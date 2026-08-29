@@ -33,18 +33,18 @@ export function ReferralPill({ userType = "student" }: { userType?: "student" | 
     const isHost = userType === "host";
     const shareText = isHost
       ? (isHi 
-          ? `नमस्ते! मैं StashSaarthi के साथ सत्यापित छात्रों को होस्ट करके ₹11,500+/माह कमा रहा/रही हूं। मेरे इनवाइट कोड ${referralCode} के साथ देखें: https://stashsaarthi.in`
-          : `Namaste! I'm earning ₹11,500+/mo hosting verified students with StashSaarthi. Check it out using my invite code ${referralCode}: https://stashsaarthi.in`)
+          ? `नमस्ते! मैं StashSaarthi के साथ सत्यापित छात्रों को होस्ट करके ₹11,500+/माह कमा रहा/रही हूं। मेरे इनवाइट कोड ${referralCode} के साथ देखें: https://stashsaarthi-web.vercel.app`
+          : `Namaste! I'm earning ₹11,500+/mo hosting verified students with StashSaarthi. Check it out using my invite code ${referralCode}: https://stashsaarthi-web.vercel.app`)
       : (isHi
-          ? `अरे! StashSaarthi हमारे सेमेस्टर लगेज को कैंपस के पास मात्र ₹300/माह में सुरक्षित रख रहा है ताकि हमारा ₹8k खाली कमरे का किराया न जले! ₹300 फ्री स्टोरेज क्रेडिट के लिए मेरा इनवाइट कोड ${referralCode} उपयोग करें: https://stashsaarthi.in`
-          : `Hey! StashSaarthi is storing our semester luggage for just ₹300/mo near campus so we don't burn ₹8k on empty room dead-rent! Use my invite code ${referralCode} for ₹300 free storage credit: https://stashsaarthi.in`);
+          ? `अरे! StashSaarthi हमारे सेमेस्टर लगेज को कैंपस के पास मात्र ₹300/माह में सुरक्षित रख रहा है ताकि हमारा ₹8k खाली कमरे का किराया न जले! ₹300 फ्री स्टोरेज क्रेडिट के लिए मेरा इनवाइट कोड ${referralCode} उपयोग करें: https://stashsaarthi-web.vercel.app`
+          : `Hey! StashSaarthi is storing our semester luggage for just ₹300/mo near campus so we don't burn ₹8k on empty room dead-rent! Use my invite code ${referralCode} for ₹300 free storage credit: https://stashsaarthi-web.vercel.app`);
 
     if (typeof navigator !== "undefined" && navigator.share) {
       try {
         await navigator.share({
           title: isHi ? "स्टैशसारथी आमंत्रण" : "StashSaarthi Campus Invite",
           text: shareText,
-          url: "https://stashsaarthi.in",
+          url: "https://stashsaarthi-web.vercel.app",
         });
         toast.success(isHi ? "आमंत्रण सफलतापूर्वक साझा किया गया!" : "Invite Shared Successfully!");
         return;

@@ -7,6 +7,9 @@ export const FOUNDER_PHONE_DISPLAY = "+91 9369454350";
 export const FOUNDER_PHONE_RAW = "9369454350";
 export const FOUNDER_EMAIL = "connect@stashsaarthi.in";
 
+// Primary live domain for share links, messages & referrals
+export const APP_BASE_URL = "https://stashsaarthi-web.vercel.app";
+
 // Central toggle: Set to FALSE when going live with 100% real verified inventory
 export const SHOW_PROTOTYPE_TAGS = true;
 

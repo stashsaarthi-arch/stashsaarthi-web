@@ -103,7 +103,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:title", content: "StashSaarthi | Intergenerational Living & Micro-Storage" },
       { property: "og:description", content: "Store vacation luggage securely from ₹300/mo. Find 100% verified, broker-free senior-hosted living across India." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://stashsaarthi.in" },
+      { property: "og:url", content: "https://stashsaarthi-web.vercel.app" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@StashSaarthi" },
       { name: "twitter:creator", content: "@StashSaarthi" },
@@ -136,10 +136,10 @@ function RootShell({ children }: { children: ReactNode }) {
     "@graph": [
       {
         "@type": "Organization",
-        "@id": "https://stashsaarthi.in/#organization",
+        "@id": "https://stashsaarthi-web.vercel.app/#organization",
         "name": "StashSaarthi",
-        "url": "https://stashsaarthi.in",
-        "logo": "https://stashsaarthi.in/favicon.png",
+        "url": "https://stashsaarthi-web.vercel.app",
+        "logo": "https://stashsaarthi-web.vercel.app/favicon.png",
         "description": "India's Zero-CapEx Intergenerational Living & Campus Micro-Storage Platform.",
         "sameAs": [
           "https://instagram.com/stashsaarthi",
@@ -155,14 +155,14 @@ function RootShell({ children }: { children: ReactNode }) {
       },
       {
         "@type": "WebSite",
-        "@id": "https://stashsaarthi.in/#website",
-        "url": "https://stashsaarthi.in",
+        "@id": "https://stashsaarthi-web.vercel.app/#website",
+        "url": "https://stashsaarthi-web.vercel.app",
         "name": "StashSaarthi",
-        "publisher": { "@id": "https://stashsaarthi.in/#organization" }
+        "publisher": { "@id": "https://stashsaarthi-web.vercel.app/#organization" }
       },
       {
         "@type": "Product",
-        "@id": "https://stashsaarthi.in/#product-microstorage",
+        "@id": "https://stashsaarthi-web.vercel.app/#product-microstorage",
         "name": "Saarthi Stash - Campus Micro-Storage",
         "description": "Secure, tamper-evident vacation luggage micro-storage for university students during semester breaks.",
         "offers": {
@@ -171,14 +171,14 @@ function RootShell({ children }: { children: ReactNode }) {
           "priceCurrency": "INR",
           "priceValidUntil": "2027-12-31",
           "availability": "https://schema.org/InStock",
-          "url": "https://stashsaarthi.in"
+          "url": "https://stashsaarthi-web.vercel.app"
         }
       },
       {
         "@type": "LocalBusiness",
-        "@id": "https://stashsaarthi.in/#hub-kanpur",
+        "@id": "https://stashsaarthi-web.vercel.app/#hub-kanpur",
         "name": "StashSaarthi Kanpur Campus Hub",
-        "image": "https://stashsaarthi.in/favicon.png",
+        "image": "https://stashsaarthi-web.vercel.app/favicon.png",
         "telephone": "+91-9369454350",
         "address": {
           "@type": "PostalAddress",
@@ -192,7 +192,7 @@ function RootShell({ children }: { children: ReactNode }) {
           "latitude": "26.5123",
           "longitude": "80.2329"
         },
-        "url": "https://stashsaarthi.in"
+        "url": "https://stashsaarthi-web.vercel.app"
       }
     ]
   };

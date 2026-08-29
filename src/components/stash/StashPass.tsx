@@ -19,14 +19,14 @@ export function StashPass({ tokenId, name, serviceLabel, type, bags, months }: S
 
   const handleShare = async () => {
     const text = isHi
-      ? `नमस्ते! मैंने StashSaarthi पर अपना आधिकारिक स्टैशपास™ (${tokenId}) सुरक्षित कर लिया है। विवरण देखें: https://stashsaarthi.in`
-      : `Hey! I just reserved my official StashPass™ (${tokenId}) on StashSaarthi. Check it out at https://stashsaarthi.in`;
+      ? `नमस्ते! मैंने StashSaarthi पर अपना आधिकारिक स्टैशपास™ (${tokenId}) सुरक्षित कर लिया है। विवरण देखें: https://stashsaarthi-web.vercel.app`
+      : `Hey! I just reserved my official StashPass™ (${tokenId}) on StashSaarthi. Check it out at https://stashsaarthi-web.vercel.app`;
     if (typeof navigator !== "undefined" && navigator.share) {
       try {
         await navigator.share({
           title: `StashPass™ #${tokenId} — StashSaarthi`,
           text: text,
-          url: "https://stashsaarthi.in",
+          url: "https://stashsaarthi-web.vercel.app",
         });
         toast.success(isHi ? "स्टैशपास™ सफलतापूर्वक साझा किया गया!" : "StashPass™ Shared Successfully!");
         return;

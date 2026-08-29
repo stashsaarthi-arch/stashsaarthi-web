@@ -32,8 +32,8 @@ import type { BookingPrefill, Role } from "@/components/stash/types";
 const TITLE = "StashSaarthi | Intergenerational Living & Micro-Storage";
 const DESC =
   "Store vacation luggage securely from ₹300/mo. Find 100% verified, broker-free senior-hosted living near your campus. India's trusted student living ecosystem.";
-const URL = "https://stashsaarthi.in/";
-const OG_IMAGE = `https://stashsaarthi.in${logoAsset.url}`;
+const URL = "https://stashsaarthi-web.vercel.app/";
+const OG_IMAGE = `https://stashsaarthi-web.vercel.app${logoAsset.url}`;
 
 export const Route = createFileRoute("/")({
   head: () => ({
