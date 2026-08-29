@@ -1,6 +1,5 @@
 {
-  "outputDirectory": "dist",
-  "framework": "vite",
+  "outputDirectory": ".output/public",
   "rewrites": [
     {
       "source": "/(.*)",
