@@ -21,7 +21,9 @@ export function Card3D({
 
   // Check mobile
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    const checkMobile = () => {
+      setIsMobile(typeof window !== "undefined" && window.innerWidth < 768);
+    };
     checkMobile();
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
@@ -36,7 +38,7 @@ export function Card3D({
   const smoothX = useSpring(x, springConfig);
   const smoothY = useSpring(y, springConfig);
 
-  // Transform X/Y to Rotate Y/X (Hooks must always be called unconditionally)
+  // Transform X/Y to Rotate Y/X
   const rotateX = useTransform(smoothY, (val) =>
     isMobile ? 0 : Math.max(Math.min(val * -tiltCoefficient, maxTilt), -maxTilt)
   );
@@ -45,10 +47,12 @@ export function Card3D({
   );
 
   // Motion values for specular shine position
-  const shineX = useSpring(useMotionValue(50), springConfig);
-  const shineY = useSpring(useMotionValue(50), springConfig);
+  const shineRawX = useMotionValue(50);
+  const shineRawY = useMotionValue(50);
+  const shineX = useSpring(shineRawX, springConfig);
+  const shineY = useSpring(shineRawY, springConfig);
 
-  // Shine background transform declared at top level (never conditionally)
+  // Shine background transform
   const shineBg = useTransform(
     [shineX, shineY],
     ([sx, sy]) =>
@@ -70,9 +74,8 @@ export function Card3D({
     x.set(mouseX - centerX);
     y.set(mouseY - centerY);
 
-    // Shine percentages
-    shineX.set((mouseX / width) * 100);
-    shineY.set((mouseY / height) * 100);
+    shineRawX.set((mouseX / width) * 100);
+    shineRawY.set((mouseY / height) * 100);
   };
 
   const handleMouseEnter = () => {
@@ -84,12 +87,12 @@ export function Card3D({
     setIsHovered(false);
     x.set(0);
     y.set(0);
-    shineX.set(50);
-    shineY.set(50);
+    shineRawX.set(50);
+    shineRawY.set(50);
   };
 
   return (
-    <motion.div
+    <div
       ref={ref}
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
@@ -112,17 +115,15 @@ export function Card3D({
       >
         {children}
 
-        {/* Specular Shine Overlay */}
-        {!isMobile && (
-          <motion.div
-            className="pointer-events-none absolute inset-0 z-[100] rounded-[inherit] transition-opacity duration-300"
-            style={{
-              opacity: isHovered ? 1 : 0,
-              background: shineBg,
-            }}
-          />
-        )}
+        {/* Specular Shine Overlay on Desktop */}
+        <motion.div
+          className="pointer-events-none absolute inset-0 z-[100] rounded-[inherit] transition-opacity duration-300 hidden md:block"
+          style={{
+            opacity: isHovered ? 1 : 0,
+            background: shineBg,
+          }}
+        />
       </motion.div>
-    </motion.div>
+    </div>
   );
 }
