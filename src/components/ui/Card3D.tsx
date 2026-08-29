@@ -36,7 +36,7 @@ export function Card3D({
   const smoothX = useSpring(x, springConfig);
   const smoothY = useSpring(y, springConfig);
 
-  // Transform X/Y to Rotate Y/X
+  // Transform X/Y to Rotate Y/X (Hooks must always be called unconditionally)
   const rotateX = useTransform(smoothY, (val) =>
     isMobile ? 0 : Math.max(Math.min(val * -tiltCoefficient, maxTilt), -maxTilt)
   );
@@ -47,6 +47,13 @@ export function Card3D({
   // Motion values for specular shine position
   const shineX = useSpring(useMotionValue(50), springConfig);
   const shineY = useSpring(useMotionValue(50), springConfig);
+
+  // Shine background transform declared at top level (never conditionally)
+  const shineBg = useTransform(
+    [shineX, shineY],
+    ([sx, sy]) =>
+      `radial-gradient(circle at ${sx}% ${sy}%, rgba(16,185,129,0.15), transparent 70%)`
+  );
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (isMobile || !ref.current) return;
@@ -88,17 +95,17 @@ export function Card3D({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       style={{
-        perspective: 1200,
-        transformStyle: "preserve-3d",
+        perspective: isMobile ? undefined : 1200,
+        transformStyle: isMobile ? undefined : "preserve-3d",
       }}
       className={cn("relative z-10 w-full group", className)}
     >
       <motion.div
         className="h-full w-full transform-gpu relative"
         style={{
-          rotateX,
-          rotateY,
-          transformStyle: "preserve-3d",
+          rotateX: isMobile ? 0 : rotateX,
+          rotateY: isMobile ? 0 : rotateY,
+          transformStyle: isMobile ? undefined : "preserve-3d",
         }}
         whileHover={!isMobile ? { scale: 1.02 } : {}}
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -111,11 +118,7 @@ export function Card3D({
             className="pointer-events-none absolute inset-0 z-[100] rounded-[inherit] transition-opacity duration-300"
             style={{
               opacity: isHovered ? 1 : 0,
-              background: useTransform(
-                [shineX, shineY],
-                ([sx, sy]) =>
-                  `radial-gradient(circle at ${sx}% ${sy}%, rgba(16,185,129,0.15), transparent 70%)`
-              ),
+              background: shineBg,
             }}
           />
         )}
