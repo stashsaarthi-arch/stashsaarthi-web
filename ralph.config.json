@@ -1,0 +1,17 @@
+{
+    "name": "StashSaarthi-Autonomous-Loop",
+    "version": "1.0.0",
+    "instructionsFile": "agent.md",
+    "taskQueueFile": "tasks.md",
+    "progressLogFile": "progress.md",
+    "verificationCommand": "npm run build",
+    "maxIterations": 25,
+    "stopOnFailure": false,
+    "autoFixErrors": true,
+    "contextFiles": [
+        "agent.md",
+        "tasks.md",
+        "progress.md",
+        "directives/self_discovery_engine.md"
+    ]
+}

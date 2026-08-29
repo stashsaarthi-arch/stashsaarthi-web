@@ -1,0 +1,114 @@
+import { useState } from "react";
+import { createFileRoute } from "@tanstack/react-router";
+import { CursorGlow } from "@/components/stash/CursorGlow";
+import { AmbientNodes } from "@/components/ui/AmbientNodes";
+import { Navbar } from "@/components/stash/Navbar";
+import { Hero } from "@/components/stash/Hero";
+import { DualCrisis } from "@/components/stash/DualCrisis";
+import { Ecosystem } from "@/components/stash/Ecosystem";
+import { StashCalculator } from "@/components/stash/Calculator";
+import { HostSimulator } from "@/components/stash/HostSimulator";
+import { HostRules } from "@/components/stash/HostRules";
+import { FamilyDashboard } from "@/components/stash/FamilyDashboard";
+import { Rooms } from "@/components/stash/Rooms";
+import { Connect } from "@/components/stash/Connect";
+import { Trust } from "@/components/stash/Trust";
+import { ZeroRisk } from "@/components/stash/ZeroRisk";
+import { Stories } from "@/components/stash/Stories";
+import { FAQ } from "@/components/stash/FAQ";
+import { FooterSection } from "@/components/stash/FooterSection";
+import { BookingModal } from "@/components/stash/BookingModal";
+import { RoomListingModal } from "@/components/stash/RoomListingModal";
+import { RoleLane } from "@/components/stash/RoleLane";
+import { WhatsAppButton } from "@/components/stash/WhatsAppButton";
+import { ActivityTicker } from "@/components/stash/ActivityTicker";
+import { ScrollProgress } from "@/components/stash/ScrollProgress";
+import { BackToTop } from "@/components/stash/BackToTop";
+import { FloatingPersonaToggle } from "@/components/stash/FloatingPersonaToggle";
+import { usePersona } from "@/context/PersonaContext";
+import logoAsset from "@/assets/stashsaarthi-logo.png.asset.json";
+import type { BookingPrefill, Role } from "@/components/stash/types";
+
+const TITLE = "StashSaarthi | Intergenerational Living & Micro-Storage";
+const DESC =
+  "Store vacation luggage securely from ₹300/mo. Find 100% verified, broker-free senior-hosted living near your campus. India's trusted student living ecosystem.";
+const URL = "https://stashsaarthi.in/";
+const OG_IMAGE = `https://stashsaarthi.in${logoAsset.url}`;
+
+export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: TITLE },
+      { name: "description", content: DESC },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESC },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: URL },
+      { property: "og:image", content: OG_IMAGE },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: OG_IMAGE },
+    ],
+    links: [{ rel: "canonical", href: URL }],
+  }),
+  component: Index,
+});
+
+function Index() {
+  const { role, setRole } = usePersona();
+  const [booking, setBooking] = useState(false);
+  const [listing, setListing] = useState(false);
+  const [prefill, setPrefill] = useState<BookingPrefill>({});
+
+  const open = (p?: BookingPrefill) => {
+    setPrefill(p ?? {});
+    setBooking(true);
+  };
+
+  return (
+    <main
+      className="relative min-h-screen overflow-x-hidden bg-background text-foreground transition-colors duration-500"
+    >
+        <AmbientNodes />
+        <CursorGlow />
+        <Navbar role={role} setRole={setRole} onBook={() => open()} onListRoom={() => setListing(true)} />
+        <Hero role={role} onBook={open} />
+        <RoleLane role={role} onBook={open} />
+        <DualCrisis />
+        <Ecosystem onBook={open} />
+        {role === "student" ? (
+          <StashCalculator onBook={open} />
+        ) : (
+          <HostSimulator onBook={open} />
+        )}
+        <Rooms onList={() => setListing(true)} />
+        <Connect onBook={open} />
+        <Trust />
+        <ZeroRisk />
+        {role === "host" && (
+          <>
+            <HostRules />
+            <FamilyDashboard />
+          </>
+        )}
+        <Stories role={role} />
+        <FAQ />
+        <FooterSection />
+
+        <BookingModal
+          open={booking}
+          onOpenChange={setBooking}
+          service={prefill.service ?? "stash"}
+          note={prefill.note}
+          bags={prefill.bags}
+          months={prefill.months}
+          amount={prefill.amount}
+        />
+      <RoomListingModal open={listing} onOpenChange={setListing} />
+      <ScrollProgress />
+      <ActivityTicker />
+      <BackToTop />
+      <FloatingPersonaToggle />
+      <WhatsAppButton onBook={open} />
+    </main>
+  );
+}

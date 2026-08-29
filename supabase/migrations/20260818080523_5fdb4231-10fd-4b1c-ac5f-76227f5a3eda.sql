@@ -1,0 +1,2 @@
+CREATE POLICY "Anyone can upload room photos" ON storage.objects FOR INSERT TO anon, authenticated WITH CHECK (bucket_id = 'room-photos');
+CREATE POLICY "Owners read their room photos" ON storage.objects FOR SELECT TO authenticated USING (bucket_id = 'room-photos' AND owner = auth.uid());
