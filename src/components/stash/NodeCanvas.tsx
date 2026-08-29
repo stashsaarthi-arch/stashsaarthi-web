@@ -15,7 +15,7 @@ export function NodeCanvas() {
     let w = 0;
     let h = 0;
     let raf = 0;
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const dpr = 1;
     const mouse = { x: -9999, y: -9999 };
     let pts: P[] = [];
 
@@ -23,16 +23,15 @@ export function NodeCanvas() {
       const rect = canvas.getBoundingClientRect();
       w = rect.width;
       h = rect.height;
-      canvas.width = w * dpr;
-      canvas.height = h * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const count = Math.min(90, Math.max(34, Math.round((w * h) / 16000)));
+      canvas.width = w;
+      canvas.height = h;
+      const count = Math.min(28, Math.max(16, Math.round((w * h) / 32000)));
       pts = Array.from({ length: count }, () => ({
         x: Math.random() * w,
         y: Math.random() * h,
-        vx: (Math.random() - 0.5) * 0.35,
-        vy: (Math.random() - 0.5) * 0.35,
-        r: Math.random() * 1.8 + 0.8,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        r: Math.random() * 1.5 + 0.8,
         c: colors[Math.floor(Math.random() * (Math.random() > 0.25 ? 1 : 3))] ?? colors[0]!,
       }));
     };

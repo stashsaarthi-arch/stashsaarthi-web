@@ -6,43 +6,41 @@ export function AmbientNodes() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    const checkMobile = () => setIsMobile(typeof window !== "undefined" && window.innerWidth < 768);
     checkMobile();
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Background Layer: translateZ(-100px) translateY(scroll * 0.2)
-  const bgY1 = useTransform(scrollY, (y) => (isMobile ? 0 : y * 0.2));
-  // Foreground Accents: translateZ(50px) translateY(scroll * -0.15)
-  const fgY1 = useTransform(scrollY, (y) => (isMobile ? 0 : y * -0.15));
-  
+  const bgY1 = useTransform(scrollY, (y) => (isMobile ? 0 : y * 0.15));
+  const fgY1 = useTransform(scrollY, (y) => (isMobile ? 0 : y * -0.1));
+
   if (isMobile) return null;
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden" style={{ perspective: 1000, transformStyle: "preserve-3d" }}>
+    <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
       {/* Background Nodes */}
       <motion.div
-        className="absolute left-[10%] top-[20%] h-32 w-32 rounded-full border border-emerald-500/10 bg-emerald-500/5 backdrop-blur-3xl"
-        style={{ y: bgY1, z: -100, rotateX: 20, rotateY: 30 }}
+        className="absolute left-[10%] top-[20%] h-32 w-32 rounded-full border border-emerald-500/10 bg-emerald-500/5 blur-xl pointer-events-none"
+        style={{ y: bgY1 }}
       />
       <motion.div
-        className="absolute right-[15%] top-[60%] h-48 w-48 rounded-full border border-cyan-500/10 bg-cyan-500/5 backdrop-blur-3xl"
-        style={{ y: bgY1, z: -150, rotateX: -20, rotateY: 45 }}
+        className="absolute right-[15%] top-[60%] h-48 w-48 rounded-full border border-cyan-500/10 bg-cyan-500/5 blur-xl pointer-events-none"
+        style={{ y: bgY1 }}
       />
       <motion.div
-        className="absolute left-[20%] top-[80%] h-24 w-24 rounded-full border border-amber-500/10 bg-amber-500/5 backdrop-blur-3xl"
-        style={{ y: bgY1, z: -80, rotateX: 10, rotateY: 15 }}
+        className="absolute left-[20%] top-[80%] h-24 w-24 rounded-full border border-amber-500/10 bg-amber-500/5 blur-xl pointer-events-none"
+        style={{ y: bgY1 }}
       />
 
-      {/* Foreground Nodes */}
+      {/* Foreground Accent Nodes */}
       <motion.div
-        className="absolute right-[5%] top-[30%] h-16 w-16 rounded-full border border-emerald-500/20 bg-emerald-500/10 backdrop-blur-md"
-        style={{ y: fgY1, z: 50, rotateX: 45, rotateY: 10 }}
+        className="absolute right-[5%] top-[30%] h-16 w-16 rounded-full border border-emerald-500/15 bg-emerald-500/10 blur-lg pointer-events-none"
+        style={{ y: fgY1 }}
       />
       <motion.div
-        className="absolute left-[5%] top-[50%] h-20 w-20 rounded-full border border-cyan-500/20 bg-cyan-500/10 backdrop-blur-md"
-        style={{ y: fgY1, z: 80, rotateX: -30, rotateY: 60 }}
+        className="absolute left-[5%] top-[50%] h-20 w-20 rounded-full border border-cyan-500/15 bg-cyan-500/10 blur-lg pointer-events-none"
+        style={{ y: fgY1 }}
       />
     </div>
   );

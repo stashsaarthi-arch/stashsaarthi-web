@@ -269,8 +269,8 @@ export function Ferrofluid({
         canvas,
         alpha: true,
         premultipliedAlpha: false,
-        antialias: true,
-        dpr: Math.min(window.devicePixelRatio || 1, window.innerWidth < 768 ? 1 : 2)
+        antialias: false,
+        dpr: 1,
       });
     } catch {
       return;
