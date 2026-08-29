@@ -404,7 +404,7 @@ export function FooterSection() {
             className="flex items-center gap-2 shrink-0 cursor-pointer mb-4 group" 
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
-            <BrandLogo iconSize={36} textClassName="text-xl font-bold" />
+            <BrandLogo height={42} className="h-9 sm:h-10" />
           </div>
           <p className="mt-4 max-w-xs text-sm text-muted-foreground">
             {isHi 

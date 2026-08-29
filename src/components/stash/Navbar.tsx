@@ -60,7 +60,7 @@ export function Navbar({
             className="flex items-center gap-2 shrink-0 cursor-pointer group" 
             onClick={() => smoothScrollTo("top")(undefined as any)}
           >
-            <BrandLogo iconSize={34} textClassName="text-lg sm:text-xl font-bold" />
+            <BrandLogo height={38} className="h-8 sm:h-9" />
           </div>
           
           {/* Desktop Nav Links (Consolidated to 3 essential items) */}
