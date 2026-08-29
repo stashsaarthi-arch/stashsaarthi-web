@@ -10,6 +10,7 @@ import { LegalDialog } from "./LegalDialog";
 import { smoothScrollTo, handleDownloadInvestorMemo } from "./legal";
 import { ReferralPill } from "./ReferralPill";
 import { StashPass } from "./StashPass";
+import { BrandLogo } from "@/components/ui/BrandLogo";
 import { InvestorModal } from "./InvestorModal";
 import { CampusCaptainModal } from "./CampusCaptainModal";
 import { useGoogleLogin } from "@react-oauth/google";
@@ -400,20 +401,10 @@ export function FooterSection() {
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 md:grid-cols-4">
         <div>
           <div 
-            className="flex items-center gap-2.5 shrink-0 cursor-pointer mb-4" 
+            className="flex items-center gap-2 shrink-0 cursor-pointer mb-4 group" 
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
-            {/* SVG Shield / Box Brand Icon */}
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-amber-500 to-amber-400 flex items-center justify-center shadow-lg shadow-amber-500/20 text-black font-black text-sm">
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-                <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
-                <line x1="12" y1="22.08" x2="12" y2="12" />
-              </svg>
-            </div>
-            <span className="font-bold text-lg tracking-tight text-white">
-              Stash<span className="text-amber-500">Saarthi</span>
-            </span>
+            <BrandLogo iconSize={36} textClassName="text-xl font-bold" />
           </div>
           <p className="mt-4 max-w-xs text-sm text-muted-foreground">
             {isHi 
