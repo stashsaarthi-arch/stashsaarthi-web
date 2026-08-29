@@ -1,9 +1,1 @@
-{
-  "outputDirectory": ".output/public",
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ]
-}
+{}

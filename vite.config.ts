@@ -8,6 +8,9 @@ export default defineConfig({
     server: { entry: "server" },
   },
   nitro: {
-    preset: "node-server",
+    preset: process.env.VERCEL ? "vercel" : (process.env.NITRO_PRESET || "node-server"),
+  },
+  build: {
+    chunkSizeWarningLimit: 1200,
   },
 });
