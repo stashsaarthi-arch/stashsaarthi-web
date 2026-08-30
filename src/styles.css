@@ -229,8 +229,8 @@ html.lenis body {
 
 @utility glass {
   background: var(--surface);
-  backdrop-filter: blur(16px) saturate(130%);
-  -webkit-backdrop-filter: blur(16px) saturate(130%);
+  backdrop-filter: blur(10px) saturate(120%);
+  -webkit-backdrop-filter: blur(10px) saturate(120%);
   border: 1px solid oklch(1 0 0 / 10%);
   box-shadow: var(--shadow-glass);
   transform: translateZ(0);
