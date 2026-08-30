@@ -87,80 +87,80 @@ function Index() {
         <Hero role={role} onBook={open} onRefer={() => setReferralOpen(true)} />
       </ErrorBoundary>
       <ErrorBoundary>
-        <AnimatedContent distance={35} threshold={0.12}>
+        <AnimatedContent distance={20} threshold={0.06}>
           <RoleLane role={role} onBook={open} />
         </AnimatedContent>
       </ErrorBoundary>
       <ErrorBoundary>
-        <AnimatedContent distance={35} threshold={0.12}>
+        <AnimatedContent distance={20} threshold={0.06}>
           <DualCrisis />
         </AnimatedContent>
       </ErrorBoundary>
       <ErrorBoundary>
-        <AnimatedContent distance={35} threshold={0.12}>
+        <AnimatedContent distance={20} threshold={0.06}>
           <Ecosystem onBook={open} />
         </AnimatedContent>
       </ErrorBoundary>
       <ErrorBoundary>
-        <AnimatedContent distance={35} threshold={0.12}>
+        <AnimatedContent distance={20} threshold={0.06}>
           {role === "student" ? <StashCalculator onBook={open} /> : <HostSimulator onBook={open} />}
         </AnimatedContent>
       </ErrorBoundary>
       <ErrorBoundary>
-        <AnimatedContent distance={35} threshold={0.12}>
+        <AnimatedContent distance={20} threshold={0.06}>
           <Rooms onList={() => setListing(true)} />
         </AnimatedContent>
       </ErrorBoundary>
       <ErrorBoundary>
-        <AnimatedContent distance={35} threshold={0.12}>
+        <AnimatedContent distance={20} threshold={0.06}>
           <Connect onBook={open} />
         </AnimatedContent>
       </ErrorBoundary>
       <ErrorBoundary>
-        <AnimatedContent distance={35} threshold={0.12}>
+        <AnimatedContent distance={20} threshold={0.06}>
           <ProcessTransparency />
         </AnimatedContent>
       </ErrorBoundary>
       <ErrorBoundary>
-        <AnimatedContent distance={35} threshold={0.12}>
+        <AnimatedContent distance={20} threshold={0.06}>
           <ProductSandbox />
         </AnimatedContent>
       </ErrorBoundary>
       <ErrorBoundary>
-        <AnimatedContent distance={35} threshold={0.12}>
+        <AnimatedContent distance={20} threshold={0.06}>
           <Trust />
         </AnimatedContent>
       </ErrorBoundary>
       <ErrorBoundary>
-        <AnimatedContent distance={35} threshold={0.12}>
+        <AnimatedContent distance={20} threshold={0.06}>
           <ZeroRisk />
         </AnimatedContent>
       </ErrorBoundary>
       <ErrorBoundary>
-        <AnimatedContent distance={35} threshold={0.12}>
+        <AnimatedContent distance={20} threshold={0.06}>
           <DataPrivacyCommitment />
         </AnimatedContent>
       </ErrorBoundary>
       <ErrorBoundary>
-        <AnimatedContent distance={35} threshold={0.12}>
+        <AnimatedContent distance={20} threshold={0.06}>
           <FounderAccountability />
         </AnimatedContent>
       </ErrorBoundary>
       {role === "host" && (
         <ErrorBoundary>
-          <AnimatedContent distance={35} threshold={0.12}>
+          <AnimatedContent distance={20} threshold={0.06}>
             <HostRules />
             <FamilyDashboard />
           </AnimatedContent>
         </ErrorBoundary>
       )}
       <ErrorBoundary>
-        <AnimatedContent distance={35} threshold={0.12}>
+        <AnimatedContent distance={20} threshold={0.06}>
           <FeedbackSuggestions />
         </AnimatedContent>
       </ErrorBoundary>
       <ErrorBoundary>
-        <AnimatedContent distance={35} threshold={0.12}>
+        <AnimatedContent distance={20} threshold={0.06}>
           <FAQ />
         </AnimatedContent>
       </ErrorBoundary>

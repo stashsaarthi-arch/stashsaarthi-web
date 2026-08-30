@@ -28,14 +28,14 @@ export interface AnimatedContentProps extends React.HTMLAttributes<HTMLDivElemen
 
 export function AnimatedContent({
   children,
-  distance = 40,
+  distance = 25,
   direction = "vertical",
   reverse = false,
-  duration = 0.8,
-  ease = "power3.out",
+  duration = 0.5,
+  ease = "power2.out",
   delay = 0,
   scale = 1,
-  threshold = 0.15,
+  threshold = 0.08,
   initialOpacity = 0,
   animateOpacity = true,
   parallax = false,

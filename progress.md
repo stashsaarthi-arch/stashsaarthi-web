@@ -2,6 +2,13 @@
 
 ## Active Task
 
+- [x] **Scroll Entrance Animations, Compact Scroll Length & Cursor Optimization**:
+  - **Fluid Scroll Reveal Animations**: Wrapped all major landing page sections in `<AnimatedContent distance={35} threshold={0.12} duration={0.8} ease="power3.out">`. As the user scrolls down, sections smoothly slide up and fade into view with momentum physics while maintaining zero layout shift on initial load.
+  - **Compact Page Density & Reduced Scroll Length**: Streamlined section vertical paddings (`py-16 sm:py-24` -> `py-10 sm:py-14`) across all 15+ sections (`Hero`, `RoleLane`, `DualCrisis`, `Ecosystem`, `Calculator`, `HostSimulator`, `Rooms`, `Connect`, `ProcessTransparency`, `ProductSandbox`, `Trust`, `ZeroRisk`, `DataPrivacyCommitment`, `FounderAccountability`, `FeedbackSuggestions`, `FAQ`), eliminating unnecessary empty vertical travel while keeping the visual layout rich and expansive.
+  - **Lenis Smoothness & Fluidity Overhaul**: Tuned `ReactLenis` parameters (`lerp: 0.12`, `duration: 0.9`, `smoothWheel: true`, `wheelMultiplier: 1.05`, `touchMultiplier: 1.0`, custom power-10 exponential deceleration easing) for responsive, buttery-smooth scrolling.
+  - **Removed Green Cursor Follower Dot**: Removed `CursorGlow` and its continuous `mousemove` global event listener, restoring native cursor responsiveness and freeing main-thread GPU/CPU cycles.
+  - **Production Deployment**: Verified `npx tsc --noEmit` (**0 errors**), `npm run build` (**0 errors**), and deployed live via Vercel CLI to [https://stashsaarthi-main.vercel.app](https://stashsaarthi-main.vercel.app) (Deployment ID: `dpl_49mWGv4WvW1qCeVt7HuqbdruNWoB`, HTTP `200 OK`).
+
 - [x] **Vercel Production Deployment (`https://stashsaarthi-main.vercel.app`)**:
   - **Automated Git Push & Production Build**: Pushed commit `f9ab499` to `origin/main` on GitHub (`https://github.com/stashsaarthi-arch/stashsaarthi-web`).
   - **Live Vercel Production Release**: Successfully deployed to production via Vercel CLI / Git pipeline (`dpl_GoMHMudBf3kZ4UpUcCf4hUzQEU5e`).
