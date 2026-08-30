@@ -90,82 +90,52 @@ function Index() {
         <Hero role={role} onBook={open} onRefer={() => setReferralOpen(true)} />
       </ErrorBoundary>
       <ErrorBoundary>
-        <AnimatedContent distance={20} threshold={0.06}>
-          <RoleLane role={role} onBook={open} />
-        </AnimatedContent>
+        <RoleLane role={role} onBook={open} />
       </ErrorBoundary>
       <ErrorBoundary>
-        <AnimatedContent distance={20} threshold={0.06} className="content-auto">
-          <DualCrisis />
-        </AnimatedContent>
+        <DualCrisis />
       </ErrorBoundary>
       <ErrorBoundary>
-        <AnimatedContent distance={20} threshold={0.06} className="content-auto">
-          <Ecosystem onBook={open} />
-        </AnimatedContent>
+        <Ecosystem onBook={open} />
       </ErrorBoundary>
       <ErrorBoundary>
-        <AnimatedContent distance={20} threshold={0.06} className="content-auto">
-          {role === "student" ? <StashCalculator onBook={open} /> : <HostSimulator onBook={open} />}
-        </AnimatedContent>
+        {role === "student" ? <StashCalculator onBook={open} /> : <HostSimulator onBook={open} />}
       </ErrorBoundary>
       <ErrorBoundary>
-        <AnimatedContent distance={20} threshold={0.06} className="content-auto">
-          <Rooms onList={() => setListing(true)} />
-        </AnimatedContent>
+        <Rooms onList={() => setListing(true)} />
       </ErrorBoundary>
       <ErrorBoundary>
-        <AnimatedContent distance={20} threshold={0.06} className="content-auto">
-          <Connect onBook={open} />
-        </AnimatedContent>
+        <Connect onBook={open} />
       </ErrorBoundary>
       <ErrorBoundary>
-        <AnimatedContent distance={20} threshold={0.06} className="content-auto">
-          <ProcessTransparency />
-        </AnimatedContent>
+        <ProcessTransparency />
       </ErrorBoundary>
       <ErrorBoundary>
-        <AnimatedContent distance={20} threshold={0.06} className="content-auto">
-          <ProductSandbox />
-        </AnimatedContent>
+        <ProductSandbox />
       </ErrorBoundary>
       <ErrorBoundary>
-        <AnimatedContent distance={20} threshold={0.06} className="content-auto">
-          <Trust />
-        </AnimatedContent>
+        <Trust />
       </ErrorBoundary>
       <ErrorBoundary>
-        <AnimatedContent distance={20} threshold={0.06} className="content-auto">
-          <ZeroRisk />
-        </AnimatedContent>
+        <ZeroRisk />
       </ErrorBoundary>
       <ErrorBoundary>
-        <AnimatedContent distance={20} threshold={0.06} className="content-auto">
-          <DataPrivacyCommitment />
-        </AnimatedContent>
+        <DataPrivacyCommitment />
       </ErrorBoundary>
       <ErrorBoundary>
-        <AnimatedContent distance={20} threshold={0.06} className="content-auto">
-          <FounderAccountability />
-        </AnimatedContent>
+        <FounderAccountability />
       </ErrorBoundary>
       {role === "host" && (
         <ErrorBoundary>
-          <AnimatedContent distance={20} threshold={0.06} className="content-auto">
-            <HostRules />
-            <FamilyDashboard />
-          </AnimatedContent>
+          <HostRules />
+          <FamilyDashboard />
         </ErrorBoundary>
       )}
       <ErrorBoundary>
-        <AnimatedContent distance={20} threshold={0.06} className="content-auto">
-          <FeedbackSuggestions />
-        </AnimatedContent>
+        <FeedbackSuggestions />
       </ErrorBoundary>
       <ErrorBoundary>
-        <AnimatedContent distance={20} threshold={0.06} className="content-auto">
-          <FAQ />
-        </AnimatedContent>
+        <FAQ />
       </ErrorBoundary>
       <ErrorBoundary>
         <FooterSection />
