@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://stashsaarthi-web.vercel.app/sitemap.xml
 Sitemap: https://stashsaarthi-main.vercel.app/sitemap.xml
