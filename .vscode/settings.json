@@ -1,5 +1,16 @@
 {
   "css.lint.unknownAtRules": "ignore",
   "less.lint.unknownAtRules": "ignore",
-  "scss.lint.unknownAtRules": "ignore"
+  "scss.lint.unknownAtRules": "ignore",
+  "ralphLoop.antigravity.mode": "cdp",
+  "ralphLoop.antigravity.cdpPort": 9000,
+  "ralphLoop.connectionMode": "cdp",
+  "ralphLoop.taskFile": "docs/tasks/PRD.md",
+  "ralphLoop.prdPath": "docs/tasks/PRD.md",
+  "ralphLoop.promptFile": "docs/tasks/prompt.md",
+  "ralphLoop.promptPath": "docs/tasks/prompt.md",
+  "ralphLoop.progressFile": "docs/tasks/progress.md",
+  "ralphLoop.autoAcceptChanges": true,
+  "ralphLoop.maxIterations": 100,
+  "ralphLoop.antigravity.oauthToken": "auto"
 }

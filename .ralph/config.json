@@ -1,0 +1,9 @@
+{
+  "project": "StashSaarthi",
+  "prd": "../prd.json",
+  "prompt": "../prompt.md",
+  "progress": "../progress.txt",
+  "verification": "npm run build",
+  "maxIterations": 25,
+  "autoCommit": true
+}

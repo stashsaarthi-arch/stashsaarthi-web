@@ -3,20 +3,13 @@ import { createFileRoute } from "@tanstack/react-router";
 import { AmbientNodes } from "@/components/ui/AmbientNodes";
 import { Navbar } from "@/components/stash/Navbar";
 import { Hero } from "@/components/stash/Hero";
+import { QuickCategoryNav } from "@/components/stash/QuickCategoryNav";
 import { DualCrisis } from "@/components/stash/DualCrisis";
-import { Ecosystem } from "@/components/stash/Ecosystem";
-import { StashCalculator } from "@/components/stash/Calculator";
-import { HostSimulator } from "@/components/stash/HostSimulator";
+import { SolutionsHub } from "@/components/stash/SolutionsHub";
+import { CalculatorHub } from "@/components/stash/CalculatorHub";
+import { TrustConsoleHub } from "@/components/stash/TrustConsoleHub";
 import { HostRules } from "@/components/stash/HostRules";
 import { FamilyDashboard } from "@/components/stash/FamilyDashboard";
-import { Rooms } from "@/components/stash/Rooms";
-import { Connect } from "@/components/stash/Connect";
-import { Trust } from "@/components/stash/Trust";
-import { ZeroRisk } from "@/components/stash/ZeroRisk";
-import { ProcessTransparency } from "@/components/stash/ProcessTransparency";
-import { ProductSandbox } from "@/components/stash/ProductSandbox";
-import { DataPrivacyCommitment } from "@/components/stash/DataPrivacyCommitment";
-import { FounderAccountability } from "@/components/stash/FounderAccountability";
 import { FounderEscalationWidget } from "@/components/stash/FounderEscalationWidget";
 import { FeedbackSuggestions } from "@/components/stash/FeedbackSuggestions";
 import { FAQ } from "@/components/stash/FAQ";
@@ -32,8 +25,7 @@ import { ActivityTicker } from "@/components/stash/ActivityTicker";
 import { ScrollProgress } from "@/components/stash/ScrollProgress";
 import { FloatingPersonaToggle } from "@/components/stash/FloatingPersonaToggle";
 import { usePersona } from "@/context/PersonaContext";
-import AnimatedContent from "@/components/ui/AnimatedContent";
-import type { BookingPrefill, Role } from "@/components/stash/types";
+import type { BookingPrefill } from "@/components/stash/types";
 
 const TITLE = "StashSaarthi - Campus Micro-Storage & Zero-Brokerage Co-Living";
 const DESC =
@@ -86,61 +78,61 @@ function Index() {
         onEarlyAccess={() => setEarlyAccess(true)}
         onRefer={() => setReferralOpen(true)}
       />
+
       <ErrorBoundary>
         <Hero role={role} onBook={open} onRefer={() => setReferralOpen(true)} />
       </ErrorBoundary>
+
+      {/* TI.com-inspired Quick Jump Sticky Category Bar */}
+      <QuickCategoryNav />
+
       <ErrorBoundary>
         <RoleLane role={role} onBook={open} />
       </ErrorBoundary>
+
       <ErrorBoundary>
         <DualCrisis />
       </ErrorBoundary>
+
+      {/* 1. Core Solutions Hub (Stash / Rooms / Kitchen / Connect) */}
       <ErrorBoundary>
-        <Ecosystem onBook={open} />
+        <SolutionsHub onBook={open} onListRoom={() => setListing(true)} />
       </ErrorBoundary>
+
+      {/* 2. Interactive Calculator & Space Simulator Hub */}
       <ErrorBoundary>
-        {role === "student" ? <StashCalculator onBook={open} /> : <HostSimulator onBook={open} />}
+        <CalculatorHub onBook={open} />
       </ErrorBoundary>
+
+      {/* 3. 100% Radical Transparency & Custody Console Hub */}
       <ErrorBoundary>
-        <Rooms onList={() => setListing(true)} />
+        <TrustConsoleHub />
       </ErrorBoundary>
-      <ErrorBoundary>
-        <Connect onBook={open} />
-      </ErrorBoundary>
-      <ErrorBoundary>
-        <ProcessTransparency />
-      </ErrorBoundary>
-      <ErrorBoundary>
-        <ProductSandbox />
-      </ErrorBoundary>
-      <ErrorBoundary>
-        <Trust />
-      </ErrorBoundary>
-      <ErrorBoundary>
-        <ZeroRisk />
-      </ErrorBoundary>
-      <ErrorBoundary>
-        <DataPrivacyCommitment />
-      </ErrorBoundary>
-      <ErrorBoundary>
-        <FounderAccountability />
-      </ErrorBoundary>
+
+      {/* Host Specific Dashboard Norms */}
       {role === "host" && (
         <ErrorBoundary>
           <HostRules />
           <FamilyDashboard />
         </ErrorBoundary>
       )}
+
+      {/* 4. Community Reviews & Improvement Suggestions Hub */}
       <ErrorBoundary>
         <FeedbackSuggestions />
       </ErrorBoundary>
+
+      {/* 5. FAQ */}
       <ErrorBoundary>
         <FAQ />
       </ErrorBoundary>
+
+      {/* Footer */}
       <ErrorBoundary>
         <FooterSection />
       </ErrorBoundary>
 
+      {/* Global Modals & Overlay Triggers */}
       <BookingModal
         open={booking}
         onOpenChange={setBooking}

@@ -1,0 +1,260 @@
+{
+  "project": "StashSaarthi",
+  "version": "1.0.0",
+  "branchName": "main",
+  "description": "Zero-CapEx Intergenerational Living & Campus Micro-Storage Platform connecting student luggage storage and room discovery with verified senior citizen hosts across Kanpur academic nodes (IITK, CSJMU, HBTU, GSVM, Kakadeo).",
+  "lastUpdated": "2026-08-31T00:46:00Z",
+  "verificationCommand": "npm run build",
+  "config": {
+    "framework": "TanStack Start + React 19 + Vite + Tailwind CSS v4",
+    "theme": {
+      "student": {
+        "bg": "#0A0D0F",
+        "primary": "#10B981",
+        "accent": "#00F5A0"
+      },
+      "host": {
+        "bg": "#0A0D0F",
+        "primary": "#F59E0B",
+        "accent": "#FBBF24"
+      }
+    },
+    "defaultPersona": "student",
+    "defaultLanguage": "en"
+  },
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Dual Persona & Bilingual State Synchronization",
+      "description": "Ensure seamless switching between Student and Senior Host personas with persistent theme tokens and full English/Hindi translation sync.",
+      "acceptanceCriteria": [
+        "Persona switch toggles color palette (Electric Mint vs Warm Amber)",
+        "Language switch toggles English (en) and Hindi (hi) across all sections",
+        "Initial page visit defaults to Student persona in English"
+      ],
+      "priority": "critical",
+      "status": "completed",
+      "passes": true,
+      "category": "frontend"
+    },
+    {
+      "id": "US-002",
+      "title": "Instant Upfront Render & Laptop 120 FPS Performance",
+      "description": "Eliminate scroll stutter, GPU layout reflows, and excessive blur filters to guarantee 120 FPS kinetic scrolling on desktop and mobile.",
+      "acceptanceCriteria": [
+        "Card3D and Tilt3D use lightweight 2D GPU transforms",
+        "AmbientNodes static CSS glows with 0ms scroll overhead",
+        "Lenis smooth scrolling locked at 60-120 FPS",
+        "Root element enforces overflow-x: hidden"
+      ],
+      "priority": "high",
+      "status": "completed",
+      "passes": true,
+      "category": "performance"
+    },
+    {
+      "id": "US-003",
+      "title": "Interactive Product Sandbox & Live Custody Pass",
+      "description": "Interactive simulation playground for students and senior hosts to inspect tamper-evident seals and custody pass without requiring login.",
+      "acceptanceCriteria": [
+        "Generates dynamic custody pass #SS-AUTH-9204",
+        "Inspects tamper seal #SS-KNP-84920 with 2.5ft pallet check",
+        "Provides interactive unit economics split slider (₹180 Host, ₹40 Seal/Insurance, ₹80 Ops)"
+      ],
+      "priority": "high",
+      "status": "completed",
+      "passes": true,
+      "category": "frontend"
+    },
+    {
+      "id": "US-004",
+      "title": "Customer Feedback & Community Suggestions Hub",
+      "description": "Dual-tab interactive hub on landing page with verified reviews, star rating modal, and community suggestion upvoting engine.",
+      "acceptanceCriteria": [
+        "Verified review cards with star ratings and serial passes",
+        "Interactive Rate Your Experience modal with localStorage persistence",
+        "Public suggestion board with live upvoting engine",
+        "Direct founder escalation trigger via WhatsApp (+91 9369454350)"
+      ],
+      "priority": "high",
+      "status": "completed",
+      "passes": true,
+      "category": "frontend"
+    },
+    {
+      "id": "US-005",
+      "title": "Dynamic 6-Service Booking Engine & Escrow UPI QR",
+      "description": "Comprehensive multi-service modal for Stash, Spaces, Kitchen, Connect, Trust, and Micro-Monetization with dynamic UPI QR generation.",
+      "acceptanceCriteria": [
+        "Dynamic inputs for all 6 service dimensions",
+        "Real-time UPI QR code generation with 1-tap payment app deep links",
+        "Supabase lead persistence with instant serial pass minting"
+      ],
+      "priority": "high",
+      "status": "completed",
+      "passes": true,
+      "category": "backend"
+    },
+    {
+      "id": "US-006",
+      "title": "Kanpur Live Campus Radar & PIN Code Coverage Checker",
+      "description": "Interactive radar map displaying verified academic nodes (IITK, CSJMU, HBTI, GSVM, Kakadeo) and instant PIN code verification widget.",
+      "acceptanceCriteria": [
+        "Rotating SVG radar beam sweep with coordinate node pins",
+        "PIN code search returning live node radius and pickup SLA",
+        "1-click route reservation prefill"
+      ],
+      "priority": "medium",
+      "status": "completed",
+      "passes": true,
+      "category": "frontend"
+    },
+    {
+      "id": "US-007",
+      "title": "PWA Manifest & Mobile Status Bar Optimization",
+      "description": "Progressive Web App support for 1-tap Add to Home Screen and native mobile status bar immersion.",
+      "acceptanceCriteria": [
+        "manifest.json configured with #0A0D0F theme and standalone display",
+        "Apple mobile status bar meta tags in __root.tsx",
+        "High-resolution app icons for iOS, Android, and Desktop"
+      ],
+      "priority": "medium",
+      "status": "completed",
+      "passes": true,
+      "category": "frontend"
+    },
+    {
+      "id": "US-008",
+      "title": "WhatsApp Direct Referral & Share Architecture",
+      "description": "1-tap WhatsApp sharing modal with 3 high-converting pre-composed topic templates for students, hosts, and kitchen tiffins.",
+      "acceptanceCriteria": [
+        "WhatsAppReferralModal with Student, Host, and Ghar Ka Swaad templates",
+        "1-tap WhatsApp deep link and native Web Share API fallback",
+        "Triggers integrated into Navbar, Hero, and Footer"
+      ],
+      "priority": "medium",
+      "status": "completed",
+      "passes": true,
+      "category": "growth"
+    },
+    {
+      "id": "US-009",
+      "title": "Automated SEO Structured Data & GSC Sitemap Sync",
+      "description": "Schema.org JSON-LD LocalBusiness, Product, and WebSite schemas with synchronized sitemap.xml and robots.txt.",
+      "acceptanceCriteria": [
+        "JSON-LD structured data in __root.tsx",
+        "sitemap.xml and robots.txt synchronized with canonical domain",
+        "0 Google Search Console cross-domain errors"
+      ],
+      "priority": "medium",
+      "status": "completed",
+      "passes": true,
+      "category": "seo"
+    },
+    {
+      "id": "US-010",
+      "title": "Continuous Ground Node Health & Inventory Telemetry",
+      "description": "Automated node telemetry monitoring luggage dry pallet clearance, humidity/moisture thresholds, and senior host active status.",
+      "acceptanceCriteria": [
+        "Node telemetry data model defined in Supabase schema",
+        "Status indicators render dynamic operational status",
+        "Immediate alert trigger for host check-in deviations"
+      ],
+      "priority": "medium",
+      "status": "completed",
+      "passes": true,
+      "category": "ops"
+    },
+    {
+      "id": "US-011",
+      "title": "[CTO] Fix Supabase Services Submission Issue",
+      "description": "Verify environment variables and database insert error handling across all 6 service dimensions.",
+      "acceptanceCriteria": [
+        "Verify Supabase client configuration and environment fallbacks",
+        "Ensure resilient error logging and graceful offline fallbacks on submission"
+      ],
+      "priority": "high",
+      "status": "pending",
+      "passes": false,
+      "category": "backend"
+    },
+    {
+      "id": "US-012",
+      "title": "[CTO] Refactor Animations to Lenis / GSAP Smooth Scroll",
+      "description": "Refactor animations to ensure Lenis / GSAP smooth scrolling without frame drops on 60-120Hz displays.",
+      "acceptanceCriteria": [
+        "Zero frame drops during continuous scroll",
+        "GPU hardware acceleration applied to scroll transitions"
+      ],
+      "priority": "high",
+      "status": "pending",
+      "passes": false,
+      "category": "performance"
+    },
+    {
+      "id": "US-013",
+      "title": "[CMO] Optimize Hero Headline, Messaging Hooks & Value Prop",
+      "description": "Ensure instant clarity and high conversion for student vacation storage and host dignified passive income.",
+      "acceptanceCriteria": [
+        "Refine student and host hero copy for punchy clarity",
+        "Highlight ₹300/bag/mo and ₹11,500+/mo passive income prominently"
+      ],
+      "priority": "high",
+      "status": "pending",
+      "passes": false,
+      "category": "marketing"
+    },
+    {
+      "id": "US-014",
+      "title": "[CPO] Polish Component Spacing, Padding & Card Styling",
+      "description": "Ensure visual consistency, harmonious padding, and modern dark-glass card aesthetics in src/components/.",
+      "acceptanceCriteria": [
+        "Uniform vertical rhythms across all landing sections",
+        "Refined border glows and glassmorphism styling"
+      ],
+      "priority": "medium",
+      "status": "pending",
+      "passes": false,
+      "category": "design"
+    },
+    {
+      "id": "US-015",
+      "title": "[QA] Test Layout Responsiveness & Eliminate Mobile Overflow",
+      "description": "Test across 320px, 375px, 768px, 1024px, 1440px viewports and eliminate any horizontal overflow glitches.",
+      "acceptanceCriteria": [
+        "Zero horizontal scrolling on touch viewports",
+        "Clean responsive typography scaling"
+      ],
+      "priority": "high",
+      "status": "pending",
+      "passes": false,
+      "category": "qa"
+    },
+    {
+      "id": "US-016",
+      "title": "[CRO] Enhance Primary CTA Button Contrast & Mobile Sticky",
+      "description": "Boost CTA click-through rate with high-contrast persona gradients and ergonomic mobile thumb-zone positioning.",
+      "acceptanceCriteria": [
+        "High contrast WCAG-compliant CTA button styles",
+        "Seamless mobile action accessibility"
+      ],
+      "priority": "medium",
+      "status": "pending",
+      "passes": false,
+      "category": "cro"
+    },
+    {
+      "id": "US-017",
+      "title": "[CEO Summary] Document Sprint Achievements & Cycle Complete",
+      "description": "Read all modified files, document sprint achievements in ai_workforce/AGENT_REPORTS.md, add 5 new improvement tasks, and output SPRINT_CYCLE_COMPLETE.",
+      "acceptanceCriteria": [
+        "Comprehensive executive summary logged in ai_workforce/AGENT_REPORTS.md",
+        "Queue replenished with 5 high-impact roadmap proposals"
+      ],
+      "priority": "high",
+      "status": "pending",
+      "passes": false,
+      "category": "management"
+    }
+  ]
+}
