@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { motion } from "motion/react";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import {
   Star,
   ThumbsUp,
@@ -9,7 +9,16 @@ import {
   Sparkles,
   Filter,
   Send,
+  User,
+  Building,
+  Heart,
+  Share2,
+  TrendingUp,
+  Award,
+  ArrowRight,
   MessageCircle,
+  PlusCircle,
+  HelpCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -220,8 +229,13 @@ export function FeedbackSuggestions() {
   const { role } = usePersona();
   const isHi = language === "hi";
 
+  // Active Tab: 'feedback' | 'suggestions'
   const [activeTab, setActiveTab] = useState<"feedback" | "suggestions">("feedback");
 
+  // Show inline quick form toggle
+  const [showInlineForm, setShowInlineForm] = useState(true);
+
+  // Storage & State for Reviews
   const [reviews, setReviews] = useState<ReviewItem[]>(() => {
     try {
       const saved = localStorage.getItem("stash_user_reviews");
@@ -235,6 +249,7 @@ export function FeedbackSuggestions() {
     return INITIAL_REVIEWS;
   });
 
+  // Storage & State for Suggestions
   const [suggestions, setSuggestions] = useState<SuggestionItem[]>(() => {
     try {
       const saved = localStorage.getItem("stash_user_suggestions");
@@ -248,6 +263,7 @@ export function FeedbackSuggestions() {
     return INITIAL_SUGGESTIONS;
   });
 
+  // Track user upvoted suggestions in localStorage
   const [upvotedIds, setUpvotedIds] = useState<string[]>(() => {
     try {
       const saved = localStorage.getItem("stash_upvoted_suggestions");
@@ -257,12 +273,11 @@ export function FeedbackSuggestions() {
     }
   });
 
+  // Filters
   const [reviewFilter, setReviewFilter] = useState<string>("all");
   const [suggestionFilter, setSuggestionFilter] = useState<string>("all");
 
-  const [reviewModalOpen, setReviewModalOpen] = useState(false);
-  const [suggestionModalOpen, setSuggestionModalOpen] = useState(false);
-
+  // Review Form State
   const [formRating, setFormRating] = useState(5);
   const [formHoverRating, setFormHoverRating] = useState<number | null>(null);
   const [formName, setFormName] = useState("");
@@ -272,6 +287,7 @@ export function FeedbackSuggestions() {
   const [formTitle, setFormTitle] = useState("");
   const [formComment, setFormComment] = useState("");
 
+  // Suggestion Form State
   const [sugTitle, setSugTitle] = useState("");
   const [sugCategory, setSugCategory] = useState<"app" | "pricing" | "safety" | "expansion" | "kitchen" | "general">(
     "app",
@@ -280,6 +296,7 @@ export function FeedbackSuggestions() {
   const [sugName, setSugName] = useState("");
   const [sugLocality, setSugLocality] = useState("");
 
+  // Handle Upvoting
   const handleToggleUpvote = (id: string) => {
     const hasVoted = upvotedIds.includes(id);
     let newUpvoted: string[];
@@ -306,6 +323,7 @@ export function FeedbackSuggestions() {
     }
   };
 
+  // Submit Review Form
   const handleReviewSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formName.trim() || !formComment.trim()) {
@@ -317,10 +335,10 @@ export function FeedbackSuggestions() {
       id: `rev-${Date.now()}`,
       name: formName.trim(),
       role: formRole,
-      campusOrLocality: formLocality.trim() || "Kanpur Node",
+      campusOrLocality: formLocality.trim() || (isHi ? "कानपुर" : "Kanpur Node"),
       service: formService,
       rating: formRating,
-      date: "Just now",
+      date: isHi ? "अभी-अभी" : "Just now",
       title: formTitle.trim() || (isHi ? "उत्कृष्ट अनुभव" : "Great Experience"),
       comment: formComment.trim(),
       verified: true,
@@ -338,25 +356,25 @@ export function FeedbackSuggestions() {
     }
 
     toast.success(
-      isHi ? "प्रतिक्रिया सफलतापूर्वक दर्ज हुई!" : "Feedback submitted successfully!",
+      isHi ? "🎉 समीक्षा सफलतापूर्वक दर्ज हुई!" : "🎉 Feedback submitted successfully!",
       {
         description: isHi
-          ? "आपके अनुभव से पूरे छात्र व होस्ट समुदाय को मदद मिलेगी।"
-          : "Your review helps the entire student & senior host community.",
+          ? "आपकी समीक्षा तुरंत लाइव कर दी गई है। धन्यवाद!"
+          : "Your review is now live on the platform. Thank you!",
       },
     );
 
-    setReviewModalOpen(false);
     setFormName("");
     setFormLocality("");
     setFormTitle("");
     setFormComment("");
   };
 
+  // Submit Suggestion Form
   const handleSuggestionSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!sugTitle.trim() || !sugDescription.trim() || !sugName.trim()) {
-      toast.error(isHi ? "कृपया शीर्षक, विवरण और अपना नाम भरें" : "Please fill in title, description, and your name");
+      toast.error(isHi ? "कृपया सुझाव का शीर्षक, विवरण और अपना नाम भरें" : "Please fill in title, description, and your name");
       return;
     }
 
@@ -366,10 +384,10 @@ export function FeedbackSuggestions() {
       description: sugDescription.trim(),
       category: sugCategory,
       submittedBy: sugName.trim(),
-      locality: sugLocality.trim() || "Community Member",
+      locality: sugLocality.trim() || (isHi ? "कम्युनिटी सदस्य" : "Community Member"),
       upvotes: 1,
       status: "under_review",
-      createdAt: "Just now",
+      createdAt: isHi ? "अभी-अभी" : "Just now",
     };
 
     const updated = [newSug, ...suggestions];
@@ -386,21 +404,21 @@ export function FeedbackSuggestions() {
     }
 
     toast.success(
-      isHi ? "सुझाव सफलतापूर्वक भेजा गया!" : "Suggestion submitted to Founder & Tech Team!",
+      isHi ? "🚀 सुझाव सीधे फाउंडर व टेक टीम को भेजा गया!" : "🚀 Suggestion submitted to Founder & Tech Team!",
       {
         description: isHi
-          ? "हम हर हफ्ते कम्युनिटी रोडमैप पर टॉप वोटेड आइडियाज को लाइव करते हैं।"
-          : "We review and implement top community-voted ideas every sprint cycle.",
+          ? "आपका सुझाव लाइव रोडमैप में जुड़ गया है। अन्य छात्र इसे अपवोट कर सकते हैं।"
+          : "Your suggestion is live on the community board for upvotes!",
       },
     );
 
-    setSuggestionModalOpen(false);
     setSugTitle("");
     setSugDescription("");
     setSugName("");
     setSugLocality("");
   };
 
+  // Filtered lists
   const filteredReviews = reviews.filter((r) => {
     if (reviewFilter === "all") return true;
     return r.service === reviewFilter;
@@ -415,6 +433,7 @@ export function FeedbackSuggestions() {
   const accentBorder = isStudent ? "border-emerald-500/30" : "border-amber-500/30";
   const accentBg = isStudent ? "bg-emerald-500/10" : "bg-amber-500/10";
   const accentText = isStudent ? "text-emerald-400" : "text-amber-400";
+  const glowBorder = isStudent ? "border-emerald-500/40 shadow-emerald-500/15" : "border-amber-500/40 shadow-amber-500/15";
 
   const getStatusBadge = (status: SuggestionItem["status"]) => {
     switch (status) {
@@ -445,58 +464,61 @@ export function FeedbackSuggestions() {
   return (
     <section
       id="feedback"
-      className="relative py-16 sm:py-24 bg-[#0A0D0F] text-foreground overflow-hidden border-t border-white/[0.06]"
+      className="relative py-16 sm:py-24 bg-[#0A0D0F] text-foreground overflow-hidden border-t border-white/[0.08]"
     >
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-gradient-to-b from-emerald-500/5 via-cyan-500/5 to-transparent blur-[120px] pointer-events-none" />
+      {/* Background Ambient Glows */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-emerald-500/10 via-cyan-500/5 to-transparent blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Header Badge & Title */}
         <AnimatedContent distance={30} direction="vertical">
-          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs font-medium backdrop-blur-md mb-4">
-              <Sparkles className={`w-3.5 h-3.5 ${accentText}`} />
-              <span className="text-zinc-300">
-                {isHi ? "ओपन कम्युनिटी हब" : "Radical Community Transparency"}
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.05] border border-white/12 text-xs font-semibold backdrop-blur-md mb-4 shadow-lg">
+              <Sparkles className={`w-4 h-4 ${accentText}`} />
+              <span className="text-zinc-200">
+                {isHi ? "ओपन कम्युनिटी रिव्यू व सुधार हब" : "Open Community Feedback & Improvement Hub"}
               </span>
-              <span className={`w-1.5 h-1.5 rounded-full ${isStudent ? "bg-emerald-400" : "bg-amber-400"} animate-pulse`} />
+              <span className={`w-2 h-2 rounded-full ${isStudent ? "bg-emerald-400" : "bg-amber-400"} animate-pulse`} />
             </div>
 
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white mb-4">
               {isHi ? (
                 <>
-                  ग्राहक <span className={accentText}>प्रतिक्रिया</span> एवं सुधार के{" "}
+                  ग्राहक <span className={accentText}>समीक्षाएं</span> एवं सुधार के{" "}
                   <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-cyan-300 to-amber-300">
-                    सुझाव
+                    खुले सुझाव
                   </span>
                 </>
               ) : (
                 <>
-                  Customer <span className={accentText}>Feedback</span> & Community{" "}
+                  Customer <span className={accentText}>Reviews</span> & Platform{" "}
                   <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-cyan-300 to-amber-300">
-                    Suggestions
+                    Improvement Ideas
                   </span>
                 </>
               )}
             </h2>
 
-            <p className="text-sm sm:text-base text-zinc-400 leading-relaxed">
+            <p className="text-sm sm:text-base text-zinc-300 leading-relaxed max-w-2xl mx-auto">
               {isHi
-                ? "हमारा मानना है कि भारत का सर्वश्रेष्ठ इंटरजेनरेशनल और माइक्रो-स्टोरेज इकोसिस्टम छात्रों व बुजुर्गों के सच्चे फीडबैक और खुले सुझावों से ही बनेगा।"
-                : "Real ratings from verified student storers & senior hosts, paired with an open feature suggestion board where top community ideas get built."}
+                ? "यहाँ आप अपना अनुभव व रेटिंग (1-5 स्टार) साझा कर सकते हैं, साथ ही बता सकते हैं कि हमें प्लेटफॉर्म में क्या नया सुधार या फीचर जोड़ना चाहिए।"
+                : "Share your experience with star ratings & written reviews, or tell us directly what improvements, features, or city corridors we should build next."}
             </p>
 
-            <div className="mt-8 inline-flex p-1.5 rounded-2xl bg-[#141A1F] border border-white/10 shadow-xl max-w-md w-full sm:w-auto">
+            {/* Mode Switcher Tabs */}
+            <div className="mt-8 inline-flex p-1.5 rounded-2xl bg-[#141A1F] border border-white/15 shadow-2xl max-w-lg w-full sm:w-auto">
               <button
                 type="button"
                 onClick={() => setActiveTab("feedback")}
-                className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 cursor-pointer ${
+                className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-bold transition-all duration-300 cursor-pointer ${
                   activeTab === "feedback"
-                    ? `${isStudent ? "bg-emerald-500 text-black shadow-lg shadow-emerald-500/25" : "bg-amber-500 text-black shadow-lg shadow-amber-500/25"}`
+                    ? `${isStudent ? "bg-emerald-500 text-black shadow-lg shadow-emerald-500/30" : "bg-amber-500 text-black shadow-lg shadow-amber-500/30"} scale-100`
                     : "text-zinc-400 hover:text-white hover:bg-white/[0.04]"
                 }`}
               >
                 <Star className="w-4 h-4 fill-current" />
-                <span>{isHi ? "प्रतिक्रिया व रेटिंग" : "Ratings & Reviews"}</span>
-                <span className="text-xs px-1.5 py-0.5 rounded-md bg-black/20 font-bold">
+                <span>{isHi ? "1. समीक्षा व रेटिंग लिखें" : "1. Rate & Review"}</span>
+                <span className="text-xs px-2 py-0.5 rounded-md bg-black/25 font-black">
                   {reviews.length}
                 </span>
               </button>
@@ -505,15 +527,15 @@ export function FeedbackSuggestions() {
                 type="button"
                 onClick={() => setActiveTab("suggestions")}
                 id="suggestions"
-                className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 cursor-pointer ${
+                className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-bold transition-all duration-300 cursor-pointer ${
                   activeTab === "suggestions"
-                    ? `${isStudent ? "bg-emerald-500 text-black shadow-lg shadow-emerald-500/25" : "bg-amber-500 text-black shadow-lg shadow-amber-500/25"}`
+                    ? `${isStudent ? "bg-cyan-500 text-black shadow-lg shadow-cyan-500/30" : "bg-amber-500 text-black shadow-lg shadow-amber-500/30"} scale-100`
                     : "text-zinc-400 hover:text-white hover:bg-white/[0.04]"
                 }`}
               >
                 <Lightbulb className="w-4 h-4" />
-                <span>{isHi ? "सुधार के सुझाव" : "Feature Suggestions"}</span>
-                <span className="text-xs px-1.5 py-0.5 rounded-md bg-black/20 font-bold">
+                <span>{isHi ? "2. सुधार के सुझाव दें" : "2. Suggest Improvements"}</span>
+                <span className="text-xs px-2 py-0.5 rounded-md bg-black/25 font-black">
                   {suggestions.length}
                 </span>
               </button>
@@ -521,17 +543,176 @@ export function FeedbackSuggestions() {
           </div>
         </AnimatedContent>
 
+        {/* ═══════════════════════════════════════════════════════════════════
+            TAB 1: CUSTOMER REVIEWS & FEEDBACK FORM
+        ════════════════════════════════════════════════════════════════════ */}
         {activeTab === "feedback" && (
-          <div>
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 mb-8 bg-[#12171B]/80 p-4 rounded-2xl border border-white/10 backdrop-blur-md">
-              <div className="flex items-center gap-1.5 overflow-x-auto pb-2 sm:pb-0 scrollbar-none">
-                <span className="text-xs text-zinc-400 flex items-center gap-1 mr-2 shrink-0 font-medium">
+          <div className="space-y-10">
+            {/* DIRECT INLINE SUBMISSION FORM (PROMINENT RIGHT ON PAGE) */}
+            <div className={`p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-[#13191F] via-[#101519] to-[#0D1115] border ${glowBorder} shadow-2xl relative overflow-hidden`}>
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-5 mb-6">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="p-1.5 rounded-lg bg-emerald-500/20 text-emerald-400">
+                      <Star className="w-5 h-5 fill-emerald-400" />
+                    </span>
+                    <h3 className="text-xl sm:text-2xl font-black text-white">
+                      {isHi ? "अपना अनुभव व रेटिंग दर्ज करें" : "Write Your Review & Rating"}
+                    </h3>
+                  </div>
+                  <p className="text-xs sm:text-sm text-zinc-400 mt-1">
+                    {isHi
+                      ? "लगेज स्टोरेज, पीजी रूम या टिफिन का अपना सच्चा अनुभव लिखें (ऑडियो की कोई बाध्यता नहीं है)।"
+                      : "Share your honest text review for student storage, senior living, or homemade tiffins."}
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-2 self-start md:self-auto bg-black/40 px-3.5 py-1.5 rounded-xl border border-white/10">
+                  <span className="text-xs text-zinc-400 font-medium">{isHi ? "रेटिंग:" : "Rating:"}</span>
+                  <div className="flex items-center gap-1">
+                    {[1, 2, 3, 4, 5].map((star) => {
+                      const active = (formHoverRating || formRating) >= star;
+                      return (
+                        <button
+                          key={star}
+                          type="button"
+                          onMouseEnter={() => setFormHoverRating(star)}
+                          onMouseLeave={() => setFormHoverRating(null)}
+                          onClick={() => setFormRating(star)}
+                          className="p-0.5 cursor-pointer transition-transform hover:scale-125 focus:outline-none"
+                        >
+                          <Star
+                            className={`w-6 h-6 ${
+                              active
+                                ? "fill-amber-400 text-amber-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.6)]"
+                                : "fill-zinc-700 text-zinc-700"
+                            }`}
+                          />
+                        </button>
+                      );
+                    })}
+                  </div>
+                  <span className="text-xs font-black text-amber-400 ml-1">{formRating}.0</span>
+                </div>
+              </div>
+
+              <form onSubmit={handleReviewSubmit} className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+                  <div>
+                    <label className="block text-xs font-bold text-zinc-300 mb-1.5">
+                      {isHi ? "आपका नाम *" : "Your Full Name *"}
+                    </label>
+                    <Input
+                      required
+                      placeholder={isHi ? "जैसे: अमन वर्मा" : "e.g. Aman Verma"}
+                      value={formName}
+                      onChange={(e) => setFormName(e.target.value)}
+                      className="bg-[#172027] border-white/15 text-xs text-white h-10 rounded-xl focus:border-emerald-400"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-zinc-300 mb-1.5">
+                      {isHi ? "आपकी भूमिका" : "Your Role"}
+                    </label>
+                    <select
+                      value={formRole}
+                      onChange={(e) => setFormRole(e.target.value)}
+                      className="w-full text-xs rounded-xl bg-[#172027] border border-white/15 p-2.5 text-white h-10 focus:outline-none focus:border-emerald-400"
+                    >
+                      <option value="Student">{isHi ? "🎓 छात्र / Student" : "🎓 Student"}</option>
+                      <option value="Senior Host">{isHi ? "🏠 सीनियर होस्ट / Host" : "🏠 Senior Host"}</option>
+                      <option value="Parent">{isHi ? "👨‍👩‍👦 अभिभावक / Parent" : "👨‍👩‍👦 Parent"}</option>
+                      <option value="Partner">{isHi ? "📦 नोड पार्टनर / Partner" : "📦 Storage Partner"}</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-zinc-300 mb-1.5">
+                      {isHi ? "उपयोग की गई सेवा" : "Service Used"}
+                    </label>
+                    <select
+                      value={formService}
+                      onChange={(e) => setFormService(e.target.value as any)}
+                      className="w-full text-xs rounded-xl bg-[#172027] border border-white/15 p-2.5 text-white h-10 focus:outline-none focus:border-emerald-400"
+                    >
+                      <option value="stash">{isHi ? "📦 वेकेशन स्टोरेज (₹300/mo)" : "📦 Vacation Storage"}</option>
+                      <option value="spaces">{isHi ? "🏠 सीनियर लिविंग रूम" : "🏠 Senior Living Room"}</option>
+                      <option value="kitchen">{isHi ? "🍲 सारथी होम टिफिन" : "🍲 Saarthi Home Tiffins"}</option>
+                      <option value="general">{isHi ? "✨ सामान्य प्लेटफॉर्म" : "✨ General Ecosystem"}</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-zinc-300 mb-1.5">
+                      {isHi ? "कॉलेज / इलाका" : "College / Locality"}
+                    </label>
+                    <Input
+                      placeholder={isHi ? "जैसे: IIT Kanpur / Kalyanpur" : "e.g. IIT Kanpur / Kakadeo"}
+                      value={formLocality}
+                      onChange={(e) => setFormLocality(e.target.value)}
+                      className="bg-[#172027] border-white/15 text-xs text-white h-10 rounded-xl focus:border-emerald-400"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-zinc-300 mb-1.5">
+                    {isHi ? "समीक्षा शीर्षक (Headline)" : "Review Headline"}
+                  </label>
+                  <Input
+                    placeholder={isHi ? "जैसे: समय पर पिकअप, लेज़र सील और सुरक्षित सामान!" : "e.g. Safe laser seals and on-time vacation pickup!"}
+                    value={formTitle}
+                    onChange={(e) => setFormTitle(e.target.value)}
+                    className="bg-[#172027] border-white/15 text-xs text-white h-10 rounded-xl focus:border-emerald-400"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-zinc-300 mb-1.5">
+                    {isHi ? "आपका विस्तृत अनुभव व रिव्यू *" : "Your Detailed Review / Feedback *"}
+                  </label>
+                  <Textarea
+                    required
+                    rows={3}
+                    placeholder={
+                      isHi
+                        ? "बताएं कि स्टोरेज, रहने या खाने का आपका अनुभव कैसा रहा... (यह तुरंत नीचे लाइव समीक्षाओं में दिखाई देगा)"
+                        : "Describe your experience with storage safety, room stays, or meals... (It will appear instantly on the live review board below)"
+                    }
+                    value={formComment}
+                    onChange={(e) => setFormComment(e.target.value)}
+                    className="bg-[#172027] border-white/15 text-xs text-white rounded-xl resize-none focus:border-emerald-400"
+                  />
+                </div>
+
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
+                  <div className="flex items-center gap-2 text-xs text-emerald-400">
+                    <CheckCircle2 className="w-4 h-4 shrink-0" />
+                    <span>{isHi ? "100% प्रामाणिक व सत्यापित समीक्षा" : "Verified Customer Submission — Zero Fake Reviews"}</span>
+                  </div>
+
+                  <Button
+                    type="submit"
+                    className="w-full sm:w-auto bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-black font-extrabold px-8 py-3 rounded-xl shadow-lg shadow-emerald-500/25 cursor-pointer"
+                  >
+                    <Send className="w-4 h-4 mr-2" />
+                    {isHi ? "समीक्षा सबमिट करें (Submit Review)" : "Publish Review Now"}
+                  </Button>
+                </div>
+              </form>
+            </div>
+
+            {/* Filter Pills & Live Count */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 bg-[#12171B] p-4 rounded-2xl border border-white/10">
+              <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
+                <span className="text-xs text-zinc-400 flex items-center gap-1 mr-2 shrink-0 font-bold">
                   <Filter className="w-3.5 h-3.5" />
-                  {isHi ? "फ़िल्टर:" : "Filter:"}
+                  {isHi ? "फ़िल्टर:" : "Filter by Service:"}
                 </span>
                 {[
                   { key: "all", label: isHi ? "सभी समीक्षाएं" : "All Reviews" },
-                  { key: "stash", label: isHi ? "📦 स्टैश स्टोरेज" : "📦 Storage" },
+                  { key: "stash", label: isHi ? "📦 वेकेशन स्टोरेज" : "📦 Storage" },
                   { key: "spaces", label: isHi ? "🏠 सीनियर लिविंग" : "🏠 Senior Living" },
                   { key: "kitchen", label: isHi ? "🍲 सारथी किचन" : "🍲 Kitchen" },
                 ].map((f) => (
@@ -539,10 +720,10 @@ export function FeedbackSuggestions() {
                     key={f.key}
                     type="button"
                     onClick={() => setReviewFilter(f.key)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all whitespace-nowrap cursor-pointer ${
+                    className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
                       reviewFilter === f.key
-                        ? `${accentBg} ${accentText} ${accentBorder} border shadow-sm font-semibold`
-                        : "bg-white/[0.03] text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.06] border border-transparent"
+                        ? `${accentBg} ${accentText} ${accentBorder} border shadow-sm`
+                        : "bg-white/[0.04] text-zinc-400 hover:text-white hover:bg-white/[0.08]"
                     }`}
                   >
                     {f.label}
@@ -550,20 +731,12 @@ export function FeedbackSuggestions() {
                 ))}
               </div>
 
-              <Button
-                type="button"
-                onClick={() => setReviewModalOpen(true)}
-                className={`cursor-pointer font-bold shadow-lg ${
-                  isStudent
-                    ? "bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-black shadow-emerald-500/20"
-                    : "bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-black shadow-amber-500/20"
-                }`}
-              >
-                <MessageSquarePlus className="w-4 h-4 mr-2" />
-                {isHi ? "अपना अनुभव व रेटिंग लिखें" : "Write a Review / Give Feedback"}
-              </Button>
+              <div className="text-xs text-zinc-400 font-semibold text-right">
+                {isHi ? `कुल ${filteredReviews.length} सत्यापित समीक्षाएं` : `Showing ${filteredReviews.length} Verified Reviews`}
+              </div>
             </div>
 
+            {/* Reviews Cards Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
               {filteredReviews.map((rev) => {
                 const serviceLabel =
@@ -589,9 +762,10 @@ export function FeedbackSuggestions() {
                     initial={{ opacity: 0, y: 15 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="group relative flex flex-col justify-between p-5 sm:p-6 rounded-2xl bg-gradient-to-b from-[#151C22]/90 to-[#0F1418]/90 border border-white/10 hover:border-white/20 transition-all duration-300 shadow-xl hover:shadow-2xl"
+                    className="group relative flex flex-col justify-between p-6 rounded-3xl bg-[#141A1F] border border-white/10 hover:border-emerald-500/40 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-emerald-500/5"
                   >
                     <div>
+                      {/* Rating & Service */}
                       <div className="flex items-center justify-between gap-2 mb-3">
                         <div className="flex items-center gap-1">
                           {[...Array(5)].map((_, i) => (
@@ -604,32 +778,35 @@ export function FeedbackSuggestions() {
                               }`}
                             />
                           ))}
-                          <span className="ml-1.5 text-xs font-bold text-amber-400">
+                          <span className="ml-1.5 text-xs font-black text-amber-400">
                             {rev.rating}.0
                           </span>
                         </div>
 
-                        <span className="text-[11px] font-semibold px-2.5 py-1 rounded-md bg-white/[0.05] border border-white/10 text-zinc-300">
+                        <span className="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-white/[0.06] border border-white/10 text-zinc-300">
                           {serviceLabel}
                         </span>
                       </div>
 
+                      {/* Headline */}
                       <h4 className="text-base sm:text-lg font-bold text-white mb-2 group-hover:text-emerald-300 transition-colors">
                         "{isHi && rev.title_hi ? rev.title_hi : rev.title}"
                       </h4>
 
+                      {/* Review Comment */}
                       <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-4">
                         {isHi && rev.comment_hi ? rev.comment_hi : rev.comment}
                       </p>
                     </div>
 
-                    <div className="pt-4 border-t border-white/[0.06] flex items-center justify-between gap-3 text-xs">
-                      <div className="flex items-center gap-2.5 min-w-0">
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-emerald-600 to-cyan-600 flex items-center justify-center text-white font-bold text-xs shrink-0 shadow-inner">
+                    {/* Author & Verification */}
+                    <div className="pt-4 border-t border-white/[0.08] flex items-center justify-between gap-3 text-xs">
+                      <div className="flex items-center gap-3 min-w-0">
+                        <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-emerald-600 to-teal-600 flex items-center justify-center text-white font-extrabold text-xs shrink-0 shadow-inner">
                           {rev.name.charAt(0)}
                         </div>
                         <div className="min-w-0">
-                          <p className="font-semibold text-white truncate">
+                          <p className="font-bold text-white truncate">
                             {isHi && rev.name_hi ? rev.name_hi : rev.name}
                           </p>
                           <p className="text-[11px] text-zinc-400 truncate">
@@ -643,12 +820,12 @@ export function FeedbackSuggestions() {
 
                       <div className="text-right shrink-0">
                         {rev.verified && (
-                          <div className="inline-flex items-center gap-1 text-[11px] text-emerald-400 font-semibold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                          <div className="inline-flex items-center gap-1 text-[11px] text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/25">
                             <CheckCircle2 className="w-3 h-3" />
                             <span>{rev.passId || (isHi ? "सत्यापित" : "Verified")}</span>
                           </div>
                         )}
-                        <p className="text-[10px] text-zinc-500 mt-0.5">{rev.date}</p>
+                        <p className="text-[10px] text-zinc-500 mt-1">{rev.date}</p>
                       </div>
                     </div>
                   </motion.div>
@@ -658,30 +835,152 @@ export function FeedbackSuggestions() {
           </div>
         )}
 
+        {/* ═══════════════════════════════════════════════════════════════════
+            TAB 2: COMMUNITY IMPROVEMENT SUGGESTIONS & ROADMAP
+        ════════════════════════════════════════════════════════════════════ */}
         {activeTab === "suggestions" && (
-          <div>
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 mb-8 bg-[#12171B]/80 p-4 rounded-2xl border border-white/10 backdrop-blur-md">
-              <div className="flex items-center gap-1.5 overflow-x-auto pb-2 sm:pb-0 scrollbar-none">
-                <span className="text-xs text-zinc-400 flex items-center gap-1 mr-2 shrink-0 font-medium">
+          <div className="space-y-10">
+            {/* DIRECT INLINE SUGGESTIONS FORM (PROMINENT RIGHT ON PAGE) */}
+            <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-[#121A22] via-[#10171D] to-[#0C1217] border border-cyan-500/40 shadow-2xl shadow-cyan-500/10 relative overflow-hidden">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-5 mb-6">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="p-1.5 rounded-lg bg-cyan-500/20 text-cyan-400">
+                      <Lightbulb className="w-5 h-5" />
+                    </span>
+                    <h3 className="text-xl sm:text-2xl font-black text-white">
+                      {isHi ? "हम क्या सुधार कर सकते हैं? अपना सुझाव दें" : "Tell Us: What Should We Improve Next?"}
+                    </h3>
+                  </div>
+                  <p className="text-xs sm:text-sm text-zinc-400 mt-1">
+                    {isHi
+                      ? "क्या आप कोई नया फीचर, पिकअप रूट, सुरक्षा सेंसर, या ऐप में बदलाव चाहते हैं? सीधा हमें बताएं।"
+                      : "Suggest new features, campus routes, IoT safety sensors, or pricing improvements directly to our team."}
+                  </p>
+                </div>
+
+                <div className="self-start md:self-auto bg-cyan-500/15 border border-cyan-500/30 px-3.5 py-1.5 rounded-xl text-xs font-bold text-cyan-300">
+                  ⚡ {isHi ? "फाउंडर द्वारा हर हफ्ते समीक्षा" : "Reviewed weekly by Tech & Ops"}
+                </div>
+              </div>
+
+              <form onSubmit={handleSuggestionSubmit} className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div>
+                    <label className="block text-xs font-bold text-zinc-300 mb-1.5">
+                      {isHi ? "आइडिया की श्रेणी" : "Category"}
+                    </label>
+                    <select
+                      value={sugCategory}
+                      onChange={(e) => setSugCategory(e.target.value as any)}
+                      className="w-full text-xs rounded-xl bg-[#172027] border border-white/15 p-2.5 text-white h-10 focus:outline-none focus:border-cyan-400"
+                    >
+                      <option value="app">{isHi ? "📱 ऐप व वेबसाइट यूआई" : "📱 App & UI Design"}</option>
+                      <option value="safety">{isHi ? "🛡️ सुरक्षा, सेंसर व सील" : "🛡️ Safety & IoT Sensors"}</option>
+                      <option value="pricing">{isHi ? "💰 मूल्य, बिलिंग व बचत" : "💰 Pricing & Discounts"}</option>
+                      <option value="expansion">{isHi ? "📍 नए शहर व कॉलेज कॉरिडोर" : "📍 City & Campus Expansion"}</option>
+                      <option value="kitchen">{isHi ? "🍲 सारथी किचन मेनू" : "🍲 Kitchen & Food"}</option>
+                      <option value="general">{isHi ? "✨ अन्य सामान्य सुधार" : "✨ Other Feature Idea"}</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-zinc-300 mb-1.5">
+                      {isHi ? "आपका नाम *" : "Your Name *"}
+                    </label>
+                    <Input
+                      required
+                      placeholder={isHi ? "जैसे: प्रिया शर्मा" : "e.g. Priya Sharma"}
+                      value={sugName}
+                      onChange={(e) => setSugName(e.target.value)}
+                      className="bg-[#172027] border-white/15 text-xs text-white h-10 rounded-xl focus:border-cyan-400"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-zinc-300 mb-1.5">
+                      {isHi ? "कॉलेज / इलाका" : "College / City"}
+                    </label>
+                    <Input
+                      placeholder={isHi ? "जैसे: HBTU Kanpur / Kakadeo" : "e.g. HBTU Kanpur / Lucknow"}
+                      value={sugLocality}
+                      onChange={(e) => setSugLocality(e.target.value)}
+                      className="bg-[#172027] border-white/15 text-xs text-white h-10 rounded-xl focus:border-cyan-400"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-zinc-300 mb-1.5">
+                    {isHi ? "सुझाव का शीर्षक (Title) *" : "Suggestion Title *"}
+                  </label>
+                  <Input
+                    required
+                    placeholder={isHi ? "जैसे: हॉस्टल से स्टेशन तक सीधा पिकअप वैन" : "e.g. Direct Hostel-to-Station pickup shuttle during semester end"}
+                    value={sugTitle}
+                    onChange={(e) => setSugTitle(e.target.value)}
+                    className="bg-[#172027] border-white/15 text-xs text-white h-10 rounded-xl focus:border-cyan-400"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-zinc-300 mb-1.5">
+                    {isHi ? "यह सुधार कैसे मदद करेगा? विस्तार से बताएं *" : "How does this idea improve student or host experience? *"}
+                  </label>
+                  <Textarea
+                    required
+                    rows={3}
+                    placeholder={
+                      isHi
+                        ? "बताएं कि इस सुधार से छात्रों या बुजुर्ग होस्ट्स को क्या लाभ होगा... (यह तुरंत नीचे कम्युनिटी रोडमैप पर लाइव जुड़ जाएगा)"
+                        : "Describe the problem and how this feature would solve it... (It will appear on the live community roadmap below for upvoting)"
+                    }
+                    value={sugDescription}
+                    onChange={(e) => setSugDescription(e.target.value)}
+                    className="bg-[#172027] border-white/15 text-xs text-white rounded-xl resize-none focus:border-cyan-400"
+                  />
+                </div>
+
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
+                  <div className="flex items-center gap-2 text-xs text-cyan-400">
+                    <TrendingUp className="w-4 h-4 shrink-0" />
+                    <span>{isHi ? "टॉप अपवोटेड सुझावों को अगले स्प्रिंट में लाइव किया जाता है" : "Top voted community ideas are built in upcoming sprint cycles"}</span>
+                  </div>
+
+                  <Button
+                    type="submit"
+                    className="w-full sm:w-auto bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-black font-extrabold px-8 py-3 rounded-xl shadow-lg shadow-cyan-500/25 cursor-pointer"
+                  >
+                    <Send className="w-4 h-4 mr-2" />
+                    {isHi ? "सुझाव भेजें (Submit Suggestion)" : "Submit Idea to Roadmap"}
+                  </Button>
+                </div>
+              </form>
+            </div>
+
+            {/* Filter Pills & Live Count */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 bg-[#12171B] p-4 rounded-2xl border border-white/10">
+              <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
+                <span className="text-xs text-zinc-400 flex items-center gap-1 mr-2 shrink-0 font-bold">
                   <Filter className="w-3.5 h-3.5" />
-                  {isHi ? "कैटेगरी:" : "Category:"}
+                  {isHi ? "श्रेणी:" : "Filter by Category:"}
                 </span>
                 {[
                   { key: "all", label: isHi ? "सभी सुझाव" : "All Suggestions" },
                   { key: "app", label: isHi ? "📱 ऐप व यूआई" : "📱 App & UI" },
                   { key: "safety", label: isHi ? "🛡️ सुरक्षा व सेंसर" : "🛡️ Safety" },
                   { key: "pricing", label: isHi ? "💰 मूल्य व बचत" : "💰 Pricing" },
-                  { key: "expansion", label: isHi ? "📍 नए शहर/कैंपस" : "📍 Cities" },
+                  { key: "expansion", label: isHi ? "📍 नए शहर" : "📍 Expansion" },
                   { key: "kitchen", label: isHi ? "🍲 किचन डाइट" : "🍲 Kitchen" },
                 ].map((f) => (
                   <button
                     key={f.key}
                     type="button"
                     onClick={() => setSuggestionFilter(f.key)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all whitespace-nowrap cursor-pointer ${
+                    className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
                       suggestionFilter === f.key
-                        ? `${accentBg} ${accentText} ${accentBorder} border shadow-sm font-semibold`
-                        : "bg-white/[0.03] text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.06] border border-transparent"
+                        ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-sm"
+                        : "bg-white/[0.04] text-zinc-400 hover:text-white hover:bg-white/[0.08]"
                     }`}
                   >
                     {f.label}
@@ -689,20 +988,12 @@ export function FeedbackSuggestions() {
                 ))}
               </div>
 
-              <Button
-                type="button"
-                onClick={() => setSuggestionModalOpen(true)}
-                className={`cursor-pointer font-bold shadow-lg ${
-                  isStudent
-                    ? "bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-black shadow-emerald-500/20"
-                    : "bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-black shadow-amber-500/20"
-                }`}
-              >
-                <Lightbulb className="w-4 h-4 mr-2" />
-                {isHi ? "नया सुझाव / आइडिया भेजें" : "Submit Improvement Idea"}
-              </Button>
+              <div className="text-xs text-zinc-400 font-semibold text-right">
+                {isHi ? `कुल ${filteredSuggestions.length} कम्युनिटी सुझाव` : `Showing ${filteredSuggestions.length} Community Ideas`}
+              </div>
             </div>
 
+            {/* Suggestions Cards Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
               {filteredSuggestions.map((sug) => {
                 const statusMeta = getStatusBadge(sug.status);
@@ -714,9 +1005,10 @@ export function FeedbackSuggestions() {
                     initial={{ opacity: 0, y: 15 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="group relative flex flex-col justify-between p-5 sm:p-6 rounded-2xl bg-gradient-to-b from-[#151C22]/90 to-[#0F1418]/90 border border-white/10 hover:border-white/20 transition-all duration-300 shadow-xl"
+                    className="group relative flex flex-col justify-between p-6 rounded-3xl bg-[#141A1F] border border-white/10 hover:border-cyan-500/40 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-cyan-500/5"
                   >
                     <div>
+                      {/* Top Status & Category */}
                       <div className="flex items-center justify-between gap-2 mb-3">
                         <span
                           className={`text-[11px] font-bold px-2.5 py-1 rounded-md border ${statusMeta.color}`}
@@ -724,23 +1016,26 @@ export function FeedbackSuggestions() {
                           {statusMeta.label}
                         </span>
 
-                        <span className="text-[11px] font-medium text-zinc-400 bg-white/[0.04] px-2 py-0.5 rounded border border-white/[0.06]">
+                        <span className="text-[11px] font-bold text-zinc-400 bg-white/[0.06] px-2.5 py-1 rounded-lg border border-white/[0.08]">
                           {sug.category.toUpperCase()}
                         </span>
                       </div>
 
+                      {/* Title */}
                       <h4 className="text-base sm:text-lg font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">
                         {isHi && sug.title_hi ? sug.title_hi : sug.title}
                       </h4>
 
+                      {/* Description */}
                       <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-4">
                         {isHi && sug.description_hi ? sug.description_hi : sug.description}
                       </p>
                     </div>
 
-                    <div className="pt-4 border-t border-white/[0.06] flex items-center justify-between gap-3">
+                    {/* Author & Interactive Upvote Button */}
+                    <div className="pt-4 border-t border-white/[0.08] flex items-center justify-between gap-3">
                       <div className="text-xs">
-                        <p className="font-semibold text-zinc-300">
+                        <p className="font-bold text-zinc-300">
                           {isHi ? "सुझाव प्रेषक:" : "Proposed by:"}{" "}
                           <span className="text-white">{sug.submittedBy}</span>
                         </p>
@@ -750,17 +1045,17 @@ export function FeedbackSuggestions() {
                       <button
                         type="button"
                         onClick={() => handleToggleUpvote(sug.id)}
-                        className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer ${
+                        className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-black transition-all duration-200 cursor-pointer ${
                           hasVoted
-                            ? "bg-emerald-500 text-black shadow-lg shadow-emerald-500/25 scale-105"
+                            ? "bg-cyan-500 text-black shadow-lg shadow-cyan-500/30 scale-105"
                             : "bg-white/[0.06] text-zinc-300 hover:text-white hover:bg-white/[0.12] border border-white/10"
                         }`}
                         title={hasVoted ? "Click to remove vote" : "Click to upvote priority"}
                       >
-                        <ThumbsUp className={`w-3.5 h-3.5 ${hasVoted ? "fill-current" : ""}`} />
+                        <ThumbsUp className={`w-4 h-4 ${hasVoted ? "fill-current" : ""}`} />
                         <span>{sug.upvotes}</span>
                         <span className="text-[10px] opacity-80 hidden sm:inline">
-                          {hasVoted ? (isHi ? "वोटेड" : "Voted") : isHi ? "वोट दें" : "Upvote"}
+                          {hasVoted ? (isHi ? "वोटेड" : "Voted") : isHi ? "अपवोट" : "Upvote"}
                         </span>
                       </button>
                     </div>
@@ -771,18 +1066,19 @@ export function FeedbackSuggestions() {
           </div>
         )}
 
-        <div className="mt-12 p-6 rounded-2xl bg-gradient-to-r from-[#121A20] via-[#162028] to-[#121A20] border border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-3.5 text-left">
-            <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
-              <MessageCircle className="w-5 h-5" />
+        {/* Founder Direct Escalation Banner */}
+        <div className="mt-12 p-6 sm:p-7 rounded-3xl bg-gradient-to-r from-[#121A20] via-[#162028] to-[#121A20] border border-white/12 flex flex-col md:flex-row items-center justify-between gap-4 shadow-xl">
+          <div className="flex items-center gap-4 text-left">
+            <div className="w-12 h-12 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shrink-0">
+              <MessageCircle className="w-6 h-6" />
             </div>
             <div>
-              <h4 className="text-sm sm:text-base font-bold text-white">
-                {isHi ? "सीधे फाउंडर से बात करना चाहते हैं?" : "Want to share urgent direct feedback?"}
+              <h4 className="text-base sm:text-lg font-bold text-white">
+                {isHi ? "फाउंडर से सीधे व्हाट्सएप पर बात करना चाहते हैं?" : "Want to share urgent suggestions directly with the founder?"}
               </h4>
-              <p className="text-xs text-zinc-400">
+              <p className="text-xs sm:text-sm text-zinc-400">
                 {isHi
-                  ? `व्हाट्सएप पर एडवाइज़र / फाउंडर को सीधा मैसेज भेजें (${FOUNDER_PHONE_DISPLAY})`
+                  ? `फाउंडर अद्विक ओमर को सीधे व्हाट्सएप मैसेज भेजें (${FOUNDER_PHONE_DISPLAY})`
                   : `Connect directly with founder Advik Omer on WhatsApp (${FOUNDER_PHONE_DISPLAY})`}
               </p>
             </div>
@@ -790,272 +1086,19 @@ export function FeedbackSuggestions() {
 
           <a
             href={`https://wa.me/${FOUNDER_WHATSAPP}?text=${encodeURIComponent(
-              "Hi Advik, I have feedback/suggestions regarding StashSaarthi:",
+              isHi
+                ? "नमस्ते अद्विक, मेरे पास StashSaarthi के लिए फीडबैक/सुधार का सुझाव है:"
+                : "Hi Advik, I have feedback/improvement suggestions regarding StashSaarthi:",
             )}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs sm:text-sm transition-all shadow-lg shadow-emerald-500/20 shrink-0 cursor-pointer"
+            className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-black text-xs sm:text-sm transition-all shadow-lg shadow-emerald-500/25 shrink-0 cursor-pointer"
           >
             <MessageCircle className="w-4 h-4 fill-current" />
-            <span>{isHi ? "व्हाट्सएप पर बात करें" : "Chat on WhatsApp"}</span>
+            <span>{isHi ? "व्हाट्सएप पर चैट करें" : "Chat on WhatsApp"}</span>
           </a>
         </div>
       </div>
-
-      <Dialog open={reviewModalOpen} onOpenChange={setReviewModalOpen}>
-        <DialogContent className="max-w-lg bg-[#0E1317] border border-white/15 text-white p-6 rounded-3xl shadow-2xl">
-          <DialogHeader>
-            <DialogTitle className="text-xl font-bold flex items-center gap-2">
-              <Star className="w-5 h-5 fill-amber-400 text-amber-400" />
-              <span>{isHi ? "अपना अनुभव व रेटिंग साझा करें" : "Rate Your Experience"}</span>
-            </DialogTitle>
-            <DialogDescription className="text-xs text-zinc-400">
-              {isHi
-                ? "आपका प्रामाणिक फीडबैक अन्य छात्रों व बुजुर्ग परिवारों को सही निर्णय लेने में मदद करता है।"
-                : "Your honest review helps fellow students and senior families find trusted living & storage."}
-            </DialogDescription>
-          </DialogHeader>
-
-          <form onSubmit={handleReviewSubmit} className="space-y-4 mt-2">
-            <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 text-center">
-              <p className="text-xs font-semibold text-zinc-300 mb-2">
-                {isHi ? "समग्र अनुभव रेटिंग चुनें:" : "Select Overall Rating:"}
-              </p>
-              <div className="flex items-center justify-center gap-2">
-                {[1, 2, 3, 4, 5].map((star) => {
-                  const active = (formHoverRating || formRating) >= star;
-                  return (
-                    <button
-                      key={star}
-                      type="button"
-                      onMouseEnter={() => setFormHoverRating(star)}
-                      onMouseLeave={() => setFormHoverRating(null)}
-                      onClick={() => setFormRating(star)}
-                      className="p-1 cursor-pointer transition-transform hover:scale-125 focus:outline-none"
-                    >
-                      <Star
-                        className={`w-7 h-7 ${
-                          active
-                            ? "fill-amber-400 text-amber-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.5)]"
-                            : "fill-zinc-700 text-zinc-700"
-                        }`}
-                      />
-                    </button>
-                  );
-                })}
-              </div>
-              <p className="text-xs font-bold text-amber-400 mt-1.5">
-                {formRating === 5 && (isHi ? "⭐⭐⭐⭐⭐ असाधारण / 5-Star!" : "⭐⭐⭐⭐⭐ Exceptional / 5-Star!")}
-                {formRating === 4 && (isHi ? "⭐⭐⭐⭐ बहुत अच्छा (Great)" : "⭐⭐⭐⭐ Great Experience")}
-                {formRating === 3 && (isHi ? "⭐⭐⭐ अच्छा (Good)" : "⭐⭐⭐ Good / Satisfactory")}
-                {formRating === 2 && (isHi ? "⭐⭐ सुधार की आवश्यकता" : "⭐⭐ Needs Improvement")}
-                {formRating === 1 && (isHi ? "⭐ असंतोषजनक" : "⭐ Poor / Issues Faced")}
-              </p>
-            </div>
-
-            <div className="grid grid-cols-2 gap-3">
-              <div>
-                <label className="block text-xs font-medium text-zinc-400 mb-1">
-                  {isHi ? "उपयोग की गई सेवा" : "Service Used"}
-                </label>
-                <select
-                  value={formService}
-                  onChange={(e) => setFormService(e.target.value as any)}
-                  className="w-full text-xs rounded-xl bg-[#151C22] border border-white/10 p-2.5 text-white focus:outline-none focus:border-emerald-500"
-                >
-                  <option value="stash">{isHi ? "📦 स्टैश स्टोरेज" : "📦 Vacation Stash"}</option>
-                  <option value="spaces">{isHi ? "🏠 सीनियर लिविंग" : "🏠 Senior Living"}</option>
-                  <option value="kitchen">{isHi ? "🍲 सारथी किचन" : "🍲 Home Tiffin"}</option>
-                  <option value="general">{isHi ? "✨ सामान्य प्लेटफॉर्म" : "✨ General"}</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-xs font-medium text-zinc-400 mb-1">
-                  {isHi ? "आपकी भूमिका" : "Your Role"}
-                </label>
-                <select
-                  value={formRole}
-                  onChange={(e) => setFormRole(e.target.value)}
-                  className="w-full text-xs rounded-xl bg-[#151C22] border border-white/10 p-2.5 text-white focus:outline-none focus:border-emerald-500"
-                >
-                  <option value="Student">{isHi ? "छात्र / Student" : "Student"}</option>
-                  <option value="Senior Host">{isHi ? "सीनियर होस्ट / Senior Host" : "Senior Host"}</option>
-                  <option value="Parent">{isHi ? "अभिभावक / Parent" : "Parent"}</option>
-                  <option value="Partner">{isHi ? "नोड पार्टनर / Partner" : "Node Partner"}</option>
-                </select>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-3">
-              <div>
-                <label className="block text-xs font-medium text-zinc-400 mb-1">
-                  {isHi ? "आपका नाम *" : "Your Name *"}
-                </label>
-                <Input
-                  required
-                  placeholder={isHi ? "जैसे: अमन वर्मा" : "e.g. Aman Verma"}
-                  value={formName}
-                  onChange={(e) => setFormName(e.target.value)}
-                  className="bg-[#151C22] border-white/10 text-xs"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-medium text-zinc-400 mb-1">
-                  {isHi ? "कॉलेज / इलाका" : "College / Locality"}
-                </label>
-                <Input
-                  placeholder={isHi ? "जैसे: IIT Kanpur / Kalyanpur" : "e.g. IIT Kanpur / Kakadeo"}
-                  value={formLocality}
-                  onChange={(e) => setFormLocality(e.target.value)}
-                  className="bg-[#151C22] border-white/10 text-xs"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-xs font-medium text-zinc-400 mb-1">
-                {isHi ? "समीक्षा का शीर्षक" : "Review Headline"}
-              </label>
-              <Input
-                placeholder={isHi ? "जैसे: समय पर डिलीवरी और बहुत सुरक्षित!" : "e.g. On-time delivery and zero damage!"}
-                value={formTitle}
-                onChange={(e) => setFormTitle(e.target.value)}
-                className="bg-[#151C22] border-white/10 text-xs"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs font-medium text-zinc-400 mb-1">
-                {isHi ? "विस्तृत अनुभव व सुझाव *" : "Your Detailed Experience *"}
-              </label>
-              <Textarea
-                required
-                rows={3}
-                placeholder={
-                  isHi
-                    ? "बताएं कि स्टोरेज, रहने या खाने का आपका अनुभव कैसा रहा..."
-                    : "Share how the storage, room living, or meals worked for you..."
-                }
-                value={formComment}
-                onChange={(e) => setFormComment(e.target.value)}
-                className="bg-[#151C22] border-white/10 text-xs resize-none"
-              />
-            </div>
-
-            <Button
-              type="submit"
-              className="w-full bg-emerald-500 hover:bg-emerald-400 text-black font-bold py-2.5 rounded-xl cursor-pointer"
-            >
-              <Send className="w-4 h-4 mr-2" />
-              {isHi ? "समीक्षा सबमिट करें" : "Submit Feedback"}
-            </Button>
-          </form>
-        </DialogContent>
-      </Dialog>
-
-      <Dialog open={suggestionModalOpen} onOpenChange={setSuggestionModalOpen}>
-        <DialogContent className="max-w-lg bg-[#0E1317] border border-white/15 text-white p-6 rounded-3xl shadow-2xl">
-          <DialogHeader>
-            <DialogTitle className="text-xl font-bold flex items-center gap-2">
-              <Lightbulb className="w-5 h-5 text-yellow-400" />
-              <span>{isHi ? "नया सुधार / आइडिया सबमिट करें" : "Submit an Improvement Idea"}</span>
-            </DialogTitle>
-            <DialogDescription className="text-xs text-zinc-400">
-              {isHi
-                ? "क्या आपके पास कोई नया फीचर, सुरक्षा या बचत का आइडिया है? हमारे टेक व ऑपरेशन्स टीम सीधे इसे रोडमैप में शामिल करेगी।"
-                : "Have an idea to improve UI, pricing, safety, or new college routes? Our founding team reviews community submissions weekly."}
-            </DialogDescription>
-          </DialogHeader>
-
-          <form onSubmit={handleSuggestionSubmit} className="space-y-4 mt-2">
-            <div>
-              <label className="block text-xs font-medium text-zinc-400 mb-1">
-                {isHi ? "आइडिया की श्रेणी" : "Idea Category"}
-              </label>
-              <select
-                value={sugCategory}
-                onChange={(e) => setSugCategory(e.target.value as any)}
-                className="w-full text-xs rounded-xl bg-[#151C22] border border-white/10 p-2.5 text-white focus:outline-none focus:border-cyan-500"
-              >
-                <option value="app">{isHi ? "📱 ऐप व वेबसाइट यूआई (App & UI)" : "📱 App & UI"}</option>
-                <option value="safety">{isHi ? "🛡️ सुरक्षा, सेंसर व सील (Safety & IoT)" : "🛡️ Safety & Seals"}</option>
-                <option value="pricing">{isHi ? "💰 मूल्य, बिलिंग व बचत (Pricing & Billing)" : "💰 Pricing & Discounts"}</option>
-                <option value="expansion">{isHi ? "📍 नए शहर व कॉलेज कॉरिडोर (City Expansion)" : "📍 New City / Campus"}</option>
-                <option value="kitchen">{isHi ? "🍲 सारथी किचन डाइट व मेनू (Kitchen Menu)" : "🍲 Kitchen & Food"}</option>
-                <option value="general">{isHi ? "✨ अन्य सामान्य सुझाव (General)" : "✨ Other Improvement"}</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-xs font-medium text-zinc-400 mb-1">
-                {isHi ? "सुझाव का शीर्षक *" : "Suggestion Title *"}
-              </label>
-              <Input
-                required
-                placeholder={isHi ? "जैसे: हॉस्टल से स्टेशन तक सीधा पिकअप वैन" : "e.g. Direct Hostel-to-Station pickup shuttle"}
-                value={sugTitle}
-                onChange={(e) => setSugTitle(e.target.value)}
-                className="bg-[#151C22] border-white/10 text-xs"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs font-medium text-zinc-400 mb-1">
-                {isHi ? "आइडिया का विवरण व यह कैसे मदद करेगा? *" : "How does this idea help students or senior hosts? *"}
-              </label>
-              <Textarea
-                required
-                rows={3}
-                placeholder={
-                  isHi
-                    ? "बताएं कि इस फीचर से क्या लाभ होगा और इसे कैसे लागू किया जा सकता है..."
-                    : "Describe what problem this solves and how it would improve the experience..."
-                }
-                value={sugDescription}
-                onChange={(e) => setSugDescription(e.target.value)}
-                className="bg-[#151C22] border-white/10 text-xs resize-none"
-              />
-            </div>
-
-            <div className="grid grid-cols-2 gap-3">
-              <div>
-                <label className="block text-xs font-medium text-zinc-400 mb-1">
-                  {isHi ? "आपका नाम *" : "Your Name *"}
-                </label>
-                <Input
-                  required
-                  placeholder={isHi ? "जैसे: प्रिया शर्मा" : "e.g. Priya Sharma"}
-                  value={sugName}
-                  onChange={(e) => setSugName(e.target.value)}
-                  className="bg-[#151C22] border-white/10 text-xs"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-medium text-zinc-400 mb-1">
-                  {isHi ? "कॉलेज / इलाका" : "College / Locality"}
-                </label>
-                <Input
-                  placeholder={isHi ? "जैसे: HBTU Kanpur" : "e.g. HBTU Kanpur"}
-                  value={sugLocality}
-                  onChange={(e) => setSugLocality(e.target.value)}
-                  className="bg-[#151C22] border-white/10 text-xs"
-                />
-              </div>
-            </div>
-
-            <Button
-              type="submit"
-              className="w-full bg-cyan-500 hover:bg-cyan-400 text-black font-bold py-2.5 rounded-xl cursor-pointer"
-            >
-              <Send className="w-4 h-4 mr-2" />
-              {isHi ? "आइडिया रोडमैप में भेजें" : "Submit to Community Roadmap"}
-            </Button>
-          </form>
-        </DialogContent>
-      </Dialog>
     </section>
   );
 }

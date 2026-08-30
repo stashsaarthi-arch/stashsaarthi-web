@@ -19,7 +19,7 @@ import { ProductSandbox } from "@/components/stash/ProductSandbox";
 import { DataPrivacyCommitment } from "@/components/stash/DataPrivacyCommitment";
 import { FounderAccountability } from "@/components/stash/FounderAccountability";
 import { FounderEscalationWidget } from "@/components/stash/FounderEscalationWidget";
-import { Stories } from "@/components/stash/Stories";
+import { FeedbackSuggestions } from "@/components/stash/FeedbackSuggestions";
 import { FAQ } from "@/components/stash/FAQ";
 import { FooterSection } from "@/components/stash/FooterSection";
 import { EarlyAccessModal } from "@/components/stash/EarlyAccessModal";
@@ -130,7 +130,7 @@ function Index() {
         </ErrorBoundary>
       )}
       <ErrorBoundary>
-        <Stories role={role} />
+        <FeedbackSuggestions />
       </ErrorBoundary>
       <ErrorBoundary>
         <FAQ />

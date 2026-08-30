@@ -42,7 +42,7 @@ export function Navbar({
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const DESKTOP_LINKS = LINKS.filter((l) => ["rooms", "stash", "trust"].includes(l.key));
+  const DESKTOP_LINKS = LINKS.filter((l) => ["rooms", "stash", "trust", "feedback"].includes(l.key));
 
   return (
     <header

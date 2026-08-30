@@ -9,6 +9,7 @@ import {
   getWhatsAppUrl,
 } from "@/lib/constants";
 import { useLanguage } from "@/context/LanguageContext";
+import { smoothScrollTo } from "./legal";
 
 export function FounderEscalationWidget() {
   const [isOpen, setIsOpen] = useState(false);
@@ -105,6 +106,21 @@ export function FounderEscalationWidget() {
                   <span>{isHi ? "सीधा ईमेल भेजें" : "Direct Email"}</span>
                 </div>
                 <span className="text-[10px] font-mono text-neutral-400">{FOUNDER_EMAIL}</span>
+              </a>
+
+              <a
+                href="#feedback"
+                onClick={(e) => {
+                  smoothScrollTo("feedback")(e);
+                  setIsOpen(false);
+                }}
+                className="w-full flex items-center justify-between rounded-xl border border-yellow-500/20 bg-yellow-500/10 p-2.5 text-left text-xs font-semibold text-yellow-300 hover:bg-yellow-500/20 transition-all cursor-pointer"
+              >
+                <div className="flex items-center gap-2">
+                  <span className="text-yellow-400 font-bold text-xs">⭐</span>
+                  <span>{isHi ? "रिव्यू या सुधार का सुझाव दें" : "Give Review & Suggestions"}</span>
+                </div>
+                <span className="text-[10px] font-mono text-yellow-400/80">#feedback</span>
               </a>
 
               <a
