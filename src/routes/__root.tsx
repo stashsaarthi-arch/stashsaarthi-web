@@ -166,12 +166,21 @@ function RootShell({ children }: { children: ReactNode }) {
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "WebSite",
+        "@id": "https://stashsaarthi-web.vercel.app/#website",
+        url: "https://stashsaarthi-web.vercel.app/",
+        name: "StashSaarthi",
+        alternateName: ["Stash Saarthi", "StashSaarthi India"],
+        description: "Official platform for StashSaarthi.",
+        publisher: { "@id": "https://stashsaarthi-web.vercel.app/#organization" },
+      },
+      {
         "@type": "Organization",
         "@id": "https://stashsaarthi-web.vercel.app/#organization",
         name: "StashSaarthi",
-        url: "https://stashsaarthi-web.vercel.app",
+        url: "https://stashsaarthi-web.vercel.app/",
         logo: "https://stashsaarthi-web.vercel.app/favicon.png",
-        description: "India's Zero-CapEx Intergenerational Living & Campus Micro-Storage Platform.",
+        description: "Official platform for StashSaarthi. India's Zero-CapEx Intergenerational Living & Campus Micro-Storage Platform.",
         sameAs: ["https://instagram.com/stashsaarthi", "https://twitter.com/StashSaarthi"],
         contactPoint: {
           "@type": "ContactPoint",
@@ -180,13 +189,6 @@ function RootShell({ children }: { children: ReactNode }) {
           areaServed: "IN",
           availableLanguage: ["en", "hi"],
         },
-      },
-      {
-        "@type": "WebSite",
-        "@id": "https://stashsaarthi-web.vercel.app/#website",
-        url: "https://stashsaarthi-web.vercel.app",
-        name: "StashSaarthi",
-        publisher: { "@id": "https://stashsaarthi-web.vercel.app/#organization" },
       },
       {
         "@type": "Product",

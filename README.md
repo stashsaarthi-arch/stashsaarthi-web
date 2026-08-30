@@ -1,6 +1,18 @@
-# StashSaarthi Connect
+# [StashSaarthi](https://stashsaarthi-web.vercel.app) — Zero-CapEx Intergenerational Living & Campus Micro-Storage
 
-Build a world-class, hyper-interactive, dark-themed Web App for "StashSaarthi" — India's premier hyper-local living ecosystem bridging student mobility with intergenerational community support.
+> **Official Website**: [StashSaarthi Platform](https://stashsaarthi-web.vercel.app) | [StashSaarthi Live](https://stashsaarthi-main.vercel.app)  
+> **Brand**: StashSaarthi  
+> **Description**: Official platform for [StashSaarthi](https://stashsaarthi-web.vercel.app) — India's premier hyper-local living ecosystem bridging student mobility with intergenerational community support.
+
+---
+
+### 🌟 What is [StashSaarthi](https://stashsaarthi-web.vercel.app)?
+[StashSaarthi](https://stashsaarthi-web.vercel.app) is an innovative, zero-brokerage campus ecosystem that solves student vacation dead-rent and luggage storage frictions while empowering senior citizens with dignified passive income:
+- 📦 **Saarthi Stash**: Micro-storage for student bags @ ₹300/bag/month during semester breaks.
+- 🏠 **Saarthi Spaces**: 100% verified, broker-free senior-hosted co-living rooms.
+- 🍲 **Saarthi Kitchen**: Pure, homestyle nani-style tiffins and meal subscriptions.
+
+---
 
 ### 🎨 1. DESIGN SYSTEM & VISUAL STYLE
 
