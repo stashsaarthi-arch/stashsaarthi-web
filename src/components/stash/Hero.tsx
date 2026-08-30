@@ -13,12 +13,9 @@ import {
   Share2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { NodeCanvas } from "./NodeCanvas";
-import { HeroParallax } from "./HeroParallax";
 import { Card3D } from "@/components/ui/Card3D";
 import { CampusNodeChecker } from "./CampusNodeChecker";
 import AnimatedContent from "@/components/ui/AnimatedContent";
-import Ferrofluid from "@/components/ui/Ferrofluid";
 import type { OpenBooking, Role } from "./types";
 import { FOUNDER_WHATSAPP } from "@/lib/constants";
 import { useLanguage } from "@/context/LanguageContext";
@@ -44,35 +41,20 @@ export function Hero({
 
   return (
     <section id="top" className="relative overflow-hidden pb-12 pt-24 sm:pb-16 md:pt-36">
-      <div className="absolute inset-0 grid-noise opacity-60" />
-      <div className="absolute inset-0">
-        <NodeCanvas />
-      </div>
-      <HeroParallax />
-      <div className="absolute inset-0 -z-10 h-[650px] w-full overflow-hidden opacity-65 pointer-events-auto">
-        <Ferrofluid
-          colors={
-            student
-              ? ["#10B981", "#00F5A0", "#06B6D4", "#1E3A8A"]
-              : ["#F59E0B", "#FBBF24", "#D97706", "#78350F"]
-          }
-          glow={student ? 2.2 : 2.0}
-          shimmer={student ? 1.4 : 1.2}
-          mouseStrength={student ? 1.2 : 1.0}
-          fluidity={0.12}
-          mixBlendMode="screen"
-          mouseDampening={0.12}
-          mouseInteraction={true}
-          mouseRadius={0.32}
-          rimWidth={0.22}
-          scale={1.4}
-          sharpness={2.8}
-          speed={0.35}
-          turbulence={0.8}
-        />
-      </div>
+      {/* 2D Clean Background (Phone-view parity across all screens) */}
+      <div className="absolute inset-0 grid-noise opacity-50 pointer-events-none" />
       <div
-        className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-[min(900px,140vw)] -translate-x-1/2 rounded-full opacity-40 blur-[120px]"
+        className="pointer-events-none absolute inset-0 -z-10"
+        style={{
+          background: `radial-gradient(ellipse 80% 50% at 50% -20%, ${
+            student ? "rgba(16, 185, 129, 0.18)" : "rgba(245, 158, 11, 0.16)"
+          }, transparent 70%), radial-gradient(ellipse 60% 40% at 50% 120%, ${
+            student ? "rgba(6, 182, 212, 0.12)" : "rgba(251, 191, 36, 0.1)"
+          }, transparent 70%)`,
+        }}
+      />
+      <div
+        className="pointer-events-none absolute left-1/2 top-0 h-[450px] w-[min(900px,140vw)] -translate-x-1/2 rounded-full opacity-40 blur-[100px]"
         style={{
           background: student
             ? "radial-gradient(circle, var(--cyan), transparent 65%)"
