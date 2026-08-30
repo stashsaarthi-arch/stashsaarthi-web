@@ -1,12 +1,15 @@
-# Current Sprint Progress
-
-## Active Task
-
-- [x] **2D Ambient Background Overhaul (Phone-View Parity on All Screens)**:
-  - **Removed 3D WebGL Canvas & Parallax**: Unmounted and stripped `Ferrofluid` WebGL fluid canvas, `NodeCanvas` particle physics, and `HeroParallax` 3D mouse layers from `Hero.tsx`.
-  - **Clean 2D Ambient Gradient Mesh**: Implemented a lightweight, ultra-crisp 2D radial gradient mesh (`radial-gradient(ellipse 80% 50% at 50% -20%, ...)`) and dark obsidian noise layer identical to the phone view, providing 120 FPS buttery rendering with zero GPU overhead.
-  - **Bundle Optimization**: Reduced client JS bundle size by ~57kB (from ~645kB to ~588kB) by eliminating heavy WebGL pipeline dependencies.
-  - **Production Deployment**: Verified `npx tsc --noEmit` (**0 errors**), `npm run build` (**0 errors**), and deployed live to [https://stashsaarthi-main.vercel.app](https://stashsaarthi-main.vercel.app) (Deployment ID: `dpl_CmfZwbo5Vn37orRGhtx9KyhgBjsR`, HTTP `200 OK`).
+- [x] **Complete Laptop 120 FPS Performance & Lag Elimination**:
+  - **Identified Root Causes of Laptop Stutter**:
+    1. `Card3D` and `Tilt3D` were running heavy `useSpring` and `preserve-3d` mouse-tracking on desktop (disabled on Android), forcing GPU 3D layer re-compositing on scroll.
+    2. `AmbientNodes` ran an active `useScroll()` + `useTransform()` loop across 5 fixed fullscreen divs on desktop (`null` on mobile), invalidating full-screen paint on every scroll frame.
+    3. `AnimatedContent` used GSAP `ScrollTrigger` forcing synchronous layout reflows (`getBoundingClientRect()`) on main thread during scroll.
+    4. `.glass` utility had high `blur(16px)` which caused fragment shader fill-rate drops across 1080p/1440p laptop displays.
+  - **Applied Android-Parity Performance Overhaul**:
+    - Converted `Card3D` and `Tilt3D` into lightweight 2D GPU-accelerated CSS hover components (zero JS springs/listeners).
+    - Converted `AmbientNodes` into static CSS ambient glows (0ms scroll overhead).
+    - Converted `AnimatedContent` to browser-native `IntersectionObserver` with CSS GPU hardware transforms, eliminating main-thread scroll blocking.
+    - Optimized `.glass` blur to 10px and tuned Lenis to `lerp: 0.2`, `duration: 0.35s` for instant kinetic scrolling.
+  - **Production Deployment**: Verified `npx tsc --noEmit` (**0 errors**), `npm run build` (**0 errors**), and deployed live to [https://stashsaarthi-main.vercel.app](https://stashsaarthi-main.vercel.app) (Deployment ID: `dpl_CGT4Yg94Xfw2k3HetR8hJvURyGfb`, HTTP `200 OK`).
 
 - [x] **Scroll Entrance Animations, Compact Scroll Length & Cursor Optimization**:
   - **Fluid Scroll Reveal Animations**: Wrapped all major landing page sections in `<AnimatedContent distance={35} threshold={0.12} duration={0.8} ease="power3.out">`. As the user scrolls down, sections smoothly slide up and fade into view with momentum physics while maintaining zero layout shift on initial load.
