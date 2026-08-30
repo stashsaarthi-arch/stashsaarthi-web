@@ -95,6 +95,9 @@ export function Hero({
             key={`h-${role}`}
             className="mx-auto mt-6 max-w-4xl text-balance text-[2rem] font-extrabold leading-[1.06] tracking-tight sm:text-6xl md:text-7xl"
           >
+            <span className="block text-xs sm:text-sm font-bold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-emerald mb-3">
+              StashSaarthi Living & Storage
+            </span>
             <span className="text-gradient">
               {student ? t.hero.student.title : t.hero.host.title}
             </span>

@@ -35,9 +35,9 @@ import { usePersona } from "@/context/PersonaContext";
 import AnimatedContent from "@/components/ui/AnimatedContent";
 import type { BookingPrefill, Role } from "@/components/stash/types";
 
-const TITLE = "StashSaarthi | Intergenerational Living & Micro-Storage";
+const TITLE = "StashSaarthi - Campus Micro-Storage & Zero-Brokerage Co-Living";
 const DESC =
-  "Store vacation luggage securely from ₹300/mo. Find 100% verified, broker-free senior-hosted living near your campus. India's trusted student living ecosystem.";
+  "Official website of StashSaarthi. India's Zero-CapEx Intergenerational Living & Campus Micro-Storage Platform. Vacation luggage storage at ₹300/bag/mo, verified senior-hosted rooms, and homemade tiffins.";
 const URL = "https://stashsaarthi-web.vercel.app/";
 const OG_IMAGE = "https://stashsaarthi-web.vercel.app/stashsaarthi-logo.png";
 
@@ -46,12 +46,15 @@ export const Route = createFileRoute("/")({
     meta: [
       { title: TITLE },
       { name: "description", content: DESC },
-      { property: "og:title", content: TITLE },
+      { property: "og:title", content: "StashSaarthi" },
+      { property: "og:site_name", content: "StashSaarthi" },
       { property: "og:description", content: DESC },
       { property: "og:type", content: "website" },
       { property: "og:url", content: URL },
       { property: "og:image", content: OG_IMAGE },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: TITLE },
+      { name: "twitter:description", content: DESC },
       { name: "twitter:image", content: OG_IMAGE },
     ],
     links: [{ rel: "canonical", href: URL }],

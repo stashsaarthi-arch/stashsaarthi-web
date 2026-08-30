@@ -101,25 +101,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "google-site-verification", content: "googlec3390cf96e97cc6c" },
       { name: "robots", content: "index, follow, max-image-preview:large" },
       { name: "format-detection", content: "telephone=no" },
-      { title: "StashSaarthi | Intergenerational Living & Micro-Storage" },
+      { title: "StashSaarthi - Campus Micro-Storage & Zero-Brokerage Co-Living" },
       {
         name: "description",
         content:
-          "Vacation luggage storage at ₹300/bag/mo, zero-brokerage verified senior-hosted rooms, and homemade tiffins near top Indian campuses.",
+          "Official website of StashSaarthi. India's Zero-CapEx Intergenerational Living & Campus Micro-Storage Platform. Vacation luggage storage at ₹300/bag/mo, verified senior-hosted rooms, and homemade tiffins.",
       },
       {
         name: "keywords",
         content:
-          "student luggage storage, campus micro-storage, Kanpur student room, broker-free PG, IIT Kanpur luggage stash, vacation dead rent, intergenerational co-living India",
+          "StashSaarthi, student luggage storage, campus micro-storage, Kanpur student room, broker-free PG, IIT Kanpur luggage stash, vacation dead rent, intergenerational co-living India",
       },
       { name: "author", content: "StashSaarthi" },
       { property: "og:site_name", content: "StashSaarthi" },
       { property: "og:locale", content: "en_IN" },
-      { property: "og:title", content: "StashSaarthi | Intergenerational Living & Micro-Storage" },
+      { property: "og:title", content: "StashSaarthi" },
       {
         property: "og:description",
         content:
-          "Store vacation luggage securely from ₹300/mo. Find 100% verified, broker-free senior-hosted living across India.",
+          "Official website of StashSaarthi. Vacation luggage storage at ₹300/bag/mo, verified senior-hosted rooms, and homemade tiffins.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://stashsaarthi-web.vercel.app" },
@@ -131,11 +131,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@StashSaarthi" },
       { name: "twitter:creator", content: "@StashSaarthi" },
-      { name: "twitter:title", content: "StashSaarthi | Intergenerational Living & Micro-Storage" },
+      { name: "twitter:title", content: "StashSaarthi - Campus Micro-Storage & Zero-Brokerage Co-Living" },
       {
         name: "twitter:description",
         content:
-          "Store vacation luggage securely from ₹300/mo. Find 100% verified, broker-free senior-hosted living across India.",
+          "Official website of StashSaarthi. Vacation luggage storage at ₹300/bag/mo, verified senior-hosted rooms, and homemade tiffins.",
       },
       { name: "twitter:image", content: "https://stashsaarthi-web.vercel.app/favicon.png" },
     ],
