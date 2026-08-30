@@ -10,17 +10,20 @@ type Layer = {
 const LAYERS: Layer[] = [
   {
     depth: 1,
-    className: "left-[6%] top-[18%] h-56 w-56 rounded-full opacity-40 gpu-accelerated pointer-events-none",
+    className:
+      "left-[6%] top-[18%] h-56 w-56 rounded-full opacity-40 gpu-accelerated pointer-events-none",
     bg: "radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, rgba(16, 185, 129, 0.08) 40%, transparent 70%)",
   },
   {
     depth: 1.8,
-    className: "right-[4%] top-[8%] h-64 w-64 rounded-full opacity-35 gpu-accelerated pointer-events-none",
+    className:
+      "right-[4%] top-[8%] h-64 w-64 rounded-full opacity-35 gpu-accelerated pointer-events-none",
     bg: "radial-gradient(circle, rgba(245, 158, 11, 0.22) 0%, rgba(245, 158, 11, 0.06) 40%, transparent 70%)",
   },
   {
     depth: 2.6,
-    className: "left-[22%] bottom-[6%] h-40 w-40 rounded-full opacity-30 gpu-accelerated pointer-events-none",
+    className:
+      "left-[22%] bottom-[6%] h-40 w-40 rounded-full opacity-30 gpu-accelerated pointer-events-none",
     bg: "radial-gradient(circle, rgba(6, 182, 212, 0.22) 0%, rgba(6, 182, 212, 0.06) 40%, transparent 70%)",
   },
   {

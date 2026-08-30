@@ -131,7 +131,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@StashSaarthi" },
       { name: "twitter:creator", content: "@StashSaarthi" },
-      { name: "twitter:title", content: "StashSaarthi - Campus Micro-Storage & Zero-Brokerage Co-Living" },
+      {
+        name: "twitter:title",
+        content: "StashSaarthi - Campus Micro-Storage & Zero-Brokerage Co-Living",
+      },
       {
         name: "twitter:description",
         content:
@@ -180,7 +183,8 @@ function RootShell({ children }: { children: ReactNode }) {
         name: "StashSaarthi",
         url: "https://stashsaarthi-web.vercel.app/",
         logo: "https://stashsaarthi-web.vercel.app/favicon.png",
-        description: "Official platform for StashSaarthi. India's Zero-CapEx Intergenerational Living & Campus Micro-Storage Platform.",
+        description:
+          "Official platform for StashSaarthi. India's Zero-CapEx Intergenerational Living & Campus Micro-Storage Platform.",
         sameAs: ["https://instagram.com/stashsaarthi", "https://twitter.com/StashSaarthi"],
         contactPoint: {
           "@type": "ContactPoint",

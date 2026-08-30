@@ -7,7 +7,9 @@
 ---
 
 ### 🌟 What is [StashSaarthi](https://stashsaarthi-web.vercel.app)?
+
 [StashSaarthi](https://stashsaarthi-web.vercel.app) is an innovative, zero-brokerage campus ecosystem that solves student vacation dead-rent and luggage storage frictions while empowering senior citizens with dignified passive income:
+
 - 📦 **Saarthi Stash**: Micro-storage for student bags @ ₹300/bag/month during semester breaks.
 - 🏠 **Saarthi Spaces**: 100% verified, broker-free senior-hosted co-living rooms.
 - 🍲 **Saarthi Kitchen**: Pure, homestyle nani-style tiffins and meal subscriptions.

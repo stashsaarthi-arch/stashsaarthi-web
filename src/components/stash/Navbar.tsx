@@ -42,18 +42,22 @@ export function Navbar({
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const DESKTOP_LINKS = LINKS.filter((l) => ["rooms", "stash", "trust", "feedback"].includes(l.key));
+  const DESKTOP_LINKS = LINKS.filter((l) =>
+    ["rooms", "stash", "trust", "feedback"].includes(l.key),
+  );
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${scrolled
+      className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${
+        scrolled
           ? "bg-[#0A0D0F]/95 backdrop-blur-2xl border-b border-white/10 shadow-2xl shadow-black/80"
           : "bg-[#0A0D0F]/70 backdrop-blur-md border-b border-white/[0.04]"
-        }`}
+      }`}
     >
       <div
-        className={`max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 w-full flex items-center justify-between gap-1 sm:gap-4 transition-all duration-300 ${scrolled ? "h-14 sm:h-16" : "h-15 sm:h-20"
-          }`}
+        className={`max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 w-full flex items-center justify-between gap-1 sm:gap-4 transition-all duration-300 ${
+          scrolled ? "h-14 sm:h-16" : "h-15 sm:h-20"
+        }`}
       >
         {/* 1. Left: Brand Logo & Desktop Navigation */}
         <div className="flex items-center gap-2 sm:gap-4 lg:gap-6 min-w-0">
@@ -115,20 +119,22 @@ export function Navbar({
             <button
               type="button"
               onClick={() => setRole("student")}
-              className={`px-2.5 py-1 rounded-full text-xs font-semibold transition-all ${role === "student"
+              className={`px-2.5 py-1 rounded-full text-xs font-semibold transition-all ${
+                role === "student"
                   ? "bg-emerald-500 text-black shadow-md"
                   : "text-slate-400 hover:text-white"
-                }`}
+              }`}
             >
               {language === "hi" ? "छात्र: ₹6.4k बचाएं" : "Student: Save ₹6.4k"}
             </button>
             <button
               type="button"
               onClick={() => setRole("host")}
-              className={`px-2.5 py-1 rounded-full text-xs font-semibold transition-all ${role === "host"
+              className={`px-2.5 py-1 rounded-full text-xs font-semibold transition-all ${
+                role === "host"
                   ? "bg-amber-500 text-black shadow-md"
                   : "text-slate-400 hover:text-white"
-                }`}
+              }`}
             >
               {language === "hi" ? "होस्ट: ₹11.5k कमाएं" : "Host: Earn ₹11.5k"}
             </button>
@@ -139,20 +145,22 @@ export function Navbar({
             <button
               type="button"
               onClick={() => setLanguage("en")}
-              className={`rounded-full px-1.5 py-0.5 text-[10px] sm:text-xs font-bold transition-colors ${language === "en"
+              className={`rounded-full px-1.5 py-0.5 text-[10px] sm:text-xs font-bold transition-colors ${
+                language === "en"
                   ? "bg-white/15 text-white"
                   : "text-muted-foreground hover:text-white"
-                }`}
+              }`}
             >
               EN
             </button>
             <button
               type="button"
               onClick={() => setLanguage("hi")}
-              className={`rounded-full px-1.5 py-0.5 text-[10px] sm:text-xs font-bold transition-colors ${language === "hi"
+              className={`rounded-full px-1.5 py-0.5 text-[10px] sm:text-xs font-bold transition-colors ${
+                language === "hi"
                   ? "bg-white/15 text-white"
                   : "text-muted-foreground hover:text-white"
-                }`}
+              }`}
             >
               HI
             </button>
@@ -192,10 +200,11 @@ export function Navbar({
           <button
             type="button"
             onClick={role === "student" ? onBook : onListRoom}
-            className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all shrink-0 cursor-pointer ${role === "student"
+            className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all shrink-0 cursor-pointer ${
+              role === "student"
                 ? "bg-emerald-500 hover:bg-emerald-400 text-black shadow-md shadow-emerald-500/20 active:scale-95"
                 : "bg-amber-500 hover:bg-amber-400 text-black shadow-md shadow-amber-500/20 active:scale-95"
-              }`}
+            }`}
           >
             {role === "student"
               ? language === "hi"
@@ -236,10 +245,11 @@ export function Navbar({
                   setRole("student");
                   setOpen(false);
                 }}
-                className={`flex-1 py-2 px-2.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${role === "student"
+                className={`flex-1 py-2 px-2.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+                  role === "student"
                     ? "bg-emerald-500 text-black shadow-md"
                     : "text-slate-400 hover:text-white"
-                  }`}
+                }`}
               >
                 <GraduationCap className="h-4 w-4" />
                 <span>{language === "hi" ? "छात्र मोड" : "Student Mode"}</span>
@@ -250,10 +260,11 @@ export function Navbar({
                   setRole("host");
                   setOpen(false);
                 }}
-                className={`flex-1 py-2 px-2.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${role === "host"
+                className={`flex-1 py-2 px-2.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+                  role === "host"
                     ? "bg-amber-500 text-black shadow-md"
                     : "text-slate-400 hover:text-white"
-                  }`}
+                }`}
               >
                 <HeartHandshake className="h-4 w-4" />
                 <span>{language === "hi" ? "सीनियर होस्ट" : "Senior Host"}</span>

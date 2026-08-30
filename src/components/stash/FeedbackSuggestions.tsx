@@ -23,7 +23,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import { toast } from "sonner";
 import { useLanguage } from "@/context/LanguageContext";
 import { usePersona } from "@/context/PersonaContext";
@@ -283,15 +289,17 @@ export function FeedbackSuggestions() {
   const [formName, setFormName] = useState("");
   const [formRole, setFormRole] = useState("Student");
   const [formLocality, setFormLocality] = useState("");
-  const [formService, setFormService] = useState<"stash" | "spaces" | "kitchen" | "general">("stash");
+  const [formService, setFormService] = useState<"stash" | "spaces" | "kitchen" | "general">(
+    "stash",
+  );
   const [formTitle, setFormTitle] = useState("");
   const [formComment, setFormComment] = useState("");
 
   // Suggestion Form State
   const [sugTitle, setSugTitle] = useState("");
-  const [sugCategory, setSugCategory] = useState<"app" | "pricing" | "safety" | "expansion" | "kitchen" | "general">(
-    "app",
-  );
+  const [sugCategory, setSugCategory] = useState<
+    "app" | "pricing" | "safety" | "expansion" | "kitchen" | "general"
+  >("app");
   const [sugDescription, setSugDescription] = useState("");
   const [sugName, setSugName] = useState("");
   const [sugLocality, setSugLocality] = useState("");
@@ -304,7 +312,9 @@ export function FeedbackSuggestions() {
     if (hasVoted) {
       newUpvoted = upvotedIds.filter((item) => item !== id);
       setSuggestions((prev) =>
-        prev.map((sug) => (sug.id === id ? { ...sug, upvotes: Math.max(0, sug.upvotes - 1) } : sug)),
+        prev.map((sug) =>
+          sug.id === id ? { ...sug, upvotes: Math.max(0, sug.upvotes - 1) } : sug,
+        ),
       );
       toast.info(isHi ? "वोट वापस लिया गया" : "Upvote removed");
     } else {
@@ -312,7 +322,11 @@ export function FeedbackSuggestions() {
       setSuggestions((prev) =>
         prev.map((sug) => (sug.id === id ? { ...sug, upvotes: sug.upvotes + 1 } : sug)),
       );
-      toast.success(isHi ? "वोट दर्ज हुआ! टीम प्राथमिकता देखेगी।" : "Upvote recorded! Team has noted this priority.");
+      toast.success(
+        isHi
+          ? "वोट दर्ज हुआ! टीम प्राथमिकता देखेगी।"
+          : "Upvote recorded! Team has noted this priority.",
+      );
     }
 
     setUpvotedIds(newUpvoted);
@@ -327,7 +341,9 @@ export function FeedbackSuggestions() {
   const handleReviewSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formName.trim() || !formComment.trim()) {
-      toast.error(isHi ? "कृपया अपना नाम और समीक्षा विवरण भरें" : "Please fill your name and review details");
+      toast.error(
+        isHi ? "कृपया अपना नाम और समीक्षा विवरण भरें" : "Please fill your name and review details",
+      );
       return;
     }
 
@@ -374,7 +390,11 @@ export function FeedbackSuggestions() {
   const handleSuggestionSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!sugTitle.trim() || !sugDescription.trim() || !sugName.trim()) {
-      toast.error(isHi ? "कृपया सुझाव का शीर्षक, विवरण और अपना नाम भरें" : "Please fill in title, description, and your name");
+      toast.error(
+        isHi
+          ? "कृपया सुझाव का शीर्षक, विवरण और अपना नाम भरें"
+          : "Please fill in title, description, and your name",
+      );
       return;
     }
 
@@ -404,7 +424,9 @@ export function FeedbackSuggestions() {
     }
 
     toast.success(
-      isHi ? "🚀 सुझाव सीधे फाउंडर व टेक टीम को भेजा गया!" : "🚀 Suggestion submitted to Founder & Tech Team!",
+      isHi
+        ? "🚀 सुझाव सीधे फाउंडर व टेक टीम को भेजा गया!"
+        : "🚀 Suggestion submitted to Founder & Tech Team!",
       {
         description: isHi
           ? "आपका सुझाव लाइव रोडमैप में जुड़ गया है। अन्य छात्र इसे अपवोट कर सकते हैं।"
@@ -433,7 +455,9 @@ export function FeedbackSuggestions() {
   const accentBorder = isStudent ? "border-emerald-500/30" : "border-amber-500/30";
   const accentBg = isStudent ? "bg-emerald-500/10" : "bg-amber-500/10";
   const accentText = isStudent ? "text-emerald-400" : "text-amber-400";
-  const glowBorder = isStudent ? "border-emerald-500/40 shadow-emerald-500/15" : "border-amber-500/40 shadow-amber-500/15";
+  const glowBorder = isStudent
+    ? "border-emerald-500/40 shadow-emerald-500/15"
+    : "border-amber-500/40 shadow-amber-500/15";
 
   const getStatusBadge = (status: SuggestionItem["status"]) => {
     switch (status) {
@@ -476,9 +500,13 @@ export function FeedbackSuggestions() {
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.05] border border-white/12 text-xs font-semibold backdrop-blur-md mb-4 shadow-lg">
               <Sparkles className={`w-4 h-4 ${accentText}`} />
               <span className="text-zinc-200">
-                {isHi ? "ओपन कम्युनिटी रिव्यू व सुधार हब" : "Open Community Feedback & Improvement Hub"}
+                {isHi
+                  ? "ओपन कम्युनिटी रिव्यू व सुधार हब"
+                  : "Open Community Feedback & Improvement Hub"}
               </span>
-              <span className={`w-2 h-2 rounded-full ${isStudent ? "bg-emerald-400" : "bg-amber-400"} animate-pulse`} />
+              <span
+                className={`w-2 h-2 rounded-full ${isStudent ? "bg-emerald-400" : "bg-amber-400"} animate-pulse`}
+              />
             </div>
 
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white mb-4">
@@ -549,7 +577,9 @@ export function FeedbackSuggestions() {
         {activeTab === "feedback" && (
           <div className="space-y-10">
             {/* DIRECT INLINE SUBMISSION FORM (PROMINENT RIGHT ON PAGE) */}
-            <div className={`p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-[#13191F] via-[#101519] to-[#0D1115] border ${glowBorder} shadow-2xl relative overflow-hidden`}>
+            <div
+              className={`p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-[#13191F] via-[#101519] to-[#0D1115] border ${glowBorder} shadow-2xl relative overflow-hidden`}
+            >
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-5 mb-6">
                 <div>
                   <div className="flex items-center gap-2">
@@ -568,7 +598,9 @@ export function FeedbackSuggestions() {
                 </div>
 
                 <div className="flex items-center gap-2 self-start md:self-auto bg-black/40 px-3.5 py-1.5 rounded-xl border border-white/10">
-                  <span className="text-xs text-zinc-400 font-medium">{isHi ? "रेटिंग:" : "Rating:"}</span>
+                  <span className="text-xs text-zinc-400 font-medium">
+                    {isHi ? "रेटिंग:" : "Rating:"}
+                  </span>
                   <div className="flex items-center gap-1">
                     {[1, 2, 3, 4, 5].map((star) => {
                       const active = (formHoverRating || formRating) >= star;
@@ -621,9 +653,13 @@ export function FeedbackSuggestions() {
                       className="w-full text-xs rounded-xl bg-[#172027] border border-white/15 p-2.5 text-white h-10 focus:outline-none focus:border-emerald-400"
                     >
                       <option value="Student">{isHi ? "🎓 छात्र / Student" : "🎓 Student"}</option>
-                      <option value="Senior Host">{isHi ? "🏠 सीनियर होस्ट / Host" : "🏠 Senior Host"}</option>
+                      <option value="Senior Host">
+                        {isHi ? "🏠 सीनियर होस्ट / Host" : "🏠 Senior Host"}
+                      </option>
                       <option value="Parent">{isHi ? "👨‍👩‍👦 अभिभावक / Parent" : "👨‍👩‍👦 Parent"}</option>
-                      <option value="Partner">{isHi ? "📦 नोड पार्टनर / Partner" : "📦 Storage Partner"}</option>
+                      <option value="Partner">
+                        {isHi ? "📦 नोड पार्टनर / Partner" : "📦 Storage Partner"}
+                      </option>
                     </select>
                   </div>
 
@@ -636,10 +672,18 @@ export function FeedbackSuggestions() {
                       onChange={(e) => setFormService(e.target.value as any)}
                       className="w-full text-xs rounded-xl bg-[#172027] border border-white/15 p-2.5 text-white h-10 focus:outline-none focus:border-emerald-400"
                     >
-                      <option value="stash">{isHi ? "📦 वेकेशन स्टोरेज (₹300/mo)" : "📦 Vacation Storage"}</option>
-                      <option value="spaces">{isHi ? "🏠 सीनियर लिविंग रूम" : "🏠 Senior Living Room"}</option>
-                      <option value="kitchen">{isHi ? "🍲 सारथी होम टिफिन" : "🍲 Saarthi Home Tiffins"}</option>
-                      <option value="general">{isHi ? "✨ सामान्य प्लेटफॉर्म" : "✨ General Ecosystem"}</option>
+                      <option value="stash">
+                        {isHi ? "📦 वेकेशन स्टोरेज (₹300/mo)" : "📦 Vacation Storage"}
+                      </option>
+                      <option value="spaces">
+                        {isHi ? "🏠 सीनियर लिविंग रूम" : "🏠 Senior Living Room"}
+                      </option>
+                      <option value="kitchen">
+                        {isHi ? "🍲 सारथी होम टिफिन" : "🍲 Saarthi Home Tiffins"}
+                      </option>
+                      <option value="general">
+                        {isHi ? "✨ सामान्य प्लेटफॉर्म" : "✨ General Ecosystem"}
+                      </option>
                     </select>
                   </div>
 
@@ -648,7 +692,9 @@ export function FeedbackSuggestions() {
                       {isHi ? "कॉलेज / इलाका" : "College / Locality"}
                     </label>
                     <Input
-                      placeholder={isHi ? "जैसे: IIT Kanpur / Kalyanpur" : "e.g. IIT Kanpur / Kakadeo"}
+                      placeholder={
+                        isHi ? "जैसे: IIT Kanpur / Kalyanpur" : "e.g. IIT Kanpur / Kakadeo"
+                      }
                       value={formLocality}
                       onChange={(e) => setFormLocality(e.target.value)}
                       className="bg-[#172027] border-white/15 text-xs text-white h-10 rounded-xl focus:border-emerald-400"
@@ -661,7 +707,11 @@ export function FeedbackSuggestions() {
                     {isHi ? "समीक्षा शीर्षक (Headline)" : "Review Headline"}
                   </label>
                   <Input
-                    placeholder={isHi ? "जैसे: समय पर पिकअप, लेज़र सील और सुरक्षित सामान!" : "e.g. Safe laser seals and on-time vacation pickup!"}
+                    placeholder={
+                      isHi
+                        ? "जैसे: समय पर पिकअप, लेज़र सील और सुरक्षित सामान!"
+                        : "e.g. Safe laser seals and on-time vacation pickup!"
+                    }
                     value={formTitle}
                     onChange={(e) => setFormTitle(e.target.value)}
                     className="bg-[#172027] border-white/15 text-xs text-white h-10 rounded-xl focus:border-emerald-400"
@@ -689,7 +739,11 @@ export function FeedbackSuggestions() {
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
                   <div className="flex items-center gap-2 text-xs text-emerald-400">
                     <CheckCircle2 className="w-4 h-4 shrink-0" />
-                    <span>{isHi ? "100% प्रामाणिक व सत्यापित समीक्षा" : "Verified Customer Submission — Zero Fake Reviews"}</span>
+                    <span>
+                      {isHi
+                        ? "100% प्रामाणिक व सत्यापित समीक्षा"
+                        : "Verified Customer Submission — Zero Fake Reviews"}
+                    </span>
                   </div>
 
                   <Button
@@ -732,7 +786,9 @@ export function FeedbackSuggestions() {
               </div>
 
               <div className="text-xs text-zinc-400 font-semibold text-right">
-                {isHi ? `कुल ${filteredReviews.length} सत्यापित समीक्षाएं` : `Showing ${filteredReviews.length} Verified Reviews`}
+                {isHi
+                  ? `कुल ${filteredReviews.length} सत्यापित समीक्षाएं`
+                  : `Showing ${filteredReviews.length} Verified Reviews`}
               </div>
             </div>
 
@@ -849,7 +905,9 @@ export function FeedbackSuggestions() {
                       <Lightbulb className="w-5 h-5" />
                     </span>
                     <h3 className="text-xl sm:text-2xl font-black text-white">
-                      {isHi ? "हम क्या सुधार कर सकते हैं? अपना सुझाव दें" : "Tell Us: What Should We Improve Next?"}
+                      {isHi
+                        ? "हम क्या सुधार कर सकते हैं? अपना सुझाव दें"
+                        : "Tell Us: What Should We Improve Next?"}
                     </h3>
                   </div>
                   <p className="text-xs sm:text-sm text-zinc-400 mt-1">
@@ -875,12 +933,24 @@ export function FeedbackSuggestions() {
                       onChange={(e) => setSugCategory(e.target.value as any)}
                       className="w-full text-xs rounded-xl bg-[#172027] border border-white/15 p-2.5 text-white h-10 focus:outline-none focus:border-cyan-400"
                     >
-                      <option value="app">{isHi ? "📱 ऐप व वेबसाइट यूआई" : "📱 App & UI Design"}</option>
-                      <option value="safety">{isHi ? "🛡️ सुरक्षा, सेंसर व सील" : "🛡️ Safety & IoT Sensors"}</option>
-                      <option value="pricing">{isHi ? "💰 मूल्य, बिलिंग व बचत" : "💰 Pricing & Discounts"}</option>
-                      <option value="expansion">{isHi ? "📍 नए शहर व कॉलेज कॉरिडोर" : "📍 City & Campus Expansion"}</option>
-                      <option value="kitchen">{isHi ? "🍲 सारथी किचन मेनू" : "🍲 Kitchen & Food"}</option>
-                      <option value="general">{isHi ? "✨ अन्य सामान्य सुधार" : "✨ Other Feature Idea"}</option>
+                      <option value="app">
+                        {isHi ? "📱 ऐप व वेबसाइट यूआई" : "📱 App & UI Design"}
+                      </option>
+                      <option value="safety">
+                        {isHi ? "🛡️ सुरक्षा, सेंसर व सील" : "🛡️ Safety & IoT Sensors"}
+                      </option>
+                      <option value="pricing">
+                        {isHi ? "💰 मूल्य, बिलिंग व बचत" : "💰 Pricing & Discounts"}
+                      </option>
+                      <option value="expansion">
+                        {isHi ? "📍 नए शहर व कॉलेज कॉरिडोर" : "📍 City & Campus Expansion"}
+                      </option>
+                      <option value="kitchen">
+                        {isHi ? "🍲 सारथी किचन मेनू" : "🍲 Kitchen & Food"}
+                      </option>
+                      <option value="general">
+                        {isHi ? "✨ अन्य सामान्य सुधार" : "✨ Other Feature Idea"}
+                      </option>
                     </select>
                   </div>
 
@@ -902,7 +972,9 @@ export function FeedbackSuggestions() {
                       {isHi ? "कॉलेज / इलाका" : "College / City"}
                     </label>
                     <Input
-                      placeholder={isHi ? "जैसे: HBTU Kanpur / Kakadeo" : "e.g. HBTU Kanpur / Lucknow"}
+                      placeholder={
+                        isHi ? "जैसे: HBTU Kanpur / Kakadeo" : "e.g. HBTU Kanpur / Lucknow"
+                      }
                       value={sugLocality}
                       onChange={(e) => setSugLocality(e.target.value)}
                       className="bg-[#172027] border-white/15 text-xs text-white h-10 rounded-xl focus:border-cyan-400"
@@ -916,7 +988,11 @@ export function FeedbackSuggestions() {
                   </label>
                   <Input
                     required
-                    placeholder={isHi ? "जैसे: हॉस्टल से स्टेशन तक सीधा पिकअप वैन" : "e.g. Direct Hostel-to-Station pickup shuttle during semester end"}
+                    placeholder={
+                      isHi
+                        ? "जैसे: हॉस्टल से स्टेशन तक सीधा पिकअप वैन"
+                        : "e.g. Direct Hostel-to-Station pickup shuttle during semester end"
+                    }
                     value={sugTitle}
                     onChange={(e) => setSugTitle(e.target.value)}
                     className="bg-[#172027] border-white/15 text-xs text-white h-10 rounded-xl focus:border-cyan-400"
@@ -925,7 +1001,9 @@ export function FeedbackSuggestions() {
 
                 <div>
                   <label className="block text-xs font-bold text-zinc-300 mb-1.5">
-                    {isHi ? "यह सुधार कैसे मदद करेगा? विस्तार से बताएं *" : "How does this idea improve student or host experience? *"}
+                    {isHi
+                      ? "यह सुधार कैसे मदद करेगा? विस्तार से बताएं *"
+                      : "How does this idea improve student or host experience? *"}
                   </label>
                   <Textarea
                     required
@@ -944,7 +1022,11 @@ export function FeedbackSuggestions() {
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
                   <div className="flex items-center gap-2 text-xs text-cyan-400">
                     <TrendingUp className="w-4 h-4 shrink-0" />
-                    <span>{isHi ? "टॉप अपवोटेड सुझावों को अगले स्प्रिंट में लाइव किया जाता है" : "Top voted community ideas are built in upcoming sprint cycles"}</span>
+                    <span>
+                      {isHi
+                        ? "टॉप अपवोटेड सुझावों को अगले स्प्रिंट में लाइव किया जाता है"
+                        : "Top voted community ideas are built in upcoming sprint cycles"}
+                    </span>
                   </div>
 
                   <Button
@@ -989,7 +1071,9 @@ export function FeedbackSuggestions() {
               </div>
 
               <div className="text-xs text-zinc-400 font-semibold text-right">
-                {isHi ? `कुल ${filteredSuggestions.length} कम्युनिटी सुझाव` : `Showing ${filteredSuggestions.length} Community Ideas`}
+                {isHi
+                  ? `कुल ${filteredSuggestions.length} कम्युनिटी सुझाव`
+                  : `Showing ${filteredSuggestions.length} Community Ideas`}
               </div>
             </div>
 
@@ -1074,7 +1158,9 @@ export function FeedbackSuggestions() {
             </div>
             <div>
               <h4 className="text-base sm:text-lg font-bold text-white">
-                {isHi ? "फाउंडर से सीधे व्हाट्सएप पर बात करना चाहते हैं?" : "Want to share urgent suggestions directly with the founder?"}
+                {isHi
+                  ? "फाउंडर से सीधे व्हाट्सएप पर बात करना चाहते हैं?"
+                  : "Want to share urgent suggestions directly with the founder?"}
               </h4>
               <p className="text-xs sm:text-sm text-zinc-400">
                 {isHi

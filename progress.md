@@ -35,7 +35,7 @@
   - **💡 Community Improvement & Feature Suggestions Roadmap**:
     - Public suggestion board allowing anyone to propose new ideas for platform improvement across App & UI, Pricing & Billing, Safety & IoT Sensors, City & Campus Expansion, and Kitchen Menus.
     - Interactive **Live Upvoting Engine** with persistent vote tracking in `localStorage` and dynamic vote count indicators.
-    - Status badges (*Under Review*, *Planned*, *In Progress*, *Implemented*) displaying transparency on community requests.
+    - Status badges (_Under Review_, _Planned_, _In Progress_, _Implemented_) displaying transparency on community requests.
     - Interactive **"Submit Improvement Idea"** modal to submit new suggestions directly to the founding team.
   - **Multi-Touchpoint Integration & Full Bilingual Sync**:
     - Added `#feedback` and `#suggestions` navigation links in [Navbar.tsx](file:///c:/Users/Dell/Downloads/stashsaarthi-main/src/components/stash/Navbar.tsx) and [FooterSection.tsx](file:///c:/Users/Dell/Downloads/stashsaarthi-main/src/components/stash/FooterSection.tsx).

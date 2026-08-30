@@ -278,20 +278,22 @@ export function FooterSection() {
               <button
                 type="button"
                 onClick={() => setUserType("student")}
-                className={`rounded-full border px-4 py-1.5 text-xs font-semibold transition cursor-pointer ${userType === "student"
+                className={`rounded-full border px-4 py-1.5 text-xs font-semibold transition cursor-pointer ${
+                  userType === "student"
                     ? "border-cyan/50 bg-cyan/15 text-foreground"
                     : "border-white/10 bg-white/5 text-muted-foreground hover:border-white/25"
-                  }`}
+                }`}
               >
                 🎓 {t.footer.student}
               </button>
               <button
                 type="button"
                 onClick={() => setUserType("host")}
-                className={`rounded-full border px-4 py-1.5 text-xs font-semibold transition cursor-pointer ${userType === "host"
+                className={`rounded-full border px-4 py-1.5 text-xs font-semibold transition cursor-pointer ${
+                  userType === "host"
                     ? "border-amber/50 bg-amber/15 text-foreground"
                     : "border-white/10 bg-white/5 text-muted-foreground hover:border-white/25"
-                  }`}
+                }`}
               >
                 🏠 {t.footer.host}
               </button>
