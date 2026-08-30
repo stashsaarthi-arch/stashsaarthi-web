@@ -24,6 +24,7 @@ import { FOUNDER_WHATSAPP } from "@/lib/constants";
 import { useLanguage } from "@/context/LanguageContext";
 import { AnimatedStat } from "./AnimatedStat";
 import { LiveChangelogBadge } from "./ChangelogModal";
+import { smoothScrollTo } from "./legal";
 
 export function Hero({
   role,
@@ -245,6 +246,32 @@ export function Hero({
         </motion.div>
 
         {student && <CampusNodeChecker onBook={onBook} />}
+
+        {/* ── Pravara-Style Luxury Mountain-Grade Scroll Indicator ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.7 }}
+          className="mt-14 flex flex-col items-center justify-center gap-2 text-center"
+        >
+          <a
+            href="#role-lane"
+            onClick={smoothScrollTo("role-lane")}
+            className="group flex flex-col items-center gap-2.5 cursor-pointer select-none text-muted-foreground/60 hover:text-white transition-all"
+            aria-label="Scroll down to explore features"
+          >
+            <span className="text-[10px] font-mono uppercase tracking-[0.3em] transition-colors group-hover:text-emerald-400">
+              {t.nav?.explore || "SCROLL TO EXPLORE"}
+            </span>
+            <div className="relative h-10 w-5 rounded-full border border-white/20 p-1 group-hover:border-emerald-400/60 transition-colors backdrop-blur-md bg-black/40">
+              <motion.div
+                animate={{ y: [0, 14, 0] }}
+                transition={{ duration: 1.8, repeat: Infinity, ease: [0.16, 1, 0.3, 1] }}
+                className={`h-2.5 w-1.5 rounded-full mx-auto shadow-lg ${student ? "bg-emerald-400 shadow-emerald-500/50" : "bg-amber-400 shadow-amber-500/50"}`}
+              />
+            </div>
+          </a>
+        </motion.div>
       </div>
     </section>
   );

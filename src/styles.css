@@ -229,22 +229,24 @@ html.lenis body {
 
 @utility glass {
   background: var(--surface);
-  backdrop-filter: blur(20px) saturate(130%);
-  -webkit-backdrop-filter: blur(20px) saturate(130%);
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
   border: 1px solid oklch(1 0 0 / 10%);
   box-shadow: var(--shadow-glass);
   transform: translateZ(0);
   contain: layout style;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @utility glass-hover {
   transition:
-    border-color 0.3s ease,
-    box-shadow 0.3s ease,
-    transform 0.3s ease;
+    border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   &:hover {
-    border-color: oklch(1 0 0 / 22%);
+    border-color: oklch(1 0 0 / 24%);
     box-shadow: var(--shadow-glass), var(--glow-cyan);
+    transform: translateY(-2px);
   }
 }
 
