@@ -223,8 +223,12 @@ html.lenis body {
 @utility gpu-accelerated {
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
-  perspective: 1000px;
   -webkit-backface-visibility: hidden;
+}
+
+@utility content-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 650px;
 }
 
 @utility glass {

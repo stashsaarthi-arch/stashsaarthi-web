@@ -269,24 +269,16 @@ function LenisHandler() {
     if (!lenis) return;
     (window as any).__lenis = lenis;
 
-    const onScroll = () => {
-      ScrollTrigger.update();
-    };
-
-    lenis.on("scroll", onScroll);
-
     let resizeTimer: NodeJS.Timeout;
     const handleResize = () => {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
         lenis.resize();
-        ScrollTrigger.refresh();
-      }, 150);
+      }, 200);
     };
 
     window.addEventListener("resize", handleResize, { passive: true });
     return () => {
-      lenis.off("scroll", onScroll);
       clearTimeout(resizeTimer);
       window.removeEventListener("resize", handleResize);
     };
@@ -336,12 +328,11 @@ function RootComponent() {
                 <ReactLenis
                   root
                   options={{
-                    lerp: 0.2,
-                    duration: 0.35,
+                    lerp: 0.12,
+                    duration: 0.8,
                     smoothWheel: true,
-                    wheelMultiplier: 1.0,
+                    wheelMultiplier: 1.05,
                     touchMultiplier: 1.0,
-                    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
                     syncTouch: false,
                     autoRaf: true,
                   }}
