@@ -22,12 +22,14 @@ export function Navbar({
   onBook,
   onListRoom,
   onEarlyAccess,
+  onRefer,
 }: {
   role: Role;
   setRole: (r: Role) => void;
   onBook: () => void;
   onListRoom: () => void;
   onEarlyAccess?: () => void;
+  onRefer?: () => void;
 }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -172,10 +174,23 @@ export function Navbar({
             <button
               type="button"
               onClick={onEarlyAccess}
-              className="hidden lg:inline-flex items-center gap-1.5 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-3 py-1.5 text-xs font-bold text-emerald-300 hover:bg-emerald-500/20 transition-all shrink-0 cursor-pointer active:scale-95"
+              className="hidden xl:inline-flex items-center gap-1.5 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-3 py-1.5 text-xs font-bold text-emerald-300 hover:bg-emerald-500/20 transition-all shrink-0 cursor-pointer active:scale-95"
             >
               <span>⚡</span>
               <span>{language === "hi" ? "अर्ली एक्सेस" : "Early Access"}</span>
+            </button>
+          )}
+
+          {/* WhatsApp Referral Trigger */}
+          {onRefer && (
+            <button
+              type="button"
+              onClick={onRefer}
+              className="hidden lg:inline-flex items-center gap-1.5 rounded-xl border border-[#25D366]/40 bg-[#25D366]/10 px-3 py-1.5 text-xs font-bold text-[#25D366] hover:bg-[#25D366]/20 transition-all shrink-0 cursor-pointer active:scale-95"
+              title={language === "hi" ? "व्हाट्सएप पर शेयर करें" : "Refer & Share on WhatsApp"}
+            >
+              <span>🎁</span>
+              <span>{language === "hi" ? "रेफर करें" : "Refer"}</span>
             </button>
           )}
 
@@ -323,6 +338,23 @@ export function Navbar({
                     {language === "hi"
                       ? "प्राथमिकता अर्ली एक्सेस लें"
                       : "Get Priority Early Access"}
+                  </span>
+                </button>
+              )}
+              {onRefer && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setOpen(false);
+                    onRefer();
+                  }}
+                  className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl border border-[#25D366]/40 bg-[#25D366]/15 text-xs font-bold text-[#25D366] hover:bg-[#25D366]/25 transition-all cursor-pointer"
+                >
+                  <span>🎁</span>
+                  <span>
+                    {language === "hi"
+                      ? "व्हाट्सएप पर रेफर व शेयर करें"
+                      : "Refer & Share on WhatsApp"}
                   </span>
                 </button>
               )}

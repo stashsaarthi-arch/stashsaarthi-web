@@ -23,6 +23,7 @@ import {
   Check,
   AlertCircle,
   Award,
+  Share2,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -579,6 +580,20 @@ export function FooterSection() {
               <Award className="h-3.5 w-3.5" />{" "}
               {isHi ? "कैंपस कैप्टन (₹5,000+ कमाएं)" : "Campus Captain (Earn ₹5k+)"}
             </button>
+
+            <a
+              href={`https://api.whatsapp.com/send?text=${encodeURIComponent(
+                isHi
+                  ? `🎒 *स्टैशसारथी — कैंपस वैकेशन लगेज स्टोरेज व आवास*\n\nअरे! छुट्टियों से पहले इसे देखें — खाली पीजी रूम के ₹6,000–₹8,000 डेड-रेंट में फूंकने के बजाय, अपना सामान कैंपस के पास मात्र *₹300/बैग/माह* में लेजर सील और ₹10k बीमा के साथ सुरक्षित रखें।\n\n👉 *यहाँ देखें:* https://stashsaarthi-web.vercel.app`
+                  : `🎒 *StashSaarthi — Campus Vacation Luggage Storage & Living*\n\nHey! Check this out before vacation starts — instead of burning ₹6,000–₹8,000 in dead rent for empty PG rooms, you can store your luggage securely for just *₹300/bag/mo* with laser tamper seals & ₹10k insurance near campus.\n\n👉 *Check it out here:* https://stashsaarthi-web.vercel.app`,
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg border border-[#25D366]/40 bg-[#25D366]/10 px-3 py-2 text-xs font-semibold text-[#25D366] transition-colors hover:border-[#25D366]/60 hover:bg-[#25D366]/20 cursor-pointer active:scale-95"
+            >
+              <Share2 className="h-3.5 w-3.5" />{" "}
+              {isHi ? "व्हाट्सएप पर रेफर करें" : "Refer on WhatsApp"}
+            </a>
           </div>
         </div>
 

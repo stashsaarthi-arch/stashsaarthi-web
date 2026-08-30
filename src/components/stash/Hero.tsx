@@ -10,6 +10,7 @@ import {
   Banknote,
   Clock,
   Phone,
+  Share2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { NodeCanvas } from "./NodeCanvas";
@@ -24,7 +25,15 @@ import { useLanguage } from "@/context/LanguageContext";
 import { AnimatedStat } from "./AnimatedStat";
 import { LiveChangelogBadge } from "./ChangelogModal";
 
-export function Hero({ role, onBook }: { role: Role; onBook: OpenBooking }) {
+export function Hero({
+  role,
+  onBook,
+  onRefer,
+}: {
+  role: Role;
+  onBook: OpenBooking;
+  onRefer?: () => void;
+}) {
   const { t } = useLanguage();
   const student = role === "student";
   const STATS = (student ? t.hero?.student?.stats : t.hero?.host?.stats) || [];
@@ -152,6 +161,18 @@ export function Hero({ role, onBook }: { role: Role; onBook: OpenBooking }) {
                   <Phone className="mr-2 h-5 w-5" />
                   {t.hero.host.secondaryCta}
                 </a>
+              </Button>
+            )}
+            {onRefer && (
+              <Button
+                data-magnetic
+                variant="outline"
+                size="xl"
+                onClick={onRefer}
+                className="w-full sm:w-auto px-5 py-6 border-[#25D366]/40 bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366]/20 hover:text-[#25D366] active:scale-95 transition-all cursor-pointer font-semibold"
+              >
+                <Share2 className="mr-2 h-4 w-4" />
+                <span>{role === "student" ? "Refer & Share" : "Share on WhatsApp"}</span>
               </Button>
             )}
           </div>

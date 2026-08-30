@@ -23,6 +23,7 @@ import { Stories } from "@/components/stash/Stories";
 import { FAQ } from "@/components/stash/FAQ";
 import { FooterSection } from "@/components/stash/FooterSection";
 import { EarlyAccessModal } from "@/components/stash/EarlyAccessModal";
+import { WhatsAppReferralModal } from "@/components/stash/WhatsAppReferralModal";
 import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 import { BookingModal } from "@/components/stash/BookingModal";
 import { RoomListingModal } from "@/components/stash/RoomListingModal";
@@ -64,6 +65,7 @@ function Index() {
   const [booking, setBooking] = useState(false);
   const [listing, setListing] = useState(false);
   const [earlyAccess, setEarlyAccess] = useState(false);
+  const [referralOpen, setReferralOpen] = useState(false);
   const [prefill, setPrefill] = useState<BookingPrefill>({});
 
   const open = (p?: BookingPrefill) => {
@@ -81,9 +83,10 @@ function Index() {
         onBook={() => open()}
         onListRoom={() => setListing(true)}
         onEarlyAccess={() => setEarlyAccess(true)}
+        onRefer={() => setReferralOpen(true)}
       />
       <ErrorBoundary>
-        <Hero role={role} onBook={open} />
+        <Hero role={role} onBook={open} onRefer={() => setReferralOpen(true)} />
       </ErrorBoundary>
       <ErrorBoundary>
         <RoleLane role={role} onBook={open} />
@@ -148,6 +151,7 @@ function Index() {
       />
       <RoomListingModal open={listing} onOpenChange={setListing} />
       <EarlyAccessModal open={earlyAccess} onOpenChange={setEarlyAccess} initialRole={role} />
+      <WhatsAppReferralModal open={referralOpen} onOpenChange={setReferralOpen} />
       <ScrollProgress />
       <ActivityTicker />
       <FloatingPersonaToggle />
