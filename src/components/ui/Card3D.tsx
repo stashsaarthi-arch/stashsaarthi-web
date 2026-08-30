@@ -54,9 +54,11 @@ export function Card3D({ children, className, tiltCoefficient = 0.06, maxTilt = 
       `radial-gradient(circle at ${sx}% ${sy}%, rgba(16,185,129,0.15), transparent 70%)`,
   );
 
+  const rectRef = useRef<DOMRect | null>(null);
+
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (isMobile || !ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
+    const rect = rectRef.current || ref.current.getBoundingClientRect();
     const width = rect.width;
     const height = rect.height;
 
@@ -74,11 +76,15 @@ export function Card3D({ children, className, tiltCoefficient = 0.06, maxTilt = 
   };
 
   const handleMouseEnter = () => {
-    if (!isMobile) setIsHovered(true);
+    if (!isMobile && ref.current) {
+      rectRef.current = ref.current.getBoundingClientRect();
+      setIsHovered(true);
+    }
   };
 
   const handleMouseLeave = () => {
     if (isMobile) return;
+    rectRef.current = null;
     setIsHovered(false);
     x.set(0);
     y.set(0);

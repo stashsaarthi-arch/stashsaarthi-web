@@ -25,6 +25,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
+  gsap.ticker.lagSmoothing(500, 33);
 }
 
 function NotFoundComponent() {
@@ -255,22 +256,34 @@ function RootShell({ children }: { children: ReactNode }) {
 }
 
 function LenisHandler() {
-  useLenis((lenis) => {
-    (window as any).__lenis = lenis;
-    ScrollTrigger.update();
-  });
+  const lenis = useLenis();
 
   useEffect(() => {
-    const handleResize = () => {
-      const lenis = (window as any).__lenis;
-      if (lenis) {
-        lenis.resize();
-      }
-      ScrollTrigger.refresh();
+    if (!lenis) return;
+    (window as any).__lenis = lenis;
+
+    const onScroll = () => {
+      ScrollTrigger.update();
     };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+
+    lenis.on("scroll", onScroll);
+
+    let resizeTimer: NodeJS.Timeout;
+    const handleResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        lenis.resize();
+        ScrollTrigger.refresh();
+      }, 150);
+    };
+
+    window.addEventListener("resize", handleResize, { passive: true });
+    return () => {
+      lenis.off("scroll", onScroll);
+      clearTimeout(resizeTimer);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [lenis]);
 
   return null;
 }
@@ -316,12 +329,11 @@ function RootComponent() {
                 <ReactLenis
                   root
                   options={{
-                    lerp: 0.08,
-                    duration: 1.2,
-                    easing: (t: number) => 1 - Math.pow(1 - t, 4),
+                    lerp: 0.1,
+                    duration: 0.8,
                     smoothWheel: true,
-                    wheelMultiplier: 0.9,
-                    touchMultiplier: 1.2,
+                    wheelMultiplier: 1.0,
+                    touchMultiplier: 1.0,
                     syncTouch: false,
                     autoRaf: true,
                   }}

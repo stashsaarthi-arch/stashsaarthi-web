@@ -46,19 +46,17 @@ export function Navbar({
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${
-        scrolled
+      className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${scrolled
           ? "bg-[#0A0D0F]/95 backdrop-blur-2xl border-b border-white/10 shadow-2xl shadow-black/80"
           : "bg-[#0A0D0F]/70 backdrop-blur-md border-b border-white/[0.04]"
-      }`}
+        }`}
     >
       <div
-        className={`max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center justify-between gap-1.5 sm:gap-4 transition-all duration-300 ${
-          scrolled ? "h-14 sm:h-16" : "h-15 sm:h-20"
-        }`}
+        className={`max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 w-full flex items-center justify-between gap-1 sm:gap-4 transition-all duration-300 ${scrolled ? "h-14 sm:h-16" : "h-15 sm:h-20"
+          }`}
       >
         {/* 1. Left: Brand Logo & Desktop Navigation */}
-        <div className="flex items-center gap-4 lg:gap-6 shrink-0 min-w-0">
+        <div className="flex items-center gap-2 sm:gap-4 lg:gap-6 min-w-0">
           <button
             type="button"
             className="flex items-center gap-1.5 shrink-0 cursor-pointer group bg-transparent border-0 p-0 transition-transform active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50 rounded-lg"
@@ -66,7 +64,7 @@ export function Navbar({
             aria-label="Scroll to top of page"
             title="StashSaarthi - Back to top"
           >
-            <BrandLogo height={32} className="h-7 sm:h-8 md:h-9" />
+            <BrandLogo height={28} className="h-6 sm:h-7 md:h-8 w-auto" />
           </button>
 
           {/* Desktop Navigation Links */}
@@ -111,28 +109,26 @@ export function Navbar({
         </div>
 
         {/* 2. Right: Action Controls (Responsive & Mobile Fitted) */}
-        <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
-          {/* Persona Toggle on Desktop (hidden on small mobile screens to prevent header cutoff) */}
-          <div className="hidden md:flex items-center p-0.5 bg-[#161B22] border border-slate-700/60 rounded-full shrink-0">
+        <div className="flex items-center gap-1.5 sm:gap-2.5 lg:gap-3 min-w-0">
+          {/* Persona Toggle on Desktop (available on large screens; mobile/tablet uses drawer and floating pill) */}
+          <div className="hidden 2xl:flex items-center p-0.5 bg-[#161B22] border border-slate-700/60 rounded-full shrink-0">
             <button
               type="button"
               onClick={() => setRole("student")}
-              className={`px-2.5 py-1 rounded-full text-xs font-semibold transition-all ${
-                role === "student"
+              className={`px-2.5 py-1 rounded-full text-xs font-semibold transition-all ${role === "student"
                   ? "bg-emerald-500 text-black shadow-md"
                   : "text-slate-400 hover:text-white"
-              }`}
+                }`}
             >
               {language === "hi" ? "छात्र: ₹6.4k बचाएं" : "Student: Save ₹6.4k"}
             </button>
             <button
               type="button"
               onClick={() => setRole("host")}
-              className={`px-2.5 py-1 rounded-full text-xs font-semibold transition-all ${
-                role === "host"
+              className={`px-2.5 py-1 rounded-full text-xs font-semibold transition-all ${role === "host"
                   ? "bg-amber-500 text-black shadow-md"
                   : "text-slate-400 hover:text-white"
-              }`}
+                }`}
             >
               {language === "hi" ? "होस्ट: ₹11.5k कमाएं" : "Host: Earn ₹11.5k"}
             </button>
@@ -143,50 +139,48 @@ export function Navbar({
             <button
               type="button"
               onClick={() => setLanguage("en")}
-              className={`rounded-full px-1.5 py-0.5 text-[10px] sm:text-xs font-bold transition-colors ${
-                language === "en"
+              className={`rounded-full px-1.5 py-0.5 text-[10px] sm:text-xs font-bold transition-colors ${language === "en"
                   ? "bg-white/15 text-white"
                   : "text-muted-foreground hover:text-white"
-              }`}
+                }`}
             >
               EN
             </button>
             <button
               type="button"
               onClick={() => setLanguage("hi")}
-              className={`rounded-full px-1.5 py-0.5 text-[10px] sm:text-xs font-bold transition-colors ${
-                language === "hi"
+              className={`rounded-full px-1.5 py-0.5 text-[10px] sm:text-xs font-bold transition-colors ${language === "hi"
                   ? "bg-white/15 text-white"
                   : "text-muted-foreground hover:text-white"
-              }`}
+                }`}
             >
               HI
             </button>
           </div>
 
           {/* Desktop Auth Button */}
-          <div className="hidden md:block shrink-0">
+          <div className="hidden lg:block shrink-0">
             <AuthButton compact />
           </div>
 
-          {/* Desktop Early Access / Demo CTA */}
+          {/* Desktop Early Access / Demo CTA (shown on 2xl) */}
           {onEarlyAccess && (
             <button
               type="button"
               onClick={onEarlyAccess}
-              className="hidden xl:inline-flex items-center gap-1.5 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-3 py-1.5 text-xs font-bold text-emerald-300 hover:bg-emerald-500/20 transition-all shrink-0 cursor-pointer active:scale-95"
+              className="hidden 2xl:inline-flex items-center gap-1.5 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-3 py-1.5 text-xs font-bold text-emerald-300 hover:bg-emerald-500/20 transition-all shrink-0 cursor-pointer active:scale-95"
             >
               <span>⚡</span>
               <span>{language === "hi" ? "अर्ली एक्सेस" : "Early Access"}</span>
             </button>
           )}
 
-          {/* WhatsApp Referral Trigger */}
+          {/* WhatsApp Referral Trigger (shown on 2xl) */}
           {onRefer && (
             <button
               type="button"
               onClick={onRefer}
-              className="hidden lg:inline-flex items-center gap-1.5 rounded-xl border border-[#25D366]/40 bg-[#25D366]/10 px-3 py-1.5 text-xs font-bold text-[#25D366] hover:bg-[#25D366]/20 transition-all shrink-0 cursor-pointer active:scale-95"
+              className="hidden 2xl:inline-flex items-center gap-1.5 rounded-xl border border-[#25D366]/40 bg-[#25D366]/10 px-2.5 py-1.5 text-xs font-bold text-[#25D366] hover:bg-[#25D366]/20 transition-all shrink-0 cursor-pointer active:scale-95"
               title={language === "hi" ? "व्हाट्सएप पर शेयर करें" : "Refer & Share on WhatsApp"}
             >
               <span>🎁</span>
@@ -198,14 +192,15 @@ export function Navbar({
           <button
             type="button"
             onClick={role === "student" ? onBook : onListRoom}
-            className={`px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all shrink-0 cursor-pointer ${
-              role === "student"
+            className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all shrink-0 cursor-pointer ${role === "student"
                 ? "bg-emerald-500 hover:bg-emerald-400 text-black shadow-md shadow-emerald-500/20 active:scale-95"
                 : "bg-amber-500 hover:bg-amber-400 text-black shadow-md shadow-amber-500/20 active:scale-95"
-            }`}
+              }`}
           >
             {role === "student"
-              ? t.nav.explore
+              ? language === "hi"
+                ? "इकोसिस्टम देखें"
+                : "Explore"
               : language === "hi"
                 ? "कमरा लिस्ट करें"
                 : "List Space"}
@@ -215,7 +210,7 @@ export function Navbar({
           <Button
             variant="ghost"
             size="icon"
-            className="xl:hidden h-8 w-8 text-white hover:bg-white/10 shrink-0"
+            className="xl:hidden h-8 w-8 text-white hover:bg-white/10 shrink-0 p-0 ml-0.5"
             onClick={() => setOpen((v) => !v)}
             aria-label="Toggle menu"
           >
@@ -241,11 +236,10 @@ export function Navbar({
                   setRole("student");
                   setOpen(false);
                 }}
-                className={`flex-1 py-2 px-2.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
-                  role === "student"
+                className={`flex-1 py-2 px-2.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${role === "student"
                     ? "bg-emerald-500 text-black shadow-md"
                     : "text-slate-400 hover:text-white"
-                }`}
+                  }`}
               >
                 <GraduationCap className="h-4 w-4" />
                 <span>{language === "hi" ? "छात्र मोड" : "Student Mode"}</span>
@@ -256,11 +250,10 @@ export function Navbar({
                   setRole("host");
                   setOpen(false);
                 }}
-                className={`flex-1 py-2 px-2.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
-                  role === "host"
+                className={`flex-1 py-2 px-2.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${role === "host"
                     ? "bg-amber-500 text-black shadow-md"
                     : "text-slate-400 hover:text-white"
-                }`}
+                  }`}
               >
                 <HeartHandshake className="h-4 w-4" />
                 <span>{language === "hi" ? "सीनियर होस्ट" : "Senior Host"}</span>

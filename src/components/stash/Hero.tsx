@@ -144,7 +144,9 @@ export function Hero({
                 asChild
                 className="w-full sm:w-auto px-6 py-6"
               >
-                <a href="#ecosystem">{t.hero.student.secondaryCta}</a>
+                <a href="#ecosystem" onClick={smoothScrollTo("ecosystem")}>
+                  {t.hero.student.secondaryCta}
+                </a>
               </Button>
             ) : (
               <Button

@@ -22,6 +22,7 @@ import {
   FOUNDER_WHATSAPP,
   FOUNDER_PHONE_DISPLAY,
   FOUNDER_EMAIL,
+  FOUNDER_LINKEDIN,
   getWhatsAppUrl,
 } from "@/lib/constants";
 
@@ -123,7 +124,7 @@ export function FounderAccountability() {
                   <div className="mt-5 pt-4 border-t border-white/10 flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <a
-                        href="https://www.linkedin.com/in/advik-omer"
+                        href={FOUNDER_LINKEDIN}
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="Advik Omer on LinkedIn"

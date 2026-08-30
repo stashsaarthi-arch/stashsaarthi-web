@@ -33,14 +33,13 @@ import { ActivityTicker } from "@/components/stash/ActivityTicker";
 import { ScrollProgress } from "@/components/stash/ScrollProgress";
 import { FloatingPersonaToggle } from "@/components/stash/FloatingPersonaToggle";
 import { usePersona } from "@/context/PersonaContext";
-import logoAsset from "@/assets/stashsaarthi-logo.png.asset.json";
 import type { BookingPrefill, Role } from "@/components/stash/types";
 
 const TITLE = "StashSaarthi | Intergenerational Living & Micro-Storage";
 const DESC =
   "Store vacation luggage securely from ₹300/mo. Find 100% verified, broker-free senior-hosted living near your campus. India's trusted student living ecosystem.";
 const URL = "https://stashsaarthi-web.vercel.app/";
-const OG_IMAGE = `https://stashsaarthi-web.vercel.app${logoAsset.url}`;
+const OG_IMAGE = "https://stashsaarthi-web.vercel.app/stashsaarthi-logo.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({

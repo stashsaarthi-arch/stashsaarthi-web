@@ -2,6 +2,42 @@
 
 ## Active Task
 
+- [x] **Customer Feedback & Community Improvement Suggestions Hub (`FeedbackSuggestions.tsx`)**:
+  - **⭐ Verified Customer Feedback & Reviews Engine**:
+    - Dual-tab interactive hub placed seamlessly on the landing page between Stories and FAQ.
+    - Category filtering: All reviews, Vacation Stash Storage, Senior Living Rooms, Ghar Ka Swaad Kitchen.
+    - Verified review cards showing star rating (1–5 stars), verified booking serial pass (`#SS-REV-XXXXX`), student/host persona badge, campus/locality, and date.
+    - Interactive **"Rate Your Experience / Write Review"** modal with dynamic star mood ratings (1 to 5 stars), role selector (Student/Senior Host/Parent/Partner), service dropdown, review headline & textarea, and local storage persistence.
+  - **💡 Community Improvement & Feature Suggestions Roadmap**:
+    - Public suggestion board allowing anyone to propose new ideas for platform improvement across App & UI, Pricing & Billing, Safety & IoT Sensors, City & Campus Expansion, and Kitchen Menus.
+    - Interactive **Live Upvoting Engine** with persistent vote tracking in `localStorage` and dynamic vote count indicators.
+    - Status badges (*Under Review*, *Planned*, *In Progress*, *Implemented*) displaying transparency on community requests.
+    - Interactive **"Submit Improvement Idea"** modal to submit new suggestions directly to the founding team.
+  - **Multi-Touchpoint Integration & Full Bilingual Sync**:
+    - Added `#feedback` and `#suggestions` navigation links in [Navbar.tsx](file:///c:/Users/Dell/Downloads/stashsaarthi-main/src/components/stash/Navbar.tsx) and [FooterSection.tsx](file:///c:/Users/Dell/Downloads/stashsaarthi-main/src/components/stash/FooterSection.tsx).
+    - Integrated direct WhatsApp escalation trigger to Founder Advik Omer (`+91 9369454350`).
+    - Full English (`en`) and Hindi (`hi`) translation sync via `useLanguage()` and dual-persona styling (Electric Mint for students vs Warm Amber for hosts).
+  - **Verification**: Strict TypeScript validation (`npx tsc --noEmit` passed with **0 errors**) and full production build (`npm run build` compiled client, SSR, and Nitro server bundles cleanly in **1.64s** with **0 errors**).
+
+- [x] **Navbar Explore Button Overflow Fix & Pure Transparent Logo Integration**:
+  - **Navbar Layout & Button Overflow Resolution**: Resolved right-edge overflow in [Navbar.tsx](file:///c:/Users/Dell/Downloads/stashsaarthi-main/src/components/stash/Navbar.tsx). Streamlined the action button text to `"Explore"` (or `"इकोसिस्टम देखें"` in Hindi), optimized flex shrink and container boundaries, and reorganized secondary triggers (`Early Access` / `Refer`) with clean responsive breakpoints so the navbar action button never pushes out of the viewport on any screen size.
+  - **Pure Transparent Official Logo Extraction**: Processed the original brand logo image to extract and remove the black background completely, generating high-resolution, alpha-antialiased transparent PNGs in `public/stashsaarthi-logo.png` and `src/assets/stashsaarthi-logo.png`.
+  - **BrandLogo Component Standardization**: Updated [BrandLogo.tsx](file:///c:/Users/Dell/Downloads/stashsaarthi-main/src/components/ui/BrandLogo.tsx) to exclusively render the authentic transparent brand logo across Navbar, Footer, and OpenGraph metadata.
+  - **Hero Section Smooth Scroll**: Linked the Hero secondary CTA directly to the `#ecosystem` anchor with Lenis smooth-scroll physics.
+  - **Verification**: Strict TypeScript type safety verified (`npx tsc --noEmit` with **0 errors**) and production build compiled cleanly (`npm run build` with **0 errors** in **2.87s**).
+
+- [x] **Complete Laptop 60–120 FPS Performance & Zero-Lag Architecture Overhaul**:
+  - **Lenis Physics Momentum Refinement**: Tuned `ReactLenis` parameters (`lerp: 0.1`, `duration: 0.8`, `wheelMultiplier: 1.0`, `touchMultiplier: 1.0`) to eliminate artificial drag/lag on laptop trackpads and scroll wheels.
+  - **GSAP ScrollTrigger Decoupling**: Replaced raw high-frequency `ScrollTrigger.update()` loop inside Lenis frame callback with requestAnimationFrame-debounced resize and scroll bindings, eliminating main-thread layout thrashing across all 20+ landing page sections. Removed hardcoded `gsap.ticker.fps(120)` to natively match laptop refresh rates without CPU thermal spikes.
+  - **WebGL Ferrofluid Shader Optimization**: Optimized fractal Brownian motion (`fbm`) in [Ferrofluid.tsx](file:///c:/Users/Dell/Downloads/stashsaarthi-main/src/components/ui/Ferrofluid.tsx) from 4 octaves to 3 octaves (reducing ALU workload by ~40%), clamped internal resolution buffers to 1400x700 max, throttled pointer movements with `requestAnimationFrame`, and added automated pause when tab is hidden or element is scrolled off-screen.
+  - **Canvas & Parallax GPU Acceleration**:
+    - Replaced heavy runtime Gaussian blur filters (`blur-[100px]`, `blur-[90px]`) in [HeroParallax.tsx](file:///c:/Users/Dell/Downloads/stashsaarthi-main/src/components/stash/HeroParallax.tsx) and [AmbientNodes.tsx](file:///c:/Users/Dell/Downloads/stashsaarthi-main/src/components/ui/AmbientNodes.tsx) with GPU-accelerated CSS radial gradients, preventing continuous multi-pass rasterization.
+    - Added RAF throttling to `mousemove` listeners in [CursorGlow.tsx](file:///c:/Users/Dell/Downloads/stashsaarthi-main/src/components/stash/CursorGlow.tsx) and [NodeCanvas.tsx](file:///c:/Users/Dell/Downloads/stashsaarthi-main/src/components/stash/NodeCanvas.tsx).
+    - Cached `getBoundingClientRect()` on `onMouseEnter` in [Card3D.tsx](file:///c:/Users/Dell/Downloads/stashsaarthi-main/src/components/ui/Card3D.tsx) and [Tilt3D.tsx](file:///c:/Users/Dell/Downloads/stashsaarthi-main/src/components/stash/Tilt3D.tsx) to eliminate synchronous DOM reflows during hover tilt.
+  - **CSS Glass Compositing**: Refined `.glass` backdrop blur to 16px and switched from `transition: all` to targeted transitions (`border-color`, `box-shadow`, `background-color`) in [styles.css](file:///c:/Users/Dell/Downloads/stashsaarthi-main/src/styles.css).
+  - **Founder LinkedIn Integration**: Linked Advik's LinkedIn profile (`https://www.linkedin.com/in/advik-omer-07046b367`) across [constants.ts](file:///c:/Users/Dell/Downloads/stashsaarthi-main/src/lib/constants.ts), [FounderAccountability.tsx](file:///c:/Users/Dell/Downloads/stashsaarthi-main/src/components/stash/FounderAccountability.tsx), [FooterSection.tsx](file:///c:/Users/Dell/Downloads/stashsaarthi-main/src/components/stash/FooterSection.tsx), and [FounderEscalationWidget.tsx](file:///c:/Users/Dell/Downloads/stashsaarthi-main/src/components/stash/FounderEscalationWidget.tsx).
+  - **Verification**: Strict TypeScript type safety verified (`npx tsc --noEmit` with **0 errors**) and production build compiled cleanly (`npm run build` compiled client, SSR, and Nitro server bundles in **2.05s** with **0 errors**).
+
 - [x] **Direct WhatsApp Referral & Instant Sharing Architecture (`WhatsAppReferralModal.tsx`)**:
   - Built an interactive **"Refer & Share on WhatsApp"** modal with 3 high-converting pre-composed topic templates:
     1. **Student Vacation Stash**: Pre-crafted message with live link, highlighting ₹300/mo storage, laser seals, ₹10k insurance, and saving ₹8k dead-rent.

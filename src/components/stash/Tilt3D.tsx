@@ -51,6 +51,8 @@ export function Tilt3D({ children, className, max = 10, lift = 8, glare = true }
         }),
   };
 
+  const rectRef = useRef<DOMRect | null>(null);
+
   return (
     <motion.div
       ref={ref}
@@ -58,17 +60,19 @@ export function Tilt3D({ children, className, max = 10, lift = 8, glare = true }
       style={dynamicStyle}
       onPointerMove={(e) => {
         if (e.pointerType !== "mouse" || isMobile) return;
-        const r = ref.current?.getBoundingClientRect();
+        const r = rectRef.current || ref.current?.getBoundingClientRect();
         if (!r) return;
         px.set((e.clientX - r.left) / r.width);
         py.set((e.clientY - r.top) / r.height);
       }}
       onPointerEnter={(e) => {
         if (e.pointerType !== "mouse" || isMobile) return;
+        if (ref.current) rectRef.current = ref.current.getBoundingClientRect();
         hover.set(1);
       }}
       onPointerLeave={() => {
         if (isMobile) return;
+        rectRef.current = null;
         hover.set(0);
         px.set(0.5);
         py.set(0.5);

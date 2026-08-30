@@ -12,9 +12,15 @@ export function CursorGlow() {
   useEffect(() => {
     if (!window.matchMedia("(pointer: fine)").matches) return;
     setEnabled(true);
+    let ticking = false;
     const move = (e: MouseEvent) => {
-      x.set(e.clientX);
-      y.set(e.clientY);
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        x.set(e.clientX);
+        y.set(e.clientY);
+        ticking = false;
+      });
     };
 
     window.addEventListener("mousemove", move, { passive: true });

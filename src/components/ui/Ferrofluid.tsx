@@ -125,7 +125,7 @@ float fbm(vec3 p) {
   float f = 0.0;
   float amp = 0.5;
   float freq = 1.0;
-  for (int i = 0; i < 4; i++) {
+  for (int i = 0; i < 3; i++) {
     f += amp * snoise(p * freq);
     p += vec3(0.35, 0.42, 0.17);
     amp *= 0.5;
@@ -317,8 +317,8 @@ export function Ferrofluid({
 
     const resize = () => {
       if (!container || !renderer) return;
-      const width = container.clientWidth || 300;
-      const height = container.clientHeight || 300;
+      const width = Math.min(container.clientWidth || 300, 1400);
+      const height = Math.min(container.clientHeight || 300, 700);
       renderer.setSize(width, height);
       const uniforms = program.uniforms as Record<string, { value: any }>;
       if (uniforms["uResolution"]) {
@@ -330,20 +330,31 @@ export function Ferrofluid({
     resizeObserver.observe(container);
     resize();
 
+    let ticking = false;
     const handleMouseMove = (e: MouseEvent) => {
-      if (!container || !mouseInteraction) return;
-      const rect = container.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width;
-      const y = 1.0 - (e.clientY - rect.top) / rect.height;
-      mouseRef.current.target = [x, y];
+      if (!container || !mouseInteraction || ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        if (!container) return;
+        const rect = container.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = 1.0 - (e.clientY - rect.top) / rect.height;
+        mouseRef.current.target = [x, y];
+        ticking = false;
+      });
     };
 
     const handleTouchMove = (e: TouchEvent) => {
-      if (!container || !mouseInteraction || !e.touches[0]) return;
-      const rect = container.getBoundingClientRect();
-      const x = (e.touches[0].clientX - rect.left) / rect.width;
-      const y = 1.0 - (e.touches[0].clientY - rect.top) / rect.height;
-      mouseRef.current.target = [x, y];
+      if (!container || !mouseInteraction || !e.touches[0] || ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        if (!container || !e.touches[0]) return;
+        const rect = container.getBoundingClientRect();
+        const x = (e.touches[0].clientX - rect.left) / rect.width;
+        const y = 1.0 - (e.touches[0].clientY - rect.top) / rect.height;
+        mouseRef.current.target = [x, y];
+        ticking = false;
+      });
     };
 
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
@@ -353,9 +364,9 @@ export function Ferrofluid({
 
     const update = (now: number) => {
       animationId = requestAnimationFrame(update);
-      if (!isVisible) return; // Skip rendering if offscreen
+      if (!isVisible || document.hidden) return; // Skip rendering if offscreen or hidden tab
 
-      const delta = (now - lastTime) * 0.001;
+      const delta = Math.min((now - lastTime) * 0.001, 0.05);
       lastTime = now;
 
       const uniforms = program.uniforms as Record<string, { value: any }>;
@@ -363,7 +374,7 @@ export function Ferrofluid({
         uniforms["uTime"].value += delta;
       }
 
-      // Mouse lerp
+      // Smooth mouse lerp
       const damp = Math.min(1.0, mouseDampening * 60 * delta);
       mouseRef.current.current[0] +=
         (mouseRef.current.target[0] - mouseRef.current.current[0]) * damp;
@@ -381,7 +392,7 @@ export function Ferrofluid({
       ([entry]) => {
         isVisible = entry?.isIntersecting ?? true;
       },
-      { threshold: 0 },
+      { threshold: 0.05 },
     );
     observer.observe(container);
 

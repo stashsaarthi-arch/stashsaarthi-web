@@ -37,7 +37,7 @@ import { InvestorModal } from "./InvestorModal";
 import { CampusCaptainModal } from "./CampusCaptainModal";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useLanguage } from "@/context/LanguageContext";
-import { FOUNDER_WHATSAPP, FOUNDER_PHONE_DISPLAY } from "@/lib/constants";
+import { FOUNDER_WHATSAPP, FOUNDER_PHONE_DISPLAY, FOUNDER_LINKEDIN } from "@/lib/constants";
 
 function GoogleGlyph() {
   return (
@@ -278,22 +278,20 @@ export function FooterSection() {
               <button
                 type="button"
                 onClick={() => setUserType("student")}
-                className={`rounded-full border px-4 py-1.5 text-xs font-semibold transition cursor-pointer ${
-                  userType === "student"
+                className={`rounded-full border px-4 py-1.5 text-xs font-semibold transition cursor-pointer ${userType === "student"
                     ? "border-cyan/50 bg-cyan/15 text-foreground"
                     : "border-white/10 bg-white/5 text-muted-foreground hover:border-white/25"
-                }`}
+                  }`}
               >
                 🎓 {t.footer.student}
               </button>
               <button
                 type="button"
                 onClick={() => setUserType("host")}
-                className={`rounded-full border px-4 py-1.5 text-xs font-semibold transition cursor-pointer ${
-                  userType === "host"
+                className={`rounded-full border px-4 py-1.5 text-xs font-semibold transition cursor-pointer ${userType === "host"
                     ? "border-amber/50 bg-amber/15 text-foreground"
                     : "border-white/10 bg-white/5 text-muted-foreground hover:border-white/25"
-                }`}
+                  }`}
               >
                 🏠 {t.footer.host}
               </button>
@@ -527,26 +525,40 @@ export function FooterSection() {
               <MessageCircle className="w-5 h-5 group-hover:scale-110 transition-transform" />
             </a>
 
-            {SOCIALS.filter((s) => s.label !== "Instagram").map(({ Icon, label }) => (
-              <button
-                key={label}
-                type="button"
-                aria-label={label}
-                onClick={() =>
-                  toast.info(
-                    isHi ? "सोशल चैनल जल्द ही शुरू हो रहे हैं!" : "Social channels launching soon!",
-                    {
-                      description: isHi
-                        ? `${label} पेज अगले शहर बैच के साथ लाइव होगा।`
-                        : `Our ${label} page goes live with the next city batch.`,
-                    },
-                  )
-                }
-                className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-slate-700 hover:bg-white/5 transition-all duration-300 group cursor-pointer"
-              >
-                <Icon className="w-5 h-5 group-hover:scale-110 transition-transform" />
-              </button>
-            ))}
+            <a
+              href={FOUNDER_LINKEDIN}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Connect with Founder Advik Omer on LinkedIn"
+              className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-blue-400 hover:border-blue-500/40 hover:bg-blue-500/10 transition-all duration-300 group cursor-pointer"
+            >
+              <Linkedin className="w-5 h-5 group-hover:scale-110 transition-transform" />
+            </a>
+
+            {SOCIALS.filter((s) => s.label !== "Instagram" && s.label !== "LinkedIn").map(
+              ({ Icon, label }) => (
+                <button
+                  key={label}
+                  type="button"
+                  aria-label={label}
+                  onClick={() =>
+                    toast.info(
+                      isHi
+                        ? "सोशल चैनल जल्द ही शुरू हो रहे हैं!"
+                        : "Social channels launching soon!",
+                      {
+                        description: isHi
+                          ? `${label} पेज अगले शहर बैच के साथ लाइव होगा।`
+                          : `Our ${label} page goes live with the next city batch.`,
+                      },
+                    )
+                  }
+                  className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-slate-700 hover:bg-white/5 transition-all duration-300 group cursor-pointer"
+                >
+                  <Icon className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                </button>
+              ),
+            )}
           </div>
 
           <div className="mt-4">

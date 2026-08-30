@@ -36,10 +36,16 @@ export function NodeCanvas() {
       }));
     };
 
+    let ticking = false;
     const onMove = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      mouse.x = e.clientX - rect.left;
-      mouse.y = e.clientY - rect.top;
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+        ticking = false;
+      });
     };
     const onLeave = () => {
       mouse.x = -9999;
@@ -49,7 +55,7 @@ export function NodeCanvas() {
     let isVisible = true;
 
     const tick = () => {
-      if (!isVisible) {
+      if (!isVisible || document.hidden) {
         raf = requestAnimationFrame(tick);
         return;
       }

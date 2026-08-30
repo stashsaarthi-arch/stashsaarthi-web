@@ -7,6 +7,7 @@ export const FOUNDER_WHATSAPP = "919369454350";
 export const FOUNDER_PHONE_DISPLAY = "+91 9369454350";
 export const FOUNDER_PHONE_RAW = "9369454350";
 export const FOUNDER_EMAIL = "stashsaarthi@gmail.com";
+export const FOUNDER_LINKEDIN = "https://www.linkedin.com/in/advik-omer-07046b367";
 
 // Primary live domain for share links, messages & referrals
 export const APP_BASE_URL = "https://stashsaarthi-web.vercel.app";

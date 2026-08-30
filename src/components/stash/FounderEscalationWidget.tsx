@@ -5,6 +5,7 @@ import {
   FOUNDER_WHATSAPP,
   FOUNDER_PHONE_DISPLAY,
   FOUNDER_EMAIL,
+  FOUNDER_LINKEDIN,
   getWhatsAppUrl,
 } from "@/lib/constants";
 import { useLanguage } from "@/context/LanguageContext";
@@ -104,6 +105,19 @@ export function FounderEscalationWidget() {
                   <span>{isHi ? "सीधा ईमेल भेजें" : "Direct Email"}</span>
                 </div>
                 <span className="text-[10px] font-mono text-neutral-400">{FOUNDER_EMAIL}</span>
+              </a>
+
+              <a
+                href={FOUNDER_LINKEDIN}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full flex items-center justify-between rounded-xl border border-blue-500/20 bg-blue-500/10 p-2.5 text-left text-xs font-semibold text-blue-300 hover:bg-blue-500/20 transition-all cursor-pointer"
+              >
+                <div className="flex items-center gap-2">
+                  <span className="text-blue-400 font-bold text-xs">in</span>
+                  <span>{isHi ? "लिंक्डइन पर जुड़ें" : "Connect on LinkedIn"}</span>
+                </div>
+                <span className="text-[10px] font-mono text-blue-400/80">/in/advik-omer</span>
               </a>
             </div>
           </motion.div>
