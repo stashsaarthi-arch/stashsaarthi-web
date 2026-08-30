@@ -2,10 +2,11 @@
  * StashSaarthi Global Platform Constants
  */
 
+export const FOUNDER_NAME = "Advik Omer";
 export const FOUNDER_WHATSAPP = "919369454350";
 export const FOUNDER_PHONE_DISPLAY = "+91 9369454350";
 export const FOUNDER_PHONE_RAW = "9369454350";
-export const FOUNDER_EMAIL = "connect@stashsaarthi.in";
+export const FOUNDER_EMAIL = "stashsaarthi@gmail.com";
 
 // Primary live domain for share links, messages & referrals
 export const APP_BASE_URL = "https://stashsaarthi-web.vercel.app";

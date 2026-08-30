@@ -74,8 +74,8 @@ export function FounderAccountability() {
                 {/* Profile Image & Status */}
                 <div className="relative aspect-square w-full overflow-hidden rounded-2xl border border-white/10 bg-slate-900 shadow-inner group">
                   <img
-                    src="/images/founder_shivesh.jpg"
-                    alt="Shivesh Anand - Founder & Operations Lead at StashSaarthi"
+                    src="/images/founder_advik.jpg"
+                    alt="Advik Omer - Founder & Operations Lead at StashSaarthi"
                     width={500}
                     height={500}
                     className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105 aspect-square"
@@ -98,7 +98,7 @@ export function FounderAccountability() {
                 <div className="mt-5">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="text-xl font-extrabold text-foreground">Shivesh Anand</h3>
+                      <h3 className="text-xl font-extrabold text-foreground">Advik Omer</h3>
                       <p className="text-xs sm:text-sm text-emerald-400 font-medium mt-0.5">
                         {isHi ? "संस्थापक एवं ग्राउंड ऑपरेशंस प्रमुख" : "Founder & Operations Lead"}
                       </p>
@@ -123,19 +123,19 @@ export function FounderAccountability() {
                   <div className="mt-5 pt-4 border-t border-white/10 flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <a
-                        href="https://www.linkedin.com/in/shivesh-anand"
+                        href="https://www.linkedin.com/in/advik-omer"
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label="Shivesh Anand on LinkedIn"
+                        aria-label="Advik Omer on LinkedIn"
                         className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 text-slate-300 hover:text-white hover:border-blue-500/40 hover:bg-blue-500/10 transition-all cursor-pointer"
                       >
                         <Linkedin className="h-4 w-4" />
                       </a>
                       <a
-                        href="https://x.com/shiveshanand"
+                        href="https://x.com/advikomer"
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label="Shivesh Anand on X / Twitter"
+                        aria-label="Advik Omer on X / Twitter"
                         className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 text-slate-300 hover:text-white hover:border-cyan-500/40 hover:bg-cyan-500/10 transition-all cursor-pointer"
                       >
                         <Twitter className="h-4 w-4" />
@@ -152,8 +152,8 @@ export function FounderAccountability() {
                     <a
                       href={getWhatsAppUrl(
                         isHi
-                          ? "नमस्ते Shivesh, मैं StashSaarthi के बारे में सीधे बात करना चाहता/चाहती हूं।"
-                          : "Hi Shivesh, I would like to connect directly regarding StashSaarthi.",
+                          ? "नमस्ते Advik, मैं StashSaarthi के बारे में सीधे बात करना चाहता/चाहती हूं।"
+                          : "Hi Advik, I would like to connect directly regarding StashSaarthi.",
                       )}
                       target="_blank"
                       rel="noopener noreferrer"

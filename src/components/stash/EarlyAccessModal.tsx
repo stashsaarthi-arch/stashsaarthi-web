@@ -342,8 +342,8 @@ export function EarlyAccessModal({
                 <a
                   href={getWhatsAppUrl(
                     isHi
-                      ? `नमस्ते Shivesh, मेरा अर्ली एक्सेस टोकन है: ${token}। कृपया मेरा स्लॉट सक्रिय करें।`
-                      : `Hi Shivesh, my priority access token is ${token}. Please confirm my Kanpur slot.`,
+                      ? `नमस्ते Advik, मेरा अर्ली एक्सेस टोकन है: ${token}। कृपया मेरा स्लॉट सक्रिय करें।`
+                      : `Hi Advik, my priority access token is ${token}. Please confirm my Kanpur slot.`,
                   )}
                   target="_blank"
                   rel="noopener noreferrer"

@@ -620,8 +620,8 @@ export function FooterSection() {
         </p>
         <p className="text-[11px] text-muted-foreground/80 font-mono">
           {isHi
-            ? "नोडल परिचालन कार्यालय: 117/के-ब्लॉक, कल्याणपुर, कानपुर — 208016 | शिकायत निवारण: grievance@stashsaarthi.in"
-            : "Operational Hub: 117/K-Block, Kalyanpur, Kanpur — 208016 | Grievance Officer: grievance@stashsaarthi.in"}
+            ? "नोडल परिचालन कार्यालय: 117/के-ब्लॉक, कल्याणपुर, कानपुर — 208016 | सीधा ईमेल: stashsaarthi@gmail.com"
+            : "Operational Hub: 117/K-Block, Kalyanpur, Kanpur — 208016 | Direct Email: stashsaarthi@gmail.com"}
         </p>
       </div>
 

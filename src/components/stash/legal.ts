@@ -58,12 +58,12 @@ export const DOCS: Record<string, Doc> = {
     title: "About us & Founding Mission",
     title_hi: "हमारे बारे में एवं संस्थापक मिशन",
     body: [
-      "StashSaarthi is India's hyper-local living ecosystem, founded in Kanpur by Shivesh Anand to bridge student mobility with intergenerational community support.",
+      "StashSaarthi is India's hyper-local living ecosystem, founded in Kanpur by Advik Omer to bridge student mobility with intergenerational community support.",
       "We replace predatory brokerages and wasteful dead-rent with verified peer-to-peer micro-storage (₹300/bag/mo), broker-free student rooms (avg ₹5,500/mo), and pure homestyle tiffins inside verified senior households.",
       "Our platform operates with software discipline and on-ground human accountability: 3-tier background verification, tamper-evident laser barcode seals, and 100% digital bank escrow.",
     ],
     body_hi: [
-      "स्टैशसारथी भारत का हाइपर-लोकल लिविंग इकोसिस्टम है, जिसे कानपुर में शिवेश आनंद द्वारा छात्र गतिशीलता को अंतर-पीढ़ी सामुदायिक समर्थन से जोड़ने के लिए स्थापित किया गया।",
+      "स्टैशसारथी भारत का हाइपर-लोकल लिविंग इकोसिस्टम है, जिसे कानपुर में अद्विक ओमर द्वारा छात्र गतिशीलता को अंतर-पीढ़ी सामुदायिक समर्थन से जोड़ने के लिए स्थापित किया गया।",
       "हम भारी ब्रोकरेज और खाली कमरों के डेड-रेंट को समाप्त कर सत्यापित बुजुर्गों के घरों में माइक्रो-स्टोरेज (₹300/बैग/माह), शून्य-ब्रोकरेज कमरे (औसत ₹5,500/माह) और घर का शुद्ध भोजन उपलब्ध कराते हैं।",
       "हमारा प्लेटफॉर्म सॉफ्टवेयर अनुशासन और ज़मीनी मानवीय जवाबदेही पर काम करता है: 3-स्तरीय सत्यापन, लेजर बारकोड सील और 100% डिजिटल बैंक एस्क्रो।",
     ],
@@ -132,15 +132,15 @@ export const DOCS: Record<string, Doc> = {
     title: "Direct Grievance & Nodal Officer Details",
     title_hi: "शिकायत निवारण एवं नोडल अधिकारी संपर्क",
     body: [
-      "Nodal Grievance Officer: Shivesh Anand (Founder & Operations Lead)",
+      "Nodal Grievance Officer: Advik Omer (Founder & Operations Lead)",
       "Physical Operational Hub: 117/K-Block, Kalyanpur, Kanpur, Uttar Pradesh — 208016, India",
-      "Direct Escalation Email: grievance@stashsaarthi.in | Direct Founder Line: +91 9369454350",
+      "Direct Escalation Email: stashsaarthi@gmail.com | Direct Founder Line: +91 9369454350",
       "Response Commitment: All official grievances acknowledged within 4 hours; full resolution guaranteed within 24 hours.",
     ],
     body_hi: [
-      "नोडल शिकायत अधिकारी: शिवेश आनंद (संस्थापक एवं ऑपरेशंस प्रमुख)",
+      "नोडल शिकायत अधिकारी: अद्विक ओमर (संस्थापक एवं ऑपरेशंस प्रमुख)",
       "भौतिक परिचालन कार्यालय: 117/के-ब्लॉक, कल्याणपुर, कानपुर, उत्तर प्रदेश — 208016, भारत",
-      "सीधी ईमेल: grievance@stashsaarthi.in | डायरेक्ट फाउंडर फोन लाइन: +91 9369454350",
+      "सीधी ईमेल: stashsaarthi@gmail.com | डायरेक्ट फाउंडर फोन लाइन: +91 9369454350",
       "प्रतिक्रिया प्रतिबद्धता: सभी आधिकारिक शिकायतों का 4 घंटे में संज्ञान लिया जाता है और 24 घंटे में पूर्ण समाधान सुनिश्चित किया जाता है।",
     ],
   },
@@ -178,12 +178,12 @@ export const DOCS: Record<string, Doc> = {
     body: [
       "We are a high-ownership, lean team building real-world physical infrastructure backed by software discipline.",
       "Open areas: Hyper-local ground operations, trust & safety inspection, community growth, and full-stack engineering.",
-      "If you care about radical transparency and building meaningful physical products in India, email your note to shivesh@stashsaarthi.in.",
+      "If you care about radical transparency and building meaningful physical products in India, email your note to stashsaarthi@gmail.com.",
     ],
     body_hi: [
       "हम एक केंद्रित और उच्च-स्वामित्व वाली टीम हैं जो सॉफ्टवेयर अनुशासन के साथ वास्तविक भौतिक बुनियादी ढांचा तैयार कर रही है।",
       "खुले क्षेत्र: हाइपर-लोकल ग्राउंड ऑपरेशंस, सुरक्षा निरीक्षण, कम्युनिटी ग्रोथ और फुल-स्टैक इंजीनियरिंग।",
-      "यदि आप पारदर्शिता और सार्थक प्रभाव में विश्वास रखते हैं, तो अपना परिचय shivesh@stashsaarthi.in पर भेजें।",
+      "यदि आप पारदर्शिता और सार्थक प्रभाव में विश्वास रखते हैं, तो अपना परिचय stashsaarthi@gmail.com पर भेजें।",
     ],
   },
 };
@@ -230,7 +230,7 @@ export const handleDownloadInvestorMemo = (language: "en" | "hi" = "en") => {
         <p>${isHi ? "• 3-स्तरीय आधार व पुलिस सत्यापन • 100% डिजिटल एस्क्रो • वियरेबल आपातकालीन एसओएस • सीलबंद कस्टडी-चेन।" : "• 3-Tier Aadhaar & Police Verification • 100% Digital Escrow • Wearable Emergency SOS • Tamper-Sealed Chain of Custody."}</p>
 
         <div class="footer">
-          <p>${isHi ? "गोपनीय • स्टैशसारथी टीम • संपर्क: connect@stashsaarthi.in • व्हाट्सएप: +91 9369454350" : "Confidential • StashSaarthi Team • Contact: connect@stashsaarthi.in • Founder WhatsApp: +91 9369454350"}</p>
+          <p>${isHi ? "गोपनीय • स्टैशसारथी टीम • संपर्क: stashsaarthi@gmail.com • व्हाट्सएप: +91 9369454350" : "Confidential • StashSaarthi Team • Contact: stashsaarthi@gmail.com • Founder WhatsApp: +91 9369454350"}</p>
         </div>
       </body>
     </html>

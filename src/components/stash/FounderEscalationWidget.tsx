@@ -39,8 +39,8 @@ export function FounderEscalationWidget() {
             <div className="flex items-start justify-between border-b border-neutral-800/80 pb-3">
               <div className="flex items-center gap-2.5">
                 <img
-                  src="/images/founder_shivesh.jpg"
-                  alt="Shivesh Anand"
+                  src="/images/founder_advik.jpg"
+                  alt="Advik Omer"
                   width={40}
                   height={40}
                   loading="lazy"
@@ -48,7 +48,7 @@ export function FounderEscalationWidget() {
                 />
                 <div>
                   <div className="flex items-center gap-1.5">
-                    <h4 className="text-xs font-bold text-white">Shivesh Anand</h4>
+                    <h4 className="text-xs font-bold text-white">Advik Omer</h4>
                     <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" />
                   </div>
                   <p className="text-[10px] text-emerald-400 font-mono">
@@ -80,8 +80,8 @@ export function FounderEscalationWidget() {
                 onClick={() =>
                   handleWhatsApp(
                     isHi
-                      ? "नमस्ते Shivesh, मैं StashSaarthi के बारे में सीधा सवाल पूछना चाहता/चाहती हूं।"
-                      : "Hi Shivesh, I have a direct question about StashSaarthi.",
+                      ? "नमस्ते Advik, मैं StashSaarthi के बारे में सीधा सवाल पूछना चाहता/चाहती हूं।"
+                      : "Hi Advik, I have a direct question about StashSaarthi.",
                   )
                 }
                 className="w-full flex items-center justify-between rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-2.5 text-left text-xs font-semibold text-emerald-300 hover:bg-emerald-500/20 transition-all cursor-pointer"
