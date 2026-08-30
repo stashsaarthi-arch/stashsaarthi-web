@@ -137,22 +137,14 @@ export function Connect(_props: { onBook: OpenBooking }) {
   const match = MATCHES.find((m) => m.city === city) ?? MATCHES[0]!;
 
   return (
-    <section id="connect" className="relative mx-auto max-w-4xl px-4 py-10 sm:py-14 scroll-mt-20">
-      <div className="mx-auto max-w-2xl text-center">
-        <h2 className="text-balance text-[1.75rem] font-extrabold tracking-tight sm:text-5xl">
-          {t.connectSection.heading}{" "}
-          <span className="text-gradient">{t.connectSection.headingGradient}</span>
-        </h2>
-        <p className="mt-4 text-sm text-muted-foreground sm:text-base">
-          {t.connectSection.subtitle}
-        </p>
-
+    <div id="connect" className="relative mx-auto max-w-4xl px-2 py-2 scroll-mt-20">
+      <div className="text-center">
         {/* Tab Switcher: Live Pairs vs Interactive Quiz */}
-        <div className="mt-6 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-black/40 p-1 backdrop-blur-md">
+        <div className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-black/40 p-1 backdrop-blur-md">
           <button
             type="button"
             onClick={() => setActiveTab("pairs")}
-            className={`rounded-full px-4 py-1.5 text-xs font-bold transition cursor-pointer ${
+            className={`rounded-full px-3.5 py-1 text-xs font-bold transition cursor-pointer ${
               activeTab === "pairs"
                 ? "bg-amber-500 text-black shadow-md shadow-amber-500/20"
                 : "text-slate-400 hover:text-white"
@@ -163,13 +155,13 @@ export function Connect(_props: { onBook: OpenBooking }) {
           <button
             type="button"
             onClick={() => setActiveTab("quiz")}
-            className={`rounded-full px-4 py-1.5 text-xs font-bold transition cursor-pointer flex items-center gap-1.5 ${
+            className={`rounded-full px-3.5 py-1 text-xs font-bold transition cursor-pointer flex items-center gap-1.5 ${
               activeTab === "quiz"
                 ? "bg-cyan-500 text-black shadow-md shadow-cyan-500/20"
                 : "text-slate-400 hover:text-white"
             }`}
           >
-            <SlidersHorizontal className="h-3.5 w-3.5" />
+            <SlidersHorizontal className="h-3 w-3" />
             <span>{isHi ? "अनुकूलता क्विज़ (Match Quiz)" : "Compatibility Match Quiz"}</span>
           </button>
         </div>
@@ -177,12 +169,12 @@ export function Connect(_props: { onBook: OpenBooking }) {
 
       {activeTab === "pairs" ? (
         <>
-          <div className="mt-8 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:justify-center">
+          <div className="mt-4 grid grid-cols-2 gap-1.5 sm:flex sm:flex-wrap sm:justify-center">
             {CITIES.map((c) => (
               <button
                 key={c}
                 onClick={() => setCity(c)}
-                className={`min-w-0 truncate rounded-full border px-4 py-2 text-sm font-medium transition cursor-pointer ${
+                className={`min-w-0 truncate rounded-full border px-3 py-1 text-xs font-medium transition cursor-pointer ${
                   city === c
                     ? "border-amber/50 bg-amber/15 text-foreground shadow-[0_0_12px_rgba(245,158,11,0.2)]"
                     : "border-white/10 bg-white/5 text-muted-foreground hover:border-white/25"
@@ -196,55 +188,49 @@ export function Connect(_props: { onBook: OpenBooking }) {
           <AnimatePresence mode="wait">
             <motion.div
               key={`${city}-${language}`}
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12 }}
+              exit={{ opacity: 0, y: -10 }}
               transition={{ type: "spring", stiffness: 220, damping: 24 }}
-              className="glass mt-8 rounded-3xl p-5 sm:p-7"
+              className="glass mt-4 rounded-2xl p-4 sm:p-5"
             >
-              <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
+              <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2">
                 <div className="flex items-center gap-2 truncate">
-                  <span className="text-xs uppercase tracking-widest text-muted-foreground">
+                  <span className="text-[11px] uppercase tracking-widest text-muted-foreground">
                     {isHi
                       ? `${CITIES_HI[match.city]} ${t.connectSection.liveSimulation}`
                       : `${match.city} Live Simulation`}
                   </span>
                   <PrototypeBadge variant="text" />
                 </div>
-                <span className="flex shrink-0 items-center gap-1 rounded-full border border-emerald/30 bg-emerald/10 px-3 py-1 text-xs font-bold text-emerald">
+                <span className="flex shrink-0 items-center gap-1 rounded-full border border-emerald/30 bg-emerald/10 px-2.5 py-0.5 text-xs font-bold text-emerald">
                   <Sparkles className="h-3 w-3" /> {match.score}% {t.connectSection.compatibility}
                 </span>
               </div>
 
-              <div className="mt-5 grid items-stretch gap-3 sm:grid-cols-[1fr_auto_1fr]">
+              <div className="mt-3.5 grid items-stretch gap-2.5 sm:grid-cols-[1fr_auto_1fr]">
                 <ProfileCard
                   icon={<GraduationCap className="h-4 w-4 text-cyan" />}
                   accent="var(--cyan)"
                   name={match.student.name}
-                  detail={
-                    isHi && match.student.detail_hi ? match.student.detail_hi : match.student.detail
-                  }
+                  detail={isHi && match.student.detail_hi ? match.student.detail_hi : match.student.detail}
                   label={t.connectSection.gives}
-                  items={
-                    isHi && match.student.gives_hi ? match.student.gives_hi : match.student.gives
-                  }
+                  items={isHi && match.student.gives_hi ? match.student.gives_hi : match.student.gives}
                 />
-                <div className="grid place-items-center">
-                  <span className="grid h-9 w-9 place-items-center rounded-full border border-white/15 bg-white/5">
-                    <ArrowLeftRight className="h-4 w-4 text-muted-foreground" />
+
+                <div className="flex items-center justify-center">
+                  <span className="grid h-8 w-8 place-items-center rounded-full border border-white/10 bg-white/5 text-muted-foreground">
+                    <ArrowLeftRight className="h-3.5 w-3.5" />
                   </span>
                 </div>
+
                 <ProfileCard
                   icon={<Heart className="h-4 w-4 text-amber" />}
                   accent="var(--amber)"
                   name={match.senior.name}
-                  detail={
-                    isHi && match.senior.detail_hi ? match.senior.detail_hi : match.senior.detail
-                  }
+                  detail={isHi && match.senior.detail_hi ? match.senior.detail_hi : match.senior.detail}
                   label={t.connectSection.offers}
-                  items={
-                    isHi && match.senior.offers_hi ? match.senior.offers_hi : match.senior.offers
-                  }
+                  items={isHi && match.senior.offers_hi ? match.senior.offers_hi : match.senior.offers}
                 />
               </div>
 
@@ -260,93 +246,90 @@ export function Connect(_props: { onBook: OpenBooking }) {
           </AnimatePresence>
         </>
       ) : (
-        /* Interactive 3-Question Compatibility Quiz */
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          className="glass mt-8 rounded-3xl p-6 sm:p-8 border border-cyan-500/30 bg-black/50"
+          className="glass mt-4 rounded-2xl p-4 sm:p-5 text-left"
         >
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-white/10 pb-4">
+          <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
             <div>
-              <h3 className="text-lg font-bold text-white">
-                {isHi ? "सार्थी अनुकूलता कैलकुलेटर" : "Instant Compatibility Radar"}
+              <h3 className="text-sm font-bold text-white">
+                {isHi ? "इंटरएक्टिव अनुकूलता कैलकुलेटर" : "Interactive Compatibility Calibrator"}
               </h3>
-              <p className="text-xs text-slate-400 mt-0.5">
+              <p className="text-[11px] text-slate-400">
                 {isHi
-                  ? "अपनी प्राथमिकताएं चुनें और कानपुर के सीनियर होस्ट्स के साथ अपनी मैच दर देखें।"
-                  : "Set your lifestyle preferences to compute live senior matching synergy."}
+                  ? "अपनी आदतें चुनें और तुरंत देखें कि आपको कितना रेंट डिस्काउंट मिल सकता है।"
+                  : "Choose your habits to compute match compatibility & monthly rental subsidy."}
               </p>
             </div>
-            <div className="flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1 text-sm font-bold text-emerald-400 font-mono">
-              <Sparkles className="h-4 w-4" />
-              <span>
-                {quizScore}% {isHi ? "अनुकूलता स्कोर" : "Match Score"}
-              </span>
+            <div className="text-right">
+              <span className="text-xs text-muted-foreground">Match Score</span>
+              <div className="text-lg font-black text-emerald-400 font-mono">{quizScore}%</div>
             </div>
           </div>
 
-          <div className="mt-6 grid gap-5 sm:grid-cols-3 text-left">
-            {/* Q1: Diet */}
-            <div className="space-y-2">
-              <label className="text-xs font-semibold text-slate-300">
-                {isHi ? "1. भोजन प्राथमिकता" : "1. Diet Preference"}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            {/* Question 1 */}
+            <div className="rounded-xl border border-white/10 bg-black/30 p-3">
+              <label className="text-[11px] font-bold text-slate-300 block mb-2">
+                1. {isHi ? "खान-पान प्राथमिकता (Diet)" : "Dietary Preference"}
               </label>
-              <div className="flex flex-col gap-1.5">
+              <div className="space-y-1.5">
                 {[
-                  { id: "veg", label: isHi ? "शुद्ध शाकाहारी (Veg)" : "Pure Veg" },
-                  { id: "egg", label: isHi ? "अंडे शामिल (Eggetarian)" : "Eggetarian" },
+                  { id: "veg", label: isHi ? "शुद्ध शाकाहारी (Pure Veg)" : "Pure Veg" },
+                  { id: "egg", label: isHi ? "अंडे स्वीकार्य (Eggitarian)" : "Eggitarian" },
                   { id: "any", label: isHi ? "कोई भी (Flexible)" : "Flexible" },
                 ].map((opt) => (
                   <button
                     key={opt.id}
                     type="button"
                     onClick={() => setDiet(opt.id as any)}
-                    className={`rounded-xl border p-2 text-xs text-left transition cursor-pointer flex items-center justify-between ${
+                    className={`rounded-lg border p-1.5 text-xs text-left transition cursor-pointer w-full flex items-center justify-between ${
                       diet === opt.id
-                        ? "border-cyan-500/50 bg-cyan-500/10 text-white font-bold"
+                        ? "border-emerald-500/50 bg-emerald-500/10 text-white font-bold"
                         : "border-white/10 bg-white/5 text-slate-400 hover:border-white/20"
                     }`}
                   >
                     <span>{opt.label}</span>
-                    {diet === opt.id && <CheckCircle2 className="h-3.5 w-3.5 text-cyan-400" />}
+                    {diet === opt.id && <CheckCircle2 className="h-3 w-3 text-emerald-400" />}
                   </button>
                 ))}
               </div>
             </div>
 
-            {/* Q2: Routine */}
-            <div className="space-y-2">
-              <label className="text-xs font-semibold text-slate-300">
-                {isHi ? "2. दैनिक दिनचर्या" : "2. Daily Routine"}
+            {/* Question 2 */}
+            <div className="rounded-xl border border-white/10 bg-black/30 p-3">
+              <label className="text-[11px] font-bold text-slate-300 block mb-2">
+                2. {isHi ? "दिनचर्या व अध्ययन समय" : "Daily Study Routine"}
               </label>
-              <div className="flex flex-col gap-1.5">
+              <div className="space-y-1.5">
                 {[
-                  { id: "early", label: isHi ? "जल्दी उठना (6 AM)" : "Early Bird (6 AM)" },
-                  { id: "night", label: isHi ? "रात में पढ़ाई (2 AM)" : "Late Study (Quiet)" },
+                  { id: "early", label: isHi ? "सुबह जल्दी उठने वाले (Early Bird)" : "Early Riser" },
+                  { id: "night", label: isHi ? "देर रात पढ़ाई (Quiet Night Owl)" : "Quiet Night Owl" },
                 ].map((opt) => (
                   <button
                     key={opt.id}
                     type="button"
                     onClick={() => setSchedule(opt.id as any)}
-                    className={`rounded-xl border p-2 text-xs text-left transition cursor-pointer flex items-center justify-between ${
+                    className={`rounded-lg border p-1.5 text-xs text-left transition cursor-pointer w-full flex items-center justify-between ${
                       schedule === opt.id
-                        ? "border-cyan-500/50 bg-cyan-500/10 text-white font-bold"
+                        ? "border-amber-500/50 bg-amber-500/10 text-white font-bold"
                         : "border-white/10 bg-white/5 text-slate-400 hover:border-white/20"
                     }`}
                   >
                     <span>{opt.label}</span>
-                    {schedule === opt.id && <CheckCircle2 className="h-3.5 w-3.5 text-cyan-400" />}
+                    {schedule === opt.id && <CheckCircle2 className="h-3 w-3 text-amber-400" />}
                   </button>
                 ))}
               </div>
             </div>
 
-            {/* Q3: Companionship */}
-            <div className="space-y-2">
-              <label className="text-xs font-semibold text-slate-300">
-                {isHi ? "3. तकनीकी/राशन सहायता समय" : "3. Daily Assistance"}
+            {/* Question 3 */}
+            <div className="rounded-xl border border-white/10 bg-black/30 p-3">
+              <label className="text-[11px] font-bold text-slate-300 block mb-2">
+                3. {isHi ? "होस्ट को दैनिक सहायता" : "Daily Host Assistance"}
               </label>
-              <div className="flex flex-col gap-1.5">
+              <div className="space-y-1.5">
                 {[
                   { id: "30m", label: isHi ? "30 मिनट / दिन" : "30 mins / day" },
                   {
@@ -359,32 +342,32 @@ export function Connect(_props: { onBook: OpenBooking }) {
                     key={opt.id}
                     type="button"
                     onClick={() => setHelpHours(opt.id as any)}
-                    className={`rounded-xl border p-2 text-xs text-left transition cursor-pointer flex items-center justify-between ${
+                    className={`rounded-lg border p-1.5 text-xs text-left transition cursor-pointer w-full flex items-center justify-between ${
                       helpHours === opt.id
                         ? "border-cyan-500/50 bg-cyan-500/10 text-white font-bold"
                         : "border-white/10 bg-white/5 text-slate-400 hover:border-white/20"
                     }`}
                   >
                     <span>{opt.label}</span>
-                    {helpHours === opt.id && <CheckCircle2 className="h-3.5 w-3.5 text-cyan-400" />}
+                    {helpHours === opt.id && <CheckCircle2 className="h-3 w-3 text-cyan-400" />}
                   </button>
                 ))}
               </div>
             </div>
           </div>
 
-          <div className="mt-6 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-            <div className="flex items-center gap-3">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-500/20 text-emerald-400">
-                <UserCheck className="h-5 w-5" />
+          <div className="mt-4 rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-3 flex flex-col sm:flex-row items-center justify-between gap-2.5">
+            <div className="flex items-center gap-2.5">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-500/20 text-emerald-400">
+                <UserCheck className="h-4 w-4" />
               </span>
               <div>
-                <h4 className="text-sm font-bold text-white">
+                <h4 className="text-xs font-bold text-white">
                   {isHi
                     ? "सत्यापित होस्ट मैच मिला: सुधा त्रिपाठी जी (स्वरूप नगर)"
                     : "Top Match Found: Sudha Tripathi Ji (Swaroop Nagar)"}
                 </h4>
-                <p className="text-xs text-slate-300">
+                <p className="text-[11px] text-slate-300">
                   {isHi
                     ? "किराया: ₹3,200/माह · घर का शुद्ध भोजन · 100% शून्य ब्रोकरेज"
                     : "Rent: ₹3,200/mo · Homestyle food · 0% Brokerage"}
@@ -394,8 +377,9 @@ export function Connect(_props: { onBook: OpenBooking }) {
 
             <Button
               variant="hero"
+              size="sm"
               onClick={() => setDrawer(true)}
-              className="w-full sm:w-auto shrink-0 cursor-pointer"
+              className="w-full sm:w-auto shrink-0 cursor-pointer text-xs py-1.5"
             >
               {isHi ? "इस मैच से जुड़ें" : "Connect with this Match"}
             </Button>
@@ -404,7 +388,7 @@ export function Connect(_props: { onBook: OpenBooking }) {
       )}
 
       <MatchDrawer open={drawer} onOpenChange={setDrawer} city={isHi ? CITIES_HI[city] : city} />
-    </section>
+    </div>
   );
 }
 

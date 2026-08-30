@@ -519,69 +519,14 @@ export function ZeroRisk() {
   const isHi = language === "hi";
 
   return (
-    <section
+    <div
       id="safety-protocol"
       data-section="zero-risk"
-      className="relative overflow-hidden py-10 sm:py-14 scroll-mt-20"
-      style={{
-        background: `linear-gradient(180deg, transparent 0%, ${OBSIDIAN} 6%, ${OBSIDIAN} 94%, transparent 100%)`,
-      }}
+      className="relative overflow-hidden py-2 scroll-mt-20"
     >
-      {/* ── Grid noise overlay ── */}
-      <div className="grid-noise pointer-events-none absolute inset-0 opacity-40" />
-
-      {/* ── Ambient glow orbs ── */}
-      <div
-        className="pointer-events-none absolute left-1/4 top-0 h-[500px] w-[500px] -translate-x-1/2 rounded-full opacity-[0.07] blur-[120px]"
-        style={{ background: EMERALD }}
-      />
-      <div
-        className="pointer-events-none absolute bottom-0 right-1/4 h-[400px] w-[400px] translate-x-1/2 rounded-full opacity-[0.05] blur-[100px]"
-        style={{ background: GOLD }}
-      />
-
-      <div className="relative mx-auto max-w-5xl px-4">
-        {/* ── Section Header ── */}
-        <AnimatedContent distance={50} direction="vertical" duration={0.8}>
-          <div className="mx-auto max-w-2xl text-center">
-            <Badge
-              variant="outline"
-              className="border-emerald-500/30 bg-emerald-500/10 text-sm"
-              style={{ color: EMERALD }}
-            >
-              {isHi ? "🛡️ शून्य-जोखिम इकोसिस्टम" : "🛡️ ZERO-RISK ECOSYSTEM"}
-            </Badge>
-
-            <h2 className="mt-6 text-balance text-[1.75rem] font-extrabold tracking-tight sm:text-5xl">
-              {isHi ? (
-                <>
-                  <span className="text-gradient">100% मानसिक शांति</span> के लिए निर्मित।
-                  <br />
-                  <span className="mt-1 block text-lg font-bold text-muted-foreground sm:text-2xl">
-                    हम हर एक संभावित जोखिम को कैसे समाप्त करते हैं।
-                  </span>
-                </>
-              ) : (
-                <>
-                  Engineered for <span className="text-gradient">100% Peace of Mind.</span>
-                  <br />
-                  <span className="mt-1 block text-lg font-bold text-muted-foreground sm:text-2xl">
-                    How We Eliminate Every Single Risk.
-                  </span>
-                </>
-              )}
-            </h2>
-
-            <p className="mt-5 text-sm leading-relaxed text-muted-foreground sm:text-base">
-              {isHi
-                ? "हमने ब्रोकर के अविश्वास को संस्थागत कस्टडी-चेन, डिजिटल वित्तीय एस्क्रो और वरिष्ठ नागरिक सुरक्षा तकनीक से बदल दिया है।"
-                : "We replaced high-brokerage distrust with institutional-grade chain-of-custody, financial escrow, and elder safety tech."}
-            </p>
-          </div>
-        </AnimatedContent>
-
+      <div className="relative mx-auto max-w-5xl px-2">
         {/* ── 5 Risk-Mitigation Cards — Bento Grid ── */}
-        <div className="mt-12 grid gap-4 sm:mt-16 md:grid-cols-2">
+        <div className="grid gap-3 md:grid-cols-2">
           {CARDS.slice(0, 4).map((card, i) => (
             <div key={card.id}>
               <RiskMitigationCard card={card} index={i} />
@@ -589,7 +534,7 @@ export function ZeroRisk() {
           ))}
         </div>
         {/* Card 5 spans full width */}
-        <div className="mt-4">
+        <div className="mt-3">
           <RiskMitigationCard card={CARDS[4]!} index={4} />
         </div>
 
@@ -597,31 +542,29 @@ export function ZeroRisk() {
         <CustodyTimeline />
 
         {/* ── Trust badge footer note ── */}
-        <AnimatedContent distance={30} direction="vertical" duration={0.6} delay={0.2}>
-          <div className="mt-14 text-center">
-            <p className="text-xs text-muted-foreground sm:text-sm">
-              {isHi ? (
-                <>
-                  सभी होस्ट पंजीकरण हमारे सुरक्षित डेटाबेस में{" "}
-                  <span className="font-semibold" style={{ color: EMERALD }}>
-                    सत्यापित
-                  </span>{" "}
-                  बैज से जुड़े हैं — 3-स्तरीय पहचान, पृष्ठभूमि और ऑन-साइट ऑडिट द्वारा समर्थित।
-                </>
-              ) : (
-                <>
-                  All host registrations are linked to{" "}
-                  <span className="font-semibold" style={{ color: EMERALD }}>
-                    verified
-                  </span>{" "}
-                  badges in our secure database — backed by 3-Tier identity, background & on-site
-                  verification.
-                </>
-              )}
-            </p>
-          </div>
-        </AnimatedContent>
+        <div className="mt-6 text-center">
+          <p className="text-[11px] text-muted-foreground sm:text-xs">
+            {isHi ? (
+              <>
+                सभी होस्ट पंजीकरण हमारे सुरक्षित डेटाबेस में{" "}
+                <span className="font-semibold" style={{ color: EMERALD }}>
+                  सत्यापित
+                </span>{" "}
+                बैज से जुड़े हैं — 3-स्तरीय पहचान, पृष्ठभूमि और ऑन-साइट ऑडिट द्वारा समर्थित।
+              </>
+            ) : (
+              <>
+                All host registrations are linked to{" "}
+                <span className="font-semibold" style={{ color: EMERALD }}>
+                  verified
+                </span>{" "}
+                badges in our secure database — backed by 3-Tier identity, background & on-site
+                verification.
+              </>
+            )}
+          </p>
+        </div>
       </div>
-    </section>
+    </div>
   );
 }

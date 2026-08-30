@@ -60,7 +60,7 @@ export function Navbar({
         }`}
       >
         {/* 1. Left: Brand Logo & Desktop Navigation */}
-        <div className="flex items-center gap-2 sm:gap-4 lg:gap-6 min-w-0">
+        <div className="flex items-center gap-2 sm:gap-3 lg:gap-4 shrink-0">
           <button
             type="button"
             className="flex items-center gap-1.5 shrink-0 cursor-pointer group bg-transparent border-0 p-0 transition-transform active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50 rounded-lg"
@@ -72,7 +72,7 @@ export function Navbar({
           </button>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden xl:flex items-center gap-1">
+          <nav className="hidden xl:flex items-center gap-1 shrink-0">
             {DESKTOP_LINKS.map((l) => {
               const isStash = l.key === "stash";
               const isTrust = l.key === "trust";
@@ -103,7 +103,7 @@ export function Navbar({
                     e.preventDefault();
                     smoothScrollTo(targetHref.replace(/^#/, ""))(e);
                   }}
-                  className="whitespace-nowrap rounded-lg px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground"
+                  className="whitespace-nowrap rounded-lg px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground shrink-0"
                 >
                   {buttonText}
                 </a>
@@ -113,30 +113,34 @@ export function Navbar({
         </div>
 
         {/* 2. Right: Action Controls (Responsive & Mobile Fitted) */}
-        <div className="flex items-center gap-1.5 sm:gap-2.5 lg:gap-3 min-w-0">
-          {/* Persona Toggle on Desktop (available on large screens; mobile/tablet uses drawer and floating pill) */}
+        <div className="flex items-center gap-1.5 sm:gap-2.5 lg:gap-3 shrink-0">
+          {/* Persona Toggle on Desktop (shown on large 2xl screens with clean non-colliding layout) */}
           <div className="hidden 2xl:flex items-center p-0.5 bg-[#161B22] border border-slate-700/60 rounded-full shrink-0">
             <button
               type="button"
               onClick={() => setRole("student")}
-              className={`px-2.5 py-1 rounded-full text-xs font-semibold transition-all ${
+              className={`px-2.5 py-1 rounded-full text-xs font-semibold transition-all flex items-center gap-1 ${
                 role === "student"
-                  ? "bg-emerald-500 text-black shadow-md"
+                  ? "bg-emerald-500 text-black shadow-md font-bold"
                   : "text-slate-400 hover:text-white"
               }`}
             >
-              {language === "hi" ? "छात्र: ₹6.4k बचाएं" : "Student: Save ₹6.4k"}
+              <span>🎓</span>
+              <span>{language === "hi" ? "छात्र" : "Student"}</span>
+              <span className="opacity-80 text-[10px]">{language === "hi" ? "₹6.4k बचत" : "Save ₹6.4k"}</span>
             </button>
             <button
               type="button"
               onClick={() => setRole("host")}
-              className={`px-2.5 py-1 rounded-full text-xs font-semibold transition-all ${
+              className={`px-2.5 py-1 rounded-full text-xs font-semibold transition-all flex items-center gap-1 ${
                 role === "host"
-                  ? "bg-amber-500 text-black shadow-md"
+                  ? "bg-amber-500 text-black shadow-md font-bold"
                   : "text-slate-400 hover:text-white"
               }`}
             >
-              {language === "hi" ? "होस्ट: ₹11.5k कमाएं" : "Host: Earn ₹11.5k"}
+              <span>🏡</span>
+              <span>{language === "hi" ? "होस्ट" : "Host"}</span>
+              <span className="opacity-80 text-[10px]">{language === "hi" ? "₹11.5k आय" : "Earn ₹11.5k"}</span>
             </button>
           </div>
 

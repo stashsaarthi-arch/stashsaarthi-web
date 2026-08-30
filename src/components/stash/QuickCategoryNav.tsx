@@ -73,10 +73,10 @@ export function QuickCategoryNav() {
   return (
     <div
       className={`z-30 transition-all duration-300 ${
-        isSticky ? "sticky top-16 mx-auto max-w-5xl px-4 py-2" : "relative mx-auto max-w-5xl px-4 py-3"
+        isSticky ? "sticky top-16 mx-auto max-w-5xl px-4 py-1.5" : "relative mx-auto max-w-5xl px-4 py-2"
       }`}
     >
-      <div className="glass flex items-center justify-between gap-1.5 overflow-x-auto rounded-full border border-white/10 p-1.5 shadow-2xl backdrop-blur-xl no-scrollbar sm:gap-2">
+      <div className="glass flex items-center justify-between gap-1 overflow-x-auto rounded-full border border-white/10 p-1 shadow-2xl backdrop-blur-xl no-scrollbar sm:gap-1.5">
         {CATEGORIES.map((cat) => {
           const Icon = cat.icon;
           const isActive = active === cat.id;
@@ -84,7 +84,7 @@ export function QuickCategoryNav() {
             <button
               key={cat.id}
               onClick={() => scrollTo(cat.id)}
-              className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold whitespace-nowrap transition-all duration-200 cursor-pointer sm:px-4 sm:py-2 sm:text-sm ${
+              className={`flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold whitespace-nowrap transition-all duration-200 cursor-pointer sm:px-3.5 sm:py-1.5 sm:text-xs ${
                 isActive
                   ? "border border-white/20 text-white shadow-lg"
                   : "text-muted-foreground hover:bg-white/5 hover:text-white"
@@ -99,7 +99,7 @@ export function QuickCategoryNav() {
               }}
             >
               <Icon
-                className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0"
+                className="h-3.5 w-3.5 shrink-0"
                 style={{ color: isActive ? accentColor : "currentColor" }}
               />
               <span>{isHi ? cat.labelHi : cat.labelEn}</span>

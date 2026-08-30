@@ -172,18 +172,18 @@ export function FAQ() {
   };
 
   return (
-    <section id="faq" className="relative px-4 py-10 sm:py-14 scroll-mt-20">
+    <section id="faq" className="relative px-4 py-4 sm:py-6 scroll-mt-20">
       <div className="mx-auto max-w-3xl">
-        <AnimatedContent distance={40} direction="vertical" duration={0.8}>
-          <div className="text-center mb-10">
+        <AnimatedContent distance={20} direction="vertical" duration={0.5}>
+          <div className="text-center mb-4">
             <Badge
               variant="outline"
-              className="border-cyan-500/30 bg-cyan-500/10 text-xs font-semibold uppercase tracking-widest text-cyan-400 font-mono mb-4"
+              className="border-cyan-500/30 bg-cyan-500/10 text-[9.5px] sm:text-[11px] font-semibold uppercase tracking-widest text-cyan-400 font-mono mb-1.5"
             >
               {isHi ? "❓ स्पष्ट एवं ईमानदार उत्तर" : "❓ HONEST & UNFILTERED ANSWERS"}
             </Badge>
 
-            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground">
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-foreground">
               {isHi ? (
                 <>
                   अक्सर पूछे जाने वाले <span className="text-gradient">पारदर्शी सवाल</span>
@@ -194,7 +194,7 @@ export function FAQ() {
                 </>
               )}
             </h2>
-            <p className="mt-4 text-xs sm:text-base text-muted-foreground max-w-xl mx-auto leading-relaxed">
+            <p className="mt-1 text-xs text-muted-foreground max-w-xl mx-auto leading-relaxed">
               {isHi
                 ? "बिना किसी कॉर्पोरेट घुमाव के — डेटा सुरक्षा, शुरुआती चरण की विश्वसनीयता और प्रत्यक्ष मानवीय जवाबदेही पर सीधे उत्तर।"
                 : "Zero corporate spin. Direct answers addressing data privacy, early-stage reliability, and guaranteed human accountability."}
@@ -202,9 +202,9 @@ export function FAQ() {
           </div>
 
           {/* Search Input & Category Pills */}
-          <div className="mb-8 space-y-4">
+          <div className="mb-3 space-y-2">
             <div className="relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-slate-400" />
               <Input
                 type="text"
                 placeholder={
@@ -214,11 +214,11 @@ export function FAQ() {
                 }
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="pl-11 pr-4 py-5 rounded-2xl border-white/10 bg-black/40 backdrop-blur-md text-sm text-foreground focus-visible:ring-emerald-500/50"
+                className="pl-8 pr-3 py-2 h-9 rounded-xl border-white/10 bg-black/40 backdrop-blur-md text-xs text-foreground focus-visible:ring-emerald-500/50"
               />
             </div>
 
-            <div className="flex flex-wrap items-center justify-center gap-2">
+            <div className="flex flex-wrap items-center justify-center gap-1">
               {categories.map((cat) => {
                 const count = getCategoryCount(cat.id);
                 const isActive = activeCategory === cat.id;
@@ -226,15 +226,15 @@ export function FAQ() {
                   <button
                     key={cat.id}
                     onClick={() => setActiveCategory(cat.id)}
-                    className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all cursor-pointer ${
+                    className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold transition-all cursor-pointer ${
                       isActive
-                        ? "border border-cyan-500/50 bg-cyan-500/15 text-cyan-300 shadow-[0_0_12px_-2px_rgba(6,182,212,0.3)]"
+                        ? "border border-cyan-500/50 bg-cyan-500/15 text-cyan-300 shadow-sm"
                         : "border border-white/10 bg-white/5 text-slate-400 hover:border-white/20 hover:text-white"
                     }`}
                   >
                     <span>{cat.label}</span>
                     <span
-                      className={`text-[10px] font-mono px-1.5 py-0.2 rounded-full ${
+                      className={`text-[9px] font-mono px-1 py-0.2 rounded-full ${
                         isActive ? "bg-cyan-500/20 text-cyan-300" : "bg-white/10 text-slate-400"
                       }`}
                     >
@@ -246,32 +246,32 @@ export function FAQ() {
             </div>
           </div>
 
-          <div className="glass rounded-3xl border border-white/10 p-6 sm:p-8">
+          <div className="glass rounded-2xl border border-white/10 p-3.5 sm:p-4">
             {filteredFaqs.length > 0 ? (
               <Accordion
                 type="single"
                 collapsible
                 defaultValue="item-0"
-                className="w-full space-y-3.5"
+                className="w-full space-y-2"
               >
                 {filteredFaqs.map((faq, index) => (
                   <AccordionItem
                     key={index}
                     value={`item-${index}`}
-                    className="border border-neutral-800 bg-neutral-950/60 rounded-2xl px-5 overflow-hidden transition-all hover:border-neutral-700"
+                    className="border border-neutral-800 bg-neutral-950/60 rounded-xl px-4 overflow-hidden transition-all hover:border-neutral-700"
                   >
-                    <AccordionTrigger className="text-left font-semibold text-sm hover:no-underline py-4 text-foreground/95">
+                    <AccordionTrigger className="text-left font-semibold text-xs sm:text-sm hover:no-underline py-2.5 text-foreground/95">
                       {isHi && faq.question_hi ? faq.question_hi : faq.question}
                     </AccordionTrigger>
-                    <AccordionContent className="text-xs sm:text-sm text-muted-foreground leading-relaxed pb-4 pt-1">
+                    <AccordionContent className="text-xs text-muted-foreground leading-relaxed pb-3 pt-0.5">
                       {isHi && faq.answer_hi ? faq.answer_hi : faq.answer}
                     </AccordionContent>
                   </AccordionItem>
                 ))}
               </Accordion>
             ) : (
-              <div className="py-8 text-center text-muted-foreground text-sm">
-                <Sparkles className="h-6 w-6 mx-auto mb-2 text-cyan-400 opacity-60" />
+              <div className="py-6 text-center text-muted-foreground text-xs">
+                <Sparkles className="h-5 w-5 mx-auto mb-1.5 text-cyan-400 opacity-60" />
                 {isHi ? (
                   <>
                     &ldquo;{search}&rdquo; के लिए कोई प्रश्न नहीं मिला। आप हमारे संस्थापक से सीधे

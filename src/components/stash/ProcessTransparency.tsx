@@ -139,42 +139,14 @@ export function ProcessTransparency() {
       ];
 
   return (
-    <section
+    <div
       id="how-it-works"
-      className="relative mx-auto max-w-6xl px-4 py-10 sm:py-14 scroll-mt-20"
+      className="relative mx-auto max-w-6xl px-2 py-2 scroll-mt-20"
     >
-      {/* ── Heading ── */}
-      <AnimatedContent distance={40} direction="vertical" duration={0.7}>
-        <div className="mx-auto max-w-3xl text-center">
-          <Badge
-            variant="outline"
-            className="border-emerald-500/30 bg-emerald-500/10 text-xs font-semibold uppercase tracking-widest text-emerald-400 font-mono"
-          >
-            {isHi ? "🔍 पूर्ण प्रक्रिया पारदर्शिता" : "🔍 RADICAL PROCESS TRANSPARENCY"}
-          </Badge>
-          <h2 className="mt-4 text-balance text-2xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl text-foreground">
-            {isHi ? (
-              <>
-                हम वास्तव में <span className="text-gradient">कैसे काम करते हैं</span>
-              </>
-            ) : (
-              <>
-                How StashSaarthi <span className="text-gradient">Actually Works</span>
-              </>
-            )}
-          </h2>
-          <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
-            {isHi
-              ? "बिना किसी भ्रामक दावे के — जानिए आपके सामान व बुकिंग के हर एक चरण की सटीक रूपरेखा।"
-              : "Zero vague marketing fluff. Here is the step-by-step blueprint of exact inputs, backstage mechanics, and guaranteed deliverables."}
-          </p>
-        </div>
-      </AnimatedContent>
-
       {/* ── 3-Stage Interactive Blueprint ── */}
-      <div className="mt-12 sm:mt-16">
+      <div>
         {/* Stage Selector Pills */}
-        <div className="grid grid-cols-3 gap-2 sm:gap-4 p-1.5 rounded-2xl bg-white/[0.03] border border-white/10 max-w-2xl mx-auto">
+        <div className="grid grid-cols-3 gap-1.5 p-1 rounded-xl bg-white/[0.03] border border-white/10 max-w-xl mx-auto mb-4">
           {STAGES.map((stage) => {
             const Icon = stage.icon;
             const isSelected = activeStage === stage.id;
@@ -183,13 +155,13 @@ export function ProcessTransparency() {
                 key={stage.id}
                 type="button"
                 onClick={() => setActiveStage(stage.id)}
-                className={`flex items-center justify-center gap-2 py-3 px-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+                className={`flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                   isSelected
-                    ? "bg-emerald-500/15 text-emerald-400 border border-emerald-500/40 shadow-[0_0_20px_-5px_rgba(16,185,129,0.3)]"
+                    ? "bg-emerald-500/15 text-emerald-400 border border-emerald-500/40 shadow-sm"
                     : "text-muted-foreground hover:text-foreground hover:bg-white/5 border border-transparent"
                 }`}
               >
-                <Icon className={`h-4 w-4 shrink-0 ${isSelected ? "text-emerald-400" : ""}`} />
+                <Icon className={`h-3.5 w-3.5 shrink-0 ${isSelected ? "text-emerald-400" : ""}`} />
                 <span className="truncate">{stage.title.split(".")[1]?.trim() || stage.title}</span>
               </button>
             );
@@ -355,6 +327,6 @@ export function ProcessTransparency() {
           </AnimatedContent>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

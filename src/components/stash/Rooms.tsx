@@ -205,25 +205,18 @@ export function Rooms({ onList }: { onList: () => void }) {
   };
 
   return (
-    <section id="rooms" className="relative mx-auto max-w-6xl px-4 py-10 sm:py-14 scroll-mt-20">
-      <div className="mx-auto max-w-2xl text-center">
-        <h2 className="text-balance text-[1.75rem] font-extrabold tracking-tight sm:text-5xl">
-          {t.rooms.heading} <span className="text-gradient">{t.rooms.headingGradient}</span>
-        </h2>
-        <p className="mt-4 text-sm text-muted-foreground sm:text-base">{t.rooms.subtitle}</p>
-      </div>
-
+    <div id="rooms" className="relative mx-auto max-w-6xl px-2 py-2 scroll-mt-20">
       {/* ── 1-Tap Quick Filter Pills ── */}
-      <div className="mt-8 flex flex-wrap items-center justify-center gap-2">
+      <div className="flex flex-wrap items-center justify-center gap-1.5 mb-4">
         {filters.map((f) => {
           const isActive = activeFilter === f.id;
           return (
             <button
               key={f.id}
               onClick={() => setActiveFilter(f.id)}
-              className={`rounded-full px-4 py-2 text-xs font-semibold transition-all cursor-pointer ${
+              className={`rounded-full px-3 py-1 text-xs font-semibold transition-all cursor-pointer ${
                 isActive
-                  ? "border border-emerald-500/50 bg-emerald-500/15 text-emerald-300 shadow-[0_0_15px_-3px_rgba(16,185,129,0.3)]"
+                  ? "border border-emerald-500/50 bg-emerald-500/15 text-emerald-300 shadow-[0_0_12px_-3px_rgba(16,185,129,0.3)]"
                   : "border border-white/10 bg-white/5 text-slate-400 hover:border-white/20 hover:text-white"
               }`}
             >
@@ -233,18 +226,18 @@ export function Rooms({ onList }: { onList: () => void }) {
         })}
       </div>
 
-      <div className="relative mt-8">
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="relative">
+        <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
           {filteredListings.map((l, i) => (
             <AnimatedContent
               key={l.id}
-              distance={40}
+              distance={30}
               direction="vertical"
-              duration={0.6}
-              delay={i * 0.08}
+              duration={0.5}
+              delay={i * 0.05}
             >
-              <article className="glass flex flex-col rounded-3xl p-4 group">
-                <div className="relative w-full h-44 rounded-2xl overflow-hidden mb-4 border border-white/10 bg-slate-900">
+              <article className="glass flex flex-col rounded-2xl p-3 group">
+                <div className="relative w-full h-36 rounded-xl overflow-hidden mb-2.5 border border-white/10 bg-slate-900">
                   <RoomImage
                     src={l.image || FALLBACK_IMAGES[i % 3] || DEFAULT_ROOM_SVG}
                     alt={l.address_location || "Student Room"}
@@ -252,10 +245,10 @@ export function Rooms({ onList }: { onList: () => void }) {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 pointer-events-none" />
 
                   {/* Badge positioned inside image overlay */}
-                  <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2 pointer-events-none">
+                  <div className="absolute top-2 left-2 right-2 flex items-center justify-between gap-1.5 pointer-events-none">
                     <button
                       onClick={() => setAuditOpen(true)}
-                      className="pointer-events-auto bg-black/60 backdrop-blur-md border border-white/10 text-amber-400 text-[10px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1.5 hover:bg-black/85 transition-colors cursor-pointer"
+                      className="pointer-events-auto bg-black/60 backdrop-blur-md border border-white/10 text-amber-400 text-[9px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 hover:bg-black/85 transition-colors cursor-pointer"
                     >
                       <span>✓</span> {t.rooms.studentReviewedBadge}
                     </button>
@@ -264,41 +257,41 @@ export function Rooms({ onList }: { onList: () => void }) {
                 </div>
 
                 <div className="flex flex-1 flex-col px-1 pb-1">
-                  <div className="flex items-start justify-between gap-3">
-                    <span className="text-lg font-extrabold">
+                  <div className="flex items-start justify-between gap-2">
+                    <span className="text-base font-extrabold">
                       {l.rent_amount
                         ? `${inr(l.rent_amount)}${t.rooms.perMonth}`
                         : t.rooms.rentOnRequest}
                     </span>
                     {l.ratings ? (
                       <span className="flex shrink-0 items-center gap-1 text-xs font-bold text-amber">
-                        <Star className="h-3.5 w-3.5 fill-current" /> {l.ratings}
+                        <Star className="h-3 w-3 fill-current" /> {l.ratings}
                       </span>
                     ) : null}
                   </div>
 
-                  <p className="mt-2 flex items-center flex-wrap gap-1.5 text-xs text-muted-foreground">
-                    <MapPin className="h-3.5 w-3.5 shrink-0 text-cyan" />
+                  <p className="mt-1 flex items-center flex-wrap gap-1 text-[11px] text-muted-foreground">
+                    <MapPin className="h-3 w-3 shrink-0 text-cyan" />
                     <span className="min-w-0">{l.address_location}</span>
                     <PrototypeBadge variant="text" />
                   </p>
 
                   {(isHi && l.transit_estimate_hi ? l.transit_estimate_hi : l.transit_estimate) && (
-                    <div className="mt-2 inline-flex items-center rounded-lg border border-emerald-500/20 bg-emerald-500/5 px-2.5 py-1 text-[11px] font-medium text-emerald-300">
+                    <div className="mt-1.5 inline-flex items-center rounded-md border border-emerald-500/20 bg-emerald-500/5 px-2 py-0.5 text-[10px] font-medium text-emerald-300">
                       {isHi && l.transit_estimate_hi ? l.transit_estimate_hi : l.transit_estimate}
                     </div>
                   )}
 
                   {(l as any).capacity_badge && (
                     <div
-                      className={`mt-2.5 inline-flex items-center w-fit rounded-full border px-2 py-1 text-[11px] font-medium 
+                      className={`mt-1.5 inline-flex items-center w-fit rounded-full border px-2 py-0.5 text-[10px] font-medium 
                       ${(l as any).capacity_badge.color === "emerald" ? "border-emerald-500/20 bg-emerald-500/10 text-emerald-400" : ""}
                       ${(l as any).capacity_badge.color === "amber" ? "border-amber-500/20 bg-amber-500/10 text-amber-400" : ""}
                       ${(l as any).capacity_badge.color === "cyan" ? "border-cyan-500/20 bg-cyan-500/10 text-cyan-400" : ""}
                     `}
                     >
                       <div
-                        className={`mr-1.5 h-1.5 w-1.5 rounded-full 
+                        className={`mr-1 h-1.5 w-1.5 rounded-full 
                         ${(l as any).capacity_badge.color === "emerald" ? "bg-emerald-500" : ""}
                         ${(l as any).capacity_badge.color === "amber" ? "bg-amber-500" : ""}
                         ${(l as any).capacity_badge.color === "cyan" ? "bg-cyan-500" : ""}
@@ -311,16 +304,17 @@ export function Rooms({ onList }: { onList: () => void }) {
                   )}
 
                   {l.student_review ? (
-                    <p className="mt-4 whitespace-pre-line text-sm leading-relaxed text-muted-foreground">
+                    <p className="mt-2 whitespace-pre-line text-xs leading-relaxed text-muted-foreground line-clamp-3">
                       {formatReview(l.student_review)}
                     </p>
                   ) : null}
 
-                  <div className="mt-5 flex gap-2 pt-1">
+                  <div className="mt-3 flex gap-1.5 pt-1">
                     <Button
                       asChild
                       variant="hero"
-                      className="flex-1 whitespace-normal text-xs leading-snug"
+                      size="sm"
+                      className="flex-1 whitespace-normal text-xs leading-snug py-1.5"
                     >
                       <a
                         href={(() => {
@@ -340,19 +334,20 @@ export function Rooms({ onList }: { onList: () => void }) {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        <MessageCircle className="h-4 w-4" /> {t.rooms.bookDirectly}
+                        <MessageCircle className="h-3.5 w-3.5 mr-1" /> {t.rooms.bookDirectly}
                       </a>
                     </Button>
                     <Button
                       asChild
                       variant="outline"
                       size="icon"
+                      className="h-8 w-8"
                       aria-label={
                         isHi ? "मालिक या सार्थी कंसीयज को कॉल करें" : "Call owner or concierge"
                       }
                     >
                       <a href={`tel:${(l.owner_phone || FOUNDER_WHATSAPP).replace(/\s/g, "")}`}>
-                        <Phone className="h-4 w-4" />
+                        <Phone className="h-3.5 w-3.5" />
                       </a>
                     </Button>
                   </div>
@@ -363,20 +358,20 @@ export function Rooms({ onList }: { onList: () => void }) {
         </div>
       </div>
 
-      <div className="glass mt-8 flex flex-col items-center gap-4 rounded-3xl p-6 text-center sm:flex-row sm:justify-between sm:text-left">
-        <div className="flex items-center gap-3">
-          <Gift className="h-6 w-6 shrink-0 text-amber" />
-          <p className="text-sm text-muted-foreground">
+      <div className="glass mt-4 flex flex-col items-center gap-3 rounded-2xl p-4 text-center sm:flex-row sm:justify-between sm:text-left">
+        <div className="flex items-center gap-2.5">
+          <Gift className="h-5 w-5 shrink-0 text-amber" />
+          <p className="text-xs text-muted-foreground">
             <span className="font-bold text-foreground">{t.rooms.vacatingTitle}</span>{" "}
             {t.rooms.vacatingDesc}
           </p>
         </div>
-        <Button variant="warm" size="lg" className="w-full shrink-0 sm:w-auto" onClick={onList}>
+        <Button variant="warm" size="default" className="w-full shrink-0 sm:w-auto text-xs py-1.5" onClick={onList}>
           {t.rooms.listVacatingBtn}
         </Button>
       </div>
 
       <SafetyAuditModal open={auditOpen} onOpenChange={setAuditOpen} />
-    </section>
+    </div>
   );
 }

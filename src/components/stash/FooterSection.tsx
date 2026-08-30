@@ -244,21 +244,21 @@ export function FooterSection() {
   };
 
   return (
-    <footer id="waitlist-form" className="relative mt-10 border-t border-white/10 scroll-mt-20">
-      <div className="relative mx-auto max-w-5xl px-4 py-24 text-center">
-        <h2 className="text-3xl font-extrabold tracking-tight sm:text-5xl">
+    <footer id="waitlist-form" className="relative mt-4 border-t border-white/10 scroll-mt-20">
+      <div className="relative mx-auto max-w-5xl px-4 py-6 sm:py-8 text-center">
+        <h2 className="text-xl font-extrabold tracking-tight sm:text-3xl">
           <span className="text-gradient">{t.footer.title}</span>
         </h2>
-        <p className="mx-auto mt-5 max-w-xl text-muted-foreground">{t.footer.subtitle}</p>
+        <p className="mx-auto mt-1 max-w-xl text-xs sm:text-sm text-muted-foreground">{t.footer.subtitle}</p>
 
         {submitted ? (
-          <div className="mt-8 mb-6">
-            <p className="text-lg font-bold text-emerald-400 mb-2">
+          <div className="mt-4 mb-3">
+            <p className="text-base font-bold text-emerald-400 mb-1">
               {isHi
                 ? "🎉 आप प्राथमिकता सूची में शामिल हो गए हैं!"
                 : "🎉 You're on the priority list!"}
             </p>
-            <p className="text-sm text-muted-foreground mb-8">
+            <p className="text-xs text-muted-foreground mb-3">
               {isHi
                 ? "हमने आपके स्टैशक्रेडिट सुरक्षित कर लिए हैं। हमारी टीम 24 घंटे में संपर्क करेगी।"
                 : "We've reserved your StashCredits. Our team will reach out within 24 hours."}
@@ -271,14 +271,14 @@ export function FooterSection() {
               e.preventDefault();
               void handleSubmit();
             }}
-            className="glass mx-auto mt-9 max-w-md rounded-2xl p-5"
+            className="glass mx-auto mt-4 max-w-xl rounded-2xl p-3.5 sm:p-4"
           >
             {/* User Type Toggle */}
-            <div className="mb-4 flex items-center justify-center gap-2">
+            <div className="mb-3 flex items-center justify-center gap-2">
               <button
                 type="button"
                 onClick={() => setUserType("student")}
-                className={`rounded-full border px-4 py-1.5 text-xs font-semibold transition cursor-pointer ${
+                className={`rounded-full border px-3.5 py-1 text-xs font-semibold transition cursor-pointer ${
                   userType === "student"
                     ? "border-cyan/50 bg-cyan/15 text-foreground"
                     : "border-white/10 bg-white/5 text-muted-foreground hover:border-white/25"
@@ -289,7 +289,7 @@ export function FooterSection() {
               <button
                 type="button"
                 onClick={() => setUserType("host")}
-                className={`rounded-full border px-4 py-1.5 text-xs font-semibold transition cursor-pointer ${
+                className={`rounded-full border px-3.5 py-1 text-xs font-semibold transition cursor-pointer ${
                   userType === "host"
                     ? "border-amber/50 bg-amber/15 text-foreground"
                     : "border-white/10 bg-white/5 text-muted-foreground hover:border-white/25"
@@ -299,24 +299,24 @@ export function FooterSection() {
               </button>
             </div>
 
-            <div className="space-y-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-left">
               {/* Full Name */}
               <div className="relative">
-                <User className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <User className="absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   onBlur={() => setTouched((t) => ({ ...t, name: true }))}
                   disabled={submitting}
                   placeholder={t.footer.name}
-                  className={`h-11 border-white/10 bg-white/5 pl-9 pr-8 focus-visible:ring-1 disabled:opacity-60 ${touched.name && !isNameValid ? "border-destructive/60" : touched.name && isNameValid ? "border-emerald-500/50" : ""}`}
+                  className={`h-9 border-white/10 bg-white/5 pl-8 pr-7 text-xs focus-visible:ring-1 disabled:opacity-60 ${touched.name && !isNameValid ? "border-destructive/60" : touched.name && isNameValid ? "border-emerald-500/50" : ""}`}
                 />
                 {touched.name && (
-                  <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                  <div className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none">
                     {isNameValid ? (
-                      <Check className="h-4 w-4 text-emerald-400" />
+                      <Check className="h-3.5 w-3.5 text-emerald-400" />
                     ) : (
-                      <AlertCircle className="h-4 w-4 text-destructive" />
+                      <AlertCircle className="h-3.5 w-3.5 text-destructive" />
                     )}
                   </div>
                 )}
@@ -324,7 +324,7 @@ export function FooterSection() {
 
               {/* Email */}
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <Mail className="absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -332,14 +332,14 @@ export function FooterSection() {
                   disabled={submitting}
                   placeholder={t.footer.email}
                   type="email"
-                  className={`h-11 border-white/10 bg-white/5 pl-9 pr-8 focus-visible:ring-1 disabled:opacity-60 ${touched.email && !isEmailValid ? "border-destructive/60" : touched.email && isEmailValid ? "border-emerald-500/50" : ""}`}
+                  className={`h-9 border-white/10 bg-white/5 pl-8 pr-7 text-xs focus-visible:ring-1 disabled:opacity-60 ${touched.email && !isEmailValid ? "border-destructive/60" : touched.email && isEmailValid ? "border-emerald-500/50" : ""}`}
                 />
                 {touched.email && (
-                  <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                  <div className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none">
                     {isEmailValid ? (
-                      <Check className="h-4 w-4 text-emerald-400" />
+                      <Check className="h-3.5 w-3.5 text-emerald-400" />
                     ) : (
-                      <AlertCircle className="h-4 w-4 text-destructive" />
+                      <AlertCircle className="h-3.5 w-3.5 text-destructive" />
                     )}
                   </div>
                 )}
@@ -347,7 +347,7 @@ export function FooterSection() {
 
               {/* Phone */}
               <div className="relative">
-                <Phone className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <Phone className="absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
@@ -355,14 +355,14 @@ export function FooterSection() {
                   disabled={submitting}
                   placeholder={t.footer.phone}
                   type="tel"
-                  className={`h-11 border-white/10 bg-white/5 pl-9 pr-8 focus-visible:ring-1 disabled:opacity-60 ${touched.phone && !isPhoneValid && phone.trim() ? "border-destructive/60" : touched.phone && isPhoneValid ? "border-emerald-500/50" : ""}`}
+                  className={`h-9 border-white/10 bg-white/5 pl-8 pr-7 text-xs focus-visible:ring-1 disabled:opacity-60 ${touched.phone && !isPhoneValid && phone.trim() ? "border-destructive/60" : touched.phone && isPhoneValid ? "border-emerald-500/50" : ""}`}
                 />
                 {touched.phone && phone.trim() && (
-                  <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                  <div className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none">
                     {isPhoneValid ? (
-                      <Check className="h-4 w-4 text-emerald-400" />
+                      <Check className="h-3.5 w-3.5 text-emerald-400" />
                     ) : (
-                      <AlertCircle className="h-4 w-4 text-destructive" />
+                      <AlertCircle className="h-3.5 w-3.5 text-destructive" />
                     )}
                   </div>
                 )}
@@ -370,7 +370,7 @@ export function FooterSection() {
 
               {/* College / Locality */}
               <div className="relative">
-                <GraduationCap className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <GraduationCap className="absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   value={college}
                   onChange={(e) => setCollege(e.target.value)}
@@ -384,23 +384,23 @@ export function FooterSection() {
                         ? "इलाका / शहर (वैकल्पिक)"
                         : "Locality / City (Optional)"
                   }
-                  className="h-11 border-white/10 bg-white/5 pl-9 focus-visible:ring-1 disabled:opacity-60"
+                  className="h-9 border-white/10 bg-white/5 pl-8 text-xs focus-visible:ring-1 disabled:opacity-60"
                 />
               </div>
 
               {/* TPA Waiver Checkbox for Hosts */}
               {userType === "host" && (
-                <div className="flex items-start gap-2 text-left pt-1">
+                <div className="col-span-full flex items-start gap-2 text-left pt-0.5">
                   <input
                     type="checkbox"
                     id="waiver"
                     checked={waiverAccepted}
                     onChange={(e) => setWaiverAccepted(e.target.checked)}
-                    className="mt-1 h-3.5 w-3.5 rounded border-white/20 bg-white/5 accent-amber-500 cursor-pointer"
+                    className="mt-0.5 h-3.5 w-3.5 rounded border-white/20 bg-white/5 accent-amber-500 cursor-pointer"
                   />
                   <label
                     htmlFor="waiver"
-                    className="text-[11px] text-muted-foreground leading-tight cursor-pointer"
+                    className="text-[10px] text-muted-foreground leading-tight cursor-pointer"
                   >
                     {isHi ? (
                       <>
@@ -419,7 +419,7 @@ export function FooterSection() {
             </div>
 
             {/* Referral Pill */}
-            <div className="mt-3">
+            <div className="mt-2">
               <ReferralPill />
             </div>
 
@@ -427,13 +427,13 @@ export function FooterSection() {
             <Button
               type="submit"
               variant={userType === "host" ? "warm" : "hero"}
-              size="lg"
-              className="mt-4 w-full"
+              size="default"
+              className="mt-3 w-full h-9 text-xs font-bold"
               disabled={submitting}
             >
               {submitting ? (
                 <span className="flex items-center gap-2">
-                  <Loader2 className="h-4 w-4 animate-spin" />{" "}
+                  <Loader2 className="h-3.5 w-3.5 animate-spin" />{" "}
                   {isHi ? "सहेज रहा है…" : "Submitting…"}
                 </span>
               ) : (
@@ -443,12 +443,12 @@ export function FooterSection() {
 
             {/* Google Sign-in Alternative */}
             {!user && (
-              <div className="mt-3">
-                <div className="relative my-2">
+              <div className="mt-2.5">
+                <div className="relative my-1.5">
                   <div className="absolute inset-0 flex items-center">
                     <span className="w-full border-t border-white/10" />
                   </div>
-                  <div className="relative flex justify-center text-[10px] uppercase">
+                  <div className="relative flex justify-center text-[9px] uppercase">
                     <span className="bg-background px-2 text-muted-foreground">
                       {isHi ? "या 1-क्लिक गूगल साइन-इन" : "or 1-click Google"}
                     </span>
@@ -457,7 +457,7 @@ export function FooterSection() {
                 <button
                   type="button"
                   onClick={() => handleGoogleWaitlist()}
-                  className="flex h-10 w-full items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 text-xs font-semibold text-foreground transition hover:bg-white/10 active:scale-[0.98] cursor-pointer"
+                  className="flex h-8.5 w-full items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 text-xs font-semibold text-foreground transition hover:bg-white/10 active:scale-[0.98] cursor-pointer"
                 >
                   <GoogleGlyph />
                   <span>{isHi ? "गूगल से तुरंत जुड़ें" : "Quick join with Google"}</span>
@@ -466,7 +466,7 @@ export function FooterSection() {
             )}
 
             {/* Micro-Trust Note */}
-            <p className="mt-3 text-[11px] text-muted-foreground">
+            <p className="mt-2 text-[10px] text-muted-foreground">
               🔒{" "}
               {isHi
                 ? "शून्य स्पैम। केवल आपके शहर में नोड्स लाइव होने पर अलर्ट।"
@@ -476,12 +476,12 @@ export function FooterSection() {
         )}
       </div>
 
-      <div className="overflow-hidden border-y border-white/10 py-4">
-        <div className="flex gap-10 whitespace-nowrap text-sm uppercase tracking-[0.24em] text-muted-foreground">
+      <div className="overflow-hidden border-y border-white/10 py-2.5">
+        <div className="flex gap-8 whitespace-nowrap text-xs uppercase tracking-[0.2em] text-muted-foreground">
           {[0, 1].map((k) => (
-            <div key={k} className="flex shrink-0 animate-[marquee_28s_linear_infinite] gap-10">
+            <div key={k} className="flex shrink-0 animate-[marquee_28s_linear_infinite] gap-8">
               {(isHi ? CITIES_HI : CITIES).map((c) => (
-                <span key={c} className="flex items-center gap-10">
+                <span key={c} className="flex items-center gap-8">
                   {c} <span className="text-cyan">◆</span>
                 </span>
               ))}
@@ -490,31 +490,31 @@ export function FooterSection() {
         </div>
       </div>
 
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 md:grid-cols-4">
+      <div className="mx-auto grid max-w-7xl gap-6 px-4 py-6 sm:py-8 md:grid-cols-4">
         <div>
           <button
             type="button"
-            className="flex items-center gap-2 shrink-0 cursor-pointer mb-4 group bg-transparent border-0 p-0 transition-transform active:scale-95 focus:outline-none rounded-lg"
+            className="flex items-center gap-2 shrink-0 cursor-pointer mb-3 group bg-transparent border-0 p-0 transition-transform active:scale-95 focus:outline-none rounded-lg"
             onClick={() => smoothScrollTo("top")(undefined as any)}
             aria-label="Scroll to top of page"
             title="StashSaarthi - Back to top"
           >
-            <BrandLogo height={42} className="h-9 sm:h-10" />
+            <BrandLogo height={36} className="h-8 sm:h-9" />
           </button>
-          <p className="mt-4 max-w-xs text-sm text-muted-foreground">
+          <p className="mt-2 max-w-xs text-xs text-muted-foreground">
             {isHi
               ? "भारत का हाइपर-लोकल लिविंग इकोसिस्टम — छात्र गतिशीलता को अंतर-पीढ़ी सामुदायिक समर्थन से जोड़ता है।"
               : "India's hyper-local living ecosystem — bridging student mobility with intergenerational community support."}
           </p>
-          <div className="mt-5 flex gap-2">
+          <div className="mt-3.5 flex gap-1.5">
             <a
               href="https://www.instagram.com/stashsaarthi"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Follow StashSaarthi on Instagram"
-              className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-pink-500 hover:border-pink-500/40 hover:bg-pink-500/10 transition-all duration-300 group cursor-pointer"
+              className="w-8.5 h-8.5 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-pink-500 hover:border-pink-500/40 hover:bg-pink-500/10 transition-all duration-300 group cursor-pointer"
             >
-              <Instagram className="w-5 h-5 group-hover:scale-110 transition-transform" />
+              <Instagram className="w-4 h-4 group-hover:scale-110 transition-transform" />
             </a>
 
             <a
@@ -522,9 +522,9 @@ export function FooterSection() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Chat with StashSaarthi on WhatsApp"
-              className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-emerald-400 hover:border-emerald-500/40 hover:bg-emerald-500/10 transition-all duration-300 group cursor-pointer"
+              className="w-8.5 h-8.5 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-emerald-400 hover:border-emerald-500/40 hover:bg-emerald-500/10 transition-all duration-300 group cursor-pointer"
             >
-              <MessageCircle className="w-5 h-5 group-hover:scale-110 transition-transform" />
+              <MessageCircle className="w-4 h-4 group-hover:scale-110 transition-transform" />
             </a>
 
             <a
@@ -532,9 +532,9 @@ export function FooterSection() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Connect with Founder Advik Omer on LinkedIn"
-              className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-blue-400 hover:border-blue-500/40 hover:bg-blue-500/10 transition-all duration-300 group cursor-pointer"
+              className="w-8.5 h-8.5 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-blue-400 hover:border-blue-500/40 hover:bg-blue-500/10 transition-all duration-300 group cursor-pointer"
             >
-              <Linkedin className="w-5 h-5 group-hover:scale-110 transition-transform" />
+              <Linkedin className="w-4 h-4 group-hover:scale-110 transition-transform" />
             </a>
 
             {SOCIALS.filter((s) => s.label !== "Instagram" && s.label !== "LinkedIn").map(
@@ -555,44 +555,44 @@ export function FooterSection() {
                       },
                     )
                   }
-                  className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-slate-700 hover:bg-white/5 transition-all duration-300 group cursor-pointer"
+                  className="w-8.5 h-8.5 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-slate-700 hover:bg-white/5 transition-all duration-300 group cursor-pointer"
                 >
-                  <Icon className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                  <Icon className="w-4 h-4 group-hover:scale-110 transition-transform" />
                 </button>
               ),
             )}
           </div>
 
-          <div className="mt-4">
+          <div className="mt-3">
             <a
               href={`https://wa.me/${FOUNDER_WHATSAPP}?text=${encodeURIComponent(isHi ? "नमस्ते StashSaarthi टीम" : "Hi StashSaarthi Team")}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-xs font-semibold text-emerald-400 hover:text-emerald-300 transition-colors"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-400 hover:text-emerald-300 transition-colors"
             >
-              <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
               {isHi
-                ? `डायरेक्ट फाउंडर लाइन: ${FOUNDER_PHONE_DISPLAY}`
-                : `Direct Founder Line: ${FOUNDER_PHONE_DISPLAY}`}
+                ? `फाउंडर लाइन: ${FOUNDER_PHONE_DISPLAY}`
+                : `Founder Line: ${FOUNDER_PHONE_DISPLAY}`}
             </a>
           </div>
 
-          <div className="mt-6 flex flex-wrap gap-2">
+          <div className="mt-4 flex flex-wrap gap-1.5">
             <button
               type="button"
               onClick={() => setShowInvestorModal(true)}
-              className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-black/40 px-3 py-2 text-xs font-semibold text-muted-foreground transition-colors hover:border-amber-500/40 hover:text-amber-400 cursor-pointer active:scale-95"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-white/10 bg-black/40 px-2.5 py-1.5 text-xs font-semibold text-muted-foreground transition-colors hover:border-amber-500/40 hover:text-amber-400 cursor-pointer active:scale-95"
             >
-              <Download className="h-3.5 w-3.5" /> {t.footer.investorCTA}
+              <Download className="h-3 w-3" /> {t.footer.investorCTA}
             </button>
 
             <button
               type="button"
               onClick={() => setShowCaptainModal(true)}
-              className="inline-flex items-center gap-2 rounded-lg border border-cyan-500/30 bg-cyan-500/10 px-3 py-2 text-xs font-semibold text-cyan-300 transition-colors hover:border-cyan-500/50 hover:bg-cyan-500/20 cursor-pointer active:scale-95"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-cyan-500/30 bg-cyan-500/10 px-2.5 py-1.5 text-xs font-semibold text-cyan-300 transition-colors hover:border-cyan-500/50 hover:bg-cyan-500/20 cursor-pointer active:scale-95"
             >
-              <Award className="h-3.5 w-3.5" />{" "}
-              {isHi ? "कैंपस कैप्टन (₹5,000+ कमाएं)" : "Campus Captain (Earn ₹5k+)"}
+              <Award className="h-3 w-3" />{" "}
+              {isHi ? "कैंपस कैप्टन (₹5k+)" : "Campus Captain (₹5k+)"}
             </button>
 
             <a
@@ -603,23 +603,23 @@ export function FooterSection() {
               )}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg border border-[#25D366]/40 bg-[#25D366]/10 px-3 py-2 text-xs font-semibold text-[#25D366] transition-colors hover:border-[#25D366]/60 hover:bg-[#25D366]/20 cursor-pointer active:scale-95"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-[#25D366]/40 bg-[#25D366]/10 px-2.5 py-1.5 text-xs font-semibold text-[#25D366] transition-colors hover:border-[#25D366]/60 hover:bg-[#25D366]/20 cursor-pointer active:scale-95"
             >
-              <Share2 className="h-3.5 w-3.5" />{" "}
-              {isHi ? "व्हाट्सएप पर रेफर करें" : "Refer on WhatsApp"}
+              <Share2 className="h-3 w-3" />{" "}
+              {isHi ? "रेफर करें" : "Refer"}
             </a>
           </div>
         </div>
 
         <div>
-          <h3 className="text-sm font-bold">{isHi ? "इकोसिस्टम" : "Ecosystem"}</h3>
-          <ul className="mt-4 space-y-2.5">
+          <h3 className="text-xs font-bold uppercase tracking-wider text-white">{isHi ? "इकोसिस्टम" : "Ecosystem"}</h3>
+          <ul className="mt-3 space-y-1.5 text-xs">
             {ECOSYSTEM.map((l) => (
               <li key={l.label}>
                 <a
                   href={`#${l.target}`}
                   onClick={smoothScrollTo(l.target)}
-                  className="text-sm text-muted-foreground transition hover:text-cyan"
+                  className="text-muted-foreground transition hover:text-cyan"
                 >
                   {l.label}
                 </a>
@@ -629,7 +629,7 @@ export function FooterSection() {
               <a
                 href="#rooms"
                 onClick={smoothScrollTo("rooms")}
-                className="text-sm text-muted-foreground transition hover:text-cyan"
+                className="text-muted-foreground transition hover:text-cyan"
               >
                 {isHi ? "सत्यापित कमरे" : "Verified Rooms"}
               </a>
@@ -641,13 +641,13 @@ export function FooterSection() {
         <DocCol title={isHi ? "कानूनी" : "Legal"} links={LEGAL} onOpen={setDoc} />
       </div>
 
-      <div className="border-t border-white/10 px-4 py-6 text-center text-xs text-muted-foreground space-y-1.5">
+      <div className="border-t border-white/10 px-4 py-4 text-center text-xs text-muted-foreground space-y-1">
         <p>
           {isHi
             ? "© 2026 StashSaarthi Technologies. 100% प्रामाणिक पारदर्शिता के साथ कानपुर, उत्तर प्रदेश में निर्मित।"
             : "© 2026 StashSaarthi Technologies. Built with radical honesty & physical accountability in Kanpur, Uttar Pradesh, India."}
         </p>
-        <p className="text-[11px] text-muted-foreground/80 font-mono">
+        <p className="text-[10px] text-muted-foreground/80 font-mono">
           {isHi
             ? "नोडल परिचालन कार्यालय: 117/के-ब्लॉक, कल्याणपुर, कानपुर — 208016 | सीधा ईमेल: stashsaarthi@gmail.com"
             : "Operational Hub: 117/K-Block, Kalyanpur, Kanpur — 208016 | Direct Email: stashsaarthi@gmail.com"}

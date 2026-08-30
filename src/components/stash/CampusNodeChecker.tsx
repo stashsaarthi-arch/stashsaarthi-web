@@ -273,34 +273,34 @@ export function CampusNodeChecker({ onBook }: { onBook: OpenBooking }) {
   }, [debouncedQuery]);
 
   return (
-    <div className="relative mx-auto mt-12 max-w-2xl text-left z-20">
-      <AnimatedContent distance={30} direction="vertical" duration={0.6} delay={0.2}>
-        <div className="glass overflow-hidden rounded-3xl border border-white/10 bg-black/40 backdrop-blur-xl shadow-2xl">
+    <div className="relative mx-auto mt-4 sm:mt-5 max-w-2xl text-left z-20">
+      <AnimatedContent distance={20} direction="vertical" duration={0.5} delay={0.15}>
+        <div className="glass overflow-hidden rounded-2xl border border-white/10 bg-black/40 backdrop-blur-xl shadow-xl">
           {/* Top Control Header with Search/Radar toggle */}
-          <div className="p-2 border-b border-white/10 flex items-center justify-between gap-2 flex-wrap">
-            <div className="flex items-center gap-1 bg-white/5 p-1 rounded-xl border border-white/10">
+          <div className="p-1.5 border-b border-white/10 flex items-center justify-between gap-2 flex-wrap">
+            <div className="flex items-center gap-1 bg-white/5 p-0.5 rounded-lg border border-white/10">
               <button
                 type="button"
                 onClick={() => setViewMode("search")}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer ${
+                className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-bold transition cursor-pointer ${
                   viewMode === "search"
                     ? "bg-emerald-500 text-black shadow-md"
                     : "text-slate-400 hover:text-white"
                 }`}
               >
-                <ListFilter className="h-3.5 w-3.5" />
+                <ListFilter className="h-3 w-3" />
                 <span>{isHi ? "खोज सूची" : "Search List"}</span>
               </button>
               <button
                 type="button"
                 onClick={() => setViewMode("radar")}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer ${
+                className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-bold transition cursor-pointer ${
                   viewMode === "radar"
                     ? "bg-cyan-500 text-black shadow-md"
                     : "text-slate-400 hover:text-white"
                 }`}
               >
-                <Radar className="h-3.5 w-3.5 animate-spin" style={{ animationDuration: "6s" }} />
+                <Radar className="h-3 w-3 animate-spin" style={{ animationDuration: "6s" }} />
                 <span>{isHi ? "लाइव कैंपस रडार" : "Live Campus Radar"}</span>
               </button>
             </div>
@@ -376,32 +376,32 @@ export function CampusNodeChecker({ onBook }: { onBook: OpenBooking }) {
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: "auto" }}
                     exit={{ opacity: 0, height: 0 }}
-                    className="max-h-[320px] overflow-y-auto px-2 pb-2"
+                    className="max-h-[260px] overflow-y-auto px-2 pb-2"
                   >
-                    <div className="space-y-2">
+                    <div className="space-y-1.5">
                       {results.map((node, i) => (
                         <motion.div
                           key={node.id}
-                          initial={{ opacity: 0, y: 10 }}
+                          initial={{ opacity: 0, y: 8 }}
                           animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: i * 0.05 }}
-                          className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-4 transition-all hover:border-emerald-500/30 hover:bg-white/[0.07]"
+                          transition={{ delay: i * 0.04 }}
+                          className="group relative overflow-hidden rounded-xl border border-white/10 bg-white/5 p-3 transition-all hover:border-emerald-500/30 hover:bg-white/[0.07]"
                         >
-                          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+                          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                             <div>
-                              <div className="flex items-center gap-2 flex-wrap">
-                                <h4 className="text-base font-bold text-foreground">
+                              <div className="flex items-center gap-1.5 flex-wrap">
+                                <h4 className="text-sm font-bold text-foreground">
                                   {isHi && node.name_hi ? node.name_hi : node.name}
                                 </h4>
-                                <span className="inline-flex items-center rounded bg-emerald-500/20 px-1.5 py-0.5 text-[10px] font-bold text-emerald-400">
+                                <span className="inline-flex items-center rounded bg-emerald-500/20 px-1.5 py-0.5 text-[9px] font-bold text-emerald-400">
                                   ★ {node.rating}
                                 </span>
                                 <PrototypeBadge variant="text" />
                               </div>
-                              <div className="mt-1.5 flex flex-col gap-1 text-xs text-muted-foreground">
-                                <div className="flex items-center gap-2 flex-wrap">
+                              <div className="mt-1 flex flex-col gap-0.5 text-[11px] text-muted-foreground">
+                                <div className="flex items-center gap-1.5 flex-wrap">
                                   <span className="flex items-center text-foreground font-semibold">
-                                    <MapPin className="mr-1 h-3.5 w-3.5 text-cyan-400 shrink-0" />
+                                    <MapPin className="mr-1 h-3 w-3 text-cyan-400 shrink-0" />
                                     {isHi && node.distance_hi ? node.distance_hi : node.distance} (
                                     {isHi && node.walkTime_hi ? node.walkTime_hi : node.walkTime})
                                   </span>
@@ -412,29 +412,29 @@ export function CampusNodeChecker({ onBook }: { onBook: OpenBooking }) {
                                       : node.gateNearby}
                                   </span>
                                 </div>
-                                <div className="flex items-center text-slate-400">
-                                  <Navigation className="mr-1.5 h-3.5 w-3.5 text-emerald-500/70 shrink-0" />
+                                <div className="flex items-center text-slate-400 text-[10px]">
+                                  <Navigation className="mr-1 h-3 w-3 text-emerald-500/70 shrink-0" />
                                   {t.campusNodeChecker.hostZone}:{" "}
                                   {isHi && node.locality_hi ? node.locality_hi : node.locality} ·{" "}
                                   {t.campusNodeChecker.pinPrefix} {node.pincode}
                                 </div>
                               </div>
 
-                              <div className="mt-3 flex flex-wrap gap-2">
+                              <div className="mt-2 flex flex-wrap gap-1.5">
                                 {node.stashAvailable > 0 && (
-                                  <div className="inline-flex items-center rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2 py-1 text-[11px] text-emerald-300 font-medium">
-                                    <CheckCircle2 className="mr-1 h-3 w-3" />
+                                  <div className="inline-flex items-center rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2 py-0.5 text-[10px] text-emerald-300 font-medium">
+                                    <CheckCircle2 className="mr-1 h-2.5 w-2.5" />
                                     {node.stashAvailable} {t.campusNodeChecker.lockersLeft}
                                   </div>
                                 )}
                                 {node.roomsAvailable > 0 && (
-                                  <div className="inline-flex items-center rounded-full border border-cyan-500/20 bg-cyan-500/10 px-2 py-1 text-[11px] text-cyan-300 font-medium">
-                                    <CheckCircle2 className="mr-1 h-3 w-3" />
+                                  <div className="inline-flex items-center rounded-full border border-cyan-500/20 bg-cyan-500/10 px-2 py-0.5 text-[10px] text-cyan-300 font-medium">
+                                    <CheckCircle2 className="mr-1 h-2.5 w-2.5" />
                                     {node.roomsAvailable} {t.campusNodeChecker.roomsLeft}
                                   </div>
                                 )}
-                                <div className="inline-flex items-center rounded-full border border-amber-500/20 bg-amber-500/10 px-2 py-1 text-[11px] text-amber-300 font-medium">
-                                  <Zap className="mr-1 h-3 w-3" />
+                                <div className="inline-flex items-center rounded-full border border-amber-500/20 bg-amber-500/10 px-2 py-0.5 text-[10px] text-amber-300 font-medium">
+                                  <Zap className="mr-1 h-2.5 w-2.5" />
                                   {isHi && node.pickupTime_hi
                                     ? node.pickupTime_hi
                                     : node.pickupTime}{" "}
@@ -443,11 +443,11 @@ export function CampusNodeChecker({ onBook }: { onBook: OpenBooking }) {
                               </div>
                             </div>
 
-                            <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto shrink-0">
+                            <div className="flex flex-col sm:flex-row gap-1.5 w-full sm:w-auto shrink-0">
                               <Button
                                 size="sm"
                                 variant="hero"
-                                className="w-full sm:w-auto shrink-0 group/btn cursor-pointer"
+                                className="w-full sm:w-auto shrink-0 group/btn cursor-pointer text-xs py-1 h-7"
                                 onClick={() =>
                                   onBook({
                                     service: "stash",
@@ -456,12 +456,12 @@ export function CampusNodeChecker({ onBook }: { onBook: OpenBooking }) {
                                 }
                               >
                                 {t.campusNodeChecker.reserveBtn}
-                                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+                                <ArrowRight className="ml-1 h-3 w-3 transition-transform group-hover/btn:translate-x-1" />
                               </Button>
                               <Button
                                 size="sm"
                                 variant="outline"
-                                className="w-full sm:w-auto border-white/10 bg-white/5 hover:bg-white/10 text-xs cursor-pointer"
+                                className="w-full sm:w-auto border-white/10 bg-white/5 hover:bg-white/10 text-[11px] cursor-pointer h-7"
                                 asChild
                               >
                                 <a
@@ -485,7 +485,7 @@ export function CampusNodeChecker({ onBook }: { onBook: OpenBooking }) {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="py-8 px-4 text-center text-sm text-muted-foreground"
+                    className="py-6 px-4 text-center text-xs text-muted-foreground"
                   >
                     {t.campusNodeChecker.noResults}
                   </motion.div>
@@ -494,8 +494,8 @@ export function CampusNodeChecker({ onBook }: { onBook: OpenBooking }) {
             </>
           ) : (
             /* Interactive Visual Campus Radar Map */
-            <div className="p-4 space-y-4">
-              <div className="relative w-full h-[280px] sm:h-[320px] rounded-2xl bg-[#070A0D] border border-cyan-500/20 overflow-hidden flex items-center justify-center">
+            <div className="p-3 space-y-3">
+              <div className="relative w-full h-[210px] sm:h-[240px] rounded-xl bg-[#070A0D] border border-cyan-500/20 overflow-hidden flex items-center justify-center">
                 {/* Radar Grid Circles */}
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                   <div className="w-[85%] h-[85%] rounded-full border border-cyan-500/15" />

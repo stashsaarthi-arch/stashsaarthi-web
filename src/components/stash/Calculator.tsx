@@ -45,31 +45,22 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
   }, [safeBags, safeDays, safeRent]);
 
   return (
-    <section
+    <div
       id="student-calculator"
-      className="relative mx-auto max-w-6xl px-4 py-10 sm:py-14 scroll-mt-20"
+      className="relative mx-auto max-w-5xl px-2 py-2 scroll-mt-20"
     >
-      <AnimatedContent distance={40} scale={0.98} duration={0.6} ease="power2.out">
-        <div className="w-full max-w-4xl mx-auto rounded-3xl bg-[#0F1318] border border-slate-800 p-6 sm:p-8 backdrop-blur-xl shadow-2xl relative overflow-hidden">
-          {/* Header */}
-          <div className="text-center mb-8">
-            <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-              {t.calculator.badge}
-            </span>
-            <h3 className="text-2xl sm:text-3xl font-bold text-white mt-3">{t.calculator.title}</h3>
-            <p className="text-sm text-slate-400 mt-1">{t.calculator.subtitle}</p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+      <AnimatedContent distance={30} scale={0.98} duration={0.5} ease="power2.out">
+        <div className="w-full max-w-4xl mx-auto rounded-2xl bg-[#0F1318] border border-slate-800 p-4 sm:p-6 backdrop-blur-xl shadow-xl relative overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-center">
             {/* Left Controls Column */}
-            <div className="space-y-6">
+            <div className="space-y-4">
               {/* Control 1: Bags Count */}
               <div>
-                <div className="flex justify-between items-center mb-2">
-                  <label className="text-sm font-medium text-slate-300">
+                <div className="flex justify-between items-center mb-1.5">
+                  <label className="text-xs font-medium text-slate-300">
                     {t.calculator.bagsLabel}
                   </label>
-                  <span className="text-sm font-bold text-emerald-400 font-mono bg-emerald-500/10 px-2.5 py-0.5 rounded-lg border border-emerald-500/20">
+                  <span className="text-xs font-bold text-emerald-400 font-mono bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20">
                     {bags} {bags === 1 ? t.calculator.bagUnit : t.calculator.bagsUnit}
                   </span>
                 </div>
@@ -80,9 +71,9 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                   step="1"
                   value={bags}
                   onChange={(e) => setBags(Math.max(1, Number(e.target.value) || 1))}
-                  className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500"
+                  className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500"
                 />
-                <div className="flex justify-between text-[11px] text-slate-500 mt-1 font-mono">
+                <div className="flex justify-between text-[10px] text-slate-500 mt-0.5 font-mono">
                   <span>1 {t.calculator.bagUnit}</span>
                   <span>3 {t.calculator.bagsUnit}</span>
                   <span>6 {t.calculator.bagsUnit}</span>
@@ -91,11 +82,11 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
 
               {/* Control 2: Vacation Duration */}
               <div>
-                <div className="flex justify-between items-center mb-2">
-                  <label className="text-sm font-medium text-slate-300">
+                <div className="flex justify-between items-center mb-1.5">
+                  <label className="text-xs font-medium text-slate-300">
                     {t.calculator.vacationLabel}
                   </label>
-                  <span className="text-sm font-bold text-emerald-400 font-mono bg-emerald-500/10 px-2.5 py-0.5 rounded-lg border border-emerald-500/20">
+                  <span className="text-xs font-bold text-emerald-400 font-mono bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20">
                     {vacationDays} {t.calculator.daysUnit} ({vacationMonths}{" "}
                     {t.calculator.monthUnit})
                   </span>
@@ -107,9 +98,9 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                   step="5"
                   value={vacationDays}
                   onChange={(e) => setVacationDays(Math.max(15, Number(e.target.value) || 15))}
-                  className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500"
+                  className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500"
                 />
-                <div className="flex justify-between text-[11px] text-slate-500 mt-1 font-mono">
+                <div className="flex justify-between text-[10px] text-slate-500 mt-0.5 font-mono">
                   <span>15 {t.calculator.daysUnit}</span>
                   <span>45 {t.calculator.daysUnit}</span>
                   <span>90 {t.calculator.daysUnit}</span>
@@ -118,11 +109,11 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
 
               {/* Control 3: Current Monthly PG/Room Rent */}
               <div>
-                <div className="flex justify-between items-center mb-2">
-                  <label className="text-sm font-medium text-slate-300">
+                <div className="flex justify-between items-center mb-1.5">
+                  <label className="text-xs font-medium text-slate-300">
                     {t.calculator.rentLabel}
                   </label>
-                  <span className="text-sm font-bold text-emerald-400 font-mono bg-emerald-500/10 px-2.5 py-0.5 rounded-lg border border-emerald-500/20">
+                  <span className="text-xs font-bold text-emerald-400 font-mono bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20">
                     ₹{monthlyRent.toLocaleString("en-IN")}/{t.calculator.monthUnit}
                   </span>
                 </div>
@@ -133,9 +124,9 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                   step="500"
                   value={monthlyRent}
                   onChange={(e) => setMonthlyRent(Math.max(1000, Number(e.target.value) || 3000))}
-                  className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500"
+                  className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500"
                 />
-                <div className="flex justify-between text-[11px] text-slate-500 mt-1 font-mono">
+                <div className="flex justify-between text-[10px] text-slate-500 mt-0.5 font-mono">
                   <span>₹3,000</span>
                   <span>₹7,500</span>
                   <span>₹12,000</span>
@@ -144,29 +135,29 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
             </div>
 
             {/* Right Results & Savings Card */}
-            <div className="rounded-2xl bg-gradient-to-b from-[#161D24] to-[#0D1115] border border-emerald-500/30 p-6 flex flex-col justify-between shadow-lg shadow-emerald-500/5">
+            <div className="rounded-xl bg-gradient-to-b from-[#161D24] to-[#0D1115] border border-emerald-500/30 p-4 sm:p-5 flex flex-col justify-between shadow-md">
               <div>
-                <div className="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">
+                <div className="text-[11px] uppercase tracking-wider text-slate-400 font-semibold mb-0.5">
                   {t.calculator.estimatedSavings}
                 </div>
-                <div className="text-4xl sm:text-5xl font-black text-emerald-400 tracking-tight font-mono">
+                <div className="text-3xl sm:text-4xl font-black text-emerald-400 tracking-tight font-mono">
                   ₹{netSavings.toLocaleString("en-IN")}
                 </div>
-                <div className="text-xs text-emerald-500/80 font-medium mt-1">
+                <div className="text-[11px] text-emerald-500/80 font-medium mt-0.5">
                   🎉 {t.calculator.saveCompare.replace("{percent}", String(savingsPercent))}
                 </div>
 
                 {/* Visual comparative bar breakdown */}
-                <div className="mt-5 space-y-3 rounded-xl border border-white/10 bg-black/40 p-4">
+                <div className="mt-3.5 space-y-2 rounded-lg border border-white/10 bg-black/40 p-3">
                   {/* Empty room bar */}
                   <div>
-                    <div className="flex justify-between text-xs mb-1">
+                    <div className="flex justify-between text-[11px] mb-1">
                       <span className="text-slate-400">{t.calculator.emptyRentBar}</span>
                       <span className="font-mono font-bold text-rose-400">
                         ₹{deadRentCost.toLocaleString("en-IN")}
                       </span>
                     </div>
-                    <div className="h-2 w-full rounded-full bg-slate-800 overflow-hidden">
+                    <div className="h-1.5 w-full rounded-full bg-slate-800 overflow-hidden">
                       <motion.div
                         className="h-full bg-gradient-to-r from-rose-600 to-rose-400 rounded-full"
                         style={{ width: "100%" }}
@@ -178,7 +169,7 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
 
                   {/* StashSaarthi bar */}
                   <div>
-                    <div className="flex justify-between text-xs mb-1">
+                    <div className="flex justify-between text-[11px] mb-1">
                       <span className="text-slate-400">
                         {t.calculator.stashCostBar.replace("{bags}", String(safeBags))}
                       </span>
@@ -186,7 +177,7 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                         ₹{stashCost.toLocaleString("en-IN")}
                       </span>
                     </div>
-                    <div className="h-2 w-full rounded-full bg-slate-800 overflow-hidden">
+                    <div className="h-1.5 w-full rounded-full bg-slate-800 overflow-hidden">
                       <motion.div
                         className="h-full bg-gradient-to-r from-emerald-500 to-emerald-400 rounded-full"
                         animate={{
@@ -199,7 +190,7 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                 </div>
               </div>
 
-              <div className="mt-6 flex flex-col sm:flex-row gap-2.5">
+              <div className="mt-4 flex flex-col sm:flex-row gap-2">
                 <button
                   type="button"
                   onClick={() => {
@@ -218,7 +209,7 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                       if (el) el.scrollIntoView({ behavior: "smooth" });
                     }
                   }}
-                  className="flex-1 py-3 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-sm transition-all shadow-lg shadow-emerald-500/25 flex items-center justify-center gap-2 group cursor-pointer active:scale-95"
+                  className="flex-1 py-2.5 px-3 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs transition-all shadow-md shadow-emerald-500/25 flex items-center justify-center gap-1.5 group cursor-pointer active:scale-95"
                 >
                   <span>{t.calculator.lockSavings}</span>
                   <span className="group-hover:translate-x-1 transition-transform">➔</span>
@@ -227,19 +218,19 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                 <button
                   type="button"
                   onClick={() => setShowCertificateModal(true)}
-                  className="py-3 px-3 rounded-xl border border-cyan-500/40 bg-cyan-500/10 hover:bg-cyan-500/20 text-xs font-semibold text-cyan-300 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                  className="py-2.5 px-3 rounded-lg border border-cyan-500/40 bg-cyan-500/10 hover:bg-cyan-500/20 text-xs font-semibold text-cyan-300 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                   title={isHi ? "बचत प्रमाणपत्र देखें" : "View Official Savings Certificate"}
                 >
-                  <FileText className="h-4 w-4" />
+                  <FileText className="h-3.5 w-3.5" />
                   <span>{isHi ? "बचत रसीद" : "Savings Proof"}</span>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => setShowPackingModal(true)}
-                  className="py-3 px-3 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-xs font-semibold text-slate-300 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                  className="py-2.5 px-3 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 text-xs font-semibold text-slate-300 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                 >
-                  <Package className="h-4 w-4 text-emerald-400" />
+                  <Package className="h-3.5 w-3.5 text-emerald-400" />
                   <span>{t.calculator.packingGuide}</span>
                 </button>
               </div>
@@ -354,6 +345,6 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
           }}
         />
       </AnimatedContent>
-    </section>
+    </div>
   );
 }

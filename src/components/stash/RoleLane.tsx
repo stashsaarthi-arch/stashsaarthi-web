@@ -57,63 +57,63 @@ export function RoleLane({ role, onBook }: { role: Role; onBook: OpenBooking }) 
     : [IndianRupee, Users, ShieldCheck];
 
   return (
-    <section id="lane" className="relative px-4 py-10 sm:py-14">
+    <section id="role-lane" className="relative px-4 py-3.5 sm:py-5">
       <div className="mx-auto max-w-6xl">
-        <AnimatedContent distance={50} direction="vertical" duration={0.8} ease="power3.out">
+        <AnimatedContent distance={25} direction="vertical" duration={0.6} ease="power3.out">
           <AnimatePresence mode="wait">
             <motion.div
               key={`${role}-${language}`}
-              initial={{ opacity: 0, y: 18 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12 }}
-              transition={{ duration: 0.35 }}
-              className="glass overflow-hidden rounded-3xl p-5 sm:p-8"
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.25 }}
+              className="glass overflow-hidden rounded-xl p-3.5 sm:p-5"
             >
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-cyan">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[8.5px] font-semibold uppercase tracking-[0.16em] text-cyan">
                 {laneContent.eyebrow}
               </span>
-              <h2 className="mt-4 text-balance text-2xl font-extrabold tracking-tight sm:text-4xl">
+              <h2 className="mt-1.5 text-balance text-lg font-extrabold tracking-tight sm:text-2xl">
                 {laneContent.title}
               </h2>
-              <p className="mt-3 max-w-2xl text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base">
+              <p className="mt-1 max-w-2xl text-pretty text-[11px] leading-relaxed text-muted-foreground sm:text-xs">
                 {laneContent.blurb}
               </p>
 
-              <div className="mt-7 grid gap-3 md:grid-cols-3">
+              <div className="mt-3 grid gap-2 md:grid-cols-3">
                 {laneContent.steps.map((s, i) => {
                   const Icon = stepIcons[i] || Boxes;
                   return (
                     <motion.div
                       key={s.title}
-                      initial={{ opacity: 0, y: 14 }}
+                      initial={{ opacity: 0, y: 8 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.06 * i }}
-                      className="rounded-2xl border border-white/10 bg-white/5 p-4"
+                      transition={{ delay: 0.03 * i }}
+                      className="rounded-lg border border-white/10 bg-white/5 p-2.5 sm:p-3"
                     >
-                      <div className="flex items-center gap-2">
-                        <span className="grid h-8 w-8 place-items-center rounded-xl bg-[image:var(--gradient-cyan)] text-xs font-black text-primary-foreground">
+                      <div className="flex items-center gap-1.5">
+                        <span className="grid h-6 w-6 place-items-center rounded-md bg-[image:var(--gradient-cyan)] text-[10px] font-black text-primary-foreground">
                           {i + 1}
                         </span>
-                        <Icon className="h-4 w-4 text-cyan" />
+                        <Icon className="h-3 w-3 text-cyan" />
                       </div>
-                      <div className="mt-3 text-sm font-semibold">{s.title}</div>
-                      <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{s.text}</p>
+                      <div className="mt-1.5 text-xs font-semibold sm:text-sm">{s.title}</div>
+                      <p className="mt-0.5 text-[10.5px] leading-relaxed text-muted-foreground">{s.text}</p>
                     </motion.div>
                   );
                 })}
               </div>
 
-              <div className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-white/10 sm:grid-cols-3">
+              <div className="mt-3 grid gap-px overflow-hidden rounded-lg border border-white/10 sm:grid-cols-3">
                 {laneContent.metrics.map((m, i) => {
                   const Icon = metricIcons[i] || ShieldCheck;
                   return (
-                    <div key={m.label} className="bg-white/5 px-4 py-4 text-center">
-                      <Icon className="mx-auto mb-1.5 h-4 w-4 text-cyan" />
+                    <div key={m.label} className="bg-white/5 px-2.5 py-2 text-center">
+                      <Icon className="mx-auto mb-0.5 h-3 w-3 text-cyan" />
                       <AnimatedStat
                         value={m.value}
-                        className="text-lg font-extrabold tracking-tight"
+                        className="text-sm font-extrabold tracking-tight sm:text-base"
                       />
-                      <div className="mt-0.5 text-[10px] uppercase tracking-wider text-muted-foreground">
+                      <div className="mt-0.5 text-[8.5px] uppercase tracking-wider text-muted-foreground">
                         {m.label}
                       </div>
                     </div>
@@ -122,23 +122,23 @@ export function RoleLane({ role, onBook }: { role: Role; onBook: OpenBooking }) 
               </div>
 
               {role === "host" && (
-                <div className="mt-6 rounded-2xl border border-amber-500/20 bg-amber-500/5 p-5">
-                  <div className="flex items-center gap-2 mb-4">
-                    <TrendingUp className="h-5 w-5 text-amber-500" />
-                    <h3 className="text-sm font-bold text-foreground">
+                <div className="mt-3 rounded-lg border border-amber-500/20 bg-amber-500/5 p-3">
+                  <div className="flex items-center gap-1.5 mb-2">
+                    <TrendingUp className="h-3.5 w-3.5 text-amber-500" />
+                    <h3 className="text-xs font-bold text-foreground sm:text-xs">
                       {t.roleLane.host.simulator.title}
                     </h3>
                   </div>
 
-                  <div className="mb-2 flex justify-between items-end">
-                    <div className="text-xs text-muted-foreground uppercase tracking-wider font-semibold">
+                  <div className="mb-1.5 flex justify-between items-end">
+                    <div className="text-[10px] text-muted-foreground uppercase tracking-wider font-semibold">
                       {t.roleLane.host.simulator.selectSpace}
                     </div>
                     <div className="text-right">
-                      <div className="text-lg font-bold text-emerald-400 font-mono tracking-tight">
+                      <div className="text-sm font-bold text-emerald-400 font-mono tracking-tight sm:text-base">
                         {currentEarning.amount}
                       </div>
-                      <div className="text-[10px] text-muted-foreground uppercase tracking-widest">
+                      <div className="text-[8px] text-muted-foreground uppercase tracking-widest">
                         {currentEarning.label}
                       </div>
                     </div>
@@ -148,11 +148,11 @@ export function RoleLane({ role, onBook }: { role: Role; onBook: OpenBooking }) 
                     defaultValue={[33]}
                     max={100}
                     step={1}
-                    className="py-4"
+                    className="py-1.5"
                     onValueChange={(vals) => setHostSpace(vals?.[0] ?? 33)}
                   />
 
-                  <div className="flex justify-between text-[10px] font-medium text-muted-foreground mt-1">
+                  <div className="flex justify-between text-[8.5px] font-medium text-muted-foreground mt-0.5">
                     <span>{t.roleLane.host.simulator.corner}</span>
                     <span>{t.roleLane.host.simulator.verandah}</span>
                     <span>{t.roleLane.host.simulator.fullRoom}</span>
@@ -162,14 +162,14 @@ export function RoleLane({ role, onBook }: { role: Role; onBook: OpenBooking }) 
 
               <Button
                 variant={role === "student" ? "hero" : "warm"}
-                size="lg"
-                className="group mt-6 w-full sm:w-auto"
+                size="default"
+                className="group mt-3 w-full sm:w-auto text-xs py-1.5 h-8"
                 onClick={() =>
                   onBook({ service: isStudent ? "stash" : "spaces", note: laneContent.eyebrow })
                 }
               >
                 {laneContent.cta}
-                <ArrowRight className="transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="transition-transform group-hover:translate-x-1 ml-1 h-3.5 w-3.5" />
               </Button>
             </motion.div>
           </AnimatePresence>

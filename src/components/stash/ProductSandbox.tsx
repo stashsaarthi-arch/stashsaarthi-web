@@ -47,76 +47,49 @@ export function ProductSandbox() {
   const platformTotal = bagCount * months * platformMarginPerBag;
 
   return (
-    <section
+    <div
       id="product-sandbox"
-      className="relative mx-auto max-w-6xl px-4 py-10 sm:py-14 scroll-mt-20"
+      className="relative mx-auto max-w-6xl px-2 py-2 scroll-mt-20"
     >
-      <AnimatedContent distance={40} direction="vertical" duration={0.7}>
-        <div className="mx-auto max-w-3xl text-center">
-          <Badge
-            variant="outline"
-            className="border-cyan-500/30 bg-cyan-500/10 text-xs font-semibold uppercase tracking-widest text-cyan-400 font-mono"
-          >
-            {isHi ? "🧪 इंटरएक्टिव सैंडबॉक्स" : "🧪 INTERACTIVE PRODUCT PREVIEW"}
-          </Badge>
-          <h2 className="mt-4 text-balance text-2xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl text-foreground">
-            {isHi ? (
-              <>
-                जुड़ने से पहले <span className="text-gradient">स्वयं जांचें</span>
-              </>
-            ) : (
-              <>
-                Inspect the Real Engine <span className="text-gradient">Before You Commit</span>
-              </>
-            )}
-          </h2>
-          <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
-            {isHi
-              ? "कोई काल्पनिक 3D मॉडल नहीं — वास्तविक डिजिटल कस्टडी, नोड सत्यापन और पारदर्शी अर्थशास्त्र का लाइव परीक्षण करें।"
-              : "No generic abstract mockups. Test our real custody tracker, verified node audit view, and zero-hidden-fee escrow math right here."}
-          </p>
-        </div>
-      </AnimatedContent>
-
       {/* ── Tab Switcher ── */}
-      <div className="mt-10 sm:mt-14 flex justify-center">
-        <div className="inline-flex rounded-2xl border border-white/10 bg-white/[0.03] p-1.5 max-w-full overflow-x-auto">
+      <div className="flex justify-center mb-4">
+        <div className="inline-flex rounded-xl border border-white/10 bg-white/[0.03] p-1 max-w-full overflow-x-auto gap-1">
           <button
             type="button"
             onClick={() => setActiveTab("custody")}
-            className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs sm:text-sm font-semibold transition-all cursor-pointer whitespace-nowrap ${
+            className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
               activeTab === "custody"
                 ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 shadow-[0_0_15px_-3px_rgba(16,185,129,0.3)]"
                 : "text-muted-foreground hover:text-white border border-transparent"
             }`}
           >
-            <ScanBarcode className="h-4 w-4" />
+            <ScanBarcode className="h-3.5 w-3.5" />
             <span>{isHi ? "1. कस्टडी व सील ट्रैकर" : "1. Live Custody & Seal Tracker"}</span>
           </button>
 
           <button
             type="button"
             onClick={() => setActiveTab("node")}
-            className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs sm:text-sm font-semibold transition-all cursor-pointer whitespace-nowrap ${
+            className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
               activeTab === "node"
                 ? "bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-[0_0_15px_-3px_rgba(245,158,11,0.3)]"
                 : "text-muted-foreground hover:text-white border border-transparent"
             }`}
           >
-            <Building className="h-4 w-4" />
+            <Building className="h-3.5 w-3.5" />
             <span>{isHi ? "2. सत्यापित नोड व रूम व्यू" : "2. Verified Node & Room Audit"}</span>
           </button>
 
           <button
             type="button"
             onClick={() => setActiveTab("economics")}
-            className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs sm:text-sm font-semibold transition-all cursor-pointer whitespace-nowrap ${
+            className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
               activeTab === "economics"
                 ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-[0_0_15px_-3px_rgba(56,189,248,0.3)]"
                 : "text-muted-foreground hover:text-white border border-transparent"
             }`}
           >
-            <Calculator className="h-4 w-4" />
+            <Calculator className="h-3.5 w-3.5" />
             <span>{isHi ? "3. पारदर्शी गणित (₹0 छुपा शुल्क)" : "3. Transparent Rupee Split"}</span>
           </button>
         </div>
@@ -632,6 +605,6 @@ export function ProductSandbox() {
           </div>
         )}
       </AnimatePresence>
-    </section>
+    </div>
   );
 }

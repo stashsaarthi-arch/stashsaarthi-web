@@ -57,13 +57,13 @@ export function SolutionsHub({ onBook, onListRoom }: SolutionsHubProps) {
   ];
 
   return (
-    <section id="solutions" className="relative mx-auto max-w-6xl px-4 py-8 sm:py-12 scroll-mt-20">
+    <section id="solutions" className="relative mx-auto max-w-6xl px-4 py-3.5 sm:py-5 scroll-mt-20">
       {/* Section Header */}
       <div className="mx-auto max-w-3xl text-center">
-        <Badge variant="outline" className="border-white/15 bg-white/5 text-muted-foreground">
+        <Badge variant="outline" className="border-white/15 bg-white/5 text-[9.5px] sm:text-[11px] text-muted-foreground">
           {isHi ? "एकीकृत समाधान हब" : "Integrated Solutions Hub"}
         </Badge>
-        <h2 className="mt-4 text-balance text-2xl font-extrabold tracking-tight sm:text-4xl">
+        <h2 className="mt-1.5 text-balance text-lg font-extrabold tracking-tight sm:text-2xl">
           {isHi ? (
             <>
               एक क्लिक में <span className="text-gradient">सभी सेवाएँ देखें</span>
@@ -74,16 +74,16 @@ export function SolutionsHub({ onBook, onListRoom }: SolutionsHubProps) {
             </>
           )}
         </h2>
-        <p className="mt-2.5 text-sm text-muted-foreground sm:text-base">
+        <p className="mt-1 text-[11px] text-muted-foreground sm:text-xs">
           {isHi
             ? "आईआईटी कानपुर और सीएसजेएमयू कॉरिडोर के लिए डिज़ाइन किए गए स्मार्ट समाधान।"
             : "High-density, modular solution matrix for Kanpur academic corridors."}
         </p>
       </div>
 
-      {/* TI.com-inspired High-Density Tab Switcher */}
-      <div className="mt-6 flex items-center justify-center">
-        <div className="glass grid w-full max-w-4xl grid-cols-2 gap-1.5 rounded-2xl border border-white/10 p-1.5 sm:grid-cols-4 sm:gap-2">
+      {/* Tab Switcher */}
+      <div className="mt-3 flex items-center justify-center">
+        <div className="glass grid w-full max-w-4xl grid-cols-2 gap-1 rounded-xl border border-white/10 p-1 sm:grid-cols-4 sm:gap-1.5">
           {tabs.map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
@@ -91,7 +91,7 @@ export function SolutionsHub({ onBook, onListRoom }: SolutionsHubProps) {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex flex-col items-center justify-center rounded-xl p-2.5 text-center transition-all duration-200 cursor-pointer sm:p-3.5 ${
+                className={`flex flex-col items-center justify-center rounded-lg p-1.5 text-center transition-all duration-200 cursor-pointer sm:p-2 ${
                   isActive
                     ? "border border-white/20 text-white shadow-xl"
                     : "text-muted-foreground hover:bg-white/5 hover:text-white"
@@ -111,7 +111,7 @@ export function SolutionsHub({ onBook, onListRoom }: SolutionsHubProps) {
               >
                 <div className="flex items-center gap-1.5">
                   <Icon
-                    className="h-4 w-4 shrink-0"
+                    className="h-3.5 w-3.5 shrink-0"
                     style={{
                       color: isActive
                         ? isStudent
@@ -125,7 +125,7 @@ export function SolutionsHub({ onBook, onListRoom }: SolutionsHubProps) {
                   </span>
                 </div>
                 <span
-                  className="mt-1 text-[10px] sm:text-xs font-medium"
+                  className="mt-0.5 text-[9px] sm:text-[10px] font-medium"
                   style={{
                     color: isActive
                       ? isStudent
@@ -143,7 +143,7 @@ export function SolutionsHub({ onBook, onListRoom }: SolutionsHubProps) {
       </div>
 
       {/* Active Tab Panel Content */}
-      <div className="mt-6 transition-all duration-300">
+      <div className="mt-2.5 transition-all duration-300">
         {activeTab === "stash" && <Ecosystem onBook={onBook} />}
         {activeTab === "rooms" && <Rooms onList={onListRoom} />}
         {activeTab === "kitchen" && (

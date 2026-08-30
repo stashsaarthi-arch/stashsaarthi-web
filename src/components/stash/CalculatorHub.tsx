@@ -15,13 +15,13 @@ export function CalculatorHub({ onBook }: { onBook: OpenBooking }) {
   const isStudent = activeTab === "student";
 
   return (
-    <section id="calculator" className="relative mx-auto max-w-6xl px-4 py-8 sm:py-12 scroll-mt-20">
+    <section id="calculator" className="relative mx-auto max-w-6xl px-4 py-3.5 sm:py-5 scroll-mt-20">
       {/* Header */}
       <div className="mx-auto max-w-3xl text-center">
-        <Badge variant="outline" className="border-white/15 bg-white/5 text-muted-foreground">
+        <Badge variant="outline" className="border-white/15 bg-white/5 text-[9.5px] sm:text-[11px] text-muted-foreground">
           {isHi ? "इंटरएक्टिव बचत व कमाई सिम्युलेटर" : "Interactive Savings & Earnings Engine"}
         </Badge>
-        <h2 className="mt-4 text-balance text-2xl font-extrabold tracking-tight sm:text-4xl">
+        <h2 className="mt-1.5 text-balance text-lg font-extrabold tracking-tight sm:text-2xl">
           {isHi ? (
             <>
               अपनी <span className="text-gradient">बचत और कमाई</span> का तुरंत हिसाब लगाएँ
@@ -32,7 +32,7 @@ export function CalculatorHub({ onBook }: { onBook: OpenBooking }) {
             </>
           )}
         </h2>
-        <p className="mt-2 text-sm text-muted-foreground sm:text-base">
+        <p className="mt-1 text-[11px] text-muted-foreground sm:text-xs">
           {isHi
             ? "छात्र ₹8,000 तक की बचत कर सकते हैं, और वरिष्ठ मेज़बान ₹11,500+/माह तक कमा सकते हैं।"
             : "Zero guesswork. 100% transparent unit economics for students & senior hosts in Kanpur."}
@@ -40,35 +40,35 @@ export function CalculatorHub({ onBook }: { onBook: OpenBooking }) {
       </div>
 
       {/* Mode Switcher */}
-      <div className="mt-6 flex items-center justify-center">
-        <div className="glass flex w-full max-w-md items-center justify-between rounded-full border border-white/10 p-1.5 shadow-xl">
+      <div className="mt-3 flex items-center justify-center">
+        <div className="glass flex w-full max-w-md items-center justify-between rounded-full border border-white/10 p-1 shadow-lg">
           <button
             onClick={() => setActiveTab("student")}
-            className={`flex flex-1 items-center justify-center gap-2 rounded-full py-2.5 px-4 text-xs font-bold transition-all duration-200 cursor-pointer sm:text-sm ${
+            className={`flex flex-1 items-center justify-center gap-1.5 rounded-full py-1.5 px-3 text-xs font-bold transition-all duration-200 cursor-pointer sm:text-xs ${
               activeTab === "student"
-                ? "border border-emerald/40 bg-emerald/15 text-emerald shadow-lg"
+                ? "border border-emerald/40 bg-emerald/15 text-emerald shadow-md"
                 : "text-muted-foreground hover:text-white"
             }`}
           >
-            <Calculator className="h-4 w-4" />
+            <Calculator className="h-3.5 w-3.5" />
             <span>{isHi ? "🎓 छात्र बचत कैलकुलेटर" : "🎓 Student Savings (₹8k Saved)"}</span>
           </button>
           <button
             onClick={() => setActiveTab("host")}
-            className={`flex flex-1 items-center justify-center gap-2 rounded-full py-2.5 px-4 text-xs font-bold transition-all duration-200 cursor-pointer sm:text-sm ${
+            className={`flex flex-1 items-center justify-center gap-1.5 rounded-full py-1.5 px-3 text-xs font-bold transition-all duration-200 cursor-pointer sm:text-xs ${
               activeTab === "host"
-                ? "border border-amber/40 bg-amber/15 text-amber shadow-lg"
+                ? "border border-amber/40 bg-amber/15 text-amber shadow-md"
                 : "text-muted-foreground hover:text-white"
             }`}
           >
-            <TrendingUp className="h-4 w-4" />
+            <TrendingUp className="h-3.5 w-3.5" />
             <span>{isHi ? "🏡 मेज़बान कमाई सिम्युलेटर" : "🏡 Host Earnings (₹11.5k+/mo)"}</span>
           </button>
         </div>
       </div>
 
       {/* Simulator View */}
-      <div className="mt-4">
+      <div className="mt-2.5">
         {activeTab === "student" ? (
           <StashCalculator onBook={onBook} />
         ) : (

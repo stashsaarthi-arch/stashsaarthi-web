@@ -39,23 +39,23 @@ export function HostRules() {
   const activeCount = Object.values(activeRules).filter(Boolean).length;
 
   return (
-    <section className="relative mx-auto max-w-5xl px-4 py-16 sm:py-24">
-      <AnimatedContent distance={40} direction="vertical" duration={0.7}>
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-4 py-1.5 text-xs font-semibold text-amber-400 mb-6 uppercase tracking-widest">
-            <ShieldCheck className="h-4 w-4" />
+    <section className="relative mx-auto max-w-5xl px-4 py-4 sm:py-6">
+      <AnimatedContent distance={20} direction="vertical" duration={0.5}>
+        <div className="text-center mb-4">
+          <div className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-[10px] sm:text-xs font-semibold text-amber-400 mb-2 uppercase tracking-widest">
+            <ShieldCheck className="h-3.5 w-3.5" />
             {t.hostRulesSection.badge}
           </div>
-          <h2 className="text-[1.75rem] font-extrabold tracking-tight sm:text-5xl mb-4">
+          <h2 className="text-xl font-extrabold tracking-tight sm:text-3xl mb-1.5">
             {t.hostRulesSection.title}{" "}
             <span className="text-gradient">{t.hostRulesSection.titleGradient}</span>
           </h2>
-          <p className="text-muted-foreground text-sm sm:text-lg max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-xs sm:text-sm max-w-2xl mx-auto">
             {t.hostRulesSection.subtitle}
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:gap-10 items-center">
+        <div className="grid gap-4 md:grid-cols-2 lg:gap-6 items-center">
           <div className="flex flex-col gap-3">
             {rules.map((rule, idx) => {
               const isActive = activeRules[idx];
@@ -100,34 +100,34 @@ export function HostRules() {
           </div>
 
           <Card3D maxTilt={5}>
-            <div className="glass rounded-3xl p-8 border border-red-500/30 bg-black/50 text-center relative overflow-hidden shadow-2xl">
+            <div className="glass rounded-2xl p-5 sm:p-6 border border-red-500/30 bg-black/50 text-center relative overflow-hidden shadow-xl">
               <div className="absolute inset-0 bg-gradient-to-br from-red-500/10 to-transparent" />
               <ShieldAlert
-                className="h-16 w-16 text-red-500 mx-auto mb-5 opacity-90"
-                style={{ transform: "translateZ(30px)" }}
+                className="h-10 w-10 text-red-500 mx-auto mb-3 opacity-90"
+                style={{ transform: "translateZ(20px)" }}
               />
 
               <div
-                className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/30 bg-amber-400/10 px-3 py-1 text-[11px] font-bold text-amber-400 mb-3"
-                style={{ transform: "translateZ(25px)" }}
+                className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/30 bg-amber-400/10 px-2.5 py-0.5 text-[10px] font-bold text-amber-400 mb-2"
+                style={{ transform: "translateZ(15px)" }}
               >
                 <Check className="h-3 w-3" /> {activeCount} {t.hostRulesSection.activeCounter}
               </div>
 
               <h3
-                className="text-xl sm:text-2xl font-bold mb-3 text-white"
-                style={{ transform: "translateZ(40px)" }}
+                className="text-base sm:text-lg font-bold mb-1.5 text-white"
+                style={{ transform: "translateZ(25px)" }}
               >
                 {t.hostRulesSection.guaranteeTitle}
               </h3>
               <p
-                className="text-sm text-slate-300 leading-relaxed"
-                style={{ transform: "translateZ(20px)" }}
+                className="text-xs text-slate-300 leading-relaxed"
+                style={{ transform: "translateZ(15px)" }}
               >
                 {t.hostRulesSection.guaranteeDesc}
               </p>
 
-              <div className="mt-6 border-t border-white/10 pt-4 text-left font-mono text-[11px] text-slate-400 flex items-center justify-between">
+              <div className="mt-4 border-t border-white/10 pt-3 text-left font-mono text-[10px] text-slate-400 flex items-center justify-between">
                 <span>{t.hostRulesSection.legalProtection}</span>
                 <span className="text-emerald-400 font-bold">
                   {t.hostRulesSection.hostProtected}

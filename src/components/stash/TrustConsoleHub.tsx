@@ -50,13 +50,13 @@ export function TrustConsoleHub() {
   ];
 
   return (
-    <section id="trust" className="relative mx-auto max-w-6xl px-4 py-8 sm:py-12 scroll-mt-20">
+    <section id="trust" className="relative mx-auto max-w-6xl px-4 py-3.5 sm:py-5 scroll-mt-20">
       {/* Header */}
       <div className="mx-auto max-w-3xl text-center">
-        <Badge variant="outline" className="border-white/15 bg-white/5 text-muted-foreground">
+        <Badge variant="outline" className="border-white/15 bg-white/5 text-[9.5px] sm:text-[11px] text-muted-foreground">
           {isHi ? "100% स्पष्टता व सत्यापन कंसोल" : "100% Radical Transparency Console"}
         </Badge>
-        <h2 className="mt-4 text-balance text-2xl font-extrabold tracking-tight sm:text-4xl">
+        <h2 className="mt-1.5 text-balance text-lg font-extrabold tracking-tight sm:text-2xl">
           {isHi ? (
             <>
               जीरो फेक बैज। <span className="text-gradient">पूरी तरह सत्यापनीय सुरक्षा</span>
@@ -67,7 +67,7 @@ export function TrustConsoleHub() {
             </>
           )}
         </h2>
-        <p className="mt-2 text-sm text-muted-foreground sm:text-base">
+        <p className="mt-1 text-[11px] text-muted-foreground sm:text-xs">
           {isHi
             ? "कानपुर में जमीनी सुरक्षा प्रोटोकॉल, लेज़र बारकोड सील और प्रत्यक्ष संस्थापक संपर्क का लाइव निरीक्षण करें।"
             : "Inspect our tamper-evident seals, ground custody protocols, and founder accountability in real time."}
@@ -75,8 +75,8 @@ export function TrustConsoleHub() {
       </div>
 
       {/* Modern High-Density Tab Bar */}
-      <div className="mt-6 flex items-center justify-center">
-        <div className="glass flex w-full max-w-5xl items-center gap-1.5 overflow-x-auto rounded-2xl border border-white/10 p-1.5 no-scrollbar sm:gap-2">
+      <div className="mt-3 flex items-center justify-center">
+        <div className="glass flex w-full max-w-5xl items-center gap-1 overflow-x-auto rounded-xl border border-white/10 p-1 no-scrollbar sm:gap-1.5">
           {tabs.map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
@@ -84,9 +84,9 @@ export function TrustConsoleHub() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex flex-1 items-center justify-center gap-1.5 rounded-xl py-2.5 px-3 text-xs font-bold whitespace-nowrap transition-all duration-200 cursor-pointer sm:text-sm ${
+                className={`flex flex-1 items-center justify-center gap-1.5 rounded-lg py-1 px-2 text-xs font-bold whitespace-nowrap transition-all duration-200 cursor-pointer sm:py-1.5 sm:px-2.5 ${
                   isActive
-                    ? "border border-white/20 text-white shadow-lg"
+                    ? "border border-white/20 text-white shadow-md"
                     : "text-muted-foreground hover:bg-white/5 hover:text-white"
                 }`}
                 style={{
@@ -103,7 +103,7 @@ export function TrustConsoleHub() {
                 }}
               >
                 <Icon
-                  className="h-4 w-4 shrink-0"
+                  className="h-3.5 w-3.5 shrink-0"
                   style={{
                     color: isActive
                       ? isStudent
@@ -120,7 +120,7 @@ export function TrustConsoleHub() {
       </div>
 
       {/* Tab Panel Display */}
-      <div className="mt-6">
+      <div className="mt-2.5">
         {activeTab === "sandbox" && <ProductSandbox />}
         {activeTab === "process" && <ProcessTransparency />}
         {activeTab === "zerorisk" && <ZeroRisk />}

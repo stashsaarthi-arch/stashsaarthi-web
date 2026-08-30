@@ -83,43 +83,43 @@ export function FamilyDashboard() {
   const features = t.familyDashboardSection.features || [];
 
   return (
-    <section className="relative mx-auto max-w-6xl px-4 py-16 sm:py-24">
-      <AnimatedContent distance={50} direction="vertical" duration={0.8}>
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-4 py-1.5 text-xs font-semibold text-amber-400 mb-6 uppercase tracking-widest">
-            <ShieldCheck className="h-4 w-4" />
+    <section className="relative mx-auto max-w-6xl px-4 py-4 sm:py-6">
+      <AnimatedContent distance={20} direction="vertical" duration={0.5}>
+        <div className="text-center mb-4">
+          <div className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-[10px] sm:text-xs font-semibold text-amber-400 mb-2 uppercase tracking-widest">
+            <ShieldCheck className="h-3.5 w-3.5" />
             {t.familyDashboardSection.badge}
           </div>
-          <h2 className="text-[1.75rem] font-extrabold tracking-tight sm:text-5xl mb-4">
+          <h2 className="text-xl font-extrabold tracking-tight sm:text-3xl mb-1.5">
             {t.familyDashboardSection.title}{" "}
             <span className="text-gradient">{t.familyDashboardSection.titleGradient}</span>
           </h2>
-          <p className="text-muted-foreground text-sm sm:text-lg max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-xs sm:text-sm max-w-2xl mx-auto">
             {t.familyDashboardSection.subtitle}
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="grid gap-3.5 md:grid-cols-3">
           {features.map((feat, idx) => {
             const Icon = FEATURE_ICONS[idx] || Smartphone;
             return (
               <Card3D key={idx} maxTilt={8} className="h-full">
-                <div className="glass flex h-full flex-col items-center text-center rounded-3xl p-8 border border-white/10 relative overflow-hidden bg-black/40">
+                <div className="glass flex h-full flex-col items-center text-center rounded-2xl p-4 sm:p-5 border border-white/10 relative overflow-hidden bg-black/40">
                   <div className="absolute inset-0 bg-gradient-to-b from-amber-500/5 to-transparent" />
                   <div
-                    className="flex h-16 w-16 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-400 mb-6"
-                    style={{ transform: "translateZ(30px)" }}
+                    className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/10 text-amber-400 mb-3"
+                    style={{ transform: "translateZ(20px)" }}
                   >
-                    <Icon className="h-8 w-8" />
+                    <Icon className="h-5 w-5" />
                   </div>
                   <h3
-                    className="text-xl font-bold mb-3 text-foreground"
-                    style={{ transform: "translateZ(20px)" }}
+                    className="text-sm sm:text-base font-bold mb-1.5 text-foreground"
+                    style={{ transform: "translateZ(15px)" }}
                   >
                     {feat.title}
                   </h3>
                   <p
-                    className="text-sm text-muted-foreground leading-relaxed"
+                    className="text-xs text-muted-foreground leading-relaxed"
                     style={{ transform: "translateZ(10px)" }}
                   >
                     {feat.desc}
@@ -131,21 +131,21 @@ export function FamilyDashboard() {
         </div>
 
         {/* ── Interactive 1-Touch Bedside SOS Live Simulator ── */}
-        <div className="mt-12 overflow-hidden rounded-3xl border border-amber-500/30 bg-gradient-to-b from-[#12161A] to-[#0A0D0F] p-6 sm:p-10 shadow-2xl relative">
+        <div className="mt-5 overflow-hidden rounded-2xl border border-amber-500/30 bg-gradient-to-b from-[#12161A] to-[#0A0D0F] p-4 sm:p-6 shadow-xl relative">
           <div className="absolute top-0 right-0 p-8 opacity-5">
             <Radio className="h-48 w-48 text-amber-400" />
           </div>
 
           <div className="relative z-10">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4">
               <div>
-                <span className="text-[11px] font-mono uppercase tracking-widest text-amber-400 font-bold">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-amber-400 font-bold">
                   {isHi ? "लाइव हार्डवेयर प्रदर्शन" : "Live Hardware Demonstration"}
                 </span>
-                <h3 className="text-xl sm:text-2xl font-bold text-white mt-1">
+                <h3 className="text-base sm:text-lg font-bold text-white mt-0.5">
                   {t.familyDashboardSection.sosTitle}
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-400 mt-1">
+                <p className="text-xs text-slate-400">
                   {t.familyDashboardSection.sosSubtitle}
                 </p>
               </div>

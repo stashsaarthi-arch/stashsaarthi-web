@@ -40,7 +40,7 @@ export function Hero({
     : [ShieldCheck, Lock, Banknote, Clock];
 
   return (
-    <section id="top" className="relative overflow-hidden pb-12 pt-24 sm:pb-16 md:pt-36">
+    <section id="top" className="relative overflow-hidden pb-4 pt-16 sm:pb-6 md:pt-20">
       {/* 2D Clean Background (Phone-view parity across all screens) */}
       <div className="absolute inset-0 grid-noise opacity-50 pointer-events-none" />
       <div
@@ -54,7 +54,7 @@ export function Hero({
         }}
       />
       <div
-        className="pointer-events-none absolute left-1/2 top-0 h-[450px] w-[min(900px,140vw)] -translate-x-1/2 rounded-full opacity-40 blur-[100px]"
+        className="pointer-events-none absolute left-1/2 top-0 h-[320px] w-[min(900px,140vw)] -translate-x-1/2 rounded-full opacity-40 blur-[80px]"
         style={{
           background: student
             ? "radial-gradient(circle, var(--cyan), transparent 65%)"
@@ -64,18 +64,18 @@ export function Hero({
 
       <div className="relative mx-auto max-w-6xl px-4 text-center">
         <AnimatedContent
-          distance={60}
+          distance={30}
           direction="vertical"
-          duration={0.9}
+          duration={0.7}
           ease="power3.out"
-          delay={0.1}
+          delay={0.05}
         >
-          <div className="mb-4 flex justify-center">
+          <div className="mb-2 flex justify-center">
             <LiveChangelogBadge />
           </div>
 
           <span
-            className="glass mx-auto inline-flex max-w-full items-center gap-2 rounded-full px-3 py-2 text-[9px] font-semibold uppercase leading-tight tracking-[0.14em] sm:px-4 sm:text-[11px] sm:tracking-[0.18em]"
+            className="glass mx-auto inline-flex max-w-full items-center gap-2 rounded-full px-3 py-1.5 text-[9px] font-semibold uppercase leading-tight tracking-[0.14em] sm:px-4 sm:text-[11px] sm:tracking-[0.18em]"
             style={{ color: student ? "var(--destructive)" : "var(--muted-foreground)" }}
           >
             {student ? (
@@ -93,9 +93,9 @@ export function Hero({
 
           <h1
             key={`h-${role}`}
-            className="mx-auto mt-6 max-w-4xl text-balance text-[2rem] font-extrabold leading-[1.06] tracking-tight sm:text-6xl md:text-7xl"
+            className="mx-auto mt-2.5 max-w-4xl text-balance text-[1.8rem] font-extrabold leading-[1.08] tracking-tight sm:text-4xl md:text-5xl"
           >
-            <span className="block text-xs sm:text-sm font-bold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-emerald mb-3">
+            <span className="block text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-emerald mb-1.5">
               StashSaarthi Living & Storage
             </span>
             <span className="text-gradient">
@@ -105,15 +105,15 @@ export function Hero({
 
           <p
             key={`p-${role}`}
-            className="mx-auto mt-5 max-w-2xl text-pretty text-[15px] leading-relaxed text-muted-foreground sm:text-lg"
+            className="mx-auto mt-2 max-w-2xl text-pretty text-xs leading-relaxed text-muted-foreground sm:text-sm"
           >
             {student ? t.hero.student.subtitle : t.hero.host.subtitle}
           </p>
 
           {/* Dynamic Live Proof Badge */}
-          <div className="mt-6 flex justify-center">
+          <div className="mt-3 flex justify-center">
             {student ? (
-              <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 text-xs font-semibold text-emerald-400 backdrop-blur-md shadow-sm">
+              <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-0.5 text-xs font-semibold text-emerald-400 backdrop-blur-md shadow-sm">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
@@ -121,7 +121,7 @@ export function Hero({
                 <span>⚡ 48+ Bags Stored Near IITK & HBTI • 100% Tamper-Proof QR Seal</span>
               </div>
             ) : (
-              <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-4 py-1.5 text-xs font-semibold text-amber-400 backdrop-blur-md shadow-sm">
+              <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-0.5 text-xs font-semibold text-amber-400 backdrop-blur-md shadow-sm">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-500" />
@@ -131,24 +131,24 @@ export function Hero({
             )}
           </div>
 
-          <div className="mt-6 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
+          <div className="mt-3.5 flex flex-col items-stretch justify-center gap-2 sm:flex-row sm:items-center">
             <Button
               data-magnetic
               variant={student ? "hero" : "warm"}
-              size="xl"
+              size="default"
               onClick={() => onBook({ service: student ? "stash" : "spaces" })}
-              className="group w-full sm:w-auto text-sm sm:text-base px-6 py-6"
+              className="group w-full sm:w-auto text-xs sm:text-sm px-5 py-4"
             >
               <span className="truncate">{student ? t.hero.student.cta : t.hero.host.cta}</span>
-              <ArrowRight className="shrink-0 transition-transform group-hover:translate-x-1 ml-2" />
+              <ArrowRight className="shrink-0 transition-transform group-hover:translate-x-1 ml-1.5 h-3.5 w-3.5" />
             </Button>
             {student ? (
               <Button
                 data-magnetic
                 variant="frost"
-                size="xl"
+                size="default"
                 asChild
-                className="w-full sm:w-auto px-6 py-6"
+                className="w-full sm:w-auto px-5 py-4 text-xs sm:text-sm"
               >
                 <a href="#ecosystem" onClick={smoothScrollTo("ecosystem")}>
                   {t.hero.student.secondaryCta}
@@ -158,16 +158,16 @@ export function Hero({
               <Button
                 data-magnetic
                 variant="outline"
-                size="xl"
+                size="default"
                 asChild
-                className="w-full sm:w-auto px-6 py-6 border-[#25D366]/50 bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366]/20 hover:text-[#25D366]"
+                className="w-full sm:w-auto px-5 py-4 text-xs sm:text-sm border-[#25D366]/50 bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366]/20 hover:text-[#25D366]"
               >
                 <a
                   href={`https://wa.me/${FOUNDER_WHATSAPP}?text=${encodeURIComponent("Namaste StashSaarthi, I want to list my spare space as a Host.")}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Phone className="mr-2 h-5 w-5" />
+                  <Phone className="mr-1.5 h-3.5 w-3.5" />
                   {t.hero.host.secondaryCta}
                 </a>
               </Button>
@@ -176,41 +176,41 @@ export function Hero({
               <Button
                 data-magnetic
                 variant="outline"
-                size="xl"
+                size="default"
                 onClick={onRefer}
-                className="w-full sm:w-auto px-5 py-6 border-[#25D366]/40 bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366]/20 hover:text-[#25D366] active:scale-95 transition-all cursor-pointer font-semibold"
+                className="w-full sm:w-auto px-4 py-4 text-xs sm:text-sm border-[#25D366]/40 bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366]/20 hover:text-[#25D366] active:scale-95 transition-all cursor-pointer font-semibold"
               >
-                <Share2 className="mr-2 h-4 w-4" />
+                <Share2 className="mr-1.5 h-3.5 w-3.5" />
                 <span>{role === "student" ? "Refer & Share" : "Share on WhatsApp"}</span>
               </Button>
             )}
           </div>
         </AnimatedContent>
 
-        <Card3D maxTilt={6} className="mx-auto mt-12 max-w-4xl rounded-3xl">
-          <div className="glass grid grid-cols-2 gap-px overflow-hidden rounded-3xl md:grid-cols-4">
+        <Card3D maxTilt={5} className="mx-auto mt-4 max-w-4xl rounded-xl">
+          <div className="glass grid grid-cols-2 gap-px overflow-hidden rounded-xl md:grid-cols-4">
             {STATS.map((s, i) => {
               const Icon = ICONS[i] || ShieldCheck;
               return (
                 <AnimatedContent
                   key={s.label}
-                  distance={30}
+                  distance={15}
                   direction="vertical"
-                  duration={0.7}
-                  delay={0.15 * i}
-                  className="min-w-0 px-3 py-5 text-center sm:px-5 sm:py-6"
+                  duration={0.5}
+                  delay={0.06 * i}
+                  className="min-w-0 px-2.5 py-2.5 text-center sm:px-3 sm:py-3"
                 >
                   <Icon
-                    className={`mx-auto mb-2 h-4 w-4 ${student ? "text-cyan" : "text-amber-400"}`}
+                    className={`mx-auto mb-1 h-3 w-3 ${student ? "text-cyan" : "text-amber-400"}`}
                   />
                   <AnimatedStat
                     value={s.value}
-                    className="text-xl font-extrabold tracking-tight sm:text-2xl"
-                    style={{ transform: "translateZ(20px)", color: student ? "" : "#FDE68A" }}
+                    className="text-base font-extrabold tracking-tight sm:text-lg"
+                    style={{ transform: "translateZ(15px)", color: student ? "" : "#FDE68A" }}
                   />
                   <div
-                    className="mt-1 text-[10px] uppercase tracking-wider text-muted-foreground sm:text-[11px] leading-tight"
-                    style={{ transform: "translateZ(30px)" }}
+                    className="mt-0.5 text-[8.5px] uppercase tracking-wider text-muted-foreground sm:text-[9.5px] leading-tight"
+                    style={{ transform: "translateZ(20px)" }}
                   >
                     {s.label}
                   </div>
@@ -222,24 +222,24 @@ export function Hero({
 
         {/* Trust Strip */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="mt-12 mx-auto max-w-2xl px-4"
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mt-3 mx-auto max-w-2xl px-2"
         >
           <div
-            className={`relative rounded-2xl border ${student ? "border-cyan-500/20 bg-cyan-950/10" : "border-amber-500/20 bg-amber-950/10"} px-4 py-3 backdrop-blur-md overflow-hidden`}
+            className={`relative rounded-lg border ${student ? "border-cyan-500/20 bg-cyan-950/10" : "border-amber-500/20 bg-amber-950/10"} px-3 py-1.5 backdrop-blur-md overflow-hidden`}
           >
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.03] to-transparent animate-[shimmer_3s_infinite]" />
             <div
               className={`absolute -inset-1 bg-gradient-to-r ${student ? "from-cyan-500/0 via-cyan-500/10 to-cyan-500/0" : "from-amber-500/0 via-amber-500/10 to-amber-500/0"} opacity-50 blur-xl animate-pulse`}
             />
 
-            <p className="relative z-10 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[11px] sm:text-xs font-semibold tracking-wider text-muted-foreground uppercase">
+            <p className="relative z-10 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-0.5 text-[9.5px] sm:text-[10.5px] font-semibold tracking-wider text-muted-foreground uppercase">
               <span
                 className={`flex items-center ${student ? "text-amber-400" : "text-amber-300"}`}
               >
-                <span className="mr-1 text-sm">⚡</span> Validated at IIT Bombay NEC 2026
+                <span className="mr-1 text-xs">⚡</span> Validated at IIT Bombay NEC 2026
               </span>
               <span className="hidden sm:inline opacity-30">•</span>
               <span className="flex items-center text-emerald-400">
@@ -255,27 +255,27 @@ export function Hero({
 
         {student && <CampusNodeChecker onBook={onBook} />}
 
-        {/* ── Pravara-Style Luxury Mountain-Grade Scroll Indicator ── */}
+        {/* ── Scroll Indicator ── */}
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
+          initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.7 }}
-          className="mt-14 flex flex-col items-center justify-center gap-2 text-center"
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mt-3 flex flex-col items-center justify-center gap-1 text-center"
         >
           <a
             href="#role-lane"
             onClick={smoothScrollTo("role-lane")}
-            className="group flex flex-col items-center gap-2.5 cursor-pointer select-none text-muted-foreground/60 hover:text-white transition-all"
+            className="group flex flex-col items-center gap-1 cursor-pointer select-none text-muted-foreground/60 hover:text-white transition-all"
             aria-label="Scroll down to explore features"
           >
-            <span className="text-[10px] font-mono uppercase tracking-[0.3em] transition-colors group-hover:text-emerald-400">
+            <span className="text-[8.5px] font-mono uppercase tracking-[0.2em] transition-colors group-hover:text-emerald-400">
               {t.nav?.explore || "SCROLL TO EXPLORE"}
             </span>
-            <div className="relative h-10 w-5 rounded-full border border-white/20 p-1 group-hover:border-emerald-400/60 transition-colors backdrop-blur-md bg-black/40">
+            <div className="relative h-6 w-3.5 rounded-full border border-white/20 p-0.5 group-hover:border-emerald-400/60 transition-colors backdrop-blur-md bg-black/40">
               <motion.div
-                animate={{ y: [0, 14, 0] }}
+                animate={{ y: [0, 6, 0] }}
                 transition={{ duration: 1.8, repeat: Infinity, ease: [0.16, 1, 0.3, 1] }}
-                className={`h-2.5 w-1.5 rounded-full mx-auto shadow-lg ${student ? "bg-emerald-400 shadow-emerald-500/50" : "bg-amber-400 shadow-amber-500/50"}`}
+                className={`h-1.5 w-1 rounded-full mx-auto shadow-lg ${student ? "bg-emerald-400 shadow-emerald-500/50" : "bg-amber-400 shadow-amber-500/50"}`}
               />
             </div>
           </a>
