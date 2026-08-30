@@ -1,5 +1,6 @@
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { logSupabaseError } from "./supabaseLogger";
 
 // ─── Validation ──────────────────────────────────────────────
 
@@ -79,30 +80,52 @@ export type GoogleProfile = {
 export async function insertWaitlistUser(
   data: WaitlistFormData,
 ): Promise<{ success: boolean; duplicate?: boolean; error?: string }> {
+  const payload = {
+    full_name: data.full_name.trim(),
+    email: data.email.trim().toLowerCase(),
+    phone_number: data.phone_number?.trim() || null,
+    user_type: data.user_type,
+    college_or_locality: data.college_or_locality?.trim() || null,
+    verified: false,
+    source: "waitlist_form",
+  };
+
   try {
-    const { error } = await supabase.from("users_waitlist").insert({
-      full_name: data.full_name.trim(),
-      email: data.email.trim().toLowerCase(),
-      phone_number: data.phone_number?.trim() || null,
-      user_type: data.user_type,
-      college_or_locality: data.college_or_locality?.trim() || null,
-      verified: false,
-      source: "waitlist_form",
-    });
+    const { error } = await supabase.from("users_waitlist").insert(payload);
 
     if (error) {
       if (isDuplicateEmailError(error)) {
         return { success: false, duplicate: true };
       }
+      logSupabaseError({
+        table: "users_waitlist",
+        operation: "insert",
+        payload,
+        error,
+        context: "waitlist_form",
+      });
       throw error;
     }
 
     return { success: true };
   } catch (err) {
     if (isNetworkError(err)) {
+      logSupabaseError({
+        table: "users_waitlist",
+        operation: "insert",
+        payload,
+        error: err,
+        context: "network_failure",
+      });
       return { success: false, error: "network" };
     }
-    console.error("[waitlistService] insertWaitlistUser:", err);
+    logSupabaseError({
+      table: "users_waitlist",
+      operation: "insert",
+      payload,
+      error: err,
+      context: "insertWaitlistUser_catch",
+    });
     return { success: false, error: "unknown" };
   }
 }
@@ -112,34 +135,57 @@ export async function insertWaitlistUser(
  * If the email already exists, this is a no-op (no error).
  */
 export async function upsertGoogleUser(profile: GoogleProfile): Promise<void> {
+  const payload = {
+    full_name: profile.name,
+    email: profile.email.toLowerCase(),
+    phone_number: null,
+    user_type: "student" as const,
+    college_or_locality: null,
+    verified: true,
+    avatar_url: profile.picture || null,
+    source: "google_auth",
+  };
+
   try {
     // Check if user already exists
-    const { data: existing } = await supabase
+    const { data: existing, error: selectErr } = await supabase
       .from("users_waitlist")
       .select("id")
       .eq("email", profile.email.toLowerCase())
       .maybeSingle();
 
+    if (selectErr) {
+      logSupabaseError({
+        table: "users_waitlist",
+        operation: "select",
+        payload: { email: profile.email },
+        error: selectErr,
+        context: "upsertGoogleUser_lookup",
+      });
+    }
+
     if (existing) return; // already registered — nothing to do
 
-    const { error } = await supabase.from("users_waitlist").insert({
-      full_name: profile.name,
-      email: profile.email.toLowerCase(),
-      phone_number: null,
-      user_type: "student",
-      college_or_locality: null,
-      verified: true,
-      avatar_url: profile.picture || null,
-      source: "google_auth",
-    });
+    const { error } = await supabase.from("users_waitlist").insert(payload);
 
     // Ignore duplicate constraint race condition
     if (error && !isDuplicateEmailError(error)) {
-      console.error("[waitlistService] upsertGoogleUser:", error);
+      logSupabaseError({
+        table: "users_waitlist",
+        operation: "insert",
+        payload,
+        error,
+        context: "upsertGoogleUser_insert",
+      });
     }
   } catch (err) {
-    // Non-critical — don't block sign-in flow
-    console.error("[waitlistService] upsertGoogleUser:", err);
+    logSupabaseError({
+      table: "users_waitlist",
+      operation: "insert",
+      payload,
+      error: err,
+      context: "upsertGoogleUser_catch",
+    });
   }
 }
 

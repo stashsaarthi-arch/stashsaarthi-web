@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useLanguage } from "@/context/LanguageContext";
+import { logSupabaseError } from "@/lib/supabaseLogger";
 
 export function MatchDrawer({
   open,
@@ -62,17 +63,28 @@ export function MatchDrawer({
     }
 
     setSubmitting(true);
+    const payload = {
+      user_id: user?.id ?? null,
+      name: name.trim(),
+      email: email.trim(),
+      phone: phone.trim(),
+      role: presetRole,
+      preferred_location: location.trim() || null,
+      message: message.trim() || null,
+    };
+
     try {
-      const { error } = await supabase.from("co_living_inquiries").insert({
-        user_id: user?.id ?? null,
-        name: name.trim(),
-        email: email.trim(),
-        phone: phone.trim(),
-        role: presetRole,
-        preferred_location: location.trim() || null,
-        message: message.trim() || null,
-      });
-      if (error) throw error;
+      const { error } = await supabase.from("co_living_inquiries").insert(payload);
+      if (error) {
+        logSupabaseError({
+          table: "co_living_inquiries",
+          operation: "insert",
+          payload,
+          error,
+          context: "match_drawer_insert",
+        });
+        throw error;
+      }
       setName("");
       setEmail("");
       setPhone("");
@@ -88,7 +100,14 @@ export function MatchDrawer({
             : "Your match request is with our community team.",
         },
       );
-    } catch {
+    } catch (err: unknown) {
+      logSupabaseError({
+        table: "co_living_inquiries",
+        operation: "insert",
+        payload,
+        error: err,
+        context: "match_drawer_catch",
+      });
       toast.error(isHi ? "अनुरोध भेजने में असमर्थ" : "We couldn't send your match request", {
         description: isHi
           ? "कृपया अपना इंटरनेट कनेक्शन जांचें और पुनः प्रयास करें।"

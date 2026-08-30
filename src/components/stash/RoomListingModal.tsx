@@ -10,6 +10,7 @@ import { Check, ImagePlus, Loader2, Star, X, Sparkles, Trash2 } from "lucide-rea
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useLanguage } from "@/context/LanguageContext";
+import { logSupabaseError } from "@/lib/supabaseLogger";
 
 const AMENITIES_LIST = [
   { en: "High-Speed Wi-Fi", hi: "हाई-स्पीड वाई-फाई" },
@@ -85,32 +86,53 @@ export function RoomListingModal({
 
   const submit = async () => {
     setSubmitting(true);
+    const photos: string[] = [];
+    const reviewNote = `${pros ? `Pros: ${pros}. ` : ""}${cons ? `Cons: ${cons}. ` : ""}Amenities: ${amenities.join(", ") || "Standard"}. Food/Water: ${foodWater}/5, Owner: ${ownerBehaviour}/5`;
+    const payload = {
+      student_id: user?.id ?? null,
+      address_location: address,
+      rent_amount: rent ? parseInt(rent, 10) : null,
+      owner_name: ownerName || null,
+      owner_phone: ownerPhone || null,
+      photos_urls: photos,
+      student_review: reviewNote,
+      ratings: Math.round(((foodWater + ownerBehaviour) / 2) * 10) / 10,
+      status: "pending_audit",
+    };
+
     try {
-      const photos: string[] = [];
       for (const f of files) {
         const path = `rooms/${Date.now()}-${f.name.replace(/[^a-zA-Z0-9.]/g, "_")}`;
         const { error: upErr } = await supabase.storage.from("room-photos").upload(path, f);
         if (!upErr) {
           const { data } = supabase.storage.from("room-photos").getPublicUrl(path);
           if (data?.publicUrl) photos.push(data.publicUrl);
+        } else {
+          logSupabaseError({
+            table: "storage.room-photos",
+            operation: "insert",
+            payload: { fileName: f.name, path },
+            error: upErr,
+            context: "photo_upload_warning",
+          });
         }
       }
 
-      const reviewNote = `${pros ? `Pros: ${pros}. ` : ""}${cons ? `Cons: ${cons}. ` : ""}Amenities: ${amenities.join(", ") || "Standard"}. Food/Water: ${foodWater}/5, Owner: ${ownerBehaviour}/5`;
+      payload.photos_urls = photos;
 
-      const { error } = await supabase.from("crowdsourced_room_listings").insert({
-        student_id: user?.id ?? null,
-        address_location: address,
-        rent_amount: rent ? parseInt(rent, 10) : null,
-        owner_name: ownerName || null,
-        owner_phone: ownerPhone || null,
-        photos_urls: photos,
-        student_review: reviewNote,
-        ratings: Math.round(((foodWater + ownerBehaviour) / 2) * 10) / 10,
-        status: "pending_audit",
-      });
+      const { error } = await supabase.from("crowdsourced_room_listings").insert(payload);
 
-      if (error) throw error;
+      if (error) {
+        logSupabaseError({
+          table: "crowdsourced_room_listings",
+          operation: "insert",
+          payload,
+          error,
+          context: "room_listing_insert",
+        });
+        throw error;
+      }
+      
       toast.success(isHi ? "🎉 कमरा सफलतापूर्वक लिस्ट हो गया!" : "Room listed!", {
         description: isHi
           ? "सत्यापन के बाद आपको ₹200 का रिवॉर्ड क्रेडिट मिलेगा।"
@@ -127,6 +149,13 @@ export function RoomListingModal({
       setAmenities([]);
       setFiles([]);
     } catch (err: unknown) {
+      logSupabaseError({
+        table: "crowdsourced_room_listings",
+        operation: "insert",
+        payload,
+        error: err,
+        context: "room_listing_catch",
+      });
       const msg = err instanceof Error ? err.message : "Failed to submit room";
       toast.error(isHi ? "कमरा सबमिट करने में विफल" : "Failed to submit room", {
         description: msg,

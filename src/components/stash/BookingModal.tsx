@@ -3,6 +3,7 @@ import { toast } from "sonner";
 import { motion, AnimatePresence } from "motion/react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
+import { logSupabaseError } from "@/lib/supabaseLogger";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -273,8 +274,7 @@ export function BookingModal({
 
       const fullMessage = `${note ? `${note} · ` : ""}${serviceMeta} · EstAmount: ₹${calcAmount} · Token: ${generatedToken} · PIN: ${pincode || "N/A"} · PayMode: ${paymentMode}`;
 
-      // Save inquiry to supabase
-      const { error } = await supabase.from("co_living_inquiries").insert({
+      const payload = {
         user_id: user?.id ?? null,
         role: service,
         name: name.trim(),
@@ -282,10 +282,19 @@ export function BookingModal({
         phone: phone.trim(),
         preferred_location: city.trim(),
         message: fullMessage,
-      });
+      };
+
+      // Save inquiry to supabase with zero data drop
+      const { error } = await supabase.from("co_living_inquiries").insert(payload);
 
       if (error) {
-        console.warn("Supabase inquiry insert failed, proceeding with client booking flow", error);
+        logSupabaseError({
+          table: "co_living_inquiries",
+          operation: "insert",
+          payload,
+          error,
+          context: "booking_modal_insert",
+        });
       }
 
       setStep(3);
@@ -297,7 +306,14 @@ export function BookingModal({
             : "Your digital StashPass is ready.",
         },
       );
-    } catch {
+    } catch (err: unknown) {
+      logSupabaseError({
+        table: "co_living_inquiries",
+        operation: "insert",
+        payload: { name, phone, service, city },
+        error: err,
+        context: "booking_modal_catch",
+      });
       toast.error(isHi ? "आरक्षण करने में असमर्थ" : "We couldn't process your booking", {
         description: isHi
           ? "कृपया अपना इंटरनेट कनेक्शन जांचें और पुनः प्रयास करें।"

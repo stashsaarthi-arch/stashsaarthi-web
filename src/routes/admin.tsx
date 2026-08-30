@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Lock, Search, MessageCircle, ShieldCheck, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { logSupabaseError } from "@/lib/supabaseLogger";
 
 export const Route = createFileRoute("/admin")({
   component: AdminPage,
@@ -43,10 +44,45 @@ function AdminPage() {
         .select("id, full_name, user_type, college_or_locality, phone_number, created_at")
         .order("created_at", { ascending: false });
 
-      if (error) throw error;
-      setLeads(Array.isArray(data) ? data : []);
+      if (error) {
+        logSupabaseError({
+          table: "users_waitlist",
+          operation: "select",
+          error,
+          context: "admin_fetchLeads",
+        });
+        throw error;
+      }
+      
+      const serverLeads = Array.isArray(data) ? data : [];
+      
+      // Merge with any pending offline leads from localStorage
+      try {
+        const offlineQueue = JSON.parse(localStorage.getItem("stash_offline_queue_users_waitlist") || "[]");
+        if (Array.isArray(offlineQueue) && offlineQueue.length > 0) {
+          const offlineLeads: Lead[] = offlineQueue.map((item) => ({
+            id: item.id,
+            full_name: item.data?.full_name || "Offline Lead",
+            user_type: item.data?.user_type || "student",
+            college_or_locality: item.data?.college_or_locality || null,
+            phone_number: item.data?.phone_number || null,
+            created_at: item.queuedAt || new Date().toISOString(),
+          }));
+          setLeads([...offlineLeads, ...serverLeads]);
+          return;
+        }
+      } catch {
+        // ignore
+      }
+
+      setLeads(serverLeads);
     } catch (err: any) {
-      console.error(err);
+      logSupabaseError({
+        table: "users_waitlist",
+        operation: "select",
+        error: err,
+        context: "admin_fetchLeads_catch",
+      });
       setLeads([]);
     } finally {
       setLoading(false);
