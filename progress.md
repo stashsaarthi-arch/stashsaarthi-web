@@ -1,3 +1,11 @@
+- [x] **PWA Manifest, Mobile Status Bar & Live Social Proof CRO Enhancements**:
+  - **PWA (Progressive Web App) Infrastructure**:
+    - Created `public/manifest.json` with brand metadata, `#0A0D0F` theme/background color, standalone display mode, and high-res app icons for 1-tap "Add to Home Screen" on Android, iOS, and Desktop.
+    - Added Apple mobile status bar meta tags (`apple-mobile-web-app-capable`, `black-translucent` status bar, `apple-mobile-web-app-title`) in `src/routes/__root.tsx`.
+  - **Live Dynamic Social Proof & Trust Trigger in Hero**:
+    - Added dynamic live activity counters and trust badge in `Hero.tsx` (`⚡ 48+ Bags Stored Near IITK & HBTI • 100% Tamper-Proof QR Seal` for students / `🛡️ ₹10,000 Safety Cover Active • 12+ Verified Senior Hosts in Kanpur` for hosts) right above the main CTA cluster.
+  - **Production Deployment**: Verified `npx tsc --noEmit` (**0 errors**), pushed commit `5a157d3` to GitHub `main`, and deployed live via Vercel CLI to [https://stashsaarthi-main.vercel.app](https://stashsaarthi-main.vercel.app) (Deployment ID: `dpl_49zf87CurwJBgawgEZfrvE2BNXys`, HTTP `200 OK`).
+
 - [x] **Instant Upfront Render Architecture & Zero Scroll Overhead Deployment**:
   - **Overcame On-Scroll CPU/GPU Bottlenecks**:
     - Eliminated delayed on-scroll animations and IntersectionObservers that were forcing layout reflows during fast scrolling.
