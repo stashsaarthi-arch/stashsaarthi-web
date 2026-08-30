@@ -172,7 +172,7 @@ export function FAQ() {
   };
 
   return (
-    <section id="faq" className="relative px-4 py-20 sm:py-28 scroll-mt-20">
+    <section id="faq" className="relative px-4 py-10 sm:py-14 scroll-mt-20">
       <div className="mx-auto max-w-3xl">
         <AnimatedContent distance={40} direction="vertical" duration={0.8}>
           <div className="text-center mb-10">

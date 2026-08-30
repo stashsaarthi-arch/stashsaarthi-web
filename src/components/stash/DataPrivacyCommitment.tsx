@@ -66,7 +66,7 @@ export function DataPrivacyCommitment() {
   return (
     <section
       id="privacy-commitments"
-      className="relative mx-auto max-w-6xl px-4 py-16 sm:py-24 scroll-mt-20"
+      className="relative mx-auto max-w-6xl px-4 py-10 sm:py-14 scroll-mt-20"
     >
       <AnimatedContent distance={40} direction="vertical" duration={0.7}>
         <div className="mx-auto max-w-3xl text-center">

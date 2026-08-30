@@ -329,11 +329,12 @@ function RootComponent() {
                 <ReactLenis
                   root
                   options={{
-                    lerp: 0.1,
-                    duration: 0.8,
+                    lerp: 0.12,
+                    duration: 0.9,
                     smoothWheel: true,
-                    wheelMultiplier: 1.0,
+                    wheelMultiplier: 1.05,
                     touchMultiplier: 1.0,
+                    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
                     syncTouch: false,
                     autoRaf: true,
                   }}

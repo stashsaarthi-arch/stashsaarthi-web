@@ -57,7 +57,7 @@ export function RoleLane({ role, onBook }: { role: Role; onBook: OpenBooking }) 
     : [IndianRupee, Users, ShieldCheck];
 
   return (
-    <section id="lane" className="relative px-4 py-16 sm:py-24">
+    <section id="lane" className="relative px-4 py-10 sm:py-14">
       <div className="mx-auto max-w-6xl">
         <AnimatedContent distance={50} direction="vertical" duration={0.8} ease="power3.out">
           <AnimatePresence mode="wait">

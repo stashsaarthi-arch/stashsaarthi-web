@@ -464,7 +464,7 @@ export function FeedbackSuggestions() {
   return (
     <section
       id="feedback"
-      className="relative py-16 sm:py-24 bg-[#0A0D0F] text-foreground overflow-hidden border-t border-white/[0.08]"
+      className="relative py-10 sm:py-14 bg-[#0A0D0F] text-foreground overflow-hidden border-t border-white/[0.08]"
     >
       {/* Background Ambient Glows */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-emerald-500/10 via-cyan-500/5 to-transparent blur-[140px] pointer-events-none" />

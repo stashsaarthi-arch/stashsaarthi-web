@@ -137,7 +137,7 @@ export function Connect(_props: { onBook: OpenBooking }) {
   const match = MATCHES.find((m) => m.city === city) ?? MATCHES[0]!;
 
   return (
-    <section id="connect" className="relative mx-auto max-w-4xl px-4 py-16 sm:py-24 scroll-mt-20">
+    <section id="connect" className="relative mx-auto max-w-4xl px-4 py-10 sm:py-14 scroll-mt-20">
       <div className="mx-auto max-w-2xl text-center">
         <h2 className="text-balance text-[1.75rem] font-extrabold tracking-tight sm:text-5xl">
           {t.connectSection.heading}{" "}

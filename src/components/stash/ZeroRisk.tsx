@@ -522,7 +522,7 @@ export function ZeroRisk() {
     <section
       id="safety-protocol"
       data-section="zero-risk"
-      className="relative overflow-hidden py-16 sm:py-24 scroll-mt-20"
+      className="relative overflow-hidden py-10 sm:py-14 scroll-mt-20"
       style={{
         background: `linear-gradient(180deg, transparent 0%, ${OBSIDIAN} 6%, ${OBSIDIAN} 94%, transparent 100%)`,
       }}

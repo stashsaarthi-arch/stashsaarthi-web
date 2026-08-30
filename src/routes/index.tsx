@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { CursorGlow } from "@/components/stash/CursorGlow";
 import { AmbientNodes } from "@/components/ui/AmbientNodes";
 import { Navbar } from "@/components/stash/Navbar";
 import { Hero } from "@/components/stash/Hero";
@@ -33,6 +32,7 @@ import { ActivityTicker } from "@/components/stash/ActivityTicker";
 import { ScrollProgress } from "@/components/stash/ScrollProgress";
 import { FloatingPersonaToggle } from "@/components/stash/FloatingPersonaToggle";
 import { usePersona } from "@/context/PersonaContext";
+import AnimatedContent from "@/components/ui/AnimatedContent";
 import type { BookingPrefill, Role } from "@/components/stash/types";
 
 const TITLE = "StashSaarthi | Intergenerational Living & Micro-Storage";
@@ -75,7 +75,6 @@ function Index() {
   return (
     <main className="relative min-h-screen overflow-x-hidden bg-background text-foreground transition-colors duration-500">
       <AmbientNodes />
-      <CursorGlow />
       <Navbar
         role={role}
         setRole={setRole}
@@ -88,52 +87,82 @@ function Index() {
         <Hero role={role} onBook={open} onRefer={() => setReferralOpen(true)} />
       </ErrorBoundary>
       <ErrorBoundary>
-        <RoleLane role={role} onBook={open} />
+        <AnimatedContent distance={35} threshold={0.12}>
+          <RoleLane role={role} onBook={open} />
+        </AnimatedContent>
       </ErrorBoundary>
       <ErrorBoundary>
-        <DualCrisis />
+        <AnimatedContent distance={35} threshold={0.12}>
+          <DualCrisis />
+        </AnimatedContent>
       </ErrorBoundary>
       <ErrorBoundary>
-        <Ecosystem onBook={open} />
+        <AnimatedContent distance={35} threshold={0.12}>
+          <Ecosystem onBook={open} />
+        </AnimatedContent>
       </ErrorBoundary>
       <ErrorBoundary>
-        {role === "student" ? <StashCalculator onBook={open} /> : <HostSimulator onBook={open} />}
+        <AnimatedContent distance={35} threshold={0.12}>
+          {role === "student" ? <StashCalculator onBook={open} /> : <HostSimulator onBook={open} />}
+        </AnimatedContent>
       </ErrorBoundary>
       <ErrorBoundary>
-        <Rooms onList={() => setListing(true)} />
+        <AnimatedContent distance={35} threshold={0.12}>
+          <Rooms onList={() => setListing(true)} />
+        </AnimatedContent>
       </ErrorBoundary>
       <ErrorBoundary>
-        <Connect onBook={open} />
+        <AnimatedContent distance={35} threshold={0.12}>
+          <Connect onBook={open} />
+        </AnimatedContent>
       </ErrorBoundary>
       <ErrorBoundary>
-        <ProcessTransparency />
+        <AnimatedContent distance={35} threshold={0.12}>
+          <ProcessTransparency />
+        </AnimatedContent>
       </ErrorBoundary>
       <ErrorBoundary>
-        <ProductSandbox />
+        <AnimatedContent distance={35} threshold={0.12}>
+          <ProductSandbox />
+        </AnimatedContent>
       </ErrorBoundary>
       <ErrorBoundary>
-        <Trust />
+        <AnimatedContent distance={35} threshold={0.12}>
+          <Trust />
+        </AnimatedContent>
       </ErrorBoundary>
       <ErrorBoundary>
-        <ZeroRisk />
+        <AnimatedContent distance={35} threshold={0.12}>
+          <ZeroRisk />
+        </AnimatedContent>
       </ErrorBoundary>
       <ErrorBoundary>
-        <DataPrivacyCommitment />
+        <AnimatedContent distance={35} threshold={0.12}>
+          <DataPrivacyCommitment />
+        </AnimatedContent>
       </ErrorBoundary>
       <ErrorBoundary>
-        <FounderAccountability />
+        <AnimatedContent distance={35} threshold={0.12}>
+          <FounderAccountability />
+        </AnimatedContent>
       </ErrorBoundary>
       {role === "host" && (
         <ErrorBoundary>
-          <HostRules />
-          <FamilyDashboard />
+          <AnimatedContent distance={35} threshold={0.12}>
+            <HostRules />
+            <FamilyDashboard />
+          </AnimatedContent>
         </ErrorBoundary>
       )}
       <ErrorBoundary>
-        <FeedbackSuggestions />
+        <AnimatedContent distance={35} threshold={0.12}>
+          <FeedbackSuggestions />
+        </AnimatedContent>
       </ErrorBoundary>
       <ErrorBoundary>
-        <FAQ />
+        <AnimatedContent distance={35} threshold={0.12}>
+          <FAQ />
+        </AnimatedContent>
       </ErrorBoundary>
       <ErrorBoundary>
         <FooterSection />

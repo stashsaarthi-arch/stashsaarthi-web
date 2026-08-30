@@ -43,7 +43,7 @@ export function Hero({
     : [ShieldCheck, Lock, Banknote, Clock];
 
   return (
-    <section id="top" className="relative overflow-hidden pb-16 pt-28 sm:pb-24 md:pt-44">
+    <section id="top" className="relative overflow-hidden pb-12 pt-24 sm:pb-16 md:pt-36">
       <div className="absolute inset-0 grid-noise opacity-60" />
       <div className="absolute inset-0">
         <NodeCanvas />

@@ -205,7 +205,7 @@ export function Rooms({ onList }: { onList: () => void }) {
   };
 
   return (
-    <section id="rooms" className="relative mx-auto max-w-6xl px-4 py-16 sm:py-24 scroll-mt-20">
+    <section id="rooms" className="relative mx-auto max-w-6xl px-4 py-10 sm:py-14 scroll-mt-20">
       <div className="mx-auto max-w-2xl text-center">
         <h2 className="text-balance text-[1.75rem] font-extrabold tracking-tight sm:text-5xl">
           {t.rooms.heading} <span className="text-gradient">{t.rooms.headingGradient}</span>

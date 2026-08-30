@@ -47,7 +47,7 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
   return (
     <section
       id="student-calculator"
-      className="relative mx-auto max-w-6xl px-4 py-16 sm:py-24 scroll-mt-20"
+      className="relative mx-auto max-w-6xl px-4 py-10 sm:py-14 scroll-mt-20"
     >
       <AnimatedContent distance={40} scale={0.98} duration={0.6} ease="power2.out">
         <div className="w-full max-w-4xl mx-auto rounded-3xl bg-[#0F1318] border border-slate-800 p-6 sm:p-8 backdrop-blur-xl shadow-2xl relative overflow-hidden">

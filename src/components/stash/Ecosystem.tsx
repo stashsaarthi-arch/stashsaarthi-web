@@ -65,7 +65,7 @@ export function Ecosystem({ onBook }: { onBook: OpenBooking }) {
   const isHi = language === "hi";
 
   return (
-    <section id="ecosystem" className="relative mx-auto max-w-4xl px-4 py-16 sm:py-24 scroll-mt-20">
+    <section id="ecosystem" className="relative mx-auto max-w-4xl px-4 py-10 sm:py-14 scroll-mt-20">
       <div className="mx-auto max-w-2xl text-center">
         <Badge variant="outline" className="border-white/15 bg-white/5 text-muted-foreground">
           {isHi ? "6 प्रमुख आयाम" : "6 Dimensions"}
