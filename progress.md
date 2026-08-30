@@ -1,3 +1,8 @@
+- [x] **Git Main & Vercel Production Deployment (`https://stashsaarthi-main.vercel.app`)**:
+  - **Git Push**: Successfully merged and pushed commit `d818763` to `origin/main` on GitHub (`https://github.com/stashsaarthi-arch/stashsaarthi-web`).
+  - **Vercel Production Release**: Successfully deployed live to Vercel production via CLI (`dpl_BvSeXJMj5z3XJzH7eMJC7mJzHS3f`).
+  - **Live URL**: [https://stashsaarthi-main.vercel.app](https://stashsaarthi-main.vercel.app) (HTTP `200 OK`, SSR + Nitro runtime active).
+
 - [x] **TI.com-Inspired High-Density Modular Hub & Scroll Fatigue Elimination**:
   - **Analyzed Texas Instruments (`ti.com`) Information Architecture**: Extracted key design patterns (categorized interactive hub switchers, high information density, quick-jump sticky sub-navigation) to eliminate long vertical scrolling.
   - **Created Quick-Jump Sticky Sub-Navigation (`QuickCategoryNav.tsx`)**: Sits right below the Hero and snaps to the top when scrolling, providing 1-tap jump buttons (`⚡ Solutions`, `🧮 Calculator`, `🛡️ Trust`, `⭐ Reviews`, `❓ FAQ`) with live active-section tracking.
