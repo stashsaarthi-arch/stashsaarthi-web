@@ -98,6 +98,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { name: "theme-color", content: "#0F172A" },
       { name: "color-scheme", content: "dark" },
+      { name: "google-site-verification", content: "googlec3390cf96e97cc6c" },
       { name: "robots", content: "index, follow, max-image-preview:large" },
       { name: "format-detection", content: "telephone=no" },
       { title: "StashSaarthi | Intergenerational Living & Micro-Storage" },
