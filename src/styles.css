@@ -1,5 +1,4 @@
-@import "tailwindcss" source(none);
-@source "../src";
+@import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
@@ -93,7 +92,14 @@
   --surface: oklch(0.198 0.013 223 / 72%);
   --gradient-cyan: linear-gradient(135deg, oklch(0.868 0.16 178), oklch(0.696 0.149 162));
   --gradient-amber: linear-gradient(135deg, oklch(0.837 0.164 84), oklch(0.769 0.165 70));
-  --gradient-hero: linear-gradient(100deg, oklch(0.98 0.01 220) 0%, oklch(0.868 0.16 178) 38%, oklch(0.696 0.149 162) 58%, oklch(0.769 0.165 70) 78%, oklch(0.98 0.01 220) 100%);
+  --gradient-hero: linear-gradient(
+    100deg,
+    oklch(0.98 0.01 220) 0%,
+    oklch(0.868 0.16 178) 38%,
+    oklch(0.696 0.149 162) 58%,
+    oklch(0.769 0.165 70) 78%,
+    oklch(0.98 0.01 220) 100%
+  );
   --shadow-glass: 0 24px 60px -22px oklch(0 0 0 / 75%), inset 0 1px 0 oklch(1 0 0 / 7%);
   --glow-cyan: 0 0 40px -8px oklch(0.868 0.16 178 / 55%);
   --chart-1: oklch(0.868 0.16 178);
@@ -130,7 +136,6 @@
   --glow-cyan: 0 0 40px -8px oklch(0.809 0.165 76 / 55%);
   --sidebar-ring: oklch(0.868 0.16 178);
 }
-
 
 .dark {
   --background: oklch(0.129 0.042 264.695);
@@ -178,7 +183,6 @@
   }
 }
 
-
 @layer base {
   html {
     scroll-behavior: auto;
@@ -194,7 +198,8 @@
 }
 
 /* Lenis Smooth Scroll Engine Specifications */
-html.lenis, html.lenis body {
+html.lenis,
+html.lenis body {
   height: auto;
 }
 
@@ -233,7 +238,10 @@ html.lenis, html.lenis body {
 }
 
 @utility glass-hover {
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
   &:hover {
     border-color: oklch(1 0 0 / 22%);
     box-shadow: var(--shadow-glass), var(--glow-cyan);
@@ -303,20 +311,30 @@ html.lenis, html.lenis body {
 }
 
 @keyframes glow-pulse-cyan {
-  0%, 100% {
-    box-shadow: 0 0 20px -4px oklch(0.868 0.16 178 / 45%), 0 0 40px -10px oklch(0.868 0.16 178 / 25%);
+  0%,
+  100% {
+    box-shadow:
+      0 0 20px -4px oklch(0.868 0.16 178 / 45%),
+      0 0 40px -10px oklch(0.868 0.16 178 / 25%);
   }
   50% {
-    box-shadow: 0 0 35px 2px oklch(0.868 0.16 178 / 75%), 0 0 60px -4px oklch(0.868 0.16 178 / 40%);
+    box-shadow:
+      0 0 35px 2px oklch(0.868 0.16 178 / 75%),
+      0 0 60px -4px oklch(0.868 0.16 178 / 40%);
   }
 }
 
 @keyframes glow-pulse-amber {
-  0%, 100% {
-    box-shadow: 0 0 20px -4px oklch(0.809 0.165 76 / 45%), 0 0 40px -10px oklch(0.809 0.165 76 / 25%);
+  0%,
+  100% {
+    box-shadow:
+      0 0 20px -4px oklch(0.809 0.165 76 / 45%),
+      0 0 40px -10px oklch(0.809 0.165 76 / 25%);
   }
   50% {
-    box-shadow: 0 0 35px 2px oklch(0.809 0.165 76 / 75%), 0 0 60px -4px oklch(0.809 0.165 76 / 40%);
+    box-shadow:
+      0 0 35px 2px oklch(0.809 0.165 76 / 75%),
+      0 0 60px -4px oklch(0.809 0.165 76 / 40%);
   }
 }
 
@@ -364,4 +382,3 @@ html.lenis, html.lenis body {
     scroll-behavior: auto !important;
   }
 }
-

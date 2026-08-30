@@ -2,16 +2,18 @@
 
 **Document ID:** SS-OPS-SOP-002  
 **Version:** 1.8  
-**Applicability:** All StashSaarthi Storage Nodes & Student Drop-off Concierges  
+**Applicability:** All StashSaarthi Storage Nodes & Student Drop-off Concierges
 
 ---
 
 ## 1. Scope & Objective
+
 Every bag stored through StashSaarthi must be hermetically sealed with a serialized, non-reusable laser barcode security seal. This eliminates all risk of bag tampering, theft, or unauthorized access while in host custody.
 
 ---
 
 ## 2. Bag Sealing & Ingestion Procedure (At Node)
+
 1. **Student Pre-Inspection:** The student zips all compartments and fastens all locks.
 2. **Seal Application:**
    - The StashSaarthi concierge loops the serialized heavy-duty nylon-core laser seal (`SS-SEAL-XXXXXX`) through the main zipper pullers.
@@ -27,6 +29,7 @@ Every bag stored through StashSaarthi must be hermetically sealed with a seriali
 ---
 
 ## 3. Storage Period & Custody Rules
+
 - Bags must remain untouched on raised wooden/plastic pallets (`min 4 inches off the floor`).
 - Hosts are strictly prohibited from relocating bags outside the verified storage zone.
 - In the event of emergency room maintenance, host must notify StashSaarthi Concierge before moving any bag.
@@ -34,6 +37,7 @@ Every bag stored through StashSaarthi must be hermetically sealed with a seriali
 ---
 
 ## 4. Retrieval & Seal Verification Procedure
+
 1. **Student Identity Check:** Student displays digital `StashPass` QR code on mobile.
 2. **Physical Seal Integrity Inspection:**
    - Verify that the barcode number on the seal matches the `StashPass` database record.
@@ -46,6 +50,7 @@ Every bag stored through StashSaarthi must be hermetically sealed with a seriali
 ---
 
 ## 5. Breach Protocol & ₹10,000 Safety Claim
+
 - If a seal is found broken or mismatched prior to authorized student pickup:
   - Immediate Concierge lockdown is triggered.
   - Operations Lead dispatches to the host site within 20 minutes.

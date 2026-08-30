@@ -12,12 +12,20 @@ interface AnimatedStatProps {
  */
 export function AnimatedStat({ value, className, style }: AnimatedStatProps) {
   const parsed = parseStatValue(value);
+  const { ref, display } = useCountUp(
+    parsed ? parsed.num : 0,
+    1200,
+    parsed ? parsed.prefix : "",
+    parsed ? parsed.suffix : "",
+  );
 
   if (!parsed) {
-    return <span className={className} style={style}>{value}</span>;
+    return (
+      <span className={className} style={style}>
+        {value}
+      </span>
+    );
   }
-
-  const { ref, display } = useCountUp(parsed.num, 1200, parsed.prefix, parsed.suffix);
 
   return (
     <span ref={ref as React.Ref<HTMLSpanElement>} className={className} style={style}>

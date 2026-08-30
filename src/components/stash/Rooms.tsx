@@ -32,10 +32,16 @@ const DEMO: Listing[] = [
     address_location: "Kalyanpur, Kanpur · 6 min to IIT gate",
     transit_estimate: "🛺 ₹10 E-Rickshaw (4m) · 650m walk to Gate 1",
     transit_estimate_hi: "🛺 ₹10 ई-रिक्शा (4 मिनट) · 650मी गेट 1 तक पैदल",
-    student_review: "Pros: Quiet lane, 24x7 water, owner never enters without asking.\nCons: Only one power backup point.",
+    student_review:
+      "Pros: Quiet lane, 24x7 water, owner never enters without asking.\nCons: Only one power backup point.",
     ratings: 4.5,
-    capacity_badge: { text: "🟢 3 slots left in Kalyanpur", text_hi: "🟢 कल्याणपुर में 3 स्लॉट शेष", color: "emerald" },
-    image: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=600&q=80",
+    capacity_badge: {
+      text: "🟢 3 slots left in Kalyanpur",
+      text_hi: "🟢 कल्याणपुर में 3 स्लॉट शेष",
+      color: "emerald",
+    },
+    image:
+      "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=600&q=80",
   },
   {
     id: "demo-2",
@@ -45,10 +51,12 @@ const DEMO: Listing[] = [
     address_location: "Gomti Nagar, Lucknow · near Phoenix",
     transit_estimate: "🛺 ₹15 E-Rickshaw (6m) · 900m to Metro / Campus",
     transit_estimate_hi: "🛺 ₹15 ई-रिक्शा (6 मिनट) · 900मी मेट्रो / कैंपस",
-    student_review: "Pros: Furnished, home-cooked tiffin available downstairs.\nCons: Street parking is tight in the evening.",
+    student_review:
+      "Pros: Furnished, home-cooked tiffin available downstairs.\nCons: Street parking is tight in the evening.",
     ratings: 4.8,
     capacity_badge: { text: "🟡 Only 1 room left", text_hi: "🟡 केवल 1 कमरा शेष", color: "amber" },
-    image: "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=600&q=80",
+    image:
+      "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=600&q=80",
   },
   {
     id: "demo-3",
@@ -60,12 +68,18 @@ const DEMO: Listing[] = [
     transit_estimate_hi: "🚌 मुफ्त कैंपस शटल (5 मिनट) · 400मी स्टॉप तक",
     student_review: "Pros: Sunlit corner room, super-fast fibre.\nCons: Third floor, no lift.",
     ratings: 4.3,
-    capacity_badge: { text: "🔵 High Demand Area", text_hi: "🔵 उच्च मांग वाला क्षेत्र", color: "cyan" },
-    image: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=600&q=80",
+    capacity_badge: {
+      text: "🔵 High Demand Area",
+      text_hi: "🔵 उच्च मांग वाला क्षेत्र",
+      color: "cyan",
+    },
+    image:
+      "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=600&q=80",
   },
 ];
 
-const DEFAULT_ROOM_SVG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%23111827'/%3E%3Cpath d='M250 200 L300 150 L350 200 L350 260 L250 260 Z' fill='%2310B981' opacity='0.3'/%3E%3Crect x='285' y='215' width='30' height='45' fill='%23059669'/%3E%3Ctext x='300' y='300' font-family='sans-serif' font-size='16' fill='%239CA3AF' font-weight='bold' text-anchor='middle'%3EVerified Student Living%3C/text%3E%3C/svg%3E";
+const DEFAULT_ROOM_SVG =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%23111827'/%3E%3Cpath d='M250 200 L300 150 L350 200 L350 260 L250 260 Z' fill='%2310B981' opacity='0.3'/%3E%3Crect x='285' y='215' width='30' height='45' fill='%23059669'/%3E%3Ctext x='300' y='300' font-family='sans-serif' font-size='16' fill='%239CA3AF' font-weight='bold' text-anchor='middle'%3EVerified Student Living%3C/text%3E%3C/svg%3E";
 
 const FALLBACK_IMAGES = [
   "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=600&q=80",
@@ -152,7 +166,12 @@ export function Rooms({ onList }: { onList: () => void }) {
       return loc.includes("kalyanpur") || loc.includes("csjmu") || loc.includes("awas vikas");
     }
     if (activeFilter === "proximity") {
-      return loc.includes("iit") || loc.includes("min") || loc.includes("gate") || loc.includes("kalyanpur");
+      return (
+        loc.includes("iit") ||
+        loc.includes("min") ||
+        loc.includes("gate") ||
+        loc.includes("kalyanpur")
+      );
     }
     return true;
   });
@@ -163,11 +182,23 @@ export function Rooms({ onList }: { onList: () => void }) {
       return text
         .replace(/Pros:/gi, "फायदे:")
         .replace(/Cons:/gi, "कमियां:")
-        .replace(/Quiet lane, 24x7 water, owner never enters without asking./gi, "शांत गली, 24x7 पानी, मकान मालिक बिना पूछे कभी कमरे में नहीं आते।")
+        .replace(
+          /Quiet lane, 24x7 water, owner never enters without asking./gi,
+          "शांत गली, 24x7 पानी, मकान मालिक बिना पूछे कभी कमरे में नहीं आते।",
+        )
         .replace(/Only one power backup point./gi, "केवल एक पावर बैकअप पॉइंट।")
-        .replace(/Furnished, home-cooked tiffin available downstairs./gi, "फर्निश्ड, नीचे घर का बना टिफिन उपलब्ध है।")
-        .replace(/Street parking is tight in the evening./gi, "शाम को सड़क पर पार्किंग तंग हो जाती है।")
-        .replace(/Sunlit corner room, super-fast fibre./gi, "धूप वाला कोना कमरा, सुपर-फास्ट इंटरनेट फाइबर।")
+        .replace(
+          /Furnished, home-cooked tiffin available downstairs./gi,
+          "फर्निश्ड, नीचे घर का बना टिफिन उपलब्ध है।",
+        )
+        .replace(
+          /Street parking is tight in the evening./gi,
+          "शाम को सड़क पर पार्किंग तंग हो जाती है।",
+        )
+        .replace(
+          /Sunlit corner room, super-fast fibre./gi,
+          "धूप वाला कोना कमरा, सुपर-फास्ट इंटरनेट फाइबर।",
+        )
         .replace(/Third floor, no lift./gi, "तीसरी मंजिल, लिफ्ट नहीं है।");
     }
     return text;
@@ -179,9 +210,7 @@ export function Rooms({ onList }: { onList: () => void }) {
         <h2 className="text-balance text-[1.75rem] font-extrabold tracking-tight sm:text-5xl">
           {t.rooms.heading} <span className="text-gradient">{t.rooms.headingGradient}</span>
         </h2>
-        <p className="mt-4 text-sm text-muted-foreground sm:text-base">
-          {t.rooms.subtitle}
-        </p>
+        <p className="mt-4 text-sm text-muted-foreground sm:text-base">{t.rooms.subtitle}</p>
       </div>
 
       {/* ── 1-Tap Quick Filter Pills ── */}
@@ -216,15 +245,15 @@ export function Rooms({ onList }: { onList: () => void }) {
             >
               <article className="glass flex flex-col rounded-3xl p-4 group">
                 <div className="relative w-full h-44 rounded-2xl overflow-hidden mb-4 border border-white/10 bg-slate-900">
-                  <RoomImage 
-                    src={l.image || FALLBACK_IMAGES[i % 3] || DEFAULT_ROOM_SVG} 
+                  <RoomImage
+                    src={l.image || FALLBACK_IMAGES[i % 3] || DEFAULT_ROOM_SVG}
                     alt={l.address_location || "Student Room"}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 pointer-events-none" />
-                  
+
                   {/* Badge positioned inside image overlay */}
                   <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2 pointer-events-none">
-                    <button 
+                    <button
                       onClick={() => setAuditOpen(true)}
                       className="pointer-events-auto bg-black/60 backdrop-blur-md border border-white/10 text-amber-400 text-[10px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1.5 hover:bg-black/85 transition-colors cursor-pointer"
                     >
@@ -237,7 +266,9 @@ export function Rooms({ onList }: { onList: () => void }) {
                 <div className="flex flex-1 flex-col px-1 pb-1">
                   <div className="flex items-start justify-between gap-3">
                     <span className="text-lg font-extrabold">
-                      {l.rent_amount ? `${inr(l.rent_amount)}${t.rooms.perMonth}` : t.rooms.rentOnRequest}
+                      {l.rent_amount
+                        ? `${inr(l.rent_amount)}${t.rooms.perMonth}`
+                        : t.rooms.rentOnRequest}
                     </span>
                     {l.ratings ? (
                       <span className="flex shrink-0 items-center gap-1 text-xs font-bold text-amber">
@@ -259,17 +290,23 @@ export function Rooms({ onList }: { onList: () => void }) {
                   )}
 
                   {(l as any).capacity_badge && (
-                    <div className={`mt-2.5 inline-flex items-center w-fit rounded-full border px-2 py-1 text-[11px] font-medium 
-                      ${(l as any).capacity_badge.color === 'emerald' ? 'border-emerald-500/20 bg-emerald-500/10 text-emerald-400' : ''}
-                      ${(l as any).capacity_badge.color === 'amber' ? 'border-amber-500/20 bg-amber-500/10 text-amber-400' : ''}
-                      ${(l as any).capacity_badge.color === 'cyan' ? 'border-cyan-500/20 bg-cyan-500/10 text-cyan-400' : ''}
-                    `}>
-                      <div className={`mr-1.5 h-1.5 w-1.5 rounded-full 
-                        ${(l as any).capacity_badge.color === 'emerald' ? 'bg-emerald-500' : ''}
-                        ${(l as any).capacity_badge.color === 'amber' ? 'bg-amber-500' : ''}
-                        ${(l as any).capacity_badge.color === 'cyan' ? 'bg-cyan-500' : ''}
-                      `} />
-                      {isHi && (l as any).capacity_badge.text_hi ? (l as any).capacity_badge.text_hi : (l as any).capacity_badge.text}
+                    <div
+                      className={`mt-2.5 inline-flex items-center w-fit rounded-full border px-2 py-1 text-[11px] font-medium 
+                      ${(l as any).capacity_badge.color === "emerald" ? "border-emerald-500/20 bg-emerald-500/10 text-emerald-400" : ""}
+                      ${(l as any).capacity_badge.color === "amber" ? "border-amber-500/20 bg-amber-500/10 text-amber-400" : ""}
+                      ${(l as any).capacity_badge.color === "cyan" ? "border-cyan-500/20 bg-cyan-500/10 text-cyan-400" : ""}
+                    `}
+                    >
+                      <div
+                        className={`mr-1.5 h-1.5 w-1.5 rounded-full 
+                        ${(l as any).capacity_badge.color === "emerald" ? "bg-emerald-500" : ""}
+                        ${(l as any).capacity_badge.color === "amber" ? "bg-amber-500" : ""}
+                        ${(l as any).capacity_badge.color === "cyan" ? "bg-cyan-500" : ""}
+                      `}
+                      />
+                      {isHi && (l as any).capacity_badge.text_hi
+                        ? (l as any).capacity_badge.text_hi
+                        : (l as any).capacity_badge.text}
                     </div>
                   )}
 
@@ -287,15 +324,17 @@ export function Rooms({ onList }: { onList: () => void }) {
                     >
                       <a
                         href={(() => {
-                          const phone = l.owner_phone ? l.owner_phone.replace(/\D/g, "") : FOUNDER_WHATSAPP;
+                          const phone = l.owner_phone
+                            ? l.owner_phone.replace(/\D/g, "")
+                            : FOUNDER_WHATSAPP;
                           const targetPhone = phone.length >= 10 ? phone : FOUNDER_WHATSAPP;
                           const text = isHi
-                            ? (l.owner_name 
-                                ? `नमस्ते ${l.owner_name}, मैंने StashSaarthi पर आपका कमरा (${l.address_location || "कानपुर"}) देखा और मैं इसे देखना चाहता/चाहती हूं।`
-                                : `नमस्ते StashSaarthi, मैं कानपुर में सत्यापित कमरा बुक करने में रुचि रखता हूं (${l.address_location || "कानपुर"})।`)
-                            : (l.owner_name
-                                ? `Hi ${l.owner_name}, I found your room (${l.address_location || "Kanpur"}) on StashSaarthi and would like to visit.`
-                                : `Hi StashSaarthi, I am interested in booking a verified room in Kanpur (${l.address_location || "Kanpur"}).`);
+                            ? l.owner_name
+                              ? `नमस्ते ${l.owner_name}, मैंने StashSaarthi पर आपका कमरा (${l.address_location || "कानपुर"}) देखा और मैं इसे देखना चाहता/चाहती हूं।`
+                              : `नमस्ते StashSaarthi, मैं कानपुर में सत्यापित कमरा बुक करने में रुचि रखता हूं (${l.address_location || "कानपुर"})।`
+                            : l.owner_name
+                              ? `Hi ${l.owner_name}, I found your room (${l.address_location || "Kanpur"}) on StashSaarthi and would like to visit.`
+                              : `Hi StashSaarthi, I am interested in booking a verified room in Kanpur (${l.address_location || "Kanpur"}).`;
                           return getWhatsAppUrl(text, targetPhone);
                         })()}
                         target="_blank"
@@ -304,7 +343,14 @@ export function Rooms({ onList }: { onList: () => void }) {
                         <MessageCircle className="h-4 w-4" /> {t.rooms.bookDirectly}
                       </a>
                     </Button>
-                    <Button asChild variant="outline" size="icon" aria-label={isHi ? "मालिक या सार्थी कंसीयज को कॉल करें" : "Call owner or concierge"}>
+                    <Button
+                      asChild
+                      variant="outline"
+                      size="icon"
+                      aria-label={
+                        isHi ? "मालिक या सार्थी कंसीयज को कॉल करें" : "Call owner or concierge"
+                      }
+                    >
                       <a href={`tel:${(l.owner_phone || FOUNDER_WHATSAPP).replace(/\s/g, "")}`}>
                         <Phone className="h-4 w-4" />
                       </a>
@@ -321,7 +367,8 @@ export function Rooms({ onList }: { onList: () => void }) {
         <div className="flex items-center gap-3">
           <Gift className="h-6 w-6 shrink-0 text-amber" />
           <p className="text-sm text-muted-foreground">
-            <span className="font-bold text-foreground">{t.rooms.vacatingTitle}</span> {t.rooms.vacatingDesc}
+            <span className="font-bold text-foreground">{t.rooms.vacatingTitle}</span>{" "}
+            {t.rooms.vacatingDesc}
           </p>
         </div>
         <Button variant="warm" size="lg" className="w-full shrink-0 sm:w-auto" onClick={onList}>

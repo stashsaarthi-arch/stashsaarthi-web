@@ -15,7 +15,9 @@ export function NetworkStatus() {
     const handleOffline = () => {
       setIsOffline(true);
       toast.error(isHi ? "ऑफ़लाइन मोड सक्रिय" : "Offline Mode Activated", {
-        description: isHi ? "आप इंटरनेट से डिस्कनेक्ट हैं। सुरक्षित डेटा और स्टैशपास अभी भी ऑफ़लाइन उपलब्ध हैं।" : "You're disconnected. Cached campus data and StashPass are still available offline.",
+        description: isHi
+          ? "आप इंटरनेट से डिस्कनेक्ट हैं। सुरक्षित डेटा और स्टैशपास अभी भी ऑफ़लाइन उपलब्ध हैं।"
+          : "You're disconnected. Cached campus data and StashPass are still available offline.",
         duration: 5000,
       });
     };
@@ -23,7 +25,9 @@ export function NetworkStatus() {
     const handleOnline = () => {
       setIsOffline(false);
       toast.success(isHi ? "इंटरनेट कनेक्शन बहाल" : "Connection Restored", {
-        description: isHi ? "लाइव स्टैशसारथी कैंपस नोड्स के साथ पुनः समन्वयित।" : "Re-synced with live StashSaarthi campus nodes.",
+        description: isHi
+          ? "लाइव स्टैशसारथी कैंपस नोड्स के साथ पुनः समन्वयित।"
+          : "Re-synced with live StashSaarthi campus nodes.",
         duration: 3000,
       });
     };
@@ -48,8 +52,8 @@ export function NetworkStatus() {
         >
           <WifiOff className="h-4 w-4" />
           <span>
-            {isHi 
-              ? "आप वर्तमान में ऑफ़लाइन ब्राउज़ कर रहे हैं। पुनः कनेक्ट होने पर लाइव आरक्षण सिंक हो जाएंगे।" 
+            {isHi
+              ? "आप वर्तमान में ऑफ़लाइन ब्राउज़ कर रहे हैं। पुनः कनेक्ट होने पर लाइव आरक्षण सिंक हो जाएंगे।"
               : "You are currently browsing offline. Live node reservations will sync upon reconnecting."}
           </span>
         </motion.div>

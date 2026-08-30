@@ -6,11 +6,7 @@ export interface BrandLogoProps {
   alt?: string;
 }
 
-export function BrandLogo({
-  className = "",
-  height = 36,
-  alt = "StashSaarthi",
-}: BrandLogoProps) {
+export function BrandLogo({ className = "", height = 36, alt = "StashSaarthi" }: BrandLogoProps) {
   return (
     <div className={`inline-flex items-center select-none ${className}`}>
       <img

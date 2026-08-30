@@ -35,7 +35,12 @@ type RiskCard = {
   id: string;
   title: string;
   title_hi?: string;
-  icons: [typeof ShieldAlert, typeof PackageCheck] | [typeof KeyRound, typeof Lock] | [typeof BadgeIndianRupee, typeof Wallet] | [typeof HeartHandshake, typeof Activity] | [typeof Camera, typeof Eye];
+  icons:
+    | [typeof ShieldAlert, typeof PackageCheck]
+    | [typeof KeyRound, typeof Lock]
+    | [typeof BadgeIndianRupee, typeof Wallet]
+    | [typeof HeartHandshake, typeof Activity]
+    | [typeof Camera, typeof Eye];
   problem: string;
   problem_hi?: string;
   mitigations: string[];
@@ -75,7 +80,7 @@ const CARDS: RiskCard[] = [
     mitigations: [
       "Senior master bedrooms remain smart-locked/restricted master zones",
       "Interactions strictly limited to verified shared common spaces",
-      "Mandatory 7-day trial period with structured \"House Norms Matrix\"",
+      'Mandatory 7-day trial period with structured "House Norms Matrix"',
     ],
     mitigations_hi: [
       "बुजुर्गों के मुख्य शयनकक्ष स्मार्ट-लॉक्ड और पूर्णतः निजी क्षेत्र रहते हैं",
@@ -184,13 +189,7 @@ const CUSTODY_STEPS: CustodyStep[] = [
   },
 ];
 
-function RiskMitigationCard({
-  card,
-  index,
-}: {
-  card: RiskCard;
-  index: number;
-}) {
+function RiskMitigationCard({ card, index }: { card: RiskCard; index: number }) {
   const { language } = useLanguage();
   const isHi = language === "hi";
   const [Icon1, Icon2] = card.icons;
@@ -210,7 +209,10 @@ function RiskMitigationCard({
       <Card3D className="h-full rounded-3xl" maxTilt={8}>
         <div className="glass glass-hover flex h-full flex-col overflow-hidden rounded-3xl relative z-10 bg-black/40">
           {/* ── Header ── */}
-          <div className="flex items-start gap-3 p-5 sm:p-6" style={{ transform: "translateZ(30px)" }}>
+          <div
+            className="flex items-start gap-3 p-5 sm:p-6"
+            style={{ transform: "translateZ(30px)" }}
+          >
             <span
               className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl border border-white/10"
               style={{
@@ -230,16 +232,16 @@ function RiskMitigationCard({
           </div>
 
           <div className="flex flex-1 flex-col px-5 pb-5 sm:px-6 sm:pb-6">
-            <h3 className="text-sm font-bold leading-snug sm:text-base break-words" style={{ transform: "translateZ(20px)" }}>
+            <h3
+              className="text-sm font-bold leading-snug sm:text-base break-words"
+              style={{ transform: "translateZ(20px)" }}
+            >
               {title}
             </h3>
 
             {/* ── Risk callout ── */}
             <div className="mt-3 flex items-start gap-2 rounded-xl border border-amber-500/20 bg-amber-500/[0.07] p-3">
-              <AlertTriangle
-                className="mt-0.5 h-4 w-4 shrink-0"
-                style={{ color: GOLD }}
-              />
+              <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" style={{ color: GOLD }} />
               <p className="text-xs leading-relaxed text-muted-foreground sm:text-sm break-words">
                 {problem}
               </p>
@@ -251,16 +253,14 @@ function RiskMitigationCard({
                 variant="outline"
                 className="border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
               >
-                <ShieldCheck className="mr-1 h-3 w-3" /> {isHi ? "सुरक्षा निवारण प्रणाली" : "Mitigation Engine"}
+                <ShieldCheck className="mr-1 h-3 w-3" />{" "}
+                {isHi ? "सुरक्षा निवारण प्रणाली" : "Mitigation Engine"}
               </Badge>
             </div>
             <ul className="mt-3 flex-1 space-y-2">
               {mitigations.map((m) => (
                 <li key={m} className="flex items-start gap-2.5 text-sm">
-                  <Check
-                    className="mt-0.5 h-4 w-4 shrink-0"
-                    style={{ color: EMERALD }}
-                  />
+                  <Check className="mt-0.5 h-4 w-4 shrink-0" style={{ color: EMERALD }} />
                   <span className="text-muted-foreground break-words">{m}</span>
                 </li>
               ))}
@@ -346,34 +346,43 @@ function SealCertificate({ onClose }: { onClose: () => void }) {
         <h3 className="text-lg font-extrabold tracking-tight sm:text-xl">
           {isHi ? "✓ सील 100% अक्षुण्ण" : "✓ Seal Intact"}
         </h3>
-        <p
-          className="mt-1 text-sm font-bold"
-          style={{ color: EMERALD }}
-        >
+        <p className="mt-1 text-sm font-bold" style={{ color: EMERALD }}>
           {isHi ? "टैम्पर-प्रूफ बारकोड #SS-KNP-84920" : "Tamper-Proof Barcode #SS-KNP-84920"}
         </p>
 
         <div className="mt-5 space-y-2 rounded-2xl border border-white/10 bg-black/40 p-4 text-left font-mono text-xs">
           <div className="flex justify-between">
-            <span className="text-muted-foreground">{isHi ? "पिकअप स्थान:" : "Pickup Location:"}</span>
-            <span className="font-semibold text-foreground">{isHi ? "आईआईटी कानपुर हॉल 13" : "IIT Kanpur Hall 13"}</span>
+            <span className="text-muted-foreground">
+              {isHi ? "पिकअप स्थान:" : "Pickup Location:"}
+            </span>
+            <span className="font-semibold text-foreground">
+              {isHi ? "आईआईटी कानपुर हॉल 13" : "IIT Kanpur Hall 13"}
+            </span>
           </div>
           <div className="flex justify-between">
             <span className="text-muted-foreground">{isHi ? "स्टोरेज नोड:" : "Storage Node:"}</span>
-            <span className="font-semibold text-foreground">{isHi ? "कल्याणपुर सीनियर होम #04" : "Kalyanpur Senior Home #04"}</span>
+            <span className="font-semibold text-foreground">
+              {isHi ? "कल्याणपुर सीनियर होम #04" : "Kalyanpur Senior Home #04"}
+            </span>
           </div>
           <div className="flex justify-between">
-            <span className="text-muted-foreground">{isHi ? "सक्रिय बीमा:" : "Insurance Active:"}</span>
+            <span className="text-muted-foreground">
+              {isHi ? "सक्रिय बीमा:" : "Insurance Active:"}
+            </span>
             <span className="font-bold text-emerald-400">₹10,000</span>
           </div>
           <div className="flex justify-between">
             <span className="text-muted-foreground">{isHi ? "स्थिति:" : "Integrity Status:"}</span>
-            <span className="font-bold text-emerald-400">{isHi ? "100% सुरक्षित एवं सीलबंद" : "100% Verified Sealed"}</span>
+            <span className="font-bold text-emerald-400">
+              {isHi ? "100% सुरक्षित एवं सीलबंद" : "100% Verified Sealed"}
+            </span>
           </div>
         </div>
 
         <p className="mt-4 text-[11px] text-muted-foreground">
-          {isHi ? "यह विंडो 4 सेकंड में स्वतः बंद हो जाएगी।" : "This certificate auto-closes in 4 seconds."}
+          {isHi
+            ? "यह विंडो 4 सेकंड में स्वतः बंद हो जाएगी।"
+            : "This certificate auto-closes in 4 seconds."}
         </p>
       </motion.div>
     </motion.div>
@@ -407,7 +416,9 @@ function CustodyTimeline() {
                 </span>
               </div>
               <h3 className="text-lg sm:text-xl font-bold text-white mt-1">
-                {isHi ? "सामान उठाने से वापसी तक 4-चरणीय सत्यापन" : "4-Stage Verifiable Custody from Doorstep to Return"}
+                {isHi
+                  ? "सामान उठाने से वापसी तक 4-चरणीय सत्यापन"
+                  : "4-Stage Verifiable Custody from Doorstep to Return"}
               </h3>
             </div>
 
@@ -434,17 +445,23 @@ function CustodyTimeline() {
                     isCurrent
                       ? "border-emerald-500/60 bg-emerald-500/10 shadow-[0_0_20px_-5px_rgba(16,185,129,0.3)]"
                       : isPassed
-                      ? "border-emerald-500/20 bg-white/[0.03]"
-                      : "border-white/10 bg-white/[0.02] opacity-50"
+                        ? "border-emerald-500/20 bg-white/[0.03]"
+                        : "border-white/10 bg-white/[0.02] opacity-50"
                   }`}
                 >
                   <div className="flex items-center justify-between mb-3">
-                    <span className={`grid h-8 w-8 place-items-center rounded-xl text-xs font-bold ${
-                      isCurrent || isPassed ? "bg-emerald-500 text-black font-mono" : "bg-white/10 text-white font-mono"
-                    }`}>
+                    <span
+                      className={`grid h-8 w-8 place-items-center rounded-xl text-xs font-bold ${
+                        isCurrent || isPassed
+                          ? "bg-emerald-500 text-black font-mono"
+                          : "bg-white/10 text-white font-mono"
+                      }`}
+                    >
                       0{step.id}
                     </span>
-                    <Icon className={`h-4 w-4 ${isCurrent ? "text-emerald-400" : "text-slate-400"}`} />
+                    <Icon
+                      className={`h-4 w-4 ${isCurrent ? "text-emerald-400" : "text-slate-400"}`}
+                    />
                   </div>
                   <h4 className="text-xs font-bold text-white leading-snug">
                     {isHi && step.label_hi ? step.label_hi : step.label}
@@ -597,7 +614,8 @@ export function ZeroRisk() {
                   <span className="font-semibold" style={{ color: EMERALD }}>
                     verified
                   </span>{" "}
-                  badges in our secure database — backed by 3-Tier identity, background & on-site verification.
+                  badges in our secure database — backed by 3-Tier identity, background & on-site
+                  verification.
                 </>
               )}
             </p>

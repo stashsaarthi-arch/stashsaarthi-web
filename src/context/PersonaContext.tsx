@@ -60,11 +60,7 @@ export function PersonaProvider({ children }: { children: React.ReactNode }) {
     [role, setRole],
   );
 
-  return (
-    <PersonaContext.Provider value={contextValue}>
-      {children}
-    </PersonaContext.Provider>
-  );
+  return <PersonaContext.Provider value={contextValue}>{children}</PersonaContext.Provider>;
 }
 
 const defaultContextValue: PersonaContextType = {

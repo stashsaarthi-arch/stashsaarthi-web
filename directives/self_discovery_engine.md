@@ -17,7 +17,7 @@ When in Discovery Mode, systematically evaluate the repository across 6 lenses:
    - Code-split heavy routes, remove dead CSS, memoize heavy calculations, and optimize image assets.
 
 5. **Behavioral Trust & Micro-Moments:**
-   - Add dynamic floating toast alerts (e.g., *"Rohit from CSJMU just booked a 2-bag slot"*).
+   - Add dynamic floating toast alerts (e.g., _"Rohit from CSJMU just booked a 2-bag slot"_).
    - Add copy-to-clipboard feedback, haptic micro-vibrations, and interactive FAQ accordions.
 
 6. **Accessibility & Code Health:**

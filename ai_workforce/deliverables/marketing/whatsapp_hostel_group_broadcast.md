@@ -1,11 +1,12 @@
 # WhatsApp Hostel Group Viral Broadcast Templates
 
 **Target Distribution:** IIT Kanpur Hall WhatsApp Groups, CSJMU Hostel Groups, Kakadeo Batch Channels  
-**Conversion Goal:** 1-Click StashPass generation & hostel group viral forwarding  
+**Conversion Goal:** 1-Click StashPass generation & hostel group viral forwarding
 
 ---
 
 ## Template 1: Semester-End Dead-Rent Alert (IITK & CSJMU)
+
 ```text
 🚨 *URGENT SEMESTER-END PSA: DON'T PAY ₹15,000 DEAD RENT THIS SUMMER* 🚨
 
@@ -28,6 +29,7 @@ _Forward this to your wingmates before they throw away ₹15k!_ 💸
 ---
 
 ## Template 2: Senior Host Neighborhood Word-of-Mouth (Kalyanpur / Kakadeo RWA Groups)
+
 ```text
 🌸 *कानपुर के वरिष्ठ नागरिकों व परिवारों के लिए सम्मानजनक अतिरिक्त आय का अवसर* 🌸
 

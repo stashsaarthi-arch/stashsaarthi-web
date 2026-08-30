@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -49,7 +55,9 @@ export function MatchDrawer({
       return;
     }
     if (phone.replace(/\D/g, "").length < 10) {
-      toast.error(isHi ? "कृपया 10-अंकों का वैध फोन नंबर दर्ज करें।" : "Please enter a valid phone number.");
+      toast.error(
+        isHi ? "कृपया 10-अंकों का वैध फोन नंबर दर्ज करें।" : "Please enter a valid phone number.",
+      );
       return;
     }
 
@@ -70,12 +78,21 @@ export function MatchDrawer({
       setPhone("");
       setMessage("");
       onOpenChange(false);
-      toast.success(isHi ? "🎉 आपका अनुरोध प्राप्त हुआ! हमारी टीम 24 घंटे में संपर्क करेगी।" : "Welcome aboard! Our team will reach out within 24 hours", {
-        description: isHi ? "आपका मैचिंग अनुरोध हमारी कम्युनिटी टीम के पास है।" : "Your match request is with our community team.",
-      });
+      toast.success(
+        isHi
+          ? "🎉 आपका अनुरोध प्राप्त हुआ! हमारी टीम 24 घंटे में संपर्क करेगी।"
+          : "Welcome aboard! Our team will reach out within 24 hours",
+        {
+          description: isHi
+            ? "आपका मैचिंग अनुरोध हमारी कम्युनिटी टीम के पास है।"
+            : "Your match request is with our community team.",
+        },
+      );
     } catch {
       toast.error(isHi ? "अनुरोध भेजने में असमर्थ" : "We couldn't send your match request", {
-        description: isHi ? "कृपया अपना इंटरनेट कनेक्शन जांचें और पुनः प्रयास करें।" : "Please check your connection and try again in a moment.",
+        description: isHi
+          ? "कृपया अपना इंटरनेट कनेक्शन जांचें और पुनः प्रयास करें।"
+          : "Please check your connection and try again in a moment.",
       });
     } finally {
       setSubmitting(false);
@@ -98,34 +115,67 @@ export function MatchDrawer({
 
         <form onSubmit={submit} className="mt-6 space-y-4">
           <Field label={isHi ? "पूरा नाम" : "Full name"}>
-            <Input value={name} onChange={(e) => setName(e.target.value)} disabled={submitting} placeholder={isHi ? "आपका नाम" : "Your name"} />
+            <Input
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              disabled={submitting}
+              placeholder={isHi ? "आपका नाम" : "Your name"}
+            />
           </Field>
           <Field label={isHi ? "ईमेल" : "Email"}>
-            <Input value={email} onChange={(e) => setEmail(e.target.value)} disabled={submitting} placeholder="you@college.edu" />
+            <Input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              disabled={submitting}
+              placeholder="you@college.edu"
+            />
           </Field>
           <Field label={isHi ? "फ़ोन / WhatsApp" : "Phone / WhatsApp"}>
-            <Input value={phone} onChange={(e) => setPhone(e.target.value)} disabled={submitting} placeholder="+91 98xxx xxxxx" />
+            <Input
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              disabled={submitting}
+              placeholder="+91 98xxx xxxxx"
+            />
           </Field>
           <Field label={isHi ? "पसंदीदा शहर या इलाका" : "Preferred city or locality"}>
-            <Input value={location} onChange={(e) => setLocation(e.target.value)} disabled={submitting} placeholder={isHi ? "जैसे कल्याणपुर, कानपुर" : "e.g. Swaroop Nagar, Kanpur"} />
+            <Input
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              disabled={submitting}
+              placeholder={isHi ? "जैसे कल्याणपुर, कानपुर" : "e.g. Swaroop Nagar, Kanpur"}
+            />
           </Field>
-          <Field label={isHi ? "आप किस तरह का साथ / सहायता ढूंढ रहे हैं?" : "What kind of companionship are you looking for?"}>
+          <Field
+            label={
+              isHi
+                ? "आप किस तरह का साथ / सहायता ढूंढ रहे हैं?"
+                : "What kind of companionship are you looking for?"
+            }
+          >
             <Textarea
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               disabled={submitting}
               rows={3}
-              placeholder={isHi ? "शाम की बातचीत, तकनीकी सहायता, भोजन प्राथमिकताएं..." : "Evening chats, tech support, dietary preferences..."}
+              placeholder={
+                isHi
+                  ? "शाम की बातचीत, तकनीकी सहायता, भोजन प्राथमिकताएं..."
+                  : "Evening chats, tech support, dietary preferences..."
+              }
             />
           </Field>
 
           <Button type="submit" variant="hero" size="lg" className="w-full" disabled={submitting}>
             {submitting ? (
               <span className="flex items-center gap-2">
-                <Loader2 className="h-4 w-4 animate-spin" /> {isHi ? "भेजा जा रहा है…" : "Submitting…"}
+                <Loader2 className="h-4 w-4 animate-spin" />{" "}
+                {isHi ? "भेजा जा रहा है…" : "Submitting…"}
               </span>
+            ) : isHi ? (
+              "मैच अनुरोध सबमिट करें"
             ) : (
-              isHi ? "मैच अनुरोध सबमिट करें" : "Submit match request"
+              "Submit match request"
             )}
           </Button>
         </form>

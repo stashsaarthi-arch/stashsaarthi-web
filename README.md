@@ -6,7 +6,7 @@ Build a world-class, hyper-interactive, dark-themed Web App for "StashSaarthi" â
 
 - Theme: Ultra-modern Dark Mode (`bg-[#06080E]`, surface `bg-[#0F1420]/80`, borders `border-white/10`).
 
-- Accent Colors: 
+- Accent Colors:
 
   - Electric Cyan (`#00F2FE`) for Tech & Stash Logistics
 
@@ -36,7 +36,7 @@ Build a world-class, hyper-interactive, dark-themed Web App for "StashSaarthi" â
 
 ### ðŸš€ 3. HERO SECTION WITH 3D CANVAS NODE NETWORK
 
-- Background: A WebGL/Canvas interactive particle constellation network that moves smoothly with mouse cursor physics. 
+- Background: A WebGL/Canvas interactive particle constellation network that moves smoothly with mouse cursor physics.
 
 - Headlines:
 
@@ -102,7 +102,7 @@ Build a world-class, hyper-interactive, dark-themed Web App for "StashSaarthi" â
 
   - Input: "Your Monthly Rent" (e.g., â‚¹8,000/month)
 
-- Live Output Box: 
+- Live Output Box:
 
   - Money Lost paying rent during breaks vs Cost with Saarthi Stash (â‚¹300/mo per bag).
 

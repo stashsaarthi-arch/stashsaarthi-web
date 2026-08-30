@@ -9,12 +9,7 @@ export interface Card3DProps {
   maxTilt?: number;
 }
 
-export function Card3D({
-  children,
-  className,
-  tiltCoefficient = 0.06,
-  maxTilt = 15,
-}: Card3DProps) {
+export function Card3D({ children, className, tiltCoefficient = 0.06, maxTilt = 15 }: Card3DProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -40,10 +35,10 @@ export function Card3D({
 
   // Transform X/Y to Rotate Y/X
   const rotateX = useTransform(smoothY, (val) =>
-    isMobile ? 0 : Math.max(Math.min(val * -tiltCoefficient, maxTilt), -maxTilt)
+    isMobile ? 0 : Math.max(Math.min(val * -tiltCoefficient, maxTilt), -maxTilt),
   );
   const rotateY = useTransform(smoothX, (val) =>
-    isMobile ? 0 : Math.max(Math.min(val * tiltCoefficient, maxTilt), -maxTilt)
+    isMobile ? 0 : Math.max(Math.min(val * tiltCoefficient, maxTilt), -maxTilt),
   );
 
   // Motion values for specular shine position
@@ -56,7 +51,7 @@ export function Card3D({
   const shineBg = useTransform(
     [shineX, shineY],
     ([sx, sy]) =>
-      `radial-gradient(circle at ${sx}% ${sy}%, rgba(16,185,129,0.15), transparent 70%)`
+      `radial-gradient(circle at ${sx}% ${sy}%, rgba(16,185,129,0.15), transparent 70%)`,
   );
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {

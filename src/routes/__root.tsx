@@ -18,10 +18,10 @@ import { LanguageProvider } from "@/context/LanguageContext";
 import { PersonaProvider } from "@/context/PersonaContext";
 import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 import { NetworkStatus } from "@/components/stash/NetworkStatus";
-import { ReactLenis, useLenis } from 'lenis/react';
-import 'lenis/dist/lenis.css';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ReactLenis, useLenis } from "lenis/react";
+import "lenis/dist/lenis.css";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -91,22 +91,51 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   head: () => ({
     meta: [
       { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1, maximum-scale=5" },
-      { name: "theme-color", content: "#0A0D0F" },
+      {
+        name: "viewport",
+        content: "width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover",
+      },
+      { name: "theme-color", content: "#0F172A" },
       { name: "color-scheme", content: "dark" },
+      { name: "robots", content: "index, follow, max-image-preview:large" },
+      { name: "format-detection", content: "telephone=no" },
       { title: "StashSaarthi | Intergenerational Living & Micro-Storage" },
-      { name: "description", content: "Vacation luggage storage at ₹300/bag/mo, zero-brokerage verified senior-hosted rooms, and homemade tiffins near top Indian campuses." },
-      { name: "keywords", content: "student luggage storage, campus micro-storage, Kanpur student room, broker-free PG, IIT Kanpur luggage stash, vacation dead rent, intergenerational co-living India" },
+      {
+        name: "description",
+        content:
+          "Vacation luggage storage at ₹300/bag/mo, zero-brokerage verified senior-hosted rooms, and homemade tiffins near top Indian campuses.",
+      },
+      {
+        name: "keywords",
+        content:
+          "student luggage storage, campus micro-storage, Kanpur student room, broker-free PG, IIT Kanpur luggage stash, vacation dead rent, intergenerational co-living India",
+      },
       { name: "author", content: "StashSaarthi" },
       { property: "og:site_name", content: "StashSaarthi" },
       { property: "og:locale", content: "en_IN" },
       { property: "og:title", content: "StashSaarthi | Intergenerational Living & Micro-Storage" },
-      { property: "og:description", content: "Store vacation luggage securely from ₹300/mo. Find 100% verified, broker-free senior-hosted living across India." },
+      {
+        property: "og:description",
+        content:
+          "Store vacation luggage securely from ₹300/mo. Find 100% verified, broker-free senior-hosted living across India.",
+      },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://stashsaarthi-web.vercel.app" },
+      { property: "og:image", content: "https://stashsaarthi-web.vercel.app/favicon.png" },
+      {
+        property: "og:image:alt",
+        content: "StashSaarthi Intergenerational Living and Micro-Storage",
+      },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@StashSaarthi" },
       { name: "twitter:creator", content: "@StashSaarthi" },
+      { name: "twitter:title", content: "StashSaarthi | Intergenerational Living & Micro-Storage" },
+      {
+        name: "twitter:description",
+        content:
+          "Store vacation luggage securely from ₹300/mo. Find 100% verified, broker-free senior-hosted living across India.",
+      },
+      { name: "twitter:image", content: "https://stashsaarthi-web.vercel.app/favicon.png" },
     ],
     links: [
       {
@@ -137,64 +166,62 @@ function RootShell({ children }: { children: ReactNode }) {
       {
         "@type": "Organization",
         "@id": "https://stashsaarthi-web.vercel.app/#organization",
-        "name": "StashSaarthi",
-        "url": "https://stashsaarthi-web.vercel.app",
-        "logo": "https://stashsaarthi-web.vercel.app/favicon.png",
-        "description": "India's Zero-CapEx Intergenerational Living & Campus Micro-Storage Platform.",
-        "sameAs": [
-          "https://instagram.com/stashsaarthi",
-          "https://twitter.com/StashSaarthi"
-        ],
-        "contactPoint": {
+        name: "StashSaarthi",
+        url: "https://stashsaarthi-web.vercel.app",
+        logo: "https://stashsaarthi-web.vercel.app/favicon.png",
+        description: "India's Zero-CapEx Intergenerational Living & Campus Micro-Storage Platform.",
+        sameAs: ["https://instagram.com/stashsaarthi", "https://twitter.com/StashSaarthi"],
+        contactPoint: {
           "@type": "ContactPoint",
-          "telephone": "+91-9369454350",
-          "contactType": "customer support",
-          "areaServed": "IN",
-          "availableLanguage": ["en", "hi"]
-        }
+          telephone: "+91-9369454350",
+          contactType: "customer support",
+          areaServed: "IN",
+          availableLanguage: ["en", "hi"],
+        },
       },
       {
         "@type": "WebSite",
         "@id": "https://stashsaarthi-web.vercel.app/#website",
-        "url": "https://stashsaarthi-web.vercel.app",
-        "name": "StashSaarthi",
-        "publisher": { "@id": "https://stashsaarthi-web.vercel.app/#organization" }
+        url: "https://stashsaarthi-web.vercel.app",
+        name: "StashSaarthi",
+        publisher: { "@id": "https://stashsaarthi-web.vercel.app/#organization" },
       },
       {
         "@type": "Product",
         "@id": "https://stashsaarthi-web.vercel.app/#product-microstorage",
-        "name": "Saarthi Stash - Campus Micro-Storage",
-        "description": "Secure, tamper-evident vacation luggage micro-storage for university students during semester breaks.",
-        "offers": {
+        name: "Saarthi Stash - Campus Micro-Storage",
+        description:
+          "Secure, tamper-evident vacation luggage micro-storage for university students during semester breaks.",
+        offers: {
           "@type": "Offer",
-          "price": "300",
-          "priceCurrency": "INR",
-          "priceValidUntil": "2027-12-31",
-          "availability": "https://schema.org/InStock",
-          "url": "https://stashsaarthi-web.vercel.app"
-        }
+          price: "300",
+          priceCurrency: "INR",
+          priceValidUntil: "2027-12-31",
+          availability: "https://schema.org/InStock",
+          url: "https://stashsaarthi-web.vercel.app",
+        },
       },
       {
         "@type": "LocalBusiness",
         "@id": "https://stashsaarthi-web.vercel.app/#hub-kanpur",
-        "name": "StashSaarthi Kanpur Campus Hub",
-        "image": "https://stashsaarthi-web.vercel.app/favicon.png",
-        "telephone": "+91-9369454350",
-        "address": {
+        name: "StashSaarthi Kanpur Campus Hub",
+        image: "https://stashsaarthi-web.vercel.app/favicon.png",
+        telephone: "+91-9369454350",
+        address: {
           "@type": "PostalAddress",
-          "addressLocality": "Kanpur",
-          "addressRegion": "Uttar Pradesh",
-          "postalCode": "208016",
-          "addressCountry": "IN"
+          addressLocality: "Kanpur",
+          addressRegion: "Uttar Pradesh",
+          postalCode: "208016",
+          addressCountry: "IN",
         },
-        "geo": {
+        geo: {
           "@type": "GeoCoordinates",
-          "latitude": "26.5123",
-          "longitude": "80.2329"
+          latitude: "26.5123",
+          longitude: "80.2329",
         },
-        "url": "https://stashsaarthi-web.vercel.app"
-      }
-    ]
+        url: "https://stashsaarthi-web.vercel.app",
+      },
+    ],
   };
 
   return (
@@ -256,29 +283,31 @@ function RootComponent() {
       toast.error("Connection lost", {
         description: "Please check your network connection.",
         duration: Infinity,
-        id: "offline-toast"
+        id: "offline-toast",
       });
     };
-    
+
     const handleOnline = () => {
       toast.dismiss("offline-toast");
       toast.success("Back online", {
         description: "Your connection has been restored.",
-        duration: 3000
+        duration: 3000,
       });
     };
 
-    window.addEventListener('offline', handleOffline);
-    window.addEventListener('online', handleOnline);
+    window.addEventListener("offline", handleOffline);
+    window.addEventListener("online", handleOnline);
 
     return () => {
-      window.removeEventListener('offline', handleOffline);
-      window.removeEventListener('online', handleOnline);
+      window.removeEventListener("offline", handleOffline);
+      window.removeEventListener("online", handleOnline);
     };
   }, []);
 
   return (
-    <GoogleOAuthProvider clientId={import.meta.env['VITE_GOOGLE_CLIENT_ID'] || "fallback_client_id"}>
+    <GoogleOAuthProvider
+      clientId={import.meta.env["VITE_GOOGLE_CLIENT_ID"] || "fallback_client_id"}
+    >
       <AuthProvider>
         <LanguageProvider>
           <PersonaProvider>
@@ -308,7 +337,8 @@ function RootComponent() {
                 richColors
                 theme="dark"
                 toastOptions={{
-                  className: "border border-white/10 bg-[#0A0D0F]/95 text-white backdrop-blur-xl shadow-2xl rounded-2xl",
+                  className:
+                    "border border-white/10 bg-[#0A0D0F]/95 text-white backdrop-blur-xl shadow-2xl rounded-2xl",
                 }}
               />
             </QueryClientProvider>

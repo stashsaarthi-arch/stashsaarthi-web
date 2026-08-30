@@ -14,16 +14,22 @@ import { Rooms } from "@/components/stash/Rooms";
 import { Connect } from "@/components/stash/Connect";
 import { Trust } from "@/components/stash/Trust";
 import { ZeroRisk } from "@/components/stash/ZeroRisk";
+import { ProcessTransparency } from "@/components/stash/ProcessTransparency";
+import { ProductSandbox } from "@/components/stash/ProductSandbox";
+import { DataPrivacyCommitment } from "@/components/stash/DataPrivacyCommitment";
+import { FounderAccountability } from "@/components/stash/FounderAccountability";
+import { FounderEscalationWidget } from "@/components/stash/FounderEscalationWidget";
 import { Stories } from "@/components/stash/Stories";
 import { FAQ } from "@/components/stash/FAQ";
 import { FooterSection } from "@/components/stash/FooterSection";
+import { EarlyAccessModal } from "@/components/stash/EarlyAccessModal";
+import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 import { BookingModal } from "@/components/stash/BookingModal";
 import { RoomListingModal } from "@/components/stash/RoomListingModal";
 import { RoleLane } from "@/components/stash/RoleLane";
 import { WhatsAppButton } from "@/components/stash/WhatsAppButton";
 import { ActivityTicker } from "@/components/stash/ActivityTicker";
 import { ScrollProgress } from "@/components/stash/ScrollProgress";
-import { BackToTop } from "@/components/stash/BackToTop";
 import { FloatingPersonaToggle } from "@/components/stash/FloatingPersonaToggle";
 import { usePersona } from "@/context/PersonaContext";
 import logoAsset from "@/assets/stashsaarthi-logo.png.asset.json";
@@ -57,6 +63,7 @@ function Index() {
   const { role, setRole } = usePersona();
   const [booking, setBooking] = useState(false);
   const [listing, setListing] = useState(false);
+  const [earlyAccess, setEarlyAccess] = useState(false);
   const [prefill, setPrefill] = useState<BookingPrefill>({});
 
   const open = (p?: BookingPrefill) => {
@@ -65,49 +72,86 @@ function Index() {
   };
 
   return (
-    <main
-      className="relative min-h-screen overflow-x-hidden bg-background text-foreground transition-colors duration-500"
-    >
-        <AmbientNodes />
-        <CursorGlow />
-        <Navbar role={role} setRole={setRole} onBook={() => open()} onListRoom={() => setListing(true)} />
+    <main className="relative min-h-screen overflow-x-hidden bg-background text-foreground transition-colors duration-500">
+      <AmbientNodes />
+      <CursorGlow />
+      <Navbar
+        role={role}
+        setRole={setRole}
+        onBook={() => open()}
+        onListRoom={() => setListing(true)}
+        onEarlyAccess={() => setEarlyAccess(true)}
+      />
+      <ErrorBoundary>
         <Hero role={role} onBook={open} />
+      </ErrorBoundary>
+      <ErrorBoundary>
         <RoleLane role={role} onBook={open} />
+      </ErrorBoundary>
+      <ErrorBoundary>
         <DualCrisis />
+      </ErrorBoundary>
+      <ErrorBoundary>
         <Ecosystem onBook={open} />
-        {role === "student" ? (
-          <StashCalculator onBook={open} />
-        ) : (
-          <HostSimulator onBook={open} />
-        )}
+      </ErrorBoundary>
+      <ErrorBoundary>
+        {role === "student" ? <StashCalculator onBook={open} /> : <HostSimulator onBook={open} />}
+      </ErrorBoundary>
+      <ErrorBoundary>
         <Rooms onList={() => setListing(true)} />
+      </ErrorBoundary>
+      <ErrorBoundary>
         <Connect onBook={open} />
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <ProcessTransparency />
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <ProductSandbox />
+      </ErrorBoundary>
+      <ErrorBoundary>
         <Trust />
+      </ErrorBoundary>
+      <ErrorBoundary>
         <ZeroRisk />
-        {role === "host" && (
-          <>
-            <HostRules />
-            <FamilyDashboard />
-          </>
-        )}
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <DataPrivacyCommitment />
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <FounderAccountability />
+      </ErrorBoundary>
+      {role === "host" && (
+        <ErrorBoundary>
+          <HostRules />
+          <FamilyDashboard />
+        </ErrorBoundary>
+      )}
+      <ErrorBoundary>
         <Stories role={role} />
+      </ErrorBoundary>
+      <ErrorBoundary>
         <FAQ />
+      </ErrorBoundary>
+      <ErrorBoundary>
         <FooterSection />
+      </ErrorBoundary>
 
-        <BookingModal
-          open={booking}
-          onOpenChange={setBooking}
-          service={prefill.service ?? "stash"}
-          note={prefill.note}
-          bags={prefill.bags}
-          months={prefill.months}
-          amount={prefill.amount}
-        />
+      <BookingModal
+        open={booking}
+        onOpenChange={setBooking}
+        service={prefill.service ?? "stash"}
+        note={prefill.note}
+        bags={prefill.bags}
+        months={prefill.months}
+        amount={prefill.amount}
+      />
       <RoomListingModal open={listing} onOpenChange={setListing} />
+      <EarlyAccessModal open={earlyAccess} onOpenChange={setEarlyAccess} initialRole={role} />
       <ScrollProgress />
       <ActivityTicker />
-      <BackToTop />
       <FloatingPersonaToggle />
+      <FounderEscalationWidget />
       <WhatsAppButton onBook={open} />
     </main>
   );

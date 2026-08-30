@@ -32,7 +32,8 @@ const STORIES: Story[] = [
     rating: 5,
     clip: "0:42",
     text: "I stashed 4 bags for the summer for ₹1,200 instead of paying ₹16,000 rent for an empty room. Pickup and return were both on time.",
-    text_hi: "मैंने खाली कमरे का ₹16,000 किराया देने के बजाय पूरी गर्मियों के लिए 4 बैग मात्र ₹1,200 में रखे। पिकअप और वापसी दोनों समय पर हुए।",
+    text_hi:
+      "मैंने खाली कमरे का ₹16,000 किराया देने के बजाय पूरी गर्मियों के लिए 4 बैग मात्र ₹1,200 में रखे। पिकअप और वापसी दोनों समय पर हुए।",
   },
   {
     group: "students",
@@ -44,7 +45,8 @@ const STORIES: Story[] = [
     rating: 5,
     clip: "0:31",
     text: "Found a brokerage-free room in six days. The on-site audit photos matched exactly what I moved into.",
-    text_hi: "छह दिनों में बिना किसी ब्रोकर के कमरा मिल गया। ऑन-साइट ऑडिट की तस्वीरें बिल्कुल वैसी ही थीं जैसा वास्तविक कमरा था।",
+    text_hi:
+      "छह दिनों में बिना किसी ब्रोकर के कमरा मिल गया। ऑन-साइट ऑडिट की तस्वीरें बिल्कुल वैसी ही थीं जैसा वास्तविक कमरा था।",
   },
   {
     group: "seniors",
@@ -56,7 +58,8 @@ const STORIES: Story[] = [
     rating: 5,
     clip: "0:55",
     text: "My first floor was empty for nine years. Now Aarav sets up my video calls every evening and the house has noise again.",
-    text_hi: "मेरी पहली मंजिल नौ साल से खाली थी। अब आरव हर शाम मेरे वीडियो कॉल सेट करता है और घर में फिर से रौनक आ गई है।",
+    text_hi:
+      "मेरी पहली मंजिल नौ साल से खाली थी। अब आरव हर शाम मेरे वीडियो कॉल सेट करता है और घर में फिर से रौनक आ गई है।",
   },
   {
     group: "seniors",
@@ -68,7 +71,8 @@ const STORIES: Story[] = [
     rating: 5,
     clip: "0:38",
     text: "The police verification gave my daughter confidence. I get help, company, and a little income.",
-    text_hi: "पुलिस सत्यापन से मेरी बेटी को पूरा भरोसा हुआ। मुझे घर में मदद, पारिवारिक साथ और सम्मानजनक आय मिलती है।",
+    text_hi:
+      "पुलिस सत्यापन से मेरी बेटी को पूरा भरोसा हुआ। मुझे घर में मदद, पारिवारिक साथ और सम्मानजनक आय मिलती है।",
   },
   {
     group: "partners",
@@ -80,7 +84,8 @@ const STORIES: Story[] = [
     rating: 5,
     clip: "0:27",
     text: "I cook 40 tiffins a day from my own kitchen. Weekly payouts arrive without a single follow-up call.",
-    text_hi: "मैं अपनी रसोई से प्रतिदिन 40 टिफिन बनाती हूं। बिना किसी फॉलो-अप के हर हफ्ते बैंक खाते में भुगतान आ जाता है।",
+    text_hi:
+      "मैं अपनी रसोई से प्रतिदिन 40 टिफिन बनाती हूं। बिना किसी फॉलो-अप के हर हफ्ते बैंक खाते में भुगतान आ जाता है।",
   },
   {
     group: "partners",
@@ -118,20 +123,20 @@ export function Stories({ role }: { role?: Role }) {
       if (!AudioCtx) return;
       const ctx = new AudioCtx();
       const notes = [440, 554.37, 659.25, 880]; // A4, C#5, E5, A5 major chord
-      
+
       notes.forEach((freq, i) => {
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
         osc.type = "sine";
         osc.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.12);
-        
+
         gain.gain.setValueAtTime(0, ctx.currentTime + i * 0.12);
         gain.gain.linearRampToValueAtTime(0.04, ctx.currentTime + i * 0.12 + 0.05);
         gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + i * 0.12 + 0.9);
-        
+
         osc.connect(gain);
         gain.connect(ctx.destination);
-        
+
         osc.start(ctx.currentTime + i * 0.12);
         osc.stop(ctx.currentTime + i * 0.12 + 1.0);
       });
@@ -164,7 +169,8 @@ export function Stories({ role }: { role?: Role }) {
     <section className="relative mx-auto max-w-6xl px-4 py-16 sm:py-24">
       <div className="mx-auto max-w-2xl text-center">
         <h2 className="text-balance text-[1.75rem] font-extrabold tracking-tight sm:text-5xl">
-          {t.storiesSection.title} <span className="text-gradient">{t.storiesSection.titleGradient}</span>
+          {t.storiesSection.title}{" "}
+          <span className="text-gradient">{t.storiesSection.titleGradient}</span>
         </h2>
         <p className="mt-4 text-sm text-muted-foreground sm:text-base">
           {t.storiesSection.subtitle}
@@ -218,7 +224,8 @@ export function Stories({ role }: { role?: Role }) {
                           <PrototypeBadge variant="text" />
                         </div>
                         <p className="text-xs text-muted-foreground">
-                          {isHi && s.role_hi ? s.role_hi : s.role} · {isHi && s.city_hi ? s.city_hi : s.city}
+                          {isHi && s.role_hi ? s.role_hi : s.role} ·{" "}
+                          {isHi && s.city_hi ? s.city_hi : s.city}
                         </p>
                       </div>
                       <div className="flex items-center gap-1 text-amber">
@@ -241,7 +248,9 @@ export function Stories({ role }: { role?: Role }) {
                       aria-label={on ? "Pause audio story" : "Play audio story"}
                     >
                       {on ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5" />}
-                      <span>{on ? (isHi ? "रोकें" : "Pause") : (isHi ? "ऑडियो सुनें" : "Listen")}</span>
+                      <span>
+                        {on ? (isHi ? "रोकें" : "Pause") : isHi ? "ऑडियो सुनें" : "Listen"}
+                      </span>
                     </button>
 
                     {/* Equalizer animation */}

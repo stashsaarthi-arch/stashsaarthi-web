@@ -1,4 +1,10 @@
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { DOCS } from "./legal";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -24,7 +30,9 @@ export function LegalDialog({
           <DialogDescription className="sr-only">{title} details</DialogDescription>
         </DialogHeader>
         <div className="space-y-4 text-sm leading-relaxed text-muted-foreground">
-          {body.map((p, idx) => <p key={idx}>{p}</p>)}
+          {body.map((p, idx) => (
+            <p key={idx}>{p}</p>
+          ))}
         </div>
       </DialogContent>
     </Dialog>

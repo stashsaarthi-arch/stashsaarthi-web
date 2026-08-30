@@ -42,7 +42,7 @@ export function HostSimulator({ onBook }: { onBook: () => void }) {
     if (selectedOptions["corner"]) monthly += cornerMonthly;
     if (selectedOptions["bedroom"]) monthly += 5225;
     if (selectedOptions["kitchen"]) monthly += kitchenMonthly;
-    
+
     return {
       totalMonthly: monthly,
       annualIncome: monthly * 12,
@@ -52,7 +52,10 @@ export function HostSimulator({ onBook }: { onBook: () => void }) {
   const options = t.hostSimulator.options || [];
 
   return (
-    <section id="host-earnings-calculator" className="relative mx-auto max-w-6xl px-4 py-16 sm:py-24 scroll-mt-20">
+    <section
+      id="host-earnings-calculator"
+      className="relative mx-auto max-w-6xl px-4 py-16 sm:py-24 scroll-mt-20"
+    >
       <div className="mx-auto max-w-2xl text-center">
         <h2 className="text-balance text-[1.75rem] font-extrabold tracking-tight sm:text-5xl">
           {t.hostSimulator.titlePart1}{" "}
@@ -80,12 +83,22 @@ export function HostSimulator({ onBook }: { onBook: () => void }) {
                       <CheckCircle2 className="h-6 w-6" />
                     </div>
                   )}
-                  <div className="mb-2 text-[10px] font-bold uppercase tracking-wider text-amber-400" style={{ transform: "translateZ(30px)" }}>
+                  <div
+                    className="mb-2 text-[10px] font-bold uppercase tracking-wider text-amber-400"
+                    style={{ transform: "translateZ(30px)" }}
+                  >
                     {opt.tag}
                   </div>
-                  <h3 className="mb-1 text-xl font-bold text-foreground" style={{ transform: "translateZ(40px)" }}>{opt.title}</h3>
-                  <div className="text-xs text-muted-foreground mb-4">{t.hostSimulator.space} {opt.space}</div>
-                  
+                  <h3
+                    className="mb-1 text-xl font-bold text-foreground"
+                    style={{ transform: "translateZ(40px)" }}
+                  >
+                    {opt.title}
+                  </h3>
+                  <div className="text-xs text-muted-foreground mb-4">
+                    {t.hostSimulator.space} {opt.space}
+                  </div>
+
                   <div className="mt-auto space-y-3" style={{ transform: "translateZ(20px)" }}>
                     <div className="flex justify-between text-sm">
                       <span className="text-muted-foreground">{t.hostSimulator.effort}</span>
@@ -96,9 +109,9 @@ export function HostSimulator({ onBook }: { onBook: () => void }) {
                       <span className="font-semibold text-foreground text-right">
                         {opt.id === "corner" && isSelected
                           ? `${cornerBags} ${isHi ? "बैग क्षमता" : "Bags Capacity"}`
-                          : opt.id === "kitchen" && isSelected 
-                          ? `${dailyTiffins} ${isHi ? "दैनिक टिफिन" : "Daily Tiffins"}` 
-                          : opt.capacity}
+                          : opt.id === "kitchen" && isSelected
+                            ? `${dailyTiffins} ${isHi ? "दैनिक टिफिन" : "Daily Tiffins"}`
+                            : opt.capacity}
                       </span>
                     </div>
 
@@ -145,8 +158,14 @@ export function HostSimulator({ onBook }: { onBook: () => void }) {
                           ))}
                         </div>
                         <div className="mt-2 flex items-center justify-between text-[10px] text-slate-400 font-mono">
-                          <span>{isHi ? `स्थान: ${(cornerBags * 1.5).toFixed(0)} वर्ग फुट` : `Area: ${(cornerBags * 1.5).toFixed(0)} sq.ft`}</span>
-                          <span className="text-amber-400 font-bold">{isHi ? "₹180/बैग होस्ट शुद्ध आय" : "₹180/bag host net"}</span>
+                          <span>
+                            {isHi
+                              ? `स्थान: ${(cornerBags * 1.5).toFixed(0)} वर्ग फुट`
+                              : `Area: ${(cornerBags * 1.5).toFixed(0)} sq.ft`}
+                          </span>
+                          <span className="text-amber-400 font-bold">
+                            {isHi ? "₹180/बैग होस्ट शुद्ध आय" : "₹180/bag host net"}
+                          </span>
                         </div>
                       </div>
                     )}
@@ -158,7 +177,8 @@ export function HostSimulator({ onBook }: { onBook: () => void }) {
                       >
                         <div className="flex justify-between text-xs font-semibold mb-1.5">
                           <span className="text-slate-300">
-                            {opt.tiffinCountTitle || (isHi ? "दैनिक टिफिन संख्या:" : "Daily Tiffin Count:")}
+                            {opt.tiffinCountTitle ||
+                              (isHi ? "दैनिक टिफिन संख्या:" : "Daily Tiffin Count:")}
                           </span>
                           <span className="font-mono font-bold text-amber-400">
                             {dailyTiffins} {opt.tiffinMealsDay || (isHi ? "भोजन/दिन" : "meals/day")}
@@ -179,7 +199,10 @@ export function HostSimulator({ onBook }: { onBook: () => void }) {
                           <span>15 {isHi ? "भोजन" : "meals"}</span>
                         </div>
                         <div className="mt-2 text-[10px] text-emerald-400 font-medium">
-                          {opt.payoutNote || (isHi ? "⚡ ₹55 प्रति भोजन होस्ट भुगतान (24 दिन/माह)" : "⚡ ₹55 host payout / meal (24 days/mo)")}
+                          {opt.payoutNote ||
+                            (isHi
+                              ? "⚡ ₹55 प्रति भोजन होस्ट भुगतान (24 दिन/माह)"
+                              : "⚡ ₹55 host payout / meal (24 days/mo)")}
                         </div>
                       </div>
                     )}
@@ -191,9 +214,9 @@ export function HostSimulator({ onBook }: { onBook: () => void }) {
                       <div className="text-xl font-bold text-amber-400 font-mono">
                         {opt.id === "corner" && isSelected
                           ? `${inr(cornerMonthly)}${isHi ? "/माह" : "/mo"}`
-                          : opt.id === "kitchen" && isSelected 
-                          ? `${inr(kitchenMonthly)}${isHi ? "/माह" : "/mo"}` 
-                          : opt.incomeRange}
+                          : opt.id === "kitchen" && isSelected
+                            ? `${inr(kitchenMonthly)}${isHi ? "/माह" : "/mo"}`
+                            : opt.incomeRange}
                       </div>
                     </div>
                   </div>
@@ -218,9 +241,12 @@ export function HostSimulator({ onBook }: { onBook: () => void }) {
             </div>
             <div className="text-4xl font-extrabold tracking-tight sm:text-6xl text-foreground flex items-center justify-center gap-2">
               <IndianRupee className="h-8 w-8 sm:h-12 sm:w-12 text-amber-400" />
-              {inr(annualIncome)} <span className="text-2xl sm:text-4xl text-muted-foreground">{t.hostSimulator.perYear}</span>
+              {inr(annualIncome)}{" "}
+              <span className="text-2xl sm:text-4xl text-muted-foreground">
+                {t.hostSimulator.perYear}
+              </span>
             </div>
-            
+
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
               <Button
                 data-magnetic

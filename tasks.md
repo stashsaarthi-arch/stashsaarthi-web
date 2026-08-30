@@ -1,6 +1,7 @@
 # Autonomous Improvement Backlog (Auto-Pilot Queue)
 
 ## Execution Rules for AI Agent:
+
 1. Always pick the top unchecked task `[ ]`.
 2. Implement the full changes strictly following `agent.md`.
 3. Run `npm run build` or `npm run check` to verify zero errors.
@@ -10,6 +11,7 @@
 ---
 
 ## Active Queue:
+
 - [x] 1. **Micro-Interactions & Hover Polish**: Add subtle haptic-like button click animations and glow pulses to all primary CTAs across Student and Host tabs.
 - [x] 2. **Form Auto-Validation & UX Feedback**: Add instant inline regex validation (Indian 10-digit phone number, valid college email, clean PIN code) in the waitlist modal.
 - [x] 3. **SEO & Social Meta Tags**: Inject rich OpenGraph (`og:image`, `og:title`, `og:description`) and Twitter cards tailored for StashSaarthi campus micro-storage in `index.html`.

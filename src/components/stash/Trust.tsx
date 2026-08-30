@@ -12,11 +12,10 @@ export function Trust() {
     <section id="trust" className="relative mx-auto max-w-3xl px-4 py-16 sm:py-24 scroll-mt-20">
       <div className="mx-auto max-w-2xl text-center">
         <h2 className="text-balance text-[1.75rem] font-extrabold tracking-tight sm:text-5xl">
-          {t.trustSection.heading} <span className="text-gradient">{t.trustSection.headingGradient}</span>
+          {t.trustSection.heading}{" "}
+          <span className="text-gradient">{t.trustSection.headingGradient}</span>
         </h2>
-        <p className="mt-4 text-sm text-muted-foreground sm:text-base">
-          {t.trustSection.subtitle}
-        </p>
+        <p className="mt-4 text-sm text-muted-foreground sm:text-base">{t.trustSection.subtitle}</p>
       </div>
 
       <ol className="relative mt-10 space-y-4 sm:mt-14">
@@ -40,7 +39,9 @@ export function Trust() {
               <li className="relative grid grid-cols-[auto_minmax(0,1fr)] gap-4">
                 <span
                   className="z-10 grid h-11 w-11 shrink-0 place-items-center rounded-full border border-emerald/40 bg-background"
-                  style={{ boxShadow: "0 0 24px -6px color-mix(in oklab, var(--emerald) 70%, transparent)" }}
+                  style={{
+                    boxShadow: "0 0 24px -6px color-mix(in oklab, var(--emerald) 70%, transparent)",
+                  }}
                 >
                   <Icon className="h-5 w-5 text-emerald" />
                 </span>
@@ -64,7 +65,9 @@ export function Trust() {
                     >
                       <BadgeCheck className="h-4 w-4 text-emerald" />
                     </motion.span>
-                    <span className="text-xs font-bold text-emerald">{t.trustSection.verifiedBadge}</span>
+                    <span className="text-xs font-bold text-emerald">
+                      {t.trustSection.verifiedBadge}
+                    </span>
                   </div>
                 </div>
               </li>

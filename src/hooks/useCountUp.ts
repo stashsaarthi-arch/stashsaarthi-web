@@ -13,7 +13,7 @@ export function useCountUp(
   end: number,
   duration = 1200,
   prefix = "",
-  suffix = ""
+  suffix = "",
 ): { ref: React.RefObject<HTMLElement | null>; display: string } {
   const ref = useRef<HTMLElement | null>(null);
   const [value, setValue] = useState(0);
@@ -39,7 +39,7 @@ export function useCountUp(
           requestAnimationFrame(step);
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.3 },
     );
 
     observer.observe(el);

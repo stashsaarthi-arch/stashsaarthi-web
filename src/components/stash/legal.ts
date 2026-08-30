@@ -1,152 +1,189 @@
-export const smoothScrollTo = (id: string, offset = -75) => (e?: React.MouseEvent) => {
-  if (e) e.preventDefault();
-  if (!id || typeof window === "undefined") return;
+export const smoothScrollTo =
+  (id: string, offset = -75) =>
+  (e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
+    if (!id || typeof window === "undefined") return;
 
-  // Resolve alias routes
-  let targetId = id.replace(/^#/, "");
-  if (targetId === "calculator" || targetId === "stash") {
-    const role = typeof document !== "undefined" ? document.documentElement.dataset["role"] : "student";
-    targetId = role === "host" ? "host-earnings-calculator" : "student-calculator";
-  } else if (targetId === "safety-protocol" || targetId === "safety") {
-    targetId = document.getElementById("safety-protocol") ? "safety-protocol" : "trust";
-  } else if (targetId === "waitlist" || targetId === "waitlist-form") {
-    targetId = "waitlist-form";
-  }
+    // Resolve alias routes
+    let targetId = id.replace(/^#/, "");
+    if (targetId === "top" || id === "top" || !targetId) {
+      const lenis = (window as any).__lenis;
+      if (lenis && typeof lenis.scrollTo === "function") {
+        lenis.scrollTo(0, {
+          duration: 1.0,
+          easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        });
+      } else {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+      return;
+    }
+    if (targetId === "calculator" || targetId === "stash") {
+      const role =
+        typeof document !== "undefined" ? document.documentElement.dataset["role"] : "student";
+      targetId = role === "host" ? "host-earnings-calculator" : "student-calculator";
+    } else if (targetId === "safety-protocol" || targetId === "safety") {
+      targetId = document.getElementById("safety-protocol") ? "safety-protocol" : "trust";
+    } else if (targetId === "waitlist" || targetId === "waitlist-form") {
+      targetId = "waitlist-form";
+    }
 
-  const el = document.getElementById(targetId) || document.getElementById(id.replace(/^#/, ""));
-  if (!el) return;
+    const el = document.getElementById(targetId) || document.getElementById(id.replace(/^#/, ""));
+    if (!el) return;
 
-  const lenis = (window as any).__lenis;
-  if (lenis && typeof lenis.scrollTo === "function") {
-    lenis.scrollTo(el, {
-      offset,
-      duration: 1.2,
-      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    });
-  } else {
-    const elementPosition = el.getBoundingClientRect().top + window.pageYOffset;
-    const offsetPosition = Math.max(0, elementPosition + offset);
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: "smooth",
-    });
-  }
-};
+    const lenis = (window as any).__lenis;
+    if (lenis && typeof lenis.scrollTo === "function") {
+      lenis.scrollTo(el, {
+        offset,
+        duration: 1.2,
+        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      });
+    } else {
+      const elementPosition = el.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = Math.max(0, elementPosition + offset);
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
+  };
 
 export type Doc = { title: string; title_hi?: string; body: string[]; body_hi?: string[] };
 
 export const DOCS: Record<string, Doc> = {
   about: {
-    title: "About us",
-    title_hi: "हमारे बारे में",
+    title: "About us & Founding Mission",
+    title_hi: "हमारे बारे में एवं संस्थापक मिशन",
     body: [
-      "StashSaarthi is India's hyper-local living ecosystem, built to solve two problems at once: students who move cities every few months, and seniors who have unused space and untapped time.",
-      "We map unused rooms, kitchens and storage corners in trusted neighbourhoods, verify them on-site, and connect them to students who need affordable, brokerage-free living.",
-      "Founded in Kanpur, we now operate pilot belts in Lucknow, Delhi NCR and Pune with a community-first, zero-CapEx model.",
+      "StashSaarthi is India's hyper-local living ecosystem, founded in Kanpur by Shivesh Anand to bridge student mobility with intergenerational community support.",
+      "We replace predatory brokerages and wasteful dead-rent with verified peer-to-peer micro-storage (₹300/bag/mo), broker-free student rooms (avg ₹5,500/mo), and pure homestyle tiffins inside verified senior households.",
+      "Our platform operates with software discipline and on-ground human accountability: 3-tier background verification, tamper-evident laser barcode seals, and 100% digital bank escrow.",
     ],
     body_hi: [
-      "स्टैशसारथी भारत का हाइपर-लोकल लिविंग इकोसिस्टम है, जो एक साथ दो समस्याओं को हल करता है: वे छात्र जो हर कुछ महीनों में शहर बदलते हैं, और वे बुजुर्ग जिनके पास खाली जगह और समय उपलब्ध है।",
-      "हम सुरक्षित मोहल्लों में खाली कमरों, रसोई और स्टोरेज कोनों को ऑन-साइट सत्यापित करते हैं और उन्हें ऐसे छात्रों से जोड़ते हैं जिन्हें किफायती, ब्रोकरेज-मुक्त आवास चाहिए।",
-      "कानपुर से शुरू होकर, अब हम लखनऊ, दिल्ली एनसीआर और पुणे में कम्युनिटी-फर्स्ट, जीरो-कैपेक्स मॉडल के साथ पायलट नोड्स संचालित कर रहे हैं।",
-    ],
-  },
-  micro: {
-    title: "Micro-Opportunity",
-    title_hi: "माइक्रो-अवसर",
-    body: [
-      "Every verified senior host, home chef and stash keeper on StashSaarthi earns a recurring micro-income from assets they already own.",
-      "A single spare room, one extra tiffin a day, or four square feet of storage can add ₹3,000–₹12,000 a month without any upfront investment.",
-      "Write to us and our community team will walk you through onboarding, verification and payouts.",
-    ],
-    body_hi: [
-      "स्टैशसारथी पर हर सत्यापित सीनियर होस्ट, होम शेफ और स्टैश कीपर अपनी मौजूदा संपत्तियों से नियमित अतिरिक्त आय अर्जित करता है।",
-      "एक खाली कमरा, रोजाना एक अतिरिक्त टिफिन या चार वर्ग फुट की स्टोरेज जगह बिना किसी निवेश के हर महीने ₹3,000–₹12,000 जोड़ सकती है।",
-      "हमसे संपर्क करें और हमारी टीम आपको ऑनबोर्डिंग, सत्यापन और साप्ताहिक भुगतान में पूरी सहायता करेगी।",
-    ],
-  },
-  partner: {
-    title: "Partner with us",
-    title_hi: "हमारे साथ साझेदारी करें",
-    body: [
-      "We partner with hostels, PG owners, resident welfare associations, campus clubs and local logistics teams.",
-      "Partners get access to verified student demand, our trust and audit framework, and transparent revenue sharing.",
-      "Share your details through the waitlist form and a partnerships lead will reach out within 24 hours.",
-    ],
-    body_hi: [
-      "हम हॉस्टलों, पीजी मालिकों, रेजिडेंट वेलफेयर एसोसिएशनों, कॉलेज क्लबों और स्थानीय लॉजिस्टिक्स टीमों के साथ साझेदारी करते हैं।",
-      "पार्टनर्स को सत्यापित छात्र मांग, हमारा ट्रस्ट फ्रेमवर्क और पारदर्शी राजस्व साझाकरण प्राप्त होता है।",
-      "वेटलिस्ट फॉर्म के माध्यम से अपनी जानकारी साझा करें और हमारी पार्टनरशिप टीम 24 घंटे में संपर्क करेगी।",
-    ],
-  },
-  careers: {
-    title: "Careers",
-    title_hi: "करियर",
-    body: [
-      "We are a small, high-ownership team building physical-world infrastructure with software discipline.",
-      "Open areas: city operations, trust & safety, community growth, and full-stack engineering.",
-      "There is no formal listings board yet — join the waitlist with a note about what you would like to build and we will get in touch.",
-    ],
-    body_hi: [
-      "हम एक केंद्रित और समर्पित टीम हैं जो सॉफ्टवेयर अनुशासन के साथ भौतिक दुनिया के लिए बुनियादी ढांचा तैयार कर रही है।",
-      "खुले क्षेत्र: सिटी ऑपरेशंस, ट्रस्ट एवं सुरक्षा, कम्युनिटी ग्रोथ और फुल-स्टैक इंजीनियरिंग।",
-      "वेटलिस्ट में अपने परिचय के साथ शामिल हों और हम आपसे सीधे संपर्क करेंगे।",
-    ],
-  },
-  terms: {
-    title: "Terms of service",
-    title_hi: "सेवा की शर्तें",
-    body: [
-      "By using StashSaarthi you agree to provide accurate information and to use the platform only for lawful, personal purposes.",
-      "Listings, prices and availability shown are indicative and subject to on-site verification. Final agreements are signed directly between you and the host, owner or kitchen partner.",
-      "We may suspend accounts that misuse the platform, misrepresent property details or violate community safety norms.",
-      "This is a placeholder summary intended for demonstration and will be replaced by our full legal terms before commercial launch.",
-    ],
-    body_hi: [
-      "स्टैशसारथी का उपयोग करके आप सटीक जानकारी प्रदान करने और प्लेटफॉर्म का उपयोग केवल वैध, व्यक्तिगत उद्देश्यों के लिए करने के लिए सहमत होते हैं।",
-      "दिखाए गए मूल्य और उपलब्धता ऑन-साइट सत्यापन के अधीन हैं। अंतिम समझौते आपके और होस्ट/मालिक के बीच सीधे हस्ताक्षरित होते हैं।",
-      "सामुदायिक सुरक्षा नियमों का उल्लंघन करने वाले खातों को निलंबित किया जा सकता है।",
+      "स्टैशसारथी भारत का हाइपर-लोकल लिविंग इकोसिस्टम है, जिसे कानपुर में शिवेश आनंद द्वारा छात्र गतिशीलता को अंतर-पीढ़ी सामुदायिक समर्थन से जोड़ने के लिए स्थापित किया गया।",
+      "हम भारी ब्रोकरेज और खाली कमरों के डेड-रेंट को समाप्त कर सत्यापित बुजुर्गों के घरों में माइक्रो-स्टोरेज (₹300/बैग/माह), शून्य-ब्रोकरेज कमरे (औसत ₹5,500/माह) और घर का शुद्ध भोजन उपलब्ध कराते हैं।",
+      "हमारा प्लेटफॉर्म सॉफ्टवेयर अनुशासन और ज़मीनी मानवीय जवाबदेही पर काम करता है: 3-स्तरीय सत्यापन, लेजर बारकोड सील और 100% डिजिटल बैंक एस्क्रो।",
     ],
   },
   privacy: {
-    title: "Privacy policy",
-    title_hi: "गोपनीयता नीति",
+    title: "Privacy Policy (Plain English)",
+    title_hi: "गोपनीयता नीति (सरल भाषा में)",
     body: [
-      "We collect only the details you submit — name, email, phone, city and the preferences relevant to your request.",
-      "Your data is stored securely and is never sold. It is used to contact you about your enquiry and to improve service quality in your city.",
-      "You can request deletion of your data at any time by contacting our support team.",
+      "1. Zero Data Monetization: We never sell, rent, lease, or distribute your phone number, email, or identity documents to third parties, telemarketers, or advertising networks.",
+      "2. Purpose of Collection: We collect only the data required to facilitate safe node custody and booking clearance (Name, College/Aadhaar proof, and campus location).",
+      "3. Encryption & Storage: All personal records are encrypted at rest and in transit. Temporary check-in photo logs are retained only during the active custody period.",
+      "4. Right to Erasure: You have full ownership of your data and can request permanent account and document deletion at any time by emailing privacy@stashsaarthi.in.",
     ],
     body_hi: [
-      "हम केवल वही जानकारी एकत्र करते हैं जो आप सबमिट करते हैं — नाम, ईमेल, फोन नंबर और आपकी आवश्यकताएं।",
-      "आपका डेटा सुरक्षित रूप से संग्रहीत किया जाता है और कभी बेचा नहीं जाता। इसका उपयोग केवल आपकी सहायता के लिए किया जाता है।",
-      "आप किसी भी समय हमारी सहायता टीम से संपर्क करके अपना डेटा हटाने का अनुरोध कर सकते हैं।",
+      "1. शून्य डेटा बिक्री: हम आपके फोन नंबर, ईमेल या पहचान दस्तावेजों को कभी किसी तीसरे पक्ष, टेलीमार्केटर या विज्ञापन नेटवर्क को नहीं बेचते या साझा नहीं करते।",
+      "2. संग्रह का उद्देश्य: हम केवल सुरक्षित नोड कस्टडी और बुकिंग सत्यापन के लिए आवश्यक डेटा (नाम, कॉलेज/आधार प्रमाण और स्थान) एकत्र करते हैं।",
+      "3. एन्क्रिप्शन एवं सुरक्षा: सभी व्यक्तिगत रिकॉर्ड पूर्णतः एन्क्रिप्टेड होते हैं। चेक-इन फोटो लॉग केवल सक्रिय स्टोरेज अवधि के दौरान ही सुरक्षित रखे जाते हैं।",
+      "4. डेटा विलोपन का अधिकार: आपको अपने डेटा पर पूर्ण नियंत्रण है और आप किसी भी समय privacy@stashsaarthi.in पर लिखकर अपने रिकॉर्ड हटाने का अनुरोध कर सकते हैं।",
     ],
   },
-  liability: {
-    title: "Storage liability",
-    title_hi: "स्टोरेज सुरक्षा व उत्तरदायित्व",
+  terms: {
+    title: "Terms of Service & Code of Conduct",
+    title_hi: "सेवा की शर्तें एवं आचार संहिता",
     body: [
-      "Stashed items are stored in audited neighbourhood spaces with CCTV coverage, tamper-evident sealing and a photo inventory taken at pickup.",
-      "Coverage applies to declared items only. Cash, jewellery, documents, perishables and hazardous materials must not be stashed.",
-      "Claims must be raised within 48 hours of return along with the digital inventory reference.",
+      "1. Lawful & Transparent Use: Users must provide truthful identity details. Misrepresentation of student status or property details results in immediate termination.",
+      "2. Prohibited Storage Items: Stashed luggage must not contain cash, currency notes, gold jewelry, perishable food, flammable items, or unlawful substances.",
+      "3. Legal Protection under TPA 1882: Room stays operate under valid leave-and-license agreements governed by Section 105 of the Transfer of Property Act 1882.",
+      "4. Escrow Protection: Payouts to hosts are released on a weekly schedule only after satisfactory custody confirmation and conflict-free handover.",
     ],
     body_hi: [
-      "संग्रहीत वस्तुएं सीसीटीवी निगरानी, छेड़छाड़-रोधी सीलिंग और फोटो इन्वेंट्री के साथ ऑडिट किए गए स्थानों में सुरक्षित रखी जाती हैं।",
-      "सुरक्षा केवल घोषित वस्तुओं पर लागू होती है। नकदी, आभूषण, दस्तावेज, खराब होने वाली वस्तुएं और ज्वलनशील पदार्थ रखना सख्त वर्जित है।",
-      "सामान वापस मिलने के 48 घंटे के भीतर डिजिटल संदर्भ के साथ क्लेम दर्ज किया जा सकता है।",
+      "1. वैध एवं पारदर्शी उपयोग: उपयोगकर्ताओं को सत्य पहचान विवरण प्रदान करना होगा। छात्र स्थिति या संपत्ति विवरण का गलत प्रतिनिधित्व करने पर खाता तुरंत निलंबित कर दिया जाएगा।",
+      "2. प्रतिबंधित वस्तुएं: संग्रहीत सामान में नकद, सोने के आभूषण, खराब होने वाली खाद्य सामग्री, ज्वलनशील पदार्थ या अवैध वस्तुएं रखना सख्त वर्जित है।",
+      "3. संपत्ति अधिनियम (TPA 1882) के तहत कानूनी सुरक्षा: कमरे के प्रवास संपत्ति अधिनियम 1882 की धारा 105 के तहत वैध लाइसेंस समझौते के रूप में संचालित होते हैं।",
+      "4. एस्क्रो सुरक्षा: होस्ट को भुगतान साप्ताहिक आधार पर केवल सुरक्षित कस्टडी और विवाद-मुक्त हैंडओवर की पुष्टि के बाद ही जारी किया जाता है।",
     ],
   },
   refund: {
-    title: "Refund policy",
-    title_hi: "रिफंड नीति",
+    title: "Cancellation & Fair Usage Policy",
+    title_hi: "रद्दीकरण एवं उचित उपयोग नीति",
     body: [
-      "Cancellations made more than 24 hours before a scheduled pickup are fully refundable.",
-      "Storage plans cancelled mid-cycle are refunded on a pro-rata basis for whole unused months.",
-      "Refunds are processed to the original payment method within 5–7 working days.",
+      "1. 100% Pre-Pickup Refund: Cancellations made up to 24 hours prior to scheduled doorstep luggage pickup or stay move-in receive a full, instant 100% refund with zero penalty fees.",
+      "2. Pro-Rata Mid-Cycle Return: If you return to campus early and withdraw stored luggage mid-cycle, unused whole months are refunded directly to your original payment method.",
+      "3. Zero Hidden Processing Charges: We do not deduct hidden processing or convenience fees on eligible refunds. Funds reflect in your bank account within 3–5 working days.",
     ],
     body_hi: [
-      "शेड्यूल पिकअप से 24 घंटे पहले रद्दीकरण पर 100% पूर्ण रिफंड प्रदान किया जाता है।",
-      "बीच में रद्द किए गए प्लान पर अप्रयुक्त महीनों का आनुपातिक रिफंड दिया जाता है।",
-      "रिफंड 5-7 कार्य दिवसों के भीतर मूल भुगतान माध्यम में जमा कर दिया जाता है।",
+      "1. पिकअप पूर्व 100% रिफंड: निर्धारित पिकअप या चेक-इन से 24 घंटे पहले रद्दीकरण पर बिना किसी कटौती के 100% पूर्ण रिफंड प्रदान किया जाता है।",
+      "2. समय से पहले वापसी पर आनुपातिक रिफंड: यदि आप कैंपस जल्दी लौटते हैं और बीच में सामान वापस लेते हैं, तो पूरे अप्रयुक्त महीनों का पैसा सीधे वापस कर दिया जाता है।",
+      "3. शून्य छुपे शुल्क: हम किसी भी तरह का कैंसिलेशन शुल्क या कन्वीनियंस चार्ज नहीं काटते। रिफंड 3-5 कार्य दिवसों में आपके बैंक खाते में जमा हो जाता है।",
+    ],
+  },
+  liability: {
+    title: "Storage Liability & ₹10k Insurance Charter",
+    title_hi: "स्टोरेज सुरक्षा व ₹10,000 बीमा चार्टर",
+    body: [
+      "1. Embedded Micro-Insurance: Every verified luggage bag sealed with our laser barcode is covered with up to ₹10,000 against physical damage, moisture, or theft.",
+      "2. Raised Platform Mandate: All host nodes are physically audited to ensure luggage is stored on elevated wooden/polymer pallets (min 2.5 ft elevation) in dry, clean zones.",
+      "3. Unbroken Seal Warranty: If a tamper seal is reported broken upon return handover, an immediate escalation ticket is raised and compensation is settled within 48 hours.",
+    ],
+    body_hi: [
+      "1. गारंटीकृत माइक्रो-बीमा: हमारे लेजर बारकोड से सील किए गए प्रत्येक बैग को भौतिक क्षति, नमी या चोरी के विरुद्ध ₹10,000 तक का सुरक्षा कवर प्राप्त है।",
+      "2. ऊंचा स्टोरेज प्लेटफॉर्म: सभी होस्ट नोड्स का भौतिक निरीक्षण किया जाता है ताकि सामान जमीन से कम से कम 2.5 फीट ऊंचे सूखे लकड़ी के पैलेट पर रखा जाए।",
+      "3. अक्षुण्ण सील गारंटी: यदि वापसी पर बारकोड सील टूटी पाई जाती है, तो तत्काल जांच शुरू होती है और 48 घंटे के भीतर मुआवजे का निपटारा किया जाता है।",
+    ],
+  },
+  grievance: {
+    title: "Direct Grievance & Nodal Officer Details",
+    title_hi: "शिकायत निवारण एवं नोडल अधिकारी संपर्क",
+    body: [
+      "Nodal Grievance Officer: Shivesh Anand (Founder & Operations Lead)",
+      "Physical Operational Hub: 117/K-Block, Kalyanpur, Kanpur, Uttar Pradesh — 208016, India",
+      "Direct Escalation Email: grievance@stashsaarthi.in | Direct Founder Line: +91 9369454350",
+      "Response Commitment: All official grievances acknowledged within 4 hours; full resolution guaranteed within 24 hours.",
+    ],
+    body_hi: [
+      "नोडल शिकायत अधिकारी: शिवेश आनंद (संस्थापक एवं ऑपरेशंस प्रमुख)",
+      "भौतिक परिचालन कार्यालय: 117/के-ब्लॉक, कल्याणपुर, कानपुर, उत्तर प्रदेश — 208016, भारत",
+      "सीधी ईमेल: grievance@stashsaarthi.in | डायरेक्ट फाउंडर फोन लाइन: +91 9369454350",
+      "प्रतिक्रिया प्रतिबद्धता: सभी आधिकारिक शिकायतों का 4 घंटे में संज्ञान लिया जाता है और 24 घंटे में पूर्ण समाधान सुनिश्चित किया जाता है।",
+    ],
+  },
+  micro: {
+    title: "Micro-Opportunity for Senior Hosts",
+    title_hi: "सीनियर होस्ट्स के लिए माइक्रो-अवसर",
+    body: [
+      "Every verified senior host, home chef, and stash keeper earns a recurring, dignified micro-income from existing unused home assets.",
+      "A single spare bedroom, 4 square feet of raised corner storage, or 4 daily homestyle tiffins can generate ₹3,000–₹12,000 monthly with zero capital expenditure.",
+      "Our Kanpur ground team provides free space measurement, digital setup, and weekly direct bank payouts.",
+    ],
+    body_hi: [
+      "प्रत्येक सत्यापित सीनियर होस्ट, होम शेफ और स्टैश कीपर अपने घर की मौजूदा खाली जगह से नियमित सम्मानजनक आय अर्जित करते हैं।",
+      "एक खाली कमरा, 4 वर्ग फुट का ऊंचा कोना या 4 रोजाना टिफिन बिना किसी निवेश के हर महीने ₹3,000–₹12,000 तक की आय दे सकते हैं।",
+      "हमारी कानपुर टीम मुफ्त जगह माप, डिजिटल सेटअप और साप्ताहिक सीधे बैंक भुगतान में पूरी मदद करती है।",
+    ],
+  },
+  partner: {
+    title: "Partner with Us (Campus & RWA)",
+    title_hi: "हमारे साथ साझेदारी करें",
+    body: [
+      "We collaborate with Resident Welfare Associations (RWAs), campus clubs, student unions, and local logistics teams in Kanpur, Lucknow, and Delhi NCR.",
+      "Partners receive access to verified student demand, our deterministic chain-of-custody framework, and transparent revenue-sharing models.",
+      "Submit an inquiry or message our founder directly on WhatsApp (+91 9369454350) for collaboration.",
+    ],
+    body_hi: [
+      "हम कानपुर, लखनऊ और दिल्ली एनसीआर में रेजिडेंट वेलफेयर एसोसिएशनों (RWAs), कॉलेज क्लबों और छात्र संघों के साथ सहयोग करते हैं।",
+      "पार्टनर्स को सत्यापित छात्र मांग, हमारा कस्टडी फ्रेमवर्क और पारदर्शी राजस्व-साझाकरण प्राप्त होता है।",
+      "साझेदारी के लिए सीधे हमारे व्हाट्सएप (+91 9369454350) पर संपर्क करें।",
+    ],
+  },
+  careers: {
+    title: "Careers & Culture",
+    title_hi: "करियर एवं कार्य संस्कृति",
+    body: [
+      "We are a high-ownership, lean team building real-world physical infrastructure backed by software discipline.",
+      "Open areas: Hyper-local ground operations, trust & safety inspection, community growth, and full-stack engineering.",
+      "If you care about radical transparency and building meaningful physical products in India, email your note to shivesh@stashsaarthi.in.",
+    ],
+    body_hi: [
+      "हम एक केंद्रित और उच्च-स्वामित्व वाली टीम हैं जो सॉफ्टवेयर अनुशासन के साथ वास्तविक भौतिक बुनियादी ढांचा तैयार कर रही है।",
+      "खुले क्षेत्र: हाइपर-लोकल ग्राउंड ऑपरेशंस, सुरक्षा निरीक्षण, कम्युनिटी ग्रोथ और फुल-स्टैक इंजीनियरिंग।",
+      "यदि आप पारदर्शिता और सार्थक प्रभाव में विश्वास रखते हैं, तो अपना परिचय shivesh@stashsaarthi.in पर भेजें।",
     ],
   },
 };
@@ -199,7 +236,7 @@ export const handleDownloadInvestorMemo = (language: "en" | "hi" = "en") => {
     </html>
   `;
 
-  const printWindow = window.open('', '_blank');
+  const printWindow = window.open("", "_blank");
   if (printWindow) {
     printWindow.document.write(memoContent);
     printWindow.document.close();

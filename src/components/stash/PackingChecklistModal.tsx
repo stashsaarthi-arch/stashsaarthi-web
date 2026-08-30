@@ -6,14 +6,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import {
-  CheckSquare,
-  Square,
-  Package,
-  CheckCircle2,
-  Scale,
-  ShieldAlert,
-} from "lucide-react";
+import { CheckSquare, Square, Package, CheckCircle2, Scale, ShieldAlert } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useLanguage } from "@/context/LanguageContext";
@@ -25,42 +18,84 @@ interface PackingChecklistModalProps {
 }
 
 const BAG_PRESETS = [
-  { id: "trolley-24", name: '24" Medium Trolley', name_hi: '24" मध्यम ट्रॉली', volume: "65L", maxWeight: "20kg", sealPos: "Main Dual-Zipper Head" },
-  { id: "trolley-28", name: '28" Large Trolley', name_hi: '28" बड़ी ट्रॉली', volume: "95L", maxWeight: "25kg", sealPos: "Dual Zippers + Side Handle" },
-  { id: "rucksack", name: "65L Campus Rucksack", name_hi: "65L कैंपस रकसैक", volume: "65L", maxWeight: "18kg", sealPos: "Drawstring Buckle Lock" },
-  { id: "study-box", name: "Heavy Study Carton", name_hi: "किताबों का भारी कार्टन", volume: "75L", maxWeight: "22kg", sealPos: "H-Tape Cross Seal" },
+  {
+    id: "trolley-24",
+    name: '24" Medium Trolley',
+    name_hi: '24" मध्यम ट्रॉली',
+    volume: "65L",
+    maxWeight: "20kg",
+    sealPos: "Main Dual-Zipper Head",
+  },
+  {
+    id: "trolley-28",
+    name: '28" Large Trolley',
+    name_hi: '28" बड़ी ट्रॉली',
+    volume: "95L",
+    maxWeight: "25kg",
+    sealPos: "Dual Zippers + Side Handle",
+  },
+  {
+    id: "rucksack",
+    name: "65L Campus Rucksack",
+    name_hi: "65L कैंपस रकसैक",
+    volume: "65L",
+    maxWeight: "18kg",
+    sealPos: "Drawstring Buckle Lock",
+  },
+  {
+    id: "study-box",
+    name: "Heavy Study Carton",
+    name_hi: "किताबों का भारी कार्टन",
+    volume: "75L",
+    maxWeight: "22kg",
+    sealPos: "H-Tape Cross Seal",
+  },
 ];
 
-export function PackingChecklistModal({ open, onOpenChange, onProceedToBooking }: PackingChecklistModalProps) {
+export function PackingChecklistModal({
+  open,
+  onOpenChange,
+  onProceedToBooking,
+}: PackingChecklistModalProps) {
   const { language } = useLanguage();
   const isHi = language === "hi";
   const [selectedBagType, setSelectedBagType] = useState("trolley-24");
 
   const CHECKLIST_ITEMS = [
-    { 
-      id: "perishables", 
-      title: isHi ? "कोई खराब होने वाला भोजन या तरल पदार्थ नहीं" : "No Perishable Food or Liquids", 
-      desc: isHi ? "सीलन और कीड़ों से बचाव के लिए पानी की बोतलें खाली करें, फल, खुले स्नैक्स और तरल प्रसाधन सामग्री निकाल लें।" : "Empty water bottles, remove fruits, open snacks, and liquid toiletries to prevent spills or pests." 
+    {
+      id: "perishables",
+      title: isHi ? "कोई खराब होने वाला भोजन या तरल पदार्थ नहीं" : "No Perishable Food or Liquids",
+      desc: isHi
+        ? "सीलन और कीड़ों से बचाव के लिए पानी की बोतलें खाली करें, फल, खुले स्नैक्स और तरल प्रसाधन सामग्री निकाल लें।"
+        : "Empty water bottles, remove fruits, open snacks, and liquid toiletries to prevent spills or pests.",
     },
-    { 
-      id: "valuable", 
-      title: isHi ? "अति-मूल्यवान वस्तुएं अपने पास रखें" : "Keep High-Valuables with You", 
-      desc: isHi ? "मूल सरकारी आईडी, आभूषण, नकदी और मुख्य लैपटॉप/फोन अपने निजी केबिन बैग में साथ ले जाएं।" : "Carry original government IDs, gold/cash, and primary laptops/phones in your personal cabin bag." 
+    {
+      id: "valuable",
+      title: isHi ? "अति-मूल्यवान वस्तुएं अपने पास रखें" : "Keep High-Valuables with You",
+      desc: isHi
+        ? "मूल सरकारी आईडी, आभूषण, नकदी और मुख्य लैपटॉप/फोन अपने निजी केबिन बैग में साथ ले जाएं।"
+        : "Carry original government IDs, gold/cash, and primary laptops/phones in your personal cabin bag.",
     },
-    { 
-      id: "zipper", 
-      title: isHi ? "मुख्य ज़िप व तालों को बंद करें" : "Lock Main Zippers & Compartments", 
-      desc: isHi ? "कंसीयज को सौंपने से पहले सभी बैगों के ज़िप पर नंबर लॉक या पैडलॉक लगाएं।" : "Use TSA/number locks on all bag zippers before doorstep concierge handoff." 
+    {
+      id: "zipper",
+      title: isHi ? "मुख्य ज़िप व तालों को बंद करें" : "Lock Main Zippers & Compartments",
+      desc: isHi
+        ? "कंसीयज को सौंपने से पहले सभी बैगों के ज़िप पर नंबर लॉक या पैडलॉक लगाएं।"
+        : "Use TSA/number locks on all bag zippers before doorstep concierge handoff.",
     },
-    { 
-      id: "barcode", 
-      title: isHi ? "बारकोड टैम्पर सील लगवाएं" : "Apply Barcode Tamper Seal", 
-      desc: isHi ? "सार्थी कंसीयज आपकी उपस्थिति में लेजर-क्रमांकित सील लगाएगा और सीरियल नंबर दर्ज करेगा।" : "Saarthi concierge applies a laser-numbered tamper seal and logs serial numbers in your presence." 
+    {
+      id: "barcode",
+      title: isHi ? "बारकोड टैम्पर सील लगवाएं" : "Apply Barcode Tamper Seal",
+      desc: isHi
+        ? "सार्थी कंसीयज आपकी उपस्थिति में लेजर-क्रमांकित सील लगाएगा और सीरियल नंबर दर्ज करेगा।"
+        : "Saarthi concierge applies a laser-numbered tamper seal and logs serial numbers in your presence.",
     },
-    { 
-      id: "photo", 
-      title: isHi ? "समय-मुद्रित दोहरी फोटो लॉग लें" : "Capture Timestamped Dual-Photo Log", 
-      desc: isHi ? "डिजिटल स्टैशपास रिकॉर्ड के लिए कंसीयज के साथ सीलबंद बैग की त्वरित तस्वीर लें।" : "Take a quick photo of your sealed bag alongside the concierge for your digital StashPass record." 
+    {
+      id: "photo",
+      title: isHi ? "समय-मुद्रित दोहरी फोटो लॉग लें" : "Capture Timestamped Dual-Photo Log",
+      desc: isHi
+        ? "डिजिटल स्टैशपास रिकॉर्ड के लिए कंसीयज के साथ सीलबंद बैग की त्वरित तस्वीर लें।"
+        : "Take a quick photo of your sealed bag alongside the concierge for your digital StashPass record.",
     },
   ];
 
@@ -78,7 +113,9 @@ export function PackingChecklistModal({ open, onOpenChange, onProceedToBooking }
 
   const handleComplete = () => {
     toast.success(isHi ? "पैकिंग प्रोटोकॉल सत्यापित!" : "Packing Protocol Verified!", {
-      description: isHi ? "आप सुरक्षित वेकेशन स्टोरेज के लिए 100% तैयार हैं।" : "You're 100% ready for safe vacation storage.",
+      description: isHi
+        ? "आप सुरक्षित वेकेशन स्टोरेज के लिए 100% तैयार हैं।"
+        : "You're 100% ready for safe vacation storage.",
     });
     onOpenChange(false);
     if (onProceedToBooking) {
@@ -100,7 +137,7 @@ export function PackingChecklistModal({ open, onOpenChange, onProceedToBooking }
             {isHi ? "लगेज पैकिंग व सील चेकलिस्ट" : "Luggage Packing & Seal Checklist"}
           </DialogTitle>
           <DialogDescription className="text-sm text-slate-400">
-            {isHi 
+            {isHi
               ? "100% बीमा वैधता सुनिश्चित करने के लिए बैग सौंपने से पहले इन 5 बिंदुओं का पालन करें।"
               : "Follow this 5-point checklist before handing over bags to ensure 100% insurance validity."}
           </DialogDescription>
@@ -131,7 +168,9 @@ export function PackingChecklistModal({ open, onOpenChange, onProceedToBooking }
                 }`}
               >
                 <div className="truncate">{isHi ? preset.name_hi : preset.name}</div>
-                <div className="text-[10px] text-slate-400 font-mono mt-0.5">{preset.volume} · Max {preset.maxWeight}</div>
+                <div className="text-[10px] text-slate-400 font-mono mt-0.5">
+                  {preset.volume} · Max {preset.maxWeight}
+                </div>
               </button>
             ))}
           </div>
@@ -146,8 +185,8 @@ export function PackingChecklistModal({ open, onOpenChange, onProceedToBooking }
                 key={item.id}
                 onClick={() => toggleItem(item.id)}
                 className={`p-3.5 rounded-2xl border transition-all cursor-pointer flex items-start gap-3 ${
-                  isDone 
-                    ? "bg-emerald-500/10 border-emerald-500/30" 
+                  isDone
+                    ? "bg-emerald-500/10 border-emerald-500/30"
                     : "bg-white/5 border-white/10 hover:border-white/20"
                 }`}
               >
@@ -166,9 +205,7 @@ export function PackingChecklistModal({ open, onOpenChange, onProceedToBooking }
                   <h4 className={`text-xs font-bold ${isDone ? "text-white" : "text-slate-300"}`}>
                     {item.title}
                   </h4>
-                  <p className="text-[11px] text-slate-400 mt-0.5 leading-relaxed">
-                    {item.desc}
-                  </p>
+                  <p className="text-[11px] text-slate-400 mt-0.5 leading-relaxed">{item.desc}</p>
                 </div>
               </div>
             );
@@ -179,8 +216,8 @@ export function PackingChecklistModal({ open, onOpenChange, onProceedToBooking }
           <div className="flex items-center gap-1.5 text-xs text-slate-400">
             <CheckCircle2 className="h-4 w-4 text-emerald-400" />
             <span>
-              {isHi 
-                ? `${Object.values(checked).filter(Boolean).length}/5 मानक सत्यापित` 
+              {isHi
+                ? `${Object.values(checked).filter(Boolean).length}/5 मानक सत्यापित`
                 : `${Object.values(checked).filter(Boolean).length}/5 verified`}
             </span>
           </div>

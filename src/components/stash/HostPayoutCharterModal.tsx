@@ -5,12 +5,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import {
-  ShieldCheck,
-  Calendar,
-  CheckCircle2,
-  PhoneCall,
-} from "lucide-react";
+import { ShieldCheck, Calendar, CheckCircle2, PhoneCall } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FOUNDER_WHATSAPP, getWhatsAppUrl } from "@/lib/constants";
 import { useLanguage } from "@/context/LanguageContext";
@@ -28,7 +23,7 @@ export function HostPayoutCharterModal({ open, onOpenChange }: HostPayoutCharter
     isHi
       ? "नमस्ते StashSaarthi, मैं अपनी संपत्ति के लिए होस्ट साप्ताहिक एस्क्रो और भुगतान समझौते की समीक्षा करना चाहता/चाहती हूं।"
       : "Namaste StashSaarthi, I want to review the Host Weekly Escrow & Payout Agreement for my property.",
-    FOUNDER_WHATSAPP
+    FOUNDER_WHATSAPP,
   );
 
   const guarantees = isHi
@@ -57,7 +52,7 @@ export function HostPayoutCharterModal({ open, onOpenChange }: HostPayoutCharter
             {isHi ? "आपको भुगतान कैसे और कब मिलता है" : "How & When You Get Paid"}
           </DialogTitle>
           <DialogDescription className="text-sm text-slate-400">
-            {isHi 
+            {isHi
               ? "शून्य नकद झंझट, शून्य देरी। हर सप्ताह सीधा पारदर्शी बैंक निपटान।"
               : "Zero cash friction, zero delayed calls. Transparent, direct bank settlement every single week."}
           </DialogDescription>
@@ -72,10 +67,14 @@ export function HostPayoutCharterModal({ open, onOpenChange }: HostPayoutCharter
               </div>
               <div>
                 <h4 className="text-sm font-bold text-white">
-                  {isHi ? "प्रत्येक मंगलवार सुबह 10:00 बजे निपटान" : "Every Tuesday Settlement (10:00 AM)"}
+                  {isHi
+                    ? "प्रत्येक मंगलवार सुबह 10:00 बजे निपटान"
+                    : "Every Tuesday Settlement (10:00 AM)"}
                 </h4>
                 <p className="text-xs text-slate-400">
-                  {isHi ? "आपके पंजीकृत बैंक खाते में सीधे NEFT / UPI ट्रांसफर।" : "Direct NEFT / UPI deposit directly into your registered bank account."}
+                  {isHi
+                    ? "आपके पंजीकृत बैंक खाते में सीधे NEFT / UPI ट्रांसफर।"
+                    : "Direct NEFT / UPI deposit directly into your registered bank account."}
                 </p>
               </div>
             </div>
@@ -103,7 +102,10 @@ export function HostPayoutCharterModal({ open, onOpenChange }: HostPayoutCharter
           {/* Guarantees List */}
           <div className="space-y-2 text-xs">
             {guarantees.map((text, i) => (
-              <div key={i} className="flex items-start gap-2.5 rounded-xl border border-white/5 bg-white/[0.02] p-2.5">
+              <div
+                key={i}
+                className="flex items-start gap-2.5 rounded-xl border border-white/5 bg-white/[0.02] p-2.5"
+              >
                 <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-400 mt-0.5" />
                 <span className="text-slate-300 leading-relaxed">{text}</span>
               </div>

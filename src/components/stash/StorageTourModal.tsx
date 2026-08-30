@@ -34,8 +34,10 @@ export function StorageTourModal({ open, onOpenChange, onBookClick }: StorageTou
   const TOUR_STEPS = [
     {
       step: 1,
-      title: isHi ? "1. डोरस्टेप पिकअप व बारकोड टैम्पर सील" : "1. Doorstep Pickup & Barcode Tamper Seal",
-      desc: isHi 
+      title: isHi
+        ? "1. डोरस्टेप पिकअप व बारकोड टैम्पर सील"
+        : "1. Doorstep Pickup & Barcode Tamper Seal",
+      desc: isHi
         ? "सत्यापित कॉलेज कंसीयज आपके हॉस्टल गेट पर पहुंचता है। हर बैग को आपकी उपस्थिति में सीरियलाइज्ड बारकोड टैग से सील किया जाता है।"
         : "Our verified college concierge arrives at your hostel room gate. Each bag is sealed with a serialized, non-tearable barcode tag in your presence.",
       icon: Truck,
@@ -56,7 +58,9 @@ export function StorageTourModal({ open, onOpenChange, onBookClick }: StorageTou
     },
     {
       step: 3,
-      title: isHi ? "3. डिजिटल स्टैशपास ट्रैकिंग व बीमा" : "3. Digital StashPass Tracking & Insurance",
+      title: isHi
+        ? "3. डिजिटल स्टैशपास ट्रैकिंग व बीमा"
+        : "3. Digital StashPass Tracking & Insurance",
       desc: isHi
         ? "सील फोटो लॉग के साथ आपका डिजिटल बोर्डिंग पास व्हाट्सएप पर तुरंत उपलब्ध होता है, जिसमें ₹10,000 की सक्रिय सुरक्षा बीमा शामिल है।"
         : "Your digital boarding pass with sealed photo logs is instantly accessible on WhatsApp with active ₹10,000 safety insurance coverage.",
@@ -101,7 +105,7 @@ export function StorageTourModal({ open, onOpenChange, onBookClick }: StorageTou
             {isHi ? "सार्थी स्टैश कैसे काम करता है" : "How Saarthi Stash Works"}
           </DialogTitle>
           <DialogDescription className="text-xs text-slate-400">
-            {isHi 
+            {isHi
               ? "हॉस्टल दरवाजे से सुरक्षित नोड और वापसी तक — शून्य तनाव, 100% बीमित।"
               : "From hostel door to dry node and back — zero stress, 100% insured."}
           </DialogDescription>
@@ -125,12 +129,8 @@ export function StorageTourModal({ open, onOpenChange, onBookClick }: StorageTou
               </span>
             </div>
 
-            <h3 className="text-lg font-bold text-white mb-2">
-              {step.title}
-            </h3>
-            <p className="text-xs text-slate-300 leading-relaxed">
-              {step.desc}
-            </p>
+            <h3 className="text-lg font-bold text-white mb-2">{step.title}</h3>
+            <p className="text-xs text-slate-300 leading-relaxed">{step.desc}</p>
           </div>
         </div>
 

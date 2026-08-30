@@ -2,11 +2,12 @@
 
 **Target Roles:** Hostel Wing Representatives, Student Gymkhana Members, Society Heads at IIT Kanpur, CSJMU, HBTI, and GSVM Medical  
 **Program Title:** StashSaarthi Campus Captain Cohort '26  
-**Earning Potential:** ₹5,000 – ₹15,000 / month passive student stipend  
+**Earning Potential:** ₹5,000 – ₹15,000 / month passive student stipend
 
 ---
 
 ## 1. The Value Proposition for Campus Leaders
+
 - **High Demand, Low Effort:** 85% of hostel students go home during semester breaks and panic about baggage.
 - **Immediate Cash Payouts:** Earn **₹50 per bag onboarded** + **₹500 per verified host room listing**.
 - **Official Resume Credential:** Certified "Campus Growth Fellow" recommendation letter signed by StashSaarthi founders.
@@ -15,6 +16,7 @@
 ---
 
 ## 2. 3-Step Captain Activation Blueprint
+
 ```mermaid
 graph LR
     A[Step 1: Get Custom Referral Code] --> B[Step 2: Share in Hostel & Branch Groups]

@@ -35,19 +35,32 @@ export function CampusCaptainModal({
     e.preventDefault();
 
     if (!name.trim() || !college.trim() || !phone.trim()) {
-      toast.error(isHi ? "कृपया अपना नाम, कॉलेज और फोन नंबर भरें।" : "Please fill in your name, campus, and phone number.");
+      toast.error(
+        isHi
+          ? "कृपया अपना नाम, कॉलेज और फोन नंबर भरें।"
+          : "Please fill in your name, campus, and phone number.",
+      );
       return;
     }
 
     if (!isValidIndianPhone(phone)) {
-      toast.error(isHi ? "कृपया 10-अंकों का वैध भारतीय फोन नंबर दर्ज करें।" : "Please enter a valid 10-digit Indian phone number.");
+      toast.error(
+        isHi
+          ? "कृपया 10-अंकों का वैध भारतीय फोन नंबर दर्ज करें।"
+          : "Please enter a valid 10-digit Indian phone number.",
+      );
       return;
     }
 
     setSubmitted(true);
-    toast.success(isHi ? "कैंपस कैप्टन आवेदन प्राप्त हुआ! 🎓" : "Campus Captain Application Received! 🎓", {
-      description: isHi ? "हमारे कैंपस लीड 6 घंटे के भीतर आपसे संपर्क करेंगे।" : "Our campus lead will reach out to you within 6 hours.",
-    });
+    toast.success(
+      isHi ? "कैंपस कैप्टन आवेदन प्राप्त हुआ! 🎓" : "Campus Captain Application Received! 🎓",
+      {
+        description: isHi
+          ? "हमारे कैंपस लीड 6 घंटे के भीतर आपसे संपर्क करेंगे।"
+          : "Our campus lead will reach out to you within 6 hours.",
+      },
+    );
 
     const text = isHi
       ? `नमस्ते StashSaarthi! मैं ${college} (${hostel || "मुख्य परिसर"}) में कैंपस नोड कैप्टन बनना चाहता/चाहती हूं। मेरा नाम ${name} है, फोन: ${phone}।`
@@ -77,13 +90,17 @@ export function CampusCaptainModal({
           </div>
           <DialogTitle className="text-2xl font-extrabold tracking-tight text-white">
             {isHi ? (
-              <>बनें <span className="text-gradient">कैंपस कैप्टन</span></>
+              <>
+                बनें <span className="text-gradient">कैंपस कैप्टन</span>
+              </>
             ) : (
-              <>Become a <span className="text-gradient">Campus Captain</span></>
+              <>
+                Become a <span className="text-gradient">Campus Captain</span>
+              </>
             )}
           </DialogTitle>
           <DialogDescription className="text-xs sm:text-sm text-slate-400">
-            {isHi 
+            {isHi
               ? "अपने हॉस्टल में वेकेशन बैग स्टोरेज और छात्र चेक-इन समन्वित करके प्रति माह ₹5,000 से ₹12,000 कमाएं।"
               : "Earn ₹5,000 to ₹12,000/month by coordinating vacation bag storage and student check-ins in your hostel."}
           </DialogDescription>
@@ -93,17 +110,27 @@ export function CampusCaptainModal({
           <form onSubmit={handleSubmit} className="mt-4 space-y-4">
             <div className="grid grid-cols-2 gap-2 text-xs">
               <div className="rounded-xl border border-white/10 bg-white/5 p-2.5">
-                <p className="text-[10px] text-slate-400 uppercase font-mono">{isHi ? "कमीशन" : "Commission"}</p>
-                <p className="font-bold text-emerald-400 text-sm mt-0.5">{isHi ? "₹50 / टैग्ड बैग" : "₹50 / Bag Tagged"}</p>
+                <p className="text-[10px] text-slate-400 uppercase font-mono">
+                  {isHi ? "कमीशन" : "Commission"}
+                </p>
+                <p className="font-bold text-emerald-400 text-sm mt-0.5">
+                  {isHi ? "₹50 / टैग्ड बैग" : "₹50 / Bag Tagged"}
+                </p>
               </div>
               <div className="rounded-xl border border-white/10 bg-white/5 p-2.5">
-                <p className="text-[10px] text-slate-400 uppercase font-mono">{isHi ? "लाभ" : "Perks"}</p>
-                <p className="font-bold text-cyan-400 text-sm mt-0.5">{isHi ? "फ्री स्टोरेज + सर्टिफिकेट" : "Free Storage + Cert"}</p>
+                <p className="text-[10px] text-slate-400 uppercase font-mono">
+                  {isHi ? "लाभ" : "Perks"}
+                </p>
+                <p className="font-bold text-cyan-400 text-sm mt-0.5">
+                  {isHi ? "फ्री स्टोरेज + सर्टिफिकेट" : "Free Storage + Cert"}
+                </p>
               </div>
             </div>
 
             <div className="space-y-1.5 text-left">
-              <Label className="text-xs text-slate-300 font-medium">{isHi ? "आपका पूरा नाम *" : "Your Full Name *"}</Label>
+              <Label className="text-xs text-slate-300 font-medium">
+                {isHi ? "आपका पूरा नाम *" : "Your Full Name *"}
+              </Label>
               <Input
                 placeholder={isHi ? "जैसे यश वर्धन" : "e.g. Yash Vardhan"}
                 value={name}
@@ -114,7 +141,9 @@ export function CampusCaptainModal({
 
             <div className="grid grid-cols-2 gap-3 text-left">
               <div className="space-y-1.5">
-                <Label className="text-xs text-slate-300 font-medium">{isHi ? "कॉलेज / परिसर *" : "College / Campus *"}</Label>
+                <Label className="text-xs text-slate-300 font-medium">
+                  {isHi ? "कॉलेज / परिसर *" : "College / Campus *"}
+                </Label>
                 <Input
                   placeholder={isHi ? "आईआईटी कानपुर / एचबीटीआई" : "IIT Kanpur / HBTI"}
                   value={college}
@@ -123,7 +152,9 @@ export function CampusCaptainModal({
                 />
               </div>
               <div className="space-y-1.5">
-                <Label className="text-xs text-slate-300 font-medium">{isHi ? "हॉस्टल / हॉल नंबर" : "Hostel / Hall No."}</Label>
+                <Label className="text-xs text-slate-300 font-medium">
+                  {isHi ? "हॉस्टल / हॉल नंबर" : "Hostel / Hall No."}
+                </Label>
                 <Input
                   placeholder={isHi ? "हॉल 13 / विंग B" : "Hall 13 / Wing B"}
                   value={hostel}
@@ -134,7 +165,9 @@ export function CampusCaptainModal({
             </div>
 
             <div className="space-y-1.5 text-left">
-              <Label className="text-xs text-slate-300 font-medium">{isHi ? "व्हाट्सएप नंबर *" : "WhatsApp Number *"}</Label>
+              <Label className="text-xs text-slate-300 font-medium">
+                {isHi ? "व्हाट्सएप नंबर *" : "WhatsApp Number *"}
+              </Label>
               <Input
                 placeholder="9876543210"
                 value={phone}
@@ -162,8 +195,8 @@ export function CampusCaptainModal({
                 {isHi ? "आवेदन सफलतापूर्वक भेजा गया!" : "Application Sent!"}
               </h3>
               <p className="text-xs text-slate-300 mt-1 max-w-xs mx-auto">
-                {isHi 
-                  ? "व्हाट्सएप चैट खुल रही है। आप सीधे फाउंडर से अपना ऑनबोर्डिंग किट प्राप्त कर सकते हैं।" 
+                {isHi
+                  ? "व्हाट्सएप चैट खुल रही है। आप सीधे फाउंडर से अपना ऑनबोर्डिंग किट प्राप्त कर सकते हैं।"
                   : "WhatsApp chat opening up. You can directly chat with the founder to receive your starter captain kit."}
               </p>
             </div>

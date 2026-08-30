@@ -104,9 +104,12 @@ export function NodeCanvas() {
       raf = requestAnimationFrame(tick);
     };
 
-    const observer = new IntersectionObserver(([entry]) => {
-      isVisible = entry?.isIntersecting ?? true;
-    }, { threshold: 0 });
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry?.isIntersecting ?? true;
+      },
+      { threshold: 0 },
+    );
     observer.observe(canvas);
 
     resize();
@@ -123,5 +126,7 @@ export function NodeCanvas() {
     };
   }, []);
 
-  return <canvas ref={ref} className="absolute inset-0 h-full w-full pointer-events-none" aria-hidden />;
+  return (
+    <canvas ref={ref} className="absolute inset-0 h-full w-full pointer-events-none" aria-hidden />
+  );
 }

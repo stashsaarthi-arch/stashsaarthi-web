@@ -112,11 +112,14 @@ export function ActivityTicker() {
   const [index, setIndex] = useState(0);
   const [visible, setVisible] = useState(true);
   const [paused, setPaused] = useState(false);
-  const [dismissed, setDismissed] = useState(false);
+  const [dismissed, setDismissed] = useState(() => {
+    if (typeof window !== "undefined") {
+      return sessionStorage.getItem("stash_hide_activity_ticker") === "true";
+    }
+    return false;
+  });
 
-  const relevantActivities = ACTIVITIES.filter(
-    (a) => a.type === role || a.type === "both" || true
-  );
+  const relevantActivities = ACTIVITIES.filter((a) => a.type === role || a.type === "both" || true);
 
   useEffect(() => {
     if (dismissed || paused) return;
@@ -131,6 +134,13 @@ export function ActivityTicker() {
 
     return () => clearInterval(interval);
   }, [dismissed, paused, relevantActivities.length]);
+
+  const handleDismiss = () => {
+    setDismissed(true);
+    if (typeof window !== "undefined") {
+      sessionStorage.setItem("stash_hide_activity_ticker", "true");
+    }
+  };
 
   if (dismissed || relevantActivities.length === 0) return null;
 
@@ -165,7 +175,7 @@ export function ActivityTicker() {
   }[current.accent];
 
   return (
-    <div className="fixed bottom-5 left-5 z-40 max-w-[340px] sm:max-w-[380px] pointer-events-auto">
+    <div className="hidden md:block fixed bottom-5 left-5 z-40 max-w-[340px] sm:max-w-[380px] pointer-events-auto">
       <AnimatePresence mode="wait">
         {visible && (
           <motion.div
@@ -180,12 +190,18 @@ export function ActivityTicker() {
           >
             {/* Animated pulsing dot */}
             <div className="relative shrink-0 mt-0.5">
-              <span className={`flex h-8 w-8 items-center justify-center rounded-xl ${accentStyles.bg} ${accentStyles.text}`}>
+              <span
+                className={`flex h-8 w-8 items-center justify-center rounded-xl ${accentStyles.bg} ${accentStyles.text}`}
+              >
                 <Icon className="h-4 w-4" />
               </span>
               <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
-                <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${accentStyles.bg} opacity-75`} />
-                <span className={`relative inline-flex rounded-full h-2.5 w-2.5 ${current.accent === 'emerald' ? 'bg-emerald-500' : current.accent === 'amber' ? 'bg-amber-500' : 'bg-cyan-500'}`} />
+                <span
+                  className={`animate-ping absolute inline-flex h-full w-full rounded-full ${accentStyles.bg} opacity-75`}
+                />
+                <span
+                  className={`relative inline-flex rounded-full h-2.5 w-2.5 ${current.accent === "emerald" ? "bg-emerald-500" : current.accent === "amber" ? "bg-amber-500" : "bg-cyan-500"}`}
+                />
               </span>
             </div>
 
@@ -200,16 +216,14 @@ export function ActivityTicker() {
                 <span className="truncate">{detail}</span>
               </div>
               <div className="flex items-center justify-between mt-2 pt-1.5 border-t border-white/5 text-[10px]">
-                <span className={`font-mono font-bold ${accentStyles.text}`}>
-                  {badge}
-                </span>
+                <span className={`font-mono font-bold ${accentStyles.text}`}>{badge}</span>
                 <span className="text-slate-500 font-mono">{timeAgo}</span>
               </div>
             </div>
 
             {/* Dismiss button */}
             <button
-              onClick={() => setDismissed(true)}
+              onClick={handleDismiss}
               className="absolute top-2.5 right-2.5 text-slate-500 hover:text-slate-300 transition-colors p-1 rounded-md hover:bg-white/5 cursor-pointer"
               title={isHi ? "हटाएं" : "Dismiss live updates"}
             >

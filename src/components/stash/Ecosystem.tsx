@@ -56,7 +56,7 @@ const NODES_BASE: NodeBase[] = [
     id: "micro",
     accent: "var(--emerald)",
     icon: Briefcase,
-  }
+  },
 ];
 
 export function Ecosystem({ onBook }: { onBook: OpenBooking }) {
@@ -73,9 +73,7 @@ export function Ecosystem({ onBook }: { onBook: OpenBooking }) {
         <h2 className="mt-5 text-balance text-[1.75rem] font-extrabold tracking-tight sm:text-5xl">
           {t.ecosystem.titlePart1} <span className="text-gradient">{t.ecosystem.titlePart2}</span>
         </h2>
-        <p className="mt-4 text-sm text-muted-foreground sm:text-base">
-          {t.ecosystem.subtitle}
-        </p>
+        <p className="mt-4 text-sm text-muted-foreground sm:text-base">{t.ecosystem.subtitle}</p>
       </div>
 
       <div className="mt-10 space-y-3 sm:mt-14">
@@ -110,7 +108,10 @@ export function Ecosystem({ onBook }: { onBook: OpenBooking }) {
                         <span>{textData.title}</span>
                         <PrototypeBadge variant="text" />
                       </span>
-                      <span className="block truncate text-xs sm:text-sm" style={{ color: n.accent }}>
+                      <span
+                        className="block truncate text-xs sm:text-sm"
+                        style={{ color: n.accent }}
+                      >
                         {textData.badge} - {textData.price}
                       </span>
                     </span>
@@ -133,14 +134,17 @@ export function Ecosystem({ onBook }: { onBook: OpenBooking }) {
                         className="overflow-hidden"
                       >
                         <div className="border-t border-white/10 p-4 sm:p-6">
-                          <p className="text-sm leading-relaxed text-muted-foreground">{textData.subtitle}</p>
+                          <p className="text-sm leading-relaxed text-muted-foreground">
+                            {textData.subtitle}
+                          </p>
                           <div
                             className="mt-4 rounded-2xl border border-white/10 p-3 text-xs sm:text-sm"
                             style={{
                               background: `color-mix(in oklab, ${n.accent} 10%, transparent)`,
                             }}
                           >
-                            <span className="font-semibold">{textData.price}</span>: {textData.comparison}
+                            <span className="font-semibold">{textData.price}</span>:{" "}
+                            {textData.comparison}
                           </div>
                           <ul className="mt-5 grid gap-2.5 sm:grid-cols-2">
                             {textData.bullets.map((f) => (

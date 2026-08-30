@@ -21,11 +21,13 @@ export function Navbar({
   setRole,
   onBook,
   onListRoom,
+  onEarlyAccess,
 }: {
   role: Role;
   setRole: (r: Role) => void;
   onBook: () => void;
   onListRoom: () => void;
+  onEarlyAccess?: () => void;
 }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -55,12 +57,15 @@ export function Navbar({
       >
         {/* 1. Left: Brand Logo & Desktop Navigation */}
         <div className="flex items-center gap-4 lg:gap-6 shrink-0 min-w-0">
-          <div
-            className="flex items-center gap-1.5 shrink-0 cursor-pointer group"
+          <button
+            type="button"
+            className="flex items-center gap-1.5 shrink-0 cursor-pointer group bg-transparent border-0 p-0 transition-transform active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50 rounded-lg"
             onClick={() => smoothScrollTo("top")(undefined as any)}
+            aria-label="Scroll to top of page"
+            title="StashSaarthi - Back to top"
           >
             <BrandLogo height={32} className="h-7 sm:h-8 md:h-9" />
-          </div>
+          </button>
 
           {/* Desktop Navigation Links */}
           <nav className="hidden xl:flex items-center gap-1">
@@ -78,13 +83,13 @@ export function Navbar({
                     ? "बचत कैलकुलेटर"
                     : "Savings Calculator"
                   : language === "hi"
-                  ? "कमाई कैलकुलेटर"
-                  : "Earning Simulator"
+                    ? "कमाई कैलकुलेटर"
+                    : "Earning Simulator"
                 : isTrust
-                ? language === "hi"
-                  ? "सुरक्षा प्रोटोकॉल"
-                  : "Safety Protocol"
-                : t.nav[l.key as keyof typeof t.nav];
+                  ? language === "hi"
+                    ? "सुरक्षा प्रोटोकॉल"
+                    : "Safety Protocol"
+                  : t.nav[l.key as keyof typeof t.nav];
 
               return (
                 <a
@@ -162,11 +167,23 @@ export function Navbar({
             <AuthButton compact />
           </div>
 
+          {/* Desktop Early Access / Demo CTA */}
+          {onEarlyAccess && (
+            <button
+              type="button"
+              onClick={onEarlyAccess}
+              className="hidden lg:inline-flex items-center gap-1.5 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-3 py-1.5 text-xs font-bold text-emerald-300 hover:bg-emerald-500/20 transition-all shrink-0 cursor-pointer active:scale-95"
+            >
+              <span>⚡</span>
+              <span>{language === "hi" ? "अर्ली एक्सेस" : "Early Access"}</span>
+            </button>
+          )}
+
           {/* Action CTA Button */}
           <button
             type="button"
             onClick={role === "student" ? onBook : onListRoom}
-            className={`px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all shrink-0 ${
+            className={`px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all shrink-0 cursor-pointer ${
               role === "student"
                 ? "bg-emerald-500 hover:bg-emerald-400 text-black shadow-md shadow-emerald-500/20 active:scale-95"
                 : "bg-amber-500 hover:bg-amber-400 text-black shadow-md shadow-amber-500/20 active:scale-95"
@@ -175,8 +192,8 @@ export function Navbar({
             {role === "student"
               ? t.nav.explore
               : language === "hi"
-              ? "कमरा लिस्ट करें"
-              : "List Space"}
+                ? "कमरा लिस्ट करें"
+                : "List Space"}
           </button>
 
           {/* Mobile Hamburger Toggle */}
@@ -250,13 +267,13 @@ export function Navbar({
                     ? "बचत कैलकुलेटर"
                     : "Savings Calculator"
                   : language === "hi"
-                  ? "कमाई कैलकुलेटर"
-                  : "Earning Simulator"
+                    ? "कमाई कैलकुलेटर"
+                    : "Earning Simulator"
                 : isTrust
-                ? language === "hi"
-                  ? "सुरक्षा प्रोटोकॉल"
-                  : "Safety Protocol"
-                : t.nav[l.key as keyof typeof t.nav];
+                  ? language === "hi"
+                    ? "सुरक्षा प्रोटोकॉल"
+                    : "Safety Protocol"
+                  : t.nav[l.key as keyof typeof t.nav];
 
               return (
                 <a
@@ -267,9 +284,7 @@ export function Navbar({
                     if (isStash) {
                       e.preventDefault();
                       const targetId =
-                        role === "host"
-                          ? "host-earnings-calculator"
-                          : "student-calculator";
+                        role === "host" ? "host-earnings-calculator" : "student-calculator";
                       const element = document.getElementById(targetId);
                       if (element) {
                         const navHeight = 70;
@@ -292,8 +307,25 @@ export function Navbar({
               );
             })}
 
-            {/* Mobile Auth Button */}
+            {/* Mobile Auth & Early Access */}
             <div className="mt-2 pt-2 border-t border-white/10 flex flex-col gap-2">
+              {onEarlyAccess && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setOpen(false);
+                    onEarlyAccess();
+                  }}
+                  className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl border border-emerald-500/40 bg-emerald-500/15 text-xs font-bold text-emerald-300 hover:bg-emerald-500/25 transition-all cursor-pointer"
+                >
+                  <span>⚡</span>
+                  <span>
+                    {language === "hi"
+                      ? "प्राथमिकता अर्ली एक्सेस लें"
+                      : "Get Priority Early Access"}
+                  </span>
+                </button>
+              )}
               <div className="px-1">
                 <AuthButton compact />
               </div>

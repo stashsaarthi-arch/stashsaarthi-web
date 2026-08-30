@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from 'react';
-import { Renderer, Program, Mesh, Triangle } from 'ogl';
-import './Ferrofluid.css';
+import React, { useEffect, useRef } from "react";
+import { Renderer, Program, Mesh, Triangle } from "ogl";
+import "./Ferrofluid.css";
 
 export interface FerrofluidProps {
   colors?: string[];
@@ -17,7 +17,7 @@ export interface FerrofluidProps {
   speed?: number;
   turbulence?: number;
   rimWidth?: number;
-  mixBlendMode?: React.CSSProperties['mixBlendMode'];
+  mixBlendMode?: React.CSSProperties["mixBlendMode"];
   className?: string;
   style?: React.CSSProperties;
 }
@@ -178,21 +178,20 @@ void main() {
 `;
 
 function hexToRgb(hex: string): [number, number, number] {
-  let clean = hex.replace('#', '');
+  let clean = hex.replace("#", "");
   if (clean.length === 3) {
-    clean = clean.split('').map(c => c + c).join('');
+    clean = clean
+      .split("")
+      .map((c) => c + c)
+      .join("");
   }
   const num = parseInt(clean, 16);
   if (isNaN(num)) return [0.06, 0.72, 0.51];
-  return [
-    ((num >> 16) & 255) / 255,
-    ((num >> 8) & 255) / 255,
-    (num & 255) / 255
-  ];
+  return [((num >> 16) & 255) / 255, ((num >> 8) & 255) / 255, (num & 255) / 255];
 }
 
 export function Ferrofluid({
-  colors = ['#10B981', '#00F5A0', '#06B6D4', '#1E3A8A'],
+  colors = ["#10B981", "#00F5A0", "#06B6D4", "#1E3A8A"],
   glow = 2.2,
   shimmer = 1.4,
   mouseStrength = 1.2,
@@ -205,9 +204,9 @@ export function Ferrofluid({
   speed = 0.35,
   turbulence = 0.8,
   rimWidth = 0.22,
-  mixBlendMode = 'screen',
-  className = '',
-  style = {}
+  mixBlendMode = "screen",
+  className = "",
+  style = {},
 }: FerrofluidProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -215,32 +214,33 @@ export function Ferrofluid({
 
   const mouseRef = useRef<{ current: [number, number]; target: [number, number] }>({
     current: [0.5, 0.5],
-    target: [0.5, 0.5]
+    target: [0.5, 0.5],
   });
 
   // Keep colors updated
   useEffect(() => {
     if (!programRef.current) return;
     const uniforms = programRef.current.uniforms as Record<string, { value: any }>;
-    const c1 = hexToRgb(colors[0] || '#10B981');
-    const c2 = hexToRgb(colors[1] || '#00F5A0');
-    const c3 = hexToRgb(colors[2] || '#06B6D4');
-    const c4 = hexToRgb(colors[3] || '#1E3A8A');
+    const c1 = hexToRgb(colors[0] || "#10B981");
+    const c2 = hexToRgb(colors[1] || "#00F5A0");
+    const c3 = hexToRgb(colors[2] || "#06B6D4");
+    const c4 = hexToRgb(colors[3] || "#1E3A8A");
 
-    if (uniforms['uColor1']) uniforms['uColor1'].value = c1;
-    if (uniforms['uColor2']) uniforms['uColor2'].value = c2;
-    if (uniforms['uColor3']) uniforms['uColor3'].value = c3;
-    if (uniforms['uColor4']) uniforms['uColor4'].value = c4;
-    if (uniforms['uGlow']) uniforms['uGlow'].value = glow;
-    if (uniforms['uShimmer']) uniforms['uShimmer'].value = shimmer;
-    if (uniforms['uMouseStrength']) uniforms['uMouseStrength'].value = mouseInteraction ? mouseStrength : 0;
-    if (uniforms['uMouseRadius']) uniforms['uMouseRadius'].value = mouseRadius;
-    if (uniforms['uFluidity']) uniforms['uFluidity'].value = fluidity;
-    if (uniforms['uScale']) uniforms['uScale'].value = scale;
-    if (uniforms['uSharpness']) uniforms['uSharpness'].value = sharpness;
-    if (uniforms['uSpeed']) uniforms['uSpeed'].value = speed;
-    if (uniforms['uTurbulence']) uniforms['uTurbulence'].value = turbulence;
-    if (uniforms['uRimWidth']) uniforms['uRimWidth'].value = rimWidth;
+    if (uniforms["uColor1"]) uniforms["uColor1"].value = c1;
+    if (uniforms["uColor2"]) uniforms["uColor2"].value = c2;
+    if (uniforms["uColor3"]) uniforms["uColor3"].value = c3;
+    if (uniforms["uColor4"]) uniforms["uColor4"].value = c4;
+    if (uniforms["uGlow"]) uniforms["uGlow"].value = glow;
+    if (uniforms["uShimmer"]) uniforms["uShimmer"].value = shimmer;
+    if (uniforms["uMouseStrength"])
+      uniforms["uMouseStrength"].value = mouseInteraction ? mouseStrength : 0;
+    if (uniforms["uMouseRadius"]) uniforms["uMouseRadius"].value = mouseRadius;
+    if (uniforms["uFluidity"]) uniforms["uFluidity"].value = fluidity;
+    if (uniforms["uScale"]) uniforms["uScale"].value = scale;
+    if (uniforms["uSharpness"]) uniforms["uSharpness"].value = sharpness;
+    if (uniforms["uSpeed"]) uniforms["uSpeed"].value = speed;
+    if (uniforms["uTurbulence"]) uniforms["uTurbulence"].value = turbulence;
+    if (uniforms["uRimWidth"]) uniforms["uRimWidth"].value = rimWidth;
   }, [
     colors,
     glow,
@@ -253,7 +253,7 @@ export function Ferrofluid({
     sharpness,
     speed,
     turbulence,
-    rimWidth
+    rimWidth,
   ]);
 
   useEffect(() => {
@@ -281,10 +281,10 @@ export function Ferrofluid({
 
     const geometry = new Triangle(gl);
 
-    const c1 = hexToRgb(colors[0] || '#10B981');
-    const c2 = hexToRgb(colors[1] || '#00F5A0');
-    const c3 = hexToRgb(colors[2] || '#06B6D4');
-    const c4 = hexToRgb(colors[3] || '#1E3A8A');
+    const c1 = hexToRgb(colors[0] || "#10B981");
+    const c2 = hexToRgb(colors[1] || "#00F5A0");
+    const c3 = hexToRgb(colors[2] || "#06B6D4");
+    const c4 = hexToRgb(colors[3] || "#1E3A8A");
 
     const program = new Program(gl, {
       vertex: vertexShader,
@@ -307,8 +307,8 @@ export function Ferrofluid({
         uColor1: { value: c1 },
         uColor2: { value: c2 },
         uColor3: { value: c3 },
-        uColor4: { value: c4 }
-      }
+        uColor4: { value: c4 },
+      },
     });
 
     programRef.current = program;
@@ -321,8 +321,8 @@ export function Ferrofluid({
       const height = container.clientHeight || 300;
       renderer.setSize(width, height);
       const uniforms = program.uniforms as Record<string, { value: any }>;
-      if (uniforms['uResolution']) {
-        uniforms['uResolution'].value = [width, height];
+      if (uniforms["uResolution"]) {
+        uniforms["uResolution"].value = [width, height];
       }
     };
 
@@ -346,8 +346,8 @@ export function Ferrofluid({
       mouseRef.current.target = [x, y];
     };
 
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    window.addEventListener('touchmove', handleTouchMove, { passive: true });
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
 
     let lastTime = performance.now();
 
@@ -359,25 +359,30 @@ export function Ferrofluid({
       lastTime = now;
 
       const uniforms = program.uniforms as Record<string, { value: any }>;
-      if (uniforms['uTime']) {
-        uniforms['uTime'].value += delta;
+      if (uniforms["uTime"]) {
+        uniforms["uTime"].value += delta;
       }
 
       // Mouse lerp
       const damp = Math.min(1.0, mouseDampening * 60 * delta);
-      mouseRef.current.current[0] += (mouseRef.current.target[0] - mouseRef.current.current[0]) * damp;
-      mouseRef.current.current[1] += (mouseRef.current.target[1] - mouseRef.current.current[1]) * damp;
-      if (uniforms['uMouse']) {
-        uniforms['uMouse'].value = mouseRef.current.current;
+      mouseRef.current.current[0] +=
+        (mouseRef.current.target[0] - mouseRef.current.current[0]) * damp;
+      mouseRef.current.current[1] +=
+        (mouseRef.current.target[1] - mouseRef.current.current[1]) * damp;
+      if (uniforms["uMouse"]) {
+        uniforms["uMouse"].value = mouseRef.current.current;
       }
 
       renderer?.render({ scene: mesh });
     };
 
     let isVisible = true;
-    const observer = new IntersectionObserver(([entry]) => {
-      isVisible = entry?.isIntersecting ?? true;
-    }, { threshold: 0 });
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry?.isIntersecting ?? true;
+      },
+      { threshold: 0 },
+    );
     observer.observe(container);
 
     animationId = requestAnimationFrame(update);
@@ -386,11 +391,11 @@ export function Ferrofluid({
       cancelAnimationFrame(animationId);
       observer.disconnect();
       resizeObserver.disconnect();
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("touchmove", handleTouchMove);
       programRef.current = null;
       if (gl) {
-        const ext = gl.getExtension('WEBGL_lose_context');
+        const ext = gl.getExtension("WEBGL_lose_context");
         if (ext) ext.loseContext();
       }
     };
@@ -402,7 +407,7 @@ export function Ferrofluid({
       className={`ferrofluid-container ${className}`}
       style={{
         mixBlendMode,
-        ...style
+        ...style,
       }}
     >
       <canvas ref={canvasRef} className="ferrofluid-canvas" />

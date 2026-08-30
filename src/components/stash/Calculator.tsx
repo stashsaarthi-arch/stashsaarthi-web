@@ -45,28 +45,24 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
   }, [safeBags, safeDays, safeRent]);
 
   return (
-    <section id="student-calculator" className="relative mx-auto max-w-6xl px-4 py-16 sm:py-24 scroll-mt-20">
+    <section
+      id="student-calculator"
+      className="relative mx-auto max-w-6xl px-4 py-16 sm:py-24 scroll-mt-20"
+    >
       <AnimatedContent distance={40} scale={0.98} duration={0.6} ease="power2.out">
         <div className="w-full max-w-4xl mx-auto rounded-3xl bg-[#0F1318] border border-slate-800 p-6 sm:p-8 backdrop-blur-xl shadow-2xl relative overflow-hidden">
-          
           {/* Header */}
           <div className="text-center mb-8">
             <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
               {t.calculator.badge}
             </span>
-            <h3 className="text-2xl sm:text-3xl font-bold text-white mt-3">
-              {t.calculator.title}
-            </h3>
-            <p className="text-sm text-slate-400 mt-1">
-              {t.calculator.subtitle}
-            </p>
+            <h3 className="text-2xl sm:text-3xl font-bold text-white mt-3">{t.calculator.title}</h3>
+            <p className="text-sm text-slate-400 mt-1">{t.calculator.subtitle}</p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            
             {/* Left Controls Column */}
             <div className="space-y-6">
-              
               {/* Control 1: Bags Count */}
               <div>
                 <div className="flex justify-between items-center mb-2">
@@ -100,7 +96,8 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                     {t.calculator.vacationLabel}
                   </label>
                   <span className="text-sm font-bold text-emerald-400 font-mono bg-emerald-500/10 px-2.5 py-0.5 rounded-lg border border-emerald-500/20">
-                    {vacationDays} {t.calculator.daysUnit} ({vacationMonths} {t.calculator.monthUnit})
+                    {vacationDays} {t.calculator.daysUnit} ({vacationMonths}{" "}
+                    {t.calculator.monthUnit})
                   </span>
                 </div>
                 <input
@@ -126,7 +123,7 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                     {t.calculator.rentLabel}
                   </label>
                   <span className="text-sm font-bold text-emerald-400 font-mono bg-emerald-500/10 px-2.5 py-0.5 rounded-lg border border-emerald-500/20">
-                    ₹{monthlyRent.toLocaleString('en-IN')}/{t.calculator.monthUnit}
+                    ₹{monthlyRent.toLocaleString("en-IN")}/{t.calculator.monthUnit}
                   </span>
                 </div>
                 <input
@@ -144,7 +141,6 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                   <span>₹12,000</span>
                 </div>
               </div>
-
             </div>
 
             {/* Right Results & Savings Card */}
@@ -154,7 +150,7 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                   {t.calculator.estimatedSavings}
                 </div>
                 <div className="text-4xl sm:text-5xl font-black text-emerald-400 tracking-tight font-mono">
-                  ₹{netSavings.toLocaleString('en-IN')}
+                  ₹{netSavings.toLocaleString("en-IN")}
                 </div>
                 <div className="text-xs text-emerald-500/80 font-medium mt-1">
                   🎉 {t.calculator.saveCompare.replace("{percent}", String(savingsPercent))}
@@ -166,7 +162,9 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                   <div>
                     <div className="flex justify-between text-xs mb-1">
                       <span className="text-slate-400">{t.calculator.emptyRentBar}</span>
-                      <span className="font-mono font-bold text-rose-400">₹{deadRentCost.toLocaleString('en-IN')}</span>
+                      <span className="font-mono font-bold text-rose-400">
+                        ₹{deadRentCost.toLocaleString("en-IN")}
+                      </span>
                     </div>
                     <div className="h-2 w-full rounded-full bg-slate-800 overflow-hidden">
                       <motion.div
@@ -184,7 +182,9 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                       <span className="text-slate-400">
                         {t.calculator.stashCostBar.replace("{bags}", String(safeBags))}
                       </span>
-                      <span className="font-mono font-bold text-emerald-400">₹{stashCost.toLocaleString('en-IN')}</span>
+                      <span className="font-mono font-bold text-emerald-400">
+                        ₹{stashCost.toLocaleString("en-IN")}
+                      </span>
                     </div>
                     <div className="h-2 w-full rounded-full bg-slate-800 overflow-hidden">
                       <motion.div
@@ -206,14 +206,16 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                     if (onBook) {
                       onBook({
                         service: "stash",
-                        note: `${safeBags} ${isHi ? "बैग" : "bag"}${safeBags > 1 && !isHi ? "s" : ""} · ${safeDays} ${isHi ? "दिन" : "days"} (${vacationMonths} ${isHi ? "माह" : "mo"}) · saves ₹${netSavings.toLocaleString('en-IN')}`,
+                        note: `${safeBags} ${isHi ? "बैग" : "bag"}${safeBags > 1 && !isHi ? "s" : ""} · ${safeDays} ${isHi ? "दिन" : "days"} (${vacationMonths} ${isHi ? "माह" : "mo"}) · saves ₹${netSavings.toLocaleString("en-IN")}`,
                         bags: safeBags,
                         months: vacationMonths,
                         amount: stashCost,
                       });
                     } else {
-                      const el = document.getElementById('waitlist-form') || document.querySelector('footer');
-                      if (el) el.scrollIntoView({ behavior: 'smooth' });
+                      const el =
+                        document.getElementById("waitlist-form") ||
+                        document.querySelector("footer");
+                      if (el) el.scrollIntoView({ behavior: "smooth" });
                     }
                   }}
                   className="flex-1 py-3 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-sm transition-all shadow-lg shadow-emerald-500/25 flex items-center justify-center gap-2 group cursor-pointer active:scale-95"
@@ -221,7 +223,7 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                   <span>{t.calculator.lockSavings}</span>
                   <span className="group-hover:translate-x-1 transition-transform">➔</span>
                 </button>
-                
+
                 <button
                   type="button"
                   onClick={() => setShowCertificateModal(true)}
@@ -242,7 +244,6 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                 </button>
               </div>
             </div>
-
           </div>
         </div>
 
@@ -253,7 +254,9 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
               <div className="flex items-center justify-between">
                 <DialogTitle className="text-base font-bold text-white flex items-center gap-2">
                   <ShieldCheck className="h-5 w-5 text-emerald-400" />
-                  <span>{isHi ? "आधिकारिक डेड-रेंट बचत प्रमाणपत्र" : "Official Dead-Rent Savings Audit"}</span>
+                  <span>
+                    {isHi ? "आधिकारिक डेड-रेंट बचत प्रमाणपत्र" : "Official Dead-Rent Savings Audit"}
+                  </span>
                 </DialogTitle>
                 <span className="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
                   VERIFIED
@@ -263,24 +266,44 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
 
             <div className="my-4 rounded-2xl border border-white/10 bg-black/60 p-5 text-left font-mono text-xs space-y-3">
               <div className="flex justify-between border-b border-white/10 pb-2">
-                <span className="text-slate-400">{isHi ? "प्रमाणपत्र आईडी:" : "Audit Certificate ID:"}</span>
-                <span className="font-bold text-emerald-400">#SAV-KANPUR-{Math.floor(Math.random() * 90000) + 10000}</span>
+                <span className="text-slate-400">
+                  {isHi ? "प्रमाणपत्र आईडी:" : "Audit Certificate ID:"}
+                </span>
+                <span className="font-bold text-emerald-400">
+                  #SAV-KANPUR-{Math.floor(Math.random() * 90000) + 10000}
+                </span>
               </div>
               <div className="flex justify-between border-b border-white/10 pb-2">
-                <span className="text-slate-400">{isHi ? "अवधि (वेकेशन):" : "Vacation Duration:"}</span>
-                <span className="text-white">{safeDays} {isHi ? "दिन" : "Days"} ({vacationMonths} {isHi ? "माह" : "mo"})</span>
+                <span className="text-slate-400">
+                  {isHi ? "अवधि (वेकेशन):" : "Vacation Duration:"}
+                </span>
+                <span className="text-white">
+                  {safeDays} {isHi ? "दिन" : "Days"} ({vacationMonths} {isHi ? "माह" : "mo"})
+                </span>
               </div>
               <div className="flex justify-between border-b border-white/10 pb-2">
-                <span className="text-slate-400">{isHi ? "पारंपरिक खाली कमरा किराया:" : "Empty Room Rent Waste:"}</span>
-                <span className="font-bold text-rose-400">₹{deadRentCost.toLocaleString('en-IN')}</span>
+                <span className="text-slate-400">
+                  {isHi ? "पारंपरिक खाली कमरा किराया:" : "Empty Room Rent Waste:"}
+                </span>
+                <span className="font-bold text-rose-400">
+                  ₹{deadRentCost.toLocaleString("en-IN")}
+                </span>
               </div>
               <div className="flex justify-between border-b border-white/10 pb-2">
-                <span className="text-slate-400">{isHi ? "सार्थी स्टैश लागत (₹300/बैग):" : "StashSaarthi Escrow Fee:"}</span>
-                <span className="font-bold text-cyan-400">₹{stashCost.toLocaleString('en-IN')}</span>
+                <span className="text-slate-400">
+                  {isHi ? "सार्थी स्टैश लागत (₹300/बैग):" : "StashSaarthi Escrow Fee:"}
+                </span>
+                <span className="font-bold text-cyan-400">
+                  ₹{stashCost.toLocaleString("en-IN")}
+                </span>
               </div>
               <div className="flex justify-between items-center pt-2 text-sm">
-                <span className="font-sans font-bold text-emerald-300">{isHi ? "सीधी छात्र जेब बचत:" : "Total In-Pocket Savings:"}</span>
-                <span className="text-xl font-bold text-emerald-400">₹{netSavings.toLocaleString('en-IN')}</span>
+                <span className="font-sans font-bold text-emerald-300">
+                  {isHi ? "सीधी छात्र जेब बचत:" : "Total In-Pocket Savings:"}
+                </span>
+                <span className="text-xl font-bold text-emerald-400">
+                  ₹{netSavings.toLocaleString("en-IN")}
+                </span>
               </div>
             </div>
 
@@ -301,7 +324,7 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                   if (onBook) {
                     onBook({
                       service: "stash",
-                      note: `Savings Audit: ${safeBags} bags · ${safeDays} days · Saved ₹${netSavings.toLocaleString('en-IN')}`,
+                      note: `Savings Audit: ${safeBags} bags · ${safeDays} days · Saved ₹${netSavings.toLocaleString("en-IN")}`,
                       bags: safeBags,
                       months: vacationMonths,
                       amount: stashCost,
@@ -322,7 +345,7 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
             if (onBook) {
               onBook({
                 service: "stash",
-                note: `${safeBags} ${isHi ? "बैग" : "bag"}${safeBags > 1 && !isHi ? "s" : ""} · ${safeDays} ${isHi ? "दिन" : "days"} (${vacationMonths} ${isHi ? "माह" : "mo"}) · saves ₹${netSavings.toLocaleString('en-IN')}`,
+                note: `${safeBags} ${isHi ? "बैग" : "bag"}${safeBags > 1 && !isHi ? "s" : ""} · ${safeDays} ${isHi ? "दिन" : "days"} (${vacationMonths} ${isHi ? "माह" : "mo"}) · saves ₹${netSavings.toLocaleString("en-IN")}`,
                 bags: safeBags,
                 months: vacationMonths,
                 amount: stashCost,

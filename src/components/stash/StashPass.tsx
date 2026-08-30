@@ -28,7 +28,9 @@ export function StashPass({ tokenId, name, serviceLabel, type, bags, months }: S
           text: text,
           url: "https://stashsaarthi-web.vercel.app",
         });
-        toast.success(isHi ? "स्टैशपास™ सफलतापूर्वक साझा किया गया!" : "StashPass™ Shared Successfully!");
+        toast.success(
+          isHi ? "स्टैशपास™ सफलतापूर्वक साझा किया गया!" : "StashPass™ Shared Successfully!",
+        );
         return;
       } catch {
         // User dismissed native share sheet
@@ -37,7 +39,9 @@ export function StashPass({ tokenId, name, serviceLabel, type, bags, months }: S
     const url = getWhatsAppUrl(text, FOUNDER_WHATSAPP);
     window.open(url, "_blank", "noopener,noreferrer");
     toast.success(isHi ? "व्हाट्सएप शेयरिंग शुरू" : "WhatsApp Sharing Initiated", {
-      description: isHi ? "डायरेक्ट मैसेज लिंक जनरेट किया गया।" : "Direct message concierge link generated.",
+      description: isHi
+        ? "डायरेक्ट मैसेज लिंक जनरेट किया गया।"
+        : "Direct message concierge link generated.",
       duration: 3000,
     });
   };
@@ -53,8 +57,11 @@ export function StashPass({ tokenId, name, serviceLabel, type, bags, months }: S
             <ShieldCheck className="h-32 w-32 text-cyan-400" />
           </div>
           <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/0 via-cyan-500/10 to-cyan-500/0 opacity-50 blur-xl animate-pulse" />
-          
-          <div className="relative z-10 p-5 border-b border-white/10 bg-gradient-to-br from-cyan-500/10 to-transparent" style={{ transform: "translateZ(30px)" }}>
+
+          <div
+            className="relative z-10 p-5 border-b border-white/10 bg-gradient-to-br from-cyan-500/10 to-transparent"
+            style={{ transform: "translateZ(30px)" }}
+          >
             <div className="flex justify-between items-start mb-2">
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-cyan-400 mb-1">
@@ -66,10 +73,12 @@ export function StashPass({ tokenId, name, serviceLabel, type, bags, months }: S
             </div>
             <div className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-[10px] font-bold text-emerald-400">
               <ShieldCheck className="h-3 w-3" />
-              {isHi ? `टैम्पर सील आईडी: ${Math.floor(Math.random() * 9000000) + 1000000}` : `Tamper Seal ID: ${Math.floor(Math.random() * 9000000) + 1000000}`}
+              {isHi
+                ? `टैम्पर सील आईडी: ${Math.floor(Math.random() * 9000000) + 1000000}`
+                : `Tamper Seal ID: ${Math.floor(Math.random() * 9000000) + 1000000}`}
             </div>
           </div>
-          
+
           <div className="relative z-10 p-5 bg-black/40" style={{ transform: "translateZ(20px)" }}>
             <div className="grid grid-cols-2 gap-y-4 gap-x-2 text-xs">
               <div>
@@ -83,36 +92,45 @@ export function StashPass({ tokenId, name, serviceLabel, type, bags, months }: S
                   {isHi ? "श्रेणी" : "Type"}
                 </p>
                 <p className="font-semibold text-foreground truncate text-sm capitalize">
-                  {serviceLabel || (type === "student" ? (isHi ? "छात्र" : "Student") : (isHi ? "होस्ट" : "Host")) || (isHi ? "मानक" : "Standard")}
+                  {serviceLabel ||
+                    (type === "student" ? (isHi ? "छात्र" : "Student") : isHi ? "होस्ट" : "Host") ||
+                    (isHi ? "मानक" : "Standard")}
                 </p>
               </div>
-              
+
               {bags !== undefined && (
                 <div>
                   <p className="text-muted-foreground uppercase text-[10px] tracking-wider mb-0.5">
                     {isHi ? "सामान" : "Baggage"}
                   </p>
                   <p className="font-semibold text-foreground text-sm">
-                    {bags} {isHi ? "बैग" : `Bag${bags > 1 ? 's' : ''}`}
+                    {bags} {isHi ? "बैग" : `Bag${bags > 1 ? "s" : ""}`}
                   </p>
                 </div>
               )}
-              
+
               <div>
                 <p className="text-muted-foreground uppercase text-[10px] tracking-wider mb-0.5">
                   {isHi ? "वैधता तिथि" : "Valid Until"}
                 </p>
                 <p className="font-semibold text-emerald-400 text-sm flex items-center gap-1">
                   <CalendarClock className="h-3 w-3" />
-                  {validityDate.toLocaleDateString(isHi ? 'hi-IN' : 'en-IN', { month: 'short', day: 'numeric', year: 'numeric' })}
+                  {validityDate.toLocaleDateString(isHi ? "hi-IN" : "en-IN", {
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric",
+                  })}
                 </p>
               </div>
             </div>
-            
+
             <div className="mt-5 flex items-center justify-center pt-4 border-t border-white/5 opacity-40">
               <div className="w-full h-8 flex gap-1 justify-center">
                 {Array.from({ length: 28 }).map((_, i) => (
-                  <div key={i} className={`bg-white ${i % 3 === 0 ? 'w-1.5' : i % 2 === 0 ? 'w-1' : 'w-0.5'} h-full`} />
+                  <div
+                    key={i}
+                    className={`bg-white ${i % 3 === 0 ? "w-1.5" : i % 2 === 0 ? "w-1" : "w-0.5"} h-full`}
+                  />
                 ))}
               </div>
             </div>

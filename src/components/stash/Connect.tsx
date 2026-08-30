@@ -1,6 +1,14 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ArrowLeftRight, GraduationCap, Heart, Sparkles, CheckCircle2, SlidersHorizontal, UserCheck } from "lucide-react";
+import {
+  ArrowLeftRight,
+  GraduationCap,
+  Heart,
+  Sparkles,
+  CheckCircle2,
+  SlidersHorizontal,
+  UserCheck,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MatchDrawer } from "./MatchDrawer";
 import { PrototypeBadge } from "@/components/ui/PrototypeBadge";
@@ -11,16 +19,28 @@ const CITIES = ["Kanpur", "Lucknow", "Delhi NCR", "Pune"] as const;
 type City = (typeof CITIES)[number];
 
 const CITIES_HI: Record<City, string> = {
-  "Kanpur": "कानपुर",
-  "Lucknow": "लखनऊ",
+  Kanpur: "कानपुर",
+  Lucknow: "लखनऊ",
   "Delhi NCR": "दिल्ली एनसीआर",
-  "Pune": "पुणे",
+  Pune: "पुणे",
 };
 
 type Match = {
   city: City;
-  student: { name: string; detail: string; detail_hi?: string; gives: string[]; gives_hi?: string[] };
-  senior: { name: string; detail: string; detail_hi?: string; offers: string[]; offers_hi?: string[] };
+  student: {
+    name: string;
+    detail: string;
+    detail_hi?: string;
+    gives: string[];
+    gives_hi?: string[];
+  };
+  senior: {
+    name: string;
+    detail: string;
+    detail_hi?: string;
+    offers: string[];
+    offers_hi?: string[];
+  };
   score: number;
 };
 
@@ -111,7 +131,8 @@ export function Connect(_props: { onBook: OpenBooking }) {
   const [schedule, setSchedule] = useState<"early" | "night">("early");
   const [helpHours, setHelpHours] = useState<"30m" | "1h" | "2h">("1h");
 
-  const quizScore = 90 + (diet === "veg" ? 4 : 2) + (schedule === "early" ? 3 : 1) + (helpHours === "1h" ? 2 : 1);
+  const quizScore =
+    90 + (diet === "veg" ? 4 : 2) + (schedule === "early" ? 3 : 1) + (helpHours === "1h" ? 2 : 1);
 
   const match = MATCHES.find((m) => m.city === city) ?? MATCHES[0]!;
 
@@ -119,7 +140,8 @@ export function Connect(_props: { onBook: OpenBooking }) {
     <section id="connect" className="relative mx-auto max-w-4xl px-4 py-16 sm:py-24 scroll-mt-20">
       <div className="mx-auto max-w-2xl text-center">
         <h2 className="text-balance text-[1.75rem] font-extrabold tracking-tight sm:text-5xl">
-          {t.connectSection.heading} <span className="text-gradient">{t.connectSection.headingGradient}</span>
+          {t.connectSection.heading}{" "}
+          <span className="text-gradient">{t.connectSection.headingGradient}</span>
         </h2>
         <p className="mt-4 text-sm text-muted-foreground sm:text-base">
           {t.connectSection.subtitle}
@@ -183,7 +205,9 @@ export function Connect(_props: { onBook: OpenBooking }) {
               <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
                 <div className="flex items-center gap-2 truncate">
                   <span className="text-xs uppercase tracking-widest text-muted-foreground">
-                    {isHi ? `${CITIES_HI[match.city]} ${t.connectSection.liveSimulation}` : `${match.city} Live Simulation`}
+                    {isHi
+                      ? `${CITIES_HI[match.city]} ${t.connectSection.liveSimulation}`
+                      : `${match.city} Live Simulation`}
                   </span>
                   <PrototypeBadge variant="text" />
                 </div>
@@ -197,9 +221,13 @@ export function Connect(_props: { onBook: OpenBooking }) {
                   icon={<GraduationCap className="h-4 w-4 text-cyan" />}
                   accent="var(--cyan)"
                   name={match.student.name}
-                  detail={isHi && match.student.detail_hi ? match.student.detail_hi : match.student.detail}
+                  detail={
+                    isHi && match.student.detail_hi ? match.student.detail_hi : match.student.detail
+                  }
                   label={t.connectSection.gives}
-                  items={isHi && match.student.gives_hi ? match.student.gives_hi : match.student.gives}
+                  items={
+                    isHi && match.student.gives_hi ? match.student.gives_hi : match.student.gives
+                  }
                 />
                 <div className="grid place-items-center">
                   <span className="grid h-9 w-9 place-items-center rounded-full border border-white/15 bg-white/5">
@@ -210,13 +238,22 @@ export function Connect(_props: { onBook: OpenBooking }) {
                   icon={<Heart className="h-4 w-4 text-amber" />}
                   accent="var(--amber)"
                   name={match.senior.name}
-                  detail={isHi && match.senior.detail_hi ? match.senior.detail_hi : match.senior.detail}
+                  detail={
+                    isHi && match.senior.detail_hi ? match.senior.detail_hi : match.senior.detail
+                  }
                   label={t.connectSection.offers}
-                  items={isHi && match.senior.offers_hi ? match.senior.offers_hi : match.senior.offers}
+                  items={
+                    isHi && match.senior.offers_hi ? match.senior.offers_hi : match.senior.offers
+                  }
                 />
               </div>
 
-              <Button variant="hero" size="lg" className="mt-6 w-full cursor-pointer" onClick={() => setDrawer(true)}>
+              <Button
+                variant="hero"
+                size="lg"
+                className="mt-6 w-full cursor-pointer"
+                onClick={() => setDrawer(true)}
+              >
                 {t.connectSection.requestMatch}
               </Button>
             </motion.div>
@@ -235,12 +272,16 @@ export function Connect(_props: { onBook: OpenBooking }) {
                 {isHi ? "सार्थी अनुकूलता कैलकुलेटर" : "Instant Compatibility Radar"}
               </h3>
               <p className="text-xs text-slate-400 mt-0.5">
-                {isHi ? "अपनी प्राथमिकताएं चुनें और कानपुर के सीनियर होस्ट्स के साथ अपनी मैच दर देखें।" : "Set your lifestyle preferences to compute live senior matching synergy."}
+                {isHi
+                  ? "अपनी प्राथमिकताएं चुनें और कानपुर के सीनियर होस्ट्स के साथ अपनी मैच दर देखें।"
+                  : "Set your lifestyle preferences to compute live senior matching synergy."}
               </p>
             </div>
             <div className="flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1 text-sm font-bold text-emerald-400 font-mono">
               <Sparkles className="h-4 w-4" />
-              <span>{quizScore}% {isHi ? "अनुकूलता स्कोर" : "Match Score"}</span>
+              <span>
+                {quizScore}% {isHi ? "अनुकूलता स्कोर" : "Match Score"}
+              </span>
             </div>
           </div>
 
@@ -308,7 +349,10 @@ export function Connect(_props: { onBook: OpenBooking }) {
               <div className="flex flex-col gap-1.5">
                 {[
                   { id: "30m", label: isHi ? "30 मिनट / दिन" : "30 mins / day" },
-                  { id: "1h", label: isHi ? "1 घंटा / दिन (60% सब्सिडी)" : "1 hr / day (60% subsidy)" },
+                  {
+                    id: "1h",
+                    label: isHi ? "1 घंटा / दिन (60% सब्सिडी)" : "1 hr / day (60% subsidy)",
+                  },
                   { id: "2h", label: isHi ? "2 घंटे / दिन" : "2 hrs / day" },
                 ].map((opt) => (
                   <button
@@ -336,10 +380,14 @@ export function Connect(_props: { onBook: OpenBooking }) {
               </span>
               <div>
                 <h4 className="text-sm font-bold text-white">
-                  {isHi ? "सत्यापित होस्ट मैच मिला: सुधा त्रिपाठी जी (स्वरूप नगर)" : "Top Match Found: Sudha Tripathi Ji (Swaroop Nagar)"}
+                  {isHi
+                    ? "सत्यापित होस्ट मैच मिला: सुधा त्रिपाठी जी (स्वरूप नगर)"
+                    : "Top Match Found: Sudha Tripathi Ji (Swaroop Nagar)"}
                 </h4>
                 <p className="text-xs text-slate-300">
-                  {isHi ? "किराया: ₹3,200/माह · घर का शुद्ध भोजन · 100% शून्य ब्रोकरेज" : "Rent: ₹3,200/mo · Homestyle food · 0% Brokerage"}
+                  {isHi
+                    ? "किराया: ₹3,200/माह · घर का शुद्ध भोजन · 100% शून्य ब्रोकरेज"
+                    : "Rent: ₹3,200/mo · Homestyle food · 0% Brokerage"}
                 </p>
               </div>
             </div>

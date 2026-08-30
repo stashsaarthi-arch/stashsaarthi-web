@@ -1,8 +1,29 @@
 import { useState } from "react";
 import { toast } from "sonner";
 import { useAuth } from "@/hooks/useAuth";
-import { isValidEmail, isValidIndianPhone, insertWaitlistUser, upsertGoogleUser, showNetworkRetryToast } from "@/lib/waitlistService";
-import { Instagram, Linkedin, Twitter, Mail, Loader2, User, Phone, GraduationCap, ShieldCheck, Download, MessageCircle, Check, AlertCircle, Award } from "lucide-react";
+import {
+  isValidEmail,
+  isValidIndianPhone,
+  insertWaitlistUser,
+  upsertGoogleUser,
+  showNetworkRetryToast,
+} from "@/lib/waitlistService";
+import {
+  Instagram,
+  Linkedin,
+  Twitter,
+  Mail,
+  Loader2,
+  User,
+  Phone,
+  GraduationCap,
+  ShieldCheck,
+  Download,
+  MessageCircle,
+  Check,
+  AlertCircle,
+  Award,
+} from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { AuthButton } from "./AuthButton";
@@ -20,10 +41,22 @@ import { FOUNDER_WHATSAPP, FOUNDER_PHONE_DISPLAY } from "@/lib/constants";
 function GoogleGlyph() {
   return (
     <svg viewBox="0 0 48 48" className="h-4 w-4" aria-hidden="true">
-      <path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.1 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.6-.4-3.9z" />
-      <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.1 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z" />
-      <path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.3 0-9.7-3.3-11.3-8l-6.5 5C9.6 39.6 16.2 44 24 44z" />
-      <path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.1-4.1 5.5l6.2 5.2C36.9 40.2 44 35 44 24c0-1.3-.1-2.6-.4-3.9z" />
+      <path
+        fill="#FFC107"
+        d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.1 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.6-.4-3.9z"
+      />
+      <path
+        fill="#FF3D00"
+        d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.1 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"
+      />
+      <path
+        fill="#4CAF50"
+        d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.3 0-9.7-3.3-11.3-8l-6.5 5C9.6 39.6 16.2 44 24 44z"
+      />
+      <path
+        fill="#1976D2"
+        d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.1-4.1 5.5l6.2 5.2C36.9 40.2 44 35 44 24c0-1.3-.1-2.6-.4-3.9z"
+      />
     </svg>
   );
 }
@@ -59,7 +92,7 @@ const SOCIALS = [
 ];
 
 export function FooterSection() {
-  const { user, loginWithGoogle } = useAuth();
+  const { user, loginWithProfile } = useAuth();
   const { language, t } = useLanguage();
   const isHi = language === "hi";
 
@@ -97,9 +130,13 @@ export function FooterSection() {
 
   const LEGAL = [
     { label: isHi ? "सेवा की शर्तें" : "Terms of service", doc: "terms" },
-    { label: isHi ? "गोपनीयता नीति" : "Privacy policy", doc: "privacy" },
-    { label: isHi ? "स्टोरेज उत्तरदायित्व" : "Storage liability", doc: "liability" },
-    { label: isHi ? "रिफंड नीति" : "Refund policy", doc: "refund" },
+    { label: isHi ? "गोपनीयता नीति (सरल भाषा)" : "Privacy policy (Plain English)", doc: "privacy" },
+    { label: isHi ? "रद्दीकरण व उचित उपयोग नीति" : "Cancellation & Fair usage", doc: "refund" },
+    {
+      label: isHi ? "स्टोरेज सुरक्षा व ₹10k बीमा" : "Storage liability & ₹10k cover",
+      doc: "liability",
+    },
+    { label: isHi ? "शिकायत व नोडल अधिकारी" : "Grievance & Nodal officer", doc: "grievance" },
   ];
 
   const handleGoogleWaitlist = useGoogleLogin({
@@ -109,23 +146,37 @@ export function FooterSection() {
           headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
         });
         const data = await res.json();
-        
+
         if (data.email) {
+          setEmail(data.email);
+          if (data.name && !fullName) {
+            setFullName(data.name);
+          }
           upsertGoogleUser({
             email: data.email,
             name: data.name || data.email.split("@")[0] || "User",
             picture: data.picture,
           });
+
+          loginWithProfile({
+            id: data.sub || data.email || "saarthi",
+            name: data.name || data.email?.split("@")[0] || "Saarthi",
+            email: data.email || "",
+            avatar: data.picture || "",
+            role: userType || "student",
+            verified: !!data.email_verified,
+          });
         }
-        
-        loginWithGoogle(tokenResponse as any);
       } catch (err) {
-        toast.error(isHi ? "वेटलिस्ट प्रविष्टि विफल" : "Waitlist entry failed", { 
-          description: isHi ? "कृपया पुनः प्रयास करें।" : "Please try again." 
+        toast.error(isHi ? "वेटलिस्ट प्रविष्टि विफल" : "Waitlist entry failed", {
+          description: isHi ? "कृपया पुनः प्रयास करें।" : "Please try again.",
         });
       }
     },
-    onError: () => toast.error(isHi ? "गूगल साइन-इन विफल रहा" : "Google sign-in failed"),
+    onError: (err) => {
+      console.error("Google Auth Error:", err);
+      toast.error(isHi ? "गूगल साइन-इन विफल रहा" : "Google sign-in failed");
+    },
   });
 
   const handleSubmit = async () => {
@@ -140,7 +191,11 @@ export function FooterSection() {
       return;
     }
     if (phone.trim() && !isValidIndianPhone(phone)) {
-      toast.error(isHi ? "कृपया 10-अंकों का वैध भारतीय फोन नंबर दर्ज करें।" : "Please enter a valid 10-digit Indian phone number.");
+      toast.error(
+        isHi
+          ? "कृपया 10-अंकों का वैध भारतीय फोन नंबर दर्ज करें।"
+          : "Please enter a valid 10-digit Indian phone number.",
+      );
       return;
     }
 
@@ -157,19 +212,30 @@ export function FooterSection() {
       const generatedToken = `ST-${Math.floor(Math.random() * 90000) + 10000}`;
       setTokenId(generatedToken);
       setSubmitted(true);
-      toast.success(isHi ? "🎉 आप प्राथमिकता सूची में शामिल हो गए हैं! हमने आपके स्टैशक्रेडिट सुरक्षित कर लिए हैं।" : "🎉 You're on the priority list! We've reserved your StashCredits.", {
-        description: isHi ? "हमारी टीम 24 घंटे के भीतर संपर्क करेगी।" : "Our team will reach out within 24 hours.",
-        duration: 6000,
-      });
+      toast.success(
+        isHi
+          ? "🎉 आप प्राथमिकता सूची में शामिल हो गए हैं! हमने आपके स्टैशक्रेडिट सुरक्षित कर लिए हैं।"
+          : "🎉 You're on the priority list! We've reserved your StashCredits.",
+        {
+          description: isHi
+            ? "हमारी टीम 24 घंटे के भीतर संपर्क करेगी।"
+            : "Our team will reach out within 24 hours.",
+          duration: 6000,
+        },
+      );
     } else if (result.duplicate) {
       toast.error(isHi ? "यह ईमेल पहले से पंजीकृत है।" : "This email is already registered.", {
-        description: isHi ? "आप पहले से ही वेटलिस्ट में हैं — हम जल्द ही संपर्क करेंगे!" : "You're already on the waitlist — we'll reach out soon!",
+        description: isHi
+          ? "आप पहले से ही वेटलिस्ट में हैं — हम जल्द ही संपर्क करेंगे!"
+          : "You're already on the waitlist — we'll reach out soon!",
       });
     } else if (result.error === "network") {
       showNetworkRetryToast(handleSubmit);
     } else {
       toast.error(isHi ? "जानकारी सहेजने में असमर्थ" : "We couldn't save your details", {
-        description: isHi ? "कृपया अपना इंटरनेट कनेक्शन जांचें और पुनः प्रयास करें।" : "Please check your connection and try again in a moment.",
+        description: isHi
+          ? "कृपया अपना इंटरनेट कनेक्शन जांचें और पुनः प्रयास करें।"
+          : "Please check your connection and try again in a moment.",
       });
     }
 
@@ -182,25 +248,21 @@ export function FooterSection() {
         <h2 className="text-3xl font-extrabold tracking-tight sm:text-5xl">
           <span className="text-gradient">{t.footer.title}</span>
         </h2>
-        <p className="mx-auto mt-5 max-w-xl text-muted-foreground">
-          {t.footer.subtitle}
-        </p>
+        <p className="mx-auto mt-5 max-w-xl text-muted-foreground">{t.footer.subtitle}</p>
 
         {submitted ? (
           <div className="mt-8 mb-6">
             <p className="text-lg font-bold text-emerald-400 mb-2">
-              {isHi ? "🎉 आप प्राथमिकता सूची में शामिल हो गए हैं!" : "🎉 You're on the priority list!"}
+              {isHi
+                ? "🎉 आप प्राथमिकता सूची में शामिल हो गए हैं!"
+                : "🎉 You're on the priority list!"}
             </p>
             <p className="text-sm text-muted-foreground mb-8">
-              {isHi 
-                ? "हमने आपके स्टैशक्रेडिट सुरक्षित कर लिए हैं। हमारी टीम 24 घंटे में संपर्क करेगी।" 
+              {isHi
+                ? "हमने आपके स्टैशक्रेडिट सुरक्षित कर लिए हैं। हमारी टीम 24 घंटे में संपर्क करेगी।"
                 : "We've reserved your StashCredits. Our team will reach out within 24 hours."}
             </p>
-            <StashPass 
-              tokenId={tokenId} 
-              name={fullName} 
-              type={userType}
-            />
+            <StashPass tokenId={tokenId} name={fullName} type={userType} />
           </div>
         ) : (
           <form
@@ -250,7 +312,11 @@ export function FooterSection() {
                 />
                 {touched.name && (
                   <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                    {isNameValid ? <Check className="h-4 w-4 text-emerald-400" /> : <AlertCircle className="h-4 w-4 text-destructive" />}
+                    {isNameValid ? (
+                      <Check className="h-4 w-4 text-emerald-400" />
+                    ) : (
+                      <AlertCircle className="h-4 w-4 text-destructive" />
+                    )}
                   </div>
                 )}
               </div>
@@ -269,7 +335,11 @@ export function FooterSection() {
                 />
                 {touched.email && (
                   <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                    {isEmailValid ? <Check className="h-4 w-4 text-emerald-400" /> : <AlertCircle className="h-4 w-4 text-destructive" />}
+                    {isEmailValid ? (
+                      <Check className="h-4 w-4 text-emerald-400" />
+                    ) : (
+                      <AlertCircle className="h-4 w-4 text-destructive" />
+                    )}
                   </div>
                 )}
               </div>
@@ -288,7 +358,11 @@ export function FooterSection() {
                 />
                 {touched.phone && phone.trim() && (
                   <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                    {isPhoneValid ? <Check className="h-4 w-4 text-emerald-400" /> : <AlertCircle className="h-4 w-4 text-destructive" />}
+                    {isPhoneValid ? (
+                      <Check className="h-4 w-4 text-emerald-400" />
+                    ) : (
+                      <AlertCircle className="h-4 w-4 text-destructive" />
+                    )}
                   </div>
                 )}
               </div>
@@ -300,7 +374,15 @@ export function FooterSection() {
                   value={college}
                   onChange={(e) => setCollege(e.target.value)}
                   disabled={submitting}
-                  placeholder={userType === "student" ? (isHi ? "कॉलेज / परिसर (वैकल्पिक)" : "College / Campus (Optional)") : (isHi ? "इलाका / शहर (वैकल्पिक)" : "Locality / City (Optional)")}
+                  placeholder={
+                    userType === "student"
+                      ? isHi
+                        ? "कॉलेज / परिसर (वैकल्पिक)"
+                        : "College / Campus (Optional)"
+                      : isHi
+                        ? "इलाका / शहर (वैकल्पिक)"
+                        : "Locality / City (Optional)"
+                  }
                   className="h-11 border-white/10 bg-white/5 pl-9 focus-visible:ring-1 disabled:opacity-60"
                 />
               </div>
@@ -315,14 +397,19 @@ export function FooterSection() {
                     onChange={(e) => setWaiverAccepted(e.target.checked)}
                     className="mt-1 h-3.5 w-3.5 rounded border-white/20 bg-white/5 accent-amber-500 cursor-pointer"
                   />
-                  <label htmlFor="waiver" className="text-[11px] text-muted-foreground leading-tight cursor-pointer">
+                  <label
+                    htmlFor="waiver"
+                    className="text-[11px] text-muted-foreground leading-tight cursor-pointer"
+                  >
                     {isHi ? (
                       <>
-                        मैं स्वीकार करता/करती हूं कि यह संपत्ति अधिनियम (TPA 1882) की धारा 105 के तहत वैध लाइसेंस समझौता है।
+                        मैं स्वीकार करता/करती हूं कि यह संपत्ति अधिनियम (TPA 1882) की धारा 105 के
+                        तहत वैध लाइसेंस समझौता है।
                       </>
                     ) : (
                       <>
-                        I acknowledge the standard legal protection under Sec 105 Transfer of Property Act 1882 for verified hosts.
+                        I acknowledge the standard legal protection under Sec 105 Transfer of
+                        Property Act 1882 for verified hosts.
                       </>
                     )}
                   </label>
@@ -345,7 +432,8 @@ export function FooterSection() {
             >
               {submitting ? (
                 <span className="flex items-center gap-2">
-                  <Loader2 className="h-4 w-4 animate-spin" /> {isHi ? "सहेज रहा है…" : "Submitting…"}
+                  <Loader2 className="h-4 w-4 animate-spin" />{" "}
+                  {isHi ? "सहेज रहा है…" : "Submitting…"}
                 </span>
               ) : (
                 t.footer.submit
@@ -378,7 +466,10 @@ export function FooterSection() {
 
             {/* Micro-Trust Note */}
             <p className="mt-3 text-[11px] text-muted-foreground">
-              🔒 {isHi ? "शून्य स्पैम। केवल आपके शहर में नोड्स लाइव होने पर अलर्ट।" : "Zero spam. Only alerts when nodes go live in your campus area."}
+              🔒{" "}
+              {isHi
+                ? "शून्य स्पैम। केवल आपके शहर में नोड्स लाइव होने पर अलर्ट।"
+                : "Zero spam. Only alerts when nodes go live in your campus area."}
             </p>
           </form>
         )}
@@ -400,15 +491,18 @@ export function FooterSection() {
 
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 md:grid-cols-4">
         <div>
-          <div 
-            className="flex items-center gap-2 shrink-0 cursor-pointer mb-4 group" 
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          <button
+            type="button"
+            className="flex items-center gap-2 shrink-0 cursor-pointer mb-4 group bg-transparent border-0 p-0 transition-transform active:scale-95 focus:outline-none rounded-lg"
+            onClick={() => smoothScrollTo("top")(undefined as any)}
+            aria-label="Scroll to top of page"
+            title="StashSaarthi - Back to top"
           >
             <BrandLogo height={42} className="h-9 sm:h-10" />
-          </div>
+          </button>
           <p className="mt-4 max-w-xs text-sm text-muted-foreground">
-            {isHi 
-              ? "भारत का हाइपर-लोकल लिविंग इकोसिस्टम — छात्र गतिशीलता को अंतर-पीढ़ी सामुदायिक समर्थन से जोड़ता है।" 
+            {isHi
+              ? "भारत का हाइपर-लोकल लिविंग इकोसिस्टम — छात्र गतिशीलता को अंतर-पीढ़ी सामुदायिक समर्थन से जोड़ता है।"
               : "India's hyper-local living ecosystem — bridging student mobility with intergenerational community support."}
           </p>
           <div className="mt-5 flex gap-2">
@@ -419,7 +513,7 @@ export function FooterSection() {
               aria-label="Follow StashSaarthi on Instagram"
               className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-pink-500 hover:border-pink-500/40 hover:bg-pink-500/10 transition-all duration-300 group cursor-pointer"
             >
-              <Instagram className="w-5 h-5 group-hover:scale-110 transition-transform"/>
+              <Instagram className="w-5 h-5 group-hover:scale-110 transition-transform" />
             </a>
 
             <a
@@ -438,9 +532,14 @@ export function FooterSection() {
                 type="button"
                 aria-label={label}
                 onClick={() =>
-                  toast.info(isHi ? "सोशल चैनल जल्द ही शुरू हो रहे हैं!" : "Social channels launching soon!", {
-                    description: isHi ? `${label} पेज अगले शहर बैच के साथ लाइव होगा।` : `Our ${label} page goes live with the next city batch.`,
-                  })
+                  toast.info(
+                    isHi ? "सोशल चैनल जल्द ही शुरू हो रहे हैं!" : "Social channels launching soon!",
+                    {
+                      description: isHi
+                        ? `${label} पेज अगले शहर बैच के साथ लाइव होगा।`
+                        : `Our ${label} page goes live with the next city batch.`,
+                    },
+                  )
                 }
                 className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-slate-700 hover:bg-white/5 transition-all duration-300 group cursor-pointer"
               >
@@ -457,25 +556,28 @@ export function FooterSection() {
               className="inline-flex items-center gap-2 text-xs font-semibold text-emerald-400 hover:text-emerald-300 transition-colors"
             >
               <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-              {isHi ? `डायरेक्ट फाउंडर लाइन: ${FOUNDER_PHONE_DISPLAY}` : `Direct Founder Line: ${FOUNDER_PHONE_DISPLAY}`}
+              {isHi
+                ? `डायरेक्ट फाउंडर लाइन: ${FOUNDER_PHONE_DISPLAY}`
+                : `Direct Founder Line: ${FOUNDER_PHONE_DISPLAY}`}
             </a>
           </div>
 
           <div className="mt-6 flex flex-wrap gap-2">
-            <button 
-              type="button" 
+            <button
+              type="button"
               onClick={() => setShowInvestorModal(true)}
               className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-black/40 px-3 py-2 text-xs font-semibold text-muted-foreground transition-colors hover:border-amber-500/40 hover:text-amber-400 cursor-pointer active:scale-95"
             >
               <Download className="h-3.5 w-3.5" /> {t.footer.investorCTA}
             </button>
 
-            <button 
-              type="button" 
+            <button
+              type="button"
               onClick={() => setShowCaptainModal(true)}
               className="inline-flex items-center gap-2 rounded-lg border border-cyan-500/30 bg-cyan-500/10 px-3 py-2 text-xs font-semibold text-cyan-300 transition-colors hover:border-cyan-500/50 hover:bg-cyan-500/20 cursor-pointer active:scale-95"
             >
-              <Award className="h-3.5 w-3.5" /> {isHi ? "कैंपस कैप्टन (₹5,000+ कमाएं)" : "Campus Captain (Earn ₹5k+)"}
+              <Award className="h-3.5 w-3.5" />{" "}
+              {isHi ? "कैंपस कैप्टन (₹5,000+ कमाएं)" : "Campus Captain (Earn ₹5k+)"}
             </button>
           </div>
         </div>
@@ -510,8 +612,17 @@ export function FooterSection() {
         <DocCol title={isHi ? "कानूनी" : "Legal"} links={LEGAL} onOpen={setDoc} />
       </div>
 
-      <div className="border-t border-white/10 px-4 py-6 text-center text-xs text-muted-foreground">
-        {t.footer.copyright}
+      <div className="border-t border-white/10 px-4 py-6 text-center text-xs text-muted-foreground space-y-1.5">
+        <p>
+          {isHi
+            ? "© 2026 StashSaarthi Technologies. 100% प्रामाणिक पारदर्शिता के साथ कानपुर, उत्तर प्रदेश में निर्मित।"
+            : "© 2026 StashSaarthi Technologies. Built with radical honesty & physical accountability in Kanpur, Uttar Pradesh, India."}
+        </p>
+        <p className="text-[11px] text-muted-foreground/80 font-mono">
+          {isHi
+            ? "नोडल परिचालन कार्यालय: 117/के-ब्लॉक, कल्याणपुर, कानपुर — 208016 | शिकायत निवारण: grievance@stashsaarthi.in"
+            : "Operational Hub: 117/K-Block, Kalyanpur, Kanpur — 208016 | Grievance Officer: grievance@stashsaarthi.in"}
+        </p>
       </div>
 
       <LegalDialog docKey={doc} onOpenChange={(v) => !v && setDoc(null)} />

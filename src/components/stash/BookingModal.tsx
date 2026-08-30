@@ -29,7 +29,12 @@ import {
   Info,
   Clock,
 } from "lucide-react";
-import { isValidEmail, isValidIndianPhone, isCollegeEmail, isValidIndianPin } from "@/lib/waitlistService";
+import {
+  isValidEmail,
+  isValidIndianPhone,
+  isCollegeEmail,
+  isValidIndianPin,
+} from "@/lib/waitlistService";
 import { StashPass } from "./StashPass";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -96,15 +101,50 @@ export function BookingModal({
   const [paymentMode, setPaymentMode] = useState<"upi_qr" | "escrow_reserve">("upi_qr");
   const [copiedUpi, setCopiedUpi] = useState(false);
   const [tokenId, setTokenId] = useState<string>("");
-  const [touched, setTouched] = useState<{ name?: boolean; email?: boolean; phone?: boolean; pincode?: boolean }>({});
+  const [touched, setTouched] = useState<{
+    name?: boolean;
+    email?: boolean;
+    phone?: boolean;
+    pincode?: boolean;
+  }>({});
 
   const SERVICES = [
-    { id: "stash", label: isHi ? "सार्थी स्टैश (स्टोरेज)" : "Saarthi Stash", tag: "₹300/mo", icon: Boxes },
-    { id: "spaces", label: isHi ? "सार्थी स्पेसेस (कमरे)" : "Saarthi Spaces", tag: "Zero-Brokerage", icon: Home },
-    { id: "kitchen", label: isHi ? "सार्थी किचन (टिफिन)" : "Saarthi Kitchen", tag: "₹90/meal", icon: Soup },
-    { id: "connect", label: isHi ? "सार्थी कनेक्ट (साथी)" : "Saarthi Connect", tag: "Mentorship", icon: HandHeart },
-    { id: "trust", label: isHi ? "ट्रस्ट व नोड ऑडिट" : "Trust & Audit", tag: "100% Escrow", icon: ShieldCheck },
-    { id: "micro", label: isHi ? "होस्ट माइक्रो-अवसर" : "Host Monetize", tag: "Earn ₹11.5k+", icon: Briefcase },
+    {
+      id: "stash",
+      label: isHi ? "सार्थी स्टैश (स्टोरेज)" : "Saarthi Stash",
+      tag: "₹300/mo",
+      icon: Boxes,
+    },
+    {
+      id: "spaces",
+      label: isHi ? "सार्थी स्पेसेस (कमरे)" : "Saarthi Spaces",
+      tag: "Zero-Brokerage",
+      icon: Home,
+    },
+    {
+      id: "kitchen",
+      label: isHi ? "सार्थी किचन (टिफिन)" : "Saarthi Kitchen",
+      tag: "₹90/meal",
+      icon: Soup,
+    },
+    {
+      id: "connect",
+      label: isHi ? "सार्थी कनेक्ट (साथी)" : "Saarthi Connect",
+      tag: "Mentorship",
+      icon: HandHeart,
+    },
+    {
+      id: "trust",
+      label: isHi ? "ट्रस्ट व नोड ऑडिट" : "Trust & Audit",
+      tag: "100% Escrow",
+      icon: ShieldCheck,
+    },
+    {
+      id: "micro",
+      label: isHi ? "होस्ट माइक्रो-अवसर" : "Host Monetize",
+      tag: "Earn ₹11.5k+",
+      icon: Briefcase,
+    },
   ];
 
   // Dynamic Amount Calculation across all 6 services
@@ -116,7 +156,13 @@ export function BookingModal({
       case "spaces":
         return roomType === "single" ? 6000 : roomType === "shared" ? 4500 : 11000;
       case "kitchen":
-        return mealPlan === "both" ? 2400 : mealPlan === "lunch" ? 1350 : mealPlan === "dinner" ? 1350 : 650;
+        return mealPlan === "both"
+          ? 2400
+          : mealPlan === "lunch"
+            ? 1350
+            : mealPlan === "dinner"
+              ? 1350
+              : 650;
       case "connect":
         return 0; // Free / Credit based
       case "trust":
@@ -164,16 +210,20 @@ export function BookingModal({
       toast.error(
         isHi
           ? "कृपया 10-अंकों का वैध भारतीय फोन नंबर दर्ज करें।"
-          : "Please enter a valid 10-digit Indian phone number (starts with 6-9)."
+          : "Please enter a valid 10-digit Indian phone number (starts with 6-9).",
       );
       return;
     }
     if (email.trim() && !isValidEmail(email)) {
-      toast.error(isHi ? "कृपया एक मान्य ईमेल पता दर्ज करें।" : "Please enter a valid email address.");
+      toast.error(
+        isHi ? "कृपया एक मान्य ईमेल पता दर्ज करें।" : "Please enter a valid email address.",
+      );
       return;
     }
     if (pincode.trim() && !isValidIndianPin(pincode)) {
-      toast.error(isHi ? "कृपया 6-अंकों का वैध पिन कोड दर्ज करें।" : "Please enter a valid 6-digit PIN code.");
+      toast.error(
+        isHi ? "कृपया 6-अंकों का वैध पिन कोड दर्ज करें।" : "Please enter a valid 6-digit PIN code.",
+      );
       return;
     }
     setStep(2);
@@ -195,7 +245,7 @@ export function BookingModal({
       toast.error(
         isHi
           ? "कृपया समुदाय एवं सुरक्षा शर्तों को स्वीकार करें।"
-          : "Please accept the community escrow & safety charter."
+          : "Please accept the community escrow & safety charter.",
       );
       return;
     }
@@ -245,7 +295,7 @@ export function BookingModal({
           description: isHi
             ? "आपका आधिकारिक डिजिटल स्टैशपास तैयार है।"
             : "Your digital StashPass is ready.",
-        }
+        },
       );
     } catch {
       toast.error(isHi ? "आरक्षण करने में असमर्थ" : "We couldn't process your booking", {
@@ -265,7 +315,8 @@ export function BookingModal({
           <div className="flex items-center justify-between">
             <DialogTitle className="text-lg sm:text-xl font-bold text-foreground">
               {step === 1 && (isHi ? "सेवा आरक्षण व विवरण" : "Select Service & Fill Details")}
-              {step === 2 && (isHi ? "एस्क्रो भुगतान व आरक्षण पुष्टि" : "Escrow Lock & Confirmation")}
+              {step === 2 &&
+                (isHi ? "एस्क्रो भुगतान व आरक्षण पुष्टि" : "Escrow Lock & Confirmation")}
               {step === 3 && (isHi ? "बुकिंग की पुष्टि हो गई!" : "Booking Confirmed!")}
             </DialogTitle>
             {step < 3 && (
@@ -307,8 +358,12 @@ export function BookingModal({
                           }`}
                         >
                           <div className="flex items-center justify-between w-full">
-                            <Icon className={`h-4 w-4 ${active ? "text-emerald-400" : "text-slate-400"}`} />
-                            <span className="text-[9px] font-mono text-emerald-400/90">{s.tag}</span>
+                            <Icon
+                              className={`h-4 w-4 ${active ? "text-emerald-400" : "text-slate-400"}`}
+                            />
+                            <span className="text-[9px] font-mono text-emerald-400/90">
+                              {s.tag}
+                            </span>
                           </div>
                           <span className="text-xs leading-tight mt-1">{s.label}</span>
                         </button>
@@ -322,12 +377,18 @@ export function BookingModal({
                   <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-400 uppercase tracking-wider">
                     <Sparkles className="h-3.5 w-3.5" />
                     <span>
-                      {service === "stash" && (isHi ? "स्टैश स्टोरेज कस्टमाइज़ेशन" : "Stash Storage Configuration")}
-                      {service === "spaces" && (isHi ? "कमरा व आवास आवश्यकताएं" : "Stay & Room Requirements")}
-                      {service === "kitchen" && (isHi ? "घर का टिफिन व भोजन प्लान" : "Homemade Meal Plan Details")}
-                      {service === "connect" && (isHi ? "इंटरजेनरेशनल साथी व मेंटरशिप" : "Intergenerational Engagement")}
-                      {service === "trust" && (isHi ? "सुरक्षा सत्यापन व ऑन-साइट ऑडिट" : "Trust & Property Verification")}
-                      {service === "micro" && (isHi ? "होस्ट स्पेस मोनेटाइजेशन" : "Host Space Monetization")}
+                      {service === "stash" &&
+                        (isHi ? "स्टैश स्टोरेज कस्टमाइज़ेशन" : "Stash Storage Configuration")}
+                      {service === "spaces" &&
+                        (isHi ? "कमरा व आवास आवश्यकताएं" : "Stay & Room Requirements")}
+                      {service === "kitchen" &&
+                        (isHi ? "घर का टिफिन व भोजन प्लान" : "Homemade Meal Plan Details")}
+                      {service === "connect" &&
+                        (isHi ? "इंटरजेनरेशनल साथी व मेंटरशिप" : "Intergenerational Engagement")}
+                      {service === "trust" &&
+                        (isHi ? "सुरक्षा सत्यापन व ऑन-साइट ऑडिट" : "Trust & Property Verification")}
+                      {service === "micro" &&
+                        (isHi ? "होस्ट स्पेस मोनेटाइजेशन" : "Host Space Monetization")}
                     </span>
                   </div>
 
@@ -335,7 +396,9 @@ export function BookingModal({
                   {service === "stash" && (
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
                       <div>
-                        <Label className="text-xs">{isHi ? "बैगों की संख्या:" : "Number of Bags:"}</Label>
+                        <Label className="text-xs">
+                          {isHi ? "बैगों की संख्या:" : "Number of Bags:"}
+                        </Label>
                         <select
                           value={bags}
                           onChange={(e) => setBags(Number(e.target.value))}
@@ -350,7 +413,9 @@ export function BookingModal({
                       </div>
 
                       <div>
-                        <Label className="text-xs">{isHi ? "अवधि (महीने):" : "Duration (Months):"}</Label>
+                        <Label className="text-xs">
+                          {isHi ? "अवधि (महीने):" : "Duration (Months):"}
+                        </Label>
                         <select
                           value={months}
                           onChange={(e) => setMonths(Number(e.target.value))}
@@ -365,7 +430,9 @@ export function BookingModal({
                       </div>
 
                       <div>
-                        <Label className="text-xs">{isHi ? "सामान प्रकार:" : "Item Category:"}</Label>
+                        <Label className="text-xs">
+                          {isHi ? "सामान प्रकार:" : "Item Category:"}
+                        </Label>
                         <select
                           value={itemType}
                           onChange={(e) => setItemType(e.target.value)}
@@ -384,7 +451,9 @@ export function BookingModal({
                   {service === "spaces" && (
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
                       <div>
-                        <Label className="text-xs">{isHi ? "कमरे का प्रकार:" : "Room Preference:"}</Label>
+                        <Label className="text-xs">
+                          {isHi ? "कमरे का प्रकार:" : "Room Preference:"}
+                        </Label>
                         <select
                           value={roomType}
                           onChange={(e) => setRoomType(e.target.value as any)}
@@ -397,7 +466,9 @@ export function BookingModal({
                       </div>
 
                       <div>
-                        <Label className="text-xs">{isHi ? "शिफ्टिंग तिथि:" : "Move-in Date:"}</Label>
+                        <Label className="text-xs">
+                          {isHi ? "शिफ्टिंग तिथि:" : "Move-in Date:"}
+                        </Label>
                         <Input
                           type="date"
                           value={moveInDate}
@@ -407,7 +478,9 @@ export function BookingModal({
                       </div>
 
                       <div>
-                        <Label className="text-xs">{isHi ? "भोजन सुविधा:" : "Tiffin Option:"}</Label>
+                        <Label className="text-xs">
+                          {isHi ? "भोजन सुविधा:" : "Tiffin Option:"}
+                        </Label>
                         <select
                           value={foodPreference}
                           onChange={(e) => setFoodPreference(e.target.value)}
@@ -424,7 +497,9 @@ export function BookingModal({
                   {service === "kitchen" && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                       <div>
-                        <Label className="text-xs">{isHi ? "मील प्लान:" : "Meal Subscription Plan:"}</Label>
+                        <Label className="text-xs">
+                          {isHi ? "मील प्लान:" : "Meal Subscription Plan:"}
+                        </Label>
                         <select
                           value={mealPlan}
                           onChange={(e) => setMealPlan(e.target.value as any)}
@@ -438,7 +513,9 @@ export function BookingModal({
                       </div>
 
                       <div>
-                        <Label className="text-xs">{isHi ? "आहार प्राथमिकता:" : "Dietary Preference:"}</Label>
+                        <Label className="text-xs">
+                          {isHi ? "आहार प्राथमिकता:" : "Dietary Preference:"}
+                        </Label>
                         <select
                           value={dietType}
                           onChange={(e) => setDietType(e.target.value)}
@@ -456,20 +533,28 @@ export function BookingModal({
                   {service === "connect" && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                       <div>
-                        <Label className="text-xs">{isHi ? "सहयोग क्षेत्र:" : "Engagement Focus:"}</Label>
+                        <Label className="text-xs">
+                          {isHi ? "सहयोग क्षेत्र:" : "Engagement Focus:"}
+                        </Label>
                         <select
                           value={connectDomain}
                           onChange={(e) => setConnectDomain(e.target.value)}
                           className="w-full mt-1.5 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white"
                         >
-                          <option value="tech_assistance">Smartphone & Tech Assistance for Seniors</option>
-                          <option value="evening_walks">Evening Walks & Social Companionship</option>
+                          <option value="tech_assistance">
+                            Smartphone & Tech Assistance for Seniors
+                          </option>
+                          <option value="evening_walks">
+                            Evening Walks & Social Companionship
+                          </option>
                           <option value="tutoring">Academic Tutoring for Host Family</option>
                         </select>
                       </div>
 
                       <div>
-                        <Label className="text-xs">{isHi ? "साप्ताहिक समय:" : "Weekly Commitment:"}</Label>
+                        <Label className="text-xs">
+                          {isHi ? "साप्ताहिक समय:" : "Weekly Commitment:"}
+                        </Label>
                         <select
                           value={hoursPerWeek}
                           onChange={(e) => setHoursPerWeek(e.target.value)}
@@ -487,27 +572,41 @@ export function BookingModal({
                   {service === "trust" && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                       <div>
-                        <Label className="text-xs">{isHi ? "ऑडिट प्रकार:" : "Verification Scope:"}</Label>
+                        <Label className="text-xs">
+                          {isHi ? "ऑडिट प्रकार:" : "Verification Scope:"}
+                        </Label>
                         <select
                           value={auditType}
                           onChange={(e) => setAuditType(e.target.value)}
                           className="w-full mt-1.5 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white"
                         >
-                          <option value="host_safety_audit">4-Tier Senior Host Safety & CCTV Audit</option>
-                          <option value="student_clearance">Student Police & College ID Verification</option>
-                          <option value="tamper_seal">Physical Barcode Sealing & Vault Custody</option>
+                          <option value="host_safety_audit">
+                            4-Tier Senior Host Safety & CCTV Audit
+                          </option>
+                          <option value="student_clearance">
+                            Student Police & College ID Verification
+                          </option>
+                          <option value="tamper_seal">
+                            Physical Barcode Sealing & Vault Custody
+                          </option>
                         </select>
                       </div>
 
                       <div>
-                        <Label className="text-xs">{isHi ? "सुविधाजनक स्लॉट:" : "Preferred Slot:"}</Label>
+                        <Label className="text-xs">
+                          {isHi ? "सुविधाजनक स्लॉट:" : "Preferred Slot:"}
+                        </Label>
                         <select
                           value={preferredSlot}
                           onChange={(e) => setPreferredSlot(e.target.value)}
                           className="w-full mt-1.5 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white"
                         >
-                          <option value="Morning (10 AM - 1 PM)">Morning (10:00 AM – 1:00 PM)</option>
-                          <option value="Afternoon (2 PM - 5 PM)">Afternoon (2:00 PM – 5:00 PM)</option>
+                          <option value="Morning (10 AM - 1 PM)">
+                            Morning (10:00 AM – 1:00 PM)
+                          </option>
+                          <option value="Afternoon (2 PM - 5 PM)">
+                            Afternoon (2:00 PM – 5:00 PM)
+                          </option>
                           <option value="Evening (5 PM - 8 PM)">Evening (5:00 PM – 8:00 PM)</option>
                         </select>
                       </div>
@@ -518,21 +617,31 @@ export function BookingModal({
                   {service === "micro" && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                       <div>
-                        <Label className="text-xs">{isHi ? "मोनेटाइज करने योग्य संपत्ति:" : "Space to Monetize:"}</Label>
+                        <Label className="text-xs">
+                          {isHi ? "मोनेटाइज करने योग्य संपत्ति:" : "Space to Monetize:"}
+                        </Label>
                         <select
                           value={monetizeAsset}
                           onChange={(e) => setMonetizeAsset(e.target.value)}
                           className="w-full mt-1.5 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white"
                         >
                           <option value="spare_room">Spare Bedroom (Earn ₹6,000–₹12,000/mo)</option>
-                          <option value="storage_closet">Dry Storage Closet/Garage (Earn ₹3,000–₹6,000/mo)</option>
-                          <option value="kitchen_tiffin">Home Kitchen Tiffins (Earn ₹5,000–₹15,000/mo)</option>
-                          <option value="campus_captain">Campus Student Ambassador / Node Captain</option>
+                          <option value="storage_closet">
+                            Dry Storage Closet/Garage (Earn ₹3,000–₹6,000/mo)
+                          </option>
+                          <option value="kitchen_tiffin">
+                            Home Kitchen Tiffins (Earn ₹5,000–₹15,000/mo)
+                          </option>
+                          <option value="campus_captain">
+                            Campus Student Ambassador / Node Captain
+                          </option>
                         </select>
                       </div>
 
                       <div>
-                        <Label className="text-xs">{isHi ? "अपेक्षित मासिक आय (₹):" : "Expected Monthly Rent (₹):"}</Label>
+                        <Label className="text-xs">
+                          {isHi ? "अपेक्षित मासिक आय (₹):" : "Expected Monthly Rent (₹):"}
+                        </Label>
                         <Input
                           type="number"
                           value={expectedRent}
@@ -553,8 +662,16 @@ export function BookingModal({
                         {isHi ? "पूरा नाम *" : "Full Name *"}
                       </Label>
                       {touched.name && (
-                        <span className={`text-[10px] ${isNameValid ? "text-emerald-400" : "text-destructive"}`}>
-                          {isNameValid ? (isHi ? "सत्यापित" : "Looks good") : (isHi ? "नाम अनिवार्य है" : "Name required")}
+                        <span
+                          className={`text-[10px] ${isNameValid ? "text-emerald-400" : "text-destructive"}`}
+                        >
+                          {isNameValid
+                            ? isHi
+                              ? "सत्यापित"
+                              : "Looks good"
+                            : isHi
+                              ? "नाम अनिवार्य है"
+                              : "Name required"}
                         </span>
                       )}
                     </div>
@@ -569,8 +686,8 @@ export function BookingModal({
                           touched.name && !isNameValid
                             ? "border-destructive/60 focus-visible:ring-destructive"
                             : touched.name && isNameValid
-                            ? "border-emerald-500/50"
-                            : ""
+                              ? "border-emerald-500/50"
+                              : ""
                         }`}
                       />
                       {touched.name && (
@@ -591,10 +708,16 @@ export function BookingModal({
                         {isHi ? "व्हाट्सएप / मोबाइल फोन *" : "WhatsApp / Mobile *"}
                       </Label>
                       {touched.phone && (
-                        <span className={`text-[10px] ${isPhoneValid ? "text-emerald-400" : "text-destructive"}`}>
+                        <span
+                          className={`text-[10px] ${isPhoneValid ? "text-emerald-400" : "text-destructive"}`}
+                        >
                           {isPhoneValid
-                            ? (isHi ? "सत्यापित भारतीय नंबर" : "Valid Phone")
-                            : (isHi ? "10-अंक आवश्यक (6-9 से शुरू)" : "10 digits required")}
+                            ? isHi
+                              ? "सत्यापित भारतीय नंबर"
+                              : "Valid Phone"
+                            : isHi
+                              ? "10-अंक आवश्यक (6-9 से शुरू)"
+                              : "10 digits required"}
                         </span>
                       )}
                     </div>
@@ -609,8 +732,8 @@ export function BookingModal({
                           touched.phone && !isPhoneValid
                             ? "border-destructive/60 focus-visible:ring-destructive"
                             : touched.phone && isPhoneValid
-                            ? "border-emerald-500/50"
-                            : ""
+                              ? "border-emerald-500/50"
+                              : ""
                         }`}
                       />
                       {touched.phone && (
@@ -642,9 +765,15 @@ export function BookingModal({
                         >
                           {isEmailValid
                             ? isCollegeEmail(email)
-                              ? (isHi ? "🎓 सत्यापित कैंपस ईमेल" : "🎓 Verified Campus")
-                              : (isHi ? "✓ वैध ईमेल" : "✓ Valid Email")
-                            : (isHi ? "अमान्य ईमेल" : "Invalid email")}
+                              ? isHi
+                                ? "🎓 सत्यापित कैंपस ईमेल"
+                                : "🎓 Verified Campus"
+                              : isHi
+                                ? "✓ वैध ईमेल"
+                                : "✓ Valid Email"
+                            : isHi
+                              ? "अमान्य ईमेल"
+                              : "Invalid email"}
                         </span>
                       )}
                     </div>
@@ -721,11 +850,11 @@ export function BookingModal({
                       {isHi ? "अनुमानित एस्क्रो मूल्य:" : "Estimated Escrow Amount:"}
                     </span>
                     <span className="text-xl font-bold font-mono text-emerald-400">
-                      {calcAmount === 0 ? (
-                        isHi ? "₹0 (निःशुल्क)" : "₹0 (Zero CapEx)"
-                      ) : (
-                        `₹${calcAmount.toLocaleString("en-IN")}`
-                      )}
+                      {calcAmount === 0
+                        ? isHi
+                          ? "₹0 (निःशुल्क)"
+                          : "₹0 (Zero CapEx)"
+                        : `₹${calcAmount.toLocaleString("en-IN")}`}
                     </span>
                   </div>
 
@@ -826,21 +955,29 @@ export function BookingModal({
                 ) : (
                   <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-xs space-y-2.5">
                     <div className="flex justify-between border-b border-white/10 pb-2">
-                      <span className="text-muted-foreground">{isHi ? "ग्राहक नाम:" : "Client Name:"}</span>
+                      <span className="text-muted-foreground">
+                        {isHi ? "ग्राहक नाम:" : "Client Name:"}
+                      </span>
                       <span className="font-bold text-foreground">{name}</span>
                     </div>
                     <div className="flex justify-between border-b border-white/10 pb-2">
-                      <span className="text-muted-foreground">{isHi ? "संपर्क फोन:" : "Contact Phone:"}</span>
+                      <span className="text-muted-foreground">
+                        {isHi ? "संपर्क फोन:" : "Contact Phone:"}
+                      </span>
                       <span className="font-bold text-cyan-400">{phone}</span>
                     </div>
                     <div className="flex justify-between border-b border-white/10 pb-2">
-                      <span className="text-muted-foreground">{isHi ? "स्थान / शहर:" : "Location / City:"}</span>
+                      <span className="text-muted-foreground">
+                        {isHi ? "स्थान / शहर:" : "Location / City:"}
+                      </span>
                       <span className="font-bold text-foreground">
                         {city} {pincode ? `(${pincode})` : ""}
                       </span>
                     </div>
                     <div className="flex justify-between border-b border-white/10 pb-2">
-                      <span className="text-muted-foreground">{isHi ? "सेवा प्रकार:" : "Service Type:"}</span>
+                      <span className="text-muted-foreground">
+                        {isHi ? "सेवा प्रकार:" : "Service Type:"}
+                      </span>
                       <span className="font-bold text-emerald-400 uppercase">{service}</span>
                     </div>
                     <div className="flex justify-between items-center pt-1 text-sm">
@@ -863,18 +1000,21 @@ export function BookingModal({
                     onChange={(e) => setWaiverAccepted(e.target.checked)}
                     className="mt-1 h-4 w-4 rounded border-white/20 bg-white/5 accent-emerald-500 cursor-pointer"
                   />
-                  <label htmlFor="bk-waiver" className="text-xs text-muted-foreground leading-relaxed cursor-pointer">
+                  <label
+                    htmlFor="bk-waiver"
+                    className="text-xs text-muted-foreground leading-relaxed cursor-pointer"
+                  >
                     {isHi ? (
                       <>
                         मैं स्वीकार करता/करती हूं कि सभी विवरण सही हैं, भुगतान{" "}
-                        <strong className="text-emerald-400">100% डिजिटल एस्क्रो</strong> में सुरक्षित रहेगा और
-                        कंसीयज द्वारा सत्यापित किया जाएगा।
+                        <strong className="text-emerald-400">100% डिजिटल एस्क्रो</strong> में
+                        सुरक्षित रहेगा और कंसीयज द्वारा सत्यापित किया जाएगा।
                       </>
                     ) : (
                       <>
                         I accept that all details are accurate, bookings are secured under{" "}
-                        <strong className="text-emerald-400">100% Digital Escrow</strong>, and operations will
-                        coordinate via StashSaarthi concierge.
+                        <strong className="text-emerald-400">100% Digital Escrow</strong>, and
+                        operations will coordinate via StashSaarthi concierge.
                       </>
                     )}
                   </label>

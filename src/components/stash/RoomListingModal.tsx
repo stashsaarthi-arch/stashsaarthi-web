@@ -54,15 +54,18 @@ export function RoomListingModal({
     };
   }, [files]);
 
-  const STEPS = useMemo(() => [
-    isHi ? "कमरे का विवरण" : "Room details",
-    isHi ? "सुविधाएं और फोटो" : "Amenities & photos",
-    isHi ? "छात्र समीक्षा" : "Student review",
-  ], [isHi]);
+  const STEPS = useMemo(
+    () => [
+      isHi ? "कमरे का विवरण" : "Room details",
+      isHi ? "सुविधाएं और फोटो" : "Amenities & photos",
+      isHi ? "छात्र समीक्षा" : "Student review",
+    ],
+    [isHi],
+  );
 
   const toggleAmenity = (name: string) => {
     setAmenities((prev) =>
-      prev.includes(name) ? prev.filter((a) => a !== name) : [...prev, name]
+      prev.includes(name) ? prev.filter((a) => a !== name) : [...prev, name],
     );
   };
 
@@ -72,7 +75,9 @@ export function RoomListingModal({
 
   const next = () => {
     if (step === 0 && (!address || !rent)) {
-      toast.error(isHi ? "कृपया कम से कम पता और किराया भरें।" : "Please fill in at least address and rent.");
+      toast.error(
+        isHi ? "कृपया कम से कम पता और किराया भरें।" : "Please fill in at least address and rent.",
+      );
       return;
     }
     setStep((s) => Math.min(STEPS.length - 1, s + 1));
@@ -107,8 +112,8 @@ export function RoomListingModal({
 
       if (error) throw error;
       toast.success(isHi ? "🎉 कमरा सफलतापूर्वक लिस्ट हो गया!" : "Room listed!", {
-        description: isHi 
-          ? "सत्यापन के बाद आपको ₹200 का रिवॉर्ड क्रेडिट मिलेगा।" 
+        description: isHi
+          ? "सत्यापन के बाद आपको ₹200 का रिवॉर्ड क्रेडिट मिलेगा।"
           : "We’ll verify the details and credit your ₹200 reward once verified.",
       });
       onOpenChange(false);
@@ -123,7 +128,9 @@ export function RoomListingModal({
       setFiles([]);
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : "Failed to submit room";
-      toast.error(isHi ? "कमरा सबमिट करने में विफल" : "Failed to submit room", { description: msg });
+      toast.error(isHi ? "कमरा सबमिट करने में विफल" : "Failed to submit room", {
+        description: msg,
+      });
     } finally {
       setSubmitting(false);
     }
@@ -142,8 +149,8 @@ export function RoomListingModal({
                 {isHi ? "खाली हो रहा कमरा लिस्ट करें" : "List your vacating room"}
               </DialogTitle>
               <p className="text-xs text-muted-foreground">
-                {isHi 
-                  ? "साथी छात्रों को 1 माह का दलाली शुल्क बचाने में मदद करें और ₹200 पाएं" 
+                {isHi
+                  ? "साथी छात्रों को 1 माह का दलाली शुल्क बचाने में मदद करें और ₹200 पाएं"
                   : "Help a junior skip 1 month brokerage · earn ₹200 on verification"}
               </p>
             </div>
@@ -156,12 +163,16 @@ export function RoomListingModal({
             <div key={s} className="flex flex-1 items-center gap-2">
               <span
                 className={`grid h-6 w-6 shrink-0 place-items-center rounded-full text-[11px] font-bold ${
-                  i <= step ? "bg-cyan-500 text-black font-extrabold" : "bg-white/10 text-muted-foreground"
+                  i <= step
+                    ? "bg-cyan-500 text-black font-extrabold"
+                    : "bg-white/10 text-muted-foreground"
                 }`}
               >
                 {i < step ? <Check className="h-3 w-3" /> : i + 1}
               </span>
-              <span className="hidden truncate text-[11px] text-muted-foreground sm:block">{s}</span>
+              <span className="hidden truncate text-[11px] text-muted-foreground sm:block">
+                {s}
+              </span>
             </div>
           ))}
         </div>
@@ -178,7 +189,12 @@ export function RoomListingModal({
             {step === 0 && (
               <>
                 <Field label={isHi ? "पता / इलाका *" : "Address / locality *"}>
-                  <Input value={address} onChange={(e) => setAddress(e.target.value)} placeholder={isHi ? "कल्याणपुर, कानपुर" : "Kalyanpur, Kanpur"} className="border-white/10 bg-white/5" />
+                  <Input
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    placeholder={isHi ? "कल्याणपुर, कानपुर" : "Kalyanpur, Kanpur"}
+                    className="border-white/10 bg-white/5"
+                  />
                 </Field>
                 <Field label={isHi ? "वर्तमान मासिक किराया (₹) *" : "Current monthly rent (₹) *"}>
                   <Input
@@ -190,10 +206,20 @@ export function RoomListingModal({
                   />
                 </Field>
                 <Field label={isHi ? "मकान मालिक का नाम" : "Landlord name"}>
-                  <Input value={ownerName} onChange={(e) => setOwnerName(e.target.value)} placeholder={isHi ? "श्री शर्मा" : "Mr. Sharma"} className="border-white/10 bg-white/5" />
+                  <Input
+                    value={ownerName}
+                    onChange={(e) => setOwnerName(e.target.value)}
+                    placeholder={isHi ? "श्री शर्मा" : "Mr. Sharma"}
+                    className="border-white/10 bg-white/5"
+                  />
                 </Field>
                 <Field label={isHi ? "मकान मालिक का WhatsApp नंबर" : "Landlord WhatsApp number"}>
-                  <Input value={ownerPhone} onChange={(e) => setOwnerPhone(e.target.value)} placeholder="+91 98xxx xxxxx" className="border-white/10 bg-white/5" />
+                  <Input
+                    value={ownerPhone}
+                    onChange={(e) => setOwnerPhone(e.target.value)}
+                    placeholder="+91 98xxx xxxxx"
+                    className="border-white/10 bg-white/5"
+                  />
                 </Field>
               </>
             )}
@@ -228,8 +254,14 @@ export function RoomListingModal({
 
                 <label className="flex cursor-pointer flex-col items-center gap-2 rounded-2xl border border-dashed border-white/20 bg-white/[0.03] p-6 text-center transition hover:border-cyan-500/40">
                   <ImagePlus className="h-6 w-6 text-cyan-400" />
-                  <span className="text-sm font-semibold">{isHi ? "कमरे की तस्वीरें जोड़ें" : "Upload room photos"}</span>
-                  <span className="text-xs text-muted-foreground">{isHi ? "JPG या PNG (थंबनेल प्रीव्यू के साथ)" : "JPG or PNG with instant thumbnail preview"}</span>
+                  <span className="text-sm font-semibold">
+                    {isHi ? "कमरे की तस्वीरें जोड़ें" : "Upload room photos"}
+                  </span>
+                  <span className="text-xs text-muted-foreground">
+                    {isHi
+                      ? "JPG या PNG (थंबनेल प्रीव्यू के साथ)"
+                      : "JPG or PNG with instant thumbnail preview"}
+                  </span>
                   <input
                     type="file"
                     accept="image/*"
@@ -243,7 +275,9 @@ export function RoomListingModal({
                 {previewUrls.length > 0 && (
                   <div className="space-y-2 pt-1">
                     <Label className="text-xs text-slate-300 font-semibold">
-                      {isHi ? `अपलोड की गई तस्वीरें (${files.length})` : `Uploaded Photos (${files.length})`}
+                      {isHi
+                        ? `अपलोड की गई तस्वीरें (${files.length})`
+                        : `Uploaded Photos (${files.length})`}
                     </Label>
                     <div className="grid grid-cols-3 gap-2.5">
                       {previewUrls.map((url, i) => (
@@ -279,14 +313,46 @@ export function RoomListingModal({
 
             {step === 2 && (
               <>
-                <Field label={isHi ? "इस कमरे में क्या सबसे अच्छा था?" : "What was good about this room?"}>
-                  <Textarea value={pros} onChange={(e) => setPros(e.target.value)} rows={2} placeholder={isHi ? "शांत गली, कॉलेज से 5 मिनट की दूरी…" : "Quiet street, 5 min to campus…"} className="border-white/10 bg-white/5" />
+                <Field
+                  label={
+                    isHi ? "इस कमरे में क्या सबसे अच्छा था?" : "What was good about this room?"
+                  }
+                >
+                  <Textarea
+                    value={pros}
+                    onChange={(e) => setPros(e.target.value)}
+                    rows={2}
+                    placeholder={
+                      isHi ? "शांत गली, कॉलेज से 5 मिनट की दूरी…" : "Quiet street, 5 min to campus…"
+                    }
+                    className="border-white/10 bg-white/5"
+                  />
                 </Field>
-                <Field label={isHi ? "अगले छात्र को क्या जानना चाहिए?" : "What should the next student know?"}>
-                  <Textarea value={cons} onChange={(e) => setCons(e.target.value)} rows={2} placeholder={isHi ? "गर्मियों में पानी का कम प्रेशर…" : "Low water pressure in summer…"} className="border-white/10 bg-white/5" />
+                <Field
+                  label={
+                    isHi ? "अगले छात्र को क्या जानना चाहिए?" : "What should the next student know?"
+                  }
+                >
+                  <Textarea
+                    value={cons}
+                    onChange={(e) => setCons(e.target.value)}
+                    rows={2}
+                    placeholder={
+                      isHi ? "गर्मियों में पानी का कम प्रेशर…" : "Low water pressure in summer…"
+                    }
+                    className="border-white/10 bg-white/5"
+                  />
                 </Field>
-                <RatingRow label={isHi ? "भोजन एवं पानी की उपलब्धता" : "Food & water availability"} value={foodWater} onChange={setFoodWater} />
-                <RatingRow label={isHi ? "मकान मालिक का व्यवहार" : "Owner behaviour"} value={ownerBehaviour} onChange={setOwnerBehaviour} />
+                <RatingRow
+                  label={isHi ? "भोजन एवं पानी की उपलब्धता" : "Food & water availability"}
+                  value={foodWater}
+                  onChange={setFoodWater}
+                />
+                <RatingRow
+                  label={isHi ? "मकान मालिक का व्यवहार" : "Owner behaviour"}
+                  value={ownerBehaviour}
+                  onChange={setOwnerBehaviour}
+                />
               </>
             )}
           </motion.div>
@@ -294,7 +360,12 @@ export function RoomListingModal({
 
         <div className="mt-6 flex gap-2">
           {step > 0 && (
-            <Button variant="outline" className="flex-1 border-white/10 cursor-pointer" disabled={submitting} onClick={() => setStep((s) => s - 1)}>
+            <Button
+              variant="outline"
+              className="flex-1 border-white/10 cursor-pointer"
+              disabled={submitting}
+              onClick={() => setStep((s) => s - 1)}
+            >
               {isHi ? "वापस" : "Back"}
             </Button>
           )}
@@ -303,13 +374,22 @@ export function RoomListingModal({
               {isHi ? "आगे बढ़ें" : "Continue"}
             </Button>
           ) : (
-            <Button variant="hero" className="flex-1 cursor-pointer" disabled={submitting} aria-busy={submitting} onClick={() => void submit()}>
+            <Button
+              variant="hero"
+              className="flex-1 cursor-pointer"
+              disabled={submitting}
+              aria-busy={submitting}
+              onClick={() => void submit()}
+            >
               {submitting ? (
                 <span className="flex items-center gap-2">
-                  <Loader2 className="h-4 w-4 animate-spin" /> {isHi ? "सबमिट हो रहा है…" : "Submitting…"}
+                  <Loader2 className="h-4 w-4 animate-spin" />{" "}
+                  {isHi ? "सबमिट हो रहा है…" : "Submitting…"}
                 </span>
+              ) : isHi ? (
+                "सबमिट करें और ₹200 रिवॉर्ड पाएं"
               ) : (
-                isHi ? "सबमिट करें और ₹200 रिवॉर्ड पाएं" : "Submit & claim ₹200"
+                "Submit & claim ₹200"
               )}
             </Button>
           )}

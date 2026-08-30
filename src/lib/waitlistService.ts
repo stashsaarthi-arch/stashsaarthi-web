@@ -34,7 +34,6 @@ export function isValidIndianPin(pin: string): boolean {
   return /^[1-9][0-9]{5}$/.test(clean);
 }
 
-
 // ─── Error classification ────────────────────────────────────
 
 /** Supabase unique-violation error code */

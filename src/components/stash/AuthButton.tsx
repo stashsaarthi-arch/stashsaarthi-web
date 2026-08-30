@@ -50,7 +50,7 @@ export function AuthButton({ compact = false }: { compact?: boolean }) {
           headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
         });
         const data = await res.json();
-        
+
         loginWithProfile({
           id: data.sub || data.email || "saarthi",
           name: data.name || data.email?.split("@")[0] || "Saarthi",
@@ -60,12 +60,17 @@ export function AuthButton({ compact = false }: { compact?: boolean }) {
           verified: !!data.email_verified,
         });
       } catch {
-        toast.error(isHi ? "उपयोगकर्ता प्रोफ़ाइल लोड करने में विफल" : "Failed to fetch user profile");
+        toast.error(
+          isHi ? "उपयोगकर्ता प्रोफ़ाइल लोड करने में विफल" : "Failed to fetch user profile",
+        );
       } finally {
         setAuthenticating(false);
       }
     },
-    onError: () => toast.error(isHi ? "गूगल साइन-इन विफल रहा" : "Google sign-in failed"),
+    onError: (errorResponse) => {
+      console.error("[AuthButton] Google sign-in failed:", errorResponse);
+      toast.error(isHi ? "गूगल साइन-इन विफल रहा" : "Google sign-in failed");
+    },
   });
 
   if (!user) {
@@ -88,7 +93,8 @@ export function AuthButton({ compact = false }: { compact?: boolean }) {
 
   const name = user.name || user.email || "User";
   const first = (name.split(" ")[0] || "User").trim();
-  const roleBadge = user.role === "student" ? (isHi ? "छात्र" : "Student") : (isHi ? "होस्ट" : "Host");
+  const roleBadge =
+    user.role === "student" ? (isHi ? "छात्र" : "Student") : isHi ? "होस्ट" : "Host";
 
   return (
     <DropdownMenu>
@@ -102,17 +108,33 @@ export function AuthButton({ compact = false }: { compact?: boolean }) {
           </Avatar>
           <div className="flex flex-col items-start leading-none">
             <span className="max-w-[7rem] truncate text-xs font-semibold text-white">{first}</span>
-            <span className="text-[9px] text-cyan-400 font-medium uppercase tracking-wider">{roleBadge}</span>
+            <span className="text-[9px] text-cyan-400 font-medium uppercase tracking-wider">
+              {roleBadge}
+            </span>
           </div>
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-52">
         <DropdownMenuLabel className="truncate">{name}</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => toast.info(isHi ? "प्रोफ़ाइल सेटिंग्स जल्द ही आ रही हैं।" : "Profile settings are coming soon.")}>
+        <DropdownMenuItem
+          onClick={() =>
+            toast.info(
+              isHi ? "प्रोफ़ाइल सेटिंग्स जल्द ही आ रही हैं।" : "Profile settings are coming soon.",
+            )
+          }
+        >
           <UserIcon className="mr-2 h-4 w-4" /> {isHi ? "प्रोफ़ाइल" : "Profile"}
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => toast.info(isHi ? "बुकिंग डैशबोर्ड जल्द ही आ रहा है।" : "Your bookings dashboard is coming soon.")}>
+        <DropdownMenuItem
+          onClick={() =>
+            toast.info(
+              isHi
+                ? "बुकिंग डैशबोर्ड जल्द ही आ रहा है।"
+                : "Your bookings dashboard is coming soon.",
+            )
+          }
+        >
           <CalendarCheck className="mr-2 h-4 w-4" /> {isHi ? "मेरी बुकिंग" : "My Bookings"}
         </DropdownMenuItem>
         <DropdownMenuSeparator />

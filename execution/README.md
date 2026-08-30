@@ -6,14 +6,14 @@ This directory houses all automation scripts for the StashSaarthi platform.
 
 ## Planned Scripts
 
-| Script | Language | Purpose |
-|---|---|---|
-| `inventory_scraper` | Python/Node.js | Scrape and sync local inventory data from partner nodes |
-| `node_auditor` | Python | Automated audit checks for stash node capacity and compliance |
-| `data_sync` | Node.js | Sync Supabase data with local caches / analytics |
-| `financial_model` | Python | Monthly P&L generation using pricing engine formulas |
-| `whatsapp_triggers` | Node.js | Automated WhatsApp notifications via Twilio |
-| `email_triggers` | Node.js | Automated email notifications via Resend |
+| Script              | Language       | Purpose                                                       |
+| ------------------- | -------------- | ------------------------------------------------------------- |
+| `inventory_scraper` | Python/Node.js | Scrape and sync local inventory data from partner nodes       |
+| `node_auditor`      | Python         | Automated audit checks for stash node capacity and compliance |
+| `data_sync`         | Node.js        | Sync Supabase data with local caches / analytics              |
+| `financial_model`   | Python         | Monthly P&L generation using pricing engine formulas          |
+| `whatsapp_triggers` | Node.js        | Automated WhatsApp notifications via Twilio                   |
+| `email_triggers`    | Node.js        | Automated email notifications via Resend                      |
 
 ## Guidelines
 

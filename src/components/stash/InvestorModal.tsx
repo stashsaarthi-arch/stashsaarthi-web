@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { Lock, KeyRound, ArrowRight, Eye, EyeOff, MessageCircle } from "lucide-react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { handleDownloadInvestorMemo } from "./legal";
@@ -30,7 +36,7 @@ export function InvestorModal({ open, onOpenChange }: InvestorModalProps) {
   const requestAccessWhatsAppUrl = `https://wa.me/${FOUNDER_WHATSAPP}?text=${encodeURIComponent(
     isHi
       ? "नमस्ते, मैं एक निवेशक/निर्णायक हूं और स्टैशसारथी इन्वेस्टर मेमो तक पहुंच चाहता/चाहती हूं।"
-      : "Hi Advik, I am an investor/judge and would like access to the StashSaarthi Investor Memo."
+      : "Hi Advik, I am an investor/judge and would like access to the StashSaarthi Investor Memo.",
   )}`;
 
   useEffect(() => {
@@ -52,7 +58,11 @@ export function InvestorModal({ open, onOpenChange }: InvestorModalProps) {
       handleDownloadInvestorMemo(language);
     } else {
       setAccessKey("");
-      setErrorMsg(isHi ? "❌ अनधिकृत की (Key)। कृपया संस्थापक टीम से एक्सेस का अनुरोध करें।" : "❌ Unauthorized key. Please request access from the founding team.");
+      setErrorMsg(
+        isHi
+          ? "❌ अनधिकृत की (Key)। कृपया संस्थापक टीम से एक्सेस का अनुरोध करें।"
+          : "❌ Unauthorized key. Please request access from the founding team.",
+      );
       setShake(true);
       setTimeout(() => setShake(false), 500);
     }
@@ -63,8 +73,7 @@ export function InvestorModal({ open, onOpenChange }: InvestorModalProps) {
       <DialogContent
         className="w-[92vw] sm:max-w-md bg-[#0D1117]/95 backdrop-blur-xl border border-amber-500/30 p-6 shadow-2xl rounded-2xl overflow-hidden"
         style={{
-          boxShadow:
-            "0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 45px -10px rgba(245, 158, 11, 0.2)",
+          boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 45px -10px rgba(245, 158, 11, 0.2)",
         }}
       >
         {/* Subtle amber ambient glow in corner */}
@@ -85,7 +94,7 @@ export function InvestorModal({ open, onOpenChange }: InvestorModalProps) {
             </div>
           </div>
           <DialogDescription className="text-xs text-slate-300 leading-relaxed mt-2">
-            {isHi 
+            {isHi
               ? "स्टैशसारथी यूनिट इकोनॉमिक्स और वित्तीय विवरण देखने के लिए अधिकृत एक्सेस की (Key) दर्ज करें।"
               : "Enter authorized ecosystem access key to view StashSaarthi Unit Economics & Financial Brief."}
           </DialogDescription>
@@ -106,7 +115,11 @@ export function InvestorModal({ open, onOpenChange }: InvestorModalProps) {
                     setAccessKey(e.target.value);
                     if (errorMsg) setErrorMsg("");
                   }}
-                  placeholder={isHi ? "एक्सेस की दर्ज करें (उदा. STASH2026)" : "Enter Access Key (e.g. STASH2026)"}
+                  placeholder={
+                    isHi
+                      ? "एक्सेस की दर्ज करें (उदा. STASH2026)"
+                      : "Enter Access Key (e.g. STASH2026)"
+                  }
                   className="pl-10 pr-10 py-5 bg-black/50 border-white/10 text-white rounded-xl placeholder:text-slate-500 font-mono text-sm focus-visible:ring-amber-500/50"
                   autoFocus
                 />

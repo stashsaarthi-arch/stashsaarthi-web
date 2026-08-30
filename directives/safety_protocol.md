@@ -11,24 +11,28 @@
 Every host must clear **all four tiers** before any student interaction is enabled.
 
 ### Tier 1 — Digital Identity (Aadhaar + Live Biometric)
+
 - **What:** Aadhaar card scan + live selfie biometric match
 - **How:** DigiLocker API verification OR manual upload with liveness check
 - **Fail condition:** Mismatch > 15% facial similarity score → rejected
 - **Timeline:** Instant (automated) or 2 hours (manual review)
 
 ### Tier 2 — Police Verification
+
 - **What:** Police station verification certificate for the host's address
 - **How:** Host submits existing PV certificate OR StashSaarthi facilitates through local police
 - **Fail condition:** Any active FIR / criminal record → permanently rejected
 - **Timeline:** 3–7 business days
 
 ### Tier 3 — University / Community Verification
+
 - **What:** Cross-verification with local university / RWA / municipal records
 - **How:** Phone call to provided references + address match
 - **Fail condition:** Inconsistent address or fabricated references → rejected
 - **Timeline:** 1–3 business days
 
 ### Tier 4 — Physical Home Audit
+
 - **What:** In-person visit by StashSaarthi field team to verify:
   - Room condition and cleanliness
   - Storage space dimensions and dryness (for Stash nodes)
@@ -43,19 +47,20 @@ Every host must clear **all four tiers** before any student interaction is enabl
 
 ## 2. Zero-Damage Guarantee (₹10,000)
 
-| Parameter | Detail |
-|---|---|
-| **Coverage** | Theft, water damage, pest damage, physical tampering |
-| **Per-bag limit** | ₹10,000 |
-| **Claim process** | WhatsApp photo evidence → 48-hour resolution |
-| **Exclusions** | Prohibited items (see §4), items with pre-existing damage not disclosed at intake |
-| **Payout method** | Direct bank transfer to student within 5 business days |
+| Parameter         | Detail                                                                            |
+| ----------------- | --------------------------------------------------------------------------------- |
+| **Coverage**      | Theft, water damage, pest damage, physical tampering                              |
+| **Per-bag limit** | ₹10,000                                                                           |
+| **Claim process** | WhatsApp photo evidence → 48-hour resolution                                      |
+| **Exclusions**    | Prohibited items (see §4), items with pre-existing damage not disclosed at intake |
+| **Payout method** | Direct bank transfer to student within 5 business days                            |
 
 ---
 
 ## 3. SOS Protocol
 
 ### Student SOS Button
+
 - Available in every active stay / stash booking
 - **Trigger:** Single-tap SOS in the app or WhatsApp keyword `SOS`
 - **Response chain:**
@@ -65,6 +70,7 @@ Every host must clear **all four tiers** before any student interaction is enabl
   4. Follow-up call within 15 minutes
 
 ### Host SOS Button
+
 - For situations involving student misconduct or emergency
 - Same response chain, with student contacted for explanation
 
@@ -83,7 +89,9 @@ The following items **must not** be stored under Saarthi Stash:
 - Items exceeding ₹50,000 declared value (requires separate high-value insurance)
 
 ### Student Waiver
+
 Every student must digitally sign the Safety Charter waiver before booking:
+
 > "I agree that stored luggage contains no prohibited/hazardous items as per StashSaarthi Safety Charter."
 
 ---
@@ -107,6 +115,6 @@ Every student must digitally sign the Safety Charter waiver before booking:
 
 ## Revision Log
 
-| Date | Change | Author |
-|---|---|---|
+| Date       | Change                                                | Author |
+| ---------- | ----------------------------------------------------- | ------ |
 | 2026-08-29 | Initial directive created from AGENTS.md safety specs | System |

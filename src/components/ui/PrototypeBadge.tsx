@@ -18,7 +18,9 @@ export const PrototypeBadge: React.FC<Props> = ({ className = "", variant = "pil
 
   if (variant === "text") {
     return (
-      <span className={`text-[10px] uppercase font-mono tracking-wider font-bold text-amber-400/90 ${className}`}>
+      <span
+        className={`text-[10px] uppercase font-mono tracking-wider font-bold text-amber-400/90 ${className}`}
+      >
         {text}
       </span>
     );
@@ -26,7 +28,9 @@ export const PrototypeBadge: React.FC<Props> = ({ className = "", variant = "pil
 
   if (variant === "overlay") {
     return (
-      <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-black/70 backdrop-blur-md border border-amber-500/40 text-amber-300 text-[10px] font-mono font-bold uppercase tracking-wider ${className}`}>
+      <span
+        className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-black/70 backdrop-blur-md border border-amber-500/40 text-amber-300 text-[10px] font-mono font-bold uppercase tracking-wider ${className}`}
+      >
         <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
         {badgeText}
       </span>
@@ -34,7 +38,9 @@ export const PrototypeBadge: React.FC<Props> = ({ className = "", variant = "pil
   }
 
   return (
-    <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-amber-500/15 border border-amber-500/30 text-amber-300 text-[10px] font-mono font-bold uppercase tracking-wider ${className}`}>
+    <span
+      className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-amber-500/15 border border-amber-500/30 text-amber-300 text-[10px] font-mono font-bold uppercase tracking-wider ${className}`}
+    >
       <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
       {badgeText}
     </span>

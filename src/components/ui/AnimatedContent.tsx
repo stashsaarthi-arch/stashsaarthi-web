@@ -1,15 +1,15 @@
-import React, { useRef, useEffect } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import React, { useRef, useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-if (typeof window !== 'undefined') {
+if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
 export interface AnimatedContentProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   distance?: number;
-  direction?: 'vertical' | 'horizontal';
+  direction?: "vertical" | "horizontal";
   reverse?: boolean;
   duration?: number;
   ease?: string;
@@ -29,10 +29,10 @@ export interface AnimatedContentProps extends React.HTMLAttributes<HTMLDivElemen
 export function AnimatedContent({
   children,
   distance = 40,
-  direction = 'vertical',
+  direction = "vertical",
   reverse = false,
   duration = 0.8,
-  ease = 'power3.out',
+  ease = "power3.out",
   delay = 0,
   scale = 1,
   threshold = 0.15,
@@ -41,7 +41,7 @@ export function AnimatedContent({
   parallax = false,
   yPercent = -15,
   scrub = 1,
-  className = '',
+  className = "",
   style = {},
   viewportOnce = true,
   ...rest
@@ -50,10 +50,10 @@ export function AnimatedContent({
 
   useEffect(() => {
     const el = elementRef.current;
-    if (!el || typeof window === 'undefined') return;
+    if (!el || typeof window === "undefined") return;
 
     // Check for user reduced motion preference
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReducedMotion) {
       gsap.set(el, { opacity: 1, x: 0, y: 0, scale: 1 });
       return;
@@ -67,23 +67,23 @@ export function AnimatedContent({
           { yPercent: 0 },
           {
             yPercent,
-            ease: 'none',
+            ease: "none",
             scrollTrigger: {
               trigger: el,
-              start: 'top bottom',
-              end: 'bottom top',
-              scrub: typeof scrub === 'boolean' ? (scrub ? 1 : false) : scrub,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: typeof scrub === "boolean" ? (scrub ? 1 : false) : scrub,
             },
-          }
+          },
         );
       } else {
         // Section reveal transition
         let x = 0;
         let y = 0;
 
-        if (direction === 'vertical') {
+        if (direction === "vertical") {
           y = reverse ? -distance : distance;
-        } else if (direction === 'horizontal') {
+        } else if (direction === "horizontal") {
           x = reverse ? distance : -distance;
         }
 
@@ -94,7 +94,7 @@ export function AnimatedContent({
             x,
             y,
             scale: scale !== 1 ? scale : 1,
-            willChange: 'transform, opacity',
+            willChange: "transform, opacity",
           },
           {
             opacity: 1,
@@ -104,14 +104,14 @@ export function AnimatedContent({
             duration,
             ease,
             delay,
-            clearProps: 'willChange',
+            clearProps: "willChange",
             scrollTrigger: {
               trigger: el,
               start: `top ${Math.min(95, Math.max(50, 100 - threshold * 100))}%`,
-              toggleActions: viewportOnce ? 'play none none none' : 'play reverse play reverse',
+              toggleActions: viewportOnce ? "play none none none" : "play reverse play reverse",
               once: viewportOnce,
             },
-          }
+          },
         );
       }
     }, elementRef);
@@ -142,8 +142,8 @@ export function AnimatedContent({
       className={`gpu-accelerated ${className}`}
       style={{
         ...style,
-        transform: 'translate3d(0, 0, 0)',
-        backfaceVisibility: 'hidden',
+        transform: "translate3d(0, 0, 0)",
+        backfaceVisibility: "hidden",
       }}
       {...rest}
     >

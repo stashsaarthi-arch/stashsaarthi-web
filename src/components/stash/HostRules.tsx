@@ -1,5 +1,14 @@
 import { useState } from "react";
-import { Check, ShieldAlert, Clock, Ban, Moon, Lock, UtensilsCrossed, ShieldCheck } from "lucide-react";
+import {
+  Check,
+  ShieldAlert,
+  Clock,
+  Ban,
+  Moon,
+  Lock,
+  UtensilsCrossed,
+  ShieldCheck,
+} from "lucide-react";
 import AnimatedContent from "@/components/ui/AnimatedContent";
 import { Card3D } from "@/components/ui/Card3D";
 import { useLanguage } from "@/context/LanguageContext";
@@ -38,7 +47,8 @@ export function HostRules() {
             {t.hostRulesSection.badge}
           </div>
           <h2 className="text-[1.75rem] font-extrabold tracking-tight sm:text-5xl mb-4">
-            {t.hostRulesSection.title} <span className="text-gradient">{t.hostRulesSection.titleGradient}</span>
+            {t.hostRulesSection.title}{" "}
+            <span className="text-gradient">{t.hostRulesSection.titleGradient}</span>
           </h2>
           <p className="text-muted-foreground text-sm sm:text-lg max-w-2xl mx-auto">
             {t.hostRulesSection.subtitle}
@@ -62,15 +72,21 @@ export function HostRules() {
                 >
                   <div
                     className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border ${
-                      isActive ? "border-amber-400 bg-amber-400 text-black" : "border-white/20 text-transparent"
+                      isActive
+                        ? "border-amber-400 bg-amber-400 text-black"
+                        : "border-white/20 text-transparent"
                     }`}
                   >
                     <Check className="h-4 w-4 stroke-[3]" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
-                      <Icon className={`h-4 w-4 shrink-0 ${isActive ? "text-amber-400" : "text-slate-500"}`} />
-                      <span className={`text-sm font-bold ${isActive ? "text-white" : "text-muted-foreground"}`}>
+                      <Icon
+                        className={`h-4 w-4 shrink-0 ${isActive ? "text-amber-400" : "text-slate-500"}`}
+                      />
+                      <span
+                        className={`text-sm font-bold ${isActive ? "text-white" : "text-muted-foreground"}`}
+                      >
                         {rule.title}
                       </span>
                     </div>
@@ -86,22 +102,36 @@ export function HostRules() {
           <Card3D maxTilt={5}>
             <div className="glass rounded-3xl p-8 border border-red-500/30 bg-black/50 text-center relative overflow-hidden shadow-2xl">
               <div className="absolute inset-0 bg-gradient-to-br from-red-500/10 to-transparent" />
-              <ShieldAlert className="h-16 w-16 text-red-500 mx-auto mb-5 opacity-90" style={{ transform: "translateZ(30px)" }} />
-              
-              <div className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/30 bg-amber-400/10 px-3 py-1 text-[11px] font-bold text-amber-400 mb-3" style={{ transform: "translateZ(25px)" }}>
+              <ShieldAlert
+                className="h-16 w-16 text-red-500 mx-auto mb-5 opacity-90"
+                style={{ transform: "translateZ(30px)" }}
+              />
+
+              <div
+                className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/30 bg-amber-400/10 px-3 py-1 text-[11px] font-bold text-amber-400 mb-3"
+                style={{ transform: "translateZ(25px)" }}
+              >
                 <Check className="h-3 w-3" /> {activeCount} {t.hostRulesSection.activeCounter}
               </div>
 
-              <h3 className="text-xl sm:text-2xl font-bold mb-3 text-white" style={{ transform: "translateZ(40px)" }}>
+              <h3
+                className="text-xl sm:text-2xl font-bold mb-3 text-white"
+                style={{ transform: "translateZ(40px)" }}
+              >
                 {t.hostRulesSection.guaranteeTitle}
               </h3>
-              <p className="text-sm text-slate-300 leading-relaxed" style={{ transform: "translateZ(20px)" }}>
+              <p
+                className="text-sm text-slate-300 leading-relaxed"
+                style={{ transform: "translateZ(20px)" }}
+              >
                 {t.hostRulesSection.guaranteeDesc}
               </p>
 
               <div className="mt-6 border-t border-white/10 pt-4 text-left font-mono text-[11px] text-slate-400 flex items-center justify-between">
                 <span>{t.hostRulesSection.legalProtection}</span>
-                <span className="text-emerald-400 font-bold">{t.hostRulesSection.hostProtected}</span>
+                <span className="text-emerald-400 font-bold">
+                  {t.hostRulesSection.hostProtected}
+                </span>
               </div>
 
               <div className="mt-4 pt-2">
@@ -128,12 +158,17 @@ export function HostRules() {
                             <div class="badge">${isHi ? "आधिकारिक होस्ट समझौता · सत्यापित छात्र प्रति" : "Official Host Agreement · Verified Tenant Copy"}</div>
                             <p><strong>${isHi ? "सीनियर होस्ट प्रॉपर्टी कोड:" : "Senior Host Property Code:"}</strong> KNP-HOST-NODE-2026</p>
                             <p>${isHi ? `किराएदार निम्नलिखित ${activeCount} सक्रिय गृह नियमों को बिना शर्त स्वीकार करता है:` : `The tenant acknowledges and unconditionally agrees to the following ${activeCount} active house rules:`}</p>
-                            ${rules.filter((_, idx) => activeRules[idx]).map(r => `
+                            ${rules
+                              .filter((_, idx) => activeRules[idx])
+                              .map(
+                                (r) => `
                               <div class="rule-box">
                                 <strong>${r.title}</strong>
                                 <p style="margin: 4px 0 0; font-size: 13px; color: #475569;">${r.desc}</p>
                               </div>
-                            `).join('')}
+                            `,
+                              )
+                              .join("")}
                             <div class="guarantee">
                               <strong>${isHi ? "24-घंटे रीलोकेशन गारंटी (SLA):" : "24-Hour Relocation SLA Guarantee:"}</strong>
                               <p style="margin: 4px 0 0; font-size: 12px; color: #065f46;">${isHi ? "किसी भी नियम उल्लंघन पर सार्थी ऑपरेशंस द्वारा 24 घंटे के भीतर छात्र का तत्काल रीलोकेशन, जिससे सीनियर होस्ट के किराए का शून्य नुकसान होता है।" : "Violations trigger immediate 24h student relocation by StashSaarthi operations with zero loss of rent to the senior host."}</p>

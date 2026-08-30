@@ -2,12 +2,14 @@
 
 **Document ID:** SS-OPS-SOP-003  
 **Version:** 2.1  
-**Target:** 24×7 Concierge Response Desk, Family Dashboard Operators, Field Security  
+**Target:** 24×7 Concierge Response Desk, Family Dashboard Operators, Field Security
 
 ---
 
 ## 1. Trigger Conditions
+
 The Emergency SOS sequence is initiated when:
+
 1. A senior host or student presses the **1-Touch SOS Button** on the StashSaarthi app.
 2. A host family member triggers a safety check via the **Family Dashboard**.
 3. A tamper breach flag is logged during physical node inspection.
@@ -27,7 +29,9 @@ The Emergency SOS sequence is initiated when:
 ---
 
 ## 3. Mandatory Incident Log Fields
+
 Every SOS incident must generate an immutable incident ticket containing:
+
 - **Incident UUID & Serial Number**
 - **Triggering User ID & Role (Host / Student)**
 - **Geo-Coordinates & Physical Node Address**
@@ -37,6 +41,7 @@ Every SOS incident must generate an immutable incident ticket containing:
 ---
 
 ## 4. Post-Incident Review Protocol
+
 - Mandatory call with the host's family within 4 hours.
 - Psychological and physical safety check-in within 24 hours.
 - Incident report archived for quarterly safety board review.

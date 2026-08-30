@@ -93,7 +93,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setAuthenticating(false);
       }
     },
-    []
+    [],
   );
 
   const loginWithProfile = useCallback((newUser: AuthUser) => {
@@ -120,8 +120,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const value = useMemo(
-    () => ({ user, loading, authenticating, loginWithGoogle, loginWithProfile, logout, setAuthenticating }),
-    [user, loading, authenticating, loginWithGoogle, loginWithProfile, logout]
+    () => ({
+      user,
+      loading,
+      authenticating,
+      loginWithGoogle,
+      loginWithProfile,
+      logout,
+      setAuthenticating,
+    }),
+    [user, loading, authenticating, loginWithGoogle, loginWithProfile, logout],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

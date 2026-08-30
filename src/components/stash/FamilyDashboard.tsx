@@ -26,14 +26,16 @@ export function FamilyDashboard() {
   // Web Audio API Synthesizer for Bedside SOS Demonstration
   const playSosAlertSound = () => {
     try {
-      const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+      const AudioCtx =
+        window.AudioContext ||
+        (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
       if (!AudioCtx) return;
       const ctx = new AudioCtx();
 
       const tones = [
-        { freq: 587.33, start: 0.0, dur: 0.15 },  // D5
+        { freq: 587.33, start: 0.0, dur: 0.15 }, // D5
         { freq: 739.99, start: 0.18, dur: 0.15 }, // F#5
-        { freq: 880.00, start: 0.36, dur: 0.25 }, // A5
+        { freq: 880.0, start: 0.36, dur: 0.25 }, // A5
       ];
 
       tones.forEach((tone) => {
@@ -89,7 +91,8 @@ export function FamilyDashboard() {
             {t.familyDashboardSection.badge}
           </div>
           <h2 className="text-[1.75rem] font-extrabold tracking-tight sm:text-5xl mb-4">
-            {t.familyDashboardSection.title} <span className="text-gradient">{t.familyDashboardSection.titleGradient}</span>
+            {t.familyDashboardSection.title}{" "}
+            <span className="text-gradient">{t.familyDashboardSection.titleGradient}</span>
           </h2>
           <p className="text-muted-foreground text-sm sm:text-lg max-w-2xl mx-auto">
             {t.familyDashboardSection.subtitle}
@@ -109,10 +112,16 @@ export function FamilyDashboard() {
                   >
                     <Icon className="h-8 w-8" />
                   </div>
-                  <h3 className="text-xl font-bold mb-3 text-foreground" style={{ transform: "translateZ(20px)" }}>
+                  <h3
+                    className="text-xl font-bold mb-3 text-foreground"
+                    style={{ transform: "translateZ(20px)" }}
+                  >
                     {feat.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed" style={{ transform: "translateZ(10px)" }}>
+                  <p
+                    className="text-sm text-muted-foreground leading-relaxed"
+                    style={{ transform: "translateZ(10px)" }}
+                  >
                     {feat.desc}
                   </p>
                 </div>
@@ -179,15 +188,21 @@ export function FamilyDashboard() {
                     <UserCheck className="h-5 w-5" />
                   </span>
                   <span className="text-[10px] font-mono font-bold text-emerald-400">
-                    {activeStep >= 1 ? (isHi ? "✓ 0.4s सक्रिय" : "✓ 0.4s TRIGGERED") : (isHi ? "टियर 1" : "TIER 1")}
+                    {activeStep >= 1
+                      ? isHi
+                        ? "✓ 0.4s सक्रिय"
+                        : "✓ 0.4s TRIGGERED"
+                      : isHi
+                        ? "टियर 1"
+                        : "TIER 1"}
                   </span>
                 </div>
                 <h4 className="font-bold text-sm text-foreground">
                   {isHi ? "सत्यापित छात्र साथी" : "Verified Student Roommate"}
                 </h4>
                 <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
-                  {isHi 
-                    ? "तत्काल बेडसाइड सहायता और प्राथमिक उपचार के लिए छात्र के फोन पर सायरन अलर्ट।" 
+                  {isHi
+                    ? "तत्काल बेडसाइड सहायता और प्राथमिक उपचार के लिए छात्र के फोन पर सायरन अलर्ट।"
                     : "Loud siren alert on student's phone for immediate bedside check-in & first aid assistance."}
                 </p>
               </div>
@@ -205,7 +220,13 @@ export function FamilyDashboard() {
                     <Building2 className="h-5 w-5" />
                   </span>
                   <span className="text-[10px] font-mono font-bold text-amber-400">
-                    {activeStep >= 2 ? (isHi ? "✓ 1.2s रवाना" : "✓ 1.2s DISPATCHED") : (isHi ? "टियर 2" : "TIER 2")}
+                    {activeStep >= 2
+                      ? isHi
+                        ? "✓ 1.2s रवाना"
+                        : "✓ 1.2s DISPATCHED"
+                      : isHi
+                        ? "टियर 2"
+                        : "TIER 2"}
                   </span>
                 </div>
                 <h4 className="font-bold text-sm text-foreground">
@@ -231,7 +252,13 @@ export function FamilyDashboard() {
                     <BellRing className="h-5 w-5" />
                   </span>
                   <span className="text-[10px] font-mono font-bold text-cyan-400">
-                    {activeStep >= 3 ? (isHi ? "✓ 2.4s कनेक्टेड" : "✓ 2.4s CONNECTED") : (isHi ? "टियर 3" : "TIER 3")}
+                    {activeStep >= 3
+                      ? isHi
+                        ? "✓ 2.4s कनेक्टेड"
+                        : "✓ 2.4s CONNECTED"
+                      : isHi
+                        ? "टियर 3"
+                        : "TIER 3"}
                   </span>
                 </div>
                 <h4 className="font-bold text-sm text-foreground">
@@ -252,7 +279,9 @@ export function FamilyDashboard() {
                 <span>KANPUR_NODE_LAT: 26.5123° N, 80.2329° E (IITK Sector)</span>
               </div>
               <span className="text-emerald-400 font-bold">
-                {isHi ? "🔒 एन्क्रिप्टेड 256-बिट परिवार सुरक्षा लाइन" : "🔒 256-BIT ENCRYPTED FAMILY SAFETY CHANNEL"}
+                {isHi
+                  ? "🔒 एन्क्रिप्टेड 256-बिट परिवार सुरक्षा लाइन"
+                  : "🔒 256-BIT ENCRYPTED FAMILY SAFETY CHANNEL"}
               </span>
             </div>
           </div>

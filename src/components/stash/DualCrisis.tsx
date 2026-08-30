@@ -34,9 +34,7 @@ export function DualCrisis() {
           {t.crisis.titlePart1}
           <span className="text-gradient">{t.crisis.titlePart2}</span>
         </h2>
-        <p className="mt-4 text-sm text-muted-foreground sm:text-base">
-          {t.crisis.subtitle}
-        </p>
+        <p className="mt-4 text-sm text-muted-foreground sm:text-base">{t.crisis.subtitle}</p>
       </div>
 
       <div className="mt-10 sm:mt-14">
@@ -149,32 +147,32 @@ function CrisisCard({
 }) {
   return (
     <Tilt3D max={8} lift={14} className="rounded-3xl">
-    <div
-      className="glass glass-hover relative overflow-hidden rounded-3xl p-6 sm:p-8"
-      style={{
-        backgroundImage: `radial-gradient(120% 90% at 0% 0%, color-mix(in oklab, ${accent} 12%, transparent), transparent 70%)`,
-      }}
-    >
-      <div className="flex min-w-0 items-center gap-3">
-        <span
-          className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl border border-white/10"
-          style={{ background: `color-mix(in oklab, ${accent} 18%, transparent)` }}
-        >
-          <Icon className="h-5 w-5" style={{ color: accent }} />
-        </span>
-        <h3 className="truncate text-lg font-bold sm:text-xl">{title}</h3>
-      </div>
-      <ul className="mt-6 space-y-3">
-        {items.map((t) => (
-          <li
-            key={t}
-            className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-muted-foreground transition-transform duration-300 hover:translate-x-1"
+      <div
+        className="glass glass-hover relative overflow-hidden rounded-3xl p-6 sm:p-8"
+        style={{
+          backgroundImage: `radial-gradient(120% 90% at 0% 0%, color-mix(in oklab, ${accent} 12%, transparent), transparent 70%)`,
+        }}
+      >
+        <div className="flex min-w-0 items-center gap-3">
+          <span
+            className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl border border-white/10"
+            style={{ background: `color-mix(in oklab, ${accent} 18%, transparent)` }}
           >
-            {t}
-          </li>
-        ))}
-      </ul>
-    </div>
+            <Icon className="h-5 w-5" style={{ color: accent }} />
+          </span>
+          <h3 className="truncate text-lg font-bold sm:text-xl">{title}</h3>
+        </div>
+        <ul className="mt-6 space-y-3">
+          {items.map((t) => (
+            <li
+              key={t}
+              className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-muted-foreground transition-transform duration-300 hover:translate-x-1"
+            >
+              {t}
+            </li>
+          ))}
+        </ul>
+      </div>
     </Tilt3D>
   );
 }

@@ -56,22 +56,29 @@ function AdminPage() {
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background px-4">
-        <form onSubmit={handleLogin} className="glass w-full max-w-sm rounded-2xl p-6 text-center border border-white/10">
+        <form
+          onSubmit={handleLogin}
+          className="glass w-full max-w-sm rounded-2xl p-6 text-center border border-white/10"
+        >
           <div className="mx-auto mb-6 grid h-12 w-12 place-items-center rounded-full bg-cyan-500/10 text-cyan-400">
             <Lock className="h-6 w-6" />
           </div>
           <h2 className="text-xl font-bold text-foreground mb-1">Admin Portal</h2>
-          <p className="text-sm text-muted-foreground mb-6">Enter operator password to access leads.</p>
-          
-          <Input 
-            type="password" 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
-            placeholder="••••••••" 
+          <p className="text-sm text-muted-foreground mb-6">
+            Enter operator password to access leads.
+          </p>
+
+          <Input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="••••••••"
             className="mb-4 bg-white/5 border-white/10 text-center tracking-[0.2em]"
           />
           {error && <p className="text-xs text-red-400 mb-4">{error}</p>}
-          <Button type="submit" variant="hero" className="w-full">Unlock Dashboard</Button>
+          <Button type="submit" variant="hero" className="w-full">
+            Unlock Dashboard
+          </Button>
         </form>
       </div>
     );
@@ -86,12 +93,14 @@ function AdminPage() {
               <ShieldCheck className="text-cyan-400 h-6 w-6" />
               Node Operator Dashboard
             </h1>
-            <p className="text-sm text-muted-foreground mt-1">Manage waitlist leads and stash bookings.</p>
+            <p className="text-sm text-muted-foreground mt-1">
+              Manage waitlist leads and stash bookings.
+            </p>
           </div>
           <div className="relative">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-            <Input 
-              placeholder="Search leads..." 
+            <Input
+              placeholder="Search leads..."
               className="pl-9 w-full sm:w-64 bg-white/5 border-white/10"
             />
           </div>
@@ -128,7 +137,9 @@ function AdminPage() {
                     <tr key={lead.id} className="hover:bg-white/[0.02] transition-colors">
                       <td className="px-6 py-4 font-medium text-foreground whitespace-nowrap">
                         {lead.full_name || "Anonymous"}
-                        <div className="text-xs text-muted-foreground font-normal mt-0.5">{lead.phone_number || "No phone"}</div>
+                        <div className="text-xs text-muted-foreground font-normal mt-0.5">
+                          {lead.phone_number || "No phone"}
+                        </div>
                       </td>
                       <td className="px-6 py-4 capitalize text-muted-foreground">
                         {lead.user_type || "-"}
@@ -143,14 +154,19 @@ function AdminPage() {
                       </td>
                       <td className="px-6 py-4 text-right">
                         {lead.phone_number ? (
-                          <Button asChild size="sm" variant="outline" className="h-8 border-[#25D366]/30 text-[#25D366] hover:bg-[#25D366]/10 hover:border-[#25D366]/50">
-                            <a 
+                          <Button
+                            asChild
+                            size="sm"
+                            variant="outline"
+                            className="h-8 border-[#25D366]/30 text-[#25D366] hover:bg-[#25D366]/10 hover:border-[#25D366]/50"
+                          >
+                            <a
                               href={(() => {
                                 const clean = lead.phone_number.replace(/\D/g, "");
                                 const intl = clean.startsWith("91") ? clean : `91${clean}`;
                                 return `https://wa.me/${intl}?text=${encodeURIComponent(`Hi ${lead.full_name}, this is your StashSaarthi Concierge.`)}`;
-                              })()} 
-                              target="_blank" 
+                              })()}
+                              target="_blank"
                               rel="noopener noreferrer"
                             >
                               <MessageCircle className="h-3.5 w-3.5 mr-1.5" />

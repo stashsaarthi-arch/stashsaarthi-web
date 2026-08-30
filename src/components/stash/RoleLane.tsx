@@ -11,7 +11,7 @@ import {
   Soup,
   Users,
   Wallet,
-  TrendingUp
+  TrendingUp,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
@@ -31,28 +31,26 @@ export function RoleLane({ role, onBook }: { role: Role; onBook: OpenBooking }) 
   const getHostEarnings = (val: number) => {
     const v = typeof val === "number" && !isNaN(val) ? val : 33;
     if (v < 30) {
-      return { 
-        label: t.roleLane.host.simulator.cornerLabel, 
-        amount: isHi ? "₹1,800 - ₹3,000/माह" : "₹1,800 - ₹3,000/mo" 
+      return {
+        label: t.roleLane.host.simulator.cornerLabel,
+        amount: isHi ? "₹1,800 - ₹3,000/माह" : "₹1,800 - ₹3,000/mo",
       };
     }
     if (v < 70) {
-      return { 
-        label: t.roleLane.host.simulator.verandahLabel, 
-        amount: isHi ? "₹4,000 - ₹7,000/माह" : "₹4,000 - ₹7,000/mo" 
+      return {
+        label: t.roleLane.host.simulator.verandahLabel,
+        amount: isHi ? "₹4,000 - ₹7,000/माह" : "₹4,000 - ₹7,000/mo",
       };
     }
-    return { 
-      label: t.roleLane.host.simulator.roomLabel, 
-      amount: isHi ? "₹8,000 - ₹12,000/माह" : "₹8,000 - ₹12,000/mo" 
+    return {
+      label: t.roleLane.host.simulator.roomLabel,
+      amount: isHi ? "₹8,000 - ₹12,000/माह" : "₹8,000 - ₹12,000/mo",
     };
   };
 
   const currentEarning = getHostEarnings(hostSpace);
 
-  const stepIcons = isStudent
-    ? [Boxes, Home, Soup]
-    : [Home, ShieldCheck, HandHeart];
+  const stepIcons = isStudent ? [Boxes, Home, Soup] : [Home, ShieldCheck, HandHeart];
 
   const metricIcons = isStudent
     ? [Wallet, CalendarClock, ShieldCheck]
@@ -111,7 +109,10 @@ export function RoleLane({ role, onBook }: { role: Role; onBook: OpenBooking }) 
                   return (
                     <div key={m.label} className="bg-white/5 px-4 py-4 text-center">
                       <Icon className="mx-auto mb-1.5 h-4 w-4 text-cyan" />
-                      <AnimatedStat value={m.value} className="text-lg font-extrabold tracking-tight" />
+                      <AnimatedStat
+                        value={m.value}
+                        className="text-lg font-extrabold tracking-tight"
+                      />
                       <div className="mt-0.5 text-[10px] uppercase tracking-wider text-muted-foreground">
                         {m.label}
                       </div>
@@ -128,25 +129,29 @@ export function RoleLane({ role, onBook }: { role: Role; onBook: OpenBooking }) 
                       {t.roleLane.host.simulator.title}
                     </h3>
                   </div>
-                  
+
                   <div className="mb-2 flex justify-between items-end">
                     <div className="text-xs text-muted-foreground uppercase tracking-wider font-semibold">
                       {t.roleLane.host.simulator.selectSpace}
                     </div>
                     <div className="text-right">
-                      <div className="text-lg font-bold text-emerald-400 font-mono tracking-tight">{currentEarning.amount}</div>
-                      <div className="text-[10px] text-muted-foreground uppercase tracking-widest">{currentEarning.label}</div>
+                      <div className="text-lg font-bold text-emerald-400 font-mono tracking-tight">
+                        {currentEarning.amount}
+                      </div>
+                      <div className="text-[10px] text-muted-foreground uppercase tracking-widest">
+                        {currentEarning.label}
+                      </div>
                     </div>
                   </div>
-                  
-                  <Slider 
-                    defaultValue={[33]} 
-                    max={100} 
-                    step={1} 
+
+                  <Slider
+                    defaultValue={[33]}
+                    max={100}
+                    step={1}
                     className="py-4"
                     onValueChange={(vals) => setHostSpace(vals?.[0] ?? 33)}
                   />
-                  
+
                   <div className="flex justify-between text-[10px] font-medium text-muted-foreground mt-1">
                     <span>{t.roleLane.host.simulator.corner}</span>
                     <span>{t.roleLane.host.simulator.verandah}</span>
@@ -159,7 +164,9 @@ export function RoleLane({ role, onBook }: { role: Role; onBook: OpenBooking }) 
                 variant={role === "student" ? "hero" : "warm"}
                 size="lg"
                 className="group mt-6 w-full sm:w-auto"
-                onClick={() => onBook({ service: isStudent ? "stash" : "spaces", note: laneContent.eyebrow })}
+                onClick={() =>
+                  onBook({ service: isStudent ? "stash" : "spaces", note: laneContent.eyebrow })
+                }
               >
                 {laneContent.cta}
                 <ArrowRight className="transition-transform group-hover:translate-x-1" />
