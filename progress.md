@@ -2,6 +2,14 @@
 
 ## Active Task
 
+- [x] **Vercel Production Deployment (`https://stashsaarthi-main.vercel.app`)**:
+  - **Automated Git Push & Production Build**: Pushed commit `f9ab499` to `origin/main` on GitHub (`https://github.com/stashsaarthi-arch/stashsaarthi-web`).
+  - **Live Vercel Production Release**: Successfully deployed to production via Vercel CLI / Git pipeline (`dpl_GoMHMudBf3kZ4UpUcCf4hUzQEU5e`).
+  - **Live Production URLs**:
+    - **Primary Alias**: [https://stashsaarthi-main.vercel.app](https://stashsaarthi-main.vercel.app)
+    - **Deployment Hash**: `https://stashsaarthi-main-f7v0ajyqt-stashsaarthi1.vercel.app`
+  - **Health Verification**: Confirmed live HTTP `200 OK` response with SSR and Nitro server bundle active.
+
 - [x] **Customer Feedback & Community Improvement Suggestions Hub (`FeedbackSuggestions.tsx`)**:
   - **⭐ Verified Customer Feedback & Reviews Engine**:
     - Dual-tab interactive hub placed seamlessly on the landing page between Stories and FAQ.
