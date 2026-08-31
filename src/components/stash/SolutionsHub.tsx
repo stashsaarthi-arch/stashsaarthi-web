@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Boxes, Home, Soup, HandHeart } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Ecosystem } from "./Ecosystem";
@@ -20,6 +20,17 @@ export function SolutionsHub({ onBook, onListRoom }: SolutionsHubProps) {
   const { role } = usePersona();
   const isHi = language === "hi";
   const isStudent = role === "student";
+
+  useEffect(() => {
+    const handleTabChange = (e: Event) => {
+      const detail = (e as CustomEvent).detail;
+      if (["stash", "rooms", "kitchen", "connect"].includes(detail)) {
+        setActiveTab(detail as "stash" | "rooms" | "kitchen" | "connect");
+      }
+    };
+    window.addEventListener("stashsaarthi-solution-tab", handleTabChange);
+    return () => window.removeEventListener("stashsaarthi-solution-tab", handleTabChange);
+  }, []);
 
   const tabs = [
     {

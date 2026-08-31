@@ -1,8 +1,12 @@
 {
-  "taskFile": "docs/tasks/PRD.md",
+  "mode": "Fast",
+  "taskFile": "docs/tasks/tasks.md",
   "promptFile": "docs/tasks/prompt.md",
-  "completionPromise": "SPRINT_CYCLE_COMPLETE",
   "autoAcceptChanges": true,
   "stopOnFailure": false,
-  "maxIterations": 150
+  "git": {
+    "enabled": false
+  },
+  "maxIterations": 100,
+  "completionPromise": "SPRINT_CYCLE_COMPLETE"
 }

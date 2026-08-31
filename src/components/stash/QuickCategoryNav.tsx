@@ -1,7 +1,19 @@
 import { useState, useEffect } from "react";
-import { Boxes, Calculator, ShieldCheck, MessageSquare, HelpCircle } from "lucide-react";
+import {
+  Boxes,
+  Calculator,
+  ShieldCheck,
+  MessageSquare,
+  HelpCircle,
+  Home,
+  Soup,
+  Search,
+  MapPin,
+  Sparkles,
+} from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { usePersona } from "@/context/PersonaContext";
+import { smoothScrollTo } from "./legal";
 
 interface CategoryItem {
   id: string;
@@ -12,15 +24,84 @@ interface CategoryItem {
 
 const CATEGORIES: CategoryItem[] = [
   { id: "solutions", labelEn: "Solutions & Hub", labelHi: "समाधान व सेवाएँ", icon: Boxes },
-  { id: "calculator", labelEn: "Savings Calculator", labelHi: "बचत कैलकुलेटर", icon: Calculator },
-  { id: "trust", labelEn: "Trust & Custody Pass", labelHi: "सुरक्षा व कस्टडी पास", icon: ShieldCheck },
-  { id: "feedback", labelEn: "Reviews & Roadmap", labelHi: "समीक्षाएँ व रोडमैप", icon: MessageSquare },
-  { id: "faq", labelEn: "FAQ", labelHi: "अक्सर पूछे जाने वाले सवाल", icon: HelpCircle },
+  { id: "calculator", labelEn: "Savings Simulator", labelHi: "बचत कैलकुलेटर", icon: Calculator },
+  { id: "trust", labelEn: "Trust & Safety Pass", labelHi: "सुरक्षा व कस्टडी पास", icon: ShieldCheck },
+  { id: "feedback", labelEn: "Community & Roadmap", labelHi: "समीक्षाएँ व रोडमैप", icon: MessageSquare },
+  { id: "faq", labelEn: "FAQ & Help", labelHi: "अक्सर पूछे जाने वाले सवाल", icon: HelpCircle },
+];
+
+interface QuickChip {
+  id: string;
+  labelEn: string;
+  labelHi: string;
+  icon: typeof Boxes;
+  badgeEn?: string;
+  badgeHi?: string;
+  target: string;
+}
+
+const QUICK_CHIPS: QuickChip[] = [
+  {
+    id: "stash",
+    labelEn: "Luggage Storage",
+    labelHi: "लगेज स्टोरेज",
+    icon: Boxes,
+    badgeEn: "₹300/mo",
+    badgeHi: "₹300/माह",
+    target: "stash",
+  },
+  {
+    id: "rooms",
+    labelEn: "Verified Rooms",
+    labelHi: "सत्यापित कमरे",
+    icon: Home,
+    badgeEn: "0% Brokerage",
+    badgeHi: "0% ब्रोकरेज",
+    target: "rooms",
+  },
+  {
+    id: "kitchen",
+    labelEn: "Ghar Ka Khana",
+    labelHi: "घर का खाना",
+    icon: Soup,
+    badgeEn: "₹90/meal",
+    badgeHi: "₹90/भोजन",
+    target: "kitchen",
+  },
+  {
+    id: "calculator",
+    labelEn: "Savings Calculator",
+    labelHi: "बचत कैलकुलेटर",
+    icon: Calculator,
+    badgeEn: "Save ₹8k",
+    badgeHi: "बचत ₹8k",
+    target: "calculator",
+  },
+  {
+    id: "custody",
+    labelEn: "Live Custody Pass",
+    labelHi: "लाइव कस्टडी पास",
+    icon: ShieldCheck,
+    badgeEn: "QR Seal",
+    badgeHi: "QR सील",
+    target: "custody-pass",
+  },
+  {
+    id: "campus",
+    labelEn: "Campus Radar",
+    labelHi: "कैंपस राडार",
+    icon: MapPin,
+    badgeEn: "PIN Search",
+    badgeHi: "पिन कोड",
+    target: "top",
+  },
 ];
 
 export function QuickCategoryNav() {
   const [active, setActive] = useState("solutions");
   const [isSticky, setIsSticky] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [showSearch, setShowSearch] = useState(false);
   const { language } = useLanguage();
   const { role } = usePersona();
   const isHi = language === "hi";
@@ -53,59 +134,135 @@ export function QuickCategoryNav() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollTo = (id: string) => {
-    setActive(id);
-    const el = document.getElementById(id);
-    if (el) {
-      const offset = 80;
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = el.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
-    }
+  const handleChipClick = (target: string) => {
+    smoothScrollTo(target)();
   };
+
+  const filteredChips = searchQuery.trim()
+    ? QUICK_CHIPS.filter((c) => {
+        const q = searchQuery.toLowerCase();
+        return (
+          c.labelEn.toLowerCase().includes(q) ||
+          c.labelHi.toLowerCase().includes(q) ||
+          (c.badgeEn && c.badgeEn.toLowerCase().includes(q)) ||
+          (c.badgeHi && c.badgeHi.toLowerCase().includes(q))
+        );
+      })
+    : QUICK_CHIPS;
 
   return (
     <div
       className={`z-30 transition-all duration-300 ${
-        isSticky ? "sticky top-16 mx-auto max-w-5xl px-4 py-1.5" : "relative mx-auto max-w-5xl px-4 py-2"
+        isSticky ? "sticky top-16 mx-auto max-w-6xl px-3 py-1.5" : "relative mx-auto max-w-6xl px-3 py-2"
       }`}
     >
-      <div className="glass flex items-center justify-between gap-1 overflow-x-auto rounded-full border border-white/10 p-1 shadow-2xl backdrop-blur-xl no-scrollbar sm:gap-1.5">
-        {CATEGORIES.map((cat) => {
-          const Icon = cat.icon;
-          const isActive = active === cat.id;
-          return (
-            <button
-              key={cat.id}
-              onClick={() => scrollTo(cat.id)}
-              className={`flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold whitespace-nowrap transition-all duration-200 cursor-pointer sm:px-3.5 sm:py-1.5 sm:text-xs ${
-                isActive
-                  ? "border border-white/20 text-white shadow-lg"
-                  : "text-muted-foreground hover:bg-white/5 hover:text-white"
-              }`}
-              style={{
-                background: isActive
-                  ? `color-mix(in oklab, ${accentColor} 22%, rgba(255,255,255,0.06))`
-                  : "transparent",
-                borderColor: isActive
-                  ? `color-mix(in oklab, ${accentColor} 45%, transparent)`
-                  : "transparent",
-              }}
-            >
-              <Icon
-                className="h-3.5 w-3.5 shrink-0"
-                style={{ color: isActive ? accentColor : "currentColor" }}
+      {/* ── Main Category Pill Bar ── */}
+      <div className="glass flex flex-col gap-1.5 rounded-2xl border border-white/10 p-1.5 shadow-2xl backdrop-blur-2xl">
+        <div className="flex items-center justify-between gap-1 overflow-x-auto no-scrollbar sm:gap-1.5">
+          {CATEGORIES.map((cat) => {
+            const Icon = cat.icon;
+            const isActive = active === cat.id;
+            return (
+              <button
+                key={cat.id}
+                onClick={() => {
+                  setActive(cat.id);
+                  smoothScrollTo(cat.id)();
+                }}
+                className={`flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold whitespace-nowrap transition-all duration-200 cursor-pointer sm:px-4 sm:py-2 ${
+                  isActive
+                    ? "border border-white/20 text-white shadow-lg"
+                    : "text-muted-foreground hover:bg-white/5 hover:text-white"
+                }`}
+                style={{
+                  background: isActive
+                    ? `color-mix(in oklab, ${accentColor} 22%, rgba(255,255,255,0.06))`
+                    : "transparent",
+                  borderColor: isActive
+                    ? `color-mix(in oklab, ${accentColor} 45%, transparent)`
+                    : "transparent",
+                }}
+              >
+                <Icon
+                  className="h-3.5 w-3.5 shrink-0"
+                  style={{ color: isActive ? accentColor : "currentColor" }}
+                />
+                <span>{isHi ? cat.labelHi : cat.labelEn}</span>
+              </button>
+            );
+          })}
+
+          {/* Quick Search Toggle Button */}
+          <button
+            type="button"
+            onClick={() => setShowSearch((v) => !v)}
+            aria-label="Search website services"
+            className={`flex items-center gap-1 rounded-xl px-2.5 py-1.5 text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+              showSearch
+                ? "bg-white/15 text-white border border-white/20"
+                : "text-slate-400 hover:bg-white/5 hover:text-white border border-transparent"
+            }`}
+          >
+            <Search className="h-3.5 w-3.5" />
+            <span className="hidden md:inline">{isHi ? "खोजें" : "Quick Find"}</span>
+          </button>
+        </div>
+
+        {/* ── Expandable Quick Search Input ── */}
+        {showSearch && (
+          <div className="pt-1 px-1 flex items-center gap-2">
+            <div className="relative flex-1">
+              <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-slate-400" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder={
+                  isHi
+                    ? "सीधे खोजें: लगेज स्टोरेज, कमरे, टिफिन, कैलकुलेटर, सुरक्षा..."
+                    : "Type to jump: Luggage, Rooms, Tiffin, Calculator, Safety, FAQ..."
+                }
+                className="w-full pl-8 pr-3 py-1.5 rounded-xl border border-white/15 bg-black/50 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-emerald-500/50"
+                autoFocus
               />
-              <span>{isHi ? cat.labelHi : cat.labelEn}</span>
-            </button>
-          );
-        })}
+            </div>
+            {searchQuery && (
+              <button
+                type="button"
+                onClick={() => setSearchQuery("")}
+                className="text-[10px] text-slate-400 hover:text-white px-2 py-1 bg-white/5 rounded-lg"
+              >
+                {isHi ? "हटाएं" : "Clear"}
+              </button>
+            )}
+          </div>
+        )}
+
+        {/* ── 1-Tap Direct Sub-Service Jump Chips ── */}
+        <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-0.5 px-0.5 border-t border-white/5">
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-400 shrink-0 flex items-center gap-1 mr-1">
+            <Sparkles className="h-3 w-3 text-amber-400" />
+            <span>{isHi ? "सीधा देखें:" : "Quick Jump:"}</span>
+          </span>
+          {filteredChips.map((chip) => {
+            const Icon = chip.icon;
+            return (
+              <button
+                key={chip.id}
+                onClick={() => handleChipClick(chip.target)}
+                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 text-slate-300 hover:text-white text-[11px] font-medium whitespace-nowrap transition-all cursor-pointer active:scale-95 shrink-0"
+              >
+                <Icon className="h-3 w-3 text-emerald-400 shrink-0" />
+                <span>{isHi ? chip.labelHi : chip.labelEn}</span>
+                {(chip.badgeEn || chip.badgeHi) && (
+                  <span className="text-[9px] font-mono px-1 py-0.2 rounded bg-emerald-500/20 text-emerald-300 font-semibold">
+                    {isHi ? chip.badgeHi : chip.badgeEn}
+                  </span>
+                )}
+              </button>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

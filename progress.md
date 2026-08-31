@@ -1,3 +1,9 @@
+- [x] **[CTO - Motion] GSAP Scroll Physics & GPU-Accelerated Transforms (Sprint #003)**:
+  - **AnimatedContent Overhaul**: Re-implemented GSAP `ScrollTrigger` in `src/components/ui/AnimatedContent.tsx` replacing static markup.
+  - **GPU Hardware Acceleration**: Injected `translate3d(0,0,0)` and dynamic `will-change: transform, opacity` attributes that get cleared post-animation to save GPU memory.
+  - **Zero Layout Thrashing**: Utilized `gsap.context()` for robust React cleanup preventing main-thread layout thrashing during hot reloads or fast scrolling.
+  - **Verification**: `npx tsc --noEmit` (**0 errors**) and seamless `ReactLenis` integration maintained across all `index.tsx` sections.
+
 - [x] **[CTO - Defect Fix] Bulletproof Supabase Error Logging & Zero-Data-Drop Engine**:
   - **Telemetry Layer (`src/lib/supabaseLogger.ts`)**: Built structured telemetry logger (`logSupabaseError`) capturing table names, operations, timestamps, sanitized payloads, and network state.
   - **Zero-Data-Drop Queue**: Integrated automatic offline storage (`queueOfflineSubmission`) with automatic recovery sync (`flushOfflineQueues`) across `users_waitlist`, `crowdsourced_room_listings`, and `co_living_inquiries`.

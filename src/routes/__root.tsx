@@ -180,6 +180,7 @@ function RootShell({ children }: { children: ReactNode }) {
         alternateName: ["Stash Saarthi", "StashSaarthi India"],
         description: "Official platform for StashSaarthi.",
         publisher: { "@id": "https://stashsaarthi-web.vercel.app/#organization" },
+        image: "https://stashsaarthi-web.vercel.app/favicon.png",
       },
       {
         "@type": "Organization",
@@ -187,6 +188,7 @@ function RootShell({ children }: { children: ReactNode }) {
         name: "StashSaarthi",
         url: "https://stashsaarthi-web.vercel.app/",
         logo: "https://stashsaarthi-web.vercel.app/favicon.png",
+        image: "https://stashsaarthi-web.vercel.app/favicon.png",
         description:
           "Official platform for StashSaarthi. India's Zero-CapEx Intergenerational Living & Campus Micro-Storage Platform.",
         sameAs: ["https://instagram.com/stashsaarthi", "https://twitter.com/StashSaarthi"],
@@ -204,6 +206,7 @@ function RootShell({ children }: { children: ReactNode }) {
         name: "Saarthi Stash - Campus Micro-Storage",
         description:
           "Secure, tamper-evident vacation luggage micro-storage for university students during semester breaks.",
+        image: "https://stashsaarthi-web.vercel.app/favicon.png",
         offers: {
           "@type": "Offer",
           price: "300",

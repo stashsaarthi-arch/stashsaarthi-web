@@ -1036,6 +1036,23 @@ export function BookingModal({
                   </label>
                 </div>
 
+                {/* Radical Transparency Trust Block */}
+                <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-3 flex gap-3 items-center">
+                  <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-emerald-500/10 text-emerald-400">
+                    <ShieldCheck className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h4 className="text-[11px] font-bold text-white uppercase tracking-wider">
+                      {isHi ? "100% रेडिकल ट्रांसपेरेंसी गारंटी" : "100% Radical Transparency Guarantee"}
+                    </h4>
+                    <p className="mt-0.5 text-[10px] text-muted-foreground leading-tight">
+                      {isHi
+                        ? "आपकी धनराशि शून्य जोखिम एस्क्रो में सुरक्षित है। जब तक सेवा पूर्ण रूप से सत्यापित नहीं हो जाती, तब तक मेजबान को भुगतान नहीं किया जाता है। कोई छिपी हुई फीस नहीं।"
+                        : "Your funds are secured in a Zero-Risk Escrow. Host payouts are withheld until full service verification. Zero hidden fees. Zero brokerage."}
+                    </p>
+                  </div>
+                </div>
+
                 <div className="flex gap-3">
                   <Button
                     variant="outline"

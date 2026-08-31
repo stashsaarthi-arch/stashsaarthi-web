@@ -1,11 +1,18 @@
+export const dispatchNavTab = (type: "solution" | "calculator" | "trust", tab: string) => {
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new CustomEvent(`stashsaarthi-${type}-tab`, { detail: tab }));
+  }
+};
+
 export const smoothScrollTo =
   (id: string, offset = -75) =>
   (e?: React.MouseEvent) => {
     if (e) e.preventDefault();
     if (!id || typeof window === "undefined") return;
 
-    // Resolve alias routes
     let targetId = id.replace(/^#/, "");
+
+    // Handle Top
     if (targetId === "top" || id === "top" || !targetId) {
       const lenis = (window as any).__lenis;
       if (lenis && typeof lenis.scrollTo === "function") {
@@ -21,34 +28,78 @@ export const smoothScrollTo =
       }
       return;
     }
-    if (targetId === "calculator" || targetId === "stash") {
+
+    // Deep sub-tab resolutions for Solutions Hub
+    if (targetId === "stash" || targetId === "storage" || targetId === "ecosystem") {
+      dispatchNavTab("solution", "stash");
+      targetId = "solutions";
+    } else if (targetId === "rooms" || targetId === "spaces") {
+      dispatchNavTab("solution", "rooms");
+      targetId = "solutions";
+    } else if (targetId === "kitchen" || targetId === "tiffin" || targetId === "food") {
+      dispatchNavTab("solution", "kitchen");
+      targetId = "solutions";
+    } else if (targetId === "connect" || targetId === "senior-living") {
+      dispatchNavTab("solution", "connect");
+      targetId = "solutions";
+    }
+
+    // Deep sub-tab resolutions for Calculator Hub
+    else if (targetId === "student-calculator" || targetId === "savings-calculator") {
+      dispatchNavTab("calculator", "student");
+      targetId = "calculator";
+    } else if (targetId === "host-earnings-calculator" || targetId === "host-simulator" || targetId === "host-calculator") {
+      dispatchNavTab("calculator", "host");
+      targetId = "calculator";
+    } else if (targetId === "calculator") {
       const role =
         typeof document !== "undefined" ? document.documentElement.dataset["role"] : "student";
-      targetId = role === "host" ? "host-earnings-calculator" : "student-calculator";
-    } else if (targetId === "safety-protocol" || targetId === "safety") {
-      targetId = document.getElementById("safety-protocol") ? "safety-protocol" : "trust";
+      dispatchNavTab("calculator", role === "host" ? "host" : "student");
+    }
+
+    // Deep sub-tab resolutions for Trust Console
+    else if (targetId === "custody-pass" || targetId === "sandbox") {
+      dispatchNavTab("trust", "sandbox");
+      targetId = "trust";
+    } else if (targetId === "process" || targetId === "logistics") {
+      dispatchNavTab("trust", "process");
+      targetId = "trust";
+    } else if (targetId === "safety" || targetId === "safety-protocol" || targetId === "zerorisk" || targetId === "insurance") {
+      dispatchNavTab("trust", "zerorisk");
+      targetId = "trust";
+    } else if (targetId === "privacy" || targetId === "sla") {
+      dispatchNavTab("trust", "privacy");
+      targetId = "trust";
+    } else if (targetId === "founder" || targetId === "accountability" || targetId === "nodal") {
+      dispatchNavTab("trust", "founder");
+      targetId = "trust";
     } else if (targetId === "waitlist" || targetId === "waitlist-form") {
       targetId = "waitlist-form";
     }
 
-    const el = document.getElementById(targetId) || document.getElementById(id.replace(/^#/, ""));
-    if (!el) return;
+    const performScroll = () => {
+      const el = document.getElementById(targetId) || document.getElementById(id.replace(/^#/, ""));
+      if (!el) return;
 
-    const lenis = (window as any).__lenis;
-    if (lenis && typeof lenis.scrollTo === "function") {
-      lenis.scrollTo(el, {
-        offset,
-        duration: 1.2,
-        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      });
-    } else {
-      const elementPosition = el.getBoundingClientRect().top + window.pageYOffset;
-      const offsetPosition = Math.max(0, elementPosition + offset);
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
-    }
+      const lenis = (window as any).__lenis;
+      if (lenis && typeof lenis.scrollTo === "function") {
+        lenis.scrollTo(el, {
+          offset,
+          duration: 1.0,
+          easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        });
+      } else {
+        const elementPosition = el.getBoundingClientRect().top + window.pageYOffset;
+        const offsetPosition = Math.max(0, elementPosition + offset);
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth",
+        });
+      }
+    };
+
+    // Small timeout ensures component state update / DOM render if sub-tab was just selected
+    setTimeout(performScroll, 50);
   };
 
 export type Doc = { title: string; title_hi?: string; body: string[]; body_hi?: string[] };

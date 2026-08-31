@@ -198,6 +198,15 @@
 }
 
 /* Lenis Smooth Scroll Engine Specifications */
+html, body {
+  overflow-x: hidden !important;
+  max-width: 100vw;
+  width: 100%;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
 html.lenis,
 html.lenis body {
   height: auto;
@@ -217,6 +226,14 @@ html.lenis body {
 
 .lenis.lenis-scrolling iframe {
   pointer-events: none;
+}
+
+/* Touch targets and mobile container safety */
+@media (max-width: 640px) {
+  button, a, input, select, textarea {
+    touch-action: manipulation;
+    min-height: 32px;
+  }
 }
 
 /* GPU Hardware Acceleration & Jitter Prevention */

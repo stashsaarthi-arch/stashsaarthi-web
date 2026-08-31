@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ShieldCheck, FileSearch, CheckCircle2, Lock, UserCheck } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { ProductSandbox } from "./ProductSandbox";
@@ -15,6 +15,17 @@ export function TrustConsoleHub() {
   const { role } = usePersona();
   const isHi = language === "hi";
   const isStudent = role === "student";
+
+  useEffect(() => {
+    const handleTabChange = (e: Event) => {
+      const detail = (e as CustomEvent).detail;
+      if (["sandbox", "process", "zerorisk", "privacy", "founder"].includes(detail)) {
+        setActiveTab(detail as "sandbox" | "process" | "zerorisk" | "privacy" | "founder");
+      }
+    };
+    window.addEventListener("stashsaarthi-trust-tab", handleTabChange);
+    return () => window.removeEventListener("stashsaarthi-trust-tab", handleTabChange);
+  }, []);
 
   const tabs = [
     {

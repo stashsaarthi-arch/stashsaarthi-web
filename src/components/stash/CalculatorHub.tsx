@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Calculator, TrendingUp } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { StashCalculator } from "./Calculator";
@@ -13,6 +13,23 @@ export function CalculatorHub({ onBook }: { onBook: OpenBooking }) {
   const { language } = useLanguage();
   const isHi = language === "hi";
   const isStudent = activeTab === "student";
+
+  // Sync with global role changes
+  useEffect(() => {
+    setActiveTab(role);
+  }, [role]);
+
+  // Listen for specific deep navigation events
+  useEffect(() => {
+    const handleTabChange = (e: Event) => {
+      const detail = (e as CustomEvent).detail;
+      if (detail === "student" || detail === "host") {
+        setActiveTab(detail);
+      }
+    };
+    window.addEventListener("stashsaarthi-calculator-tab", handleTabChange);
+    return () => window.removeEventListener("stashsaarthi-calculator-tab", handleTabChange);
+  }, []);
 
   return (
     <section id="calculator" className="relative mx-auto max-w-6xl px-4 py-3.5 sm:py-5 scroll-mt-20">

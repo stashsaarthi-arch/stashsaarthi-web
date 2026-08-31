@@ -8,12 +8,61 @@ import { smoothScrollTo } from "./legal";
 import { useLanguage } from "@/context/LanguageContext";
 import type { Role } from "./types";
 
-const LINKS = [
-  { key: "ecosystem", href: "#ecosystem" },
-  { key: "rooms", href: "#rooms" },
-  { key: "stash", href: "#calculator" },
-  { key: "connect", href: "#connect" },
-  { key: "trust", href: "#trust" },
+const NAV_LINKS = [
+  {
+    key: "stash",
+    href: "#stash",
+    icon: "🎒",
+    labelEn: "Micro-Storage",
+    labelHi: "लगेज स्टोरेज",
+    descEn: "From ₹300/bag/mo",
+    descHi: "₹300/बैग से शुरू",
+  },
+  {
+    key: "rooms",
+    href: "#rooms",
+    icon: "🏠",
+    labelEn: "Verified Rooms",
+    labelHi: "सत्यापित कमरे",
+    descEn: "0% Brokerage stays",
+    descHi: "शून्य ब्रोकरेज आवास",
+  },
+  {
+    key: "kitchen",
+    href: "#kitchen",
+    icon: "🍲",
+    labelEn: "Ghar Ka Khana",
+    labelHi: "घर का खाना",
+    descEn: "Homestyle tiffins ₹90",
+    descHi: "घर जैसा शुद्ध भोजन",
+  },
+  {
+    key: "calculator",
+    href: "#calculator",
+    icon: "🧮",
+    labelEn: "Savings Simulator",
+    labelHi: "बचत कैलकुलेटर",
+    descEn: "Instant profit/savings",
+    descHi: "बचत व कमाई का हिसाब",
+  },
+  {
+    key: "trust",
+    href: "#trust",
+    icon: "🛡️",
+    labelEn: "Safety & Custody",
+    labelHi: "सुरक्षा व कस्टडी",
+    descEn: "QR seals & ₹10k cover",
+    descHi: "QR सील व ₹10k बीमा",
+  },
+  {
+    key: "faq",
+    href: "#faq",
+    icon: "❓",
+    labelEn: "FAQ & Help",
+    labelHi: "अक्सर पूछे जाने वाले सवाल",
+    descEn: "24×7 Answers",
+    descHi: "पारदर्शी उत्तर",
+  },
 ];
 
 export function Navbar({
@@ -34,6 +83,7 @@ export function Navbar({
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const { language, setLanguage, t } = useLanguage();
+  const isHi = language === "hi";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -41,10 +91,6 @@ export function Navbar({
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  const DESKTOP_LINKS = LINKS.filter((l) =>
-    ["rooms", "stash", "trust", "feedback"].includes(l.key),
-  );
 
   return (
     <header
@@ -55,7 +101,7 @@ export function Navbar({
       }`}
     >
       <div
-        className={`max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 w-full flex items-center justify-between gap-1 sm:gap-4 transition-all duration-300 ${
+        className={`max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 w-full flex items-center justify-between gap-1 sm:gap-4 transition-all duration-300 ${
           scrolled ? "h-14 sm:h-16" : "h-15 sm:h-20"
         }`}
       >
@@ -72,40 +118,22 @@ export function Navbar({
           </button>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden xl:flex items-center gap-1 shrink-0">
-            {DESKTOP_LINKS.map((l) => {
-              const isStash = l.key === "stash";
-              const isTrust = l.key === "trust";
-              const targetHref = isStash
-                ? role === "host"
-                  ? "#host-earnings-calculator"
-                  : "#student-calculator"
-                : l.href;
-              const buttonText = isStash
-                ? role === "student"
-                  ? language === "hi"
-                    ? "बचत कैलकुलेटर"
-                    : "Savings Calculator"
-                  : language === "hi"
-                    ? "कमाई कैलकुलेटर"
-                    : "Earning Simulator"
-                : isTrust
-                  ? language === "hi"
-                    ? "सुरक्षा प्रोटोकॉल"
-                    : "Safety Protocol"
-                  : t.nav[l.key as keyof typeof t.nav];
+          <nav className="hidden xl:flex items-center gap-0.5 shrink-0">
+            {NAV_LINKS.map((l) => {
+              const label = isHi ? l.labelHi : l.labelEn;
 
               return (
                 <a
-                  key={l.href}
-                  href={targetHref}
+                  key={l.key}
+                  href={l.href}
                   onClick={(e) => {
                     e.preventDefault();
-                    smoothScrollTo(targetHref.replace(/^#/, ""))(e);
+                    smoothScrollTo(l.href.replace(/^#/, ""))(e);
                   }}
-                  className="whitespace-nowrap rounded-lg px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground shrink-0"
+                  className="whitespace-nowrap rounded-lg px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground shrink-0 flex items-center gap-1"
                 >
-                  {buttonText}
+                  <span className="text-xs">{l.icon}</span>
+                  <span>{label}</span>
                 </a>
               );
             })}
@@ -113,8 +141,8 @@ export function Navbar({
         </div>
 
         {/* 2. Right: Action Controls (Responsive & Mobile Fitted) */}
-        <div className="flex items-center gap-1.5 sm:gap-2.5 lg:gap-3 shrink-0">
-          {/* Persona Toggle on Desktop (shown on large 2xl screens with clean non-colliding layout) */}
+        <div className="flex items-center gap-1 sm:gap-2.5 lg:gap-3 shrink-0">
+          {/* Persona Toggle on Desktop */}
           <div className="hidden 2xl:flex items-center p-0.5 bg-[#161B22] border border-slate-700/60 rounded-full shrink-0">
             <button
               type="button"
@@ -126,8 +154,8 @@ export function Navbar({
               }`}
             >
               <span>🎓</span>
-              <span>{language === "hi" ? "छात्र" : "Student"}</span>
-              <span className="opacity-80 text-[10px]">{language === "hi" ? "₹6.4k बचत" : "Save ₹6.4k"}</span>
+              <span>{isHi ? "छात्र" : "Student"}</span>
+              <span className="opacity-80 text-[10px]">{isHi ? "₹6.4k बचत" : "Save ₹6.4k"}</span>
             </button>
             <button
               type="button"
@@ -139,8 +167,8 @@ export function Navbar({
               }`}
             >
               <span>🏡</span>
-              <span>{language === "hi" ? "होस्ट" : "Host"}</span>
-              <span className="opacity-80 text-[10px]">{language === "hi" ? "₹11.5k आय" : "Earn ₹11.5k"}</span>
+              <span>{isHi ? "होस्ट" : "Host"}</span>
+              <span className="opacity-80 text-[10px]">{isHi ? "₹11.5k आय" : "Earn ₹11.5k"}</span>
             </button>
           </div>
 
@@ -149,7 +177,7 @@ export function Navbar({
             <button
               type="button"
               onClick={() => setLanguage("en")}
-              className={`rounded-full px-1.5 py-0.5 text-[10px] sm:text-xs font-bold transition-colors ${
+              className={`rounded-full px-1.5 py-0.5 text-[9px] sm:text-xs font-bold transition-colors ${
                 language === "en"
                   ? "bg-white/15 text-white"
                   : "text-muted-foreground hover:text-white"
@@ -160,7 +188,7 @@ export function Navbar({
             <button
               type="button"
               onClick={() => setLanguage("hi")}
-              className={`rounded-full px-1.5 py-0.5 text-[10px] sm:text-xs font-bold transition-colors ${
+              className={`rounded-full px-1.5 py-0.5 text-[9px] sm:text-xs font-bold transition-colors ${
                 language === "hi"
                   ? "bg-white/15 text-white"
                   : "text-muted-foreground hover:text-white"
@@ -175,7 +203,7 @@ export function Navbar({
             <AuthButton compact />
           </div>
 
-          {/* Desktop Early Access / Demo CTA (shown on 2xl) */}
+          {/* Desktop Early Access / Demo CTA */}
           {onEarlyAccess && (
             <button
               type="button"
@@ -183,20 +211,20 @@ export function Navbar({
               className="hidden 2xl:inline-flex items-center gap-1.5 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-3 py-1.5 text-xs font-bold text-emerald-300 hover:bg-emerald-500/20 transition-all shrink-0 cursor-pointer active:scale-95"
             >
               <span>⚡</span>
-              <span>{language === "hi" ? "अर्ली एक्सेस" : "Early Access"}</span>
+              <span>{isHi ? "अर्ली एक्सेस" : "Early Access"}</span>
             </button>
           )}
 
-          {/* WhatsApp Referral Trigger (shown on 2xl) */}
+          {/* WhatsApp Referral Trigger */}
           {onRefer && (
             <button
               type="button"
               onClick={onRefer}
               className="hidden 2xl:inline-flex items-center gap-1.5 rounded-xl border border-[#25D366]/40 bg-[#25D366]/10 px-2.5 py-1.5 text-xs font-bold text-[#25D366] hover:bg-[#25D366]/20 transition-all shrink-0 cursor-pointer active:scale-95"
-              title={language === "hi" ? "व्हाट्सएप पर शेयर करें" : "Refer & Share on WhatsApp"}
+              title={isHi ? "व्हाट्सएप पर शेयर करें" : "Refer & Share on WhatsApp"}
             >
               <span>🎁</span>
-              <span>{language === "hi" ? "रेफर करें" : "Refer"}</span>
+              <span>{isHi ? "रेफर करें" : "Refer"}</span>
             </button>
           )}
 
@@ -204,17 +232,17 @@ export function Navbar({
           <button
             type="button"
             onClick={role === "student" ? onBook : onListRoom}
-            className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all shrink-0 cursor-pointer ${
+            className={`px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-xl text-[10px] sm:text-sm font-bold whitespace-nowrap transition-all shrink-0 cursor-pointer ${
               role === "student"
                 ? "bg-emerald-500 hover:bg-emerald-400 text-black shadow-md shadow-emerald-500/20 active:scale-95"
                 : "bg-amber-500 hover:bg-amber-400 text-black shadow-md shadow-amber-500/20 active:scale-95"
             }`}
           >
             {role === "student"
-              ? language === "hi"
+              ? isHi
                 ? "इकोसिस्टम देखें"
                 : "Explore"
-              : language === "hi"
+              : isHi
                 ? "कमरा लिस्ट करें"
                 : "List Space"}
           </button>
@@ -223,7 +251,7 @@ export function Navbar({
           <Button
             variant="ghost"
             size="icon"
-            className="xl:hidden h-8 w-8 text-white hover:bg-white/10 shrink-0 p-0 ml-0.5"
+            className="xl:hidden h-7 w-7 sm:h-8 sm:w-8 text-white hover:bg-white/10 shrink-0 p-0 ml-0.5"
             onClick={() => setOpen((v) => !v)}
             aria-label="Toggle menu"
           >
@@ -256,7 +284,7 @@ export function Navbar({
                 }`}
               >
                 <GraduationCap className="h-4 w-4" />
-                <span>{language === "hi" ? "छात्र मोड" : "Student Mode"}</span>
+                <span>{isHi ? "छात्र मोड" : "Student Mode"}</span>
               </button>
               <button
                 type="button"
@@ -271,66 +299,35 @@ export function Navbar({
                 }`}
               >
                 <HeartHandshake className="h-4 w-4" />
-                <span>{language === "hi" ? "सीनियर होस्ट" : "Senior Host"}</span>
+                <span>{isHi ? "सीनियर होस्ट" : "Senior Host"}</span>
               </button>
             </div>
 
-            {/* Navigation Links */}
-            {LINKS.map((l) => {
-              const isStash = l.key === "stash";
-              const isTrust = l.key === "trust";
-              const targetHref = isStash
-                ? role === "host"
-                  ? "#host-earnings-calculator"
-                  : "#student-calculator"
-                : l.href;
-              const buttonText = isStash
-                ? role === "student"
-                  ? language === "hi"
-                    ? "बचत कैलकुलेटर"
-                    : "Savings Calculator"
-                  : language === "hi"
-                    ? "कमाई कैलकुलेटर"
-                    : "Earning Simulator"
-                : isTrust
-                  ? language === "hi"
-                    ? "सुरक्षा प्रोटोकॉल"
-                    : "Safety Protocol"
-                  : t.nav[l.key as keyof typeof t.nav];
+            {/* Structured Navigation Grid */}
+            <div className="grid grid-cols-2 gap-1.5">
+              {NAV_LINKS.map((l) => {
+                const label = isHi ? l.labelHi : l.labelEn;
+                const desc = isHi ? l.descHi : l.descEn;
 
-              return (
-                <a
-                  key={l.href}
-                  href={targetHref}
-                  onClick={(e) => {
-                    setOpen(false);
-                    if (isStash) {
-                      e.preventDefault();
-                      const targetId =
-                        role === "host" ? "host-earnings-calculator" : "student-calculator";
-                      const element = document.getElementById(targetId);
-                      if (element) {
-                        const navHeight = 70;
-                        const elementPosition =
-                          element.getBoundingClientRect().top + window.pageYOffset;
-                        const offsetPosition = elementPosition - navHeight;
-                        window.scrollTo({
-                          top: offsetPosition,
-                          behavior: "smooth",
-                        });
-                      }
-                    } else {
-                      smoothScrollTo(l.href.slice(1))(e);
-                    }
-                  }}
-                  className="rounded-lg px-3 py-2 text-sm font-medium text-slate-300 hover:bg-white/5 hover:text-white transition-colors"
-                >
-                  {buttonText}
-                </a>
-              );
-            })}
+                return (
+                  <button
+                    key={l.key}
+                    type="button"
+                    onClick={(e) => {
+                      setOpen(false);
+                      smoothScrollTo(l.href.replace(/^#/, ""))(e);
+                    }}
+                    className="flex flex-col items-start rounded-xl p-2.5 bg-white/5 hover:bg-white/10 border border-white/5 transition-all text-left cursor-pointer active:scale-98"
+                  >
+                    <span className="text-base mb-1">{l.icon}</span>
+                    <span className="text-xs font-bold text-white">{label}</span>
+                    <span className="text-[10px] text-muted-foreground mt-0.5">{desc}</span>
+                  </button>
+                );
+              })}
+            </div>
 
-            {/* Mobile Auth & Early Access */}
+            {/* Mobile Auth & Priority CTAs */}
             <div className="mt-2 pt-2 border-t border-white/10 flex flex-col gap-2">
               {onEarlyAccess && (
                 <button
@@ -343,7 +340,7 @@ export function Navbar({
                 >
                   <span>⚡</span>
                   <span>
-                    {language === "hi"
+                    {isHi
                       ? "प्राथमिकता अर्ली एक्सेस लें"
                       : "Get Priority Early Access"}
                   </span>
@@ -360,7 +357,7 @@ export function Navbar({
                 >
                   <span>🎁</span>
                   <span>
-                    {language === "hi"
+                    {isHi
                       ? "व्हाट्सएप पर रेफर व शेयर करें"
                       : "Refer & Share on WhatsApp"}
                   </span>
