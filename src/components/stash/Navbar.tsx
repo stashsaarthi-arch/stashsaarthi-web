@@ -173,7 +173,7 @@ export function Navbar({
           </div>
 
           {/* Compact Language Switcher */}
-          <div className="flex items-center rounded-full border border-white/10 bg-white/5 p-0.5 shrink-0">
+          <div className="hidden sm:flex items-center rounded-full border border-white/10 bg-white/5 p-0.5 shrink-0">
             <button
               type="button"
               onClick={() => setLanguage("en")}
@@ -300,6 +300,32 @@ export function Navbar({
               >
                 <HeartHandshake className="h-4 w-4" />
                 <span>{isHi ? "सीनियर होस्ट" : "Senior Host"}</span>
+              </button>
+            </div>
+
+            {/* Mobile Language Switcher in Menu */}
+            <div className="p-1 bg-[#161B22] border border-slate-700/60 rounded-xl flex items-center gap-1 mb-2">
+              <button
+                type="button"
+                onClick={() => setLanguage("en")}
+                className={`flex-1 py-1.5 px-2.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+                  language === "en"
+                    ? "bg-white/15 text-white shadow-md"
+                    : "text-slate-400 hover:text-white"
+                }`}
+              >
+                English
+              </button>
+              <button
+                type="button"
+                onClick={() => setLanguage("hi")}
+                className={`flex-1 py-1.5 px-2.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+                  language === "hi"
+                    ? "bg-white/15 text-white shadow-md"
+                    : "text-slate-400 hover:text-white"
+                }`}
+              >
+                हिंदी
               </button>
             </div>
 
