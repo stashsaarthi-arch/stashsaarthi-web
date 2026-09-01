@@ -4,10 +4,13 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
+import { AnimatePresence } from "framer-motion";
+import { PageTransition } from "@/components/ui/PageTransition";
 
 import appCss from "../styles.css?url";
 import { reportError } from "../lib/error-reporting";
@@ -276,6 +279,15 @@ function LenisHandler() {
     if (!lenis) return;
     (window as any).__lenis = lenis;
 
+    // Sync GSAP ScrollTrigger with Lenis
+    lenis.on("scroll", ScrollTrigger.update);
+
+    const updateGsap = (time: number) => {
+      lenis.raf(time * 1000);
+    };
+    gsap.ticker.add(updateGsap);
+    gsap.ticker.lagSmoothing(0);
+
     let resizeTimer: NodeJS.Timeout;
     const handleResize = () => {
       clearTimeout(resizeTimer);
@@ -286,6 +298,8 @@ function LenisHandler() {
 
     window.addEventListener("resize", handleResize, { passive: true });
     return () => {
+      lenis.off("scroll", ScrollTrigger.update);
+      gsap.ticker.remove(updateGsap);
       clearTimeout(resizeTimer);
       window.removeEventListener("resize", handleResize);
     };
@@ -296,6 +310,8 @@ function LenisHandler() {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const routerState = useRouterState();
+  const currentRoute = routerState.location.pathname;
 
   useEffect(() => {
     const handleOffline = () => {
@@ -341,12 +357,16 @@ function RootComponent() {
                     wheelMultiplier: 1.05,
                     touchMultiplier: 1.0,
                     syncTouch: false,
-                    autoRaf: true,
+                    autoRaf: false, // GSAP is driving the raf now
                   }}
                 >
                   <LenisHandler />
-                  {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-                  <Outlet />
+                  <AnimatePresence mode="wait" initial={false}>
+                    <PageTransition key={currentRoute} routeKey={currentRoute}>
+                      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+                      <Outlet />
+                    </PageTransition>
+                  </AnimatePresence>
                   <NetworkStatus />
                 </ReactLenis>
               </ErrorBoundary>

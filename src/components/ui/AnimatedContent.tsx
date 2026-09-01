@@ -16,6 +16,8 @@ export interface AnimatedContentProps extends React.HTMLAttributes<HTMLDivElemen
   parallax?: boolean;
   yPercent?: number;
   scrub?: boolean | number;
+  staggerChildren?: boolean;
+  staggerDelay?: number;
   className?: string;
   style?: React.CSSProperties;
   viewportOnce?: boolean;
@@ -36,6 +38,8 @@ export function AnimatedContent({
   parallax = false,
   yPercent = 0,
   scrub = false,
+  staggerChildren = false,
+  staggerDelay = 0.1,
   className = "",
   style = {},
   viewportOnce = true,
@@ -64,8 +68,10 @@ export function AnimatedContent({
         const xOffset = direction === "horizontal" ? (reverse ? -distance : distance) : 0;
         const yOffset = direction === "vertical" ? (reverse ? -distance : distance) : 0;
 
+        const targets = staggerChildren ? gsap.utils.toArray(el.children) : el;
+
         // Apply initial state immediately
-        gsap.set(el, {
+        gsap.set(targets, {
           x: xOffset,
           y: yOffset,
           opacity: animateOpacity ? initialOpacity : 1,
@@ -74,7 +80,7 @@ export function AnimatedContent({
         });
 
         // Animate on scroll trigger
-        gsap.to(el, {
+        gsap.to(targets, {
           x: 0,
           y: 0,
           opacity: 1,
@@ -82,6 +88,7 @@ export function AnimatedContent({
           duration: duration,
           ease: ease,
           delay: delay,
+          stagger: staggerChildren ? staggerDelay : 0,
           clearProps: "willChange", // Hardware acceleration cleanup
           scrollTrigger: {
             trigger: el,
@@ -107,6 +114,8 @@ export function AnimatedContent({
     parallax,
     yPercent,
     scrub,
+    staggerChildren,
+    staggerDelay,
     viewportOnce,
   ]);
 

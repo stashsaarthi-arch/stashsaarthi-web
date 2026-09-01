@@ -101,12 +101,12 @@ export function Navbar({
       }`}
     >
       <div
-        className={`max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 w-full flex items-center justify-between gap-1 sm:gap-4 transition-all duration-300 ${
+        className={`max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-4 xl:px-6 w-full flex items-center justify-between gap-1 sm:gap-2 transition-all duration-300 ${
           scrolled ? "h-14 sm:h-16" : "h-15 sm:h-20"
         }`}
       >
         {/* 1. Left: Brand Logo & Desktop Navigation */}
-        <div className="flex items-center gap-2 sm:gap-3 lg:gap-4 shrink-0">
+        <div className="flex items-center gap-2 sm:gap-3 lg:gap-3 xl:gap-4 shrink-0">
           <button
             type="button"
             className="flex items-center gap-1.5 shrink-0 cursor-pointer group bg-transparent border-0 p-0 transition-transform active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50 rounded-lg"
@@ -130,9 +130,9 @@ export function Navbar({
                     e.preventDefault();
                     smoothScrollTo(l.href.replace(/^#/, ""))(e);
                   }}
-                  className="whitespace-nowrap rounded-lg px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground shrink-0 flex items-center gap-1"
+                  className="whitespace-nowrap rounded-lg px-1.5 2xl:px-2.5 py-1.5 text-[11px] 2xl:text-xs font-medium text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground shrink-0 flex items-center gap-1"
                 >
-                  <span className="text-xs">{l.icon}</span>
+                  <span className="text-[11px] 2xl:text-xs">{l.icon}</span>
                   <span>{label}</span>
                 </a>
               );
@@ -141,7 +141,7 @@ export function Navbar({
         </div>
 
         {/* 2. Right: Action Controls (Responsive & Mobile Fitted) */}
-        <div className="flex items-center gap-1 sm:gap-2.5 lg:gap-3 shrink-0">
+        <div className="flex items-center gap-1 sm:gap-2 lg:gap-2.5 shrink-0">
           {/* Persona Toggle on Desktop */}
           <div className="hidden 2xl:flex items-center p-0.5 bg-[#161B22] border border-slate-700/60 rounded-full shrink-0">
             <button
