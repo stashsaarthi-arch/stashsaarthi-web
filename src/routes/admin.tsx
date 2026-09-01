@@ -17,6 +17,8 @@ type Lead = {
   college_or_locality: string | null;
   phone_number: string | null;
   created_at: string;
+  source?: string;
+  message?: string | null;
 };
 
 function AdminPage() {
@@ -39,23 +41,46 @@ function AdminPage() {
   const fetchLeads = async () => {
     setLoading(true);
     try {
-      const { data, error } = await supabase
+      const { data: waitlistData, error: waitlistError } = await supabase
         .from("users_waitlist")
-        .select("id, full_name, user_type, college_or_locality, phone_number, created_at")
-        .order("created_at", { ascending: false });
+        .select("id, full_name, user_type, college_or_locality, phone_number, created_at");
 
-      if (error) {
-        logSupabaseError({
-          table: "users_waitlist",
-          operation: "select",
-          error,
-          context: "admin_fetchLeads",
-        });
-        throw error;
+      if (waitlistError) {
+        logSupabaseError({ table: "users_waitlist", operation: "select", error: waitlistError, context: "admin_fetchLeads" });
       }
       
-      const serverLeads = Array.isArray(data) ? data : [];
+      const { data: bookingData, error: bookingError } = await supabase
+        .from("co_living_inquiries")
+        .select("id, name, role, preferred_location, phone, message, created_at");
+
+      if (bookingError) {
+        logSupabaseError({ table: "co_living_inquiries", operation: "select", error: bookingError, context: "admin_fetchBookings" });
+      }
+
+      const serverWaitlist = Array.isArray(waitlistData) ? waitlistData.map((w: any) => ({
+        id: w.id,
+        full_name: w.full_name,
+        user_type: w.user_type,
+        college_or_locality: w.college_or_locality,
+        phone_number: w.phone_number,
+        created_at: w.created_at,
+        source: "Waitlist",
+        message: null
+      })) : [];
+
+      const serverBookings = Array.isArray(bookingData) ? bookingData.map((b: any) => ({
+        id: b.id,
+        full_name: b.name,
+        user_type: b.role,
+        college_or_locality: b.preferred_location,
+        phone_number: b.phone,
+        created_at: b.created_at,
+        source: "Booking",
+        message: b.message
+      })) : [];
       
+      let combined = [...serverWaitlist, ...serverBookings];
+
       // Merge with any pending offline leads from localStorage
       try {
         const offlineQueue = JSON.parse(localStorage.getItem("stash_offline_queue_users_waitlist") || "[]");
@@ -67,15 +92,17 @@ function AdminPage() {
             college_or_locality: item.data?.college_or_locality || null,
             phone_number: item.data?.phone_number || null,
             created_at: item.queuedAt || new Date().toISOString(),
+            source: "Waitlist",
+            message: null
           }));
-          setLeads([...offlineLeads, ...serverLeads]);
-          return;
+          combined = [...offlineLeads, ...combined];
         }
       } catch {
         // ignore
       }
 
-      setLeads(serverLeads);
+      combined.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+      setLeads(combined);
     } catch (err: any) {
       logSupabaseError({
         table: "users_waitlist",
@@ -178,10 +205,16 @@ function AdminPage() {
                         </div>
                       </td>
                       <td className="px-6 py-4 capitalize text-muted-foreground">
-                        {lead.user_type || "-"}
+                        <div className="font-medium text-foreground">{lead.source || "Waitlist"}</div>
+                        <div className="text-[10px] uppercase tracking-wider">{lead.user_type || "-"}</div>
                       </td>
                       <td className="px-6 py-4 text-muted-foreground">
-                        {lead.college_or_locality || "-"}
+                        <div>{lead.college_or_locality || "-"}</div>
+                        {lead.message && (
+                          <div className="text-[10px] text-cyan-400/80 mt-1 max-w-[200px] truncate" title={lead.message}>
+                            {lead.message}
+                          </div>
+                        )}
                       </td>
                       <td className="px-6 py-4">
                         <span className="inline-flex items-center rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2.5 py-0.5 text-[10px] font-medium text-emerald-400">
