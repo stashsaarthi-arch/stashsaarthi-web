@@ -203,3 +203,47 @@ export function showNetworkRetryToast(retryFn: () => void) {
     duration: 8000,
   });
 }
+
+export type ProfileUpdateData = {
+  full_name?: string;
+  phone_number?: string;
+  user_type?: "student" | "host";
+  college_or_locality?: string;
+  bio?: string;
+  address?: string;
+  emergency_contact?: string;
+};
+
+export async function updateUserProfile(email: string, data: ProfileUpdateData): Promise<{ success: boolean; error?: string }> {
+  try {
+    const { error } = await supabase
+      .from("users_waitlist")
+      .update(data)
+      .eq("email", email.toLowerCase());
+
+    if (error) {
+      logSupabaseError({
+        table: "users_waitlist",
+        operation: "update",
+        payload: { email, ...data },
+        error,
+        context: "updateUserProfile",
+      });
+      return { success: false, error: "update_failed" };
+    }
+
+    return { success: true };
+  } catch (err) {
+    if (isNetworkError(err)) {
+      return { success: false, error: "network" };
+    }
+    logSupabaseError({
+      table: "users_waitlist",
+      operation: "update",
+      payload: { email, ...data },
+      error: err,
+      context: "updateUserProfile_catch",
+    });
+    return { success: false, error: "unknown" };
+  }
+}

@@ -12,6 +12,11 @@ export type AuthUser = {
   role: "student" | "host";
   verified: boolean;
   provider?: "google" | "local";
+  phone_number?: string;
+  college_or_locality?: string;
+  bio?: string;
+  address?: string;
+  emergency_contact?: string;
 };
 
 type AuthValue = {
@@ -20,6 +25,7 @@ type AuthValue = {
   authenticating: boolean;
   loginWithGoogle: (response: CredentialResponse, defaultRole?: "student" | "host") => void;
   loginWithProfile: (profile: AuthUser) => void;
+  updateUser: (updates: Partial<AuthUser>) => void;
   logout: () => void;
   setAuthenticating: (val: boolean) => void;
 };
@@ -121,6 +127,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     toast.success("Signed out. See you soon!");
   }, []);
 
+  const updateUser = useCallback((updates: Partial<AuthUser>) => {
+    setUser((prev) => {
+      if (!prev) return null;
+      const updatedUser = { ...prev, ...updates };
+      localStorage.setItem("stash_user_session", JSON.stringify(updatedUser));
+      return updatedUser;
+    });
+  }, []);
+
   const value = useMemo(
     () => ({
       user,
@@ -128,10 +143,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       authenticating,
       loginWithGoogle,
       loginWithProfile,
+      updateUser,
       logout,
       setAuthenticating,
     }),
-    [user, loading, authenticating, loginWithGoogle, loginWithProfile, logout],
+    [user, loading, authenticating, loginWithGoogle, loginWithProfile, updateUser, logout],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

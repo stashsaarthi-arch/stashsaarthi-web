@@ -197,6 +197,9 @@ export type Database = {
           avatar_url: string | null;
           source: string | null;
           created_at: string;
+          bio: string | null;
+          address: string | null;
+          emergency_contact: string | null;
         };
         Insert: {
           id?: string;
@@ -209,6 +212,9 @@ export type Database = {
           avatar_url?: string | null;
           source?: string | null;
           created_at?: string;
+          bio?: string | null;
+          address?: string | null;
+          emergency_contact?: string | null;
         };
         Update: {
           id?: string;
@@ -221,6 +227,9 @@ export type Database = {
           avatar_url?: string | null;
           source?: string | null;
           created_at?: string;
+          bio?: string | null;
+          address?: string | null;
+          emergency_contact?: string | null;
         };
         Relationships: [];
       };

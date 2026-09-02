@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { LogOut, User as UserIcon, CalendarCheck, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -13,6 +14,7 @@ import { toast } from "sonner";
 import { useAuth } from "@/hooks/useAuth";
 import { useLanguage } from "@/context/LanguageContext";
 import { useGoogleLogin } from "@react-oauth/google";
+import { ProfileModal } from "./ProfileModal";
 
 function GoogleGlyph() {
   return (
@@ -41,6 +43,8 @@ export function AuthButton({ compact = false }: { compact?: boolean }) {
   const { user, authenticating, loginWithProfile, setAuthenticating, logout } = useAuth();
   const { language, t } = useLanguage();
   const isHi = language === "hi";
+
+  const [profileOpen, setProfileOpen] = useState(false);
 
   const handleCustomLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
@@ -119,21 +123,8 @@ export function AuthButton({ compact = false }: { compact?: boolean }) {
         <DropdownMenuLabel className="truncate">{name}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem
-          onClick={(e) => {
-            if (user.provider === "google") {
-              e.preventDefault();
-              toast.error(
-                isHi
-                  ? "गूगल लॉगिन वाले उपयोगकर्ता प्रोफ़ाइल संपादित नहीं कर सकते।"
-                  : "Profile editing is not available for Google accounts."
-              );
-              return;
-            }
-            toast.info(
-              isHi ? "प्रोफ़ाइल सेटिंग्स जल्द ही आ रही हैं।" : "Profile settings are coming soon.",
-            );
-          }}
-          className={user.provider === "google" ? "opacity-50 cursor-not-allowed" : ""}
+          onClick={() => setProfileOpen(true)}
+          className="cursor-pointer"
         >
           <UserIcon className="mr-2 h-4 w-4" /> {isHi ? "प्रोफ़ाइल" : "Profile"}
         </DropdownMenuItem>
@@ -153,6 +144,8 @@ export function AuthButton({ compact = false }: { compact?: boolean }) {
           <LogOut className="mr-2 h-4 w-4" /> {isHi ? "लॉग आउट" : "Logout"}
         </DropdownMenuItem>
       </DropdownMenuContent>
+
+      <ProfileModal open={profileOpen} onOpenChange={setProfileOpen} />
     </DropdownMenu>
   );
 }
