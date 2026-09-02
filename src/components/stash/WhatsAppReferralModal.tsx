@@ -58,8 +58,8 @@ export function WhatsAppReferralModal({ open, onOpenChange }: WhatsAppReferralMo
       icon: Utensils,
       titleEn: "Share Ghar Ka Swaad (Home Tiffins)",
       titleHi: "घर का स्वाद (होम टिफिन) शेयर करें",
-      en: `🍲 *Ghar Ka Swaad by StashSaarthi*\n\nMiss home food in Kanpur? Get pure, hygienic homemade tiffins cooked by verified neighborhood grandmothers starting at just *₹90/meal* (₹2,400/month) with zero preservatives.\n\n👉 *View daily menu & plans:* ${APP_BASE_URL}`,
-      hi: `🍲 *घर का स्वाद — शुद्ध होम टिफिन*\n\nकानपुर में घर के खाने की याद आ रही है? मोहल्ले की बुजुर्ग माताओं द्वारा तैयार शुद्ध, स्वच्छ घर का खाना मात्र *₹90/भोजन* से शुरू।\n\n👉 *मेन्यू व प्लान यहाँ देखें:* ${APP_BASE_URL}`,
+      en: `🍲 *Ghar Ka Swaad by StashSaarthi*\n\nMiss home food in Kanpur? Get pure, hygienic homemade tiffins cooked by verified neighborhood grandmothers starting at just *50 Tokens/meal* (1 Token = ₹1) with zero preservatives.\n\n👉 *View daily menu & plans:* ${APP_BASE_URL}`,
+      hi: `🍲 *घर का स्वाद — शुद्ध होम टिफिन*\n\nकानपुर में घर के खाने की याद आ रही है? मोहल्ले की बुजुर्ग माताओं द्वारा तैयार शुद्ध, स्वच्छ घर का खाना मात्र *50 टोकन/भोजन* से शुरू।\n\n👉 *मेन्यू व प्लान यहाँ देखें:* ${APP_BASE_URL}`,
     },
   };
 

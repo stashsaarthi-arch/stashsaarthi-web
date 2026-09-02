@@ -12,7 +12,7 @@ export function Card3D({ children, className }: Card3DProps) {
   return (
     <div
       className={cn(
-        "relative z-10 w-full transition-transform duration-300 ease-out hover:-translate-y-1 will-change-transform",
+        "relative z-10 w-full transition-all duration-300 ease-out hover:-translate-y-1.5 will-change-transform",
         className,
       )}
     >

@@ -22,12 +22,12 @@ export const translations = {
     },
     hero: {
       student: {
-        badge: "🚨 The 20-Day Vacation Scam Costing Indian Students ₹4,000–₹8,000",
-        title: "Why Are You Paying ₹8,000 Rent for an Empty Room and Locked Bags?",
+        badge: "🚨 Stop the ₹8,000 Vacation Dead-Rent Trap",
+        title: "Don't Pay Rent for an Empty Room. Stash Your Bags for ₹300/mo.",
         subtitle:
-          "Semester break? Internship shift? Stop burning money. Stash your luggage for ₹300/mo, get broker-free student rooms, and eat pure homestyle tiffins — hosted by verified local elders.",
-        cta: "Store Luggage @ ₹300/mo",
-        secondaryCta: "Explore Verified Co-Living",
+          "Going home for semester break? Ditch your PG. Secure your luggage in verified local homes near IITK & CSJMU. Rebook broker-free rooms when you return.",
+        cta: "Stash Luggage for ₹300/mo",
+        secondaryCta: "Find Broker-Free Rooms",
         stats: [
           { label: "Brokerage Free", value: "100%" },
           { label: "Verified", value: "3-Tier" },
@@ -36,12 +36,12 @@ export const translations = {
         ],
       },
       host: {
-        badge: "Trusted by 1,200+ Senior Hosts Across India",
+        badge: "Trusted by 12+ Senior Hosts in Kanpur",
         title:
-          "Turn Silent Rooms & Empty Corners Into ₹11,500/Month With Zero Lifestyle Disturbance.",
+          "Turn Spare Rooms & Corners Into ₹11,500/mo Passive Income.",
         subtitle:
-          "No commercial chaos. No intrusive brokers. Host verified students for safe luggage storage, family-like stays, or home-cooked meals — backed by 100% upfront digital escrow and strict house norms.",
-        cta: "Request a Free Home Visit & Space Measurement",
+          "Help verified IITK & CSJMU students store luggage or find safe housing. 100% escrow protected, zero broker hassle, and strictly on your terms.",
+        cta: "List Your Space for Free",
         secondaryCta: "Chat Directly on WhatsApp",
         stats: [
           { label: "Zero-Damage Guarantee", value: "₹10,000" },
@@ -184,7 +184,7 @@ export const translations = {
         subtitle: "Neighbourhood micro-batch tiffins.",
         price: "₹90/meal",
         comparison: "Zero palm oil, 100% hygienic home kitchen",
-        bullets: ["₹2,400 / month for 1 daily meal", "Cooked by local families"],
+        bullets: ["Pay-as-you-go Token Wallet", "Cooked by local families"],
       },
       connect: {
         badge: "Social Infrastructure",
@@ -513,12 +513,12 @@ export const translations = {
     },
     hero: {
       student: {
-        badge: "🚨 छुट्टियों में ₹8,000 का नुकसान उठाना बंद करें!",
-        title: "खाली कमरे और बंद बैग के लिए आप ₹8,000 किराया क्यों दे रहे हैं?",
+        badge: "🚨 छुट्टियों में ₹8,000 का किराया बर्बाद करना बंद करें!",
+        title: "खाली कमरे का किराया क्यों देना? अपना सामान सुरक्षित रखें मात्र ₹300/महीने में।",
         subtitle:
-          "सेमेस्टर ब्रेक? पैसा बर्बाद करना बंद करें। अपना सामान मात्र ₹300/महीने में रखें, बिना ब्रोकर के कमरे पाएं, और शुद्ध घरेलू टिफिन का आनंद लें।",
+          "सेमेस्टर ब्रेक पर जा रहे हैं? अपना सामान IITK और CSJMU के पास सुरक्षित घरों में रखें। वापस आने पर बिना ब्रोकर के कमरा पाएं।",
         cta: "₹300/महीने में सामान रखें",
-        secondaryCta: "सत्यापित कमरे देखें",
+        secondaryCta: "बिना ब्रोकर वाले कमरे खोजें",
         stats: [
           { label: "ब्रोकरेज फ्री", value: "100%" },
           { label: "सत्यापित", value: "3-Tier" },
@@ -527,12 +527,12 @@ export const translations = {
         ],
       },
       host: {
-        badge: "पूरे भारत में 1,200+ सीनियर होस्ट्स का भरोसा",
+        badge: "कानपुर में 12+ सीनियर होस्ट्स का भरोसा",
         title:
-          "अपने खाली कमरों और कोनों को बनाएं ₹11,500/महीने की सम्मानजनक आय का साधन — बिना किसी ब्रोकर या परेशानी के।",
+          "अपने खाली कमरों से ₹11,500/महीने की सम्मानजनक आय कमाएं।",
         subtitle:
-          "कोई कमर्शियल भीड़ नहीं। कोई ब्रोकर नहीं। सुरक्षित सामान रखने या छात्रों को ठहराने के लिए अपना कमरा दें - 100% एडवांस डिजिटल एस्क्रो और आपके घर के नियमों के साथ।",
-        cta: "मुफ्त होम विजिट बुक करें",
+          "IITK और CSJMU के सत्यापित छात्रों की सामान रखने या रहने में मदद करें। 100% सुरक्षित, कोई ब्रोकर नहीं, और पूरी तरह आपके नियमों पर।",
+        cta: "अपना खाली कमरा मुफ्त लिस्ट करें",
         secondaryCta: "WhatsApp पर सीधे बात करें",
         stats: [
           { label: "नुकसान की गारंटी", value: "₹10,000" },
@@ -675,7 +675,7 @@ export const translations = {
         subtitle: "पड़ोस के माइक्रो-बैच टिफिन।",
         price: "₹90/भोजन",
         comparison: "जीरो पाम ऑयल, 100% स्वच्छ घरेलू किचन",
-        bullets: ["₹2,400 / महीने में 1 दैनिक भोजन", "स्थानीय परिवारों द्वारा पकाया गया"],
+        bullets: ["टोकन वॉलेट से भुगतान", "स्थानीय परिवारों द्वारा पकाया गया"],
       },
       connect: {
         badge: "सामाजिक इंफ्रास्ट्रक्चर",

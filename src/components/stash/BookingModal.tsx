@@ -82,7 +82,7 @@ export function BookingModal({
   const [foodPreference, setFoodPreference] = useState("with_food");
 
   // 3. Kitchen specific fields
-  const [mealPlan, setMealPlan] = useState<"both" | "lunch" | "dinner" | "trial">("both");
+  const [mealPlan, setMealPlan] = useState<"trial" | "smart" | "freedom" | "semester">("smart");
   const [dietType, setDietType] = useState("Pure Vegetarian");
 
   // 4. Connect specific fields
@@ -157,13 +157,13 @@ export function BookingModal({
       case "spaces":
         return roomType === "single" ? 6000 : roomType === "shared" ? 4500 : 11000;
       case "kitchen":
-        return mealPlan === "both"
-          ? 2400
-          : mealPlan === "lunch"
-            ? 1350
-            : mealPlan === "dinner"
-              ? 1350
-              : 650;
+        return mealPlan === "trial"
+          ? 300
+          : mealPlan === "smart"
+            ? 599
+            : mealPlan === "freedom"
+              ? 1449
+              : 2799;
       case "connect":
         return 0; // Free / Credit based
       case "trust":
@@ -197,7 +197,7 @@ export function BookingModal({
   const isPinValid = !pincode.trim() ? true : isValidIndianPin(pincode);
   const isNameValid = name.trim().length >= 2;
 
-  const upiId = "stashsaarthi@okaxis";
+  const upiId = "advikomer@okhdfcbank";
   const upiDeepLink = `upi://pay?pa=${upiId}&pn=StashSaarthi%20Escrow&am=${calcAmount}&cu=INR&tn=StashSaarthi%20${service.toUpperCase()}%20Booking`;
   const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=8&color=10B981&bgcolor=000000&data=${encodeURIComponent(upiDeepLink)}`;
 
@@ -295,6 +295,7 @@ export function BookingModal({
           error,
           context: "booking_modal_insert",
         });
+        throw error;
       }
 
       setStep(3);
@@ -502,7 +503,7 @@ export function BookingModal({
                           onChange={(e) => setFoodPreference(e.target.value)}
                           className="w-full mt-1.5 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white"
                         >
-                          <option value="with_food">With Home Tiffins (+₹2,400)</option>
+                          <option value="with_food">With Token Meal Wallet</option>
                           <option value="without_food">Room Only (Self-Cook)</option>
                         </select>
                       </div>
@@ -521,10 +522,10 @@ export function BookingModal({
                           onChange={(e) => setMealPlan(e.target.value as any)}
                           className="w-full mt-1.5 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white"
                         >
-                          <option value="both">Lunch + Dinner (₹2,400/mo · 60 Meals)</option>
-                          <option value="lunch">Lunch Only (₹1,350/mo · 30 Meals)</option>
-                          <option value="dinner">Dinner Only (₹1,350/mo · 30 Meals)</option>
-                          <option value="trial">7-Day Trial Pack (₹650 · 14 Meals)</option>
+                          <option value="trial">Starter Trial (300 Tokens · ₹300)</option>
+                          <option value="smart">Smart Hopper (625 Tokens · ₹599)</option>
+                          <option value="freedom">Monthly Freedom (1550 Tokens · ₹1,449)</option>
+                          <option value="semester">Semester Pro (3050 Tokens · ₹2,799)</option>
                         </select>
                       </div>
 

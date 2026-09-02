@@ -1,3 +1,11 @@
+- [x] **[CTO - Database] Supabase Complete Migration to Fresh Instance**:
+  - **Identified Request**: Replace the old Supabase integration entirely with a new project instance (`vzwtappbltaplumazupb`).
+  - **Applied Solutions**:
+    - Purged old credentials and injected the new Project URL and Publishable Key into both `.env` and `.env.local`.
+    - Generated and executed a complete schema provisioning script in the new Supabase instance to create all core tables (`co_living_inquiries`, `users_waitlist`, `crowdsourced_room_listings`, `stash_bookings`, `waitlist_leads`, `profiles`).
+    - Engineered completely clean Row Level Security (RLS) policies allowing for public form submissions without auth collisions.
+  - **Verification**: Executed live HTTPS tests against the new instance. Both `users_waitlist` and `co_living_inquiries` successfully returned HTTP `201 Created` responses, verifying end-to-end functionality of the new database.
+
 - [x] **[CTO - Motion] GSAP Scroll Physics & GPU-Accelerated Transforms (Sprint #003)**:
   - **AnimatedContent Overhaul**: Re-implemented GSAP `ScrollTrigger` in `src/components/ui/AnimatedContent.tsx` replacing static markup.
   - **GPU Hardware Acceleration**: Injected `translate3d(0,0,0)` and dynamic `will-change: transform, opacity` attributes that get cleared post-animation to save GPU memory.
@@ -44,57 +52,6 @@
   - **Overall Impact**: Reduced total page vertical scroll height by **~65%**, providing instant access, zero scroll fatigue, and 120 FPS kinetic navigation.
   - **Verification**: Strict TypeScript type checking (`npx tsc --noEmit` with **0 errors**) and full production build (`npm run build` compiled client, SSR, and Nitro server bundles cleanly in **3.09s** with **0 errors**).
 
-- [x] **Self-Healing & Continuous Evolution Loop Engine Configured**:
-  - Injected dual-track autonomous workforce directives (`Track 1: Bug & Defect Hunt`, `Track 2: Aggressive Innovation & Polish`) into [docs/tasks/prompt.md](file:///c:/Users/Dell/Downloads/stashsaarthi-main/docs/tasks/prompt.md).
-  - Injected self-sustaining role pipeline ([CTO], [QA], [CMO], [CPO], [CRO], [CEO]) into [docs/tasks/PRD.md](file:///c:/Users/Dell/Downloads/stashsaarthi-main/docs/tasks/PRD.md) and [tasks.md](file:///c:/Users/Dell/Downloads/stashsaarthi-main/tasks.md).
-  - Locked [ralph.config.json](file:///c:/Users/Dell/Downloads/stashsaarthi-main/ralph.config.json) with `completionPromise: "SPRINT_CYCLE_COMPLETE"` and 150 max iterations.
-
-- [x] **Ralph Loop Extension CDP Mode & OAuth Bypass Configuration**:
-  - Configured [ralph.config.json](file:///c:/Users/Dell/Downloads/stashsaarthi-main/ralph.config.json), [ralph.json](file:///c:/Users/Dell/Downloads/stashsaarthi-main/ralph.json), and [.vscode/settings.json](file:///c:/Users/Dell/Downloads/stashsaarthi-main/.vscode/settings.json) with `connectionMode: "cdp"` (CDP Port 9000), eliminating gRPC OAuth extraction failures on Windows.
-  - Linked `taskFile: "docs/tasks/PRD.md"` and `promptFile: "docs/tasks/prompt.md"` for zero-error discovery.
-
-- [x] **Ralph Loop Extension PRD Structure Integration (`docs/tasks/PRD.md`)**:
-  - Created [docs/tasks/PRD.md](file:///c:/Users/Dell/Downloads/stashsaarthi-main/docs/tasks/PRD.md) with comprehensive Product Requirements Document, core unit economics, Kanpur corridor specs, and the complete 7-task role pipeline.
-  - Created mirror state files [docs/tasks/tasks.md](file:///c:/Users/Dell/Downloads/stashsaarthi-main/docs/tasks/tasks.md) and [docs/tasks/progress.md](file:///c:/Users/Dell/Downloads/stashsaarthi-main/docs/tasks/progress.md) for full Ralph Loop extension discovery.
-
-- [x] **RALPH Autonomous Workforce Queue Setup (`tasks.md` & `prd.json`)**:
-  - Injected full 7-task role-based pipeline into [tasks.md](file:///c:/Users/Dell/Downloads/stashsaarthi-main/tasks.md) ([CTO], [CMO], [CPO], [QA], [CRO], [CEO Summary]).
-  - Synchronized [prd.json](file:///c:/Users/Dell/Downloads/stashsaarthi-main/prd.json) and [progress.txt](file:///c:/Users/Dell/Downloads/stashsaarthi-main/progress.txt) with all 7 active user stories (`US-011` to `US-017`).
-  - Verified state synchronization via `npm run ralph:sync` and `npm run ralph:status` (10 completed / 7 pending).
-
-- [x] **Ralph Loop Extension & Autonomous Task Orchestration Integration**:
-  - **Full PRD & User Story Matrix (`prd.json`)**:
-    - Standardized complete `prd.json` task queue tracking 10 core stories with status, acceptance criteria, priorities, and verification commands (`npm run build`).
-  - **Autonomous System Prompts & Instructions (`prompt.md` & `PROMPT.md`)**:
-    - Created deterministic runner instructions enforcing `AGENTS.md` / `GEMINI.md` 3-layer architecture, Kanpur unit economics, dual-persona fidelity, and self-annealing build fixes.
-  - **Persistent Tracking Log (`progress.txt`)**:
-    - Established machine-readable and extension-compatible timestamped progress logs for Ralph Runner and VS Code extensions.
-  - **IDE & Extension Configuration (`ralph.config.json`, `ralph.json`, `.ralph/config.json`)**:
-    - Configured multi-format configuration files ensuring compatibility with VS Code Ralph Loop, Ralph-Runner, Antigravity, and CLI toolchains.
-  - **VS Code Tasks Integration (`.vscode/tasks.json` & `.vscode/settings.json`)**:
-    - Added 1-click execution tasks (`Ralph: Run Loop`, `Ralph: Single Step`, `Ralph: Status Check`, `Ralph: Verify Build & Types`, `Ralph: Sync PRD & Progress`).
-  - **Deterministic Orchestration & Sync Scripts (`execution/ralph_loop.cjs` & `execution/ralph_sync.cjs`)**:
-    - Added `npm run ralph`, `npm run ralph:step`, `npm run ralph:status`, and `npm run ralph:sync` scripts.
-  - **Verification**: `npm run ralph:status` and `npm run build` compiled client, SSR, and Nitro server bundles with **0 errors**.
-
-- [x] **PWA Manifest, Mobile Status Bar & Live Social Proof CRO Enhancements**:
-  - **PWA (Progressive Web App) Infrastructure**:
-    - Created `public/manifest.json` with brand metadata, `#0A0D0F` theme/background color, standalone display mode, and high-res app icons for 1-tap "Add to Home Screen" on Android, iOS, and Desktop.
-    - Added Apple mobile status bar meta tags (`apple-mobile-web-app-capable`, `black-translucent` status bar, `apple-mobile-web-app-title`) in `src/routes/__root.tsx`.
-  - **Live Dynamic Social Proof & Trust Trigger in Hero**:
-    - Added dynamic live activity counters and trust badge in `Hero.tsx` (`⚡ 48+ Bags Stored Near IITK & HBTI • 100% Tamper-Proof QR Seal` for students / `🛡️ ₹10,000 Safety Cover Active • 12+ Verified Senior Hosts in Kanpur` for hosts) right above the main CTA cluster.
-  - **Production Deployment**: Verified `npx tsc --noEmit` (**0 errors**), pushed commit `5a157d3` to GitHub `main`, and deployed live via Vercel CLI to [https://stashsaarthi-main.vercel.app](https://stashsaarthi-main.vercel.app) (Deployment ID: `dpl_49zf87CurwJBgawgEZfrvE2BNXys`, HTTP `200 OK`).
-
-- [x] **Instant Upfront Render Architecture & Zero Scroll Overhead Deployment**:
-  - **Overcame On-Scroll CPU/GPU Bottlenecks**:
-    - Eliminated delayed on-scroll animations and IntersectionObservers that were forcing layout reflows during fast scrolling.
-    - Updated `AnimatedContent` and landing page sections in `src/routes/index.tsx` so 100% of DOM nodes, images, and card structures render instantly upfront upon initial page load.
-    - As a result, when user opens the site on laptop, the GPU pre-rasterizes the layout once; during scroll, CPU overhead drops to near 0% and scrolling delivers consistent phone-like 120 FPS.
-  - **Google Search Console Sitemap Match**:
-    - Synchronized `public/sitemap.xml` and `public/robots.txt` with verified property domain `https://stashsaarthi-web.vercel.app/` to eliminate GSC "Cross-domain URL not allowed" error.
-  - **Production Deployment**: Verified `npx tsc --noEmit` (**0 errors**), `git push origin main` (`aa14626`), and published live via Vercel CLI to [https://stashsaarthi-main.vercel.app](https://stashsaarthi-main.vercel.app) (Deployment ID: `dpl_7EyeBzprhytaw4jYhRCBfeq2WBmx`, HTTP `200 OK`).
-
-- [x] **Complete Laptop 120 FPS Performance & Lag Elimination**:
   - **Identified Root Causes of Laptop Stutter**:
     1. `Card3D` and `Tilt3D` were running heavy `useSpring` and `preserve-3d` mouse-tracking on desktop (disabled on Android), forcing GPU 3D layer re-compositing on scroll.
     2. `AmbientNodes` ran an active `useScroll()` + `useTransform()` loop across 5 fixed fullscreen divs on desktop (`null` on mobile), invalidating full-screen paint on every scroll frame.

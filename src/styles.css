@@ -268,9 +268,9 @@ html.lenis body {
     box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   &:hover {
-    border-color: oklch(1 0 0 / 24%);
+    border-color: oklch(1 0 0 / 20%);
     box-shadow: var(--shadow-glass), var(--glow-cyan);
-    transform: translateY(-2px);
+    transform: translateY(-4px);
   }
 }
 

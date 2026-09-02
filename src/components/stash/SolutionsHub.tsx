@@ -3,7 +3,7 @@ import { Boxes, Home, Soup, HandHeart } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Ecosystem } from "./Ecosystem";
 import { Rooms } from "./Rooms";
-import { MealPricing } from "./MealPricing";
+import { TokenMealHub } from "../TokenMealHub";
 import { Connect } from "./Connect";
 import { useLanguage } from "@/context/LanguageContext";
 import { usePersona } from "@/context/PersonaContext";
@@ -158,14 +158,7 @@ export function SolutionsHub({ onBook, onListRoom }: SolutionsHubProps) {
         {activeTab === "stash" && <Ecosystem onBook={onBook} />}
         {activeTab === "rooms" && <Rooms onList={onListRoom} />}
         {activeTab === "kitchen" && (
-          <MealPricing
-            onSelectPlan={(planId, cycle) =>
-              onBook({
-                service: "kitchen",
-                note: `Ghar Ka Swaad: ${planId} (${cycle})`,
-              })
-            }
-          />
+          <TokenMealHub />
         )}
         {activeTab === "connect" && <Connect onBook={onBook} />}
       </div>

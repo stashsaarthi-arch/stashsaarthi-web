@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
-import { Lock, Search, MessageCircle, ShieldCheck, Loader2 } from "lucide-react";
+import { Lock, Search, MessageCircle, ShieldCheck, Loader2, CheckCircle2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { logSupabaseError } from "@/lib/supabaseLogger";
@@ -27,6 +27,30 @@ function AdminPage() {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [contactedLeads, setContactedLeads] = useState<Set<string>>(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const saved = localStorage.getItem("stash_contacted_leads");
+        return saved ? new Set(JSON.parse(saved)) : new Set();
+      } catch {
+        return new Set();
+      }
+    }
+    return new Set();
+  });
+
+  const toggleContacted = (id: string) => {
+    setContactedLeads(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
+      localStorage.setItem("stash_contacted_leads", JSON.stringify(Array.from(next)));
+      return next;
+    });
+  };
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -78,8 +102,7 @@ function AdminPage() {
         source: "Booking",
         message: b.message
       })) : [];
-      
-      let combined = [...serverWaitlist, ...serverBookings];
+      let combined: Lead[] = [...serverWaitlist, ...serverBookings];
 
       // Merge with any pending offline leads from localStorage
       try {
@@ -196,7 +219,9 @@ function AdminPage() {
                     </td>
                   </tr>
                 ) : (
-                  leads.map((lead) => (
+                  leads.map((lead) => {
+                    const isContacted = contactedLeads.has(lead.id);
+                    return (
                     <tr key={lead.id} className="hover:bg-white/[0.02] transition-colors">
                       <td className="px-6 py-4 font-medium text-foreground whitespace-nowrap">
                         {lead.full_name || "Anonymous"}
@@ -217,9 +242,23 @@ function AdminPage() {
                         )}
                       </td>
                       <td className="px-6 py-4">
-                        <span className="inline-flex items-center rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2.5 py-0.5 text-[10px] font-medium text-emerald-400">
-                          Pending Contact
-                        </span>
+                        <button
+                          onClick={() => toggleContacted(lead.id)}
+                          className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-[10px] font-medium transition-colors ${
+                            isContacted 
+                              ? "border-cyan-500/30 bg-cyan-500/10 text-cyan-400 hover:bg-cyan-500/20" 
+                              : "border-emerald-500/20 bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20"
+                          }`}
+                        >
+                          {isContacted ? (
+                            <>
+                              <CheckCircle2 className="h-3 w-3" />
+                              Contacted
+                            </>
+                          ) : (
+                            "Pending Contact"
+                          )}
+                        </button>
                       </td>
                       <td className="px-6 py-4 text-right">
                         {lead.phone_number ? (
@@ -247,7 +286,7 @@ function AdminPage() {
                         )}
                       </td>
                     </tr>
-                  ))
+                  )})
                 )}
               </tbody>
             </table>

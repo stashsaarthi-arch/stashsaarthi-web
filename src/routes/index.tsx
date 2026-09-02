@@ -19,11 +19,13 @@ import { WhatsAppReferralModal } from "@/components/stash/WhatsAppReferralModal"
 import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 import { BookingModal } from "@/components/stash/BookingModal";
 import { RoomListingModal } from "@/components/stash/RoomListingModal";
+import { TokenMealHub } from "@/components/TokenMealHub";
 import { RoleLane } from "@/components/stash/RoleLane";
 import { WhatsAppButton } from "@/components/stash/WhatsAppButton";
 import { ActivityTicker } from "@/components/stash/ActivityTicker";
 import { ScrollProgress } from "@/components/stash/ScrollProgress";
 import { FloatingPersonaToggle } from "@/components/stash/FloatingPersonaToggle";
+import { MobileStickyCTA } from "@/components/stash/MobileStickyCTA";
 import { usePersona } from "@/context/PersonaContext";
 import type { BookingPrefill } from "@/components/stash/types";
 
@@ -104,6 +106,11 @@ function Index() {
         <CalculatorHub onBook={open} />
       </ErrorBoundary>
 
+      {/* 2.5 Token Meal Engine Hub */}
+      <ErrorBoundary>
+        <TokenMealHub />
+      </ErrorBoundary>
+
       {/* 3. 100% Radical Transparency & Custody Console Hub */}
       <ErrorBoundary>
         <TrustConsoleHub />
@@ -149,6 +156,7 @@ function Index() {
       <ActivityTicker />
       <FloatingPersonaToggle />
       <FounderEscalationWidget />
+      <MobileStickyCTA onBook={open} />
       <WhatsAppButton onBook={open} />
     </main>
   );
