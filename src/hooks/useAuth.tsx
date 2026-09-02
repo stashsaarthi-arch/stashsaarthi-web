@@ -11,6 +11,7 @@ export type AuthUser = {
   avatar: string;
   role: "student" | "host";
   verified: boolean;
+  provider?: "google" | "local";
 };
 
 type AuthValue = {
@@ -70,6 +71,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           avatar: decoded.picture || "",
           role: defaultRole,
           verified: !!decoded.email_verified,
+          provider: "google",
         };
 
         setUser(newUser);

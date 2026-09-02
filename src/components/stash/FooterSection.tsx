@@ -166,6 +166,7 @@ export function FooterSection() {
             avatar: data.picture || "",
             role: userType || "student",
             verified: !!data.email_verified,
+            provider: "google",
           });
         }
       } catch (err) {

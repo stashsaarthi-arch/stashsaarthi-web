@@ -58,6 +58,7 @@ export function AuthButton({ compact = false }: { compact?: boolean }) {
           avatar: data.picture || "",
           role: "student",
           verified: !!data.email_verified,
+          provider: "google",
         });
       } catch {
         toast.error(
@@ -118,11 +119,21 @@ export function AuthButton({ compact = false }: { compact?: boolean }) {
         <DropdownMenuLabel className="truncate">{name}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem
-          onClick={() =>
+          onClick={(e) => {
+            if (user.provider === "google") {
+              e.preventDefault();
+              toast.error(
+                isHi
+                  ? "गूगल लॉगिन वाले उपयोगकर्ता प्रोफ़ाइल संपादित नहीं कर सकते।"
+                  : "Profile editing is not available for Google accounts."
+              );
+              return;
+            }
             toast.info(
               isHi ? "प्रोफ़ाइल सेटिंग्स जल्द ही आ रही हैं।" : "Profile settings are coming soon.",
-            )
-          }
+            );
+          }}
+          className={user.provider === "google" ? "opacity-50 cursor-not-allowed" : ""}
         >
           <UserIcon className="mr-2 h-4 w-4" /> {isHi ? "प्रोफ़ाइल" : "Profile"}
         </DropdownMenuItem>
