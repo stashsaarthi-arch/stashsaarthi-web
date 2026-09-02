@@ -42,4 +42,9 @@
 ### Sprint #004 - [CRO] Radical Transparency Trust Block
 - **File(s) Changed:** `src/components/stash/BookingModal.tsx`
 - **Why this was changed:** To reassure users right before completing a booking, reinforcing the zero risk and 100% digital escrow architecture to increase conversion rates.
-- **Technical Architecture Detail:** Implemented a new 100% Radical Transparency Guarantee block in Step 2 of the BookingModal. This visual cue sits directly above the checkout buttons, detailing zero hidden fees, zero brokerage, and escrow withholding until service is fully verified.
+- **Technical Architecture Detail:** Implemented a new 100% Radical Transparency Guarantee block in Step 2 of the BookingModal. This visual cue sits directly above the checkout buttons, detailing zero hidden fees, zero brokerage, and escrow withholding until service is fully verified.
+
+### Sprint #005 - [CTO] Zero Data Drop Enforcement in Service Transactions
+- **File(s) Changed:** `src/components/TokenMealHub.tsx`
+- **Why this was changed:** Meal booking transactions via the TokenMealHub (Service Page) needed hardened zero-data-drop guarantees.
+- **Technical Architecture Detail:** Enforced `logSupabaseError` telemetry into the Supabase insertion loop for the Kitchen service block. Swapped broad `err: any` declarations for `err: unknown` strict typing to prevent blind spot crashes during transaction timeouts.

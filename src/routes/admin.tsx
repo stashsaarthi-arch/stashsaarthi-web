@@ -21,6 +21,25 @@ type Lead = {
   message?: string | null;
 };
 
+type WaitlistEntry = {
+  id: string;
+  full_name: string | null;
+  user_type: string | null;
+  college_or_locality: string | null;
+  phone_number: string | null;
+  created_at: string;
+};
+
+type BookingEntry = {
+  id: string;
+  name: string | null;
+  role: string | null;
+  preferred_location: string | null;
+  phone: string | null;
+  message: string | null;
+  created_at: string;
+};
+
 function AdminPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
@@ -81,7 +100,7 @@ function AdminPage() {
         logSupabaseError({ table: "co_living_inquiries", operation: "select", error: bookingError, context: "admin_fetchBookings" });
       }
 
-      const serverWaitlist = Array.isArray(waitlistData) ? waitlistData.map((w: any) => ({
+      const serverWaitlist = Array.isArray(waitlistData) ? waitlistData.map((w: WaitlistEntry) => ({
         id: w.id,
         full_name: w.full_name,
         user_type: w.user_type,
@@ -92,7 +111,7 @@ function AdminPage() {
         message: null
       })) : [];
 
-      const serverBookings = Array.isArray(bookingData) ? bookingData.map((b: any) => ({
+      const serverBookings = Array.isArray(bookingData) ? bookingData.map((b: BookingEntry) => ({
         id: b.id,
         full_name: b.name,
         user_type: b.role,
@@ -126,7 +145,7 @@ function AdminPage() {
 
       combined.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
       setLeads(combined);
-    } catch (err: any) {
+    } catch (err: unknown) {
       logSupabaseError({
         table: "users_waitlist",
         operation: "select",

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
+import { logSupabaseError } from "@/lib/supabaseLogger";
 import { toast } from 'sonner';
 
 type FulfillmentType = 'DineIn_Pickup' | 'RoomDelivery';
@@ -177,7 +178,10 @@ export const TokenMealHub: React.FC = () => {
                 },
             ]);
 
-            if (error) throw error;
+            if (error) {
+                logSupabaseError({ table: "meal_bookings", operation: "insert", error: error, context: "TokenMealHub_submitOrder" });
+                throw error;
+            }
 
             // Deduct balance locally
             setTokenBalance((prev) => prev - currentCost);
@@ -190,10 +194,11 @@ export const TokenMealHub: React.FC = () => {
             setUserName('');
             setPhone('');
             setDeliveryAddress('');
-        } catch (err: any) {
-            console.error(err);
+        } catch (err: unknown) {
+            console.error('Failed to submit order', err);
+            logSupabaseError({ table: "meal_bookings", operation: "insert", error: err, context: "TokenMealHub_submitOrder_catch" });
             toast.error('Failed to submit order', {
-                description: err.message || 'Check your internet connection.',
+                description: (err as Error)?.message || 'Check your internet connection.',
             });
         } finally {
             setIsSubmitting(false);

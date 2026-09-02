@@ -220,7 +220,7 @@ export function Ferrofluid({
   // Keep colors updated
   useEffect(() => {
     if (!programRef.current) return;
-    const uniforms = programRef.current.uniforms as Record<string, { value: any }>;
+    const uniforms = programRef.current.uniforms as Record<string, { value: number | number[] | Float32Array }>;
     const c1 = hexToRgb(colors[0] || "#10B981");
     const c2 = hexToRgb(colors[1] || "#00F5A0");
     const c3 = hexToRgb(colors[2] || "#06B6D4");
@@ -320,7 +320,7 @@ export function Ferrofluid({
       const width = Math.min(container.clientWidth || 300, 1400);
       const height = Math.min(container.clientHeight || 300, 700);
       renderer.setSize(width, height);
-      const uniforms = program.uniforms as Record<string, { value: any }>;
+      const uniforms = program.uniforms as Record<string, { value: number | number[] | Float32Array }>;
       if (uniforms["uResolution"]) {
         uniforms["uResolution"].value = [width, height];
       }
@@ -369,7 +369,7 @@ export function Ferrofluid({
       const delta = Math.min((now - lastTime) * 0.001, 0.05);
       lastTime = now;
 
-      const uniforms = program.uniforms as Record<string, { value: any }>;
+      const uniforms = program.uniforms as Record<string, { value: number | number[] | Float32Array }>;
       if (uniforms["uTime"]) {
         uniforms["uTime"].value += delta;
       }
@@ -396,7 +396,18 @@ export function Ferrofluid({
     );
     observer.observe(container);
 
-    animationId = requestAnimationFrame(update);
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const isLowPower = typeof navigator !== "undefined" && (
+      (navigator as any).hardwareConcurrency < 4 || 
+      (navigator as any).connection?.saveData === true
+    );
+
+    if (prefersReducedMotion || isLowPower) {
+      // Just render once and skip the animation loop to save battery
+      renderer?.render({ scene: mesh });
+    } else {
+      animationId = requestAnimationFrame(update);
+    }
 
     return () => {
       cancelAnimationFrame(animationId);

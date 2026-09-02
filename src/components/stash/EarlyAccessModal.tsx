@@ -22,7 +22,7 @@ import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import {
   isValidEmail,
-  isValidIndianPhone,
+  isValidPhone,
   insertWaitlistUser,
   showNetworkRetryToast,
 } from "@/lib/waitlistService";
@@ -63,11 +63,11 @@ export function EarlyAccessModal({
       toast.error(isHi ? "कृपया एक मान्य ईमेल दर्ज करें।" : "Please enter a valid email address.");
       return;
     }
-    if (phone.trim() && !isValidIndianPhone(phone)) {
+    if (phone.trim() && !isValidPhone(phone)) {
       toast.error(
         isHi
-          ? "कृपया 10-अंकों का वैध भारतीय फोन नंबर दर्ज करें।"
-          : "Please enter a valid 10-digit Indian phone number.",
+          ? "कृपया एक वैध फोन नंबर दर्ज करें।"
+          : "Please enter a valid phone number.",
       );
       return;
     }

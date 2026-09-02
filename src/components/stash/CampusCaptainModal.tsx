@@ -12,7 +12,7 @@ import { Label } from "@/components/ui/label";
 import { Award, CheckCircle2, Phone } from "lucide-react";
 import { toast } from "sonner";
 import { FOUNDER_WHATSAPP, getWhatsAppUrl } from "@/lib/constants";
-import { isValidIndianPhone } from "@/lib/waitlistService";
+import { isValidPhone } from "@/lib/waitlistService";
 import { useLanguage } from "@/context/LanguageContext";
 
 export function CampusCaptainModal({
@@ -43,11 +43,11 @@ export function CampusCaptainModal({
       return;
     }
 
-    if (!isValidIndianPhone(phone)) {
+    if (!isValidPhone(phone)) {
       toast.error(
         isHi
-          ? "कृपया 10-अंकों का वैध भारतीय फोन नंबर दर्ज करें।"
-          : "Please enter a valid 10-digit Indian phone number.",
+          ? "कृपया एक वैध फोन नंबर दर्ज करें।"
+          : "Please enter a valid phone number.",
       );
       return;
     }

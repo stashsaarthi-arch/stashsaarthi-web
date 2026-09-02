@@ -32,7 +32,7 @@ import {
 } from "lucide-react";
 import {
   isValidEmail,
-  isValidIndianPhone,
+  isValidPhone,
   isCollegeEmail,
   isValidIndianPin,
 } from "@/lib/waitlistService";
@@ -192,7 +192,7 @@ export function BookingModal({
     if (user?.email) setEmail((e) => e || user.email!);
   }, [open, serviceProp, user]);
 
-  const isPhoneValid = !phone.trim() ? false : isValidIndianPhone(phone);
+  const isPhoneValid = !phone.trim() ? false : isValidPhone(phone);
   const isEmailValid = !email.trim() ? true : isValidEmail(email);
   const isPinValid = !pincode.trim() ? true : isValidIndianPin(pincode);
   const isNameValid = name.trim().length >= 2;
@@ -207,11 +207,11 @@ export function BookingModal({
       toast.error(isHi ? "कृपया अपना पूरा नाम दर्ज करें।" : "Please enter your full name.");
       return;
     }
-    if (!phone.trim() || !isValidIndianPhone(phone)) {
+    if (!phone.trim() || !isValidPhone(phone)) {
       toast.error(
         isHi
-          ? "कृपया 10-अंकों का वैध भारतीय फोन नंबर दर्ज करें।"
-          : "Please enter a valid 10-digit Indian phone number (starts with 6-9).",
+          ? "कृपया एक वैध फोन नंबर दर्ज करें।"
+          : "Please enter a valid phone number (e.g., 10-digits).",
       );
       return;
     }
@@ -730,11 +730,11 @@ export function BookingModal({
                         >
                           {isPhoneValid
                             ? isHi
-                              ? "सत्यापित भारतीय नंबर"
+                              ? "सत्यापित नंबर"
                               : "Valid Phone"
                             : isHi
-                              ? "10-अंक आवश्यक (6-9 से शुरू)"
-                              : "10 digits required"}
+                              ? "वैध नंबर आवश्यक"
+                              : "Valid number required"}
                         </span>
                       )}
                     </div>
@@ -963,11 +963,19 @@ export function BookingModal({
                       </button>
                     </div>
 
-                    <p className="text-[10px] text-muted-foreground">
+                    <p className="text-[10px] text-muted-foreground hidden md:block">
                       {isHi
                         ? "Google Pay, PhonePe, Paytm या किसी भी UPI ऐप से स्कैन करके एस्क्रो सुरक्षित करें।"
                         : "Scan with GPay, PhonePe, Paytm or BHIM to lock your digital escrow."}
                     </p>
+
+                    {/* Mobile Deep Link Button */}
+                    <a
+                      href={upiDeepLink}
+                      className="mt-2 md:hidden flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-emerald-500 text-black font-bold text-sm shadow-lg shadow-emerald-500/25 active:scale-95 transition-transform"
+                    >
+                      {isHi ? "UPI ऐप से भुगतान करें" : "Pay with UPI App"}
+                    </a>
                   </div>
                 ) : (
                   <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-xs space-y-2.5">

@@ -3,7 +3,7 @@ import { toast } from "sonner";
 import { useAuth } from "@/hooks/useAuth";
 import {
   isValidEmail,
-  isValidIndianPhone,
+  isValidPhone,
   insertWaitlistUser,
   upsertGoogleUser,
   showNetworkRetryToast,
@@ -111,7 +111,7 @@ export function FooterSection() {
   const [showCaptainModal, setShowCaptainModal] = useState(false);
   const [touched, setTouched] = useState<{ name?: boolean; email?: boolean; phone?: boolean }>({});
 
-  const isPhoneValid = phone.trim() ? isValidIndianPhone(phone) : false;
+  const isPhoneValid = phone.trim() ? isValidPhone(phone) : false;
   const isEmailValid = email.trim() ? isValidEmail(email) : false;
   const isNameValid = fullName.trim().length >= 2;
 
@@ -192,11 +192,11 @@ export function FooterSection() {
       toast.error(isHi ? "कृपया एक मान्य ईमेल दर्ज करें।" : "Please enter a valid email address.");
       return;
     }
-    if (phone.trim() && !isValidIndianPhone(phone)) {
+    if (phone.trim() && !isValidPhone(phone)) {
       toast.error(
         isHi
-          ? "कृपया 10-अंकों का वैध भारतीय फोन नंबर दर्ज करें।"
-          : "Please enter a valid 10-digit Indian phone number.",
+          ? "कृपया एक वैध फोन नंबर दर्ज करें।"
+          : "Please enter a valid phone number.",
       );
       return;
     }

@@ -16,15 +16,17 @@ export function isCollegeEmail(email: string): boolean {
 }
 
 /**
- * Validates a 10-digit Indian mobile number.
- * Accepts optional +91 / 91 prefix and spaces/dashes.
- * Core digits must start with 6-9.
+ * Validates a mobile number.
+ * Supports Indian 10-digit formats and standard E.164 international formats.
  */
-export function isValidIndianPhone(phone: string): boolean {
-  const digits = phone.replace(/[\s\-+]/g, "");
-  // Strip country code if present
+export function isValidPhone(phone: string): boolean {
+  const digits = phone.replace(/[\s\-]/g, "");
+  if (digits.startsWith("+")) {
+    const raw = digits.slice(1);
+    return /^\d{8,15}$/.test(raw);
+  }
   const core = digits.startsWith("91") && digits.length > 10 ? digits.slice(2) : digits;
-  return /^[6-9]\d{9}$/.test(core);
+  return /^[6-9]\d{9}$/.test(core) || /^\d{8,15}$/.test(core);
 }
 
 /**
