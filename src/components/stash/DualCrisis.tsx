@@ -148,7 +148,7 @@ function CrisisCard({
   return (
     <Tilt3D max={4} lift={6} className="rounded-xl">
       <div
-        className="glass glass-hover relative overflow-hidden rounded-xl p-3 sm:p-4"
+        className="glass relative overflow-hidden rounded-xl p-3 sm:p-4"
         style={{
           backgroundImage: `radial-gradient(120% 90% at 0% 0%, color-mix(in oklab, ${accent} 12%, transparent), transparent 70%)`,
         }}
@@ -166,7 +166,7 @@ function CrisisCard({
           {items.map((t) => (
             <li
               key={t}
-              className="rounded-lg border border-white/10 bg-white/[0.03] px-2.5 py-1.5 text-xs text-muted-foreground transition-transform duration-200 hover:translate-x-1"
+              className="rounded-lg border border-white/10 bg-white/[0.03] px-2.5 py-1.5 text-xs text-muted-foreground"
             >
               {t}
             </li>

@@ -24,6 +24,7 @@ import {
   AlertCircle,
   Award,
   Share2,
+  ArrowUp,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -467,7 +468,7 @@ export function FooterSection() {
             )}
 
             {/* Micro-Trust Note */}
-            <p className="mt-2 text-[10px] text-muted-foreground">
+            <p className="mt-2 text-xs text-muted-foreground">
               🔒{" "}
               {isHi
                 ? "शून्य स्पैम। केवल आपके शहर में नोड्स लाइव होने पर अलर्ट।"
@@ -493,15 +494,9 @@ export function FooterSection() {
 
       <div className="mx-auto grid max-w-7xl gap-6 px-4 py-6 sm:py-8 md:grid-cols-4">
         <div>
-          <button
-            type="button"
-            className="flex items-center gap-2 shrink-0 cursor-pointer mb-3 group bg-transparent border-0 p-0 transition-transform active:scale-95 focus:outline-none rounded-lg"
-            onClick={() => smoothScrollTo("top")(undefined as any)}
-            aria-label="Scroll to top of page"
-            title="StashSaarthi - Back to top"
-          >
+          <div className="flex items-center gap-2 mb-3">
             <BrandLogo height={36} className="h-8 sm:h-9" />
-          </button>
+          </div>
           <p className="mt-2 max-w-xs text-xs text-muted-foreground">
             {isHi
               ? "भारत का हाइपर-लोकल लिविंग इकोसिस्टम — छात्र गतिशीलता को अंतर-पीढ़ी सामुदायिक समर्थन से जोड़ता है।"
@@ -642,17 +637,29 @@ export function FooterSection() {
         <DocCol title={isHi ? "कानूनी" : "Legal"} links={LEGAL} onOpen={setDoc} />
       </div>
 
-      <div className="border-t border-white/10 px-4 py-4 text-center text-xs text-muted-foreground space-y-1">
-        <p>
-          {isHi
-            ? "© 2026 StashSaarthi Technologies. 100% प्रामाणिक पारदर्शिता के साथ कानपुर, उत्तर प्रदेश में निर्मित।"
-            : "© 2026 StashSaarthi Technologies. Built with radical honesty & physical accountability in Kanpur, Uttar Pradesh, India."}
-        </p>
-        <p className="text-xs text-muted-foreground font-mono">
-          {isHi
-            ? "नोडल परिचालन कार्यालय: 117/के-ब्लॉक, कल्याणपुर, कानपुर — 208016 | सीधा ईमेल: stashsaarthi@gmail.com"
-            : "Operational Hub: 117/K-Block, Kalyanpur, Kanpur — 208016 | Direct Email: stashsaarthi@gmail.com"}
-        </p>
+      <div className="border-t border-white/10 px-4 py-6">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 sm:flex-row text-xs text-muted-foreground">
+          <div className="space-y-1 text-center sm:text-left">
+            <p>
+              {isHi
+                ? "© 2026 StashSaarthi Technologies. 100% प्रामाणिक पारदर्शिता के साथ कानपुर, उत्तर प्रदेश में निर्मित।"
+                : "© 2026 StashSaarthi Technologies. Built with radical honesty & physical accountability in Kanpur, Uttar Pradesh, India."}
+            </p>
+            <p className="font-mono">
+              {isHi
+                ? "नोडल परिचालन कार्यालय: 117/के-ब्लॉक, कल्याणपुर, कानपुर — 208016 | सीधा ईमेल: stashsaarthi@gmail.com"
+                : "Operational Hub: 117/K-Block, Kalyanpur, Kanpur — 208016 | Direct Email: stashsaarthi@gmail.com"}
+            </p>
+          </div>
+          <button
+            onClick={() => smoothScrollTo("top")(undefined as any)}
+            className="flex items-center gap-1.5 font-semibold hover:text-emerald-400 transition-colors cursor-pointer"
+            aria-label="Scroll to top"
+          >
+            <span>{isHi ? "शीर्ष पर जाएँ" : "Back to top"}</span>
+            <ArrowUp className="h-3.5 w-3.5" />
+          </button>
+        </div>
       </div>
 
       <LegalDialog docKey={doc} onOpenChange={(v) => !v && setDoc(null)} />

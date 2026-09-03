@@ -127,11 +127,11 @@ export function ProductSandbox() {
                       : "At doorstep pickup, a non-tearable serialized barcode seal is affixed. Only the verified student can release the custody ticket upon return."}
                   </p>
 
-                  <div className="space-y-2 pt-2">
+                  <div className="space-y-2 pt-2 text-center lg:text-left">
                     <label className="text-xs font-medium text-muted-foreground">
                       {isHi ? "सामान का प्रकार:" : "Luggage Type:"}
                     </label>
-                    <div className="grid grid-cols-3 gap-2">
+                    <div className="flex flex-wrap justify-center lg:justify-start gap-2">
                       {[
                         {
                           id: "trolley",
@@ -153,7 +153,7 @@ export function ProductSandbox() {
                           key={item.id}
                           type="button"
                           onClick={() => setBagType(item.id)}
-                          className={`rounded-xl border p-2.5 text-center text-xs transition-all cursor-pointer ${
+                          className={`rounded-xl border px-4 py-2.5 text-center text-xs transition-all cursor-pointer flex-1 sm:flex-none ${
                             bagType === item.id
                               ? "border-emerald-500/60 bg-emerald-500/15 text-emerald-300 font-bold"
                               : "border-white/10 bg-white/5 text-muted-foreground hover:bg-white/10"
@@ -237,7 +237,7 @@ export function ProductSandbox() {
 
                     {/* Interactive 1-Click Sandbox Action */}
                     <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between">
-                      <span className="text-[11px] text-muted-foreground italic">
+                      <span className="text-xs text-muted-foreground italic">
                         {isHi
                           ? "✓ बिना लॉगिन के लाइव आउटपुट परखें"
                           : "✓ Live interactive output • No login required"}
@@ -385,8 +385,8 @@ export function ProductSandbox() {
                   </p>
 
                   {/* Bags slider */}
-                  <div className="space-y-2">
-                    <label htmlFor="sandbox-bag-slider" className="flex justify-between text-xs font-semibold cursor-pointer">
+                  <div className="space-y-2 text-center lg:text-left pt-2">
+                    <label htmlFor="sandbox-bag-slider" className="flex justify-between text-xs font-semibold cursor-pointer max-w-sm mx-auto lg:mx-0">
                       <span className="text-muted-foreground">
                         {isHi ? "बैग की संख्या:" : "Luggage Count:"}
                       </span>
@@ -402,13 +402,13 @@ export function ProductSandbox() {
                       value={bagCount}
                       onChange={(e) => setBagCount(Number(e.target.value))}
                       aria-label={isHi ? "बैग की संख्या" : "Luggage bag count"}
-                      className="w-full h-2 rounded-lg bg-white/10 accent-cyan-400 cursor-pointer"
+                      className="w-full max-w-sm h-2 rounded-lg bg-white/10 accent-cyan-400 cursor-pointer block mx-auto lg:mx-0"
                     />
                   </div>
 
                   {/* Months slider */}
-                  <div className="space-y-2">
-                    <label htmlFor="sandbox-month-slider" className="flex justify-between text-xs font-semibold cursor-pointer">
+                  <div className="space-y-2 text-center lg:text-left mt-4">
+                    <label htmlFor="sandbox-month-slider" className="flex justify-between text-xs font-semibold cursor-pointer max-w-sm mx-auto lg:mx-0">
                       <span className="text-muted-foreground">
                         {isHi ? "अवधि (माह):" : "Storage Duration:"}
                       </span>
@@ -424,7 +424,7 @@ export function ProductSandbox() {
                       value={months}
                       onChange={(e) => setMonths(Number(e.target.value))}
                       aria-label={isHi ? "स्टोरेज अवधि (माह)" : "Storage duration in months"}
-                      className="w-full h-2 rounded-lg bg-white/10 accent-cyan-400 cursor-pointer"
+                      className="w-full max-w-sm h-2 rounded-lg bg-white/10 accent-cyan-400 cursor-pointer block mx-auto lg:mx-0"
                     />
                   </div>
                 </div>

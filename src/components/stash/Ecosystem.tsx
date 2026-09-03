@@ -60,16 +60,14 @@ const NODES_BASE: NodeBase[] = [
 ];
 
 export function Ecosystem({ onBook }: { onBook: OpenBooking }) {
-  const [open, setOpen] = useState<string | null>("stash");
   const { language, t } = useLanguage();
   const isHi = language === "hi";
 
   return (
     <div id="ecosystem" className="relative mx-auto max-w-4xl px-2 py-2 scroll-mt-20">
-      <div className="space-y-2.5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {NODES_BASE.map((n, i) => {
           const Icon = n.icon;
-          const isOpen = open === n.id;
           const textData = t.ecosystem[n.id];
           return (
             <AnimatedContent
@@ -80,81 +78,62 @@ export function Ecosystem({ onBook }: { onBook: OpenBooking }) {
               threshold={0.15}
               delay={Math.min(i * 0.05, 0.3)}
             >
-              <Tilt3D max={3} lift={6} className="rounded-2xl">
-                <div className="glass overflow-hidden rounded-2xl border border-white/10">
-                  <button
-                    onClick={() => setOpen(isOpen ? null : n.id)}
-                    aria-expanded={isOpen}
-                    className="grid w-full grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2.5 p-3 text-left sm:gap-3 sm:p-4 cursor-pointer"
-                  >
+              <Tilt3D max={3} lift={6} className="rounded-2xl h-full">
+                <div className="glass h-full flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-black/40">
+                  <div className="flex items-center gap-3 p-4 sm:p-5 border-b border-white/10">
                     <span
-                      className="grid h-9 w-9 shrink-0 place-items-center rounded-xl border border-white/10"
+                      className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-white/10"
                       style={{ background: `color-mix(in oklab, ${n.accent} 18%, transparent)` }}
                     >
-                      <Icon className="h-4 w-4" style={{ color: n.accent }} />
+                      <Icon className="h-5 w-5" style={{ color: n.accent }} />
                     </span>
-                    <span className="min-w-0">
-                      <span className="flex items-center gap-2 truncate text-sm font-bold sm:text-base">
-                        <span>{textData.title}</span>
-                      </span>
-                      <span
-                        className="block truncate text-xs font-medium"
+                    <div className="min-w-0 flex-1">
+                      <div className="truncate text-base font-bold">
+                        {textData.title}
+                      </div>
+                      <div
+                        className="truncate text-xs font-medium mt-0.5"
                         style={{ color: n.accent }}
                       >
                         {textData.badge} - {textData.price}
-                      </span>
-                    </span>
-                    <motion.span
-                      animate={{ rotate: isOpen ? 180 : 0 }}
-                      className="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-white/10 bg-white/5"
-                    >
-                      <ChevronDown className="h-3.5 w-3.5 text-muted-foreground" />
-                    </motion.span>
-                  </button>
+                      </div>
+                    </div>
+                  </div>
 
-                  <AnimatePresence initial={false}>
-                    {isOpen && (
-                      <motion.div
-                        key="body"
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.25, ease: "easeInOut" }}
-                        className="overflow-hidden"
-                      >
-                        <div className="border-t border-white/10 p-4 sm:p-6 pb-6 sm:pb-8">
-                          <p className="text-xs leading-relaxed text-muted-foreground sm:text-sm">
-                            {textData.subtitle}
-                          </p>
-                          <div
-                            className="mt-3 rounded-xl border border-white/10 p-3 text-xs"
-                            style={{
-                              background: `color-mix(in oklab, ${n.accent} 10%, transparent)`,
-                            }}
-                          >
-                            <span className="font-semibold">{textData.price}</span>:{" "}
-                            {textData.comparison}
-                          </div>
-                          <ul className="mt-3.5 grid gap-2 sm:grid-cols-2">
-                            {textData.bullets.map((f) => (
-                              <li key={f} className="flex items-start gap-2 text-xs sm:text-sm">
-                                <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald" />
-                                <span className="text-muted-foreground">{f}</span>
-                              </li>
-                            ))}
-                          </ul>
-                          <Button
-                            variant="hero"
-                            size="default"
-                            className="mt-5 w-full sm:w-auto cursor-pointer text-xs sm:text-sm py-2.5 px-5"
-                            onClick={() => onBook({ service: n.id, note: textData.title })}
-                          >
-                            {isHi ? `${textData.title} बुक करें` : `Book ${textData.title}`}
-                          </Button>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                  <div className="flex-1 p-4 sm:p-5 flex flex-col">
+                    <p className="text-xs leading-relaxed text-muted-foreground sm:text-sm">
+                      {textData.subtitle}
+                    </p>
+                    <div
+                      className="mt-3 rounded-xl border border-white/10 p-3 text-xs"
+                      style={{
+                        background: `color-mix(in oklab, ${n.accent} 10%, transparent)`,
+                      }}
+                    >
+                      <span className="font-semibold">{textData.price}</span>:{" "}
+                      {textData.comparison}
+                    </div>
+                    <ul className="mt-3 space-y-2 flex-1">
+                      {textData.bullets.map((f) => (
+                        <li key={f} className="flex items-start gap-2 text-xs sm:text-sm">
+                          <Check className="mt-0.5 h-3.5 w-3.5 shrink-0" style={{ color: n.accent }} />
+                          <span className="text-muted-foreground">{f}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    
+                    <Button
+                      onClick={() => onBook({ service: n.id as any, note: textData.title })}
+                      className="mt-4 w-full rounded-xl py-4 font-bold shadow-lg transition-all active:scale-95 text-xs sm:text-sm cursor-pointer"
+                      style={{
+                        backgroundColor: n.accent,
+                        color: "black",
+                        boxShadow: `0 4px 14px 0 color-mix(in oklab, ${n.accent} 40%, transparent)`,
+                      }}
+                    >
+                      {isHi ? `${textData.title} बुक करें` : `Book ${textData.title}`}
+                    </Button>
+                  </div>
                 </div>
               </Tilt3D>
             </AnimatedContent>

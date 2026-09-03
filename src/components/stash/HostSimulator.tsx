@@ -90,19 +90,25 @@ export function HostSimulator({ onBook }: { onBook: () => void }) {
                   </div>
 
                   <div className="mt-auto space-y-2" style={{ transform: "translateZ(15px)" }}>
-                    <div className="flex justify-between text-xs">
-                      <span className="text-muted-foreground">{t.hostSimulator.effort}</span>
-                      <span className="font-semibold text-foreground">{opt.effort}</span>
-                    </div>
-                    <div className="flex justify-between text-xs">
-                      <span className="text-muted-foreground">{t.hostSimulator.capacity}</span>
-                      <span className="font-semibold text-foreground text-right">
-                        {opt.id === "corner" && isSelected
-                          ? `${cornerBags} ${isHi ? "बैग क्षमता" : "Bags Capacity"}`
-                          : opt.id === "kitchen" && isSelected
-                            ? `${dailyTiffins} ${isHi ? "दैनिक टिफिन" : "Daily Tiffins"}`
-                            : opt.capacity}
-                      </span>
+                    <div className="flex-1 transition-all duration-300">
+                      {isSelected && (
+                        <div className="space-y-2 animate-in fade-in slide-in-from-top-2">
+                          <div className="flex justify-between text-xs">
+                            <span className="text-muted-foreground">{t.hostSimulator.effort}</span>
+                            <span className="font-semibold text-foreground">{opt.effort}</span>
+                          </div>
+                          <div className="flex justify-between text-xs">
+                            <span className="text-muted-foreground">{t.hostSimulator.capacity}</span>
+                            <span className="font-semibold text-foreground text-right">
+                              {opt.id === "corner"
+                                ? `${cornerBags} ${isHi ? "बैग क्षमता" : "Bags Capacity"}`
+                                : opt.id === "kitchen"
+                                  ? `${dailyTiffins} ${isHi ? "दैनिक टिफिन" : "Daily Tiffins"}`
+                                  : opt.capacity}
+                            </span>
+                          </div>
+                        </div>
+                      )}
                     </div>
 
                     {opt.id === "corner" && isSelected && (

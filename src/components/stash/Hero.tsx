@@ -144,10 +144,10 @@ export function Hero({
             {student ? (
               <Button
                 data-magnetic
-                variant="frost"
+                variant="ghost"
                 size="default"
                 asChild
-                className="w-full sm:w-auto px-5 py-4 text-xs sm:text-sm"
+                className="w-full sm:w-auto px-5 py-4 text-xs sm:text-sm bg-white/5 hover:bg-white/10"
               >
                 <a href="#ecosystem" onClick={smoothScrollTo("ecosystem")}>
                   {t.hero.student.secondaryCta}
@@ -156,10 +156,10 @@ export function Hero({
             ) : (
               <Button
                 data-magnetic
-                variant="outline"
+                variant="ghost"
                 size="default"
                 asChild
-                className="w-full sm:w-auto px-5 py-4 text-xs sm:text-sm border-[#25D366]/50 bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366]/20 hover:text-[#25D366]"
+                className="w-full sm:w-auto px-5 py-4 text-xs sm:text-sm bg-white/5 hover:bg-white/10 text-muted-foreground hover:text-white"
               >
                 <a
                   href={`https://wa.me/${FOUNDER_WHATSAPP}?text=${encodeURIComponent("Namaste StashSaarthi, I want to list my spare space as a Host.")}`}
@@ -174,10 +174,10 @@ export function Hero({
             {onRefer && (
               <Button
                 data-magnetic
-                variant="outline"
+                variant="ghost"
                 size="default"
                 onClick={onRefer}
-                className="w-full sm:w-auto px-4 py-4 text-xs sm:text-sm border-[#25D366]/40 bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366]/20 hover:text-[#25D366] active:scale-95 transition-all cursor-pointer font-semibold"
+                className="w-full sm:w-auto px-4 py-4 text-xs sm:text-sm bg-white/5 hover:bg-white/10 text-muted-foreground hover:text-white active:scale-95 transition-all cursor-pointer font-semibold"
               >
                 <Share2 className="mr-1.5 h-3.5 w-3.5" />
                 <span>{role === "student" ? "Refer & Share" : "Share on WhatsApp"}</span>
@@ -267,8 +267,8 @@ export function Hero({
             className="group flex flex-col items-center gap-1 cursor-pointer select-none text-slate-300 hover:text-white transition-all"
             aria-label="Scroll down to explore features"
           >
-            <span className="text-xs font-mono uppercase tracking-[0.15em] transition-colors group-hover:text-emerald-400">
-              {t.nav?.explore || "EXPLORE OUR SERVICES"}
+            <span className="text-xs font-mono transition-colors group-hover:text-emerald-400">
+              {t.nav?.explore || "Explore Our Services"}
             </span>
             <div className="relative h-6 w-3.5 rounded-full border border-white/20 p-0.5 group-hover:border-emerald-400/60 transition-colors backdrop-blur-md bg-black/40">
               <motion.div
