@@ -233,12 +233,196 @@ export type Database = {
         };
         Relationships: [];
       };
+      meal_vendors: {
+        Row: {
+          created_at: string;
+          id: string;
+          is_active: boolean;
+          location: string;
+          name: string;
+        };
+        Insert: {
+          created_at?: string;
+          id?: string;
+          is_active?: boolean;
+          location: string;
+          name: string;
+        };
+        Update: {
+          created_at?: string;
+          id?: string;
+          is_active?: boolean;
+          location?: string;
+          name?: string;
+        };
+        Relationships: [];
+      };
+      meal_bookings: {
+        Row: {
+          created_at: string;
+          cutoff_time: string | null;
+          delivery_address: string | null;
+          delivery_runner_payout: number | null;
+          fulfillment_type: string | null;
+          id: string;
+          meal_date: string | null;
+          meal_slot: string | null;
+          menu_id: string | null;
+          order_status: string | null;
+          pickup_code: string | null;
+          tokens_debited: number;
+          user_name: string | null;
+          user_phone: string;
+          vendor_id: string | null;
+          vendor_payout: number | null;
+          vendor_selected: string | null;
+        };
+        Insert: {
+          created_at?: string;
+          cutoff_time?: string | null;
+          delivery_address?: string | null;
+          delivery_runner_payout?: number | null;
+          fulfillment_type?: string | null;
+          id?: string;
+          meal_date?: string | null;
+          meal_slot?: string | null;
+          menu_id?: string | null;
+          order_status?: string | null;
+          pickup_code?: string | null;
+          tokens_debited?: number;
+          user_name?: string | null;
+          user_phone: string;
+          vendor_id?: string | null;
+          vendor_payout?: number | null;
+          vendor_selected?: string | null;
+        };
+        Update: {
+          created_at?: string;
+          cutoff_time?: string | null;
+          delivery_address?: string | null;
+          delivery_runner_payout?: number | null;
+          fulfillment_type?: string | null;
+          id?: string;
+          meal_date?: string | null;
+          meal_slot?: string | null;
+          menu_id?: string | null;
+          order_status?: string | null;
+          pickup_code?: string | null;
+          tokens_debited?: number;
+          user_name?: string | null;
+          user_phone?: string;
+          vendor_id?: string | null;
+          vendor_payout?: number | null;
+          vendor_selected?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "meal_bookings_vendor_id_fkey";
+            columns: ["vendor_id"];
+            isOneToOne: false;
+            referencedRelation: "meal_vendors";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      meal_reviews: {
+        Row: {
+          booking_id: string;
+          created_at: string;
+          feedback_text: string | null;
+          id: string;
+          issue_category: "taste_quality" | "raw_or_burnt" | "hygiene_foreign_object" | "missing_items" | "other" | null;
+          photo_url: string | null;
+          rating: number;
+          refund_status: "not_eligible" | "auto_credited" | "under_review" | "rejected";
+          refund_tokens: number;
+          user_phone: string;
+          vendor_id: string;
+        };
+        Insert: {
+          booking_id: string;
+          created_at?: string;
+          feedback_text?: string | null;
+          id?: string;
+          issue_category?: "taste_quality" | "raw_or_burnt" | "hygiene_foreign_object" | "missing_items" | "other" | null;
+          photo_url?: string | null;
+          rating: number;
+          refund_status?: "not_eligible" | "auto_credited" | "under_review" | "rejected";
+          refund_tokens?: number;
+          user_phone: string;
+          vendor_id: string;
+        };
+        Update: {
+          booking_id?: string;
+          created_at?: string;
+          feedback_text?: string | null;
+          id?: string;
+          issue_category?: "taste_quality" | "raw_or_burnt" | "hygiene_foreign_object" | "missing_items" | "other" | null;
+          photo_url?: string | null;
+          rating?: number;
+          refund_status?: "not_eligible" | "auto_credited" | "under_review" | "rejected";
+          refund_tokens?: number;
+          user_phone?: string;
+          vendor_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "meal_reviews_booking_id_fkey";
+            columns: ["booking_id"];
+            isOneToOne: false;
+            referencedRelation: "meal_bookings";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "meal_reviews_vendor_id_fkey";
+            columns: ["vendor_id"];
+            isOneToOne: false;
+            referencedRelation: "meal_vendors";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      user_shield_quotas: {
+        Row: {
+          is_shield_blocked: boolean;
+          last_claim_date: string | null;
+          monthly_claims_used: number;
+          total_lifetime_strikes: number;
+          user_phone: string;
+        };
+        Insert: {
+          is_shield_blocked?: boolean;
+          last_claim_date?: string | null;
+          monthly_claims_used?: number;
+          total_lifetime_strikes?: number;
+          user_phone: string;
+        };
+        Update: {
+          is_shield_blocked?: boolean;
+          last_claim_date?: string | null;
+          monthly_claims_used?: number;
+          total_lifetime_strikes?: number;
+          user_phone?: string;
+        };
+        Relationships: [];
+      };
     };
     Views: {
       [_ in never]: never;
     };
     Functions: {
-      [_ in never]: never;
+      process_taste_shield_claim: {
+        Args: {
+          p_booking_id: string;
+          p_user_phone: string;
+          p_vendor_id: string;
+          p_rating: number;
+          p_issue_category?: string | null;
+          p_feedback_text?: string | null;
+          p_photo_url?: string | null;
+        };
+        Returns: Json;
+      };
     };
     Enums: {
       [_ in never]: never;

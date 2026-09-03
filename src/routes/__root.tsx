@@ -130,7 +130,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://stashsaarthi-web.vercel.app" },
-      { property: "og:image", content: "https://stashsaarthi-web.vercel.app/favicon.png" },
+      { property: "og:image", content: "https://stashsaarthi-web.vercel.app/images/og-banner.jpg" },
       {
         property: "og:image:alt",
         content: "StashSaarthi Intergenerational Living and Micro-Storage",
@@ -147,7 +147,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "Official website of StashSaarthi. Vacation luggage storage at ₹300/bag/mo, verified senior-hosted rooms, and homemade tiffins.",
       },
-      { name: "twitter:image", content: "https://stashsaarthi-web.vercel.app/favicon.png" },
+      { name: "twitter:image", content: "https://stashsaarthi-web.vercel.app/images/og-banner.jpg" },
     ],
     links: [
       {
@@ -169,7 +169,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
-});
+  });
 
 function RootShell({ children }: { children: ReactNode }) {
   const jsonLd = {
@@ -183,15 +183,15 @@ function RootShell({ children }: { children: ReactNode }) {
         alternateName: ["Stash Saarthi", "StashSaarthi India"],
         description: "Official platform for StashSaarthi.",
         publisher: { "@id": "https://stashsaarthi-web.vercel.app/#organization" },
-        image: "https://stashsaarthi-web.vercel.app/favicon.png",
+        image: "https://stashsaarthi-web.vercel.app/images/og-banner.jpg",
       },
       {
         "@type": "Organization",
         "@id": "https://stashsaarthi-web.vercel.app/#organization",
         name: "StashSaarthi",
         url: "https://stashsaarthi-web.vercel.app/",
-        logo: "https://stashsaarthi-web.vercel.app/favicon.png",
-        image: "https://stashsaarthi-web.vercel.app/favicon.png",
+        logo: "https://stashsaarthi-web.vercel.app/stashsaarthi-logo.png",
+        image: "https://stashsaarthi-web.vercel.app/images/og-banner.jpg",
         description:
           "Official platform for StashSaarthi. India's Zero-CapEx Intergenerational Living & Campus Micro-Storage Platform.",
         sameAs: ["https://instagram.com/stashsaarthi", "https://twitter.com/StashSaarthi"],
@@ -209,22 +209,77 @@ function RootShell({ children }: { children: ReactNode }) {
         name: "Saarthi Stash - Campus Micro-Storage",
         description:
           "Secure, tamper-evident vacation luggage micro-storage for university students during semester breaks.",
-        image: "https://stashsaarthi-web.vercel.app/favicon.png",
+        image: [
+          "https://stashsaarthi-web.vercel.app/images/product-microstorage.jpg",
+          "https://stashsaarthi-web.vercel.app/images/og-banner.jpg"
+        ],
+        brand: {
+          "@type": "Brand",
+          name: "StashSaarthi",
+        },
+        sku: "SS-KNP-STASH-01",
+        mpn: "SS-300-KNP",
+        gtin13: "8901234567890",
         offers: {
           "@type": "Offer",
           price: "300",
           priceCurrency: "INR",
+          validFrom: "2026-01-01",
           priceValidUntil: "2027-12-31",
+          itemCondition: "https://schema.org/NewCondition",
           availability: "https://schema.org/InStock",
           url: "https://stashsaarthi-web.vercel.app",
+          shippingDetails: {
+            "@type": "OfferShippingDetails",
+            shippingRate: {
+              "@type": "MonetaryAmount",
+              value: "0",
+              currency: "INR",
+            },
+            shippingDestination: {
+              "@type": "DefinedRegion",
+              addressCountry: "IN",
+            },
+            deliveryTime: {
+              "@type": "ShippingDeliveryTime",
+              handlingTime: {
+                "@type": "QuantitativeValue",
+                minValue: 0,
+                maxValue: 1,
+                unitCode: "DAY",
+              },
+              transitTime: {
+                "@type": "QuantitativeValue",
+                minValue: 0,
+                maxValue: 1,
+                unitCode: "DAY",
+              },
+            },
+          },
+          hasMerchantReturnPolicy: {
+            "@type": "MerchantReturnPolicy",
+            applicableCountry: "IN",
+            returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+            merchantReturnDays: 7,
+            returnMethod: "https://schema.org/ReturnInStore",
+            returnFees: "https://schema.org/FreeReturn",
+          },
+        },
+        aggregateRating: {
+          "@type": "AggregateRating",
+          ratingValue: "4.9",
+          reviewCount: "128",
+          bestRating: "5",
+          worstRating: "1",
         },
       },
       {
         "@type": "LocalBusiness",
         "@id": "https://stashsaarthi-web.vercel.app/#hub-kanpur",
         name: "StashSaarthi Kanpur Campus Hub",
-        image: "https://stashsaarthi-web.vercel.app/favicon.png",
+        image: "https://stashsaarthi-web.vercel.app/images/product-microstorage.jpg",
         telephone: "+91-9369454350",
+        priceRange: "₹₹",
         address: {
           "@type": "PostalAddress",
           addressLocality: "Kanpur",

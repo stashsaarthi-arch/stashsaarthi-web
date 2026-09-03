@@ -14,21 +14,22 @@ export interface SupabaseLogPayload {
   table: string;
   operation: "insert" | "upsert" | "update" | "delete" | "select";
   payload?: unknown;
-  error?: unknown;
+  error?: any;
   context?: string;
 }
 
 export function logSupabaseError({ table, operation, payload, error, context }: SupabaseLogPayload) {
   const timestamp = new Date().toISOString();
+  const errObj = error as { code?: string; message?: string; details?: string; hint?: string } | null;
   const errorDetails = {
     timestamp,
     table,
     operation,
     context: context || "General",
-    code: error?.code || "UNKNOWN_ERROR",
-    message: error?.message || (typeof error === "string" ? error : "Unknown Supabase Exception"),
-    details: error?.details || null,
-    hint: error?.hint || null,
+    code: errObj?.code || "UNKNOWN_ERROR",
+    message: errObj?.message || (typeof error === "string" ? error : "Unknown Supabase Exception"),
+    details: errObj?.details || null,
+    hint: errObj?.hint || null,
     payload: sanitizePayload(payload),
     isOnline: typeof navigator !== "undefined" ? navigator.onLine : true,
   };
@@ -48,9 +49,9 @@ function sanitizePayload(payload: unknown) {
   try {
     const copy = { ...(payload as Record<string, unknown>) };
     // Redact password or raw tokens if present
-    if (copy.password) copy.password = "[REDACTED]";
-    if (copy.token && typeof copy.token === "string" && copy.token.length > 30) {
-      copy.token = "[REDACTED]";
+    if (copy["password"]) copy["password"] = "[REDACTED]";
+    if (copy["token"] && typeof copy["token"] === "string" && (copy["token"] as string).length > 30) {
+      copy["token"] = "[REDACTED]";
     }
     return copy;
   } catch {
@@ -99,7 +100,7 @@ export async function flushOfflineQueues() {
 
       for (const item of items) {
         try {
-          const { error } = await supabase.from(table).insert(item.data as Record<string, unknown>);
+          const { error } = await (supabase.from as any)(table).insert(item.data as Record<string, unknown>);
           if (error && error.code !== "23505") { // 23505 is unique violation, treat as success/synced
             remaining.push(item);
           }

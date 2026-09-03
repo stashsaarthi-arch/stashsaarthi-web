@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { supabase } from '../lib/supabase';
+import { supabase } from '@/integrations/supabase/client';
 import { logSupabaseError } from "@/lib/supabaseLogger";
 import { toast } from 'sonner';
+import { TasteShieldModal } from './TasteShieldModal';
 
 type FulfillmentType = 'DineIn_Pickup' | 'RoomDelivery';
 
@@ -74,6 +75,30 @@ export const TokenMealHub: React.FC = () => {
     const [userName, setUserName] = useState<string>('');
     const [deliveryAddress, setDeliveryAddress] = useState<string>('');
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+
+    // Taste Shield Protection State
+    const [isTasteShieldOpen, setIsTasteShieldOpen] = useState<boolean>(false);
+    const [recentBooking, setRecentBooking] = useState<{
+        id: string;
+        mealName: string;
+        vendorName: string;
+        vendorId?: string;
+        tokensDebited: number;
+        userPhone: string;
+        userName?: string;
+        orderCreatedAt?: string;
+        pickupCode?: string | null;
+    }>({
+        id: "d3b07384-d113-4c92-9922-a8f828a2b534",
+        mealName: "Special Thali",
+        vendorName: "Kakadeo Hub - Annapurna Kitchen",
+        vendorId: "11111111-1111-1111-1111-111111111111",
+        tokensDebited: 60,
+        userPhone: "9876543210",
+        userName: "Advik Student",
+        orderCreatedAt: new Date(Date.now() - 25 * 60 * 1000).toISOString(),
+        pickupCode: "K-42",
+    });
 
     // Cut-off Timer Engine
     const [timeLeft, setTimeLeft] = useState<{ hours: number; minutes: number; seconds: number; isLocked: boolean }>({
@@ -159,24 +184,28 @@ export const TokenMealHub: React.FC = () => {
             }
 
             // Strictly typed payload insert
-            const { error } = await supabase.from('meal_bookings').insert([
-                {
-                    user_name: userName.trim(),
-                    user_phone: phone.trim(),
-                    menu_id: selectedMeal.id,
-                    vendor_selected: vendorNode,
-                    fulfillment_type: fulfillmentType,
-                    delivery_address: fulfillmentType === 'RoomDelivery' ? deliveryAddress.trim() : null,
-                    pickup_code: generatedPickupCode,
-                    meal_date: today,
-                    meal_slot: deliverySlot,
-                    tokens_debited: currentCost,
-                    vendor_payout: selectedMeal.vendorPayout,
-                    delivery_runner_payout: fulfillmentType === 'RoomDelivery' ? 7 : 0,
-                    cutoff_time: cutoffTime.toISOString(),
-                    order_status: 'confirmed',
-                },
-            ]);
+            const { data: insertedBooking, error } = await supabase
+                .from('meal_bookings')
+                .insert([
+                    {
+                        user_name: userName.trim(),
+                        user_phone: phone.trim(),
+                        menu_id: selectedMeal.id,
+                        vendor_selected: vendorNode,
+                        fulfillment_type: fulfillmentType,
+                        delivery_address: fulfillmentType === 'RoomDelivery' ? deliveryAddress.trim() : null,
+                        pickup_code: generatedPickupCode,
+                        meal_date: today ?? null,
+                        meal_slot: deliverySlot,
+                        tokens_debited: currentCost,
+                        vendor_payout: selectedMeal.vendorPayout,
+                        delivery_runner_payout: fulfillmentType === 'RoomDelivery' ? 7 : 0,
+                        cutoff_time: cutoffTime.toISOString(),
+                        order_status: 'confirmed',
+                    },
+                ])
+                .select('id, created_at')
+                .maybeSingle();
 
             if (error) {
                 logSupabaseError({ table: "meal_bookings", operation: "insert", error: error, context: "TokenMealHub_submitOrder" });
@@ -186,9 +215,26 @@ export const TokenMealHub: React.FC = () => {
             // Deduct balance locally
             setTokenBalance((prev) => prev - currentCost);
 
+            // Register active booking for review & Taste Shield
+            const activeBooking = {
+                id: insertedBooking?.id || ("bk-" + Date.now().toString(36)),
+                mealName: selectedMeal.name,
+                vendorName: vendorNode,
+                tokensDebited: currentCost,
+                userPhone: phone.trim(),
+                userName: userName.trim(),
+                orderCreatedAt: insertedBooking?.created_at || new Date().toISOString(),
+                pickupCode: generatedPickupCode,
+            };
+            setRecentBooking(activeBooking);
+
             toast.success('Order Confirmed! 🎉', {
-                description: `${currentCost} Tokens debited. Delivery scheduled for ${deliverySlot} slot. ${generatedPickupCode ? `Your Fast-Track Pickup Code is ${generatedPickupCode}` : ''}`,
-                duration: 5000,
+                description: `${currentCost} Tokens debited. Delivery scheduled for ${deliverySlot} slot. ${generatedPickupCode ? `Your Fast-Track Pickup Code is ${generatedPickupCode}.` : ''} Protected by 50% Taste Shield.`,
+                action: {
+                    label: '🛡️ Rate & Shield',
+                    onClick: () => setIsTasteShieldOpen(true),
+                },
+                duration: 7000,
             });
 
             setUserName('');
@@ -221,9 +267,19 @@ export const TokenMealHub: React.FC = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8 items-stretch">
                 <div className="lg:col-span-2 bg-slate-900/80 border border-slate-800 backdrop-blur-md rounded-2xl p-6 flex flex-col justify-between shadow-xl">
                     <div>
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-semibold mb-3">
-                            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                            6-Hour Flexible Cut-Off Protocol
+                        <div className="flex flex-wrap items-center gap-2 mb-3">
+                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-semibold">
+                                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                                6-Hour Flexible Cut-Off Protocol
+                            </div>
+                            <button
+                                type="button"
+                                onClick={() => setIsTasteShieldOpen(true)}
+                                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-950 border border-emerald-500/40 hover:border-emerald-400 text-emerald-300 text-xs font-bold transition-all hover:scale-105 cursor-pointer shadow-sm"
+                            >
+                                <span>🛡️ 50% Taste Shield</span>
+                                <span className="text-[10px] px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-300 font-mono font-bold">1 Claim/Mo</span>
+                            </button>
                         </div>
                         <h2 className="text-3xl font-extrabold tracking-tight text-white">
                             Hyperlocal <span className="text-emerald-400">Token Meal Engine</span>
@@ -297,6 +353,33 @@ export const TokenMealHub: React.FC = () => {
                         </div>
                     </div>
                 </div>
+            </div>
+
+            {/* Taste Shield Active Protection Banner */}
+            <div className="bg-slate-900/80 border border-emerald-500/30 rounded-3xl p-5 mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xl backdrop-blur-sm">
+                <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-2xl shrink-0">
+                        🛡️
+                    </div>
+                    <div>
+                        <div className="text-sm font-extrabold text-white flex items-center gap-2">
+                            <span>StashSaarthi Anti-Fraud Taste Shield Active</span>
+                            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                                50% Token Refund Guarantee
+                            </span>
+                        </div>
+                        <p className="text-xs text-slate-400 mt-1 max-w-xl">
+                            Burnt roti, watery dal, hygiene concern, or cold meal? Snap live camera proof within 2 hours of meal completion for instant 50% token auto-refund to your wallet (1 verified use/month).
+                        </p>
+                    </div>
+                </div>
+                <button
+                    type="button"
+                    onClick={() => setIsTasteShieldOpen(true)}
+                    className="w-full sm:w-auto px-5 py-3 rounded-2xl bg-slate-950 hover:bg-slate-800 border border-emerald-500/40 hover:border-emerald-400 text-emerald-400 text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md shrink-0 hover:scale-102"
+                >
+                    <span>⭐ Rate Meal & Taste Shield</span>
+                </button>
             </div>
 
             {/* Main Interactive Booking Flow */}
@@ -484,6 +567,18 @@ export const TokenMealHub: React.FC = () => {
                     </form>
                 </div>
             </div>
+
+            {/* StashSaarthi Anti-Fraud Taste Shield & Meal Review Modal */}
+            {recentBooking && (
+                <TasteShieldModal
+                    open={isTasteShieldOpen}
+                    onOpenChange={setIsTasteShieldOpen}
+                    booking={recentBooking}
+                    onRefundSuccess={(refundTokens) => {
+                        setTokenBalance((prev) => prev + refundTokens);
+                    }}
+                />
+            )}
         </section>
     );
 };

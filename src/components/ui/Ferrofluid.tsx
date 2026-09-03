@@ -371,7 +371,7 @@ export function Ferrofluid({
 
       const uniforms = program.uniforms as Record<string, { value: number | number[] | Float32Array }>;
       if (uniforms["uTime"]) {
-        uniforms["uTime"].value += delta;
+        uniforms["uTime"].value = (uniforms["uTime"].value as number) + delta;
       }
 
       // Smooth mouse lerp
