@@ -43,12 +43,12 @@ interface QuickChip {
 const QUICK_CHIPS: QuickChip[] = [
   {
     id: "stash",
-    labelEn: "Luggage Storage",
-    labelHi: "लगेज स्टोरेज",
+    labelEn: "Micro-Storage",
+    labelHi: "माइक्रो-स्टोरेज",
     icon: Boxes,
     badgeEn: "₹300/mo",
     badgeHi: "₹300/माह",
-    target: "stash",
+    target: "solutions",
   },
   {
     id: "rooms",
@@ -56,8 +56,8 @@ const QUICK_CHIPS: QuickChip[] = [
     labelHi: "सत्यापित कमरे",
     icon: Home,
     badgeEn: "0% Brokerage",
-    badgeHi: "0% ब्रोकरेज",
-    target: "rooms",
+    badgeHi: "0% दलाली",
+    target: "solutions",
   },
   {
     id: "kitchen",
@@ -66,7 +66,7 @@ const QUICK_CHIPS: QuickChip[] = [
     icon: Soup,
     badgeEn: "₹90/meal",
     badgeHi: "₹90/भोजन",
-    target: "kitchen",
+    target: "solutions",
   },
   {
     id: "calculator",
@@ -84,16 +84,7 @@ const QUICK_CHIPS: QuickChip[] = [
     icon: ShieldCheck,
     badgeEn: "QR Seal",
     badgeHi: "QR सील",
-    target: "custody-pass",
-  },
-  {
-    id: "campus",
-    labelEn: "Campus Radar",
-    labelHi: "कैंपस राडार",
-    icon: MapPin,
-    badgeEn: "PIN Search",
-    badgeHi: "पिन कोड",
-    target: "top",
+    target: "trust",
   },
 ];
 
@@ -134,8 +125,10 @@ export function QuickCategoryNav() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleChipClick = (target: string) => {
+  const handleSearchResultClick = (target: string) => {
     smoothScrollTo(target)();
+    setShowSearch(false);
+    setSearchQuery("");
   };
 
   const filteredChips = searchQuery.trim()
@@ -148,15 +141,15 @@ export function QuickCategoryNav() {
           (c.badgeHi && c.badgeHi.toLowerCase().includes(q))
         );
       })
-    : QUICK_CHIPS;
+    : [];
 
   return (
     <div
       className={`z-30 transition-all duration-300 ${
-        isSticky ? "sticky top-16 mx-auto max-w-6xl px-3 py-1.5" : "relative mx-auto max-w-6xl px-3 py-2"
+        isSticky ? "sticky top-16 mx-auto max-w-5xl px-3 py-1.5" : "relative mx-auto max-w-5xl px-3 py-2"
       }`}
     >
-      {/* ── Main Category Pill Bar ── */}
+      {/* ── Consolidated Single-Row Category Bar ── */}
       <div className="glass flex flex-col gap-1.5 rounded-2xl border border-white/10 p-1.5 shadow-2xl backdrop-blur-2xl">
         <div className="flex items-center justify-between gap-1 overflow-x-auto no-scrollbar sm:gap-1.5">
           {CATEGORIES.map((cat) => {
@@ -169,7 +162,7 @@ export function QuickCategoryNav() {
                   setActive(cat.id);
                   smoothScrollTo(cat.id)();
                 }}
-                className={`flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold whitespace-nowrap transition-all duration-200 cursor-pointer sm:px-4 sm:py-2 ${
+                className={`flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold whitespace-nowrap transition-all duration-200 cursor-pointer sm:px-3.5 sm:py-2 ${
                   isActive
                     ? "border border-white/20 text-white shadow-lg"
                     : "text-muted-foreground hover:bg-white/5 hover:text-white"
@@ -210,59 +203,58 @@ export function QuickCategoryNav() {
 
         {/* ── Expandable Quick Search Input ── */}
         {showSearch && (
-          <div className="pt-1 px-1 flex items-center gap-2">
-            <div className="relative flex-1">
-              <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-slate-400" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder={
-                  isHi
-                    ? "सीधे खोजें: लगेज स्टोरेज, कमरे, टिफिन, कैलकुलेटर, सुरक्षा..."
-                    : "Type to jump: Luggage, Rooms, Tiffin, Calculator, Safety, FAQ..."
-                }
-                className="w-full pl-8 pr-3 py-1.5 rounded-xl border border-white/15 bg-black/50 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-emerald-500/50"
-                autoFocus
-              />
+          <div className="pt-1 px-1 flex flex-col gap-2">
+            <div className="flex items-center gap-2">
+              <div className="relative flex-1">
+                <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-slate-400" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder={
+                    isHi
+                      ? "सीधे खोजें: माइक्रो-स्टोरेज, कमरे, टिफिन, कैलकुलेटर, सुरक्षा..."
+                      : "Type to jump: Micro-Storage, Rooms, Tiffin, Calculator, Safety, FAQ..."
+                  }
+                  aria-label={isHi ? "त्वरित नेविगेशन खोजें" : "Quick jump search"}
+                  className="w-full pl-8 pr-3 py-1.5 rounded-xl border border-white/15 bg-black/50 text-xs text-white placeholder:text-slate-400 focus:outline-none focus:border-emerald-500/50"
+                  autoFocus
+                />
+              </div>
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery("")}
+                  className="text-xs text-slate-400 hover:text-white px-2 py-1 bg-white/5 rounded-lg"
+                >
+                  {isHi ? "हटाएं" : "Clear"}
+                </button>
+              )}
             </div>
-            {searchQuery && (
-              <button
-                type="button"
-                onClick={() => setSearchQuery("")}
-                className="text-[10px] text-slate-400 hover:text-white px-2 py-1 bg-white/5 rounded-lg"
-              >
-                {isHi ? "हटाएं" : "Clear"}
-              </button>
+
+            {/* Quick search result suggestions */}
+            {filteredChips.length > 0 && (
+              <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1">
+                {filteredChips.map((chip) => {
+                  const Icon = chip.icon;
+                  return (
+                    <button
+                      key={chip.id}
+                      onClick={() => handleSearchResultClick(chip.target)}
+                      className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 text-white text-xs font-medium whitespace-nowrap cursor-pointer"
+                    >
+                      <Icon className="h-3 w-3 text-emerald-400 shrink-0" />
+                      <span>{isHi ? chip.labelHi : chip.labelEn}</span>
+                      <span className="text-xs text-emerald-300 font-mono font-semibold">
+                        ({isHi ? chip.badgeHi : chip.badgeEn})
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
             )}
           </div>
         )}
-
-        {/* ── 1-Tap Direct Sub-Service Jump Chips ── */}
-        <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-0.5 px-0.5 border-t border-white/5">
-          <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-400 shrink-0 flex items-center gap-1 mr-1">
-            <Sparkles className="h-3 w-3 text-amber-400" />
-            <span>{isHi ? "सीधा देखें:" : "Quick Jump:"}</span>
-          </span>
-          {filteredChips.map((chip) => {
-            const Icon = chip.icon;
-            return (
-              <button
-                key={chip.id}
-                onClick={() => handleChipClick(chip.target)}
-                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 text-slate-300 hover:text-white text-[11px] font-medium whitespace-nowrap transition-all cursor-pointer active:scale-95 shrink-0"
-              >
-                <Icon className="h-3 w-3 text-emerald-400 shrink-0" />
-                <span>{isHi ? chip.labelHi : chip.labelEn}</span>
-                {(chip.badgeEn || chip.badgeHi) && (
-                  <span className="text-[9px] font-mono px-1 py-0.2 rounded bg-emerald-500/20 text-emerald-300 font-semibold">
-                    {isHi ? chip.badgeHi : chip.badgeEn}
-                  </span>
-                )}
-              </button>
-            );
-          })}
-        </div>
       </div>
     </div>
   );

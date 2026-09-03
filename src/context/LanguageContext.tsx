@@ -13,7 +13,7 @@ export const translations = {
       studentToggle: "🟢 Student: Save ₹6,400",
       hostToggle: "🟡 Host: Earn ₹11,500",
       listRoom: "List room · ₹200",
-      explore: "Explore Ecosystem",
+      explore: "Explore Our Services",
       auth: "Continue with Google",
       savingsCalc: "Savings Calculator",
       earningSim: "Earning Simulator",
@@ -134,7 +134,7 @@ export const translations = {
     crisis: {
       titlePart1: "The Harsh Reality vs. ",
       titlePart2: "The Saarthi Secret.",
-      subtitle: "Tap Merge Solution to fuse both sides into a single living network.",
+      subtitle: "See the Integrated Ecosystem to fuse both sides into a single living network.",
       studentTitle: "The Exploitative Cycle",
       hostTitle: "The StashSaarthi Ecosystem",
       studentPoints: [
@@ -155,7 +155,7 @@ export const translations = {
         "Vacation luggage stays safe in a neighbourhood stash node at ₹300/mo",
         "Home-cooked meals replace mess food — cooked by the same community",
       ],
-      mergeSolution: "Merge Solution",
+      mergeSolution: "See the Integrated Ecosystem",
       resetSplit: "Reset the split",
     },
     ecosystem: {
@@ -504,7 +504,7 @@ export const translations = {
       studentToggle: "🟢 छात्र: ₹6,400 बचाएं",
       hostToggle: "🟡 होस्ट: ₹11,500 कमाएं",
       listRoom: "कमरा लिस्ट करें · ₹200",
-      explore: "इकोसिस्टम देखें",
+      explore: "हमारी सेवाएँ देखें",
       auth: "Google से जारी रखें",
       savingsCalc: "बचत कैलकुलेटर",
       earningSim: "कमाई कैलकुलेटर",
@@ -625,7 +625,7 @@ export const translations = {
       titlePart1: "कड़वी सच्चाई vs. ",
       titlePart2: "सार्थी सीक्रेट।",
       subtitle:
-        "दोनों पक्षों को एक सिंगल लिविंग नेटवर्क में जोड़ने के लिए Merge Solution पर टैप करें।",
+        "दोनों पक्षों को एक सिंगल लिविंग नेटवर्क में जोड़ने के लिए 'एकीकृत इकोसिस्टम देखें' पर टैप करें।",
       studentTitle: "शोषणकारी चक्र",
       hostTitle: "स्टैश सार्थी इकोसिस्टम",
       studentPoints: [
@@ -646,7 +646,7 @@ export const translations = {
         "छुट्टियों में सामान सुरक्षित पड़ोस के स्टैश नोड में ₹300/महीने पर",
         "मेस के खाने की जगह घर का बना खाना — उसी समुदाय द्वारा पकाया गया",
       ],
-      mergeSolution: "समाधान मिलाएं",
+      mergeSolution: "एकीकृत इकोसिस्टम देखें",
       resetSplit: "रीसेट करें",
     },
     ecosystem: {

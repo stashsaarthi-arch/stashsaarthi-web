@@ -34,9 +34,9 @@ export function WhatsAppButton({ onBook }: { onBook: OpenBooking }) {
             <div className="rounded-xl bg-[#25D366]/10 p-4 border border-[#25D366]/20">
               <div className="flex items-start justify-between">
                 <div>
-                  <h4 className="text-sm font-bold text-white">
+                  <div className="text-sm font-bold text-white">
                     {isHi ? "त्वरित 24×7 कंसीयज" : "Instant Concierge"}
-                  </h4>
+                  </div>
                   <p className="text-xs text-[#25D366] font-mono">
                     {FOUNDER_PHONE_DISPLAY} · {isHi ? "औसत उत्तर: 3 मिनट" : "Avg reply: 3 mins"}
                   </p>

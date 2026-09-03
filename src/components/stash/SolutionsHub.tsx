@@ -35,32 +35,32 @@ export function SolutionsHub({ onBook, onListRoom }: SolutionsHubProps) {
   const tabs = [
     {
       id: "stash" as const,
-      labelEn: "🎒 Vacation Micro-Storage (₹300/mo)",
-      labelHi: "🎒 वेकेशन स्टोरेज (₹300/माह)",
+      nameEn: "Saarthi Stash",
+      nameHi: "सारथी स्टैश",
       icon: Boxes,
       badgeEn: "Zero Dead-Rent",
       badgeHi: "80% बचत",
     },
     {
       id: "rooms" as const,
-      labelEn: "🏠 Verified Co-Living Rooms",
-      labelHi: "🏠 सत्यापित सीनियर रूम्स",
+      nameEn: "Saarthi Spaces",
+      nameHi: "सारथी स्पेसेस",
       icon: Home,
       badgeEn: "Zero Brokerage",
       badgeHi: "0% दलाली",
     },
     {
       id: "kitchen" as const,
-      labelEn: "🍲 Ghar Ka Swaad Kitchen",
-      labelHi: "🍲 घर का स्वाद टिफिन",
+      nameEn: "Saarthi Kitchen",
+      nameHi: "सारथी किचन",
       icon: Soup,
       badgeEn: "From ₹90/meal",
       badgeHi: "₹90/भोजन",
     },
     {
       id: "connect" as const,
-      labelEn: "🤝 Senior Living Connect",
-      labelHi: "🤝 सीनियर कनेक्ट व सौहार्द",
+      nameEn: "Saarthi Connect",
+      nameHi: "सारथी कनेक्ट",
       icon: HandHeart,
       badgeEn: "100% Safe",
       badgeHi: "100% सुरक्षित",
@@ -71,7 +71,7 @@ export function SolutionsHub({ onBook, onListRoom }: SolutionsHubProps) {
     <section id="solutions" className="relative mx-auto max-w-6xl px-4 py-3.5 sm:py-5 scroll-mt-20">
       {/* Section Header */}
       <div className="mx-auto max-w-3xl text-center">
-        <Badge variant="outline" className="border-white/15 bg-white/5 text-[9.5px] sm:text-[11px] text-muted-foreground">
+        <Badge variant="outline" className="border-white/15 bg-white/5 text-xs text-muted-foreground">
           {isHi ? "एकीकृत समाधान हब" : "Integrated Solutions Hub"}
         </Badge>
         <h2 className="mt-1.5 text-balance text-lg font-extrabold tracking-tight sm:text-2xl">
@@ -85,10 +85,10 @@ export function SolutionsHub({ onBook, onListRoom }: SolutionsHubProps) {
             </>
           )}
         </h2>
-        <p className="mt-1 text-[11px] text-muted-foreground sm:text-xs">
+        <p className="mt-1 text-xs text-muted-foreground">
           {isHi
             ? "आईआईटी कानपुर और सीएसजेएमयू कॉरिडोर के लिए डिज़ाइन किए गए स्मार्ट समाधान।"
-            : "High-density, modular solution matrix for Kanpur academic corridors."}
+            : "A complete range of living and storage solutions for Kanpur campus corridors."}
         </p>
       </div>
 
@@ -132,11 +132,11 @@ export function SolutionsHub({ onBook, onListRoom }: SolutionsHubProps) {
                     }}
                   />
                   <span className="text-xs font-bold sm:text-sm">
-                    {isHi ? tab.labelHi.split(" ")[1] : tab.labelEn.split(" ")[1]}
+                    {isHi ? tab.nameHi : tab.nameEn}
                   </span>
                 </div>
                 <span
-                  className="mt-0.5 text-[9px] sm:text-[10px] font-medium"
+                  className="mt-0.5 text-xs font-medium"
                   style={{
                     color: isActive
                       ? isStudent

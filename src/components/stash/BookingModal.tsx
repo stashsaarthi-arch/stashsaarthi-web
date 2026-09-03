@@ -413,13 +413,15 @@ export function BookingModal({
                   {service === "stash" && (
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
                       <div>
-                        <Label className="text-xs">
+                        <Label htmlFor="bk-bags" className="text-xs cursor-pointer">
                           {isHi ? "बैगों की संख्या:" : "Number of Bags:"}
                         </Label>
                         <select
+                          id="bk-bags"
+                          aria-label={isHi ? "बैगों की संख्या चुनें" : "Select number of bags"}
                           value={bags}
                           onChange={(e) => setBags(Number(e.target.value))}
-                          className="w-full mt-1.5 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white"
+                          className="w-full mt-1.5 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white cursor-pointer"
                         >
                           {[1, 2, 3, 4, 5, 6, 8, 10].map((b) => (
                             <option key={b} value={b} className="bg-[#0A0D0F]">
@@ -430,13 +432,15 @@ export function BookingModal({
                       </div>
 
                       <div>
-                        <Label className="text-xs">
+                        <Label htmlFor="bk-months" className="text-xs cursor-pointer">
                           {isHi ? "अवधि (महीने):" : "Duration (Months):"}
                         </Label>
                         <select
+                          id="bk-months"
+                          aria-label={isHi ? "स्टोरेज अवधि चुनें" : "Select duration in months"}
                           value={months}
                           onChange={(e) => setMonths(Number(e.target.value))}
-                          className="w-full mt-1.5 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white"
+                          className="w-full mt-1.5 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white cursor-pointer"
                         >
                           {[1, 2, 3, 4, 5, 6].map((m) => (
                             <option key={m} value={m} className="bg-[#0A0D0F]">
@@ -447,13 +451,15 @@ export function BookingModal({
                       </div>
 
                       <div>
-                        <Label className="text-xs">
+                        <Label htmlFor="bk-item-type" className="text-xs cursor-pointer">
                           {isHi ? "सामान प्रकार:" : "Item Category:"}
                         </Label>
                         <select
+                          id="bk-item-type"
+                          aria-label={isHi ? "सामान का प्रकार चुनें" : "Select item category"}
                           value={itemType}
                           onChange={(e) => setItemType(e.target.value)}
-                          className="w-full mt-1.5 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white"
+                          className="w-full mt-1.5 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white cursor-pointer"
                         >
                           <option value="Suitcase & Luggage">Luggage / Trolley</option>
                           <option value="Carton Box / Books">Carton / Books</option>
@@ -468,13 +474,15 @@ export function BookingModal({
                   {service === "spaces" && (
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
                       <div>
-                        <Label className="text-xs">
+                        <Label htmlFor="bk-room-type" className="text-xs cursor-pointer">
                           {isHi ? "कमरे का प्रकार:" : "Room Preference:"}
                         </Label>
                         <select
+                          id="bk-room-type"
+                          aria-label={isHi ? "कमरे का प्रकार चुनें" : "Select room preference"}
                           value={roomType}
                           onChange={(e) => setRoomType(e.target.value as any)}
-                          className="w-full mt-1.5 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white"
+                          className="w-full mt-1.5 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white cursor-pointer"
                         >
                           <option value="single">Single Room (₹6,000/mo)</option>
                           <option value="shared">Shared Twin (₹4,500/mo)</option>
@@ -483,11 +491,13 @@ export function BookingModal({
                       </div>
 
                       <div>
-                        <Label className="text-xs">
+                        <Label htmlFor="bk-move-in" className="text-xs cursor-pointer">
                           {isHi ? "शिफ्टिंग तिथि:" : "Move-in Date:"}
                         </Label>
                         <Input
+                          id="bk-move-in"
                           type="date"
+                          aria-label={isHi ? "शिफ्टिंग तिथि" : "Move-in date"}
                           value={moveInDate}
                           onChange={(e) => setMoveInDate(e.target.value)}
                           className="mt-1.5 border-white/10 bg-black/60 text-xs text-white"
@@ -495,13 +505,15 @@ export function BookingModal({
                       </div>
 
                       <div>
-                        <Label className="text-xs">
+                        <Label htmlFor="bk-food-pref" className="text-xs cursor-pointer">
                           {isHi ? "भोजन सुविधा:" : "Tiffin Option:"}
                         </Label>
                         <select
+                          id="bk-food-pref"
+                          aria-label={isHi ? "भोजन सुविधा चुनें" : "Select tiffin option"}
                           value={foodPreference}
                           onChange={(e) => setFoodPreference(e.target.value)}
-                          className="w-full mt-1.5 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white"
+                          className="w-full mt-1.5 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white cursor-pointer"
                         >
                           <option value="with_food">With Token Meal Wallet</option>
                           <option value="without_food">Room Only (Self-Cook)</option>
@@ -514,13 +526,15 @@ export function BookingModal({
                   {service === "kitchen" && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                       <div>
-                        <Label className="text-xs">
+                        <Label htmlFor="bk-meal-plan" className="text-xs cursor-pointer">
                           {isHi ? "मील प्लान:" : "Meal Subscription Plan:"}
                         </Label>
                         <select
+                          id="bk-meal-plan"
+                          aria-label={isHi ? "मील प्लान चुनें" : "Select meal plan"}
                           value={mealPlan}
                           onChange={(e) => setMealPlan(e.target.value as any)}
-                          className="w-full mt-1.5 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white"
+                          className="w-full mt-1.5 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white cursor-pointer"
                         >
                           <option value="trial">Starter Trial (300 Tokens · ₹300)</option>
                           <option value="smart">Smart Hopper (625 Tokens · ₹599)</option>
@@ -530,13 +544,15 @@ export function BookingModal({
                       </div>
 
                       <div>
-                        <Label className="text-xs">
+                        <Label htmlFor="bk-diet-type" className="text-xs cursor-pointer">
                           {isHi ? "आहार प्राथमिकता:" : "Dietary Preference:"}
                         </Label>
                         <select
+                          id="bk-diet-type"
+                          aria-label={isHi ? "आहार प्राथमिकता चुनें" : "Select dietary preference"}
                           value={dietType}
                           onChange={(e) => setDietType(e.target.value)}
-                          className="w-full mt-1.5 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white"
+                          className="w-full mt-1.5 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white cursor-pointer"
                         >
                           <option value="Pure Vegetarian">Pure Vegetarian (Homestyle)</option>
                           <option value="Jain (No Onion/Garlic)">Jain (No Onion/Garlic)</option>
@@ -550,13 +566,15 @@ export function BookingModal({
                   {service === "connect" && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                       <div>
-                        <Label className="text-xs">
+                        <Label htmlFor="bk-connect-domain" className="text-xs cursor-pointer">
                           {isHi ? "सहयोग क्षेत्र:" : "Engagement Focus:"}
                         </Label>
                         <select
+                          id="bk-connect-domain"
+                          aria-label={isHi ? "सहयोग क्षेत्र चुनें" : "Select engagement focus"}
                           value={connectDomain}
                           onChange={(e) => setConnectDomain(e.target.value)}
-                          className="w-full mt-1.5 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white"
+                          className="w-full mt-1.5 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white cursor-pointer"
                         >
                           <option value="tech_assistance">
                             Smartphone & Tech Assistance for Seniors
@@ -569,13 +587,15 @@ export function BookingModal({
                       </div>
 
                       <div>
-                        <Label className="text-xs">
+                        <Label htmlFor="bk-hours-week" className="text-xs cursor-pointer">
                           {isHi ? "साप्ताहिक समय:" : "Weekly Commitment:"}
                         </Label>
                         <select
+                          id="bk-hours-week"
+                          aria-label={isHi ? "साप्ताहिक समय चुनें" : "Select weekly commitment"}
                           value={hoursPerWeek}
                           onChange={(e) => setHoursPerWeek(e.target.value)}
-                          className="w-full mt-1.5 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white"
+                          className="w-full mt-1.5 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white cursor-pointer"
                         >
                           <option value="2-3 hours/week">2–3 Hours / Week</option>
                           <option value="4-6 hours/week">4–6 Hours / Week</option>
@@ -589,13 +609,15 @@ export function BookingModal({
                   {service === "trust" && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                       <div>
-                        <Label className="text-xs">
+                        <Label htmlFor="bk-audit-type" className="text-xs cursor-pointer">
                           {isHi ? "ऑडिट प्रकार:" : "Verification Scope:"}
                         </Label>
                         <select
+                          id="bk-audit-type"
+                          aria-label={isHi ? "ऑडिट प्रकार चुनें" : "Select verification scope"}
                           value={auditType}
                           onChange={(e) => setAuditType(e.target.value)}
-                          className="w-full mt-1.5 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white"
+                          className="w-full mt-1.5 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white cursor-pointer"
                         >
                           <option value="host_safety_audit">
                             4-Tier Senior Host Safety & CCTV Audit
@@ -610,13 +632,15 @@ export function BookingModal({
                       </div>
 
                       <div>
-                        <Label className="text-xs">
+                        <Label htmlFor="bk-preferred-slot" className="text-xs cursor-pointer">
                           {isHi ? "सुविधाजनक स्लॉट:" : "Preferred Slot:"}
                         </Label>
                         <select
+                          id="bk-preferred-slot"
+                          aria-label={isHi ? "सुविधाजनक स्लॉट चुनें" : "Select preferred slot"}
                           value={preferredSlot}
                           onChange={(e) => setPreferredSlot(e.target.value)}
-                          className="w-full mt-1.5 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white"
+                          className="w-full mt-1.5 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white cursor-pointer"
                         >
                           <option value="Morning (10 AM - 1 PM)">
                             Morning (10:00 AM – 1:00 PM)
@@ -634,13 +658,15 @@ export function BookingModal({
                   {service === "micro" && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                       <div>
-                        <Label className="text-xs">
+                        <Label htmlFor="bk-monetize-asset" className="text-xs cursor-pointer">
                           {isHi ? "मोनेटाइज करने योग्य संपत्ति:" : "Space to Monetize:"}
                         </Label>
                         <select
+                          id="bk-monetize-asset"
+                          aria-label={isHi ? "मोनेटाइज करने योग्य संपत्ति चुनें" : "Select space to monetize"}
                           value={monetizeAsset}
                           onChange={(e) => setMonetizeAsset(e.target.value)}
-                          className="w-full mt-1.5 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white"
+                          className="w-full mt-1.5 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white cursor-pointer"
                         >
                           <option value="spare_room">Spare Bedroom (Earn ₹6,000–₹12,000/mo)</option>
                           <option value="storage_closet">
@@ -656,11 +682,13 @@ export function BookingModal({
                       </div>
 
                       <div>
-                        <Label className="text-xs">
+                        <Label htmlFor="bk-expected-rent" className="text-xs cursor-pointer">
                           {isHi ? "अपेक्षित मासिक आय (₹):" : "Expected Monthly Rent (₹):"}
                         </Label>
                         <Input
+                          id="bk-expected-rent"
                           type="number"
+                          aria-label={isHi ? "अपेक्षित मासिक आय" : "Expected monthly rent in rupees"}
                           value={expectedRent}
                           onChange={(e) => setExpectedRent(e.target.value)}
                           placeholder="8000"
@@ -806,14 +834,15 @@ export function BookingModal({
 
                   <div className="grid grid-cols-2 gap-2">
                     <div className="grid gap-1.5">
-                      <Label htmlFor="bk-city" className="text-xs">
+                      <Label htmlFor="bk-city" className="text-xs cursor-pointer">
                         {isHi ? "शहर" : "City"}
                       </Label>
                       <select
                         id="bk-city"
+                        aria-label={isHi ? "शहर चुनें" : "Select city"}
                         value={city}
                         onChange={(e) => setCity(e.target.value)}
-                        className="rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white"
+                        className="rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white cursor-pointer"
                       >
                         <option value="Kanpur">Kanpur</option>
                         <option value="Lucknow">Lucknow</option>

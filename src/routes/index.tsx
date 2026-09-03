@@ -19,7 +19,6 @@ import { WhatsAppReferralModal } from "@/components/stash/WhatsAppReferralModal"
 import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 import { BookingModal } from "@/components/stash/BookingModal";
 import { RoomListingModal } from "@/components/stash/RoomListingModal";
-import { TokenMealHub } from "@/components/TokenMealHub";
 import { RoleLane } from "@/components/stash/RoleLane";
 import { WhatsAppButton } from "@/components/stash/WhatsAppButton";
 import { ActivityTicker } from "@/components/stash/ActivityTicker";
@@ -104,11 +103,6 @@ function Index() {
       {/* 2. Interactive Calculator & Space Simulator Hub */}
       <ErrorBoundary>
         <CalculatorHub onBook={open} />
-      </ErrorBoundary>
-
-      {/* 2.5 Token Meal Engine Hub */}
-      <ErrorBoundary>
-        <TokenMealHub />
       </ErrorBoundary>
 
       {/* 3. 100% Radical Transparency & Custody Console Hub */}

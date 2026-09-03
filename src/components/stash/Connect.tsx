@@ -362,11 +362,11 @@ export function Connect(_props: { onBook: OpenBooking }) {
                 <UserCheck className="h-4 w-4" />
               </span>
               <div>
-                <h4 className="text-xs font-bold text-white">
+                <h3 className="text-xs font-bold text-white">
                   {isHi
                     ? "सत्यापित होस्ट मैच मिला: सुधा त्रिपाठी जी (स्वरूप नगर)"
                     : "Top Match Found: Sudha Tripathi Ji (Swaroop Nagar)"}
-                </h4>
+                </h3>
                 <p className="text-[11px] text-slate-300">
                   {isHi
                     ? "किराया: ₹3,200/माह · घर का शुद्ध भोजन · 100% शून्य ब्रोकरेज"

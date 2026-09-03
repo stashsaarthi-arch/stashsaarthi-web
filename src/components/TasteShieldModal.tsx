@@ -293,7 +293,7 @@ export const TasteShieldModal: React.FC<TasteShieldModalProps> = ({
                   <div className="text-[11px] text-slate-400 mt-1">1 Token = ₹1 • Available for your next thali</div>
                 </div>
 
-                <p className="text-xs text-slate-500 italic max-w-xs mx-auto mb-6">
+                <p className="text-xs text-slate-400 italic max-w-xs mx-auto mb-6">
                   {booking.vendorName} quality supervisor has received your photo proof for mess inspection.
                 </p>
               </div>
@@ -334,7 +334,7 @@ export const TasteShieldModal: React.FC<TasteShieldModalProps> = ({
                 <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[11px] font-bold uppercase tracking-wider flex items-center gap-1">
                   <Receipt className="w-3 h-3" /> Order Completed
                 </span>
-                <span className="text-xs text-slate-500">
+                <span className="text-xs text-slate-400">
                   {booking.tokensDebited} Tokens Debited
                 </span>
               </div>
@@ -566,7 +566,7 @@ export const TasteShieldModal: React.FC<TasteShieldModalProps> = ({
                     <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider">
                       Live Meal Photo Evidence <span className="text-rose-400">*</span>
                     </label>
-                    <span className="text-[10px] text-slate-500 flex items-center gap-1">
+                    <span className="text-xs text-slate-400 flex items-center gap-1">
                       <HelpCircle className="w-3 h-3" /> Real-time camera only
                     </span>
                   </div>
@@ -595,7 +595,7 @@ export const TasteShieldModal: React.FC<TasteShieldModalProps> = ({
                         <div className="text-[11px] text-slate-300 truncate mt-1">
                           {photoFile?.name || "live_camera_capture.jpg"}
                         </div>
-                        <div className="text-[10px] text-slate-500">
+                        <div className="text-xs text-slate-400">
                           {photoFile ? `${Math.round(photoFile.size / 1024)} KB` : "Verified snapshot"}
                         </div>
                       </div>
@@ -619,7 +619,7 @@ export const TasteShieldModal: React.FC<TasteShieldModalProps> = ({
                       <span>Capture Food Photo (Camera Required)</span>
                     </button>
                   )}
-                  <p className="text-[10px] text-slate-500 mt-1">
+                  <p className="text-xs text-slate-400 mt-1">
                     Uploads directly to StashSaarthi <code>review-proofs</code> bucket for verification audit.
                   </p>
                 </div>
@@ -628,7 +628,7 @@ export const TasteShieldModal: React.FC<TasteShieldModalProps> = ({
 
             {/* Action Bar */}
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3">
-              <div className="text-xs text-slate-500">
+              <div className="text-xs text-slate-400">
                 {rating <= 2 ? (
                   <span>
                     Claiming for <strong>{booking.userPhone}</strong>

@@ -111,15 +111,16 @@ export function ProfileModal({ open, onOpenChange }: ProfileModalProps) {
               {isHi ? "ईमेल पता" : "Email Address"}
             </label>
             <div className="relative flex items-center">
-              <Mail className="absolute left-3.5 h-4 w-4 text-slate-500 pointer-events-none" />
+              <Mail className="absolute left-3.5 h-4 w-4 text-slate-400 pointer-events-none" />
               <Input
                 value={user?.email || ""}
                 disabled
-                className="pl-10 bg-black/30 border-white/5 text-slate-400 rounded-lg text-sm cursor-not-allowed"
+                aria-label={isHi ? "ईमेल पता" : "Email Address"}
+                className="pl-10 bg-black/30 border-white/5 text-slate-300 rounded-lg text-sm cursor-not-allowed"
               />
             </div>
             {user?.provider === "google" && (
-              <p className="text-[10px] text-slate-500 mt-1 flex items-center gap-1">
+              <p className="text-xs text-slate-400 mt-1 flex items-center gap-1">
                 <Info className="h-3 w-3" />
                 {isHi ? "ईमेल गूगल द्वारा प्रबंधित है।" : "Email is managed by Google."}
               </p>

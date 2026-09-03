@@ -34,7 +34,7 @@ export function DualCrisis() {
           {t.crisis.titlePart1}
           <span className="text-gradient">{t.crisis.titlePart2}</span>
         </h2>
-        <p className="mt-1 text-[11px] text-muted-foreground sm:text-xs">{t.crisis.subtitle}</p>
+        <p className="mt-1 text-xs text-muted-foreground">{t.crisis.subtitle}</p>
       </div>
 
       <div className="mt-3 sm:mt-4">
@@ -84,7 +84,7 @@ export function DualCrisis() {
                     style={{ background: "var(--amber)" }}
                   />
                   <div className="relative">
-                    <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald/30 bg-emerald/10 px-2 py-0.5 text-[8.5px] font-bold uppercase tracking-[0.18em] text-emerald">
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald/30 bg-emerald/10 px-2 py-0.5 text-xs font-bold uppercase tracking-wider text-emerald">
                       <Sparkles className="h-2.5 w-2.5" /> {t.crisis.fusionComplete}
                     </span>
                     <h3 className="mt-2 text-lg font-extrabold tracking-tight sm:text-2xl">
@@ -97,7 +97,7 @@ export function DualCrisis() {
                           initial={{ opacity: 0, y: 8 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: 0.05 + i * 0.04 }}
-                          className="rounded-lg border border-white/10 bg-white/[0.04] p-2.5 text-[11px] leading-relaxed text-muted-foreground"
+                          className="rounded-lg border border-white/10 bg-white/[0.04] p-2.5 text-xs leading-relaxed text-muted-foreground"
                         >
                           {f}
                         </motion.li>
@@ -116,7 +116,7 @@ export function DualCrisis() {
           data-magnetic
           variant={merged ? "frost" : "hero"}
           size="default"
-          className="w-full sm:w-auto text-xs py-1.5 h-8"
+          className="w-full sm:w-auto text-xs py-2 px-4 h-9 cursor-pointer"
           onClick={() => setMerged((m) => !m)}
         >
           {merged ? (
@@ -166,7 +166,7 @@ function CrisisCard({
           {items.map((t) => (
             <li
               key={t}
-              className="rounded-lg border border-white/10 bg-white/[0.03] px-2.5 py-1.5 text-[11px] text-muted-foreground transition-transform duration-200 hover:translate-x-1"
+              className="rounded-lg border border-white/10 bg-white/[0.03] px-2.5 py-1.5 text-xs text-muted-foreground transition-transform duration-200 hover:translate-x-1"
             >
               {t}
             </li>

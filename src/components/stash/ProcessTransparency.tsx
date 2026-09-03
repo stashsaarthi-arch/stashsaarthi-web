@@ -278,9 +278,9 @@ export function ProcessTransparency() {
                   <CheckCircle2 className="h-5 w-5" />
                 </div>
                 <div>
-                  <h4 className="text-lg font-bold text-emerald-300">
+                  <h3 className="text-lg font-bold text-emerald-300">
                     {isHi ? "हम क्या करते हैं (गारंटी)" : "What StashSaarthi DOES"}
-                  </h4>
+                  </h3>
                   <span className="text-xs text-emerald-400/80 font-mono">
                     {isHi ? "100% सत्यापित एवं प्रतिबद्ध" : "Deterministic & Certified"}
                   </span>
@@ -306,9 +306,9 @@ export function ProcessTransparency() {
                   <XCircle className="h-5 w-5" />
                 </div>
                 <div>
-                  <h4 className="text-lg font-bold text-red-300">
+                  <h3 className="text-lg font-bold text-red-300">
                     {isHi ? "हम क्या नहीं करते (सख्त सीमाएं)" : "What We DO NOT Do"}
-                  </h4>
+                  </h3>
                   <span className="text-xs text-red-400/80 font-mono">
                     {isHi ? "शून्य डार्क पैटर्न" : "Zero Dark Patterns"}
                   </span>

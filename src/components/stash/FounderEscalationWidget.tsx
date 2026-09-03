@@ -50,7 +50,7 @@ export function FounderEscalationWidget() {
                 />
                 <div>
                   <div className="flex items-center gap-1.5">
-                    <h4 className="text-xs font-bold text-white">Advik Omer</h4>
+                    <span className="text-xs font-bold text-white">Advik Omer</span>
                     <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" />
                   </div>
                   <p className="text-[10px] text-emerald-400 font-mono">

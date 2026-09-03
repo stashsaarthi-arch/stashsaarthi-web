@@ -70,32 +70,31 @@ export function Hero({
           ease="power3.out"
           delay={0.05}
         >
-          <div className="mb-2 flex justify-center">
+          <div className="mb-2 flex items-center justify-center gap-2 flex-wrap">
             <LiveChangelogBadge />
-          </div>
-
-          <span
-            className="glass mx-auto inline-flex max-w-full items-center gap-2 rounded-full px-3 py-1.5 text-[9px] font-semibold uppercase leading-tight tracking-[0.14em] sm:px-4 sm:text-[11px] sm:tracking-[0.18em]"
-            style={{ color: student ? "var(--destructive)" : "var(--muted-foreground)" }}
-          >
-            {student ? (
-              <span className="relative flex h-2.5 w-2.5 shrink-0">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-destructive opacity-60" />
-                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-destructive" />
+            <span
+              className="glass inline-flex max-w-full items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold leading-tight sm:px-3.5"
+              style={{ color: student ? "var(--destructive)" : "var(--muted-foreground)" }}
+            >
+              {student ? (
+                <span className="relative flex h-2 w-2 shrink-0">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-destructive opacity-60" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-destructive" />
+                </span>
+              ) : (
+                <BadgeCheck className="h-3.5 w-3.5 shrink-0 text-emerald" />
+              )}
+              <span className="text-balance">
+                {student ? t.hero.student.badge : t.hero.host.badge}
               </span>
-            ) : (
-              <BadgeCheck className="h-3.5 w-3.5 shrink-0 text-emerald" />
-            )}
-            <span className="text-balance">
-              {student ? t.hero.student.badge : t.hero.host.badge}
             </span>
-          </span>
+          </div>
 
           <h1
             key={`h-${role}`}
-            className="mx-auto mt-2.5 max-w-4xl text-balance text-[1.8rem] font-extrabold leading-[1.08] tracking-tight sm:text-4xl md:text-5xl"
+            className="mx-auto mt-2 max-w-4xl text-balance text-2xl font-extrabold leading-[1.1] tracking-tight sm:text-4xl md:text-5xl"
           >
-            <span className="block text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-emerald mb-1.5">
+            <span className="block text-xs font-bold tracking-wider text-emerald mb-1.5">
               StashSaarthi Living & Storage
             </span>
             <span className="text-gradient">
@@ -235,7 +234,7 @@ export function Hero({
               className={`absolute -inset-1 bg-gradient-to-r ${student ? "from-cyan-500/0 via-cyan-500/10 to-cyan-500/0" : "from-amber-500/0 via-amber-500/10 to-amber-500/0"} opacity-50 blur-xl animate-pulse`}
             />
 
-            <p className="relative z-10 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-0.5 text-[9.5px] sm:text-[10.5px] font-semibold tracking-wider text-muted-foreground uppercase">
+            <p className="relative z-10 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-0.5 text-xs font-semibold text-muted-foreground">
               <span
                 className={`flex items-center ${student ? "text-amber-400" : "text-amber-300"}`}
               >
@@ -265,11 +264,11 @@ export function Hero({
           <a
             href="#role-lane"
             onClick={smoothScrollTo("role-lane")}
-            className="group flex flex-col items-center gap-1 cursor-pointer select-none text-muted-foreground/60 hover:text-white transition-all"
+            className="group flex flex-col items-center gap-1 cursor-pointer select-none text-slate-300 hover:text-white transition-all"
             aria-label="Scroll down to explore features"
           >
-            <span className="text-[8.5px] font-mono uppercase tracking-[0.2em] transition-colors group-hover:text-emerald-400">
-              {t.nav?.explore || "SCROLL TO EXPLORE"}
+            <span className="text-xs font-mono uppercase tracking-[0.15em] transition-colors group-hover:text-emerald-400">
+              {t.nav?.explore || "EXPLORE OUR SERVICES"}
             </span>
             <div className="relative h-6 w-3.5 rounded-full border border-white/20 p-0.5 group-hover:border-emerald-400/60 transition-colors backdrop-blur-md bg-black/40">
               <motion.div

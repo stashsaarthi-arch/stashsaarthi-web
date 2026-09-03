@@ -130,9 +130,9 @@ export function Navbar({
                     e.preventDefault();
                     smoothScrollTo(l.href.replace(/^#/, ""))(e);
                   }}
-                  className="whitespace-nowrap rounded-lg px-1.5 min-[1650px]:px-2.5 py-1.5 text-[11px] min-[1650px]:text-xs font-medium text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground shrink-0 flex items-center gap-1"
+                  className="whitespace-nowrap rounded-lg px-1.5 min-[1650px]:px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground shrink-0 flex items-center gap-1"
                 >
-                  <span className="text-[11px] min-[1650px]:text-xs">{l.icon}</span>
+                  <span className="text-xs">{l.icon}</span>
                   <span>{label}</span>
                 </a>
               );
@@ -155,7 +155,7 @@ export function Navbar({
             >
               <span>🎓</span>
               <span>{isHi ? "छात्र" : "Student"}</span>
-              <span className="opacity-80 text-[10px]">{isHi ? "₹6.4k बचत" : "Save ₹6.4k"}</span>
+              <span className="opacity-80 text-xs">({isHi ? "₹6.4k बचत" : "Save ₹6.4k"})</span>
             </button>
             <button
               type="button"
@@ -168,7 +168,7 @@ export function Navbar({
             >
               <span>🏡</span>
               <span>{isHi ? "होस्ट" : "Host"}</span>
-              <span className="opacity-80 text-[10px]">{isHi ? "₹11.5k आय" : "Earn ₹11.5k"}</span>
+              <span className="opacity-80 text-xs">({isHi ? "₹11.5k आय" : "Earn ₹11.5k"})</span>
             </button>
           </div>
 
@@ -177,7 +177,7 @@ export function Navbar({
             <button
               type="button"
               onClick={() => setLanguage("en")}
-              className={`rounded-full px-1.5 py-0.5 text-[9px] sm:text-xs font-bold transition-colors ${
+              className={`rounded-full px-2 py-0.5 text-xs font-bold transition-colors ${
                 language === "en"
                   ? "bg-white/15 text-white"
                   : "text-muted-foreground hover:text-white"
@@ -188,7 +188,7 @@ export function Navbar({
             <button
               type="button"
               onClick={() => setLanguage("hi")}
-              className={`rounded-full px-1.5 py-0.5 text-[9px] sm:text-xs font-bold transition-colors ${
+              className={`rounded-full px-2 py-0.5 text-xs font-bold transition-colors ${
                 language === "hi"
                   ? "bg-white/15 text-white"
                   : "text-muted-foreground hover:text-white"
@@ -232,7 +232,7 @@ export function Navbar({
           <button
             type="button"
             onClick={role === "student" ? onBook : onListRoom}
-            className={`px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-xl text-[10px] sm:text-sm font-bold whitespace-nowrap transition-all shrink-0 cursor-pointer ${
+            className={`px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all shrink-0 cursor-pointer ${
               role === "student"
                 ? "bg-emerald-500 hover:bg-emerald-400 text-black shadow-md shadow-emerald-500/20 active:scale-95"
                 : "bg-amber-500 hover:bg-amber-400 text-black shadow-md shadow-amber-500/20 active:scale-95"

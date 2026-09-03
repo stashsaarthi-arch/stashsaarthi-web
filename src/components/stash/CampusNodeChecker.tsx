@@ -310,7 +310,7 @@ export function CampusNodeChecker({ onBook }: { onBook: OpenBooking }) {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
               </span>
-              <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider">
+              <span className="text-xs font-bold text-emerald-400">
                 {t.campusNodeChecker.liveNetwork}
               </span>
             </div>
@@ -339,7 +339,7 @@ export function CampusNodeChecker({ onBook }: { onBook: OpenBooking }) {
                     exit={{ opacity: 0, height: 0 }}
                     className="px-5 pb-5 pt-3"
                   >
-                    <p className="text-xs text-muted-foreground mb-3 font-medium uppercase tracking-wider">
+                    <p className="text-xs text-muted-foreground mb-2.5 font-medium">
                       {t.campusNodeChecker.popularHubs}
                     </p>
                     <div className="flex flex-wrap gap-2">
@@ -390,9 +390,9 @@ export function CampusNodeChecker({ onBook }: { onBook: OpenBooking }) {
                           <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                             <div>
                               <div className="flex items-center gap-1.5 flex-wrap">
-                                <h4 className="text-sm font-bold text-foreground">
+                                <h3 className="text-sm font-bold text-foreground">
                                   {isHi && node.name_hi ? node.name_hi : node.name}
-                                </h4>
+                                </h3>
                                 <span className="inline-flex items-center rounded bg-emerald-500/20 px-1.5 py-0.5 text-[9px] font-bold text-emerald-400">
                                   ★ {node.rating}
                                 </span>

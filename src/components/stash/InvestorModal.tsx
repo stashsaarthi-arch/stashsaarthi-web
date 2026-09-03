@@ -120,7 +120,8 @@ export function InvestorModal({ open, onOpenChange }: InvestorModalProps) {
                       ? "एक्सेस की दर्ज करें (उदा. STASH2026)"
                       : "Enter Access Key (e.g. STASH2026)"
                   }
-                  className="pl-10 pr-10 py-5 bg-black/50 border-white/10 text-white rounded-xl placeholder:text-slate-500 font-mono text-sm focus-visible:ring-amber-500/50"
+                  aria-label={isHi ? "निवेशक एक्सेस की" : "Investor access key"}
+                  className="pl-10 pr-10 py-5 bg-black/50 border-white/10 text-white rounded-xl placeholder:text-slate-400 font-mono text-sm focus-visible:ring-amber-500/50"
                   autoFocus
                 />
                 <button

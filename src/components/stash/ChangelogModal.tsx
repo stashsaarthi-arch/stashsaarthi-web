@@ -263,10 +263,10 @@ export function LiveChangelogBadge({ className = "" }: { className?: string }) {
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
           <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
         </span>
-        <span className="font-mono text-[11px] font-semibold text-emerald-300">
+        <span className="font-mono text-xs font-semibold text-emerald-300">
           {isHi ? "सक्रिय विकास • v1.0 लाइव" : "Active Development • v1.0 Live"}
         </span>
-        <span className="text-[10px] text-muted-foreground transition-transform group-hover:translate-x-0.5">
+        <span className="text-xs text-muted-foreground transition-transform group-hover:translate-x-0.5">
           →
         </span>
       </button>

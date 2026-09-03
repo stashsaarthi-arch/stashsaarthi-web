@@ -198,13 +198,13 @@ export function PackingChecklistModal({
                   {isDone ? (
                     <CheckSquare className="h-5 w-5 fill-emerald-500 text-black" />
                   ) : (
-                    <Square className="h-5 w-5 text-slate-500" />
+                    <Square className="h-5 w-5 text-slate-400" />
                   )}
                 </button>
                 <div className="flex-1 text-left">
-                  <h4 className={`text-xs font-bold ${isDone ? "text-white" : "text-slate-300"}`}>
+                  <h3 className={`text-xs font-bold ${isDone ? "text-white" : "text-slate-300"}`}>
                     {item.title}
-                  </h4>
+                  </h3>
                   <p className="text-[11px] text-slate-400 mt-0.5 leading-relaxed">{item.desc}</p>
                 </div>
               </div>

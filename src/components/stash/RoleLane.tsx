@@ -91,13 +91,13 @@ export function RoleLane({ role, onBook }: { role: Role; onBook: OpenBooking }) 
                       className="rounded-lg border border-white/10 bg-white/5 p-2.5 sm:p-3"
                     >
                       <div className="flex items-center gap-1.5">
-                        <span className="grid h-6 w-6 place-items-center rounded-md bg-[image:var(--gradient-cyan)] text-[10px] font-black text-primary-foreground">
+                        <span className="grid h-6 w-6 place-items-center rounded-md bg-[image:var(--gradient-cyan)] text-xs font-black text-primary-foreground">
                           {i + 1}
                         </span>
                         <Icon className="h-3 w-3 text-cyan" />
                       </div>
                       <div className="mt-1.5 text-xs font-semibold sm:text-sm">{s.title}</div>
-                      <p className="mt-0.5 text-[10.5px] leading-relaxed text-muted-foreground">{s.text}</p>
+                      <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">{s.text}</p>
                     </motion.div>
                   );
                 })}
@@ -113,7 +113,7 @@ export function RoleLane({ role, onBook }: { role: Role; onBook: OpenBooking }) 
                         value={m.value}
                         className="text-sm font-extrabold tracking-tight sm:text-base"
                       />
-                      <div className="mt-0.5 text-[8.5px] uppercase tracking-wider text-muted-foreground">
+                      <div className="mt-0.5 text-xs text-muted-foreground">
                         {m.label}
                       </div>
                     </div>
@@ -131,14 +131,14 @@ export function RoleLane({ role, onBook }: { role: Role; onBook: OpenBooking }) 
                   </div>
 
                   <div className="mb-1.5 flex justify-between items-end">
-                    <div className="text-[10px] text-muted-foreground uppercase tracking-wider font-semibold">
+                    <div className="text-xs text-muted-foreground font-semibold">
                       {t.roleLane.host.simulator.selectSpace}
                     </div>
                     <div className="text-right">
                       <div className="text-sm font-bold text-emerald-400 font-mono tracking-tight sm:text-base">
                         {currentEarning.amount}
                       </div>
-                      <div className="text-[8px] text-muted-foreground uppercase tracking-widest">
+                      <div className="text-xs text-muted-foreground">
                         {currentEarning.label}
                       </div>
                     </div>
@@ -152,7 +152,7 @@ export function RoleLane({ role, onBook }: { role: Role; onBook: OpenBooking }) 
                     onValueChange={(vals) => setHostSpace(vals?.[0] ?? 33)}
                   />
 
-                  <div className="flex justify-between text-[8.5px] font-medium text-muted-foreground mt-0.5">
+                  <div className="flex justify-between text-xs font-medium text-muted-foreground mt-1">
                     <span>{t.roleLane.host.simulator.corner}</span>
                     <span>{t.roleLane.host.simulator.verandah}</span>
                     <span>{t.roleLane.host.simulator.fullRoom}</span>

@@ -82,7 +82,7 @@ export function ReferralPill({ userType = "student" }: { userType?: "student" | 
             </AnimatePresence>
           </div>
           <div>
-            <h4
+            <h3
               className={`text-sm font-semibold ${userType === "host" ? "text-amber-300" : "text-emerald-300"}`}
             >
               {userType === "host"
@@ -92,7 +92,7 @@ export function ReferralPill({ userType = "student" }: { userType?: "student" | 
                 : isHi
                   ? "रेफर करें और 1 महीना मुफ्त पाएं"
                   : "Refer & Earn 1 Month FREE"}
-            </h4>
+            </h3>
             <p className="text-xs text-slate-400">
               {userType === "host"
                 ? isHi

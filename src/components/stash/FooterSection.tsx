@@ -614,13 +614,13 @@ export function FooterSection() {
 
         <div>
           <h3 className="text-xs font-bold uppercase tracking-wider text-white">{isHi ? "इकोसिस्टम" : "Ecosystem"}</h3>
-          <ul className="mt-3 space-y-1.5 text-xs">
+          <ul className="mt-3 space-y-1 text-xs">
             {ECOSYSTEM.map((l) => (
               <li key={l.label}>
                 <a
                   href={`#${l.target}`}
                   onClick={smoothScrollTo(l.target)}
-                  className="text-muted-foreground transition hover:text-cyan"
+                  className="min-h-[28px] inline-flex items-center text-muted-foreground transition hover:text-cyan py-0.5"
                 >
                   {l.label}
                 </a>
@@ -630,7 +630,7 @@ export function FooterSection() {
               <a
                 href="#rooms"
                 onClick={smoothScrollTo("rooms")}
-                className="text-muted-foreground transition hover:text-cyan"
+                className="min-h-[28px] inline-flex items-center text-muted-foreground transition hover:text-cyan py-0.5"
               >
                 {isHi ? "सत्यापित कमरे" : "Verified Rooms"}
               </a>
@@ -648,7 +648,7 @@ export function FooterSection() {
             ? "© 2026 StashSaarthi Technologies. 100% प्रामाणिक पारदर्शिता के साथ कानपुर, उत्तर प्रदेश में निर्मित।"
             : "© 2026 StashSaarthi Technologies. Built with radical honesty & physical accountability in Kanpur, Uttar Pradesh, India."}
         </p>
-        <p className="text-[10px] text-muted-foreground/80 font-mono">
+        <p className="text-xs text-muted-foreground font-mono">
           {isHi
             ? "नोडल परिचालन कार्यालय: 117/के-ब्लॉक, कल्याणपुर, कानपुर — 208016 | सीधा ईमेल: stashsaarthi@gmail.com"
             : "Operational Hub: 117/K-Block, Kalyanpur, Kanpur — 208016 | Direct Email: stashsaarthi@gmail.com"}
@@ -673,14 +673,14 @@ function DocCol({
 }) {
   return (
     <div>
-      <h3 className="text-sm font-bold">{title}</h3>
-      <ul className="mt-4 space-y-2.5">
+      <h3 className="text-sm font-bold text-white">{title}</h3>
+      <ul className="mt-4 space-y-1.5">
         {links.map((l) => (
           <li key={l.label}>
             <button
               type="button"
               onClick={() => onOpen(l.doc)}
-              className="text-left text-sm text-muted-foreground transition hover:text-cyan cursor-pointer"
+              className="text-left text-sm text-muted-foreground transition hover:text-cyan cursor-pointer min-h-[28px] inline-flex items-center py-0.5"
             >
               {l.label}
             </button>

@@ -712,13 +712,15 @@ export function FeedbackSuggestions() {
                         </div>
 
                         <div>
-                          <label className="block text-[11px] font-bold text-zinc-300 mb-1">
+                          <label htmlFor="feedback-role-select" className="block text-xs font-bold text-zinc-300 mb-1 cursor-pointer">
                             {isHi ? "आपकी भूमिका" : "Your Role"}
                           </label>
                           <select
+                            id="feedback-role-select"
+                            aria-label={isHi ? "आपकी भूमिका चुनें" : "Select your role"}
                             value={formRole}
                             onChange={(e) => setFormRole(e.target.value)}
-                            className="w-full text-xs rounded-lg bg-[#172027] border border-white/15 p-2 text-white h-9 focus:outline-none focus:border-emerald-400"
+                            className="w-full text-xs rounded-lg bg-[#172027] border border-white/15 p-2 text-white h-9 focus:outline-none focus:border-emerald-400 cursor-pointer"
                           >
                             <option value="Student">{isHi ? "🎓 छात्र / Student" : "🎓 Student"}</option>
                             <option value="Senior Host">
@@ -732,13 +734,15 @@ export function FeedbackSuggestions() {
                         </div>
 
                         <div>
-                          <label className="block text-[11px] font-bold text-zinc-300 mb-1">
+                          <label htmlFor="feedback-service-select" className="block text-xs font-bold text-zinc-300 mb-1 cursor-pointer">
                             {isHi ? "उपयोग की गई सेवा" : "Service Used"}
                           </label>
                           <select
+                            id="feedback-service-select"
+                            aria-label={isHi ? "उपयोग की गई सेवा चुनें" : "Select service used"}
                             value={formService}
                             onChange={(e) => setFormService(e.target.value as any)}
-                            className="w-full text-xs rounded-lg bg-[#172027] border border-white/15 p-2 text-white h-9 focus:outline-none focus:border-emerald-400"
+                            className="w-full text-xs rounded-lg bg-[#172027] border border-white/15 p-2 text-white h-9 focus:outline-none focus:border-emerald-400 cursor-pointer"
                           >
                             <option value="stash">
                               {isHi ? "📦 वेकेशन स्टोरेज (₹300/mo)" : "📦 Vacation Storage"}
@@ -882,9 +886,9 @@ export function FeedbackSuggestions() {
                       </div>
 
                       {/* Headline */}
-                      <h4 className="text-sm sm:text-base font-bold text-white mb-1.5 group-hover:text-emerald-300 transition-colors">
+                      <h3 className="text-sm sm:text-base font-bold text-white mb-1.5 group-hover:text-emerald-300 transition-colors">
                         "{isHi && rev.title_hi ? rev.title_hi : rev.title}"
-                      </h4>
+                      </h3>
 
                       {/* Review Comment */}
                       <p className="text-xs text-zinc-300 leading-relaxed mb-3">
@@ -895,14 +899,14 @@ export function FeedbackSuggestions() {
                     {/* Author & Verification */}
                     <div className="pt-3 border-t border-white/[0.08] flex items-center justify-between gap-2 text-xs">
                       <div className="flex items-center gap-2.5 min-w-0">
-                        <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-emerald-600 to-teal-600 flex items-center justify-center text-white font-extrabold text-[11px] shrink-0 shadow-inner">
+                        <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-emerald-600 to-teal-600 flex items-center justify-center text-white font-extrabold text-xs shrink-0 shadow-inner">
                           {rev.name.charAt(0)}
                         </div>
                         <div className="min-w-0">
                           <p className="font-bold text-white truncate text-xs">
                             {isHi && rev.name_hi ? rev.name_hi : rev.name}
                           </p>
-                          <p className="text-[10px] text-zinc-400 truncate">
+                          <p className="text-xs text-zinc-400 truncate">
                             {isHi && rev.role_hi ? rev.role_hi : rev.role} •{" "}
                             {isHi && rev.campusOrLocality_hi
                               ? rev.campusOrLocality_hi
@@ -913,12 +917,12 @@ export function FeedbackSuggestions() {
 
                       <div className="text-right shrink-0">
                         {rev.verified && (
-                          <div className="inline-flex items-center gap-1 text-[10px] text-emerald-400 font-bold bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/25">
-                            <CheckCircle2 className="w-2.5 h-2.5" />
+                          <div className="inline-flex items-center gap-1 text-xs text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/25">
+                            <CheckCircle2 className="w-3 h-3" />
                             <span>{rev.passId || (isHi ? "सत्यापित" : "Verified")}</span>
                           </div>
                         )}
-                        <p className="text-[9px] text-zinc-500 mt-0.5">{rev.date}</p>
+                        <p className="text-xs text-zinc-400 mt-0.5">{rev.date}</p>
                       </div>
                     </div>
                   </motion.div>
@@ -1029,13 +1033,15 @@ export function FeedbackSuggestions() {
                     <form onSubmit={handleSuggestionSubmit} className="space-y-3">
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
                         <div>
-                          <label className="block text-[11px] font-bold text-zinc-300 mb-1">
+                          <label htmlFor="suggestion-category-select" className="block text-xs font-bold text-zinc-300 mb-1 cursor-pointer">
                             {isHi ? "आइडिया की श्रेणी" : "Category"}
                           </label>
                           <select
+                            id="suggestion-category-select"
+                            aria-label={isHi ? "आइडिया की श्रेणी चुनें" : "Select suggestion category"}
                             value={sugCategory}
                             onChange={(e) => setSugCategory(e.target.value as any)}
-                            className="w-full text-xs rounded-lg bg-[#172027] border border-white/15 p-2 text-white h-9 focus:outline-none focus:border-cyan-400"
+                            className="w-full text-xs rounded-lg bg-[#172027] border border-white/15 p-2 text-white h-9 focus:outline-none focus:border-cyan-400 cursor-pointer"
                           >
                             <option value="app">
                               {isHi ? "📱 ऐप व यूआई" : "📱 App & UI Design"}
@@ -1177,9 +1183,9 @@ export function FeedbackSuggestions() {
                       </div>
 
                       {/* Title */}
-                      <h4 className="text-sm sm:text-base font-bold text-white mb-1.5 group-hover:text-cyan-300 transition-colors">
+                      <h3 className="text-sm sm:text-base font-bold text-white mb-1.5 group-hover:text-cyan-300 transition-colors">
                         {isHi && sug.title_hi ? sug.title_hi : sug.title}
-                      </h4>
+                      </h3>
 
                       {/* Description */}
                       <p className="text-xs text-zinc-300 leading-relaxed mb-3">
@@ -1194,7 +1200,7 @@ export function FeedbackSuggestions() {
                           {isHi ? "प्रेषक:" : "By:"}{" "}
                           <span className="text-white">{sug.submittedBy}</span>
                         </p>
-                        <p className="text-[10px] text-zinc-500 truncate">{sug.locality}</p>
+                        <p className="text-xs text-zinc-400 truncate">{sug.locality}</p>
                       </div>
 
                       <button
@@ -1209,7 +1215,7 @@ export function FeedbackSuggestions() {
                       >
                         <ThumbsUp className={`w-3.5 h-3.5 ${hasVoted ? "fill-current" : ""}`} />
                         <span>{sug.upvotes}</span>
-                        <span className="text-[9px] opacity-80 hidden sm:inline">
+                        <span className="text-xs opacity-80 hidden sm:inline">
                           {hasVoted ? (isHi ? "वोटेड" : "Voted") : isHi ? "अपवोट" : "Upvote"}
                         </span>
                       </button>
@@ -1228,11 +1234,11 @@ export function FeedbackSuggestions() {
               <MessageCircle className="w-5 h-5" />
             </div>
             <div>
-              <h4 className="text-sm sm:text-base font-bold text-white">
+              <h3 className="text-sm sm:text-base font-bold text-white">
                 {isHi
                   ? "फाउंडर से सीधे व्हाट्सएप पर बात करना चाहते हैं?"
                   : "Want to share urgent suggestions directly with the founder?"}
-              </h4>
+              </h3>
               <p className="text-xs text-zinc-400">
                 {isHi
                   ? `फाउंडर अद्विक ओमर को सीधे व्हाट्सएप मैसेज भेजें (${FOUNDER_PHONE_DISPLAY})`

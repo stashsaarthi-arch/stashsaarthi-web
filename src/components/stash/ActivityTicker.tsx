@@ -212,19 +212,20 @@ export function ActivityTicker() {
                 <span className="text-[11px] text-slate-300">{action}</span>
               </div>
               <div className="flex items-center gap-1 text-[11px] text-slate-400 mt-0.5">
-                <MapPin className="h-3 w-3 shrink-0 text-slate-500" />
+                <MapPin className="h-3 w-3 shrink-0 text-slate-400" />
                 <span className="truncate">{detail}</span>
               </div>
-              <div className="flex items-center justify-between mt-2 pt-1.5 border-t border-white/5 text-[10px]">
+              <div className="flex items-center justify-between mt-2 pt-1.5 border-t border-white/5 text-xs">
                 <span className={`font-mono font-bold ${accentStyles.text}`}>{badge}</span>
-                <span className="text-slate-500 font-mono">{timeAgo}</span>
+                <span className="text-slate-400 font-mono">{timeAgo}</span>
               </div>
             </div>
 
             {/* Dismiss button */}
             <button
               onClick={handleDismiss}
-              className="absolute top-2.5 right-2.5 text-slate-500 hover:text-slate-300 transition-colors p-1 rounded-md hover:bg-white/5 cursor-pointer"
+              aria-label={isHi ? "लाइव अपडेट हटाएं" : "Dismiss live updates"}
+              className="absolute top-2.5 right-2.5 text-slate-400 hover:text-slate-200 transition-colors p-1 rounded-md hover:bg-white/5 cursor-pointer"
               title={isHi ? "हटाएं" : "Dismiss live updates"}
             >
               <X className="h-3.5 w-3.5" />

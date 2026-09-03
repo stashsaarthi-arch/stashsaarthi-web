@@ -3,6 +3,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { logSupabaseError } from "@/lib/supabaseLogger";
 import { toast } from 'sonner';
 import { TasteShieldModal } from './TasteShieldModal';
+import { ShieldCheck } from 'lucide-react';
 
 type FulfillmentType = 'DineIn_Pickup' | 'RoomDelivery';
 
@@ -278,11 +279,11 @@ export const TokenMealHub: React.FC = () => {
                                 className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-950 border border-emerald-500/40 hover:border-emerald-400 text-emerald-300 text-xs font-bold transition-all hover:scale-105 cursor-pointer shadow-sm"
                             >
                                 <span>🛡️ 50% Taste Shield</span>
-                                <span className="text-[10px] px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-300 font-mono font-bold">1 Claim/Mo</span>
+                                <span className="text-xs px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono font-bold">1 Claim/Mo</span>
                             </button>
                         </div>
                         <h2 className="text-3xl font-extrabold tracking-tight text-white">
-                            Hyperlocal <span className="text-emerald-400">Token Meal Engine</span>
+                            Hyperlocal <span className="text-emerald-400">Home-Cooked Meals</span>
                         </h2>
                         <p className="text-sm text-slate-400 mt-2 max-w-xl">
                             Zero monthly lock-ins. Pick up yourself for free or get it delivered to your room for +10 tokens. 1 Token = ₹1.
@@ -337,17 +338,17 @@ export const TokenMealHub: React.FC = () => {
 
                     <div className="mt-4 pt-4 border-t border-slate-800">
                         <span className="text-xs text-slate-400 block mb-2 font-medium">Quick Top-Up Packages:</span>
-                        <div className="grid grid-cols-2 gap-2">
+                        <div className="grid grid-cols-2 gap-2.5">
                             {RECHARGE_PACKS.map((pack) => (
                                 <button
                                     key={pack.id}
                                     type="button"
                                     onClick={() => handleQuickRecharge(pack.tokens, pack.price)}
-                                    className={`p-2 text-center rounded-xl bg-slate-950 border transition-all text-xs cursor-pointer ${pack.recommended ? 'border-emerald-500/50 hover:bg-emerald-500/10' : 'border-slate-800 hover:border-slate-700 hover:bg-slate-800/50'}`}
+                                    className={`p-3 sm:py-3.5 text-center rounded-xl bg-slate-950 border transition-all text-xs cursor-pointer flex flex-col justify-between ${pack.recommended ? 'border-emerald-500/50 hover:bg-emerald-500/10' : 'border-slate-800 hover:border-slate-700 hover:bg-slate-800/50'}`}
                                 >
-                                    <div className="font-bold text-white">+{pack.tokens} Tokens</div>
-                                    <div className="text-[10px] text-emerald-400 font-medium">₹{pack.price}</div>
-                                    <div className="text-[9px] text-slate-500 mt-0.5">{pack.desc}</div>
+                                    <div className="font-bold text-white text-xs">+{pack.tokens} Tokens</div>
+                                    <div className="text-xs text-emerald-400 font-semibold mt-1">₹{pack.price}</div>
+                                    <div className="text-xs text-slate-400 mt-1">{pack.desc}</div>
                                 </button>
                             ))}
                         </div>
@@ -356,15 +357,15 @@ export const TokenMealHub: React.FC = () => {
             </div>
 
             {/* Taste Shield Active Protection Banner */}
-            <div className="bg-slate-900/80 border border-emerald-500/30 rounded-3xl p-5 mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xl backdrop-blur-sm">
+            <div className="bg-slate-900/80 border border-emerald-500/30 rounded-2xl p-5 mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xl backdrop-blur-sm">
                 <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-2xl shrink-0">
+                    <div className="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-2xl shrink-0">
                         🛡️
                     </div>
                     <div>
-                        <div className="text-sm font-extrabold text-white flex items-center gap-2">
+                        <div className="text-sm font-extrabold text-white flex items-center gap-2 flex-wrap">
                             <span>StashSaarthi Anti-Fraud Taste Shield Active</span>
-                            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                            <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
                                 50% Token Refund Guarantee
                             </span>
                         </div>
@@ -376,9 +377,10 @@ export const TokenMealHub: React.FC = () => {
                 <button
                     type="button"
                     onClick={() => setIsTasteShieldOpen(true)}
-                    className="w-full sm:w-auto px-5 py-3 rounded-2xl bg-slate-950 hover:bg-slate-800 border border-emerald-500/40 hover:border-emerald-400 text-emerald-400 text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md shrink-0 hover:scale-102"
+                    className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-800 border border-slate-700 hover:border-slate-600 text-slate-200 hover:text-white text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm shrink-0"
                 >
-                    <span>⭐ Rate Meal & Taste Shield</span>
+                    <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                    <span>Rate Meal & Taste Shield</span>
                 </button>
             </div>
 
@@ -400,14 +402,14 @@ export const TokenMealHub: React.FC = () => {
                         <button
                             type="button"
                             onClick={() => setFulfillmentType('DineIn_Pickup')}
-                            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl transition-all cursor-pointer font-bold text-sm ${fulfillmentType === 'DineIn_Pickup' ? 'bg-emerald-500 text-slate-950 shadow-md' : 'text-slate-400 hover:text-white'}`}
+                            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl transition-all cursor-pointer font-bold text-sm ${fulfillmentType === 'DineIn_Pickup' ? 'bg-emerald-500 text-slate-950 shadow-md' : 'bg-slate-800/60 border border-slate-700/60 text-slate-300 hover:text-white hover:bg-slate-800'}`}
                         >
                             🏪 Self-Pickup (Free)
                         </button>
                         <button
                             type="button"
                             onClick={() => setFulfillmentType('RoomDelivery')}
-                            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl transition-all cursor-pointer font-bold text-sm ${fulfillmentType === 'RoomDelivery' ? 'bg-emerald-500 text-slate-950 shadow-md' : 'text-slate-400 hover:text-white'}`}
+                            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl transition-all cursor-pointer font-bold text-sm ${fulfillmentType === 'RoomDelivery' ? 'bg-emerald-500 text-slate-950 shadow-md' : 'bg-slate-800/60 border border-slate-700/60 text-slate-300 hover:text-white hover:bg-slate-800'}`}
                         >
                             🛵 Room Delivery (+10 T)
                         </button>
@@ -434,12 +436,12 @@ export const TokenMealHub: React.FC = () => {
                                     onClick={() => setSelectedMeal(tier)}
                                     className={`relative cursor-pointer rounded-2xl p-5 border transition-all duration-300 ${isSelected
                                             ? 'bg-slate-900 border-emerald-500 shadow-[0_0_20px_-5px_rgba(16,185,129,0.3)] transform -translate-y-1'
-                                            : 'bg-slate-950/50 border-slate-800 hover:border-slate-700 hover:bg-slate-900'
+                                            : 'bg-slate-950/80 border-white/15 hover:border-emerald-500/40 hover:bg-slate-900/90'
                                         }`}
                                 >
                                     {tier.badge && (
                                         <span
-                                            className={`absolute top-4 right-4 text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider ${tier.popular
+                                            className={`absolute top-4 right-4 text-xs font-bold px-2 py-0.5 rounded-full uppercase tracking-wider ${tier.popular
                                                     ? 'bg-emerald-500 text-slate-950'
                                                     : 'bg-slate-800 text-slate-300'
                                                 }`}
@@ -454,7 +456,7 @@ export const TokenMealHub: React.FC = () => {
                                     <div className="text-3xl font-black text-white mb-3">
                                         {tierCost} <span className="text-xs font-bold text-emerald-400">Tokens</span>
                                     </div>
-                                    <p className="text-[11px] text-slate-400 leading-relaxed font-medium">{tier.description}</p>
+                                    <p className="text-xs text-slate-400 leading-relaxed font-medium">{tier.description}</p>
                                 </div>
                             );
                         })}
@@ -504,10 +506,12 @@ export const TokenMealHub: React.FC = () => {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                             <div>
-                                <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
+                                <label htmlFor="master-kitchen-node" className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5 cursor-pointer">
                                     Select Master Kitchen Node
                                 </label>
                                 <select
+                                    id="master-kitchen-node"
+                                    aria-label="Select Master Kitchen Node"
                                     value={vendorNode}
                                     onChange={(e) => setVendorNode(e.target.value)}
                                     className="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all text-sm cursor-pointer appearance-none"
@@ -521,24 +525,31 @@ export const TokenMealHub: React.FC = () => {
                             
                             {fulfillmentType === 'RoomDelivery' ? (
                                 <div className="animate-in fade-in slide-in-from-top-4 duration-300">
-                                    <label className="block text-xs font-bold text-emerald-300 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <label htmlFor="delivery-address-input" className="block text-xs font-bold text-emerald-300 uppercase tracking-wider mb-1.5 flex items-center gap-1.5 cursor-pointer">
                                         Delivery Address <span className="text-rose-500">*</span>
                                     </label>
                                     <input
+                                        id="delivery-address-input"
                                         type="text"
                                         required
+                                        aria-label="Room delivery address"
                                         placeholder="e.g. Room 204, Sharda PG, Chhapeda Pulia"
                                         value={deliveryAddress}
                                         onChange={(e) => setDeliveryAddress(e.target.value)}
-                                        className="w-full bg-slate-900 border border-emerald-500/30 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all text-sm"
+                                        className="w-full bg-slate-900 border border-emerald-500/30 rounded-xl px-4 py-3 text-white placeholder-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all text-sm"
                                     />
                                 </div>
                             ) : (
-                                <div className="bg-emerald-500/5 border border-emerald-500/20 rounded-xl p-3.5 flex items-start gap-3 animate-in fade-in duration-300">
-                                    <div className="text-emerald-400 mt-0.5">🏪</div>
-                                    <div>
-                                        <div className="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-0.5">Self-Pickup Active</div>
-                                        <div className="text-xs text-slate-400">Fast-track pickup available at StashShelf with your auto-generated 3-digit pickup code.</div>
+                                <div className="flex flex-col animate-in fade-in duration-300">
+                                    <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
+                                        Fulfillment Status
+                                    </label>
+                                    <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-xl px-4 py-2.5 min-h-[46px] flex items-center gap-3">
+                                        <div className="text-emerald-400 text-lg shrink-0">🏪</div>
+                                        <div>
+                                            <div className="text-xs font-bold text-emerald-400">Self-Pickup Active</div>
+                                            <div className="text-xs text-slate-400">Fast-track pickup at StashShelf with auto-generated 3-digit code.</div>
+                                        </div>
                                     </div>
                                 </div>
                             )}
@@ -559,7 +570,7 @@ export const TokenMealHub: React.FC = () => {
                             <button
                                 type="submit"
                                 disabled={isSubmitting || timeLeft.isLocked}
-                                className={`w-full md:w-auto px-10 py-3.5 rounded-xl font-extrabold text-sm transition-all duration-300 shadow-lg flex items-center justify-center gap-2 ${isSubmitting || timeLeft.isLocked ? 'bg-slate-800 text-slate-500 cursor-not-allowed border border-slate-700' : 'bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-slate-950 shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5 border border-transparent cursor-pointer'}`}
+                                className={`w-full md:w-auto px-10 py-3.5 rounded-xl font-extrabold text-sm transition-all duration-300 shadow-lg flex items-center justify-center gap-2 ${isSubmitting || timeLeft.isLocked ? 'bg-slate-800 text-slate-400 cursor-not-allowed border border-slate-700' : 'bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-slate-950 shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5 border border-transparent cursor-pointer'}`}
                             >
                                 {isSubmitting ? 'Processing Ledger...' : timeLeft.isLocked ? 'Slot Locked' : `Redeem Meal & Pay ${currentCost} T`}
                             </button>

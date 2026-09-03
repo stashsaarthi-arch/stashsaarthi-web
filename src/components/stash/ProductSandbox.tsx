@@ -386,40 +386,44 @@ export function ProductSandbox() {
 
                   {/* Bags slider */}
                   <div className="space-y-2">
-                    <div className="flex justify-between text-xs font-semibold">
+                    <label htmlFor="sandbox-bag-slider" className="flex justify-between text-xs font-semibold cursor-pointer">
                       <span className="text-muted-foreground">
                         {isHi ? "बैग की संख्या:" : "Luggage Count:"}
                       </span>
                       <span className="text-cyan-400 font-bold">
                         {bagCount} {isHi ? "बैग" : "Bags"}
                       </span>
-                    </div>
+                    </label>
                     <input
+                      id="sandbox-bag-slider"
                       type="range"
                       min={1}
                       max={10}
                       value={bagCount}
                       onChange={(e) => setBagCount(Number(e.target.value))}
+                      aria-label={isHi ? "बैग की संख्या" : "Luggage bag count"}
                       className="w-full h-2 rounded-lg bg-white/10 accent-cyan-400 cursor-pointer"
                     />
                   </div>
 
                   {/* Months slider */}
                   <div className="space-y-2">
-                    <div className="flex justify-between text-xs font-semibold">
+                    <label htmlFor="sandbox-month-slider" className="flex justify-between text-xs font-semibold cursor-pointer">
                       <span className="text-muted-foreground">
                         {isHi ? "अवधि (माह):" : "Storage Duration:"}
                       </span>
                       <span className="text-cyan-400 font-bold">
                         {months} {isHi ? "माह" : "Months"}
                       </span>
-                    </div>
+                    </label>
                     <input
+                      id="sandbox-month-slider"
                       type="range"
                       min={1}
                       max={6}
                       value={months}
                       onChange={(e) => setMonths(Number(e.target.value))}
+                      aria-label={isHi ? "स्टोरेज अवधि (माह)" : "Storage duration in months"}
                       className="w-full h-2 rounded-lg bg-white/10 accent-cyan-400 cursor-pointer"
                     />
                   </div>
