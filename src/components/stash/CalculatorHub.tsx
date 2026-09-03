@@ -58,28 +58,34 @@ export function CalculatorHub({ onBook }: { onBook: OpenBooking }) {
 
       {/* Mode Switcher */}
       <div className="mt-3 flex items-center justify-center">
-        <div className="glass flex w-full max-w-md items-center justify-between rounded-full border border-white/10 p-1 shadow-lg">
+        <div className="glass flex w-full max-w-xl items-center justify-between rounded-full border border-white/10 p-1 shadow-lg">
           <button
             onClick={() => setActiveTab("student")}
-            className={`flex flex-1 items-center justify-center gap-1.5 rounded-full py-1.5 px-3 text-xs font-bold transition-all duration-200 cursor-pointer sm:text-xs ${
+            className={`flex flex-1 items-center justify-center gap-1.5 rounded-full py-1.5 px-2 sm:px-3 text-[11px] sm:text-xs font-bold transition-all duration-200 cursor-pointer whitespace-nowrap ${
               activeTab === "student"
                 ? "border border-emerald/40 bg-emerald/15 text-emerald shadow-md"
                 : "text-muted-foreground hover:text-white"
             }`}
           >
-            <Calculator className="h-3.5 w-3.5" />
-            <span>{isHi ? "🎓 छात्र बचत कैलकुलेटर" : "🎓 Student Savings (₹8k Saved)"}</span>
+            <Calculator className="h-3.5 w-3.5 shrink-0" />
+            <span>
+              {isHi ? "🎓 छात्र बचत" : "🎓 Student Savings"}
+              <span className="hidden sm:inline"> (₹8k Saved)</span>
+            </span>
           </button>
           <button
             onClick={() => setActiveTab("host")}
-            className={`flex flex-1 items-center justify-center gap-1.5 rounded-full py-1.5 px-3 text-xs font-bold transition-all duration-200 cursor-pointer sm:text-xs ${
+            className={`flex flex-1 items-center justify-center gap-1.5 rounded-full py-1.5 px-2 sm:px-3 text-[11px] sm:text-xs font-bold transition-all duration-200 cursor-pointer whitespace-nowrap ${
               activeTab === "host"
                 ? "border border-amber/40 bg-amber/15 text-amber shadow-md"
                 : "text-muted-foreground hover:text-white"
             }`}
           >
-            <TrendingUp className="h-3.5 w-3.5" />
-            <span>{isHi ? "🏡 मेज़बान कमाई सिम्युलेटर" : "🏡 Host Earnings (₹11.5k+/mo)"}</span>
+            <TrendingUp className="h-3.5 w-3.5 shrink-0" />
+            <span>
+              {isHi ? "🏡 मेज़बान कमाई" : "🏡 Host Earnings"}
+              <span className="hidden sm:inline"> (₹11.5k+/mo)</span>
+            </span>
           </button>
         </div>
       </div>
