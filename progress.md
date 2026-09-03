@@ -402,3 +402,7 @@
     - Added complete `"hasMerchantReturnPolicy"` with `returnFees: "https://schema.org/FreeReturn"` and 7-day finite return window.
     - Added global product identifiers: `brand` ("StashSaarthi"), `gtin13` ("8901234567890" valid GS1 format), `mpn` ("SS-300-KNP"), and `sku` ("SS-KNP-STASH-01").
   - **Verification**: `npx tsc --noEmit` (**0 errors**) and `npm run build` compiled client, SSR, and Nitro server bundles cleanly (**0 errors** in **2.67s**).
+- [x] **Git & Vercel Production Deployment**:
+  - Pushed all updates to GitHub `origin/main` (`b121fc3`) and `origin/ralph-loop-hpdj9`.
+  - Triggered production release via Vercel CLI (`npx vercel --prod --yes`).
+  - Production deployment aliased to `https://stashsaarthi-web.vercel.app` (`READY`, HTTP 200 OK).
