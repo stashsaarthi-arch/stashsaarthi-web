@@ -31,10 +31,7 @@ export function FounderAccountability() {
   const isHi = language === "hi";
 
   return (
-    <div
-      id="founder-accountability"
-      className="relative mx-auto max-w-6xl px-2 py-2 scroll-mt-20"
-    >
+    <div id="founder-accountability" className="relative mx-auto max-w-6xl px-2 py-2 scroll-mt-20">
       <div className="grid gap-5 lg:grid-cols-12 items-center">
         {/* ── Founder Profile Card (5 Cols) ── */}
         <div className="lg:col-span-5">
@@ -70,7 +67,9 @@ export function FounderAccountability() {
                 <div className="mt-3.5">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="text-base sm:text-lg font-extrabold text-foreground">Advik Omer</h3>
+                      <h3 className="text-base sm:text-lg font-extrabold text-foreground">
+                        Advik Omer
+                      </h3>
                       <p className="text-xs text-emerald-400 font-medium mt-0.5">
                         {isHi ? "संस्थापक एवं ग्राउंड ऑपरेशंस प्रमुख" : "Founder & Operations Lead"}
                       </p>

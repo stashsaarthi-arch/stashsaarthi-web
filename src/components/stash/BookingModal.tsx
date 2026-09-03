@@ -663,7 +663,9 @@ export function BookingModal({
                         </Label>
                         <select
                           id="bk-monetize-asset"
-                          aria-label={isHi ? "मोनेटाइज करने योग्य संपत्ति चुनें" : "Select space to monetize"}
+                          aria-label={
+                            isHi ? "मोनेटाइज करने योग्य संपत्ति चुनें" : "Select space to monetize"
+                          }
                           value={monetizeAsset}
                           onChange={(e) => setMonetizeAsset(e.target.value)}
                           className="w-full mt-1.5 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white cursor-pointer"
@@ -688,7 +690,9 @@ export function BookingModal({
                         <Input
                           id="bk-expected-rent"
                           type="number"
-                          aria-label={isHi ? "अपेक्षित मासिक आय" : "Expected monthly rent in rupees"}
+                          aria-label={
+                            isHi ? "अपेक्षित मासिक आय" : "Expected monthly rent in rupees"
+                          }
                           value={expectedRent}
                           onChange={(e) => setExpectedRent(e.target.value)}
                           placeholder="8000"
@@ -1081,7 +1085,9 @@ export function BookingModal({
                   </div>
                   <div>
                     <h4 className="text-[11px] font-bold text-white uppercase tracking-wider">
-                      {isHi ? "100% रेडिकल ट्रांसपेरेंसी गारंटी" : "100% Radical Transparency Guarantee"}
+                      {isHi
+                        ? "100% रेडिकल ट्रांसपेरेंसी गारंटी"
+                        : "100% Radical Transparency Guarantee"}
                     </h4>
                     <p className="mt-0.5 text-[10px] text-muted-foreground leading-tight">
                       {isHi

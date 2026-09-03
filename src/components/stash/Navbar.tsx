@@ -365,11 +365,7 @@ export function Navbar({
                   className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl border border-emerald-500/40 bg-emerald-500/15 text-xs font-bold text-emerald-300 hover:bg-emerald-500/25 transition-all cursor-pointer"
                 >
                   <span>⚡</span>
-                  <span>
-                    {isHi
-                      ? "प्राथमिकता अर्ली एक्सेस लें"
-                      : "Get Priority Early Access"}
-                  </span>
+                  <span>{isHi ? "प्राथमिकता अर्ली एक्सेस लें" : "Get Priority Early Access"}</span>
                 </button>
               )}
               {onRefer && (
@@ -383,9 +379,7 @@ export function Navbar({
                 >
                   <span>🎁</span>
                   <span>
-                    {isHi
-                      ? "व्हाट्सएप पर रेफर व शेयर करें"
-                      : "Refer & Share on WhatsApp"}
+                    {isHi ? "व्हाट्सएप पर रेफर व शेयर करें" : "Refer & Share on WhatsApp"}
                   </span>
                 </button>
               )}

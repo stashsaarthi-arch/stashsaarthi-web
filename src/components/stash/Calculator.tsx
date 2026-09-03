@@ -45,10 +45,7 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
   }, [safeBags, safeDays, safeRent]);
 
   return (
-    <div
-      id="student-calculator"
-      className="relative mx-auto max-w-5xl px-2 py-2 scroll-mt-20"
-    >
+    <div id="student-calculator" className="relative mx-auto max-w-5xl px-2 py-2 scroll-mt-20">
       <AnimatedContent distance={30} scale={0.98} duration={0.5} ease="power2.out">
         <div className="w-full max-w-4xl mx-auto rounded-2xl bg-[#0F1318] border border-slate-800 p-4 sm:p-6 backdrop-blur-xl shadow-xl relative overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-center">
@@ -57,7 +54,10 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
               {/* Control 1: Bags Count */}
               <div>
                 <div className="flex justify-between items-center mb-1.5">
-                  <label htmlFor="calc-bags-slider" className="text-xs font-medium text-slate-300 cursor-pointer">
+                  <label
+                    htmlFor="calc-bags-slider"
+                    className="text-xs font-medium text-slate-300 cursor-pointer"
+                  >
                     {t.calculator.bagsLabel}
                   </label>
                   <span className="text-xs font-bold text-emerald-400 font-mono bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20">
@@ -72,7 +72,9 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                   step="1"
                   value={bags}
                   onChange={(e) => setBags(Math.max(1, Number(e.target.value) || 1))}
-                  aria-label={isHi ? "स्टोर करने के लिए बैगों की संख्या" : "Number of luggage bags to store"}
+                  aria-label={
+                    isHi ? "स्टोर करने के लिए बैगों की संख्या" : "Number of luggage bags to store"
+                  }
                   className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500"
                 />
                 <div className="flex justify-between text-xs text-slate-400 mt-2 font-mono">
@@ -85,7 +87,10 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
               {/* Control 2: Vacation Duration */}
               <div>
                 <div className="flex justify-between items-center mb-1.5">
-                  <label htmlFor="calc-days-slider" className="text-xs font-medium text-slate-300 cursor-pointer">
+                  <label
+                    htmlFor="calc-days-slider"
+                    className="text-xs font-medium text-slate-300 cursor-pointer"
+                  >
                     {t.calculator.vacationLabel}
                   </label>
                   <span className="text-xs font-bold text-emerald-400 font-mono bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20">
@@ -114,7 +119,10 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
               {/* Control 3: Current Monthly PG/Room Rent */}
               <div>
                 <div className="flex justify-between items-center mb-1.5">
-                  <label htmlFor="calc-rent-slider" className="text-xs font-medium text-slate-300 cursor-pointer">
+                  <label
+                    htmlFor="calc-rent-slider"
+                    className="text-xs font-medium text-slate-300 cursor-pointer"
+                  >
                     {t.calculator.rentLabel}
                   </label>
                   <span className="text-xs font-bold text-emerald-400 font-mono bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20">
@@ -129,7 +137,9 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                   step="500"
                   value={monthlyRent}
                   onChange={(e) => setMonthlyRent(Math.max(1000, Number(e.target.value) || 3000))}
-                  aria-label={isHi ? "वर्तमान मासिक कमरा किराया" : "Current monthly PG or room rent in rupees"}
+                  aria-label={
+                    isHi ? "वर्तमान मासिक कमरा किराया" : "Current monthly PG or room rent in rupees"
+                  }
                   className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500"
                 />
                 <div className="flex justify-between text-xs text-slate-400 mt-2 font-mono">

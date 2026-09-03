@@ -47,10 +47,7 @@ export function ProductSandbox() {
   const platformTotal = bagCount * months * platformMarginPerBag;
 
   return (
-    <div
-      id="product-sandbox"
-      className="relative mx-auto max-w-6xl px-2 py-2 scroll-mt-20"
-    >
+    <div id="product-sandbox" className="relative mx-auto max-w-6xl px-2 py-2 scroll-mt-20">
       {/* ── Tab Switcher ── */}
       <div className="flex justify-center mb-4">
         <div className="inline-flex rounded-xl border border-white/10 bg-white/[0.03] p-1 max-w-full overflow-x-auto gap-1">
@@ -386,7 +383,10 @@ export function ProductSandbox() {
 
                   {/* Bags slider */}
                   <div className="space-y-2 text-center lg:text-left pt-2">
-                    <label htmlFor="sandbox-bag-slider" className="flex justify-between text-xs font-semibold cursor-pointer max-w-sm mx-auto lg:mx-0">
+                    <label
+                      htmlFor="sandbox-bag-slider"
+                      className="flex justify-between text-xs font-semibold cursor-pointer max-w-sm mx-auto lg:mx-0"
+                    >
                       <span className="text-muted-foreground">
                         {isHi ? "बैग की संख्या:" : "Luggage Count:"}
                       </span>
@@ -408,7 +408,10 @@ export function ProductSandbox() {
 
                   {/* Months slider */}
                   <div className="space-y-2 text-center lg:text-left mt-4">
-                    <label htmlFor="sandbox-month-slider" className="flex justify-between text-xs font-semibold cursor-pointer max-w-sm mx-auto lg:mx-0">
+                    <label
+                      htmlFor="sandbox-month-slider"
+                      className="flex justify-between text-xs font-semibold cursor-pointer max-w-sm mx-auto lg:mx-0"
+                    >
                       <span className="text-muted-foreground">
                         {isHi ? "अवधि (माह):" : "Storage Duration:"}
                       </span>

@@ -25,8 +25,18 @@ interface CategoryItem {
 const CATEGORIES: CategoryItem[] = [
   { id: "solutions", labelEn: "Solutions & Hub", labelHi: "समाधान व सेवाएँ", icon: Boxes },
   { id: "calculator", labelEn: "Savings Simulator", labelHi: "बचत कैलकुलेटर", icon: Calculator },
-  { id: "trust", labelEn: "Trust & Safety Pass", labelHi: "सुरक्षा व कस्टडी पास", icon: ShieldCheck },
-  { id: "feedback", labelEn: "Community & Roadmap", labelHi: "समीक्षाएँ व रोडमैप", icon: MessageSquare },
+  {
+    id: "trust",
+    labelEn: "Trust & Safety Pass",
+    labelHi: "सुरक्षा व कस्टडी पास",
+    icon: ShieldCheck,
+  },
+  {
+    id: "feedback",
+    labelEn: "Community & Roadmap",
+    labelHi: "समीक्षाएँ व रोडमैप",
+    icon: MessageSquare,
+  },
   { id: "faq", labelEn: "FAQ & Help", labelHi: "अक्सर पूछे जाने वाले सवाल", icon: HelpCircle },
 ];
 
@@ -146,7 +156,9 @@ export function QuickCategoryNav() {
   return (
     <div
       className={`z-30 transition-all duration-300 ${
-        isSticky ? "sticky top-16 mx-auto max-w-5xl px-3 py-1.5" : "relative mx-auto max-w-5xl px-3 py-2"
+        isSticky
+          ? "sticky top-16 mx-auto max-w-5xl px-3 py-1.5"
+          : "relative mx-auto max-w-5xl px-3 py-2"
       }`}
     >
       {/* ── Consolidated Single-Row Category Bar ── */}

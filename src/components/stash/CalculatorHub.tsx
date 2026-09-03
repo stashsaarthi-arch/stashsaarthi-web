@@ -32,10 +32,16 @@ export function CalculatorHub({ onBook }: { onBook: OpenBooking }) {
   }, []);
 
   return (
-    <section id="calculator" className="relative mx-auto max-w-6xl px-4 py-3.5 sm:py-5 scroll-mt-20">
+    <section
+      id="calculator"
+      className="relative mx-auto max-w-6xl px-4 py-3.5 sm:py-5 scroll-mt-20"
+    >
       {/* Header */}
       <div className="mx-auto max-w-3xl text-center">
-        <Badge variant="outline" className="border-white/15 bg-white/5 text-[9.5px] sm:text-[11px] text-muted-foreground">
+        <Badge
+          variant="outline"
+          className="border-white/15 bg-white/5 text-[9.5px] sm:text-[11px] text-muted-foreground"
+        >
           {isHi ? "इंटरएक्टिव बचत व कमाई सिम्युलेटर" : "Interactive Savings & Earnings Engine"}
         </Badge>
         <h2 className="mt-1.5 text-balance text-lg font-extrabold tracking-tight sm:text-2xl">

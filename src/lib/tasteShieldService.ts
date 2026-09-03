@@ -1,6 +1,6 @@
 /**
  * StashSaarthi Anti-Fraud Taste Shield & Meal Review Engine
- * 
+ *
  * Gatekeeper Architecture:
  * 1. Rating Threshold: Rating <= 2 activates 50% refund evaluation.
  * 2. Monthly Quota Check: Exactly 1 claim allowed per calendar month (monthly_claims_used == 0).
@@ -13,13 +13,9 @@ import { supabase } from "@/integrations/supabase/client";
 import { logSupabaseError } from "@/lib/supabaseLogger";
 
 export type TasteShieldIssueCategory =
-  | 'taste_quality'
-  | 'raw_or_burnt'
-  | 'hygiene_foreign_object'
-  | 'missing_items'
-  | 'other';
+  "taste_quality" | "raw_or_burnt" | "hygiene_foreign_object" | "missing_items" | "other";
 
-export type RefundStatus = 'not_eligible' | 'auto_credited' | 'under_review' | 'rejected';
+export type RefundStatus = "not_eligible" | "auto_credited" | "under_review" | "rejected";
 
 export interface UserShieldQuota {
   userPhone: string;
@@ -52,11 +48,12 @@ export interface TasteShieldClaimResult {
   refundStatus: RefundStatus;
   refundTokens: number;
   message: string;
-  rejectionReason?: 'quota_exhausted' | 'missing_photo' | 'window_expired' | 'account_blocked' | null | undefined;
+  rejectionReason?:
+    "quota_exhausted" | "missing_photo" | "window_expired" | "account_blocked" | null | undefined;
   reviewId?: string | undefined;
 }
 
-const DEFAULT_VENDOR_ID = '11111111-1111-1111-1111-111111111111'; // Kakadeo Annapurna Kitchen
+const DEFAULT_VENDOR_ID = "11111111-1111-1111-1111-111111111111"; // Kakadeo Annapurna Kitchen
 
 /**
  * Checks if the user has available Taste Shield quota for the current calendar month
@@ -92,7 +89,9 @@ export async function getUserShieldQuota(userPhone: string): Promise<UserShieldQ
   try {
     const { data, error } = await supabase
       .from("user_shield_quotas")
-      .select("user_phone, monthly_claims_used, last_claim_date, is_shield_blocked, total_lifetime_strikes")
+      .select(
+        "user_phone, monthly_claims_used, last_claim_date, is_shield_blocked, total_lifetime_strikes",
+      )
       .eq("user_phone", normalizedPhone)
       .maybeSingle();
 
@@ -103,10 +102,7 @@ export async function getUserShieldQuota(userPhone: string): Promise<UserShieldQ
       // Calendar month rollover check: if last claim was in an earlier month, claims reset to 0
       if (data.last_claim_date) {
         const lastDate = new Date(data.last_claim_date);
-        if (
-          lastDate.getFullYear() < now.getFullYear() ||
-          lastDate.getMonth() < now.getMonth()
-        ) {
+        if (lastDate.getFullYear() < now.getFullYear() || lastDate.getMonth() < now.getMonth()) {
           claimsUsed = 0;
         }
       }
@@ -149,13 +145,14 @@ export async function uploadProofPhoto(file: File, bookingId: string): Promise<s
       });
 
     if (uploadError) {
-      console.warn("[TasteShield:Storage] Remote upload error, falling back to local object URL", uploadError);
+      console.warn(
+        "[TasteShield:Storage] Remote upload error, falling back to local object URL",
+        uploadError,
+      );
       return URL.createObjectURL(file);
     }
 
-    const { data: publicUrlData } = supabase.storage
-      .from("review-proofs")
-      .getPublicUrl(filePath);
+    const { data: publicUrlData } = supabase.storage.from("review-proofs").getPublicUrl(filePath);
 
     return publicUrlData.publicUrl || URL.createObjectURL(file);
   } catch (err) {
@@ -168,7 +165,7 @@ export async function uploadProofPhoto(file: File, bookingId: string): Promise<s
  * Submits the meal review and evaluates Taste Shield 50% refund claim
  */
 export async function submitTasteShieldClaim(
-  claim: TasteShieldClaimRequest
+  claim: TasteShieldClaimRequest,
 ): Promise<TasteShieldClaimResult> {
   const userPhone = claim.userPhone.trim();
   const rating = Math.max(1, Math.min(5, Math.round(claim.rating)));
@@ -197,7 +194,7 @@ export async function submitTasteShieldClaim(
         p_issue_category: claim.issueCategory || null,
         p_feedback_text: claim.feedbackText || null,
         p_photo_url: photoUrl,
-      }
+      },
     );
 
     if (!rpcError && rpcData && typeof rpcData === "object") {
@@ -212,7 +209,8 @@ export async function submitTasteShieldClaim(
 
       const isEligible = Boolean(parsed.eligible);
       const refundTokens = parsed.refund_tokens || 0;
-      const refundStatus: RefundStatus = parsed.refund_status || (isEligible ? "auto_credited" : "not_eligible");
+      const refundStatus: RefundStatus =
+        parsed.refund_status || (isEligible ? "auto_credited" : "not_eligible");
 
       // Update local storage quota cache
       if (typeof window !== "undefined" && isEligible) {
@@ -233,20 +231,28 @@ export async function submitTasteShieldClaim(
         eligible: isEligible,
         refundStatus,
         refundTokens,
-        message: parsed.message || (isEligible ? `Verified claim! ${refundTokens} tokens credited to your wallet.` : "Feedback recorded!"),
+        message:
+          parsed.message ||
+          (isEligible
+            ? `Verified claim! ${refundTokens} tokens credited to your wallet.`
+            : "Feedback recorded!"),
         rejectionReason: (parsed.rejection_reason as any) || null,
         reviewId: parsed.review_id,
       };
     }
   } catch (rpcEx) {
-    console.warn("[TasteShield] RPC invocation error, activating client gatekeeper fallback", rpcEx);
+    console.warn(
+      "[TasteShield] RPC invocation error, activating client gatekeeper fallback",
+      rpcEx,
+    );
   }
 
   // Step 3: Client Anti-Fraud Gatekeeper Fallback
   // (Ensures zero breakage in case RPC is not yet applied to database)
   const currentQuota = await getUserShieldQuota(userPhone);
   let isEligible = false;
-  let rejectionReason: 'quota_exhausted' | 'missing_photo' | 'window_expired' | 'account_blocked' | null = null;
+  let rejectionReason:
+    "quota_exhausted" | "missing_photo" | "window_expired" | "account_blocked" | null = null;
 
   if (rating <= 2) {
     const now = Date.now();
@@ -273,11 +279,13 @@ export async function submitTasteShieldClaim(
   if (isEligible) {
     message = `Verified claim! 50% tokens (${refundTokens} Tokens) credited to your wallet.`;
   } else if (rejectionReason === "quota_exhausted") {
-    message = "Feedback recorded! Your monthly Taste Shield quota is currently used, but our kitchen quality team has been alerted.";
+    message =
+      "Feedback recorded! Your monthly Taste Shield quota is currently used, but our kitchen quality team has been alerted.";
   } else if (rejectionReason === "missing_photo") {
     message = "Feedback recorded! A live camera photo is required for instant Taste Shield credit.";
   } else if (rejectionReason === "window_expired") {
-    message = "Feedback recorded! Taste Shield claim window expired (must be within 2 hours of meal).";
+    message =
+      "Feedback recorded! Taste Shield claim window expired (must be within 2 hours of meal).";
   } else if (rejectionReason === "account_blocked") {
     message = "Feedback recorded. Taste Shield is not active on this account.";
   } else {
@@ -333,7 +341,7 @@ export async function submitTasteShieldClaim(
             isShieldBlocked: false,
             totalLifetimeStrikes: 0,
             isQuotaAvailable: false,
-          })
+          }),
         );
       }
     }

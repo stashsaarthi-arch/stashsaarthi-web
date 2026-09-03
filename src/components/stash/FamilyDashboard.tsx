@@ -145,9 +145,7 @@ export function FamilyDashboard() {
                 <h3 className="text-base sm:text-lg font-bold text-white mt-0.5">
                   {t.familyDashboardSection.sosTitle}
                 </h3>
-                <p className="text-xs text-slate-400">
-                  {t.familyDashboardSection.sosSubtitle}
-                </p>
+                <p className="text-xs text-slate-400">{t.familyDashboardSection.sosSubtitle}</p>
               </div>
 
               {sosState === "idle" ? (

@@ -64,11 +64,7 @@ export function EarlyAccessModal({
       return;
     }
     if (phone.trim() && !isValidPhone(phone)) {
-      toast.error(
-        isHi
-          ? "कृपया एक वैध फोन नंबर दर्ज करें।"
-          : "Please enter a valid phone number.",
-      );
+      toast.error(isHi ? "कृपया एक वैध फोन नंबर दर्ज करें।" : "Please enter a valid phone number.");
       return;
     }
 

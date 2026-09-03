@@ -20,7 +20,7 @@ export function isCollegeEmail(email: string): boolean {
  * Supports Indian 10-digit formats and standard E.164 international formats.
  */
 export function isValidPhone(phone: string): boolean {
-  const digits = phone.replace(/[\s\-]/g, "");
+  const digits = phone.replace(/[\s-]/g, "");
   if (digits.startsWith("+")) {
     const raw = digits.slice(1);
     return /^\d{8,15}$/.test(raw);
@@ -216,7 +216,10 @@ export type ProfileUpdateData = {
   emergency_contact?: string;
 };
 
-export async function updateUserProfile(email: string, data: ProfileUpdateData): Promise<{ success: boolean; error?: string }> {
+export async function updateUserProfile(
+  email: string,
+  data: ProfileUpdateData,
+): Promise<{ success: boolean; error?: string }> {
   try {
     const { error } = await supabase
       .from("users_waitlist")

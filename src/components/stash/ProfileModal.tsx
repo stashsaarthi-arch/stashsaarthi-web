@@ -1,5 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { User, Phone, Mail, GraduationCap, MapPin, Activity, Save, Loader2, Info } from "lucide-react";
+import {
+  User,
+  Phone,
+  Mail,
+  GraduationCap,
+  MapPin,
+  Activity,
+  Save,
+  Loader2,
+  Info,
+} from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -61,7 +71,7 @@ export function ProfileModal({ open, onOpenChange }: ProfileModalProps) {
 
     setSaving(true);
     const result = await updateUserProfile(user.email, formData);
-    
+
     if (result.success) {
       updateUser({
         name: formData.full_name,
@@ -100,7 +110,9 @@ export function ProfileModal({ open, onOpenChange }: ProfileModalProps) {
             </div>
           </div>
           <DialogDescription className="text-xs text-slate-300 leading-relaxed mt-2">
-            {isHi ? "अपने खाते का विवरण अपडेट करें।" : "Update your account details and preferences."}
+            {isHi
+              ? "अपने खाते का विवरण अपडेट करें।"
+              : "Update your account details and preferences."}
           </DialogDescription>
         </DialogHeader>
 
@@ -197,8 +209,12 @@ export function ProfileModal({ open, onOpenChange }: ProfileModalProps) {
           <div>
             <label className="text-xs text-muted-foreground font-semibold mb-1 block">
               {formData.user_type === "student"
-                ? (isHi ? "कॉलेज / परिसर" : "College / Campus")
-                : (isHi ? "इलाका / शहर" : "Locality / City")}
+                ? isHi
+                  ? "कॉलेज / परिसर"
+                  : "College / Campus"
+                : isHi
+                  ? "इलाका / शहर"
+                  : "Locality / City"}
             </label>
             <div className="relative flex items-center">
               {formData.user_type === "student" ? (
@@ -209,7 +225,9 @@ export function ProfileModal({ open, onOpenChange }: ProfileModalProps) {
               <Input
                 value={formData.college_or_locality}
                 onChange={(e) => setFormData({ ...formData, college_or_locality: e.target.value })}
-                placeholder={formData.user_type === "student" ? "e.g. IIT Kanpur" : "e.g. Kalyanpur"}
+                placeholder={
+                  formData.user_type === "student" ? "e.g. IIT Kanpur" : "e.g. Kalyanpur"
+                }
                 className="pl-10 bg-black/50 border-white/10 text-white rounded-lg text-sm focus-visible:ring-cyan-500/50"
               />
             </div>
@@ -224,11 +242,13 @@ export function ProfileModal({ open, onOpenChange }: ProfileModalProps) {
               <Textarea
                 value={formData.bio}
                 onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
-                placeholder={isHi ? "अपने बारे में कुछ बताएं..." : "Tell us a bit about yourself..."}
+                placeholder={
+                  isHi ? "अपने बारे में कुछ बताएं..." : "Tell us a bit about yourself..."
+                }
                 className="bg-black/50 border-white/10 text-white rounded-lg text-sm focus-visible:ring-cyan-500/50 resize-none h-20"
               />
             </div>
-            
+
             {/* Address */}
             <div>
               <label className="text-xs text-muted-foreground font-semibold mb-1 block">

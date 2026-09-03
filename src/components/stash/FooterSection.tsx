@@ -194,11 +194,7 @@ export function FooterSection() {
       return;
     }
     if (phone.trim() && !isValidPhone(phone)) {
-      toast.error(
-        isHi
-          ? "कृपया एक वैध फोन नंबर दर्ज करें।"
-          : "Please enter a valid phone number.",
-      );
+      toast.error(isHi ? "कृपया एक वैध फोन नंबर दर्ज करें।" : "Please enter a valid phone number.");
       return;
     }
 
@@ -251,7 +247,9 @@ export function FooterSection() {
         <h2 className="text-xl font-extrabold tracking-tight sm:text-3xl">
           <span className="text-gradient">{t.footer.title}</span>
         </h2>
-        <p className="mx-auto mt-1 max-w-xl text-xs sm:text-sm text-muted-foreground">{t.footer.subtitle}</p>
+        <p className="mx-auto mt-1 max-w-xl text-xs sm:text-sm text-muted-foreground">
+          {t.footer.subtitle}
+        </p>
 
         {submitted ? (
           <div className="mt-4 mb-3">
@@ -587,8 +585,7 @@ export function FooterSection() {
               onClick={() => setShowCaptainModal(true)}
               className="inline-flex items-center gap-1.5 rounded-lg border border-cyan-500/30 bg-cyan-500/10 px-2.5 py-1.5 text-xs font-semibold text-cyan-300 transition-colors hover:border-cyan-500/50 hover:bg-cyan-500/20 cursor-pointer active:scale-95"
             >
-              <Award className="h-3 w-3" />{" "}
-              {isHi ? "कैंपस कैप्टन (₹5k+)" : "Campus Captain (₹5k+)"}
+              <Award className="h-3 w-3" /> {isHi ? "कैंपस कैप्टन (₹5k+)" : "Campus Captain (₹5k+)"}
             </button>
 
             <a
@@ -601,14 +598,15 @@ export function FooterSection() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 rounded-lg border border-[#25D366]/40 bg-[#25D366]/10 px-2.5 py-1.5 text-xs font-semibold text-[#25D366] transition-colors hover:border-[#25D366]/60 hover:bg-[#25D366]/20 cursor-pointer active:scale-95"
             >
-              <Share2 className="h-3 w-3" />{" "}
-              {isHi ? "रेफर करें" : "Refer"}
+              <Share2 className="h-3 w-3" /> {isHi ? "रेफर करें" : "Refer"}
             </a>
           </div>
         </div>
 
         <div>
-          <h3 className="text-xs font-bold uppercase tracking-wider text-white">{isHi ? "इकोसिस्टम" : "Ecosystem"}</h3>
+          <h3 className="text-xs font-bold uppercase tracking-wider text-white">
+            {isHi ? "इकोसिस्टम" : "Ecosystem"}
+          </h3>
           <ul className="mt-3 space-y-1 text-xs">
             {ECOSYSTEM.map((l) => (
               <li key={l.label}>

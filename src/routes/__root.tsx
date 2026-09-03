@@ -130,7 +130,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://stashsaarthi-web.vercel.app" },
-      { property: "og:image", content: "https://stashsaarthi-web.vercel.app/images/og-banner.jpg" },
+      { property: "og:image", content: "https://stashsaarthi-web.vercel.app/images/og-banner-new.png" },
       {
         property: "og:image:alt",
         content: "StashSaarthi Intergenerational Living and Micro-Storage",
@@ -147,7 +147,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "Official website of StashSaarthi. Vacation luggage storage at ₹300/bag/mo, verified senior-hosted rooms, and homemade tiffins.",
       },
-      { name: "twitter:image", content: "https://stashsaarthi-web.vercel.app/images/og-banner.jpg" },
+      {
+        name: "twitter:image",
+        content: "https://stashsaarthi-web.vercel.app/images/og-banner-new.png",
+      },
     ],
     links: [
       {
@@ -162,14 +165,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { rel: "icon", href: "/favicon.png", type: "image/png" },
       { rel: "manifest", href: "/manifest.json" },
-      { rel: "apple-touch-icon", href: "/favicon.png" },
+      { rel: "apple-touch-icon", href: "/app-icon.png" },
     ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
-  });
+});
 
 function RootShell({ children }: { children: ReactNode }) {
   const jsonLd = {
@@ -183,7 +186,7 @@ function RootShell({ children }: { children: ReactNode }) {
         alternateName: ["Stash Saarthi", "StashSaarthi India"],
         description: "Official platform for StashSaarthi.",
         publisher: { "@id": "https://stashsaarthi-web.vercel.app/#organization" },
-        image: "https://stashsaarthi-web.vercel.app/images/og-banner.jpg",
+        image: "https://stashsaarthi-web.vercel.app/images/og-banner-new.png",
       },
       {
         "@type": "Organization",
@@ -191,7 +194,7 @@ function RootShell({ children }: { children: ReactNode }) {
         name: "StashSaarthi",
         url: "https://stashsaarthi-web.vercel.app/",
         logo: "https://stashsaarthi-web.vercel.app/stashsaarthi-logo.png",
-        image: "https://stashsaarthi-web.vercel.app/images/og-banner.jpg",
+        image: "https://stashsaarthi-web.vercel.app/images/og-banner-new.png",
         description:
           "Official platform for StashSaarthi. India's Zero-CapEx Intergenerational Living & Campus Micro-Storage Platform.",
         sameAs: ["https://instagram.com/stashsaarthi", "https://twitter.com/StashSaarthi"],
@@ -211,7 +214,7 @@ function RootShell({ children }: { children: ReactNode }) {
           "Secure, tamper-evident vacation luggage micro-storage for university students during semester breaks.",
         image: [
           "https://stashsaarthi-web.vercel.app/images/product-microstorage.jpg",
-          "https://stashsaarthi-web.vercel.app/images/og-banner.jpg"
+          "https://stashsaarthi-web.vercel.app/images/og-banner-new.png",
         ],
         brand: {
           "@type": "Brand",

@@ -88,9 +88,7 @@ export function Ecosystem({ onBook }: { onBook: OpenBooking }) {
                       <Icon className="h-5 w-5" style={{ color: n.accent }} />
                     </span>
                     <div className="min-w-0 flex-1">
-                      <div className="truncate text-base font-bold">
-                        {textData.title}
-                      </div>
+                      <div className="truncate text-base font-bold">{textData.title}</div>
                       <div
                         className="truncate text-xs font-medium mt-0.5"
                         style={{ color: n.accent }}
@@ -110,18 +108,20 @@ export function Ecosystem({ onBook }: { onBook: OpenBooking }) {
                         background: `color-mix(in oklab, ${n.accent} 10%, transparent)`,
                       }}
                     >
-                      <span className="font-semibold">{textData.price}</span>:{" "}
-                      {textData.comparison}
+                      <span className="font-semibold">{textData.price}</span>: {textData.comparison}
                     </div>
                     <ul className="mt-3 space-y-2 flex-1">
                       {textData.bullets.map((f) => (
                         <li key={f} className="flex items-start gap-2 text-xs sm:text-sm">
-                          <Check className="mt-0.5 h-3.5 w-3.5 shrink-0" style={{ color: n.accent }} />
+                          <Check
+                            className="mt-0.5 h-3.5 w-3.5 shrink-0"
+                            style={{ color: n.accent }}
+                          />
                           <span className="text-muted-foreground">{f}</span>
                         </li>
                       ))}
                     </ul>
-                    
+
                     <Button
                       onClick={() => onBook({ service: n.id as any, note: textData.title })}
                       className="mt-4 w-full rounded-xl py-4 font-bold shadow-lg transition-all active:scale-95 text-xs sm:text-sm cursor-pointer"

@@ -97,7 +97,9 @@ export function RoleLane({ role, onBook }: { role: Role; onBook: OpenBooking }) 
                         <Icon className="h-3 w-3 text-cyan" />
                       </div>
                       <div className="mt-1.5 text-xs font-semibold sm:text-sm">{s.title}</div>
-                      <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">{s.text}</p>
+                      <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">
+                        {s.text}
+                      </p>
                     </motion.div>
                   );
                 })}
@@ -113,9 +115,7 @@ export function RoleLane({ role, onBook }: { role: Role; onBook: OpenBooking }) 
                         value={m.value}
                         className="text-sm font-extrabold tracking-tight sm:text-base"
                       />
-                      <div className="mt-0.5 text-xs text-muted-foreground">
-                        {m.label}
-                      </div>
+                      <div className="mt-0.5 text-xs text-muted-foreground">{m.label}</div>
                     </div>
                   );
                 })}
@@ -138,9 +138,7 @@ export function RoleLane({ role, onBook }: { role: Role; onBook: OpenBooking }) 
                       <div className="text-sm font-bold text-emerald-400 font-mono tracking-tight sm:text-base">
                         {currentEarning.amount}
                       </div>
-                      <div className="text-xs text-muted-foreground">
-                        {currentEarning.label}
-                      </div>
+                      <div className="text-xs text-muted-foreground">{currentEarning.label}</div>
                     </div>
                   </div>
 
@@ -149,7 +147,7 @@ export function RoleLane({ role, onBook }: { role: Role; onBook: OpenBooking }) 
                     max={100}
                     step={1}
                     className="py-1.5"
-                    onValueChange={(vals) => setHostSpace(vals?.[0] ?? 33)}
+                    onValueChange={(vals: number[]) => setHostSpace(vals?.[0] ?? 33)}
                   />
 
                   <div className="flex justify-between text-xs font-medium text-muted-foreground mt-1">

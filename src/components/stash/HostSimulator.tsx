@@ -98,7 +98,9 @@ export function HostSimulator({ onBook }: { onBook: () => void }) {
                             <span className="font-semibold text-foreground">{opt.effort}</span>
                           </div>
                           <div className="flex justify-between text-xs">
-                            <span className="text-muted-foreground">{t.hostSimulator.capacity}</span>
+                            <span className="text-muted-foreground">
+                              {t.hostSimulator.capacity}
+                            </span>
                             <span className="font-semibold text-foreground text-right">
                               {opt.id === "corner"
                                 ? `${cornerBags} ${isHi ? "बैग क्षमता" : "Bags Capacity"}`
@@ -128,7 +130,9 @@ export function HostSimulator({ onBook }: { onBook: () => void }) {
                             >
                               -
                             </button>
-                            <span className="font-mono text-xs text-white font-bold">{cornerBags}</span>
+                            <span className="font-mono text-xs text-white font-bold">
+                              {cornerBags}
+                            </span>
                             <button
                               type="button"
                               onClick={() => setCornerBags((b) => Math.min(30, b + 2))}
@@ -139,7 +143,8 @@ export function HostSimulator({ onBook }: { onBook: () => void }) {
                           </div>
                         </div>
                         <div className="text-[10px] text-emerald-400 font-medium">
-                          {opt.payoutNote || (isHi ? "⚡ ₹180 प्रति बैग/माह" : "⚡ ₹180 net / bag / mo")}
+                          {opt.payoutNote ||
+                            (isHi ? "⚡ ₹180 प्रति बैग/माह" : "⚡ ₹180 net / bag / mo")}
                         </div>
                       </div>
                     )}
@@ -161,7 +166,9 @@ export function HostSimulator({ onBook }: { onBook: () => void }) {
                             >
                               -
                             </button>
-                            <span className="font-mono text-xs text-white font-bold">{dailyTiffins}</span>
+                            <span className="font-mono text-xs text-white font-bold">
+                              {dailyTiffins}
+                            </span>
                             <button
                               type="button"
                               onClick={() => setDailyTiffins((d) => Math.min(25, d + 2))}

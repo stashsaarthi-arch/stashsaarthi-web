@@ -122,10 +122,7 @@ export function AuthButton({ compact = false }: { compact?: boolean }) {
       <DropdownMenuContent align="end" className="w-52">
         <DropdownMenuLabel className="truncate">{name}</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem
-          onClick={() => setProfileOpen(true)}
-          className="cursor-pointer"
-        >
+        <DropdownMenuItem onClick={() => setProfileOpen(true)} className="cursor-pointer">
           <UserIcon className="mr-2 h-4 w-4" /> {isHi ? "प्रोफ़ाइल" : "Profile"}
         </DropdownMenuItem>
         <DropdownMenuItem

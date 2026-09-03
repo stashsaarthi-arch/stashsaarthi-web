@@ -48,7 +48,11 @@ export const smoothScrollTo =
     else if (targetId === "student-calculator" || targetId === "savings-calculator") {
       dispatchNavTab("calculator", "student");
       targetId = "calculator";
-    } else if (targetId === "host-earnings-calculator" || targetId === "host-simulator" || targetId === "host-calculator") {
+    } else if (
+      targetId === "host-earnings-calculator" ||
+      targetId === "host-simulator" ||
+      targetId === "host-calculator"
+    ) {
       dispatchNavTab("calculator", "host");
       targetId = "calculator";
     } else if (targetId === "calculator") {
@@ -64,7 +68,12 @@ export const smoothScrollTo =
     } else if (targetId === "process" || targetId === "logistics") {
       dispatchNavTab("trust", "process");
       targetId = "trust";
-    } else if (targetId === "safety" || targetId === "safety-protocol" || targetId === "zerorisk" || targetId === "insurance") {
+    } else if (
+      targetId === "safety" ||
+      targetId === "safety-protocol" ||
+      targetId === "zerorisk" ||
+      targetId === "insurance"
+    ) {
       dispatchNavTab("trust", "zerorisk");
       targetId = "trust";
     } else if (targetId === "privacy" || targetId === "sla") {

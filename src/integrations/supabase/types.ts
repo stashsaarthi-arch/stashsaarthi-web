@@ -331,7 +331,13 @@ export type Database = {
           created_at: string;
           feedback_text: string | null;
           id: string;
-          issue_category: "taste_quality" | "raw_or_burnt" | "hygiene_foreign_object" | "missing_items" | "other" | null;
+          issue_category:
+            | "taste_quality"
+            | "raw_or_burnt"
+            | "hygiene_foreign_object"
+            | "missing_items"
+            | "other"
+            | null;
           photo_url: string | null;
           rating: number;
           refund_status: "not_eligible" | "auto_credited" | "under_review" | "rejected";
@@ -344,7 +350,13 @@ export type Database = {
           created_at?: string;
           feedback_text?: string | null;
           id?: string;
-          issue_category?: "taste_quality" | "raw_or_burnt" | "hygiene_foreign_object" | "missing_items" | "other" | null;
+          issue_category?:
+            | "taste_quality"
+            | "raw_or_burnt"
+            | "hygiene_foreign_object"
+            | "missing_items"
+            | "other"
+            | null;
           photo_url?: string | null;
           rating: number;
           refund_status?: "not_eligible" | "auto_credited" | "under_review" | "rejected";
@@ -357,7 +369,13 @@ export type Database = {
           created_at?: string;
           feedback_text?: string | null;
           id?: string;
-          issue_category?: "taste_quality" | "raw_or_burnt" | "hygiene_foreign_object" | "missing_items" | "other" | null;
+          issue_category?:
+            | "taste_quality"
+            | "raw_or_burnt"
+            | "hygiene_foreign_object"
+            | "missing_items"
+            | "other"
+            | null;
           photo_url?: string | null;
           rating?: number;
           refund_status?: "not_eligible" | "auto_credited" | "under_review" | "rejected";

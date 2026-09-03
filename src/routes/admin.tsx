@@ -59,7 +59,7 @@ function AdminPage() {
   });
 
   const toggleContacted = (id: string) => {
-    setContactedLeads(prev => {
+    setContactedLeads((prev) => {
       const next = new Set(prev);
       if (next.has(id)) {
         next.delete(id);
@@ -89,43 +89,59 @@ function AdminPage() {
         .select("id, full_name, user_type, college_or_locality, phone_number, created_at");
 
       if (waitlistError) {
-        logSupabaseError({ table: "users_waitlist", operation: "select", error: waitlistError, context: "admin_fetchLeads" });
+        logSupabaseError({
+          table: "users_waitlist",
+          operation: "select",
+          error: waitlistError,
+          context: "admin_fetchLeads",
+        });
       }
-      
+
       const { data: bookingData, error: bookingError } = await supabase
         .from("co_living_inquiries")
         .select("id, name, role, preferred_location, phone, message, created_at");
 
       if (bookingError) {
-        logSupabaseError({ table: "co_living_inquiries", operation: "select", error: bookingError, context: "admin_fetchBookings" });
+        logSupabaseError({
+          table: "co_living_inquiries",
+          operation: "select",
+          error: bookingError,
+          context: "admin_fetchBookings",
+        });
       }
 
-      const serverWaitlist = Array.isArray(waitlistData) ? waitlistData.map((w: WaitlistEntry) => ({
-        id: w.id,
-        full_name: w.full_name,
-        user_type: w.user_type,
-        college_or_locality: w.college_or_locality,
-        phone_number: w.phone_number,
-        created_at: w.created_at,
-        source: "Waitlist",
-        message: null
-      })) : [];
+      const serverWaitlist = Array.isArray(waitlistData)
+        ? waitlistData.map((w: WaitlistEntry) => ({
+            id: w.id,
+            full_name: w.full_name,
+            user_type: w.user_type,
+            college_or_locality: w.college_or_locality,
+            phone_number: w.phone_number,
+            created_at: w.created_at,
+            source: "Waitlist",
+            message: null,
+          }))
+        : [];
 
-      const serverBookings = Array.isArray(bookingData) ? bookingData.map((b: BookingEntry) => ({
-        id: b.id,
-        full_name: b.name,
-        user_type: b.role,
-        college_or_locality: b.preferred_location,
-        phone_number: b.phone,
-        created_at: b.created_at,
-        source: "Booking",
-        message: b.message
-      })) : [];
+      const serverBookings = Array.isArray(bookingData)
+        ? bookingData.map((b: BookingEntry) => ({
+            id: b.id,
+            full_name: b.name,
+            user_type: b.role,
+            college_or_locality: b.preferred_location,
+            phone_number: b.phone,
+            created_at: b.created_at,
+            source: "Booking",
+            message: b.message,
+          }))
+        : [];
       let combined: Lead[] = [...serverWaitlist, ...serverBookings];
 
       // Merge with any pending offline leads from localStorage
       try {
-        const offlineQueue = JSON.parse(localStorage.getItem("stash_offline_queue_users_waitlist") || "[]");
+        const offlineQueue = JSON.parse(
+          localStorage.getItem("stash_offline_queue_users_waitlist") || "[]",
+        );
         if (Array.isArray(offlineQueue) && offlineQueue.length > 0) {
           const offlineLeads: Lead[] = offlineQueue.map((item) => ({
             id: item.id,
@@ -135,7 +151,7 @@ function AdminPage() {
             phone_number: item.data?.phone_number || null,
             created_at: item.queuedAt || new Date().toISOString(),
             source: "Waitlist",
-            message: null
+            message: null,
           }));
           combined = [...offlineLeads, ...combined];
         }
@@ -241,71 +257,79 @@ function AdminPage() {
                   leads.map((lead) => {
                     const isContacted = contactedLeads.has(lead.id);
                     return (
-                    <tr key={lead.id} className="hover:bg-white/[0.02] transition-colors">
-                      <td className="px-6 py-4 font-medium text-foreground whitespace-nowrap">
-                        {lead.full_name || "Anonymous"}
-                        <div className="text-xs text-muted-foreground font-normal mt-0.5">
-                          {lead.phone_number || "No phone"}
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 capitalize text-muted-foreground">
-                        <div className="font-medium text-foreground">{lead.source || "Waitlist"}</div>
-                        <div className="text-[10px] uppercase tracking-wider">{lead.user_type || "-"}</div>
-                      </td>
-                      <td className="px-6 py-4 text-muted-foreground">
-                        <div>{lead.college_or_locality || "-"}</div>
-                        {lead.message && (
-                          <div className="text-[10px] text-cyan-400/80 mt-1 max-w-[200px] truncate" title={lead.message}>
-                            {lead.message}
+                      <tr key={lead.id} className="hover:bg-white/[0.02] transition-colors">
+                        <td className="px-6 py-4 font-medium text-foreground whitespace-nowrap">
+                          {lead.full_name || "Anonymous"}
+                          <div className="text-xs text-muted-foreground font-normal mt-0.5">
+                            {lead.phone_number || "No phone"}
                           </div>
-                        )}
-                      </td>
-                      <td className="px-6 py-4">
-                        <button
-                          onClick={() => toggleContacted(lead.id)}
-                          className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-[10px] font-medium transition-colors ${
-                            isContacted 
-                              ? "border-cyan-500/30 bg-cyan-500/10 text-cyan-400 hover:bg-cyan-500/20" 
-                              : "border-emerald-500/20 bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20"
-                          }`}
-                        >
-                          {isContacted ? (
-                            <>
-                              <CheckCircle2 className="h-3 w-3" />
-                              Contacted
-                            </>
-                          ) : (
-                            "Pending Contact"
-                          )}
-                        </button>
-                      </td>
-                      <td className="px-6 py-4 text-right">
-                        {lead.phone_number ? (
-                          <Button
-                            asChild
-                            size="sm"
-                            variant="outline"
-                            className="h-8 border-[#25D366]/30 text-[#25D366] hover:bg-[#25D366]/10 hover:border-[#25D366]/50"
-                          >
-                            <a
-                              href={(() => {
-                                const clean = lead.phone_number.replace(/\D/g, "");
-                                const intl = clean.startsWith("91") ? clean : `91${clean}`;
-                                return `https://wa.me/${intl}?text=${encodeURIComponent(`Hi ${lead.full_name}, this is your StashSaarthi Concierge.`)}`;
-                              })()}
-                              target="_blank"
-                              rel="noopener noreferrer"
+                        </td>
+                        <td className="px-6 py-4 capitalize text-muted-foreground">
+                          <div className="font-medium text-foreground">
+                            {lead.source || "Waitlist"}
+                          </div>
+                          <div className="text-[10px] uppercase tracking-wider">
+                            {lead.user_type || "-"}
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 text-muted-foreground">
+                          <div>{lead.college_or_locality || "-"}</div>
+                          {lead.message && (
+                            <div
+                              className="text-[10px] text-cyan-400/80 mt-1 max-w-[200px] truncate"
+                              title={lead.message}
                             >
-                              <MessageCircle className="h-3.5 w-3.5 mr-1.5" />
-                              WhatsApp
-                            </a>
-                          </Button>
-                        ) : (
-                          <span className="text-xs text-muted-foreground">No phone</span>
-                        )}
-                      </td>
-                    </tr>
-                  )})
+                              {lead.message}
+                            </div>
+                          )}
+                        </td>
+                        <td className="px-6 py-4">
+                          <button
+                            onClick={() => toggleContacted(lead.id)}
+                            className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-[10px] font-medium transition-colors ${
+                              isContacted
+                                ? "border-cyan-500/30 bg-cyan-500/10 text-cyan-400 hover:bg-cyan-500/20"
+                                : "border-emerald-500/20 bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20"
+                            }`}
+                          >
+                            {isContacted ? (
+                              <>
+                                <CheckCircle2 className="h-3 w-3" />
+                                Contacted
+                              </>
+                            ) : (
+                              "Pending Contact"
+                            )}
+                          </button>
+                        </td>
+                        <td className="px-6 py-4 text-right">
+                          {lead.phone_number ? (
+                            <Button
+                              asChild
+                              size="sm"
+                              variant="outline"
+                              className="h-8 border-[#25D366]/30 text-[#25D366] hover:bg-[#25D366]/10 hover:border-[#25D366]/50"
+                            >
+                              <a
+                                href={(() => {
+                                  const clean = lead.phone_number.replace(/\D/g, "");
+                                  const intl = clean.startsWith("91") ? clean : `91${clean}`;
+                                  return `https://wa.me/${intl}?text=${encodeURIComponent(`Hi ${lead.full_name}, this is your StashSaarthi Concierge.`)}`;
+                                })()}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                <MessageCircle className="h-3.5 w-3.5 mr-1.5" />
+                                WhatsApp
+                              </a>
+                            </Button>
+                          ) : (
+                            <span className="text-xs text-muted-foreground">No phone</span>
+                          )}
+                        </td>
+                      </tr>
+                    );
+                  })
                 )}
               </tbody>
             </table>

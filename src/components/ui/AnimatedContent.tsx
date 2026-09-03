@@ -52,7 +52,7 @@ export function AnimatedContent({
     if (!el) return;
 
     // Use GSAP context for clean cleanup
-    let ctx = gsap.context(() => {
+    const ctx = gsap.context(() => {
       if (parallax && yPercent) {
         gsap.to(el, {
           yPercent: yPercent,
@@ -76,7 +76,7 @@ export function AnimatedContent({
           y: yOffset,
           opacity: animateOpacity ? initialOpacity : 1,
           scale: scale,
-          willChange: "transform, opacity"
+          willChange: "transform, opacity",
         });
 
         // Animate on scroll trigger

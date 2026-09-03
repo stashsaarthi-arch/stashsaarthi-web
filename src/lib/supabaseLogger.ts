@@ -1,6 +1,6 @@
 /**
  * StashSaarthi Deterministic Supabase Telemetry & Zero-Data-Drop Engine
- * 
+ *
  * Enforces:
  * 1. Structured bulletproof error logging (table, payload, error code, timestamp, network status)
  * 2. Zero Data Drop (auto-persist failed inserts to indexed local storage queue)
@@ -18,9 +18,20 @@ export interface SupabaseLogPayload {
   context?: string;
 }
 
-export function logSupabaseError({ table, operation, payload, error, context }: SupabaseLogPayload) {
+export function logSupabaseError({
+  table,
+  operation,
+  payload,
+  error,
+  context,
+}: SupabaseLogPayload) {
   const timestamp = new Date().toISOString();
-  const errObj = error as { code?: string; message?: string; details?: string; hint?: string } | null;
+  const errObj = error as {
+    code?: string;
+    message?: string;
+    details?: string;
+    hint?: string;
+  } | null;
   const errorDetails = {
     timestamp,
     table,
@@ -50,7 +61,11 @@ function sanitizePayload(payload: unknown) {
     const copy = { ...(payload as Record<string, unknown>) };
     // Redact password or raw tokens if present
     if (copy["password"]) copy["password"] = "[REDACTED]";
-    if (copy["token"] && typeof copy["token"] === "string" && (copy["token"] as string).length > 30) {
+    if (
+      copy["token"] &&
+      typeof copy["token"] === "string" &&
+      (copy["token"] as string).length > 30
+    ) {
       copy["token"] = "[REDACTED]";
     }
     return copy;
@@ -75,7 +90,9 @@ export async function queueOfflineSubmission(table: string, data: unknown) {
     };
     existing.push(item);
     await set(queueKey, existing);
-    console.info(`[StashSaarthi:ZeroDataDrop] Saved item to offline queue for table "${table}" (Total pending: ${existing.length})`);
+    console.info(
+      `[StashSaarthi:ZeroDataDrop] Saved item to offline queue for table "${table}" (Total pending: ${existing.length})`,
+    );
   } catch (err) {
     console.warn("[StashSaarthi:ZeroDataDrop] IndexedDB queue error:", err);
   }
@@ -95,13 +112,18 @@ export async function flushOfflineQueues() {
       const items = (await get(queueKey)) as { data: unknown }[] | undefined;
       if (!Array.isArray(items) || items.length === 0) continue;
 
-      console.info(`[StashSaarthi:ZeroDataDrop] Flushing ${items.length} queued items to "${table}"...`);
+      console.info(
+        `[StashSaarthi:ZeroDataDrop] Flushing ${items.length} queued items to "${table}"...`,
+      );
       const remaining: { data: unknown }[] = [];
 
       for (const item of items) {
         try {
-          const { error } = await (supabase.from as any)(table).insert(item.data as Record<string, unknown>);
-          if (error && error.code !== "23505") { // 23505 is unique violation, treat as success/synced
+          const { error } = await (supabase.from as any)(table).insert(
+            item.data as Record<string, unknown>,
+          );
+          if (error && error.code !== "23505") {
+            // 23505 is unique violation, treat as success/synced
             remaining.push(item);
           }
         } catch {
@@ -111,7 +133,9 @@ export async function flushOfflineQueues() {
 
       if (remaining.length === 0) {
         await del(queueKey);
-        console.info(`[StashSaarthi:ZeroDataDrop] Table "${table}" offline queue completely synced!`);
+        console.info(
+          `[StashSaarthi:ZeroDataDrop] Table "${table}" offline queue completely synced!`,
+        );
       } else {
         await set(queueKey, remaining);
       }

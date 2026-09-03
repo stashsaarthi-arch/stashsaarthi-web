@@ -37,8 +37,7 @@ export const translations = {
       },
       host: {
         badge: "Trusted by 12+ Senior Hosts in Kanpur",
-        title:
-          "Turn Spare Rooms & Corners Into ₹11,500/mo Passive Income.",
+        title: "Turn Spare Rooms & Corners Into ₹11,500/mo Passive Income.",
         subtitle:
           "Help verified IITK & CSJMU students store luggage or find safe housing. 100% escrow protected, zero broker hassle, and strictly on your terms.",
         cta: "List Your Space for Free",
@@ -528,8 +527,7 @@ export const translations = {
       },
       host: {
         badge: "कानपुर में 12+ सीनियर होस्ट्स का भरोसा",
-        title:
-          "अपने खाली कमरों से ₹11,500/महीने की सम्मानजनक आय कमाएं।",
+        title: "अपने खाली कमरों से ₹11,500/महीने की सम्मानजनक आय कमाएं।",
         subtitle:
           "IITK और CSJMU के सत्यापित छात्रों की सामान रखने या रहने में मदद करें। 100% सुरक्षित, कोई ब्रोकर नहीं, और पूरी तरह आपके नियमों पर।",
         cta: "अपना खाली कमरा मुफ्त लिस्ट करें",

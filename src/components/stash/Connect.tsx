@@ -213,9 +213,13 @@ export function Connect(_props: { onBook: OpenBooking }) {
                   icon={<GraduationCap className="h-4 w-4 text-cyan" />}
                   accent="var(--cyan)"
                   name={match.student.name}
-                  detail={isHi && match.student.detail_hi ? match.student.detail_hi : match.student.detail}
+                  detail={
+                    isHi && match.student.detail_hi ? match.student.detail_hi : match.student.detail
+                  }
                   label={t.connectSection.gives}
-                  items={isHi && match.student.gives_hi ? match.student.gives_hi : match.student.gives}
+                  items={
+                    isHi && match.student.gives_hi ? match.student.gives_hi : match.student.gives
+                  }
                 />
 
                 <div className="flex items-center justify-center">
@@ -228,9 +232,13 @@ export function Connect(_props: { onBook: OpenBooking }) {
                   icon={<Heart className="h-4 w-4 text-amber" />}
                   accent="var(--amber)"
                   name={match.senior.name}
-                  detail={isHi && match.senior.detail_hi ? match.senior.detail_hi : match.senior.detail}
+                  detail={
+                    isHi && match.senior.detail_hi ? match.senior.detail_hi : match.senior.detail
+                  }
                   label={t.connectSection.offers}
-                  items={isHi && match.senior.offers_hi ? match.senior.offers_hi : match.senior.offers}
+                  items={
+                    isHi && match.senior.offers_hi ? match.senior.offers_hi : match.senior.offers
+                  }
                 />
               </div>
 
@@ -304,8 +312,14 @@ export function Connect(_props: { onBook: OpenBooking }) {
               </label>
               <div className="space-y-1.5">
                 {[
-                  { id: "early", label: isHi ? "सुबह जल्दी उठने वाले (Early Bird)" : "Early Riser" },
-                  { id: "night", label: isHi ? "देर रात पढ़ाई (Quiet Night Owl)" : "Quiet Night Owl" },
+                  {
+                    id: "early",
+                    label: isHi ? "सुबह जल्दी उठने वाले (Early Bird)" : "Early Riser",
+                  },
+                  {
+                    id: "night",
+                    label: isHi ? "देर रात पढ़ाई (Quiet Night Owl)" : "Quiet Night Owl",
+                  },
                 ].map((opt) => (
                   <button
                     key={opt.id}

@@ -132,7 +132,7 @@ export const TasteShieldModal: React.FC<TasteShieldModalProps> = ({
 
   const toggleTag = (tag: string) => {
     setSelectedTags((prev) =>
-      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
+      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag],
     );
   };
 
@@ -141,10 +141,7 @@ export const TasteShieldModal: React.FC<TasteShieldModalProps> = ({
     setSelectedIssueLabel(option.label);
   };
 
-  const isEligibleForRefund =
-    rating <= 2 &&
-    quota?.isQuotaAvailable &&
-    !quota?.isShieldBlocked;
+  const isEligibleForRefund = rating <= 2 && quota?.isQuotaAvailable && !quota?.isShieldBlocked;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -278,7 +275,8 @@ export const TasteShieldModal: React.FC<TasteShieldModalProps> = ({
                   Auto-Refund Credited!
                 </h3>
                 <p className="text-sm text-slate-400 mt-2 max-w-sm mx-auto">
-                  Our anti-fraud engine verified your meal proof. The 50% guarantee has been settled automatically.
+                  Our anti-fraud engine verified your meal proof. The 50% guarantee has been settled
+                  automatically.
                 </p>
 
                 {/* Animated Tokens Badge */}
@@ -290,11 +288,14 @@ export const TasteShieldModal: React.FC<TasteShieldModalProps> = ({
                     <span className="text-emerald-400">+{submissionResult.refundTokens}</span>
                     <span className="text-sm font-semibold text-slate-300">Tokens ⚡</span>
                   </div>
-                  <div className="text-[11px] text-slate-400 mt-1">1 Token = ₹1 • Available for your next thali</div>
+                  <div className="text-[11px] text-slate-400 mt-1">
+                    1 Token = ₹1 • Available for your next thali
+                  </div>
                 </div>
 
                 <p className="text-xs text-slate-400 italic max-w-xs mx-auto mb-6">
-                  {booking.vendorName} quality supervisor has received your photo proof for mess inspection.
+                  {booking.vendorName} quality supervisor has received your photo proof for mess
+                  inspection.
                 </p>
               </div>
             ) : (
@@ -310,7 +311,9 @@ export const TasteShieldModal: React.FC<TasteShieldModalProps> = ({
                 </p>
                 <div className="my-6 p-4 rounded-2xl bg-slate-950 border border-slate-800 text-xs text-slate-400 max-w-sm mx-auto">
                   <div className="font-semibold text-slate-300 mb-1">Reviewed Node:</div>
-                  <div>{booking.mealName} • {booking.vendorName}</div>
+                  <div>
+                    {booking.mealName} • {booking.vendorName}
+                  </div>
                 </div>
               </div>
             )}
@@ -345,7 +348,8 @@ export const TasteShieldModal: React.FC<TasteShieldModalProps> = ({
                 </span>
               </h3>
               <p className="text-xs text-slate-400 mt-0.5">
-                {booking.mealName} from <span className="text-slate-300 font-medium">{booking.vendorName}</span>
+                {booking.mealName} from{" "}
+                <span className="text-slate-300 font-medium">{booking.vendorName}</span>
               </p>
             </div>
 
@@ -385,11 +389,19 @@ export const TasteShieldModal: React.FC<TasteShieldModalProps> = ({
 
               {/* Mood indicator text */}
               <div className="text-xs font-semibold h-5">
-                {rating === 5 && <span className="text-emerald-400">🔥 Lajawab! Pure Ghar Ka Swad</span>}
+                {rating === 5 && (
+                  <span className="text-emerald-400">🔥 Lajawab! Pure Ghar Ka Swad</span>
+                )}
                 {rating === 4 && <span className="text-emerald-300">✨ Very Good & Fresh</span>}
                 {rating === 3 && <span className="text-slate-400">🙂 Average / Thik Thaak</span>}
-                {rating === 2 && <span className="text-rose-400">⚠️ Disappointing (Taste Shield Active)</span>}
-                {rating === 1 && <span className="text-rose-500 font-bold">❌ Poor Quality / Burnt (Taste Shield Active)</span>}
+                {rating === 2 && (
+                  <span className="text-rose-400">⚠️ Disappointing (Taste Shield Active)</span>
+                )}
+                {rating === 1 && (
+                  <span className="text-rose-500 font-bold">
+                    ❌ Poor Quality / Burnt (Taste Shield Active)
+                  </span>
+                )}
               </div>
             </div>
 
@@ -503,7 +515,8 @@ export const TasteShieldModal: React.FC<TasteShieldModalProps> = ({
                       <strong className="text-emerald-400 font-bold block mb-0.5">
                         Verified claim eligible!
                       </strong>
-                      50% tokens (<strong>{potentialRefund} Tokens</strong>) will be instantly credited to your wallet upon live photo verification.
+                      50% tokens (<strong>{potentialRefund} Tokens</strong>) will be instantly
+                      credited to your wallet upon live photo verification.
                     </div>
                   </div>
                 ) : (
@@ -513,7 +526,8 @@ export const TasteShieldModal: React.FC<TasteShieldModalProps> = ({
                       <strong className="text-amber-400 font-bold block mb-0.5">
                         Monthly Taste Shield used
                       </strong>
-                      Your monthly claim quota is currently exhausted. Your review will be sent directly to mess management for quality penalties.
+                      Your monthly claim quota is currently exhausted. Your review will be sent
+                      directly to mess management for quality penalties.
                     </div>
                   </div>
                 )}
@@ -596,7 +610,9 @@ export const TasteShieldModal: React.FC<TasteShieldModalProps> = ({
                           {photoFile?.name || "live_camera_capture.jpg"}
                         </div>
                         <div className="text-xs text-slate-400">
-                          {photoFile ? `${Math.round(photoFile.size / 1024)} KB` : "Verified snapshot"}
+                          {photoFile
+                            ? `${Math.round(photoFile.size / 1024)} KB`
+                            : "Verified snapshot"}
                         </div>
                       </div>
 
@@ -620,7 +636,8 @@ export const TasteShieldModal: React.FC<TasteShieldModalProps> = ({
                     </button>
                   )}
                   <p className="text-xs text-slate-400 mt-1">
-                    Uploads directly to StashSaarthi <code>review-proofs</code> bucket for verification audit.
+                    Uploads directly to StashSaarthi <code>review-proofs</code> bucket for
+                    verification audit.
                   </p>
                 </div>
               </motion.div>

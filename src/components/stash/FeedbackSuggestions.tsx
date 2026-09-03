@@ -609,7 +609,9 @@ export function FeedbackSuggestions() {
 
               <div className="flex items-center justify-between sm:justify-end gap-2.5">
                 <span className="text-[11px] text-zinc-400 font-semibold">
-                  {isHi ? `${filteredReviews.length} समीक्षाएं` : `${filteredReviews.length} Reviews`}
+                  {isHi
+                    ? `${filteredReviews.length} समीक्षाएं`
+                    : `${filteredReviews.length} Reviews`}
                 </span>
                 <Button
                   type="button"
@@ -692,7 +694,9 @@ export function FeedbackSuggestions() {
                             );
                           })}
                         </div>
-                        <span className="text-xs font-black text-amber-400 ml-1">{formRating}.0</span>
+                        <span className="text-xs font-black text-amber-400 ml-1">
+                          {formRating}.0
+                        </span>
                       </div>
                     </div>
 
@@ -712,7 +716,10 @@ export function FeedbackSuggestions() {
                         </div>
 
                         <div>
-                          <label htmlFor="feedback-role-select" className="block text-xs font-bold text-zinc-300 mb-1 cursor-pointer">
+                          <label
+                            htmlFor="feedback-role-select"
+                            className="block text-xs font-bold text-zinc-300 mb-1 cursor-pointer"
+                          >
                             {isHi ? "आपकी भूमिका" : "Your Role"}
                           </label>
                           <select
@@ -722,11 +729,15 @@ export function FeedbackSuggestions() {
                             onChange={(e) => setFormRole(e.target.value)}
                             className="w-full text-xs rounded-lg bg-[#172027] border border-white/15 p-2 text-white h-9 focus:outline-none focus:border-emerald-400 cursor-pointer"
                           >
-                            <option value="Student">{isHi ? "🎓 छात्र / Student" : "🎓 Student"}</option>
+                            <option value="Student">
+                              {isHi ? "🎓 छात्र / Student" : "🎓 Student"}
+                            </option>
                             <option value="Senior Host">
                               {isHi ? "🏠 सीनियर होस्ट / Host" : "🏠 Senior Host"}
                             </option>
-                            <option value="Parent">{isHi ? "👨‍👩‍👦 अभिभावक / Parent" : "👨‍👩‍👦 Parent"}</option>
+                            <option value="Parent">
+                              {isHi ? "👨‍👩‍👦 अभिभावक / Parent" : "👨‍👩‍👦 Parent"}
+                            </option>
                             <option value="Partner">
                               {isHi ? "📦 नोड पार्टनर / Partner" : "📦 Storage Partner"}
                             </option>
@@ -734,7 +745,10 @@ export function FeedbackSuggestions() {
                         </div>
 
                         <div>
-                          <label htmlFor="feedback-service-select" className="block text-xs font-bold text-zinc-300 mb-1 cursor-pointer">
+                          <label
+                            htmlFor="feedback-service-select"
+                            className="block text-xs font-bold text-zinc-300 mb-1 cursor-pointer"
+                          >
                             {isHi ? "उपयोग की गई सेवा" : "Service Used"}
                           </label>
                           <select
@@ -792,7 +806,9 @@ export function FeedbackSuggestions() {
 
                       <div>
                         <label className="block text-[11px] font-bold text-zinc-300 mb-1">
-                          {isHi ? "आपका विस्तृत अनुभव व रिव्यू *" : "Your Detailed Review / Feedback *"}
+                          {isHi
+                            ? "आपका विस्तृत अनुभव व रिव्यू *"
+                            : "Your Detailed Review / Feedback *"}
                         </label>
                         <Textarea
                           required
@@ -969,7 +985,9 @@ export function FeedbackSuggestions() {
 
               <div className="flex items-center justify-between sm:justify-end gap-2.5">
                 <span className="text-[11px] text-zinc-400 font-semibold">
-                  {isHi ? `${filteredSuggestions.length} सुझाव` : `${filteredSuggestions.length} Ideas`}
+                  {isHi
+                    ? `${filteredSuggestions.length} सुझाव`
+                    : `${filteredSuggestions.length} Ideas`}
                 </span>
                 <Button
                   type="button"
@@ -1033,12 +1051,17 @@ export function FeedbackSuggestions() {
                     <form onSubmit={handleSuggestionSubmit} className="space-y-3">
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
                         <div>
-                          <label htmlFor="suggestion-category-select" className="block text-xs font-bold text-zinc-300 mb-1 cursor-pointer">
+                          <label
+                            htmlFor="suggestion-category-select"
+                            className="block text-xs font-bold text-zinc-300 mb-1 cursor-pointer"
+                          >
                             {isHi ? "आइडिया की श्रेणी" : "Category"}
                           </label>
                           <select
                             id="suggestion-category-select"
-                            aria-label={isHi ? "आइडिया की श्रेणी चुनें" : "Select suggestion category"}
+                            aria-label={
+                              isHi ? "आइडिया की श्रेणी चुनें" : "Select suggestion category"
+                            }
                             value={sugCategory}
                             onChange={(e) => setSugCategory(e.target.value as any)}
                             className="w-full text-xs rounded-lg bg-[#172027] border border-white/15 p-2 text-white h-9 focus:outline-none focus:border-cyan-400 cursor-pointer"

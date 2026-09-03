@@ -1,13 +1,7 @@
 import { motion } from "framer-motion";
 import { ReactNode } from "react";
 
-export function PageTransition({
-  children,
-  routeKey,
-}: {
-  children: ReactNode;
-  routeKey: string;
-}) {
+export function PageTransition({ children, routeKey }: { children: ReactNode; routeKey: string }) {
   return (
     <motion.div
       key={routeKey}

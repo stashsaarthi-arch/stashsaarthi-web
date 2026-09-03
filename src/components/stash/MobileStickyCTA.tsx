@@ -40,7 +40,9 @@ export function MobileStickyCTA({ onBook }: { onBook: OpenBooking }) {
               <span className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground">
                 {student ? "Vacation Storage" : "Spare Space"}
               </span>
-              <span className={`text-sm font-extrabold ${student ? "text-emerald-400" : "text-amber-400"} flex items-center gap-0.5 mt-0.5`}>
+              <span
+                className={`text-sm font-extrabold ${student ? "text-emerald-400" : "text-amber-400"} flex items-center gap-0.5 mt-0.5`}
+              >
                 <IndianRupee className="w-3.5 h-3.5" />
                 {student ? "300/mo" : "11,500/mo"}
               </span>

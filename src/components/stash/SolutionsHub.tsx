@@ -71,7 +71,10 @@ export function SolutionsHub({ onBook, onListRoom }: SolutionsHubProps) {
     <section id="solutions" className="relative mx-auto max-w-6xl px-4 py-3.5 sm:py-5 scroll-mt-20">
       {/* Section Header */}
       <div className="mx-auto max-w-3xl text-center">
-        <Badge variant="outline" className="border-white/15 bg-white/5 text-xs text-muted-foreground">
+        <Badge
+          variant="outline"
+          className="border-white/15 bg-white/5 text-xs text-muted-foreground"
+        >
           {isHi ? "एकीकृत समाधान हब" : "Integrated Solutions Hub"}
         </Badge>
         <h2 className="mt-1.5 text-balance text-lg font-extrabold tracking-tight sm:text-2xl">
@@ -157,9 +160,7 @@ export function SolutionsHub({ onBook, onListRoom }: SolutionsHubProps) {
       <div className="mt-2.5 transition-all duration-300">
         {activeTab === "stash" && <Ecosystem onBook={onBook} />}
         {activeTab === "rooms" && <Rooms onList={onListRoom} />}
-        {activeTab === "kitchen" && (
-          <TokenMealHub />
-        )}
+        {activeTab === "kitchen" && <TokenMealHub />}
         {activeTab === "connect" && <Connect onBook={onBook} />}
       </div>
     </section>

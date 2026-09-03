@@ -64,10 +64,7 @@ export function DataPrivacyCommitment() {
   ];
 
   return (
-    <div
-      id="privacy-commitments"
-      className="relative mx-auto max-w-6xl px-2 py-2 scroll-mt-20"
-    >
+    <div id="privacy-commitments" className="relative mx-auto max-w-6xl px-2 py-2 scroll-mt-20">
       <div className="grid gap-3 md:grid-cols-3">
         {COMMITMENTS.map((item, index) => {
           const Icon = item.icon;
@@ -116,7 +113,9 @@ export function DataPrivacyCommitment() {
 
                   <div className="mt-4 pt-3 border-t border-white/5 flex items-center gap-1.5">
                     <CheckCircle className="h-3.5 w-3.5 shrink-0 text-emerald-400" />
-                    <span className="text-[11px] font-semibold text-foreground/85">{item.proof}</span>
+                    <span className="text-[11px] font-semibold text-foreground/85">
+                      {item.proof}
+                    </span>
                   </div>
                 </div>
               </Card3D>

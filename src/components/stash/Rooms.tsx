@@ -366,7 +366,12 @@ export function Rooms({ onList }: { onList: () => void }) {
             {t.rooms.vacatingDesc}
           </p>
         </div>
-        <Button variant="warm" size="default" className="w-full shrink-0 sm:w-auto text-xs py-1.5" onClick={onList}>
+        <Button
+          variant="warm"
+          size="default"
+          className="w-full shrink-0 sm:w-auto text-xs py-1.5"
+          onClick={onList}
+        >
           {t.rooms.listVacatingBtn}
         </Button>
       </div>
