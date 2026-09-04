@@ -14,7 +14,7 @@ export interface SupabaseLogPayload {
   table: string;
   operation: "insert" | "upsert" | "update" | "delete" | "select";
   payload?: unknown;
-  error?: any;
+  error?: unknown;
   context?: string;
 }
 

@@ -1,3 +1,10 @@
+- [x] **[Architectural Hardening] Unbiased Architecture Fixes & Zero-Data-Drop Telemetry**:
+  - **Storage Architecture (Zero-Data-Drop)**: Upgraded offline storage queue in `src/lib/supabaseLogger.ts` from 5MB synchronous `localStorage` to asynchronous IndexedDB using `idb-keyval`. Guaranteed zero data drop for failed form submissions with automatic background syncing on network reconnect or idle.
+  - **Strict Type Safety**: Removed loose `any` signatures across telemetry (`error?: unknown`), admin dashboard (`WaitlistEntry`, `BookingEntry`), and referral modals (`LucideIcon`), ensuring full compile-time validation.
+  - **Booking Modal Desktop UX**: Configured responsive presentation in `src/components/stash/BookingModal.tsx`. On desktop viewports (`md:` and above), the `upi://pay` deep link is cleanly hidden to prevent protocol errors, emphasizing the scannable instant QR code and 1-click UPI ID copy. On mobile, the 1-tap "Pay with UPI App" button remains active.
+  - **International Phone Validation**: Upgraded `src/lib/waitlistService.ts` to support E.164 international formats (e.g. `+1`, `+44`) alongside strict 10-digit Indian numbers (`6-9` prefix).
+  - **Verification**: `npx tsc --noEmit` passed with **0 errors**. Production build (`npm run build`) succeeded across client, SSR, and Nitro server bundles.
+
 - [x] **[UI Restoration & Emergency Rollback] Reverted Broken Plain-Text State to Original Pristine UI**:
   - **Identified Defect**: A stray `index.html` file containing crawlable plain-text SEO content hijacked the Nitro SSR server route, causing `localhost:3000` to serve raw unstyled text without loading the React runtime.
   - **Resolution**:

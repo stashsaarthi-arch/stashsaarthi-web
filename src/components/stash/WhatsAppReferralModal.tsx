@@ -12,6 +12,7 @@ import {
   Utensils,
   CheckCircle2,
   ArrowRight,
+  type LucideIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -38,7 +39,7 @@ export function WhatsAppReferralModal({ open, onOpenChange }: WhatsAppReferralMo
   // Pre-crafted high-converting referral messages
   const messages: Record<
     "student" | "host" | "food",
-    { en: string; hi: string; titleEn: string; titleHi: string; icon: any }
+    { en: string; hi: string; titleEn: string; titleHi: string; icon: LucideIcon }
   > = {
     student: {
       icon: GraduationCap,
