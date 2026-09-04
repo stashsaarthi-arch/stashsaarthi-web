@@ -1,3 +1,11 @@
+- [x] **[UI Restoration & Emergency Rollback] Reverted Broken Plain-Text State to Original Pristine UI**:
+  - **Identified Defect**: A stray `index.html` file containing crawlable plain-text SEO content hijacked the Nitro SSR server route, causing `localhost:3000` to serve raw unstyled text without loading the React runtime.
+  - **Resolution**:
+    - Completely rolled back the codebase to stable commit `4c53d44` where the full interactive UI (Dark Obsidian theme, Electric Mint / Warm Amber accents, Hero, Navbar, Hubs, Ticker) was intact and validated.
+    - Purged rogue `index.html` static bypass so Nitro SSR and Vite properly mount the TanStack Start React application.
+    - Forced update pushed to `origin/main` on GitHub to sync production deployment.
+  - **Verification**: Strict TypeScript type checking (`npx tsc --noEmit`) and full production build (`npm run build`) passed with **0 errors**. HTTP response on `localhost:3000` verified returning full interactive React application and styles.
+
 - [x] **[CTO - Database] Supabase Complete Migration to Fresh Instance**:
   - **Identified Request**: Replace the old Supabase integration entirely with a new project instance (`vzwtappbltaplumazupb`).
   - **Applied Solutions**:
