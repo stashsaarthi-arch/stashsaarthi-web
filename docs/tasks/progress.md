@@ -160,4 +160,11 @@
     • Mobile sticky CTA and touch viewport responsiveness.
   - Built deterministic test runner harness script `execution/run-e2e-tests.mjs` and added npm scripts `"test:e2e"`, `"test:e2e:ui"`, and `"test:e2e:stub"` in `package.json`.
   - Build & Type Check Verified: `npx tsc --noEmit` (**0 errors**), `npm run test:e2e:stub` (**PASSED**), and `npm run build` (**0 errors**).
-
+- [x] **[CPO] Task 20: Implement Dark Mode Toggle with Smooth Color-Palette Transition** (2026-09-06)
+  - Engineered global `ThemeContext` provider (`src/context/ThemeContext.tsx`) with dark/light palette state, `localStorage` persistence (`ss-theme`), and automated `theme-color` meta tag updating.
+  - Added smooth CSS transition engine (`.theme-transitioning`) in `src/styles.css` enabling cubic-bezier (0.4s) color palette transitions during theme toggles without permanent animation layout overhead.
+  - Defined high-contrast light mode oklch color design tokens (`--background`, `--foreground`, `--card`, `--surface`, `--border`, `--shadow-glass`) for pristine light mode viewing.
+  - Built reusable, accessible `ThemeToggle` component (`src/components/ui/ThemeToggle.tsx`) featuring animated Sun/Moon icons and tooltips.
+  - Integrated `ThemeToggle` controls into desktop and mobile header action strips in `src/components/stash/Navbar.tsx`.
+  - Wrapped global root application layout in `src/routes/__root.tsx` with `<ThemeProvider>`.
+  - Build & Type Check Verified: `npx tsc --noEmit` (**0 errors**) and `npm run build` (**0 errors**).

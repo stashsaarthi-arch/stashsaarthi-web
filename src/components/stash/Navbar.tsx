@@ -4,6 +4,7 @@ import { Menu, X, GraduationCap, HeartHandshake } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AuthButton } from "./AuthButton";
 import { BrandLogo } from "@/components/ui/BrandLogo";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { smoothScrollTo } from "./legal";
 import { useLanguage } from "@/context/LanguageContext";
 import type { Role } from "./types";
@@ -172,30 +173,33 @@ export const Navbar = memo(function Navbar({
             </button>
           </div>
 
-          {/* Compact Language Switcher */}
-          <div className="hidden sm:flex items-center rounded-full border border-white/10 bg-white/5 p-0.5 shrink-0">
-            <button
-              type="button"
-              onClick={() => setLanguage("en")}
-              className={`rounded-full px-2 py-0.5 text-xs font-bold transition-colors ${
-                language === "en"
-                  ? "bg-white/15 text-white"
-                  : "text-muted-foreground hover:text-white"
-              }`}
-            >
-              EN
-            </button>
-            <button
-              type="button"
-              onClick={() => setLanguage("hi")}
-              className={`rounded-full px-2 py-0.5 text-xs font-bold transition-colors ${
-                language === "hi"
-                  ? "bg-white/15 text-white"
-                  : "text-muted-foreground hover:text-white"
-              }`}
-            >
-              HI
-            </button>
+          {/* Compact Language Switcher & Theme Toggle */}
+          <div className="hidden sm:flex items-center gap-1.5 shrink-0">
+            <div className="flex items-center rounded-full border border-white/10 bg-white/5 p-0.5 shrink-0">
+              <button
+                type="button"
+                onClick={() => setLanguage("en")}
+                className={`rounded-full px-2 py-0.5 text-xs font-bold transition-colors ${
+                  language === "en"
+                    ? "bg-white/15 text-white"
+                    : "text-muted-foreground hover:text-white"
+                }`}
+              >
+                EN
+              </button>
+              <button
+                type="button"
+                onClick={() => setLanguage("hi")}
+                className={`rounded-full px-2 py-0.5 text-xs font-bold transition-colors ${
+                  language === "hi"
+                    ? "bg-white/15 text-white"
+                    : "text-muted-foreground hover:text-white"
+                }`}
+              >
+                HI
+              </button>
+            </div>
+            <ThemeToggle compact />
           </div>
 
           {/* Desktop Auth Button */}
@@ -303,7 +307,7 @@ export const Navbar = memo(function Navbar({
               </button>
             </div>
 
-            {/* Mobile Language Switcher in Menu */}
+            {/* Mobile Language & Theme Switcher in Menu */}
             <div className="p-1 bg-[#161B22] border border-slate-700/60 rounded-xl flex items-center gap-1 mb-2">
               <button
                 type="button"
@@ -327,6 +331,7 @@ export const Navbar = memo(function Navbar({
               >
                 हिंदी
               </button>
+              <ThemeToggle compact className="shrink-0" />
             </div>
 
             {/* Structured Navigation Grid */}

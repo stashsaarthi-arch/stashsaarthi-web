@@ -24,7 +24,7 @@
 - [x] 19. **[CTO]**: Setup end-to-end (E2E) testing stub with Playwright or Cypress for the core booking flow.
 
 ## Sprint 2: CPO (Product & UI Excellence)
-- [ ] 20. **[CPO]**: Implement dark mode toggle with smooth color-palette transition (if not strictly locked to current theme).
+- [x] 20. **[CPO]**: Implement dark mode toggle with smooth color-palette transition (if not strictly locked to current theme).
 - [ ] 21. **[CPO]**: Design and implement skeleton loaders for all data-fetching components.
 - [ ] 22. **[CPO]**: Polish the "Host" persona dashboard with charts for projected passive income.
 - [ ] 23. **[CPO]**: Refine the typography scaling across ultra-wide monitors (4k+).

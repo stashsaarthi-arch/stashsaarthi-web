@@ -1,3 +1,14 @@
+- [x] **[CPO - UI & Customization] Task 20: Implement Dark Mode Toggle with Smooth Color-Palette Transition**:
+  - **Identified Directive**: Implement dark mode toggle with smooth color-palette transition.
+  - **Applied Solution**:
+    - Built `ThemeContext` (`src/context/ThemeContext.tsx`) with dark/light mode state, `localStorage` persistence, and HTML root data attribute / class syncing (`data-theme="light"` / `data-theme="dark"`).
+    - Added smooth 0.4s cubic-bezier color palette transition engine (`.theme-transitioning`) in `src/styles.css` for background, text, border, and glass shadows during theme toggles.
+    - Defined oklch light mode design tokens in `src/styles.css` matching StashSaarthi's high-contrast theme.
+    - Built `ThemeToggle` (`src/components/ui/ThemeToggle.tsx`) component with animated Sun/Moon icons.
+    - Integrated theme toggle into Navbar header controls (`src/components/stash/Navbar.tsx`) for desktop and mobile viewports.
+    - Wrapped application provider tree in `src/routes/__root.tsx` with `<ThemeProvider>`.
+  - **Verification**: `npx tsc --noEmit` (**0 errors**) and `npm run build` (**0 errors**).
+
 - [x] **[CTO - Testing & Quality] Task 19: Setup E2E Testing Suite with Playwright for Core Booking Flow**:
   - **Identified Directive**: Setup end-to-end (E2E) testing stub with Playwright or Cypress for the core booking flow.
   - **Applied Solution**:

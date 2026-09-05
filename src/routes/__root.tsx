@@ -20,6 +20,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { AuthProvider } from "@/hooks/useAuth";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { PersonaProvider } from "@/context/PersonaContext";
+import { ThemeProvider } from "@/context/ThemeContext";
 import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 import { NetworkStatus } from "@/components/stash/NetworkStatus";
 import { ReactLenis, useLenis } from "lenis/react";
@@ -410,40 +411,42 @@ function RootComponent() {
       <AuthProvider>
         <LanguageProvider>
           <PersonaProvider>
-            <QueryClientProvider client={queryClient}>
-              <ErrorBoundary>
-                <ReactLenis
-                  root
-                  options={{
-                    lerp: 0.12,
-                    duration: 0.8,
-                    smoothWheel: true,
-                    wheelMultiplier: 1.05,
-                    touchMultiplier: 1.0,
-                    syncTouch: false,
-                    autoRaf: false, // GSAP is driving the raf now
+            <ThemeProvider>
+              <QueryClientProvider client={queryClient}>
+                <ErrorBoundary>
+                  <ReactLenis
+                    root
+                    options={{
+                      lerp: 0.12,
+                      duration: 0.8,
+                      smoothWheel: true,
+                      wheelMultiplier: 1.05,
+                      touchMultiplier: 1.0,
+                      syncTouch: false,
+                      autoRaf: false, // GSAP is driving the raf now
+                    }}
+                  >
+                    <LenisHandler />
+                    <AnimatePresence mode="wait" initial={false}>
+                      <PageTransition key={currentRoute} routeKey={currentRoute}>
+                        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+                        <Outlet />
+                      </PageTransition>
+                    </AnimatePresence>
+                    <NetworkStatus />
+                  </ReactLenis>
+                </ErrorBoundary>
+                <Toaster
+                  position="top-center"
+                  richColors
+                  theme="dark"
+                  toastOptions={{
+                    className:
+                      "border border-white/10 bg-[#0A0D0F]/95 text-white backdrop-blur-xl shadow-2xl rounded-2xl",
                   }}
-                >
-                  <LenisHandler />
-                  <AnimatePresence mode="wait" initial={false}>
-                    <PageTransition key={currentRoute} routeKey={currentRoute}>
-                      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-                      <Outlet />
-                    </PageTransition>
-                  </AnimatePresence>
-                  <NetworkStatus />
-                </ReactLenis>
-              </ErrorBoundary>
-              <Toaster
-                position="top-center"
-                richColors
-                theme="dark"
-                toastOptions={{
-                  className:
-                    "border border-white/10 bg-[#0A0D0F]/95 text-white backdrop-blur-xl shadow-2xl rounded-2xl",
-                }}
-              />
-            </QueryClientProvider>
+                />
+              </QueryClientProvider>
+            </ThemeProvider>
           </PersonaProvider>
         </LanguageProvider>
       </AuthProvider>
