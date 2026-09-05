@@ -8,5 +8,6 @@
   "ralphLoop.progressFile": "docs/tasks/progress.md",
   "ralphLoop.autoAcceptChanges": true,
   "ralphLoop.maxIterations": 100,
+  "ralphLoop.defaultModel": "Gemini 3 Flash",
   "ralphLoop.antigravity.oauthToken": "auto"
 }

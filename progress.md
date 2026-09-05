@@ -1,3 +1,10 @@
+- [x] **[CTO - Performance] Task 15: Multi-Tier In-Memory & Redis/Upstash REST Caching Engine**:
+  - **Identified Directive**: Implement caching layer for frequently accessed, non-user-specific data (campus nodes, pricing matrices, reviews).
+  - **Applied Solution**:
+    - Built `src/lib/cache.ts` providing 3-tier fallback architecture: In-memory Map cache (0ms TTL) -> IndexedDB persistent cache (`idb-keyval`) -> Upstash REST Redis interface.
+    - Added helper `getOrSet<T>()` and explicit cache invalidation mechanisms.
+  - **Verification**: `npm run build` compiled client, SSR, and Nitro server bundles with **0 errors**.
+
 - [x] **[CTO - Performance] Task 14: WebP Asset Optimization & Automatic Responsive srcset**:
   - **Identified Directive**: Refactor large image assets to WebP with responsive variants and automatic `srcset` generation.
   - **Applied Solution**:

@@ -56,4 +56,12 @@
   - Refactored `FounderAccountability.tsx`, `FounderEscalationWidget.tsx`, and `BrandLogo.tsx` to leverage `OptimizedImage` and WebP assets.
   - Build verified: `npm run build` passes with 0 errors.
 
+- [x] **[CTO] Task 15: Multi-Tier Caching Layer & Upstash Redis REST Integration** (2026-09-06)
+  - Built `src/lib/cache.ts` providing multi-tier caching:
+    • Tier 1: In-memory Map cache with TTL for 0ms immediate responses.
+    • Tier 2: Persistent IndexedDB caching via `idb-keyval` for surviving browser reloads.
+    • Tier 3: Upstash Redis REST interface (if `VITE_UPSTASH_REDIS_REST_URL` & token are provided).
+  - Implemented `getCached`, `setCached`, `invalidateCached`, and `getOrSet` fetch helpers.
+  - Build verified: `npm run build` compiles with 0 errors across client, SSR, and Nitro server bundles.
+
 

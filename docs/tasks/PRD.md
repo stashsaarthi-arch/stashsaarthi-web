@@ -17,7 +17,7 @@
 - [x] 12. **[CTO]**: Audit all Supabase RPC calls for latency optimizations.
 - [x] 13. **[CTO]**: Implement a Service Worker for offline-first capabilities and aggressive caching of static assets.
 - [x] 14. **[CTO]**: Refactor any remaining large image assets to WEBP with automatic `srcset` generation.
-- [ ] 15. **[CTO]**: Implement Redis/Upstash caching layer for frequently accessed, non-user-specific data (if applicable).
+- [x] 15. **[CTO]**: Implement Redis/Upstash caching layer for frequently accessed, non-user-specific data (if applicable).
 - [ ] 16. **[CTO]**: Setup automated nightly build scripts to check for dependency vulnerabilities.
 - [ ] 17. **[CTO]**: Implement comprehensive error boundaries on every distinct section of the landing page.
 - [ ] 18. **[CTO]**: Optimize React re-renders by enforcing strict `React.memo` and `useCallback` on heavy components.
