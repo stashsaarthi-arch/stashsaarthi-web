@@ -17,6 +17,7 @@ import {
 import AnimatedContent from "@/components/ui/AnimatedContent";
 import { Card3D } from "@/components/ui/Card3D";
 import { Badge } from "@/components/ui/badge";
+import { OptimizedImage } from "@/components/ui/OptimizedImage";
 import { useLanguage } from "@/context/LanguageContext";
 import {
   FOUNDER_WHATSAPP,
@@ -42,13 +43,18 @@ export function FounderAccountability() {
 
                 {/* Profile Image & Status */}
                 <div className="relative aspect-video sm:aspect-square max-h-56 w-full overflow-hidden rounded-xl border border-white/10 bg-slate-900 shadow-inner group mx-auto">
-                  <img
+                  <OptimizedImage
                     src="/images/founder_advik.jpg"
                     alt="Advik Omer - Founder & Operations Lead at StashSaarthi"
                     width={400}
                     height={400}
+                    webpSrc="/images/founder_advik.webp"
+                    webpSrcSetEntries={[
+                      { src: "/images/founder_advik-200w.webp", width: 200 },
+                      { src: "/images/founder_advik-400w.webp", width: 400 },
+                    ]}
+                    sizes="(max-width: 640px) 100vw, 400px"
                     className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
                   />
                   <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between rounded-lg bg-black/70 px-2.5 py-1.5 backdrop-blur-md border border-white/10">
                     <div className="flex items-center gap-1.5">

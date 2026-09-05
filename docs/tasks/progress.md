@@ -32,3 +32,28 @@
   - Hardened Supabase client config: explicit `db.schema: "public"`, 8s global fetch timeout, disabled unused realtime channel
   - Build verified: `npm run build` passes with zero errors
 
+- [x] **[CTO] Task 13: Implement Service Worker for offline-first capabilities and aggressive caching** (2026-09-06)
+  - Created `public/sw.js` with multi-strategy caching architecture:
+    • **Cache-first** for Vite hashed bundles (`/assets/*`) — immutable after deploy
+    • **Cache-first** for images (`/images/`, `.png`, `.jpg`, `.webp`, `.svg`)
+    • **Stale-while-revalidate** for Google Fonts API + gstatic font files
+    • **Network-first** for HTML navigation — always try fresh, fallback to cached shell
+    • Skips Supabase, Clarity, and non-font Google APIs to prevent auth/data cache poisoning
+  - Created `src/lib/sw-register.ts` — SSR-safe registration utility:
+    • Guards against `window === undefined` (SSR) and dev mode (localhost / `import.meta.env.DEV`)
+    • Registers with `updateViaCache: "none"` for guaranteed fresh SW fetch
+    • Listens for `updatefound` lifecycle events for future new-version toast
+    • Schedules periodic `TRIM_CACHES` message every 5 min
+  - Wired `registerServiceWorker()` into `__root.tsx` `RootComponent` via `useEffect`
+  - Branded offline fallback page (Dark Obsidian + Electric Mint CTA, StashSaarthi emoji branding)
+  - Cache size limits: IMAGE_CACHE ≤ 80 entries, RUNTIME_CACHE ≤ 120 entries
+  - Pre-caches critical shell: `/`, `/manifest.json`, `/favicon.png`, `/app-icon.png`, `/stashsaarthi-logo.png`
+  - Build verified: `npm run build` passes with zero errors
+
+- [x] **[CTO] Task 14: Refactor image assets to WEBP with automatic srcset generation** (2026-09-06)
+  - Generated responsive WebP image variants (`founder_advik`, `product-microstorage`, `og-banner-new`, `stashsaarthi-logo`, `app-icon`) via `execution/generate-responsive-images.mjs`.
+  - Built reusable `OptimizedImage` component (`src/components/ui/OptimizedImage.tsx`) supporting `<picture>` fallback, automated `srcset` generation, `sizes` attribute hints, lazy loading, and async decoding.
+  - Refactored `FounderAccountability.tsx`, `FounderEscalationWidget.tsx`, and `BrandLogo.tsx` to leverage `OptimizedImage` and WebP assets.
+  - Build verified: `npm run build` passes with 0 errors.
+
+

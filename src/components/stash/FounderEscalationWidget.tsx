@@ -9,6 +9,7 @@ import {
   getWhatsAppUrl,
 } from "@/lib/constants";
 import { useLanguage } from "@/context/LanguageContext";
+import { OptimizedImage } from "@/components/ui/OptimizedImage";
 import { smoothScrollTo } from "./legal";
 
 export function FounderEscalationWidget() {
@@ -40,12 +41,13 @@ export function FounderEscalationWidget() {
             {/* Header */}
             <div className="flex items-start justify-between border-b border-neutral-800/80 pb-3">
               <div className="flex items-center gap-2.5">
-                <img
+                <OptimizedImage
                   src="/images/founder_advik.jpg"
                   alt="Advik Omer"
                   width={40}
                   height={40}
-                  loading="lazy"
+                  webpSrc="/images/founder_advik-200w.webp"
+                  sizes="40px"
                   className="h-10 w-10 rounded-xl object-cover border border-neutral-700 aspect-square"
                 />
                 <div>
