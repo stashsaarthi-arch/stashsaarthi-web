@@ -1,3 +1,11 @@
+- [x] **[CTO - Security & Operations] Task 16: Automated Nightly Build & Dependency Vulnerability Audit Engine**:
+  - **Identified Directive**: Setup automated nightly build scripts to check for dependency vulnerabilities.
+  - **Applied Solution**:
+    - Engineered `execution/audit-vulnerabilities.mjs` script scanning 464 dependencies (`npm audit --json`), extracting severity metrics (critical, high, moderate, low), generating Markdown reports (`.tmp/audit-report.md`), and supporting `--strict` enforcement.
+    - Added npm scripts `"audit:vulnerabilities"` and `"nightly:check"` in `package.json`.
+    - Created GitHub Actions workflow `.github/workflows/nightly-security-audit.yml` scheduled to run nightly at 2:00 AM UTC with artifact upload.
+  - **Verification**: `npx tsc --noEmit` (**0 errors**), `npm run audit:vulnerabilities` (**0 vulnerabilities across 464 dependencies**), and `npm run build` compiled cleanly.
+
 - [x] **[CTO - Performance] Task 15: Multi-Tier In-Memory & Redis/Upstash REST Caching Engine**:
   - **Identified Directive**: Implement caching layer for frequently accessed, non-user-specific data (campus nodes, pricing matrices, reviews).
   - **Applied Solution**:

@@ -10,6 +10,8 @@
     "preview": "node .output/server/index.mjs",
     "lint": "eslint .",
     "format": "prettier --write .",
+    "audit:vulnerabilities": "node execution/audit-vulnerabilities.mjs",
+    "nightly:check": "node execution/audit-vulnerabilities.mjs --strict --with-build",
     "ralph": "node execution/ralph_loop.cjs",
     "ralph:step": "node execution/ralph_loop.cjs --step",
     "ralph:status": "node execution/ralph_loop.cjs --status",

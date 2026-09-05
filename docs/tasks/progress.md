@@ -64,4 +64,11 @@
   - Implemented `getCached`, `setCached`, `invalidateCached`, and `getOrSet` fetch helpers.
   - Build verified: `npm run build` compiles with 0 errors across client, SSR, and Nitro server bundles.
 
+- [x] **[CTO] Task 16: Automated Nightly Build & Dependency Vulnerability Audit Engine** (2026-09-06)
+  - Created `execution/audit-vulnerabilities.mjs` script scanning 464 dependencies (`npm audit --json`), extracting severity metrics (critical, high, moderate, low), generating Markdown reports (`.tmp/audit-report.md`), and supporting `--strict` enforcement.
+  - Added npm scripts `"audit:vulnerabilities"` and `"nightly:check"` in `package.json`.
+  - Built GitHub Actions workflow `.github/workflows/nightly-security-audit.yml` scheduled to run nightly at 2:00 AM UTC with artifact upload.
+  - Build & Type Check Verified: `npx tsc --noEmit` and `npm run audit:vulnerabilities` pass with 0 errors across 464 packages.
+
+
 
