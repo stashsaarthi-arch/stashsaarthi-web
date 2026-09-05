@@ -7,7 +7,7 @@ export interface BrandLogoProps {
   alt?: string;
 }
 
-export function BrandLogo({ className = "", height = 36, alt = "StashSaarthi" }: BrandLogoProps) {
+export const BrandLogo = React.memo(function BrandLogo({ className = "", height = 36, alt = "StashSaarthi" }: BrandLogoProps) {
   return (
     <div className={`inline-flex items-center select-none ${className}`}>
       <OptimizedImage
@@ -20,5 +20,5 @@ export function BrandLogo({ className = "", height = 36, alt = "StashSaarthi" }:
       />
     </div>
   );
-}
+});
 

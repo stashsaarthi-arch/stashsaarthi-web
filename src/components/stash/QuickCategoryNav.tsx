@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import {
   Boxes,
   Calculator,
@@ -32,12 +32,12 @@ const CATEGORIES: CategoryItem[] = [
     icon: ShieldCheck,
   },
   {
-    id: "feedback",
-    labelEn: "Community & Roadmap",
-    labelHi: "समीक्षाएँ व रोडमैप",
+    id: "community-feedback",
+    labelEn: "Reviews & Ideas",
+    labelHi: "समीक्षाएँ व सुझाव",
     icon: MessageSquare,
   },
-  { id: "faq", labelEn: "FAQ & Help", labelHi: "अक्सर पूछे जाने वाले सवाल", icon: HelpCircle },
+  { id: "faq", labelEn: "FAQ & Help", labelHi: "सवाल और जवाब", icon: HelpCircle },
 ];
 
 interface QuickChip {
@@ -79,12 +79,21 @@ const QUICK_CHIPS: QuickChip[] = [
     target: "solutions",
   },
   {
-    id: "calculator",
-    labelEn: "Savings Calculator",
-    labelHi: "बचत कैलकुलेटर",
+    id: "calculator-calc",
+    labelEn: "Dead-Rent Savings",
+    labelHi: "बचत हिसाब",
     icon: Calculator,
-    badgeEn: "Save ₹8k",
-    badgeHi: "बचत ₹8k",
+    badgeEn: "Audit",
+    badgeHi: "ऑडिट",
+    target: "calculator",
+  },
+  {
+    id: "host-simulator",
+    labelEn: "Host Passive Income",
+    labelHi: "होस्ट पैसिव कमाई",
+    icon: Calculator,
+    badgeEn: "₹11.5k+",
+    badgeHi: "₹11.5k+",
     target: "calculator",
   },
   {
@@ -98,7 +107,7 @@ const QUICK_CHIPS: QuickChip[] = [
   },
 ];
 
-export function QuickCategoryNav() {
+export const QuickCategoryNav = memo(function QuickCategoryNav() {
   const [active, setActive] = useState("solutions");
   const [isSticky, setIsSticky] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -270,4 +279,4 @@ export function QuickCategoryNav() {
       </div>
     </div>
   );
-}
+});

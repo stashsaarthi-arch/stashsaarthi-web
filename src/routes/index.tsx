@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { AmbientNodes } from "@/components/ui/AmbientNodes";
 import { Navbar } from "@/components/stash/Navbar";
@@ -63,95 +63,131 @@ function Index() {
   const [referralOpen, setReferralOpen] = useState(false);
   const [prefill, setPrefill] = useState<BookingPrefill>({});
 
-  const open = (p?: BookingPrefill) => {
+  const open = useCallback((p?: BookingPrefill) => {
     setPrefill(p ?? {});
     setBooking(true);
-  };
+  }, []);
+
+  const handleBookDefault = useCallback(() => {
+    open();
+  }, [open]);
+
+  const handleListRoom = useCallback(() => setListing(true), []);
+  const handleEarlyAccess = useCallback(() => setEarlyAccess(true), []);
+  const handleRefer = useCallback(() => setReferralOpen(true), []);
 
   return (
     <main className="relative min-h-screen overflow-x-hidden bg-background text-foreground transition-colors duration-500">
       <AmbientNodes />
-      <Navbar
-        role={role}
-        setRole={setRole}
-        onBook={() => open()}
-        onListRoom={() => setListing(true)}
-        onEarlyAccess={() => setEarlyAccess(true)}
-        onRefer={() => setReferralOpen(true)}
-      />
+      <ErrorBoundary sectionName="Navbar" compact>
+        <Navbar
+          role={role}
+          setRole={setRole}
+          onBook={handleBookDefault}
+          onListRoom={handleListRoom}
+          onEarlyAccess={handleEarlyAccess}
+          onRefer={handleRefer}
+        />
+      </ErrorBoundary>
 
-      <ErrorBoundary>
-        <Hero role={role} onBook={open} onRefer={() => setReferralOpen(true)} />
+      <ErrorBoundary sectionName="Hero Section">
+        <Hero role={role} onBook={open} onRefer={handleRefer} />
       </ErrorBoundary>
 
       {/* TI.com-inspired Quick Jump Sticky Category Bar */}
-      <QuickCategoryNav />
+      <ErrorBoundary sectionName="Category Navigation" compact>
+        <QuickCategoryNav />
+      </ErrorBoundary>
 
-      <ErrorBoundary>
+      <ErrorBoundary sectionName="Role Switcher">
         <RoleLane role={role} onBook={open} />
       </ErrorBoundary>
 
-      <ErrorBoundary>
+      <ErrorBoundary sectionName="Dual Crisis Overview">
         <DualCrisis />
       </ErrorBoundary>
 
       {/* 1. Core Solutions Hub (Stash / Rooms / Kitchen / Connect) */}
-      <ErrorBoundary>
-        <SolutionsHub onBook={open} onListRoom={() => setListing(true)} />
+      <ErrorBoundary sectionName="Solutions Hub">
+        <SolutionsHub onBook={open} onListRoom={handleListRoom} />
       </ErrorBoundary>
 
       {/* 2. Interactive Calculator & Space Simulator Hub */}
-      <ErrorBoundary>
+      <ErrorBoundary sectionName="Calculator Hub">
         <CalculatorHub onBook={open} />
       </ErrorBoundary>
 
       {/* 3. 100% Radical Transparency & Custody Console Hub */}
-      <ErrorBoundary>
+      <ErrorBoundary sectionName="Trust & Custody Console">
         <TrustConsoleHub />
       </ErrorBoundary>
 
       {/* Host Specific Dashboard Norms */}
       {role === "host" && (
-        <ErrorBoundary>
-          <HostRules />
-          <FamilyDashboard />
-        </ErrorBoundary>
+        <>
+          <ErrorBoundary sectionName="Host House Rules">
+            <HostRules />
+          </ErrorBoundary>
+          <ErrorBoundary sectionName="Family Dashboard">
+            <FamilyDashboard />
+          </ErrorBoundary>
+        </>
       )}
 
       {/* 4. Community Reviews & Improvement Suggestions Hub */}
-      <ErrorBoundary>
+      <ErrorBoundary sectionName="Community Feedback & Suggestions">
         <FeedbackSuggestions />
       </ErrorBoundary>
 
       {/* 5. FAQ */}
-      <ErrorBoundary>
+      <ErrorBoundary sectionName="FAQ Section">
         <FAQ />
       </ErrorBoundary>
 
       {/* Footer */}
-      <ErrorBoundary>
+      <ErrorBoundary sectionName="Footer">
         <FooterSection />
       </ErrorBoundary>
 
       {/* Global Modals & Overlay Triggers */}
-      <BookingModal
-        open={booking}
-        onOpenChange={setBooking}
-        service={prefill.service ?? "stash"}
-        note={prefill.note}
-        bags={prefill.bags}
-        months={prefill.months}
-        amount={prefill.amount}
-      />
-      <RoomListingModal open={listing} onOpenChange={setListing} />
-      <EarlyAccessModal open={earlyAccess} onOpenChange={setEarlyAccess} initialRole={role} />
-      <WhatsAppReferralModal open={referralOpen} onOpenChange={setReferralOpen} />
-      <ScrollProgress />
-      <ActivityTicker />
-      <FloatingPersonaToggle />
-      <FounderEscalationWidget />
-      <MobileStickyCTA onBook={open} />
-      <WhatsAppButton onBook={open} />
+      <ErrorBoundary sectionName="Booking Modal" compact>
+        <BookingModal
+          open={booking}
+          onOpenChange={setBooking}
+          service={prefill.service ?? "stash"}
+          note={prefill.note}
+          bags={prefill.bags}
+          months={prefill.months}
+          amount={prefill.amount}
+        />
+      </ErrorBoundary>
+      <ErrorBoundary sectionName="Room Listing Modal" compact>
+        <RoomListingModal open={listing} onOpenChange={setListing} />
+      </ErrorBoundary>
+      <ErrorBoundary sectionName="Early Access Modal" compact>
+        <EarlyAccessModal open={earlyAccess} onOpenChange={setEarlyAccess} initialRole={role} />
+      </ErrorBoundary>
+      <ErrorBoundary sectionName="WhatsApp Referral Modal" compact>
+        <WhatsAppReferralModal open={referralOpen} onOpenChange={setReferralOpen} />
+      </ErrorBoundary>
+      <ErrorBoundary sectionName="Scroll Progress Indicator" compact>
+        <ScrollProgress />
+      </ErrorBoundary>
+      <ErrorBoundary sectionName="Activity Ticker Widget" compact>
+        <ActivityTicker />
+      </ErrorBoundary>
+      <ErrorBoundary sectionName="Floating Persona Toggle Widget" compact>
+        <FloatingPersonaToggle />
+      </ErrorBoundary>
+      <ErrorBoundary sectionName="Founder Escalation Widget" compact>
+        <FounderEscalationWidget />
+      </ErrorBoundary>
+      <ErrorBoundary sectionName="Mobile Sticky CTA Widget" compact>
+        <MobileStickyCTA onBook={open} />
+      </ErrorBoundary>
+      <ErrorBoundary sectionName="WhatsApp Floating Action Button" compact>
+        <WhatsAppButton onBook={open} />
+      </ErrorBoundary>
     </main>
   );
 }

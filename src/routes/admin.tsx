@@ -5,10 +5,19 @@ import { Lock, Search, MessageCircle, ShieldCheck, Loader2, CheckCircle2 } from 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { logSupabaseError } from "@/lib/supabaseLogger";
+import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 
 export const Route = createFileRoute("/admin")({
-  component: AdminPage,
+  component: AdminPageWrapped,
 });
+
+function AdminPageWrapped() {
+  return (
+    <ErrorBoundary sectionName="Admin Portal">
+      <AdminPage />
+    </ErrorBoundary>
+  );
+}
 
 type Lead = {
   id: string;

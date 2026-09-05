@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState, memo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { MessageCircle, X, ShieldAlert, Home, Briefcase } from "lucide-react";
 import { FOUNDER_WHATSAPP, FOUNDER_PHONE_DISPLAY, getWhatsAppUrl } from "@/lib/constants";
 import { useLanguage } from "@/context/LanguageContext";
 import type { OpenBooking } from "./types";
 
-export function WhatsAppButton({ onBook }: { onBook: OpenBooking }) {
+export const WhatsAppButton = memo(function WhatsAppButton({ onBook }: { onBook: OpenBooking }) {
   const [isOpen, setIsOpen] = useState(false);
   const { language } = useLanguage();
   const isHi = language === "hi";
@@ -130,4 +130,4 @@ export function WhatsAppButton({ onBook }: { onBook: OpenBooking }) {
       </button>
     </div>
   );
-}
+});

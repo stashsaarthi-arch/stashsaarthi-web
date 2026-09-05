@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, memo } from "react";
 import {
   Check,
   ShieldAlert,
@@ -15,7 +15,7 @@ import { useLanguage } from "@/context/LanguageContext";
 
 const ICONS = [Clock, Ban, Moon, Lock, UtensilsCrossed];
 
-export function HostRules() {
+export const HostRules = memo(function HostRules() {
   const { language, t } = useLanguage();
   const isHi = language === "hi";
 
@@ -195,4 +195,4 @@ export function HostRules() {
       </AnimatedContent>
     </section>
   );
-}
+});

@@ -6,7 +6,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { ArrowRight, IndianRupee } from "lucide-react";
 import type { OpenBooking } from "./types";
 
-export function MobileStickyCTA({ onBook }: { onBook: OpenBooking }) {
+export const MobileStickyCTA = React.memo(function MobileStickyCTA({ onBook }: { onBook: OpenBooking }) {
   const [isVisible, setIsVisible] = useState(false);
   const { role } = usePersona();
   const { t } = useLanguage();
@@ -61,4 +61,4 @@ export function MobileStickyCTA({ onBook }: { onBook: OpenBooking }) {
       )}
     </AnimatePresence>
   );
-}
+});

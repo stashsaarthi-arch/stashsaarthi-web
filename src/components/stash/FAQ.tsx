@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, memo } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -136,7 +136,7 @@ const FAQ_ITEMS: FAQItem[] = [
   },
 ];
 
-export function FAQ() {
+export const FAQ = memo(function FAQ() {
   const { language, t } = useLanguage();
   const isHi = language === "hi";
   const [search, setSearch] = useState("");
@@ -290,4 +290,4 @@ export function FAQ() {
       </div>
     </section>
   );
-}
+});

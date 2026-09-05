@@ -23,7 +23,7 @@ export interface AnimatedContentProps extends React.HTMLAttributes<HTMLDivElemen
   viewportOnce?: boolean;
 }
 
-export function AnimatedContent({
+export const AnimatedContent = React.memo(function AnimatedContent({
   children,
   distance = 30,
   direction = "vertical",
@@ -133,6 +133,6 @@ export function AnimatedContent({
       {children}
     </div>
   );
-}
+});
 
 export default AnimatedContent;

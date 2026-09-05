@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, memo } from "react";
 import { toast } from "sonner";
 import { useAuth } from "@/hooks/useAuth";
 import {
@@ -93,7 +93,7 @@ const SOCIALS = [
   { Icon: Linkedin, label: "LinkedIn" },
 ];
 
-export function FooterSection() {
+export const FooterSection = memo(function FooterSection() {
   const { user, loginWithProfile } = useAuth();
   const { language, t } = useLanguage();
   const isHi = language === "hi";
@@ -665,7 +665,7 @@ export function FooterSection() {
       <CampusCaptainModal open={showCaptainModal} onOpenChange={setShowCaptainModal} />
     </footer>
   );
-}
+});
 
 function DocCol({
   title,

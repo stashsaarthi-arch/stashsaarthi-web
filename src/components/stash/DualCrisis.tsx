@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, memo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { GraduationCap, Heart, Merge, RotateCcw, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -7,23 +7,23 @@ import AnimatedContent from "@/components/ui/AnimatedContent";
 
 const STUDENT = [
   "The Broker Trap: Paying 1 month brokerage for a dingy room with fake photos.",
-  "The Dead-Rent Tax: \u20b98,000 burned during holidays just so your luggage doesn\u2019t get stolen.",
+  "The Dead-Rent Tax: ₹8,000 burned during holidays just so your luggage doesn’t get stolen.",
   "The Mess Nightmare: Watery daal, unhygienic oil, and homesickness.",
 ];
 const SENIOR = [
   "Zero Brokerage: Direct connection to audited family and senior-hosted homes.",
-  "Flat \u20b9300/mo Stash: Barcode-sealed, \u20b910,000 insured vacation luggage storage.",
+  "Flat ₹300/mo Stash: Barcode-sealed, ₹10,000 insured vacation luggage storage.",
   "Ghar Ka Khana: Fresh micro-batch meals cooked by neighbourhood dadi/nani.",
 ];
 const FUSION = [
   "Empty senior rooms become verified, brokerage-free student homes",
   "One hour a day of tech help & errands earns up to 60% rent subsidy",
-  "Vacation luggage stays safe in a neighbourhood stash node at \u20b9300/mo",
-  "Home-cooked meals replace mess food \u2014 cooked by the same community",
+  "Vacation luggage stays safe in a neighbourhood stash node at ₹300/mo",
+  "Home-cooked meals replace mess food — cooked by the same community",
 ];
 import { useLanguage } from "@/context/LanguageContext";
 
-export function DualCrisis() {
+export const DualCrisis = memo(function DualCrisis() {
   const [merged, setMerged] = useState(false);
   const { t } = useLanguage();
 
@@ -132,9 +132,9 @@ export function DualCrisis() {
       </div>
     </section>
   );
-}
+});
 
-function CrisisCard({
+const CrisisCard = memo(function CrisisCard({
   title,
   icon: Icon,
   accent,
@@ -175,4 +175,4 @@ function CrisisCard({
       </div>
     </Tilt3D>
   );
-}
+});

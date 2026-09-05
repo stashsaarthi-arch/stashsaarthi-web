@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import { Boxes, Home, Soup, HandHeart } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Ecosystem } from "./Ecosystem";
@@ -14,7 +14,7 @@ interface SolutionsHubProps {
   onListRoom: () => void;
 }
 
-export function SolutionsHub({ onBook, onListRoom }: SolutionsHubProps) {
+export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: SolutionsHubProps) {
   const [activeTab, setActiveTab] = useState<"stash" | "rooms" | "kitchen" | "connect">("stash");
   const { language } = useLanguage();
   const { role } = usePersona();
@@ -165,4 +165,4 @@ export function SolutionsHub({ onBook, onListRoom }: SolutionsHubProps) {
       </div>
     </section>
   );
-}
+});

@@ -1,10 +1,13 @@
 import React, { Component, ErrorInfo, ReactNode } from "react";
 import { AlertTriangle, RefreshCcw, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { reportError } from "@/lib/error-reporting";
 
 interface Props {
   children?: ReactNode;
   fallback?: ReactNode;
+  sectionName?: string;
+  compact?: boolean;
 }
 
 interface State {
@@ -25,7 +28,11 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 
   public override componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error("Uncaught error in boundary:", error, errorInfo);
+    console.error(`Uncaught error in boundary [${this.props.sectionName || "unnamed"}]:`, error, errorInfo);
+    reportError(error, {
+      section: this.props.sectionName || "unnamed_section",
+      componentStack: errorInfo.componentStack,
+    });
   }
 
   public override render() {
@@ -34,15 +41,23 @@ export class ErrorBoundary extends Component<Props, State> {
         return this.props.fallback;
       }
 
+      if (this.props.compact) {
+        return null;
+      }
+
+      const sectionTitle = this.props.sectionName || "This Section";
+
       return (
-        <div className="min-h-[400px] w-full flex items-center justify-center bg-background/50 p-4">
+        <div className="min-h-[220px] w-full flex items-center justify-center bg-background/50 p-4 my-4">
           <div className="glass max-w-md w-full rounded-2xl border border-red-500/20 bg-red-500/5 p-6 text-center shadow-2xl">
-            <div className="mx-auto mb-4 grid h-12 w-12 place-items-center rounded-full bg-red-500/10">
-              <AlertTriangle className="h-6 w-6 text-red-400" />
+            <div className="mx-auto mb-3 grid h-10 w-10 place-items-center rounded-full bg-red-500/10">
+              <AlertTriangle className="h-5 w-5 text-red-400" />
             </div>
-            <h3 className="text-lg font-bold text-foreground mb-2">Something went wrong</h3>
-            <p className="text-sm text-muted-foreground mb-4">
-              A rendering error occurred. We've logged it for our engineers.
+            <h3 className="text-base font-bold text-foreground mb-1">
+              {sectionTitle} Unavailable
+            </h3>
+            <p className="text-xs text-muted-foreground mb-4">
+              A rendering issue occurred in this section. Other parts of the platform remain functional.
             </p>
 
             {this.state.error && (
@@ -58,7 +73,7 @@ export class ErrorBoundary extends Component<Props, State> {
                   <span>Technical details</span>
                 </button>
                 {this.state.showDetails && (
-                  <pre className="mt-2 max-h-40 overflow-auto rounded-lg bg-black/80 p-2.5 text-[11px] font-mono text-red-300 border border-red-500/20">
+                  <pre className="mt-2 max-h-32 overflow-auto rounded-lg bg-black/80 p-2.5 text-[11px] font-mono text-red-300 border border-red-500/20">
                     {this.state.error.message || String(this.state.error)}
                     {"\n"}
                     {this.state.error.stack}
@@ -69,14 +84,14 @@ export class ErrorBoundary extends Component<Props, State> {
 
             <Button
               variant="outline"
-              className="w-full border-white/10 hover:bg-white/5 cursor-pointer"
+              size="sm"
+              className="w-full border-white/10 hover:bg-white/5 cursor-pointer text-xs"
               onClick={() => {
                 this.setState({ hasError: false, error: null });
-                window.location.reload();
               }}
             >
-              <RefreshCcw className="mr-2 h-4 w-4" />
-              Reload Page
+              <RefreshCcw className="mr-2 h-3.5 w-3.5" />
+              Retry Section
             </Button>
           </div>
         </div>
@@ -86,3 +101,4 @@ export class ErrorBoundary extends Component<Props, State> {
     return this.props.children;
   }
 }
+

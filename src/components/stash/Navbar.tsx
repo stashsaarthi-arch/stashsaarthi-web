@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X, GraduationCap, HeartHandshake } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -65,7 +65,7 @@ const NAV_LINKS = [
   },
 ];
 
-export function Navbar({
+export const Navbar = memo(function Navbar({
   role,
   setRole,
   onBook,
@@ -76,7 +76,7 @@ export function Navbar({
   role: Role;
   setRole: (r: Role) => void;
   onBook: () => void;
-  onListRoom: () => void;
+  onListRoom?: () => void;
   onEarlyAccess?: () => void;
   onRefer?: () => void;
 }) {
@@ -392,4 +392,4 @@ export function Navbar({
       </AnimatePresence>
     </header>
   );
-}
+});

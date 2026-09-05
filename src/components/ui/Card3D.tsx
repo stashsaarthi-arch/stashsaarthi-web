@@ -8,7 +8,7 @@ export interface Card3DProps {
   maxTilt?: number;
 }
 
-export function Card3D({ children, className }: Card3DProps) {
+export const Card3D = React.memo(function Card3D({ children, className }: Card3DProps) {
   return (
     <div
       className={cn(
@@ -19,4 +19,4 @@ export function Card3D({ children, className }: Card3DProps) {
       {children}
     </div>
   );
-}
+});

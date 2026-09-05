@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   Star,
@@ -230,7 +230,7 @@ const INITIAL_SUGGESTIONS: SuggestionItem[] = [
   },
 ];
 
-export function FeedbackSuggestions() {
+export const FeedbackSuggestions = memo(function FeedbackSuggestions() {
   const { language } = useLanguage();
   const { role } = usePersona();
   const isHi = language === "hi";
@@ -1287,4 +1287,4 @@ export function FeedbackSuggestions() {
       </div>
     </section>
   );
-}
+});

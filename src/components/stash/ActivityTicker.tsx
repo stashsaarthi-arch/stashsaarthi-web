@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Boxes, Home, Soup, ShieldCheck, Sparkles, X, MapPin } from "lucide-react";
 import { usePersona } from "@/context/PersonaContext";
@@ -104,7 +104,7 @@ const ACTIVITIES: ActivityItem[] = [
   },
 ];
 
-export function ActivityTicker() {
+export const ActivityTicker = memo(function ActivityTicker() {
   const { role } = usePersona();
   const { language } = useLanguage();
   const isHi = language === "hi";
@@ -235,4 +235,4 @@ export function ActivityTicker() {
       </AnimatePresence>
     </div>
   );
-}
+});

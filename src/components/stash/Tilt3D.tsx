@@ -1,4 +1,4 @@
-import { type ReactNode } from "react";
+import { memo, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
   glare?: boolean;
 };
 
-export function Tilt3D({ children, className }: Props) {
+export const Tilt3D = memo(function Tilt3D({ children, className }: Props) {
   return (
     <div
       className={cn(
@@ -20,4 +20,4 @@ export function Tilt3D({ children, className }: Props) {
       {children}
     </div>
   );
-}
+});

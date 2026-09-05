@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import { ShieldCheck, FileSearch, CheckCircle2, Lock, UserCheck } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { ProductSandbox } from "./ProductSandbox";
@@ -9,7 +9,7 @@ import { FounderAccountability } from "./FounderAccountability";
 import { useLanguage } from "@/context/LanguageContext";
 import { usePersona } from "@/context/PersonaContext";
 
-export function TrustConsoleHub() {
+export const TrustConsoleHub = memo(function TrustConsoleHub() {
   const [activeTab, setActiveTab] = useState<
     "sandbox" | "process" | "zerorisk" | "privacy" | "founder"
   >("sandbox");
@@ -145,4 +145,4 @@ export function TrustConsoleHub() {
       </div>
     </section>
   );
-}
+});

@@ -12,6 +12,9 @@
     "format": "prettier --write .",
     "audit:vulnerabilities": "node execution/audit-vulnerabilities.mjs",
     "nightly:check": "node execution/audit-vulnerabilities.mjs --strict --with-build",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:stub": "node execution/run-e2e-tests.mjs",
     "ralph": "node execution/ralph_loop.cjs",
     "ralph:step": "node execution/ralph_loop.cjs --step",
     "ralph:status": "node execution/ralph_loop.cjs --status",
@@ -57,6 +60,7 @@
   "devDependencies": {
     "@eslint/js": "^9.32.0",
     "@lovable.dev/vite-tanstack-config": "2.13.1",
+    "@playwright/test": "^1.63.0",
     "@types/node": "^22.16.5",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",

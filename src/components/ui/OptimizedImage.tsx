@@ -48,7 +48,7 @@ function buildSrcSet(entries: SrcSetEntry[]): string {
  * - `loading="lazy"` and `decoding="async"` defaults
  * - Full passthrough of standard `<img>` attributes (className, style, width, height, etc.)
  */
-export function OptimizedImage({
+export const OptimizedImage = React.memo(function OptimizedImage({
   src,
   alt,
   srcSetEntries,
@@ -91,4 +91,4 @@ export function OptimizedImage({
   }
 
   return imgElement;
-}
+});

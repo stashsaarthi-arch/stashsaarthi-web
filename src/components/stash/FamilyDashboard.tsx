@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, memo } from "react";
 import {
   ShieldCheck,
   HeartPulse,
@@ -17,7 +17,7 @@ import { useLanguage } from "@/context/LanguageContext";
 
 const FEATURE_ICONS = [Smartphone, HeartPulse, LocateFixed];
 
-export function FamilyDashboard() {
+export const FamilyDashboard = memo(function FamilyDashboard() {
   const { language, t } = useLanguage();
   const isHi = language === "hi";
   const [sosState, setSosState] = useState<"idle" | "triggered" | "resolved">("idle");
@@ -287,4 +287,4 @@ export function FamilyDashboard() {
       </AnimatedContent>
     </section>
   );
-}
+});

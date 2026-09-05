@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import { usePersona } from "@/context/PersonaContext";
 import { useLanguage } from "@/context/LanguageContext";
 import { GraduationCap, HeartHandshake } from "lucide-react";
 import { playPop } from "@/lib/audio";
 import { motion, AnimatePresence } from "motion/react";
 
-export function FloatingPersonaToggle() {
+export const FloatingPersonaToggle = memo(function FloatingPersonaToggle() {
   const { role, setRole } = usePersona();
   const { language } = useLanguage();
   const isHi = language === "hi";
@@ -66,4 +66,4 @@ export function FloatingPersonaToggle() {
       )}
     </AnimatePresence>
   );
-}
+});

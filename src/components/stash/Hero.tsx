@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { motion } from "motion/react";
 import {
   ArrowRight,
@@ -23,7 +24,7 @@ import { AnimatedStat } from "./AnimatedStat";
 import { LiveChangelogBadge } from "./ChangelogModal";
 import { smoothScrollTo } from "./legal";
 
-export function Hero({
+export const Hero = memo(function Hero({
   role,
   onBook,
   onRefer,
@@ -282,4 +283,4 @@ export function Hero({
       </div>
     </section>
   );
-}
+});

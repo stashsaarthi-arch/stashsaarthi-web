@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, memo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { MessageCircle, Mail, Phone, X, ShieldCheck, Sparkles, ArrowRight } from "lucide-react";
 import {
@@ -12,7 +12,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { OptimizedImage } from "@/components/ui/OptimizedImage";
 import { smoothScrollTo } from "./legal";
 
-export function FounderEscalationWidget() {
+export const FounderEscalationWidget = memo(function FounderEscalationWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const { language } = useLanguage();
   const isHi = language === "hi";
@@ -166,4 +166,4 @@ export function FounderEscalationWidget() {
       </button>
     </div>
   );
-}
+});

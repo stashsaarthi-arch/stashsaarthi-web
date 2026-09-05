@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import { Calculator, TrendingUp } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { StashCalculator } from "./Calculator";
@@ -7,7 +7,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { usePersona } from "@/context/PersonaContext";
 import type { OpenBooking } from "./types";
 
-export function CalculatorHub({ onBook }: { onBook: OpenBooking }) {
+export const CalculatorHub = memo(function CalculatorHub({ onBook }: { onBook: OpenBooking }) {
   const { role } = usePersona();
   const [activeTab, setActiveTab] = useState<"student" | "host">(role);
   const { language } = useLanguage();
@@ -106,4 +106,4 @@ export function CalculatorHub({ onBook }: { onBook: OpenBooking }) {
       </div>
     </section>
   );
-}
+});
