@@ -31,8 +31,8 @@ interface CacheEnvelope<T> {
 const memoryCache = new Map<string, CacheEnvelope<unknown>>();
 
 // Upstash REST configuration (read from Vite env if provided)
-const UPSTASH_REST_URL = (typeof import.meta !== "undefined" && import.meta.env?.VITE_UPSTASH_REDIS_REST_URL) || "";
-const UPSTASH_REST_TOKEN = (typeof import.meta !== "undefined" && import.meta.env?.VITE_UPSTASH_REDIS_REST_TOKEN) || "";
+const UPSTASH_REST_URL = (typeof import.meta !== "undefined" && import.meta.env?.["VITE_UPSTASH_REDIS_REST_URL"]) || "";
+const UPSTASH_REST_TOKEN = (typeof import.meta !== "undefined" && import.meta.env?.["VITE_UPSTASH_REDIS_REST_TOKEN"]) || "";
 
 /**
  * Check if Upstash Redis REST credentials are configured.
