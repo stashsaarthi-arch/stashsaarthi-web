@@ -14,6 +14,7 @@ import { PageTransition } from "@/components/ui/PageTransition";
 
 import appCss from "../styles.css?url";
 import { reportError } from "../lib/error-reporting";
+import { registerServiceWorker } from "../lib/sw-register";
 import { Toaster, toast } from "sonner";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { AuthProvider } from "@/hooks/useAuth";
@@ -395,6 +396,11 @@ function RootComponent() {
       window.removeEventListener("offline", handleOffline);
       window.removeEventListener("online", handleOnline);
     };
+  }, []);
+
+  // Register Service Worker for offline-first caching (production only)
+  useEffect(() => {
+    registerServiceWorker();
   }, []);
 
   return (
