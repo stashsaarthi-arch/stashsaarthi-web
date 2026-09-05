@@ -294,7 +294,8 @@ export async function submitTasteShieldClaim(
 
   // Persist review to Supabase
   try {
-    const { data: insertedReview, error: insertError } = await supabase
+    // Build promises array: always insert review, conditionally upsert quota
+    const reviewPromise = supabase
       .from("meal_reviews")
       .insert({
         booking_id: claim.bookingId,
@@ -310,6 +311,21 @@ export async function submitTasteShieldClaim(
       .select("id")
       .maybeSingle();
 
+    // If eligible, fire quota upsert in parallel (independent table — no dependency)
+    const quotaPromise = isEligible
+      ? supabase.from("user_shield_quotas").upsert({
+          user_phone: userPhone,
+          monthly_claims_used: 1,
+          last_claim_date: new Date().toISOString(),
+          is_shield_blocked: false,
+          total_lifetime_strikes: 0,
+        })
+      : Promise.resolve(null);
+
+    const [reviewResult, _quotaResult] = await Promise.all([reviewPromise, quotaPromise]);
+
+    const { data: insertedReview, error: insertError } = reviewResult;
+
     if (insertError) {
       logSupabaseError({
         table: "meal_reviews",
@@ -319,31 +335,20 @@ export async function submitTasteShieldClaim(
       });
     }
 
-    // If claim was approved, update quota table
-    if (isEligible) {
-      await supabase.from("user_shield_quotas").upsert({
-        user_phone: userPhone,
-        monthly_claims_used: 1,
-        last_claim_date: new Date().toISOString(),
-        is_shield_blocked: false,
-        total_lifetime_strikes: 0,
-      });
-
-      // Update local quota cache
-      if (typeof window !== "undefined") {
-        const cacheKey = `stash_shield_quota_${userPhone}`;
-        localStorage.setItem(
-          cacheKey,
-          JSON.stringify({
-            userPhone,
-            monthlyClaimsUsed: 1,
-            lastClaimDate: new Date().toISOString(),
-            isShieldBlocked: false,
-            totalLifetimeStrikes: 0,
-            isQuotaAvailable: false,
-          }),
-        );
-      }
+    // Update local quota cache (non-blocking, sync operation)
+    if (isEligible && typeof window !== "undefined") {
+      const cacheKey = `stash_shield_quota_${userPhone}`;
+      localStorage.setItem(
+        cacheKey,
+        JSON.stringify({
+          userPhone,
+          monthlyClaimsUsed: 1,
+          lastClaimDate: new Date().toISOString(),
+          isShieldBlocked: false,
+          totalLifetimeStrikes: 0,
+          isQuotaAvailable: false,
+        }),
+      );
     }
 
     return {

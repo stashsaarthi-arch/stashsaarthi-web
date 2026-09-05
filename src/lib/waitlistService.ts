@@ -149,41 +149,25 @@ export async function upsertGoogleUser(profile: GoogleProfile): Promise<void> {
   };
 
   try {
-    // Check if user already exists
-    const { data: existing, error: selectErr } = await supabase
+    // Single round-trip upsert: if email already exists, no-op (ignoreDuplicates).
+    // Eliminates the previous SELECT+INSERT 2-round-trip anti-pattern.
+    const { error } = await supabase
       .from("users_waitlist")
-      .select("id")
-      .eq("email", profile.email.toLowerCase())
-      .maybeSingle();
+      .upsert(payload, { onConflict: "email", ignoreDuplicates: true });
 
-    if (selectErr) {
-      logSupabaseError({
-        table: "users_waitlist",
-        operation: "select",
-        payload: { email: profile.email },
-        error: selectErr,
-        context: "upsertGoogleUser_lookup",
-      });
-    }
-
-    if (existing) return; // already registered — nothing to do
-
-    const { error } = await supabase.from("users_waitlist").insert(payload);
-
-    // Ignore duplicate constraint race condition
     if (error && !isDuplicateEmailError(error)) {
       logSupabaseError({
         table: "users_waitlist",
-        operation: "insert",
+        operation: "upsert",
         payload,
         error,
-        context: "upsertGoogleUser_insert",
+        context: "upsertGoogleUser",
       });
     }
   } catch (err) {
     logSupabaseError({
       table: "users_waitlist",
-      operation: "insert",
+      operation: "upsert",
       payload,
       error: err,
       context: "upsertGoogleUser_catch",

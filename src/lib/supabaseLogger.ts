@@ -115,29 +115,41 @@ export async function flushOfflineQueues() {
       console.info(
         `[StashSaarthi:ZeroDataDrop] Flushing ${items.length} queued items to "${table}"...`,
       );
-      const remaining: { data: unknown }[] = [];
 
-      for (const item of items) {
-        try {
-          const { error } = await (supabase.from as any)(table).insert(
-            item.data as Record<string, unknown>,
-          );
-          if (error && error.code !== "23505") {
-            // 23505 is unique violation, treat as success/synced
-            remaining.push(item);
-          }
-        } catch {
-          remaining.push(item);
-        }
-      }
+      // Batch insert: send all queued records in a single round trip
+      const payloads = items.map((item) => item.data as Record<string, unknown>);
+      const { error } = await (supabase.from as any)(table).insert(payloads);
 
-      if (remaining.length === 0) {
+      if (!error || (error && error.code === "23505")) {
+        // All succeeded or duplicates — clear the queue
         await del(queueKey);
         console.info(
           `[StashSaarthi:ZeroDataDrop] Table "${table}" offline queue completely synced!`,
         );
       } else {
-        await set(queueKey, remaining);
+        // Batch failed: fall back to per-item insert to salvage individual records
+        const remaining: { data: unknown }[] = [];
+        for (const item of items) {
+          try {
+            const { error: itemErr } = await (supabase.from as any)(table).insert(
+              item.data as Record<string, unknown>,
+            );
+            if (itemErr && itemErr.code !== "23505") {
+              remaining.push(item);
+            }
+          } catch {
+            remaining.push(item);
+          }
+        }
+
+        if (remaining.length === 0) {
+          await del(queueKey);
+          console.info(
+            `[StashSaarthi:ZeroDataDrop] Table "${table}" offline queue completely synced (fallback)!`,
+          );
+        } else {
+          await set(queueKey, remaining);
+        }
       }
     } catch {
       // ignore

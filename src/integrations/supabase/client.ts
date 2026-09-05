@@ -38,6 +38,25 @@ function createSupabaseClient() {
       persistSession: true,
       autoRefreshToken: true,
     },
+    db: {
+      // Explicit schema declaration: prevents PostgREST content negotiation overhead
+      schema: "public",
+    },
+    global: {
+      // 8-second global fetch timeout: prevents UI hangs on slow connections
+      fetch: (url, options = {}) => {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 8000);
+        return fetch(url, {
+          ...options,
+          signal: controller.signal,
+        }).finally(() => clearTimeout(timeoutId));
+      },
+    },
+    realtime: {
+      // Realtime channels are not used in StashSaarthi frontend — disable to save connection overhead
+      params: { eventsPerSecond: 0 },
+    },
   });
 }
 

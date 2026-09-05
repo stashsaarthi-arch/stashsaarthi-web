@@ -84,9 +84,18 @@ function AdminPage() {
   const fetchLeads = async () => {
     setLoading(true);
     try {
-      const { data: waitlistData, error: waitlistError } = await supabase
-        .from("users_waitlist")
-        .select("id, full_name, user_type, college_or_locality, phone_number, created_at");
+      // Parallel fetch: both queries are independent, run concurrently to halve latency
+      const [waitlistResult, bookingResult] = await Promise.all([
+        supabase
+          .from("users_waitlist")
+          .select("id, full_name, user_type, college_or_locality, phone_number, created_at"),
+        supabase
+          .from("co_living_inquiries")
+          .select("id, name, role, preferred_location, phone, message, created_at"),
+      ]);
+
+      const { data: waitlistData, error: waitlistError } = waitlistResult;
+      const { data: bookingData, error: bookingError } = bookingResult;
 
       if (waitlistError) {
         logSupabaseError({
@@ -96,10 +105,6 @@ function AdminPage() {
           context: "admin_fetchLeads",
         });
       }
-
-      const { data: bookingData, error: bookingError } = await supabase
-        .from("co_living_inquiries")
-        .select("id, name, role, preferred_location, phone, message, created_at");
 
       if (bookingError) {
         logSupabaseError({
