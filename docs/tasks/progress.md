@@ -23,3 +23,12 @@
 - [ ] [CPO] Web Audio API micro-haptics on interactive toggles
 - [ ] [CEO Summary] Auto-generate continuous tasks in `EXECUTIVE_DASHBOARD.md`
 
+## Sprint 1: CTO (Performance & Backend)
+- [x] **[CTO] Task 12: Audit all Supabase RPC calls for latency optimizations** (2026-09-06)
+  - Parallelized independent queries in `admin.tsx` fetchLeads via `Promise.all` (2 sequential → 1 concurrent)
+  - Replaced SELECT+INSERT anti-pattern in `waitlistService.ts` upsertGoogleUser with single `.upsert(onConflict, ignoreDuplicates)` — eliminates 1 round trip
+  - Batch-inserted offline queue flush in `supabaseLogger.ts` — N sequential inserts → 1 batch insert per table
+  - Parallelized review insert + quota upsert in `tasteShieldService.ts` via `Promise.all`
+  - Hardened Supabase client config: explicit `db.schema: "public"`, 8s global fetch timeout, disabled unused realtime channel
+  - Build verified: `npm run build` passes with zero errors
+
