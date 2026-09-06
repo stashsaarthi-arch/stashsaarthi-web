@@ -16,11 +16,14 @@ import {
   ExternalLink,
   ShieldCheck,
   TrendingUp,
+  MessageCircle,
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { toast } from "sonner";
 import { checkAndRecordRateLimit } from "@/lib/rateLimiter";
 import { playClick, playPop } from "@/lib/audio";
+import { RoommateMenuShareModal, MenuShareDetails } from "./RoommateMenuShareModal";
+import { SaarthiKitchenSchema } from "@/components/seo/SaarthiKitchenSchema";
 
 export interface TopKitchen {
   id: string;
@@ -130,6 +133,8 @@ export const TopRatedKitchensWidget: React.FC<TopRatedKitchensWidgetProps> = ({
   const [kitchens, setKitchens] = useState<TopKitchen[]>(INITIAL_KITCHENS);
   const [votedIds, setVotedIds] = useState<Record<string, boolean>>({});
   const [showNominateModal, setShowNominateModal] = useState(false);
+  const [isRoommateShareOpen, setIsRoommateShareOpen] = useState(false);
+  const [roommateShareDetails, setRoommateShareDetails] = useState<MenuShareDetails | undefined>(undefined);
   const [nominateForm, setNominateForm] = useState({
     hostName: "",
     address: "",
@@ -204,6 +209,9 @@ export const TopRatedKitchensWidget: React.FC<TopRatedKitchensWidgetProps> = ({
 
   return (
     <section className="py-12 px-4 max-w-7xl mx-auto" id="top-rated-kitchens">
+      {/* Dynamic Schema.org JSON-LD for Google Search Results (Task 75) */}
+      <SaarthiKitchenSchema />
+
       {/* Header Banner */}
       <div className="relative overflow-hidden rounded-3xl bg-slate-900/90 border border-emerald-500/20 p-6 md:p-10 mb-8 backdrop-blur-xl shadow-2xl">
         <div className="absolute -top-24 -right-24 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
@@ -396,6 +404,25 @@ export const TopRatedKitchensWidget: React.FC<TopRatedKitchensWidgetProps> = ({
                     <ExternalLink className="w-3 h-3" />
                   </button>
                 </div>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    playClick();
+                    setRoommateShareDetails({
+                      menuName: isHi ? kitchen.nameHi : kitchen.name,
+                      price: kitchen.pricePerMeal,
+                      kitchenNode: isHi ? kitchen.locationHi : kitchen.location,
+                      slot: "Lunch",
+                      description: isHi ? kitchen.specialtyHi : kitchen.specialty,
+                    });
+                    setIsRoommateShareOpen(true);
+                  }}
+                  className="w-full mt-2 py-2 rounded-xl bg-slate-950 border border-teal-500/30 hover:border-teal-400 text-teal-300 font-semibold text-xs transition-all flex items-center justify-center gap-1.5 hover:bg-slate-900"
+                >
+                  <MessageCircle className="w-3.5 h-3.5 text-teal-400 fill-teal-400/20" />
+                  <span>{isHi ? "रूममेट के साथ मेनू शेयर करें 📱" : "Share Menu with Roommate 📱"}</span>
+                </button>
               </div>
             </div>
           );
@@ -520,6 +547,13 @@ export const TopRatedKitchensWidget: React.FC<TopRatedKitchensWidgetProps> = ({
           </div>
         </div>
       )}
+
+      {/* Roommate Menu Share Modal (Task 73) */}
+      <RoommateMenuShareModal
+        open={isRoommateShareOpen}
+        onOpenChange={setIsRoommateShareOpen}
+        defaultDetails={roommateShareDetails}
+      />
     </section>
   );
 };

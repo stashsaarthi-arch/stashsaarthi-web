@@ -5,8 +5,11 @@ import { useComponentTelemetry } from "@/lib/interactionTelemetry";
 import { toast } from "sonner";
 import { TasteShieldModal } from "./TasteShieldModal";
 import { PeacockFeatherMatkiDusting } from "./stash/PeacockFeatherMatkiDusting";
-import { ShieldCheck, Repeat, Zap, Check, X, ChevronRight, Clock, MapPin, Phone } from "lucide-react";
+import { RoommateMenuShareModal, MenuShareDetails } from "./stash/RoommateMenuShareModal";
+import { ShieldCheck, Repeat, Zap, Check, X, ChevronRight, Clock, MapPin, Phone, Share2, MessageCircle } from "lucide-react";
 import { playClick, playPop } from "@/lib/audio";
+import { SaarthiKitchenSchema } from "@/components/seo/SaarthiKitchenSchema";
+import { IntelligentNudgesWidget } from "./stash/IntelligentNudgesWidget";
 
 type FulfillmentType = "DineIn_Pickup" | "RoomDelivery";
 
@@ -258,6 +261,10 @@ export const TokenMealHub: React.FC = () => {
   const [userName, setUserName] = useState<string>("");
   const [deliveryAddress, setDeliveryAddress] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+
+  // Roommate Menu Share Modal State (Task 73)
+  const [isRoommateShareOpen, setIsRoommateShareOpen] = useState<boolean>(false);
+  const [roommateShareDetails, setRoommateShareDetails] = useState<MenuShareDetails | undefined>(undefined);
 
   // 2-Step "Re-order My Last Meal" Shortcut State (Task 61)
   const [lastMeal, setLastMeal] = useState<LastMealOrder>(() => {
@@ -624,6 +631,12 @@ export const TokenMealHub: React.FC = () => {
 
   return (
     <section className="relative w-full max-w-6xl mx-auto px-4 py-12 text-slate-100 font-sans">
+      {/* Dynamic Schema.org JSON-LD for Google Search Results (Task 75) */}
+      <SaarthiKitchenSchema />
+
+      {/* CAO Intelligent Nudges for Inactive Students (Task 77) */}
+      <IntelligentNudgesWidget />
+
       {/* Background Accent Gradients */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[32rem] h-[32rem] bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
 
@@ -645,6 +658,24 @@ export const TokenMealHub: React.FC = () => {
                 <span className="text-xs px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono font-bold">
                   1 Claim/Mo
                 </span>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  playClick();
+                  setRoommateShareDetails({
+                    menuName: selectedMeal.name,
+                    price: currentCost,
+                    kitchenNode: vendorNode,
+                    slot: deliverySlot,
+                    description: selectedMeal.description,
+                  });
+                  setIsRoommateShareOpen(true);
+                }}
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-950 border border-teal-500/40 hover:border-teal-400 hover:scale-105 text-teal-300 text-xs font-bold transition-all cursor-pointer shadow-sm"
+              >
+                <MessageCircle className="w-3.5 h-3.5 text-teal-400 fill-teal-400/20" />
+                <span>Share Menu with Roommate 📱</span>
               </button>
             </div>
             <h2 className="text-3xl font-extrabold tracking-tight text-white">
@@ -1351,6 +1382,13 @@ export const TokenMealHub: React.FC = () => {
           }}
         />
       )}
+
+      {/* Customizable WhatsApp Roommate Menu Share Modal (Task 73) */}
+      <RoommateMenuShareModal
+        open={isRoommateShareOpen}
+        onOpenChange={setIsRoommateShareOpen}
+        defaultDetails={roommateShareDetails}
+      />
     </section>
   );
 };

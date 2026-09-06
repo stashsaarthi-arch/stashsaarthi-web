@@ -23,6 +23,7 @@ import { Card3D } from "@/components/ui/Card3D";
 import { useLanguage } from "@/context/LanguageContext";
 import { usePersona } from "@/context/PersonaContext";
 import { VisionAiPhotoVerifier } from "@/components/stash/VisionAiPhotoVerifier";
+import { TpaLegalOverviewSection } from "@/components/stash/TpaLegalOverviewSection";
 
 interface VettingStage {
   id: number;
@@ -328,6 +329,9 @@ export const HostVettingFlow = memo(function HostVettingFlow() {
 
       {/* Interactive Google Cloud Vision AI Photo Verifier Widget */}
       <VisionAiPhotoVerifier />
+
+      {/* Dedicated Legal Overview Section (Task 74: TPA Sec 105 Protections in Simple Hindi) */}
+      <TpaLegalOverviewSection />
 
       {/* Summary Trust Stats Strip */}
       <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">

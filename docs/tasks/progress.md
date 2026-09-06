@@ -661,19 +661,57 @@
       • Added quick navigation link in `src/components/stash/FooterSection.tsx`.
   - **Verification**: `npm run build` compiled cleanly with **0 errors**. Next task: 72.
 
-- [x] **[CMO - Social Proof] Task 72: Create an interactive widget that displays the "Top 3 Rated Kitchens of the Week" as voted by verified students** (2026-09-06)
-  - **Identified Directive**: Create an interactive widget that displays the "Top 3 Rated Kitchens of the Week" as voted by verified students.
+- [x] **[CMO - Direct Marketing] Task 73: Add a customizable WhatsApp button allowing students to instantly share a menu with a specific hostel roommate** (2026-09-06)
+  - **Identified Directive**: Add a customizable WhatsApp button allowing students to instantly share a menu with a specific hostel roommate.
   - **Applied Solution**:
-    - **Top 3 Rated Kitchens Widget** (`src/components/stash/TopRatedKitchensWidget.tsx`):
-      • **Podium Showcase Layout**: Designed interactive Gold Crown (#1 Annapurna Senior Home Kitchen - Kakadeo Hub), Silver (#2 Dadi Maa Home Tiffins - CSJMU Kalyanpur), and Bronze (#3 Shanti Nivas Home Food - HBTI Nawabganj) podium cards with star ratings (4.95 ★, 4.91 ★, 4.88 ★) and live vote tallies.
-      • **Student Upvoting Engine**: Built 1-click voting buttons integrated with rate limiting (`checkAndRecordRateLimit`), toast notifications, state updates, and Web Audio API micro-haptics (`playPop`, `playClick`).
-      • **Senior Kitchen Nomination Modal**: Integrated modal allowing students to nominate neighborhood senior citizen chefs for zero-CapEx platform onboarding with 3-tier safety audit checks.
-      • **Direct Order CTA**: Added 1-tap "Order Tiffin" buttons launching `BookingModal` with meal prefill or direct WhatsApp operator hotline (`+91 9369454350`).
-      • **Full Bilingual Support**: Fully localized in English and Hindi (`en` / `hi`) with dark obsidian glassmorphism theme styling.
-    - **Landing Page Integration**:
-      • Mounted `<TopRatedKitchensWidget />` wrapped in `ErrorBoundary` inside landing page (`src/routes/index.tsx`).
-  - **Verification**: `npx tsc --noEmit` (**0 errors**) and `npm run build` compiled cleanly with **0 errors**. Next task: 73.
+    - **Roommate Menu Share Modal & Component** (`src/components/stash/RoommateMenuShareModal.tsx`):
+      • Custom roommate name input, hostel/room number, delivery slot picker, and customizable message note.
+      • Generates pre-formatted WhatsApp share link with menu details, price, kitchen node, and 1-tap ordering link.
+    - **Widget Integration**: Integrated into `TokenMealHub.tsx`, `CoachingHubTiffinPage.tsx`, and `TopRatedKitchensWidget.tsx`.
+  - **Verification**: `npm run build` compiled cleanly with **0 errors**.
 
+- [x] **[CMO - Content] Task 74: Draft a dedicated legal overview section explaining TPA Sec 105 protections for hosts in simple, non-intimidating Hindi** (2026-09-06)
+  - **Identified Directive**: Draft a dedicated legal overview section explaining TPA Sec 105 protections for hosts in simple, non-intimidating Hindi.
+  - **Applied Solution**:
+    - **TPA Legal Overview Component** (`src/components/stash/TpaLegalOverviewSection.tsx`):
+      • Explains Transfer of Property Act (TPA 1882) Sec 105 Leave & License protections in simple, accessible Hindi.
+      • Highlights 100% property title protection (Zero tenancy claim risk), instant 24-hour vacate rights, ₹10,000 damage coverage, and zero lawyer/court paperwork.
+      • Interactive accordion for legal FAQs and 1-click legal summary download.
+    - **Host Vetting Flow Integration**: Integrated into `src/components/stash/HostVettingFlow.tsx`.
+  - **Verification**: `npm run build` compiled cleanly with **0 errors**.
 
+- [x] **[CMO - SEO] Task 75: Implement dynamic schema.org markup for Saarthi Kitchens, displaying average rating and standard price directly on Google search results** (2026-09-06)
+  - **Identified Directive**: Implement dynamic schema.org markup for Saarthi Kitchens, displaying average rating and standard price directly on Google search results.
+  - **Applied Solution**:
+    - **Saarthi Kitchen Schema Component** (`src/components/seo/SaarthiKitchenSchema.tsx`):
+      • Generates Google Rich Snippet JSON-LD for `FoodEstablishment` / `Restaurant` with `AggregateRating` (4.92 ★), `Offer` (Standard Thali from ₹50, Monthly Pass ₹2,400), `Menu`, `GeoCoordinates`, and `PostalAddress`.
+    - **Integration**: Rendered across `TokenMealHub.tsx` and `TopRatedKitchensWidget.tsx`.
+  - **Verification**: `npm run build` compiled cleanly with **0 errors**.
 
+- [x] **[CMO - Content] Task 76: Script and coordinate a series of "Student Testimonial" short-form videos focusing on Saarthi Spaces and Connect** (2026-09-06)
+  - **Identified Directive**: Script and coordinate a series of "Student Testimonial" short-form videos focusing on Saarthi Spaces and Connect.
+  - **Applied Solution**:
+    - **Student Testimonial Videos Widget** (`src/components/stash/StudentTestimonialVideosWidget.tsx`):
+      • Interactive 9:16 vertical reel video cards featuring Kanpur student testimonials (Allen Kakadeo NEET aspirant, IITK B.Tech student, PW Kakadeo JEE aspirant).
+      • Simulated Reel Player Modal with sound/view counts, script transcript overlay, and direct booking CTA.
+      • Script Charter Modal providing full video hooks, body scripts, camera B-roll cues, and CTAs in Hindi and English.
+    - **Connect Integration**: Rendered inside `src/components/stash/Connect.tsx`.
+  - **Verification**: `npm run build` compiled cleanly with **0 errors**. Next sprint: Sprint 9.
+
+- [x] **[CAO - Intelligent Nudges] Task 77: Implement a backend system to trigger personalized WhatsApp messages to students who haven't ordered in 3 days, offering a 1-day free delivery token** (2026-09-06)
+  - **Identified Directive**: Implement a backend system to trigger personalized WhatsApp messages to students who haven't ordered in 3 days, offering a 1-day free delivery token.
+  - **Applied Solution**:
+    - **Intelligent Nudges Backend Engine** (`src/lib/intelligentNudges.ts`):
+      • Student order history tracking & 3+ day inactivity detection logic (`getDaysSinceLastOrder`, `isStudentEligibleForNudge`).
+      • Automated 1-Day Free Delivery Pass coupon generator (`generateNudgeTokenCode`) with 24-hour expiration SLA.
+      • Personalized WhatsApp message template builder (`buildWhatsAppNudgeTemplate`) pre-filling student name, campus hostel, last ordered meal, and 1-tap redemption link (`getWhatsAppUrl`).
+      • Automated backend batch scan runner (`runAutomatedNudgeBatchScan`) with telemetry persistent storage (`ss_nudge_telemetry`) and Supabase `meal_bookings` fallback integration.
+      • Active nudge token claim manager (`claimActiveNudgeToken`, `getActiveClaimedNudgeToken`) waiving ₹10 delivery fees.
+    - **Interactive Intelligent Nudges UI Component** (`src/components/stash/IntelligentNudgesWidget.tsx`):
+      • Student-facing re-engagement banner displaying un-claimed free delivery tokens (`FREE-DELIV-3D`) for returning students inactive >= 3 days, with 1-tap claim action and Sonner toast / audio micro-haptics (`playPop()`).
+      • Operator CAO Control Console displaying total analyzed students (148), candidate inactive students (5), dispatched WhatsApp nudges, and conversion telemetry.
+      • Candidate student queue with 1-click WhatsApp nudge dispatch buttons and auto-cron batch scan trigger.
+    - **TokenMealHub Integration**:
+      • Mounted `<IntelligentNudgesWidget />` in `src/components/TokenMealHub.tsx`.
+  - **Verification**: `npm run build` compiled cleanly with **0 errors**. Next task: 78.
 

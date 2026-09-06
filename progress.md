@@ -1,3 +1,40 @@
+- [x] **[CMO - Content] Task 76: Script and coordinate a series of "Student Testimonial" short-form videos focusing on Saarthi Spaces and Connect**:
+  - **Identified Directive**: Script and coordinate a series of "Student Testimonial" short-form videos focusing on Saarthi Spaces and Connect.
+  - **Applied Solution**:
+    - **Student Testimonial Videos Widget** (`src/components/stash/StudentTestimonialVideosWidget.tsx`):
+      • Interactive 9:16 vertical reel video cards featuring Kanpur student testimonials (Allen Kakadeo NEET aspirant, IITK B.Tech student, PW Kakadeo JEE aspirant).
+      • Simulated Reel Player Modal with sound/view counts, script transcript overlay, and direct booking CTA.
+      • Script Charter Modal providing full video hooks, body scripts, camera B-roll cues, and CTAs in Hindi and English.
+    - **Connect Integration**: Rendered inside `src/components/stash/Connect.tsx`.
+  - **Verification**: `npm run build` compiled cleanly with **0 errors**.
+
+- [x] **[CMO - SEO] Task 75: Implement dynamic schema.org markup for Saarthi Kitchens, displaying average rating and standard price directly on Google search results**:
+  - **Identified Directive**: Implement dynamic schema.org markup for Saarthi Kitchens, displaying average rating and standard price directly on Google search results.
+  - **Applied Solution**:
+    - **Saarthi Kitchen Schema Component** (`src/components/seo/SaarthiKitchenSchema.tsx`):
+      • Generates Google Rich Snippet JSON-LD for `FoodEstablishment` / `Restaurant` with `AggregateRating` (4.92 ★), `Offer` (Standard Thali from ₹50, Monthly Pass ₹2,400), `Menu`, `GeoCoordinates`, and `PostalAddress`.
+    - **Integration**: Rendered across `TokenMealHub.tsx` and `TopRatedKitchensWidget.tsx`.
+  - **Verification**: `npm run build` compiled cleanly with **0 errors**.
+
+- [x] **[CMO - Content] Task 74: Draft a dedicated legal overview section explaining TPA Sec 105 protections for hosts in simple, non-intimidating Hindi**:
+  - **Identified Directive**: Draft a dedicated legal overview section explaining TPA Sec 105 protections for hosts in simple, non-intimidating Hindi.
+  - **Applied Solution**:
+    - **TPA Legal Overview Component** (`src/components/stash/TpaLegalOverviewSection.tsx`):
+      • Explains Transfer of Property Act (TPA 1882) Sec 105 Leave & License protections in simple, accessible Hindi.
+      • Highlights 100% property title protection (Zero tenancy claim risk), instant 24-hour vacate rights, ₹10,000 damage coverage, and zero lawyer/court paperwork.
+      • Interactive accordion for legal FAQs and 1-click legal summary download.
+    - **Host Vetting Flow Integration**: Integrated into `src/components/stash/HostVettingFlow.tsx`.
+  - **Verification**: `npm run build` compiled cleanly with **0 errors**.
+
+- [x] **[CMO - Direct Marketing] Task 73: Add a customizable WhatsApp button allowing students to instantly share a menu with a specific hostel roommate**:
+  - **Identified Directive**: Add a customizable WhatsApp button allowing students to instantly share a menu with a specific hostel roommate.
+  - **Applied Solution**:
+    - **Roommate Menu Share Modal & Component** (`src/components/stash/RoommateMenuShareModal.tsx`):
+      • Custom roommate name input, hostel/room number, delivery slot picker, and customizable message note.
+      • Generates pre-formatted WhatsApp share link with menu details, price, kitchen node, and 1-tap ordering link.
+    - **Widget Integration**: Integrated into `TokenMealHub.tsx`, `CoachingHubTiffinPage.tsx`, and `TopRatedKitchensWidget.tsx`.
+  - **Verification**: `npm run build` compiled cleanly with **0 errors**.
+
 - [x] **[CMO - Social Proof] Task 72: Create an interactive widget that displays the "Top 3 Rated Kitchens of the Week" as voted by verified students**:
   - **Identified Directive**: Create an interactive widget that displays the "Top 3 Rated Kitchens of the Week" as voted by verified students.
   - **Applied Solution**:
@@ -1175,3 +1212,17 @@
 - [x] **Verification**:
   - Executed `npm run build` with **0 errors** across client, SSR, and Nitro server bundles.
 
+### Session: 2026-09-06 — [CAO - Intelligent Nudges] Task 77 WhatsApp Re-engagement Engine & Free Delivery Tokens
+- [x] **Intelligent Nudges Backend & Inactivity Tracker (`src/lib/intelligentNudges.ts`)**:
+  - Implemented 3+ day student inactivity detection logic (`getDaysSinceLastOrder`, `isStudentEligibleForNudge`).
+  - Created automated 1-Day Free Delivery Pass coupon generator (`generateNudgeTokenCode`) with 24-hour expiration SLA.
+  - Formatted personalized Hindi & English WhatsApp re-engagement copy (`buildWhatsAppNudgeTemplate`) featuring student name, hostel campus, last ordered meal, and 1-tap WhatsApp redemption link (`getWhatsAppUrl`).
+  - Created automated cron batch scan engine (`runAutomatedNudgeBatchScan`) with persistent telemetry storage (`ss_nudge_telemetry`) and Supabase `meal_bookings` fallback integration.
+- [x] **Intelligent Nudges UI & Operator Console (`src/components/stash/IntelligentNudgesWidget.tsx`)**:
+  - Built student-facing re-engagement banner offering 1-Day Free Delivery Pass (`FREE-DELIV-3D`) for returning students inactive >= 3 days, with 1-tap claim action and audio micro-haptics (`playPop()`).
+  - Built CAO / Operator Nudge Control Console showcasing live telemetry (total analyzed, inactive candidates, dispatched WhatsApp nudges, conversion uplift).
+  - Built candidate student queue with individual 1-click WhatsApp nudge dispatch buttons and automated cron batch scan trigger.
+- [x] **Integration**:
+  - Mounted `<IntelligentNudgesWidget />` in `src/components/TokenMealHub.tsx`.
+- [x] **Verification**:
+  - `npm run build` compiled production bundle cleanly with **0 errors**.

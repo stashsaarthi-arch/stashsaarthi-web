@@ -26,6 +26,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { FOUNDER_WHATSAPP, FOUNDER_PHONE_DISPLAY } from "@/lib/constants";
 import { BookingModal } from "@/components/stash/BookingModal";
 import { FooterSection } from "@/components/stash/FooterSection";
+import { RoommateMenuShareModal, MenuShareDetails } from "@/components/stash/RoommateMenuShareModal";
 import { showRateLimitToast } from "@/lib/rateLimiter";
 import { toast } from "sonner";
 
@@ -60,6 +61,8 @@ export function CoachingHubTiffinPage({ config }: { config: HubConfig }) {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [selectedSlot, setSelectedSlot] = useState<"lunch" | "dinner">("lunch");
   const [selectedTier, setSelectedTier] = useState<"standard" | "feast">("standard");
+  const [isRoommateShareOpen, setIsRoommateShareOpen] = useState<boolean>(false);
+  const [roommateShareDetails, setRoommateShareDetails] = useState<MenuShareDetails | undefined>(undefined);
 
   const isHindi = language === "hi";
 
@@ -249,6 +252,25 @@ export function CoachingHubTiffinPage({ config }: { config: HubConfig }) {
                 >
                   <Utensils className="w-4 h-4 mr-2" />
                   {isHindi ? "₹50 थाली आर्डर करें" : "Order ₹50 Thali Now"}
+                </Button>
+
+                <Button
+                  size="lg"
+                  variant="outline"
+                  onClick={() => {
+                    setRoommateShareDetails({
+                      menuName: `${config.coachingName} Homestyle Thali`,
+                      price: 50,
+                      kitchenNode: `${config.hubName} (${config.chefName})`,
+                      slot: "Lunch",
+                      description: config.heroDescription,
+                    });
+                    setIsRoommateShareOpen(true);
+                  }}
+                  className="border-emerald-500/40 bg-[#0A0D0F] hover:bg-slate-800 text-emerald-300 font-semibold"
+                >
+                  <MessageCircle className="w-4 h-4 mr-2 text-emerald-400 fill-emerald-400/20" />
+                  {isHindi ? "रूममेट के साथ शेयर करें 📱" : "Share Menu with Roommate 📱"}
                 </Button>
 
                 <Button

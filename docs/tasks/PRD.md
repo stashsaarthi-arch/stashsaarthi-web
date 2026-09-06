@@ -87,13 +87,13 @@ Sprint 8: CMO & CLO (Hyperlocal Growth & Community Engagement)
 - [x] 70. [CMO - Content]: Design a downloadable PDF guide: "The Complete Guide to Surviving Kakadeo as a New Student (powered by StashSaarthi)".
 - [x] 71. [CMO - Community]: Launch an official "Kanpur Student Council" section, inviting student leaders to discuss platform features and local issues.
 - [x] 72. [CMO - Social Proof]: Create an interactive widget that displays the "Top 3 Rated Kitchens of the Week" as voted by verified students.
-[ ] 73. [CMO - Direct Marketing]: Add a customizable WhatsApp button allowing students to instantly share a menu with a specific hostel roommate.
-[ ] 74. [CMO - Content]: Draft a dedicated legal overview section explaining TPA Sec 105 protections for hosts in simple, non-intimidating Hindi.
-[ ] 75. [CMO - SEO]: Implement dynamic schema.org markup for Saarthi Kitchens, displaying average rating and standard price directly on Google search results.
-[ ] 76. [CMO - Content]: Script and coordinate a series of "Student Testimonial" short-form videos focusing on Saarthi Spaces and Connect.
+- [x] 73. [CMO - Direct Marketing]: Add a customizable WhatsApp button allowing students to instantly share a menu with a specific hostel roommate.
+- [x] 74. [CMO - Content]: Draft a dedicated legal overview section explaining TPA Sec 105 protections for hosts in simple, non-intimidating Hindi.
+- [x] 75. [CMO - SEO]: Implement dynamic schema.org markup for Saarthi Kitchens, displaying average rating and standard price directly on Google search results.
+- [x] 76. [CMO - Content]: Script and coordinate a series of "Student Testimonial" short-form videos focusing on Saarthi Spaces and Connect.
 
 Sprint 9: CRO & CAO (Intelligent Conversion & Retention)
-[ ] 77. [CAO - Intelligent Nudges]: Implement a backend system to trigger personalized WhatsApp messages to students who haven't ordered in 3 days, offering a 1-day free delivery token.
+- [x] 77. [CAO - Intelligent Nudges]: Implement a backend system to trigger personalized WhatsApp messages to students who haven't ordered in 3 days, offering a 1-day free delivery token.
 [ ] 78. [CRO - Tiffin Flow]: Implement "Meal Personalization" (e.g., "Skip Rice, Extra Roti" for ₹5 more) during the booking process.
 [ ] 79. [CRO - Spaces Flow]: Add a high-contrast "Instant Booking" button alongside the existing "Find Broker-Free Rooms" button.
 [ ] 80. [CRO - Payment Flow]: Implement "Zero-Fee Trial Token" for first-time students, instantly credited to their Stash Wallet upon verification.

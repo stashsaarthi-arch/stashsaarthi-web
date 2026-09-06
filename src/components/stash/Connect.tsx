@@ -18,6 +18,7 @@ import type { OpenBooking } from "./types";
 import { useLanguage } from "@/context/LanguageContext";
 import { ConnectAudioWidget } from "./ConnectAudioWidget";
 import { KarmaPointsBadge, KarmaPointsModal, type SeniorTier } from "./KarmaPointsModal";
+import { StudentTestimonialVideosWidget } from "./StudentTestimonialVideosWidget";
 
 const CITIES = ["Kanpur", "Lucknow", "Delhi NCR", "Pune"] as const;
 type City = (typeof CITIES)[number];
@@ -453,6 +454,9 @@ export function Connect(_props: { onBook: OpenBooking }) {
 
       <MatchDrawer open={drawer} onOpenChange={setDrawer} city={isHi ? CITIES_HI[city] : city} />
       <KarmaPointsModal open={karmaModal} onOpenChange={setKarmaModal} />
+
+      {/* Student Testimonial Short-Form Videos (Task 76) */}
+      <StudentTestimonialVideosWidget />
     </div>
   );
 }
