@@ -59,6 +59,90 @@ const MEAL_TIERS: MealOption[] = [
   },
 ];
 
+interface KitchenNodeInfo {
+  id: string;
+  name: string;
+  campus: string;
+  distance: string;
+  rating: number;
+  totalTokensLunch: number;
+  tokensSoldLunch: number;
+  percentSoldLunch: number;
+  totalTokensDinner: number;
+  tokensSoldDinner: number;
+  percentSoldDinner: number;
+  chefName: string;
+  specialty: string;
+  badge?: string;
+}
+
+const KITCHEN_NODES: KitchenNodeInfo[] = [
+  {
+    id: "annapurna",
+    name: "Kakadeo Hub - Annapurna Kitchen",
+    campus: "Kakadeo PW & Allen Hub",
+    distance: "0.4 km",
+    rating: 4.9,
+    totalTokensLunch: 150,
+    tokensSoldLunch: 117,
+    percentSoldLunch: 78,
+    totalTokensDinner: 150,
+    tokensSoldDinner: 82,
+    percentSoldDinner: 55,
+    chefName: "Sunita Sharma (Senior Host)",
+    specialty: "Ghar Jaisa Desi Ghee Tiffin",
+    badge: "⚡ 78% Sold",
+  },
+  {
+    id: "dadi_maa",
+    name: "CSJMU Kalyanpur - Dadi Maa Rasoi",
+    campus: "CSJMU & Chhapeda Pulia",
+    distance: "0.8 km",
+    rating: 4.8,
+    totalTokensLunch: 120,
+    tokensSoldLunch: 102,
+    percentSoldLunch: 85,
+    totalTokensDinner: 120,
+    tokensSoldDinner: 48,
+    percentSoldDinner: 40,
+    chefName: "Geeta Devi (Senior Host)",
+    specialty: "Satvik Arhar Dal & Phulka",
+    badge: "🔥 85% Sold",
+  },
+  {
+    id: "iitk_mess",
+    name: "IIT Kanpur Gate 1 - Campus Senior Mess",
+    campus: "IIT Kanpur Gate 1",
+    distance: "1.2 km",
+    rating: 4.9,
+    totalTokensLunch: 200,
+    tokensSoldLunch: 128,
+    percentSoldLunch: 64,
+    totalTokensDinner: 200,
+    tokensSoldDinner: 144,
+    percentSoldDinner: 72,
+    chefName: "Rameshwar Ji (Senior Host)",
+    specialty: "Paneer Masala & Desi Kheer",
+    badge: "⭐ 64% Sold",
+  },
+  {
+    id: "hbti_shanti",
+    name: "HBTI Nawabganj - Shanti Home Food",
+    campus: "HBTI Nawabganj Hub",
+    distance: "1.5 km",
+    rating: 4.7,
+    totalTokensLunch: 100,
+    tokensSoldLunch: 45,
+    percentSoldLunch: 45,
+    totalTokensDinner: 100,
+    tokensSoldDinner: 30,
+    percentSoldDinner: 30,
+    chefName: "Shanti Verma (Senior Host)",
+    specialty: "Homestyle Kadhi Chawal",
+    badge: "🏡 45% Sold",
+  },
+];
+
 const RECHARGE_PACKS = [
   { id: "trial", name: "Starter Trial", price: 300, tokens: 300, desc: "15 Days Validity" },
   {
@@ -519,6 +603,90 @@ export const TokenMealHub: React.FC = () => {
           </div>
         </div>
 
+        {/* Real-Time Kitchen Node Availability Percentage Bars (Task 60) */}
+        <div className="mb-8 bg-slate-950/90 border border-slate-800 rounded-2xl p-5 shadow-lg">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-slate-800/80">
+            <div>
+              <h3 className="text-sm font-extrabold text-white flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                <span>Real-Time Kitchen Node Availability ({deliverySlot} Slot)</span>
+              </h3>
+              <p className="text-xs text-slate-400 mt-0.5">
+                Live token allocation per kitchen node. Select a kitchen node below to order.
+              </p>
+            </div>
+            <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 self-start sm:self-auto">
+              Live Token Ledger Active
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+            {KITCHEN_NODES.map((node) => {
+              const isSelected = vendorNode === node.name;
+              const percentSold = deliverySlot === "Lunch" ? node.percentSoldLunch : node.percentSoldDinner;
+              const totalTokens = deliverySlot === "Lunch" ? node.totalTokensLunch : node.totalTokensDinner;
+              const tokensSold = deliverySlot === "Lunch" ? node.tokensSoldLunch : node.tokensSoldDinner;
+              const tokensLeft = totalTokens - tokensSold;
+
+              return (
+                <div
+                  key={node.id}
+                  onClick={() => setVendorNode(node.name)}
+                  className={`cursor-pointer rounded-xl p-4 border transition-all duration-300 flex flex-col justify-between ${
+                    isSelected
+                      ? "bg-slate-900 border-emerald-500 shadow-[0_0_15px_-3px_rgba(16,185,129,0.3)] ring-1 ring-emerald-500"
+                      : "bg-slate-900/60 border-slate-800 hover:border-slate-700 hover:bg-slate-900/90"
+                  }`}
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-1 mb-1.5">
+                      <span className="text-[11px] font-semibold text-slate-400 truncate">{node.campus}</span>
+                      {node.badge && (
+                        <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${percentSold > 80 ? "bg-rose-500/20 text-rose-300 border border-rose-500/30" : "bg-emerald-500/15 text-emerald-300 border border-emerald-500/20"}`}>
+                          {node.badge}
+                        </span>
+                      )}
+                    </div>
+                    <h4 className="text-xs font-bold text-white leading-snug mb-1 line-clamp-1">
+                      {node.name}
+                    </h4>
+                    <p className="text-[11px] text-slate-400 mb-3 line-clamp-1">{node.chefName}</p>
+                  </div>
+
+                  <div>
+                    {/* Availability Percentage Bar */}
+                    <div className="flex justify-between items-center text-[11px] font-bold mb-1.5">
+                      <span className={percentSold > 80 ? "text-rose-400" : percentSold > 60 ? "text-amber-400" : "text-emerald-400"}>
+                        {percentSold}% of {deliverySlot.toLowerCase()} tokens sold
+                      </span>
+                      <span className="text-slate-400 font-mono">{tokensLeft} left</span>
+                    </div>
+
+                    <div className="w-full bg-slate-950 rounded-full h-2 overflow-hidden border border-slate-800 p-0.5">
+                      <div
+                        className={`h-full rounded-full transition-all duration-500 ${
+                          percentSold > 80
+                            ? "bg-gradient-to-r from-rose-500 to-amber-500"
+                            : percentSold > 60
+                            ? "bg-gradient-to-r from-amber-400 to-emerald-400"
+                            : "bg-gradient-to-r from-emerald-500 to-teal-400"
+                        }`}
+                        style={{ width: `${percentSold}%` }}
+                      />
+                    </div>
+
+                    {isSelected && (
+                      <div className="mt-2.5 text-[10px] font-bold text-emerald-400 flex items-center justify-center gap-1 bg-emerald-500/10 py-0.5 rounded border border-emerald-500/20">
+                        <span>✓ Selected Kitchen Node</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
         {/* Step 2: Meal Tier Selection */}
         <div className="mb-8">
           <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
@@ -606,18 +774,17 @@ export const TokenMealHub: React.FC = () => {
                   onChange={(e) => setVendorNode(e.target.value)}
                   className="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all text-sm cursor-pointer appearance-none"
                 >
-                  <option value="Kakadeo Hub - Annapurna Kitchen">
-                    Kakadeo Hub - Annapurna Kitchen
-                  </option>
-                  <option value="CSJMU Kalyanpur - Dadi Maa Rasoi">
-                    CSJMU Kalyanpur - Dadi Maa Rasoi
-                  </option>
-                  <option value="IIT Kanpur Gate 1 - Campus Senior Mess">
-                    IIT Kanpur Gate 1 - Campus Senior Mess
-                  </option>
-                  <option value="HBTI Nawabganj - Shanti Home Food">
-                    HBTI Nawabganj - Shanti Home Food
-                  </option>
+                  {KITCHEN_NODES.map((node) => {
+                    const percentSold = deliverySlot === "Lunch" ? node.percentSoldLunch : node.percentSoldDinner;
+                    const totalTokens = deliverySlot === "Lunch" ? node.totalTokensLunch : node.totalTokensDinner;
+                    const tokensSold = deliverySlot === "Lunch" ? node.tokensSoldLunch : node.tokensSoldDinner;
+                    const tokensLeft = totalTokens - tokensSold;
+                    return (
+                      <option key={node.id} value={node.name}>
+                        {node.name} ({percentSold}% {deliverySlot} Sold • {tokensLeft} Tokens Left)
+                      </option>
+                    );
+                  })}
                 </select>
               </div>
 

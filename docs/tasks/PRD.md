@@ -70,10 +70,10 @@
 - [x] 56. [CAO - Chatbot]: Prototype a Retrieval-Augmented Generation (RAG) chatbot using the existing FAQ documentation to provide instant answers to students.
 - [x] 57. [CTO - Analytics]: Implement custom Supabase telemetry to track specific component-level interaction time (e.g., how long do students hover on the ₹50 thali vs. ₹70 thali?).
 - [x] 58. [CTO - Security]: Audit Supabase JWT token expiration and refresh token logic for enhanced session security.
-[ ] 59. [CTO - Infrastructure]: Set up redundant Supabase edge function deployments across different geographical regions for maximum uptime.
+- [x] 59. [CTO - Infrastructure]: Set up redundant Supabase edge function deployments across different geographical regions for maximum uptime.
 
 Sprint 7: CPO & UI/UX (Hyperlocal Mobile Dominance)
-[ ] 60. [CPO - Kitchen UI]: Add real-time "availability percentage" bars to each kitchen node (e.g., "75% of lunch tokens sold").
+- [x] 60. [CPO - Kitchen UI]: Add real-time "availability percentage" bars to each kitchen node (e.g., "75% of lunch tokens sold").
 [ ] 61. [UX - Kitchen Flow]: Design and implement a 2-step "Re-order My Last Meal" shortcut on the dashboard.
 [ ] 62. [UI - Spaces]: Integrate a lightweight, open-source 360° photo viewer for Saarthi Spaces room tours (using Pannellum or similar).
 [ ] 63. [UX - Storage]: Redesign the luggage storage UI to support itemization and custom labeling (e.g., "Carton #1: Books", "Suitcase: Winter Clothes").

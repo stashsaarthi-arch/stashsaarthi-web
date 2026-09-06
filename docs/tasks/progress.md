@@ -544,4 +544,14 @@
     • `src/routes/__root.tsx`: Mounted `initSessionSecurityListener()` into `RootComponent` for automatic client hydration lifecycle management.
   - Type-check & build verified: `npx tsc --noEmit` (**0 errors**) and `npm run build` compiled cleanly.
 
+- [x] **[CPO] Task 60: Add real-time "availability percentage" bars to each kitchen node (e.g., "75% of lunch tokens sold")** (2026-09-06)
+  - Engineered Real-Time Kitchen Node Availability & Quota Tracker in `src/components/TokenMealHub.tsx`:
+    • **Structured Kitchen Node Data**: Defined `KITCHEN_NODES` array tracking live campus nodes (Kakadeo Hub - Annapurna Kitchen, CSJMU Kalyanpur - Dadi Maa Rasoi, IIT Kanpur Gate 1 - Campus Senior Mess, HBTI Nawabganj - Shanti Home Food) with slot-specific metrics (total tokens, tokens sold, percentage sold, senior host chef details, distance, ratings, and demand badges).
+    • **Dynamic Availability Percentage Bars**: Calculated slot-specific token availability percentages (e.g., `78% of lunch tokens sold`, `85% of lunch tokens sold - 18 left`) based on active delivery slot selection ("Lunch" vs "Dinner").
+    • **Color-Coded Progress Gauge**: Applied smooth animated progress bars with dynamic color gradients (Emerald for <60%, Amber for 60-80%, Flame Red for >80% near sold out).
+    • **1-Click Kitchen Node Selection**: Integrated interactive card selection updating order form state (`vendorNode`) with visual selection outline and checkmark badges.
+    • **Select Dropdown Optimization**: Enhanced master kitchen node select dropdown options to dynamically reflect real-time percentage sold and remaining token counts.
+  - Type-check & build verified: `npx tsc --noEmit` (**0 errors**) and `npm run build` compiled cleanly with **0 errors**.
+
+
 
