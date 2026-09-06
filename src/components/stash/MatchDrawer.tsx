@@ -16,6 +16,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useLanguage } from "@/context/LanguageContext";
 import { logSupabaseError } from "@/lib/supabaseLogger";
+import { checkAndRecordRateLimit, showRateLimitToast } from "@/lib/rateLimiter";
 
 export function MatchDrawer({
   open,
@@ -59,6 +60,12 @@ export function MatchDrawer({
       toast.error(
         isHi ? "कृपया 10-अंकों का वैध फोन नंबर दर्ज करें।" : "Please enter a valid phone number.",
       );
+      return;
+    }
+
+    const rateCheck = checkAndRecordRateLimit("match_drawer");
+    if (!rateCheck.allowed) {
+      showRateLimitToast(rateCheck.remainingSeconds, rateCheck.message);
       return;
     }
 

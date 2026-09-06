@@ -1,3 +1,33 @@
+- [x] **[CAO] Task 53: Set up Serverless Edge Function for Host Vetting (Google Cloud Vision API)**:
+  - **Identified Directive**: Set up a serverless edge function for Host Vetting: Auto-verify property photos for quality, safety, and "ghar jaisa" aesthetics using Google Cloud Vision API.
+  - **Applied Solution**:
+    - Supabase Edge Function (`supabase/functions/verify-host-photo/index.ts`):
+      • Integrated Google Cloud Vision REST API (`/v1/images:annotate`) supporting `LABEL_DETECTION`, `SAFE_SEARCH_DETECTION`, and `IMAGE_PROPERTIES`.
+      • Evaluated safety (SafeSearch audit), photo resolution/lighting, and homestyle comfort ("Ghar Jaisa" score).
+      • Implemented fallback heuristic engine for dev/offline environments.
+    - Client Integration Library (`src/lib/visionAiHostVetting.ts`):
+      • Created `verifyHostPropertyPhoto()` helper and preset property photo inspection scenarios.
+    - Interactive UI Widget (`src/components/stash/VisionAiPhotoVerifier.tsx`):
+      • Interactive scanning beam animation, custom photo upload, and live score breakdown.
+      • Embedded into `HostVettingFlow.tsx` within the Trust Console Hub.
+  - **Verification**: `npx tsc --noEmit` (**0 errors**) and `npm run build` compiled cleanly with **0 errors**.
+
+- [x] **[CTO] Task 52: Design Supabase Schema for Dynamic, Location-Based Pricing Tiers**:
+  - **Identified Directive**: Design Supabase schema for dynamic, location-based pricing tiers (e.g., higher storage rates near premium hostels).
+  - **Applied Solution**:
+    - Created SQL database migration (`supabase/migrations/20260906_location_pricing_tiers.sql`):
+      • Created `pricing_zones` table (IITK_PREMIUM, KAKADEO_COACHING, CSJMU_MAIN, KALYANPUR_OUTER, SWAROOP_NAGAR, LUCKNOW_CENTRAL) storing tier levels, PIN arrays, base monthly storage rates, host payout rates, and peak season multipliers.
+      • Created `campus_location_pricing` table mapping campus nodes to pricing zones with proximity radius (km) and demand surge multipliers.
+      • Configured RLS policies for public read access (`SELECT`) and restricted write access.
+      • Implemented RPC function `get_location_pricing_tier(p_pincode TEXT, p_campus TEXT)` calculating dynamic storage rates, host payouts, and platform net margins.
+    - Created client-side location pricing engine (`src/lib/locationPricing.ts`):
+      • Built `calculateLocationPricingQuote()` for instant 0ms fallback rendering.
+      • Integrated Supabase RPC client call `fetchLocationPricingQuoteFromSupabase()`.
+      • Added `getZoneTierBadge()` utility for Gold Premium, Emerald Standard, and Cyan Budget UI badges.
+    - Integrated Location Zone Selector into `src/components/stash/Calculator.tsx`:
+      • Enabled location zone selection (IIT Kanpur Premium Zone @ ₹350/mo, Kakadeo Coaching Hub @ ₹300/mo, Kalyanpur Budget Zone @ ₹270/mo) in student calculator with real-time math updating.
+  - **Verification**: `npx tsc --noEmit` (**0 errors**) and `npm run build` compiled cleanly with **0 errors**.
+
 - [x] **[CAO] Task 51: Implement Predictive AI Persona Model & Dynamic Asset Pre-loader**:
   - **Identified Directive**: Implement a light ML model on the client side to predict user persona (Student/Host) based on scroll behavior and pre-load relevant assets.
   - **Applied Solution**:

@@ -1,4 +1,5 @@
 import { useState, memo } from "react";
+import { Link } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { useAuth } from "@/hooks/useAuth";
 import {
@@ -39,6 +40,7 @@ import { CampusCaptainModal } from "./CampusCaptainModal";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useLanguage } from "@/context/LanguageContext";
 import { FOUNDER_WHATSAPP, FOUNDER_PHONE_DISPLAY, FOUNDER_LINKEDIN } from "@/lib/constants";
+import { checkAndRecordRateLimit, showRateLimitToast } from "@/lib/rateLimiter";
 
 function GoogleGlyph() {
   return (
@@ -205,6 +207,12 @@ export const FooterSection = memo(function FooterSection() {
     }
     if (cleanPhone && !isValidPhone(cleanPhone)) {
       toast.error(isHi ? "कृपया एक वैध फोन नंबर दर्ज करें।" : "Please enter a valid phone number.");
+      return;
+    }
+
+    const rateCheck = checkAndRecordRateLimit("footer_waitlist");
+    if (!rateCheck.allowed) {
+      showRateLimitToast(rateCheck.remainingSeconds, rateCheck.message);
       return;
     }
 
@@ -658,6 +666,23 @@ export const FooterSection = memo(function FooterSection() {
                 ? "नोडल परिचालन कार्यालय: 117/के-ब्लॉक, कल्याणपुर, कानपुर — 208016 | सीधा ईमेल: stashsaarthi@gmail.com"
                 : "Operational Hub: 117/K-Block, Kalyanpur, Kanpur — 208016 | Direct Email: stashsaarthi@gmail.com"}
             </p>
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 pt-1 text-[11px]">
+              <Link to="/privacy" className="text-emerald-400 hover:underline font-semibold">
+                {isHi ? "गोपनीयता नीति (Privacy Policy)" : "Privacy Policy"}
+              </Link>
+              <span>•</span>
+              <Link to="/terms" className="text-amber-400 hover:underline font-semibold">
+                {isHi ? "सेवा की शर्तें (Terms of Service)" : "Terms of Service"}
+              </Link>
+              <span>•</span>
+              <button
+                type="button"
+                onClick={() => setDoc("liability")}
+                className="hover:text-white transition-colors cursor-pointer"
+              >
+                {isHi ? "₹10k बीमा चार्टर" : "₹10k Insurance Charter"}
+              </button>
+            </div>
           </div>
           <button
             onClick={() => smoothScrollTo("top")(undefined as any)}

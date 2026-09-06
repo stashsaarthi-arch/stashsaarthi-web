@@ -215,7 +215,7 @@ export function ReferralLeaderboard({ onRefer }: { onRefer?: () => void }) {
         ? `🚨 *छुट्टियों में खाली रूम का ₹8,000 डेड-रेंट मत फूंको!* 🚨\n\nअरे! StashSaarthi हमारे सेमेस्टर लगेज को कैंपस के पास मात्र *₹300/माह* में सुरक्षित रख रहा है! लेजर सील + ₹10k बीमा।\n\n🎁 ₹300 फ्री क्रेडिट के लिए मेरा इनवाइट कोड *${mockUserCode}* उपयोग करें:\n👉 ${APP_BASE_URL}?ref=${mockUserCode}`
         : `🚨 *DON'T BURN ₹8,000 DEAD-RENT THIS VACATION!* 🚨\n\nHey! StashSaarthi stores vacation luggage for *₹300/mo* near campus with laser seals & ₹10k insurance!\n\n🎁 Use invite code *${mockUserCode}* for ₹300 free credit:\n👉 ${APP_BASE_URL}?ref=${mockUserCode}`;
 
-    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, "_blank");
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, "_blank", "noopener,noreferrer");
   };
 
   return (

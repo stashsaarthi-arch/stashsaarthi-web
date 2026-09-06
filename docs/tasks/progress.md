@@ -457,3 +457,33 @@
   - Built interactive `PredictivePersonaWidget` component (`src/components/stash/PredictivePersonaWidget.tsx`) rendering real-time AI persona predictions, confidence scores (e.g., "88% conf."), pre-loaded asset counts, and 1-tap view adaptation triggers.
   - Mounted `<PredictivePersonaWidget>` in `src/routes/index.tsx` wrapped in `ErrorBoundary`.
   - Type-check & build verified: `npx tsc --noEmit` (**0 errors**) and `npm run build` (**0 errors**).
+
+- [x] **[CTO] Task 52: Design Supabase Schema for Dynamic, Location-Based Pricing Tiers** (2026-09-06)
+  - Created Supabase SQL database migration (`supabase/migrations/20260906_location_pricing_tiers.sql`):
+    • Created `pricing_zones` schema table storing location pricing zones (`IITK_PREMIUM`, `KAKADEO_COACHING`, `CSJMU_MAIN`, `KALYANPUR_OUTER`, `SWAROOP_NAGAR`, `LUCKNOW_CENTRAL`) with tier levels (`premium`, `standard`, `budget`), PIN code arrays, base storage rates, host payout rates, and peak season multipliers.
+    • Created `campus_location_pricing` schema table mapping campus nodes to pricing zones with proximity radius (km) and demand surge multipliers.
+    • Configured Row-Level Security (RLS) policies allowing public read access (`SELECT`) and restricting mutations to `authenticated` / `service_role`.
+    • Built RPC database function `get_location_pricing_tier(p_pincode TEXT, p_campus TEXT)` for dynamic server-side pricing lookup and platform net margin computation.
+  - Created client-side location pricing engine (`src/lib/locationPricing.ts`):
+    • Implemented synchronous dynamic quote calculation fallback for 0ms client-side rendering.
+    • Integrated Supabase RPC client call `fetchLocationPricingQuoteFromSupabase()`.
+    • Added `getZoneTierBadge()` utility generating high-contrast UI theme badges (Gold Premium, Emerald Standard, Cyan Budget).
+  - Integrated Location-Based Pricing Zone Selector in `src/components/stash/Calculator.tsx`:
+    • Users can select their campus / location zone (e.g., IIT Kanpur Premium Zone @ ₹350/mo, Kakadeo Coaching Hub @ ₹300/mo, Kalyanpur Budget Zone @ ₹270/mo) and observe real-time dynamic pricing, host payouts, and dead-rent savings calculations.
+  - Type-check & build verified: `npx tsc --noEmit` (**0 errors**) and `npm run build` (**0 errors**).
+
+- [x] **[CAO] Task 53: Set up a serverless edge function for Host Vetting: Auto-verify property photos for quality, safety, and "ghar jaisa" aesthetics using Google Cloud Vision API** (2026-09-06)
+  - Created Supabase Edge Function (`supabase/functions/verify-host-photo/index.ts`):
+    • Implemented REST API integration with Google Cloud Vision API (`/v1/images:annotate`) supporting `LABEL_DETECTION`, `SAFE_SEARCH_DETECTION`, and `IMAGE_PROPERTIES`.
+    • Computed composite vetting scores across Safety (SafeSearch audit), Image Quality (lighting/resolution), and "Ghar Jaisa" Homestyle Comfort (bedroom, wooden furniture, clean bedding keywords).
+    • Built client-side fallback heuristic vision engine for offline/development environments when edge API key is unset.
+  - Built client integration service (`src/lib/visionAiHostVetting.ts`):
+    • Created `verifyHostPropertyPhoto()` invoking `supabase.functions.invoke("verify-host-photo")` with client fallback.
+    • Provided sample property inspection scenarios (Swaroop Nagar Senior Host Bedroom, Kakadeo Homestyle Living Space, Cluttered Dark Basement Storage).
+  - Built interactive UI Component (`src/components/stash/VisionAiPhotoVerifier.tsx`):
+    • Visual AI photo scanner beam animation with real-time score gauges (Overall Score, Safety Audit, Image Quality, Ghar Jaisa Score).
+    • Upload custom photo capability & instant auto-vetting report generation.
+  - Integrated `<VisionAiPhotoVerifier />` into `src/components/stash/HostVettingFlow.tsx` under the Host Vetting Audit tab in `TrustConsoleHub.tsx`.
+  - Type-check & build verified: `npx tsc --noEmit` (**0 errors**) and `npm run build` (**0 errors**).
+
+

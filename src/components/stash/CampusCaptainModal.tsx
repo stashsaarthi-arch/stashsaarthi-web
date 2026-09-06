@@ -13,6 +13,7 @@ import { Award, CheckCircle2, Phone } from "lucide-react";
 import { toast } from "sonner";
 import { FOUNDER_WHATSAPP, getWhatsAppUrl } from "@/lib/constants";
 import { isValidPhone } from "@/lib/waitlistService";
+import { checkAndRecordRateLimit, showRateLimitToast } from "@/lib/rateLimiter";
 import { useLanguage } from "@/context/LanguageContext";
 
 export function CampusCaptainModal({
@@ -44,6 +45,12 @@ export function CampusCaptainModal({
           ? "कृपया संपर्क के लिए 10-अंकीय फोन नंबर दर्ज करें।"
           : "Please enter a valid phone number for contact.",
       );
+      return;
+    }
+
+    const rateCheck = checkAndRecordRateLimit("campus_captain");
+    if (!rateCheck.allowed) {
+      showRateLimitToast(rateCheck.remainingSeconds, rateCheck.message);
       return;
     }
 

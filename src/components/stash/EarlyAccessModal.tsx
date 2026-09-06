@@ -27,6 +27,7 @@ import {
   showNetworkRetryToast,
 } from "@/lib/waitlistService";
 import { FOUNDER_WHATSAPP, FOUNDER_PHONE_DISPLAY, getWhatsAppUrl } from "@/lib/constants";
+import { checkAndRecordRateLimit, showRateLimitToast } from "@/lib/rateLimiter";
 import { useLanguage } from "@/context/LanguageContext";
 
 export function EarlyAccessModal({
@@ -75,6 +76,12 @@ export function EarlyAccessModal({
     }
     if (cleanPhone && !isValidPhone(cleanPhone)) {
       toast.error(isHi ? "कृपया एक वैध फोन नंबर दर्ज करें।" : "Please enter a valid phone number.");
+      return;
+    }
+
+    const rateCheck = checkAndRecordRateLimit("early_access");
+    if (!rateCheck.allowed) {
+      showRateLimitToast(rateCheck.remainingSeconds, rateCheck.message);
       return;
     }
 

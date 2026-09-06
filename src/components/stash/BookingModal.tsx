@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { logSupabaseError } from "@/lib/supabaseLogger";
+import { checkAndRecordRateLimit, showRateLimitToast } from "@/lib/rateLimiter";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -276,6 +277,12 @@ export function BookingModal({
           ? "कृपया समुदाय एवं सुरक्षा शर्तों को स्वीकार करें।"
           : "Please accept the community escrow & safety charter.",
       );
+      return;
+    }
+
+    const rateCheck = checkAndRecordRateLimit("booking_modal");
+    if (!rateCheck.allowed) {
+      showRateLimitToast(rateCheck.remainingSeconds, rateCheck.message);
       return;
     }
 

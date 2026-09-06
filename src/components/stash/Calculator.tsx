@@ -4,9 +4,14 @@ import AnimatedContent from "@/components/ui/AnimatedContent";
 import type { OpenBooking } from "./types";
 import { useLanguage } from "@/context/LanguageContext";
 import { PackingChecklistModal } from "./PackingChecklistModal";
-import { Package, FileText, Printer, ShieldCheck, X, ArrowRight } from "lucide-react";
+import { Package, FileText, Printer, ShieldCheck, ArrowRight, MapPin } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import {
+  PRESET_PRICING_ZONES,
+  calculateLocationPricingQuote,
+  getZoneTierBadge,
+} from "@/lib/locationPricing";
 
 export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
   const { language, t } = useLanguage();
@@ -16,6 +21,7 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
   const [bags, setBags] = useState<number>(2);
   const [vacationDays, setVacationDays] = useState<number>(45);
   const [monthlyRent, setMonthlyRent] = useState<number>(6000);
+  const [selectedZoneCode, setSelectedZoneCode] = useState<string>("KAKADEO_COACHING");
   const [showPackingModal, setShowPackingModal] = useState(false);
   const [showCertificateModal, setShowCertificateModal] = useState(false);
 
@@ -23,26 +29,32 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
   const safeDays = Math.max(15, vacationDays || 15);
   const safeRent = Math.max(1000, monthlyRent || 6000);
 
-  // 2. Kanpur Real-World Math Engine (Memoized for 60fps interaction)
-  const { vacationMonths, deadRentCost, stashCost, netSavings, savingsPercent } = useMemo(() => {
-    // Months fraction (e.g., 45 days = 1.5 months)
+  // Selected Zone Info
+  const activeZone = useMemo(
+    () => (PRESET_PRICING_ZONES.find((z) => z.zone_code === selectedZoneCode) || PRESET_PRICING_ZONES[0])!,
+    [selectedZoneCode]
+  );
+  const zoneBadge = useMemo(() => getZoneTierBadge(activeZone.tier_level), [activeZone]);
+
+  // 2. Kanpur Dynamic Location-Based Math Engine (Memoized for 60fps interaction)
+  const { vacationMonths, deadRentCost, stashCost, netSavings, savingsPercent, dynamicQuote } = useMemo(() => {
     const vMonths = Math.max(0.5, Number((safeDays / 30).toFixed(1)) || 0.5);
-    // Traditional Dead Rent burned by student during vacation
-    const dCost = Math.round(safeRent * vMonths) || 0;
-    // StashSaarthi Cost: ₹300 per bag per month
-    const sCost = Math.round(safeBags * 300 * vMonths) || 0;
-    // Net In-Pocket Savings
-    const nSavings = Math.max(0, dCost - sCost);
-    const sPercent = dCost > 0 ? Math.round((nSavings / dCost) * 100) : 0;
+    const quote = calculateLocationPricingQuote({
+      campus: activeZone.zone_name,
+      bags: safeBags,
+      months: vMonths,
+      monthlyRent: safeRent,
+    });
 
     return {
       vacationMonths: vMonths,
-      deadRentCost: dCost,
-      stashCost: sCost,
-      netSavings: nSavings,
-      savingsPercent: sPercent,
+      deadRentCost: Math.round(safeRent * vMonths) || 0,
+      stashCost: quote.total_stash_cost,
+      netSavings: quote.net_savings,
+      savingsPercent: quote.savings_percent,
+      dynamicQuote: quote,
     };
-  }, [safeBags, safeDays, safeRent]);
+  }, [safeBags, safeDays, safeRent, activeZone]);
 
   return (
     <div id="student-calculator" className="relative mx-auto max-w-5xl px-2 py-2 scroll-mt-20">
@@ -51,6 +63,34 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-center">
             {/* Left Controls Column */}
             <div className="space-y-4">
+              {/* Control 0: Location-Based Pricing Zone Selector */}
+              <div>
+                <div className="flex justify-between items-center mb-1.5">
+                  <label
+                    htmlFor="calc-zone-select"
+                    className="text-xs font-medium text-slate-300 cursor-pointer flex items-center gap-1"
+                  >
+                    <MapPin className="h-3.5 w-3.5 text-cyan-400" />
+                    <span>{isHi ? "कैंपस / लोकेशन प्राइजिंग ज़ोन" : "Campus Location Pricing Zone"}</span>
+                  </label>
+                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded border ${zoneBadge.badgeClass}`}>
+                    {zoneBadge.icon} {isHi ? zoneBadge.label_hi : zoneBadge.label} (₹{dynamicQuote.effective_rate_per_bag}/{isHi ? "बैग/माह" : "bag/mo"})
+                  </span>
+                </div>
+                <select
+                  id="calc-zone-select"
+                  value={selectedZoneCode}
+                  onChange={(e) => setSelectedZoneCode(e.target.value)}
+                  className="w-full h-9 rounded-xl bg-slate-900 border border-slate-700 px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-emerald-500 cursor-pointer"
+                >
+                  {PRESET_PRICING_ZONES.map((zone) => (
+                    <option key={zone.zone_code} value={zone.zone_code}>
+                      {isHi && zone.zone_name_hi ? zone.zone_name_hi : zone.zone_name} — ₹{zone.base_storage_rate_monthly}/bag/mo
+                    </option>
+                  ))}
+                </select>
+              </div>
+
               {/* Control 1: Bags Count */}
               <div>
                 <div className="flex justify-between items-center mb-1.5">

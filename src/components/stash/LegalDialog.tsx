@@ -1,3 +1,5 @@
+import { Link } from "@tanstack/react-router";
+import { ExternalLink } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -22,6 +24,8 @@ export function LegalDialog({
   const title = doc ? (isHi && doc.title_hi ? doc.title_hi : doc.title) : "";
   const body = doc ? (isHi && doc.body_hi ? doc.body_hi : doc.body) : [];
 
+  const targetPath = docKey === "privacy" ? "/privacy" : docKey === "terms" ? "/terms" : null;
+
   return (
     <Dialog open={!!doc} onOpenChange={onOpenChange}>
       <DialogContent className="glass max-h-[80vh] overflow-y-auto sm:max-w-lg">
@@ -33,8 +37,22 @@ export function LegalDialog({
           {body.map((p, idx) => (
             <p key={idx}>{p}</p>
           ))}
+
+          {targetPath && (
+            <div className="pt-2 border-t border-white/10 flex justify-end">
+              <Link
+                to={targetPath}
+                onClick={() => onOpenChange(false)}
+                className="inline-flex items-center gap-1.5 rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 text-xs font-semibold text-emerald-400 transition hover:bg-emerald-500/20"
+              >
+                <span>{isHi ? "पूरा दस्तावेज़ पेज देखें" : "View Full Formal Page"}</span>
+                <ExternalLink className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+          )}
         </div>
       </DialogContent>
     </Dialog>
   );
 }
+

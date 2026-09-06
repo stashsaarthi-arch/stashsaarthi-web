@@ -11,6 +11,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useLanguage } from "@/context/LanguageContext";
 import { logSupabaseError } from "@/lib/supabaseLogger";
+import { checkAndRecordRateLimit, showRateLimitToast } from "@/lib/rateLimiter";
 
 const AMENITIES_LIST = [
   { en: "High-Speed Wi-Fi", hi: "हाई-स्पीड वाई-फाई" },
@@ -85,6 +86,12 @@ export function RoomListingModal({
   };
 
   const submit = async () => {
+    const rateCheck = checkAndRecordRateLimit("room_listing");
+    if (!rateCheck.allowed) {
+      showRateLimitToast(rateCheck.remainingSeconds, rateCheck.message);
+      return;
+    }
+
     setSubmitting(true);
     const photos: string[] = [];
     const reviewNote = `${pros ? `Pros: ${pros}. ` : ""}${cons ? `Cons: ${cons}. ` : ""}Amenities: ${amenities.join(", ") || "Standard"}. Food/Water: ${foodWater}/5, Owner: ${ownerBehaviour}/5`;

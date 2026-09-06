@@ -1,6 +1,7 @@
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { logSupabaseError } from "./supabaseLogger";
+import { checkAndRecordRateLimit, showRateLimitToast } from "./rateLimiter";
 
 // ─── Validation ──────────────────────────────────────────────
 
@@ -82,6 +83,12 @@ export type GoogleProfile = {
 export async function insertWaitlistUser(
   data: WaitlistFormData,
 ): Promise<{ success: boolean; duplicate?: boolean; error?: string }> {
+  const rateCheck = checkAndRecordRateLimit("waitlist_form");
+  if (!rateCheck.allowed) {
+    showRateLimitToast(rateCheck.remainingSeconds, rateCheck.message);
+    return { success: false, error: "rate_limited" };
+  }
+
   const payload = {
     full_name: data.full_name.trim(),
     email: data.email.trim().toLowerCase(),

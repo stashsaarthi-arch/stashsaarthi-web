@@ -1,17 +1,18 @@
 import { useState, useEffect, memo } from "react";
-import { ShieldCheck, FileSearch, CheckCircle2, Lock, UserCheck } from "lucide-react";
+import { ShieldCheck, FileSearch, CheckCircle2, Lock, UserCheck, UserCheck2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { ProductSandbox } from "./ProductSandbox";
 import { ProcessTransparency } from "./ProcessTransparency";
 import { ZeroRisk } from "./ZeroRisk";
 import { DataPrivacyCommitment } from "./DataPrivacyCommitment";
 import { FounderAccountability } from "./FounderAccountability";
+import { HostVettingFlow } from "./HostVettingFlow";
 import { useLanguage } from "@/context/LanguageContext";
 import { usePersona } from "@/context/PersonaContext";
 
 export const TrustConsoleHub = memo(function TrustConsoleHub() {
   const [activeTab, setActiveTab] = useState<
-    "sandbox" | "process" | "zerorisk" | "privacy" | "founder"
+    "sandbox" | "vetting" | "process" | "zerorisk" | "privacy" | "founder"
   >("sandbox");
   const { language } = useLanguage();
   const { role } = usePersona();
@@ -21,8 +22,8 @@ export const TrustConsoleHub = memo(function TrustConsoleHub() {
   useEffect(() => {
     const handleTabChange = (e: Event) => {
       const detail = (e as CustomEvent).detail;
-      if (["sandbox", "process", "zerorisk", "privacy", "founder"].includes(detail)) {
-        setActiveTab(detail as "sandbox" | "process" | "zerorisk" | "privacy" | "founder");
+      if (["sandbox", "vetting", "process", "zerorisk", "privacy", "founder"].includes(detail)) {
+        setActiveTab(detail as "sandbox" | "vetting" | "process" | "zerorisk" | "privacy" | "founder");
       }
     };
     window.addEventListener("stashsaarthi-trust-tab", handleTabChange);
@@ -35,6 +36,12 @@ export const TrustConsoleHub = memo(function TrustConsoleHub() {
       labelEn: "Live Custody Pass",
       labelHi: "लाइव कस्टडी पास",
       icon: FileSearch,
+    },
+    {
+      id: "vetting" as const,
+      labelEn: "Host Vetting Audit",
+      labelHi: "होस्ट सत्यापन प्रक्रिया",
+      icon: UserCheck2,
     },
     {
       id: "process" as const,
@@ -138,6 +145,7 @@ export const TrustConsoleHub = memo(function TrustConsoleHub() {
       {/* Tab Panel Display */}
       <div className="mt-2.5">
         {activeTab === "sandbox" && <ProductSandbox />}
+        {activeTab === "vetting" && <HostVettingFlow />}
         {activeTab === "process" && <ProcessTransparency />}
         {activeTab === "zerorisk" && <ZeroRisk />}
         {activeTab === "privacy" && <DataPrivacyCommitment />}

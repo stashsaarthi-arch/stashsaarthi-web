@@ -31,6 +31,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { toast } from "sonner";
+import { checkAndRecordRateLimit, showRateLimitToast } from "@/lib/rateLimiter";
 import { useLanguage } from "@/context/LanguageContext";
 import { usePersona } from "@/context/PersonaContext";
 import { FOUNDER_WHATSAPP, FOUNDER_PHONE_DISPLAY } from "@/lib/constants";
@@ -348,6 +349,12 @@ export const FeedbackSuggestions = memo(function FeedbackSuggestions() {
       return;
     }
 
+    const rateCheck = checkAndRecordRateLimit("user_review");
+    if (!rateCheck.allowed) {
+      showRateLimitToast(rateCheck.remainingSeconds, rateCheck.message);
+      return;
+    }
+
     const newRev: ReviewItem = {
       id: `rev-${Date.now()}`,
       name: formName.trim(),
@@ -397,6 +404,12 @@ export const FeedbackSuggestions = memo(function FeedbackSuggestions() {
           ? "कृपया सुझाव का शीर्षक, विवरण और अपना नाम भरें"
           : "Please fill in title, description, and your name",
       );
+      return;
+    }
+
+    const rateCheck = checkAndRecordRateLimit("user_suggestion");
+    if (!rateCheck.allowed) {
+      showRateLimitToast(rateCheck.remainingSeconds, rateCheck.message);
       return;
     }
 
