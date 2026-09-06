@@ -1,3 +1,17 @@
+- [x] **[UI] Task 62: Integrate a lightweight 360° photo viewer for Saarthi Spaces room tours**:
+  - **Identified Directive**: Integrate a lightweight, open-source 360° photo viewer for Saarthi Spaces room tours (using Pannellum or similar canvas-based projection engine).
+  - **Applied Solution**:
+    - **Equirectangular Panorama Engine & 360° Room Viewer Component** (`src/components/stash/Room360Viewer.tsx`):
+      • **Equirectangular Canvas Renderer**: Canvas 2D projection engine supporting 360° drag panning, pitch rotation (-55° to 55°), wheel/button smooth FOV zoom (45° to 95°), auto-rotation mode, and full-screen expansion.
+      • **Interactive Room Hotspots & Popovers**: Hotspot positioning system calculating exact screen coordinates for features like study desk, fiber Wi-Fi, sunlit balcony, attached washroom, and storage lockers, complete with interactive popovers and bilingual (`en` / `hi`) descriptions.
+      • **Multi-Scene Room Switcher**: Scene navigator supporting smooth tabbed switching between Master Bedroom, Study Area, and Attached Washroom/Balcony.
+      • **Direct Founder WhatsApp Reservation Link**: Pre-populates message with selected room title and location for instant booking.
+    - **Integrated 360° Virtual Tour Triggers into Saarthi Spaces Room Cards** (`src/components/stash/Rooms.tsx`):
+      • Added glowing image-overlay badge button (`360° Room Tour` / `360° टूर`) on every verified room card.
+      • Added `360°` action button alongside WhatsApp direct booking and phone call triggers.
+      • Wired up `Room360Viewer` modal state dynamically populated with listing title, location, rent amount, and room scenes.
+  - **Verification**: `npx tsc --noEmit` (**0 errors**) and `npm run build` compiled cleanly with **0 errors** across client, SSR, and Nitro server environments.
+
 - [x] **[CTO - Edge Infra] Fix Supabase Edge Function TypeScript & Deno Runtime Diagnostics**:
   - **Identified Directive**: Fix TypeScript language server diagnostics in `supabase/functions/verify-host-photo/index.ts` (Cannot find module 'https://deno.land/std@0.168.0/http/server.ts', parameter 'req' implicitly has an 'any' type, and Cannot find name 'Deno').
   - **Applied Solution**:

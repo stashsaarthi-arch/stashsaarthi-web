@@ -75,7 +75,7 @@
 Sprint 7: CPO & UI/UX (Hyperlocal Mobile Dominance)
 - [x] 60. [CPO - Kitchen UI]: Add real-time "availability percentage" bars to each kitchen node (e.g., "75% of lunch tokens sold").
 - [x] 61. [UX - Kitchen Flow]: Design and implement a 2-step "Re-order My Last Meal" shortcut on the dashboard.
-[ ] 62. [UI - Spaces]: Integrate a lightweight, open-source 360° photo viewer for Saarthi Spaces room tours (using Pannellum or similar).
+- [x] 62. [UI - Spaces]: Integrate a lightweight, open-source 360° photo viewer for Saarthi Spaces room tours (using Pannellum or similar).
 [ ] 63. [UX - Storage]: Redesign the luggage storage UI to support itemization and custom labeling (e.g., "Carton #1: Books", "Suitcase: Winter Clothes").
 [ ] 64. [UI - Motion]: Implement a Micro-Interaction where the Peacock Feather "dusts off" the matki of butter when a student selects the Standard Thali.
 [ ] 65. [UX - Local Navigation]: Implement "Find My Stash" directions that open natively in Google Maps or Apple Maps, specifically guiding students to the back-alley entrances often found in Kakadeo.
