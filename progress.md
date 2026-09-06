@@ -1,3 +1,23 @@
+- [x] **[CMO] Task 34: Add Schema.org Structured Data for All Co-Living Spaces**:
+  - **Identified Directive**: Add schema.org structured data for all "Co-living Spaces" to enhance rich snippets in Google Search.
+  - **Applied Solution**:
+    - Created schema.org structured data engine for co-living spaces (`src/lib/seo-coliving-schema.ts`) defining rich snippet schemas (`Accommodation`, `ItemList`, `ListItem`, `Offer`, `PostalAddress`, `GeoCoordinates`, `AggregateRating`, `LocationFeatureSpecification`):
+      • Kalyanpur, Kanpur Room (IIT Kanpur Belt, ₹6,500/mo, 4.5 rating, 24x7 water, zero brokerage)
+      • Kakadeo Coaching Belt Room (PW & Allen Hub, ₹5,500/mo, 4.9 rating, home-cooked tiffin access)
+      • Gomti Nagar, Lucknow Room (Phoenix & Metro Access, ₹7,800/mo, 4.8 rating, fully furnished)
+      • Kothrud, Pune Room (Campus Shuttle Access, ₹9,200/mo, 4.3 rating, super-fast fiber internet)
+    - Integrated `coLivingItemListSchema` and `...coLivingSpacesSchema` into the root JSON-LD `@graph` in `src/routes/__root.tsx` for immediate SSR crawler discovery.
+    - Upgraded `DynamicOGHead.tsx` (`src/components/seo/DynamicOGHead.tsx`) to dynamically inject and update JSON-LD `<script id="coliving-rooms-jsonld" type="application/ld+json">` during client-side route navigation.
+  - **Verification**: `npm run build` compiled with **0 errors**.
+
+- [x] **[CMO] Task 33: Optimize Meta Descriptions for All Specific Long-Tail Keyword Pages**:
+  - **Identified Directive**: Optimize meta descriptions for all specific long-tail keyword pages.
+  - **Applied Solution**:
+    - Built SEO long-tail keyword optimization engine (`src/lib/seo-keywords.ts`) defining hyper-targeted metadata configurations across key intents: Vacation Micro-Storage (`?service=stash`), Zero-Brokerage Co-Living (`?service=rooms`), Homemade Tiffin Service (`?service=kitchen`), Senior Host Passive Income (`?role=host`), Dead-Rent Calculator (`#calculator`), and Admin Operations Console (`/admin`).
+    - Refactored `DynamicOGHead.tsx` (`src/components/seo/DynamicOGHead.tsx`) to dynamically update `<title>`, `<meta name="description">`, `<meta name="keywords">`, `<link rel="canonical">`, OpenGraph (`og:title`, `og:description`, `og:image`, `og:url`), and Twitter Cards based on real-time route, query parameters, hash, and active persona.
+    - Updated default meta keywords in `src/routes/__root.tsx` with hyper-targeted long-tail search phrases.
+  - **Verification**: `npm run build` compiled with **0 errors**.
+
 - [x] **[CMO] Task 31: Build an Interactive "Timeline of a Stash" Component**:
   - **Identified Directive**: Build an interactive "Timeline of a Stash" component (from pickup to secure storage).
   - **Applied Solution**:

@@ -25,22 +25,22 @@
 
 ## Sprint 2: CPO (Product & UI Excellence)
 - [x] 20. **[CPO]**: Implement dark mode toggle with smooth color-palette transition (if not strictly locked to current theme).
-- [ ] 21. **[CPO]**: Design and implement skeleton loaders for all data-fetching components.
-- [ ] 22. **[CPO]**: Polish the "Host" persona dashboard with charts for projected passive income.
-- [ ] 23. **[CPO]**: Refine the typography scaling across ultra-wide monitors (4k+).
-- [ ] 24. **[CPO]**: Add subtle parallax effects to background elements in the Solutions Hub.
-- [ ] 25. **[CPO]**: Improve keyboard navigation (tabbing) across all interactive elements for screen-reader compatibility.
-- [ ] 26. **[CPO]**: Create a unified `ToastProvider` for sleek, non-intrusive success/error notifications.
-- [ ] 27. **[CPO]**: Audit and fix any low-contrast text ratios for WCAG AA compliance.
+- [x] 21. **[CPO]**: Design and implement skeleton loaders for all data-fetching components.
+- [x] 22. **[CPO]**: Polish the "Host" persona dashboard with charts for projected passive income.
+- [x] 23. **[CPO]**: Refine the typography scaling across ultra-wide monitors (4k+).
+- [x] 24. **[CPO]**: Add subtle parallax effects to background elements in the Solutions Hub.
+- [x] 25. **[CPO]**: Improve keyboard navigation (tabbing) across all interactive elements for screen-reader compatibility.
+- [x] 26. **[CPO]**: Create a unified `ToastProvider` for sleek, non-intrusive success/error notifications.
+- [x] 27. **[CPO]**: Audit and fix any low-contrast text ratios for WCAG AA compliance.
 
 ## Sprint 3: CMO (Marketing & Storytelling)
-- [ ] 28. **[CMO]**: Create a dedicated "Student Success Stories" carousel component.
-- [ ] 29. **[CMO]**: Implement dynamic OpenGraph images that render based on the specific route/persona.
-- [ ] 30. **[CMO]**: Draft and integrate localized Hindi copy for the pricing calculator tool.
-- [ ] 31. **[CMO]**: Build an interactive "Timeline of a Stash" component (from pickup to secure storage).
-- [ ] 32. **[CMO]**: Design a referral leaderboard UI snippet to encourage viral growth.
-- [ ] 33. **[CMO]**: Optimize meta descriptions for all specific long-tail keyword pages.
-- [ ] 34. **[CMO]**: Add schema.org structured data for all "Co-living Spaces" to enhance rich snippets.
+- [x] 28. **[CMO]**: Create a dedicated "Student Success Stories" carousel component.
+- [x] 29. **[CMO]**: Implement dynamic OpenGraph images that render based on the specific route/persona.
+- [x] 30. **[CMO]**: Draft and integrate localized Hindi copy for the pricing calculator tool.
+- [x] 31. **[CMO]**: Build an interactive "Timeline of a Stash" component (from pickup to secure storage).
+- [x] 32. **[CMO]**: Design a referral leaderboard UI snippet to encourage viral growth.
+- [x] 33. **[CMO]**: Optimize meta descriptions for all specific long-tail keyword pages.
+- [x] 34. **[CMO]**: Add schema.org structured data for all "Co-living Spaces" to enhance rich snippets.
 - [ ] 35. **[CMO]**: Create a "Why StashSaarthi vs. Traditional PGs" comparison table.
 
 ## Sprint 4: CRO (Conversion Rate Optimization)

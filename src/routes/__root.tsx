@@ -21,8 +21,10 @@ import { AuthProvider } from "@/hooks/useAuth";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { PersonaProvider } from "@/context/PersonaContext";
 import { ThemeProvider } from "@/context/ThemeContext";
+import { ToastProvider } from "@/context/ToastContext";
 import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 import { NetworkStatus } from "@/components/stash/NetworkStatus";
+import { coLivingSpacesSchema, coLivingItemListSchema } from "@/lib/seo-coliving-schema";
 import { ReactLenis, useLenis } from "lenis/react";
 import "lenis/dist/lenis.css";
 import gsap from "gsap";
@@ -119,7 +121,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "keywords",
         content:
-          "StashSaarthi, student luggage storage, campus micro-storage, Kanpur student room, broker-free PG, IIT Kanpur luggage stash, vacation dead rent, intergenerational co-living India",
+          "student luggage storage Kanpur, vacation luggage stash IIT Kanpur, zero brokerage student rooms Kakadeo, tiffin service Kakadeo Kanpur, home cooked meals student Kanpur, senior citizen passive income Kanpur, student dead rent calculator Kanpur, StashSaarthi, broker free PG Kakadeo, HBTI luggage storage",
       },
       { name: "author", content: "StashSaarthi" },
       { property: "og:site_name", content: "StashSaarthi" },
@@ -299,6 +301,8 @@ function RootShell({ children }: { children: ReactNode }) {
         },
         url: "https://stashsaarthi-web.vercel.app",
       },
+      coLivingItemListSchema,
+      ...coLivingSpacesSchema,
     ],
   };
 
@@ -368,6 +372,8 @@ function LenisHandler() {
   return null;
 }
 
+import { DynamicOGHead } from "@/components/seo/DynamicOGHead";
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const routerState = useRouterState();
@@ -412,40 +418,43 @@ function RootComponent() {
         <LanguageProvider>
           <PersonaProvider>
             <ThemeProvider>
-              <QueryClientProvider client={queryClient}>
-                <ErrorBoundary>
-                  <ReactLenis
-                    root
-                    options={{
-                      lerp: 0.12,
-                      duration: 0.8,
-                      smoothWheel: true,
-                      wheelMultiplier: 1.05,
-                      touchMultiplier: 1.0,
-                      syncTouch: false,
-                      autoRaf: false, // GSAP is driving the raf now
+              <ToastProvider>
+                <QueryClientProvider client={queryClient}>
+                  <DynamicOGHead />
+                  <ErrorBoundary>
+                    <ReactLenis
+                      root
+                      options={{
+                        lerp: 0.12,
+                        duration: 0.8,
+                        smoothWheel: true,
+                        wheelMultiplier: 1.05,
+                        touchMultiplier: 1.0,
+                        syncTouch: false,
+                        autoRaf: false, // GSAP is driving the raf now
+                      }}
+                    >
+                      <LenisHandler />
+                      <AnimatePresence mode="wait" initial={false}>
+                        <PageTransition key={currentRoute} routeKey={currentRoute}>
+                          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+                          <Outlet />
+                        </PageTransition>
+                      </AnimatePresence>
+                      <NetworkStatus />
+                    </ReactLenis>
+                  </ErrorBoundary>
+                  <Toaster
+                    position="top-center"
+                    richColors
+                    theme="dark"
+                    toastOptions={{
+                      className:
+                        "border border-white/10 bg-[#0A0D0F]/95 text-white backdrop-blur-xl shadow-2xl rounded-2xl",
                     }}
-                  >
-                    <LenisHandler />
-                    <AnimatePresence mode="wait" initial={false}>
-                      <PageTransition key={currentRoute} routeKey={currentRoute}>
-                        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-                        <Outlet />
-                      </PageTransition>
-                    </AnimatePresence>
-                    <NetworkStatus />
-                  </ReactLenis>
-                </ErrorBoundary>
-                <Toaster
-                  position="top-center"
-                  richColors
-                  theme="dark"
-                  toastOptions={{
-                    className:
-                      "border border-white/10 bg-[#0A0D0F]/95 text-white backdrop-blur-xl shadow-2xl rounded-2xl",
-                  }}
-                />
-              </QueryClientProvider>
+                  />
+                </QueryClientProvider>
+              </ToastProvider>
             </ThemeProvider>
           </PersonaProvider>
         </LanguageProvider>
