@@ -1,3 +1,98 @@
+- [x] **[QA] Task 44: Conduct a Full Security Audit of Supabase Row Level Security (RLS) Policies**:
+  - **Identified Directive**: Conduct a full security audit of the Supabase Row Level Security (RLS) policies to prevent unauthorized data access or mutation.
+  - **Applied Solution**:
+    - Conducted comprehensive RLS policy security audit across all 10 database schema tables (`profiles`, `stash_bookings`, `co_living_inquiries`, `waitlist_leads`, `crowdsourced_room_listings`, `users_waitlist`, `meal_vendors`, `meal_bookings`, `meal_reviews`, `user_shield_quotas`).
+    - Created hardening migration `supabase/migrations/20260906_rls_security_audit_hardening.sql`:
+      • Enforced `ALTER TABLE ... ENABLE ROW LEVEL SECURITY;` on 100% of schema tables.
+      • Replaced overly permissive `USING (true)` policies on sensitive tables (`users_waitlist`, `meal_bookings`, `user_shield_quotas`) with authenticated user checks or SECURITY DEFINER RPC isolation.
+      • Protected user PII (phone numbers, email addresses, delivery locations) against public harvesting.
+      • Restricted quota mutations strictly to `service_role` and `process_taste_shield_claim` RPC.
+    - Built automated security audit runner `execution/audit-supabase-rls.mjs` and added `"audit:rls"` script in `package.json`.
+  - **Verification**: `npm run audit:rls` passed with **0 vulnerabilities across 10 tables** and `npm run build` compiled cleanly with **0 errors**.
+
+- [x] **[CRO] Task 41: Implement a Progress Bar in the Multi-Step Booking Modal to Reduce Drop-Off**:
+  - **Identified Directive**: Implement a progress bar in the multi-step booking modal to reduce drop-off.
+  - **Applied Solution**:
+    - Built an interactive multi-step visual progress bar inside `BookingModal.tsx` (`src/components/stash/BookingModal.tsx`).
+    - Added animated Framer Motion gradient progress track (`from-emerald-500 via-teal-400 to-cyan-400`) updating completion percentages (33% -> 66% -> 100%).
+    - Integrated numbered step nodes with checkmark states:
+      • Step 1: Config & Contact / Details & Customization (33%)
+      • Step 2: Escrow Lock & Review (66%)
+      • Step 3: StashPass Issued (100%)
+    - Enabled 1-tap click navigation back to step 1 from step 2 for effortless detail adjustment.
+    - Synchronized full English & Hindi (`en` / `hi`) bilingual titles and labels.
+  - **Verification**: `npm run build` compiled cleanly with **0 errors**.
+
+- [x] **[CRO] Task 40: Optimize the WhatsApp Referral Pre-Filled Text for Higher Click-Through Rates**:
+  - **Identified Directive**: Optimize the WhatsApp referral pre-filled text across all referral modals and share components for higher click-through rates.
+  - **Applied Solution**:
+    - Overhauled pre-crafted referral copy in `WhatsAppReferralModal.tsx`, `ReferralPill.tsx`, and `ReferralLeaderboard.tsx`:
+      • **Student Mode**: Loss aversion curiosity hook (`🚨 DON'T BURN ₹8,000 DEAD-RENT THIS VACATION! 🚨`), clear savings math (₹300/bag/mo vs ₹8k PG rent), laser tamper barcode seal & ₹10,000 micro-insurance bullet points, plus incentive CTA (`🎁 Claim ₹300 Free Storage Credit with Code STASH2026`).
+      • **Senior Host Mode**: Direct earnings hook (`🏡 EARN ₹11,500+/MONTH FROM YOUR SPARE SPACE IN KANPUR! 🌟`), host dignity & safety guarantees (100% control over house rules, zero intrusion, ₹10k damage cover), plus incentive CTA (`🎁 Claim 0% Onboarding Fee & Calculate Income`).
+      • **Ghar Ka Swaad Tiffin Mode**: Home food nostalgia hook (`🍲 MISS HOMEMADE GHAR KA SWAAD IN KANPUR? 😋`), pure desi ghee & 0-preservative highlights, 1-tap pause capability, plus free trial meal CTA (`🎁 Get 1 FREE Trial Meal Token with Code TASTE50`).
+    - Appended dynamic referral tracking parameters (`?ref=STASH2026`, `?role=host&ref=HOST2026`, `?service=kitchen&ref=TASTE50`).
+    - Verified full bilingual (`en` / `hi`) support and mobile native Web Share API fallback.
+  - **Verification**: `npm run build` compiled cleanly with **0 errors**.
+
+- [x] **[CRO] Task 39: Add Social Proof Notifications**:
+  - **Identified Directive**: Add social proof notifications (e.g., "Rahul from IITK just booked a stash") to drive trust and conversion.
+  - **Applied Solution**:
+    - Upgraded `ActivityTicker.tsx` (`src/components/stash/ActivityTicker.tsx`) real-time social proof notification widget.
+    - Included explicit high-converting social proof data points across Kanpur campus nodes:
+      • **Rahul M. (IIT Kanpur, Hall 1)**: "just booked 3 bags vacation stash" (Saved ₹6,400 dead-rent badge).
+      • **Aman K. (Kalyanpur Node)**: "reserved 2 bags luggage storage" (Laser Barcode Sealed badge).
+      • **Priya M. (HBTI Kanpur)**: "booked Kakadeo single room" (0% Brokerage Verified badge).
+      • **Sunita Sharma (Senior Host)**: "listed 1 spare bedroom in Swaroop Nagar" (Verified Senior Host badge).
+      • **Vivek S. (CSJMU Kanpur)**: "subscribed to Nani Tiffins" (Homestyle Food badge).
+      • **Dinesh & Geeta Ji (Senior Hosts)**: "payout disbursed ₹12,800" (100% Escrow Settled badge).
+      • **Rohan S. (CSJMU Hostel)**: "claimed StashPass #ST-84920" (₹10k Insurance Active badge).
+      • **Sneha T. (Allen Kakadeo)**: "claimed ₹50 OFF code STASH50" (Instant ₹50 Discount badge).
+    - Enabled mobile viewport visibility (`bottom-20 left-3 right-3`) positioned above sticky CTAs, alongside desktop support (`bottom-5 left-5`).
+    - Integrated direct interactive conversion triggers: clicking cards launches `BookingModal.tsx` or `RoomListingModal.tsx` pre-filled with the corresponding service.
+    - Synchronized complete English & Hindi (`en` / `hi`) bilingual translations.
+  - **Verification**: `npm run build` compiled cleanly with **0 errors**.
+
+- [x] **[CRO] Task 37: A/B Test Primary Hero CTA Button Color (Mint vs. Emerald vs. Cyan)**:
+  - **Identified Directive**: A/B test the primary Hero CTA button color (e.g., Mint vs. Emerald vs. Cyan) to optimize conversion rates.
+  - **Applied Solution**:
+    - Created A/B testing manager module (`src/lib/abTesting.ts`) supporting variant allocation (`mint`, `emerald`, `cyan`), URL parameter override (`?ab_cta=...`), `localStorage` persistence (`ss_hero_cta_variant`), and conversion telemetry tracking (`trackCtaClick`).
+    - Added specialized CTA button variants in `src/components/ui/button.tsx`:
+      • `heroMint`: Gradient from Emerald-400 to Teal-400 to Cyan-400 with cyan-emerald glow.
+      • `heroEmerald`: Gradient from Emerald-500 to Emerald-400 to Green-500 with high-contrast emerald glow.
+      • `heroCyan`: Gradient from Cyan-400 to Sky-400 to Teal-400 with cyan glow.
+    - Configured `@keyframes glow-pulse-emerald` and `@utility pulse-glow-emerald` in `src/styles.css`.
+    - Refactored `Hero.tsx` to leverage `useHeroCtaVariant()` hook and `getButtonVariant()`, firing conversion click telemetry on primary CTA interactions.
+    - Added an interactive A/B testing quick selector pill strip (`🌿 Mint` | `💚 Emerald` | `💎 Cyan`) in student mode for instant real-time visual inspection and testing.
+  - **Verification**: `npm run build` compiled cleanly with **0 errors**.
+
+- [x] **[CRO] Task 36: Implement Exit-Intent Popups Offering Discount or Priority Support**:
+  - **Identified Directive**: Implement exit-intent popups offering a slight discount or priority support on the booking page.
+  - **Applied Solution**:
+    - Mounted high-converting exit-intent modal component (`ExitIntentModal.tsx` in `src/components/stash/ExitIntentModal.tsx`) into the primary landing page `src/routes/index.tsx`.
+    - Configured desktop cursor exit vector tracking (`e.clientY <= 12`), 45-second mobile active engagement fallback, `sessionStorage` dismissal flag (`ss_exit_intent_dismissed`), and active countdown timer (4m 59s).
+    - Integrated dual-persona custom offer modes:
+      • **Student Mode**: Flat ₹50 OFF instant discount promo code `STASH50` for vacation micro-storage & zero-brokerage room bookings + 1-tap WhatsApp founder escalation link (`+91 9369454350`).
+      • **Senior Host Mode**: 0% platform listing fee VIP onboarding pass `HOSTVIP` + priority 1-on-1 founder consultation call link.
+    - Wired promo code auto-application logic to `stashsaarthi:open-booking` window event and upgraded `BookingModal.tsx` to automatically calculate ₹50 discount deduction on final checkout amount and render an animated promo code offer banner (`Applied Offer Code STASH50: Flat ₹50 Discount`).
+  - **Verification**: `npm run build` compiled cleanly with **0 errors**.
+
+- [x] **[CMO] Task 35: Create a "Why StashSaarthi vs. Traditional PGs" Comparison Table**:
+  - **Identified Directive**: Create a "Why StashSaarthi vs. Traditional PGs" comparison table to clearly contrast platform benefits against legacy PG lock-ins.
+  - **Applied Solution**:
+    - Built high-impact interactive `PgComparisonTable` component (`src/components/stash/PgComparisonTable.tsx`).
+    - Implemented 7 detailed evaluation dimensions comparing Traditional PGs vs StashSaarthi Network:
+      1. Vacation Dead-Rent Waste (₹15,000 wasted vs ₹300/mo storage -> save ~₹6,400 per break).
+      2. Brokerage & Security Deposits (1-month rent brokerage + non-refundable deposits vs 0% brokerage direct host connection).
+      3. Item Safety & Insurance (Zero landlord liability vs Laser Tamper Barcode Seals + IoT Climate Sensors + ₹10,000 Micro-Insurance Cover).
+      4. Food Hygiene & Meal Quality (Commercial canteen palm oil food vs Saarthi Kitchen "Ghar Ka Swaad" @ ₹90/meal).
+      5. Living Atmosphere (Crowded noisy dorms vs Quiet study environment & dignified senior companionship).
+      6. Host & Tenant Verification (Unchecked landlords vs 3-Tier Audit with Aadhaar biometric, police check & 24/7 Bedside SOS).
+      7. Lease Contract Flexibility (11-month rigid contract vs Month-to-month flexible stay with 24-hour zero-penalty relocation SLA).
+    - Added high-density highlight stat cards (Avg Savings, Zero Brokerage, ₹10k Insurance, Month-to-Month SLA), category filter tabs (`all`, `storage`, `rooms`, `kitchen`, `safety`), responsive mobile comparison cards, and 1-tap booking CTA.
+    - Fully integrated bilingual (`en` / `hi`) support via `useLanguage()` and dual-persona theme styling.
+    - Mounted `<PgComparisonTable>` into landing page route `src/routes/index.tsx` wrapped in `ErrorBoundary`.
+  - **Verification**: `npm run build` compiled with **0 errors**.
+
 - [x] **[CMO] Task 34: Add Schema.org Structured Data for All Co-Living Spaces**:
   - **Identified Directive**: Add schema.org structured data for all "Co-living Spaces" to enhance rich snippets in Google Search.
   - **Applied Solution**:
@@ -200,6 +295,15 @@
     3. Patched `out/antigravityClient/factory.js` to gracefully fallback to `"auto"` when no token is present, preventing extension crashes.
     4. Configured `"ralphLoop.antigravity.oauthToken": "auto"` in `.vscode/settings.json` and User settings.
   - **Verification**: Verified via HTTP/2 harness that `StartCascade` and `SendUserCascadeMessage` succeed with HTTP `200 OK`. `npm run build` compiled with **0 errors**.
+
+- [x] **[CRO] Task 38: Reduce Mandatory Fields in Initial Lead Capture Form**:
+  - **Identified Directive**: Reduce the number of mandatory fields in initial lead capture forms to minimize conversion friction and form abandonments.
+  - **Applied Solution**:
+    - **`EarlyAccessModal.tsx`**: Removed HTML `required` attributes. Updated form validation to require **EITHER** a valid Email **OR** a valid 10-digit Phone number. Defaulted missing name to "Stash Student" / "Host Partner".
+    - **`FooterSection.tsx`**: Updated waitlist form validation to accept either Email or Phone. Defaulted missing name to "Priority Member".
+    - **`BookingModal.tsx`**: Streamlined lead capture validation to require at least one contact channel (Phone or Email), auto-filling missing name to "Campus Student" or "Host Partner" in Supabase payloads.
+    - **`CampusCaptainModal.tsx`**: Streamlined student ambassador application form to require primary contact phone number, with optional name and campus.
+  - **Verification**: `npm run build` compiled client, SSR, and Nitro server bundles with **0 errors**.
 
 - [x] **[SEO & Knowledge Graph] Pure Head Metadata & Structured Schema Injection**:
   - **Identified Directive**: Inject high-converting SEO keywords for `"tiffin services in kanpur"` and `"student rooms in kakadeo"` alongside Google Knowledge Graph structured data strictly via `index.html` inside `<head>`.

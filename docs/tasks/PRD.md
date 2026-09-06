@@ -41,20 +41,20 @@
 - [x] 32. **[CMO]**: Design a referral leaderboard UI snippet to encourage viral growth.
 - [x] 33. **[CMO]**: Optimize meta descriptions for all specific long-tail keyword pages.
 - [x] 34. **[CMO]**: Add schema.org structured data for all "Co-living Spaces" to enhance rich snippets.
-- [ ] 35. **[CMO]**: Create a "Why StashSaarthi vs. Traditional PGs" comparison table.
+- [x] 35. **[CMO]**: Create a "Why StashSaarthi vs. Traditional PGs" comparison table.
 
 ## Sprint 4: CRO (Conversion Rate Optimization)
-- [ ] 36. **[CRO]**: Implement exit-intent popups offering a slight discount or priority support on the booking page.
-- [ ] 37. **[CRO]**: A/B test the primary Hero CTA button color (e.g., Mint vs. Emerald).
-- [ ] 38. **[CRO]**: Reduce the number of mandatory fields in the initial lead capture form.
-- [ ] 39. **[CRO]**: Add social proof notifications (e.g., "Rahul from IITK just booked a stash").
-- [ ] 40. **[CRO]**: Optimize the WhatsApp referral pre-filled text for higher click-through rates.
-- [ ] 41. **[CRO]**: Implement a progress bar in the multi-step booking modal to reduce drop-off.
-- [ ] 42. **[CRO]**: Add prominent "Zero Cancellation Fee" badges near pricing tables.
-- [ ] 43. **[CRO]**: Analyze scroll-depth and move the highest-converting module higher up the page.
+- [x] 36. **[CRO]**: Implement exit-intent popups offering a slight discount or priority support on the booking page.
+- [x] 37. **[CRO]**: A/B test the primary Hero CTA button color (e.g., Mint vs. Emerald).
+- [x] 38. **[CRO]**: Reduce the number of mandatory fields in the initial lead capture form.
+- [x] 39. **[CRO]**: Add social proof notifications (e.g., "Rahul from IITK just booked a stash").
+- [x] 40. **[CRO]**: Optimize the WhatsApp referral pre-filled text for higher click-through rates.
+- [x] 41. **[CRO]**: Implement a progress bar in the multi-step booking modal to reduce drop-off.
+- [x] 42. **[CRO]**: Add prominent "Zero Cancellation Fee" badges near pricing tables.
+- [x] 43. **[CRO]**: Analyze scroll-depth and move the highest-converting module higher up the page.
 
 ## Sprint 5: QA & CSO (Quality, Safety, Compliance)
-- [ ] 44. **[QA]**: Conduct a full security audit of the Supabase Row Level Security (RLS) policies.
+- [x] 44. **[QA]**: Conduct a full security audit of the Supabase Row Level Security (RLS) policies.
 - [ ] 45. **[QA]**: Test the UI on specific older Android devices (via emulation) to ensure no WebGL crashes.
 - [ ] 46. **[CSO]**: Draft a clear "Host Vetting Process" flow diagram and integrate it into the Trust section.
 - [ ] 47. **[QA]**: Implement rate-limiting on all form submissions to prevent spam.

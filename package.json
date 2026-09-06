@@ -11,6 +11,7 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "audit:vulnerabilities": "node execution/audit-vulnerabilities.mjs",
+    "audit:rls": "node execution/audit-supabase-rls.mjs",
     "nightly:check": "node execution/audit-vulnerabilities.mjs --strict --with-build",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
