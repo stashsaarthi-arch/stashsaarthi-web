@@ -290,9 +290,10 @@ function RootShell({ children }: { children: ReactNode }) {
         priceRange: "₹₹",
         address: {
           "@type": "PostalAddress",
+          streetAddress: "12/504, Near Allen House Public School, Gwaltoli",
           addressLocality: "Kanpur",
           addressRegion: "Uttar Pradesh",
-          postalCode: "208016",
+          postalCode: "208002",
           addressCountry: "IN",
         },
         geo: {
