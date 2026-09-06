@@ -21,6 +21,7 @@ import { AuthProvider } from "@/hooks/useAuth";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { PersonaProvider } from "@/context/PersonaContext";
 import { ThemeProvider } from "@/context/ThemeContext";
+import { LowDataProvider } from "@/context/LowDataContext";
 import { ToastProvider } from "@/context/ToastContext";
 import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 import { NetworkStatus } from "@/components/stash/NetworkStatus";
@@ -424,43 +425,45 @@ function RootComponent() {
         <LanguageProvider>
           <PersonaProvider>
             <ThemeProvider>
-              <ToastProvider>
-                <QueryClientProvider client={queryClient}>
-                  <DynamicOGHead />
-                  <ErrorBoundary>
-                    <ReactLenis
-                      root
-                      options={{
-                        lerp: 0.12,
-                        duration: 0.8,
-                        smoothWheel: true,
-                        wheelMultiplier: 1.05,
-                        touchMultiplier: 1.0,
-                        syncTouch: false,
-                        autoRaf: false, // GSAP is driving the raf now
+              <LowDataProvider>
+                <ToastProvider>
+                  <QueryClientProvider client={queryClient}>
+                    <DynamicOGHead />
+                    <ErrorBoundary>
+                      <ReactLenis
+                        root
+                        options={{
+                          lerp: 0.12,
+                          duration: 0.8,
+                          smoothWheel: true,
+                          wheelMultiplier: 1.05,
+                          touchMultiplier: 1.0,
+                          syncTouch: false,
+                          autoRaf: false, // GSAP is driving the raf now
+                        }}
+                      >
+                        <LenisHandler />
+                        <AnimatePresence mode="wait" initial={false}>
+                          <PageTransition key={currentRoute} routeKey={currentRoute}>
+                            {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+                            <Outlet />
+                          </PageTransition>
+                        </AnimatePresence>
+                        <NetworkStatus />
+                      </ReactLenis>
+                    </ErrorBoundary>
+                    <Toaster
+                      position="top-center"
+                      richColors
+                      theme="dark"
+                      toastOptions={{
+                        className:
+                          "border border-white/10 bg-[#0A0D0F]/95 text-white backdrop-blur-xl shadow-2xl rounded-2xl",
                       }}
-                    >
-                      <LenisHandler />
-                      <AnimatePresence mode="wait" initial={false}>
-                        <PageTransition key={currentRoute} routeKey={currentRoute}>
-                          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-                          <Outlet />
-                        </PageTransition>
-                      </AnimatePresence>
-                      <NetworkStatus />
-                    </ReactLenis>
-                  </ErrorBoundary>
-                  <Toaster
-                    position="top-center"
-                    richColors
-                    theme="dark"
-                    toastOptions={{
-                      className:
-                        "border border-white/10 bg-[#0A0D0F]/95 text-white backdrop-blur-xl shadow-2xl rounded-2xl",
-                    }}
-                  />
-                </QueryClientProvider>
-              </ToastProvider>
+                    />
+                  </QueryClientProvider>
+                </ToastProvider>
+              </LowDataProvider>
             </ThemeProvider>
           </PersonaProvider>
         </LanguageProvider>
