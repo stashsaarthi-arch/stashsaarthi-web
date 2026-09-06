@@ -8,12 +8,14 @@ import {
   CheckCircle2,
   SlidersHorizontal,
   UserCheck,
+  Radio,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MatchDrawer } from "./MatchDrawer";
 import { PrototypeBadge } from "@/components/ui/PrototypeBadge";
 import type { OpenBooking } from "./types";
 import { useLanguage } from "@/context/LanguageContext";
+import { ConnectAudioWidget } from "./ConnectAudioWidget";
 
 const CITIES = ["Kanpur", "Lucknow", "Delhi NCR", "Pune"] as const;
 type City = (typeof CITIES)[number];
@@ -124,7 +126,7 @@ export function Connect(_props: { onBook: OpenBooking }) {
   const isHi = language === "hi";
   const [city, setCity] = useState<City>("Kanpur");
   const [drawer, setDrawer] = useState(false);
-  const [activeTab, setActiveTab] = useState<"pairs" | "quiz">("pairs");
+  const [activeTab, setActiveTab] = useState<"pairs" | "quiz" | "audio">("pairs");
 
   // Compatibility Quiz state
   const [diet, setDiet] = useState<"veg" | "egg" | "any">("veg");
@@ -139,8 +141,8 @@ export function Connect(_props: { onBook: OpenBooking }) {
   return (
     <div id="connect" className="relative mx-auto max-w-4xl px-2 py-2 scroll-mt-20">
       <div className="text-center">
-        {/* Tab Switcher: Live Pairs vs Interactive Quiz */}
-        <div className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-black/40 p-1 backdrop-blur-md">
+        {/* Tab Switcher: Live Pairs vs Interactive Quiz vs 2G Audio */}
+        <div className="inline-flex flex-wrap justify-center items-center gap-1 rounded-2xl sm:rounded-full border border-white/10 bg-black/40 p-1 backdrop-blur-md">
           <button
             type="button"
             onClick={() => setActiveTab("pairs")}
@@ -163,6 +165,18 @@ export function Connect(_props: { onBook: OpenBooking }) {
           >
             <SlidersHorizontal className="h-3 w-3" />
             <span>{isHi ? "अनुकूलता क्विज़ (Match Quiz)" : "Compatibility Match Quiz"}</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveTab("audio")}
+            className={`rounded-full px-3.5 py-1 text-xs font-bold transition cursor-pointer flex items-center gap-1.5 ${
+              activeTab === "audio"
+                ? "bg-emerald-500 text-black shadow-md shadow-emerald-500/20"
+                : "text-slate-400 hover:text-white"
+            }`}
+          >
+            <Radio className="h-3 w-3" />
+            <span>{isHi ? "2G लो-डाटा वॉइस मोड" : "2G Audio Engine"}</span>
           </button>
         </div>
       </div>
@@ -253,7 +267,7 @@ export function Connect(_props: { onBook: OpenBooking }) {
             </motion.div>
           </AnimatePresence>
         </>
-      ) : (
+      ) : activeTab === "quiz" ? (
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -398,6 +412,14 @@ export function Connect(_props: { onBook: OpenBooking }) {
               {isHi ? "इस मैच से जुड़ें" : "Connect with this Match"}
             </Button>
           </div>
+        </motion.div>
+      ) : (
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mt-4 text-left"
+        >
+          <ConnectAudioWidget />
         </motion.div>
       )}
 
