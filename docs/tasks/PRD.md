@@ -119,3 +119,4 @@ Sprint 10: QA, CSO & CEO (Total Assurance, Compliance & Strategic Direction)
 [ ] 98. [CEO - Analytics]: Compile all Sprint data into a new executive dashboard showing core metrics: CAC (Customer Acquisition Cost), LTV (Lifetime Value), active token circulation.
 [ ] 99. [QA - Performance]: Audit the final webpack bundle size and ensure it's minimal by using code splitting and lazy loading heavy components.
 [ ] 100. [CEO]: Compile all Sprint Reports into a single Master Release Note (v3.0) and push to production.
+[ ] 101. [CTO]: add my bookings dashboard in user login profile.    

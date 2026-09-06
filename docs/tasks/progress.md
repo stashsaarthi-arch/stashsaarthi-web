@@ -410,4 +410,44 @@
     • Verified clean landing page hydration, zero unhandled WebGL exceptions, multi-step booking modal navigation on low-spec viewport (360x640), and resilient fallback mode triggering upon `webglcontextlost` events.
   - Build & E2E Verification: `npm run test:e2e:stub` (**PASSED**) and `npm run build` (**0 errors**).
 
+- [x] **[QA] Task 47: Implement Rate-Limiting on All Form Submissions to Prevent Spam** (2026-09-06)
+  - Built client-side form submission rate limiter engine in `src/lib/rateLimiter.ts`:
+    • **Minimum Inter-Submission Interval**: Enforces a default 10-second cooldown between consecutive submissions to prevent accidental double-clicks or bot spamming.
+    • **Sliding Window Cap**: Restricts maximum form submissions (default: 5 submissions per 5-minute sliding window) per form action key.
+    • **Storage & State**: Persists sub-second submission timestamps in `localStorage` (`ss_rate_limits`), automatically clearing expired timestamps beyond the window.
+    • **User Feedback**: Emits localized warning toast alerts with exact countdown timers (`Please wait N seconds before submitting again to prevent spam`) via Sonner toasts with ambient audio haptics.
+  - Integrated rate limit enforcement across 8 core form handlers:
+    1. `src/lib/waitlistService.ts` (`insertWaitlistUser` - `waitlist_form`)
+    2. `src/components/stash/BookingModal.tsx` (`handleCheckout` - `booking_modal`)
+    3. `src/components/stash/RoomListingModal.tsx` (`submit` - `room_listing`)
+    4. `src/components/stash/EarlyAccessModal.tsx` (`handleSubmit` - `early_access`)
+    5. `src/components/stash/CampusCaptainModal.tsx` (`handleSubmit` - `campus_captain`)
+    6. `src/components/stash/FeedbackSuggestions.tsx` (`handleReviewSubmit` - `user_review`)
+    7. `src/components/stash/FeedbackSuggestions.tsx` (`handleSuggestionSubmit` - `user_suggestion`)
+    8. `src/components/stash/MatchDrawer.tsx` (`submit` - `match_drawer`)
+    9. `src/components/stash/FooterSection.tsx` (`handleSubmit` - `footer_waitlist`)
+  - Build & Type Check Verified: `npm run build` compiled cleanly with **0 errors**.
+
+- [x] **[CSO] Task 49: Draft formal Privacy Policy & Terms of Service page content and link it in the footer** (2026-09-06)
+  - Created dedicated full-page routes for legal documents:
+    1. `src/routes/privacy.tsx`: Drafted comprehensive formal Privacy Policy compliant with India's Digital Personal Data Protection (DPDP) Act 2023. Included explicit sections on Zero Data Resale Guarantee, Row-Level Security & AES-256 Encryption, Automatic 18-Month Data Retention & Erasure SLA, and Nodal Grievance Officer details (Advik Omer, Kalyanpur Kanpur hub, `stashsaarthi@gmail.com`, `+91 9369454350`).
+    2. `src/routes/terms.tsx`: Drafted formal Terms of Service & Host Protection Charter governed under Section 105 of the Transfer of Property Act 1882 (TPA 1882). Included detailed charters on Saarthi Stash tamper-evident laser barcode seals, Prohibited Items List (cash, gold, perishables, flammables), ₹10,000 Micro-Insurance coverage, 100% Digital Escrow Payouts, and Prominent Zero-Cancellation-Fee guarantee.
+  - Registered `/privacy` and `/terms` in `src/routeTree.gen.ts` for full TanStack Router type safety.
+  - Updated `src/components/stash/LegalDialog.tsx` to include "View Full Formal Page →" buttons directing users to standalone legal routes.
+  - Updated `src/components/stash/FooterSection.tsx` with explicit clickable links to Privacy Policy (`/privacy`) and Terms of Service (`/terms`).
+  - Fully localized both pages in `en` and `hi` (Hindi) with print capabilities and section navigation.
+  - Verified with `npx tsc --noEmit` and `npm run build` — compiled cleanly with **0 errors**.
+
+- [x] **[CEO] Task 50: Compile all Sprint Reports into a single Master Release Note (v2.0) and push to production** (2026-09-06)
+  - Compiled comprehensive Master Release Note v2.0 in `docs/RELEASE_NOTES_v2.0.md` detailing achievements across all 50 sprint tasks in Sprints 0 through 5:
+    • **Sprint 0**: Dual Persona & Bilingual Sync, Kinetic Scroll Physics, Deep Navigation Sync.
+    • **Sprint 1 (CTO)**: Supabase Latency Optimization, Service Worker & PWA Caching, WebP Asset Optimization, Multi-tier Redis/IDB Caching, Nightly Security Audits, Section Error Boundaries, React memo optimizations, Playwright E2E Test Suite.
+    • **Sprint 2 (CPO)**: Dark Mode Transition Engine, Skeleton Loader Suite, Senior Host Income Charts, 4K+ Fluid Typography, ARIA Accessibility, Unified Toast Context with Web Audio Haptics, WCAG AA Contrast Compliance.
+    • **Sprint 3 (CMO)**: Student Success Stories Carousel, Dynamic OpenGraph Engine, Localized Hindi Pricing Calculator, Timeline of a Stash Interactive Component, Referral Leaderboard UI, Meta Description Optimizations, Schema.org Structured Data, PG Comparison Matrix.
+    • **Sprint 4 (CRO)**: Exit-Intent Discount Popups, Hero CTA Color A/B Testing, Reduced Mandatory Form Fields, Real-Time Social Proof Ticker, High-CTR WhatsApp Referral Copy, Multi-Step Booking Progress Bar, Zero Cancellation Fee Badges, Scroll-Depth Layout Optimization.
+    • **Sprint 5 (QA, CSO & CEO)**: Supabase RLS Security Policy Hardening, Older Android Device WebGL Safety & Fallback Layer, Host Vetting Protocol, Form Submission Cooldown Rate Limiting, External Link Security Hardening, DPDP 2023 & TPA Sec 105 Compliant Legal Routes (`/privacy`, `/terms`), Master Release Note v2.0 Compilation.
+  - Verified production build (`npm run build`) succeeded across client, SSR, and Nitro server bundles with **0 errors**.
+
+----------
+ralph-done-gd8zp
 
