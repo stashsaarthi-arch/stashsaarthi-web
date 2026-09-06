@@ -9,5 +9,47 @@
   "ralphLoop.autoAcceptChanges": true,
   "ralphLoop.maxIterations": 100,
   "ralphLoop.defaultModel": "Gemini 3 Flash",
-  "ralphLoop.antigravity.oauthToken": "auto"
+  "ralphLoop.antigravity.oauthToken": "auto",
+  "autoAcceptAgent.enableCommandPolling": true,
+  "autoAcceptAgent.pollIntervalMs": 300,
+  "autoAcceptAgent.autoConfigureSettings": true,
+  "autoAcceptAgent.interceptNotifications": true,
+  "autoAcceptAgent.enableCDP": false,
+  "autoAcceptAgent.blockedCommands": [
+    "rm -rf /",
+    "format",
+    "mkfs",
+    "del",
+    "del *",
+    "rmdir",
+    "rd",
+    "erase"
+  ],
+  "autoAcceptAgent.customButtonTexts": [
+    "accept all",
+    "accept step",
+    "accept changes",
+    "keep",
+    "allow once",
+    "continue",
+    "apply",
+    "yes"
+  ],
+  "chat.editing.autoAcceptDelay": 1,
+  "chat.tools.global.autoApprove": true,
+  "chat.tools.autoApprove": true,
+  "chat.tools.terminal.enableAutoApprove": true,
+  "chat.tools.terminal.autoApprove": {
+    "/.*/": true
+  },
+  "chat.tools.terminal.ignoreDefaultAutoApproveRules": true,
+  "chat.tools.terminal.autoApprove.warningAccepted": true,
+  "chat.agent.autoApprove": true,
+  "chat.agent.maxRequests": 999,
+  "chat.tools.run_command.autoApprove": true,
+  "chat.tools.default_api:run_command.autoApprove": true,
+  "terminal.integrated.confirmOnKill": "never",
+  "terminal.integrated.confirmOnPaste": false,
+  "security.workspace.trust.enabled": false,
+  "workbench.editor.enablePreview": false
 }

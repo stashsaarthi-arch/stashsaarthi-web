@@ -10,6 +10,7 @@ import {
   Search,
   MapPin,
   Sparkles,
+  Clock,
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { usePersona } from "@/context/PersonaContext";
@@ -25,6 +26,7 @@ interface CategoryItem {
 const CATEGORIES: CategoryItem[] = [
   { id: "solutions", labelEn: "Solutions & Hub", labelHi: "समाधान व सेवाएँ", icon: Boxes },
   { id: "calculator", labelEn: "Savings Simulator", labelHi: "बचत कैलकुलेटर", icon: Calculator },
+  { id: "timeline", labelEn: "Stash Journey", labelHi: "सामान का सफर", icon: Clock },
   {
     id: "trust",
     labelEn: "Trust & Safety Pass",
@@ -105,6 +107,15 @@ const QUICK_CHIPS: QuickChip[] = [
     badgeHi: "QR सील",
     target: "trust",
   },
+  {
+    id: "timeline-chip",
+    labelEn: "Timeline of a Stash",
+    labelHi: "सामान का सफर",
+    icon: Clock,
+    badgeEn: "6 Stages",
+    badgeHi: "6 चरण",
+    target: "timeline",
+  },
 ];
 
 export const QuickCategoryNav = memo(function QuickCategoryNav() {
@@ -164,6 +175,8 @@ export const QuickCategoryNav = memo(function QuickCategoryNav() {
 
   return (
     <div
+      role="region"
+      aria-label={isHi ? "त्वरित श्रेणी नेविगेशन" : "Quick Category Jump Navigation"}
       className={`z-30 transition-all duration-300 ${
         isSticky
           ? "sticky top-16 mx-auto max-w-5xl px-3 py-1.5"
@@ -172,18 +185,25 @@ export const QuickCategoryNav = memo(function QuickCategoryNav() {
     >
       {/* ── Consolidated Single-Row Category Bar ── */}
       <div className="glass flex flex-col gap-1.5 rounded-2xl border border-white/10 p-1.5 shadow-2xl backdrop-blur-2xl">
-        <div className="flex items-center justify-between gap-1 overflow-x-auto no-scrollbar sm:gap-1.5">
+        <div
+          role="tablist"
+          aria-label={isHi ? "श्रेणी लिंक" : "Category Navigation Links"}
+          className="flex items-center justify-between gap-1 overflow-x-auto no-scrollbar sm:gap-1.5"
+        >
           {CATEGORIES.map((cat) => {
             const Icon = cat.icon;
             const isActive = active === cat.id;
             return (
               <button
                 key={cat.id}
+                role="tab"
+                aria-selected={isActive}
+                aria-controls={cat.id}
                 onClick={() => {
                   setActive(cat.id);
                   smoothScrollTo(cat.id)();
                 }}
-                className={`flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold whitespace-nowrap transition-all duration-200 cursor-pointer sm:px-3.5 sm:py-2 ${
+                className={`flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold whitespace-nowrap transition-all duration-200 cursor-pointer sm:px-3.5 sm:py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 ${
                   isActive
                     ? "border border-white/20 text-white shadow-lg"
                     : "text-muted-foreground hover:bg-white/5 hover:text-white"
@@ -199,6 +219,7 @@ export const QuickCategoryNav = memo(function QuickCategoryNav() {
               >
                 <Icon
                   className="h-3.5 w-3.5 shrink-0"
+                  aria-hidden="true"
                   style={{ color: isActive ? accentColor : "currentColor" }}
                 />
                 <span>{isHi ? cat.labelHi : cat.labelEn}</span>
@@ -210,14 +231,15 @@ export const QuickCategoryNav = memo(function QuickCategoryNav() {
           <button
             type="button"
             onClick={() => setShowSearch((v) => !v)}
+            aria-expanded={showSearch}
             aria-label="Search website services"
-            className={`flex items-center gap-1 rounded-xl px-2.5 py-1.5 text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+            className={`flex items-center gap-1 rounded-xl px-2.5 py-1.5 text-xs font-semibold whitespace-nowrap transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 ${
               showSearch
                 ? "bg-white/15 text-white border border-white/20"
                 : "text-slate-400 hover:bg-white/5 hover:text-white border border-transparent"
             }`}
           >
-            <Search className="h-3.5 w-3.5" />
+            <Search className="h-3.5 w-3.5" aria-hidden="true" />
             <span className="hidden md:inline">{isHi ? "खोजें" : "Quick Find"}</span>
           </button>
         </div>

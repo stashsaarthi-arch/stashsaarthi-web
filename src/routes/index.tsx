@@ -8,6 +8,7 @@ import { DualCrisis } from "@/components/stash/DualCrisis";
 import { SolutionsHub } from "@/components/stash/SolutionsHub";
 import { CalculatorHub } from "@/components/stash/CalculatorHub";
 import { TrustConsoleHub } from "@/components/stash/TrustConsoleHub";
+import { StudentStoriesCarousel } from "@/components/stash/StudentStoriesCarousel";
 import { HostRules } from "@/components/stash/HostRules";
 import { FamilyDashboard } from "@/components/stash/FamilyDashboard";
 import { FounderEscalationWidget } from "@/components/stash/FounderEscalationWidget";
@@ -20,6 +21,7 @@ import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 import { BookingModal } from "@/components/stash/BookingModal";
 import { RoomListingModal } from "@/components/stash/RoomListingModal";
 import { RoleLane } from "@/components/stash/RoleLane";
+import { StashTimeline } from "@/components/stash/StashTimeline";
 import { WhatsAppButton } from "@/components/stash/WhatsAppButton";
 import { ActivityTicker } from "@/components/stash/ActivityTicker";
 import { ScrollProgress } from "@/components/stash/ScrollProgress";
@@ -77,7 +79,10 @@ function Index() {
   const handleRefer = useCallback(() => setReferralOpen(true), []);
 
   return (
-    <main className="relative min-h-screen overflow-x-hidden bg-background text-foreground transition-colors duration-500">
+    <main id="main-content" tabIndex={-1} className="relative min-h-screen overflow-x-hidden bg-background text-foreground transition-colors duration-500 focus:outline-none">
+      <a href="#main-content" className="skip-to-content">
+        Skip to main content
+      </a>
       <AmbientNodes />
       <ErrorBoundary sectionName="Navbar" compact>
         <Navbar
@@ -117,9 +122,19 @@ function Index() {
         <CalculatorHub onBook={open} />
       </ErrorBoundary>
 
+      {/* Interactive Timeline of a Stash (Pickup -> Custody -> Return) */}
+      <ErrorBoundary sectionName="Timeline of a Stash">
+        <StashTimeline onBook={open} />
+      </ErrorBoundary>
+
       {/* 3. 100% Radical Transparency & Custody Console Hub */}
       <ErrorBoundary sectionName="Trust & Custody Console">
         <TrustConsoleHub />
+      </ErrorBoundary>
+
+      {/* Dedicated Student & Host Success Stories Carousel */}
+      <ErrorBoundary sectionName="Student Success Stories">
+        <StudentStoriesCarousel onBook={open} />
       </ErrorBoundary>
 
       {/* Host Specific Dashboard Norms */}
