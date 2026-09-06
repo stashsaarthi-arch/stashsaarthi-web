@@ -4,6 +4,12 @@ import { Card3D } from "@/components/ui/Card3D";
 import { FOUNDER_WHATSAPP, getWhatsAppUrl } from "@/lib/constants";
 import { useLanguage } from "@/context/LanguageContext";
 
+export interface StashPassItem {
+  category: string;
+  customLabel: string;
+  barcode?: string;
+}
+
 export interface StashPassProps {
   tokenId: string;
   name: string;
@@ -11,9 +17,10 @@ export interface StashPassProps {
   type?: "student" | "host";
   bags?: number | undefined;
   months?: number | undefined;
+  items?: StashPassItem[] | undefined;
 }
 
-export function StashPass({ tokenId, name, serviceLabel, type, bags, months }: StashPassProps) {
+export function StashPass({ tokenId, name, serviceLabel, type, bags, months, items }: StashPassProps) {
   const { language } = useLanguage();
   const isHi = language === "hi";
 
@@ -123,6 +130,29 @@ export function StashPass({ tokenId, name, serviceLabel, type, bags, months }: S
                 </p>
               </div>
             </div>
+
+            {items && items.length > 0 && (
+              <div className="mt-4 pt-3 border-t border-white/10 space-y-1.5">
+                <p className="text-[10px] font-bold uppercase tracking-wider text-cyan-400">
+                  {isHi ? "आधिकारिक आईटमाइज्ड सामान टैग:" : "Official Itemized Storage Inventory:"}
+                </p>
+                <div className="space-y-1 max-h-24 overflow-y-auto pr-1">
+                  {items.map((it, idx) => (
+                    <div
+                      key={idx}
+                      className="flex items-center justify-between text-[10px] bg-white/5 border border-white/10 rounded-md px-2 py-1"
+                    >
+                      <span className="font-mono text-emerald-400 font-bold">
+                        {it.barcode || `#SS-BAG-${String(idx + 1).padStart(2, "0")}`}
+                      </span>
+                      <span className="text-foreground truncate max-w-[170px]">
+                        {it.customLabel || `${it.category} #${idx + 1}`}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
 
             <div className="mt-5 flex items-center justify-center pt-4 border-t border-white/5 opacity-40">
               <div className="w-full h-8 flex gap-1 justify-center">

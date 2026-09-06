@@ -564,8 +564,26 @@
     • Added glowing image-overlay badge button (`360° Room Tour` / `360° टूर`) on every verified room card.
     • Added `360°` action button alongside WhatsApp direct booking and phone call triggers.
     • Wired up `Room360Viewer` modal state dynamically populated with listing title, location, rent amount, and room scenes.
-  - Type-check & build verified: `npx tsc --noEmit` (**0 errors**) and `npm run build` compiled cleanly with **0 errors** across client, SSR, and Nitro server environments.
+- [x] **[UX - Storage] Task 63: Redesign the luggage storage UI to support itemization and custom labeling** (2026-09-06)
+  - **Luggage Itemization & Barcode Console in BookingModal**:
+    • Engineered dynamic itemization state management (`luggageItems`) synchronized with total bag count and custom item additions/removals.
+    • Added tamper seal barcode tag tracking system (`#SS-BAG-01`, `#SS-BAG-02`, etc.) for every individual stored bag or box.
+    • Integrated category dropdowns (`Carton Box 📦`, `Suitcase 🧳`, `Duffle / Backpack 🎒`, `Books & Notes 📚`, `Bicycle / Cooler 🚲`, `Electronics 🔌`, `Other 🏷️`).
+    • Added custom item label input field supporting granular student storage notes (e.g. "Carton #1: Books & Semester Notes", "Suitcase: Winter Clothes & Jackets").
+    • Built 1-tap quick preset chips (`+ Books Box`, `+ Winter Suitcase`, `+ Bedding Box`, `+ Electronics`) for instant item labeling.
+    • Added live itemized inventory summary bar displaying total itemized list string and price calculation.
+  - **StashPass Digital Custody & Tamper Seal Integration**:
+    • Enhanced `StashPass.tsx` (`StashPassProps`) with `items` array support.
+    • Rendered official itemized storage inventory breakdown on the StashPass digital pass with individual barcode tags and custom labels.
+    • Formatted structured inquiry payload (`serviceMeta`) on checkout with full itemization details for local nodal concierges.
+  - Type-check & build verified: `npx tsc --noEmit` (**0 errors**) and `npm run build` compiled cleanly with **0 errors** across client and server environments.
 
-
-
-
+- [x] **[UI - Motion] Task 64: Implement a Micro-Interaction where the Peacock Feather "dusts off" the matki of butter when a student selects the Standard Thali** (2026-09-06)
+  - **Peacock Feather & Matki Desi Makhan Dusting Micro-Interaction**:
+    • Created `PeacockFeatherMatkiDusting` component (`src/components/stash/PeacockFeatherMatkiDusting.tsx`) featuring custom SVG matki pot with white butter mound and animated peacock feather (Mor-Pankh) sweep animation.
+    • Integrated Web Audio API haptic sound effect (`playPop()`), animated sparkle particles (`✨`, `🧈`, `💛`), and counter tracking (`Fresh Makhan #N`).
+    • Provided both full visual stage variant and compact inline pill variant (`🪶 Fresh Makhan Dusted`).
+  - **Integrated into TokenMealHub**:
+    • Auto-triggers Mor-Pankh dusting animation whenever the user selects the Standard Thali (`selectedMeal.id === "standard"`).
+    • Rendered compact trigger button directly on the Standard Thali tier card and full stage banner within the meal selection view (`src/components/TokenMealHub.tsx`).
+  - Type-check & build verified: `npx tsc --noEmit` (**0 errors**) and `npm run build` compiled cleanly with **0 errors** across client and server environments.

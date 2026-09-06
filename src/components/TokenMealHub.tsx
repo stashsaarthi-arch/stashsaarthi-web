@@ -4,6 +4,7 @@ import { logSupabaseError } from "@/lib/supabaseLogger";
 import { useComponentTelemetry } from "@/lib/interactionTelemetry";
 import { toast } from "sonner";
 import { TasteShieldModal } from "./TasteShieldModal";
+import { PeacockFeatherMatkiDusting } from "./stash/PeacockFeatherMatkiDusting";
 import { ShieldCheck, Repeat, Zap, Check, X, ChevronRight, Clock, MapPin, Phone } from "lucide-react";
 import { playClick, playPop } from "@/lib/audio";
 
@@ -228,8 +229,13 @@ const MealTierCard: React.FC<MealTierCardProps> = ({ tier, isSelected, tierCost,
         </span>
       )}
 
-      <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1 mt-4">
-        {tier.name}
+      <div className="flex items-center justify-between gap-2 mb-1 mt-4">
+        <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+          {tier.name}
+        </div>
+        {tier.id === "standard" && (
+          <PeacockFeatherMatkiDusting compact isAutoTriggered={isSelected} />
+        )}
       </div>
       <div className="text-3xl font-black text-white mb-3">
         {tierCost} <span className="text-xs font-bold text-emerald-400">Tokens</span>
@@ -947,6 +953,12 @@ export const TokenMealHub: React.FC = () => {
               );
             })}
           </div>
+
+          {/* Micro-Interaction: Peacock Feather Matki Butter Dusting (Task 64) */}
+          <PeacockFeatherMatkiDusting
+            isAutoTriggered={selectedMeal.id === "standard"}
+            className="mt-5"
+          />
         </div>
 
         {/* Step 3: Checkout Details */}

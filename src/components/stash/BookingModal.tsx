@@ -30,6 +30,12 @@ import {
   Sparkles,
   Info,
   Clock,
+  Plus,
+  Trash2,
+  Tag,
+  Package,
+  Luggage,
+  BookOpen,
 } from "lucide-react";
 import {
   isValidEmail,
@@ -38,6 +44,7 @@ import {
   isValidIndianPin,
 } from "@/lib/waitlistService";
 import { StashPass } from "./StashPass";
+import { LuggageItemizerModal, type LuggageStorageItem } from "./LuggageItemizerModal";
 import { useLanguage } from "@/context/LanguageContext";
 
 export function BookingModal({
@@ -72,10 +79,96 @@ export function BookingModal({
   const [pincode, setPincode] = useState("");
   const [addressDetail, setAddressDetail] = useState("");
 
-  // 1. Stash specific fields
+  // 1. Stash specific fields & Itemization
   const [bags, setBags] = useState<number>(initialBags || 1);
   const [months, setMonths] = useState<number>(initialMonths || 1);
   const [itemType, setItemType] = useState("Suitcase & Luggage");
+  const [showItemizerModal, setShowItemizerModal] = useState(false);
+
+  const [luggageItems, setLuggageItems] = useState<
+    { id: string; category: string; customLabel: string; barcode: string }[]
+  >(() => {
+    const count = initialBags || 1;
+    const presets = [
+      { category: "Suitcase", customLabel: "Suitcase: Winter Clothes & Jackets" },
+      { category: "Carton Box", customLabel: "Carton #1: Books & Semester Notes" },
+      { category: "Carton Box", customLabel: "Box #2: Bedding & Linens" },
+      { category: "Duffle Bag", customLabel: "Duffle: Sports & Daily Wear" },
+      { category: "Electronics", customLabel: "Electronics Box: Kettle & Charger" },
+    ];
+    return Array.from({ length: count }).map((_, i) => ({
+      id: `item-${i + 1}-${Date.now()}`,
+      category: presets[i % presets.length]?.category || "Suitcase",
+      customLabel: presets[i % presets.length]?.customLabel || `Luggage Item #${i + 1}`,
+      barcode: `#SS-BAG-${String(i + 1).padStart(2, "0")}`,
+    }));
+  });
+
+  // Sync luggage items array with bags count
+  useEffect(() => {
+    setLuggageItems((prev) => {
+      if (prev.length === bags) return prev;
+      if (prev.length < bags) {
+        const addedCount = bags - prev.length;
+        const presets = [
+          { category: "Carton Box", customLabel: "Carton #1: Books & Semester Notes" },
+          { category: "Suitcase", customLabel: "Suitcase: Winter Clothes & Jackets" },
+          { category: "Carton Box", customLabel: "Box #2: Bedding & Linens" },
+          { category: "Duffle Bag", customLabel: "Duffle: Sports & Daily Wear" },
+        ];
+        const newItems = Array.from({ length: addedCount }).map((_, idx) => {
+          const i = prev.length + idx;
+          const preset = presets[i % presets.length];
+          return {
+            id: `item-${i + 1}-${Date.now()}`,
+            category: preset?.category || "Carton Box",
+            customLabel: preset?.customLabel || `Storage Item #${i + 1}`,
+            barcode: `#SS-BAG-${String(i + 1).padStart(2, "0")}`,
+          };
+        });
+        return [...prev, ...newItems];
+      } else {
+        return prev.slice(0, bags);
+      }
+    });
+  }, [bags]);
+
+  const updateLuggageItem = (
+    index: number,
+    field: "category" | "customLabel",
+    val: string
+  ) => {
+    setLuggageItems((prev) =>
+      prev.map((item, idx) => (idx === index ? { ...item, [field]: val } : item))
+    );
+  };
+
+  const addLuggageItemWithPreset = (presetCategory: string, presetLabel: string) => {
+    setLuggageItems((prev) => {
+      const nextIdx = prev.length + 1;
+      const newItem = {
+        id: `item-${nextIdx}-${Date.now()}`,
+        category: presetCategory,
+        customLabel: presetLabel,
+        barcode: `#SS-BAG-${String(nextIdx).padStart(2, "0")}`,
+      };
+      const updated = [...prev, newItem];
+      setBags(updated.length);
+      return updated;
+    });
+  };
+
+  const removeLuggageItem = (index: number) => {
+    if (luggageItems.length <= 1) return;
+    setLuggageItems((prev) => {
+      const updated = prev.filter((_, idx) => idx !== index).map((item, idx) => ({
+        ...item,
+        barcode: `#SS-BAG-${String(idx + 1).padStart(2, "0")}`,
+      }));
+      setBags(updated.length);
+      return updated;
+    });
+  };
 
   // 2. Spaces specific fields
   const [roomType, setRoomType] = useState<"single" | "shared" | "floor">("single");
@@ -294,7 +387,10 @@ export function BookingModal({
       // Build structured message payload depending on the selected service
       let serviceMeta = "";
       if (service === "stash") {
-        serviceMeta = `[Stash] Bags: ${bags}, Months: ${months}, Type: ${itemType}, Pickup: ${addressDetail || "Hostel/Campus Gate"}`;
+        const itemizationStr = luggageItems
+          .map((it, idx) => `${it.barcode}: [${it.category}] ${it.customLabel || "Unlabeled"}`)
+          .join(" | ");
+        serviceMeta = `[Stash] Bags: ${bags}, Months: ${months}, Itemization: {${itemizationStr}}, Pickup: ${addressDetail || "Hostel/Campus Gate"}`;
       } else if (service === "spaces") {
         serviceMeta = `[Spaces] Room: ${roomType}, MoveIn: ${moveInDate || "Immediate"}, Food: ${foodPreference}, Address: ${addressDetail || city}`;
       } else if (service === "kitchen") {
@@ -544,61 +640,177 @@ export function BookingModal({
 
                   {/* 2.1 Stash Inputs */}
                   {service === "stash" && (
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
-                      <div>
-                        <Label htmlFor="bk-bags" className="text-xs cursor-pointer">
-                          {isHi ? "बैगों की संख्या:" : "Number of Bags:"}
-                        </Label>
-                        <select
-                          id="bk-bags"
-                          aria-label={isHi ? "बैगों की संख्या चुनें" : "Select number of bags"}
-                          value={bags}
-                          onChange={(e) => setBags(Number(e.target.value))}
-                          className="w-full mt-1.5 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white cursor-pointer"
-                        >
-                          {[1, 2, 3, 4, 5, 6, 8, 10].map((b) => (
-                            <option key={b} value={b} className="bg-[#0A0D0F]">
-                              {b} {isHi ? "बैग" : b === 1 ? "Bag" : "Bags"} (₹{b * 300}/mo)
-                            </option>
-                          ))}
-                        </select>
+                    <div className="space-y-3.5 pt-1 text-left">
+                      {/* Upper controls: Quantity and Duration */}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                          <Label htmlFor="bk-bags" className="text-xs font-semibold cursor-pointer text-slate-200">
+                            {isHi ? "कुल स्टैश बैग संख्या:" : "Total Stash Bags Count:"}
+                          </Label>
+                          <select
+                            id="bk-bags"
+                            aria-label={isHi ? "बैगों की संख्या चुनें" : "Select number of bags"}
+                            value={bags}
+                            onChange={(e) => setBags(Number(e.target.value))}
+                            className="w-full mt-1.5 rounded-xl border border-emerald-500/30 bg-black/70 px-3 py-2 text-xs font-semibold text-emerald-400 cursor-pointer shadow-inner"
+                          >
+                            {[1, 2, 3, 4, 5, 6, 8, 10].map((b) => (
+                              <option key={b} value={b} className="bg-[#0A0D0F]">
+                                {b} {isHi ? "बैग / बॉक्स" : b === 1 ? "Bag / Box" : "Bags / Boxes"} (₹{b * 300}/mo)
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+
+                        <div>
+                          <Label htmlFor="bk-months" className="text-xs font-semibold cursor-pointer text-slate-200">
+                            {isHi ? "स्टोरेज अवधि (महीने):" : "Storage Duration (Months):"}
+                          </Label>
+                          <select
+                            id="bk-months"
+                            aria-label={isHi ? "स्टोरेज अवधि चुनें" : "Select duration in months"}
+                            value={months}
+                            onChange={(e) => setMonths(Number(e.target.value))}
+                            className="w-full mt-1.5 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white cursor-pointer"
+                          >
+                            {[1, 2, 3, 4, 5, 6].map((m) => (
+                              <option key={m} value={m} className="bg-[#0A0D0F]">
+                                {m} {isHi ? "महीने" : m === 1 ? "Month" : "Months"}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
                       </div>
 
-                      <div>
-                        <Label htmlFor="bk-months" className="text-xs cursor-pointer">
-                          {isHi ? "अवधि (महीने):" : "Duration (Months):"}
-                        </Label>
-                        <select
-                          id="bk-months"
-                          aria-label={isHi ? "स्टोरेज अवधि चुनें" : "Select duration in months"}
-                          value={months}
-                          onChange={(e) => setMonths(Number(e.target.value))}
-                          className="w-full mt-1.5 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white cursor-pointer"
-                        >
-                          {[1, 2, 3, 4, 5, 6].map((m) => (
-                            <option key={m} value={m} className="bg-[#0A0D0F]">
-                              {m} {isHi ? "महीने" : m === 1 ? "Month" : "Months"}
-                            </option>
-                          ))}
-                        </select>
+                      {/* Quick Presets Bar & Full Itemizer Trigger */}
+                      <div className="space-y-1.5 pt-1">
+                        <div className="flex items-center justify-between text-[11px]">
+                          <span className="font-semibold text-slate-300 flex items-center gap-1.5">
+                            <Tag className="w-3.5 h-3.5 text-cyan-400" />
+                            {isHi ? "आईटमाइजेशन व कस्टम लेबलिंग:" : "Storage Itemization & Labels:"}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => setShowItemizerModal(true)}
+                            className="text-[10px] text-cyan-300 hover:text-white font-mono bg-cyan-500/15 border border-cyan-500/30 px-2 py-0.5 rounded-md transition cursor-pointer flex items-center gap-1"
+                          >
+                            <Luggage className="w-3 h-3 text-cyan-400" />
+                            {isHi ? "पूर्ण आईटमाइज़र व बारकोड टैग खोलें →" : "Full Itemizer & Print Tags →"}
+                          </button>
+                        </div>
+                        <div className="flex flex-wrap gap-1.5">
+                          <button
+                            type="button"
+                            onClick={() => addLuggageItemWithPreset("Carton Box", "Carton #1: Books & Semester Notes")}
+                            className="px-2.5 py-1 rounded-lg border border-cyan-500/30 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 text-[11px] font-medium transition cursor-pointer flex items-center gap-1"
+                          >
+                            <Plus className="w-3 h-3" /> + {isHi ? "किताबें बॉक्स" : "Books Box"}
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => addLuggageItemWithPreset("Suitcase", "Suitcase: Winter Clothes & Jackets")}
+                            className="px-2.5 py-1 rounded-lg border border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 text-[11px] font-medium transition cursor-pointer flex items-center gap-1"
+                          >
+                            <Plus className="w-3 h-3" /> + {isHi ? "सूटकेस (सर्दियों के कपड़े)" : "Winter Suitcase"}
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => addLuggageItemWithPreset("Carton Box", "Box #2: Bedding & Linens")}
+                            className="px-2.5 py-1 rounded-lg border border-amber-500/30 bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 text-[11px] font-medium transition cursor-pointer flex items-center gap-1"
+                          >
+                            <Plus className="w-3 h-3" /> + {isHi ? "बिस्तर बॉक्स" : "Bedding Box"}
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => addLuggageItemWithPreset("Electronics", "Electronics Box: Kettle & Chargers")}
+                            className="px-2.5 py-1 rounded-lg border border-purple-500/30 bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 text-[11px] font-medium transition cursor-pointer flex items-center gap-1"
+                          >
+                            <Plus className="w-3 h-3" /> + {isHi ? "इलेक्ट्रॉनिक्स" : "Electronics"}
+                          </button>
+                        </div>
                       </div>
 
-                      <div>
-                        <Label htmlFor="bk-item-type" className="text-xs cursor-pointer">
-                          {isHi ? "सामान प्रकार:" : "Item Category:"}
-                        </Label>
-                        <select
-                          id="bk-item-type"
-                          aria-label={isHi ? "सामान का प्रकार चुनें" : "Select item category"}
-                          value={itemType}
-                          onChange={(e) => setItemType(e.target.value)}
-                          className="w-full mt-1.5 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white cursor-pointer"
-                        >
-                          <option value="Suitcase & Luggage">Luggage / Trolley</option>
-                          <option value="Carton Box / Books">Carton / Books</option>
-                          <option value="Bicycle / Cooler">Bicycle / Cooler</option>
-                          <option value="Electronics / Other">Electronics / Other</option>
-                        </select>
+                      {/* Itemization Cards List */}
+                      <div className="space-y-2 max-h-56 overflow-y-auto pr-1">
+                        {luggageItems.map((item, idx) => (
+                          <div
+                            key={item.id}
+                            className="rounded-xl border border-white/10 bg-black/40 p-3 space-y-2 transition hover:border-emerald-500/40 text-left"
+                          >
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center gap-2">
+                                <span className="font-mono text-[10px] font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full flex items-center gap-1">
+                                  <Tag className="w-3 h-3" />
+                                  {item.barcode}
+                                </span>
+                                <span className="text-xs font-semibold text-slate-300">
+                                  {isHi ? `सामान #${idx + 1}` : `Item #${idx + 1}`}
+                                </span>
+                              </div>
+
+                              {luggageItems.length > 1 && (
+                                <button
+                                  type="button"
+                                  onClick={() => removeLuggageItem(idx)}
+                                  className="text-rose-400 hover:text-rose-300 p-1 rounded hover:bg-rose-500/10 transition cursor-pointer"
+                                  title={isHi ? "सामान हटाएं" : "Remove Item"}
+                                >
+                                  <Trash2 className="w-3.5 h-3.5" />
+                                </button>
+                              )}
+                            </div>
+
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                              <div>
+                                <Label className="text-[10px] text-muted-foreground">
+                                  {isHi ? "सामान श्रेणी:" : "Item Category:"}
+                                </Label>
+                                <select
+                                  value={item.category}
+                                  onChange={(e) => updateLuggageItem(idx, "category", e.target.value)}
+                                  className="w-full mt-1 rounded-lg border border-white/10 bg-black/80 px-2.5 py-1.5 text-xs text-white cursor-pointer"
+                                >
+                                  <option value="Carton Box">{isHi ? "कार्टन बॉक्स 📦" : "Carton Box 📦"}</option>
+                                  <option value="Suitcase">{isHi ? "सूटकेस / ट्रॉली 🧳" : "Luggage / Suitcase 🧳"}</option>
+                                  <option value="Duffle Bag">{isHi ? "डफ़ल / बैकपैक 🎒" : "Duffle / Backpack 🎒"}</option>
+                                  <option value="Books & Notes">{isHi ? "किताबें व नोट्स 📚" : "Books & Semester Notes 📚"}</option>
+                                  <option value="Bicycle/Cooler">{isHi ? "साइकिल / कूलर 🚲" : "Bicycle / Cooler 🚲"}</option>
+                                  <option value="Electronics">{isHi ? "इलेक्ट्रॉनिक्स 🔌" : "Electronics & Appliances 🔌"}</option>
+                                  <option value="Other">{isHi ? "अन्य सामान 🏷️" : "Other Miscellaneous 🏷️"}</option>
+                                </select>
+                              </div>
+
+                              <div>
+                                <Label className="text-[10px] text-muted-foreground">
+                                  {isHi ? "कस्टम लेबल / विवरण:" : "Custom Item Label:"}
+                                </Label>
+                                <Input
+                                  type="text"
+                                  value={item.customLabel}
+                                  onChange={(e) => updateLuggageItem(idx, "customLabel", e.target.value)}
+                                  placeholder={isHi ? "उदा. कार्टन #1: पुस्तकें" : "e.g., Carton #1: Books"}
+                                  className="mt-1 border-white/10 bg-black/80 text-xs text-white py-1 px-2.5 h-8"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Live Labeled Inventory Summary Bar */}
+                      <div className="rounded-lg bg-emerald-500/10 border border-emerald-500/20 p-2.5 text-[11px] text-emerald-300 flex items-center justify-between">
+                        <div className="flex items-center gap-1.5 truncate">
+                          <Package className="w-4 h-4 text-emerald-400 shrink-0" />
+                          <span className="font-medium truncate">
+                            {isHi ? "आईटमाइज्ड सूची:" : "Itemized Inventory:"}{" "}
+                            <strong className="text-white font-mono">
+                              {luggageItems.map((it) => it.customLabel || it.category).join(" · ")}
+                            </strong>
+                          </span>
+                        </div>
+                        <span className="font-mono text-[10px] font-bold bg-emerald-500/20 px-2 py-0.5 rounded text-emerald-300 shrink-0">
+                          ₹{bags * months * 300}
+                        </span>
                       </div>
                     </div>
                   )}
@@ -1296,6 +1508,7 @@ export function BookingModal({
                   serviceLabel={service.toUpperCase()}
                   bags={service === "stash" ? bags : undefined}
                   months={service === "stash" ? months : undefined}
+                  items={service === "stash" ? luggageItems : undefined}
                 />
 
                 <Button
@@ -1310,6 +1523,30 @@ export function BookingModal({
           </AnimatePresence>
         </div>
       </DialogContent>
+
+      <LuggageItemizerModal
+        open={showItemizerModal}
+        onOpenChange={setShowItemizerModal}
+        items={luggageItems.map((it) => ({
+          id: it.id,
+          category: (it.category || "Carton Box") as any,
+          customLabel: it.customLabel || "",
+          barcode: it.barcode || "#SS-BAG-01",
+          isFragile: false,
+          weightEstKg: 12,
+        }))}
+        onSaveItems={(newItems) => {
+          setLuggageItems(
+            newItems.map((ni) => ({
+              id: ni.id,
+              category: ni.category,
+              customLabel: ni.customLabel,
+              barcode: ni.barcode,
+            }))
+          );
+          setBags(newItems.length);
+        }}
+      />
     </Dialog>
   );
 }

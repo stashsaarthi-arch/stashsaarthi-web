@@ -4,7 +4,8 @@ import AnimatedContent from "@/components/ui/AnimatedContent";
 import type { OpenBooking } from "./types";
 import { useLanguage } from "@/context/LanguageContext";
 import { PackingChecklistModal } from "./PackingChecklistModal";
-import { Package, FileText, Printer, ShieldCheck, ArrowRight, MapPin } from "lucide-react";
+import { LuggageItemizerModal } from "./LuggageItemizerModal";
+import { Package, FileText, Printer, ShieldCheck, ArrowRight, MapPin, Luggage } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import {
@@ -24,6 +25,7 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
   const [selectedZoneCode, setSelectedZoneCode] = useState<string>("KAKADEO_COACHING");
   const [showPackingModal, setShowPackingModal] = useState(false);
   const [showCertificateModal, setShowCertificateModal] = useState(false);
+  const [showItemizerModal, setShowItemizerModal] = useState(false);
 
   const safeBags = Math.max(1, bags || 1);
   const safeDays = Math.max(15, vacationDays || 15);
@@ -282,6 +284,15 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
 
                 <button
                   type="button"
+                  onClick={() => setShowItemizerModal(true)}
+                  className="sm:flex-1 h-10 px-3 rounded-xl border border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-500/20 text-xs font-semibold text-emerald-300 whitespace-nowrap transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                >
+                  <Luggage className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
+                  <span>{isHi ? "सामान आईटमाइज़ करें" : "Itemize Luggage"}</span>
+                </button>
+
+                <button
+                  type="button"
                   onClick={() => setShowPackingModal(true)}
                   className="sm:flex-1 h-10 px-3 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-xs font-semibold text-slate-300 whitespace-nowrap transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                 >
@@ -385,6 +396,22 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                 bags: safeBags,
                 months: vacationMonths,
                 amount: stashCost,
+              });
+            }
+          }}
+        />
+
+        <LuggageItemizerModal
+          open={showItemizerModal}
+          onOpenChange={setShowItemizerModal}
+          onProceedToBooking={(items) => {
+            if (onBook) {
+              onBook({
+                service: "stash",
+                note: `${items.length} itemized bag(s): ${items.map((i) => i.customLabel || i.category).join(", ")}`,
+                bags: items.length,
+                months: vacationMonths,
+                amount: items.length * vacationMonths * 300,
               });
             }
           }}

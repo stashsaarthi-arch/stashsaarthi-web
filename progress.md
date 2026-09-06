@@ -1056,7 +1056,22 @@
   - Resolved `currentStep` null-safety error in `src/components/stash/StashTimeline.tsx`.
   - `npx tsc --noEmit` passed with **0 errors**.
 
+### Session: 2026-09-06 — [UX - Storage] Task 63 Luggage Itemization & Custom Labeling UI Redesign
+- [x] **Luggage Storage UI Redesign (Itemization & Custom Labeling)**:
+  - Built `LuggageItemizerModal.tsx` (`src/components/stash/LuggageItemizerModal.tsx`) with category presets, custom label text fields, auto-minted laser tamper barcode seals (`#SS-BAG-01`, etc.), fragility toggles, estimated item weight inputs, and printable barcode tag sheet mode.
+  - Upgraded `BookingModal.tsx` with 1-tap itemization preset chips, category dropdown selector, live itemized inventory summary bar, and trigger for `LuggageItemizerModal`.
+  - Integrated `LuggageItemizerModal` into `Calculator.tsx` with 1-click "Itemize Luggage" action button and dynamic booking callback.
+- [x] **Verification**:
+  - Executed `npm run build` with **0 TypeScript errors** and clean bundle output.
+  - Verified cross-persona dark obsidian aesthetic and bilingual (`en`/`hi`) state sync.
 
-
-
-
+### Session: 2026-09-06 — [UI - Motion] Task 64 Peacock Feather Matki Makhan Micro-Interaction
+- [x] **Peacock Feather & Matki Desi Makhan Dusting Micro-Interaction**:
+  - Created `PeacockFeatherMatkiDusting` component (`src/components/stash/PeacockFeatherMatkiDusting.tsx`) featuring custom SVG matki pot with white butter mound and animated peacock feather (Mor-Pankh) sweep animation.
+  - Integrated Web Audio API haptic sound effect (`playPop()`), animated sparkle particles (`✨`, `🧈`, `💛`), and counter tracking (`Fresh Makhan #N`).
+  - Provided both full visual stage variant and compact inline pill variant (`🪶 Fresh Makhan Dusted`).
+- [x] **Integrated into TokenMealHub**:
+  - Auto-triggers Mor-Pankh dusting animation whenever the user selects the Standard Thali (`selectedMeal.id === "standard"`).
+  - Rendered compact trigger button directly on the Standard Thali tier card and full stage banner within the meal selection view (`src/components/TokenMealHub.tsx`).
+- [x] **Verification**:
+  - Executed `npm run build` with **0 TypeScript errors** and clean production bundle output.
