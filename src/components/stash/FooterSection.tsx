@@ -647,6 +647,22 @@ export const FooterSection = memo(function FooterSection() {
                 {isHi ? "सत्यापित कमरे" : "Verified Rooms"}
               </a>
             </li>
+            <li>
+              <Link
+                to="/tiffin-services-near-motion"
+                className="min-h-[28px] inline-flex items-center text-emerald-400 hover:text-emerald-300 transition-colors py-0.5 font-medium"
+              >
+                {isHi ? "मोशन कोचिंग टिफिन (काकादेव)" : "Tiffin near Motion Coaching"}
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/tiffin-services-near-physics-wallah"
+                className="min-h-[28px] inline-flex items-center text-emerald-400 hover:text-emerald-300 transition-colors py-0.5 font-medium"
+              >
+                {isHi ? "PW फिजिक्स वाला टिफिन (काकादेव)" : "Tiffin near Physics Wallah"}
+              </Link>
+            </li>
           </ul>
         </div>
 

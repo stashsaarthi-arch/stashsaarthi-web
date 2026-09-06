@@ -13,6 +13,8 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as TiffinServicesNearMotionRouteImport } from './routes/tiffin-services-near-motion'
+import { Route as TiffinServicesNearPhysicsWallahRouteImport } from './routes/tiffin-services-near-physics-wallah'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,18 +36,34 @@ const TermsRoute = TermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TiffinServicesNearMotionRoute =
+  TiffinServicesNearMotionRouteImport.update({
+    id: '/tiffin-services-near-motion',
+    path: '/tiffin-services-near-motion',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const TiffinServicesNearPhysicsWallahRoute =
+  TiffinServicesNearPhysicsWallahRouteImport.update({
+    id: '/tiffin-services-near-physics-wallah',
+    path: '/tiffin-services-near-physics-wallah',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/tiffin-services-near-motion': typeof TiffinServicesNearMotionRoute
+  '/tiffin-services-near-physics-wallah': typeof TiffinServicesNearPhysicsWallahRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/tiffin-services-near-motion': typeof TiffinServicesNearMotionRoute
+  '/tiffin-services-near-physics-wallah': typeof TiffinServicesNearPhysicsWallahRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +71,34 @@ export interface FileRoutesById {
   '/admin': typeof AdminRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/tiffin-services-near-motion': typeof TiffinServicesNearMotionRoute
+  '/tiffin-services-near-physics-wallah': typeof TiffinServicesNearPhysicsWallahRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/admin' | '/privacy' | '/terms'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/privacy'
+    | '/terms'
+    | '/tiffin-services-near-motion'
+    | '/tiffin-services-near-physics-wallah'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/admin' | '/privacy' | '/terms'
-  id: '__root__' | '/' | '/admin' | '/privacy' | '/terms'
+  to:
+    | '/'
+    | '/admin'
+    | '/privacy'
+    | '/terms'
+    | '/tiffin-services-near-motion'
+    | '/tiffin-services-near-physics-wallah'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/privacy'
+    | '/terms'
+    | '/tiffin-services-near-motion'
+    | '/tiffin-services-near-physics-wallah'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,6 +106,8 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRoute
   PrivacyRoute: typeof PrivacyRoute
   TermsRoute: typeof TermsRoute
+  TiffinServicesNearMotionRoute: typeof TiffinServicesNearMotionRoute
+  TiffinServicesNearPhysicsWallahRoute: typeof TiffinServicesNearPhysicsWallahRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -99,6 +140,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tiffin-services-near-motion': {
+      id: '/tiffin-services-near-motion'
+      path: '/tiffin-services-near-motion'
+      fullPath: '/tiffin-services-near-motion'
+      preLoaderRoute: typeof TiffinServicesNearMotionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tiffin-services-near-physics-wallah': {
+      id: '/tiffin-services-near-physics-wallah'
+      path: '/tiffin-services-near-physics-wallah'
+      fullPath: '/tiffin-services-near-physics-wallah'
+      preLoaderRoute: typeof TiffinServicesNearPhysicsWallahRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -107,6 +162,8 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRoute,
   PrivacyRoute: PrivacyRoute,
   TermsRoute: TermsRoute,
+  TiffinServicesNearMotionRoute: TiffinServicesNearMotionRoute,
+  TiffinServicesNearPhysicsWallahRoute: TiffinServicesNearPhysicsWallahRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

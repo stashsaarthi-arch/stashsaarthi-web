@@ -587,3 +587,44 @@
     • Auto-triggers Mor-Pankh dusting animation whenever the user selects the Standard Thali (`selectedMeal.id === "standard"`).
     • Rendered compact trigger button directly on the Standard Thali tier card and full stage banner within the meal selection view (`src/components/TokenMealHub.tsx`).
   - Type-check & build verified: `npx tsc --noEmit` (**0 errors**) and `npm run build` compiled cleanly with **0 errors** across client and server environments.
+
+- [x] **[UX - Local Navigation] Task 65: Implement "Find My Stash" directions that open natively in Google Maps or Apple Maps** (2026-09-06)
+  - **Hyperlocal Campus Navigation & Back-Alley Entrance Engine** (`src/lib/stashNavigation.ts`):
+    • Structured Kanpur ground nodes (Kakadeo PW Vidyapeeth Hub, IIT Kanpur Nankari Gate 1, CSJMU Kalyanpur Gate 2, HBTI Nawabganj West Campus) with exact coordinates, main road landmarks, and step-by-step back-alley entrance instructions.
+    • Built native walking route URL generators for Google Maps (`/maps/dir/?api=1&destination=lat,lng&travelmode=walking`) and Apple Maps (`/maps/?daddr=lat,lng&dirflg=w`) with OS auto-detection (`isAppleDevice()`).
+    • Formatted pre-crafted WhatsApp direction sharing links for instant student-to-host or roommate sharing.
+  - **Interactive "Find My Stash" Directions Modal** (`src/components/stash/FindMyStashModal.tsx`):
+    • Built responsive dialog featuring node selector pills, campus proximity badges, step-by-step walking checkpoint cards, and high-contrast back-alley route alert ("⚠️ Kakadeo Narrow Lane Notice: Google Maps stops at Chhapeda Pulia main road. Take Gali #3 behind Sharma Tea Stall...").
+    • Integrated 1-tap "Open in Google Maps Walking", "Open in Apple Maps", "Copy Address", "Share via WhatsApp", and "Call Host" action triggers.
+  - **Integrated into Campus Radar & Search List** (`src/components/stash/CampusNodeChecker.tsx`):
+    • Added "📍 Find Directions / दिशाएं" button on every verified node card and live campus radar inspector box.
+    • Mounted `FindMyStashModal` state initialized with selected node ID.
+  - Type-check & build verified: `npx tsc --noEmit` (**0 errors**) and `npm run build` compiled cleanly with **0 errors** across client and server environments.
+
+- [x] **[UI - Gamification] Task 66: Design a "Karma Points" UI badge for Saarthi Connect, rewarding active seniors for their participation** (2026-09-06)
+  - **Senior Host Karma Rewards & Perks Engine** (`src/components/stash/KarmaPointsModal.tsx`):
+    • **Gamified Tier Architecture**: Defined 4 senior participation tiers (Bronze Saarthi 0+ Pts, Silver Mentor 500+ Pts, Gold Community Anchor 1200+ Pts, Platinum Champion 2500+ Pts) with customized badges, icon tokens, theme colors, and unlocked perk charters (0% platform commission, free grocery vouchers, annual awards trophy, VIP founder hotline).
+    • **Karma Points Matrix**: Structured senior earning model (+100 Pts/mo for warm co-living room, +30 Pts/session for evening mentorship/tea, +50 Pts/review for 5-star student ratings).
+    • **Interactive Karma Badge Component (`KarmaPointsBadge`)**: Compact & detailed UI badges rendering active senior karma points, tier level, and click triggers.
+    • **Karma Rewards Modal (`KarmaPointsModal`)**: Full modal dialog showcasing senior profiles (Sudha Tripathi Ji 1480 Pts, Col. R. Bajpai 1320 Pts, Vasant Deshpande Ji 1150 Pts, Kamla Arora Ji 980 Pts), XP progress bar to next tier, earned badges, recent activity, unlocked perk charters, and 1-tap reward voucher claim button.
+  - **Integrated into Saarthi Connect Network** (`src/components/stash/Connect.tsx`):
+    • Mounted "Senior Karma Points & Perks Charter" trigger badge in `Connect.tsx` header.
+    • Rendered `KarmaPointsBadge` on senior host profile cards within the verified host pairs simulator.
+    • Mounted `KarmaPointsModal` state trigger for seamless user inspection.
+  - Type-check & build verified: `npx tsc --noEmit` (**0 errors**) and `npm run build` compiled cleanly with **0 errors** across client, SSR, and Nitro server bundles.
+
+- [x] **[CMO - SEO] Task 69: Create dedicated, crawlable pages for every distinct coaching hub: /tiffin-services-near-motion, /tiffin-services-near-physics-wallah** (2026-09-06)
+  - **Identified Directive**: Create dedicated, crawlable pages for every distinct coaching hub in Kakadeo, Kanpur: `/tiffin-services-near-motion` and `/tiffin-services-near-physics-wallah`.
+  - **Applied Solution**:
+    - **Reusable Coaching Hub Tiffin Page Engine** (`src/components/stash/CoachingHubTiffinPage.tsx`):
+      • Structured comprehensive landing page layout for coaching hub tiffin services with custom hero banners, proximity badges, daily menu options (Standard Thali @ ₹50, Senior Feast @ ₹90, Monthly Pass @ ₹2,400/mo), senior mother chef bios, real-time lunch/dinner token quota bar, student testimonials, and bilingual (`en` / `hi`) support.
+      • Integrated Google Rich Snippets JSON-LD `FoodEstablishment` structured data for search engine indexing.
+      • Integrated 1-tap WhatsApp quick order (`+91 9369454350`), native Web Share API, and `BookingModal` trigger.
+    - **Dedicated Crawlable Route Files**:
+      • Created `src/routes/tiffin-services-near-motion.tsx` targeting Motion Coaching Kakadeo (120m distance, Shanti Senior Home Kitchen).
+      • Created `src/routes/tiffin-services-near-physics-wallah.tsx` targeting Physics Wallah (PW) Vidyapeeth Kakadeo (80m distance, Annapurna Senior Home Kitchen).
+    - **Router & Navigation Registration**:
+      • Registered routes in `src/routeTree.gen.ts` for full TanStack Router type safety.
+      • Added crawlable links in `src/components/stash/FooterSection.tsx` for immediate crawler discovery.
+  - Type-check & build verified: `npx tsc --noEmit` (**0 errors**) and `npm run build` compiled cleanly with **0 errors** across client, SSR, and Nitro server bundles.
+
