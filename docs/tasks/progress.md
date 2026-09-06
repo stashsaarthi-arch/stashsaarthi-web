@@ -525,3 +525,23 @@
   - Mounted `<RagChatbotWidget />` in `src/routes/index.tsx` wrapped in `ErrorBoundary`.
   - Type-check & build verified: `npx tsc --noEmit` (**0 errors**) and `npm run build` compiled cleanly.
 
+- [x] **[CTO] Task 57: Custom Supabase Telemetry & Component Interaction Telemetry** (2026-09-06)
+  - Built custom component interaction telemetry tracker (`src/lib/interactionTelemetry.ts`):
+    • **Dwell Time & Hover Measurement**: Tracks interaction durations, click frequencies, hover dwell times, and pricing selections (e.g. ₹50 vs ₹70 thali).
+    • **Buffered Telemetry Flusher**: Buffers events in-memory and flushes batch payloads to Supabase `telemetry_events` table or IndexedDB queue during idle time or page unload.
+  - Type-check & build verified: `npx tsc --noEmit` (**0 errors**) and `npm run build` compiled cleanly.
+
+- [x] **[CTO] Task 58: Audit Supabase JWT Token Expiration and Refresh Token Logic for Enhanced Session Security** (2026-09-06)
+  - Built Session Security Audit Utility & Token Manager (`src/lib/sessionSecurity.ts`):
+    • **JWT Payload Decoder**: Safely decodes base64Url JWT access tokens without external library overhead, extracting claims (`exp`, `iat`, `sub`, `role`, `nbf`, `email`).
+    • **Session Security Auditor**: Evaluates active session token health, calculates remaining validity (seconds), flags tokens expiring within buffer (120s), and checks for refresh token presence.
+    • **Proactive Token Refresh**: `ensureValidSession()` automatically triggers `supabase.auth.refreshSession()` before token expiration to prevent 401 unauthorized errors during active sessions.
+    • **Global Auth State Listener**: `initSessionSecurityListener()` subscribes to `onAuthStateChange` (`TOKEN_REFRESHED`, `SIGNED_OUT`, `USER_UPDATED`, `INITIAL_SESSION`) and purges sensitive session storage on sign-out.
+  - Hardened Client & Middleware Authentication Settings:
+    • `src/integrations/supabase/client.ts`: Configured `storageKey: "ss_supabase_auth_token"`, `detectSessionInUrl: true`, `flowType: "pkce"`, `persistSession: true`, and `autoRefreshToken: true`.
+    • `src/integrations/supabase/auth-middleware.ts`: Hardened `requireSupabaseAuth` with explicit UNIX timestamp checks for `exp` (token expiration) and `nbf` (not before) claims.
+    • `src/integrations/supabase/auth-attacher.ts`: Upgraded `attachSupabaseAuth` client middleware to call `ensureValidSession()`, ensuring serverFn RPCs always attach fresh Bearer tokens.
+    • `src/routes/__root.tsx`: Mounted `initSessionSecurityListener()` into `RootComponent` for automatic client hydration lifecycle management.
+  - Type-check & build verified: `npx tsc --noEmit` (**0 errors**) and `npm run build` compiled cleanly.
+
+

@@ -68,8 +68,8 @@
 - [x] 54. [CTO - Audio]: Implement low-latency audio compression for Saarthi Connect, ensuring high quality on poor (2G/3G) networks common near CSJMU.
 - [x] 55. [CTO - Network]: Add a "Low-Data Mode" toggle that disables GSAP/WebGL animations and uses static images for users on weak cellular data.
 - [x] 56. [CAO - Chatbot]: Prototype a Retrieval-Augmented Generation (RAG) chatbot using the existing FAQ documentation to provide instant answers to students.
-[ ] 57. [CTO - Analytics]: Implement custom Supabase telemetry to track specific component-level interaction time (e.g., how long do students hover on the ₹50 thali vs. ₹70 thali?).
-[ ] 58. [CTO - Security]: Audit Supabase JWT token expiration and refresh token logic for enhanced session security.
+- [x] 57. [CTO - Analytics]: Implement custom Supabase telemetry to track specific component-level interaction time (e.g., how long do students hover on the ₹50 thali vs. ₹70 thali?).
+- [x] 58. [CTO - Security]: Audit Supabase JWT token expiration and refresh token logic for enhanced session security.
 [ ] 59. [CTO - Infrastructure]: Set up redundant Supabase edge function deployments across different geographical regions for maximum uptime.
 
 Sprint 7: CPO & UI/UX (Hyperlocal Mobile Dominance)

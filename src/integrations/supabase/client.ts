@@ -35,8 +35,11 @@ function createSupabaseClient() {
   return createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
     auth: {
       storage: typeof window !== "undefined" ? localStorage : undefined,
+      storageKey: "ss_supabase_auth_token",
       persistSession: true,
       autoRefreshToken: true,
+      detectSessionInUrl: true,
+      flowType: "pkce",
     },
     db: {
       // Explicit schema declaration: prevents PostgREST content negotiation overhead

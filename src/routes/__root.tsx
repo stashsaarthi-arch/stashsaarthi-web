@@ -376,6 +376,7 @@ function LenisHandler() {
 import { DynamicOGHead } from "@/components/seo/DynamicOGHead";
 
 import { initWebGLSafetyGuard } from "@/lib/webgl-fallback";
+import { initSessionSecurityListener } from "@/lib/sessionSecurity";
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
@@ -384,6 +385,10 @@ function RootComponent() {
 
   useEffect(() => {
     initWebGLSafetyGuard();
+    const { unsubscribe } = initSessionSecurityListener();
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   useEffect(() => {

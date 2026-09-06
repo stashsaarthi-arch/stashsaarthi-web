@@ -1,3 +1,18 @@
+- [x] **[CTO] Task 58: Audit Supabase JWT token expiration and refresh token logic for enhanced session security**:
+  - **Identified Directive**: Audit Supabase JWT token expiration and refresh token logic for enhanced session security.
+  - **Applied Solution**:
+    - Session Security Audit Utility & Token Manager (`src/lib/sessionSecurity.ts`):
+      • **JWT Payload Decoder**: Safely decodes base64Url JWT access tokens without external library overhead, extracting claims (`exp`, `iat`, `sub`, `role`, `nbf`, `email`).
+      • **Session Security Auditor**: Evaluates active session token health, calculates remaining validity (seconds), flags tokens expiring within buffer (120s), and checks for refresh token presence.
+      • **Proactive Token Refresh**: `ensureValidSession()` automatically triggers `supabase.auth.refreshSession()` before token expiration to prevent 401 unauthorized errors during active sessions.
+      • **Global Auth State Listener**: `initSessionSecurityListener()` subscribes to `onAuthStateChange` (`TOKEN_REFRESHED`, `SIGNED_OUT`, `USER_UPDATED`, `INITIAL_SESSION`) and purges sensitive session storage on sign-out.
+    - Hardened Client & Middleware Authentication Settings:
+      • `src/integrations/supabase/client.ts`: Configured `storageKey: "ss_supabase_auth_token"`, `detectSessionInUrl: true`, `flowType: "pkce"`, `persistSession: true`, and `autoRefreshToken: true`.
+      • `src/integrations/supabase/auth-middleware.ts`: Hardened `requireSupabaseAuth` with explicit UNIX timestamp checks for `exp` (token expiration) and `nbf` (not before) claims.
+      • `src/integrations/supabase/auth-attacher.ts`: Upgraded `attachSupabaseAuth` client middleware to call `ensureValidSession()`, ensuring serverFn RPCs always attach fresh Bearer tokens.
+      • `src/routes/__root.tsx`: Mounted `initSessionSecurityListener()` into `RootComponent` for automatic client hydration lifecycle management.
+  - **Verification**: `npx tsc --noEmit` (**0 errors**) and `npm run build` compiled cleanly with **0 errors**.
+
 - [x] **[CAO] Task 56: Prototype Retrieval-Augmented Generation (RAG) Chatbot for Instant Student FAQ Retrieval**:
   - **Identified Directive**: Prototype a Retrieval-Augmented Generation (RAG) chatbot using the existing FAQ documentation to provide instant answers to students.
   - **Applied Solution**:

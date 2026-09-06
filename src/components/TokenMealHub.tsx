@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { logSupabaseError } from "@/lib/supabaseLogger";
+import { useComponentTelemetry } from "@/lib/interactionTelemetry";
 import { toast } from "sonner";
 import { TasteShieldModal } from "./TasteShieldModal";
 import { ShieldCheck } from "lucide-react";
@@ -71,6 +72,63 @@ const RECHARGE_PACKS = [
   { id: "freedom", name: "Monthly Freedom", price: 1449, tokens: 1550, desc: "45 Days Validity" },
   { id: "semester", name: "Semester Pro", price: 2799, tokens: 3050, desc: "60 Days Validity" },
 ];
+
+interface MealTierCardProps {
+  tier: MealOption;
+  isSelected: boolean;
+  tierCost: number;
+  onSelect: (tier: MealOption) => void;
+}
+
+const MealTierCard: React.FC<MealTierCardProps> = ({ tier, isSelected, tierCost, onSelect }) => {
+  const { telemetryProps, trackClick } = useComponentTelemetry(
+    `thali_${tier.id}_${tier.costPickup}`,
+    "kitchen_thali",
+    {
+      meal_id: tier.id,
+      meal_name: tier.name,
+      cost_pickup: tier.costPickup,
+      cost_delivery: tier.costDelivery,
+      effective_cost: tierCost,
+      badge: tier.badge,
+    }
+  );
+
+  return (
+    <div
+      {...telemetryProps}
+      onClick={() => {
+        trackClick({ action: "select_thali_tier" });
+        onSelect(tier);
+      }}
+      className={`relative cursor-pointer rounded-2xl p-5 border transition-all duration-300 ${
+        isSelected
+          ? "bg-slate-900 border-emerald-500 shadow-[0_0_20px_-5px_rgba(16,185,129,0.3)] transform -translate-y-1"
+          : "bg-slate-950/80 border-white/15 hover:border-emerald-500/40 hover:bg-slate-900/90"
+      }`}
+    >
+      {tier.badge && (
+        <span
+          className={`absolute top-4 right-4 text-xs font-bold px-2 py-0.5 rounded-full uppercase tracking-wider ${
+            tier.popular ? "bg-emerald-500 text-slate-950" : "bg-slate-800 text-slate-300"
+          }`}
+        >
+          {tier.badge}
+        </span>
+      )}
+
+      <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1 mt-4">
+        {tier.name}
+      </div>
+      <div className="text-3xl font-black text-white mb-3">
+        {tierCost} <span className="text-xs font-bold text-emerald-400">Tokens</span>
+      </div>
+      <p className="text-xs text-slate-400 leading-relaxed font-medium">
+        {tier.description}
+      </p>
+    </div>
+  );
+};
 
 export const TokenMealHub: React.FC = () => {
   // Wallet State
@@ -477,37 +535,13 @@ export const TokenMealHub: React.FC = () => {
                 fulfillmentType === "RoomDelivery" ? tier.costDelivery : tier.costPickup;
 
               return (
-                <div
+                <MealTierCard
                   key={tier.id}
-                  onClick={() => setSelectedMeal(tier)}
-                  className={`relative cursor-pointer rounded-2xl p-5 border transition-all duration-300 ${
-                    isSelected
-                      ? "bg-slate-900 border-emerald-500 shadow-[0_0_20px_-5px_rgba(16,185,129,0.3)] transform -translate-y-1"
-                      : "bg-slate-950/80 border-white/15 hover:border-emerald-500/40 hover:bg-slate-900/90"
-                  }`}
-                >
-                  {tier.badge && (
-                    <span
-                      className={`absolute top-4 right-4 text-xs font-bold px-2 py-0.5 rounded-full uppercase tracking-wider ${
-                        tier.popular
-                          ? "bg-emerald-500 text-slate-950"
-                          : "bg-slate-800 text-slate-300"
-                      }`}
-                    >
-                      {tier.badge}
-                    </span>
-                  )}
-
-                  <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1 mt-4">
-                    {tier.name}
-                  </div>
-                  <div className="text-3xl font-black text-white mb-3">
-                    {tierCost} <span className="text-xs font-bold text-emerald-400">Tokens</span>
-                  </div>
-                  <p className="text-xs text-slate-400 leading-relaxed font-medium">
-                    {tier.description}
-                  </p>
-                </div>
+                  tier={tier}
+                  isSelected={isSelected}
+                  tierCost={tierCost}
+                  onSelect={setSelectedMeal}
+                />
               );
             })}
           </div>
