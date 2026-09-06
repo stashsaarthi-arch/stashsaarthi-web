@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { logSupabaseError } from "@/lib/supabaseLogger";
 import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 import { TableSkeleton } from "@/components/ui/skeleton";
+import { EdgeRegionMonitorWidget } from "@/components/stash/EdgeRegionMonitorWidget";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
@@ -361,6 +362,11 @@ function AdminPage() {
               </tbody>
             </table>
           </div>
+        </div>
+
+        {/* Multi-Region Edge Infrastructure Telemetry */}
+        <div className="mt-8">
+          <EdgeRegionMonitorWidget />
         </div>
       </div>
     </div>

@@ -4,9 +4,36 @@ import { logSupabaseError } from "@/lib/supabaseLogger";
 import { useComponentTelemetry } from "@/lib/interactionTelemetry";
 import { toast } from "sonner";
 import { TasteShieldModal } from "./TasteShieldModal";
-import { ShieldCheck } from "lucide-react";
+import { ShieldCheck, Repeat, Zap, Check, X, ChevronRight, Clock, MapPin, Phone } from "lucide-react";
+import { playClick, playPop } from "@/lib/audio";
 
 type FulfillmentType = "DineIn_Pickup" | "RoomDelivery";
+
+export interface LastMealOrder {
+  mealId: string;
+  mealName: string;
+  vendorNode: string;
+  fulfillmentType: FulfillmentType;
+  deliverySlot: "Lunch" | "Dinner";
+  cost: number;
+  phone: string;
+  userName: string;
+  deliveryAddress: string;
+  timestamp: string;
+}
+
+const DEFAULT_LAST_MEAL: LastMealOrder = {
+  mealId: "special",
+  mealName: "Special Thali",
+  vendorNode: "Kakadeo Hub - Annapurna Kitchen",
+  fulfillmentType: "RoomDelivery",
+  deliverySlot: "Lunch",
+  cost: 70,
+  phone: "9876543210",
+  userName: "Campus Student",
+  deliveryAddress: "Hostel 4, Room 204, CSJMU / Kakadeo Belt",
+  timestamp: new Date().toISOString(),
+};
 
 interface MealOption {
   id: string;
@@ -226,6 +253,154 @@ export const TokenMealHub: React.FC = () => {
   const [deliveryAddress, setDeliveryAddress] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
+  // 2-Step "Re-order My Last Meal" Shortcut State (Task 61)
+  const [lastMeal, setLastMeal] = useState<LastMealOrder>(() => {
+    if (typeof window === "undefined") return DEFAULT_LAST_MEAL;
+    try {
+      const saved = localStorage.getItem("ss_last_meal_order");
+      return saved ? JSON.parse(saved) : DEFAULT_LAST_MEAL;
+    } catch {
+      return DEFAULT_LAST_MEAL;
+    }
+  });
+
+  const [isReorderModalOpen, setIsReorderModalOpen] = useState<boolean>(false);
+  const [reorderStep, setReorderStep] = useState<1 | 2>(1);
+  const [reorderSlot, setReorderSlot] = useState<"Lunch" | "Dinner">(lastMeal.deliverySlot || "Lunch");
+  const [reorderFulfillment, setReorderFulfillment] = useState<FulfillmentType>(lastMeal.fulfillmentType || "RoomDelivery");
+  const [reorderPhone, setReorderPhone] = useState<string>(lastMeal.phone || "9876543210");
+  const [reorderAddress, setReorderAddress] = useState<string>(lastMeal.deliveryAddress || "Hostel 4, Room 204, CSJMU / Kakadeo Belt");
+  const [isReorderSubmitting, setIsReorderSubmitting] = useState<boolean>(false);
+
+  const saveLastMeal = (orderData: LastMealOrder) => {
+    setLastMeal(orderData);
+    try {
+      localStorage.setItem("ss_last_meal_order", JSON.stringify(orderData));
+    } catch (err) {
+      console.error("Failed to save last meal order", err);
+    }
+  };
+
+  const handleQuickReorderSubmit = async () => {
+    const mealTier = MEAL_TIERS.find((m) => m.id === lastMeal.mealId) || MEAL_TIERS[1]!;
+    const reorderCost = reorderFulfillment === "RoomDelivery" ? mealTier.costDelivery : mealTier.costPickup;
+
+    if (tokenBalance < reorderCost) {
+      toast.error("Insufficient tokens for Re-order", {
+        description: `Need ${reorderCost} tokens. Balance: ${tokenBalance}. Please recharge wallet.`,
+      });
+      return;
+    }
+
+    if (!reorderPhone || !/^[6-9]\d{9}$/.test(reorderPhone)) {
+      toast.error("Invalid Mobile Number", {
+        description: "Please enter a valid 10-digit Indian phone number.",
+      });
+      return;
+    }
+
+    if (reorderFulfillment === "RoomDelivery" && (!reorderAddress || reorderAddress.trim().length < 4)) {
+      toast.error("Delivery Address Required", {
+        description: "Please enter room number & hostel/PG name.",
+      });
+      return;
+    }
+
+    setIsReorderSubmitting(true);
+    playPop();
+
+    try {
+      const today = new Date().toISOString().split("T")[0]!;
+      const cutoffTime = new Date();
+      cutoffTime.setHours(reorderSlot === "Lunch" ? 7 : 14, 0, 0, 0);
+
+      let generatedPickupCode: string | null = null;
+      if (reorderFulfillment === "DineIn_Pickup") {
+        generatedPickupCode = "K-" + Math.floor(10 + Math.random() * 90);
+      }
+
+      const { data: insertedBooking, error } = await supabase
+        .from("meal_bookings")
+        .insert([
+          {
+            user_name: lastMeal.userName || "Campus Student",
+            user_phone: reorderPhone.trim(),
+            menu_id: mealTier.id,
+            vendor_selected: lastMeal.vendorNode,
+            fulfillment_type: reorderFulfillment,
+            delivery_address: reorderFulfillment === "RoomDelivery" ? reorderAddress.trim() : null,
+            pickup_code: generatedPickupCode,
+            meal_date: today,
+            meal_slot: reorderSlot,
+            tokens_debited: reorderCost,
+            vendor_payout: mealTier.vendorPayout,
+            delivery_runner_payout: reorderFulfillment === "RoomDelivery" ? 7 : 0,
+            cutoff_time: cutoffTime.toISOString(),
+            order_status: "confirmed",
+          },
+        ])
+        .select("id, created_at")
+        .maybeSingle();
+
+      if (error) {
+        logSupabaseError({
+          table: "meal_bookings",
+          operation: "insert",
+          error,
+          context: "TokenMealHub_quickReorder",
+        });
+        throw error;
+      }
+
+      // Deduct balance
+      setTokenBalance((prev) => prev - reorderCost);
+
+      // Save updated last order
+      const updatedOrder: LastMealOrder = {
+        ...lastMeal,
+        fulfillmentType: reorderFulfillment,
+        deliverySlot: reorderSlot,
+        cost: reorderCost,
+        phone: reorderPhone.trim(),
+        deliveryAddress: reorderAddress.trim(),
+        timestamp: new Date().toISOString(),
+      };
+      saveLastMeal(updatedOrder);
+
+      // Set recent booking for Taste Shield
+      const activeBooking = {
+        id: insertedBooking?.id || "reorder-" + Date.now().toString(36),
+        mealName: mealTier.name,
+        vendorName: lastMeal.vendorNode,
+        tokensDebited: reorderCost,
+        userPhone: reorderPhone.trim(),
+        userName: lastMeal.userName || "Campus Student",
+        orderCreatedAt: insertedBooking?.created_at || new Date().toISOString(),
+        pickupCode: generatedPickupCode,
+      };
+      setRecentBooking(activeBooking);
+
+      toast.success("Last Meal Re-Ordered! ⚡", {
+        description: `${reorderCost} Tokens debited for ${reorderSlot} slot at ${lastMeal.vendorNode}. ${generatedPickupCode ? `Fast-Track Code: ${generatedPickupCode}.` : ""} Protected by 50% Taste Shield.`,
+        action: {
+          label: "🛡️ Rate & Shield",
+          onClick: () => setIsTasteShieldOpen(true),
+        },
+        duration: 7000,
+      });
+
+      setIsReorderModalOpen(false);
+      setReorderStep(1);
+    } catch (err: unknown) {
+      console.error("Failed to quick re-order", err);
+      toast.error("Re-order Failed", {
+        description: (err as Error)?.message || "Check network connection.",
+      });
+    } finally {
+      setIsReorderSubmitting(false);
+    }
+  };
+
   // Taste Shield Protection State
   const [isTasteShieldOpen, setIsTasteShieldOpen] = useState<boolean>(false);
   const [recentBooking, setRecentBooking] = useState<{
@@ -391,6 +566,20 @@ export const TokenMealHub: React.FC = () => {
         pickupCode: generatedPickupCode,
       };
       setRecentBooking(activeBooking);
+
+      // Save last order for 2-step shortcut (Task 61)
+      saveLastMeal({
+        mealId: selectedMeal.id,
+        mealName: selectedMeal.name,
+        vendorNode: vendorNode,
+        fulfillmentType: fulfillmentType,
+        deliverySlot: deliverySlot,
+        cost: currentCost,
+        phone: phone.trim(),
+        userName: userName.trim(),
+        deliveryAddress: deliveryAddress.trim(),
+        timestamp: new Date().toISOString(),
+      });
 
       toast.success("Order Confirmed! 🎉", {
         description: `${currentCost} Tokens debited. Delivery scheduled for ${deliverySlot} slot. ${generatedPickupCode ? `Your Fast-Track Pickup Code is ${generatedPickupCode}.` : ""} Protected by 50% Taste Shield.`,
@@ -568,6 +757,51 @@ export const TokenMealHub: React.FC = () => {
           <ShieldCheck className="w-4 h-4 text-emerald-400" />
           <span>Rate Meal & Taste Shield</span>
         </button>
+      </div>
+
+      {/* 2-Step "Re-order My Last Meal" Shortcut Bar (Task 61) */}
+      <div className="mb-8 bg-gradient-to-r from-slate-900 via-slate-900/95 to-slate-950 border border-emerald-500/30 hover:border-emerald-500/50 rounded-2xl p-5 shadow-xl transition-all relative overflow-hidden group">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-emerald-500/15 transition-all" />
+        
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
+          <div className="flex items-start gap-3.5">
+            <div className="p-3 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 shrink-0">
+              <Repeat className="w-6 h-6 animate-pulse" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
+                  <Zap className="w-3 h-3 fill-emerald-400 text-emerald-400" />
+                  2-Step Dashboard Shortcut
+                </span>
+                <span className="text-xs text-slate-400 font-mono">Saved in Session</span>
+              </div>
+              <h3 className="text-base font-extrabold text-white flex items-center gap-2">
+                Re-Order My Last Meal: <span className="text-emerald-400">{lastMeal.mealName}</span>
+              </h3>
+              <p className="text-xs text-slate-300 mt-0.5 flex flex-wrap items-center gap-2">
+                <span>📍 {lastMeal.vendorNode}</span>
+                <span className="text-slate-600">•</span>
+                <span>{lastMeal.fulfillmentType === "RoomDelivery" ? "🛵 Room Delivery" : "🏃 Dine-In Pickup"}</span>
+                <span className="text-slate-600">•</span>
+                <span className="font-bold text-emerald-300">{lastMeal.cost} Tokens</span>
+              </p>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => {
+              playPop();
+              setReorderStep(1);
+              setIsReorderModalOpen(true);
+            }}
+            className="shrink-0 px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-sm flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/35 transition-all hover:-translate-y-0.5 cursor-pointer"
+          >
+            <span>⚡ Re-Order in 2 Taps</span>
+            <ChevronRight className="w-4 h-4" />
+          </button>
+        </div>
       </div>
 
       {/* Main Interactive Booking Flow */}
@@ -868,6 +1102,214 @@ export const TokenMealHub: React.FC = () => {
           </form>
         </div>
       </div>
+
+      {/* 2-Step "Re-Order My Last Meal" Shortcut Modal (Task 61) */}
+      {isReorderModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-in fade-in duration-200">
+          <div className="relative w-full max-w-lg bg-slate-900 border border-emerald-500/30 rounded-2xl p-6 shadow-2xl overflow-hidden">
+            {/* Top Header & Close */}
+            <div className="flex items-center justify-between border-b border-slate-800 pb-4 mb-5">
+              <div>
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                    Shortcut Step {reorderStep} of 2
+                  </span>
+                  <span className="text-xs text-slate-400 font-semibold">
+                    {reorderStep === 1 ? "1. Review & Config" : "2. One-Tap Confirmation"}
+                  </span>
+                </div>
+                <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                  <Repeat className="w-5 h-5 text-emerald-400" />
+                  Quick Re-Order Last Meal
+                </h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsReorderModalOpen(false)}
+                className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Progress Bar */}
+            <div className="w-full bg-slate-950 h-1.5 rounded-full mb-6 overflow-hidden border border-slate-800">
+              <div
+                className="h-full bg-gradient-to-r from-emerald-500 to-teal-400 transition-all duration-300"
+                style={{ width: reorderStep === 1 ? "50%" : "100%" }}
+              />
+            </div>
+
+            {/* Step 1: Config & Review */}
+            {reorderStep === 1 ? (
+              <div className="space-y-4">
+                <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-4">
+                  <div className="flex justify-between items-start mb-2">
+                    <div>
+                      <h4 className="text-sm font-bold text-white">{lastMeal.mealName}</h4>
+                      <p className="text-xs text-slate-400">{lastMeal.vendorNode}</p>
+                    </div>
+                    <span className="text-sm font-extrabold text-emerald-400 font-mono">
+                      {reorderFulfillment === "RoomDelivery" ? lastMeal.cost : Math.max(50, lastMeal.cost - 10)} Tokens
+                    </span>
+                  </div>
+                  <p className="text-xs text-slate-500 italic border-t border-slate-900 pt-2 mt-2">
+                    Includes Desi Ghee Phulka, Dal, Sabzi & Homestyle Salad. Protected by 50% Taste Shield.
+                  </p>
+                </div>
+
+                {/* Slot Toggle */}
+                <div>
+                  <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+                    Select Delivery Slot
+                  </label>
+                  <div className="grid grid-cols-2 gap-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        playClick();
+                        setReorderSlot("Lunch");
+                      }}
+                      className={`px-3 py-2.5 rounded-xl text-xs font-bold transition-all border flex items-center justify-center gap-2 cursor-pointer ${reorderSlot === "Lunch" ? "bg-emerald-500/20 border-emerald-500 text-emerald-300" : "bg-slate-950 border-slate-800 text-slate-400 hover:text-white"}`}
+                    >
+                      <span>☀️ Lunch Slot</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        playClick();
+                        setReorderSlot("Dinner");
+                      }}
+                      className={`px-3 py-2.5 rounded-xl text-xs font-bold transition-all border flex items-center justify-center gap-2 cursor-pointer ${reorderSlot === "Dinner" ? "bg-emerald-500/20 border-emerald-500 text-emerald-300" : "bg-slate-950 border-slate-800 text-slate-400 hover:text-white"}`}
+                    >
+                      <span>🌙 Dinner Slot</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Fulfillment Toggle */}
+                <div>
+                  <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+                    Fulfillment Method
+                  </label>
+                  <div className="grid grid-cols-2 gap-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        playClick();
+                        setReorderFulfillment("RoomDelivery");
+                      }}
+                      className={`px-3 py-2.5 rounded-xl text-xs font-bold transition-all border flex items-center justify-center gap-2 cursor-pointer ${reorderFulfillment === "RoomDelivery" ? "bg-emerald-500/20 border-emerald-500 text-emerald-300" : "bg-slate-950 border-slate-800 text-slate-400 hover:text-white"}`}
+                    >
+                      <span>🛵 Room Delivery</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        playClick();
+                        setReorderFulfillment("DineIn_Pickup");
+                      }}
+                      className={`px-3 py-2.5 rounded-xl text-xs font-bold transition-all border flex items-center justify-center gap-2 cursor-pointer ${reorderFulfillment === "DineIn_Pickup" ? "bg-emerald-500/20 border-emerald-500 text-emerald-300" : "bg-slate-950 border-slate-800 text-slate-400 hover:text-white"}`}
+                    >
+                      <span>🏃 Fast Pickup (-10 T)</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Phone & Address Inputs */}
+                <div className="grid grid-cols-1 gap-3">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-400 mb-1">Mobile Number</label>
+                    <input
+                      type="tel"
+                      value={reorderPhone}
+                      onChange={(e) => setReorderPhone(e.target.value)}
+                      placeholder="10-digit mobile number"
+                      className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:border-emerald-500 focus:outline-none"
+                    />
+                  </div>
+                  {reorderFulfillment === "RoomDelivery" && (
+                    <div>
+                      <label className="block text-xs font-bold text-slate-400 mb-1">Room / Hostel Address</label>
+                      <input
+                        type="text"
+                        value={reorderAddress}
+                        onChange={(e) => setReorderAddress(e.target.value)}
+                        placeholder="e.g. Room 204, Hostel 4, CSJMU / IITK Belt"
+                        className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:border-emerald-500 focus:outline-none"
+                      />
+                    </div>
+                  )}
+                </div>
+
+                {/* Proceed Button */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    playClick();
+                    setReorderStep(2);
+                  }}
+                  className="w-full mt-4 py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-slate-950 font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/25 transition-all cursor-pointer"
+                >
+                  <span>Proceed to Step 2: One-Tap Confirm →</span>
+                </button>
+              </div>
+            ) : (
+              /* Step 2: One-Tap Confirmation */
+              <div className="space-y-5 animate-in fade-in duration-300">
+                <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-4 text-center">
+                  <div className="w-12 h-12 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center mx-auto mb-3">
+                    <Check className="w-6 h-6 stroke-[3]" />
+                  </div>
+                  <h4 className="text-base font-extrabold text-white">Ready for 1-Tap Execution</h4>
+                  <p className="text-xs text-slate-300 mt-1">
+                    Re-ordering <strong className="text-emerald-400">{lastMeal.mealName}</strong> for{" "}
+                    <strong className="text-emerald-400">{reorderSlot} slot</strong> at {lastMeal.vendorNode}.
+                  </p>
+                </div>
+
+                {/* Token Deduction Visualizer */}
+                <div className="bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-2 text-xs font-mono">
+                  <div className="flex justify-between text-slate-400">
+                    <span>Current Balance:</span>
+                    <span className="text-white font-bold">{tokenBalance} Tokens</span>
+                  </div>
+                  <div className="flex justify-between text-rose-400">
+                    <span>Re-order Deduction:</span>
+                    <span className="font-bold">
+                      -{reorderFulfillment === "RoomDelivery" ? lastMeal.cost : Math.max(50, lastMeal.cost - 10)} Tokens
+                    </span>
+                  </div>
+                  <div className="border-t border-slate-800 pt-2 flex justify-between text-emerald-400 text-sm font-extrabold">
+                    <span>Remaining Balance:</span>
+                    <span>
+                      {tokenBalance - (reorderFulfillment === "RoomDelivery" ? lastMeal.cost : Math.max(50, lastMeal.cost - 10))} Tokens
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setReorderStep(1)}
+                    className="w-1/3 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs transition-colors cursor-pointer"
+                  >
+                    ← Back
+                  </button>
+                  <button
+                    type="button"
+                    disabled={isReorderSubmitting}
+                    onClick={handleQuickReorderSubmit}
+                    className="w-2/3 py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-slate-950 font-black text-sm flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/30 transition-all cursor-pointer"
+                  >
+                    {isReorderSubmitting ? "Debiting Ledger..." : "⚡ Tap 2: Confirm Order"}
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* StashSaarthi Anti-Fraud Taste Shield & Meal Review Modal */}
       {recentBooking && (

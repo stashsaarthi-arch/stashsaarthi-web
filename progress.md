@@ -1,3 +1,14 @@
+- [x] **[CTO - Edge Infra] Fix Supabase Edge Function TypeScript & Deno Runtime Diagnostics**:
+  - **Identified Directive**: Fix TypeScript language server diagnostics in `supabase/functions/verify-host-photo/index.ts` (Cannot find module 'https://deno.land/std@0.168.0/http/server.ts', parameter 'req' implicitly has an 'any' type, and Cannot find name 'Deno').
+  - **Applied Solution**:
+    - `supabase/functions/verify-host-photo/index.ts`:
+      • Added `// @ts-ignore` for the Deno standard library URL import (`https://deno.land/std@0.168.0/http/server.ts`) for Supabase Edge Runtime.
+      • Declared ambient `Deno` namespace with `env: { get(key: string): string | undefined }` to provide type definitions for Deno globals.
+      • Explicitly typed `serve(async (req: Request) => { ... })` using standard Web/Fetch API `Request` interface, eliminating implicit `any`.
+    - `supabase/functions/tsconfig.json`:
+      • Configured scoped tsconfig with `"moduleResolution": "Bundler"`, `"lib": ["ESNext", "DOM"]`, and `"skipLibCheck": true` for Supabase Edge Functions.
+  - **Verification**: `npx tsc --noEmit` (**0 errors**) and `npm run build` compiled cleanly with **0 errors**.
+
 - [x] **[CPO] Task 60: Add real-time "availability percentage" bars to each kitchen node (e.g., "75% of lunch tokens sold")**:
   - **Identified Directive**: Add real-time "availability percentage" bars to each kitchen node (e.g., "75% of lunch tokens sold").
   - **Applied Solution**:

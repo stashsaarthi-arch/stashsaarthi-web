@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
-import { BadgeCheck, MessageCircle, Phone, MapPin, Star, Gift } from "lucide-react";
+import { BadgeCheck, MessageCircle, Phone, MapPin, Star, Gift, Compass } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AnimatedContent from "@/components/ui/AnimatedContent";
 import { supabase } from "@/integrations/supabase/client";
 import { SafetyAuditModal } from "./SafetyAuditModal";
+import { Room360Viewer } from "./Room360Viewer";
 import { FOUNDER_WHATSAPP, getWhatsAppUrl } from "@/lib/constants";
 import { PrototypeBadge } from "@/components/ui/PrototypeBadge";
 import { useLanguage } from "@/context/LanguageContext";

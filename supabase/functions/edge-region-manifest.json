@@ -1,0 +1,55 @@
+{
+  "project": "stashsaarthi-edge-infrastructure",
+  "version": "2.0.0",
+  "routingPolicy": "GEO_PROXIMITY_WITH_FAILOVER",
+  "primaryRegion": {
+    "id": "ap-south-1",
+    "name": "South Asia (Mumbai)",
+    "location": "Mumbai, MH, India",
+    "flag": "🇮🇳",
+    "provider": "AWS / Supabase Edge",
+    "targetFunctions": ["verify-host-photo"],
+    "healthCheckUrl": "https://ap-south-1.supabase.co/functions/v1/health",
+    "sla": "99.99%",
+    "maxLatencyMs": 150
+  },
+  "backupRegions": [
+    {
+      "id": "ap-southeast-1",
+      "name": "Southeast Asia (Singapore)",
+      "location": "Singapore",
+      "flag": "🇸🇬",
+      "provider": "AWS / Supabase Edge",
+      "targetFunctions": ["verify-host-photo"],
+      "healthCheckUrl": "https://ap-southeast-1.supabase.co/functions/v1/health",
+      "sla": "99.95%",
+      "maxLatencyMs": 300,
+      "priority": 1
+    },
+    {
+      "id": "eu-central-1",
+      "name": "Europe (Frankfurt)",
+      "location": "Frankfurt, Germany",
+      "flag": "🇩🇪",
+      "provider": "AWS / Supabase Edge",
+      "targetFunctions": ["verify-host-photo"],
+      "healthCheckUrl": "https://eu-central-1.supabase.co/functions/v1/health",
+      "sla": "99.90%",
+      "maxLatencyMs": 500,
+      "priority": 2
+    }
+  ],
+  "secretReplication": {
+    "autoSyncKeys": [
+      "GOOGLE_CLOUD_VISION_API_KEY",
+      "SUPABASE_SERVICE_ROLE_KEY",
+      "SUPABASE_ANON_KEY"
+    ],
+    "syncStrategy": "ENCRYPTED_CROSS_REGION_KMS"
+  },
+  "circuitBreaker": {
+    "failureThresholdConsecutive": 2,
+    "timeoutMs": 3500,
+    "recoveryTimeMs": 30000
+  }
+}

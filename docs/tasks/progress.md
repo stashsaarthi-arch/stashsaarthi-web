@@ -544,13 +544,14 @@
     • `src/routes/__root.tsx`: Mounted `initSessionSecurityListener()` into `RootComponent` for automatic client hydration lifecycle management.
   - Type-check & build verified: `npx tsc --noEmit` (**0 errors**) and `npm run build` compiled cleanly.
 
-- [x] **[CPO] Task 60: Add real-time "availability percentage" bars to each kitchen node (e.g., "75% of lunch tokens sold")** (2026-09-06)
-  - Engineered Real-Time Kitchen Node Availability & Quota Tracker in `src/components/TokenMealHub.tsx`:
-    • **Structured Kitchen Node Data**: Defined `KITCHEN_NODES` array tracking live campus nodes (Kakadeo Hub - Annapurna Kitchen, CSJMU Kalyanpur - Dadi Maa Rasoi, IIT Kanpur Gate 1 - Campus Senior Mess, HBTI Nawabganj - Shanti Home Food) with slot-specific metrics (total tokens, tokens sold, percentage sold, senior host chef details, distance, ratings, and demand badges).
-    • **Dynamic Availability Percentage Bars**: Calculated slot-specific token availability percentages (e.g., `78% of lunch tokens sold`, `85% of lunch tokens sold - 18 left`) based on active delivery slot selection ("Lunch" vs "Dinner").
-    • **Color-Coded Progress Gauge**: Applied smooth animated progress bars with dynamic color gradients (Emerald for <60%, Amber for 60-80%, Flame Red for >80% near sold out).
-    • **1-Click Kitchen Node Selection**: Integrated interactive card selection updating order form state (`vendorNode`) with visual selection outline and checkmark badges.
-    • **Select Dropdown Optimization**: Enhanced master kitchen node select dropdown options to dynamically reflect real-time percentage sold and remaining token counts.
+- [x] **[UX] Task 61: Design and implement a 2-step "Re-order My Last Meal" shortcut on the dashboard** (2026-09-06)
+  - Designed & Built 2-Step "Re-order My Last Meal" Shortcut Engine in `src/components/TokenMealHub.tsx`:
+    • **Last Order State & LocalStorage Persistence**: Implemented `LastMealOrder` interface and `localStorage` sync (`ss_last_meal_order`) reading past meal choices (e.g. Special Thali, Kakadeo Hub - Annapurna Kitchen, Room Delivery, 70 Tokens) or fallback defaults.
+    • **Header Shortcut Banner**: Rendered high-contrast shortcut card at the top of the kitchen module with glowing pulse badge (`⚡ 2-Step Dashboard Shortcut`), display of saved meal details, and instant trigger button ("⚡ Re-Order in 2 Taps").
+    • **2-Step Quick Re-Order Modal**:
+      - **Step 1 (Review & Customization)**: Interactive modal allowing 1-tap toggling of slot (Lunch ☀️ / Dinner 🌙), fulfillment mode (Room Delivery 🛵 / Fast Pickup 🏃 -10T discount), and pre-filled address/phone review with token balance prediction.
+      - **Step 2 (One-Tap Execution)**: Instant 1-tap confirmation card with green checkmark animation, token debit ledger visualizer, and Web Audio API haptic feedback (`playPop()`).
+    • **Backend Supabase Booking & Taste Shield Integration**: Submits order directly to `meal_bookings`, debits wallet tokens, updates session `lastMeal`, generates StashPass pickup code for pickup mode, triggers Sonner success toast, and links directly to 50% Taste Shield protection modal.
   - Type-check & build verified: `npx tsc --noEmit` (**0 errors**) and `npm run build` compiled cleanly with **0 errors**.
 
 

@@ -1,4 +1,4 @@
-import { supabase } from "@/lib/supabase";
+import { edgeRouter } from "@/lib/multiRegionEdgeRouter";
 
 export interface HostPhotoVerificationResult {
   isApproved: boolean;
@@ -64,22 +64,26 @@ export const SAMPLE_PROPERTY_PHOTOS: SamplePhotoPreset[] = [
 ];
 
 /**
- * Executes Vision AI photo verification via Supabase Edge Function with Canvas Fallback
+ * Executes Vision AI photo verification via Supabase Edge Function with Multi-Region Failover & Canvas Fallback
  */
 export async function verifyHostPropertyPhoto(
   input: { imageUrl?: string; imageBase64?: string; hostId?: string }
 ): Promise<HostPhotoVerificationResult> {
   try {
-    // Attempt Supabase Edge Function execution
-    const { data, error } = await supabase.functions.invoke("verify-host-photo", {
-      body: input,
-    });
+    // Attempt Supabase Edge Function execution across multi-region edge nodes
+    const { data, error, regionUsed } = await edgeRouter.invokeFunction<HostPhotoVerificationResult>(
+      "verify-host-photo",
+      input
+    );
 
     if (!error && data && data.overallScore !== undefined) {
-      return data as HostPhotoVerificationResult;
+      return {
+        ...data,
+        engine: `${data.engine} (${regionUsed})`,
+      };
     }
   } catch {
-    // Edge function unreachable or not deployed in dev environment
+    // Edge function unreachable across all regions in dev environment
   }
 
   // Client-Side Canvas & Heuristic Fallback Engine
@@ -134,6 +138,6 @@ function runClientHeuristicVisionAI(input: {
         ],
     badgeId: `VAI-KNP-${badgeRandom}`,
     timestamp: new Date().toISOString(),
-    engine: "StashSaarthi Vision AI (Edge Fallback)",
+    engine: "StashSaarthi Vision AI (Multi-Region Edge Fallback)",
   };
 }
