@@ -46,6 +46,7 @@ import {
 import { StashPass } from "./StashPass";
 import { LuggageItemizerModal, type LuggageStorageItem } from "./LuggageItemizerModal";
 import { useLanguage } from "@/context/LanguageContext";
+import { MealPersonalizationSelector } from "./MealPersonalizationSelector";
 
 export function BookingModal({
   open,
@@ -178,6 +179,8 @@ export function BookingModal({
   // 3. Kitchen specific fields
   const [mealPlan, setMealPlan] = useState<"trial" | "smart" | "freedom" | "semester">("smart");
   const [dietType, setDietType] = useState("Pure Vegetarian");
+  const [selectedPersonalizations, setSelectedPersonalizations] = useState<string[]>([]);
+  const [personalizationDelta, setPersonalizationDelta] = useState<number>(0);
 
   // 4. Connect specific fields
   const [connectDomain, setConnectDomain] = useState("tech_assistance");
@@ -262,13 +265,13 @@ export function BookingModal({
           break;
         case "kitchen":
           base =
-            mealPlan === "trial"
+            (mealPlan === "trial"
               ? 300
               : mealPlan === "smart"
               ? 599
               : mealPlan === "freedom"
               ? 1449
-              : 2799;
+              : 2799) + personalizationDelta;
           break;
         case "connect":
           base = 0;

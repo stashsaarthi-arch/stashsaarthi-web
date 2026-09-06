@@ -10,6 +10,8 @@ import { ShieldCheck, Repeat, Zap, Check, X, ChevronRight, Clock, MapPin, Phone,
 import { playClick, playPop } from "@/lib/audio";
 import { SaarthiKitchenSchema } from "@/components/seo/SaarthiKitchenSchema";
 import { IntelligentNudgesWidget } from "./stash/IntelligentNudgesWidget";
+import { MealPersonalizationSelector } from "./stash/MealPersonalizationSelector";
+import { formatPersonalizationsSummary } from "@/lib/mealPersonalization";
 
 type FulfillmentType = "DineIn_Pickup" | "RoomDelivery";
 
@@ -262,6 +264,10 @@ export const TokenMealHub: React.FC = () => {
   const [deliveryAddress, setDeliveryAddress] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
+  // Meal Personalization State (Task 78)
+  const [selectedPersonalizations, setSelectedPersonalizations] = useState<string[]>([]);
+  const [personalizationDelta, setPersonalizationDelta] = useState<number>(0);
+
   // Roommate Menu Share Modal State (Task 73)
   const [isRoommateShareOpen, setIsRoommateShareOpen] = useState<boolean>(false);
   const [roommateShareDetails, setRoommateShareDetails] = useState<MenuShareDetails | undefined>(undefined);
@@ -487,8 +493,9 @@ export const TokenMealHub: React.FC = () => {
     return () => clearInterval(timer);
   }, [deliverySlot]);
 
-  const currentCost =
+  const baseCost =
     fulfillmentType === "RoomDelivery" ? selectedMeal.costDelivery : selectedMeal.costPickup;
+  const currentCost = baseCost + personalizationDelta;
 
   // Handle Token Redemption
   const handleRedeemMeal = async (e: React.FormEvent) => {
@@ -1007,6 +1014,17 @@ export const TokenMealHub: React.FC = () => {
             isAutoTriggered={selectedMeal.id === "standard"}
             className="mt-5"
           />
+
+          {/* Step 2.5: Meal Personalization (Task 78) */}
+          <div className="mt-6">
+            <MealPersonalizationSelector
+              selectedIds={selectedPersonalizations}
+              onChange={(ids, delta) => {
+                setSelectedPersonalizations(ids);
+                setPersonalizationDelta(delta);
+              }}
+            />
+          </div>
         </div>
 
         {/* Step 3: Checkout Details */}
