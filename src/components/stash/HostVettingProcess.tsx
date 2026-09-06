@@ -233,7 +233,8 @@ export function HostVettingProcess() {
     return () => stepTimers.forEach((t) => clearTimeout(t));
   };
 
-  const activeTierData = VETTING_TIERS.find((t) => t.id === activeTier) || VETTING_TIERS[0];
+  const activeTierData = VETTING_TIERS.find((t) => t.id === activeTier) ?? VETTING_TIERS[0];
+  if (!activeTierData) return null;
 
   return (
     <div
