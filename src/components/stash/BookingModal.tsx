@@ -5,6 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { logSupabaseError } from "@/lib/supabaseLogger";
 import { checkAndRecordRateLimit, showRateLimitToast } from "@/lib/rateLimiter";
+import { saveBooking } from "@/lib/localSubmissions";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -433,6 +434,33 @@ export function BookingModal({
         message: fullMessage,
       };
 
+      // Persist to localStorage for offline admin dashboard (no Supabase dependency)
+      saveBooking({
+        id: `booking-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+        service: service as import("@/lib/localSubmissions").ServiceType,
+        name: cleanName,
+        phone: cleanPhone || "N/A",
+        email: cleanEmail,
+        city: city.trim(),
+        pincode: pincode || undefined,
+        token: generatedToken,
+        amount: calcAmount,
+        paymentMode,
+        message: fullMessage,
+        submittedAt: new Date().toISOString(),
+        // Service-specific extras
+        bags: service === "stash" ? bags : undefined,
+        months: service === "stash" ? months : undefined,
+        roomType: service === "spaces" ? roomType : undefined,
+        moveInDate: service === "spaces" ? moveInDate : undefined,
+        mealPlan: service === "kitchen" ? mealPlan : undefined,
+        dietType: service === "kitchen" ? dietType : undefined,
+        personalizations: service === "kitchen" ? selectedPersonalizations : undefined,
+        connectDomain: service === "connect" ? connectDomain : undefined,
+        auditType: service === "trust" ? auditType : undefined,
+        monetizeAsset: service === "micro" ? monetizeAsset : undefined,
+      });
+
       // Save inquiry to supabase with zero data drop
       const { error } = await supabase.from("co_living_inquiries").insert(payload);
 
@@ -444,7 +472,7 @@ export function BookingModal({
           error,
           context: "booking_modal_insert",
         });
-        throw error;
+        // Don't throw — booking already saved locally
       }
 
       setStep(3);

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { logSupabaseError } from "@/lib/supabaseLogger";
+import { saveMealOrder } from "@/lib/localSubmissions";
 import { useComponentTelemetry } from "@/lib/interactionTelemetry";
 import { toast } from "sonner";
 import { TasteShieldModal } from "./TasteShieldModal";
@@ -295,6 +296,18 @@ export const TokenMealHub: React.FC = () => {
     setLastMeal(orderData);
     try {
       localStorage.setItem("ss_last_meal_order", JSON.stringify(orderData));
+      // Also persist to admin meal orders store
+      saveMealOrder({
+        id: `meal-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+        name: orderData.userName,
+        phone: orderData.phone,
+        mealType: orderData.mealName,
+        kitchenNode: orderData.vendorNode,
+        deliverySlot: orderData.deliverySlot,
+        address: orderData.deliveryAddress,
+        amount: orderData.cost,
+        submittedAt: orderData.timestamp,
+      });
     } catch (err) {
       console.error("Failed to save last meal order", err);
     }

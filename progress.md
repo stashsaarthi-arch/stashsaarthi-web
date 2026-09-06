@@ -1,3 +1,11 @@
+- [x] **[DevOps] Deployment Checkpoint — 2026-09-06T23:47 IST**:
+  - **Build**: `npm run build` — ✅ 0 errors (client + SSR Nitro bundles).
+  - **Commit**: `c70ab2a` — `feat(cpo): add meal personalization selector with dietary filters, spice level, allergy controls & token ordering integration (Task 78)`
+  - **Files committed**: `src/components/stash/MealPersonalizationSelector.tsx` (new), `src/lib/mealPersonalization.ts` (new), `src/components/TokenMealHub.tsx` (modified), `src/components/stash/BookingModal.tsx` (modified).
+  - **GitHub**: Pushed branch `ralph-loop-g63oi` → `origin` (`https://github.com/stashsaarthi-arch/stashsaarthi-web`). New branch created on remote — PR available at `https://github.com/stashsaarthi-arch/stashsaarthi-web/pull/new/ralph-loop-g63oi`.
+  - **Vercel**: Deployment triggered automatically via Vercel GitHub integration on branch `ralph-loop-g63oi` push.
+  - **Next Steps**: Merge PR into `main` branch to trigger production Vercel deploy if branch is not already connected to Vercel production env.
+
 - [x] **[CMO - Content] Task 76: Script and coordinate a series of "Student Testimonial" short-form videos focusing on Saarthi Spaces and Connect**:
   - **Identified Directive**: Script and coordinate a series of "Student Testimonial" short-form videos focusing on Saarthi Spaces and Connect.
   - **Applied Solution**:
