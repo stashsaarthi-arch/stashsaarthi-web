@@ -105,12 +105,13 @@ export async function insertWaitlistUser(
     id: `wl-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
     full_name: data.full_name.trim(),
     email: data.email.trim().toLowerCase(),
-    phone_number: data.phone_number?.trim() || undefined,
     user_type: data.user_type,
-    college_or_locality: data.college_or_locality?.trim() || undefined,
     submittedAt: new Date().toISOString(),
     source: "waitlist_form",
+    ...(data.phone_number?.trim() ? { phone_number: data.phone_number.trim() } : {}),
+    ...(data.college_or_locality?.trim() ? { college_or_locality: data.college_or_locality.trim() } : {}),
   });
+
 
   try {
     const { error } = await supabase.from("users_waitlist").insert(payload);

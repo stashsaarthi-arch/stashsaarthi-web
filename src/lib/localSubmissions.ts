@@ -36,9 +36,9 @@ export interface BookingRecord {
   token: string;
   amount: number;
   paymentMode: string;
-  message: string; // full service meta string
+  message: string;
   submittedAt: string;
-  // Service-specific extras
+  // Service-specific extras (optional — absent when not applicable)
   bags?: number;
   months?: number;
   roomType?: string;

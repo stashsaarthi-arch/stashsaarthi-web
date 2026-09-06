@@ -19,6 +19,7 @@ import {
   type SuggestionRecord,
   type AdminStats,
 } from "@/lib/localSubmissions";
+import { fetchVisitorSessions, type VisitorRow } from "@/lib/visitorTracking";
 import {
   Lock,
   ShieldCheck,
@@ -48,6 +49,12 @@ import {
   Package,
   Clock,
   X,
+  Monitor,
+  Activity,
+  Globe,
+  Smartphone,
+  Tablet,
+  ArrowUpRight,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -416,7 +423,7 @@ function EmptyState({
 }
 
 // ─── Tab types ────────────────────────────────────────────────────────────────
-type Tab = "bookings" | "waitlist" | "meals" | "reviews" | "suggestions";
+type Tab = "bookings" | "waitlist" | "meals" | "reviews" | "suggestions" | "visitors";
 
 // ─── Main AdminPage ───────────────────────────────────────────────────────────
 function AdminPage() {
@@ -433,6 +440,8 @@ function AdminPage() {
   const [stats, setStats] = useState<AdminStats | null>(null);
   const [contactedIds, setContactedIds] = useState<Set<string>>(new Set());
   const [serviceFilter, setServiceFilter] = useState<string>("all");
+  const [visitors, setVisitors] = useState<VisitorRow[]>([]);
+  const [visitorsLoading, setVisitorsLoading] = useState(false);
 
   const loadData = useCallback(() => {
     setBookings(getBookings());
@@ -444,9 +453,19 @@ function AdminPage() {
     setContactedIds(getContactedIds());
   }, []);
 
+  const loadVisitors = useCallback(async () => {
+    setVisitorsLoading(true);
+    const rows = await fetchVisitorSessions(200);
+    setVisitors(rows);
+    setVisitorsLoading(false);
+  }, []);
+
   useEffect(() => {
-    if (isAuthenticated) loadData();
-  }, [isAuthenticated, loadData]);
+    if (isAuthenticated) {
+      loadData();
+      loadVisitors();
+    }
+  }, [isAuthenticated, loadData, loadVisitors]);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -550,6 +569,7 @@ function AdminPage() {
     { id: "meals", label: "Meal Orders", count: meals.length, icon: Soup },
     { id: "reviews", label: "Reviews", count: reviews.length, icon: Star },
     { id: "suggestions", label: "Suggestions", count: suggestions.length, icon: Lightbulb },
+    { id: "visitors", label: "Visitors", count: visitors.length, icon: Monitor },
   ];
 
   return (
@@ -975,10 +995,243 @@ function AdminPage() {
           </div>
         )}
 
+        {/* ── Visitors Tab ── */}
+        {activeTab === "visitors" && (
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-muted-foreground">
+                  {visitors.length} visitor session{visitors.length !== 1 ? "s" : ""} captured
+                  <span className="ml-2 text-[10px] text-sky-400 font-medium">
+                    ● via Supabase — cross-device
+                  </span>
+                </p>
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => loadVisitors()}
+                  className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground border border-white/10 bg-white/5 hover:bg-white/10 px-3 py-1.5 rounded-xl transition-colors"
+                >
+                  <RefreshCw className={`h-3 w-3 ${visitorsLoading ? "animate-spin" : ""}`} />
+                  Refresh
+                </button>
+                {visitors.length > 0 && (
+                  <button
+                    onClick={() => exportCSV(visitors, "stashsaarthi-visitors")}
+                    className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground border border-white/10 bg-white/5 hover:bg-white/10 px-3 py-1.5 rounded-xl transition-colors"
+                  >
+                    <Download className="h-3 w-3" />
+                    Export CSV
+                  </button>
+                )}
+              </div>
+            </div>
+
+            {/* Device breakdown mini stats */}
+            {visitors.length > 0 && (
+              <div className="grid grid-cols-3 gap-2">
+                {(["mobile", "tablet", "desktop"] as const).map((dt) => {
+                  const count = visitors.filter((v) => v.device_type === dt).length;
+                  const Icon = dt === "mobile" ? Smartphone : dt === "tablet" ? Tablet : Monitor;
+                  const color = dt === "mobile" ? "emerald" : dt === "tablet" ? "cyan" : "sky";
+                  const c = COLOR_CLASSES[color] || COLOR_CLASSES["sky"]!;
+                  return (
+                    <div
+                      key={dt}
+                      className={`rounded-2xl border ${c.border} ${c.bg} p-3 flex items-center gap-3`}
+                    >
+                      <Icon className={`h-4 w-4 ${c.text} shrink-0`} />
+                      <div>
+                        <div className={`text-lg font-bold ${c.text}`}>{count}</div>
+                        <div className="text-[10px] text-muted-foreground capitalize">{dt}</div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+
+            {visitorsLoading ? (
+              <div className="rounded-2xl border border-white/10 bg-white/[0.02] py-12 flex flex-col items-center justify-center gap-3">
+                <Activity className="h-6 w-6 text-sky-400 animate-pulse" />
+                <p className="text-sm text-muted-foreground">Loading visitor sessions from Supabase…</p>
+              </div>
+            ) : visitors.length === 0 ? (
+              <EmptyState
+                icon={Monitor}
+                title="No visitors tracked yet"
+                sub="Visitor sessions are captured automatically. Run the Supabase migration (supabase/migrations/20260907_visitor_sessions.sql) to enable cross-device tracking."
+              />
+            ) : (
+              <div className="space-y-2">
+                {visitors
+                  .filter(
+                    (v) =>
+                      !search ||
+                      v.browser.toLowerCase().includes(search.toLowerCase()) ||
+                      v.os.toLowerCase().includes(search.toLowerCase()) ||
+                      (v.city_hint || "").toLowerCase().includes(search.toLowerCase()) ||
+                      v.pages_visited.some((p) => p.toLowerCase().includes(search.toLowerCase())) ||
+                      v.services_clicked.some((s) =>
+                        s.toLowerCase().includes(search.toLowerCase()),
+                      ),
+                  )
+                  .map((v) => {
+                    const DeviceIcon =
+                      v.device_type === "mobile"
+                        ? Smartphone
+                        : v.device_type === "tablet"
+                          ? Tablet
+                          : Monitor;
+                    const isRecent =
+                      Date.now() - new Date(v.last_seen_at).getTime() < 5 * 60 * 1000;
+                    return (
+                      <div
+                        key={v.session_id}
+                        className="rounded-2xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.05] transition-all p-4"
+                      >
+                        <div className="flex items-start gap-3">
+                          <div className="h-9 w-9 rounded-xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center shrink-0 mt-0.5">
+                            <DeviceIcon className="h-4 w-4 text-sky-400" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            {/* Top row */}
+                            <div className="flex items-center gap-2 flex-wrap mb-2">
+                              <span className="text-sm font-semibold text-foreground">
+                                {v.browser}
+                              </span>
+                              <span className="text-xs text-muted-foreground">on {v.os}</span>
+                              <span className="text-[10px] font-mono bg-white/5 border border-white/10 text-muted-foreground px-2 py-0.5 rounded-full">
+                                {v.screen_resolution}
+                              </span>
+                              {isRecent && (
+                                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400">
+                                  ● Active now
+                                </span>
+                              )}
+                            </div>
+
+                            {/* Detail grid */}
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+                              <div className="rounded-lg bg-white/5 border border-white/10 px-2.5 py-1.5">
+                                <div className="text-[10px] text-muted-foreground uppercase mb-0.5 flex items-center gap-1">
+                                  <Globe className="h-2.5 w-2.5" /> Location
+                                </div>
+                                <div className="font-medium text-foreground truncate">
+                                  {v.city_hint || v.timezone || "—"}
+                                </div>
+                              </div>
+                              <div className="rounded-lg bg-white/5 border border-white/10 px-2.5 py-1.5">
+                                <div className="text-[10px] text-muted-foreground uppercase mb-0.5 flex items-center gap-1">
+                                  <Clock className="h-2.5 w-2.5" /> Time on site
+                                </div>
+                                <div className="font-medium text-foreground">
+                                  {v.time_on_site_seconds < 60
+                                    ? `${v.time_on_site_seconds}s`
+                                    : `${Math.floor(v.time_on_site_seconds / 60)}m ${v.time_on_site_seconds % 60}s`}
+                                </div>
+                              </div>
+                              <div className="rounded-lg bg-white/5 border border-white/10 px-2.5 py-1.5">
+                                <div className="text-[10px] text-muted-foreground uppercase mb-0.5 flex items-center gap-1">
+                                  <ArrowUpRight className="h-2.5 w-2.5" /> Referrer
+                                </div>
+                                <div className="font-medium text-foreground truncate">
+                                  {v.referrer === "" || v.referrer === "direct"
+                                    ? "Direct"
+                                    : v.referrer.replace(/https?:\/\/(www\.)?/, "")}
+                                </div>
+                              </div>
+                              <div className="rounded-lg bg-white/5 border border-white/10 px-2.5 py-1.5">
+                                <div className="text-[10px] text-muted-foreground uppercase mb-0.5">
+                                  Language
+                                </div>
+                                <div className="font-medium text-foreground">{v.language}</div>
+                              </div>
+                            </div>
+
+                            {/* Pages visited */}
+                            {v.pages_visited.length > 0 && (
+                              <div className="mt-2">
+                                <div className="text-[10px] text-muted-foreground uppercase mb-1">
+                                  Pages Visited
+                                </div>
+                                <div className="flex flex-wrap gap-1">
+                                  {v.pages_visited.map((p) => (
+                                    <span
+                                      key={p}
+                                      className="text-[10px] font-mono bg-sky-500/10 border border-sky-500/20 text-sky-300 px-2 py-0.5 rounded-full"
+                                    >
+                                      {p}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+
+                            {/* Services clicked */}
+                            {v.services_clicked.length > 0 && (
+                              <div className="mt-2">
+                                <div className="text-[10px] text-muted-foreground uppercase mb-1">
+                                  Services Used
+                                </div>
+                                <div className="flex flex-wrap gap-1">
+                                  {v.services_clicked.map((s) => (
+                                    <span
+                                      key={s}
+                                      className="text-[10px] font-bold uppercase bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full"
+                                    >
+                                      {s}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+
+                            {/* UTM params */}
+                            {(v.utm_source || v.utm_medium || v.utm_campaign) && (
+                              <div className="mt-2 flex flex-wrap gap-1.5">
+                                {v.utm_source && (
+                                  <span className="text-[10px] bg-violet-500/10 border border-violet-500/20 text-violet-300 px-2 py-0.5 rounded-full">
+                                    src: {v.utm_source}
+                                  </span>
+                                )}
+                                {v.utm_medium && (
+                                  <span className="text-[10px] bg-violet-500/10 border border-violet-500/20 text-violet-300 px-2 py-0.5 rounded-full">
+                                    med: {v.utm_medium}
+                                  </span>
+                                )}
+                                {v.utm_campaign && (
+                                  <span className="text-[10px] bg-violet-500/10 border border-violet-500/20 text-violet-300 px-2 py-0.5 rounded-full">
+                                    camp: {v.utm_campaign}
+                                  </span>
+                                )}
+                              </div>
+                            )}
+
+                            {/* Timestamps */}
+                            <div className="flex items-center gap-4 mt-2">
+                              <span className="text-[10px] text-muted-foreground">
+                                First: {fmtDate(v.first_seen_at)}
+                              </span>
+                              <span className="text-[10px] text-muted-foreground">
+                                Last: {fmtDate(v.last_seen_at)}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+              </div>
+            )}
+          </div>
+        )}
+
         {/* Edge infra monitor */}
         <div className="pt-4">
           <EdgeRegionMonitorWidget />
         </div>
+
       </div>
     </div>
   );

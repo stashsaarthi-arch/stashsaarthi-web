@@ -1,3 +1,15 @@
+- [x] **[DevOps] Offline Admin Dashboard — 2026-09-07T00:07 IST**:
+  - **Build**: `npm run build` — ✅ 0 errors (client + SSR Nitro bundles).
+  - **Commit**: `b61ab8d` — `feat(admin): offline admin dashboard — zero Supabase dependency, localStorage-based submissions store for all 6 services`
+  - **New Files**:
+    - `src/lib/localSubmissions.ts` — central localStorage store with typed `BookingRecord`, `WaitlistRecord`, `MealOrderRecord`, `ReviewRecord`, `SuggestionRecord` interfaces and CRUD helpers.
+    - **Modified**: `src/routes/admin.tsx` — rebuilt as fully offline dashboard (5 tabs: Bookings, Waitlist, Meal Orders, Reviews, Suggestions), service filter pills, stats bar, expandable service-specific detail cards, CSV export, WhatsApp CTA, delete, no Supabase required.
+    - **Modified**: `src/components/stash/BookingModal.tsx` — calls `saveBooking()` before Supabase; Supabase error no longer throws (booking already saved locally).
+    - **Modified**: `src/lib/waitlistService.ts` — calls `saveWaitlistEntry()` before Supabase; Supabase error no longer throws (lead already saved locally).
+    - **Modified**: `src/components/TokenMealHub.tsx` — `saveLastMeal()` now also calls `saveMealOrder()` to persist every meal order to the admin store.
+  - **GitHub**: Pushed branch `ralph-loop-g63oi` → origin. Vercel preview deployment triggered.
+  - **Access**: `/admin` route, password: `stash2026`.
+
 - [x] **[DevOps] Deployment Checkpoint — 2026-09-06T23:47 IST**:
   - **Build**: `npm run build` — ✅ 0 errors (client + SSR Nitro bundles).
   - **Commit**: `c70ab2a` — `feat(cpo): add meal personalization selector with dietary filters, spice level, allergy controls & token ordering integration (Task 78)`

@@ -442,24 +442,21 @@ export function BookingModal({
         phone: cleanPhone || "N/A",
         email: cleanEmail,
         city: city.trim(),
-        pincode: pincode || undefined,
         token: generatedToken,
         amount: calcAmount,
         paymentMode,
         message: fullMessage,
         submittedAt: new Date().toISOString(),
-        // Service-specific extras
-        bags: service === "stash" ? bags : undefined,
-        months: service === "stash" ? months : undefined,
-        roomType: service === "spaces" ? roomType : undefined,
-        moveInDate: service === "spaces" ? moveInDate : undefined,
-        mealPlan: service === "kitchen" ? mealPlan : undefined,
-        dietType: service === "kitchen" ? dietType : undefined,
-        personalizations: service === "kitchen" ? selectedPersonalizations : undefined,
-        connectDomain: service === "connect" ? connectDomain : undefined,
-        auditType: service === "trust" ? auditType : undefined,
-        monetizeAsset: service === "micro" ? monetizeAsset : undefined,
+        // Conditional spreads — exactOptionalPropertyTypes safe
+        ...(pincode ? { pincode } : {}),
+        ...(service === "stash" ? { bags, months } : {}),
+        ...(service === "spaces" ? { roomType, ...(moveInDate ? { moveInDate } : {}) } : {}),
+        ...(service === "kitchen" ? { mealPlan, dietType, personalizations: selectedPersonalizations } : {}),
+        ...(service === "connect" ? { connectDomain } : {}),
+        ...(service === "trust" ? { auditType } : {}),
+        ...(service === "micro" ? { monetizeAsset } : {}),
       });
+
 
       // Save inquiry to supabase with zero data drop
       const { error } = await supabase.from("co_living_inquiries").insert(payload);

@@ -114,17 +114,22 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "google-site-verification", content: "googlec3390cf96e97cc6c" },
       { name: "robots", content: "index, follow, max-image-preview:large" },
       { name: "format-detection", content: "telephone=no" },
-      { title: "StashSaarthi - Campus Micro-Storage & Zero-Brokerage Co-Living" },
+      { title: "StashSaarthi Kanpur — Student Tiffin, Hostel Delivery, Bag Storage & Rooms in Kakadeo" },
+      { name: "title", content: "StashSaarthi Kanpur — Student Tiffin, Hostel Delivery, Bag Storage & Rooms in Kakadeo" },
       {
         name: "description",
         content:
-          "Official website of StashSaarthi. India's Zero-CapEx Intergenerational Living & Campus Micro-Storage Platform. Vacation luggage storage at ₹300/bag/mo, verified senior-hosted rooms, and homemade tiffins.",
+          "Kanpur's #1 student platform: Flexible daily tiffin from ₹50, ₹10 hostel room delivery, ₹300/mo luggage vacation storage, and broker-free student rooms in Kakadeo & Kalyanpur.",
       },
       {
         name: "keywords",
         content:
-          "student luggage storage Kanpur, vacation luggage stash IIT Kanpur, zero brokerage student rooms Kakadeo, tiffin service Kakadeo Kanpur, home cooked meals student Kanpur, senior citizen passive income Kanpur, student dead rent calculator Kanpur, StashSaarthi, broker free PG Kakadeo, HBTI luggage storage",
+          "tiffin services in kanpur, best tiffin in kakadeo, student room in kakadeo, hostel in kakadeo kanpur, luggage storage kanpur, daily mess kalyanpur, food delivery near allen kakadeo, single room pg kanpur, zero brokerage rooms kakadeo, student luggage storage IIT Kanpur, vacation stash kanpur, home cooked food CSJMU",
       },
+      { name: "geo.region", content: "IN-UP" },
+      { name: "geo.placename", content: "Kanpur, Kakadeo, Kalyanpur" },
+      { name: "geo.position", content: "26.4797;80.3012" },
+      { name: "ICBM", content: "26.4797, 80.3012" },
       { name: "author", content: "StashSaarthi" },
       { property: "og:site_name", content: "StashSaarthi" },
       { property: "og:locale", content: "en_IN" },
@@ -304,10 +309,106 @@ function RootShell({ children }: { children: ReactNode }) {
         },
         url: "https://stashsaarthi-web.vercel.app",
       },
+      // ── Kanpur Entity: Kakadeo Hub ──────────────────────────────────────
+      {
+        "@type": "LocalBusiness",
+        "@id": "https://stashsaarthi-web.vercel.app/#kakadeo-entity",
+        name: "StashSaarthi — Kakadeo Student Hub",
+        url: "https://stashsaarthi-web.vercel.app/",
+        telephone: "+91-9369454350",
+        priceRange: "\u20b950\u2013\u20b9300",
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: "Chhapeda Pulia, Kakadeo",
+          addressLocality: "Kanpur",
+          addressRegion: "Uttar Pradesh",
+          postalCode: "208025",
+          addressCountry: "IN",
+        },
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: 26.4797,
+          longitude: 80.3012,
+        },
+        areaServed: ["Kakadeo", "Kalyanpur", "Rawatpur", "Nawabganj", "Kanpur"],
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: "Kanpur Student Services",
+          itemListElement: [
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Token Meal & Daily Tiffin Service Kakadeo",
+                description:
+                  "Flexible daily homestyle thali from \u20b950 with zero monthly lock-in, ₹10 room delivery in Kakadeo & Kalyanpur.",
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Vacation Luggage Micro-Storage Kanpur",
+                description:
+                  "Secure tamper-proof luggage storage at \u20b9300/month per bag during semester breaks.",
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Broker-Free Student Rooms Kakadeo",
+                description:
+                  "Verified PG and student rooms near Allen, Motion, Physics Wallah coaching centers in Kakadeo — zero brokerage.",
+              },
+            },
+          ],
+        },
+      },
+      // ── FAQPage: High-intent Kanpur search queries ──────────────────────
+      {
+        "@type": "FAQPage",
+        "@id": "https://stashsaarthi-web.vercel.app/#faq",
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: "Which is the best flexible tiffin service in Kakadeo Kanpur?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "StashSaarthi offers flexible daily token-based tiffin services in Kakadeo and Kalyanpur starting at \u20b950 with \u20b910 room delivery — no monthly lock-in required.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Where can students safely store luggage during semester breaks in Kanpur?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "StashSaarthi provides secure micro-storage at \u20b9300/month per bag near CSJMU and IIT Kanpur with tamper-proof QR-sealed packing.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "How to find broker-free student rooms near Allen coaching in Kakadeo?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "StashSaarthi Spaces lists verified student stays and PGs near Allen, Motion, and Physics Wallah coaching centers in Kakadeo without any brokerage fees.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "What is the food delivery charge for hostels in Kakadeo Kanpur?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "StashSaarthi Saarthi Kitchen delivers homestyle thalis directly to hostel rooms in Kakadeo and Kalyanpur for a flat \u20b910 delivery charge.",
+            },
+          },
+        ],
+      },
       coLivingItemListSchema,
       ...coLivingSpacesSchema,
     ],
   };
+
 
   return (
     <html lang="en">
@@ -379,6 +480,7 @@ import { DynamicOGHead } from "@/components/seo/DynamicOGHead";
 
 import { initWebGLSafetyGuard } from "@/lib/webgl-fallback";
 import { initSessionSecurityListener } from "@/lib/sessionSecurity";
+import { initVisitorTracking, trackPageView } from "@/lib/visitorTracking";
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
@@ -388,10 +490,18 @@ function RootComponent() {
   useEffect(() => {
     initWebGLSafetyGuard();
     const { unsubscribe } = initSessionSecurityListener();
+    const stopTracking = initVisitorTracking();
     return () => {
       unsubscribe();
+      stopTracking();
     };
   }, []);
+
+  // Track page views on route changes
+  useEffect(() => {
+    trackPageView(currentRoute);
+  }, [currentRoute]);
+
 
   useEffect(() => {
     const handleOffline = () => {
