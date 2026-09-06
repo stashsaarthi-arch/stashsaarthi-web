@@ -30,6 +30,7 @@ import { ScrollProgress } from "@/components/stash/ScrollProgress";
 import { FloatingPersonaToggle } from "@/components/stash/FloatingPersonaToggle";
 import { MobileStickyCTA } from "@/components/stash/MobileStickyCTA";
 import { ExitIntentModal } from "@/components/stash/ExitIntentModal";
+import { PredictivePersonaWidget } from "@/components/stash/PredictivePersonaWidget";
 import { usePersona } from "@/context/PersonaContext";
 import type { BookingPrefill } from "@/components/stash/types";
 

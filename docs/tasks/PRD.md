@@ -56,13 +56,13 @@
 ## Sprint 5: QA & CSO (Quality, Safety, Compliance)
 - [x] 44. **[QA]**: Conduct a full security audit of the Supabase Row Level Security (RLS) policies.
 - [x] 45. **[QA]**: Test the UI on specific older Android devices (via emulation) to ensure no WebGL crashes.
-- [ ] 46. **[CSO]**: Draft a clear "Host Vetting Process" flow diagram and integrate it into the Trust section.
-- [ ] 47. **[QA]**: Implement rate-limiting on all form submissions to prevent spam.
-- [ ] 48. **[QA]**: Verify all external links open in a new tab with `rel="noopener noreferrer"`.
-- [ ] 49. **[CSO]**: Draft the formal Privacy Policy & Terms of Service page content and link it in the footer.
+- [x] 46. **[CSO]**: Draft a clear "Host Vetting Process" flow diagram and integrate it into the Trust section.
+- [x] 47. **[QA]**: Implement rate-limiting on all form submissions to prevent spam.
+- [x] 48. **[QA]**: Verify all external links open in a new tab with `rel="noopener noreferrer"`.
+- [x] 49. **[CSO]**: Draft the formal Privacy Policy & Terms of Service page content and link it in the footer.
 - [ ] 50. **[CEO]**: Compile all Sprint Reports into a single Master Release Note (v2.0) and push to production.
 
-[ ] 51. [CAO - Predictive AI]: Implement a light ML model (e.g., using TensorFlow.js) on the client side to predict user persona (Student/Host) based on scroll behavior and pre-load relevant assets.
+- [x] 51. [CAO - Predictive AI]: Implement a light ML model (e.g., using TensorFlow.js) on the client side to predict user persona (Student/Host) based on scroll behavior and pre-load relevant assets.
 [ ] 52. [CTO - Database]: Design Supabase schema for dynamic, location-based pricing tiers (e.g., higher storage rates near premium hostels).
 [ ] 53. [CAO - Vision AI]: Set up a serverless edge function for Host Vetting: Auto-verify property photos for quality, safety, and "ghar jaisa" aesthetics using Google Cloud Vision API.
 [ ] 54. [CTO - Audio]: Implement low-latency audio compression for Saarthi Connect, ensuring high quality on poor (2G/3G) networks common near CSJMU.
