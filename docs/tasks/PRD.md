@@ -84,9 +84,9 @@ Sprint 7: CPO & UI/UX (Hyperlocal Mobile Dominance)
 - [x] 68. [UX - Payment Flow]: Implement a "Partial UPI Payment" option allowing students to pay 50% in cash at pickup, reducing upfront friction.
 Sprint 8: CMO & CLO (Hyperlocal Growth & Community Engagement)
 - [x] 69. [CMO - SEO]: Create dedicated, crawlable pages for every distinct coaching hub: /tiffin-services-near-motion, /tiffin-services-near-physics-wallah.
-[ ] 70. [CMO - Content]: Design a downloadable PDF guide: "The Complete Guide to Surviving Kakadeo as a New Student (powered by StashSaarthi)".
-[ ] 71. [CMO - Community]: Launch an official "Kanpur Student Council" section, inviting student leaders to discuss platform features and local issues.
-[ ] 72. [CMO - Social Proof]: Create an interactive widget that displays the "Top 3 Rated Kitchens of the Week" as voted by verified students.
+- [x] 70. [CMO - Content]: Design a downloadable PDF guide: "The Complete Guide to Surviving Kakadeo as a New Student (powered by StashSaarthi)".
+- [x] 71. [CMO - Community]: Launch an official "Kanpur Student Council" section, inviting student leaders to discuss platform features and local issues.
+- [x] 72. [CMO - Social Proof]: Create an interactive widget that displays the "Top 3 Rated Kitchens of the Week" as voted by verified students.
 [ ] 73. [CMO - Direct Marketing]: Add a customizable WhatsApp button allowing students to instantly share a menu with a specific hostel roommate.
 [ ] 74. [CMO - Content]: Draft a dedicated legal overview section explaining TPA Sec 105 protections for hosts in simple, non-intimidating Hindi.
 [ ] 75. [CMO - SEO]: Implement dynamic schema.org markup for Saarthi Kitchens, displaying average rating and standard price directly on Google search results.

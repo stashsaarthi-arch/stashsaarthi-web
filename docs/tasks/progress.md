@@ -629,3 +629,51 @@
       • Added crawlable links in `src/components/stash/FooterSection.tsx` for immediate crawler discovery.
   - Type-check & build verified: `npx tsc --noEmit` (**0 errors**) and `npm run build` compiled cleanly with **0 errors** across client, SSR, and Nitro server bundles.
 
+- [x] **[CMO - Content] Task 70: Design a downloadable PDF guide: "The Complete Guide to Surviving Kakadeo as a New Student (powered by StashSaarthi)"** (2026-09-06)
+  - **Identified Directive**: Design a downloadable PDF guide: "The Complete Guide to Surviving Kakadeo as a New Student (powered by StashSaarthi)".
+  - **Applied Solution**:
+    - **Interactive Kakadeo Survival Guide Component** (`src/components/stash/KakadeoSurvivalGuide.tsx`):
+      • Structured 5 comprehensive handbook chapters covering Coaching Hub Navigation (PW, Motion, Allen shortcuts & bypass galis), Food & Mess Survival (Avoiding canteen stomach infections, Mother Chef Tiffins @ ₹50), Zero-Brokerage Room Hunting Checklist (Avoiding deposit scams, Senior Host co-living @ ₹5,500/mo), Vacation Micro-Storage Hacks (Saving ₹8,000 dead rent with ₹300/mo stashes), and Emergency Helplines (StashSaarthi Hotline `+91 9369454350`, Kakadeo Police, Regency Hospital).
+      • **Print-to-PDF Engine**: Built custom `@media print` CSS stylesheet with page breaks, clean monochrome typography, official document seal (`SS-KNP-GUIDE-2026`), and header/footer formatting for native browser print / save to PDF (`window.print()`).
+      • **Offline HTML/PDF Generator**: Built single-click offline handbook blob downloader (`.html` / `.pdf` format) for devices without print drivers.
+      • **Social Sharing & Localization**: Integrated 1-tap WhatsApp sharing pre-populated with referral CTA and full bilingual (`en` / `hi`) support.
+    - **Crawlable Full-Page Route**:
+      • Created `src/routes/kakadeo-survival-guide.tsx` with dedicated OpenGraph, Twitter Card, and SEO metadata.
+      • Registered route in `src/routeTree.gen.ts` for TanStack Router type safety.
+    - **Modal & Footer Integrations**:
+      • Created `KakadeoSurvivalGuideModal.tsx` (`src/components/stash/KakadeoSurvivalGuideModal.tsx`) for popup inspection.
+      • Integrated direct `Link` badge button in `src/components/stash/FooterSection.tsx` for instant student discovery.
+  - **Verification**: `npx tsc --noEmit` (**0 errors**) and `npm run build` compiled cleanly with **0 errors** across client, SSR, and Nitro server bundles.
+
+- [x] **[CMO - Community] Task 71: Launch an official "Kanpur Student Council" section, inviting student leaders to discuss platform features and local issues** (2026-09-06)
+  - **Identified Directive**: Launch an official "Kanpur Student Council" section, inviting student leaders across premier Kanpur institutes (IIT Kanpur, HBTI, CSJMU, Kakadeo PW/Allen, GSVM Medical) to discuss platform features, submit issues, and vote on policies.
+  - **Applied Solution**:
+    - **Kanpur Student Council Component** (`src/components/stash/KanpurStudentCouncil.tsx`):
+      • Features verified Student Leaders & Campus Delegates across IITK, HBTI, CSJMU, Kakadeo Coaching Belt, and GSVM.
+      • Built interactive **Student Proposal & Issue Upvoting Forum** allowing real-time upvoting of campus policy changes (e.g. 0-deposit PG terms in Kakadeo, mandatory RO water audit for tiffins, summer vacation storage pick-up SLA).
+      • Built **Proposal & Council Seat Submission Modal** with client-side rate limiting (`checkAndRecordRateLimit`), toast alerts, and Web Audio API haptics (`playClick`, `playPop`).
+      • Included **Official Kanpur Student Council WhatsApp Group Banner** linking directly to operator hotline (`+91 9369454350`).
+      • Fully localized in English & Hindi (`en` / `hi`) with dark obsidian glassmorphism theme tokens.
+    - **Crawlable Dedicated Route & Home Page Mounting**:
+      • Created `src/routes/kanpur-student-council.tsx` with full OpenGraph, Twitter Card, and SEO metadata.
+      • Registered `/kanpur-student-council` in `src/routeTree.gen.ts`.
+      • Mounted `<KanpurStudentCouncil />` section wrapped in `ErrorBoundary` on the home page (`src/routes/index.tsx`).
+      • Added quick navigation link in `src/components/stash/FooterSection.tsx`.
+  - **Verification**: `npm run build` compiled cleanly with **0 errors**. Next task: 72.
+
+- [x] **[CMO - Social Proof] Task 72: Create an interactive widget that displays the "Top 3 Rated Kitchens of the Week" as voted by verified students** (2026-09-06)
+  - **Identified Directive**: Create an interactive widget that displays the "Top 3 Rated Kitchens of the Week" as voted by verified students.
+  - **Applied Solution**:
+    - **Top 3 Rated Kitchens Widget** (`src/components/stash/TopRatedKitchensWidget.tsx`):
+      • **Podium Showcase Layout**: Designed interactive Gold Crown (#1 Annapurna Senior Home Kitchen - Kakadeo Hub), Silver (#2 Dadi Maa Home Tiffins - CSJMU Kalyanpur), and Bronze (#3 Shanti Nivas Home Food - HBTI Nawabganj) podium cards with star ratings (4.95 ★, 4.91 ★, 4.88 ★) and live vote tallies.
+      • **Student Upvoting Engine**: Built 1-click voting buttons integrated with rate limiting (`checkAndRecordRateLimit`), toast notifications, state updates, and Web Audio API micro-haptics (`playPop`, `playClick`).
+      • **Senior Kitchen Nomination Modal**: Integrated modal allowing students to nominate neighborhood senior citizen chefs for zero-CapEx platform onboarding with 3-tier safety audit checks.
+      • **Direct Order CTA**: Added 1-tap "Order Tiffin" buttons launching `BookingModal` with meal prefill or direct WhatsApp operator hotline (`+91 9369454350`).
+      • **Full Bilingual Support**: Fully localized in English and Hindi (`en` / `hi`) with dark obsidian glassmorphism theme styling.
+    - **Landing Page Integration**:
+      • Mounted `<TopRatedKitchensWidget />` wrapped in `ErrorBoundary` inside landing page (`src/routes/index.tsx`).
+  - **Verification**: `npx tsc --noEmit` (**0 errors**) and `npm run build` compiled cleanly with **0 errors**. Next task: 73.
+
+
+
+

@@ -26,6 +26,7 @@ import {
   Award,
   Share2,
   ArrowUp,
+  BookOpen,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -607,6 +608,13 @@ export const FooterSection = memo(function FooterSection() {
               <Award className="h-3 w-3" /> {isHi ? "कैंपस कैप्टन (₹5k+)" : "Campus Captain (₹5k+)"}
             </button>
 
+            <Link
+              to="/kakadeo-survival-guide"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-emerald-500/40 bg-emerald-500/10 px-2.5 py-1.5 text-xs font-semibold text-emerald-300 transition-colors hover:border-emerald-500/60 hover:bg-emerald-500/20 cursor-pointer active:scale-95"
+            >
+              <BookOpen className="h-3 w-3" /> {isHi ? "काकादेव गाइड (PDF)" : "Kakadeo Guide (PDF)"}
+            </Link>
+
             <a
               href={`https://api.whatsapp.com/send?text=${encodeURIComponent(
                 isHi
@@ -638,6 +646,14 @@ export const FooterSection = memo(function FooterSection() {
                 </a>
               </li>
             ))}
+            <li>
+              <Link
+                to="/kanpur-student-council"
+                className="min-h-[28px] inline-flex items-center text-cyan-400 hover:text-cyan-300 transition-colors py-0.5 font-semibold"
+              >
+                {isHi ? "🏛️ कानपुर छात्र परिषद" : "🏛️ Kanpur Student Council"}
+              </Link>
+            </li>
             <li>
               <a
                 href="#rooms"

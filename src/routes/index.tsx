@@ -24,6 +24,8 @@ import { RoomListingModal } from "@/components/stash/RoomListingModal";
 import { RoleLane } from "@/components/stash/RoleLane";
 import { StashTimeline } from "@/components/stash/StashTimeline";
 import { ReferralLeaderboard } from "@/components/stash/ReferralLeaderboard";
+import { KanpurStudentCouncil } from "@/components/stash/KanpurStudentCouncil";
+import { TopRatedKitchensWidget } from "@/components/stash/TopRatedKitchensWidget";
 import { WhatsAppButton } from "@/components/stash/WhatsAppButton";
 import { ActivityTicker } from "@/components/stash/ActivityTicker";
 import { ScrollProgress } from "@/components/stash/ScrollProgress";
@@ -170,6 +172,23 @@ function Index() {
       {/* Interactive Referral Leaderboard */}
       <ErrorBoundary sectionName="Referral Leaderboard">
         <ReferralLeaderboard onRefer={handleRefer} />
+      </ErrorBoundary>
+
+      {/* Top 3 Rated Kitchens of the Week Widget */}
+      <ErrorBoundary sectionName="Top Rated Kitchens">
+        <TopRatedKitchensWidget
+          onOrderMeal={(kId) =>
+            open({
+              service: "kitchen",
+              note: `Selected Top Rated Kitchen of the Week: ${kId}`,
+            })
+          }
+        />
+      </ErrorBoundary>
+
+      {/* Official Kanpur Student Council Section */}
+      <ErrorBoundary sectionName="Kanpur Student Council">
+        <KanpurStudentCouncil />
       </ErrorBoundary>
 
       {/* Host Specific Dashboard Norms */}
