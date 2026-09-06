@@ -1,3 +1,19 @@
+- [x] **[CMO - SEO] Task 69: Create dedicated, crawlable pages for every distinct coaching hub: /tiffin-services-near-motion, /tiffin-services-near-physics-wallah, /tiffin-services-near-allen**:
+  - **Identified Directive**: Create dedicated, crawlable pages for every distinct coaching hub in Kakadeo, Kanpur: `/tiffin-services-near-motion`, `/tiffin-services-near-physics-wallah`, and `/tiffin-services-near-allen`.
+  - **Applied Solution**:
+    - **Reusable Coaching Hub Tiffin Page Engine** (`src/components/stash/CoachingHubTiffinPage.tsx`):
+      • Layout for coaching hub tiffin services with custom hero banners, proximity badges, daily menu options (Standard Thali @ ₹50, Senior Feast @ ₹90, Monthly Pass @ ₹2,400/mo), senior mother chef bios, real-time lunch/dinner token quota bar, student testimonials, and bilingual (`en` / `hi`) support.
+      • Integrated Google Rich Snippets JSON-LD `FoodEstablishment` structured data for search engine indexing.
+      • Integrated 1-tap WhatsApp quick order (`+91 9369454350`), native Web Share API, and `BookingModal` trigger.
+    - **Dedicated Crawlable Route Files**:
+      • Created `src/routes/tiffin-services-near-motion.tsx` targeting Motion Coaching Kakadeo (120m distance, Shanti Senior Home Kitchen).
+      • Created `src/routes/tiffin-services-near-physics-wallah.tsx` targeting Physics Wallah (PW) Vidyapeeth Kakadeo (80m distance, Annapurna Senior Home Kitchen).
+      • Created `src/routes/tiffin-services-near-allen.tsx` targeting Allen Career Institute Kakadeo (100m distance, Dadi Maa Senior Home Kitchen).
+    - **Router & Navigation Registration**:
+      • Registered routes in `src/routeTree.gen.ts` for TanStack Router type safety.
+      • Added crawlable links in `src/components/stash/FooterSection.tsx` for immediate crawler discovery.
+  - **Verification**: `npx tsc --noEmit` (**0 errors**) and `npm run build` compiled cleanly with **0 errors**. Next task: 70.
+
 - [x] **[UI - Gamification] Task 66: Design a "Karma Points" UI badge for Saarthi Connect, rewarding active seniors for their participation**:
   - **Identified Directive**: Design a "Karma Points" UI badge for Saarthi Connect, rewarding active seniors for their participation.
   - **Applied Solution**:

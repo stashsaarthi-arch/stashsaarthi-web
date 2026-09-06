@@ -193,7 +193,7 @@ export function BookingModal({
 
   const [submitting, setSubmitting] = useState(false);
   const [waiverAccepted, setWaiverAccepted] = useState(false);
-  const [paymentMode, setPaymentMode] = useState<"upi_qr" | "escrow_reserve">("upi_qr");
+  const [paymentMode, setPaymentMode] = useState<"upi_qr" | "partial_cash" | "escrow_reserve">("upi_qr");
   const [copiedUpi, setCopiedUpi] = useState(false);
   const [tokenId, setTokenId] = useState<string>("");
   const [touched, setTouched] = useState<{
@@ -310,9 +310,13 @@ export function BookingModal({
   const isPinValid = !pincode.trim() ? true : isValidIndianPin(pincode);
   const isNameValid = !name.trim() || name.trim().length >= 2;
 
+  const partialUpfrontAmount = Math.ceil(calcAmount / 2);
+  const partialRemainingCash = Math.floor(calcAmount / 2);
+  const currentPayAmount = paymentMode === "partial_cash" ? partialUpfrontAmount : calcAmount;
+
   const upiId = "advikomer@okhdfcbank";
-  const upiDeepLink = `upi://pay?pa=${upiId}&pn=StashSaarthi%20Escrow&am=${calcAmount}&cu=INR&tn=StashSaarthi%20${service.toUpperCase()}%20Booking`;
-  const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=8&color=10B981&bgcolor=000000&data=${encodeURIComponent(upiDeepLink)}`;
+  const upiDeepLink = `upi://pay?pa=${upiId}&pn=StashSaarthi%20Escrow&am=${currentPayAmount}&cu=INR&tn=StashSaarthi%20${service.toUpperCase()}%20Booking`;
+  const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=8&color=${paymentMode === "partial_cash" ? "F59E0B" : "10B981"}&bgcolor=000000&data=${encodeURIComponent(upiDeepLink)}`;
 
   const handleNextToSummary = () => {
     setTouched({ name: true, email: true, phone: true, pincode: true });
@@ -403,7 +407,14 @@ export function BookingModal({
         serviceMeta = `[Micro Monetize] Asset: ${monetizeAsset}, ExpectedRent: ₹${expectedRent}/mo, Address: ${addressDetail || city}`;
       }
 
-      const fullMessage = `${note ? `${note} · ` : ""}${serviceMeta} · EstAmount: ₹${calcAmount} · Token: ${generatedToken} · PIN: ${pincode || "N/A"} · PayMode: ${paymentMode}`;
+      const payModeTag =
+        paymentMode === "partial_cash"
+          ? `Partial (50% Upfront UPI: ₹${partialUpfrontAmount}, 50% Pickup Cash: ₹${partialRemainingCash})`
+          : paymentMode === "upi_qr"
+          ? `100% Instant UPI (₹${calcAmount})`
+          : `Escrow Reserve Hold (₹${calcAmount})`;
+
+      const fullMessage = `${note ? `${note} · ` : ""}${serviceMeta} · EstAmount: ₹${calcAmount} · Token: ${generatedToken} · PIN: ${pincode || "N/A"} · PayMode: ${payModeTag}`;
 
       const cleanName = name.trim() || (service === "micro" ? "Host Partner" : "Campus Student");
       const cleanPhone = phone.trim();
@@ -1279,35 +1290,137 @@ export function BookingModal({
                 exit={{ opacity: 0, x: -20 }}
                 className="space-y-4"
               >
-                {/* Payment Mode Selector Tabs */}
-                <div className="flex items-center gap-2 p-1 rounded-xl bg-black/40 border border-white/10">
+                {/* Payment Mode Selector Tabs (3 Options) */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-1.5 p-1 rounded-xl bg-black/40 border border-white/10">
                   <button
                     type="button"
                     onClick={() => setPaymentMode("upi_qr")}
-                    className={`flex-1 py-2 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+                    className={`py-2 px-2 rounded-lg text-xs font-bold transition-all flex flex-col items-center justify-center gap-0.5 cursor-pointer text-center ${
                       paymentMode === "upi_qr"
                         ? "bg-emerald-500 text-black shadow-lg shadow-emerald-500/25"
                         : "text-slate-400 hover:text-white"
                     }`}
                   >
-                    <QrCode className="h-4 w-4" />
-                    <span>{isHi ? "UPI QR कोड (तत्काल)" : "UPI QR Code (Instant)"}</span>
+                    <div className="flex items-center gap-1">
+                      <QrCode className="h-3.5 w-3.5" />
+                      <span>{isHi ? "100% UPI एस्क्रो" : "100% Instant UPI"}</span>
+                    </div>
+                    <span className="text-[9px] font-mono font-normal opacity-80">
+                      {isHi ? "पूर्ण डिजिटल एस्क्रो" : "Full Digital Escrow"}
+                    </span>
                   </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setPaymentMode("partial_cash")}
+                    className={`py-2 px-2 rounded-lg text-xs font-bold transition-all flex flex-col items-center justify-center gap-0.5 cursor-pointer text-center ${
+                      paymentMode === "partial_cash"
+                        ? "bg-amber-500 text-black shadow-lg shadow-amber-500/25 font-black"
+                        : "text-amber-400 hover:text-amber-300 border border-amber-500/30 bg-amber-500/10"
+                    }`}
+                  >
+                    <div className="flex items-center gap-1">
+                      <Sparkles className="h-3.5 w-3.5 shrink-0" />
+                      <span>{isHi ? "50% UPI + 50% कैश" : "50% Pay + 50% Cash"}</span>
+                    </div>
+                    <span className="text-[9px] font-mono font-semibold opacity-90">
+                      {isHi ? "⚡ न्यूनतम अग्रिम" : "⚡ Low Friction"}
+                    </span>
+                  </button>
+
                   <button
                     type="button"
                     onClick={() => setPaymentMode("escrow_reserve")}
-                    className={`flex-1 py-2 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+                    className={`py-2 px-2 rounded-lg text-xs font-bold transition-all flex flex-col items-center justify-center gap-0.5 cursor-pointer text-center ${
                       paymentMode === "escrow_reserve"
                         ? "bg-emerald-500 text-black shadow-lg shadow-emerald-500/25"
                         : "text-slate-400 hover:text-white"
                     }`}
                   >
-                    <Lock className="h-4 w-4" />
-                    <span>{isHi ? "एस्क्रो होल्ड रिजर्व" : "Escrow Reserve"}</span>
+                    <div className="flex items-center gap-1">
+                      <Lock className="h-3.5 w-3.5" />
+                      <span>{isHi ? "एस्क्रो होल्ड" : "Escrow Reserve"}</span>
+                    </div>
+                    <span className="text-[9px] font-mono font-normal opacity-80">
+                      {isHi ? "पिकअप पर भुगतान" : "Pay at Doorstep"}
+                    </span>
                   </button>
                 </div>
 
-                {paymentMode === "upi_qr" && calcAmount > 0 ? (
+                {/* 1. Partial UPI Payment Mode (50% Upfront + 50% Pickup Cash) */}
+                {paymentMode === "partial_cash" && calcAmount > 0 ? (
+                  <div className="rounded-2xl border border-amber-500/40 bg-gradient-to-b from-[#1E170C] to-[#0A0D0F] p-4 text-center space-y-3">
+                    <div className="flex items-center justify-between text-xs px-1 border-b border-amber-500/20 pb-2.5">
+                      <div className="text-left">
+                        <span className="text-amber-300 font-medium block">
+                          {isHi ? "50% अग्रिम UPI भुगतान:" : "50% Upfront Pay Now (UPI):"}
+                        </span>
+                        <span className="text-slate-400 text-[10px] block">
+                          {isHi
+                            ? `शेष ₹${partialRemainingCash} पिकअप पर नकद/UPI दें`
+                            : `Remaining ₹${partialRemainingCash} due at doorstep pickup`}
+                        </span>
+                      </div>
+                      <div className="text-right">
+                        <span className="text-xl font-mono font-bold text-amber-400">
+                          ₹{partialUpfrontAmount.toLocaleString("en-IN")}
+                        </span>
+                        <span className="text-[10px] font-mono text-muted-foreground block">
+                          ({isHi ? "कुल मूल्य:" : "Total:"} ₹{calcAmount.toLocaleString("en-IN")})
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Dynamic QR Code Container for Partial Amount */}
+                    <div className="relative mx-auto w-36 h-36 rounded-2xl bg-black p-2 border-2 border-amber-500/50 shadow-[0_0_30px_-5px_rgba(245,158,11,0.3)] flex items-center justify-center overflow-hidden">
+                      <img
+                        src={qrCodeUrl}
+                        alt="StashSaarthi Partial UPI QR"
+                        className="w-full h-full object-contain rounded-xl"
+                      />
+                      <div className="absolute inset-0 border border-amber-400/20 rounded-2xl pointer-events-none" />
+                    </div>
+
+                    <div className="flex items-center justify-center gap-1.5 text-[11px] text-slate-300 font-mono">
+                      <span>
+                        UPI ID: <strong className="text-amber-400">{upiId}</strong>
+                      </span>
+                      <button
+                        type="button"
+                        onClick={copyUpiId}
+                        className="p-1 rounded bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white transition cursor-pointer"
+                        title="Copy UPI ID"
+                      >
+                        {copiedUpi ? (
+                          <Check className="h-3.5 w-3.5 text-amber-400" />
+                        ) : (
+                          <Copy className="h-3.5 w-3.5" />
+                        )}
+                      </button>
+                    </div>
+
+                    {/* Zero Friction Cash-at-Pickup Guarantee Banner */}
+                    <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-2.5 text-left text-xs space-y-1">
+                      <div className="flex items-center gap-1.5 text-amber-300 font-bold">
+                        <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0" />
+                        <span>{isHi ? "50% पिकअप कैश सुरक्षा" : "50% Cash at Doorstep Pickup"}</span>
+                      </div>
+                      <p className="text-[11px] text-slate-300 leading-tight">
+                        {isHi
+                          ? `अभी केवल ₹${partialUpfrontAmount} UPI से जमा करें। शेष ₹${partialRemainingCash} हमारा एजेंट जब आपके कमरे पर आए तब नकद दें।`
+                          : `Pay just ₹${partialUpfrontAmount} upfront via UPI. Hand over the remaining ₹${partialRemainingCash} in cash/UPI when our pickup agent collects your baggage.`}
+                      </p>
+                    </div>
+
+                    {/* Mobile Deep Link Button */}
+                    <a
+                      href={upiDeepLink}
+                      className="mt-2 md:hidden flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-amber-500 text-black font-bold text-sm shadow-lg shadow-amber-500/25 active:scale-95 transition-transform"
+                    >
+                      {isHi ? `₹${partialUpfrontAmount} UPI ऐप से दें` : `Pay ₹${partialUpfrontAmount} via UPI App`}
+                    </a>
+                  </div>
+                ) : paymentMode === "upi_qr" && calcAmount > 0 ? (
                   <div className="rounded-2xl border border-emerald-500/30 bg-gradient-to-b from-[#12181F] to-[#0A0D0F] p-4 text-center space-y-3">
                     <div className="flex items-center justify-between text-xs px-1">
                       <span className="text-slate-300 font-medium">
@@ -1509,6 +1622,7 @@ export function BookingModal({
                   bags={service === "stash" ? bags : undefined}
                   months={service === "stash" ? months : undefined}
                   items={service === "stash" ? luggageItems : undefined}
+                  paymentMode={paymentMode}
                 />
 
                 <Button

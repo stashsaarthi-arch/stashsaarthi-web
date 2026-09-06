@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as TiffinServicesNearAllenRouteImport } from './routes/tiffin-services-near-allen'
 import { Route as TiffinServicesNearMotionRouteImport } from './routes/tiffin-services-near-motion'
 import { Route as TiffinServicesNearPhysicsWallahRouteImport } from './routes/tiffin-services-near-physics-wallah'
 
@@ -36,6 +37,11 @@ const TermsRoute = TermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TiffinServicesNearAllenRoute = TiffinServicesNearAllenRouteImport.update({
+  id: '/tiffin-services-near-allen',
+  path: '/tiffin-services-near-allen',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TiffinServicesNearMotionRoute =
   TiffinServicesNearMotionRouteImport.update({
     id: '/tiffin-services-near-motion',
@@ -54,6 +60,7 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/tiffin-services-near-allen': typeof TiffinServicesNearAllenRoute
   '/tiffin-services-near-motion': typeof TiffinServicesNearMotionRoute
   '/tiffin-services-near-physics-wallah': typeof TiffinServicesNearPhysicsWallahRoute
 }
@@ -62,6 +69,7 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/tiffin-services-near-allen': typeof TiffinServicesNearAllenRoute
   '/tiffin-services-near-motion': typeof TiffinServicesNearMotionRoute
   '/tiffin-services-near-physics-wallah': typeof TiffinServicesNearPhysicsWallahRoute
 }
@@ -71,6 +79,7 @@ export interface FileRoutesById {
   '/admin': typeof AdminRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/tiffin-services-near-allen': typeof TiffinServicesNearAllenRoute
   '/tiffin-services-near-motion': typeof TiffinServicesNearMotionRoute
   '/tiffin-services-near-physics-wallah': typeof TiffinServicesNearPhysicsWallahRoute
 }
@@ -81,6 +90,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/privacy'
     | '/terms'
+    | '/tiffin-services-near-allen'
     | '/tiffin-services-near-motion'
     | '/tiffin-services-near-physics-wallah'
   fileRoutesByTo: FileRoutesByTo
@@ -89,6 +99,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/privacy'
     | '/terms'
+    | '/tiffin-services-near-allen'
     | '/tiffin-services-near-motion'
     | '/tiffin-services-near-physics-wallah'
   id:
@@ -97,6 +108,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/privacy'
     | '/terms'
+    | '/tiffin-services-near-allen'
     | '/tiffin-services-near-motion'
     | '/tiffin-services-near-physics-wallah'
   fileRoutesById: FileRoutesById
@@ -106,6 +118,7 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRoute
   PrivacyRoute: typeof PrivacyRoute
   TermsRoute: typeof TermsRoute
+  TiffinServicesNearAllenRoute: typeof TiffinServicesNearAllenRoute
   TiffinServicesNearMotionRoute: typeof TiffinServicesNearMotionRoute
   TiffinServicesNearPhysicsWallahRoute: typeof TiffinServicesNearPhysicsWallahRoute
 }
@@ -140,6 +153,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tiffin-services-near-allen': {
+      id: '/tiffin-services-near-allen'
+      path: '/tiffin-services-near-allen'
+      fullPath: '/tiffin-services-near-allen'
+      preLoaderRoute: typeof TiffinServicesNearAllenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/tiffin-services-near-motion': {
       id: '/tiffin-services-near-motion'
       path: '/tiffin-services-near-motion'
@@ -162,6 +182,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRoute,
   PrivacyRoute: PrivacyRoute,
   TermsRoute: TermsRoute,
+  TiffinServicesNearAllenRoute: TiffinServicesNearAllenRoute,
   TiffinServicesNearMotionRoute: TiffinServicesNearMotionRoute,
   TiffinServicesNearPhysicsWallahRoute: TiffinServicesNearPhysicsWallahRoute,
 }

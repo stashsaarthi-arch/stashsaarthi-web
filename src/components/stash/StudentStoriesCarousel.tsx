@@ -217,7 +217,7 @@ export const StudentStoriesCarousel = memo(function StudentStoriesCarousel({
         </AnimatedContent>
 
         {/* Category Filters */}
-        <div className="flex flex-wrap items-center justify-center gap-1.5 mb-6">
+        <div role="tablist" aria-label="Story categories" className="flex flex-wrap items-center justify-center gap-1.5 mb-6">
           {[
             { id: "all", labelEn: "All Stories", labelHi: "सभी कहानियां", icon: Sparkles },
             { id: "stash", labelEn: "Vacation Stash (₹300/mo)", labelHi: "वैकेशन स्टोरेज", icon: Package },
@@ -230,8 +230,11 @@ export const StudentStoriesCarousel = memo(function StudentStoriesCarousel({
             return (
               <button
                 key={tab.id}
+                role="tab"
+                aria-selected={active}
+                aria-label={isHindi ? tab.labelHi : tab.labelEn}
                 onClick={() => setActiveCategory(tab.id as any)}
-                className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-all ${
+                className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 ${
                   active
                     ? "bg-emerald-500 text-black font-semibold shadow-md shadow-emerald-500/20"
                     : "bg-white/5 text-muted-foreground hover:bg-white/10 hover:text-white border border-white/5"
@@ -247,6 +250,9 @@ export const StudentStoriesCarousel = memo(function StudentStoriesCarousel({
         {/* Carousel Slide Area */}
         <div
           className="relative max-w-4xl mx-auto"
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="Student Stories Carousel"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
           onTouchStart={() => setIsPaused(true)}
@@ -255,6 +261,9 @@ export const StudentStoriesCarousel = memo(function StudentStoriesCarousel({
           <AnimatePresence mode="wait">
             <motion.div
               key={`${activeStory.id}-${currentIndex}`}
+              role="group"
+              aria-roledescription="slide"
+              aria-label={`Story ${currentIndex + 1} of ${filteredStories.length}: ${activeStory.name}`}
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}

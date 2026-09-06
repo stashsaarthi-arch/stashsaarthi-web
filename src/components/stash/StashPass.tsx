@@ -18,9 +18,10 @@ export interface StashPassProps {
   bags?: number | undefined;
   months?: number | undefined;
   items?: StashPassItem[] | undefined;
+  paymentMode?: "upi_qr" | "partial_cash" | "escrow_reserve" | string | undefined;
 }
 
-export function StashPass({ tokenId, name, serviceLabel, type, bags, months, items }: StashPassProps) {
+export function StashPass({ tokenId, name, serviceLabel, type, bags, months, items, paymentMode }: StashPassProps) {
   const { language } = useLanguage();
   const isHi = language === "hi";
 
@@ -129,6 +130,27 @@ export function StashPass({ tokenId, name, serviceLabel, type, bags, months, ite
                   })}
                 </p>
               </div>
+
+              {paymentMode && (
+                <div className="col-span-2 pt-1 border-t border-white/10 flex items-center justify-between text-[11px]">
+                  <span className="text-muted-foreground uppercase text-[10px] tracking-wider">
+                    {isHi ? "भुगतान विधि:" : "Escrow Payment:"}
+                  </span>
+                  {paymentMode === "partial_cash" ? (
+                    <span className="text-amber-300 font-mono font-bold bg-amber-500/15 border border-amber-500/30 px-2 py-0.5 rounded-full flex items-center gap-1">
+                      ⚡ {isHi ? "50% UPI + 50% पिकअप कैश" : "50% Pay Now · 50% Cash @ Pickup"}
+                    </span>
+                  ) : paymentMode === "upi_qr" ? (
+                    <span className="text-emerald-300 font-mono font-bold bg-emerald-500/15 border border-emerald-500/30 px-2 py-0.5 rounded-full flex items-center gap-1">
+                      🔒 {isHi ? "100% यूपीआई एस्क्रो भुगतान" : "100% Instant Escrow UPI"}
+                    </span>
+                  ) : (
+                    <span className="text-cyan-300 font-mono font-bold bg-cyan-500/15 border border-cyan-500/30 px-2 py-0.5 rounded-full flex items-center gap-1">
+                      🛡️ {isHi ? "एस्क्रो होल्ड रिजर्व" : "Escrow Reserve Hold"}
+                    </span>
+                  )}
+                </div>
+              )}
             </div>
 
             {items && items.length > 0 && (

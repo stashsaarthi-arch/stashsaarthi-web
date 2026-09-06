@@ -613,8 +613,8 @@
     • Mounted `KarmaPointsModal` state trigger for seamless user inspection.
   - Type-check & build verified: `npx tsc --noEmit` (**0 errors**) and `npm run build` compiled cleanly with **0 errors** across client, SSR, and Nitro server bundles.
 
-- [x] **[CMO - SEO] Task 69: Create dedicated, crawlable pages for every distinct coaching hub: /tiffin-services-near-motion, /tiffin-services-near-physics-wallah** (2026-09-06)
-  - **Identified Directive**: Create dedicated, crawlable pages for every distinct coaching hub in Kakadeo, Kanpur: `/tiffin-services-near-motion` and `/tiffin-services-near-physics-wallah`.
+- [x] **[CMO - SEO] Task 69: Create dedicated, crawlable pages for every distinct coaching hub: /tiffin-services-near-motion, /tiffin-services-near-physics-wallah, /tiffin-services-near-allen** (2026-09-06)
+  - **Identified Directive**: Create dedicated, crawlable pages for every distinct coaching hub in Kakadeo, Kanpur: `/tiffin-services-near-motion`, `/tiffin-services-near-physics-wallah`, and `/tiffin-services-near-allen`.
   - **Applied Solution**:
     - **Reusable Coaching Hub Tiffin Page Engine** (`src/components/stash/CoachingHubTiffinPage.tsx`):
       • Structured comprehensive landing page layout for coaching hub tiffin services with custom hero banners, proximity badges, daily menu options (Standard Thali @ ₹50, Senior Feast @ ₹90, Monthly Pass @ ₹2,400/mo), senior mother chef bios, real-time lunch/dinner token quota bar, student testimonials, and bilingual (`en` / `hi`) support.
@@ -623,6 +623,7 @@
     - **Dedicated Crawlable Route Files**:
       • Created `src/routes/tiffin-services-near-motion.tsx` targeting Motion Coaching Kakadeo (120m distance, Shanti Senior Home Kitchen).
       • Created `src/routes/tiffin-services-near-physics-wallah.tsx` targeting Physics Wallah (PW) Vidyapeeth Kakadeo (80m distance, Annapurna Senior Home Kitchen).
+      • Created `src/routes/tiffin-services-near-allen.tsx` targeting Allen Career Institute Kakadeo (100m distance, Dadi Maa Senior Home Kitchen).
     - **Router & Navigation Registration**:
       • Registered routes in `src/routeTree.gen.ts` for full TanStack Router type safety.
       • Added crawlable links in `src/components/stash/FooterSection.tsx` for immediate crawler discovery.

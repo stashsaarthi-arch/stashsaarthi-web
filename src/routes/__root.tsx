@@ -23,6 +23,7 @@ import { PersonaProvider } from "@/context/PersonaContext";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { LowDataProvider } from "@/context/LowDataContext";
 import { ToastProvider } from "@/context/ToastContext";
+import { AccessibilityAnnouncer } from "@/components/ui/AccessibilityAnnouncer";
 import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 import { NetworkStatus } from "@/components/stash/NetworkStatus";
 import { coLivingSpacesSchema, coLivingItemListSchema } from "@/lib/seo-coliving-schema";
@@ -456,6 +457,7 @@ function RootComponent() {
                           </PageTransition>
                         </AnimatePresence>
                         <NetworkStatus />
+                        <AccessibilityAnnouncer />
                       </ReactLenis>
                     </ErrorBoundary>
                     <Toaster

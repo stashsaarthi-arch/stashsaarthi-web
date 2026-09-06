@@ -9,6 +9,7 @@ import {
   SlidersHorizontal,
   UserCheck,
   Radio,
+  Trophy,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MatchDrawer } from "./MatchDrawer";
@@ -16,6 +17,7 @@ import { PrototypeBadge } from "@/components/ui/PrototypeBadge";
 import type { OpenBooking } from "./types";
 import { useLanguage } from "@/context/LanguageContext";
 import { ConnectAudioWidget } from "./ConnectAudioWidget";
+import { KarmaPointsBadge, KarmaPointsModal, type SeniorTier } from "./KarmaPointsModal";
 
 const CITIES = ["Kanpur", "Lucknow", "Delhi NCR", "Pune"] as const;
 type City = (typeof CITIES)[number];
@@ -42,6 +44,8 @@ type Match = {
     detail_hi?: string;
     offers: string[];
     offers_hi?: string[];
+    karmaPoints?: number;
+    karmaTier?: SeniorTier;
   };
   score: number;
 };
@@ -62,6 +66,8 @@ const MATCHES: Match[] = [
       detail_hi: "सेवानिवृत्त प्रधानाचार्य · स्वरूप नगर",
       offers: ["Private room at ₹3,200", "Evening mentorship & home food"],
       offers_hi: ["₹3,200 में निजी कमरा", "शाम का मार्गदर्शन व घर का खाना"],
+      karmaPoints: 1480,
+      karmaTier: "Gold",
     },
     score: 96,
   },
@@ -80,6 +86,8 @@ const MATCHES: Match[] = [
       detail_hi: "पूर्व सैन्य अधिकारी · गोमती नगर",
       offers: ["Furnished room at ₹2,800", "Interview prep & home food"],
       offers_hi: ["₹2,800 में सुसज्जित कमरा", "इंटरव्यू तैयारी व घर का खाना"],
+      karmaPoints: 1320,
+      karmaTier: "Gold",
     },
     score: 93,
   },
@@ -98,6 +106,8 @@ const MATCHES: Match[] = [
       detail_hi: "सेवानिवृत्त बैंकर · नोएडा सेक्टर 51",
       offers: ["Room + kitchen access ₹4,500", "Finance mentorship"],
       offers_hi: ["कमरा + रसोई सुविधा ₹4,500", "वित्तीय मार्गदर्शन"],
+      karmaPoints: 980,
+      karmaTier: "Silver",
     },
     score: 91,
   },
@@ -116,6 +126,8 @@ const MATCHES: Match[] = [
       detail_hi: "सेवानिवृत्त इंजीनियर · कोथरूड",
       offers: ["Balcony room ₹3,900", "Marathi cooking & home food"],
       offers_hi: ["बालकनी वाला कमरा ₹3,900", "मराठी व घरेलू भोजन"],
+      karmaPoints: 1150,
+      karmaTier: "Silver",
     },
     score: 95,
   },
@@ -126,6 +138,7 @@ export function Connect(_props: { onBook: OpenBooking }) {
   const isHi = language === "hi";
   const [city, setCity] = useState<City>("Kanpur");
   const [drawer, setDrawer] = useState(false);
+  const [karmaModal, setKarmaModal] = useState(false);
   const [activeTab, setActiveTab] = useState<"pairs" | "quiz" | "audio">("pairs");
 
   // Compatibility Quiz state
@@ -140,7 +153,7 @@ export function Connect(_props: { onBook: OpenBooking }) {
 
   return (
     <div id="connect" className="relative mx-auto max-w-4xl px-2 py-2 scroll-mt-20">
-      <div className="text-center">
+      <div className="text-center space-y-2">
         {/* Tab Switcher: Live Pairs vs Interactive Quiz vs 2G Audio */}
         <div className="inline-flex flex-wrap justify-center items-center gap-1 rounded-2xl sm:rounded-full border border-white/10 bg-black/40 p-1 backdrop-blur-md">
           <button
@@ -177,6 +190,18 @@ export function Connect(_props: { onBook: OpenBooking }) {
           >
             <Radio className="h-3 w-3" />
             <span>{isHi ? "2G लो-डाटा वॉइस मोड" : "2G Audio Engine"}</span>
+          </button>
+        </div>
+
+        {/* Karma Points Gamification Badge Button */}
+        <div>
+          <button
+            type="button"
+            onClick={() => setKarmaModal(true)}
+            className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/40 bg-gradient-to-r from-amber-500/20 via-amber-700/20 to-emerald-500/20 px-3.5 py-1 text-xs font-bold text-amber-300 transition hover:scale-105 shadow-md shadow-amber-500/10 cursor-pointer"
+          >
+            <Trophy className="h-3.5 w-3.5 text-amber-400" />
+            <span>{isHi ? "होस्ट कर्म अंक एवं सम्मान चार्टर (Karma Rewards)" : "Senior Karma Points & Perks Charter"}</span>
           </button>
         </div>
       </div>
@@ -253,6 +278,9 @@ export function Connect(_props: { onBook: OpenBooking }) {
                   items={
                     isHi && match.senior.offers_hi ? match.senior.offers_hi : match.senior.offers
                   }
+                  karmaPoints={match.senior.karmaPoints}
+                  karmaTier={match.senior.karmaTier}
+                  onKarmaClick={() => setKarmaModal(true)}
                 />
               </div>
 
@@ -424,6 +452,7 @@ export function Connect(_props: { onBook: OpenBooking }) {
       )}
 
       <MatchDrawer open={drawer} onOpenChange={setDrawer} city={isHi ? CITIES_HI[city] : city} />
+      <KarmaPointsModal open={karmaModal} onOpenChange={setKarmaModal} />
     </div>
   );
 }
@@ -435,6 +464,9 @@ function ProfileCard({
   detail,
   label,
   items,
+  karmaPoints,
+  karmaTier,
+  onKarmaClick,
 }: {
   icon: React.ReactNode;
   accent: string;
@@ -442,15 +474,23 @@ function ProfileCard({
   detail: string;
   label: string;
   items: string[];
+  karmaPoints?: number | undefined;
+  karmaTier?: SeniorTier | undefined;
+  onKarmaClick?: (() => void) | undefined;
 }) {
   return (
     <div
       className="min-w-0 rounded-2xl border border-white/10 p-4 text-left"
       style={{ background: `color-mix(in oklab, ${accent} 8%, transparent)` }}
     >
-      <div className="flex min-w-0 items-center gap-2">
-        <span className="shrink-0">{icon}</span>
-        <span className="truncate text-sm font-bold">{name}</span>
+      <div className="flex min-w-0 items-center justify-between gap-2">
+        <div className="flex min-w-0 items-center gap-2">
+          <span className="shrink-0">{icon}</span>
+          <span className="truncate text-sm font-bold">{name}</span>
+        </div>
+        {karmaPoints !== undefined && karmaTier && (
+          <KarmaPointsBadge points={karmaPoints} tier={karmaTier} compact onClick={onKarmaClick} />
+        )}
       </div>
       <p className="mt-1 text-xs text-muted-foreground">{detail}</p>
       <p className="mt-3 text-[10px] uppercase tracking-widest font-bold" style={{ color: accent }}>

@@ -11,6 +11,7 @@ import {
   Radar,
   ListFilter,
   ShieldCheck,
+  Footprints,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -19,6 +20,7 @@ import { PrototypeBadge } from "@/components/ui/PrototypeBadge";
 import type { OpenBooking } from "./types";
 import { useLanguage } from "@/context/LanguageContext";
 import { NodeSkeleton } from "@/components/ui/skeleton";
+import { FindMyStashModal } from "./FindMyStashModal";
 
 interface NodeData {
   id: string;
@@ -219,6 +221,13 @@ export function CampusNodeChecker({ onBook }: { onBook: OpenBooking }) {
   const [hasInteracted, setHasInteracted] = useState(false);
   const [viewMode, setViewMode] = useState<"search" | "radar">("search");
   const [selectedRadarNode, setSelectedRadarNode] = useState<NodeData | null>(null);
+  const [navModalOpen, setNavModalOpen] = useState(false);
+  const [activeNavNodeId, setActiveNavNodeId] = useState<string | undefined>(undefined);
+
+  const openDirections = (nodeId?: string) => {
+    setActiveNavNodeId(nodeId);
+    setNavModalOpen(true);
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -461,17 +470,11 @@ export function CampusNodeChecker({ onBook }: { onBook: OpenBooking }) {
                               <Button
                                 size="sm"
                                 variant="outline"
-                                className="w-full sm:w-auto border-white/10 bg-white/5 hover:bg-white/10 text-[11px] cursor-pointer h-7"
-                                asChild
+                                className="w-full sm:w-auto border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 text-[11px] cursor-pointer h-7 gap-1"
+                                onClick={() => openDirections(node.id)}
                               >
-                                <a
-                                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${node.locality}, Kanpur`)}`}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  aria-label={t.campusNodeChecker.viewMap}
-                                >
-                                  {t.campusNodeChecker.viewMap}
-                                </a>
+                                <Footprints className="h-3 w-3 text-cyan-400" />
+                                <span>{isHi ? "📍 दिशाएं (Find Stash)" : "📍 Find Directions"}</span>
                               </Button>
                             </div>
                           </div>
@@ -565,16 +568,28 @@ export function CampusNodeChecker({ onBook }: { onBook: OpenBooking }) {
                     </p>
                   </div>
 
-                  <Button
-                    size="sm"
-                    variant="hero"
-                    onClick={() =>
-                      onBook({ service: "stash", note: `Radar Booked: ${selectedRadarNode.name}` })
-                    }
-                    className="w-full sm:w-auto shrink-0 cursor-pointer"
-                  >
-                    {isHi ? "यह नोड बुक करें" : "Reserve This Node"}
-                  </Button>
+                  <div className="flex items-center gap-2 w-full sm:w-auto shrink-0">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => openDirections(selectedRadarNode.id)}
+                      className="w-full sm:w-auto border-emerald-500/30 bg-emerald-500/10 text-emerald-300 text-xs cursor-pointer gap-1"
+                    >
+                      <Footprints className="h-3.5 w-3.5 text-cyan-400" />
+                      <span>{isHi ? "मार्ग देखें" : "Directions"}</span>
+                    </Button>
+
+                    <Button
+                      size="sm"
+                      variant="hero"
+                      onClick={() =>
+                        onBook({ service: "stash", note: `Radar Booked: ${selectedRadarNode.name}` })
+                      }
+                      className="w-full sm:w-auto shrink-0 cursor-pointer text-xs"
+                    >
+                      {isHi ? "यह नोड बुक करें" : "Reserve Node"}
+                    </Button>
+                  </div>
                 </div>
               ) : (
                 <p className="text-xs text-center text-slate-400 italic">
@@ -587,6 +602,12 @@ export function CampusNodeChecker({ onBook }: { onBook: OpenBooking }) {
           )}
         </div>
       </AnimatedContent>
+
+      <FindMyStashModal
+        isOpen={navModalOpen}
+        onClose={() => setNavModalOpen(false)}
+        initialNodeId={activeNavNodeId}
+      />
     </div>
   );
 }

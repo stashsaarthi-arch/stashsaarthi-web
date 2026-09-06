@@ -78,12 +78,12 @@ Sprint 7: CPO & UI/UX (Hyperlocal Mobile Dominance)
 - [x] 62. [UI - Spaces]: Integrate a lightweight, open-source 360° photo viewer for Saarthi Spaces room tours (using Pannellum or similar).
 - [x] 63. [UX - Storage]: Redesign the luggage storage UI to support itemization and custom labeling (e.g., "Carton #1: Books", "Suitcase: Winter Clothes").
 - [x] 64. [UI - Motion]: Implement a Micro-Interaction where the Peacock Feather "dusts off" the matki of butter when a student selects the Standard Thali.
-[ ] 65. [UX - Local Navigation]: Implement "Find My Stash" directions that open natively in Google Maps or Apple Maps, specifically guiding students to the back-alley entrances often found in Kakadeo.
-[ ] 66. [UI - Gamification]: Design a "Karma Points" UI badge for Saarthi Connect, rewarding active seniors for their participation.
-[ ] 67. [CPO - Accessibility]: Conduct a full screen-reader audit and ensure all interactive components have appropriate ARIA labels and roles.
-[ ] 68. [UX - Payment Flow]: Implement a "Partial UPI Payment" option allowing students to pay 50% in cash at pickup, reducing upfront friction.
+- [x] 65. [UX - Local Navigation]: Implement "Find My Stash" directions that open natively in Google Maps or Apple Maps, specifically guiding students to the back-alley entrances often found in Kakadeo.
+- [x] 66. [UI - Gamification]: Design a "Karma Points" UI badge for Saarthi Connect, rewarding active seniors for their participation.
+- [x] 67. [CPO - Accessibility]: Conduct a full screen-reader audit and ensure all interactive components have appropriate ARIA labels and roles.
+- [x] 68. [UX - Payment Flow]: Implement a "Partial UPI Payment" option allowing students to pay 50% in cash at pickup, reducing upfront friction.
 Sprint 8: CMO & CLO (Hyperlocal Growth & Community Engagement)
-[ ] 69. [CMO - SEO]: Create dedicated, crawlable pages for every distinct coaching hub: /tiffin-services-near-motion, /tiffin-services-near-physics-wallah.
+- [x] 69. [CMO - SEO]: Create dedicated, crawlable pages for every distinct coaching hub: /tiffin-services-near-motion, /tiffin-services-near-physics-wallah.
 [ ] 70. [CMO - Content]: Design a downloadable PDF guide: "The Complete Guide to Surviving Kakadeo as a New Student (powered by StashSaarthi)".
 [ ] 71. [CMO - Community]: Launch an official "Kanpur Student Council" section, inviting student leaders to discuss platform features and local issues.
 [ ] 72. [CMO - Social Proof]: Create an interactive widget that displays the "Top 3 Rated Kitchens of the Week" as voted by verified students.

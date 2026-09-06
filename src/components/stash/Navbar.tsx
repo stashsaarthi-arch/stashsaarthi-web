@@ -271,6 +271,7 @@ export const Navbar = memo(function Navbar({
             className="xl:hidden h-7 w-7 sm:h-8 sm:w-8 text-white hover:bg-white/10 shrink-0 p-0 ml-0.5"
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
+            aria-controls="mobile-nav-drawer"
             aria-label={open ? "Close navigation menu" : "Open navigation menu"}
           >
             {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
@@ -282,6 +283,9 @@ export const Navbar = memo(function Navbar({
       <AnimatePresence>
         {open && (
           <motion.div
+            id="mobile-nav-drawer"
+            role="region"
+            aria-label="Mobile Navigation Menu"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}

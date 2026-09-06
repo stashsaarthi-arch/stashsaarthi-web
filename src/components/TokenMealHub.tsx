@@ -871,8 +871,18 @@ export const TokenMealHub: React.FC = () => {
               return (
                 <div
                   key={node.id}
+                  role="button"
+                  tabIndex={0}
+                  aria-pressed={isSelected}
+                  aria-label={`${node.name}, ${node.campus}, ${percentSold}% of ${deliverySlot.toLowerCase()} tokens sold, ${tokensLeft} tokens remaining`}
                   onClick={() => setVendorNode(node.name)}
-                  className={`cursor-pointer rounded-xl p-4 border transition-all duration-300 flex flex-col justify-between ${
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setVendorNode(node.name);
+                    }
+                  }}
+                  className={`cursor-pointer rounded-xl p-4 border transition-all duration-300 flex flex-col justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 ${
                     isSelected
                       ? "bg-slate-900 border-emerald-500 shadow-[0_0_15px_-3px_rgba(16,185,129,0.3)] ring-1 ring-emerald-500"
                       : "bg-slate-900/60 border-slate-800 hover:border-slate-700 hover:bg-slate-900/90"
@@ -902,7 +912,14 @@ export const TokenMealHub: React.FC = () => {
                       <span className="text-slate-400 font-mono">{tokensLeft} left</span>
                     </div>
 
-                    <div className="w-full bg-slate-950 rounded-full h-2 overflow-hidden border border-slate-800 p-0.5">
+                    <div
+                      role="progressbar"
+                      aria-valuenow={percentSold}
+                      aria-valuemin={0}
+                      aria-valuemax={100}
+                      aria-label={`${node.name} ${deliverySlot.toLowerCase()} token availability: ${percentSold}% sold`}
+                      className="w-full bg-slate-950 rounded-full h-2 overflow-hidden border border-slate-800 p-0.5"
+                    >
                       <div
                         className={`h-full rounded-full transition-all duration-500 ${
                           percentSold > 80
