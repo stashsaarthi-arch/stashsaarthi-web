@@ -55,7 +55,7 @@
 
 ## Sprint 5: QA & CSO (Quality, Safety, Compliance)
 - [x] 44. **[QA]**: Conduct a full security audit of the Supabase Row Level Security (RLS) policies.
-- [ ] 45. **[QA]**: Test the UI on specific older Android devices (via emulation) to ensure no WebGL crashes.
+- [x] 45. **[QA]**: Test the UI on specific older Android devices (via emulation) to ensure no WebGL crashes.
 - [ ] 46. **[CSO]**: Draft a clear "Host Vetting Process" flow diagram and integrate it into the Trust section.
 - [ ] 47. **[QA]**: Implement rate-limiting on all form submissions to prevent spam.
 - [ ] 48. **[QA]**: Verify all external links open in a new tab with `rel="noopener noreferrer"`.

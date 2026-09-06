@@ -4,6 +4,7 @@ import { Gift, Copy, Check, Sparkles, Share2 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
 import { useLanguage } from "@/context/LanguageContext";
+import { APP_BASE_URL } from "@/lib/constants";
 
 export function ReferralPill({ userType = "student" }: { userType?: "student" | "host" }) {
   const { user } = useAuth();
@@ -33,11 +34,11 @@ export function ReferralPill({ userType = "student" }: { userType?: "student" | 
     const isHost = userType === "host";
     const shareText = isHost
       ? isHi
-        ? `नमस्ते! मैं StashSaarthi के साथ सत्यापित छात्रों को होस्ट करके ₹11,500+/माह कमा रहा/रही हूं। मेरे इनवाइट कोड ${referralCode} के साथ देखें: https://stashsaarthi-web.vercel.app`
-        : `Namaste! I'm earning ₹11,500+/mo hosting verified students with StashSaarthi. Check it out using my invite code ${referralCode}: https://stashsaarthi-web.vercel.app`
+        ? `🏡 *कानपुर में अपने खाली कमरे से हर महीने ₹11,500+ कमाएं!* 🌟\n\nनमस्ते! मैं StashSaarthi के साथ सत्यापित छात्रों को होस्ट करके ₹11,500+/माह गरिमापूर्ण आय कमा रहा/रही हूं।\n\n🛡️ 100% एस्क्रौ सुरक्षा, नियमों पर आपका नियंत्रण व ₹10k बीमा।\n\n🎁 0% ऑनबोर्डिंग शुल्क के लिए मेरा इनवाइट कोड *${referralCode}* उपयोग करें:\n👉 ${APP_BASE_URL}?role=host&ref=${referralCode}`
+        : `🏡 *EARN ₹11,500+/MONTH FROM YOUR SPARE SPACE IN KANPUR!* 🌟\n\nNamaste! I'm earning ₹11,500+/mo hosting verified university students with StashSaarthi.\n\n🛡️ 100% Escrow security, full control over house rules & ₹10k insurance.\n\n🎁 Claim 0% onboarding fee using my invite code *${referralCode}*:\n👉 ${APP_BASE_URL}?role=host&ref=${referralCode}`
       : isHi
-        ? `अरे! StashSaarthi हमारे सेमेस्टर लगेज को कैंपस के पास मात्र ₹300/माह में सुरक्षित रख रहा है ताकि हमारा ₹8k खाली कमरे का किराया न जले! ₹300 फ्री स्टोरेज क्रेडिट के लिए मेरा इनवाइट कोड ${referralCode} उपयोग करें: https://stashsaarthi-web.vercel.app`
-        : `Hey! StashSaarthi is storing our semester luggage for just ₹300/mo near campus so we don't burn ₹8k on empty room dead-rent! Use my invite code ${referralCode} for ₹300 free storage credit: https://stashsaarthi-web.vercel.app`;
+        ? `🚨 *छुट्टियों में खाली रूम का ₹8,000 डेड-रेंट मत फूंको!* 🚨\n\nअरे दोस्त! StashSaarthi हमारे सेमेस्टर लगेज को कैंपस के पास मात्र *₹300/माह* में लेजर सील व ₹10k बीमा के साथ रख रहा है!\n\n🎁 *₹300 फ्री स्टोरेज क्रेडिट* पाने के लिए मेरा इनवाइट कोड *${referralCode}* उपयोग करें:\n👉 ${APP_BASE_URL}?ref=${referralCode}`
+        : `🚨 *DON'T BURN ₹8,000 DEAD-RENT THIS VACATION!* 🚨\n\nHey! StashSaarthi stores our semester luggage near campus for just *₹300/mo* with laser seals & ₹10k insurance!\n\n🎁 Claim *₹300 Free Storage Credit* using my invite code *${referralCode}*:\n👉 ${APP_BASE_URL}?ref=${referralCode}`;
 
     if (typeof navigator !== "undefined" && navigator.share) {
       try {

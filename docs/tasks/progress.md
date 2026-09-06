@@ -398,3 +398,16 @@
   - Built automated node audit harness `execution/audit-supabase-rls.mjs` and added `"audit:rls"` script in `package.json`.
   - Build & Type Check Verified: `npm run audit:rls` (**0 vulnerabilities across 10 tables**) and `npm run build` (**0 errors**).
 
+- [x] **[QA] Task 45: Test the UI on Specific Older Android Devices (via Emulation) to Ensure No WebGL Crashes** (2026-09-06)
+  - Engineered WebGL Safety & Legacy Android Compatibility Guard (`src/lib/webgl-fallback.ts`):
+    • Detects WebGL context availability, hardware acceleration support, and older Android OS user-agents (Android < 8.0 / low GPU memory).
+    • Listens for global `webglcontextlost` events on canvas elements, setting `data-webgl-supported="false"` and applying CSS `.legacy-android-fallback` mode.
+    • Auto-initializes WebGL safety guard upon client hydration in `src/routes/__root.tsx`.
+  - Added Legacy Android 2D CSS Fallback Layer in `src/styles.css`:
+    • Forces 2D hardware-safe element composition (`transform-style: flat !important`, `backface-visibility: visible !important`) and disables high-overhead GPU layer hints (`will-change: auto !important`) on low-spec Android devices.
+  - Created Playwright E2E Legacy Android Emulation Suite (`e2e/legacy-android-emulation.spec.ts`):
+    • Configured Nexus 5 (Android 6.0.1 Chrome) device emulation in `playwright.config.ts`.
+    • Verified clean landing page hydration, zero unhandled WebGL exceptions, multi-step booking modal navigation on low-spec viewport (360x640), and resilient fallback mode triggering upon `webglcontextlost` events.
+  - Build & E2E Verification: `npm run test:e2e:stub` (**PASSED**) and `npm run build` (**0 errors**).
+
+

@@ -10,6 +10,8 @@
   "ralphLoop.maxIterations": 100,
   "ralphLoop.defaultModel": "Gemini 3 Flash",
   "ralphLoop.antigravity.oauthToken": "auto",
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 500,
   "autoAcceptAgent.enableCommandPolling": true,
   "autoAcceptAgent.pollIntervalMs": 300,
   "autoAcceptAgent.autoConfigureSettings": true,
@@ -35,6 +37,9 @@
     "apply",
     "yes"
   ],
+  "autorunpro.engine": "uia",
+  "autorunpro.godMode": true,
+  "autorunpro.antiLoopProtection": true,
   "chat.editing.autoAcceptDelay": 1,
   "chat.tools.global.autoApprove": true,
   "chat.tools.autoApprove": true,
@@ -48,8 +53,25 @@
   "chat.agent.maxRequests": 999,
   "chat.tools.run_command.autoApprove": true,
   "chat.tools.default_api:run_command.autoApprove": true,
+  "chat.tools.edits.autoApprove": {
+    "**/*": true
+  },
+  "chat.tools.eligibleForAutoApproval": {
+    "runInTerminal": true,
+    "runTask": true,
+    "runTests": true,
+    "runSubagent": true
+  },
+  "chat.tools.terminal.autoReplyToPrompts": true,
+  "chat.editing.confirmEditRequestRemoval": false,
+  "chat.editing.confirmEditRequestRetry": false,
   "terminal.integrated.confirmOnKill": "never",
   "terminal.integrated.confirmOnPaste": false,
   "security.workspace.trust.enabled": false,
+  "security.workspace.trust.startupPrompt": "never",
+  "security.workspace.trust.banner": "never",
+  "security.workspace.trust.untrustedFiles": "open",
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
   "workbench.editor.enablePreview": false
 }

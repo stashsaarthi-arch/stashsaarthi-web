@@ -11,6 +11,7 @@ import {
   MapPin,
   Sparkles,
   Clock,
+  Trophy,
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { usePersona } from "@/context/PersonaContext";
@@ -27,6 +28,7 @@ const CATEGORIES: CategoryItem[] = [
   { id: "solutions", labelEn: "Solutions & Hub", labelHi: "समाधान व सेवाएँ", icon: Boxes },
   { id: "calculator", labelEn: "Savings Simulator", labelHi: "बचत कैलकुलेटर", icon: Calculator },
   { id: "timeline", labelEn: "Stash Journey", labelHi: "सामान का सफर", icon: Clock },
+  { id: "leaderboard", labelEn: "Leaderboard", labelHi: "लीडरबोर्ड", icon: Trophy },
   {
     id: "trust",
     labelEn: "Trust & Safety Pass",

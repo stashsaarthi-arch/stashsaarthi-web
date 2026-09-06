@@ -18,6 +18,7 @@ import AnimatedContent from "@/components/ui/AnimatedContent";
 import { PrototypeBadge } from "@/components/ui/PrototypeBadge";
 import type { OpenBooking } from "./types";
 import { useLanguage } from "@/context/LanguageContext";
+import { NodeSkeleton } from "@/components/ui/skeleton";
 
 interface NodeData {
   id: string;
@@ -363,12 +364,11 @@ export function CampusNodeChecker({ onBook }: { onBook: OpenBooking }) {
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: "auto" }}
                     exit={{ opacity: 0, height: 0 }}
-                    className="flex items-center justify-center py-10"
+                    className="p-3 space-y-2.5"
                   >
-                    <Activity className="h-6 w-6 text-emerald-500 animate-pulse" />
-                    <span className="ml-3 text-sm text-muted-foreground">
-                      {t.campusNodeChecker.scanning}
-                    </span>
+                    <NodeSkeleton />
+                    <NodeSkeleton />
+                    <NodeSkeleton />
                   </motion.div>
                 ) : results && results.length > 0 ? (
                   <motion.div

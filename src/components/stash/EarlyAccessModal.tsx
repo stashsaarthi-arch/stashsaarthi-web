@@ -55,24 +55,34 @@ export function EarlyAccessModal({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!fullName.trim() || fullName.trim().length < 2) {
-      toast.error(isHi ? "कृपया अपना नाम दर्ज करें।" : "Please enter your name.");
+    const cleanEmail = email.trim();
+    const cleanPhone = phone.trim();
+    const cleanName = fullName.trim() || (role === "student" ? "Stash Student" : "Host Partner");
+
+    // Require at least one valid contact method (Email OR Phone)
+    if (!cleanEmail && !cleanPhone) {
+      toast.error(
+        isHi
+          ? "कृपया संपर्क के लिए ईमेल या फोन नंबर दर्ज करें।"
+          : "Please enter either an email or phone number to continue.",
+      );
       return;
     }
-    if (!isValidEmail(email)) {
+
+    if (cleanEmail && !isValidEmail(cleanEmail)) {
       toast.error(isHi ? "कृपया एक मान्य ईमेल दर्ज करें।" : "Please enter a valid email address.");
       return;
     }
-    if (phone.trim() && !isValidPhone(phone)) {
+    if (cleanPhone && !isValidPhone(cleanPhone)) {
       toast.error(isHi ? "कृपया एक वैध फोन नंबर दर्ज करें।" : "Please enter a valid phone number.");
       return;
     }
 
     setSubmitting(true);
     const res = await insertWaitlistUser({
-      full_name: fullName.trim(),
-      email: email.trim(),
-      phone_number: phone.trim() || null,
+      full_name: cleanName,
+      email: cleanEmail || `${cleanPhone}@temp.stashsaarthi-web.vercel.app`,
+      phone_number: cleanPhone || null,
       user_type: role,
       college_or_locality: campus.trim() || `${servicePref.toUpperCase()} inquiry`,
     });
@@ -196,17 +206,16 @@ export function EarlyAccessModal({
                 <div className="relative">
                   <User className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
-                    required
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     placeholder={
                       role === "student"
                         ? isHi
-                          ? "आपका पूरा नाम"
-                          : "Full Name (e.g. Rahul Sharma)"
+                          ? "आपका पूरा नाम (वैकल्पिक)"
+                          : "Full Name (Optional)"
                         : isHi
-                          ? "होस्ट का पूरा नाम"
-                          : "Host Name (e.g. Smt. Sunita Verma)"
+                          ? "होस्ट का पूरा नाम (वैकल्पिक)"
+                          : "Host Name (Optional)"
                     }
                     className="pl-10 h-11 rounded-xl border-neutral-800 bg-neutral-950 text-sm focus-visible:ring-emerald-500/50"
                   />
@@ -216,12 +225,13 @@ export function EarlyAccessModal({
                 <div className="relative">
                   <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
-                    required
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder={
-                      isHi ? "ईमेल पता (उदा. name@iitk.ac.in)" : "Email (e.g. name@iitk.ac.in)"
+                      isHi
+                        ? "ईमेल या फोन नंबर दर्ज करें *"
+                        : "Email (or WhatsApp Phone below) *"
                     }
                     className="pl-10 h-11 rounded-xl border-neutral-800 bg-neutral-950 text-sm focus-visible:ring-emerald-500/50"
                   />

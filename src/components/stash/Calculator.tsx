@@ -72,9 +72,7 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                   step="1"
                   value={bags}
                   onChange={(e) => setBags(Math.max(1, Number(e.target.value) || 1))}
-                  aria-label={
-                    isHi ? "स्टोर करने के लिए बैगों की संख्या" : "Number of luggage bags to store"
-                  }
+                  aria-label={t.calculator.bagsAria}
                   className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500"
                 />
                 <div className="flex justify-between text-xs text-slate-400 mt-2 font-mono">
@@ -106,7 +104,7 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                   step="5"
                   value={vacationDays}
                   onChange={(e) => setVacationDays(Math.max(15, Number(e.target.value) || 15))}
-                  aria-label={isHi ? "छुट्टियों की अवधि (दिन)" : "Vacation duration in days"}
+                  aria-label={t.calculator.daysAria}
                   className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500"
                 />
                 <div className="flex justify-between text-xs text-slate-400 mt-2 font-mono">
@@ -137,9 +135,7 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                   step="500"
                   value={monthlyRent}
                   onChange={(e) => setMonthlyRent(Math.max(1000, Number(e.target.value) || 3000))}
-                  aria-label={
-                    isHi ? "वर्तमान मासिक कमरा किराया" : "Current monthly PG or room rent in rupees"
-                  }
+                  aria-label={t.calculator.rentAria}
                   className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500"
                 />
                 <div className="flex justify-between text-xs text-slate-400 mt-2 font-mono">
@@ -161,6 +157,9 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                 </div>
                 <div className="text-xs text-emerald-500/80 font-medium mt-0.5">
                   🎉 {t.calculator.saveCompare.replace("{percent}", String(savingsPercent))}
+                </div>
+                <div className="mt-2 inline-flex items-center gap-1 rounded-full border border-emerald-500/40 bg-emerald-500/15 px-2.5 py-0.5 text-[11px] font-bold text-emerald-300">
+                  ⚡ {isHi ? "0 रद्दीकरण शुल्क (Zero Cancellation Fee)" : "Zero Cancellation Fee Guarantee"}
                 </div>
 
                 {/* Visual comparative bar breakdown */}
@@ -238,7 +237,7 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                   title={isHi ? "बचत प्रमाणपत्र देखें" : "View Official Savings Certificate"}
                 >
                   <FileText className="h-3.5 w-3.5 shrink-0" />
-                  <span>{isHi ? "बचत रसीद" : "Savings Proof"}</span>
+                  <span>{t.calculator.savingsProofBtn}</span>
                 </button>
 
                 <button
@@ -261,52 +260,42 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
               <div className="flex items-center justify-between">
                 <DialogTitle className="text-base font-bold text-white flex items-center gap-2">
                   <ShieldCheck className="h-5 w-5 text-emerald-400" />
-                  <span>
-                    {isHi ? "आधिकारिक डेड-रेंट बचत प्रमाणपत्र" : "Official Dead-Rent Savings Audit"}
-                  </span>
+                  <span>{t.calculator.certificateTitle}</span>
                 </DialogTitle>
                 <span className="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
-                  VERIFIED
+                  {t.calculator.verifiedBadge}
                 </span>
               </div>
             </DialogHeader>
 
             <div className="my-4 rounded-2xl border border-white/10 bg-black/60 p-5 text-left font-mono text-xs space-y-3">
               <div className="flex justify-between border-b border-white/10 pb-2">
-                <span className="text-slate-400">
-                  {isHi ? "प्रमाणपत्र आईडी:" : "Audit Certificate ID:"}
-                </span>
+                <span className="text-slate-400">{t.calculator.certificateAuditId}</span>
                 <span className="font-bold text-emerald-400">
                   #SAV-KANPUR-{Math.floor(Math.random() * 90000) + 10000}
                 </span>
               </div>
               <div className="flex justify-between border-b border-white/10 pb-2">
-                <span className="text-slate-400">
-                  {isHi ? "अवधि (वेकेशन):" : "Vacation Duration:"}
-                </span>
+                <span className="text-slate-400">{t.calculator.certificateDuration}</span>
                 <span className="text-white">
-                  {safeDays} {isHi ? "दिन" : "Days"} ({vacationMonths} {isHi ? "माह" : "mo"})
+                  {safeDays} {t.calculator.daysUnit} ({vacationMonths} {t.calculator.monthUnit})
                 </span>
               </div>
               <div className="flex justify-between border-b border-white/10 pb-2">
-                <span className="text-slate-400">
-                  {isHi ? "पारंपरिक खाली कमरा किराया:" : "Empty Room Rent Waste:"}
-                </span>
+                <span className="text-slate-400">{t.calculator.certificateEmptyRent}</span>
                 <span className="font-bold text-rose-400">
                   ₹{deadRentCost.toLocaleString("en-IN")}
                 </span>
               </div>
               <div className="flex justify-between border-b border-white/10 pb-2">
-                <span className="text-slate-400">
-                  {isHi ? "सार्थी स्टैश लागत (₹300/बैग):" : "StashSaarthi Escrow Fee:"}
-                </span>
+                <span className="text-slate-400">{t.calculator.certificateStashFee}</span>
                 <span className="font-bold text-cyan-400">
                   ₹{stashCost.toLocaleString("en-IN")}
                 </span>
               </div>
               <div className="flex justify-between items-center pt-2 text-sm">
                 <span className="font-sans font-bold text-emerald-300">
-                  {isHi ? "सीधी छात्र जेब बचत:" : "Total In-Pocket Savings:"}
+                  {t.calculator.certificateNetSavings}
                 </span>
                 <span className="text-xl font-bold text-emerald-400">
                   ₹{netSavings.toLocaleString("en-IN")}
@@ -321,7 +310,7 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                 onClick={() => window.print()}
               >
                 <Printer className="h-4 w-4 mr-1.5" />
-                <span>{isHi ? "प्रिंट / PDF" : "Print / PDF"}</span>
+                <span>{t.calculator.printPdf}</span>
               </Button>
               <Button
                 variant="hero"
@@ -339,7 +328,7 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                   }
                 }}
               >
-                {isHi ? "यह बचत सुरक्षित करें" : "Lock This Savings"}
+                {t.calculator.lockSavingsCert}
               </Button>
             </div>
           </DialogContent>

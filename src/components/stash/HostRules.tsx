@@ -82,10 +82,10 @@ export const HostRules = memo(function HostRules() {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
                       <Icon
-                        className={`h-4 w-4 shrink-0 ${isActive ? "text-amber-400" : "text-slate-500"}`}
+                        className={`h-4 w-4 shrink-0 ${isActive ? "text-amber-400" : "text-muted-foreground"}`}
                       />
                       <span
-                        className={`text-sm font-bold ${isActive ? "text-white" : "text-muted-foreground"}`}
+                        className={`text-sm font-bold ${isActive ? "text-foreground" : "text-muted-foreground"}`}
                       >
                         {rule.title}
                       </span>

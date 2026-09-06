@@ -34,17 +34,16 @@ export function CampusCaptainModal({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!name.trim() || !college.trim() || !phone.trim()) {
+    const cleanPhone = phone.trim();
+    const cleanName = name.trim() || "Campus Captain Applicant";
+    const cleanCollege = college.trim() || "Kanpur Campus";
+
+    if (!cleanPhone || !isValidPhone(cleanPhone)) {
       toast.error(
         isHi
-          ? "कृपया अपना नाम, कॉलेज और फोन नंबर भरें।"
-          : "Please fill in your name, campus, and phone number.",
+          ? "कृपया संपर्क के लिए 10-अंकीय फोन नंबर दर्ज करें।"
+          : "Please enter a valid phone number for contact.",
       );
-      return;
-    }
-
-    if (!isValidPhone(phone)) {
-      toast.error(isHi ? "कृपया एक वैध फोन नंबर दर्ज करें।" : "Please enter a valid phone number.");
       return;
     }
 

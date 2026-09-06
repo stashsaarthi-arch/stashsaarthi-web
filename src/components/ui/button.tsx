@@ -19,6 +19,9 @@ const buttonVariants = cva(
           "hover:bg-accent hover:text-accent-foreground hover:scale-100 hover:translate-y-0 active:scale-95",
         link: "text-primary underline-offset-4 hover:underline hover:scale-100 hover:translate-y-0",
         hero: "relative overflow-hidden bg-[image:var(--gradient-cyan)] text-primary-foreground font-semibold shadow-[var(--glow-cyan)] hover:brightness-110 btn-shimmer pulse-glow",
+        heroMint: "relative overflow-hidden bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 text-slate-950 font-bold shadow-[0_0_25px_rgba(16,185,129,0.45)] hover:brightness-110 btn-shimmer pulse-glow",
+        heroEmerald: "relative overflow-hidden bg-gradient-to-r from-emerald-500 via-emerald-400 to-green-500 text-slate-950 font-bold shadow-[0_0_25px_rgba(16,185,129,0.55)] hover:brightness-110 btn-shimmer pulse-glow-emerald",
+        heroCyan: "relative overflow-hidden bg-gradient-to-r from-cyan-400 via-sky-400 to-teal-400 text-slate-950 font-bold shadow-[0_0_25px_rgba(6,182,212,0.55)] hover:brightness-110 btn-shimmer pulse-glow",
         warm: "relative overflow-hidden bg-[image:var(--gradient-amber)] text-primary-foreground font-semibold hover:brightness-110 btn-shimmer pulse-glow-amber",
         frost:
           "glass glass-hover text-foreground font-semibold backdrop-blur-xl hover:text-foreground",

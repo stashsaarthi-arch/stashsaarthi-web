@@ -114,7 +114,7 @@ export const FooterSection = memo(function FooterSection() {
 
   const isPhoneValid = phone.trim() ? isValidPhone(phone) : false;
   const isEmailValid = email.trim() ? isValidEmail(email) : false;
-  const isNameValid = fullName.trim().length >= 2;
+  const isNameValid = !fullName.trim() || fullName.trim().length >= 2;
 
   const ECOSYSTEM = [
     { label: isHi ? "सार्थी स्पेसेस (कमरे)" : "Saarthi Spaces", target: "ecosystem" },
@@ -184,25 +184,35 @@ export const FooterSection = memo(function FooterSection() {
 
   const handleSubmit = async () => {
     setTouched({ name: true, email: true, phone: true });
-    // Validation
-    if (!fullName.trim() || fullName.trim().length < 2) {
-      toast.error(isHi ? "कृपया अपना पूरा नाम दर्ज करें।" : "Please enter your full name.");
+
+    const cleanEmail = email.trim();
+    const cleanPhone = phone.trim();
+    const cleanName = fullName.trim() || (userType === "student" ? "Priority Student" : "Priority Host");
+
+    // Require at least 1 contact method (Email OR Phone)
+    if (!cleanEmail && !cleanPhone) {
+      toast.error(
+        isHi
+          ? "कृपया संपर्क के लिए ईमेल या फोन नंबर दर्ज करें।"
+          : "Please enter either an email or phone number to continue.",
+      );
       return;
     }
-    if (!isValidEmail(email)) {
+
+    if (cleanEmail && !isValidEmail(cleanEmail)) {
       toast.error(isHi ? "कृपया एक मान्य ईमेल दर्ज करें।" : "Please enter a valid email address.");
       return;
     }
-    if (phone.trim() && !isValidPhone(phone)) {
+    if (cleanPhone && !isValidPhone(cleanPhone)) {
       toast.error(isHi ? "कृपया एक वैध फोन नंबर दर्ज करें।" : "Please enter a valid phone number.");
       return;
     }
 
     setSubmitting(true);
     const result = await insertWaitlistUser({
-      full_name: fullName.trim(),
-      email: email.trim(),
-      phone_number: phone.trim() || null,
+      full_name: cleanName,
+      email: cleanEmail || `${cleanPhone}@temp.stashsaarthi-web.vercel.app`,
+      phone_number: cleanPhone || null,
       user_type: userType,
       college_or_locality: college.trim() || null,
     });

@@ -64,30 +64,58 @@ export const CalculatorHub = memo(function CalculatorHub({ onBook }: { onBook: O
 
       {/* Mode Switcher */}
       <div className="mt-3 flex items-center justify-center">
-        <div className="glass flex w-full max-w-xl items-center justify-between rounded-full border border-white/10 p-1 shadow-lg">
+        <div
+          role="tablist"
+          aria-label={isHi ? "कैलकुलेटर मोड चुनें" : "Calculator Mode Selector"}
+          className="glass flex w-full max-w-xl items-center justify-between rounded-full border border-white/10 p-1 shadow-lg"
+        >
           <button
+            id="calc-tab-student"
+            role="tab"
+            aria-selected={activeTab === "student"}
+            aria-controls="calc-panel-student"
+            tabIndex={activeTab === "student" ? 0 : -1}
             onClick={() => setActiveTab("student")}
-            className={`flex flex-1 items-center justify-center gap-1.5 rounded-full py-1.5 px-2 sm:px-3 text-[11px] sm:text-xs font-bold transition-all duration-200 cursor-pointer whitespace-nowrap ${
+            onKeyDown={(e) => {
+              if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+                e.preventDefault();
+                setActiveTab("host");
+                document.getElementById("calc-tab-host")?.focus();
+              }
+            }}
+            className={`flex flex-1 items-center justify-center gap-1.5 rounded-full py-1.5 px-2 sm:px-3 text-[11px] sm:text-xs font-bold transition-all duration-200 cursor-pointer whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 ${
               activeTab === "student"
                 ? "border border-emerald/40 bg-emerald/15 text-emerald shadow-md"
                 : "text-muted-foreground hover:text-white"
             }`}
           >
-            <Calculator className="h-3.5 w-3.5 shrink-0" />
+            <Calculator className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
             <span>
               {isHi ? "🎓 छात्र बचत" : "🎓 Student Savings"}
               <span className="hidden sm:inline"> (₹8k Saved)</span>
             </span>
           </button>
           <button
+            id="calc-tab-host"
+            role="tab"
+            aria-selected={activeTab === "host"}
+            aria-controls="calc-panel-host"
+            tabIndex={activeTab === "host" ? 0 : -1}
             onClick={() => setActiveTab("host")}
-            className={`flex flex-1 items-center justify-center gap-1.5 rounded-full py-1.5 px-2 sm:px-3 text-[11px] sm:text-xs font-bold transition-all duration-200 cursor-pointer whitespace-nowrap ${
+            onKeyDown={(e) => {
+              if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+                e.preventDefault();
+                setActiveTab("student");
+                document.getElementById("calc-tab-student")?.focus();
+              }
+            }}
+            className={`flex flex-1 items-center justify-center gap-1.5 rounded-full py-1.5 px-2 sm:px-3 text-[11px] sm:text-xs font-bold transition-all duration-200 cursor-pointer whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
               activeTab === "host"
                 ? "border border-amber/40 bg-amber/15 text-amber shadow-md"
                 : "text-muted-foreground hover:text-white"
             }`}
           >
-            <TrendingUp className="h-3.5 w-3.5 shrink-0" />
+            <TrendingUp className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
             <span>
               {isHi ? "🏡 मेज़बान कमाई" : "🏡 Host Earnings"}
               <span className="hidden sm:inline"> (₹11.5k+/mo)</span>
@@ -97,7 +125,13 @@ export const CalculatorHub = memo(function CalculatorHub({ onBook }: { onBook: O
       </div>
 
       {/* Simulator View */}
-      <div className="mt-2.5">
+      <div
+        role="tabpanel"
+        id={`calc-panel-${activeTab}`}
+        aria-labelledby={`calc-tab-${activeTab}`}
+        tabIndex={0}
+        className="mt-2.5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/20 rounded-2xl"
+      >
         {activeTab === "student" ? (
           <StashCalculator onBook={onBook} />
         ) : (

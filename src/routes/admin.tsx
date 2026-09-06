@@ -6,8 +6,26 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { logSupabaseError } from "@/lib/supabaseLogger";
 import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
+import { TableSkeleton } from "@/components/ui/skeleton";
 
 export const Route = createFileRoute("/admin")({
+  head: () => ({
+    meta: [
+      { title: "StashSaarthi Admin & Investor Telemetry Console" },
+      {
+        name: "description",
+        content:
+          "Secure operational control dashboard, waitlist management, and unit economics telemetry for StashSaarthi Kanpur.",
+      },
+      { property: "og:title", content: "StashSaarthi Admin & Investor Telemetry Console" },
+      { property: "og:description", content: "Secure operational control dashboard, waitlist management, and unit economics telemetry for StashSaarthi Kanpur." },
+      { property: "og:image", content: "https://stashsaarthi-web.vercel.app/images/og-admin.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "StashSaarthi Admin & Investor Telemetry Console" },
+      { name: "twitter:description", content: "Secure operational control dashboard, waitlist management, and unit economics telemetry for StashSaarthi Kanpur." },
+      { name: "twitter:image", content: "https://stashsaarthi-web.vercel.app/images/og-admin.png" },
+    ],
+  }),
   component: AdminPageWrapped,
 });
 
@@ -255,12 +273,7 @@ function AdminPage() {
               </thead>
               <tbody className="divide-y divide-white/5">
                 {loading ? (
-                  <tr>
-                    <td colSpan={5} className="px-6 py-12 text-center text-muted-foreground">
-                      <Loader2 className="h-6 w-6 animate-spin mx-auto mb-2" />
-                      Loading leads...
-                    </td>
-                  </tr>
+                  <TableSkeleton rows={5} columns={5} />
                 ) : leads.length === 0 ? (
                   <tr>
                     <td colSpan={5} className="px-6 py-12 text-center text-muted-foreground">

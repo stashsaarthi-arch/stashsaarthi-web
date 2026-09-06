@@ -409,10 +409,15 @@ function CustodyTimeline() {
         <div className="rounded-3xl border border-white/10 bg-black/40 p-6 backdrop-blur-xl sm:p-8">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <div className="flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="text-xs font-bold uppercase tracking-widest text-emerald-400 font-mono">
-                  {isHi ? "डिजिटल कस्टडी चेन प्रोटोकॉल" : "Digital Chain of Custody Protocol"}
+              <div className="flex items-center gap-2 flex-wrap">
+                <div className="flex items-center gap-2">
+                  <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="text-xs font-bold uppercase tracking-widest text-emerald-400 font-mono">
+                    {isHi ? "डिजिटल कस्टडी चेन प्रोटोकॉल" : "Digital Chain of Custody Protocol"}
+                  </span>
+                </div>
+                <span className="inline-flex items-center gap-1 rounded-full border border-emerald-500/40 bg-emerald-500/15 px-2 py-0.5 text-[10px] font-bold text-emerald-300">
+                  ⚡ {isHi ? "100% शून्य रद्दीकरण शुल्क" : "100% Zero Cancellation Fee Guarantee"}
                 </span>
               </div>
               <h3 className="text-lg sm:text-xl font-bold text-white mt-1">

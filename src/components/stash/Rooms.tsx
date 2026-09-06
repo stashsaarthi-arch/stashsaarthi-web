@@ -8,6 +8,7 @@ import { SafetyAuditModal } from "./SafetyAuditModal";
 import { FOUNDER_WHATSAPP, getWhatsAppUrl } from "@/lib/constants";
 import { PrototypeBadge } from "@/components/ui/PrototypeBadge";
 import { useLanguage } from "@/context/LanguageContext";
+import { RoomCardSkeleton } from "@/components/ui/skeleton";
 
 type Listing = {
   id: string;
@@ -123,6 +124,7 @@ export function Rooms({ onList }: { onList: () => void }) {
   const { language, t } = useLanguage();
   const isHi = language === "hi";
   const [listings, setListings] = useState<Listing[]>(DEMO);
+  const [loading, setLoading] = useState(false);
   const [activeFilter, setActiveFilter] = useState<string>("all");
   const [auditOpen, setAuditOpen] = useState(false);
 
@@ -137,15 +139,25 @@ export function Rooms({ onList }: { onList: () => void }) {
 
   useEffect(() => {
     let active = true;
-    void supabase
-      .from("crowdsourced_room_listings")
-      .select("id, owner_name, owner_phone, rent_amount, address_location, student_review, ratings")
-      .eq("status", "verified")
-      .order("created_at", { ascending: false })
-      .limit(6)
-      .then(({ data }) => {
-        if (active && Array.isArray(data) && data.length > 0) setListings(data as Listing[]);
-      });
+    const fetchListings = async () => {
+      setLoading(true);
+      try {
+        const { data } = await supabase
+          .from("crowdsourced_room_listings")
+          .select("id, owner_name, owner_phone, rent_amount, address_location, student_review, ratings")
+          .eq("status", "verified")
+          .order("created_at", { ascending: false })
+          .limit(6);
+        if (active && Array.isArray(data) && data.length > 0) {
+          setListings(data as Listing[]);
+        }
+      } catch {
+        // use default DEMO
+      } finally {
+        if (active) setLoading(false);
+      }
+    };
+    void fetchListings();
     return () => {
       active = false;
     };
@@ -228,7 +240,14 @@ export function Rooms({ onList }: { onList: () => void }) {
 
       <div className="relative">
         <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredListings.map((l, i) => (
+          {loading ? (
+            <>
+              <RoomCardSkeleton />
+              <RoomCardSkeleton />
+              <RoomCardSkeleton />
+            </>
+          ) : (
+            filteredListings.map((l, i) => (
             <AnimatedContent
               key={l.id}
               distance={30}
@@ -257,12 +276,17 @@ export function Rooms({ onList }: { onList: () => void }) {
                 </div>
 
                 <div className="flex flex-1 flex-col px-1 pb-1">
-                  <div className="flex items-start justify-between gap-2">
-                    <span className="text-base font-extrabold">
-                      {l.rent_amount
-                        ? `${inr(l.rent_amount)}${t.rooms.perMonth}`
-                        : t.rooms.rentOnRequest}
-                    </span>
+                  <div className="flex items-start justify-between gap-2 flex-wrap">
+                    <div className="flex items-center gap-1.5 flex-wrap">
+                      <span className="text-base font-extrabold">
+                        {l.rent_amount
+                          ? `${inr(l.rent_amount)}${t.rooms.perMonth}`
+                          : t.rooms.rentOnRequest}
+                      </span>
+                      <span className="inline-flex items-center gap-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-[10px] font-bold text-emerald-400">
+                        ⚡ {isHi ? "0 रद्दीकरण शुल्क" : "Zero Cancellation Fee"}
+                      </span>
+                    </div>
                     {l.ratings ? (
                       <span className="flex shrink-0 items-center gap-1 text-xs font-bold text-amber">
                         <Star className="h-3 w-3 fill-current" /> {l.ratings}
@@ -354,7 +378,7 @@ export function Rooms({ onList }: { onList: () => void }) {
                 </div>
               </article>
             </AnimatedContent>
-          ))}
+          )))}
         </div>
       </div>
 

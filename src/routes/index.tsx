@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { AmbientNodes } from "@/components/ui/AmbientNodes";
 import { Navbar } from "@/components/stash/Navbar";
@@ -6,6 +6,7 @@ import { Hero } from "@/components/stash/Hero";
 import { QuickCategoryNav } from "@/components/stash/QuickCategoryNav";
 import { DualCrisis } from "@/components/stash/DualCrisis";
 import { SolutionsHub } from "@/components/stash/SolutionsHub";
+import { PgComparisonTable } from "@/components/stash/PgComparisonTable";
 import { CalculatorHub } from "@/components/stash/CalculatorHub";
 import { TrustConsoleHub } from "@/components/stash/TrustConsoleHub";
 import { StudentStoriesCarousel } from "@/components/stash/StudentStoriesCarousel";
@@ -22,11 +23,13 @@ import { BookingModal } from "@/components/stash/BookingModal";
 import { RoomListingModal } from "@/components/stash/RoomListingModal";
 import { RoleLane } from "@/components/stash/RoleLane";
 import { StashTimeline } from "@/components/stash/StashTimeline";
+import { ReferralLeaderboard } from "@/components/stash/ReferralLeaderboard";
 import { WhatsAppButton } from "@/components/stash/WhatsAppButton";
 import { ActivityTicker } from "@/components/stash/ActivityTicker";
 import { ScrollProgress } from "@/components/stash/ScrollProgress";
 import { FloatingPersonaToggle } from "@/components/stash/FloatingPersonaToggle";
 import { MobileStickyCTA } from "@/components/stash/MobileStickyCTA";
+import { ExitIntentModal } from "@/components/stash/ExitIntentModal";
 import { usePersona } from "@/context/PersonaContext";
 import type { BookingPrefill } from "@/components/stash/types";
 
@@ -78,6 +81,26 @@ function Index() {
   const handleEarlyAccess = useCallback(() => setEarlyAccess(true), []);
   const handleRefer = useCallback(() => setReferralOpen(true), []);
 
+  useEffect(() => {
+    const handleOpenBooking = (e: Event) => {
+      const customEv = e as CustomEvent<{ service?: string; promoCode?: string; note?: string }>;
+      if (customEv.detail) {
+        open({
+          service: customEv.detail.service,
+          note:
+            customEv.detail.note ||
+            (customEv.detail.promoCode
+              ? `Applied Offer Code ${customEv.detail.promoCode}: Flat ₹50 Discount`
+              : undefined),
+        });
+      } else {
+        open();
+      }
+    };
+    window.addEventListener("stashsaarthi:open-booking", handleOpenBooking);
+    return () => window.removeEventListener("stashsaarthi:open-booking", handleOpenBooking);
+  }, [open]);
+
   return (
     <main id="main-content" tabIndex={-1} className="relative min-h-screen overflow-x-hidden bg-background text-foreground transition-colors duration-500 focus:outline-none">
       <a href="#main-content" className="skip-to-content">
@@ -108,18 +131,23 @@ function Index() {
         <RoleLane role={role} onBook={open} />
       </ErrorBoundary>
 
-      <ErrorBoundary sectionName="Dual Crisis Overview">
-        <DualCrisis />
+      {/* High-Converting Savings Calculator Module placed high up for optimal scroll-depth conversion */}
+      <ErrorBoundary sectionName="Calculator Hub">
+        <CalculatorHub onBook={open} />
       </ErrorBoundary>
 
-      {/* 1. Core Solutions Hub (Stash / Rooms / Kitchen / Connect) */}
+      {/* Core Solutions Hub (Stash / Rooms / Kitchen / Connect) */}
       <ErrorBoundary sectionName="Solutions Hub">
         <SolutionsHub onBook={open} onListRoom={handleListRoom} />
       </ErrorBoundary>
 
-      {/* 2. Interactive Calculator & Space Simulator Hub */}
-      <ErrorBoundary sectionName="Calculator Hub">
-        <CalculatorHub onBook={open} />
+      {/* Why StashSaarthi vs. Traditional PGs Comparison Table */}
+      <ErrorBoundary sectionName="Why StashSaarthi vs Traditional PGs">
+        <PgComparisonTable onBook={open} />
+      </ErrorBoundary>
+
+      <ErrorBoundary sectionName="Dual Crisis Overview">
+        <DualCrisis />
       </ErrorBoundary>
 
       {/* Interactive Timeline of a Stash (Pickup -> Custody -> Return) */}
@@ -135,6 +163,11 @@ function Index() {
       {/* Dedicated Student & Host Success Stories Carousel */}
       <ErrorBoundary sectionName="Student Success Stories">
         <StudentStoriesCarousel onBook={open} />
+      </ErrorBoundary>
+
+      {/* Interactive Referral Leaderboard */}
+      <ErrorBoundary sectionName="Referral Leaderboard">
+        <ReferralLeaderboard onRefer={handleRefer} />
       </ErrorBoundary>
 
       {/* Host Specific Dashboard Norms */}
@@ -185,11 +218,21 @@ function Index() {
       <ErrorBoundary sectionName="WhatsApp Referral Modal" compact>
         <WhatsAppReferralModal open={referralOpen} onOpenChange={setReferralOpen} />
       </ErrorBoundary>
+      <ErrorBoundary sectionName="Exit Intent Modal" compact>
+        <ExitIntentModal
+          onClaimDiscount={(code, service) => {
+            open({
+              service,
+              note: `Applied Offer Code ${code}: Flat ₹50 Discount`,
+            });
+          }}
+        />
+      </ErrorBoundary>
       <ErrorBoundary sectionName="Scroll Progress Indicator" compact>
         <ScrollProgress />
       </ErrorBoundary>
       <ErrorBoundary sectionName="Activity Ticker Widget" compact>
-        <ActivityTicker />
+        <ActivityTicker onBook={open} onListRoom={handleListRoom} />
       </ErrorBoundary>
       <ErrorBoundary sectionName="Floating Persona Toggle Widget" compact>
         <FloatingPersonaToggle />
@@ -206,3 +249,4 @@ function Index() {
     </main>
   );
 }
+

@@ -23,6 +23,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { AnimatedStat } from "./AnimatedStat";
 import { LiveChangelogBadge } from "./ChangelogModal";
 import { smoothScrollTo } from "./legal";
+import { useHeroCtaVariant, trackCtaClick, type HeroCtaVariant } from "@/lib/abTesting";
 
 export const Hero = memo(function Hero({
   role,
@@ -34,11 +35,25 @@ export const Hero = memo(function Hero({
   onRefer?: () => void;
 }) {
   const { t } = useLanguage();
+  const { variant: ctaVariant, setVariant: setCtaVariant } = useHeroCtaVariant();
   const student = role === "student";
   const STATS = (student ? t.hero?.student?.stats : t.hero?.host?.stats) || [];
   const ICONS = student
     ? [IndianRupee, ShieldCheck, MapPin, Boxes]
     : [ShieldCheck, Lock, Banknote, Clock];
+
+  const getButtonVariant = () => {
+    if (!student) return "warm";
+    if (ctaVariant === "emerald") return "heroEmerald";
+    if (ctaVariant === "cyan") return "heroCyan";
+    return "heroMint";
+  };
+
+  const handleCtaClick = () => {
+    const service = student ? "stash" : "spaces";
+    trackCtaClick(ctaVariant, role, service);
+    onBook({ service });
+  };
 
   return (
     <section id="top" className="relative overflow-hidden pb-4 pt-16 sm:pb-6 md:pt-20">
@@ -93,7 +108,7 @@ export const Hero = memo(function Hero({
 
           <h1
             key={`h-${role}`}
-            className="mx-auto mt-2 max-w-4xl text-balance text-2xl font-extrabold leading-[1.1] tracking-tight sm:text-4xl md:text-5xl"
+            className="mx-auto mt-2 max-w-4xl text-balance text-2xl font-extrabold leading-[1.1] tracking-tight sm:text-4xl md:text-5xl 3xl:text-6xl 4xl:text-7xl"
           >
             <span className="block text-xs font-bold tracking-wider text-emerald mb-1.5">
               StashSaarthi Living & Storage
@@ -134,9 +149,9 @@ export const Hero = memo(function Hero({
           <div className="mt-3.5 flex flex-col items-stretch justify-center gap-2 sm:flex-row sm:items-center">
             <Button
               data-magnetic
-              variant={student ? "hero" : "warm"}
+              variant={getButtonVariant()}
               size="default"
-              onClick={() => onBook({ service: student ? "stash" : "spaces" })}
+              onClick={handleCtaClick}
               className="group w-full sm:w-auto text-xs sm:text-sm px-5 py-4"
             >
               <span className="truncate">{student ? t.hero.student.cta : t.hero.host.cta}</span>
@@ -185,6 +200,48 @@ export const Hero = memo(function Hero({
               </Button>
             )}
           </div>
+
+          {/* CRO A/B Testing Variant Selector (Student Mode) */}
+          {student && (
+            <div className="mt-2.5 flex items-center justify-center gap-1.5 text-[10px] font-mono text-muted-foreground/80">
+              <span className="opacity-60">A/B Test CTA Color:</span>
+              <div className="inline-flex rounded-full border border-white/10 bg-black/30 p-0.5 backdrop-blur-md">
+                <button
+                  type="button"
+                  onClick={() => setCtaVariant("mint")}
+                  className={`rounded-full px-2 py-0.5 transition-all ${
+                    ctaVariant === "mint"
+                      ? "bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/40"
+                      : "hover:text-white opacity-70"
+                  }`}
+                >
+                  🌿 Mint
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setCtaVariant("emerald")}
+                  className={`rounded-full px-2 py-0.5 transition-all ${
+                    ctaVariant === "emerald"
+                      ? "bg-emerald-400/25 text-emerald-200 font-bold border border-emerald-400/50"
+                      : "hover:text-white opacity-70"
+                  }`}
+                >
+                  💚 Emerald
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setCtaVariant("cyan")}
+                  className={`rounded-full px-2 py-0.5 transition-all ${
+                    ctaVariant === "cyan"
+                      ? "bg-cyan-500/20 text-cyan-300 font-bold border border-cyan-500/40"
+                      : "hover:text-white opacity-70"
+                  }`}
+                >
+                  💎 Cyan
+                </button>
+              </div>
+            </div>
+          )}
         </AnimatedContent>
 
         <Card3D maxTilt={5} className="mx-auto mt-4 max-w-4xl rounded-xl">

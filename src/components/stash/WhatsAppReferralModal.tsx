@@ -36,7 +36,7 @@ export function WhatsAppReferralModal({ open, onOpenChange }: WhatsAppReferralMo
   );
   const [copied, setCopied] = useState(false);
 
-  // Pre-crafted high-converting referral messages
+  // Pre-crafted high-converting referral messages optimized for maximum CTR
   const messages: Record<
     "student" | "host" | "food",
     { en: string; hi: string; titleEn: string; titleHi: string; icon: LucideIcon }
@@ -45,22 +45,22 @@ export function WhatsAppReferralModal({ open, onOpenChange }: WhatsAppReferralMo
       icon: GraduationCap,
       titleEn: "Share with College & Hostel Friends",
       titleHi: "कॉलेज व हॉस्टल मित्रों के साथ शेयर करें",
-      en: `🎒 *StashSaarthi — Campus Vacation Luggage Storage & Living*\n\nHey! Check this out before vacation starts — instead of burning ₹6,000–₹8,000 in dead rent for empty PG rooms, you can store your luggage securely for just *₹300/bag/mo* with laser tamper seals & ₹10k insurance near campus.\n\nAlso get verified 0% brokerage rooms & homemade tiffins!\n\n👉 *Check it out here:* ${APP_BASE_URL}`,
-      hi: `🎒 *स्टैशसारथी — कैंपस वैकेशन लगेज स्टोरेज व आवास*\n\nअरे! छुट्टियों से पहले इसे देखें — खाली पीजी रूम के ₹6,000–₹8,000 डेड-रेंट में फूंकने के बजाय, अपना सामान कैंपस के पास मात्र *₹300/बैग/माह* में लेजर सील और ₹10k बीमा के साथ सुरक्षित रखें।\n\nसाथ ही शून्य ब्रोकरेज वाले कमरे और घर का शुद्ध भोजन भी उपलब्ध है!\n\n👉 *यहाँ देखें:* ${APP_BASE_URL}`,
+      en: `🚨 *DON'T BURN ₹8,000 DEAD-RENT THIS VACATION!* 🚨\n\nHey! Check this out before leaving campus for holidays — instead of paying full PG rent for an empty room, store your luggage near campus for just *₹300/bag/month*!\n\n🔒 *What you get:*\n• Laser Tamper Barcode Seals (#SS-8921)\n• ₹10,000 Micro-Insurance Protection\n• Verified 0% Brokerage Rooms & Home Tiffins (₹50/meal)\n\n🎁 *Claim ₹300 Free Storage Credit with Code STASH2026:*\n👉 ${APP_BASE_URL}?ref=STASH2026`,
+      hi: `🚨 *छुट्टियों में खाली रूम का ₹8,000 डेड-रेंट मत फूंको!* 🚨\n\nअरे दोस्त! घर जाने से पहले इसे देखो — खाली पीजी कमरे का पूरा किराया देने के बजाय, अपना सामान कैंपस के पास मात्र *₹300/बैग/माह* में स्टोर करो!\n\n🔒 *आपको क्या मिलेगा:*\n• लेजर बारकोड टेम्पर सील (#SS-8921)\n• ₹10,000 सुरक्षा माइक्रो-बीमा कवर\n• शून्य ब्रोकरेज वाले कमरे व होम टिफिन (₹50/भोजन)\n\n🎁 *कोड STASH2026 के साथ ₹300 फ्री स्टोरेज क्रेडिट पाएं:*\n👉 ${APP_BASE_URL}?ref=STASH2026`,
     },
     host: {
       icon: Home,
       titleEn: "Share with Senior Hosts & Neighborhood",
       titleHi: "सीनियर होस्ट्स व पड़ोसियों के साथ शेयर करें",
-      en: `🏡 *StashSaarthi — Senior Host Dignified Earnings*\n\nNamaste! If you or someone in your family has a spare corner or room in Kanpur, you can earn *₹11,500+/month* by hosting verified university students with 100% control over house norms, zero intrusion, and ₹10k damage cover.\n\n👉 *Explore hosting details here:* ${APP_BASE_URL}`,
-      hi: `🏡 *स्टैशसारथी — सीनियर होस्ट सम्मानजनक आय*\n\nनमस्ते! यदि आपके पास कानपुर में कोई खाली कोना या कमरा है, तो आप सत्यापित छात्रों को होस्ट करके *₹11,500+/माह* तक की गरिमापूर्ण आय अर्जित कर सकते हैं। पूर्ण सुरक्षा व ₹10k कवर के साथ।\n\n👉 *विस्तार से यहाँ देखें:* ${APP_BASE_URL}`,
+      en: `🏡 *EARN ₹11,500+/MONTH FROM YOUR SPARE SPACE IN KANPUR!* 🌟\n\nNamaste! If you or someone in your family has a spare room or clean corner, turn it into dignified passive income by hosting verified university students (IITK, HBTI, CSJMU).\n\n🛡️ *Host Protections:*\n• 100% Control over House Norms & Timings\n• Zero Intrusion & 100% Escrow Direct Bank Payouts\n• ₹10,000 Property Damage Safety Cover\n\n🎁 *Claim 0% Onboarding Fee & Calculate Income:*\n👉 ${APP_BASE_URL}?role=host&ref=HOST2026`,
+      hi: `🏡 *कानपुर में अपने खाली कमरे से हर महीने ₹11,500+ कमाएं!* 🌟\n\nनमस्ते! यदि आपके घर में कोई खाली कमरा या कोना है, तो सत्यापित विश्वविद्यालय छात्रों (IITK, HBTI, CSJMU) को होस्ट करके सम्मानजनक आय अर्जित करें।\n\n🛡️ *होस्ट सुरक्षा गारंटियां:*\n• घर के नियमों व समय पर 100% आपका नियंत्रण\n• 0% लिस्टिंग शुल्क व 100% एस्क्रौ डायरेक्ट बैंक ट्रांसफर\n• ₹10,000 प्रॉपर्टी सुरक्षा कवर\n\n🎁 *0% ऑनबोर्डिंग शुल्क के साथ संभावित आय देखें:*\n👉 ${APP_BASE_URL}?role=host&ref=HOST2026`,
     },
     food: {
       icon: Utensils,
       titleEn: "Share Ghar Ka Swaad (Home Tiffins)",
       titleHi: "घर का स्वाद (होम टिफिन) शेयर करें",
-      en: `🍲 *Ghar Ka Swaad by StashSaarthi*\n\nMiss home food in Kanpur? Get pure, hygienic homemade tiffins cooked by verified neighborhood grandmothers starting at just *50 Tokens/meal* (1 Token = ₹1) with zero preservatives.\n\n👉 *View daily menu & plans:* ${APP_BASE_URL}`,
-      hi: `🍲 *घर का स्वाद — शुद्ध होम टिफिन*\n\nकानपुर में घर के खाने की याद आ रही है? मोहल्ले की बुजुर्ग माताओं द्वारा तैयार शुद्ध, स्वच्छ घर का खाना मात्र *50 टोकन/भोजन* से शुरू।\n\n👉 *मेन्यू व प्लान यहाँ देखें:* ${APP_BASE_URL}`,
+      en: `🍲 *MISS HOMEMADE GHAR KA SWAAD IN KANPUR?* 😋\n\nStop eating oily mess food! Enjoy pure, hygienic tiffins cooked by neighborhood grandmothers (Nani Tiffins) starting at just *50 Tokens/meal* (₹50) with 0 preservatives.\n\n✨ *Highlights:*\n• 100% Pure Desi Ghee & Fresh Vegetables\n• Flexible Meal Subscription & Doorstep Delivery\n• Instant 1-Tap Pausing when going home\n\n🎁 *Get 1 FREE Trial Meal Token with Code TASTE50:*\n👉 ${APP_BASE_URL}?service=kitchen&ref=TASTE50`,
+      hi: `🍲 *कानपुर में घर के बने शुद्ध खाने की याद आ रही है?* 😋\n\nमेस के तेलीय खाने से छुट्टी पाओ! मोहल्ले की बुजुर्ग माताओं (नानी टिफिन) द्वारा निर्मित शुद्ध घर का टिफिन पाएं मात्र *50 टोकन/भोजन* (₹50) से शुरू, शून्य प्रिजर्वेटिव्स।\n\n✨ *मुख्य विशेषताएं:*\n• 100% शुद्ध देसी घी व ताजी सब्ज़ियां\n• घर जाने पर 1-क्लिक भोजन पॉज़ की सुविधा\n• हॉस्टल/कमरे तक 0-वेट डिलीवरी\n\n🎁 *कोड TASTE50 से 1 फ्री ट्रायल मील टोकन पाएं:*\n👉 ${APP_BASE_URL}?service=kitchen&ref=TASTE50`,
     },
   };
 

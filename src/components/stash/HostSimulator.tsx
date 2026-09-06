@@ -6,6 +6,7 @@ import { Card3D } from "@/components/ui/Card3D";
 import AnimatedContent from "@/components/ui/AnimatedContent";
 import { useLanguage } from "@/context/LanguageContext";
 import { HostPayoutCharterModal } from "./HostPayoutCharterModal";
+import { HostIncomeChart } from "./HostIncomeChart";
 
 export function HostSimulator({ onBook }: { onBook: () => void }) {
   const { language, t } = useLanguage();
@@ -205,6 +206,19 @@ export function HostSimulator({ onBook }: { onBook: () => void }) {
             );
           })}
         </div>
+
+        <HostIncomeChart
+          cornerMonthly={cornerMonthly}
+          roomMonthly={5225}
+          kitchenMonthly={kitchenMonthly}
+          totalMonthly={totalMonthly}
+          annualIncome={annualIncome}
+          cornerBags={cornerBags}
+          dailyTiffins={dailyTiffins}
+          hasCorner={!!selectedOptions["corner"]}
+          hasRoom={!!selectedOptions["bedroom"]}
+          hasKitchen={!!selectedOptions["kitchen"]}
+        />
 
         <motion.div
           key={annualIncome}

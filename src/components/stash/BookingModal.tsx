@@ -148,32 +148,51 @@ export function BookingModal({
     },
   ];
 
+  const hasDiscount = Boolean(
+    note && (note.includes("STASH50") || note.includes("₹50") || note.includes("Discount"))
+  );
+  const discountAmount = hasDiscount ? 50 : 0;
+
   // Dynamic Amount Calculation across all 6 services
   const calcAmount = (() => {
-    if (initialAmount) return initialAmount;
-    switch (service) {
-      case "stash":
-        return bags * months * 300;
-      case "spaces":
-        return roomType === "single" ? 6000 : roomType === "shared" ? 4500 : 11000;
-      case "kitchen":
-        return mealPlan === "trial"
-          ? 300
-          : mealPlan === "smart"
-            ? 599
-            : mealPlan === "freedom"
+    let base = 0;
+    if (initialAmount) {
+      base = initialAmount;
+    } else {
+      switch (service) {
+        case "stash":
+          base = bags * months * 300;
+          break;
+        case "spaces":
+          base = roomType === "single" ? 6000 : roomType === "shared" ? 4500 : 11000;
+          break;
+        case "kitchen":
+          base =
+            mealPlan === "trial"
+              ? 300
+              : mealPlan === "smart"
+              ? 599
+              : mealPlan === "freedom"
               ? 1449
               : 2799;
-      case "connect":
-        return 0; // Free / Credit based
-      case "trust":
-        return 499; // Verification fee
-      case "micro":
-        return 0; // Host onboarding is 0 CapEx
-      default:
-        return 300;
+          break;
+        case "connect":
+          base = 0;
+          break;
+        case "trust":
+          base = 499;
+          break;
+        case "micro":
+          base = 0;
+          break;
+        default:
+          base = 300;
+          break;
+      }
     }
+    return Math.max(0, base - discountAmount);
   })();
+
 
   // Reset state when opened
   useEffect(() => {
@@ -192,10 +211,10 @@ export function BookingModal({
     if (user?.email) setEmail((e) => e || user.email!);
   }, [open, serviceProp, user]);
 
-  const isPhoneValid = !phone.trim() ? false : isValidPhone(phone);
+  const isPhoneValid = !phone.trim() ? true : isValidPhone(phone);
   const isEmailValid = !email.trim() ? true : isValidEmail(email);
   const isPinValid = !pincode.trim() ? true : isValidIndianPin(pincode);
-  const isNameValid = name.trim().length >= 2;
+  const isNameValid = !name.trim() || name.trim().length >= 2;
 
   const upiId = "advikomer@okhdfcbank";
   const upiDeepLink = `upi://pay?pa=${upiId}&pn=StashSaarthi%20Escrow&am=${calcAmount}&cu=INR&tn=StashSaarthi%20${service.toUpperCase()}%20Booking`;
@@ -203,19 +222,28 @@ export function BookingModal({
 
   const handleNextToSummary = () => {
     setTouched({ name: true, email: true, phone: true, pincode: true });
-    if (!name.trim()) {
-      toast.error(isHi ? "कृपया अपना पूरा नाम दर्ज करें।" : "Please enter your full name.");
-      return;
-    }
-    if (!phone.trim() || !isValidPhone(phone)) {
+
+    const cleanPhone = phone.trim();
+    const cleanEmail = email.trim();
+
+    // At least 1 contact method required (Phone OR Email)
+    if (!cleanPhone && !cleanEmail) {
       toast.error(
         isHi
-          ? "कृपया एक वैध फोन नंबर दर्ज करें।"
-          : "Please enter a valid phone number (e.g., 10-digits).",
+          ? "कृपया संपर्क के लिए व्हाट्सएप नंबर या ईमेल दर्ज करें।"
+          : "Please enter either a phone number or email address.",
       );
       return;
     }
-    if (email.trim() && !isValidEmail(email)) {
+    if (cleanPhone && !isValidPhone(cleanPhone)) {
+      toast.error(
+        isHi
+          ? "कृपया एक वैध 10-अंकीय फोन नंबर दर्ज करें।"
+          : "Please enter a valid 10-digit phone number.",
+      );
+      return;
+    }
+    if (cleanEmail && !isValidEmail(cleanEmail)) {
       toast.error(
         isHi ? "कृपया एक मान्य ईमेल पता दर्ज करें।" : "Please enter a valid email address.",
       );
@@ -274,12 +302,16 @@ export function BookingModal({
 
       const fullMessage = `${note ? `${note} · ` : ""}${serviceMeta} · EstAmount: ₹${calcAmount} · Token: ${generatedToken} · PIN: ${pincode || "N/A"} · PayMode: ${paymentMode}`;
 
+      const cleanName = name.trim() || (service === "micro" ? "Host Partner" : "Campus Student");
+      const cleanPhone = phone.trim();
+      const cleanEmail = email.trim() || `${cleanPhone || "guest"}@temp.stashsaarthi-web.vercel.app`;
+
       const payload = {
         user_id: user?.id ?? null,
         role: service,
-        name: name.trim(),
-        email: email.trim() || `${phone.trim()}@temp.stashsaarthi-web.vercel.app`,
-        phone: phone.trim(),
+        name: cleanName,
+        email: cleanEmail,
+        phone: cleanPhone || "N/A",
         preferred_location: city.trim(),
         message: fullMessage,
       };
@@ -328,7 +360,7 @@ export function BookingModal({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="glass max-h-[92vh] overflow-y-auto sm:max-w-xl border-white/10 p-5 sm:p-7">
-        <DialogHeader>
+        <DialogHeader className="space-y-3 pb-1">
           <div className="flex items-center justify-between">
             <DialogTitle className="text-lg sm:text-xl font-bold text-foreground">
               {step === 1 && (isHi ? "सेवा आरक्षण व विवरण" : "Select Service & Fill Details")}
@@ -336,11 +368,90 @@ export function BookingModal({
                 (isHi ? "एस्क्रो भुगतान व आरक्षण पुष्टि" : "Escrow Lock & Confirmation")}
               {step === 3 && (isHi ? "बुकिंग की पुष्टि हो गई!" : "Booking Confirmed!")}
             </DialogTitle>
-            {step < 3 && (
-              <span className="text-xs font-mono font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 rounded-full">
-                {isHi ? `चरण 0${step}/02` : `Step 0${step}/02`}
+            <span className="text-xs font-mono font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 rounded-full">
+              {step === 1 ? (isHi ? "चरण 01/03" : "Step 01/03") : step === 2 ? (isHi ? "चरण 02/03" : "Step 02/03") : (isHi ? "चरण 03/03" : "Step 03/03")}
+            </span>
+          </div>
+
+          {/* Multi-Step Visual Progress Bar */}
+          <div className="w-full space-y-2 pt-1 border-t border-white/10">
+            <div className="flex items-center justify-between text-xs">
+              <span className="text-muted-foreground font-medium flex items-center gap-1.5">
+                <Clock className="w-3.5 h-3.5 text-emerald-400" />
+                {step === 1 && (isHi ? "चरण 1: सेवा व संपर्क विवरण" : "Step 1: Details & Customization")}
+                {step === 2 && (isHi ? "चरण 2: एस्क्रो सुरक्षा व समीक्षा" : "Step 2: Escrow Lock & Review")}
+                {step === 3 && (isHi ? "चरण 3: डिजिटल स्टैशपास जारी" : "Step 3: StashPass Issued")}
               </span>
-            )}
+              <span className="font-mono text-[11px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+                {step === 1 ? "33%" : step === 2 ? "66%" : "100%"} {isHi ? "पूर्ण" : "Complete"}
+              </span>
+            </div>
+
+            {/* Animated Progress Bar Track */}
+            <div className="relative h-2 w-full overflow-hidden rounded-full bg-white/10">
+              <motion.div
+                className="h-full bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-400 shadow-[0_0_12px_rgba(16,185,129,0.5)]"
+                initial={{ width: "33%" }}
+                animate={{ width: step === 1 ? "33%" : step === 2 ? "66%" : "100%" }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+              />
+            </div>
+
+            {/* Step Nodes Row */}
+            <div className="grid grid-cols-3 pt-1 text-center">
+              <button
+                type="button"
+                onClick={() => step > 1 && setStep(1)}
+                disabled={step === 3}
+                className={`flex items-center justify-start gap-1.5 text-[11px] font-medium transition ${
+                  step >= 1 ? "text-emerald-400" : "text-muted-foreground"
+                } ${step === 3 ? "cursor-default opacity-80" : "cursor-pointer hover:underline"}`}
+              >
+                <div className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold font-mono transition-all ${
+                  step > 1
+                    ? "bg-emerald-500 text-black"
+                    : step === 1
+                    ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/50 shadow-[0_0_8px_rgba(16,185,129,0.3)]"
+                    : "bg-white/10 text-slate-400"
+                }`}>
+                  {step > 1 ? <Check className="h-3 w-3 stroke-[3]" /> : "1"}
+                </div>
+                <span className="truncate hidden sm:inline">{isHi ? "विवरण व चयन" : "Config & Contact"}</span>
+                <span className="sm:hidden">{isHi ? "विवरण" : "Details"}</span>
+              </button>
+
+              <div
+                className={`flex items-center justify-center gap-1.5 text-[11px] font-medium transition ${
+                  step >= 2 ? "text-emerald-400" : "text-muted-foreground"
+                }`}
+              >
+                <div className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold font-mono transition-all ${
+                  step > 2
+                    ? "bg-emerald-500 text-black"
+                    : step === 2
+                    ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/50 shadow-[0_0_8px_rgba(16,185,129,0.3)]"
+                    : "bg-white/10 text-slate-400"
+                }`}>
+                  {step > 2 ? <Check className="h-3 w-3 stroke-[3]" /> : "2"}
+                </div>
+                <span className="truncate hidden sm:inline">{isHi ? "एस्क्रो समीक्षा" : "Escrow & Review"}</span>
+                <span className="sm:hidden">{isHi ? "एस्क्रो" : "Escrow"}</span>
+              </div>
+
+              <div className={`flex items-center justify-end gap-1.5 text-[11px] font-medium transition ${
+                step === 3 ? "text-emerald-400" : "text-muted-foreground"
+              }`}>
+                <div className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold font-mono transition-all ${
+                  step === 3
+                    ? "bg-emerald-500 text-black shadow-[0_0_10px_rgba(16,185,129,0.5)]"
+                    : "bg-white/10 text-slate-400"
+                }`}>
+                  {step === 3 ? <Check className="h-3 w-3 stroke-[3]" /> : "3"}
+                </div>
+                <span className="truncate hidden sm:inline">{isHi ? "स्टैशपास" : "StashPass"}</span>
+                <span className="sm:hidden">{isHi ? "पास" : "Pass"}</span>
+              </div>
+            </div>
           </div>
         </DialogHeader>
 
@@ -354,6 +465,21 @@ export function BookingModal({
                 exit={{ opacity: 0, x: 15 }}
                 className="space-y-4"
               >
+                {/* Applied Promo Code Offer Banner */}
+                {note && (
+                  <div className="flex items-center justify-between gap-2 p-3 rounded-xl bg-emerald-500/15 border border-emerald-500/35 text-emerald-400 text-xs font-medium">
+                    <div className="flex items-center gap-2">
+                      <Sparkles className="w-4 h-4 shrink-0 animate-pulse text-emerald-400" />
+                      <span>{note}</span>
+                    </div>
+                    {hasDiscount && (
+                      <span className="px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 font-mono font-bold text-[11px] shrink-0">
+                        -₹50 OFF
+                      </span>
+                    )}
+                  </div>
+                )}
+
                 {/* 1. 6-Service Selector Grid */}
                 <div>
                   <Label className="text-xs text-muted-foreground uppercase tracking-wider mb-2 block">
@@ -894,18 +1020,23 @@ export function BookingModal({
                 </div>
 
                 {/* Price Bar & Next Button */}
-                <div className="flex items-center justify-between pt-3 border-t border-white/10">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-3 border-t border-white/10">
                   <div>
                     <span className="text-[11px] text-muted-foreground block">
                       {isHi ? "अनुमानित एस्क्रो मूल्य:" : "Estimated Escrow Amount:"}
                     </span>
-                    <span className="text-xl font-bold font-mono text-emerald-400">
-                      {calcAmount === 0
-                        ? isHi
-                          ? "₹0 (निःशुल्क)"
-                          : "₹0 (Zero CapEx)"
-                        : `₹${calcAmount.toLocaleString("en-IN")}`}
-                    </span>
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="text-xl font-bold font-mono text-emerald-400">
+                        {calcAmount === 0
+                          ? isHi
+                            ? "₹0 (निःशुल्क)"
+                            : "₹0 (Zero CapEx)"
+                          : `₹${calcAmount.toLocaleString("en-IN")}`}
+                      </span>
+                      <span className="inline-flex items-center gap-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-[10px] font-bold text-emerald-400">
+                        ⚡ {isHi ? "0% रद्दीकरण शुल्क" : "Zero Cancellation Fee"}
+                      </span>
+                    </div>
                   </div>
 
                   <Button

@@ -1,0 +1,75 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="bgHost" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#0A0D0F"/>
+        <stop offset="50%" stop-color="#1E1306"/>
+        <stop offset="100%" stop-color="#2D1A04"/>
+      </linearGradient>
+      <radialGradient id="amberGlow" cx="80%" cy="20%" r="60%">
+        <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.4"/>
+        <stop offset="100%" stop-color="#F59E0B" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="goldGlow" cx="20%" cy="80%" r="60%">
+        <stop offset="0%" stop-color="#FBBF24" stop-opacity="0.25"/>
+        <stop offset="100%" stop-color="#FBBF24" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="cardBorderHost" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.7"/>
+        <stop offset="100%" stop-color="#FBBF24" stop-opacity="0.2"/>
+      </linearGradient>
+    </defs>
+
+    <!-- Background -->
+    <rect width="1200" height="630" fill="url(#bgHost)"/>
+    <rect width="1200" height="630" fill="url(#amberGlow)"/>
+    <rect width="1200" height="630" fill="url(#goldGlow)"/>
+
+    <!-- Glass Card Container -->
+    <rect x="80" y="60" width="1040" height="510" rx="28" fill="#0A0D0F" fill-opacity="0.8" stroke="url(#cardBorderHost)" stroke-width="2"/>
+
+    <!-- Header Badge -->
+    <g transform="translate(130, 110)">
+      <rect width="280" height="42" rx="21" fill="#F59E0B" fill-opacity="0.2" stroke="#F59E0B" stroke-width="1.5"/>
+      <text x="140" y="26" fill="#FBBF24" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="15" font-weight="700" text-anchor="middle" letter-spacing="1">ELDERLY HOST PERSONA MODE</text>
+    </g>
+
+    <!-- Title -->
+    <text x="130" y="225" fill="#FFFFFF" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="52" font-weight="800" letter-spacing="-1">
+      Earn <tspan fill="#FBBF24">₹11,500+/Month</tspan> Passive Income
+    </text>
+
+    <!-- Subtitle -->
+    <text x="130" y="285" fill="#CBD5E1" font-family="'Inter', system-ui, sans-serif" font-size="24" font-weight="500">
+      Dignified Intergenerational Living • 100% Control Over House Norms
+    </text>
+
+    <!-- Feature Cards / Badges -->
+    <g transform="translate(130, 340)">
+      <!-- Pill 1 -->
+      <g transform="translate(0, 0)">
+        <rect width="260" height="90" rx="16" fill="#181109" fill-opacity="0.9" stroke="#38240D" stroke-width="1.5"/>
+        <text x="24" y="38" fill="#94A3B8" font-family="'Inter', sans-serif" font-size="14" font-weight="600">AVG MONTHLY PAYOUT</text>
+        <text x="24" y="68" fill="#FBBF24" font-family="'Plus Jakarta Sans', sans-serif" font-size="22" font-weight="700">₹11,500 / month</text>
+      </g>
+      <!-- Pill 2 -->
+      <g transform="translate(280, 0)">
+        <rect width="260" height="90" rx="16" fill="#181109" fill-opacity="0.9" stroke="#38240D" stroke-width="1.5"/>
+        <text x="24" y="38" fill="#94A3B8" font-family="'Inter', sans-serif" font-size="14" font-weight="600">HOST PRIVACY</text>
+        <text x="24" y="68" fill="#10B981" font-family="'Plus Jakarta Sans', sans-serif" font-size="22" font-weight="700">Zero Intrusion</text>
+      </g>
+      <!-- Pill 3 -->
+      <g transform="translate(560, 0)">
+        <rect width="260" height="90" rx="16" fill="#181109" fill-opacity="0.9" stroke="#38240D" stroke-width="1.5"/>
+        <text x="24" y="38" fill="#94A3B8" font-family="'Inter', sans-serif" font-size="14" font-weight="600">SAFETY CHARTER</text>
+        <text x="24" y="68" fill="#F59E0B" font-family="'Plus Jakarta Sans', sans-serif" font-size="22" font-weight="700">₹10k Protection</text>
+      </g>
+    </g>
+
+    <!-- Footer Brand Mark -->
+    <g transform="translate(130, 495)">
+      <circle cx="20" cy="20" r="18" fill="#F59E0B"/>
+      <path d="M12 20 L18 26 L28 14" stroke="#0A0D0F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <text x="50" y="27" fill="#FFFFFF" font-family="'Plus Jakarta Sans', sans-serif" font-size="22" font-weight="800" letter-spacing="-0.5">StashSaarthi</text>
+      <text x="195" y="27" fill="#94A3B8" font-family="'Inter', sans-serif" font-size="18" font-weight="500">| Dignified Senior Living</text>
+    </g>
+  </svg>

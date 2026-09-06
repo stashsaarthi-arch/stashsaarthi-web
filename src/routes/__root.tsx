@@ -374,10 +374,16 @@ function LenisHandler() {
 
 import { DynamicOGHead } from "@/components/seo/DynamicOGHead";
 
+import { initWebGLSafetyGuard } from "@/lib/webgl-fallback";
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const routerState = useRouterState();
   const currentRoute = routerState.location.pathname;
+
+  useEffect(() => {
+    initWebGLSafetyGuard();
+  }, []);
 
   useEffect(() => {
     const handleOffline = () => {

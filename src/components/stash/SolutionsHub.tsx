@@ -1,4 +1,4 @@
-import { useState, useEffect, memo } from "react";
+import { useState, useEffect, useRef, memo } from "react";
 import { Boxes, Home, Soup, HandHeart } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Ecosystem } from "./Ecosystem";
@@ -20,6 +20,88 @@ export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: S
   const { role } = usePersona();
   const isHi = language === "hi";
   const isStudent = role === "student";
+
+  const sectionRef = useRef<HTMLElement>(null);
+  const orbTopRef = useRef<HTMLDivElement>(null);
+  const orbBottomRef = useRef<HTMLDivElement>(null);
+  const orbCenterRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let rafId: number;
+    let isIntersecting = false;
+    const isMobile = typeof window !== "undefined" && (window.innerWidth < 768 || "ontouchstart" in window);
+
+    const sectionEl = sectionRef.current;
+    if (!sectionEl) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]) {
+          isIntersecting = entries[0].isIntersecting;
+        }
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(sectionEl);
+
+    let mouseX = 0;
+    let mouseY = 0;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (isMobile || !isIntersecting) return;
+      const rect = sectionEl.getBoundingClientRect();
+      const relativeX = (e.clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
+      const relativeY = (e.clientY - (rect.top + rect.height / 2)) / (rect.height / 2);
+      mouseX = relativeX;
+      mouseY = relativeY;
+    };
+
+    const updateParallax = () => {
+      if (isIntersecting && sectionEl) {
+        const rect = sectionEl.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        const scrollProgress = (rect.top - viewportHeight / 2) / (viewportHeight / 2);
+
+        if (orbTopRef.current) {
+          const translateY = scrollProgress * -28 + (isMobile ? 0 : mouseY * -14);
+          const translateX = isMobile ? 0 : mouseX * -18;
+          orbTopRef.current.style.transform = `translate3d(${translateX}px, ${translateY}px, 0px)`;
+        }
+
+        if (orbBottomRef.current) {
+          const translateY = scrollProgress * 32 + (isMobile ? 0 : mouseY * 16);
+          const translateX = isMobile ? 0 : mouseX * 22;
+          orbBottomRef.current.style.transform = `translate3d(${translateX}px, ${translateY}px, 0px)`;
+        }
+
+        if (orbCenterRef.current) {
+          const translateY = scrollProgress * -45 + (isMobile ? 0 : mouseY * -20);
+          const translateX = isMobile ? 0 : mouseX * 28;
+          orbCenterRef.current.style.transform = `translate3d(${translateX}px, ${translateY}px, 0px) rotate(${scrollProgress * 15}deg)`;
+        }
+
+        if (gridRef.current) {
+          const translateY = scrollProgress * -12;
+          gridRef.current.style.transform = `translate3d(0px, ${translateY}px, 0px)`;
+        }
+      }
+      rafId = requestAnimationFrame(updateParallax);
+    };
+
+    if (!isMobile) {
+      window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    }
+    rafId = requestAnimationFrame(updateParallax);
+
+    return () => {
+      observer.disconnect();
+      if (!isMobile) {
+        window.removeEventListener("mousemove", handleMouseMove);
+      }
+      cancelAnimationFrame(rafId);
+    };
+  }, []);
 
   useEffect(() => {
     const handleTabChange = (e: Event) => {
@@ -68,7 +150,55 @@ export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: S
   ];
 
   return (
-    <section id="solutions" className="relative mx-auto max-w-6xl px-4 py-3.5 sm:py-5 scroll-mt-20">
+    <section id="solutions" ref={sectionRef} className="relative mx-auto max-w-6xl px-4 py-3.5 sm:py-5 scroll-mt-20 overflow-hidden">
+      {/* Background Ambient Parallax Elements */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden -z-10 select-none">
+        {/* Ambient Gradient Orb Top Left */}
+        <div
+          ref={orbTopRef}
+          className="absolute -top-16 -left-16 w-80 h-80 rounded-full transition-transform duration-75 ease-out will-change-transform opacity-30"
+          style={{
+            background: isStudent
+              ? "radial-gradient(circle, rgba(16,185,129,0.25) 0%, rgba(6,182,212,0.08) 50%, transparent 70%)"
+              : "radial-gradient(circle, rgba(245,158,11,0.25) 0%, rgba(251,191,36,0.08) 50%, transparent 70%)",
+            filter: "blur(40px)",
+          }}
+        />
+
+        {/* Ambient Gradient Orb Bottom Right */}
+        <div
+          ref={orbBottomRef}
+          className="absolute -bottom-16 -right-16 w-96 h-96 rounded-full transition-transform duration-75 ease-out will-change-transform opacity-25"
+          style={{
+            background: isStudent
+              ? "radial-gradient(circle, rgba(6,182,212,0.22) 0%, rgba(16,185,129,0.08) 50%, transparent 70%)"
+              : "radial-gradient(circle, rgba(251,191,36,0.22) 0%, rgba(245,158,11,0.08) 50%, transparent 70%)",
+            filter: "blur(50px)",
+          }}
+        />
+
+        {/* Ambient Secondary Center Ring Parallax */}
+        <div
+          ref={orbCenterRef}
+          className="absolute top-1/3 left-1/2 -translate-x-1/2 w-64 h-64 rounded-full border border-white/5 opacity-20 pointer-events-none transition-transform duration-75 ease-out will-change-transform"
+          style={{
+            background: isStudent
+              ? "radial-gradient(circle, rgba(16,185,129,0.08) 0%, transparent 60%)"
+              : "radial-gradient(circle, rgba(245,158,11,0.08) 0%, transparent 60%)",
+          }}
+        />
+
+        {/* Background Micro Grid Pattern with Parallax Shift */}
+        <div
+          ref={gridRef}
+          className="absolute inset-0 opacity-[0.04] transition-transform duration-100 ease-out will-change-transform"
+          style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.8) 1px, transparent 0)`,
+            backgroundSize: '24px 24px',
+          }}
+        />
+      </div>
+
       {/* Section Header */}
       <div className="mx-auto max-w-3xl text-center">
         <Badge
@@ -97,15 +227,41 @@ export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: S
 
       {/* Tab Switcher */}
       <div className="mt-3 flex items-center justify-center">
-        <div className="glass grid w-full max-w-4xl grid-cols-2 gap-1 rounded-xl border border-white/10 p-1 sm:grid-cols-4 sm:gap-1.5">
-          {tabs.map((tab) => {
+        <div
+          role="tablist"
+          aria-label={isHi ? "समाधान सेवा टैब" : "StashSaarthi Solutions Tabs"}
+          className="glass grid w-full max-w-4xl grid-cols-2 gap-1 rounded-xl border border-white/10 p-1 sm:grid-cols-4 sm:gap-1.5"
+        >
+          {tabs.map((tab, idx) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
             return (
               <button
                 key={tab.id}
+                id={`solutions-tab-${tab.id}`}
+                role="tab"
+                aria-selected={isActive}
+                aria-controls={`solutions-panel-${tab.id}`}
+                tabIndex={isActive ? 0 : -1}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex flex-col items-center justify-center rounded-lg p-1.5 text-center transition-all duration-200 cursor-pointer sm:p-2 ${
+                onKeyDown={(e) => {
+                  if (e.key === "ArrowRight") {
+                    e.preventDefault();
+                    const nextTab = tabs[(idx + 1) % tabs.length];
+                    if (nextTab) {
+                      setActiveTab(nextTab.id);
+                      document.getElementById(`solutions-tab-${nextTab.id}`)?.focus();
+                    }
+                  } else if (e.key === "ArrowLeft") {
+                    e.preventDefault();
+                    const prevTab = tabs[(idx - 1 + tabs.length) % tabs.length];
+                    if (prevTab) {
+                      setActiveTab(prevTab.id);
+                      document.getElementById(`solutions-tab-${prevTab.id}`)?.focus();
+                    }
+                  }
+                }}
+                className={`flex flex-col items-center justify-center rounded-lg p-1.5 text-center transition-all duration-200 cursor-pointer sm:p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 ${
                   isActive
                     ? "border border-white/20 text-white shadow-xl"
                     : "text-muted-foreground hover:bg-white/5 hover:text-white"
@@ -126,6 +282,7 @@ export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: S
                 <div className="flex items-center gap-1.5">
                   <Icon
                     className="h-3.5 w-3.5 shrink-0"
+                    aria-hidden="true"
                     style={{
                       color: isActive
                         ? isStudent
@@ -157,7 +314,13 @@ export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: S
       </div>
 
       {/* Active Tab Panel Content */}
-      <div className="mt-2.5 transition-all duration-300">
+      <div
+        role="tabpanel"
+        id={`solutions-panel-${activeTab}`}
+        aria-labelledby={`solutions-tab-${activeTab}`}
+        tabIndex={0}
+        className="mt-2.5 transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/20 rounded-xl"
+      >
         {activeTab === "stash" && <Ecosystem onBook={onBook} />}
         {activeTab === "rooms" && <Rooms onList={onListRoom} />}
         {activeTab === "kitchen" && <TokenMealHub />}
@@ -166,3 +329,4 @@ export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: S
     </section>
   );
 });
+

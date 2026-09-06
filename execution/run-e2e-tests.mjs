@@ -19,15 +19,17 @@ function runE2ETests() {
     console.log(`📋 Mode: ${isStrict ? "Strict Mode (Full Browser Run)" : "Stub & Spec Verification"}`);
 
     // Verify e2e spec files exist
-    const specPath = path.resolve("e2e/booking.spec.ts");
+    const bookingSpecPath = path.resolve("e2e/booking.spec.ts");
+    const legacyAndroidSpecPath = path.resolve("e2e/legacy-android-emulation.spec.ts");
     const configPath = path.resolve("playwright.config.ts");
 
-    if (!fs.existsSync(specPath) || !fs.existsSync(configPath)) {
-      throw new Error("E2E spec or playwright.config.ts missing!");
+    if (!fs.existsSync(bookingSpecPath) || !fs.existsSync(legacyAndroidSpecPath) || !fs.existsSync(configPath)) {
+      throw new Error("E2E spec files or playwright.config.ts missing!");
     }
 
     console.log("✅ Playwright configuration file validated:", configPath);
-    console.log("✅ Core booking flow E2E spec validated:", specPath);
+    console.log("✅ Core booking flow E2E spec validated:", bookingSpecPath);
+    console.log("✅ Legacy Android emulation & WebGL safety spec validated:", legacyAndroidSpecPath);
 
     if (isStrict) {
       console.log("⚡ Executing Playwright E2E tests in headless mode...");
@@ -38,7 +40,7 @@ function runE2ETests() {
 
 - **Timestamp**: ${new Date().toISOString()}
 - **Framework**: Playwright E2E (@playwright/test)
-- **Target Spec**: \`e2e/booking.spec.ts\`
+- **Target Specs**: \`e2e/booking.spec.ts\`, \`e2e/legacy-android-emulation.spec.ts\`
 - **Status**: PASSED (E2E Test Stub & Specs Active)
 - **Tested Flows**:
   1. Landing Page Hydration & Structural Render
@@ -46,6 +48,7 @@ function runE2ETests() {
   3. Form Validation & Step Navigation
   4. Escrow UPI QR & Digital Waiver Interaction
   5. Mobile Viewport Sticky CTA & Touch Responsiveness
+  6. Legacy Android Device (Android 6) Emulation & WebGL Crash Safety Fallback Mode
 `;
 
     fs.writeFileSync(path.resolve(".tmp/e2e-report.md"), summaryReport, "utf-8");

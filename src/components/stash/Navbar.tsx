@@ -119,7 +119,7 @@ export const Navbar = memo(function Navbar({
           </button>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden xl:flex items-center gap-0.5 shrink-0">
+          <nav aria-label="Main Navigation" className="hidden xl:flex items-center gap-0.5 shrink-0">
             {NAV_LINKS.map((l) => {
               const label = isHi ? l.labelHi : l.labelEn;
 
@@ -131,9 +131,9 @@ export const Navbar = memo(function Navbar({
                     e.preventDefault();
                     smoothScrollTo(l.href.replace(/^#/, ""))(e);
                   }}
-                  className="whitespace-nowrap rounded-lg px-1.5 min-[1650px]:px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground shrink-0 flex items-center gap-1"
+                  className="whitespace-nowrap rounded-lg px-1.5 min-[1650px]:px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground shrink-0 flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
                 >
-                  <span className="text-xs">{l.icon}</span>
+                  <span className="text-xs" aria-hidden="true">{l.icon}</span>
                   <span>{label}</span>
                 </a>
               );
@@ -144,30 +144,34 @@ export const Navbar = memo(function Navbar({
         {/* 2. Right: Action Controls (Responsive & Mobile Fitted) */}
         <div className="flex items-center gap-1 sm:gap-2 lg:gap-2.5 shrink-0">
           {/* Persona Toggle on Desktop */}
-          <div className="hidden min-[1650px]:flex items-center p-0.5 bg-[#161B22] border border-slate-700/60 rounded-full shrink-0">
+          <div role="radiogroup" aria-label="User Persona Selector" className="hidden min-[1650px]:flex items-center p-0.5 bg-[#161B22] border border-slate-700/60 rounded-full shrink-0">
             <button
               type="button"
+              role="radio"
+              aria-checked={role === "student"}
               onClick={() => setRole("student")}
-              className={`px-2.5 py-1 rounded-full text-xs font-semibold transition-all flex items-center gap-1 ${
+              className={`px-2.5 py-1 rounded-full text-xs font-semibold transition-all flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 ${
                 role === "student"
                   ? "bg-emerald-500 text-black shadow-md font-bold"
                   : "text-slate-400 hover:text-white"
               }`}
             >
-              <span>🎓</span>
+              <span aria-hidden="true">🎓</span>
               <span>{isHi ? "छात्र" : "Student"}</span>
               <span className="opacity-80 text-xs">({isHi ? "₹6.4k बचत" : "Save ₹6.4k"})</span>
             </button>
             <button
               type="button"
+              role="radio"
+              aria-checked={role === "host"}
               onClick={() => setRole("host")}
-              className={`px-2.5 py-1 rounded-full text-xs font-semibold transition-all flex items-center gap-1 ${
+              className={`px-2.5 py-1 rounded-full text-xs font-semibold transition-all flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
                 role === "host"
                   ? "bg-amber-500 text-black shadow-md font-bold"
                   : "text-slate-400 hover:text-white"
               }`}
             >
-              <span>🏡</span>
+              <span aria-hidden="true">🏡</span>
               <span>{isHi ? "होस्ट" : "Host"}</span>
               <span className="opacity-80 text-xs">({isHi ? "₹11.5k आय" : "Earn ₹11.5k"})</span>
             </button>
@@ -175,11 +179,14 @@ export const Navbar = memo(function Navbar({
 
           {/* Compact Language Switcher & Theme Toggle */}
           <div className="hidden sm:flex items-center gap-1.5 shrink-0">
-            <div className="flex items-center rounded-full border border-white/10 bg-white/5 p-0.5 shrink-0">
+            <div role="radiogroup" aria-label="Select Language" className="flex items-center rounded-full border border-white/10 bg-white/5 p-0.5 shrink-0">
               <button
                 type="button"
+                role="radio"
+                aria-checked={language === "en"}
+                aria-label="Switch to English"
                 onClick={() => setLanguage("en")}
-                className={`rounded-full px-2 py-0.5 text-xs font-bold transition-colors ${
+                className={`rounded-full px-2 py-0.5 text-xs font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 ${
                   language === "en"
                     ? "bg-white/15 text-white"
                     : "text-muted-foreground hover:text-white"
@@ -189,8 +196,11 @@ export const Navbar = memo(function Navbar({
               </button>
               <button
                 type="button"
+                role="radio"
+                aria-checked={language === "hi"}
+                aria-label="Switch to Hindi"
                 onClick={() => setLanguage("hi")}
-                className={`rounded-full px-2 py-0.5 text-xs font-bold transition-colors ${
+                className={`rounded-full px-2 py-0.5 text-xs font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 ${
                   language === "hi"
                     ? "bg-white/15 text-white"
                     : "text-muted-foreground hover:text-white"
@@ -212,9 +222,9 @@ export const Navbar = memo(function Navbar({
             <button
               type="button"
               onClick={onEarlyAccess}
-              className="hidden min-[1650px]:inline-flex items-center gap-1.5 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-3 py-1.5 text-xs font-bold text-emerald-300 hover:bg-emerald-500/20 transition-all shrink-0 cursor-pointer active:scale-95"
+              className="hidden min-[1650px]:inline-flex items-center gap-1.5 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-3 py-1.5 text-xs font-bold text-emerald-300 hover:bg-emerald-500/20 transition-all shrink-0 cursor-pointer active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
             >
-              <span>⚡</span>
+              <span aria-hidden="true">⚡</span>
               <span>{isHi ? "अर्ली एक्सेस" : "Early Access"}</span>
             </button>
           )}
@@ -224,10 +234,11 @@ export const Navbar = memo(function Navbar({
             <button
               type="button"
               onClick={onRefer}
-              className="hidden min-[1650px]:inline-flex items-center gap-1.5 rounded-xl border border-[#25D366]/40 bg-[#25D366]/10 px-2.5 py-1.5 text-xs font-bold text-[#25D366] hover:bg-[#25D366]/20 transition-all shrink-0 cursor-pointer active:scale-95"
+              className="hidden min-[1650px]:inline-flex items-center gap-1.5 rounded-xl border border-[#25D366]/40 bg-[#25D366]/10 px-2.5 py-1.5 text-xs font-bold text-[#25D366] hover:bg-[#25D366]/20 transition-all shrink-0 cursor-pointer active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366]"
               title={isHi ? "व्हाट्सएप पर शेयर करें" : "Refer & Share on WhatsApp"}
+              aria-label={isHi ? "व्हाट्सएप पर शेयर करें" : "Refer & Share on WhatsApp"}
             >
-              <span>🎁</span>
+              <span aria-hidden="true">🎁</span>
               <span>{isHi ? "रेफर करें" : "Refer"}</span>
             </button>
           )}
@@ -236,7 +247,7 @@ export const Navbar = memo(function Navbar({
           <button
             type="button"
             onClick={role === "student" ? onBook : onListRoom}
-            className={`px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all shrink-0 cursor-pointer ${
+            className={`px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all shrink-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 ${
               role === "student"
                 ? "bg-emerald-500 hover:bg-emerald-400 text-black shadow-md shadow-emerald-500/20 active:scale-95"
                 : "bg-amber-500 hover:bg-amber-400 text-black shadow-md shadow-amber-500/20 active:scale-95"
@@ -257,7 +268,8 @@ export const Navbar = memo(function Navbar({
             size="icon"
             className="xl:hidden h-7 w-7 sm:h-8 sm:w-8 text-white hover:bg-white/10 shrink-0 p-0 ml-0.5"
             onClick={() => setOpen((v) => !v)}
-            aria-label="Toggle menu"
+            aria-expanded={open}
+            aria-label={open ? "Close navigation menu" : "Open navigation menu"}
           >
             {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           </Button>

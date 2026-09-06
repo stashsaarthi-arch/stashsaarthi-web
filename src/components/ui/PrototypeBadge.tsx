@@ -19,7 +19,7 @@ export const PrototypeBadge: React.FC<Props> = ({ className = "", variant = "pil
   if (variant === "text") {
     return (
       <span
-        className={`text-xs uppercase font-mono tracking-wider font-bold text-slate-400 ${className}`}
+        className={`text-xs uppercase font-mono tracking-wider font-bold text-muted-foreground ${className}`}
       >
         {text}
       </span>
