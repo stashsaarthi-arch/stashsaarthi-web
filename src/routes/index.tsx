@@ -31,6 +31,7 @@ import { FloatingPersonaToggle } from "@/components/stash/FloatingPersonaToggle"
 import { MobileStickyCTA } from "@/components/stash/MobileStickyCTA";
 import { ExitIntentModal } from "@/components/stash/ExitIntentModal";
 import { PredictivePersonaWidget } from "@/components/stash/PredictivePersonaWidget";
+import { RagChatbotWidget } from "@/components/stash/RagChatbotWidget";
 import { usePersona } from "@/context/PersonaContext";
 import type { BookingPrefill } from "@/components/stash/types";
 
@@ -246,6 +247,9 @@ function Index() {
       </ErrorBoundary>
       <ErrorBoundary sectionName="WhatsApp Floating Action Button" compact>
         <WhatsAppButton onBook={open} />
+      </ErrorBoundary>
+      <ErrorBoundary sectionName="RAG Chatbot Widget" compact>
+        <RagChatbotWidget />
       </ErrorBoundary>
     </main>
   );

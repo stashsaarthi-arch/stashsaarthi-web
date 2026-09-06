@@ -37,6 +37,7 @@ import { StashPass } from "./StashPass";
 import { BrandLogo } from "@/components/ui/BrandLogo";
 import { InvestorModal } from "./InvestorModal";
 import { CampusCaptainModal } from "./CampusCaptainModal";
+import { LowDataToggle } from "@/components/ui/LowDataToggle";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useLanguage } from "@/context/LanguageContext";
 import { FOUNDER_WHATSAPP, FOUNDER_PHONE_DISPLAY, FOUNDER_LINKEDIN } from "@/lib/constants";
@@ -682,6 +683,8 @@ export const FooterSection = memo(function FooterSection() {
               >
                 {isHi ? "₹10k बीमा चार्टर" : "₹10k Insurance Charter"}
               </button>
+              <span>•</span>
+              <LowDataToggle compact />
             </div>
           </div>
           <button

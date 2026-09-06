@@ -680,6 +680,56 @@ html.light .text-cyan-400 {
   display: none !important;
 }
 
+/* ==========================================================================
+   Low-Data Mode CSS Optimization Layer
+   Disables GSAP/WebGL animations, Framer Motion transitions, backdrop-blur, and forces static images.
+   ========================================================================== */
+
+.low-data-mode *,
+[data-low-data-mode="true"] * {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+.low-data-mode canvas,
+[data-low-data-mode="true"] canvas,
+.low-data-mode video,
+[data-low-data-mode="true"] video {
+  display: none !important;
+}
+
+.low-data-mode .gpu-accelerated,
+[data-low-data-mode="true"] .gpu-accelerated,
+.low-data-mode .will-change-transform,
+[data-low-data-mode="true"] .will-change-transform {
+  transform: none !important;
+  will-change: auto !important;
+}
+
+/* Replace expensive GPU backdrop-blur with opaque dark glass in low-data mode */
+.low-data-mode .backdrop-blur-2xl,
+[data-low-data-mode="true"] .backdrop-blur-2xl,
+.low-data-mode .backdrop-blur-xl,
+[data-low-data-mode="true"] .backdrop-blur-xl,
+.low-data-mode .backdrop-blur-md,
+[data-low-data-mode="true"] .backdrop-blur-md,
+.low-data-mode .glass,
+[data-low-data-mode="true"] .glass {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background-color: rgba(10, 13, 15, 0.98) !important;
+}
+
+/* Force static image containers */
+.low-data-mode [data-static-image],
+[data-low-data-mode="true"] [data-static-image] {
+  display: block !important;
+}
+
+
+
 
 
 

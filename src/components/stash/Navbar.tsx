@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { AuthButton } from "./AuthButton";
 import { BrandLogo } from "@/components/ui/BrandLogo";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { LowDataToggle } from "@/components/ui/LowDataToggle";
 import { smoothScrollTo } from "./legal";
 import { useLanguage } from "@/context/LanguageContext";
 import type { Role } from "./types";
@@ -210,6 +211,7 @@ export const Navbar = memo(function Navbar({
               </button>
             </div>
             <ThemeToggle compact />
+            <LowDataToggle compact />
           </div>
 
           {/* Desktop Auth Button */}
@@ -344,6 +346,7 @@ export const Navbar = memo(function Navbar({
                 हिंदी
               </button>
               <ThemeToggle compact className="shrink-0" />
+              <LowDataToggle compact className="shrink-0" />
             </div>
 
             {/* Structured Navigation Grid */}

@@ -1,3 +1,34 @@
+- [x] **[CAO] Task 56: Prototype Retrieval-Augmented Generation (RAG) Chatbot for Instant Student FAQ Retrieval**:
+  - **Identified Directive**: Prototype a Retrieval-Augmented Generation (RAG) chatbot using the existing FAQ documentation to provide instant answers to students.
+  - **Applied Solution**:
+    - Knowledge Index & RAG Engine (`src/lib/ragChatbot.ts`):
+      • **TF-IDF & Semantic Keyword Retrieval**: Tokenizer and n-gram keyword overlap matcher indexing platform FAQs, micro-storage rates (₹300/bag/mo), 0% brokerage rooms (₹5,500/mo), ₹10k insurance claims, and homestyle tiffins (₹90/meal).
+      • **Contextual Synthesis & Citation Engine**: Generates response text in English & Hindi (`en` / `hi`), calculates confidence score (0-98%), attaches document citation tags, and offers follow-up prompt chips.
+      • **Human Escalation Fallback**: Direct WhatsApp founder escalation (`+91 9369454350`) for low-confidence queries or custom needs.
+    - Interactive RAG Chatbot Widget (`src/components/stash/RagChatbotWidget.tsx`):
+      • Floating drawer modal trigger with animated ping badge, user/bot message bubbles, typing animation, confidence badges, source citations, and quick reply chips.
+    - Mounted `<RagChatbotWidget />` in `src/routes/index.tsx` wrapped in `ErrorBoundary`.
+  - **Verification**: `npx tsc --noEmit` (**0 errors**) and `npm run build` compiled cleanly with **0 errors**.
+
+- [x] **[CTO] Task 55: Add a "Low-Data Mode" toggle that disables GSAP/WebGL animations and uses static images for users on weak cellular data**:
+  - **Identified Directive**: Add a "Low-Data Mode" toggle that disables GSAP/WebGL animations and uses static images for users on weak cellular data.
+  - **Applied Solution**:
+    - Low-Data Mode Provider & Network Detection Engine (`src/context/LowDataContext.tsx`):
+      • **Auto-Detection**: Auto-detects 2G/3G cellular networks (`2g`, `slow-2g`, `3g`) or `saveData` header via Network Information API (`navigator.connection`).
+      • **DOM Synchronization**: Dynamically sets `data-low-data-mode="true"` and `.low-data-mode` class on `document.documentElement`.
+      • **LocalStorage Persistence**: Saves user manual override choice (`ss_low_data_mode`).
+    - Interactive Low-Data Toggle Button Component (`src/components/ui/LowDataToggle.tsx`):
+      • Renders interactive state toggle with English & Hindi (`en` / `hi`) labels ("Low-Data Mode", "लो-डेटा ऑन").
+      • Compact & full-width variants with speed gauge icon, auto-detection indicator, and explanatory tooltips.
+    - UI Header & Footer Integrations:
+      • Integrated `<LowDataToggle compact />` into Navbar desktop action bar & mobile menu drawer (`src/components/stash/Navbar.tsx`).
+      • Integrated `<LowDataToggle compact />` into Footer legal metadata bar (`src/components/stash/FooterSection.tsx`).
+    - Expanded Low-Data CSS Optimization Layer (`src/styles.css`):
+      • Forced `animation-duration: 0.001ms !important`, `transition-duration: 0.001ms !important`, and `scroll-behavior: auto !important`.
+      • Disabled WebGL/GSAP canvas animations (`display: none !important`) & GPU transformations (`will-change: auto !important`).
+      • Replaced GPU-heavy `backdrop-blur` with solid high-contrast glass (`rgba(10, 13, 15, 0.98)`).
+  - **Verification**: `npx tsc --noEmit` (**0 errors**) and `npm run build` compiled cleanly with **0 errors**.
+
 - [x] **[CTO] Task 54: Low-Latency Audio Compression Engine for Saarthi Connect (2G/3G CSJMU)**:
   - **Identified Directive**: Implement low-latency audio compression for Saarthi Connect, ensuring high quality on poor (2G/3G) networks common near CSJMU.
   - **Applied Solution**:
