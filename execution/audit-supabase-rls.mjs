@@ -10,6 +10,7 @@ const SENSITIVE_TABLES = [
   'meal_bookings',
   'user_shield_quotas',
   'profiles',
+  'waitlist_leads',
 ];
 
 const KNOWN_TABLES = [
@@ -23,6 +24,10 @@ const KNOWN_TABLES = [
   'meal_bookings',
   'meal_reviews',
   'user_shield_quotas',
+  'pricing_zones',
+  'campus_location_pricing',
+  'component_interaction_telemetry',
+  'visitor_sessions',
 ];
 
 console.log('🔍 Starting Supabase Row Level Security (RLS) Policy Security Audit...\n');

@@ -1,3 +1,13 @@
+- [x] **[CSO - Security] Task 91: Audit the entire Supabase database and ensure no tables with sensitive user information are publicly readable — 2026-09-07**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite client production bundle).
+  - **Security Audit**: `node execution/audit-supabase-rls.mjs` — ✅ PASSED (100% of 14 schema tables enforce Row Level Security with 0 critical/high vulnerabilities).
+  - **New Files**:
+    - `supabase/migrations/20260907_sensitive_data_rls_audit.sql` — RLS security audit & sensitive data lockdown migration; enforced RLS across all 14 schema tables; locked down sensitive user PII SELECT policies (`profiles`, `stash_bookings`, `co_living_inquiries`, `waitlist_leads`, `users_waitlist`, `meal_bookings`, `user_shield_quotas`); created `audit_supabase_db_security()` PL/pgSQL function.
+  - **Modified Files**:
+    - `execution/audit-supabase-rls.mjs` — Updated node security auditor script to inspect all 14 schema tables and assert non-public read access on sensitive PII tables.
+    - `docs/tasks/PRD.md` — Marked Task 91 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 91 execution details.
+
 - [x] **[QA - Compliance] Task 90: Implement rate-limiting on all SMS and WhatsApp token requests to prevent spam — 2026-09-07**:
   - **Build**: `npm run build` — ✅ 0 errors (Vite client production bundle).
   - **Test Suite**: `npx tsx execution/test-token-rate-limiter.mjs` — ✅ PASSED (7/7 compliance checks).
