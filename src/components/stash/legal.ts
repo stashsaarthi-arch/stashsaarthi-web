@@ -136,12 +136,14 @@ export const DOCS: Record<string, Doc> = {
       "2. Purpose of Collection: We collect only the data required to facilitate safe node custody and booking clearance (Name, College/Aadhaar proof, and campus location).",
       "3. Encryption & Storage: All personal records are encrypted at rest and in transit. Temporary check-in photo logs are retained only during the active custody period.",
       "4. Right to Erasure: You have full ownership of your data and can request permanent account and document deletion at any time by emailing privacy@stashsaarthi.in.",
+      "5. Predictive AI & Telemetry Governance: Client-side neural network models run 100% locally in browser memory for asset pre-loading with zero server-side PII or biometric profiling. Opt-out anytime via Low-Data Mode.",
     ],
     body_hi: [
       "1. शून्य डेटा बिक्री: हम आपके फोन नंबर, ईमेल या पहचान दस्तावेजों को कभी किसी तीसरे पक्ष, टेलीमार्केटर या विज्ञापन नेटवर्क को नहीं बेचते या साझा नहीं करते।",
       "2. संग्रह का उद्देश्य: हम केवल सुरक्षित नोड कस्टडी और बुकिंग सत्यापन के लिए आवश्यक डेटा (नाम, कॉलेज/आधार प्रमाण और स्थान) एकत्र करते हैं।",
       "3. एन्क्रिप्शन एवं सुरक्षा: सभी व्यक्तिगत रिकॉर्ड पूर्णतः एन्क्रिप्टेड होते हैं। चेक-इन फोटो लॉग केवल सक्रिय स्टोरेज अवधि के दौरान ही सुरक्षित रखे जाते हैं।",
       "4. डेटा विलोपन का अधिकार: आपको अपने डेटा पर पूर्ण नियंत्रण है और आप किसी भी समय privacy@stashsaarthi.in पर लिखकर अपने रिकॉर्ड हटाने का अनुरोध कर सकते हैं।",
+      "5. प्रेडिक्टिव AI व टेलीमेट्री नियम: न्यूरल नेटवर्क मॉडल ब्राउज़र मेमोरी में 100% स्थानीय रूप से चलते हैं। लो-डेटा मोड द्वारा किसी भी समय ऑप्ट-आउट करें।",
     ],
   },
   terms: {
@@ -152,12 +154,14 @@ export const DOCS: Record<string, Doc> = {
       "2. Prohibited Storage Items: Stashed luggage must not contain cash, currency notes, gold jewelry, perishable food, flammable items, or unlawful substances.",
       "3. Legal Protection under TPA 1882: Room stays operate under valid leave-and-license agreements governed by Section 105 of the Transfer of Property Act 1882.",
       "4. Escrow Protection: Payouts to hosts are released on a weekly schedule only after satisfactory custody confirmation and conflict-free handover.",
+      "5. Client-Side AI & Low-Data Control: Browsing experience uses client-side neural network persona adaptation and asset pre-loading. Users retain full control via Low-Data Mode toggles.",
     ],
     body_hi: [
       "1. वैध एवं पारदर्शी उपयोग: उपयोगकर्ताओं को सत्य पहचान विवरण प्रदान करना होगा। छात्र स्थिति या संपत्ति विवरण का गलत प्रतिनिधित्व करने पर खाता तुरंत निलंबित कर दिया जाएगा।",
       "2. प्रतिबंधित वस्तुएं: संग्रहीत सामान में नकद, सोने के आभूषण, खराब होने वाली खाद्य सामग्री, ज्वलनशील पदार्थ या अवैध वस्तुएं रखना सख्त वर्जित है।",
       "3. संपत्ति अधिनियम (TPA 1882) के तहत कानूनी सुरक्षा: कमरे के प्रवास संपत्ति अधिनियम 1882 की धारा 105 के तहत वैध लाइसेंस समझौते के रूप में संचालित होते हैं।",
       "4. एस्क्रो सुरक्षा: होस्ट को भुगतान साप्ताहिक आधार पर केवल सुरक्षित कस्टडी और विवाद-मुक्त हैंडओवर की पुष्टि के बाद ही जारी किया जाता है।",
+      "5. क्लाइंट-साइड AI और लो-डेटा नियंत्रण: ब्राउज़िंग अनुभव क्लाइंट-साइड न्यूरल नेटवर्क का उपयोग करता है। लो-डेटा मोड के माध्यम से उपयोगकर्ता का पूर्ण नियंत्रण रहता है।",
     ],
   },
   refund: {

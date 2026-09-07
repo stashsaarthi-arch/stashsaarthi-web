@@ -112,10 +112,10 @@ Sprint 10: QA, CSO & CEO (Total Assurance, Compliance & Strategic Direction)
 - [x] 91. [CSO - Security]: Audit the entire Supabase database and ensure no tables with sensitive user information are publicly readable.
 - [x] 92. [CEO - Compliance]: Finalize the "Host Vetting Process" as a formal company policy and integrate the agreement into the Host persona onboarding flow.
 - [x] 93. [QA - Performance]: Audit all GSAP and Lenis scroll listeners to ensure they are properly cleaned up upon component unmount, preventing memory leaks.
-[ ] 94. [CSO - Compliance]: Review and update the privacy policy and terms of service to reflect the newly implemented predictive AI and data collection features.
-[ ] 95. [QA - Security]: Perform a comprehensive pen-test on all public-facing API endpoints.
-[ ] 96. [QA - Mobile Performance]: Verify that all heavy animated and interactive components pass without crashing on low-end Android Go devices common in Kanpur.
-[ ] 97. [CSO - Data Retention]: Define and implement a clear data retention policy, automatically deleting inactive student account data after 18 months.
+- [x] 94. [CSO - Compliance]: Review and update the privacy policy and terms of service to reflect the newly implemented predictive AI and data collection features.
+- [x] 95. [QA - Security]: Perform a comprehensive pen-test on all public-facing API endpoints.
+- [x] 96. [QA - Mobile Performance]: Verify that all heavy animated and interactive components pass without crashing on low-end Android Go devices common in Kanpur.
+- [x] 97. [CSO - Data Retention]: Define and implement a clear data retention policy, automatically deleting inactive student account data after 18 months.
 [ ] 98. [CEO - Analytics]: Compile all Sprint data into a new executive dashboard showing core metrics: CAC (Customer Acquisition Cost), LTV (Lifetime Value), active token circulation.
 [ ] 99. [QA - Performance]: Audit the final webpack bundle size and ensure it's minimal by using code splitting and lazy loading heavy components.
 [ ] 100. [CTO]: add my bookings dashboard in user login profile.

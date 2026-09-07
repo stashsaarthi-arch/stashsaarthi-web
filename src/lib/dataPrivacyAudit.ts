@@ -160,6 +160,17 @@ export const PRIVACY_AUDIT_CHECKS: AuditCheckItem[] = [
     status: "PASSED",
     impactScore: 10,
   },
+  {
+    id: "ai-sec-predictive-telemetry",
+    category: "TRANSPARENCY",
+    titleEn: "Client-Side Predictive AI & Zero PII Telemetry",
+    titleHi: "क्लाइंट-साइड प्रेडिक्टिव AI व शून्य PII टेलीमेट्री",
+    descriptionEn: "Predictive AI neural network models run 100% locally in browser memory for asset pre-loading with zero server-side PII or biometric profiling.",
+    descriptionHi: "प्रेडिक्टिव AI न्यूरल नेटवर्क मॉडल एसेट प्री-लोडिंग के लिए ब्राउज़र मेमोरी में 100% स्थानीय रूप से चलते हैं।",
+    clause: "AI Data Ethics Charter 2026",
+    status: "ENFORCED",
+    impactScore: 10,
+  },
 ];
 
 const DSAR_STORAGE_KEY = "ss_dsar_requests";

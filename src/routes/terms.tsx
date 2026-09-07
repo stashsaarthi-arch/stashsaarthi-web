@@ -105,8 +105,8 @@ function TermsPage() {
               : "This agreement defines user responsibilities, senior host rights under Sec 105 TPA 1882, prohibited storage item restrictions, zero cancellation fee refunds, and escrow payout guarantees."}
           </p>
           <div className="mt-3 text-xs text-muted-foreground">
-            <span>{isHi ? "अंतिम संशोधन:" : "Last Updated:"} September 6, 2026</span> •{" "}
-            <span>{isHi ? "संस्करण:" : "Version:"} v2.4 (Kanpur Operational Standard)</span>
+            <span>{isHi ? "अंतिम संशोधन:" : "Last Updated:"} September 7, 2026</span> •{" "}
+            <span>{isHi ? "संस्करण:" : "Version:"} v2.5 (Predictive AI & Data Governance Standard)</span>
           </div>
         </div>
 
@@ -173,6 +173,12 @@ function TermsPage() {
                 <div className="rounded-xl border border-white/10 bg-black/40 p-3">
                   <h3 className="font-bold text-purple-400 mb-1">D. Saarthi Connect</h3>
                   <p className="text-muted-foreground">Intergenerational compatibility matching connecting verified students with dignified senior host household mentorship.</p>
+                </div>
+                <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-3 sm:col-span-2">
+                  <h3 className="font-bold text-amber-300 mb-1">E. Predictive AI & Client-Side UX Personalization</h3>
+                  <p className="text-amber-100/90">
+                    StashSaarthi utilizes a 100% client-side neural network classifier to adapt the user experience (Student vs Host view) based on interaction signals. Zero behavioral telemetry is stored on external servers or sold to third parties. Users can toggle "Low-Data Mode" at any time to bypass animations and client-side AI processing.
+                  </p>
                 </div>
               </div>
             </section>

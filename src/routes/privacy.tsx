@@ -7,6 +7,7 @@ import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 import { useLanguage } from "@/context/LanguageContext";
 import { FOUNDER_WHATSAPP, FOUNDER_PHONE_DISPLAY } from "@/lib/constants";
 import { DataPrivacyAuditModal } from "@/components/stash/DataPrivacyAuditModal";
+import { DataRetentionModal } from "@/components/stash/DataRetentionModal";
 
 export const Route = createFileRoute("/privacy")({
   head: () => ({
@@ -42,6 +43,7 @@ function PrivacyPage() {
   const isHi = language === "hi";
   const [activeSection, setActiveSection] = useState("overview");
   const [isAuditModalOpen, setIsAuditModalOpen] = useState(false);
+  const [isRetentionModalOpen, setIsRetentionModalOpen] = useState(false);
 
   const handlePrint = () => {
     if (typeof window !== "undefined") {
@@ -114,9 +116,17 @@ function PrivacyPage() {
               <ShieldCheck className="h-4 w-4" />
               <span>{isHi ? "🛡️ ऑटोनॉमस DPDP व GDPR ऑडिट पोर्टल" : "🛡️ Audit DPDP & GDPR Compliance Portal"}</span>
             </Button>
+            <Button
+              onClick={() => setIsRetentionModalOpen(true)}
+              variant="outline"
+              className="border-amber-500/40 bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 font-bold text-xs gap-2 cursor-pointer"
+            >
+              <FileText className="h-4 w-4" />
+              <span>{isHi ? "⚖️ 18-माह डेटा रिटेंशन कंसोल" : "⚖️ 18-Month Data Retention Console"}</span>
+            </Button>
             <div className="text-xs text-muted-foreground">
-              <span>{isHi ? "अंतिम संशोधन:" : "Last Updated:"} September 6, 2026</span> •{" "}
-              <span>{isHi ? "संस्करण:" : "Version:"} v2.4 (Kanpur Operational Standard)</span>
+              <span>{isHi ? "अंतिम संशोधन:" : "Last Updated:"} September 7, 2026</span> •{" "}
+              <span>{isHi ? "संस्करण:" : "Version:"} v2.5 (Predictive AI & Data Governance Standard)</span>
             </div>
           </div>
         </div>
@@ -132,13 +142,14 @@ function PrivacyPage() {
               <nav className="space-y-1 text-xs">
                 {[
                   { id: "overview", label: isHi ? "1. मुख्य सिद्धांत" : "1. Core Governance" },
-                  { id: "collection", label: isHi ? "2. एकत्रित डेटा" : "2. Information Collected" },
+                  { id: "collection", label: isHi ? "2. एकत्रित डेटा व AI" : "2. Information Collected" },
                   { id: "purpose", label: isHi ? "3. डेटा उपयोग" : "3. Purpose of Processing" },
-                  { id: "sharing", label: isHi ? "4. शून्य बिक्री गारंटी" : "4. Zero-Resale Guarantee" },
-                  { id: "security", label: isHi ? "5. सुरक्षा व एन्क्रिप्शन" : "5. Encryption & Security" },
-                  { id: "retention", label: isHi ? "6. डेटा विलोपन अधिकार" : "6. Retention & Erasure" },
-                  { id: "dpdp", label: isHi ? "7. DPDP 2023 अधिकार" : "7. DPDP Act Rights" },
-                  { id: "nodal", label: isHi ? "8. नोडल अधिकारी" : "8. Nodal Officer Contacts" },
+                  { id: "ai-governance", label: isHi ? "4. प्रेडिक्टिव AI व टेलीमेट्री" : "4. Predictive AI Governance" },
+                  { id: "sharing", label: isHi ? "5. शून्य बिक्री गारंटी" : "5. Zero-Resale Guarantee" },
+                  { id: "security", label: isHi ? "6. सुरक्षा व एन्क्रिप्शन" : "6. Encryption & Security" },
+                  { id: "retention", label: isHi ? "7. डेटा विलोपन अधिकार" : "7. Retention & Erasure" },
+                  { id: "dpdp", label: isHi ? "8. DPDP 2023 अधिकार" : "8. DPDP Act Rights" },
+                  { id: "nodal", label: isHi ? "9. नोडल अधिकारी" : "9. Nodal Officer Contacts" },
                 ].map((item) => (
                   <a
                     key={item.id}
@@ -178,7 +189,7 @@ function PrivacyPage() {
                   <strong className="text-white">Data Minimization:</strong> We collect strictly the minimum operational parameters required to verify node security, issue StashPasses, and clear bank escrow payouts.
                 </li>
                 <li>
-                  <strong className="text-white">User Sovereignty:</strong> You retain complete ownership over your identity, contact details, and stored records at all times.
+                  <strong className="text-white">User Sovereignty:</strong> You retain complete ownership over your identity, contact details, stored records, and client-side telemetry preferences at all times.
                 </li>
               </ul>
             </section>
@@ -189,7 +200,7 @@ function PrivacyPage() {
                 <FileText className="h-5 w-5" />
                 <h2>2. Information We Collect</h2>
               </div>
-              <p>To enable deterministic node custody and verified bookings, we collect the following categories of information:</p>
+              <p>To enable deterministic node custody, verified bookings, and zero-latency user experience, we collect the following categories of information:</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                 <div className="rounded-xl border border-white/10 bg-black/40 p-3">
                   <h3 className="font-bold text-emerald-400 mb-1">A. Student Identity & Contact</h3>
@@ -207,6 +218,12 @@ function PrivacyPage() {
                   <h3 className="font-bold text-purple-400 mb-1">D. Technical Telemetry</h3>
                   <p className="text-muted-foreground">Browser device user-agent, network error logs, and anonymized performance telemetry to optimize 60–120 FPS web application performance.</p>
                 </div>
+                <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-3 sm:col-span-2">
+                  <h3 className="font-bold text-emerald-300 mb-1">E. Client-Side Predictive AI & Scroll Behavior Telemetry</h3>
+                  <p className="text-emerald-100/90">
+                    To deliver zero-lag persona auto-adaptation (Student vs Senior Host mode), our client-side lightweight neural network analyzes scroll velocity, section dwell time ratios, hover frequencies, and direction reversals directly inside your browser memory. <strong>100% Local Execution:</strong> Zero biometric data, zero personal profile records, and zero behavioral logs are ever sent to remote servers or external AI model providers.
+                  </p>
+                </div>
               </div>
             </section>
 
@@ -221,16 +238,37 @@ function PrivacyPage() {
                 <li>Issuing digital custody certificates (StashPass) with embedded ₹10,000 micro-insurance coverage.</li>
                 <li>Executing 3-tier host background verification and legal leave-and-license agreements under Sec 105 Transfer of Property Act 1882.</li>
                 <li>Processing 100% digital escrow payouts to verified hosts on weekly schedules.</li>
+                <li>Executing client-side predictive AI persona classification (Student vs Host) and pre-loading relevant images/assets to ensure 60–120 FPS performance over cellular networks.</li>
                 <li>Sending essential transactional updates via SMS and WhatsApp (e.g., luggage arrival alerts, doorstep pickup confirmations).</li>
                 <li>Preventing platform abuse, fraudulent room listings, or illegal item storage.</li>
               </ul>
             </section>
 
-            {/* 4. Zero-Resale Guarantee */}
+            {/* 4. Predictive AI Governance */}
+            <section id="ai-governance" className="rounded-2xl border border-cyan-500/30 bg-cyan-500/10 p-6 space-y-3">
+              <div className="flex items-center gap-2 text-cyan-400 font-bold text-base">
+                <ShieldCheck className="h-5 w-5" />
+                <h2>4. Predictive AI Governance & Low-Data Mode Control</h2>
+              </div>
+              <p className="text-cyan-100">
+                {isHi
+                  ? "स्टैशसारथी का प्रेडिक्टिव AI मॉडल केवल आपके ब्राउज़र (क्लाइंट-साइड) में निष्पादित होता है। यह किसी भी व्यक्तिगत डेटा या पहचान को बाहरी सर्वर पर संग्रहीत नहीं करता।"
+                  : "StashSaarthi's client-side predictive AI engine respects radical data sovereignty. The forward pass neural classifier computes persona probabilities solely to trigger pre-fetching of high-resolution images or high-contrast theme tokens."}
+              </p>
+              <div className="rounded-xl border border-cyan-500/20 bg-black/40 p-4 space-y-2 text-xs">
+                <p className="font-semibold text-white">Your Control & Opt-Out Guarantee:</p>
+                <ul className="list-disc pl-5 space-y-1 text-slate-300">
+                  <li><strong className="text-cyan-300">Zero Server-Side Storage:</strong> Scroll dynamics and hover timing vectors are processed transiently in RAM and discarded immediately upon session closure.</li>
+                  <li><strong className="text-cyan-300">Low-Data Mode Opt-Out:</strong> Toggling "Low-Data Mode" from the top navigation bar instantly disables all client-side predictive AI inference cycles, GSAP canvas animations, and dynamic asset pre-fetching.</li>
+                </ul>
+              </div>
+            </section>
+
+            {/* 5. Zero-Resale Guarantee */}
             <section id="sharing" className="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-6 space-y-3">
               <div className="flex items-center gap-2 text-emerald-400 font-bold text-base">
                 <ShieldCheck className="h-5 w-5" />
-                <h2>4. Zero Data Resale & Strict Non-Disclosure</h2>
+                <h2>5. Zero Data Resale & Strict Non-Disclosure</h2>
               </div>
               <p className="text-emerald-100">
                 {isHi
@@ -346,6 +384,8 @@ function PrivacyPage() {
 
       {/* DPDP & GDPR Audit Modal */}
       <DataPrivacyAuditModal isOpen={isAuditModalOpen} onClose={() => setIsAuditModalOpen(false)} />
+      {/* 18-Month Data Retention & Auto-Purge Modal */}
+      <DataRetentionModal isOpen={isRetentionModalOpen} onClose={() => setIsRetentionModalOpen(false)} />
     </div>
   );
 }
