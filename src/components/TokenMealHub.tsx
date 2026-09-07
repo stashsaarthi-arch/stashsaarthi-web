@@ -14,6 +14,8 @@ import { IntelligentNudgesWidget } from "./stash/IntelligentNudgesWidget";
 import { MealPersonalizationSelector } from "./stash/MealPersonalizationSelector";
 import { formatPersonalizationsSummary } from "@/lib/mealPersonalization";
 import { DeliveryCutoffCountdown } from "./stash/DeliveryCutoffCountdown";
+import { useThaliPriceLabelVariant, trackThaliPriceClick, ThaliPriceLabelVariant } from "@/lib/abTesting";
+
 
 type FulfillmentType = "DineIn_Pickup" | "RoomDelivery";
 
@@ -199,6 +201,33 @@ interface MealTierCardProps {
   onSelect: (tier: MealOption) => void;
 }
 
+const ThaliPriceVariantToggle: React.FC = () => {
+  const { variant, setVariant } = useThaliPriceLabelVariant();
+  return (
+    <div className="inline-flex items-center gap-1.5 p-1 rounded-xl bg-slate-950 border border-emerald-500/30 text-xs">
+      <span className="text-[10px] font-bold text-slate-400 px-2 uppercase tracking-wider">
+        A/B Price Label:
+      </span>
+      <button
+        type="button"
+        onClick={() => {
+          playClick();
+          const next = variant === "classic" ? "value_save" : "classic";
+          setVariant(next);
+          trackThaliPriceClick(next, `toggle_to_${next}`);
+        }}
+        className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+          variant === "value_save"
+            ? "bg-emerald-500 text-slate-950 shadow-sm"
+            : "bg-slate-800 text-emerald-300 hover:bg-slate-700"
+        }`}
+      >
+        {variant === "value_save" ? "✨ From ₹50, save more..." : "₹50 (pickup) / ₹60 (delivery)"}
+      </button>
+    </div>
+  );
+};
+
 const MealTierCard: React.FC<MealTierCardProps> = ({ tier, isSelected, tierCost, onSelect }) => {
   const { telemetryProps, trackClick } = useComponentTelemetry(
     `thali_${tier.id}_${tier.costPickup}`,
@@ -212,11 +241,15 @@ const MealTierCard: React.FC<MealTierCardProps> = ({ tier, isSelected, tierCost,
       badge: tier.badge,
     }
   );
+  const { variant, getLabel } = useThaliPriceLabelVariant();
 
   return (
     <div
       {...telemetryProps}
       onClick={() => {
+        if (tier.id === "standard") {
+          trackThaliPriceClick(variant, `select_thali_${variant}`);
+        }
         trackClick({ action: "select_thali_tier" });
         onSelect(tier);
       }}
@@ -244,9 +277,19 @@ const MealTierCard: React.FC<MealTierCardProps> = ({ tier, isSelected, tierCost,
           <PeacockFeatherMatkiDusting compact isAutoTriggered={isSelected} />
         )}
       </div>
-      <div className="text-3xl font-black text-white mb-3">
+      <div className="text-3xl font-black text-white mb-2">
         {tierCost} <span className="text-xs font-bold text-emerald-400">Tokens</span>
       </div>
+
+      {tier.id === "standard" && (
+        <div className="mb-3 text-[11px] font-bold text-emerald-300 bg-emerald-950/70 border border-emerald-500/30 px-2.5 py-1 rounded-lg flex items-center justify-between shadow-sm">
+          <span>{getLabel(false)}</span>
+          <span className="text-[9px] font-mono uppercase bg-emerald-500/20 text-emerald-400 px-1.5 py-0.5 rounded border border-emerald-500/30">
+            {variant === "classic" ? "Classic" : "Value-Save"}
+          </span>
+        </div>
+      )}
+
       <p className="text-xs text-slate-400 leading-relaxed font-medium">
         {tier.description}
       </p>
@@ -961,12 +1004,15 @@ export const TokenMealHub: React.FC = () => {
 
         {/* Step 2: Meal Tier Selection */}
         <div className="mb-8">
-          <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-            <span className="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-xs flex items-center justify-center font-black">
-              2
-            </span>
-            Select Your Menu Tier
-          </h3>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+            <h3 className="text-lg font-bold text-white flex items-center gap-2">
+              <span className="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-xs flex items-center justify-center font-black">
+                2
+              </span>
+              Select Your Menu Tier
+            </h3>
+            <ThaliPriceVariantToggle />
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {MEAL_TIERS.map((tier) => {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
-import { BadgeCheck, MessageCircle, Phone, MapPin, Star, Gift, Compass } from "lucide-react";
+import { BadgeCheck, MessageCircle, Phone, MapPin, Star, Gift, Compass, Zap, Search, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AnimatedContent from "@/components/ui/AnimatedContent";
 import { supabase } from "@/integrations/supabase/client";
@@ -10,6 +10,7 @@ import { FOUNDER_WHATSAPP, getWhatsAppUrl } from "@/lib/constants";
 import { PrototypeBadge } from "@/components/ui/PrototypeBadge";
 import { useLanguage } from "@/context/LanguageContext";
 import { RoomCardSkeleton } from "@/components/ui/skeleton";
+import type { OpenBooking } from "./types";
 
 type Listing = {
   id: string;
@@ -121,7 +122,7 @@ function RoomImage({ src, alt }: { src: string; alt: string }) {
   );
 }
 
-export function Rooms({ onList }: { onList: () => void }) {
+export function Rooms({ onList, onBook }: { onList: () => void; onBook?: OpenBooking }) {
   const { language, t } = useLanguage();
   const isHi = language === "hi";
   const [listings, setListings] = useState<Listing[]>(DEMO);
@@ -226,6 +227,53 @@ export function Rooms({ onList }: { onList: () => void }) {
 
   return (
     <div id="rooms" className="relative mx-auto max-w-6xl px-2 py-2 scroll-mt-20">
+      {/* ── High-Contrast Action Banner: Find Broker-Free Rooms & Instant Booking ── */}
+      <div className="flex flex-wrap items-center justify-between gap-3 mb-3.5 p-3 rounded-2xl bg-slate-900/90 border border-emerald-500/30 backdrop-blur-md shadow-xl">
+        <div className="flex items-center gap-2.5">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 shadow-inner">
+            <Home className="h-4.5 w-4.5" />
+          </div>
+          <div>
+            <h3 className="text-xs font-extrabold uppercase tracking-wider text-white flex items-center gap-1.5">
+              {isHi ? "सत्यापित 0% दलाली कमरे" : "Verified Broker-Free Rooms"}
+              <span className="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full font-bold border border-emerald-500/30">
+                0% Brokerage
+              </span>
+            </h3>
+            <p className="text-[11px] text-slate-400">
+              {isHi
+                ? "आईआईटीके, सीएसजेएमयू और काकादेव के पास डायरेक्ट हॉस्ट को-लिविंग रूम्स"
+                : "Direct host co-living rooms near IITK, CSJMU & Kakadeo coaching belt"}
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2 w-full sm:w-auto">
+          <Button
+            variant="outline"
+            size="sm"
+            className="border-emerald-500/40 bg-slate-950/80 text-emerald-300 hover:bg-emerald-500/20 text-xs px-3.5 py-2 font-bold flex-1 sm:flex-none border"
+            onClick={() => {
+              const el = document.getElementById("rooms");
+              el?.scrollIntoView({ behavior: "smooth" });
+            }}
+          >
+            <Search className="h-3.5 w-3.5 mr-1.5 text-emerald-400" />
+            {isHi ? "कमरे खोजें (0% ब्रोकरेज)" : "Find Broker-Free Rooms"}
+          </Button>
+          {onBook && (
+            <Button
+              variant="hero"
+              size="sm"
+              className="bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 text-slate-950 font-black hover:brightness-110 shadow-[0_0_20px_-3px_rgba(16,185,129,0.6)] text-xs px-4 py-2 flex items-center gap-1.5 flex-1 sm:flex-none transition-all active:scale-95 cursor-pointer"
+              onClick={() => onBook({ service: "spaces" })}
+            >
+              <Zap className="h-4 w-4 fill-current text-slate-950" />
+              <span>{isHi ? "इन्स्टेंट रूम बुकिंग ⚡" : "Instant Booking ⚡"}</span>
+            </Button>
+          )}
+        </div>
+      </div>
       {/* ── 1-Tap Quick Filter Pills ── */}
       <div className="flex flex-wrap items-center justify-center gap-1.5 mb-4">
         {filters.map((f) => {
@@ -350,12 +398,23 @@ export function Rooms({ onList }: { onList: () => void }) {
                     </p>
                   ) : null}
 
-                  <div className="mt-3 flex gap-1.5 pt-1">
+                  <div className="mt-3 flex flex-wrap gap-1.5 pt-1">
+                    {onBook && (
+                      <Button
+                        variant="hero"
+                        size="sm"
+                        className="bg-gradient-to-r from-emerald-400 to-teal-400 text-slate-950 font-extrabold hover:brightness-110 shadow-[0_0_12px_-2px_rgba(16,185,129,0.5)] text-xs px-2.5 py-1.5 flex items-center gap-1 shrink-0"
+                        onClick={() => onBook({ service: "spaces" })}
+                      >
+                        <Zap className="h-3.5 w-3.5 fill-current text-slate-950" />
+                        <span>{isHi ? "इन्स्टेंट बुकिंग ⚡" : "Instant Booking ⚡"}</span>
+                      </Button>
+                    )}
                     <Button
                       asChild
-                      variant="hero"
+                      variant="outline"
                       size="sm"
-                      className="flex-1 whitespace-normal text-xs leading-snug py-1.5"
+                      className="flex-1 whitespace-normal border-white/15 bg-white/5 hover:bg-slate-900 text-xs leading-snug py-1.5"
                     >
                       <a
                         href={(() => {
@@ -375,7 +434,7 @@ export function Rooms({ onList }: { onList: () => void }) {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        <MessageCircle className="h-3.5 w-3.5 mr-1" /> {t.rooms.bookDirectly}
+                        <MessageCircle className="h-3.5 w-3.5 mr-1 text-emerald-400" /> {t.rooms.bookDirectly}
                       </a>
                     </Button>
                     <Button

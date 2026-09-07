@@ -13,6 +13,7 @@ import {
   calculateLocationPricingQuote,
   getZoneTierBadge,
 } from "@/lib/locationPricing";
+import { calculateExtendedBreakDiscount } from "@/lib/extendedBreakUpsell";
 
 export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
   const { language, t } = useLanguage();
@@ -39,7 +40,7 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
   const zoneBadge = useMemo(() => getZoneTierBadge(activeZone.tier_level), [activeZone]);
 
   // 2. Kanpur Dynamic Location-Based Math Engine (Memoized for 60fps interaction)
-  const { vacationMonths, deadRentCost, stashCost, netSavings, savingsPercent, dynamicQuote } = useMemo(() => {
+  const { vacationMonths, deadRentCost, stashCost, netSavings, savingsPercent, dynamicQuote, breakQuote } = useMemo(() => {
     const vMonths = Math.max(0.5, Number((safeDays / 30).toFixed(1)) || 0.5);
     const quote = calculateLocationPricingQuote({
       campus: activeZone.zone_name,
@@ -48,13 +49,20 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
       monthlyRent: safeRent,
     });
 
+    const bQuote = calculateExtendedBreakDiscount(safeBags, vMonths, quote.effective_rate_per_bag);
+    const effectiveStashCost = bQuote.finalStashCost;
+    const deadRent = Math.round(safeRent * vMonths) || 0;
+    const netSave = deadRent - effectiveStashCost;
+    const savePercent = deadRent > 0 ? Math.round((netSave / deadRent) * 100) : 0;
+
     return {
       vacationMonths: vMonths,
-      deadRentCost: Math.round(safeRent * vMonths) || 0,
-      stashCost: quote.total_stash_cost,
-      netSavings: quote.net_savings,
-      savingsPercent: quote.savings_percent,
+      deadRentCost: deadRent,
+      stashCost: effectiveStashCost,
+      netSavings: netSave,
+      savingsPercent: savePercent,
       dynamicQuote: quote,
+      breakQuote: bQuote,
     };
   }, [safeBags, safeDays, safeRent, activeZone]);
 
@@ -185,6 +193,34 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                   <span>₹7,500</span>
                   <span>₹12,000</span>
                 </div>
+              </div>
+
+              {/* Extended Break 15% Discount Upsell Banner (Task 82) */}
+              <div>
+                {vacationDays < 90 ? (
+                  <button
+                    type="button"
+                    onClick={() => setVacationDays(90)}
+                    className="w-full text-left p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/30 hover:border-amber-500/50 text-[11px] text-amber-300 transition cursor-pointer flex items-center justify-between gap-2 shadow-sm"
+                  >
+                    <span>
+                      🌴 <strong>{isHi ? "3 महीने की छुट्टी?" : "3-Month Summer Break?"}</strong>{" "}
+                      {isHi ? "90 दिन चुनें और 15% छूट पाएं!" : "Set 90 days to unlock 15% OFF storage!"}
+                    </span>
+                    <span className="shrink-0 bg-amber-500 hover:bg-amber-400 text-black px-2 py-0.5 rounded font-bold font-mono text-[10px]">
+                      {isHi ? "90 दिन चुनें" : "Set 90 Days"}
+                    </span>
+                  </button>
+                ) : (
+                  <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-[11px] text-emerald-300 flex items-center justify-between font-medium">
+                    <span className="flex items-center gap-1">
+                      🎉 {isHi ? "15% एक्सटेंडेड ब्रेक डिस्काउंट लागू हुआ!" : "15% Extended Break Discount Active!"}
+                    </span>
+                    <span className="font-mono text-[10px] font-bold text-emerald-400 bg-emerald-500/20 px-2 py-0.5 rounded border border-emerald-500/30 shrink-0">
+                      -₹{breakQuote.discountAmount} (15% OFF)
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
 

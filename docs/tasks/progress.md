@@ -764,4 +764,30 @@
       • Integrated `<DeliveryCutoffCountdown />` into `CoachingHubTiffinPage.tsx` (`src/components/stash/CoachingHubTiffinPage.tsx`) above menu options for instant student urgency nudge.
   - **Verification**: `npm run build` compiled cleanly with **0 errors**.
 
+- [x] **[CRO - Tiffin Flow] Task 84: A/B test changing the Standard Thali price label from "₹50 (pickup) / ₹60 (delivery)" to "From ₹50, save more on pickup"** (2026-09-07)
+  - **Identified Directive**: A/B test changing the Standard Thali price label from "₹50 (pickup) / ₹60 (delivery)" to "From ₹50, save more on pickup".
+  - **Applied Solution**:
+    - **A/B Testing Price Engine** (`src/lib/abTesting.ts`):
+      • Built `useThaliPriceLabelVariant()`, `getThaliPriceLabelVariant()`, and `trackThaliPriceClick()` supporting 2 variants: `"classic"` ("₹50 (pickup) / ₹60 (delivery)") vs `"value_save"` ("From ₹50, save more on pickup").
+      • Integrated URL query parameter overrides (`?ab_thali=classic | value_save`), persistent `localStorage` storage (`ss_thali_price_variant`), and conversion telemetry recording.
+    - **Standard Thali Card & Variant Switcher** (`src/components/TokenMealHub.tsx`):
+      • Updated `MealTierCard` for Standard Thali to dynamically display the active A/B price label variant badge with A/B telemetry tracking on card selection.
+      • Added interactive `<ThaliPriceVariantToggle />` control in the Step 2 Menu Tier header, allowing students and evaluators to toggle between variants in real-time.
+  - **Verification**: `npm run build` compiled cleanly with **0 errors**.
+
+- [x] **[QA - Kitchen Performance] Task 85: Stress-test the Service Worker's handling of multiple kitchen images loading simultaneously on a 2G connection emulator** (2026-09-07)
+  - **Identified Directive**: Stress-test the Service Worker's handling of multiple kitchen images loading simultaneously on a 2G connection emulator.
+  - **Applied Solution**:
+    - **Hardened Service Worker Image Caching Strategy** (`public/sw.js`):
+      • Implemented `cacheFirstImage` strategy with concurrent request deduplication map (`pendingImageRequests`), preventing duplicate network fetches on 2G bursts.
+      • Added 6-second `AbortController` timeout guard for slow 2G connection fetches.
+      • Implemented SVG fallback image handler (`imageFallback`) returning lightweight SVG placeholders instead of 503 HTML error pages upon image fetch timeout/failures over 2G.
+    - **2G Kitchen SW Performance Stress Tester** (`src/lib/kitchenSwStressTest.ts`):
+      • Created client utility `runKitchenSwStressTest()` simulating concurrent multi-image fetch bursts under 2G constraints and logging latency, cache hits, and SVG fallback telemetry.
+    - **Playwright E2E 2G Performance Spec & Test Harness** (`e2e/kitchen-sw-2g-performance.spec.ts` & `execution/run-e2e-tests.mjs`):
+      • Created Playwright E2E spec setting 2G network emulation profile (300kbps down, 150kbps up, 300ms latency) and testing concurrent kitchen image loading bursts.
+  - **Verification**: `npm run build` (**0 errors**) and `node execution/run-e2e-tests.mjs` (**PASSED**).
+
+
+
 

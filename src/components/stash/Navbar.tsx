@@ -9,6 +9,7 @@ import { LowDataToggle } from "@/components/ui/LowDataToggle";
 import { smoothScrollTo } from "./legal";
 import { useLanguage } from "@/context/LanguageContext";
 import type { Role } from "./types";
+import { StashWalletBadge, ZeroFeeTrialTokenModal } from "./ZeroFeeTrialTokenModal";
 
 const NAV_LINKS = [
   {
@@ -84,6 +85,7 @@ export const Navbar = memo(function Navbar({
 }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [showTrialModal, setShowTrialModal] = useState(false);
   const { language, setLanguage, t } = useLanguage();
   const isHi = language === "hi";
 
@@ -212,6 +214,11 @@ export const Navbar = memo(function Navbar({
             </div>
             <ThemeToggle compact />
             <LowDataToggle compact />
+          </div>
+
+          {/* Stash Wallet Zero-Fee Trial Token Badge */}
+          <div className="hidden sm:block shrink-0">
+            <StashWalletBadge onClick={() => setShowTrialModal(true)} />
           </div>
 
           {/* Desktop Auth Button */}
@@ -414,6 +421,12 @@ export const Navbar = memo(function Navbar({
           </motion.div>
         )}
       </AnimatePresence>
+
+      <ZeroFeeTrialTokenModal
+        open={showTrialModal}
+        onOpenChange={setShowTrialModal}
+        onApplyTrial={onBook}
+      />
     </header>
   );
 });

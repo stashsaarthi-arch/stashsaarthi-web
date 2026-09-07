@@ -48,6 +48,15 @@ import { StashPass } from "./StashPass";
 import { LuggageItemizerModal, type LuggageStorageItem } from "./LuggageItemizerModal";
 import { useLanguage } from "@/context/LanguageContext";
 import { MealPersonalizationSelector } from "./MealPersonalizationSelector";
+import {
+  getStashWallet,
+  applyTrialTokenToCheckout,
+  consumeTrialTokenOnBooking,
+} from "@/lib/stashWallet";
+import {
+  calculateExtendedBreakDiscount,
+  getExtendedBreakUpsellMessage,
+} from "@/lib/extendedBreakUpsell";
 
 export function BookingModal({
   open,
@@ -251,6 +260,13 @@ export function BookingModal({
   );
   const discountAmount = hasDiscount ? 50 : 0;
 
+  const [useTrialToken, setUseTrialToken] = useState(true);
+  const stashWallet = getStashWallet();
+  const hasActiveTrialToken = Boolean(
+    stashWallet.trialToken && !stashWallet.trialToken.isUsed && stashWallet.balance > 0
+  );
+  const trialDeduction = hasActiveTrialToken && useTrialToken ? Math.min(60, stashWallet.balance) : 0;
+
   // Dynamic Amount Calculation across all 6 services
   const calcAmount = (() => {
     let base = 0;
@@ -258,9 +274,11 @@ export function BookingModal({
       base = initialAmount;
     } else {
       switch (service) {
-        case "stash":
-          base = bags * months * 300;
+        case "stash": {
+          const breakQuote = calculateExtendedBreakDiscount(bags, months, 300);
+          base = breakQuote.finalStashCost;
           break;
+        }
         case "spaces":
           base = roomType === "single" ? 6000 : roomType === "shared" ? 4500 : 11000;
           break;
@@ -288,7 +306,8 @@ export function BookingModal({
           break;
       }
     }
-    return Math.max(0, base - discountAmount);
+    const gross = Math.max(0, base - discountAmount);
+    return Math.max(0, gross - trialDeduction);
   })();
 
 
@@ -456,6 +475,10 @@ export function BookingModal({
         ...(service === "trust" ? { auditType } : {}),
         ...(service === "micro" ? { monetizeAsset } : {}),
       });
+
+      if (trialDeduction > 0) {
+        consumeTrialTokenOnBooking(generatedToken, trialDeduction);
+      }
 
 
       // Save inquiry to supabase with zero data drop
@@ -714,12 +737,67 @@ export function BookingModal({
                           >
                             {[1, 2, 3, 4, 5, 6].map((m) => (
                               <option key={m} value={m} className="bg-[#0A0D0F]">
-                                {m} {isHi ? "महीने" : m === 1 ? "Month" : "Months"}
+                                {m} {isHi ? "महीने" : m === 1 ? "Month" : "Months"} {m >= 3 ? (isHi ? " (15% छूट)" : " (15% OFF)") : ""}
                               </option>
                             ))}
                           </select>
                         </div>
                       </div>
+
+                      {/* Extended Break Upsell Banner (Task 82) */}
+                      {(() => {
+                        const breakQuote = calculateExtendedBreakDiscount(bags, months, 300);
+                        const potentialQuote = calculateExtendedBreakDiscount(bags, 3, 300);
+                        const msg = getExtendedBreakUpsellMessage(language);
+
+                        if (months < 3) {
+                          return (
+                            <div className="rounded-xl border border-amber-500/40 bg-gradient-to-r from-amber-500/15 via-amber-950/20 to-emerald-950/20 p-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 transition shadow-sm">
+                              <div className="space-y-0.5 text-left">
+                                <div className="text-xs font-bold text-amber-300 flex items-center gap-1.5">
+                                  <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-pulse shrink-0" />
+                                  <span>{msg.title}</span>
+                                </div>
+                                <p className="text-[11px] text-slate-300 leading-tight">
+                                  {isHi
+                                    ? `3+ महीनों (सेमेस्टर/गर्मी की छुट्टियों) के लिए 15% छूट! ₹${potentialQuote.discountAmount} की सीधी बचत पाएं।`
+                                    : `Commit to 3+ months (semester/summer break) for 15% OFF! Save ₹${potentialQuote.discountAmount} instantly.`}
+                                </p>
+                              </div>
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setMonths(3);
+                                  toast.success(
+                                    isHi ? "🎉 15% एक्सटेंडेड ब्रेक डिस्काउंट लागू हुआ!" : "🎉 15% Extended Break Discount Applied!",
+                                    {
+                                      description: isHi
+                                        ? `आपने ₹${potentialQuote.discountAmount} की बचत की!`
+                                        : `You saved ₹${potentialQuote.discountAmount} on your 3-month stash!`,
+                                    }
+                                  );
+                                }}
+                                className="w-full sm:w-auto shrink-0 px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black text-xs font-bold font-sans transition cursor-pointer shadow-md flex items-center justify-center gap-1 active:scale-95"
+                              >
+                                <Tag className="w-3.5 h-3.5" />
+                                {msg.upgradeCta}
+                              </button>
+                            </div>
+                          );
+                        } else {
+                          return (
+                            <div className="rounded-xl border border-emerald-500/40 bg-emerald-500/15 p-2.5 flex items-center justify-between gap-2 text-xs font-medium text-emerald-300">
+                              <div className="flex items-center gap-2">
+                                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                                <span>{msg.activeBadge}</span>
+                              </div>
+                              <span className="font-mono text-[11px] font-bold text-emerald-200 bg-emerald-500/20 px-2 py-0.5 rounded border border-emerald-500/30 shrink-0">
+                                -₹{breakQuote.discountAmount} {isHi ? "छूट" : "OFF"}
+                              </span>
+                            </div>
+                          );
+                        }
+                      })()}
 
                       {/* Quick Presets Bar & Full Itemizer Trigger */}
                       <div className="space-y-1.5 pt-1">
@@ -1276,6 +1354,38 @@ export function BookingModal({
                     className="border-white/10 bg-white/5 text-xs"
                   />
                 </div>
+
+                {/* Stash Wallet Zero-Fee Trial Token Banner */}
+                {hasActiveTrialToken && (
+                  <div className="p-3 rounded-xl bg-emerald-950/50 border border-emerald-500/30 flex items-center justify-between gap-3 text-xs">
+                    <div className="flex items-center space-x-2.5">
+                      <div className="p-1.5 rounded-lg bg-emerald-500/20 text-emerald-400">
+                        <Sparkles className="w-4 h-4 animate-pulse" />
+                      </div>
+                      <div>
+                        <div className="font-semibold text-emerald-300">
+                          {isHi ? "⚡ ₹60 जीरो-फी ट्रायल टोकन लागू" : "⚡ ₹60 Zero-Fee Trial Token Active"}
+                        </div>
+                        <div className="text-[11px] text-slate-400">
+                          {isHi ? "स्टैश वॉलेट क्रेडिट: 1st ऑर्डर पर ₹60 की छूट" : "Stash Wallet Credit: ₹60 discount applied"}
+                        </div>
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setUseTrialToken(!useTrialToken)}
+                      className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition-colors cursor-pointer ${
+                        useTrialToken
+                          ? "bg-emerald-500 text-slate-950 hover:bg-emerald-400"
+                          : "bg-slate-800 text-slate-300 border border-slate-700"
+                      }`}
+                    >
+                      {useTrialToken
+                        ? isHi ? "लागू है ✓" : "Applied ✓"
+                        : isHi ? "टोकन लागू करें" : "Apply Token"}
+                    </button>
+                  </div>
+                )}
 
                 {/* Price Bar & Next Button */}
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-3 border-t border-white/10">

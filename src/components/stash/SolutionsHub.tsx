@@ -7,6 +7,7 @@ import { TokenMealHub } from "../TokenMealHub";
 import { Connect } from "./Connect";
 import { useLanguage } from "@/context/LanguageContext";
 import { usePersona } from "@/context/PersonaContext";
+import { trackPersonaLayoutRecording } from "@/lib/abTesting";
 import type { OpenBooking } from "./types";
 
 interface SolutionsHubProps {
@@ -15,17 +16,30 @@ interface SolutionsHubProps {
 }
 
 export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: SolutionsHubProps) {
-  const [activeTab, setActiveTab] = useState<"stash" | "rooms" | "kitchen" | "connect">("stash");
-  const { language } = useLanguage();
   const { role } = usePersona();
-  const isHi = language === "hi";
   const isStudent = role === "student";
+  const [activeTab, setActiveTab] = useState<"stash" | "rooms" | "kitchen" | "connect">(
+    isStudent ? "stash" : "connect"
+  );
+  const { language } = useLanguage();
+  const isHi = language === "hi";
 
   const sectionRef = useRef<HTMLElement>(null);
   const orbTopRef = useRef<HTMLDivElement>(null);
   const orbBottomRef = useRef<HTMLDivElement>(null);
   const orbCenterRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
+
+  // Auto-switch tab and log heatmap recording telemetry when persona changes
+  useEffect(() => {
+    if (role === "host") {
+      setActiveTab("connect");
+      trackPersonaLayoutRecording("host", "SaarthiConnect", 15);
+    } else {
+      setActiveTab("stash");
+      trackPersonaLayoutRecording("student", "SaarthiStash", 25);
+    }
+  }, [role]);
 
   useEffect(() => {
     let rafId: number;
@@ -114,7 +128,7 @@ export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: S
     return () => window.removeEventListener("stashsaarthi-solution-tab", handleTabChange);
   }, []);
 
-  const tabs = [
+  const studentTabs = [
     {
       id: "stash" as const,
       nameEn: "Saarthi Stash",
@@ -148,6 +162,43 @@ export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: S
       badgeHi: "100% सुरक्षित",
     },
   ];
+
+  const hostTabs = [
+    {
+      id: "connect" as const,
+      nameEn: "Saarthi Connect",
+      nameHi: "सारथी कनेक्ट",
+      icon: HandHeart,
+      badgeEn: "Verified Seniors",
+      badgeHi: "सत्यापित वरिष्ठ",
+    },
+    {
+      id: "rooms" as const,
+      nameEn: "Saarthi Spaces",
+      nameHi: "सारथी स्पेसेस",
+      icon: Home,
+      badgeEn: "₹11,500+/mo Income",
+      badgeHi: "₹11,500+/माह आय",
+    },
+    {
+      id: "stash" as const,
+      nameEn: "Saarthi Stash",
+      nameHi: "सारथी स्टैश",
+      icon: Boxes,
+      badgeEn: "Spare Room Stash",
+      badgeHi: "खाली कमरा स्टैश",
+    },
+    {
+      id: "kitchen" as const,
+      nameEn: "Saarthi Kitchen",
+      nameHi: "सारथी किचन",
+      icon: Soup,
+      badgeEn: "Home Cooking",
+      badgeHi: "घरेलू रसोई",
+    },
+  ];
+
+  const tabs = isStudent ? studentTabs : hostTabs;
 
   return (
     <section id="solutions" ref={sectionRef} className="relative mx-auto max-w-6xl px-4 py-3.5 sm:py-5 scroll-mt-20 overflow-hidden">
@@ -322,7 +373,7 @@ export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: S
         className="mt-2.5 transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/20 rounded-xl"
       >
         {activeTab === "stash" && <Ecosystem onBook={onBook} />}
-        {activeTab === "rooms" && <Rooms onList={onListRoom} />}
+        {activeTab === "rooms" && <Rooms onList={onListRoom} onBook={onBook} />}
         {activeTab === "kitchen" && <TokenMealHub />}
         {activeTab === "connect" && <Connect onBook={onBook} />}
       </div>

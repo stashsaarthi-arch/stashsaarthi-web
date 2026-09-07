@@ -75,7 +75,7 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // Strategy 1b: Cache-first for images in /images/ and root icons
+  // Strategy 1b: Cache-first for images with SVG fallback & 2G timeout protection
   if (
     url.pathname.startsWith("/images/") ||
     url.pathname.endsWith(".png") ||
@@ -84,7 +84,7 @@ self.addEventListener("fetch", (event) => {
     url.pathname.endsWith(".svg") ||
     url.pathname.endsWith(".ico")
   ) {
-    event.respondWith(cacheFirst(request, IMAGE_CACHE));
+    event.respondWith(cacheFirstImage(request, IMAGE_CACHE));
     return;
   }
 
@@ -108,6 +108,48 @@ self.addEventListener("fetch", (event) => {
 });
 
 // ─── Strategy Implementations ─────────────────────────────────
+
+// In-flight request deduplication map for 2G network burst handling
+const pendingImageRequests = new Map();
+
+async function cacheFirstImage(request, cacheName) {
+  const cached = await caches.match(request);
+  if (cached) return cached;
+
+  const url = request.url;
+  // Deduplicate concurrent fetch attempts for identical image URL on 2G bursts
+  if (pendingImageRequests.has(url)) {
+    try {
+      const response = await pendingImageRequests.get(url);
+      return response.clone();
+    } catch {
+      return imageFallback();
+    }
+  }
+
+  const fetchPromise = (async () => {
+    const controller = new AbortController();
+    // 6-second timeout guard on slow 2G connections
+    const timeoutId = setTimeout(() => controller.abort(), 6000);
+    try {
+      const networkResponse = await fetch(request, { signal: controller.signal });
+      clearTimeout(timeoutId);
+      if (networkResponse.ok) {
+        const cache = await caches.open(cacheName);
+        cache.put(request, networkResponse.clone());
+      }
+      return networkResponse;
+    } catch (err) {
+      clearTimeout(timeoutId);
+      return imageFallback();
+    } finally {
+      pendingImageRequests.delete(url);
+    }
+  })();
+
+  pendingImageRequests.set(url, fetchPromise);
+  return fetchPromise;
+}
 
 async function cacheFirst(request, cacheName) {
   const cached = await caches.match(request);
@@ -154,6 +196,17 @@ async function staleWhileRevalidate(request, cacheName) {
 
   // Return cached immediately if available, else wait for network
   return cached || fetchPromise;
+}
+
+function imageFallback() {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"><rect width="400" height="300" fill="#0A0D0F"/><rect x="10" y="10" width="380" height="280" rx="12" fill="none" stroke="#10B981" stroke-width="2" stroke-dasharray="6,6"/><text x="50%" y="45%" dominant-baseline="middle" text-anchor="middle" fill="#10B981" font-family="system-ui, sans-serif" font-size="16" font-weight="bold">🍲 Saarthi Kitchen Node</text><text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="12">Cached Offline (2G Mode Active)</text></svg>`;
+  return new Response(svg, {
+    status: 200,
+    headers: {
+      "Content-Type": "image/svg+xml",
+      "Cache-Control": "public, max-age=86400",
+    },
+  });
 }
 
 function offlineFallback() {

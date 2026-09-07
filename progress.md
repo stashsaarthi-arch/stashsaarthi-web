@@ -1,3 +1,24 @@
+- [x] **[QA - Kitchen Performance] Task 85: Stress-test Service Worker handling of multiple kitchen images loading simultaneously on a 2G connection emulator — 2026-09-07**:
+  - **Build**: `npm run build` — ✅ 0 errors (client + SSR Nitro bundles).
+  - **E2E Test**: `node execution/run-e2e-tests.mjs` — ✅ PASSED.
+  - **New Files**:
+    - `src/lib/kitchenSwStressTest.ts` — Client-side 2G Kitchen SW stress testing utility (`runKitchenSwStressTest`) evaluating request deduplication, cache hits, SVG fallbacks, and 2G latency metrics.
+    - `e2e/kitchen-sw-2g-performance.spec.ts` — Playwright E2E spec setting 2G network emulation (300kbps down, 150kbps up, 300ms latency) and testing concurrent kitchen image loading bursts.
+  - **Modified Files**:
+    - `public/sw.js` — Hardened image caching strategy with `cacheFirstImage`, concurrent request deduplication map (`pendingImageRequests`), 6-second 2G timeout protection, and SVG fallback response (`imageFallback`) eliminating broken image icons over congested networks.
+    - `execution/run-e2e-tests.mjs` — Updated E2E test harness to validate `kitchen-sw-2g-performance.spec.ts`.
+    - `docs/tasks/PRD.md` — Updated Task 85 status to `- [x]`.
+    - `docs/tasks/progress.md` — Appended Task 85 progress.
+
+- [x] **[CRO - Tiffin Flow] Task 84: A/B test changing Standard Thali price label — 2026-09-07**:
+  - **Build**: `npm run build` — ✅ 0 errors (client + SSR Nitro bundles).
+  - **New Files / Modules**:
+    - `src/lib/abTesting.ts` — A/B testing price label variant engine (`useThaliPriceLabelVariant`, `getThaliPriceLabelVariant`, `trackThaliPriceClick`) supporting `"classic"` ("₹50 (pickup) / ₹60 (delivery)") vs `"value_save"` ("From ₹50, save more on pickup").
+  - **Modified Files**:
+    - `src/components/TokenMealHub.tsx` — updated Standard Thali `MealTierCard` to render dynamic A/B test price label badge and track click telemetry; added interactive `<ThaliPriceVariantToggle />` component in Step 2 header.
+    - `docs/tasks/PRD.md` — updated Task 84 status to `- [x]`.
+    - `docs/tasks/progress.md` — appended Task 84 details.
+
 - [x] **[CRO - Payment Flow] Task 80: Implement "Zero-Fee Trial Token" for first-time students — 2026-09-07**:
   - **Build**: `npm run build` — ✅ 0 errors (client + SSR Nitro bundles).
   - **New Files**:

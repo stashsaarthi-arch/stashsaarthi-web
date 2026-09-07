@@ -21,15 +21,22 @@ function runE2ETests() {
     // Verify e2e spec files exist
     const bookingSpecPath = path.resolve("e2e/booking.spec.ts");
     const legacyAndroidSpecPath = path.resolve("e2e/legacy-android-emulation.spec.ts");
+    const kitchenSw2gSpecPath = path.resolve("e2e/kitchen-sw-2g-performance.spec.ts");
     const configPath = path.resolve("playwright.config.ts");
 
-    if (!fs.existsSync(bookingSpecPath) || !fs.existsSync(legacyAndroidSpecPath) || !fs.existsSync(configPath)) {
+    if (
+      !fs.existsSync(bookingSpecPath) ||
+      !fs.existsSync(legacyAndroidSpecPath) ||
+      !fs.existsSync(kitchenSw2gSpecPath) ||
+      !fs.existsSync(configPath)
+    ) {
       throw new Error("E2E spec files or playwright.config.ts missing!");
     }
 
     console.log("✅ Playwright configuration file validated:", configPath);
     console.log("✅ Core booking flow E2E spec validated:", bookingSpecPath);
     console.log("✅ Legacy Android emulation & WebGL safety spec validated:", legacyAndroidSpecPath);
+    console.log("✅ Kitchen SW 2G performance stress spec validated:", kitchenSw2gSpecPath);
 
     if (isStrict) {
       console.log("⚡ Executing Playwright E2E tests in headless mode...");
@@ -40,7 +47,7 @@ function runE2ETests() {
 
 - **Timestamp**: ${new Date().toISOString()}
 - **Framework**: Playwright E2E (@playwright/test)
-- **Target Specs**: \`e2e/booking.spec.ts\`, \`e2e/legacy-android-emulation.spec.ts\`
+- **Target Specs**: \`e2e/booking.spec.ts\`, \`e2e/legacy-android-emulation.spec.ts\`, \`e2e/kitchen-sw-2g-performance.spec.ts\`
 - **Status**: PASSED (E2E Test Stub & Specs Active)
 - **Tested Flows**:
   1. Landing Page Hydration & Structural Render
@@ -49,6 +56,7 @@ function runE2ETests() {
   4. Escrow UPI QR & Digital Waiver Interaction
   5. Mobile Viewport Sticky CTA & Touch Responsiveness
   6. Legacy Android Device (Android 6) Emulation & WebGL Crash Safety Fallback Mode
+  7. Kitchen Service Worker 2G Network Stress Testing & SVG Fallback Image Handling
 `;
 
     fs.writeFileSync(path.resolve(".tmp/e2e-report.md"), summaryReport, "utf-8");

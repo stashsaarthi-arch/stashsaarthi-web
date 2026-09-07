@@ -100,16 +100,16 @@ Sprint 9: CRO & CAO (Intelligent Conversion & Retention)
 - [x] 81. [CRO - Landing Page]: Analyze session recordings (e.g., using Hotjar) and test moving the "Saarthi Connect" module higher for the Host persona.
 - [x] 82. [CRO - Storage Flow]: Implement an "Extended Break" upsell in the storage flow, offering a discount for commitments of 3+ months.
 - [x] 83. [CRO - Tiffin Flow]: Add a persistent, countdown timer for the next delivery slot's cutoff time (e.g., "1 hour left to book Lunch!").
-[ ] 84. [CRO - Tiffin Flow]: A/B test changing the Standard Thali price label from "₹50 (pickup) / ₹60 (delivery)" to "From ₹50, save more on pickup".
+- [x] 84. [CRO - Tiffin Flow]: A/B test changing the Standard Thali price label from "₹50 (pickup) / ₹60 (delivery)" to "From ₹50, save more on pickup".
 
 Sprint 10: QA, CSO & CEO (Total Assurance, Compliance & Strategic Direction)
-[ ] 85. [QA - Kitchen Performance]: Stress-test the Service Worker's handling of multiple kitchen images loading simultaneously on a 2G connection emulator.
-[ ] 86. [QA - Storage Logic]: E2E test the luggage storage booking flow, specifically verifying that QR codes generated match the unique booking ID and can be scanned across different user roles.
-[ ] 87. [CSO - Data Privacy]: Conduct a comprehensive audit of all GDPR and India's DPDP Act compliance, ensuring all user data is stored and processed lawfully.
-[ ] 88. [QA - Mobile UI]: Fix any remaining mobile safari rendering glitches where absolute positioned elements (like the Peacock Feather) cover interactive buttons.
-[ ] 89. [CSO - Trust]: Implement a formalized, automated process for CSO to review and "seal" (using the simulated barcode) each new vetted kitchen node.
-[ ] 90. [QA - Compliance]: Implement rate-limiting on all SMS and WhatsApp token requests to prevent spam.
-[ ] 91. [CSO - Security]: Audit the entire Supabase database and ensure no tables with sensitive user information are publicly readable.
+- [x] 85. [QA - Kitchen Performance]: Stress-test the Service Worker's handling of multiple kitchen images loading simultaneously on a 2G connection emulator.
+- [ ] 86. [QA - Storage Logic]: E2E test the luggage storage booking flow, specifically verifying that QR codes generated match the unique booking ID and can be scanned across different user roles.
+- [ ] 87. [CSO - Data Privacy]: Conduct a comprehensive audit of all GDPR and India's DPDP Act compliance, ensuring all user data is stored and processed lawfully.
+- [ ] 88. [QA - Mobile UI]: Fix any remaining mobile safari rendering glitches where absolute positioned elements (like the Peacock Feather) cover interactive buttons.
+- [ ] 89. [CSO - Trust]: Implement a formalized, automated process for CSO to review and "seal" (using the simulated barcode) each new vetted kitchen node.
+- [ ] 90. [QA - Compliance]: Implement rate-limiting on all SMS and WhatsApp token requests to prevent spam.
+- [ ] 91. [CSO - Security]: Audit the entire Supabase database and ensure no tables with sensitive user information are publicly readable.
 [ ] 92. [CEO - Compliance]: Finalize the "Host Vetting Process" as a formal company policy and integrate the agreement into the Host persona onboarding flow.
 [ ] 93. [QA - Performance]: Audit all GSAP and Lenis scroll listeners to ensure they are properly cleaned up upon component unmount, preventing memory leaks.
 [ ] 94. [CSO - Compliance]: Review and update the privacy policy and terms of service to reflect the newly implemented predictive AI and data collection features.
