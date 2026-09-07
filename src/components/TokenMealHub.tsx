@@ -15,6 +15,7 @@ import { MealPersonalizationSelector } from "./stash/MealPersonalizationSelector
 import { formatPersonalizationsSummary } from "@/lib/mealPersonalization";
 import { DeliveryCutoffCountdown } from "./stash/DeliveryCutoffCountdown";
 import { useThaliPriceLabelVariant, trackThaliPriceClick, ThaliPriceLabelVariant } from "@/lib/abTesting";
+import { CsoKitchenSealModal } from "./stash/CsoKitchenSealModal";
 
 
 type FulfillmentType = "DineIn_Pickup" | "RoomDelivery";
@@ -479,6 +480,8 @@ export const TokenMealHub: React.FC = () => {
 
   // Taste Shield Protection State
   const [isTasteShieldOpen, setIsTasteShieldOpen] = useState<boolean>(false);
+  const [isCsoSealModalOpen, setIsCsoSealModalOpen] = useState<boolean>(false);
+  const [selectedCsoNodeId, setSelectedCsoNodeId] = useState<string | undefined>(undefined);
   const [recentBooking, setRecentBooking] = useState<{
     id: string;
     mealName: string;
@@ -741,6 +744,18 @@ export const TokenMealHub: React.FC = () => {
                 <MessageCircle className="w-3.5 h-3.5 text-teal-400 fill-teal-400/20" />
                 <span>Share Menu with Roommate 📱</span>
               </button>
+              <button
+                type="button"
+                onClick={() => {
+                  playClick();
+                  setSelectedCsoNodeId(undefined);
+                  setIsCsoSealModalOpen(true);
+                }}
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-950 border border-amber-500/40 hover:border-amber-400 hover:scale-105 text-amber-300 text-xs font-bold transition-all cursor-pointer shadow-sm"
+              >
+                <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
+                <span>CSO Barcode Seal 🛡️</span>
+              </button>
             </div>
             <h2 className="text-3xl font-extrabold tracking-tight text-white">
               Hyperlocal <span className="text-emerald-400">Home-Cooked Meals</span>
@@ -995,6 +1010,20 @@ export const TokenMealHub: React.FC = () => {
                         <span>✓ Selected Kitchen Node</span>
                       </div>
                     )}
+
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        playClick();
+                        setSelectedCsoNodeId(node.id);
+                        setIsCsoSealModalOpen(true);
+                      }}
+                      className="mt-2 text-[10px] font-mono font-bold text-amber-300 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 px-2 py-0.5 rounded flex items-center justify-between w-full transition-all cursor-pointer"
+                    >
+                      <span>🛡️ CSO Verified Seal</span>
+                      <span className="text-[9px] text-amber-400 font-extrabold">Inspect Barcode</span>
+                    </button>
                   </div>
                 </div>
               );
@@ -1429,6 +1458,13 @@ export const TokenMealHub: React.FC = () => {
         open={isRoommateShareOpen}
         onOpenChange={setIsRoommateShareOpen}
         defaultDetails={roommateShareDetails}
+      />
+
+      {/* CSO Kitchen Review & Barcode Seal Modal (Task 89) */}
+      <CsoKitchenSealModal
+        isOpen={isCsoSealModalOpen}
+        onClose={() => setIsCsoSealModalOpen(false)}
+        initialNodeId={selectedCsoNodeId}
       />
     </section>
   );

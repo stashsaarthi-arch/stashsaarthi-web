@@ -6,6 +6,7 @@ import { BrandLogo } from "@/components/ui/BrandLogo";
 import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 import { useLanguage } from "@/context/LanguageContext";
 import { FOUNDER_WHATSAPP, FOUNDER_PHONE_DISPLAY } from "@/lib/constants";
+import { DataPrivacyAuditModal } from "@/components/stash/DataPrivacyAuditModal";
 
 export const Route = createFileRoute("/privacy")({
   head: () => ({
@@ -40,6 +41,7 @@ function PrivacyPage() {
   const { language, setLanguage } = useLanguage();
   const isHi = language === "hi";
   const [activeSection, setActiveSection] = useState("overview");
+  const [isAuditModalOpen, setIsAuditModalOpen] = useState(false);
 
   const handlePrint = () => {
     if (typeof window !== "undefined") {
@@ -104,9 +106,18 @@ function PrivacyPage() {
               ? "स्टैशसारथी टेक्नोलॉजीज आपकी व्यक्तिगत जानकारी की सुरक्षा और गोपनीयता के प्रति 100% प्रतिबद्ध है। हम आपकी जानकारी का कभी व्यापार नहीं करते।"
               : "StashSaarthi Technologies is committed to radical transparency and absolute data privacy. Read how we protect student identity and host safety under India's Digital Personal Data Protection Act."}
           </p>
-          <div className="mt-3 text-xs text-muted-foreground">
-            <span>{isHi ? "अंतिम संशोधन:" : "Last Updated:"} September 6, 2026</span> •{" "}
-            <span>{isHi ? "संस्करण:" : "Version:"} v2.4 (Kanpur Operational Standard)</span>
+          <div className="mt-4 flex flex-wrap items-center gap-3">
+            <Button
+              onClick={() => setIsAuditModalOpen(true)}
+              className="bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs gap-2 shadow-lg shadow-emerald-500/20 cursor-pointer"
+            >
+              <ShieldCheck className="h-4 w-4" />
+              <span>{isHi ? "🛡️ ऑटोनॉमस DPDP व GDPR ऑडिट पोर्टल" : "🛡️ Audit DPDP & GDPR Compliance Portal"}</span>
+            </Button>
+            <div className="text-xs text-muted-foreground">
+              <span>{isHi ? "अंतिम संशोधन:" : "Last Updated:"} September 6, 2026</span> •{" "}
+              <span>{isHi ? "संस्करण:" : "Version:"} v2.4 (Kanpur Operational Standard)</span>
+            </div>
           </div>
         </div>
 
@@ -332,6 +343,9 @@ function PrivacyPage() {
           </div>
         </div>
       </main>
+
+      {/* DPDP & GDPR Audit Modal */}
+      <DataPrivacyAuditModal isOpen={isAuditModalOpen} onClose={() => setIsAuditModalOpen(false)} />
     </div>
   );
 }

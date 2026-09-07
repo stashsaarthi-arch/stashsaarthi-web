@@ -6,6 +6,7 @@
 
 import { playPop, playClick } from "./audio";
 import { toast } from "sonner";
+import { checkAndRecordTokenRateLimit } from "./tokenRateLimiter";
 
 export interface TrialTokenRecord {
   tokenId: string;
@@ -95,6 +96,19 @@ export function claimZeroFeeTrialToken(
       success: false,
       wallet,
       message: "Trial token already claimed for this account.",
+    };
+  }
+
+  // Rate Limit Check (Compliance - Task 90)
+  const rateLimitCheck = checkAndRecordTokenRateLimit(
+    studentPhone || "global_trial_token",
+    "trial_token"
+  );
+  if (!rateLimitCheck.allowed) {
+    return {
+      success: false,
+      wallet,
+      message: rateLimitCheck.message,
     };
   }
 

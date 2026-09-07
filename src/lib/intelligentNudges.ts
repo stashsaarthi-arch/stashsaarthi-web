@@ -6,6 +6,7 @@
 
 import { FOUNDER_WHATSAPP, getWhatsAppUrl } from "./constants";
 import { supabase } from "@/integrations/supabase/client";
+import { checkAndRecordTokenRateLimit } from "./tokenRateLimiter";
 
 export interface StudentNudgeRecord {
   id: string;
@@ -194,6 +195,10 @@ export function runAutomatedNudgeBatchScan(): {
 
   students.forEach((student) => {
     if (student.daysInactive >= 3 && !student.nudgeSent) {
+      // Task 90 Compliance Token Rate Limit Check
+      const rateCheck = checkAndRecordTokenRateLimit(student.phone, "nudge_token");
+      if (!rateCheck.allowed) return;
+
       student.nudgeSent = true;
       student.lastNudgeDate = new Date().toISOString();
       student.tokenCode = generateNudgeTokenCode(student.phone);

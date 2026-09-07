@@ -1,8 +1,10 @@
-import { ShieldCheck, CalendarClock, Share2, ScanBarcode } from "lucide-react";
+import { useState } from "react";
+import { ShieldCheck, CalendarClock, Share2, ScanBarcode, QrCode, CheckCircle2, UserCheck, ShieldAlert, KeyRound } from "lucide-react";
 import { toast } from "sonner";
 import { Card3D } from "@/components/ui/Card3D";
 import { FOUNDER_WHATSAPP, getWhatsAppUrl } from "@/lib/constants";
 import { useLanguage } from "@/context/LanguageContext";
+import { getStorageQrCodeUrl, verifyStorageQrCode, type StorageQrScanResult } from "@/lib/storageQrValidator";
 
 export interface StashPassItem {
   category: string;
@@ -24,6 +26,25 @@ export interface StashPassProps {
 export function StashPass({ tokenId, name, serviceLabel, type, bags, months, items, paymentMode }: StashPassProps) {
   const { language } = useLanguage();
   const isHi = language === "hi";
+
+  const [activeScanRole, setActiveScanRole] = useState<"student" | "host" | "admin" | null>(null);
+  const [scanResult, setScanResult] = useState<StorageQrScanResult | null>(null);
+
+  const qrImageUrl = getStorageQrCodeUrl(tokenId);
+
+  const handleRoleScan = (role: "student" | "host" | "admin") => {
+    setActiveScanRole(role);
+    const result = verifyStorageQrCode(tokenId, role);
+    setScanResult(result);
+    toast.success(
+      isHi
+        ? `QR कोड सत्यापित: ${role === "student" ? "छात्र" : role === "host" ? "सीनियर होस्ट" : "एडमिन"} भूमिका`
+        : `QR Code Verified for ${role.toUpperCase()} Role`,
+      {
+        description: `Token: ${tokenId} · Custody Hash: ${result.verificationHash}`,
+      }
+    );
+  };
 
   const handleShare = async () => {
     const text = isHi
@@ -75,7 +96,7 @@ export function StashPass({ tokenId, name, serviceLabel, type, bags, months, ite
                 <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-cyan-400 mb-1">
                   {isHi ? "स्टैशपास™ बोर्डिंग पास" : "StashPass™ Boarding Pass"}
                 </p>
-                <p className="text-3xl font-mono font-bold text-foreground">{tokenId}</p>
+                <p className="text-3xl font-mono font-bold text-foreground" data-testid="stash-pass-token-id">{tokenId}</p>
               </div>
               <ScanBarcode className="h-10 w-10 text-white/40" />
             </div>
@@ -153,6 +174,91 @@ export function StashPass({ tokenId, name, serviceLabel, type, bags, months, ite
               )}
             </div>
 
+            {/* Scannable Storage Pass QR Code Section */}
+            <div className="mt-4 p-3 rounded-xl bg-black/70 border border-cyan-500/30 flex items-center justify-between gap-3">
+              <div className="space-y-1">
+                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-cyan-400 flex items-center gap-1">
+                  <QrCode className="h-3.5 w-3.5" />
+                  {isHi ? "डिजिटल कस्टडी QR कोड" : "Digital Custody QR Code"}
+                </span>
+                <p className="text-[10px] text-slate-300 leading-tight">
+                  {isHi ? "नोड इनटेक एवं कस्टडी के लिए QR स्कैन करें" : "Scan to verify node custody & booking ID"}
+                </p>
+                <div className="flex items-center gap-1 text-[9px] font-mono text-emerald-400 pt-0.5">
+                  <CheckCircle2 className="h-3 w-3" />
+                  <span>ID: {tokenId}</span>
+                </div>
+              </div>
+              <div className="relative w-16 h-16 shrink-0 rounded-lg bg-white p-1 shadow-[0_0_15px_rgba(6,182,212,0.3)]">
+                <img
+                  src={qrImageUrl}
+                  alt={`StashPass QR Code ${tokenId}`}
+                  data-testid="stash-pass-qr"
+                  data-token-id={tokenId}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+            </div>
+
+            {/* Role-Based QR Code Verification Simulator */}
+            <div className="mt-3 p-2.5 rounded-xl border border-white/10 bg-white/5 space-y-2">
+              <p className="text-[10px] font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1">
+                <KeyRound className="h-3 w-3 text-emerald-400" />
+                {isHi ? "QR कोड रोल-आधारित स्कैन सत्यापन:" : "Scan & Verify QR Code Across User Roles:"}
+              </p>
+              <div className="grid grid-cols-3 gap-1.5 text-[10px]">
+                <button
+                  type="button"
+                  data-testid="qr-scan-student"
+                  onClick={() => handleRoleScan("student")}
+                  className={`py-1.5 px-2 rounded-lg font-semibold transition border cursor-pointer ${
+                    activeScanRole === "student"
+                      ? "bg-emerald-500 text-black border-emerald-400"
+                      : "bg-black/40 text-emerald-300 border-emerald-500/30 hover:bg-emerald-500/10"
+                  }`}
+                >
+                  🎓 {isHi ? "छात्र भूमिका" : "Student"}
+                </button>
+                <button
+                  type="button"
+                  data-testid="qr-scan-host"
+                  onClick={() => handleRoleScan("host")}
+                  className={`py-1.5 px-2 rounded-lg font-semibold transition border cursor-pointer ${
+                    activeScanRole === "host"
+                      ? "bg-amber-500 text-black border-amber-400"
+                      : "bg-black/40 text-amber-300 border-amber-500/30 hover:bg-amber-500/10"
+                  }`}
+                >
+                  🏡 {isHi ? "होस्ट भूमिका" : "Senior Host"}
+                </button>
+                <button
+                  type="button"
+                  data-testid="qr-scan-admin"
+                  onClick={() => handleRoleScan("admin")}
+                  className={`py-1.5 px-2 rounded-lg font-semibold transition border cursor-pointer ${
+                    activeScanRole === "admin"
+                      ? "bg-cyan-500 text-black border-cyan-400"
+                      : "bg-black/40 text-cyan-300 border-cyan-500/30 hover:bg-cyan-500/10"
+                  }`}
+                >
+                  ⚡ {isHi ? "एडमिन भूमिका" : "Admin Ops"}
+                </button>
+              </div>
+
+              {scanResult && (
+                <div className="mt-2 p-2 rounded-lg bg-black/80 border border-emerald-500/30 text-[10px] space-y-1 font-mono text-left">
+                  <div className="flex items-center justify-between text-emerald-400 font-bold">
+                    <span className="flex items-center gap-1">
+                      <UserCheck className="h-3 w-3" />
+                      Role: {scanResult.scannedRole.toUpperCase()}
+                    </span>
+                    <span>{scanResult.verificationHash}</span>
+                  </div>
+                  <p className="text-slate-300 font-sans">{scanResult.roleActionText}</p>
+                </div>
+              )}
+            </div>
+
             {items && items.length > 0 && (
               <div className="mt-4 pt-3 border-t border-white/10 space-y-1.5">
                 <p className="text-[10px] font-bold uppercase tracking-wider text-cyan-400">
@@ -203,3 +309,4 @@ export function StashPass({ tokenId, name, serviceLabel, type, bags, months, ite
     </div>
   );
 }
+

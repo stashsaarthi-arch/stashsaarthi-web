@@ -817,6 +817,46 @@
       • Added WebKit `@supports (-webkit-touch-callout: none)` touch rules and `.absolute-pointer-guard` utility ensuring absolute overlays never trap touch interactions on Mobile Safari.
   - **Verification**: `npm run build` compiled cleanly with **0 errors**.
 
+- [x] **[CSO - Trust] Task 89: Implement a formalized, automated process for CSO to review and "seal" (using the simulated barcode) each new vetted kitchen node** (2026-09-07)
+  - **CSO Kitchen Sealing Core Engine** (`src/lib/csoKitchenSealingService.ts`):
+    • Engineered formal CSO audit certificate minting & barcode seal manager supporting 4 mandatory safety & hygiene checkpoints:
+      1. RO Filtered Water & Pure Desi Ghee / Zero Palm Oil Certification
+      2. FSSAI / Home Kitchen Hygiene Pass
+      3. Senior Chef Identity & Police Character Clearance
+      4. Tamper-Evident Laser Barcode Packaging Seal & Daily Thermal Pass
+    • Pre-populated default verified Kanpur kitchen nodes (Kakadeo Annapurna `#CSO-SEAL-KNP-8921`, CSJMU Dadi Maa `#CSO-SEAL-KNP-8922`, IITK Mess `#CSO-SEAL-KNP-8923`, HBTI Shanti Home Food `#CSO-SEAL-KNP-8924`).
+    • Built barcode authenticity verifier `verifyBarcodeSerial()` and `localStorage` persistence layer.
+  - **Interactive CSO Kitchen Barcode Seal Console** (`src/components/stash/CsoKitchenSealModal.tsx`):
+    • Multi-tab modal suite: "Vetted & Sealed Kitchens", "Audit & Seal New Kitchen Node", and "Verify Barcode Serial Authenticity".
+    • Animated CSO audit runner showing real-time step-by-step verification progress with ambient audio haptics (`playPop()`).
+    • Renders high-fidelity tamper-evident laser barcode certificate card with barcode serial ID, 100% audit score badge, expiry date, CSO signature, and printable / copyable certificate actions.
+  - **Token Meal Hub Integration** (`src/components/TokenMealHub.tsx`):
+    • Added prominent "CSO Barcode Seal 🛡️" button in the main header toolbar for instant accessibility.
+    • Displayed interactive `🛡️ CSO Verified Seal` badges on each kitchen node availability card for 1-click barcode inspection.
+  - **Verification**: `npm run build` compiled cleanly with **0 errors**.
+
+- [x] **[QA - Compliance] Task 90: Implement rate-limiting on all SMS and WhatsApp token requests to prevent spam** (2026-09-07)
+  - **Specialized Token Rate Limiter Engine** (`src/lib/tokenRateLimiter.ts`):
+    • Engineered rate limiter engine enforcing sliding-window quotas and cooldowns across SMS and WhatsApp token request channels:
+      1. `sms_token`: Min 60s cooldown between SMS OTP / token requests, max 3 requests per 15-min window.
+      2. `whatsapp_token`: Min 60s cooldown between WhatsApp token dispatches, max 3 requests per 15-min window.
+      3. `trial_token`: Min 60s cooldown for student Zero-Fee Trial Token claims, max 2 claims per 30-min window.
+      4. `nudge_token`: Min 120s cooldown between automated WhatsApp re-engagement tokens, max 2 nudges per 60-min window.
+      5. `referral_token`: Min 10s cooldown between referral token share attempts, max 5 shares per 5-min window.
+      6. `roommate_token`: Min 10s cooldown between roommate menu share tokens, max 5 shares per 5-min window.
+    • Features audio micro-haptic alerts (`playClick()`), Sonner toast warnings (`🛡️ Rate Limited`), `sessionStorage` persistence (`ss_token_ratelimit_*`), and in-memory fallback.
+  - **Re-exports & Standardized Rate Limiter DX** (`src/lib/rateLimiter.ts`):
+    • Integrated and re-exported token rate-limiting helpers (`checkSmsTokenRateLimit`, `checkWhatsAppTokenRateLimit`, `checkAndRecordTokenRateLimit`) for single-source developer access.
+  - **Workflow Integrations**:
+    • `src/lib/stashWallet.ts`: Enforced `checkAndRecordTokenRateLimit(studentPhone, "trial_token")` inside `claimZeroFeeTrialToken`.
+    • `src/components/stash/ZeroFeeTrialTokenModal.tsx`: Enforced `checkSmsTokenRateLimit(phone)` before initiating trial token claims.
+    • `src/components/stash/WhatsAppReferralModal.tsx`: Added referral token rate limit check in `handleSendWhatsApp`.
+    • `src/lib/intelligentNudges.ts`: Enforced `checkAndRecordTokenRateLimit(student.phone, "nudge_token")` in `runAutomatedNudgeBatchScan()`.
+  - **Automated Verification**:
+    • Created test script `execution/test-token-rate-limiter.mjs` verifying all 7 rate-limiting assertions (first request allowed, rapid second request blocked with cooldown, reset behavior, and channel configurations).
+    • `npm run build` compiled with **0 errors**.
+
+
 
 
 

@@ -1,5 +1,7 @@
 import { toast } from "sonner";
 
+export * from "./tokenRateLimiter";
+
 /**
  * Client-Side Form Submission Rate Limiter
  * Enforces cooldowns and sliding-window rate limits across form submissions to prevent spam.
@@ -145,3 +147,4 @@ export function showRateLimitToast(remainingSeconds: number, customMessage?: str
     duration: 4000,
   });
 }
+

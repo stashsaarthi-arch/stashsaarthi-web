@@ -107,8 +107,8 @@ Sprint 10: QA, CSO & CEO (Total Assurance, Compliance & Strategic Direction)
 - [x] 86. [QA - Storage Logic]: E2E test the luggage storage booking flow, specifically verifying that QR codes generated match the unique booking ID and can be scanned across different user roles.
 - [x] 87. [CSO - Data Privacy]: Conduct a comprehensive audit of all GDPR and India's DPDP Act compliance, ensuring all user data is stored and processed lawfully.
 - [x] 88. [QA - Mobile UI]: Fix any remaining mobile safari rendering glitches where absolute positioned elements (like the Peacock Feather) cover interactive buttons.
-- [ ] 89. [CSO - Trust]: Implement a formalized, automated process for CSO to review and "seal" (using the simulated barcode) each new vetted kitchen node.
-- [ ] 90. [QA - Compliance]: Implement rate-limiting on all SMS and WhatsApp token requests to prevent spam.
+- [x] 89. [CSO - Trust]: Implement a formalized, automated process for CSO to review and "seal" (using the simulated barcode) each new vetted kitchen node.
+- [x] 90. [QA - Compliance]: Implement rate-limiting on all SMS and WhatsApp token requests to prevent spam.
 - [ ] 91. [CSO - Security]: Audit the entire Supabase database and ensure no tables with sensitive user information are publicly readable.
 [ ] 92. [CEO - Compliance]: Finalize the "Host Vetting Process" as a formal company policy and integrate the agreement into the Host persona onboarding flow.
 [ ] 93. [QA - Performance]: Audit all GSAP and Lenis scroll listeners to ensure they are properly cleaned up upon component unmount, preventing memory leaks.

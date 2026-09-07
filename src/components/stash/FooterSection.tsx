@@ -712,6 +712,10 @@ export const FooterSection = memo(function FooterSection() {
                 {isHi ? "गोपनीयता नीति (Privacy Policy)" : "Privacy Policy"}
               </Link>
               <span>•</span>
+              <Link to="/privacy" className="text-cyan-400 hover:underline font-semibold">
+                {isHi ? "🛡️ DPDP 2023 ऑडिट पोर्टल" : "🛡️ DPDP & GDPR Audit Portal"}
+              </Link>
+              <span>•</span>
               <Link to="/terms" className="text-amber-400 hover:underline font-semibold">
                 {isHi ? "सेवा की शर्तें (Terms of Service)" : "Terms of Service"}
               </Link>

@@ -24,6 +24,8 @@ import {
 } from "lucide-react";
 import { playClick, playPop } from "@/lib/audio";
 
+import { checkSmsTokenRateLimit } from "@/lib/tokenRateLimiter";
+
 const KANPUR_CAMPUSES = [
   "Kakadeo PW & Allen Belt",
   "IIT Kanpur (Hall 1-13)",
@@ -69,6 +71,12 @@ export function ZeroFeeTrialTokenModal({
           ? "कृपया 10-अंकों का वैध मोबाइल नंबर दर्ज करें"
           : "Please enter a valid 10-digit mobile number"
       );
+      return;
+    }
+
+    // Task 90: Compliance Token Rate Limiting
+    const rateCheck = checkSmsTokenRateLimit(phone);
+    if (!rateCheck.allowed) {
       return;
     }
 

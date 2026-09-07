@@ -20,6 +20,7 @@ import { toast } from "sonner";
 import { useLanguage } from "@/context/LanguageContext";
 import { usePersona } from "@/context/PersonaContext";
 import { APP_BASE_URL } from "@/lib/constants";
+import { checkAndRecordTokenRateLimit } from "@/lib/tokenRateLimiter";
 
 export interface WhatsAppReferralModalProps {
   open: boolean;
@@ -67,6 +68,10 @@ export function WhatsAppReferralModal({ open, onOpenChange }: WhatsAppReferralMo
   const currentMessage = messages[shareType][isHi ? "hi" : "en"];
 
   const handleSendWhatsApp = async () => {
+    // Task 90 Compliance Token Rate Limit Check
+    const rateCheck = checkAndRecordTokenRateLimit(`wa_referral_${shareType}`, "referral_token");
+    if (!rateCheck.allowed) return;
+
     const encodedText = encodeURIComponent(currentMessage);
     const waUrl = `https://api.whatsapp.com/send?text=${encodedText}`;
 
