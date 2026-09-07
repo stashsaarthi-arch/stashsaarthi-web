@@ -29,6 +29,7 @@ import { FooterSection } from "@/components/stash/FooterSection";
 import { RoommateMenuShareModal, MenuShareDetails } from "@/components/stash/RoommateMenuShareModal";
 import { showRateLimitToast } from "@/lib/rateLimiter";
 import { toast } from "sonner";
+import { DeliveryCutoffCountdown } from "@/components/stash/DeliveryCutoffCountdown";
 
 export interface HubConfig {
   slug: string;
@@ -376,6 +377,12 @@ export function CoachingHubTiffinPage({ config }: { config: HubConfig }) {
 
         {/* Menu & Pricing Matrix Section */}
         <section className="py-12 px-4 lg:px-8 max-w-7xl mx-auto border-t border-slate-800/80">
+          {/* Live Cutoff Countdown Banner (Task 83) */}
+          <DeliveryCutoffCountdown
+            onBookClick={() => setIsBookingOpen(true)}
+            className="mb-10 max-w-4xl mx-auto"
+          />
+
           <div className="text-center space-y-3 mb-10">
             <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
               {isHindi ? (

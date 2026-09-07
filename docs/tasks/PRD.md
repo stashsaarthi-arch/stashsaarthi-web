@@ -94,12 +94,12 @@ Sprint 8: CMO & CLO (Hyperlocal Growth & Community Engagement)
 
 Sprint 9: CRO & CAO (Intelligent Conversion & Retention)
 - [x] 77. [CAO - Intelligent Nudges]: Implement a backend system to trigger personalized WhatsApp messages to students who haven't ordered in 3 days, offering a 1-day free delivery token.
-[ ] 78. [CRO - Tiffin Flow]: Implement "Meal Personalization" (e.g., "Skip Rice, Extra Roti" for ₹5 more) during the booking process.
-[ ] 79. [CRO - Spaces Flow]: Add a high-contrast "Instant Booking" button alongside the existing "Find Broker-Free Rooms" button.
-[ ] 80. [CRO - Payment Flow]: Implement "Zero-Fee Trial Token" for first-time students, instantly credited to their Stash Wallet upon verification.
-[ ] 81. [CRO - Landing Page]: Analyze session recordings (e.g., using Hotjar) and test moving the "Saarthi Connect" module higher for the Host persona.
-[ ] 82. [CRO - Storage Flow]: Implement an "Extended Break" upsell in the storage flow, offering a discount for commitments of 3+ months.
-[ ] 83. [CRO - Tiffin Flow]: Add a persistent, countdown timer for the next delivery slot's cutoff time (e.g., "1 hour left to book Lunch!").
+- [x] 78. [CRO - Tiffin Flow]: Implement "Meal Personalization" (e.g., "Skip Rice, Extra Roti" for ₹5 more) during the booking process.
+- [x] 79. [CRO - Spaces Flow]: Add a high-contrast "Instant Booking" button alongside the existing "Find Broker-Free Rooms" button.
+- [x] 80. [CRO - Payment Flow]: Implement "Zero-Fee Trial Token" for first-time students, instantly credited to their Stash Wallet upon verification.
+- [x] 81. [CRO - Landing Page]: Analyze session recordings (e.g., using Hotjar) and test moving the "Saarthi Connect" module higher for the Host persona.
+- [x] 82. [CRO - Storage Flow]: Implement an "Extended Break" upsell in the storage flow, offering a discount for commitments of 3+ months.
+- [x] 83. [CRO - Tiffin Flow]: Add a persistent, countdown timer for the next delivery slot's cutoff time (e.g., "1 hour left to book Lunch!").
 [ ] 84. [CRO - Tiffin Flow]: A/B test changing the Standard Thali price label from "₹50 (pickup) / ₹60 (delivery)" to "From ₹50, save more on pickup".
 
 Sprint 10: QA, CSO & CEO (Total Assurance, Compliance & Strategic Direction)

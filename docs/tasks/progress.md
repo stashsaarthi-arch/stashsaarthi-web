@@ -713,5 +713,55 @@
       • Candidate student queue with 1-click WhatsApp nudge dispatch buttons and auto-cron batch scan trigger.
     - **TokenMealHub Integration**:
       • Mounted `<IntelligentNudgesWidget />` in `src/components/TokenMealHub.tsx`.
-  - **Verification**: `npm run build` compiled cleanly with **0 errors**. Next task: 78.
+- [x] **[CRO - Tiffin Flow] Task 78: Implement Meal Personalization during booking process** (2026-09-07)
+  - **Identified Directive**: Implement "Meal Personalization" (e.g., "Skip Rice, Extra Roti" for ₹5 more) during the booking process.
+  - **Applied Solution**:
+    - Built `MealPersonalizationSelector.tsx` (`src/components/stash/MealPersonalizationSelector.tsx`) and `src/lib/mealPersonalization.ts`.
+    - Integrated meal personalization selector options (extra roti, skip rice, desi ghee topping, dietary preferences) into `TokenMealHub.tsx` and `BookingModal.tsx`.
+  - **Verification**: `npm run build` compiled cleanly with **0 errors**.
+
+- [x] **[CRO - Spaces Flow] Task 79: Add high-contrast "Instant Booking" button alongside "Find Broker-Free Rooms"** (2026-09-07)
+  - **Identified Directive**: Add a high-contrast "Instant Booking" button alongside the existing "Find Broker-Free Rooms" button.
+  - **Applied Solution**:
+    - Upgraded `Rooms.tsx` (`src/components/stash/Rooms.tsx`) with a high-contrast top action banner featuring "Find Broker-Free Rooms" and "Instant Booking ⚡" buttons.
+    - Updated `Rooms` component to accept `onBook?: OpenBooking` from `SolutionsHub.tsx`.
+    - Added high-contrast "Instant Booking ⚡" CTA buttons on every verified room listing card in `Rooms.tsx` triggering `onBook({ service: "spaces" })`.
+  - **Verification**: `npm run build` compiled cleanly with **0 errors**.
+
+- [x] **[CRO - Payment Flow] Task 80: Implement "Zero-Fee Trial Token" for first-time students, instantly credited to their Stash Wallet upon verification** (2026-09-07)
+  - **Identified Directive**: Implement "Zero-Fee Trial Token" for first-time students, instantly credited to their Stash Wallet upon verification.
+  - **Applied Solution**:
+    - **Stash Wallet & Zero-Fee Trial Token Engine** (`src/lib/stashWallet.ts`):
+      • Built state engine tracking Stash Wallet balance, trial tokens (`₹60 credit`), student campus verification, and offline `localStorage` (`ss_stash_wallet`) sync with reactive `stashsaarthi:wallet-updated` custom events.
+      • Implemented trial token claim helper (`claimZeroFeeTrialToken`), checkout deduction logic (`applyTrialTokenToCheckout`), and automatic consumption upon booking completion (`consumeTrialTokenOnBooking`).
+    - **Zero-Fee Trial Token Modal & Header Wallet Badge** (`src/components/stash/ZeroFeeTrialTokenModal.tsx`):
+      • Designed sleek Dark Obsidian + Electric Mint `ZeroFeeTrialTokenModal` with Kanpur campus/coaching hub selector (IITK, HBTI, CSJMU, Kakadeo PW/Allen, GSVM), phone number verification, instant ₹60 credit deposit animation, and 1-tap "Use Token on Order" trigger.
+      • Created compact `StashWalletBadge` displaying real-time wallet balance and animated ping indicator for unclaimed tokens.
+    - **Navbar & Booking Modal Integration**:
+      • Mounted `<StashWalletBadge />` into desktop header navigation and integrated `<ZeroFeeTrialTokenModal />` into `Navbar.tsx`.
+      • Integrated active trial token banner into `BookingModal.tsx` (`src/components/stash/BookingModal.tsx`) allowing students to apply/toggle ₹60 discount on checkout with zero friction.
+  - **Verification**: `npm run build` compiled cleanly with **0 errors**.
+
+- [x] **[CRO - Storage Flow] Task 82: Implement an "Extended Break" upsell in the storage flow, offering a discount for commitments of 3+ months** (2026-09-07)
+  - **Identified Directive**: Implement an "Extended Break" upsell in the storage flow, offering a discount for commitments of 3+ months.
+  - **Applied Solution**:
+    - Integrated `calculateExtendedBreakDiscount` and `getExtendedBreakUpsellMessage` from `src/lib/extendedBreakUpsell.ts` into `BookingModal.tsx` and `Calculator.tsx`.
+    - Enforced 15% discount calculation in `calcAmount` for storage bookings of 3+ months (90+ days).
+    - Designed interactive Extended Break Upsell banner inside `BookingModal.tsx` step 1, displaying potential savings math (e.g. Save ₹270+ instantly) with 1-tap "Upgrade to 3 Months (15% OFF)" button and active discount badge.
+    - Added Extended Break prompt banner inside `StashCalculator` (`src/components/stash/Calculator.tsx`), allowing students simulating vacation breaks under 90 days to toggle 90 days with 1-click and see instant 15% savings.
+  - **Verification**: `npm run build` compiled cleanly with **0 errors**.
+
+- [x] **[CRO - Tiffin Flow] Task 83: Add a persistent countdown timer for the next delivery slot's cutoff time** (2026-09-07)
+  - **Identified Directive**: Add a persistent, countdown timer for the next delivery slot's cutoff time (e.g., "1 hour left to book Lunch!").
+  - **Applied Solution**:
+    - **Persistent Delivery Cutoff Countdown Component** (`src/components/stash/DeliveryCutoffCountdown.tsx`):
+      • Built dynamic real-time countdown engine for Lunch (7:00 AM cutoff for 1:00 PM delivery) and Dinner (2:00 PM cutoff for 8:00 PM delivery) slots.
+      • Calculated natural countdown text (e.g. "1 hr 15 min left to book Lunch!") in English and Hindi (`en` / `hi`).
+      • Designed multi-tier urgency styling: calm emerald/cyan state (>2 hours remaining), amber warning state (1-2 hours remaining), and flashing red flame state (<45 mins remaining) with animated light sweep effects.
+      • Integrated slot switcher tabs ("Lunch 7 AM" vs "Dinner 2 PM") and 1-tap "Book Slot Now" CTA button.
+    - **Hub Integration**:
+      • Integrated `<DeliveryCutoffCountdown />` into `TokenMealHub.tsx` (`src/components/TokenMealHub.tsx`) replacing basic static cutoff widget.
+      • Integrated `<DeliveryCutoffCountdown />` into `CoachingHubTiffinPage.tsx` (`src/components/stash/CoachingHubTiffinPage.tsx`) above menu options for instant student urgency nudge.
+  - **Verification**: `npm run build` compiled cleanly with **0 errors**.
+
 

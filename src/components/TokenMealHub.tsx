@@ -13,6 +13,7 @@ import { SaarthiKitchenSchema } from "@/components/seo/SaarthiKitchenSchema";
 import { IntelligentNudgesWidget } from "./stash/IntelligentNudgesWidget";
 import { MealPersonalizationSelector } from "./stash/MealPersonalizationSelector";
 import { formatPersonalizationsSummary } from "@/lib/mealPersonalization";
+import { DeliveryCutoffCountdown } from "./stash/DeliveryCutoffCountdown";
 
 type FulfillmentType = "DineIn_Pickup" | "RoomDelivery";
 
@@ -707,49 +708,12 @@ export const TokenMealHub: React.FC = () => {
             </p>
           </div>
 
-          {/* Cut-Off Timer Widget */}
-          <div className="mt-6 pt-6 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
-                Active Window:
-              </span>
-              <div className="inline-flex bg-slate-950 p-1 rounded-xl border border-slate-800 text-xs font-medium">
-                <button
-                  type="button"
-                  onClick={() => setDeliverySlot("Lunch")}
-                  className={`px-3 py-1.5 rounded-lg transition-colors cursor-pointer ${
-                    deliverySlot === "Lunch"
-                      ? "bg-emerald-500 text-slate-950 font-bold"
-                      : "text-slate-400 hover:text-white"
-                  }`}
-                >
-                  Lunch (1 PM)
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setDeliverySlot("Dinner")}
-                  className={`px-3 py-1.5 rounded-lg transition-colors cursor-pointer ${
-                    deliverySlot === "Dinner"
-                      ? "bg-emerald-500 text-slate-950 font-bold"
-                      : "text-slate-400 hover:text-white"
-                  }`}
-                >
-                  Dinner (8 PM)
-                </button>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2 bg-slate-950 px-4 py-2 rounded-xl border border-slate-800">
-              <span className="text-xs text-slate-400">Order cutoff in:</span>
-              <span
-                className={`font-mono text-base font-bold ${timeLeft.isLocked ? "text-red-400" : "text-amber-400"}`}
-              >
-                {String(timeLeft.hours).padStart(2, "0")}:
-                {String(timeLeft.minutes).padStart(2, "0")}:
-                {String(timeLeft.seconds).padStart(2, "0")}
-              </span>
-            </div>
-          </div>
+          {/* Cut-Off Timer Widget (Task 83) */}
+          <DeliveryCutoffCountdown
+            initialSlot={deliverySlot}
+            onSelectSlot={(slot) => setDeliverySlot(slot)}
+            className="mt-6"
+          />
         </div>
 
         {/* Live Token Wallet Card */}
