@@ -38,6 +38,7 @@ import { StashPass } from "./StashPass";
 import { BrandLogo } from "@/components/ui/BrandLogo";
 import { InvestorModal } from "./InvestorModal";
 import { CampusCaptainModal } from "./CampusCaptainModal";
+import { AndroidGoPerformanceModal } from "./AndroidGoPerformanceModal";
 import { LowDataToggle } from "@/components/ui/LowDataToggle";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useLanguage } from "@/context/LanguageContext";
@@ -114,6 +115,7 @@ export const FooterSection = memo(function FooterSection() {
   const [doc, setDoc] = useState<string | null>(null);
   const [showInvestorModal, setShowInvestorModal] = useState(false);
   const [showCaptainModal, setShowCaptainModal] = useState(false);
+  const [showAndroidGoModal, setShowAndroidGoModal] = useState(false);
   const [touched, setTouched] = useState<{ name?: boolean; email?: boolean; phone?: boolean }>({});
 
   const isPhoneValid = phone.trim() ? isValidPhone(phone) : false;
@@ -728,6 +730,14 @@ export const FooterSection = memo(function FooterSection() {
                 {isHi ? "₹10k बीमा चार्टर" : "₹10k Insurance Charter"}
               </button>
               <span>•</span>
+              <button
+                type="button"
+                onClick={() => setShowAndroidGoModal(true)}
+                className="text-cyan-400 hover:text-cyan-300 transition-colors cursor-pointer font-medium"
+              >
+                {isHi ? "📱 एंड्रॉइड गो परफॉर्मेंस टेस्ट" : "📱 Android Go Audit"}
+              </button>
+              <span>•</span>
               <LowDataToggle compact />
             </div>
           </div>
@@ -745,6 +755,7 @@ export const FooterSection = memo(function FooterSection() {
       <LegalDialog docKey={doc} onOpenChange={(v) => !v && setDoc(null)} />
       <InvestorModal open={showInvestorModal} onOpenChange={setShowInvestorModal} />
       <CampusCaptainModal open={showCaptainModal} onOpenChange={setShowCaptainModal} />
+      <AndroidGoPerformanceModal open={showAndroidGoModal} onOpenChange={setShowAndroidGoModal} />
     </footer>
   );
 });

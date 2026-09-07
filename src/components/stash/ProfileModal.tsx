@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import {
   User,
   Phone,
@@ -9,6 +9,7 @@ import {
   Save,
   Loader2,
   Info,
+  Boxes,
 } from "lucide-react";
 import {
   Dialog,
@@ -25,6 +26,12 @@ import { updateUserProfile } from "@/lib/waitlistService";
 import { toast } from "sonner";
 import { useLanguage } from "@/context/LanguageContext";
 
+const MyBookingsDashboard = lazy(() =>
+  import("./MyBookingsDashboard").then((m) => ({ default: m.MyBookingsDashboard }))
+);
+
+type ProfileTab = "settings" | "bookings";
+
 interface ProfileModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -35,6 +42,7 @@ export function ProfileModal({ open, onOpenChange }: ProfileModalProps) {
   const { language } = useLanguage();
   const isHi = language === "hi";
 
+  const [activeTab, setActiveTab] = useState<ProfileTab>("settings");
   const [saving, setSaving] = useState(false);
   const [formData, setFormData] = useState({
     full_name: "",
@@ -116,190 +124,237 @@ export function ProfileModal({ open, onOpenChange }: ProfileModalProps) {
           </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="space-y-4 mt-2">
-          {/* Email (Readonly) */}
-          <div>
-            <label className="text-xs text-muted-foreground font-semibold mb-1 block">
-              {isHi ? "ईमेल पता" : "Email Address"}
-            </label>
-            <div className="relative flex items-center">
-              <Mail className="absolute left-3.5 h-4 w-4 text-slate-400 pointer-events-none" />
-              <Input
-                value={user?.email || ""}
-                disabled
-                aria-label={isHi ? "ईमेल पता" : "Email Address"}
-                className="pl-10 bg-black/30 border-white/5 text-slate-300 rounded-lg text-sm cursor-not-allowed"
-              />
-            </div>
-            {user?.provider === "google" && (
-              <p className="text-xs text-slate-400 mt-1 flex items-center gap-1">
-                <Info className="h-3 w-3" />
-                {isHi ? "ईमेल गूगल द्वारा प्रबंधित है।" : "Email is managed by Google."}
-              </p>
-            )}
-          </div>
+        {/* ─── Tab Toggle: Profile Settings | My Bookings ─────────────── */}
+        <div className="flex bg-black/50 border border-white/10 rounded-lg p-1 mt-2 mb-1">
+          <button
+            type="button"
+            onClick={() => setActiveTab("settings")}
+            className={`flex-1 py-2 text-xs font-semibold rounded-md transition-colors flex items-center justify-center gap-1.5 ${
+              activeTab === "settings"
+                ? "bg-cyan-500/20 text-cyan-300"
+                : "text-slate-400 hover:bg-white/5"
+            }`}
+          >
+            <User className="h-3.5 w-3.5" />
+            {isHi ? "प्रोफ़ाइल" : "Profile"}
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveTab("bookings")}
+            className={`flex-1 py-2 text-xs font-semibold rounded-md transition-colors flex items-center justify-center gap-1.5 ${
+              activeTab === "bookings"
+                ? "bg-cyan-500/20 text-cyan-300"
+                : "text-slate-400 hover:bg-white/5"
+            }`}
+          >
+            <Boxes className="h-3.5 w-3.5" />
+            {isHi ? "मेरी बुकिंग" : "My Bookings"}
+          </button>
+        </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {/* Full Name */}
+        {/* ─── Profile Settings Tab ──────────────────────────────────── */}
+        {activeTab === "settings" && (
+          <form onSubmit={handleSubmit} className="space-y-4 mt-2">
+            {/* Email (Readonly) */}
             <div>
               <label className="text-xs text-muted-foreground font-semibold mb-1 block">
-                {isHi ? "पूरा नाम" : "Full Name"}
+                {isHi ? "ईमेल पता" : "Email Address"}
               </label>
               <div className="relative flex items-center">
-                <User className="absolute left-3.5 h-4 w-4 text-slate-400 pointer-events-none" />
+                <Mail className="absolute left-3.5 h-4 w-4 text-slate-400 pointer-events-none" />
                 <Input
-                  value={formData.full_name}
-                  onChange={(e) => setFormData({ ...formData, full_name: e.target.value })}
-                  placeholder="e.g. Advik Omer"
+                  value={user?.email || ""}
+                  disabled
+                  aria-label={isHi ? "ईमेल पता" : "Email Address"}
+                  className="pl-10 bg-black/30 border-white/5 text-slate-300 rounded-lg text-sm cursor-not-allowed"
+                />
+              </div>
+              {user?.provider === "google" && (
+                <p className="text-xs text-slate-400 mt-1 flex items-center gap-1">
+                  <Info className="h-3 w-3" />
+                  {isHi ? "ईमेल गूगल द्वारा प्रबंधित है।" : "Email is managed by Google."}
+                </p>
+              )}
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Full Name */}
+              <div>
+                <label className="text-xs text-muted-foreground font-semibold mb-1 block">
+                  {isHi ? "पूरा नाम" : "Full Name"}
+                </label>
+                <div className="relative flex items-center">
+                  <User className="absolute left-3.5 h-4 w-4 text-slate-400 pointer-events-none" />
+                  <Input
+                    value={formData.full_name}
+                    onChange={(e) => setFormData({ ...formData, full_name: e.target.value })}
+                    placeholder="e.g. Advik Omer"
+                    className="pl-10 bg-black/50 border-white/10 text-white rounded-lg text-sm focus-visible:ring-cyan-500/50"
+                    required
+                  />
+                </div>
+              </div>
+
+              {/* Phone Number */}
+              <div>
+                <label className="text-xs text-muted-foreground font-semibold mb-1 block">
+                  {isHi ? "फ़ोन नंबर" : "Phone Number"}
+                </label>
+                <div className="relative flex items-center">
+                  <Phone className="absolute left-3.5 h-4 w-4 text-slate-400 pointer-events-none" />
+                  <Input
+                    value={formData.phone_number}
+                    onChange={(e) => setFormData({ ...formData, phone_number: e.target.value })}
+                    placeholder="+91"
+                    className="pl-10 bg-black/50 border-white/10 text-white rounded-lg text-sm focus-visible:ring-cyan-500/50"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* User Type Toggle */}
+            <div>
+              <label className="text-xs text-muted-foreground font-semibold mb-2 block">
+                {isHi ? "मेरी भूमिका" : "My Role"}
+              </label>
+              <div className="flex bg-black/50 border border-white/10 rounded-lg p-1">
+                <button
+                  type="button"
+                  onClick={() => setFormData({ ...formData, user_type: "student" })}
+                  className={`flex-1 py-1.5 text-xs font-semibold rounded-md transition-colors ${
+                    formData.user_type === "student"
+                      ? "bg-cyan-500/20 text-cyan-300"
+                      : "text-slate-400 hover:bg-white/5"
+                  }`}
+                >
+                  🎓 {isHi ? "छात्र" : "Student"}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setFormData({ ...formData, user_type: "host" })}
+                  className={`flex-1 py-1.5 text-xs font-semibold rounded-md transition-colors ${
+                    formData.user_type === "host"
+                      ? "bg-amber-500/20 text-amber-300"
+                      : "text-slate-400 hover:bg-white/5"
+                  }`}
+                >
+                  🏠 {isHi ? "होस्ट" : "Host"}
+                </button>
+              </div>
+            </div>
+
+            {/* College or Locality */}
+            <div>
+              <label className="text-xs text-muted-foreground font-semibold mb-1 block">
+                {formData.user_type === "student"
+                  ? isHi
+                    ? "कॉलेज / परिसर"
+                    : "College / Campus"
+                  : isHi
+                    ? "इलाका / शहर"
+                    : "Locality / City"}
+              </label>
+              <div className="relative flex items-center">
+                {formData.user_type === "student" ? (
+                  <GraduationCap className="absolute left-3.5 h-4 w-4 text-slate-400 pointer-events-none" />
+                ) : (
+                  <MapPin className="absolute left-3.5 h-4 w-4 text-slate-400 pointer-events-none" />
+                )}
+                <Input
+                  value={formData.college_or_locality}
+                  onChange={(e) => setFormData({ ...formData, college_or_locality: e.target.value })}
+                  placeholder={
+                    formData.user_type === "student" ? "e.g. IIT Kanpur" : "e.g. Kalyanpur"
+                  }
                   className="pl-10 bg-black/50 border-white/10 text-white rounded-lg text-sm focus-visible:ring-cyan-500/50"
-                  required
                 />
               </div>
             </div>
 
-            {/* Phone Number */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Bio */}
+              <div>
+                <label className="text-xs text-muted-foreground font-semibold mb-1 block">
+                  {isHi ? "बायो / मेरे बारे में" : "Bio / About Me"}
+                </label>
+                <Textarea
+                  value={formData.bio}
+                  onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
+                  placeholder={
+                    isHi ? "अपने बारे में कुछ बताएं..." : "Tell us a bit about yourself..."
+                  }
+                  className="bg-black/50 border-white/10 text-white rounded-lg text-sm focus-visible:ring-cyan-500/50 resize-none h-20"
+                />
+              </div>
+
+              {/* Address */}
+              <div>
+                <label className="text-xs text-muted-foreground font-semibold mb-1 block">
+                  {isHi ? "पूर्ण पता" : "Full Address"}
+                </label>
+                <Textarea
+                  value={formData.address}
+                  onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                  placeholder={isHi ? "अपना पूरा पता दर्ज करें" : "Enter your full address"}
+                  className="bg-black/50 border-white/10 text-white rounded-lg text-sm focus-visible:ring-cyan-500/50 resize-none h-20"
+                />
+              </div>
+            </div>
+
+            {/* Emergency Contact */}
             <div>
               <label className="text-xs text-muted-foreground font-semibold mb-1 block">
-                {isHi ? "फ़ोन नंबर" : "Phone Number"}
+                {isHi ? "आपातकालीन संपर्क" : "Emergency Contact"}
               </label>
               <div className="relative flex items-center">
-                <Phone className="absolute left-3.5 h-4 w-4 text-slate-400 pointer-events-none" />
+                <Activity className="absolute left-3.5 h-4 w-4 text-rose-400 pointer-events-none" />
                 <Input
-                  value={formData.phone_number}
-                  onChange={(e) => setFormData({ ...formData, phone_number: e.target.value })}
+                  value={formData.emergency_contact}
+                  onChange={(e) => setFormData({ ...formData, emergency_contact: e.target.value })}
                   placeholder="+91"
-                  className="pl-10 bg-black/50 border-white/10 text-white rounded-lg text-sm focus-visible:ring-cyan-500/50"
+                  className="pl-10 bg-black/50 border-white/10 text-white rounded-lg text-sm focus-visible:ring-rose-500/50"
                 />
               </div>
             </div>
-          </div>
 
-          {/* User Type Toggle */}
-          <div>
-            <label className="text-xs text-muted-foreground font-semibold mb-2 block">
-              {isHi ? "मेरी भूमिका" : "My Role"}
-            </label>
-            <div className="flex bg-black/50 border border-white/10 rounded-lg p-1">
-              <button
-                type="button"
-                onClick={() => setFormData({ ...formData, user_type: "student" })}
-                className={`flex-1 py-1.5 text-xs font-semibold rounded-md transition-colors ${
-                  formData.user_type === "student"
-                    ? "bg-cyan-500/20 text-cyan-300"
-                    : "text-slate-400 hover:bg-white/5"
-                }`}
+            <div className="pt-2">
+              <Button
+                type="submit"
+                disabled={saving}
+                className="w-full py-5 rounded-xl font-bold bg-cyan-500 hover:bg-cyan-400 text-black shadow-lg shadow-cyan-500/25 transition-all active:scale-[0.98] flex items-center justify-center gap-2"
               >
-                🎓 {isHi ? "छात्र" : "Student"}
-              </button>
-              <button
-                type="button"
-                onClick={() => setFormData({ ...formData, user_type: "host" })}
-                className={`flex-1 py-1.5 text-xs font-semibold rounded-md transition-colors ${
-                  formData.user_type === "host"
-                    ? "bg-amber-500/20 text-amber-300"
-                    : "text-slate-400 hover:bg-white/5"
-                }`}
-              >
-                🏠 {isHi ? "होस्ट" : "Host"}
-              </button>
+                {saving ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    <span>{isHi ? "सहेजा जा रहा है..." : "Saving..."}</span>
+                  </>
+                ) : (
+                  <>
+                    <Save className="h-4 w-4" />
+                    <span>{isHi ? "परिवर्तन सहेजें" : "Save Changes"}</span>
+                  </>
+                )}
+              </Button>
             </div>
-          </div>
+          </form>
+        )}
 
-          {/* College or Locality */}
-          <div>
-            <label className="text-xs text-muted-foreground font-semibold mb-1 block">
-              {formData.user_type === "student"
-                ? isHi
-                  ? "कॉलेज / परिसर"
-                  : "College / Campus"
-                : isHi
-                  ? "इलाका / शहर"
-                  : "Locality / City"}
-            </label>
-            <div className="relative flex items-center">
-              {formData.user_type === "student" ? (
-                <GraduationCap className="absolute left-3.5 h-4 w-4 text-slate-400 pointer-events-none" />
-              ) : (
-                <MapPin className="absolute left-3.5 h-4 w-4 text-slate-400 pointer-events-none" />
-              )}
-              <Input
-                value={formData.college_or_locality}
-                onChange={(e) => setFormData({ ...formData, college_or_locality: e.target.value })}
-                placeholder={
-                  formData.user_type === "student" ? "e.g. IIT Kanpur" : "e.g. Kalyanpur"
-                }
-                className="pl-10 bg-black/50 border-white/10 text-white rounded-lg text-sm focus-visible:ring-cyan-500/50"
-              />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {/* Bio */}
-            <div>
-              <label className="text-xs text-muted-foreground font-semibold mb-1 block">
-                {isHi ? "बायो / मेरे बारे में" : "Bio / About Me"}
-              </label>
-              <Textarea
-                value={formData.bio}
-                onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
-                placeholder={
-                  isHi ? "अपने बारे में कुछ बताएं..." : "Tell us a bit about yourself..."
-                }
-                className="bg-black/50 border-white/10 text-white rounded-lg text-sm focus-visible:ring-cyan-500/50 resize-none h-20"
-              />
-            </div>
-
-            {/* Address */}
-            <div>
-              <label className="text-xs text-muted-foreground font-semibold mb-1 block">
-                {isHi ? "पूर्ण पता" : "Full Address"}
-              </label>
-              <Textarea
-                value={formData.address}
-                onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                placeholder={isHi ? "अपना पूरा पता दर्ज करें" : "Enter your full address"}
-                className="bg-black/50 border-white/10 text-white rounded-lg text-sm focus-visible:ring-cyan-500/50 resize-none h-20"
-              />
-            </div>
-          </div>
-
-          {/* Emergency Contact */}
-          <div>
-            <label className="text-xs text-muted-foreground font-semibold mb-1 block">
-              {isHi ? "आपातकालीन संपर्क" : "Emergency Contact"}
-            </label>
-            <div className="relative flex items-center">
-              <Activity className="absolute left-3.5 h-4 w-4 text-rose-400 pointer-events-none" />
-              <Input
-                value={formData.emergency_contact}
-                onChange={(e) => setFormData({ ...formData, emergency_contact: e.target.value })}
-                placeholder="+91"
-                className="pl-10 bg-black/50 border-white/10 text-white rounded-lg text-sm focus-visible:ring-rose-500/50"
-              />
-            </div>
-          </div>
-
-          <div className="pt-2">
-            <Button
-              type="submit"
-              disabled={saving}
-              className="w-full py-5 rounded-xl font-bold bg-cyan-500 hover:bg-cyan-400 text-black shadow-lg shadow-cyan-500/25 transition-all active:scale-[0.98] flex items-center justify-center gap-2"
+        {/* ─── My Bookings Tab ───────────────────────────────────────── */}
+        {activeTab === "bookings" && (
+          <div className="mt-2">
+            <Suspense
+              fallback={
+                <div className="flex items-center justify-center py-12">
+                  <Loader2 className="h-5 w-5 animate-spin text-cyan-400" />
+                </div>
+              }
             >
-              {saving ? (
-                <>
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                  <span>{isHi ? "सहेजा जा रहा है..." : "Saving..."}</span>
-                </>
-              ) : (
-                <>
-                  <Save className="h-4 w-4" />
-                  <span>{isHi ? "परिवर्तन सहेजें" : "Save Changes"}</span>
-                </>
-              )}
-            </Button>
+              <MyBookingsDashboard />
+            </Suspense>
           </div>
-        </form>
+        )}
       </DialogContent>
     </Dialog>
   );
 }
+

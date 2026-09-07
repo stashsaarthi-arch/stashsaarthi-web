@@ -485,6 +485,7 @@ import { DynamicOGHead } from "@/components/seo/DynamicOGHead";
 import { initWebGLSafetyGuard } from "@/lib/webgl-fallback";
 import { initSessionSecurityListener } from "@/lib/sessionSecurity";
 import { initVisitorTracking, trackPageView } from "@/lib/visitorTracking";
+import { initAutoDataRetentionPurge } from "@/lib/dataRetentionEngine";
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
@@ -493,6 +494,7 @@ function RootComponent() {
 
   useEffect(() => {
     initWebGLSafetyGuard();
+    initAutoDataRetentionPurge();
     const { unsubscribe } = initSessionSecurityListener();
     const stopTracking = initVisitorTracking();
     return () => {

@@ -104,7 +104,7 @@ export function auditInactiveStudentData(): {
   // 1. Audit Local Bookings
   const bookings = getLocalBookings();
   bookings.forEach((b) => {
-    const created = new Date(b.created_at || Date.now()).getTime();
+    const created = new Date(b.submittedAt || Date.now()).getTime();
     const ageDays = Math.floor((now - created) / (1000 * 60 * 60 * 24));
     if (ageDays > oldestDays) oldestDays = ageDays;
 
@@ -113,17 +113,17 @@ export function auditInactiveStudentData(): {
       id: b.id,
       source: "localSubmissions",
       categoryName: "Luggage & Space Booking",
-      createdAt: b.created_at,
+      createdAt: b.submittedAt,
       ageDays,
       status: isExpired ? "EXPIRED_18M_FLAGGED" : "ACTIVE",
-      dataSummary: `Booking #${b.id.slice(0, 8)} (${b.service_type}) - ${b.full_name}`,
+      dataSummary: `Booking #${b.id.slice(0, 8)} (${b.service}) - ${b.name}`,
     });
   });
 
   // 2. Audit Waitlist Entries
   const waitlist = getWaitlistEntries();
   waitlist.forEach((w) => {
-    const created = new Date(w.created_at || Date.now()).getTime();
+    const created = new Date(w.submittedAt || Date.now()).getTime();
     const ageDays = Math.floor((now - created) / (1000 * 60 * 60 * 24));
     if (ageDays > oldestDays) oldestDays = ageDays;
 
@@ -132,17 +132,17 @@ export function auditInactiveStudentData(): {
       id: w.id,
       source: "waitlist",
       categoryName: "Waitlist Lead",
-      createdAt: w.created_at,
+      createdAt: w.submittedAt,
       ageDays,
       status: isExpired ? "EXPIRED_18M_FLAGGED" : "ACTIVE",
-      dataSummary: `Waitlist Lead - ${w.data?.full_name || w.id}`,
+      dataSummary: `Waitlist Lead - ${w.full_name || w.id}`,
     });
   });
 
   // 3. Audit Meal Orders
   const meals = getMealOrders();
   meals.forEach((m) => {
-    const created = new Date(m.created_at || Date.now()).getTime();
+    const created = new Date(m.submittedAt || Date.now()).getTime();
     const ageDays = Math.floor((now - created) / (1000 * 60 * 60 * 24));
     if (ageDays > oldestDays) oldestDays = ageDays;
 
@@ -151,17 +151,17 @@ export function auditInactiveStudentData(): {
       id: m.id,
       source: "localSubmissions",
       categoryName: "Meal Order",
-      createdAt: m.created_at,
+      createdAt: m.submittedAt,
       ageDays,
       status: isExpired ? "EXPIRED_18M_FLAGGED" : "ACTIVE",
-      dataSummary: `Meal Order #${m.id.slice(0, 8)} (${m.tier_id}) - ${m.student_name}`,
+      dataSummary: `Meal Order #${m.id.slice(0, 8)} (${m.mealType}) - ${m.name}`,
     });
   });
 
   // 4. Audit Customer Reviews & Suggestions
   const reviews = getReviews();
   reviews.forEach((r) => {
-    const created = new Date(r.created_at || Date.now()).getTime();
+    const created = new Date(r.createdAt || Date.now()).getTime();
     const ageDays = Math.floor((now - created) / (1000 * 60 * 60 * 24));
     if (ageDays > oldestDays) oldestDays = ageDays;
 
@@ -170,10 +170,10 @@ export function auditInactiveStudentData(): {
       id: r.id,
       source: "reviews",
       categoryName: "Customer Review",
-      createdAt: r.created_at,
+      createdAt: r.createdAt,
       ageDays,
       status: isExpired ? "EXPIRED_18M_FLAGGED" : "ACTIVE",
-      dataSummary: `Review - ${r.author}`,
+      dataSummary: `Review - ${r.name}`,
     });
   });
 

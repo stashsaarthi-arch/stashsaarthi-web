@@ -189,7 +189,7 @@ async function flushToSupabase(): Promise<void> {
   saveSessionData(_session);
 
   try {
-    await supabase.from("visitor_sessions").upsert(
+    await (supabase as any).from("visitor_sessions").upsert(
       {
         session_id: _session.session_id,
         device_type: _session.device_type,
@@ -279,7 +279,7 @@ export interface VisitorRow {
 
 export async function fetchVisitorSessions(limit = 200): Promise<VisitorRow[]> {
   try {
-    const { data, error } = await supabase
+    const { data, error } = await (supabase as any)
       .from("visitor_sessions")
       .select("*")
       .order("last_seen_at", { ascending: false })

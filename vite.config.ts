@@ -11,8 +11,48 @@ export default defineConfig({
     preset: process.env["VERCEL"] ? "vercel" : process.env["NITRO_PRESET"] || "node-server",
   },
   vite: {
+    resolve: {
+      tsconfigPaths: true,
+    },
     build: {
-      chunkSizeWarningLimit: 1200,
+      chunkSizeWarningLimit: 1000,
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes("node_modules")) {
+              if (id.includes("react-dom") || id.includes("react/")) {
+                return "vendor-react";
+              }
+              if (id.includes("@tanstack")) {
+                return "vendor-tanstack";
+              }
+              if (id.includes("lucide-react")) {
+                return "vendor-icons";
+              }
+              if (id.includes("framer-motion") || id.includes("motion")) {
+                return "vendor-framer";
+              }
+              if (id.includes("@supabase")) {
+                return "vendor-supabase";
+              }
+              if (id.includes("gsap")) {
+                return "vendor-gsap";
+              }
+              if (id.includes("lenis")) {
+                return "vendor-lenis";
+              }
+              if (id.includes("mathjs")) {
+                return "vendor-mathjs";
+              }
+              if (id.includes("sonner")) {
+                return "vendor-sonner";
+              }
+            }
+            return undefined;
+          },
+        },
+      },
     },
   },
 });
+

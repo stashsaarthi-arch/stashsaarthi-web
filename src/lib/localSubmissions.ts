@@ -127,6 +127,8 @@ export function getBookings(): BookingRecord[] {
   );
 }
 
+export const getLocalBookings = getBookings;
+
 export function deleteBooking(id: string): void {
   const existing = readLS<BookingRecord>(LS_KEYS.BOOKINGS);
   writeLS(LS_KEYS.BOOKINGS, existing.filter((r) => r.id !== id));
@@ -146,11 +148,11 @@ export function getWaitlistEntries(): WaitlistRecord[] {
     "stash_offline_queue_users_waitlist",
   ).map((item) => ({
     id: item.id,
-    full_name: (item.data?.full_name as string) || "Offline Lead",
-    email: (item.data?.email as string) || "",
-    phone_number: (item.data?.phone_number as string) || undefined,
-    user_type: ((item.data?.user_type as "student" | "host") || "student") as "student" | "host",
-    college_or_locality: (item.data?.college_or_locality as string) || undefined,
+    full_name: (item.data?.["full_name"] as string) || "Offline Lead",
+    email: (item.data?.["email"] as string) || "",
+    phone_number: (item.data?.["phone_number"] as string) || "",
+    user_type: ((item.data?.["user_type"] as "student" | "host") || "student") as "student" | "host",
+    college_or_locality: (item.data?.["college_or_locality"] as string) || "",
     submittedAt: item.queuedAt || new Date().toISOString(),
     source: "Offline Queue",
   }));

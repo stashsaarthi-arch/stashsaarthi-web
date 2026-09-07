@@ -1,10 +1,19 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, lazy, Suspense } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
-import { EdgeRegionMonitorWidget } from "@/components/stash/EdgeRegionMonitorWidget";
-import { ApiPenTestModal } from "@/components/stash/ApiPenTestModal";
-import { AndroidGoPerfModal } from "@/components/stash/AndroidGoPerfModal";
-import { ExecutiveAnalyticsDashboard } from "@/components/stash/ExecutiveAnalyticsDashboard";
+
+const ExecutiveAnalyticsDashboard = lazy(() =>
+  import("@/components/stash/ExecutiveAnalyticsDashboard").then((m) => ({ default: m.ExecutiveAnalyticsDashboard }))
+);
+const ApiPenTestModal = lazy(() =>
+  import("@/components/stash/ApiPenTestModal").then((m) => ({ default: m.ApiPenTestModal }))
+);
+const AndroidGoPerfModal = lazy(() =>
+  import("@/components/stash/AndroidGoPerfModal").then((m) => ({ default: m.AndroidGoPerfModal }))
+);
+const EdgeRegionMonitorWidget = lazy(() =>
+  import("@/components/stash/EdgeRegionMonitorWidget").then((m) => ({ default: m.EdgeRegionMonitorWidget }))
+);
 import {
   getBookings,
   getWaitlistEntries,

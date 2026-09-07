@@ -1,41 +1,49 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, lazy, Suspense } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { AmbientNodes } from "@/components/ui/AmbientNodes";
+import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
+import { usePersona } from "@/context/PersonaContext";
+import type { BookingPrefill } from "@/components/stash/types";
+
+// ─── Above-the-fold (eagerly loaded for instant first paint) ─────────────────
 import { Navbar } from "@/components/stash/Navbar";
 import { Hero } from "@/components/stash/Hero";
 import { QuickCategoryNav } from "@/components/stash/QuickCategoryNav";
-import { DualCrisis } from "@/components/stash/DualCrisis";
-import { SolutionsHub } from "@/components/stash/SolutionsHub";
-import { PgComparisonTable } from "@/components/stash/PgComparisonTable";
-import { CalculatorHub } from "@/components/stash/CalculatorHub";
-import { TrustConsoleHub } from "@/components/stash/TrustConsoleHub";
-import { StudentStoriesCarousel } from "@/components/stash/StudentStoriesCarousel";
-import { HostRules } from "@/components/stash/HostRules";
-import { FamilyDashboard } from "@/components/stash/FamilyDashboard";
-import { FounderEscalationWidget } from "@/components/stash/FounderEscalationWidget";
-import { FeedbackSuggestions } from "@/components/stash/FeedbackSuggestions";
-import { FAQ } from "@/components/stash/FAQ";
-import { FooterSection } from "@/components/stash/FooterSection";
-import { EarlyAccessModal } from "@/components/stash/EarlyAccessModal";
-import { WhatsAppReferralModal } from "@/components/stash/WhatsAppReferralModal";
-import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
-import { BookingModal } from "@/components/stash/BookingModal";
-import { RoomListingModal } from "@/components/stash/RoomListingModal";
 import { RoleLane } from "@/components/stash/RoleLane";
-import { StashTimeline } from "@/components/stash/StashTimeline";
-import { ReferralLeaderboard } from "@/components/stash/ReferralLeaderboard";
-import { KanpurStudentCouncil } from "@/components/stash/KanpurStudentCouncil";
-import { TopRatedKitchensWidget } from "@/components/stash/TopRatedKitchensWidget";
-import { WhatsAppButton } from "@/components/stash/WhatsAppButton";
-import { ActivityTicker } from "@/components/stash/ActivityTicker";
+import { CalculatorHub } from "@/components/stash/CalculatorHub";
+import { SolutionsHub } from "@/components/stash/SolutionsHub";
+
+// ─── Small utilities (eagerly loaded — negligible size) ──────────────────────
 import { ScrollProgress } from "@/components/stash/ScrollProgress";
 import { FloatingPersonaToggle } from "@/components/stash/FloatingPersonaToggle";
 import { MobileStickyCTA } from "@/components/stash/MobileStickyCTA";
-import { ExitIntentModal } from "@/components/stash/ExitIntentModal";
-import { PredictivePersonaWidget } from "@/components/stash/PredictivePersonaWidget";
-import { RagChatbotWidget } from "@/components/stash/RagChatbotWidget";
-import { usePersona } from "@/context/PersonaContext";
-import type { BookingPrefill } from "@/components/stash/types";
+import { WhatsAppButton } from "@/components/stash/WhatsAppButton";
+
+// ─── Below-the-fold heavy components (lazy-loaded for bundle optimization) ───
+const DualCrisis = lazy(() => import("@/components/stash/DualCrisis").then((m) => ({ default: m.DualCrisis })));
+const PgComparisonTable = lazy(() => import("@/components/stash/PgComparisonTable").then((m) => ({ default: m.PgComparisonTable })));
+const StashTimeline = lazy(() => import("@/components/stash/StashTimeline").then((m) => ({ default: m.StashTimeline })));
+const TrustConsoleHub = lazy(() => import("@/components/stash/TrustConsoleHub").then((m) => ({ default: m.TrustConsoleHub })));
+const StudentStoriesCarousel = lazy(() => import("@/components/stash/StudentStoriesCarousel").then((m) => ({ default: m.StudentStoriesCarousel })));
+const ReferralLeaderboard = lazy(() => import("@/components/stash/ReferralLeaderboard").then((m) => ({ default: m.ReferralLeaderboard })));
+const TopRatedKitchensWidget = lazy(() => import("@/components/stash/TopRatedKitchensWidget").then((m) => ({ default: m.TopRatedKitchensWidget })));
+const KanpurStudentCouncil = lazy(() => import("@/components/stash/KanpurStudentCouncil").then((m) => ({ default: m.KanpurStudentCouncil })));
+const HostRules = lazy(() => import("@/components/stash/HostRules").then((m) => ({ default: m.HostRules })));
+const FamilyDashboard = lazy(() => import("@/components/stash/FamilyDashboard").then((m) => ({ default: m.FamilyDashboard })));
+const FeedbackSuggestions = lazy(() => import("@/components/stash/FeedbackSuggestions").then((m) => ({ default: m.FeedbackSuggestions })));
+const FAQ = lazy(() => import("@/components/stash/FAQ").then((m) => ({ default: m.FAQ })));
+const FooterSection = lazy(() => import("@/components/stash/FooterSection").then((m) => ({ default: m.FooterSection })));
+const FounderEscalationWidget = lazy(() => import("@/components/stash/FounderEscalationWidget").then((m) => ({ default: m.FounderEscalationWidget })));
+
+// ─── Modals & overlays (lazy — only loaded on user interaction) ──────────────
+const BookingModal = lazy(() => import("@/components/stash/BookingModal").then((m) => ({ default: m.BookingModal })));
+const RoomListingModal = lazy(() => import("@/components/stash/RoomListingModal").then((m) => ({ default: m.RoomListingModal })));
+const EarlyAccessModal = lazy(() => import("@/components/stash/EarlyAccessModal").then((m) => ({ default: m.EarlyAccessModal })));
+const WhatsAppReferralModal = lazy(() => import("@/components/stash/WhatsAppReferralModal").then((m) => ({ default: m.WhatsAppReferralModal })));
+const ExitIntentModal = lazy(() => import("@/components/stash/ExitIntentModal").then((m) => ({ default: m.ExitIntentModal })));
+const ActivityTicker = lazy(() => import("@/components/stash/ActivityTicker").then((m) => ({ default: m.ActivityTicker })));
+const RagChatbotWidget = lazy(() => import("@/components/stash/RagChatbotWidget").then((m) => ({ default: m.RagChatbotWidget })));
+const PredictivePersonaWidget = lazy(() => import("@/components/stash/PredictivePersonaWidget").then((m) => ({ default: m.PredictivePersonaWidget })));
 
 const TITLE = "StashSaarthi - Campus Micro-Storage & Zero-Brokerage Co-Living";
 const DESC =
@@ -145,131 +153,166 @@ function Index() {
         <SolutionsHub onBook={open} onListRoom={handleListRoom} />
       </ErrorBoundary>
 
+
       {/* Why StashSaarthi vs. Traditional PGs Comparison Table */}
       <ErrorBoundary sectionName="Why StashSaarthi vs Traditional PGs">
-        <PgComparisonTable onBook={open} />
+        <Suspense fallback={null}>
+          <PgComparisonTable onBook={open} />
+        </Suspense>
       </ErrorBoundary>
 
       <ErrorBoundary sectionName="Dual Crisis Overview">
-        <DualCrisis />
+        <Suspense fallback={null}>
+          <DualCrisis />
+        </Suspense>
       </ErrorBoundary>
 
       {/* Interactive Timeline of a Stash (Pickup -> Custody -> Return) */}
       <ErrorBoundary sectionName="Timeline of a Stash">
-        <StashTimeline onBook={open} />
+        <Suspense fallback={null}>
+          <StashTimeline onBook={open} />
+        </Suspense>
       </ErrorBoundary>
 
       {/* 3. 100% Radical Transparency & Custody Console Hub */}
       <ErrorBoundary sectionName="Trust & Custody Console">
-        <TrustConsoleHub />
+        <Suspense fallback={null}>
+          <TrustConsoleHub />
+        </Suspense>
       </ErrorBoundary>
 
       {/* Dedicated Student & Host Success Stories Carousel */}
       <ErrorBoundary sectionName="Student Success Stories">
-        <StudentStoriesCarousel onBook={open} />
+        <Suspense fallback={null}>
+          <StudentStoriesCarousel onBook={open} />
+        </Suspense>
       </ErrorBoundary>
 
       {/* Interactive Referral Leaderboard */}
       <ErrorBoundary sectionName="Referral Leaderboard">
-        <ReferralLeaderboard onRefer={handleRefer} />
+        <Suspense fallback={null}>
+          <ReferralLeaderboard onRefer={handleRefer} />
+        </Suspense>
       </ErrorBoundary>
 
       {/* Top 3 Rated Kitchens of the Week Widget */}
       <ErrorBoundary sectionName="Top Rated Kitchens">
-        <TopRatedKitchensWidget
-          onOrderMeal={(kId) =>
-            open({
-              service: "kitchen",
-              note: `Selected Top Rated Kitchen of the Week: ${kId}`,
-            })
-          }
-        />
+        <Suspense fallback={null}>
+          <TopRatedKitchensWidget
+            onOrderMeal={(kId) =>
+              open({
+                service: "kitchen",
+                note: `Selected Top Rated Kitchen of the Week: ${kId}`,
+              })
+            }
+          />
+        </Suspense>
       </ErrorBoundary>
 
       {/* Official Kanpur Student Council Section */}
       <ErrorBoundary sectionName="Kanpur Student Council">
-        <KanpurStudentCouncil />
+        <Suspense fallback={null}>
+          <KanpurStudentCouncil />
+        </Suspense>
       </ErrorBoundary>
 
       {/* Host Specific Dashboard Norms */}
       {role === "host" && (
         <>
           <ErrorBoundary sectionName="Host House Rules">
-            <HostRules />
+            <Suspense fallback={null}>
+              <HostRules />
+            </Suspense>
           </ErrorBoundary>
           <ErrorBoundary sectionName="Family Dashboard">
-            <FamilyDashboard />
+            <Suspense fallback={null}>
+              <FamilyDashboard />
+            </Suspense>
           </ErrorBoundary>
         </>
       )}
 
       {/* 4. Community Reviews & Improvement Suggestions Hub */}
       <ErrorBoundary sectionName="Community Feedback & Suggestions">
-        <FeedbackSuggestions />
+        <Suspense fallback={null}>
+          <FeedbackSuggestions />
+        </Suspense>
       </ErrorBoundary>
 
       {/* 5. FAQ */}
       <ErrorBoundary sectionName="FAQ Section">
-        <FAQ />
+        <Suspense fallback={null}>
+          <FAQ />
+        </Suspense>
       </ErrorBoundary>
 
       {/* Footer */}
       <ErrorBoundary sectionName="Footer">
-        <FooterSection />
+        <Suspense fallback={null}>
+          <FooterSection />
+        </Suspense>
       </ErrorBoundary>
 
       {/* Global Modals & Overlay Triggers */}
-      <ErrorBoundary sectionName="Booking Modal" compact>
-        <BookingModal
-          open={booking}
-          onOpenChange={setBooking}
-          service={prefill.service ?? "stash"}
-          note={prefill.note}
-          bags={prefill.bags}
-          months={prefill.months}
-          amount={prefill.amount}
-        />
-      </ErrorBoundary>
-      <ErrorBoundary sectionName="Room Listing Modal" compact>
-        <RoomListingModal open={listing} onOpenChange={setListing} />
-      </ErrorBoundary>
-      <ErrorBoundary sectionName="Early Access Modal" compact>
-        <EarlyAccessModal open={earlyAccess} onOpenChange={setEarlyAccess} initialRole={role} />
-      </ErrorBoundary>
-      <ErrorBoundary sectionName="WhatsApp Referral Modal" compact>
-        <WhatsAppReferralModal open={referralOpen} onOpenChange={setReferralOpen} />
-      </ErrorBoundary>
-      <ErrorBoundary sectionName="Exit Intent Modal" compact>
-        <ExitIntentModal
-          onClaimDiscount={(code, service) => {
-            open({
-              service,
-              note: `Applied Offer Code ${code}: Flat ₹50 Discount`,
-            });
-          }}
-        />
-      </ErrorBoundary>
+      <Suspense fallback={null}>
+        <ErrorBoundary sectionName="Booking Modal" compact>
+          <BookingModal
+            open={booking}
+            onOpenChange={setBooking}
+            service={prefill.service ?? "stash"}
+            note={prefill.note}
+            bags={prefill.bags}
+            months={prefill.months}
+            amount={prefill.amount}
+          />
+        </ErrorBoundary>
+        <ErrorBoundary sectionName="Room Listing Modal" compact>
+          <RoomListingModal open={listing} onOpenChange={setListing} />
+        </ErrorBoundary>
+        <ErrorBoundary sectionName="Early Access Modal" compact>
+          <EarlyAccessModal open={earlyAccess} onOpenChange={setEarlyAccess} initialRole={role} />
+        </ErrorBoundary>
+        <ErrorBoundary sectionName="WhatsApp Referral Modal" compact>
+          <WhatsAppReferralModal open={referralOpen} onOpenChange={setReferralOpen} />
+        </ErrorBoundary>
+        <ErrorBoundary sectionName="Exit Intent Modal" compact>
+          <ExitIntentModal
+            onClaimDiscount={(code, service) => {
+              open({
+                service,
+                note: `Applied Offer Code ${code}: Flat ₹50 Discount`,
+              });
+            }}
+          />
+        </ErrorBoundary>
+      </Suspense>
       <ErrorBoundary sectionName="Scroll Progress Indicator" compact>
         <ScrollProgress />
       </ErrorBoundary>
-      <ErrorBoundary sectionName="Activity Ticker Widget" compact>
-        <ActivityTicker onBook={open} onListRoom={handleListRoom} />
-      </ErrorBoundary>
+      <Suspense fallback={null}>
+        <ErrorBoundary sectionName="Activity Ticker Widget" compact>
+          <ActivityTicker onBook={open} onListRoom={handleListRoom} />
+        </ErrorBoundary>
+      </Suspense>
       <ErrorBoundary sectionName="Floating Persona Toggle Widget" compact>
         <FloatingPersonaToggle />
       </ErrorBoundary>
-      <ErrorBoundary sectionName="Founder Escalation Widget" compact>
-        <FounderEscalationWidget />
-      </ErrorBoundary>
+      <Suspense fallback={null}>
+        <ErrorBoundary sectionName="Founder Escalation Widget" compact>
+          <FounderEscalationWidget />
+        </ErrorBoundary>
+      </Suspense>
       <ErrorBoundary sectionName="Mobile Sticky CTA Widget" compact>
         <MobileStickyCTA onBook={open} />
       </ErrorBoundary>
       <ErrorBoundary sectionName="WhatsApp Floating Action Button" compact>
         <WhatsAppButton onBook={open} />
       </ErrorBoundary>
-      <ErrorBoundary sectionName="RAG Chatbot Widget" compact>
-        <RagChatbotWidget />
-      </ErrorBoundary>
+      <Suspense fallback={null}>
+        <ErrorBoundary sectionName="RAG Chatbot Widget" compact>
+          <RagChatbotWidget />
+        </ErrorBoundary>
+      </Suspense>
     </main>
   );
 }

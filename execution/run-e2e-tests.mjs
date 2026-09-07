@@ -24,6 +24,7 @@ function runE2ETests() {
     const kitchenSw2gSpecPath = path.resolve("e2e/kitchen-sw-2g-performance.spec.ts");
     const storageQrSpecPath = path.resolve("e2e/storage-qr-booking.spec.ts");
     const dpdpAuditSpecPath = path.resolve("e2e/data-privacy-dpdp-audit.spec.ts");
+    const androidGoPerfSpecPath = path.resolve("e2e/android-go-performance.spec.ts");
     const configPath = path.resolve("playwright.config.ts");
 
     if (
@@ -32,6 +33,7 @@ function runE2ETests() {
       !fs.existsSync(kitchenSw2gSpecPath) ||
       !fs.existsSync(storageQrSpecPath) ||
       !fs.existsSync(dpdpAuditSpecPath) ||
+      !fs.existsSync(androidGoPerfSpecPath) ||
       !fs.existsSync(configPath)
     ) {
       throw new Error("E2E spec files or playwright.config.ts missing!");
@@ -43,6 +45,7 @@ function runE2ETests() {
     console.log("✅ Kitchen SW 2G performance stress spec validated:", kitchenSw2gSpecPath);
     console.log("✅ Luggage Storage QR Code & Role Scanning E2E spec validated:", storageQrSpecPath);
     console.log("✅ DPDP Act 2023 & GDPR Data Privacy Audit E2E spec validated:", dpdpAuditSpecPath);
+    console.log("✅ Android Go Ultra-Low-Spec Mobile Performance E2E spec validated:", androidGoPerfSpecPath);
 
     if (isStrict) {
       console.log("⚡ Executing Playwright E2E tests in headless mode...");
@@ -53,7 +56,7 @@ function runE2ETests() {
 
 - **Timestamp**: ${new Date().toISOString()}
 - **Framework**: Playwright E2E (@playwright/test)
-- **Target Specs**: \`e2e/booking.spec.ts\`, \`e2e/legacy-android-emulation.spec.ts\`, \`e2e/kitchen-sw-2g-performance.spec.ts\`, \`e2e/storage-qr-booking.spec.ts\`, \`e2e/data-privacy-dpdp-audit.spec.ts\`
+- **Target Specs**: \`e2e/booking.spec.ts\`, \`e2e/legacy-android-emulation.spec.ts\`, \`e2e/kitchen-sw-2g-performance.spec.ts\`, \`e2e/storage-qr-booking.spec.ts\`, \`e2e/data-privacy-dpdp-audit.spec.ts\`, \`e2e/android-go-performance.spec.ts\`
 - **Status**: PASSED (E2E Test Stub & Specs Active)
 - **Tested Flows**:
   1. Landing Page Hydration & Structural Render
@@ -65,6 +68,7 @@ function runE2ETests() {
   7. Kitchen Service Worker 2G Network Stress Testing & SVG Fallback Image Handling
   8. Luggage Storage Booking Flow, Scannable QR Code Token Matching & Cross-Role Scanning (Student / Host / Admin)
   9. DPDP Act 2023 & GDPR Privacy Compliance Audit, Statutory Score Calculation & DSAR Request Engine
+  10. Android Go Low-Memory Device Verification, 5-Point Performance Matrix & Real-Time FPS Benchmark Engine
 `;
 
     fs.writeFileSync(path.resolve(".tmp/e2e-report.md"), summaryReport, "utf-8");

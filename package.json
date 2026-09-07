@@ -12,6 +12,8 @@
     "format": "prettier --write .",
     "audit:vulnerabilities": "node execution/audit-vulnerabilities.mjs",
     "audit:rls": "node execution/audit-supabase-rls.mjs",
+    "audit:pentest": "node execution/run-api-pentest.mjs",
+    "audit:android-go": "node execution/verify-android-go-perf.mjs",
     "deploy:edge:multi-region": "node execution/deploy-edge-functions-multi-region.mjs",
     "audit:edge-regions": "node execution/deploy-edge-functions-multi-region.mjs --check-only",
     "nightly:check": "node execution/audit-vulnerabilities.mjs --strict --with-build",
