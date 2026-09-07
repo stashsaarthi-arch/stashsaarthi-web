@@ -2,6 +2,9 @@ import { useState, useEffect, useCallback } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 import { EdgeRegionMonitorWidget } from "@/components/stash/EdgeRegionMonitorWidget";
+import { ApiPenTestModal } from "@/components/stash/ApiPenTestModal";
+import { AndroidGoPerfModal } from "@/components/stash/AndroidGoPerfModal";
+import { ExecutiveAnalyticsDashboard } from "@/components/stash/ExecutiveAnalyticsDashboard";
 import {
   getBookings,
   getWaitlistEntries,
@@ -423,14 +426,14 @@ function EmptyState({
 }
 
 // ─── Tab types ────────────────────────────────────────────────────────────────
-type Tab = "bookings" | "waitlist" | "meals" | "reviews" | "suggestions" | "visitors";
+type Tab = "executive" | "bookings" | "waitlist" | "meals" | "reviews" | "suggestions" | "visitors";
 
 // ─── Main AdminPage ───────────────────────────────────────────────────────────
 function AdminPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
-  const [activeTab, setActiveTab] = useState<Tab>("bookings");
+  const [activeTab, setActiveTab] = useState<Tab>("executive");
   const [search, setSearch] = useState("");
   const [bookings, setBookings] = useState<BookingRecord[]>([]);
   const [waitlist, setWaitlist] = useState<WaitlistRecord[]>([]);
@@ -442,6 +445,8 @@ function AdminPage() {
   const [serviceFilter, setServiceFilter] = useState<string>("all");
   const [visitors, setVisitors] = useState<VisitorRow[]>([]);
   const [visitorsLoading, setVisitorsLoading] = useState(false);
+  const [isPenTestOpen, setIsPenTestOpen] = useState(false);
+  const [isAndroidGoPerfOpen, setIsAndroidGoPerfOpen] = useState(false);
 
   const loadData = useCallback(() => {
     setBookings(getBookings());
@@ -564,6 +569,7 @@ function AdminPage() {
   );
 
   const TABS: { id: Tab; label: string; count: number; icon: React.ElementType }[] = [
+    { id: "executive", label: "Executive Analytics", count: 0, icon: TrendingUp },
     { id: "bookings", label: "Bookings", count: bookings.length, icon: Boxes },
     { id: "waitlist", label: "Waitlist", count: waitlist.length, icon: Users },
     { id: "meals", label: "Meal Orders", count: meals.length, icon: Soup },
@@ -591,6 +597,22 @@ function AdminPage() {
             </div>
           </div>
           <div className="flex items-center gap-2">
+            <button
+              onClick={() => setIsAndroidGoPerfOpen(true)}
+              className="h-8 px-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-semibold flex items-center gap-1.5 hover:bg-emerald-500/20 transition-colors"
+              title="Run Android Go Mobile Performance Audit"
+            >
+              <Smartphone className="h-3.5 w-3.5" />
+              <span className="hidden sm:inline">Android Go Audit</span>
+            </button>
+            <button
+              onClick={() => setIsPenTestOpen(true)}
+              className="h-8 px-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs font-semibold flex items-center gap-1.5 hover:bg-rose-500/20 transition-colors"
+              title="Run API Security Pen-Test"
+            >
+              <ShieldAlert className="h-3.5 w-3.5" />
+              <span className="hidden sm:inline">API Pen-Test</span>
+            </button>
             <button
               onClick={loadData}
               className="h-8 w-8 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors"
@@ -702,6 +724,11 @@ function AdminPage() {
             );
           })}
         </div>
+
+        {/* ── Executive Analytics ── */}
+        {activeTab === "executive" && (
+          <ExecutiveAnalyticsDashboard />
+        )}
 
         {/* ── Bookings ── */}
         {activeTab === "bookings" && (
@@ -1232,6 +1259,8 @@ function AdminPage() {
           <EdgeRegionMonitorWidget />
         </div>
 
+        <ApiPenTestModal isOpen={isPenTestOpen} onClose={() => setIsPenTestOpen(false)} />
+        <AndroidGoPerfModal isOpen={isAndroidGoPerfOpen} onClose={() => setIsAndroidGoPerfOpen(false)} />
       </div>
     </div>
   );
