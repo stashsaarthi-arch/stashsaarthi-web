@@ -470,6 +470,10 @@ function LenisHandler() {
       gsap.ticker.remove(updateGsap);
       clearTimeout(resizeTimer);
       window.removeEventListener("resize", handleResize);
+      if (typeof window !== "undefined") {
+        delete (window as any).__lenis;
+      }
+      ScrollTrigger.refresh();
     };
   }, [lenis]);
 

@@ -26,6 +26,9 @@ import AnimatedContent from "@/components/ui/AnimatedContent";
 import { useLanguage } from "@/context/LanguageContext";
 import { usePersona } from "@/context/PersonaContext";
 
+import { HostOnboardingAgreementModal } from "@/components/stash/HostOnboardingAgreementModal";
+import { getHostAgreement } from "@/lib/hostVettingPolicy";
+
 interface TierDetail {
   id: number;
   titleEn: string;
@@ -165,6 +168,8 @@ export function HostVettingProcess() {
   const [isSimulating, setIsSimulating] = useState<boolean>(false);
   const [simulatedStep, setSimulatedStep] = useState<number>(0);
   const [simLogs, setSimLogs] = useState<string[]>([]);
+  const [showAgreementModal, setShowAgreementModal] = useState<boolean>(false);
+  const [hostAgreement, setHostAgreement] = useState(() => getHostAgreement());
 
   // Simulation runner
   const runSimulation = () => {
@@ -267,7 +272,30 @@ export function HostVettingProcess() {
             ? "कोई भी सीनियर होस्ट या कमरा तब तक लिस्ट नहीं होता जब तक वह इन सभी 4 कड़े सुरक्षा चरणों को 100% पास न कर ले।"
             : "No senior host or room is listed on StashSaarthi without clearing 100% of all 4 verification tiers."}
         </p>
+
+        {/* Formal CEO & CSO Policy Onboarding Agreement Trigger */}
+        <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
+          <button
+            type="button"
+            onClick={() => setShowAgreementModal(true)}
+            className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 to-amber-600 px-5 py-2.5 text-xs font-extrabold text-black hover:from-amber-400 hover:to-amber-500 transition-all shadow-lg hover:shadow-amber-500/25 cursor-pointer"
+          >
+            <FileCheck className="h-4 w-4" />
+            <span>
+              {hostAgreement
+                ? (isHi ? `✓ नीतियाँ स्वीकार की गईं (${hostAgreement.agreementId})` : `✓ Signed Policy (${hostAgreement.agreementId})`)
+                : (isHi ? "📋 ऑनबोर्डिंग नीति समझौता देखें व हस्ताक्षरित करें" : "📋 View & Sign Formal Host Policy Agreement")}
+            </span>
+          </button>
+        </div>
       </div>
+
+      {/* Modal */}
+      <HostOnboardingAgreementModal
+        open={showAgreementModal}
+        onOpenChange={setShowAgreementModal}
+        onSignedSuccess={(rec) => setHostAgreement(rec)}
+      />
 
       {/* ── Visual Flowchart / Stepper Diagram ── */}
       <div className="mx-auto max-w-5xl px-2">

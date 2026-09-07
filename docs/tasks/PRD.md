@@ -110,8 +110,8 @@ Sprint 10: QA, CSO & CEO (Total Assurance, Compliance & Strategic Direction)
 - [x] 89. [CSO - Trust]: Implement a formalized, automated process for CSO to review and "seal" (using the simulated barcode) each new vetted kitchen node.
 - [x] 90. [QA - Compliance]: Implement rate-limiting on all SMS and WhatsApp token requests to prevent spam.
 - [x] 91. [CSO - Security]: Audit the entire Supabase database and ensure no tables with sensitive user information are publicly readable.
-[ ] 92. [CEO - Compliance]: Finalize the "Host Vetting Process" as a formal company policy and integrate the agreement into the Host persona onboarding flow.
-[ ] 93. [QA - Performance]: Audit all GSAP and Lenis scroll listeners to ensure they are properly cleaned up upon component unmount, preventing memory leaks.
+- [x] 92. [CEO - Compliance]: Finalize the "Host Vetting Process" as a formal company policy and integrate the agreement into the Host persona onboarding flow.
+- [x] 93. [QA - Performance]: Audit all GSAP and Lenis scroll listeners to ensure they are properly cleaned up upon component unmount, preventing memory leaks.
 [ ] 94. [CSO - Compliance]: Review and update the privacy policy and terms of service to reflect the newly implemented predictive AI and data collection features.
 [ ] 95. [QA - Security]: Perform a comprehensive pen-test on all public-facing API endpoints.
 [ ] 96. [QA - Mobile Performance]: Verify that all heavy animated and interactive components pass without crashing on low-end Android Go devices common in Kanpur.

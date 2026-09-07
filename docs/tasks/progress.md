@@ -867,4 +867,39 @@
     - `docs/tasks/progress.md` — Appended Task 91 execution details.
     - `progress.md` — Appended Task 91 progress summary.
 
+- [x] **[CEO - Compliance] Task 92: Finalize the "Host Vetting Process" as a formal company policy and integrate the agreement into the Host persona onboarding flow — 2026-09-07**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production bundle compiled cleanly).
+  - **Host Agreement Engine** (`src/lib/hostVettingPolicy.ts`):
+    - Added local storage persistence (`ss_host_agreement_record`) and helper functions (`saveHostAgreement`, `getHostAgreement`, `clearHostAgreement`).
+    - Extended `HostAgreementRecord` interface with node address, campus node, and timestamp fields.
+  - **Host Onboarding Agreement Modal** (`src/components/stash/HostOnboardingAgreementModal.tsx`):
+    - Built interactive 3-step host policy & onboarding agreement modal featuring:
+      1. Formal 4-tier security policy breakdown (DigiLocker e-KYC, Police character clearance, TPA Sec 105 Leave & License, 12-Point safety audit).
+      2. Onboarding registration form & binding legal assent checkboxes (Aadhaar biometric consent, 0 FIR declaration, 100% property title protection under TPA Sec 105, ₹10k damage cover & bedside SOS rules).
+      3. Verified Senior Host Certificate generator with agreement serial (`SS-HOST-POLICY-2026-XXXX`), copy ID trigger, and 1-click printable certificate layout.
+  - **Host Vetting Process Integration** (`src/components/stash/HostVettingProcess.tsx`):
+    - Added header CTA button ("📋 View & Sign Formal Host Policy Agreement" / "✓ Signed Policy") linking to `<HostOnboardingAgreementModal />`.
+  - **Modified Files**:
+    - `src/lib/hostVettingPolicy.ts` — Added agreement persistence & helper functions.
+    - `src/components/stash/HostOnboardingAgreementModal.tsx` — Created host onboarding agreement modal.
+    - `src/components/stash/HostVettingProcess.tsx` — Integrated agreement modal and header CTA.
+    - `docs/tasks/PRD.md` — Updated Task 92 status to `- [x]`.
+    - `docs/tasks/progress.md` — Appended Task 92 execution log.
+    - `progress.md` — Appended Task 92 execution log.
+
+- [x] **[QA - Performance] Task 93: Audit all GSAP and Lenis scroll listeners to ensure they are properly cleaned up upon component unmount, preventing memory leaks — 2026-09-07**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production bundle compiled cleanly).
+  - **Memory Leak & Scroll Listener Audit**:
+    - `src/lib/predictiveAI.ts` (`PersonaTelemetryEngine`): Added subscriber reference-counting (`isInitialized` flag, `listeners.size` triggers). Prevents duplicate event listeners (`scroll`, `resize`, `mouseover`), duplicate `setInterval` inference cycles, and orphan `IntersectionObserver` instances when subscribers unmount.
+    - `src/hooks/useCountUp.ts`: Added requestAnimationFrame ID (`animationFrameId`) tracking and explicit `cancelAnimationFrame` cleanup on component unmount, eliminating state updates on unmounted components.
+    - `src/routes/__root.tsx` (`LenisHandler`): Added explicit `delete (window as any).__lenis` and `ScrollTrigger.refresh()` cleanup upon route/component unmount.
+  - **Modified Files**:
+    - `src/hooks/useCountUp.ts` — Added `cancelAnimationFrame` cleanup.
+    - `src/lib/predictiveAI.ts` — Added subscriber ref-counting and `destroy()` lifecycle guards.
+    - `src/routes/__root.tsx` — Enhanced `LenisHandler` cleanup.
+    - `docs/tasks/PRD.md` — Marked Task 93 as `- [x]`.
+    - `docs/tasks/progress.md` — Appended Task 93 log.
+    - `progress.md` — Appended Task 93 log.
+
+
 

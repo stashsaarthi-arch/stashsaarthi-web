@@ -193,9 +193,11 @@ class PersonaTelemetryEngine {
   private listeners: Set<(result: PredictionResult) => void> = new Set();
   private activeIntersectionObserver: IntersectionObserver | null = null;
   private timerId: number | null = null;
+  private isInitialized = false;
 
   public init() {
-    if (typeof window === "undefined") return;
+    if (typeof window === "undefined" || this.isInitialized) return;
+    this.isInitialized = true;
 
     this.lastScrollY = window.scrollY;
     this.lastScrollTime = Date.now();
@@ -220,7 +222,8 @@ class PersonaTelemetryEngine {
   }
 
   public destroy() {
-    if (typeof window === "undefined") return;
+    if (typeof window === "undefined" || !this.isInitialized) return;
+    this.isInitialized = false;
 
     window.removeEventListener("scroll", this.handleScroll);
     window.removeEventListener("resize", this.handleResize);
@@ -228,9 +231,11 @@ class PersonaTelemetryEngine {
 
     if (this.activeIntersectionObserver) {
       this.activeIntersectionObserver.disconnect();
+      this.activeIntersectionObserver = null;
     }
     if (this.timerId !== null) {
       clearInterval(this.timerId);
+      this.timerId = null;
     }
   }
 
@@ -354,9 +359,15 @@ class PersonaTelemetryEngine {
   }
 
   public subscribe(cb: (result: PredictionResult) => void) {
+    if (this.listeners.size === 0) {
+      this.init();
+    }
     this.listeners.add(cb);
     return () => {
       this.listeners.delete(cb);
+      if (this.listeners.size === 0) {
+        this.destroy();
+      }
     };
   }
 }
@@ -370,7 +381,6 @@ export function usePredictivePersonaAI() {
   const [prediction, setPrediction] = useState<PredictionResult | null>(null);
 
   useEffect(() => {
-    telemetryEngine.init();
     const unsub = telemetryEngine.subscribe((res) => setPrediction(res));
     setPrediction(telemetryEngine.evaluateAI());
 

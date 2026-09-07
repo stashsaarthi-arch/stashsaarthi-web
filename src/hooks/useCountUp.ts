@@ -23,6 +23,8 @@ export function useCountUp(
     const el = ref.current;
     if (!el) return;
 
+    let animationFrameId: number | null = null;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry?.isIntersecting && !hasRun.current) {
@@ -34,16 +36,23 @@ export function useCountUp(
             // easeOutExpo for a snappy feel
             const eased = 1 - Math.pow(2, -10 * progress);
             setValue(Math.round(eased * end));
-            if (progress < 1) requestAnimationFrame(step);
+            if (progress < 1) {
+              animationFrameId = requestAnimationFrame(step);
+            }
           };
-          requestAnimationFrame(step);
+          animationFrameId = requestAnimationFrame(step);
         }
       },
       { threshold: 0.3 },
     );
 
     observer.observe(el);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      if (animationFrameId !== null) {
+        cancelAnimationFrame(animationFrameId);
+      }
+    };
   }, [end, duration]);
 
   return {
