@@ -261,7 +261,7 @@ const MealTierCard: React.FC<MealTierCardProps> = ({ tier, isSelected, tierCost,
     >
       {tier.badge && (
         <span
-          className={`absolute top-4 right-4 text-xs font-bold px-2 py-0.5 rounded-full uppercase tracking-wider ${
+          className={`absolute top-3 right-3 text-[10px] sm:text-xs font-bold px-2 py-0.5 rounded-full uppercase tracking-wider pointer-events-none z-10 ${
             tier.popular ? "bg-emerald-500 text-slate-950" : "bg-slate-800 text-slate-300"
           }`}
         >

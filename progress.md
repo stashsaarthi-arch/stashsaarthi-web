@@ -1,4 +1,27 @@
-- [x] **[QA - Kitchen Performance] Task 85: Stress-test Service Worker handling of multiple kitchen images loading simultaneously on a 2G connection emulator — 2026-09-07**:
+- [x] **[QA - Mobile UI] Task 88: Fix any remaining mobile safari rendering glitches where absolute positioned elements (like the Peacock Feather) cover interactive buttons — 2026-09-07**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite client production bundle).
+  - **Modified Files**:
+    - `src/components/stash/PeacockFeatherMatkiDusting.tsx` — Hardened touch event propagation with `e.stopPropagation()` in compact and full modes; added `relative z-10` layer control to prevent parent card touch interception on Mobile Safari.
+    - `src/components/TokenMealHub.tsx` — Added `pointer-events-none z-10` to `MealTierCard` absolute badge (`tier.badge`), preventing absolute elements from blocking interactive card taps on small viewports (<400px).
+    - `src/styles.css` — Added `@supports (-webkit-touch-callout: none)` touch rules and `.absolute-pointer-guard` utility ensuring absolute overlays never trap touch interactions on Mobile Safari.
+    - `docs/tasks/PRD.md` — Marked Task 88 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 88 progress log.
+
+- [x] **[CSO - Data Privacy] Task 87: Conduct a comprehensive audit of all GDPR and India's DPDP Act compliance, ensuring all user data is stored and processed lawfully — 2026-09-07**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite client production bundle).
+  - **E2E Test**: `node execution/run-e2e-tests.mjs` — ✅ PASSED.
+  - **New Files**:
+    - `e2e/data-privacy-dpdp-audit.spec.ts` — Playwright E2E test verifying Privacy page rendering, modal launch, 100% compliance audit score, and DSAR erasure request submission.
+  - **Modified Files**:
+    - `src/lib/dataPrivacyAudit.ts` — Expanded statutory checks for DPDP Act 2023 & GDPR standards; built `auditUserDataLawfulness()` report generator, `submitDsarRequest()`, `getDsarRequests()`, and ticket acknowledgement generator (`DSAR-2026-KNP-XXXX`).
+    - `src/components/stash/DataPrivacyAuditModal.tsx` — Enhanced audit modal with 100% score banner, statutory matrix breakdown, JSON compliance certificate downloader, DSAR request form, and WhatsApp contact link to Nodal Grievance Officer (`FOUNDER_WHATSAPP`).
+    - `src/routes/privacy.tsx` — Mounted `<DataPrivacyAuditModal>` and added interactive "🛡️ Audit DPDP & GDPR Compliance Portal" launch CTA button.
+    - `src/components/stash/FooterSection.tsx` — Added "🛡️ DPDP & GDPR Audit Portal" link to bottom legal footer row.
+    - `execution/run-e2e-tests.mjs` — Updated E2E test harness to validate `data-privacy-dpdp-audit.spec.ts`.
+    - `docs/tasks/PRD.md` — Marked Task 87 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 87 execution log.
+
+
   - **Build**: `npm run build` — ✅ 0 errors (client + SSR Nitro bundles).
   - **E2E Test**: `node execution/run-e2e-tests.mjs` — ✅ PASSED.
   - **New Files**:

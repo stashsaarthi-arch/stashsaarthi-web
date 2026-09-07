@@ -104,9 +104,9 @@ Sprint 9: CRO & CAO (Intelligent Conversion & Retention)
 
 Sprint 10: QA, CSO & CEO (Total Assurance, Compliance & Strategic Direction)
 - [x] 85. [QA - Kitchen Performance]: Stress-test the Service Worker's handling of multiple kitchen images loading simultaneously on a 2G connection emulator.
-- [ ] 86. [QA - Storage Logic]: E2E test the luggage storage booking flow, specifically verifying that QR codes generated match the unique booking ID and can be scanned across different user roles.
-- [ ] 87. [CSO - Data Privacy]: Conduct a comprehensive audit of all GDPR and India's DPDP Act compliance, ensuring all user data is stored and processed lawfully.
-- [ ] 88. [QA - Mobile UI]: Fix any remaining mobile safari rendering glitches where absolute positioned elements (like the Peacock Feather) cover interactive buttons.
+- [x] 86. [QA - Storage Logic]: E2E test the luggage storage booking flow, specifically verifying that QR codes generated match the unique booking ID and can be scanned across different user roles.
+- [x] 87. [CSO - Data Privacy]: Conduct a comprehensive audit of all GDPR and India's DPDP Act compliance, ensuring all user data is stored and processed lawfully.
+- [x] 88. [QA - Mobile UI]: Fix any remaining mobile safari rendering glitches where absolute positioned elements (like the Peacock Feather) cover interactive buttons.
 - [ ] 89. [CSO - Trust]: Implement a formalized, automated process for CSO to review and "seal" (using the simulated barcode) each new vetted kitchen node.
 - [ ] 90. [QA - Compliance]: Implement rate-limiting on all SMS and WhatsApp token requests to prevent spam.
 - [ ] 91. [CSO - Security]: Audit the entire Supabase database and ensure no tables with sensitive user information are publicly readable.
@@ -118,5 +118,5 @@ Sprint 10: QA, CSO & CEO (Total Assurance, Compliance & Strategic Direction)
 [ ] 97. [CSO - Data Retention]: Define and implement a clear data retention policy, automatically deleting inactive student account data after 18 months.
 [ ] 98. [CEO - Analytics]: Compile all Sprint data into a new executive dashboard showing core metrics: CAC (Customer Acquisition Cost), LTV (Lifetime Value), active token circulation.
 [ ] 99. [QA - Performance]: Audit the final webpack bundle size and ensure it's minimal by using code splitting and lazy loading heavy components.
-[ ] 100. [CEO]: Compile all Sprint Reports into a single Master Release Note (v3.0) and push to production.
-[ ] 101. [CTO]: add my bookings dashboard in user login profile.    
+[ ] 100. [CTO]: add my bookings dashboard in user login profile.
+[ ] 101. [CEO]: Compile all Sprint Reports into a single Master Release Note (v3.0) and push to production.

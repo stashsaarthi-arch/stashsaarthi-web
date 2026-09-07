@@ -46,13 +46,16 @@ export const PeacockFeatherMatkiDusting: React.FC<PeacockFeatherMatkiDustingProp
   if (compact) {
     return (
       <div
-        onClick={triggerDusting}
-        className={`relative group cursor-pointer inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900/90 border border-emerald-500/30 hover:border-emerald-400 transition-all ${className}`}
+        onClick={(e) => {
+          e.stopPropagation();
+          triggerDusting();
+        }}
+        className={`relative z-10 group cursor-pointer inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900/90 border border-emerald-500/30 hover:border-emerald-400 transition-all ${className}`}
         title="Click to dust fresh white butter on thali"
       >
         {/* Animated Feather Icon */}
-        <div className={`relative transition-transform duration-700 ${isDusting ? "animate-bounce scale-110" : "group-hover:scale-110"}`}>
-          <svg className="w-5 h-5 text-emerald-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div className={`relative transition-transform duration-700 pointer-events-none ${isDusting ? "animate-bounce scale-110" : "group-hover:scale-110"}`}>
+          <svg className="w-5 h-5 text-emerald-400 pointer-events-none" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M12 2C12 2 17 6 17 11C17 14 15 16 12 22C9 16 7 14 7 11C7 6 12 2 12 2Z"
               fill="url(#peacockGradientCompact)"
@@ -71,14 +74,14 @@ export const PeacockFeatherMatkiDusting: React.FC<PeacockFeatherMatkiDustingProp
           </svg>
         </div>
 
-        <span className="text-xs font-bold text-emerald-300">
+        <span className="text-xs font-bold text-emerald-300 pointer-events-none">
           {isDusting ? "🪶 Dusting Makhan..." : "🪶 Fresh Makhan Dusted"}
         </span>
 
         {showSparkles && (
-          <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75" />
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-300" />
+          <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5 pointer-events-none">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75 pointer-events-none" />
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-300 pointer-events-none" />
           </span>
         )}
       </div>
@@ -128,13 +131,13 @@ export const PeacockFeatherMatkiDusting: React.FC<PeacockFeatherMatkiDustingProp
 
             {/* Peacock Feather Overlay with Micro Sweep Motion */}
             <div
-              className={`absolute top-0 right-0 transform transition-all duration-700 origin-bottom-left ${
+              className={`absolute top-0 right-0 transform transition-all duration-700 origin-bottom-left pointer-events-none ${
                 isDusting
                   ? "rotate-[25deg] translate-x-1 -translate-y-2 scale-125"
                   : "rotate-[-10deg] translate-x-2 -translate-y-1 hover:rotate-[5deg]"
               }`}
             >
-              <svg className="w-10 h-10 drop-shadow-[0_0_8px_rgba(16,185,129,0.5)]" viewBox="0 0 32 32" fill="none">
+              <svg className="w-10 h-10 drop-shadow-[0_0_8px_rgba(16,185,129,0.5)] pointer-events-none" viewBox="0 0 32 32" fill="none">
                 <path
                   d="M16 2C16 2 24 8 24 16C24 21 21 24 16 30C11 24 8 21 8 16C8 8 16 2 16 2Z"
                   fill="url(#featherGradient)"
@@ -157,9 +160,9 @@ export const PeacockFeatherMatkiDusting: React.FC<PeacockFeatherMatkiDustingProp
             {/* Floating Sparkle Particles */}
             {showSparkles && (
               <>
-                <span className="absolute -top-2 left-2 text-xs animate-ping">✨</span>
-                <span className="absolute top-1 -right-2 text-xs animate-bounce">🧈</span>
-                <span className="absolute -bottom-1 left-4 text-xs animate-pulse">💛</span>
+                <span className="absolute -top-2 left-2 text-xs animate-ping pointer-events-none">✨</span>
+                <span className="absolute top-1 -right-2 text-xs animate-bounce pointer-events-none">🧈</span>
+                <span className="absolute -bottom-1 left-4 text-xs animate-pulse pointer-events-none">💛</span>
               </>
             )}
           </div>
@@ -185,9 +188,12 @@ export const PeacockFeatherMatkiDusting: React.FC<PeacockFeatherMatkiDustingProp
         {/* Action Trigger Button */}
         <button
           type="button"
-          onClick={triggerDusting}
+          onClick={(e) => {
+            e.stopPropagation();
+            triggerDusting();
+          }}
           disabled={isDusting}
-          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs transition-all cursor-pointer shadow-md ${
+          className={`relative z-10 flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs transition-all cursor-pointer shadow-md ${
             isDusting
               ? "bg-amber-500/20 text-amber-300 border border-amber-500/40"
               : "bg-gradient-to-r from-amber-500 to-emerald-500 hover:from-amber-400 hover:to-emerald-400 text-slate-950 hover:scale-105"

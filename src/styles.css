@@ -728,6 +728,20 @@ html.light .text-cyan-400 {
   display: block !important;
 }
 
+/* Mobile Safari Touch & Absolute Position Safety Guard */
+@supports (-webkit-touch-callout: none) {
+  /* Prevent WebKit absolute positioning overflow from blocking interactive touch targets */
+  .absolute-pointer-guard {
+    pointer-events: none !important;
+  }
+  .absolute-pointer-guard button,
+  .absolute-pointer-guard a,
+  .absolute-pointer-guard [role="button"] {
+    pointer-events: auto !important;
+  }
+}
+
+
 
 
 

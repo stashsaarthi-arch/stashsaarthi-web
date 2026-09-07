@@ -788,6 +788,37 @@
       • Created Playwright E2E spec setting 2G network emulation profile (300kbps down, 150kbps up, 300ms latency) and testing concurrent kitchen image loading bursts.
   - **Verification**: `npm run build` (**0 errors**) and `node execution/run-e2e-tests.mjs` (**PASSED**).
 
+- [x] **[CSO - Data Privacy] Task 87: Conduct a comprehensive audit of all GDPR and India's DPDP Act compliance, ensuring all user data is stored and processed lawfully** (2026-09-07)
+  - **Identified Directive**: Conduct a comprehensive audit of all GDPR and India's DPDP Act compliance, ensuring all user data is stored and processed lawfully.
+  - **Applied Solution**:
+    - **Expanded Data Privacy Audit Engine** (`src/lib/dataPrivacyAudit.ts`):
+      • Expanded statutory checks covering DPDP Sec 6(1) explicit consent, DPDP Sec 5(3) bilingual notice, DPDP Sec 8(10) Nodal Officer SLA, DPDP Sec 12(3) 18-month auto-purge SLA, GDPR Art 15 DSAR access, GDPR Art 17 Right to be Forgotten, GDPR Art 25 AES-256 encryption, GDPR Art 33 72-hour breach SLA, and 100% Supabase Row-Level Security (RLS) coverage.
+      • Created `auditUserDataLawfulness()` helper compiling lawfulness ratings (`LAW_COMPLIANT_A_PLUS`), category breakdown matrix, and storage engine status checks.
+      • Implemented `submitDsarRequest()`, `getDsarRequests()`, and ticket acknowledgement generator (`DSAR-2026-KNP-XXXX`).
+    - **Data Sovereignty & DPDP Audit Portal Component** (`src/components/stash/DataPrivacyAuditModal.tsx`):
+      • Built interactive audit dashboard with compliance score banner (100%), statutory matrix, rescan capabilities, downloadable official JSON compliance certificate, and direct WhatsApp contact to Nodal Grievance Officer (`FOUNDER_WHATSAPP`).
+      • Added interactive DSAR request submission engine supporting Data Erasure, Data Copy Access, Profile Correction, and Legal Representative Nomination.
+    - **Privacy Page & Footer Integration** (`src/routes/privacy.tsx` & `src/components/stash/FooterSection.tsx`):
+      • Mounted `<DataPrivacyAuditModal>` in privacy route tree and added interactive "🛡️ Audit DPDP & GDPR Compliance Portal" hero CTA.
+      • Added "🛡️ DPDP & GDPR Audit Portal" link to bottom legal footer navigation.
+    - **Playwright E2E Spec & Harness Execution** (`e2e/data-privacy-dpdp-audit.spec.ts` & `execution/run-e2e-tests.mjs`):
+      • Created E2E test verifying Privacy page hydration, modal launch, 100% audit score rendering, and DSAR erasure submission workflow.
+  - **Verification**: `npm run build` (**0 errors**) and `node execution/run-e2e-tests.mjs` (**PASSED**).
+
+- [x] **[QA - Mobile UI] Task 88: Fix any remaining mobile safari rendering glitches where absolute positioned elements (like the Peacock Feather) cover interactive buttons** (2026-09-07)
+  - **Identified Directive**: Fix any remaining mobile safari rendering glitches where absolute positioned elements (like the Peacock Feather) cover interactive buttons.
+  - **Applied Solution**:
+    - **Hardened Peacock Feather & Matki Touch Target Event Propagation** (`src/components/stash/PeacockFeatherMatkiDusting.tsx`):
+      • Added `e.stopPropagation()` to both compact mode and full mode button click handlers, preventing touch events from bubbling up and misfiring on parent cards on Mobile Safari touch viewports.
+      • Added `relative z-10` to compact interactive container and action trigger buttons.
+    - **Meal Tier Card Absolute Overlay Guard** (`src/components/TokenMealHub.tsx`):
+      • Added `pointer-events-none z-10` to `MealTierCard` absolute badge (`tier.badge`), preventing absolute elements from capturing taps or blocking buttons underneath it on small screen sizes (<400px).
+    - **Mobile Safari CSS Touch & Pointer Safety Guard** (`src/styles.css`):
+      • Added WebKit `@supports (-webkit-touch-callout: none)` touch rules and `.absolute-pointer-guard` utility ensuring absolute overlays never trap touch interactions on Mobile Safari.
+  - **Verification**: `npm run build` compiled cleanly with **0 errors**.
+
+
+
 
 
 
