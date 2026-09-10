@@ -426,7 +426,22 @@ export type Database = {
       };
     };
     Views: {
-      [_ in never]: never;
+      user_master_bookings: {
+        Row: {
+          id: string;
+          booking_type: "storage" | "kitchen" | "spaces";
+          user_id: string | null;
+          user_name: string | null;
+          user_phone: string | null;
+          user_email: string | null;
+          title: string;
+          service_details: Json;
+          total_amount: number;
+          status: string;
+          created_at: string;
+        };
+        Relationships: [];
+      };
     };
     Functions: {
       process_taste_shield_claim: {

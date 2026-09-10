@@ -124,7 +124,7 @@
 ## Sprint 11: User Profile, Booking Telemetry & Real-Time Lifecycle (Tasks 102–111)
 - [x] 102. [CTO / CPO - Direct Request]: Profile icon click par responsive flyout menu / dropdown render karna jisme direct "My Bookings" action button ho; click karne par complete historical booking logs (Active, Completed, Cancelled) display hon.
 
-[ ] 103. [CTO - Bookings Engine]: Supabase me unified user_master_bookings view compile karna jo Storage, Kitchen tokens aur Spaces lease agreements ko single query me merge kare with instant pagination.
+- [x] 103. [CTO - Bookings Engine]: Supabase me unified user_master_bookings view compile karna jo Storage, Kitchen tokens aur Spaces lease agreements ko single query me merge kare with instant pagination.
 
 [ ] 104. [CPO - Booking Detail Modal]: Har past booking card par click karte hi digital receipt, booking ID, allocated slot address aur emergency host contact ka slide-over drawer dikhana.
 
