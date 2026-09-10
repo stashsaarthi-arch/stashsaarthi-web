@@ -132,6 +132,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (!prev) return null;
       const updatedUser = { ...prev, ...updates };
       localStorage.setItem("stash_user_session", JSON.stringify(updatedUser));
+      // Broadcast profile update event for zero-refresh real-time propagation across UI
+      window.dispatchEvent(
+        new CustomEvent("stashsaarthi:profile-updated", { detail: updatedUser })
+      );
       return updatedUser;
     });
   }, []);

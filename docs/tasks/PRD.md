@@ -151,7 +151,7 @@
 
 - [x] 115. [UX - Host Stash Verification Checklist]: Host app me 3-point intake checklist daalna: (1. Box Seal Intact, 2. Barcode Scanned, 3. Weight under 25kg) with photo proof upload.
 
-[ ] 116. [CTO - Geo-Fenced Host Check-in]: Host app par student pickup/drop verification ko strict 50-meter geo-fence radius me lock karna to prevent fake drop-offs.
+- [x] 116. [CTO - Geo-Fenced Host Check-in]: Host app par student pickup/drop verification ko strict 50-meter geo-fence radius me lock karna to prevent fake drop-offs.
 
 [ ] 117. [CRO - Host Earning Simulator]: Landing page ke Host section par interactive slider lagana ("Have a 10x10 empty room in Kakadeo? Earn ₹6,200/month passively").
 

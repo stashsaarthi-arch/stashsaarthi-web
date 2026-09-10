@@ -22,9 +22,14 @@ import {
   Eye,
   QrCode,
   WifiOff,
+  RefreshCw,
+  RotateCw,
+  Download,
 } from "lucide-react";
+import { toast } from "sonner";
 import { useLanguage } from "@/context/LanguageContext";
 import { useAuth } from "@/hooks/useAuth";
+import { downloadInvoicePdf } from "@/lib/pdfInvoiceEngine";
 import {
   getBookings,
   getMealOrders,
@@ -34,6 +39,8 @@ import {
   type WaitlistRecord,
 } from "@/lib/localSubmissions";
 import { BookingDetailDrawer } from "./BookingDetailDrawer";
+import { CampusEmptyStateDelight } from "./CampusEmptyStateDelight";
+import { BookingLiveStatusBadge } from "./BookingLiveStatusBadge";
 
 type Tab = "bookings" | "meals" | "waitlist";
 
@@ -177,6 +184,55 @@ export function MyBookingsDashboard() {
     setExpandedId((prev) => (prev === id ? null : id));
   };
 
+  // ─── One-Click Rebook & Renewal Handlers (Task 107) ─────────────────
+
+  const handleRebook = (b: BookingRecord) => {
+    const serviceName = b.service === "micro" ? "stash" : b.service;
+    const eventNote = `Renewing/Rebooking Token ${b.token} (${b.name || serviceName})`;
+    
+    window.dispatchEvent(
+      new CustomEvent("stashsaarthi:open-booking", {
+        detail: {
+          service: serviceName,
+          note: eventNote,
+        },
+      })
+    );
+
+    toast.success(
+      isHi
+        ? `नवीनीकरण फॉर्म खोला गया: ${b.token}`
+        : `Opening renewal booking for ${b.token}...`,
+      {
+        description: isHi
+          ? "विवरण स्वचालित रूप से लोड हो गए हैं।"
+          : "Previous booking specs loaded into 1-tap checkout.",
+      }
+    );
+  };
+
+  const handleReorderMeal = (m: MealOrderRecord) => {
+    window.dispatchEvent(
+      new CustomEvent("stashsaarthi:open-booking", {
+        detail: {
+          service: "kitchen",
+          note: `Reordering meal pack: ${m.mealType || "Standard Thali"} at ${m.kitchenNode || "Kakadeo Hub"}`,
+        },
+      })
+    );
+
+    toast.success(
+      isHi
+        ? `भोजन पुनः ऑर्डर फॉर्म खोला गया...`
+        : `Opening meal pack reorder form...`,
+      {
+        description: isHi
+          ? "आपका पसंदीदा किचन और विवरण लोड किया गया।"
+          : "Your preferred kitchen node has been pre-selected.",
+      }
+    );
+  };
+
   // ─── Renderers ───────────────────────────────────────────────────────
 
   const renderBookingCard = (b: BookingRecord) => {
@@ -213,6 +269,14 @@ export function MyBookingsDashboard() {
                 <Calendar className="h-2.5 w-2.5" />
                 {formatDate(b.submittedAt)}
               </p>
+              <div className="mt-1">
+                <BookingLiveStatusBadge
+                  bookingId={b.id}
+                  submittedAt={b.submittedAt}
+                  currentStatus={b.status}
+                  showStepper={isExpanded}
+                />
+              </div>
             </div>
           </div>
           <div className="flex items-center gap-2 shrink-0">
@@ -220,6 +284,18 @@ export function MyBookingsDashboard() {
               <IndianRupee className="h-3 w-3" />
               {b.amount}
             </span>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleRebook(b);
+              }}
+              title={isHi ? "स्लॉट नवीनीकृत / पुनः बुक करें" : "One-Click Renew / Rebook"}
+              className="p-1 px-2 rounded-md bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 text-[10px] font-bold flex items-center gap-1 transition-colors shrink-0"
+            >
+              <RotateCw className="h-3 w-3 text-emerald-400" />
+              <span>{isHi ? "नवीनीकृत" : "Renew"}</span>
+            </button>
             <button
               type="button"
               onClick={(e) => {
@@ -304,7 +380,39 @@ export function MyBookingsDashboard() {
                 <Receipt className="h-3.5 w-3.5 text-cyan-400" />
                 <span>{isHi ? "रसीद व विवरण" : "View Receipt"}</span>
               </button>
+
+              <button
+                onClick={async () => {
+                  try {
+                    await downloadInvoicePdf(b);
+                    toast.success(isHi ? "GST चालान PDF डाउनलोड हुआ!" : "GST Invoice PDF downloaded!");
+                  } catch (e) {
+                    toast.error(isHi ? "PDF जनरेट नहीं हो सका" : "Failed to generate PDF invoice");
+                  }
+                }}
+                className="bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 rounded-lg py-1.5 px-2.5 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors"
+                title={isHi ? "GST टैक्स चालान PDF डाउनलोड करें" : "Download GST Tax Invoice PDF"}
+              >
+                <Download className="h-3.5 w-3.5 text-emerald-400" />
+                <span>{isHi ? "GST चालान PDF" : "PDF Invoice"}</span>
+              </button>
             </div>
+
+            <button
+              onClick={() => handleRebook(b)}
+              className="w-full mt-2 bg-gradient-to-r from-emerald-500/20 via-teal-500/20 to-cyan-500/20 hover:from-emerald-500/30 hover:to-cyan-500/30 text-emerald-300 border border-emerald-500/40 rounded-lg py-2 px-3 text-xs font-bold flex items-center justify-center gap-2 transition-all shadow-sm group"
+            >
+              <RefreshCw className="h-3.5 w-3.5 text-emerald-400 group-hover:rotate-180 transition-transform duration-500" />
+              <span>
+                {b.service === "stash" || b.service === "micro"
+                  ? (isHi ? "स्लॉट नवीनीकृत करें (Renew Storage Slot)" : "Renew Storage Slot")
+                  : b.service === "kitchen" || b.service === "meal"
+                  ? (isHi ? "टिफिन कूपन पुनः ऑर्डर करें (Reorder Meal Pack)" : "Reorder Meal Pack")
+                  : b.service === "spaces"
+                  ? (isHi ? "स्टे नवीनीकृत करें (Renew Room Stay)" : "Renew Room Stay")
+                  : (isHi ? "सेक्शन पुनः बुक करें (Rebook Session)" : "Rebook Session")}
+              </span>
+            </button>
           </div>
         )}
       </div>
@@ -340,6 +448,18 @@ export function MyBookingsDashboard() {
               <IndianRupee className="h-3 w-3" />
               {m.amount}
             </span>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleReorderMeal(m);
+              }}
+              title={isHi ? "भोजन पुनः ऑर्डर करें" : "One-Click Reorder"}
+              className="p-1 px-2 rounded-md bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-[10px] font-bold flex items-center gap-1 transition-colors shrink-0"
+            >
+              <RotateCw className="h-3 w-3 text-amber-400" />
+              <span>{isHi ? "पुनः ऑर्डर" : "Reorder"}</span>
+            </button>
             {isExpanded ? (
               <ChevronUp className="h-3.5 w-3.5 text-slate-400" />
             ) : (
@@ -368,6 +488,14 @@ export function MyBookingsDashboard() {
                 <span>{m.address}</span>
               </div>
             )}
+
+            <button
+              onClick={() => handleReorderMeal(m)}
+              className="w-full mt-2 bg-gradient-to-r from-amber-500/20 to-orange-500/20 hover:from-amber-500/30 hover:to-orange-500/30 text-amber-300 border border-amber-500/40 rounded-lg py-2 px-3 text-xs font-bold flex items-center justify-center gap-2 transition-all shadow-sm group"
+            >
+              <RotateCw className="h-3.5 w-3.5 text-amber-400 group-hover:rotate-180 transition-transform duration-500" />
+              <span>{isHi ? "थॉली / टिफिन पैक पुनः ऑर्डर करें" : "Reorder This Meal Pack"}</span>
+            </button>
           </div>
         )}
       </div>
@@ -400,32 +528,62 @@ export function MyBookingsDashboard() {
 
   // ─── Empty state ─────────────────────────────────────────────────────
 
-  const renderEmpty = () => (
-    <div className="text-center py-10 px-4">
-      <div className="text-4xl mb-3">📭</div>
-      <p className="text-sm font-semibold text-slate-300">
-        {isHi ? "अभी तक कोई रिकॉर्ड नहीं" : "No records yet"}
-      </p>
-      <p className="text-xs text-slate-500 mt-1">
-        {activeTab === "bookings"
-          ? isHi
-            ? "जब आप स्टैश, रूम या किचन बुक करेंगे तो यहाँ दिखेगा।"
-            : "Your bookings will appear here once you book a stash, room, or meal."
-          : activeTab === "meals"
+  const renderEmpty = () => {
+    if (activeTab === "bookings") {
+      return <CampusEmptyStateDelight />;
+    }
+
+    return (
+      <div className="text-center py-10 px-4">
+        <div className="text-4xl mb-3">📭</div>
+        <p className="text-sm font-semibold text-slate-300">
+          {isHi ? "अभी तक कोई रिकॉर्ड नहीं" : "No records yet"}
+        </p>
+        <p className="text-xs text-slate-500 mt-1">
+          {activeTab === "meals"
             ? isHi
               ? "जब आप भोजन ऑर्डर करेंगे तो यहाँ दिखेगा।"
               : "Your meal orders will appear here."
             : isHi
               ? "आपकी प्रतीक्षा सूची यहाँ दिखेगी।"
               : "Your waitlist submissions will appear here."}
-      </p>
-    </div>
-  );
+        </p>
+      </div>
+    );
+  };
 
   // ─── Main Render ─────────────────────────────────────────────────────
 
   return (
     <div className="space-y-3">
+      {/* Active User Live Profile Banner (Task 108) */}
+      {user && (
+        <div className="bg-gradient-to-r from-cyan-950/40 via-black/60 to-emerald-950/30 border border-cyan-500/30 rounded-xl p-3 flex items-center justify-between gap-3 shadow-md">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="relative shrink-0">
+              <img
+                src={user.avatar || "https://api.dicebear.com/7.x/bottts/svg?seed=Saarthi"}
+                alt={user.name}
+                className="h-10 w-10 rounded-full border-2 border-cyan-400 bg-black/80 object-cover shadow"
+              />
+              <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-emerald-400 border-2 border-black" title="Verified Session" />
+            </div>
+            <div className="min-w-0">
+              <div className="flex items-center gap-2">
+                <h4 className="text-sm font-bold text-white truncate">{user.name}</h4>
+                <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-semibold uppercase">
+                  {user.role === "host" ? (isHi ? "होस्ट" : "Host") : (isHi ? "छात्र" : "Student")}
+                </span>
+              </div>
+              <p className="text-[11px] text-slate-400 font-mono truncate">{user.email}</p>
+            </div>
+          </div>
+          <span className="text-[10px] text-emerald-400 font-bold bg-emerald-500/10 border border-emerald-500/30 px-2 py-1 rounded-lg shrink-0">
+            {isHi ? "लाइव सिंक ⚡" : "Live Cached ⚡"}
+          </span>
+        </div>
+      )}
+
       {/* Tab Pills */}
       <div className="flex bg-black/50 border border-white/10 rounded-lg p-1 gap-0.5">
         {tabs.map((tab) => (

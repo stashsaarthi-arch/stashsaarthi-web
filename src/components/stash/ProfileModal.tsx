@@ -30,6 +30,14 @@ const MyBookingsDashboard = lazy(() =>
   import("./MyBookingsDashboard").then((m) => ({ default: m.MyBookingsDashboard }))
 );
 
+const AVATAR_PRESETS = [
+  { id: "saarthi", name: "Cyber Saarthi", url: "https://api.dicebear.com/7.x/bottts/svg?seed=Saarthi" },
+  { id: "student_boy", name: "Advik", url: "https://api.dicebear.com/7.x/avataaars/svg?seed=Advik" },
+  { id: "student_girl", name: "Ananya", url: "https://api.dicebear.com/7.x/avataaars/svg?seed=Ananya" },
+  { id: "host_senior", name: "Sudha Ji", url: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sudha" },
+  { id: "emerald", name: "Emerald", url: "https://api.dicebear.com/7.x/identicon/svg?seed=Emerald" },
+];
+
 type ProfileTab = "settings" | "bookings";
 
 interface ProfileModalProps {
@@ -51,8 +59,10 @@ export function ProfileModal({ open, onOpenChange, initialTab = "settings" }: Pr
       setActiveTab(initialTab);
     }
   }, [open, initialTab]);
+
   const [formData, setFormData] = useState({
     full_name: "",
+    avatar: "",
     phone_number: "",
     user_type: "student" as "student" | "host",
     college_or_locality: "",
@@ -65,6 +75,7 @@ export function ProfileModal({ open, onOpenChange, initialTab = "settings" }: Pr
     if (user && open) {
       setFormData({
         full_name: user.name || "",
+        avatar: user.avatar || AVATAR_PRESETS[0]?.url || "",
         phone_number: user.phone_number || "",
         user_type: user.role || "student",
         college_or_locality: user.college_or_locality || "",
@@ -90,6 +101,7 @@ export function ProfileModal({ open, onOpenChange, initialTab = "settings" }: Pr
     if (result.success) {
       updateUser({
         name: formData.full_name,
+        avatar: formData.avatar,
         phone_number: formData.phone_number,
         role: formData.user_type,
         college_or_locality: formData.college_or_locality,
@@ -97,7 +109,7 @@ export function ProfileModal({ open, onOpenChange, initialTab = "settings" }: Pr
         address: formData.address,
         emergency_contact: formData.emergency_contact,
       });
-      toast.success(isHi ? "प्रोफ़ाइल अपडेट की गई" : "Profile updated successfully");
+      toast.success(isHi ? "प्रोफ़ाइल व अवतार अपडेट किया गया" : "Profile & Avatar updated successfully");
       onOpenChange(false);
     } else {
       toast.error(isHi ? "प्रोफ़ाइल अपडेट विफल रहा" : "Failed to update profile", {
@@ -112,8 +124,12 @@ export function ProfileModal({ open, onOpenChange, initialTab = "settings" }: Pr
       <DialogContent className="w-[95vw] sm:max-w-xl max-h-[85vh] overflow-y-auto bg-[#0D1117]/95 backdrop-blur-xl border border-white/10 p-6 shadow-2xl rounded-2xl">
         <DialogHeader className="text-left">
           <div className="flex items-center gap-3 mb-1">
-            <div className="h-10 w-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shadow-lg shrink-0">
-              <User className="h-5 w-5" />
+            <div className="h-10 w-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shadow-lg shrink-0 overflow-hidden">
+              {formData.avatar ? (
+                <img src={formData.avatar} alt="Avatar" className="h-full w-full object-cover" />
+              ) : (
+                <User className="h-5 w-5" />
+              )}
             </div>
             <div>
               <DialogTitle className="text-lg font-bold text-white tracking-tight">
@@ -126,8 +142,8 @@ export function ProfileModal({ open, onOpenChange, initialTab = "settings" }: Pr
           </div>
           <DialogDescription className="text-xs text-slate-300 leading-relaxed mt-2">
             {isHi
-              ? "अपने खाते का विवरण अपडेट करें।"
-              : "Update your account details and preferences."}
+              ? "अपने खाते का विवरण व अवतार अपडेट करें।"
+              : "Update your account details, avatar, and preferences."}
           </DialogDescription>
         </DialogHeader>
 
@@ -162,6 +178,39 @@ export function ProfileModal({ open, onOpenChange, initialTab = "settings" }: Pr
         {/* ─── Profile Settings Tab ──────────────────────────────────── */}
         {activeTab === "settings" && (
           <form onSubmit={handleSubmit} className="space-y-4 mt-2">
+            {/* Avatar Switcher */}
+            <div className="bg-black/40 border border-white/10 rounded-xl p-3 space-y-2">
+              <label className="text-xs text-cyan-400 font-bold uppercase tracking-wider block">
+                {isHi ? "अवतार चुनें (Instant Profile Avatar Switch)" : "Choose Profile Avatar"}
+              </label>
+              <div className="flex items-center gap-3">
+                <div className="h-12 w-12 rounded-full border-2 border-cyan-500/60 bg-black overflow-hidden shrink-0 shadow-md">
+                  <img
+                    src={formData.avatar || AVATAR_PRESETS[0]?.url || ""}
+                    alt="Current Avatar"
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <div className="grid grid-cols-5 gap-2 flex-1">
+                  {AVATAR_PRESETS.map((preset) => (
+                    <button
+                      key={preset.id}
+                      type="button"
+                      onClick={() => setFormData({ ...formData, avatar: preset.url })}
+                      className={`p-1 rounded-xl border transition-all flex items-center justify-center bg-black/60 ${
+                        formData.avatar === preset.url
+                          ? "border-cyan-400 bg-cyan-500/30 ring-2 ring-cyan-500/50 scale-105"
+                          : "border-white/10 hover:border-white/30"
+                      }`}
+                      title={preset.name}
+                    >
+                      <img src={preset.url} alt={preset.name} className="h-7 w-7 rounded-full" />
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
             {/* Email (Readonly) */}
             <div>
               <label className="text-xs text-muted-foreground font-semibold mb-1 block">

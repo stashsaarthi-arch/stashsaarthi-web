@@ -23,12 +23,18 @@ import {
   Clock,
   ExternalLink,
   QrCode,
+  RefreshCw,
+  FileText,
+  Download,
+  Loader2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/context/LanguageContext";
 import { toast } from "sonner";
 import type { BookingRecord } from "@/lib/localSubmissions";
 import { OfflineQrCode } from "@/components/ui/OfflineQrCode";
+import { downloadInvoicePdf } from "@/lib/pdfInvoiceEngine";
+import { BookingLiveStatusBadge } from "./BookingLiveStatusBadge";
 
 const FOUNDER_WHATSAPP = "919369454350";
 
@@ -69,8 +75,25 @@ export function BookingDetailDrawer({ booking, open, onClose }: BookingDetailDra
   const isHi = language === "hi";
   const [copiedToken, setCopiedToken] = useState(false);
   const [showFullQr, setShowFullQr] = useState(false);
+  const [downloadingPdf, setDownloadingPdf] = useState(false);
 
   if (!open || !booking) return null;
+
+  const handleDownloadPdf = async () => {
+    setDownloadingPdf(true);
+    try {
+      await downloadInvoicePdf(booking);
+      toast.success(
+        isHi
+          ? "GST टैक्स चालान PDF सफलतापूर्वक डाउनलोड हुआ!"
+          : "GST Tax Invoice PDF downloaded successfully!",
+      );
+    } catch (err) {
+      toast.error(isHi ? "चालान PDF डाउनलोड विफल रहा" : "Failed to generate PDF invoice");
+    } finally {
+      setDownloadingPdf(false);
+    }
+  };
 
   const svc = SERVICE_TITLES[booking.service] || SERVICE_TITLES["stash"]!;
   const status = booking.status || "active";
@@ -118,6 +141,24 @@ export function BookingDetailDrawer({ booking, open, onClose }: BookingDetailDra
       : `Hello! I need emergency host assistance regarding my booking ID ${booking.token}.`;
     
     window.open(`https://wa.me/${FOUNDER_WHATSAPP}?text=${encodeURIComponent(text)}`, "_blank");
+  };
+
+  const handleRenew = () => {
+    const serviceName = booking.service === "micro" ? "stash" : booking.service;
+    window.dispatchEvent(
+      new CustomEvent("stashsaarthi:open-booking", {
+        detail: {
+          service: serviceName,
+          note: `Renewing/Rebooking Token ${booking.token} (${booking.name || serviceName})`,
+        },
+      })
+    );
+    toast.success(
+      isHi
+        ? `नवीनीकरण फॉर्म खोला गया: ${booking.token}`
+        : `Opening renewal booking flow for ${booking.token}...`
+    );
+    onClose();
   };
 
   return (
@@ -186,6 +227,14 @@ export function BookingDetailDrawer({ booking, open, onClose }: BookingDetailDra
           {/* Body Content */}
           <div className="p-6 space-y-5 flex-1">
             
+            {/* Supabase Realtime Dynamic Status Stepper (Task 111) */}
+            <BookingLiveStatusBadge
+              bookingId={booking.id}
+              submittedAt={booking.submittedAt}
+              currentStatus={booking.status}
+              showStepper={true}
+            />
+
             {/* 0. Offline Storage QR Lock Pass (Task 105) */}
             <div className="bg-gradient-to-br from-cyan-950/40 via-black/50 to-emerald-950/30 border border-cyan-500/30 rounded-2xl p-4 space-y-3">
               <div className="flex items-center justify-between">
@@ -306,6 +355,27 @@ export function BookingDetailDrawer({ booking, open, onClose }: BookingDetailDra
                     {booking.amount}
                   </span>
                 </div>
+
+                <div className="pt-2">
+                  <Button
+                    type="button"
+                    onClick={handleDownloadPdf}
+                    disabled={downloadingPdf}
+                    className="w-full bg-gradient-to-r from-emerald-500/20 via-cyan-500/20 to-teal-500/20 hover:from-emerald-500/30 hover:to-cyan-500/30 text-emerald-300 border border-emerald-500/40 font-bold py-2 rounded-xl text-xs flex items-center justify-center gap-2 transition-all shadow-sm active:scale-[0.98]"
+                  >
+                    {downloadingPdf ? (
+                      <>
+                        <Loader2 className="h-3.5 w-3.5 animate-spin text-emerald-400" />
+                        <span>{isHi ? "PDF जनरेट हो रहा है..." : "Generating GST Invoice PDF..."}</span>
+                      </>
+                    ) : (
+                      <>
+                        <Download className="h-3.5 w-3.5 text-emerald-400" />
+                        <span>{isHi ? "GST टैक्स चालान PDF डाउनलोड करें" : "Download GST Tax Invoice PDF"}</span>
+                      </>
+                    )}
+                  </Button>
+                </div>
               </div>
             </div>
 
@@ -394,6 +464,20 @@ export function BookingDetailDrawer({ booking, open, onClose }: BookingDetailDra
 
           {/* Footer Actions */}
           <div className="p-4 border-t border-white/10 bg-black/60 space-y-2">
+            <Button
+              onClick={handleRenew}
+              className="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-black font-bold text-xs py-4 shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2"
+            >
+              <RefreshCw className="h-4 w-4" />
+              <span>
+                {booking.service === "stash" || booking.service === "micro"
+                  ? (isHi ? "1-टैप स्लॉट नवीनीकृत करें (Renew Slot)" : "1-Tap Renew Storage Slot")
+                  : booking.service === "kitchen" || booking.service === "meal"
+                  ? (isHi ? "1-टैप टिफिन पुनः ऑर्डर करें (Reorder Pack)" : "1-Tap Reorder Meal Pack")
+                  : (isHi ? "1-टैप पुनः बुक करें (Rebook)" : "1-Tap Rebook Service")}
+              </span>
+            </Button>
+
             <div className="grid grid-cols-2 gap-2">
               <Button
                 variant="outline"

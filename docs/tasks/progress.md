@@ -1108,6 +1108,16 @@
     - `src/routes/admin.tsx`: Integrated `<HostStashVerificationModal>` launcher button in Operator & Host Console header bar.
     - `execution/test-host-stash-verification.mjs`: Created test harness asserting engine validation logic, weight limits, seal failure flags, verification record persistence, and UI component mounting.
 
+- [x] **[CTO - Geo-Fenced Host Check-in] Task 116: Strict 50-Meter Geo-Fence Radius Lock on Host App Verification — 2026-09-11**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & Nitro server bundle compiled cleanly).
+  - **Verification Suite**: `node execution/test-geofenced-host-checkin.mjs` — ✅ PASSED (16/16 checks verified).
+  - **50-Meter Radius Geo-Fenced Check-in System**:
+    - `src/lib/geoFenceEngine.ts`: Engineered GPS location & Haversine distance engine (`calculateDistanceMeters`, `verifyGeoFenceLocation`, `getSimulatedDeviceLocation`, `PRESET_CAMPUS_HOST_NODES`) enforcing strict 50.0m radius limits around campus host hubs (Kakadeo PW Hub, IIT Kanpur Nankari Gate, CSJMU Kalyanpur Hub, HBTI Nawabganj Hub).
+    - `src/lib/hostVerificationEngine.ts`: Integrated geo-fencing checks into `validateIntakeChecklist` (`geoFencePassed`, `geoFenceResult`, `deviceCoords`), locking check-in validation if device coordinates are > 50m from host node.
+    - `src/components/stash/HostStashVerificationModal.tsx`: Enhanced host verification modal with dynamic Geo-Fence Lock card (`UNLOCKED (≤ 50M)` vs `LOCKED (> 50M)`), live distance meter, GPS proximity simulation buttons (`🟢 12m At Node`, `🟡 35m In Range`, `🔴 185m Remote`), demo bypass mode, and strict form submission lock when out of range.
+    - `execution/test-geofenced-host-checkin.mjs`: Built automated verification suite testing Haversine math, 50m boundary assertions, engine exports, and modal UI integration.
+
+
 
 
 

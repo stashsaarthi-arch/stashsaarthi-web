@@ -1,12 +1,10 @@
-/**
- * Host Stash Verification Checklist Engine — StashSaarthi Autonomous System
- * 
- * Enforces 3-Point Intake Checklist for Host App / Operator Intake:
- * 1. Box Seal Intact (Laser barcode tamper tape unbroken)
- * 2. Barcode Scanned (Pre-printed alphanumeric tag verified)
- * 3. Weight under 25kg (Digital scale reading <= 25.0 kg)
- * + Photo proof upload & intake audit certificate generation.
- */
+import {
+  verifyGeoFenceLocation,
+  PRESET_CAMPUS_HOST_NODES,
+  MAX_GEOFENCE_RADIUS_METERS,
+  type GeoFenceResult,
+  type Coordinates,
+} from "./geoFenceEngine";
 
 export interface HostStashVerification {
   id: string;
@@ -23,6 +21,9 @@ export interface HostStashVerification {
   verifiedAt: string;
   certificateId: string;
   verifiedBy: string;
+  geoFencePassed?: boolean;
+  geoFenceDistanceMeters?: number;
+  geoFenceResult?: GeoFenceResult;
 }
 
 export interface VerificationChecklistState {
@@ -31,6 +32,8 @@ export interface VerificationChecklistState {
   measuredWeightKg: number;
   photoProofUrl?: string;
   notes?: string;
+  deviceCoords?: Coordinates;
+  overrideGeoFence?: boolean;
 }
 
 export interface VerificationValidationResult {
@@ -40,6 +43,8 @@ export interface VerificationValidationResult {
   barcodePassed: boolean;
   weightPassed: boolean;
   photoPassed: boolean;
+  geoFencePassed: boolean;
+  geoFenceResult: GeoFenceResult;
   errors: string[];
   certificateId: string;
 }
@@ -48,7 +53,7 @@ const STORAGE_KEY = "ss_host_stash_verifications";
 export const MAX_ALLOWED_WEIGHT_KG = 25.0;
 
 /**
- * Validates a host intake checklist against verified platform safety rules
+ * Validates a host intake checklist against verified platform safety rules & 50m geo-fence lock
  */
 export function validateIntakeChecklist(
   checklist: VerificationChecklistState,
@@ -57,6 +62,31 @@ export function validateIntakeChecklist(
   verifiedBy: string = "StashSaarthi Host App Intake"
 ): VerificationValidationResult {
   const errors: string[] = [];
+
+  // Target node coordinates
+  const defaultNode = PRESET_CAMPUS_HOST_NODES["Kakadeo PW Hub"]!;
+  const nodeConfig = PRESET_CAMPUS_HOST_NODES[campusNode] ?? defaultNode;
+  const targetCoords = nodeConfig.coords;
+
+  // Device coordinates (defaults to node vicinity if unprovided)
+  const deviceCoords = checklist.deviceCoords || {
+    lat: targetCoords.lat + 0.0001,
+    lng: targetCoords.lng + 0.00005,
+  };
+
+  // 0. Geo-Fence 50-Meter Radius Check
+  const geoFenceResult = verifyGeoFenceLocation(
+    deviceCoords,
+    targetCoords,
+    campusNode,
+    MAX_GEOFENCE_RADIUS_METERS,
+    checklist.overrideGeoFence || false
+  );
+  const geoFencePassed = geoFenceResult.inRange;
+
+  if (!geoFencePassed) {
+    errors.push(`Geo-Fence Lock: Check-in locked! Device is ${geoFenceResult.distanceMeters}m away from node (Must be within 50m).`);
+  }
 
   // 1. Box Seal Intact Check
   const sealPassed = checklist.sealIntact === true;
@@ -86,10 +116,10 @@ export function validateIntakeChecklist(
     errors.push("Photo proof upload is required for verification audit.");
   }
 
-  const isValid = sealPassed && barcodePassed && weightPassed && photoPassed;
+  const isValid = geoFencePassed && sealPassed && barcodePassed && weightPassed && photoPassed;
   const status: "verified" | "flagged" | "rejected" = isValid
     ? "verified"
-    : weight > MAX_ALLOWED_WEIGHT_KG || !sealPassed
+    : weight > MAX_ALLOWED_WEIGHT_KG || !sealPassed || !geoFencePassed
     ? "flagged"
     : "rejected";
 
@@ -102,6 +132,8 @@ export function validateIntakeChecklist(
     barcodePassed,
     weightPassed,
     photoPassed,
+    geoFencePassed,
+    geoFenceResult,
     errors,
     certificateId,
   };

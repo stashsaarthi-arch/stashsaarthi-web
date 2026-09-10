@@ -213,6 +213,7 @@ export function showNetworkRetryToast(retryFn: () => void) {
 
 export type ProfileUpdateData = {
   full_name?: string;
+  avatar?: string;
   phone_number?: string;
   user_type?: "student" | "host";
   college_or_locality?: string;

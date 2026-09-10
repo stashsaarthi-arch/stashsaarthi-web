@@ -21,6 +21,10 @@ import {
   User,
   MapPin,
   Check,
+  LocateFixed,
+  Lock,
+  Unlock,
+  Navigation,
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { toast } from "sonner";
@@ -32,6 +36,14 @@ import {
   type HostStashVerification,
   type VerificationChecklistState,
 } from "@/lib/hostVerificationEngine";
+import {
+  verifyGeoFenceLocation,
+  getSimulatedDeviceLocation,
+  PRESET_CAMPUS_HOST_NODES,
+  MAX_GEOFENCE_RADIUS_METERS,
+  type GeoFenceResult,
+  type Coordinates,
+} from "@/lib/geoFenceEngine";
 
 interface HostStashVerificationModalProps {
   isOpen: boolean;
@@ -53,6 +65,13 @@ export function HostStashVerificationModal({
 
   const [activeTab, setActiveTab] = useState<"new" | "history">("new");
 
+  // Geo-Fence State
+  const [geoProximityMode, setGeoProximityMode] = useState<"at_node" | "near_node" | "far_away">("at_node");
+  const [overrideGeoFence, setOverrideGeoFence] = useState<boolean>(false);
+  const [deviceCoords, setDeviceCoords] = useState<Coordinates>(
+    getSimulatedDeviceLocation(campusNode, "at_node")
+  );
+
   // Checklist form state
   const [sealIntact, setSealIntact] = useState<boolean>(true);
   const [barcodeSerial, setBarcodeSerial] = useState<string>(`SS-KNP-BAR-${Math.floor(1000 + Math.random() * 9000)}`);
@@ -71,7 +90,21 @@ export function HostStashVerificationModal({
     }
   }, [isOpen]);
 
+  useEffect(() => {
+    setDeviceCoords(getSimulatedDeviceLocation(campusNode, geoProximityMode));
+  }, [geoProximityMode, campusNode]);
+
   if (!isOpen) return null;
+
+  const defaultNode = PRESET_CAMPUS_HOST_NODES["Kakadeo PW Hub"]!;
+  const targetNodeConfig = PRESET_CAMPUS_HOST_NODES[campusNode] ?? defaultNode;
+  const geoResult: GeoFenceResult = verifyGeoFenceLocation(
+    deviceCoords,
+    targetNodeConfig.coords,
+    campusNode,
+    MAX_GEOFENCE_RADIUS_METERS,
+    overrideGeoFence
+  );
 
   // Handle camera photo capture simulation
   const handleSimulateCameraCapture = () => {
@@ -103,6 +136,16 @@ export function HostStashVerificationModal({
   const handleSubmitVerification = (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Geo-fence strict lock assertion
+    if (!geoResult.inRange) {
+      toast.error(
+        isHi
+          ? `जिओ-फेंस लॉक: आप नोड से ${geoResult.distanceMeters}m दूर हैं! चेक-इन के लिए 50m दायरे में आएं।`
+          : `Geo-Fence Locked! You are ${geoResult.distanceMeters}m from node. Must be within 50m to check in.`
+      );
+      return;
+    }
+
     // Auto capture fallback if no photo
     let photo = photoProofUrl;
     if (!photo) {
@@ -115,9 +158,16 @@ export function HostStashVerificationModal({
       measuredWeightKg,
       photoProofUrl: photo,
       notes,
+      deviceCoords,
+      overrideGeoFence,
     };
 
     const validation = validateIntakeChecklist(state, hostName, campusNode);
+
+    if (!validation.geoFencePassed) {
+      toast.error(validation.errors[0] || (isHi ? "जिओ-फेंस सत्यापन विफल।" : "Geo-fence check-in verification locked."));
+      return;
+    }
 
     if (!validation.sealPassed || !validation.barcodePassed) {
       toast.error(validation.errors[0] || (isHi ? "सत्यापन में त्रुटि है।" : "Intake verification failed. Check seal and barcode."));
@@ -131,7 +181,7 @@ export function HostStashVerificationModal({
     const record = createAndSaveVerification(state, bookingId, hostName, campusNode);
     setCompletedRecord(record);
     setSavedRecords(getSavedVerifications());
-    toast.success(isHi ? "3-पॉइंट इनटेक सत्यापन पूर्ण!" : "3-Point Intake Verification Completed!");
+    toast.success(isHi ? "50m जिओ-फेंस व 3-पॉइंट इनटेक पूर्ण!" : "50m Geo-Fenced 3-Point Intake Completed!");
   };
 
   const isOverweight = measuredWeightKg > MAX_ALLOWED_WEIGHT_KG;
@@ -346,6 +396,112 @@ export function HostStashVerificationModal({
             /* Form View */
             <form onSubmit={handleSubmitVerification} className="space-y-6">
               
+              {/* Mandatory Geo-Fence 50-Meter Radius Lock */}
+              <div className={`p-4 rounded-2xl border space-y-3 transition-colors ${
+                geoResult.inRange
+                  ? "bg-emerald-500/10 border-emerald-500/30"
+                  : "bg-rose-500/10 border-rose-500/40"
+              }`}>
+                <div className="flex items-center justify-between flex-wrap gap-2">
+                  <div className="flex items-center gap-3">
+                    <div className={`h-9 w-9 rounded-xl flex items-center justify-center border ${
+                      geoResult.inRange
+                        ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/40"
+                        : "bg-rose-500/20 text-rose-400 border-rose-500/40"
+                    }`}>
+                      {geoResult.inRange ? <Unlock className="h-5 w-5" /> : <Lock className="h-5 w-5" />}
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <h4 className="text-sm font-extrabold text-white flex items-center gap-1.5">
+                          <LocateFixed className="h-4 w-4 text-cyan-400" />
+                          {isHi ? "जिओ-फेंस चेक-इन सत्यापन" : "Geo-Fenced Host Check-in Lock"}
+                        </h4>
+                        <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase border ${
+                          geoResult.inRange
+                            ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/30"
+                            : "bg-rose-500/20 text-rose-300 border-rose-500/30"
+                        }`}>
+                          {geoResult.inRange ? "UNLOCKED (≤ 50M)" : "LOCKED (> 50M)"}
+                        </span>
+                      </div>
+                      <p className="text-xs text-muted-foreground mt-0.5">
+                        {isHi
+                          ? `नोड: ${campusNode} (दायरा: 50 मीटर strict limit)`
+                          : `Campus Node: ${campusNode} (Strict 50-meter radius lock)`}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="text-right font-mono">
+                    <span className={`text-sm font-bold ${geoResult.inRange ? "text-emerald-300" : "text-rose-300"}`}>
+                      {geoResult.distanceMeters}m {isHi ? "दूरी" : "away"}
+                    </span>
+                    <span className="text-[10px] block text-muted-foreground">Max 50.0m</span>
+                  </div>
+                </div>
+
+                {/* Geo-Fence Proximity Simulator Buttons */}
+                <div className="pt-1 space-y-2 border-t border-white/10">
+                  <div className="flex items-center justify-between text-[11px] text-muted-foreground">
+                    <span>{isHi ? "जीपीएस स्थान सिम्युलेटर (Demo):" : "GPS Location Proximity:"}</span>
+                    <button
+                      type="button"
+                      onClick={() => setOverrideGeoFence(!overrideGeoFence)}
+                      className="text-cyan-400 hover:underline text-[11px]"
+                    >
+                      {overrideGeoFence ? "Disable Override" : "Bypass (Demo Only)"}
+                    </button>
+                  </div>
+                  <div className="grid grid-cols-3 gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setGeoProximityMode("at_node")}
+                      className={`py-1.5 px-2 rounded-xl text-xs font-semibold border transition-all ${
+                        geoProximityMode === "at_node" && !overrideGeoFence
+                          ? "bg-emerald-500/30 text-emerald-200 border-emerald-500/50"
+                          : "bg-white/5 text-muted-foreground border-white/10 hover:text-white"
+                      }`}
+                    >
+                      🟢 12m (At Node)
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setGeoProximityMode("near_node")}
+                      className={`py-1.5 px-2 rounded-xl text-xs font-semibold border transition-all ${
+                        geoProximityMode === "near_node" && !overrideGeoFence
+                          ? "bg-emerald-500/30 text-emerald-200 border-emerald-500/50"
+                          : "bg-white/5 text-muted-foreground border-white/10 hover:text-white"
+                      }`}
+                    >
+                      🟡 35m (In Range)
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setGeoProximityMode("far_away")}
+                      className={`py-1.5 px-2 rounded-xl text-xs font-semibold border transition-all ${
+                        geoProximityMode === "far_away" && !overrideGeoFence
+                          ? "bg-rose-500/30 text-rose-200 border-rose-500/50"
+                          : "bg-white/5 text-muted-foreground border-white/10 hover:text-white"
+                      }`}
+                    >
+                      🔴 185m (Locked)
+                    </button>
+                  </div>
+                </div>
+
+                {!geoResult.inRange && (
+                  <div className="flex items-center gap-2 p-2.5 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-300 text-xs">
+                    <AlertTriangle className="h-4 w-4 shrink-0 text-rose-400" />
+                    <span>
+                      {isHi
+                        ? "चेक-इन लॉक है: नकली ड्रॉप-ऑफ रोकने के लिए आप नोड के 50 मीटर दायरे में होने चाहिए।"
+                        : "Check-in Locked: To prevent fake drop-offs, host device must be within 50m of campus node."}
+                    </span>
+                  </div>
+                )}
+              </div>
+
               {/* 3-Point Checklist Cards */}
               <div className="space-y-4">
                 <p className="text-xs font-bold uppercase tracking-wider text-amber-400">

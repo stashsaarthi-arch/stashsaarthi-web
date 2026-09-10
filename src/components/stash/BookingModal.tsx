@@ -6,6 +6,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { logSupabaseError } from "@/lib/supabaseLogger";
 import { checkAndRecordRateLimit, showRateLimitToast } from "@/lib/rateLimiter";
 import { saveBooking } from "@/lib/localSubmissions";
+import { scheduleRazorpayRoutePayout } from "@/lib/razorpayRouteEngine";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -479,6 +480,18 @@ export function BookingModal({
       if (trialDeduction > 0) {
         consumeTrialTokenOnBooking(generatedToken, trialDeduction);
       }
+
+      // Schedule 24-Hour Razorpay Route Host Split Payout
+      const payoutService = (["stash", "kitchen", "spaces", "connect"].includes(service)
+        ? service
+        : "stash") as "stash" | "kitchen" | "spaces" | "connect";
+
+      scheduleRazorpayRoutePayout({
+        bookingId: generatedToken,
+        serviceType: payoutService,
+        totalAmount: calcAmount,
+        upiVpa: "host@upi",
+      });
 
 
       // Save inquiry to supabase with zero data drop
