@@ -35,15 +35,22 @@ type ProfileTab = "settings" | "bookings";
 interface ProfileModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  initialTab?: ProfileTab;
 }
 
-export function ProfileModal({ open, onOpenChange }: ProfileModalProps) {
+export function ProfileModal({ open, onOpenChange, initialTab = "settings" }: ProfileModalProps) {
   const { user, updateUser } = useAuth();
   const { language } = useLanguage();
   const isHi = language === "hi";
 
-  const [activeTab, setActiveTab] = useState<ProfileTab>("settings");
+  const [activeTab, setActiveTab] = useState<ProfileTab>(initialTab);
   const [saving, setSaving] = useState(false);
+
+  useEffect(() => {
+    if (open) {
+      setActiveTab(initialTab);
+    }
+  }, [open, initialTab]);
   const [formData, setFormData] = useState({
     full_name: "",
     phone_number: "",

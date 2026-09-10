@@ -1549,3 +1549,15 @@
   - `node execution/run-api-pentest.mjs` passed with **5/5 (100%) vectors**.
   - `npm run build` compiled cleanly with **0 errors**.
 
+### Session: 2026-09-11 — CTO/CPO Task 102: Profile Icon Dropdown & Historical "My Bookings" Logs
+- [x] **Profile Dropdown Menu (`src/components/stash/AuthButton.tsx`)**:
+  - Integrated responsive profile dropdown trigger rendering profile settings and direct "My Bookings" (`CalendarCheck` icon) CTA button.
+- [x] **Profile Modal Tab Synchronization (`src/components/stash/ProfileModal.tsx`)**:
+  - Wired `initialTab="bookings"` to lazy-load `<MyBookingsDashboard />` inside dialog content with tab switcher.
+- [x] **Historical Booking Logs Dashboard (`src/components/stash/MyBookingsDashboard.tsx`)**:
+  - Displays user's complete historical bookings across all 6 platform verticals (Luggage Stash, Co-Living Spaces, Kitchen Meals, Connect, Waitlist).
+  - Status filters (`[All]`, `[Active]`, `[Completed]`, `[Cancelled]`), expandable cards with token serials, pricing, date formatting, and payment mode breakdowns.
+- [x] **Verification**:
+  - `npm run build` compiled cleanly with **0 errors** (Vite production bundle & Nitro server generated successfully).
+
+

@@ -45,6 +45,7 @@ export function AuthButton({ compact = false }: { compact?: boolean }) {
   const isHi = language === "hi";
 
   const [profileOpen, setProfileOpen] = useState(false);
+  const [initialTab, setInitialTab] = useState<"settings" | "bookings">("settings");
 
   const handleCustomLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
@@ -122,27 +123,31 @@ export function AuthButton({ compact = false }: { compact?: boolean }) {
       <DropdownMenuContent align="end" className="w-52">
         <DropdownMenuLabel className="truncate">{name}</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => setProfileOpen(true)} className="cursor-pointer">
+        <DropdownMenuItem
+          onClick={() => {
+            setInitialTab("settings");
+            setProfileOpen(true);
+          }}
+          className="cursor-pointer"
+        >
           <UserIcon className="mr-2 h-4 w-4" /> {isHi ? "प्रोफ़ाइल" : "Profile"}
         </DropdownMenuItem>
         <DropdownMenuItem
-          onClick={() =>
-            toast.info(
-              isHi
-                ? "बुकिंग डैशबोर्ड जल्द ही आ रहा है।"
-                : "Your bookings dashboard is coming soon.",
-            )
-          }
+          onClick={() => {
+            setInitialTab("bookings");
+            setProfileOpen(true);
+          }}
+          className="cursor-pointer"
         >
           <CalendarCheck className="mr-2 h-4 w-4" /> {isHi ? "मेरी बुकिंग" : "My Bookings"}
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => logout()}>
+        <DropdownMenuItem onClick={() => logout()} className="cursor-pointer">
           <LogOut className="mr-2 h-4 w-4" /> {isHi ? "लॉग आउट" : "Logout"}
         </DropdownMenuItem>
       </DropdownMenuContent>
 
-      <ProfileModal open={profileOpen} onOpenChange={setProfileOpen} />
+      <ProfileModal open={profileOpen} onOpenChange={setProfileOpen} initialTab={initialTab} />
     </DropdownMenu>
   );
 }

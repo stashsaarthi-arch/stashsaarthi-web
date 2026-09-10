@@ -38,6 +38,7 @@ export interface BookingRecord {
   paymentMode: string;
   message: string;
   submittedAt: string;
+  status?: "active" | "completed" | "cancelled";
   // Service-specific extras (optional — absent when not applicable)
   bags?: number;
   months?: number;

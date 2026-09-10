@@ -966,9 +966,14 @@
     - `docs/tasks/progress.md` — Appended Task 98 execution log.
     - `progress.md` — Appended Task 98 execution log.
 
-
-
-
-
-
+- [x] **[CTO / CPO - Direct Request] Task 102: Profile Icon Dropdown & Direct "My Bookings" Historical Logs Modal — 2026-09-11**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & Nitro server bundle compiled cleanly).
+  - **Profile Dropdown & My Bookings Integration**:
+    - `src/components/stash/AuthButton.tsx`: Responsive profile avatar flyout dropdown menu containing direct "My Bookings" (`CalendarCheck` icon) CTA trigger alongside profile settings and logout options.
+    - `src/components/stash/ProfileModal.tsx`: Lazy-loads `<MyBookingsDashboard />` with seamless tab switching between "Profile Settings" and "My Bookings".
+    - `src/components/stash/MyBookingsDashboard.tsx`: Built complete historical booking logs viewer displaying active, completed, and cancelled bookings (Luggage Stash, Co-Living Spaces, Tiffin Meals, Saarthi Connect, Waitlist) with status filters (`[All]`, `[Active]`, `[Completed]`, `[Cancelled]`), expandable receipt cards, payment mode details, and token details.
+  - **Modified Files**:
+    - `docs/tasks/PRD.md` — Marked Task 102 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 102 execution details.
+    - `progress.md` — Appended Task 102 execution details.
 

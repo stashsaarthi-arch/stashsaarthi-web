@@ -58,20 +58,36 @@ function formatDate(iso: string): string {
   }
 }
 
+type StatusFilter = "all" | "active" | "completed" | "cancelled";
+
 export function MyBookingsDashboard() {
   const { language } = useLanguage();
   const { user } = useAuth();
   const isHi = language === "hi";
   const [activeTab, setActiveTab] = useState<Tab>("bookings");
+  const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
+  // Helper to resolve status for booking
+  const getBookingStatus = (b: BookingRecord): "active" | "completed" | "cancelled" => {
+    if (b.status) return b.status;
+    const date = new Date(b.submittedAt).getTime();
+    const thirtyDaysAgo = Date.now() - 30 * 24 * 60 * 60 * 1000;
+    return date > thirtyDaysAgo ? "active" : "completed";
+  };
+
   // Filter records by current user's email
-  const userBookings = useMemo(() => {
+  const rawUserBookings = useMemo(() => {
     if (!user?.email) return [];
     return getBookings().filter(
       (b) => b.email.toLowerCase() === user.email.toLowerCase(),
     );
   }, [user?.email]);
+
+  const userBookings = useMemo(() => {
+    if (statusFilter === "all") return rawUserBookings;
+    return rawUserBookings.filter((b) => getBookingStatus(b) === statusFilter);
+  }, [rawUserBookings, statusFilter]);
 
   const userMeals = useMemo(() => {
     if (!user?.email) return [];
@@ -92,7 +108,7 @@ export function MyBookingsDashboard() {
       labelEn: "Bookings",
       labelHi: "बुकिंग",
       icon: <Boxes className="h-3.5 w-3.5" />,
-      count: userBookings.length,
+      count: rawUserBookings.length,
     },
     {
       key: "meals",
@@ -119,6 +135,12 @@ export function MyBookingsDashboard() {
   const renderBookingCard = (b: BookingRecord) => {
     const svc = SERVICE_LABELS[b.service] || SERVICE_LABELS["stash"]!;
     const isExpanded = expandedId === b.id;
+    const status = getBookingStatus(b);
+    const statusConfig = {
+      active: { labelEn: "Active", labelHi: "सक्रिय", style: "bg-emerald-500/10 text-emerald-400 border-emerald-500/30" },
+      completed: { labelEn: "Completed", labelHi: "पूर्ण", style: "bg-cyan-500/10 text-cyan-400 border-cyan-500/30" },
+      cancelled: { labelEn: "Cancelled", labelHi: "रद्द", style: "bg-rose-500/10 text-rose-400 border-rose-500/30" },
+    }[status];
 
     return (
       <div
@@ -132,10 +154,15 @@ export function MyBookingsDashboard() {
           <div className="flex items-center gap-2.5 min-w-0">
             <span className="text-lg shrink-0">{svc.icon}</span>
             <div className="min-w-0">
-              <p className="text-sm font-semibold text-white truncate">
-                {isHi ? svc.hi : svc.en}
-              </p>
-              <p className="text-[10px] text-slate-400 flex items-center gap-1">
+              <div className="flex items-center gap-2">
+                <p className="text-sm font-semibold text-white truncate">
+                  {isHi ? svc.hi : svc.en}
+                </p>
+                <span className={`text-[9px] px-1.5 py-0.5 rounded-full border font-bold ${statusConfig.style}`}>
+                  {isHi ? statusConfig.labelHi : statusConfig.labelEn}
+                </span>
+              </div>
+              <p className="text-[10px] text-slate-400 flex items-center gap-1 mt-0.5">
                 <Calendar className="h-2.5 w-2.5" />
                 {formatDate(b.submittedAt)}
               </p>
@@ -339,6 +366,32 @@ export function MyBookingsDashboard() {
           </button>
         ))}
       </div>
+
+      {/* Status Filter Pills for Bookings */}
+      {activeTab === "bookings" && (
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-[10px]">
+          {(
+            [
+              { key: "all", labelEn: "All", labelHi: "सभी" },
+              { key: "active", labelEn: "Active", labelHi: "सक्रिय" },
+              { key: "completed", labelEn: "Completed", labelHi: "पूर्ण" },
+              { key: "cancelled", labelEn: "Cancelled", labelHi: "रद्द" },
+            ] as const
+          ).map((f) => (
+            <button
+              key={f.key}
+              onClick={() => setStatusFilter(f.key)}
+              className={`px-2.5 py-1 rounded-full border transition-all ${
+                statusFilter === f.key
+                  ? "bg-cyan-500/20 text-cyan-300 border-cyan-500/40 font-semibold"
+                  : "bg-black/30 text-slate-400 border-white/5 hover:border-white/20"
+              }`}
+            >
+              {isHi ? f.labelHi : f.labelEn}
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* Content */}
       <div className="max-h-[40vh] overflow-y-auto space-y-2 pr-1 scrollbar-thin scrollbar-thumb-white/10">
