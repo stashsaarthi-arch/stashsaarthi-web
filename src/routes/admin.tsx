@@ -14,6 +14,18 @@ const AndroidGoPerfModal = lazy(() =>
 const EdgeRegionMonitorWidget = lazy(() =>
   import("@/components/stash/EdgeRegionMonitorWidget").then((m) => ({ default: m.EdgeRegionMonitorWidget }))
 );
+const HostPayoutsModal = lazy(() =>
+  import("@/components/stash/HostPayoutsModal").then((m) => ({ default: m.HostPayoutsModal }))
+);
+const HostInventoryGridModal = lazy(() =>
+  import("@/components/stash/HostInventoryGrid").then((m) => ({ default: m.HostInventoryGridModal }))
+);
+const HostKycModal = lazy(() =>
+  import("@/components/stash/HostKycModal").then((m) => ({ default: m.HostKycModal }))
+);
+const HostStashVerificationModal = lazy(() =>
+  import("@/components/stash/HostStashVerificationModal").then((m) => ({ default: m.HostStashVerificationModal }))
+);
 import {
   getBookings,
   getWaitlistEntries,
@@ -40,6 +52,7 @@ import {
   Download,
   MessageCircle,
   CheckCircle2,
+  FileCheck,
   Boxes,
   Home,
   Soup,
@@ -47,6 +60,7 @@ import {
   ShieldAlert,
   Briefcase,
   Users,
+  UserCheck,
   Star,
   Lightbulb,
   Trash2,
@@ -456,6 +470,10 @@ function AdminPage() {
   const [visitorsLoading, setVisitorsLoading] = useState(false);
   const [isPenTestOpen, setIsPenTestOpen] = useState(false);
   const [isAndroidGoPerfOpen, setIsAndroidGoPerfOpen] = useState(false);
+  const [isHostPayoutsOpen, setIsHostPayoutsOpen] = useState(false);
+  const [isHostGridOpen, setIsHostGridOpen] = useState(false);
+  const [isHostKycOpen, setIsHostKycOpen] = useState(false);
+  const [isHostVerificationOpen, setIsHostVerificationOpen] = useState(false);
 
   const loadData = useCallback(() => {
     setBookings(getBookings());
@@ -606,6 +624,38 @@ function AdminPage() {
             </div>
           </div>
           <div className="flex items-center gap-2">
+            <button
+              onClick={() => setIsHostPayoutsOpen(true)}
+              className="h-8 px-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-semibold flex items-center gap-1.5 hover:bg-amber-500/20 transition-colors"
+              title="Razorpay Route Host Payouts Manager"
+            >
+              <IndianRupee className="h-3.5 w-3.5" />
+              <span className="hidden sm:inline">Host Payouts</span>
+            </button>
+            <button
+              onClick={() => setIsHostGridOpen(true)}
+              className="h-8 px-3 rounded-xl bg-orange-500/10 border border-orange-500/30 text-orange-300 text-xs font-semibold flex items-center gap-1.5 hover:bg-orange-500/20 transition-colors"
+              title="Host Visual Room Inventory Grid"
+            >
+              <Boxes className="h-3.5 w-3.5" />
+              <span className="hidden sm:inline">Host Grid</span>
+            </button>
+            <button
+              onClick={() => setIsHostKycOpen(true)}
+              className="h-8 px-3 rounded-xl bg-violet-500/10 border border-violet-500/30 text-violet-300 text-xs font-semibold flex items-center gap-1.5 hover:bg-violet-500/20 transition-colors"
+              title="Host DigiLocker & Aadhaar XML KYC Automation"
+            >
+              <UserCheck className="h-3.5 w-3.5" />
+              <span className="hidden sm:inline">Host KYC</span>
+            </button>
+            <button
+              onClick={() => setIsHostVerificationOpen(true)}
+              className="h-8 px-3 rounded-xl bg-[#00F5A0]/10 border border-[#00F5A0]/30 text-[#00F5A0] text-xs font-semibold flex items-center gap-1.5 hover:bg-[#00F5A0]/20 transition-colors"
+              title="Host Stash 3-Point Intake Verification & Photo Proof"
+            >
+              <FileCheck className="h-3.5 w-3.5" />
+              <span className="hidden sm:inline">Stash Verification</span>
+            </button>
             <button
               onClick={() => setIsAndroidGoPerfOpen(true)}
               className="h-8 px-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-semibold flex items-center gap-1.5 hover:bg-emerald-500/20 transition-colors"
@@ -1270,6 +1320,12 @@ function AdminPage() {
 
         <ApiPenTestModal isOpen={isPenTestOpen} onClose={() => setIsPenTestOpen(false)} />
         <AndroidGoPerfModal isOpen={isAndroidGoPerfOpen} onClose={() => setIsAndroidGoPerfOpen(false)} />
+        <Suspense fallback={null}>
+          <HostPayoutsModal isOpen={isHostPayoutsOpen} onClose={() => setIsHostPayoutsOpen(false)} />
+          <HostInventoryGridModal isOpen={isHostGridOpen} onClose={() => setIsHostGridOpen(false)} />
+          <HostKycModal isOpen={isHostKycOpen} onClose={() => setIsHostKycOpen(false)} />
+          <HostStashVerificationModal isOpen={isHostVerificationOpen} onClose={() => setIsHostVerificationOpen(false)} />
+        </Suspense>
       </div>
     </div>
   );

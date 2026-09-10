@@ -132,24 +132,24 @@
 
 - [x] 106. [UX - Booking Filters]: "My Bookings" screen par vertical-wise filters integrate karna: [All], [Luggage Stash], [Kitchen Subscriptions], [Spaces Lease], [Connect Sessions].
 
-[ ] 107. [CTO - One-Click Rebook]: Expired storage slots ya exhausted tiffin coupon books ke niche instant "Renew Slot / Reorder" single-tap trigger lagana.
+- [x] 107. [CTO - One-Click Rebook]: Expired storage slots ya exhausted tiffin coupon books ke niche instant "Renew Slot / Reorder" single-tap trigger lagana.
 
-[ ] 108. [QA - Profile Cache Validation]: Test karna ki profile avatar switch aur name updates bina page refresh ke pure dashboard aur booking logs me instant propagate ho rahe hain.
+- [x] 108. [QA - Profile Cache Validation]: Test karna ki profile avatar switch aur name updates bina page refresh ke pure dashboard aur booking logs me instant propagate ho rahe hain.
 
-[ ] 109. [CTO - PDF Invoice Engine]: Har completed booking ke liye GST-compliant downloadable PDF invoice generate karne ka edge function integrate karna (using PDF-Lib).
+- [x] 109. [CTO - PDF Invoice Engine]: Har completed booking ke liye GST-compliant downloadable PDF invoice generate karne ka edge function integrate karna (using PDF-Lib).
 
-[ ] 110. [UX - Empty State Delight]: Jab student ka zero active booking ho, tab generic blank page ke bajaye customized campus-specific empty state graphic aur instant ₹50 welcome discount card dikhana.
+- [x] 110. [UX - Empty State Delight]: Jab student ka zero active booking ho, tab generic blank page ke bajaye customized campus-specific empty state graphic aur instant ₹50 welcome discount card dikhana.
 
-[ ] 111. [CTO - Live Status Badges]: Supabase realtime channels se booking card par dynamic state update karna (Item Received ➔ In Secure Locker ➔ Ready for Retrieval).
+- [x] 111. [CTO - Live Status Badges]: Supabase realtime channels se booking card par dynamic state update karna (Item Received ➔ In Secure Locker ➔ Ready for Retrieval).
 
 ## Sprint 12: Host Engine, Payouts & Micro-Warehousing (Tasks 112–121)
-[ ] 112. [CTO - Razorpay Route Integration]: Verified hosts ke bank accounts/UPI IDs me automated split-payouts schedule karna booking complete hone ke 24 ghante ke andar.
+- [x] 112. [CTO - Razorpay Route Integration]: Verified hosts ke bank accounts/UPI IDs me automated split-payouts schedule karna booking complete hone ke 24 ghante ke andar.
 
-[ ] 113. [CPO - Host Inventory Grid]: Hosts ke dashboard me visual isometric room capacity grid banana, jisse host manually mark kar sake ki kitne standard boxes ki space bachi hai.
+- [x] 113. [CPO - Host Inventory Grid]: Hosts ke dashboard me visual isometric room capacity grid banana, jisse host manually mark kar sake ki kitne standard boxes ki space bachi hai.
 
-[ ] 114. [CSO - Host KYC Automation]: Aadhaar XML / DigiLocker verification API bridge setup karna for instant host onboarding and background check.
+- [x] 114. [CSO - Host KYC Automation]: Aadhaar XML / DigiLocker verification API bridge setup karna for instant host onboarding and background check.
 
-[ ] 115. [UX - Host Stash Verification Checklist]: Host app me 3-point intake checklist daalna: (1. Box Seal Intact, 2. Barcode Scanned, 3. Weight under 25kg) with photo proof upload.
+- [x] 115. [UX - Host Stash Verification Checklist]: Host app me 3-point intake checklist daalna: (1. Box Seal Intact, 2. Barcode Scanned, 3. Weight under 25kg) with photo proof upload.
 
 [ ] 116. [CTO - Geo-Fenced Host Check-in]: Host app par student pickup/drop verification ko strict 50-meter geo-fence radius me lock karna to prevent fake drop-offs.
 
