@@ -20,6 +20,8 @@ import {
   Hash,
   Receipt,
   Eye,
+  QrCode,
+  WifiOff,
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { useAuth } from "@/hooks/useAuth";
@@ -62,6 +64,15 @@ function formatDate(iso: string): string {
 }
 
 type StatusFilter = "all" | "active" | "completed" | "cancelled";
+type VerticalFilter = "all" | "stash" | "kitchen" | "spaces" | "connect";
+
+const VERTICAL_FILTERS: { key: VerticalFilter; labelEn: string; labelHi: string; icon: string }[] = [
+  { key: "all", labelEn: "All Services", labelHi: "सभी सेवाएं", icon: "✨" },
+  { key: "stash", labelEn: "Luggage Stash", labelHi: "लगेज स्टैश", icon: "🎒" },
+  { key: "kitchen", labelEn: "Kitchen Subscriptions", labelHi: "किचन सब्सक्रिप्शन", icon: "🍲" },
+  { key: "spaces", labelEn: "Spaces Lease", labelHi: "स्पेस लीज", icon: "🏠" },
+  { key: "connect", labelEn: "Connect Sessions", labelHi: "कनेक्ट सेशंस", icon: "🤝" },
+];
 
 export function MyBookingsDashboard() {
   const { language } = useLanguage();
@@ -69,6 +80,7 @@ export function MyBookingsDashboard() {
   const isHi = language === "hi";
   const [activeTab, setActiveTab] = useState<Tab>("bookings");
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
+  const [verticalFilter, setVerticalFilter] = useState<VerticalFilter>("all");
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [selectedBooking, setSelectedBooking] = useState<BookingRecord | null>(null);
 
@@ -88,10 +100,41 @@ export function MyBookingsDashboard() {
     );
   }, [user?.email]);
 
+  const verticalCounts = useMemo(() => {
+    const counts: Record<VerticalFilter, number> = {
+      all: rawUserBookings.length,
+      stash: 0,
+      kitchen: 0,
+      spaces: 0,
+      connect: 0,
+    };
+    rawUserBookings.forEach((b) => {
+      if (b.service === "stash" || b.service === "micro") counts.stash++;
+      else if (b.service === "kitchen" || b.service === "meal") counts.kitchen++;
+      else if (b.service === "spaces") counts.spaces++;
+      else if (b.service === "connect") counts.connect++;
+    });
+    return counts;
+  }, [rawUserBookings]);
+
   const userBookings = useMemo(() => {
-    if (statusFilter === "all") return rawUserBookings;
-    return rawUserBookings.filter((b) => getBookingStatus(b) === statusFilter);
-  }, [rawUserBookings, statusFilter]);
+    let list = rawUserBookings;
+    if (statusFilter !== "all") {
+      list = list.filter((b) => getBookingStatus(b) === statusFilter);
+    }
+    if (verticalFilter !== "all") {
+      if (verticalFilter === "stash") {
+        list = list.filter((b) => b.service === "stash" || b.service === "micro");
+      } else if (verticalFilter === "kitchen") {
+        list = list.filter((b) => b.service === "kitchen" || b.service === "meal");
+      } else if (verticalFilter === "spaces") {
+        list = list.filter((b) => b.service === "spaces");
+      } else if (verticalFilter === "connect") {
+        list = list.filter((b) => b.service === "connect");
+      }
+    }
+    return list;
+  }, [rawUserBookings, statusFilter, verticalFilter]);
 
   const userMeals = useMemo(() => {
     if (!user?.email) return [];
@@ -183,6 +226,18 @@ export function MyBookingsDashboard() {
                 e.stopPropagation();
                 setSelectedBooking(b);
               }}
+              title={isHi ? "ऑफ़लाइन QR कोड देखें" : "View Offline QR Pass"}
+              className="p-1 px-2 rounded-md bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-bold flex items-center gap-1 transition-colors"
+            >
+              <QrCode className="h-3 w-3" />
+              <span>QR Pass</span>
+            </button>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedBooking(b);
+              }}
               title={isHi ? "रसीद व विवरण देखें" : "View Receipt & Details"}
               className="p-1 rounded-md bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 transition-colors"
             >
@@ -233,16 +288,23 @@ export function MyBookingsDashboard() {
               <span>{b.paymentMode}</span>
             </div>
 
-            <button
-              onClick={() => setSelectedBooking(b)}
-              className="w-full mt-2 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 rounded-lg py-1.5 px-3 text-xs font-semibold flex items-center justify-between transition-colors"
-            >
-              <span className="flex items-center gap-1.5">
+            <div className="grid grid-cols-2 gap-2 mt-2">
+              <button
+                onClick={() => setSelectedBooking(b)}
+                className="bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 rounded-lg py-1.5 px-2.5 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors"
+              >
+                <QrCode className="h-3.5 w-3.5 text-emerald-400" />
+                <span>{isHi ? "ऑफ़लाइन QR पास" : "Offline QR Pass"}</span>
+              </button>
+
+              <button
+                onClick={() => setSelectedBooking(b)}
+                className="bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 rounded-lg py-1.5 px-2.5 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors"
+              >
                 <Receipt className="h-3.5 w-3.5 text-cyan-400" />
-                <span>{isHi ? "रसीद व आपातकालीन विवरण देखें" : "View Receipt & Emergency Details"}</span>
-              </span>
-              <Eye className="h-3.5 w-3.5 text-cyan-400" />
-            </button>
+                <span>{isHi ? "रसीद व विवरण" : "View Receipt"}</span>
+              </button>
+            </div>
           </div>
         )}
       </div>
@@ -391,6 +453,47 @@ export function MyBookingsDashboard() {
             )}
           </button>
         ))}
+      </div>
+
+      {/* Vertical-Wise Service Filters */}
+      <div className="space-y-1">
+        <p className="text-[10px] uppercase tracking-wider font-semibold text-slate-400 px-0.5">
+          {isHi ? "वर्टिकल फ़िल्टर:" : "Vertical Filter:"}
+        </p>
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-[11px] no-scrollbar">
+          {VERTICAL_FILTERS.map((vf) => {
+            const count = verticalCounts[vf.key];
+            const isActive = verticalFilter === vf.key;
+            return (
+              <button
+                key={vf.key}
+                onClick={() => {
+                  setVerticalFilter(vf.key);
+                  if (activeTab !== "bookings" && (vf.key === "stash" || vf.key === "spaces" || vf.key === "connect")) {
+                    setActiveTab("bookings");
+                  }
+                }}
+                className={`px-2.5 py-1 rounded-lg border flex items-center gap-1.5 shrink-0 transition-all font-medium ${
+                  isActive
+                    ? "bg-cyan-500/20 text-cyan-300 border-cyan-500/40 shadow-sm font-semibold"
+                    : "bg-black/40 text-slate-400 border-white/5 hover:border-white/20 hover:text-slate-200"
+                }`}
+              >
+                <span>{vf.icon}</span>
+                <span>{isHi ? vf.labelHi : vf.labelEn}</span>
+                {count > 0 && (
+                  <span
+                    className={`text-[9px] px-1.5 py-0.2 rounded-full font-bold ${
+                      isActive ? "bg-cyan-500/30 text-cyan-200" : "bg-white/10 text-slate-400"
+                    }`}
+                  >
+                    {count}
+                  </span>
+                )}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* Status Filter Pills for Bookings */}

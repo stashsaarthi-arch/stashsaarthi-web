@@ -28,6 +28,7 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/context/LanguageContext";
 import { toast } from "sonner";
 import type { BookingRecord } from "@/lib/localSubmissions";
+import { OfflineQrCode } from "@/components/ui/OfflineQrCode";
 
 const FOUNDER_WHATSAPP = "919369454350";
 
@@ -67,6 +68,7 @@ export function BookingDetailDrawer({ booking, open, onClose }: BookingDetailDra
   const { language } = useLanguage();
   const isHi = language === "hi";
   const [copiedToken, setCopiedToken] = useState(false);
+  const [showFullQr, setShowFullQr] = useState(false);
 
   if (!open || !booking) return null;
 
@@ -184,6 +186,53 @@ export function BookingDetailDrawer({ booking, open, onClose }: BookingDetailDra
           {/* Body Content */}
           <div className="p-6 space-y-5 flex-1">
             
+            {/* 0. Offline Storage QR Lock Pass (Task 105) */}
+            <div className="bg-gradient-to-br from-cyan-950/40 via-black/50 to-emerald-950/30 border border-cyan-500/30 rounded-2xl p-4 space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2 text-cyan-400 text-xs font-bold uppercase tracking-wider">
+                  <QrCode className="h-4 w-4" />
+                  <span>{isHi ? "ऑफ़लाइन पिकअप/ड्रॉप QR पास" : "Offline Pickup/Drop QR Pass"}</span>
+                </div>
+                <span className="text-[9px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full font-bold border border-emerald-500/30 flex items-center gap-1">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-ping" />
+                  {isHi ? "100% ऑफ़लाइन रेडी" : "100% Offline Ready"}
+                </span>
+              </div>
+
+              <div className="flex items-center gap-4 bg-black/60 border border-white/10 rounded-xl p-3">
+                <button
+                  type="button"
+                  onClick={() => setShowFullQr(true)}
+                  className="relative group shrink-0 focus:outline-none"
+                  title={isHi ? "बड़ा QR कोड देखें" : "View Fullscreen QR"}
+                >
+                  <OfflineQrCode value={booking.token} size={88} className="border border-cyan-500/40 group-hover:scale-105 transition-transform" />
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center text-[10px] text-white font-bold">
+                    🔍 Zoom
+                  </div>
+                </button>
+
+                <div className="space-y-1 text-xs min-w-0">
+                  <p className="text-[11px] text-slate-300 font-semibold leading-tight">
+                    {isHi
+                      ? "पिकअप व ड्रॉप के समय सीनियर होस्ट को यह QR कोड दिखाएं।"
+                      : "Present this QR code to the senior host at node pickup/drop-off."}
+                  </p>
+                  <p className="text-[10px] text-emerald-400 font-mono flex items-center gap-1 pt-1">
+                    <ShieldCheck className="h-3 w-3" />
+                    <span>{isHi ? "बिना इंटरनेट के कार्य करता है" : "Works without cellular internet"}</span>
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => setShowFullQr(true)}
+                    className="mt-1 text-[11px] text-cyan-400 hover:text-cyan-300 font-bold underline flex items-center gap-1"
+                  >
+                    <span>{isHi ? "फुलस्क्रीन QR दिखाएं" : "Show Fullscreen QR Pass"}</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
             {/* 1. Digital Receipt Card */}
             <div className="bg-black/50 border border-white/10 rounded-2xl p-4 space-y-3">
               <div className="flex items-center justify-between border-b border-white/5 pb-2">
@@ -375,6 +424,51 @@ export function BookingDetailDrawer({ booking, open, onClose }: BookingDetailDra
 
         </div>
       </div>
+
+      {/* Fullscreen Offline QR Pass Modal */}
+      {showFullQr && (
+        <div className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center animate-in fade-in">
+          <button
+            onClick={() => setShowFullQr(false)}
+            className="absolute top-6 right-6 p-3 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
+          >
+            <X className="h-6 w-6" />
+          </button>
+
+          <div className="max-w-xs w-full bg-[#0D1117] border border-cyan-500/40 rounded-3xl p-6 space-y-4 shadow-2xl">
+            <div className="flex items-center justify-center gap-2 text-cyan-400 text-sm font-bold uppercase tracking-wider">
+              <QrCode className="h-5 w-5" />
+              <span>{isHi ? "ऑफ़लाइन कस्टडी पास" : "Offline Custody Pass"}</span>
+            </div>
+
+            <div className="p-3 bg-white rounded-2xl shadow-inner inline-block">
+              <OfflineQrCode value={booking.token} size={220} />
+            </div>
+
+            <div>
+              <p className="text-2xl font-mono font-bold text-white tracking-widest">
+                {booking.token}
+              </p>
+              <p className="text-xs text-slate-400 mt-1">
+                {booking.name} · {booking.city || "Kakadeo Campus Hub"}
+              </p>
+            </div>
+
+            <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-[11px] text-emerald-300 font-semibold flex items-center justify-center gap-1.5">
+              <ShieldCheck className="h-4 w-4" />
+              <span>{isHi ? "ऑफ़लाइन मोड में 100% कार्यशील" : "100% Functional in Offline Mode"}</span>
+            </div>
+
+            <Button
+              onClick={() => setShowFullQr(false)}
+              className="w-full bg-cyan-500 hover:bg-cyan-400 text-black font-bold py-3 text-xs"
+            >
+              {isHi ? "वापस जाएं" : "Close QR Pass"}
+            </Button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
+

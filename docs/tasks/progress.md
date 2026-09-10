@@ -1007,8 +1007,41 @@
     - `src/components/stash/MyBookingsDashboard.tsx` — Integrated drawer state and card triggers.
     - `execution/test-booking-detail-drawer.mjs` — Created verification script.
     - `docs/tasks/PRD.md` — Marked Task 104 as completed (`- [x]`).
-    - `docs/tasks/progress.md` — Appended Task 104 execution details.
-    - `progress.md` — Appended Task 104 execution details.
+- [x] **[CTO - QR Re-generator] Task 105: Dynamic Offline QR Code Pass Generator for Active Storage Locks — 2026-09-11**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & Nitro server bundle compiled cleanly).
+  - **Verification Suite**: `node execution/test-qr-regenerator.mjs` — ✅ PASSED.
+  - **Offline Dynamic QR Code Infrastructure**:
+    - `src/components/ui/OfflineQrCode.tsx`: Engineered zero-dependency pure SVG QR Code generator supporting 21x21 QR matrix rendering, error correction finder patterns, custom size, and instant offline rendering.
+    - `src/lib/storageQrValidator.ts`: Added `getOfflineQrSvgDataUri` generator and updated `getStorageQrCodeUrl` to automatically fallback to client-side SVG generation when `navigator.onLine` is false or external API fails.
+    - `src/components/stash/BookingDetailDrawer.tsx`: Integrated offline dynamic QR code pass card with token validation hash, laser barcode tag, scan instructions, and interactive full-screen QR scan pass modal for low-light campus node pickups.
+    - `src/components/stash/MyBookingsDashboard.tsx`: Added instant 1-tap "QR Pass" trigger buttons to both collapsed headers and expanded booking card action grids.
+    - `src/components/stash/StashPass.tsx`: Updated live custody pass component to render `OfflineQrCode` SVG component instead of relying on external API images.
+    - `execution/test-qr-regenerator.mjs`: Verification script testing QR validation hash generation and offline SVG Data URI creation.
+  - **Modified Files**:
+    - `src/components/ui/OfflineQrCode.tsx` — Zero-dependency SVG QR component.
+    - `src/lib/storageQrValidator.ts` — Offline fallback logic.
+    - `src/components/stash/BookingDetailDrawer.tsx` — Integrated QR pass card & fullscreen modal.
+    - `src/components/stash/MyBookingsDashboard.tsx` — Integrated quick QR pass buttons on booking cards.
+    - `src/components/stash/StashPass.tsx` — Switched to offline SVG QR rendering.
+    - `execution/test-qr-regenerator.mjs` — Created verification harness.
+    - `docs/tasks/PRD.md` — Marked Task 105 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 105 execution details.
+    - `progress.md` — Appended Task 105 execution details.
+
+- [x] **[UX - Booking Filters] Task 106: Vertical-Wise Service Filters for "My Bookings" Dashboard — 2026-09-11**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & Nitro server bundle compiled cleanly).
+  - **Verification Suite**: `node execution/test-booking-filters.mjs` — ✅ PASSED (All 5 vertical filters verified).
+  - **Vertical-Wise Booking Filters Architecture**:
+    - `src/components/stash/MyBookingsDashboard.tsx`: Engineered `VerticalFilter` state (`all`, `stash`, `kitchen`, `spaces`, `connect`) and `VERTICAL_FILTERS` configuration array (`[All Services]`, `[Luggage Stash]`, `[Kitchen Subscriptions]`, `[Spaces Lease]`, `[Connect Sessions]`). Added dynamic per-vertical record counters (`verticalCounts`), automatic tab switching on service filter click, and horizontal filter bar UI strip.
+    - `execution/test-booking-filters.mjs`: Created test harness asserting type declarations, vertical filter array structure, and filter pill rendering.
+  - **Modified Files**:
+    - `src/components/stash/MyBookingsDashboard.tsx` — Integrated vertical-wise service filters and dynamic counters.
+    - `execution/test-booking-filters.mjs` — Created verification script.
+    - `docs/tasks/PRD.md` — Marked Task 106 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 106 execution log.
+    - `progress.md` — Appended Task 106 execution log.
+
+
 
 
 

@@ -5,6 +5,7 @@ import { Card3D } from "@/components/ui/Card3D";
 import { FOUNDER_WHATSAPP, getWhatsAppUrl } from "@/lib/constants";
 import { useLanguage } from "@/context/LanguageContext";
 import { getStorageQrCodeUrl, verifyStorageQrCode, type StorageQrScanResult } from "@/lib/storageQrValidator";
+import { OfflineQrCode } from "@/components/ui/OfflineQrCode";
 
 export interface StashPassItem {
   category: string;
@@ -189,13 +190,12 @@ export function StashPass({ tokenId, name, serviceLabel, type, bags, months, ite
                   <span>ID: {tokenId}</span>
                 </div>
               </div>
-              <div className="relative w-16 h-16 shrink-0 rounded-lg bg-white p-1 shadow-[0_0_15px_rgba(6,182,212,0.3)]">
-                <img
-                  src={qrImageUrl}
-                  alt={`StashPass QR Code ${tokenId}`}
+              <div className="relative w-16 h-16 shrink-0 rounded-lg bg-white p-0.5 shadow-[0_0_15px_rgba(6,182,212,0.3)] flex items-center justify-center">
+                <OfflineQrCode
+                  value={tokenId}
+                  size={60}
                   data-testid="stash-pass-qr"
                   data-token-id={tokenId}
-                  className="w-full h-full object-contain"
                 />
               </div>
             </div>

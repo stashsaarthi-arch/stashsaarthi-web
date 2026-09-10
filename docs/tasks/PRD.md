@@ -128,9 +128,9 @@
 
 - [x] 104. [CPO - Booking Detail Modal]: Har past booking card par click karte hi digital receipt, booking ID, allocated slot address aur emergency host contact ka slide-over drawer dikhana.
 
-[ ] 105. [CTO - QR Re-generator]: "My Bookings" dashboard ke andar active storage locks ke liye dynamic QR code display karna taaki student pickup/drop time par offline hone par bhi QR dikha sake.
+- [x] 105. [CTO - QR Re-generator]: "My Bookings" dashboard ke andar active storage locks ke liye dynamic QR code display karna taaki student pickup/drop time par offline hone par bhi QR dikha sake.
 
-[ ] 106. [UX - Booking Filters]: "My Bookings" screen par vertical-wise filters integrate karna: [All], [Luggage Stash], [Kitchen Subscriptions], [Spaces Lease], [Connect Sessions].
+- [x] 106. [UX - Booking Filters]: "My Bookings" screen par vertical-wise filters integrate karna: [All], [Luggage Stash], [Kitchen Subscriptions], [Spaces Lease], [Connect Sessions].
 
 [ ] 107. [CTO - One-Click Rebook]: Expired storage slots ya exhausted tiffin coupon books ke niche instant "Renew Slot / Reorder" single-tap trigger lagana.
 
