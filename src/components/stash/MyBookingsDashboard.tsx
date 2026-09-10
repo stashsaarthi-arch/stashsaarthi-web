@@ -18,6 +18,8 @@ import {
   ChevronUp,
   MessageCircle,
   Hash,
+  Receipt,
+  Eye,
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { useAuth } from "@/hooks/useAuth";
@@ -29,6 +31,7 @@ import {
   type MealOrderRecord,
   type WaitlistRecord,
 } from "@/lib/localSubmissions";
+import { BookingDetailDrawer } from "./BookingDetailDrawer";
 
 type Tab = "bookings" | "meals" | "waitlist";
 
@@ -67,6 +70,7 @@ export function MyBookingsDashboard() {
   const [activeTab, setActiveTab] = useState<Tab>("bookings");
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [selectedBooking, setSelectedBooking] = useState<BookingRecord | null>(null);
 
   // Helper to resolve status for booking
   const getBookingStatus = (b: BookingRecord): "active" | "completed" | "cancelled" => {
@@ -173,6 +177,17 @@ export function MyBookingsDashboard() {
               <IndianRupee className="h-3 w-3" />
               {b.amount}
             </span>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedBooking(b);
+              }}
+              title={isHi ? "रसीद व विवरण देखें" : "View Receipt & Details"}
+              className="p-1 rounded-md bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 transition-colors"
+            >
+              <Receipt className="h-3.5 w-3.5" />
+            </button>
             {isExpanded ? (
               <ChevronUp className="h-3.5 w-3.5 text-slate-400" />
             ) : (
@@ -217,6 +232,17 @@ export function MyBookingsDashboard() {
               <span className="text-slate-400">{isHi ? "भुगतान:" : "Payment:"}</span>
               <span>{b.paymentMode}</span>
             </div>
+
+            <button
+              onClick={() => setSelectedBooking(b)}
+              className="w-full mt-2 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 rounded-lg py-1.5 px-3 text-xs font-semibold flex items-center justify-between transition-colors"
+            >
+              <span className="flex items-center gap-1.5">
+                <Receipt className="h-3.5 w-3.5 text-cyan-400" />
+                <span>{isHi ? "रसीद व आपातकालीन विवरण देखें" : "View Receipt & Emergency Details"}</span>
+              </span>
+              <Eye className="h-3.5 w-3.5 text-cyan-400" />
+            </button>
           </div>
         )}
       </div>
@@ -410,6 +436,12 @@ export function MyBookingsDashboard() {
             ? userWaitlist.map(renderWaitlistCard)
             : renderEmpty())}
       </div>
+
+      <BookingDetailDrawer
+        booking={selectedBooking}
+        open={!!selectedBooking}
+        onClose={() => setSelectedBooking(null)}
+      />
     </div>
   );
 }

@@ -126,7 +126,7 @@
 
 - [x] 103. [CTO - Bookings Engine]: Supabase me unified user_master_bookings view compile karna jo Storage, Kitchen tokens aur Spaces lease agreements ko single query me merge kare with instant pagination.
 
-[ ] 104. [CPO - Booking Detail Modal]: Har past booking card par click karte hi digital receipt, booking ID, allocated slot address aur emergency host contact ka slide-over drawer dikhana.
+- [x] 104. [CPO - Booking Detail Modal]: Har past booking card par click karte hi digital receipt, booking ID, allocated slot address aur emergency host contact ka slide-over drawer dikhana.
 
 [ ] 105. [CTO - QR Re-generator]: "My Bookings" dashboard ke andar active storage locks ke liye dynamic QR code display karna taaki student pickup/drop time par offline hone par bhi QR dikha sake.
 
