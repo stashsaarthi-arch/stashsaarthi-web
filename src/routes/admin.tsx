@@ -32,6 +32,12 @@ const HostPushNotificationModal = lazy(() =>
 const DeliveryFleetScannerModal = lazy(() =>
   import("@/components/stash/DeliveryFleetScannerModal").then((m) => ({ default: m.DeliveryFleetScannerModal }))
 );
+const TamperHologramProtocolModal = lazy(() =>
+  import("@/components/stash/TamperHologramProtocolModal").then((m) => ({ default: m.TamperHologramProtocolModal }))
+);
+const BarcodeScanStressModal = lazy(() =>
+  import("@/components/stash/BarcodeScanStressModal").then((m) => ({ default: m.BarcodeScanStressModal }))
+);
 import {
   getBookings,
   getWaitlistEntries,
@@ -484,6 +490,8 @@ function AdminPage() {
   const [isHostVerificationOpen, setIsHostVerificationOpen] = useState(false);
   const [isHostPushOpen, setIsHostPushOpen] = useState(false);
   const [isDeliveryFleetOpen, setIsDeliveryFleetOpen] = useState(false);
+  const [isHologramModalOpen, setIsHologramModalOpen] = useState(false);
+  const [isBarcodeStressOpen, setIsBarcodeStressOpen] = useState(false);
 
   const loadData = useCallback(() => {
     setBookings(getBookings());
@@ -634,6 +642,22 @@ function AdminPage() {
             </div>
           </div>
           <div className="flex items-center gap-2">
+            <button
+              onClick={() => setIsBarcodeStressOpen(true)}
+              className="h-8 px-3 rounded-xl bg-teal-500/10 border border-teal-500/30 text-teal-300 text-xs font-semibold flex items-center gap-1.5 hover:bg-teal-500/20 transition-colors"
+              title="QA Barcode Scan Stress Test (html5-qrcode)"
+            >
+              <QrCode className="h-3.5 w-3.5" />
+              <span className="hidden sm:inline">Barcode Stress Test</span>
+            </button>
+            <button
+              onClick={() => setIsHologramModalOpen(true)}
+              className="h-8 px-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-semibold flex items-center gap-1.5 hover:bg-emerald-500/20 transition-colors"
+              title="CSO Tamper-Proof Hologram Protocol Engine"
+            >
+              <ShieldCheck className="h-3.5 w-3.5" />
+              <span className="hidden sm:inline">Hologram Protocol</span>
+            </button>
             <button
               onClick={() => setIsHostPayoutsOpen(true)}
               className="h-8 px-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-semibold flex items-center gap-1.5 hover:bg-amber-500/20 transition-colors"
@@ -1353,6 +1377,8 @@ function AdminPage() {
           <HostStashVerificationModal isOpen={isHostVerificationOpen} onClose={() => setIsHostVerificationOpen(false)} />
           <HostPushNotificationModal isOpen={isHostPushOpen} onClose={() => setIsHostPushOpen(false)} />
           <DeliveryFleetScannerModal isOpen={isDeliveryFleetOpen} onClose={() => setIsDeliveryFleetOpen(false)} />
+          <TamperHologramProtocolModal isOpen={isHologramModalOpen} onClose={() => setIsHologramModalOpen(false)} />
+          <BarcodeScanStressModal isOpen={isBarcodeStressOpen} onClose={() => setIsBarcodeStressOpen(false)} />
         </Suspense>
       </div>
     </div>

@@ -20,7 +20,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { AuthProvider } from "@/hooks/useAuth";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { PersonaProvider } from "@/context/PersonaContext";
-import { ThemeProvider } from "@/context/ThemeContext";
+import { ThemeProvider, useTheme } from "@/context/ThemeContext";
 import { LowDataProvider } from "@/context/LowDataContext";
 import { ToastProvider } from "@/context/ToastContext";
 import { AccessibilityAnnouncer } from "@/components/ui/AccessibilityAnnouncer";
@@ -487,6 +487,21 @@ import { initSessionSecurityListener } from "@/lib/sessionSecurity";
 import { initVisitorTracking, trackPageView } from "@/lib/visitorTracking";
 import { initAutoDataRetentionPurge } from "@/lib/dataRetentionEngine";
 
+function ThemedToaster() {
+  const { isDark } = useTheme();
+  return (
+    <Toaster
+      position="top-center"
+      richColors
+      theme={isDark ? "dark" : "light"}
+      toastOptions={{
+        className:
+          "border border-border bg-card text-card-foreground backdrop-blur-xl shadow-2xl rounded-2xl",
+      }}
+    />
+  );
+}
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const routerState = useRouterState();
@@ -576,15 +591,7 @@ function RootComponent() {
                         <AccessibilityAnnouncer />
                       </ReactLenis>
                     </ErrorBoundary>
-                    <Toaster
-                      position="top-center"
-                      richColors
-                      theme="dark"
-                      toastOptions={{
-                        className:
-                          "border border-white/10 bg-[#0A0D0F]/95 text-white backdrop-blur-xl shadow-2xl rounded-2xl",
-                      }}
-                    />
+                    <ThemedToaster />
                   </QueryClientProvider>
                 </ToastProvider>
               </LowDataProvider>

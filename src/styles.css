@@ -193,27 +193,35 @@ html.light {
   --card-foreground: oklch(0.145 0.015 232);
   --popover: oklch(0.975 0.006 220);
   --popover-foreground: oklch(0.145 0.015 232);
-  --primary: oklch(0.55 0.18 165);
+  --primary: oklch(0.52 0.18 165);
   --primary-foreground: oklch(0.99 0.002 0);
   --secondary: oklch(0.93 0.01 220);
   --secondary-foreground: oklch(0.145 0.015 232);
   --muted: oklch(0.93 0.01 220);
-  --muted-foreground: oklch(0.42 0.02 220);
+  --muted-foreground: oklch(0.38 0.02 240);
   --accent: oklch(0.91 0.015 220);
   --accent-foreground: oklch(0.145 0.015 232);
   --destructive: oklch(0.58 0.22 27);
   --destructive-foreground: oklch(0.99 0.002 0);
-  --border: oklch(0.15 0.01 220 / 12%);
-  --input: oklch(0.15 0.01 220 / 14%);
-  --ring: oklch(0.55 0.18 165);
-  --surface: oklch(0.98 0.006 220 / 88%);
-  --shadow-glass: 0 20px 40px -15px oklch(0 0 0 / 8%), inset 0 1px 0 oklch(1 0 0 / 80%);
+  --border: oklch(0.15 0.01 220 / 14%);
+  --input: oklch(0.15 0.01 220 / 16%);
+  --ring: oklch(0.52 0.18 165);
+  --surface: oklch(0.985 0.006 220 / 94%);
+  --shadow-glass: 0 20px 40px -15px oklch(0 0 0 / 10%), inset 0 1px 0 oklch(1 0 0 / 90%);
+  --gradient-hero: linear-gradient(
+    100deg,
+    oklch(0.18 0.03 232) 0%,
+    oklch(0.42 0.16 162) 38%,
+    oklch(0.40 0.16 220) 58%,
+    oklch(0.44 0.17 70) 78%,
+    oklch(0.18 0.03 232) 100%
+  );
 }
 
 [data-theme="light"][data-role="host"] {
   --background: oklch(0.985 0.008 75);
   --card: oklch(0.965 0.012 75);
-  --surface: oklch(0.98 0.01 75 / 88%);
+  --surface: oklch(0.98 0.01 75 / 94%);
   --primary: oklch(0.68 0.17 70);
   --ring: oklch(0.68 0.17 70);
 }
@@ -598,7 +606,7 @@ html.lenis body {
   }
 }
 
-/* Light Mode Contrast Hardening */
+/* Light Mode Contrast & Visibility Hardening */
 [data-theme="light"],
 html.light {
   --muted-foreground: oklch(0.38 0.02 240); /* Slate-700 equivalent: 7.2:1 contrast */
@@ -624,6 +632,45 @@ html.light .text-zinc-500 {
   color: oklch(0.30 0.02 240);
 }
 
+[data-theme="light"] .text-slate-100,
+html.light .text-slate-100,
+[data-theme="light"] .text-zinc-100,
+html.light .text-zinc-100,
+[data-theme="light"] .text-slate-200,
+html.light .text-slate-200,
+[data-theme="light"] .text-zinc-200,
+html.light .text-zinc-200 {
+  color: oklch(0.18 0.015 232);
+}
+
+[data-theme="light"] .text-slate-300,
+html.light .text-slate-300,
+[data-theme="light"] .text-zinc-300,
+html.light .text-zinc-300 {
+  color: oklch(0.28 0.018 232);
+}
+
+[data-theme="light"] .text-white\/90,
+html.light .text-white\/90,
+[data-theme="light"] .text-white\/80,
+html.light .text-white\/80 {
+  color: oklch(0.18 0.015 232);
+}
+
+[data-theme="light"] .text-white\/70,
+html.light .text-white\/70,
+[data-theme="light"] .text-white\/60,
+html.light .text-white\/60 {
+  color: oklch(0.28 0.018 232);
+}
+
+[data-theme="light"] .text-white\/50,
+html.light .text-white\/50,
+[data-theme="light"] .text-white\/40,
+html.light .text-white\/40 {
+  color: oklch(0.38 0.02 240);
+}
+
 [data-theme="light"] .text-emerald-400,
 html.light .text-emerald-400 {
   color: oklch(0.42 0.16 162); /* 5.1:1 contrast on light bg */
@@ -637,6 +684,85 @@ html.light .text-amber-400 {
 [data-theme="light"] .text-cyan-400,
 html.light .text-cyan-400 {
   color: oklch(0.40 0.16 220); /* 5.3:1 contrast on light bg */
+}
+
+/* Hardcoded Dark Background Containers in Light Mode */
+[data-theme="light"] .bg-\[\#0A0D0F\],
+html.light .bg-\[\#0A0D0F\],
+[data-theme="light"] .bg-\[\#0D1117\],
+html.light .bg-\[\#0D1117\],
+[data-theme="light"] .bg-\[\#121619\],
+html.light .bg-\[\#121619\],
+[data-theme="light"] .bg-\[\#141A1F\],
+html.light .bg-\[\#141A1F\],
+[data-theme="light"] .bg-\[\#0d1317\],
+html.light .bg-\[\#0d1317\],
+[data-theme="light"] .bg-slate-900,
+html.light .bg-slate-900,
+[data-theme="light"] .bg-slate-950,
+html.light .bg-slate-950,
+[data-theme="light"] .bg-zinc-900,
+html.light .bg-zinc-900 {
+  background-color: var(--card);
+}
+
+/* Header & Navbar Light Mode Enforcement */
+[data-theme="light"] header,
+html.light header {
+  background-color: oklch(0.985 0.004 220 / 94%) !important;
+  border-bottom-color: oklch(0.15 0.01 220 / 14%) !important;
+  box-shadow: 0 10px 30px -10px oklch(0 0 0 / 8%) !important;
+}
+
+/* Light Mode Borders & Dividers */
+[data-theme="light"] .border-white\/5,
+html.light .border-white\/5,
+[data-theme="light"] .border-white\/10,
+html.light .border-white\/10,
+[data-theme="light"] .border-white\/15,
+html.light .border-white\/15,
+[data-theme="light"] .border-white\/20,
+html.light .border-white\/20,
+[data-theme="light"] .border-white\/30,
+html.light .border-white\/30,
+[data-theme="light"] .border-slate-800,
+html.light .border-slate-800,
+[data-theme="light"] .border-slate-700,
+html.light .border-slate-700 {
+  border-color: oklch(0.15 0.01 220 / 14%);
+}
+
+/* Light Mode Micro Fills & Subtle Cards */
+[data-theme="light"] .bg-white\/5,
+html.light .bg-white\/5,
+[data-theme="light"] .bg-white\/10,
+html.light .bg-white\/10,
+[data-theme="light"] .bg-white\/15,
+html.light .bg-white\/15,
+[data-theme="light"] .bg-slate-800,
+html.light .bg-slate-800,
+[data-theme="light"] .bg-\[\#161B22\],
+html.light .bg-\[\#161B22\] {
+  background-color: oklch(0.93 0.008 220);
+}
+
+/* Form Controls in Light Mode */
+[data-theme="light"] input:not([type="checkbox"]):not([type="radio"]),
+html.light input:not([type="checkbox"]):not([type="radio"]),
+[data-theme="light"] select,
+html.light select,
+[data-theme="light"] textarea,
+html.light textarea {
+  background-color: oklch(0.99 0.002 0);
+  color: oklch(0.145 0.015 232);
+  border-color: oklch(0.15 0.01 220 / 18%);
+}
+
+[data-theme="light"] input::placeholder,
+html.light input::placeholder,
+[data-theme="light"] textarea::placeholder,
+html.light textarea::placeholder {
+  color: oklch(0.45 0.015 232);
 }
 
 /* Dark Mode Contrast Hardening for Muted Text & Small Labels */

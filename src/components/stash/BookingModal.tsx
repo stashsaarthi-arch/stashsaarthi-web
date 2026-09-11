@@ -59,6 +59,7 @@ import {
   calculateExtendedBreakDiscount,
   getExtendedBreakUpsellMessage,
 } from "@/lib/extendedBreakUpsell";
+import { ScheduledPickupSelector, type ScheduledPickupSelection } from "./ScheduledPickupSelector";
 
 export function BookingModal({
   open,
@@ -91,6 +92,11 @@ export function BookingModal({
   const [city, setCity] = useState("Kanpur");
   const [pincode, setPincode] = useState("");
   const [addressDetail, setAddressDetail] = useState("");
+  const [scheduledPickupWindow, setScheduledPickupWindow] = useState<string>("Today: 04:00 PM - 06:00 PM");
+
+  const handlePickupSelect = (selection: ScheduledPickupSelection) => {
+    setScheduledPickupWindow(selection.formattedString);
+  };
 
   // 1. Stash specific fields & Itemization
   const [bags, setBags] = useState<number>(initialBags || 1);
@@ -419,11 +425,11 @@ export function BookingModal({
         const itemizationStr = luggageItems
           .map((it, idx) => `${it.barcode}: [${it.category}] ${it.customLabel || "Unlabeled"}`)
           .join(" | ");
-        serviceMeta = `[Stash] Bags: ${bags}, Months: ${months}, Itemization: {${itemizationStr}}, Pickup: ${addressDetail || "Hostel/Campus Gate"}`;
+        serviceMeta = `[Stash] Bags: ${bags}, Months: ${months}, Pickup Window: ${scheduledPickupWindow}, Itemization: {${itemizationStr}}, Pickup: ${addressDetail || "Hostel/Campus Gate"}`;
       } else if (service === "spaces") {
-        serviceMeta = `[Spaces] Room: ${roomType}, MoveIn: ${moveInDate || "Immediate"}, Food: ${foodPreference}, Address: ${addressDetail || city}`;
+        serviceMeta = `[Spaces] Room: ${roomType}, MoveIn: ${moveInDate || "Immediate"}, Pickup Window: ${scheduledPickupWindow}, Food: ${foodPreference}, Address: ${addressDetail || city}`;
       } else if (service === "kitchen") {
-        serviceMeta = `[Kitchen] Plan: ${mealPlan}, Diet: ${dietType}, Delivery Address: ${addressDetail || city}`;
+        serviceMeta = `[Kitchen] Plan: ${mealPlan}, Diet: ${dietType}, Pickup/Delivery Window: ${scheduledPickupWindow}, Delivery Address: ${addressDetail || city}`;
       } else if (service === "connect") {
         serviceMeta = `[Connect] Domain: ${connectDomain}, Hours: ${hoursPerWeek}, Locality: ${addressDetail || city}`;
       } else if (service === "trust") {
@@ -470,6 +476,7 @@ export function BookingModal({
         submittedAt: new Date().toISOString(),
         // Conditional spreads — exactOptionalPropertyTypes safe
         ...(pincode ? { pincode } : {}),
+        ...(scheduledPickupWindow ? { pickupWindow: scheduledPickupWindow } : {}),
         ...(service === "stash" ? { bags, months } : {}),
         ...(service === "spaces" ? { roomType, ...(moveInDate ? { moveInDate } : {}) } : {}),
         ...(service === "kitchen" ? { mealPlan, dietType, personalizations: selectedPersonalizations } : {}),
@@ -1191,6 +1198,15 @@ export function BookingModal({
                   )}
                 </div>
 
+                {/* 2.7 2-Hour Doorstep Pickup Window Selector (Task 124) */}
+                {(service === "stash" || service === "spaces" || service === "kitchen") && (
+                  <ScheduledPickupSelector
+                    onPickupSelect={handlePickupSelect}
+                    initialDay="today"
+                    initialSlot="04:00 PM - 06:00 PM"
+                  />
+                )}
+
                 {/* 3. Common User Contact Details */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                   <div className="grid gap-1.5">
@@ -1665,6 +1681,14 @@ export function BookingModal({
                       </span>
                       <span className="font-bold text-emerald-400 uppercase">{service}</span>
                     </div>
+                    {(service === "stash" || service === "spaces" || service === "kitchen") && (
+                      <div className="flex justify-between border-b border-white/10 pb-2">
+                        <span className="text-muted-foreground">
+                          {isHi ? "पिकअप समय विंडो:" : "Pickup Window:"}
+                        </span>
+                        <span className="font-bold font-mono text-emerald-300">{scheduledPickupWindow}</span>
+                      </div>
+                    )}
                     <div className="flex justify-between items-center pt-1 text-sm">
                       <span className="text-muted-foreground font-sans font-bold">
                         {isHi ? "कुल देय राशि:" : "Total Amount:"}

@@ -42,6 +42,7 @@ export interface BookingRecord {
   // Service-specific extras (optional — absent when not applicable)
   bags?: number;
   months?: number;
+  pickupWindow?: string;
   roomType?: string;
   moveInDate?: string;
   mealPlan?: string;

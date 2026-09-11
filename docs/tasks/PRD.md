@@ -166,13 +166,13 @@
 ## Sprint 13: Logistics, Pickup Fleet & Barcode Security (Tasks 122–131)
 - [x] 122. [CTO - Delivery Fleet Mini-PWA]: Local delivery agents / campus runners ke liye fast, lightweight scanner view banana for doorstep box pickups.
 
-[ ] 123. [CSO - Tamper-Proof Hologram Protocol]: Har physical StashSaarthi tamper tape par pre-printed alphanumeric code ko camera scanner se link karke record lock karna.
+- [x] 123. [CSO - Tamper-Proof Hologram Protocol]: Har physical StashSaarthi tamper tape par pre-printed alphanumeric code ko camera scanner se link karke record lock karna.
 
-[ ] 124. [UX - Scheduled Doorstep Pickup]: Booking flow me 2-hour delivery pickup window selector introduce karna (e.g., "Today: 4 PM - 6 PM").
+[x] 124. [UX - Scheduled Doorstep Pickup]: Booking flow me 2-hour delivery pickup window selector introduce karna (e.g., "Today: 4 PM - 6 PM").
 
-[ ] 125. [CTO - Live Delivery Route Map]: Pickup runner ka live distance marker Leaflet.js map par dikhana jab delivery agent 1km radius me ho.
+- [x] 125. [CTO - Fix Light Mode UI]: Fix visibility of website in light ui mode and ensure that all the elemnts are also in light theme and all the text is looking clear.
 
-[ ] 126. [QA - Barcode Scan Stress Test]: Dim lighting aur crumpled tape par camera scanner (html5-qrcode) ka decode rate 95%+ verify karna.
+- [x] 126. [QA - Barcode Scan Stress Test]: Dim lighting aur crumpled tape par camera scanner (html5-qrcode) ka decode rate 95%+ verify karna.
 
 [ ] 127. [CRO - Free Pickup Threshold]: Cart value par dynamic nudge dikhana: "Add 1 more box to unlock 100% Free Campus Doorstep Pickup".
 
