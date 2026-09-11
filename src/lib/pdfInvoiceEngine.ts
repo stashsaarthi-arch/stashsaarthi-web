@@ -320,7 +320,7 @@ export async function generateGstInvoicePdf(
  */
 export async function downloadInvoicePdf(booking: BookingRecord): Promise<void> {
   const pdfBytes = await generateGstInvoicePdf(booking);
-  const blob = new Blob([pdfBytes], { type: "application/pdf" });
+  const blob = new Blob([pdfBytes as unknown as BlobPart], { type: "application/pdf" });
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;

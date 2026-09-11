@@ -19,11 +19,35 @@ import { Button } from "@/components/ui/button";
 import { handleDownloadInvestorMemo } from "@/components/stash/legal";
 import { toast } from "sonner";
 import { playClick } from "@/lib/audio";
+import {
+  generateTpaDigitalStampAgreement,
+  getLatestTpaAgreementForHost,
+  TpaDigitalAgreementRecord,
+} from "@/lib/tpaDigitalAgreementEngine";
+import { TpaDigitalAgreementModal } from "@/components/stash/TpaDigitalAgreementModal";
 
 export const TpaLegalOverviewSection: React.FC = () => {
   const { language } = useLanguage();
   const isHi = language === "hi" || true; // Emphasize clear Hindi by default
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+
+  const [tpaModalOpen, setTpaModalOpen] = useState(false);
+  const [tpaRecord, setTpaRecord] = useState<TpaDigitalAgreementRecord | null>(null);
+
+  const handleOpenStampModal = () => {
+    playClick();
+    const existing = getLatestTpaAgreementForHost();
+    const record =
+      existing ||
+      generateTpaDigitalStampAgreement(
+        "श्रीमती सरिता शर्मा (नमूना होस्ट)",
+        "+91 9839012345",
+        "117/N/89 काकादेव, कानपुर",
+        "Kakadeo Coaching Belt"
+      );
+    setTpaRecord(record);
+    setTpaModalOpen(true);
+  };
 
   const toggleFaq = (index: number) => {
     playClick();
@@ -209,7 +233,16 @@ export const TpaLegalOverviewSection: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex items-center gap-3 shrink-0">
+          <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={handleOpenStampModal}
+              className="border-amber-500/40 bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 font-semibold text-xs"
+            >
+              <FileText className="w-3.5 h-3.5 mr-1 text-amber-400" />
+              📜 UP ई-स्टांप समझौता देखें
+            </Button>
             <Button
               size="sm"
               variant="outline"
@@ -238,6 +271,13 @@ export const TpaLegalOverviewSection: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* TPA Digital e-Stamp Agreement Viewer Modal */}
+      <TpaDigitalAgreementModal
+        open={tpaModalOpen}
+        onOpenChange={setTpaModalOpen}
+        record={tpaRecord}
+      />
     </div>
   );
 };

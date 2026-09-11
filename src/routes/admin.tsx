@@ -26,6 +26,12 @@ const HostKycModal = lazy(() =>
 const HostStashVerificationModal = lazy(() =>
   import("@/components/stash/HostStashVerificationModal").then((m) => ({ default: m.HostStashVerificationModal }))
 );
+const HostPushNotificationModal = lazy(() =>
+  import("@/components/stash/HostPushNotificationModal").then((m) => ({ default: m.HostPushNotificationModal }))
+);
+const DeliveryFleetScannerModal = lazy(() =>
+  import("@/components/stash/DeliveryFleetScannerModal").then((m) => ({ default: m.DeliveryFleetScannerModal }))
+);
 import {
   getBookings,
   getWaitlistEntries,
@@ -45,6 +51,7 @@ import {
 } from "@/lib/localSubmissions";
 import { fetchVisitorSessions, type VisitorRow } from "@/lib/visitorTracking";
 import {
+  QrCode,
   Lock,
   ShieldCheck,
   Search,
@@ -81,6 +88,7 @@ import {
   Smartphone,
   Tablet,
   ArrowUpRight,
+  BellRing,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -474,6 +482,8 @@ function AdminPage() {
   const [isHostGridOpen, setIsHostGridOpen] = useState(false);
   const [isHostKycOpen, setIsHostKycOpen] = useState(false);
   const [isHostVerificationOpen, setIsHostVerificationOpen] = useState(false);
+  const [isHostPushOpen, setIsHostPushOpen] = useState(false);
+  const [isDeliveryFleetOpen, setIsDeliveryFleetOpen] = useState(false);
 
   const loadData = useCallback(() => {
     setBookings(getBookings());
@@ -655,6 +665,22 @@ function AdminPage() {
             >
               <FileCheck className="h-3.5 w-3.5" />
               <span className="hidden sm:inline">Stash Verification</span>
+            </button>
+            <button
+              onClick={() => setIsHostPushOpen(true)}
+              className="h-8 px-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-semibold flex items-center gap-1.5 hover:bg-amber-500/20 transition-colors"
+              title="Host Web Push Notifications & Audio Siren Manager"
+            >
+              <BellRing className="h-3.5 w-3.5" />
+              <span className="hidden sm:inline">Push & Siren</span>
+            </button>
+            <button
+              onClick={() => setIsDeliveryFleetOpen(true)}
+              className="h-8 px-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-semibold flex items-center gap-1.5 hover:bg-emerald-500/20 transition-colors"
+              title="Delivery Fleet Mini-PWA Scanner for Campus Runners"
+            >
+              <QrCode className="h-3.5 w-3.5" />
+              <span className="hidden sm:inline">Fleet PWA</span>
             </button>
             <button
               onClick={() => setIsAndroidGoPerfOpen(true)}
@@ -1325,6 +1351,8 @@ function AdminPage() {
           <HostInventoryGridModal isOpen={isHostGridOpen} onClose={() => setIsHostGridOpen(false)} />
           <HostKycModal isOpen={isHostKycOpen} onClose={() => setIsHostKycOpen(false)} />
           <HostStashVerificationModal isOpen={isHostVerificationOpen} onClose={() => setIsHostVerificationOpen(false)} />
+          <HostPushNotificationModal isOpen={isHostPushOpen} onClose={() => setIsHostPushOpen(false)} />
+          <DeliveryFleetScannerModal isOpen={isDeliveryFleetOpen} onClose={() => setIsDeliveryFleetOpen(false)} />
         </Suspense>
       </div>
     </div>

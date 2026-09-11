@@ -263,3 +263,52 @@ self.addEventListener("message", (event) => {
     trimCache(RUNTIME_CACHE, 120);
   }
 });
+
+// ─── Web Push Notification Event Handlers ───────────────────────
+self.addEventListener("push", (event) => {
+  let payload = {
+    title: "🚨 New StashSaarthi Booking Request!",
+    body: "A new student booking request has arrived.",
+    icon: "/app-icon.png",
+    url: "/admin",
+  };
+
+  if (event.data) {
+    try {
+      const data = event.data.json();
+      payload = { ...payload, ...data };
+    } catch {
+      payload.body = event.data.text();
+    }
+  }
+
+  const options = {
+    body: payload.body,
+    icon: payload.icon || "/app-icon.png",
+    badge: "/favicon.png",
+    vibrate: [200, 100, 200, 100, 400],
+    requireInteraction: true,
+    data: { url: payload.url || "/admin" },
+  };
+
+  event.waitUntil(self.registration.showNotification(payload.title, options));
+});
+
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+  const urlToOpen = event.notification.data?.url || "/admin";
+
+  event.waitUntil(
+    clients.matchAll({ type: "window", includeUncontrolled: true }).then((windowClients) => {
+      for (const client of windowClients) {
+        if (client.url.includes(urlToOpen) && "focus" in client) {
+          return client.focus();
+        }
+      }
+      if (clients.openWindow) {
+        return clients.openWindow(urlToOpen);
+      }
+    })
+  );
+});
+

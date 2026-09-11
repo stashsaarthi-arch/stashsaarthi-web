@@ -153,18 +153,18 @@
 
 - [x] 116. [CTO - Geo-Fenced Host Check-in]: Host app par student pickup/drop verification ko strict 50-meter geo-fence radius me lock karna to prevent fake drop-offs.
 
-[ ] 117. [CRO - Host Earning Simulator]: Landing page ke Host section par interactive slider lagana ("Have a 10x10 empty room in Kakadeo? Earn ₹6,200/month passively").
+- [x] 117. [CRO - Host Earning Simulator]: Landing page ke Host section par interactive slider lagana ("Have a 10x10 empty room in Kakadeo? Earn ₹6,200/month passively").
 
-[ ] 118. [CTO - Host Push Notifications]: Web Push API integrate karna taaki naye booking request aate hi host ke phone par persistent alert sound trigger ho.
+- [x] 118. [CTO - Host Push Notifications]: Web Push API integrate karna taaki naye booking request aate hi host ke phone par persistent alert sound trigger ho.
 
-[ ] 119. [CSO - TPA Sec 105 Digital Agreement]: Host aur StashSaarthi ke beech automated dynamic digital stamp agreement generate karna on every onboarding.
+- [x] 119. [CSO - TPA Sec 105 Digital Agreement]: Host aur StashSaarthi ke beech automated dynamic digital stamp agreement generate karna on every onboarding.
 
-[ ] 120. [QA - Overbooking Prevention Test]: High concurrency stress-testing chalana jisme do students simultaneously ek hi last available box slot book na kar sakein.
+- [x] 120. [QA - Overbooking Prevention Test]: High concurrency stress-testing chalana jisme do students simultaneously ek hi last available box slot book na kar sakein.
 
-[ ] 121. [CPO - Host Rating & Tiering]: Hosts ke liye "SuperHost" badge logic build karna based on 99% check-in accuracy and zero dispute record.
+- [x] 121. [CPO - Host Rating & Tiering]: Hosts ke liye "SuperHost" badge logic build karna based on 99% check-in accuracy and zero dispute record.
 
 ## Sprint 13: Logistics, Pickup Fleet & Barcode Security (Tasks 122–131)
-[ ] 122. [CTO - Delivery Fleet Mini-PWA]: Local delivery agents / campus runners ke liye fast, lightweight scanner view banana for doorstep box pickups.
+- [x] 122. [CTO - Delivery Fleet Mini-PWA]: Local delivery agents / campus runners ke liye fast, lightweight scanner view banana for doorstep box pickups.
 
 [ ] 123. [CSO - Tamper-Proof Hologram Protocol]: Har physical StashSaarthi tamper tape par pre-printed alphanumeric code ko camera scanner se link karke record lock karna.
 

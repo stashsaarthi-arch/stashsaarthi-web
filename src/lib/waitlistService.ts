@@ -227,9 +227,25 @@ export async function updateUserProfile(
   data: ProfileUpdateData,
 ): Promise<{ success: boolean; error?: string }> {
   try {
+    const { avatar, ...rest } = data;
+    const dbPayload: {
+      full_name?: string;
+      avatar_url?: string;
+      phone_number?: string;
+      user_type?: "student" | "host";
+      college_or_locality?: string;
+      bio?: string;
+      address?: string;
+      emergency_contact?: string;
+    } = { ...rest };
+
+    if (avatar !== undefined) {
+      dbPayload.avatar_url = avatar;
+    }
+
     const { error } = await supabase
       .from("users_waitlist")
-      .update(data)
+      .update(dbPayload)
       .eq("email", email.toLowerCase());
 
     if (error) {

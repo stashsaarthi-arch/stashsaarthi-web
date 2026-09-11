@@ -69,7 +69,7 @@ export const HostPayoutsModal: React.FC<HostPayoutsModalProps> = ({
     playClick();
 
     if (!hostName || !bankAccountNumber || !ifscCode || !upiVpa) {
-      toast.error("Required Fields", "Please fill in all bank details.");
+      toast.error("Required Fields", { description: "Please fill in all bank details." });
       return;
     }
 
@@ -85,10 +85,9 @@ export const HostPayoutsModal: React.FC<HostPayoutsModalProps> = ({
 
     setAccounts(getHostBankAccounts());
     playPop();
-    toast.success(
-      "Bank Account Linked",
-      `Verified Razorpay Route Account created for ${updated.hostName}`
-    );
+    toast.success("Bank Account Linked", {
+      description: `Verified Razorpay Route Account created for ${updated.hostName}`,
+    });
   };
 
   const handleSimulateNewBookingPayout = () => {
@@ -103,10 +102,9 @@ export const HostPayoutsModal: React.FC<HostPayoutsModalProps> = ({
     });
     setPayouts(getPayoutScheduleRecords());
     playPop();
-    toast.success(
-      "24-Hr Payout Scheduled",
-      `₹${record.hostPayoutAmount} scheduled for ${record.hostName} via Razorpay Route`
-    );
+    toast.success("24-Hr Payout Scheduled", {
+      description: `₹${record.hostPayoutAmount} scheduled for ${record.hostName} via Razorpay Route`,
+    });
   };
 
   const handleForceInstantTransfer = (payoutId: string) => {
@@ -115,10 +113,9 @@ export const HostPayoutsModal: React.FC<HostPayoutsModalProps> = ({
     if (updated) {
       setPayouts(getPayoutScheduleRecords());
       playPop();
-      toast.success(
-        "Instant Transfer Complete",
-        `₹${updated.hostPayoutAmount} transferred to ${updated.upiVpa} (${updated.razorpayTransferId})`
-      );
+      toast.success("Instant Transfer Complete", {
+        description: `₹${updated.hostPayoutAmount} transferred to ${updated.upiVpa} (${updated.razorpayTransferId})`,
+      });
     }
   };
 
@@ -229,7 +226,7 @@ export const HostPayoutsModal: React.FC<HostPayoutsModalProps> = ({
                   onClick={() => {
                     playClick();
                     loadData();
-                    toast.success("Refreshed", "Scanned Razorpay Route queue.");
+                    toast.success("Refreshed", { description: "Scanned Razorpay Route queue." });
                   }}
                   className="flex items-center space-x-1.5 px-3 py-1.5 text-xs font-semibold text-amber-400 bg-amber-400/10 border border-amber-400/30 hover:bg-amber-400/20 rounded-lg transition-colors"
                 >

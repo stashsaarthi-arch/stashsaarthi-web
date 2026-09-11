@@ -29,6 +29,12 @@ import {
   saveHostAgreement,
   getHostAgreement,
 } from "@/lib/hostVettingPolicy";
+import {
+  generateTpaDigitalStampAgreement,
+  getLatestTpaAgreementForHost,
+  TpaDigitalAgreementRecord,
+} from "@/lib/tpaDigitalAgreementEngine";
+import { TpaDigitalAgreementModal } from "@/components/stash/TpaDigitalAgreementModal";
 
 interface HostOnboardingAgreementModalProps {
   open: boolean;
@@ -46,6 +52,9 @@ export function HostOnboardingAgreementModal({
 
   const [activeTab, setActiveTab] = useState<"policy" | "sign" | "certificate">("policy");
   const [existingRecord, setExistingRecord] = useState<HostAgreementRecord | null>(null);
+
+  const [tpaModalOpen, setTpaModalOpen] = useState(false);
+  const [tpaRecord, setTpaRecord] = useState<TpaDigitalAgreementRecord | null>(null);
 
   // Form State
   const [hostName, setHostName] = useState("");
@@ -67,6 +76,8 @@ export function HostOnboardingAgreementModal({
       const rec = getHostAgreement();
       if (rec) {
         setExistingRecord(rec);
+        const tpa = getLatestTpaAgreementForHost(rec.hostPhone);
+        if (tpa) setTpaRecord(tpa);
         setActiveTab("certificate");
       } else {
         setActiveTab("policy");
@@ -110,6 +121,16 @@ export function HostOnboardingAgreementModal({
 
     saveHostAgreement(newRecord);
     setExistingRecord(newRecord);
+
+    // Auto-generate TPA Sec 105 Digital Stamp Agreement
+    const tpa = generateTpaDigitalStampAgreement(
+      newRecord.hostName,
+      newRecord.hostPhone,
+      newRecord.nodeAddress,
+      newRecord.campusNode
+    );
+    setTpaRecord(tpa);
+
     playPop();
 
     if (onSignedSuccess) {
@@ -519,7 +540,29 @@ export function HostOnboardingAgreementModal({
                     <span>{copiedId ? (isHi ? "कॉपी हो गया!" : "Copied!") : (isHi ? "आईडी कॉपी करें" : "Copy Agreement ID")}</span>
                   </button>
 
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        playPop();
+                        const currentTpa =
+                          tpaRecord ||
+                          getLatestTpaAgreementForHost(existingRecord.hostPhone) ||
+                          generateTpaDigitalStampAgreement(
+                            existingRecord.hostName,
+                            existingRecord.hostPhone,
+                            existingRecord.nodeAddress,
+                            existingRecord.campusNode
+                          );
+                        setTpaRecord(currentTpa);
+                        setTpaModalOpen(true);
+                      }}
+                      className="inline-flex items-center gap-1.5 rounded-xl border border-amber-500/40 bg-amber-500/10 px-3.5 py-2 text-xs font-bold text-amber-300 hover:bg-amber-500/20 cursor-pointer"
+                    >
+                      <FileCheck className="h-3.5 w-3.5" />
+                      <span>{isHi ? "📜 ई-स्टांप लीव एंड लाइसेंस देखें" : "📜 View UP e-Stamp Agreement"}</span>
+                    </button>
+
                     <button
                       type="button"
                       onClick={handlePrint}
@@ -542,6 +585,13 @@ export function HostOnboardingAgreementModal({
             )}
           </div>
         </motion.div>
+
+        {/* TPA Digital e-Stamp Agreement Viewer Modal */}
+        <TpaDigitalAgreementModal
+          open={tpaModalOpen}
+          onOpenChange={setTpaModalOpen}
+          record={tpaRecord}
+        />
       </div>
     </AnimatePresence>
   );

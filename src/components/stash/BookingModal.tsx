@@ -7,6 +7,7 @@ import { logSupabaseError } from "@/lib/supabaseLogger";
 import { checkAndRecordRateLimit, showRateLimitToast } from "@/lib/rateLimiter";
 import { saveBooking } from "@/lib/localSubmissions";
 import { scheduleRazorpayRoutePayout } from "@/lib/razorpayRouteEngine";
+import { triggerHostPushNotification } from "@/lib/hostPushNotifications";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -492,6 +493,18 @@ export function BookingModal({
         totalAmount: calcAmount,
         upiVpa: "host@upi",
       });
+
+      // Trigger Host Web Push & Persistent Audio Alert Siren
+      triggerHostPushNotification({
+        id: generatedToken,
+        bookingType: payoutService === "connect" ? "stash" : payoutService,
+        studentName: cleanName,
+        studentPhone: cleanPhone || "N/A",
+        nodeName: "Kakadeo PW Hub",
+        details: fullMessage || `${bags || 1}x Item Stash`,
+        amount: calcAmount,
+        timestamp: new Date().toISOString(),
+      }).catch(() => null);
 
 
       // Save inquiry to supabase with zero data drop

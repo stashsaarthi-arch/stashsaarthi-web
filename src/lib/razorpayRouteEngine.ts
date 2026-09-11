@@ -252,10 +252,11 @@ export function scheduleRazorpayRoutePayout(params: {
   upiVpa?: string;
 }): PayoutScheduleRecord {
   const accounts = getHostBankAccounts();
-  const matchedHost =
+  const fallbackHost = DEFAULT_HOST_BANK_ACCOUNTS[0]!;
+  const matchedHost: HostBankAccountDetails =
     accounts.find((a) => a.hostId === params.hostId || a.hostPhone === params.hostPhone) ||
     accounts[0] ||
-    DEFAULT_HOST_BANK_ACCOUNTS[0];
+    fallbackHost;
 
   const { hostPayoutAmount, platformCommission } = calculateSplitPayout(
     params.serviceType,
