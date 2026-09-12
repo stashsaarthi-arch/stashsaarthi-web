@@ -324,6 +324,10 @@ export function RoomListingModal({
                           <img
                             src={url}
                             alt={`Room thumbnail ${i + 1}`}
+                            loading="lazy"
+                            decoding="async"
+                            width={160}
+                            height={90}
                             className="w-full h-full object-cover"
                           />
                           {i === 0 && (
@@ -335,9 +339,9 @@ export function RoomListingModal({
                             type="button"
                             aria-label="Remove photo"
                             onClick={() => removePhoto(i)}
-                            className="absolute top-1 right-1 p-1 rounded-full bg-black/80 text-white/80 hover:text-white hover:bg-destructive transition cursor-pointer"
+                            className="absolute top-1 right-1 min-h-[44px] min-w-[44px] flex items-center justify-center p-2 rounded-full bg-black/80 text-white/80 hover:text-white hover:bg-destructive transition cursor-pointer"
                           >
-                            <Trash2 className="h-3 w-3" />
+                            <Trash2 className="h-3.5 w-3.5" />
                           </button>
                         </div>
                       ))}

@@ -38,6 +38,24 @@ const TamperHologramProtocolModal = lazy(() =>
 const BarcodeScanStressModal = lazy(() =>
   import("@/components/stash/BarcodeScanStressModal").then((m) => ({ default: m.BarcodeScanStressModal }))
 );
+const DamageClaimsModal = lazy(() =>
+  import("@/components/stash/DamageClaimsModal").then((m) => ({ default: m.DamageClaimsModal }))
+);
+const SmsFallbackGatewayModal = lazy(() =>
+  import("@/components/stash/SmsFallbackGatewayModal").then((m) => ({ default: m.SmsFallbackGatewayModal }))
+);
+const LuggageWeightEstimatorModal = lazy(() =>
+  import("@/components/stash/LuggageWeightEstimatorModal").then((m) => ({ default: m.LuggageWeightEstimatorModal }))
+);
+const ReverseLogisticsModal = lazy(() =>
+  import("@/components/stash/ReverseLogisticsModal").then((m) => ({ default: m.ReverseLogisticsModal }))
+);
+const ProxyHandoverModal = lazy(() =>
+  import("@/components/stash/ProxyHandoverModal").then((m) => ({ default: m.ProxyHandoverModal }))
+);
+const MealTokenLedgerModal = lazy(() =>
+  import("@/components/stash/MealTokenLedgerModal").then((m) => ({ default: m.MealTokenLedgerModal }))
+);
 import {
   getBookings,
   getWaitlistEntries,
@@ -95,6 +113,7 @@ import {
   Tablet,
   ArrowUpRight,
   BellRing,
+  Weight,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -492,6 +511,28 @@ function AdminPage() {
   const [isDeliveryFleetOpen, setIsDeliveryFleetOpen] = useState(false);
   const [isHologramModalOpen, setIsHologramModalOpen] = useState(false);
   const [isBarcodeStressOpen, setIsBarcodeStressOpen] = useState(false);
+  const [isDamageClaimsOpen, setIsDamageClaimsOpen] = useState(false);
+  const [isSmsFallbackOpen, setIsSmsFallbackOpen] = useState(false);
+  const [isWeightEstimatorOpen, setIsWeightEstimatorOpen] = useState(false);
+  const [isReverseLogisticsOpen, setIsReverseLogisticsOpen] = useState(false);
+  const [isMealTokenLedgerOpen, setIsMealTokenLedgerOpen] = useState(false);
+
+  useEffect(() => {
+    const handleSmsModal = () => setIsSmsFallbackOpen(true);
+    const handleWeightModal = () => setIsWeightEstimatorOpen(true);
+    const handleReverseModal = () => setIsReverseLogisticsOpen(true);
+    const handleMealTokenModal = () => setIsMealTokenLedgerOpen(true);
+    window.addEventListener("stashsaarthi:open-sms-fallback", handleSmsModal);
+    window.addEventListener("stashsaarthi:open-weight-estimator", handleWeightModal);
+    window.addEventListener("stashsaarthi:open-reverse-logistics", handleReverseModal);
+    window.addEventListener("stashsaarthi:open-meal-token-ledger", handleMealTokenModal);
+    return () => {
+      window.removeEventListener("stashsaarthi:open-sms-fallback", handleSmsModal);
+      window.removeEventListener("stashsaarthi:open-weight-estimator", handleWeightModal);
+      window.removeEventListener("stashsaarthi:open-reverse-logistics", handleReverseModal);
+      window.removeEventListener("stashsaarthi:open-meal-token-ledger", handleMealTokenModal);
+    };
+  }, []);
 
   const loadData = useCallback(() => {
     setBookings(getBookings());
@@ -642,6 +683,46 @@ function AdminPage() {
             </div>
           </div>
           <div className="flex items-center gap-2">
+            <button
+              onClick={() => setIsMealTokenLedgerOpen(true)}
+              className="h-8 px-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-semibold flex items-center gap-1.5 hover:bg-emerald-500/20 transition-colors"
+              title="CTO Cryptographic Meal Token Ledger (Micro-Burn Passbook)"
+            >
+              <Soup className="h-3.5 w-3.5 text-emerald-400" />
+              <span className="hidden sm:inline">Meal Token Ledger</span>
+            </button>
+            <button
+              onClick={() => setIsReverseLogisticsOpen(true)}
+              className="h-8 px-3 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-semibold flex items-center gap-1.5 hover:bg-cyan-500/20 transition-colors"
+              title="QA Reverse Logistics Proxy Handover Verification"
+            >
+              <UserCheck className="h-3.5 w-3.5 text-cyan-400" />
+              <span className="hidden sm:inline">Proxy Handover</span>
+            </button>
+            <button
+              onClick={() => setIsWeightEstimatorOpen(true)}
+              className="h-8 px-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-semibold flex items-center gap-1.5 hover:bg-emerald-500/20 transition-colors"
+              title="UX Luggage Weight & Box Estimator"
+            >
+              <Weight className="h-3.5 w-3.5 text-emerald-400" />
+              <span className="hidden sm:inline">Weight Estimator</span>
+            </button>
+            <button
+              onClick={() => setIsSmsFallbackOpen(true)}
+              className="h-8 px-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-semibold flex items-center gap-1.5 hover:bg-amber-500/20 transition-colors animate-pulse"
+              title="CTO Encrypted SMS Fallback Gateway (No Cellular Data)"
+            >
+              <Smartphone className="h-3.5 w-3.5 text-amber-400" />
+              <span className="hidden sm:inline">SMS Fallback</span>
+            </button>
+            <button
+              onClick={() => setIsDamageClaimsOpen(true)}
+              className="h-8 px-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-300 text-xs font-semibold flex items-center gap-1.5 hover:bg-red-500/20 transition-colors"
+              title="CSO Visual Diff & Damage Claims Console"
+            >
+              <ShieldAlert className="h-3.5 w-3.5 text-red-400" />
+              <span className="hidden sm:inline">Damage Claims</span>
+            </button>
             <button
               onClick={() => setIsBarcodeStressOpen(true)}
               className="h-8 px-3 rounded-xl bg-teal-500/10 border border-teal-500/30 text-teal-300 text-xs font-semibold flex items-center gap-1.5 hover:bg-teal-500/20 transition-colors"
@@ -1379,6 +1460,11 @@ function AdminPage() {
           <DeliveryFleetScannerModal isOpen={isDeliveryFleetOpen} onClose={() => setIsDeliveryFleetOpen(false)} />
           <TamperHologramProtocolModal isOpen={isHologramModalOpen} onClose={() => setIsHologramModalOpen(false)} />
           <BarcodeScanStressModal isOpen={isBarcodeStressOpen} onClose={() => setIsBarcodeStressOpen(false)} />
+          <DamageClaimsModal isOpen={isDamageClaimsOpen} onClose={() => setIsDamageClaimsOpen(false)} />
+          <SmsFallbackGatewayModal isOpen={isSmsFallbackOpen} onClose={() => setIsSmsFallbackOpen(false)} />
+          <LuggageWeightEstimatorModal isOpen={isWeightEstimatorOpen} onClose={() => setIsWeightEstimatorOpen(false)} />
+          <ReverseLogisticsModal isOpen={isReverseLogisticsOpen} onClose={() => setIsReverseLogisticsOpen(false)} />
+          <MealTokenLedgerModal isOpen={isMealTokenLedgerOpen} onClose={() => setIsMealTokenLedgerOpen(false)} />
         </Suspense>
       </div>
     </div>

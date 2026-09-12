@@ -120,6 +120,10 @@ export const VisionAiPhotoVerifier = memo(function VisionAiPhotoVerifier() {
             <img
               src={activePhotoUrl}
               alt="Property Inspection Preview"
+              loading="lazy"
+              decoding="async"
+              width={480}
+              height={360}
               className={`w-full h-full object-cover transition-transform duration-500 ${
                 isScanning ? "scale-105 filter brightness-90" : ""
               }`}

@@ -108,11 +108,8 @@ export const Hero = memo(function Hero({
 
           <h1
             key={`h-${role}`}
-            className="mx-auto mt-2 max-w-4xl text-balance text-2xl font-extrabold leading-[1.1] tracking-tight sm:text-4xl md:text-5xl 3xl:text-6xl 4xl:text-7xl"
+            className="mx-auto mt-2 max-w-4xl text-balance text-2xl font-extrabold leading-[1.12] sm:text-4xl md:text-5xl 3xl:text-6xl 4xl:text-7xl tracking-editorial-display"
           >
-            <span className="block text-xs font-bold tracking-wider text-emerald mb-1.5">
-              StashSaarthi Living & Storage
-            </span>
             <span className="text-gradient">
               {student ? t.hero.student.title : t.hero.host.title}
             </span>
@@ -120,7 +117,8 @@ export const Hero = memo(function Hero({
 
           <p
             key={`p-${role}`}
-            className="mx-auto mt-2 max-w-2xl text-pretty text-xs leading-relaxed text-muted-foreground sm:text-sm"
+            className="mx-auto mt-3 max-w-2xl text-pretty text-xs leading-relaxed text-muted-foreground sm:text-sm font-normal"
+            style={{ letterSpacing: "-0.01em" }}
           >
             {student ? t.hero.student.subtitle : t.hero.host.subtitle}
           </p>
@@ -128,7 +126,7 @@ export const Hero = memo(function Hero({
           {/* Dynamic Live Proof Badge */}
           <div className="mt-3 flex justify-center">
             {student ? (
-              <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-0.5 text-xs font-semibold text-emerald-400 backdrop-blur-md shadow-sm">
+              <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/25 bg-emerald-500/[0.08] px-3.5 py-1 text-xs font-semibold text-emerald-300 backdrop-blur-xl shadow-xs">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
@@ -136,7 +134,7 @@ export const Hero = memo(function Hero({
                 <span>⚡ 48+ Bags Stored Near IITK & HBTI • 100% Tamper-Proof QR Seal</span>
               </div>
             ) : (
-              <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-0.5 text-xs font-semibold text-amber-400 backdrop-blur-md shadow-sm">
+              <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/25 bg-amber-500/[0.08] px-3.5 py-1 text-xs font-semibold text-amber-300 backdrop-blur-xl shadow-xs">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-500" />
@@ -200,52 +198,10 @@ export const Hero = memo(function Hero({
               </Button>
             )}
           </div>
-
-          {/* CRO A/B Testing Variant Selector (Student Mode) */}
-          {student && (
-            <div className="mt-2.5 flex items-center justify-center gap-1.5 text-[10px] font-mono text-muted-foreground/80">
-              <span className="opacity-60">A/B Test CTA Color:</span>
-              <div className="inline-flex rounded-full border border-white/10 bg-black/30 p-0.5 backdrop-blur-md">
-                <button
-                  type="button"
-                  onClick={() => setCtaVariant("mint")}
-                  className={`rounded-full px-2 py-0.5 transition-all ${
-                    ctaVariant === "mint"
-                      ? "bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/40"
-                      : "hover:text-white opacity-70"
-                  }`}
-                >
-                  🌿 Mint
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setCtaVariant("emerald")}
-                  className={`rounded-full px-2 py-0.5 transition-all ${
-                    ctaVariant === "emerald"
-                      ? "bg-emerald-400/25 text-emerald-200 font-bold border border-emerald-400/50"
-                      : "hover:text-white opacity-70"
-                  }`}
-                >
-                  💚 Emerald
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setCtaVariant("cyan")}
-                  className={`rounded-full px-2 py-0.5 transition-all ${
-                    ctaVariant === "cyan"
-                      ? "bg-cyan-500/20 text-cyan-300 font-bold border border-cyan-500/40"
-                      : "hover:text-white opacity-70"
-                  }`}
-                >
-                  💎 Cyan
-                </button>
-              </div>
-            </div>
-          )}
         </AnimatedContent>
 
-        <Card3D maxTilt={5} className="mx-auto mt-4 max-w-4xl rounded-xl">
-          <div className="glass grid grid-cols-2 gap-px overflow-hidden rounded-xl md:grid-cols-4">
+        <Card3D maxTilt={5} className="mx-auto mt-5 max-w-4xl rounded-2xl">
+          <div className="glass grid grid-cols-2 gap-px overflow-hidden rounded-2xl md:grid-cols-4 border border-white/[0.08] shadow-2xl">
             {STATS.map((s, i) => {
               const Icon = ICONS[i] || ShieldCheck;
               return (
@@ -255,18 +211,18 @@ export const Hero = memo(function Hero({
                   direction="vertical"
                   duration={0.5}
                   delay={0.06 * i}
-                  className="min-w-0 px-2.5 py-2.5 text-center sm:px-3 sm:py-3"
+                  className="min-w-0 px-3 py-3.5 text-center sm:px-4 sm:py-4 transition-colors hover:bg-white/[0.02]"
                 >
                   <Icon
-                    className={`mx-auto mb-1 h-3 w-3 ${student ? "text-cyan" : "text-amber-400"}`}
+                    className={`mx-auto mb-1.5 h-3.5 w-3.5 ${student ? "text-cyan" : "text-amber-400"}`}
                   />
                   <AnimatedStat
                     value={s.value}
-                    className="text-base font-extrabold tracking-tight sm:text-lg"
+                    className="text-base font-extrabold tracking-[-0.02em] sm:text-xl"
                     style={{ transform: "translateZ(15px)", color: student ? "" : "#FDE68A" }}
                   />
                   <div
-                    className="mt-0.5 text-[8.5px] uppercase tracking-wider text-muted-foreground sm:text-[9.5px] leading-tight"
+                    className="mt-1 text-[10px] uppercase tracking-[0.05em] text-muted-foreground leading-tight font-semibold"
                     style={{ transform: "translateZ(20px)" }}
                   >
                     {s.label}

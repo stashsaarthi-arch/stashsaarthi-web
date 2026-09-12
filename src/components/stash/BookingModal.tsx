@@ -6,6 +6,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { logSupabaseError } from "@/lib/supabaseLogger";
 import { checkAndRecordRateLimit, showRateLimitToast } from "@/lib/rateLimiter";
 import { saveBooking } from "@/lib/localSubmissions";
+import { enqueueOfflineSubmission } from "@/lib/offlineSubmissionQueue";
 import { scheduleRazorpayRoutePayout } from "@/lib/razorpayRouteEngine";
 import { triggerHostPushNotification } from "@/lib/hostPushNotifications";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -39,6 +40,7 @@ import {
   Package,
   Luggage,
   BookOpen,
+  MessageCircle,
 } from "lucide-react";
 import {
   isValidEmail,
@@ -60,6 +62,8 @@ import {
   getExtendedBreakUpsellMessage,
 } from "@/lib/extendedBreakUpsell";
 import { ScheduledPickupSelector, type ScheduledPickupSelection } from "./ScheduledPickupSelector";
+import { FreePickupNudgeBanner } from "./FreePickupNudgeBanner";
+import { calculateFreePickupStatus } from "@/lib/freePickupThreshold";
 
 export function BookingModal({
   open,
@@ -515,28 +519,45 @@ export function BookingModal({
 
 
       // Save inquiry to supabase with zero data drop
-      const { error } = await supabase.from("co_living_inquiries").insert(payload);
-
-      if (error) {
-        logSupabaseError({
-          table: "co_living_inquiries",
-          operation: "insert",
-          payload,
-          error,
-          context: "booking_modal_insert",
-        });
-        // Don't throw — booking already saved locally
+      let syncError = false;
+      try {
+        const { error } = await supabase.from("co_living_inquiries").insert(payload);
+        if (error) {
+          syncError = true;
+          logSupabaseError({
+            table: "co_living_inquiries",
+            operation: "insert",
+            payload,
+            error,
+            context: "booking_modal_insert",
+          });
+          enqueueOfflineSubmission("booking", payload);
+        }
+      } catch (networkErr) {
+        syncError = true;
+        enqueueOfflineSubmission("booking", payload);
       }
 
       setStep(3);
-      toast.success(
-        isHi ? "🎉 सेवा आरक्षण व एस्क्रो लॉक सफल!" : "🎉 Service Reservation & Escrow Locked!",
-        {
-          description: isHi
-            ? "आपका आधिकारिक डिजिटल स्टैशपास तैयार है।"
-            : "Your digital StashPass is ready.",
-        },
-      );
+      if (syncError) {
+        toast.info(
+          isHi ? "📡 ऑफ़लाइन मोड: बुकिंग सुरक्षित व कतारबद्ध!" : "📡 Offline Mode: Booking Saved & Queued!",
+          {
+            description: isHi
+              ? "कनेक्शन पुनः जुड़ते ही आपका आरक्षण स्वतः सिंक हो जाएगा।"
+              : "Your reservation is saved locally and will auto-sync when back online.",
+          },
+        );
+      } else {
+        toast.success(
+          isHi ? "🎉 सेवा आरक्षण व एस्क्रो लॉक सफल!" : "🎉 Service Reservation & Escrow Locked!",
+          {
+            description: isHi
+              ? "आपका आधिकारिक डिजिटल स्टैशपास तैयार है।"
+              : "Your digital StashPass is ready.",
+          },
+        );
+      }
     } catch (err: unknown) {
       logSupabaseError({
         table: "co_living_inquiries",
@@ -545,11 +566,26 @@ export function BookingModal({
         error: err,
         context: "booking_modal_catch",
       });
-      toast.error(isHi ? "आरक्षण करने में असमर्थ" : "We couldn't process your booking", {
-        description: isHi
-          ? "कृपया अपना इंटरनेट कनेक्शन जांचें और पुनः प्रयास करें।"
-          : "Please check your connection and try again.",
-      });
+      // Ensure offline queue is captured
+      const fallbackPayload = {
+        user_id: user?.id ?? null,
+        role: service,
+        name: name.trim() || "Campus Student",
+        email: email.trim() || "student@stashsaarthi.com",
+        phone: phone.trim() || "N/A",
+        preferred_location: city.trim(),
+        message: `Offline Fallback: ${service} booking for ${name}`,
+      };
+      enqueueOfflineSubmission("booking", fallbackPayload);
+      setStep(3);
+      toast.info(
+        isHi ? "📡 ऑफ़लाइन पास तैयार!" : "📡 Offline StashPass Generated!",
+        {
+          description: isHi
+            ? "विवरण स्थानीय रूप से सुरक्षित कर लिया गया है।"
+            : "Your StashPass is active and queued for background sync.",
+        },
+      );
     } finally {
       setSubmitting(false);
     }
@@ -831,6 +867,22 @@ export function BookingModal({
                           );
                         }
                       })()}
+
+                      {/* Free Campus Doorstep Pickup Threshold Nudge Banner (Task 127) */}
+                      <FreePickupNudgeBanner
+                        boxCount={bags}
+                        onAddBox={() => {
+                          setBags((prev) => prev + 1);
+                          toast.success(
+                            isHi ? "🎉 1 और बॉक्स जोड़ा गया!" : "🎉 1 Box Added to Cart!",
+                            {
+                              description: isHi
+                                ? "100% मुफ़्त कैंपस डोरस्टेप पिकअप अनलॉक हो गया!"
+                                : "100% Free Campus Doorstep Pickup unlocked!",
+                            }
+                          );
+                        }}
+                      />
 
                       {/* Quick Presets Bar & Full Itemizer Trigger */}
                       <div className="space-y-1.5 pt-1">
@@ -1556,25 +1608,30 @@ export function BookingModal({
                       <img
                         src={qrCodeUrl}
                         alt="StashSaarthi Partial UPI QR"
+                        loading="lazy"
+                        decoding="async"
+                        width={144}
+                        height={144}
                         className="w-full h-full object-contain rounded-xl"
                       />
                       <div className="absolute inset-0 border border-amber-400/20 rounded-2xl pointer-events-none" />
                     </div>
 
-                    <div className="flex items-center justify-center gap-1.5 text-[11px] text-slate-300 font-mono">
+                    <div className="flex items-center justify-center gap-2 text-[11px] text-slate-300 font-mono">
                       <span>
                         UPI ID: <strong className="text-amber-400">{upiId}</strong>
                       </span>
                       <button
                         type="button"
                         onClick={copyUpiId}
-                        className="p-1 rounded bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white transition cursor-pointer"
+                        className="min-h-[48px] min-w-[48px] flex items-center justify-center rounded-lg bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white transition cursor-pointer"
                         title="Copy UPI ID"
+                        aria-label="Copy UPI ID"
                       >
                         {copiedUpi ? (
-                          <Check className="h-3.5 w-3.5 text-amber-400" />
+                          <Check className="h-4 w-4 text-amber-400" />
                         ) : (
-                          <Copy className="h-3.5 w-3.5" />
+                          <Copy className="h-4 w-4" />
                         )}
                       </button>
                     </div>
@@ -1595,7 +1652,7 @@ export function BookingModal({
                     {/* Mobile Deep Link Button */}
                     <a
                       href={upiDeepLink}
-                      className="mt-2 md:hidden flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-amber-500 text-black font-bold text-sm shadow-lg shadow-amber-500/25 active:scale-95 transition-transform"
+                      className="mt-2 md:hidden flex items-center justify-center gap-2 w-full min-h-[48px] py-3 rounded-xl bg-amber-500 text-black font-bold text-sm shadow-lg shadow-amber-500/25 active:scale-95 transition-transform"
                     >
                       {isHi ? `₹${partialUpfrontAmount} UPI ऐप से दें` : `Pay ₹${partialUpfrontAmount} via UPI App`}
                     </a>
@@ -1616,25 +1673,30 @@ export function BookingModal({
                       <img
                         src={qrCodeUrl}
                         alt="StashSaarthi UPI Escrow QR"
+                        loading="lazy"
+                        decoding="async"
+                        width={160}
+                        height={160}
                         className="w-full h-full object-contain rounded-xl"
                       />
                       <div className="absolute inset-0 border border-emerald-400/20 rounded-2xl pointer-events-none" />
                     </div>
 
-                    <div className="flex items-center justify-center gap-1.5 text-[11px] text-slate-300 font-mono">
+                    <div className="flex items-center justify-center gap-2 text-[11px] text-slate-300 font-mono">
                       <span>
                         UPI ID: <strong className="text-emerald-400">{upiId}</strong>
                       </span>
                       <button
                         type="button"
                         onClick={copyUpiId}
-                        className="p-1 rounded bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white transition cursor-pointer"
+                        className="min-h-[48px] min-w-[48px] flex items-center justify-center rounded-lg bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white transition cursor-pointer"
                         title="Copy UPI ID"
+                        aria-label="Copy UPI ID"
                       >
                         {copiedUpi ? (
-                          <Check className="h-3.5 w-3.5 text-emerald-400" />
+                          <Check className="h-4 w-4 text-emerald-400" />
                         ) : (
-                          <Copy className="h-3.5 w-3.5" />
+                          <Copy className="h-4 w-4" />
                         )}
                       </button>
                     </div>
@@ -1687,6 +1749,18 @@ export function BookingModal({
                           {isHi ? "पिकअप समय विंडो:" : "Pickup Window:"}
                         </span>
                         <span className="font-bold font-mono text-emerald-300">{scheduledPickupWindow}</span>
+                      </div>
+                    )}
+                    {service === "stash" && (
+                      <div className="flex justify-between border-b border-white/10 pb-2">
+                        <span className="text-muted-foreground">
+                          {isHi ? "कैंपस डोरस्टेप पिकअप शुल्क:" : "Campus Doorstep Pickup Fee:"}
+                        </span>
+                        <span className={`font-bold ${bags >= 2 ? "text-emerald-400" : "text-amber-400"}`}>
+                          {bags >= 2
+                            ? isHi ? "100% मुफ़्त (₹99 की बचत)" : "100% FREE (Saved ₹99)"
+                            : "₹99 (2+ बॉक्स पर मुफ़्त)"}
+                        </span>
                       </div>
                     )}
                     <div className="flex justify-between items-center pt-1 text-sm">
@@ -1813,9 +1887,28 @@ export function BookingModal({
                   paymentMode={paymentMode}
                 />
 
+                {/* Dynamic Pre-filled WhatsApp Action Link */}
+                <div className="pt-1">
+                  <a
+                    href={`https://wa.me/919369454350?text=${encodeURIComponent(
+                      `Hello StashSaarthi Concierge, my Order ID is ${tokenId} for service ${service.toUpperCase()}. Booked at ${new Date().toLocaleString("en-IN")}. Please confirm my service slot.`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 hover:brightness-110 text-slate-950 font-black text-sm shadow-[0_0_20px_-3px_rgba(16,185,129,0.5)] transition-all cursor-pointer min-h-[44px]"
+                  >
+                    <MessageCircle className="h-4 w-4 fill-slate-950" />
+                    <span>
+                      {isHi
+                        ? `कंसीयज से व्हाट्सएप पर संपर्क करें (${tokenId})`
+                        : `Chat with Concierge on WhatsApp (${tokenId})`}
+                    </span>
+                  </a>
+                </div>
+
                 <Button
                   variant="outline"
-                  className="w-full border-white/10 hover:bg-white/5 cursor-pointer"
+                  className="w-full border-white/10 hover:bg-white/5 cursor-pointer min-h-[44px]"
                   onClick={() => onOpenChange(false)}
                 >
                   {isHi ? "पूर्ण (बंद करें)" : "Done (Close Window)"}

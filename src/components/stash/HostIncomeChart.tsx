@@ -226,43 +226,67 @@ export function HostIncomeChart({
         </div>
 
         {/* View Controls */}
-        <div className="flex items-center gap-1 bg-white/5 p-1 rounded-xl border border-white/10 self-start sm:self-auto">
-          <button
+        <div className="flex items-center gap-1 bg-white/5 p-1 rounded-xl border border-white/10 self-start sm:self-auto relative">
+          <motion.button
             type="button"
+            whileTap={{ scale: 0.96 }}
             onClick={() => setActiveView("growth")}
-            className={`flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-[11px] font-semibold transition-all cursor-pointer ${
+            className={`relative flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-[11px] font-semibold transition-colors cursor-pointer z-10 ${
               activeView === "growth"
-                ? "bg-amber-500/20 text-amber-300 border border-amber-500/30 shadow-sm"
+                ? "text-amber-300 font-bold"
                 : "text-muted-foreground hover:text-white"
             }`}
           >
+            {activeView === "growth" && (
+              <motion.span
+                layoutId="activeHostChartView"
+                transition={{ type: "spring", stiffness: 450, damping: 32 }}
+                className="absolute inset-0 rounded-lg bg-amber-500/20 border border-amber-500/40 shadow-sm -z-10"
+              />
+            )}
             <TrendingUp className="h-3.5 w-3.5" />
             <span>{isHi ? "12-माह वृद्धि" : "12-Mo Growth"}</span>
-          </button>
-          <button
+          </motion.button>
+          <motion.button
             type="button"
+            whileTap={{ scale: 0.96 }}
             onClick={() => setActiveView("breakdown")}
-            className={`flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-[11px] font-semibold transition-all cursor-pointer ${
+            className={`relative flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-[11px] font-semibold transition-colors cursor-pointer z-10 ${
               activeView === "breakdown"
-                ? "bg-amber-500/20 text-amber-300 border border-amber-500/30 shadow-sm"
+                ? "text-amber-300 font-bold"
                 : "text-muted-foreground hover:text-white"
             }`}
           >
+            {activeView === "breakdown" && (
+              <motion.span
+                layoutId="activeHostChartView"
+                transition={{ type: "spring", stiffness: 450, damping: 32 }}
+                className="absolute inset-0 rounded-lg bg-amber-500/20 border border-amber-500/40 shadow-sm -z-10"
+              />
+            )}
             <PieChart className="h-3.5 w-3.5" />
             <span>{isHi ? "आय विभाजन" : "Revenue Split"}</span>
-          </button>
-          <button
+          </motion.button>
+          <motion.button
             type="button"
+            whileTap={{ scale: 0.96 }}
             onClick={() => setActiveView("payouts")}
-            className={`flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-[11px] font-semibold transition-all cursor-pointer ${
+            className={`relative flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-[11px] font-semibold transition-colors cursor-pointer z-10 ${
               activeView === "payouts"
-                ? "bg-amber-500/20 text-amber-300 border border-amber-500/30 shadow-sm"
+                ? "text-amber-300 font-bold"
                 : "text-muted-foreground hover:text-white"
             }`}
           >
+            {activeView === "payouts" && (
+              <motion.span
+                layoutId="activeHostChartView"
+                transition={{ type: "spring", stiffness: 450, damping: 32 }}
+                className="absolute inset-0 rounded-lg bg-amber-500/20 border border-amber-500/40 shadow-sm -z-10"
+              />
+            )}
             <Calendar className="h-3.5 w-3.5" />
             <span>{isHi ? "साप्ताहिक भुगतान" : "Weekly Payouts"}</span>
-          </button>
+          </motion.button>
         </div>
       </div>
 

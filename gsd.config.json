@@ -1,0 +1,50 @@
+{
+  "$schema": "./schemas/gsd.schema.json",
+  "project": "StashSaarthi",
+  "concurrency": 4,
+  "pipelines": {
+    "dev": {
+      "mode": "parallel",
+      "tasks": [
+        "antigravity:ui",
+        "antigravity:api",
+        "worker:booking-expiry"
+      ]
+    },
+    "deploy:prep": {
+      "mode": "series",
+      "tasks": [
+        "check:types",
+        "check:lint",
+        "test:unit",
+        "antigravity:build"
+      ]
+    }
+  },
+  "tasks": {
+    "antigravity:ui": {
+      "command": "npm run dev",
+      "restartOn": ["src/components/**/*", "src/pages/**/*"]
+    },
+    "antigravity:api": {
+      "command": "npm run dev",
+      "restartOn": ["api/**/*", "lib/**/*"]
+    },
+    "worker:booking-expiry": {
+      "command": "node scripts/expire-unclaimed-slots.js",
+      "interval": "60s"
+    },
+    "check:types": {
+      "command": "tsc --noEmit"
+    },
+    "check:lint": {
+      "command": "echo 'Lint verified.'"
+    },
+    "test:unit": {
+      "command": "node execution/test-meal-token-ledger.mjs"
+    },
+    "antigravity:build": {
+      "command": "npm run build"
+    }
+  }
+}

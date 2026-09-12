@@ -15,6 +15,7 @@ import {
   MapPin,
   Phone,
   ShieldCheck,
+  ShieldAlert,
   MessageSquare,
   Building,
   UserCheck,
@@ -35,6 +36,8 @@ import type { BookingRecord } from "@/lib/localSubmissions";
 import { OfflineQrCode } from "@/components/ui/OfflineQrCode";
 import { downloadInvoicePdf } from "@/lib/pdfInvoiceEngine";
 import { BookingLiveStatusBadge } from "./BookingLiveStatusBadge";
+import { motion, AnimatePresence } from "motion/react";
+import { playConfirm, playMicroClick } from "@/lib/audio";
 
 const FOUNDER_WHATSAPP = "919369454350";
 
@@ -77,7 +80,7 @@ export function BookingDetailDrawer({ booking, open, onClose }: BookingDetailDra
   const [showFullQr, setShowFullQr] = useState(false);
   const [downloadingPdf, setDownloadingPdf] = useState(false);
 
-  if (!open || !booking) return null;
+  if (!booking) return null;
 
   const handleDownloadPdf = async () => {
     setDownloadingPdf(true);
@@ -119,6 +122,7 @@ export function BookingDetailDrawer({ booking, open, onClose }: BookingDetailDra
   const handleCopyToken = () => {
     navigator.clipboard.writeText(booking.token);
     setCopiedToken(true);
+    playConfirm();
     toast.success(isHi ? "बुकिंग आईडी कॉपी की गई!" : "Booking ID copied to clipboard!");
     setTimeout(() => setCopiedToken(false), 2000);
   };
@@ -162,15 +166,27 @@ export function BookingDetailDrawer({ booking, open, onClose }: BookingDetailDra
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-hidden">
-      {/* Backdrop */}
-      <div
-        className="fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity"
-        onClick={onClose}
-      />
+    <AnimatePresence>
+      {open && (
+        <div className="fixed inset-0 z-50 overflow-hidden pointer-events-auto">
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-0 bg-black/75 backdrop-blur-md"
+            onClick={onClose}
+          />
 
-      <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
-        <div className="w-screen max-w-md bg-[#0D1117] border-l border-white/10 shadow-2xl text-white flex flex-col justify-between overflow-y-auto scrollbar-thin scrollbar-thumb-white/10">
+          <div className="fixed inset-y-0 right-0 max-w-full flex pl-10 pointer-events-none">
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 32, stiffness: 350 }}
+              className="w-screen max-w-md bg-[#0D1117] border-l border-white/10 shadow-2xl text-white flex flex-col justify-between overflow-y-auto scrollbar-thin scrollbar-thumb-white/10 pointer-events-auto"
+            >
           
           {/* Header */}
           <div className="p-6 border-b border-white/10 bg-black/40 relative">
@@ -499,15 +515,36 @@ export function BookingDetailDrawer({ booking, open, onClose }: BookingDetailDra
             </div>
 
             <Button
+              variant="outline"
+              onClick={() => {
+                window.dispatchEvent(
+                  new CustomEvent("stashsaarthi:open-damage-claims", {
+                    detail: { bookingId: booking.token },
+                  })
+                );
+                toast.info(
+                  isHi
+                    ? "अनबॉक्सिंग विजुअल डिफ़ क्लेम विंडो खोली जा रही है..."
+                    : "Opening visual diff damage claims window..."
+                );
+              }}
+              className="w-full border-red-500/30 bg-red-500/10 hover:bg-red-500/20 text-red-300 text-xs py-3.5 font-bold flex items-center justify-center gap-2"
+            >
+              <ShieldAlert className="h-4 w-4 text-red-400" />
+              <span>{isHi ? "अनबॉक्सिंग क्षति दावा प्रस्तुत करें (₹10k कवर)" : "File Unboxing Damage Claim (₹10k Cover)"}</span>
+            </Button>
+
+            <Button
               onClick={onClose}
               className="w-full bg-white/10 hover:bg-white/20 text-white text-xs py-4 font-semibold"
             >
               {isHi ? "बंद करें" : "Close Drawer"}
             </Button>
           </div>
-
+            </motion.div>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Fullscreen Offline QR Pass Modal */}
       {showFullQr && (
@@ -519,7 +556,13 @@ export function BookingDetailDrawer({ booking, open, onClose }: BookingDetailDra
             <X className="h-6 w-6" />
           </button>
 
-          <div className="max-w-xs w-full bg-[#0D1117] border border-cyan-500/40 rounded-3xl p-6 space-y-4 shadow-2xl">
+          <motion.div
+            initial={{ scale: 0.92, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.92, opacity: 0 }}
+            transition={{ type: "spring", damping: 28, stiffness: 350 }}
+            className="max-w-xs w-full bg-[#0D1117] border border-cyan-500/40 rounded-3xl p-6 space-y-4 shadow-2xl"
+          >
             <div className="flex items-center justify-center gap-2 text-cyan-400 text-sm font-bold uppercase tracking-wider">
               <QrCode className="h-5 w-5" />
               <span>{isHi ? "ऑफ़लाइन कस्टडी पास" : "Offline Custody Pass"}</span>
@@ -549,10 +592,10 @@ export function BookingDetailDrawer({ booking, open, onClose }: BookingDetailDra
             >
               {isHi ? "वापस जाएं" : "Close QR Pass"}
             </Button>
-          </div>
+          </motion.div>
         </div>
       )}
-    </div>
+    </AnimatePresence>
   );
 }
 

@@ -174,18 +174,18 @@
 
 - [x] 126. [QA - Barcode Scan Stress Test]: Dim lighting aur crumpled tape par camera scanner (html5-qrcode) ka decode rate 95%+ verify karna.
 
-[ ] 127. [CRO - Free Pickup Threshold]: Cart value par dynamic nudge dikhana: "Add 1 more box to unlock 100% Free Campus Doorstep Pickup".
+- [x] 127. [CRO - Free Pickup Threshold]: Cart value par dynamic nudge dikhana: "Add 1 more box to unlock 100% Free Campus Doorstep Pickup".
 
-[ ] 128. [CSO - Damage Claims Workflow]: Drop-off ke waqt student ke unboxing photo aur initial intake photo ka automated visual diff upload system banana.
+- [x] 128. [CSO - Damage Claims Workflow]: Drop-off ke waqt student ke unboxing photo aur initial intake photo ka automated visual diff upload system banana.
 
-[ ] 129. [CTO - SMS Fallback Gateways]: Agar runner ke area me cellular data fail ho, toh backup encrypted SMS format se OTP confirm karne ka protocol banana.
+- [x] 129. [CTO - SMS Fallback Gateways]: Agar runner ke area me cellular data fail ho, toh backup encrypted SMS format se OTP confirm karne ka protocol banana.
 
-[ ] 130. [UX - Luggage Weight Estimator]: Interactive visual tool jisme student select kare ("2 Jeans + 5 Books + 1 Blanket") aur approximate weight / recommended box size calculate ho jaye.
+- [x] 130. [UX - Luggage Weight Estimator]: Interactive visual tool jisme student select kare ("2 Jeans + 5 Books + 1 Blanket") aur approximate weight / recommended box size calculate ho jaye.
 
-[ ] 131. [QA - Reverse Logistics Flow]: Student agar end-of-break par city wapas na aaye aur box kisi friend ko handover karwana chahe, toh secure proxy-handover verification test karna.
+- [x] 131. [QA - Reverse Logistics Flow]: Student agar end-of-break par city wapas na aaye aur box kisi friend ko handover karwana chahe, toh secure proxy-handover verification test karna.
 
 ## Sprint 14: Saarthi Kitchens — Meal Token Architecture (Tasks 132–141)
-[ ] 132. [CTO - Meal Token Ledger]: Kitchen subscription coupons ko cryptographic micro-tokens ke format me store karna jisse daily meal par 1 token burn ho sake.
+- [x] 132. [CTO - Meal Token Ledger]: Kitchen subscription coupons ko cryptographic micro-tokens ke format me store karna jisse daily meal par 1 token burn ho sake.
 
 [ ] 133. [UX - Today's Live Menu Card]: Har partner kitchen ke liye automated daily menu banner jo subah 9:00 AM par auto-refresh ho with verified thali photo.
 

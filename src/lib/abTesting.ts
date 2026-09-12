@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { logSupabaseError } from "./supabaseLogger";
+import { supabase } from "@/integrations/supabase/client";
 
 export type HeroCtaVariant = "mint" | "emerald" | "cyan";
 
@@ -69,41 +70,81 @@ export function useHeroCtaVariant() {
  */
 export function trackCtaClick(variant: HeroCtaVariant, role: string, service: string) {
   try {
-    // Log conversion telemetry
-    logSupabaseError({
-      table: "ab_test_conversions",
-      operation: "insert",
-      context: `A/B CTA Click: variant=${variant}, role=${role}, service=${service}`,
-      payload: {
-        variant,
-        role,
-        service,
-        timestamp: new Date().toISOString(),
-        user_agent: typeof navigator !== "undefined" ? navigator.userAgent : "unknown",
-      },
-    });
+    if (typeof window === "undefined") return;
+
+    // Buffer conversion locally for analytics session telemetry
+    const conversion = {
+      variant,
+      role,
+      service,
+      timestamp: new Date().toISOString(),
+      user_agent: navigator.userAgent || "unknown",
+    };
+
+    try {
+      const raw = localStorage.getItem("ss_ab_conversions") || "[]";
+      const list = JSON.parse(raw);
+      if (Array.isArray(list)) {
+        list.push(conversion);
+        if (list.length > 50) list.shift();
+        localStorage.setItem("ss_ab_conversions", JSON.stringify(list));
+      }
+    } catch {
+      // Ignore storage errors
+    }
   } catch {
     // Silent fallback
   }
 }
 
+// In-memory buffer for persona layout telemetry when session_heatmaps table is pending in Supabase
+const localHeatmapBuffer: Array<{
+  role: string;
+  moduleName: string;
+  scrollDepth: number;
+  timestamp: string;
+}> = [];
+
 /**
  * Log session recording & heatmap analytics metrics (e.g. Hotjar / Clarity integration)
  * for testing module ordering across Student and Host personas.
+ * Fails silently if session_heatmaps table or RLS policy is pending in Supabase.
  */
 export function trackPersonaLayoutRecording(role: string, moduleName: string, scrollDepth: number) {
   try {
-    logSupabaseError({
-      table: "session_heatmaps",
-      operation: "insert",
-      context: `Session Recording Telemetry: role=${role}, module=${moduleName}, depth=${scrollDepth}%`,
-      payload: {
-        role,
-        moduleName,
-        scrollDepth,
-        timestamp: new Date().toISOString(),
-      },
+    if (typeof window === "undefined") return;
+
+    // Buffer locally for analytics without triggering 404 network failure in DevTools
+    localHeatmapBuffer.push({
+      role,
+      moduleName,
+      scrollDepth,
+      timestamp: new Date().toISOString(),
     });
+    if (localHeatmapBuffer.length > 50) localHeatmapBuffer.shift();
+
+    // Only attempt remote Supabase insert if explicitly flagged as provisioned
+    const isTableActive = (window as any).__SS_HEATMAPS_ACTIVE__ === true;
+    if (!isTableActive) {
+      return;
+    }
+
+    // Fire-and-forget insert to session_heatmaps, failing silently if table or RLS policy is pending
+    void Promise.resolve(
+      (supabase.from as any)("session_heatmaps").insert({
+        role,
+        module_name: moduleName,
+        scroll_depth: scrollDepth,
+        timestamp: new Date().toISOString(),
+      })
+    )
+      .then(({ error }: any) => {
+        // Fail silently if table does not exist or RLS is pending (no unhandled console error)
+        if (error) return;
+      })
+      .catch(() => {
+        // Silent fallback
+      });
   } catch {
     // Silent fallback
   }

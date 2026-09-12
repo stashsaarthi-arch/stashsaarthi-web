@@ -1,0 +1,25 @@
+{
+  "projectId": "cb681ff4-a1c9-4217-9828-cee01f4e0850",
+  "type": "frontend",
+  "name": "Savings calculator updates estimated savings when selecting extended vacation duration",
+  "description": "When a user selects the 90 days extended vacation duration in the dead-rent savings calculator, the estimated savings and comparative bars recalculate dynamically with the 15% discount.",
+  "priority": "p1",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to the homepage"
+    },
+    {
+      "type": "action",
+      "description": "Scroll down to the dead-rent savings calculator section"
+    },
+    {
+      "type": "action",
+      "description": "Click the button to set 90 days vacation duration"
+    },
+    {
+      "type": "assertion",
+      "description": "Verify the estimated savings panel displays the active 15% extended break discount badge and the recalculated savings amount"
+    }
+  ]
+}

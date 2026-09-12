@@ -1,0 +1,25 @@
+{
+  "projectId": "cb681ff4-a1c9-4217-9828-cee01f4e0850",
+  "type": "frontend",
+  "name": "Persona toggle switches to Senior Host mode and displays host income propositions",
+  "description": "When a user scrolls and switches to Senior Host persona, the platform adapts to display senior host earning propositions and verified host security badges.",
+  "priority": "p1",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to the homepage"
+    },
+    {
+      "type": "action",
+      "description": "Scroll down past the hero section to reveal the floating persona toggle"
+    },
+    {
+      "type": "action",
+      "description": "Click the Senior Host button in the persona selector"
+    },
+    {
+      "type": "assertion",
+      "description": "Verify the page displays the Senior Host earning proposition and ₹10,000 safety cover guarantee"
+    }
+  ]
+}

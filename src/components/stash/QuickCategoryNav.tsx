@@ -187,47 +187,49 @@ export const QuickCategoryNav = memo(function QuickCategoryNav() {
     >
       {/* ── Consolidated Single-Row Category Bar ── */}
       <div className="glass flex flex-col gap-1.5 rounded-2xl border border-white/10 p-1.5 shadow-2xl backdrop-blur-2xl">
-        <div
-          role="tablist"
-          aria-label={isHi ? "श्रेणी लिंक" : "Category Navigation Links"}
-          className="flex items-center justify-between gap-1 overflow-x-auto no-scrollbar sm:gap-1.5"
-        >
-          {CATEGORIES.map((cat) => {
-            const Icon = cat.icon;
-            const isActive = active === cat.id;
-            return (
-              <button
-                key={cat.id}
-                role="tab"
-                aria-selected={isActive}
-                aria-controls={cat.id}
-                onClick={() => {
-                  setActive(cat.id);
-                  smoothScrollTo(cat.id)();
-                }}
-                className={`flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold whitespace-nowrap transition-all duration-200 cursor-pointer sm:px-3.5 sm:py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 ${
-                  isActive
-                    ? "border border-white/20 text-white shadow-lg"
-                    : "text-muted-foreground hover:bg-white/5 hover:text-white"
-                }`}
-                style={{
-                  background: isActive
-                    ? `color-mix(in oklab, ${accentColor} 22%, rgba(255,255,255,0.06))`
-                    : "transparent",
-                  borderColor: isActive
-                    ? `color-mix(in oklab, ${accentColor} 45%, transparent)`
-                    : "transparent",
-                }}
-              >
-                <Icon
-                  className="h-3.5 w-3.5 shrink-0"
-                  aria-hidden="true"
-                  style={{ color: isActive ? accentColor : "currentColor" }}
-                />
-                <span>{isHi ? cat.labelHi : cat.labelEn}</span>
-              </button>
-            );
-          })}
+        <div className="flex items-center justify-between gap-2 overflow-x-auto overscroll-x-contain touch-pan-x no-scrollbar sm:gap-2.5 py-1">
+          <div
+            role="tablist"
+            aria-label={isHi ? "श्रेणी लिंक" : "Category Navigation Links"}
+            className="flex items-center gap-2 sm:gap-2.5"
+          >
+            {CATEGORIES.map((cat) => {
+              const Icon = cat.icon;
+              const isActive = active === cat.id;
+              return (
+                <button
+                  key={cat.id}
+                  role="tab"
+                  aria-selected={isActive}
+                  aria-controls={cat.id}
+                  onClick={() => {
+                    setActive(cat.id);
+                    smoothScrollTo(cat.id)();
+                  }}
+                  className={`flex items-center gap-2 rounded-xl min-h-[48px] px-3.5 py-2.5 text-xs font-bold whitespace-nowrap transition-all duration-200 cursor-pointer sm:px-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 ${
+                    isActive
+                      ? "border border-white/20 text-white shadow-lg"
+                      : "text-muted-foreground hover:bg-white/5 hover:text-white"
+                  }`}
+                  style={{
+                    background: isActive
+                      ? `color-mix(in oklab, ${accentColor} 22%, rgba(255,255,255,0.06))`
+                      : "transparent",
+                    borderColor: isActive
+                      ? `color-mix(in oklab, ${accentColor} 45%, transparent)`
+                      : "transparent",
+                  }}
+                >
+                  <Icon
+                    className="h-4 w-4 shrink-0"
+                    aria-hidden="true"
+                    style={{ color: isActive ? accentColor : "currentColor" }}
+                  />
+                  <span>{isHi ? cat.labelHi : cat.labelEn}</span>
+                </button>
+              );
+            })}
+          </div>
 
           {/* Quick Search Toggle Button */}
           <button
@@ -235,23 +237,23 @@ export const QuickCategoryNav = memo(function QuickCategoryNav() {
             onClick={() => setShowSearch((v) => !v)}
             aria-expanded={showSearch}
             aria-label="Search website services"
-            className={`flex items-center gap-1 rounded-xl px-2.5 py-1.5 text-xs font-semibold whitespace-nowrap transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 ${
+            className={`flex items-center gap-1.5 rounded-xl min-h-[48px] min-w-[48px] px-3 py-2.5 text-xs font-semibold whitespace-nowrap transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 ${
               showSearch
                 ? "bg-white/15 text-white border border-white/20"
                 : "text-slate-400 hover:bg-white/5 hover:text-white border border-transparent"
             }`}
           >
-            <Search className="h-3.5 w-3.5" aria-hidden="true" />
+            <Search className="h-4 w-4" aria-hidden="true" />
             <span className="hidden md:inline">{isHi ? "खोजें" : "Quick Find"}</span>
           </button>
         </div>
 
         {/* ── Expandable Quick Search Input ── */}
         {showSearch && (
-          <div className="pt-1 px-1 flex flex-col gap-2">
+          <div className="pt-2 px-1 flex flex-col gap-2.5">
             <div className="flex items-center gap-2">
               <div className="relative flex-1">
-                <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-slate-400" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
                 <input
                   type="text"
                   value={searchQuery}
@@ -262,7 +264,7 @@ export const QuickCategoryNav = memo(function QuickCategoryNav() {
                       : "Type to jump: Micro-Storage, Rooms, Tiffin, Calculator, Safety, FAQ..."
                   }
                   aria-label={isHi ? "त्वरित नेविगेशन खोजें" : "Quick jump search"}
-                  className="w-full pl-8 pr-3 py-1.5 rounded-xl border border-white/15 bg-black/50 text-xs text-white placeholder:text-slate-400 focus:outline-none focus:border-emerald-500/50"
+                  className="w-full pl-9 pr-3 min-h-[48px] py-2.5 rounded-xl border border-white/15 bg-black/50 text-xs text-white placeholder:text-slate-400 focus:outline-none focus:border-emerald-500/50"
                   autoFocus
                 />
               </div>
@@ -270,7 +272,7 @@ export const QuickCategoryNav = memo(function QuickCategoryNav() {
                 <button
                   type="button"
                   onClick={() => setSearchQuery("")}
-                  className="text-xs text-slate-400 hover:text-white px-2 py-1 bg-white/5 rounded-lg"
+                  className="min-h-[48px] min-w-[48px] flex items-center justify-center text-xs text-slate-400 hover:text-white px-3 py-2 bg-white/5 rounded-xl cursor-pointer"
                 >
                   {isHi ? "हटाएं" : "Clear"}
                 </button>
@@ -279,16 +281,16 @@ export const QuickCategoryNav = memo(function QuickCategoryNav() {
 
             {/* Quick search result suggestions */}
             {filteredChips.length > 0 && (
-              <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1">
+              <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
                 {filteredChips.map((chip) => {
                   const Icon = chip.icon;
                   return (
                     <button
                       key={chip.id}
                       onClick={() => handleSearchResultClick(chip.target)}
-                      className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 text-white text-xs font-medium whitespace-nowrap cursor-pointer"
+                      className="inline-flex items-center gap-2 min-h-[48px] px-3.5 py-2.5 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-white text-xs font-medium whitespace-nowrap cursor-pointer"
                     >
-                      <Icon className="h-3 w-3 text-emerald-400 shrink-0" />
+                      <Icon className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
                       <span>{isHi ? chip.labelHi : chip.labelEn}</span>
                       <span className="text-xs text-emerald-300 font-mono font-semibold">
                         ({isHi ? chip.badgeHi : chip.badgeEn})

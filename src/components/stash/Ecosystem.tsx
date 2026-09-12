@@ -79,10 +79,10 @@ export function Ecosystem({ onBook }: { onBook: OpenBooking }) {
               delay={Math.min(i * 0.05, 0.3)}
             >
               <Tilt3D max={3} lift={6} className="rounded-2xl h-full">
-                <div className="glass h-full flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-black/40">
-                  <div className="flex items-center gap-3 p-4 sm:p-5 border-b border-white/10">
+                <div className="glass h-full flex flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.025] hover:border-white/[0.15] shadow-2xl transition-all">
+                  <div className="flex items-center gap-3 p-4 sm:p-5 border-b border-white/[0.08]">
                     <span
-                      className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-white/10"
+                      className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-white/[0.08]"
                       style={{ background: `color-mix(in oklab, ${n.accent} 18%, transparent)` }}
                     >
                       <Icon className="h-5 w-5" style={{ color: n.accent }} />
@@ -106,7 +106,7 @@ export function Ecosystem({ onBook }: { onBook: OpenBooking }) {
                       {textData.subtitle}
                     </p>
                     <div
-                      className="mt-3 rounded-xl border border-white/10 p-3 text-xs"
+                      className="mt-3 rounded-xl border border-white/[0.08] p-3 text-xs"
                       style={{
                         background: `color-mix(in oklab, ${n.accent} 10%, transparent)`,
                       }}
@@ -127,11 +127,11 @@ export function Ecosystem({ onBook }: { onBook: OpenBooking }) {
 
                     <Button
                       onClick={() => onBook({ service: n.id as any, note: textData.title })}
-                      className="mt-4 w-full rounded-xl py-4 font-bold shadow-lg transition-all active:scale-95 text-xs sm:text-sm cursor-pointer"
+                      className="mt-4 w-full rounded-xl py-4 font-bold shadow-md transition-all active:scale-[0.98] text-xs sm:text-sm cursor-pointer"
                       style={{
                         backgroundColor: n.accent,
                         color: "black",
-                        boxShadow: `0 4px 14px 0 color-mix(in oklab, ${n.accent} 40%, transparent)`,
+                        boxShadow: `0 4px 14px 0 color-mix(in oklab, ${n.accent} 25%, transparent)`,
                       }}
                     >
                       {isHi ? `${textData.title} बुक करें` : `Book ${textData.title}`}

@@ -55,5 +55,5 @@ Every single sprint MUST append a new structured entry into `ai_workforce/AGENT_
      - 🧪 **QA**: Cross-viewport testing (<400px, 768px, 1440px), font scaling, touch interactions.
      - 🔒 **CSO**: Laser seal custody verification, legal compliance (TPA 105), ₹10k safety cover.
    - Append 3 to 5 new concrete, high-impact tasks to the bottom of `docs/tasks/PRD.md` and `docs/tasks/tasks.md`.
-4. Output the completion token: `SPRINT_CYCLE_COMPLETE`
+4. Output the completion token `ALL_SPRINT_TASKS_FINISHED` ONLY when all tasks in `docs/tasks/PRD.md` are marked `- [x]`. If pending tasks remain, proceed without outputting the completion token.
 

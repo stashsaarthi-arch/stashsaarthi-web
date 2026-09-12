@@ -264,7 +264,7 @@ export function LiveChangelogBadge({ className = "" }: { className?: string }) {
           <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
         </span>
         <span className="font-mono text-xs font-semibold text-emerald-300">
-          {isHi ? "सक्रिय विकास • v1.0 लाइव" : "Active Development • v1.0 Live"}
+          {isHi ? "कानपुर कॉरिडोर शुरुआत • v1.0 लाइव" : "Kanpur Corridor Genesis • v1.0 Live"}
         </span>
         <span className="text-xs text-muted-foreground transition-transform group-hover:translate-x-0.5">
           →

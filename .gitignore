@@ -38,3 +38,9 @@ dist-ssr
 
 .vercel
 .env*
+
+# Gemini Web2API local files
+gemini_web2api.py
+gemini_web2api/
+cookie.txt
+config.json

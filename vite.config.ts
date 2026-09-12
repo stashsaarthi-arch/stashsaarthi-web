@@ -41,9 +41,6 @@ export default defineConfig({
               if (id.includes("lenis")) {
                 return "vendor-lenis";
               }
-              if (id.includes("mathjs")) {
-                return "vendor-mathjs";
-              }
               if (id.includes("sonner")) {
                 return "vendor-sonner";
               }

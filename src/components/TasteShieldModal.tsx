@@ -600,6 +600,10 @@ export const TasteShieldModal: React.FC<TasteShieldModalProps> = ({
                       <img
                         src={photoPreview}
                         alt="Meal evidence proof"
+                        loading="lazy"
+                        decoding="async"
+                        width={64}
+                        height={64}
                         className="w-16 h-16 object-cover rounded-lg border border-slate-800 shrink-0"
                       />
                       <div className="min-w-0 flex-1">

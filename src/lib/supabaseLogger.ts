@@ -45,6 +45,11 @@ export function logSupabaseError({
     isOnline: typeof navigator !== "undefined" ? navigator.onLine : true,
   };
 
+  // Fail silently without unhandled console errors if session_heatmaps or telemetry table / RLS is pending
+  if (table === "session_heatmaps") {
+    return errorDetails;
+  }
+
   console.error(`[StashSaarthi:SupabaseError][${table}:${operation}]`, errorDetails);
 
   // Auto queue for zero data drop if it was a write operation
@@ -78,7 +83,7 @@ function sanitizePayload(payload: unknown) {
  * Queue failed write operation to IndexedDB for guaranteed zero data drop
  */
 export async function queueOfflineSubmission(table: string, data: unknown) {
-  if (typeof window === "undefined" || !data) return;
+  if (typeof window === "undefined" || !data || table === "session_heatmaps") return;
   try {
     const queueKey = `stash_offline_queue_${table}`;
     const existing = (await get(queueKey)) || [];

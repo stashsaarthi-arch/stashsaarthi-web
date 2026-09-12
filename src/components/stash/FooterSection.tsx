@@ -450,12 +450,12 @@ export const FooterSection = memo(function FooterSection() {
               type="submit"
               variant={userType === "host" ? "warm" : "hero"}
               size="default"
-              className="mt-3 w-full h-9 text-xs font-bold"
+              className="mt-3 w-full min-h-[48px] h-12 text-xs font-bold cursor-pointer"
               disabled={submitting}
             >
               {submitting ? (
                 <span className="flex items-center gap-2">
-                  <Loader2 className="h-3.5 w-3.5 animate-spin" />{" "}
+                  <Loader2 className="h-4 w-4 animate-spin" />{" "}
                   {isHi ? "सहेज रहा है…" : "Submitting…"}
                 </span>
               ) : (
@@ -466,7 +466,7 @@ export const FooterSection = memo(function FooterSection() {
             {/* Google Sign-in Alternative */}
             {!user && (
               <div className="mt-2.5">
-                <div className="relative my-1.5">
+                <div className="relative my-2">
                   <div className="absolute inset-0 flex items-center">
                     <span className="w-full border-t border-white/10" />
                   </div>
@@ -479,7 +479,7 @@ export const FooterSection = memo(function FooterSection() {
                 <button
                   type="button"
                   onClick={() => handleGoogleWaitlist()}
-                  className="flex h-8.5 w-full items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 text-xs font-semibold text-foreground transition hover:bg-white/10 active:scale-[0.98] cursor-pointer"
+                  className="flex min-h-[48px] h-12 w-full items-center justify-center gap-2.5 rounded-xl border border-white/10 bg-white/5 text-xs font-semibold text-foreground transition hover:bg-white/10 active:scale-[0.98] cursor-pointer"
                 >
                   <GoogleGlyph />
                   <span>{isHi ? "गूगल से तुरंत जुड़ें" : "Quick join with Google"}</span>
@@ -522,15 +522,15 @@ export const FooterSection = memo(function FooterSection() {
               ? "भारत का हाइपर-लोकल लिविंग इकोसिस्टम — छात्र गतिशीलता को अंतर-पीढ़ी सामुदायिक समर्थन से जोड़ता है।"
               : "India's hyper-local living ecosystem — bridging student mobility with intergenerational community support."}
           </p>
-          <div className="mt-3.5 flex gap-1.5">
+          <div className="mt-4 flex flex-wrap gap-2.5">
             <a
               href="https://www.instagram.com/stashsaarthi"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Follow StashSaarthi on Instagram"
-              className="w-8.5 h-8.5 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-pink-500 hover:border-pink-500/40 hover:bg-pink-500/10 transition-all duration-300 group cursor-pointer"
+              className="min-h-[48px] min-w-[48px] h-12 w-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-pink-500 hover:border-pink-500/40 hover:bg-pink-500/10 transition-all duration-300 group cursor-pointer"
             >
-              <Instagram className="w-4 h-4 group-hover:scale-110 transition-transform" />
+              <Instagram className="w-5 h-5 group-hover:scale-110 transition-transform" />
             </a>
 
             <a
@@ -538,9 +538,9 @@ export const FooterSection = memo(function FooterSection() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Chat with StashSaarthi on WhatsApp"
-              className="w-8.5 h-8.5 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-emerald-400 hover:border-emerald-500/40 hover:bg-emerald-500/10 transition-all duration-300 group cursor-pointer"
+              className="min-h-[48px] min-w-[48px] h-12 w-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-emerald-400 hover:border-emerald-500/40 hover:bg-emerald-500/10 transition-all duration-300 group cursor-pointer"
             >
-              <MessageCircle className="w-4 h-4 group-hover:scale-110 transition-transform" />
+              <MessageCircle className="w-5 h-5 group-hover:scale-110 transition-transform" />
             </a>
 
             <a
@@ -548,9 +548,9 @@ export const FooterSection = memo(function FooterSection() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Connect with Founder Advik Omer on LinkedIn"
-              className="w-8.5 h-8.5 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-blue-400 hover:border-blue-500/40 hover:bg-blue-500/10 transition-all duration-300 group cursor-pointer"
+              className="min-h-[48px] min-w-[48px] h-12 w-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-blue-400 hover:border-blue-500/40 hover:bg-blue-500/10 transition-all duration-300 group cursor-pointer"
             >
-              <Linkedin className="w-4 h-4 group-hover:scale-110 transition-transform" />
+              <Linkedin className="w-5 h-5 group-hover:scale-110 transition-transform" />
             </a>
 
             {SOCIALS.filter((s) => s.label !== "Instagram" && s.label !== "LinkedIn").map(
@@ -571,50 +571,50 @@ export const FooterSection = memo(function FooterSection() {
                       },
                     )
                   }
-                  className="w-8.5 h-8.5 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-slate-700 hover:bg-white/5 transition-all duration-300 group cursor-pointer"
+                  className="min-h-[48px] min-w-[48px] h-12 w-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-slate-700 hover:bg-slate-800 transition-all duration-300 group cursor-pointer"
                 >
-                  <Icon className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                  <Icon className="w-5 h-5 group-hover:scale-110 transition-transform" />
                 </button>
               ),
             )}
           </div>
 
-          <div className="mt-3">
+          <div className="mt-3.5">
             <a
               href={`https://wa.me/${FOUNDER_WHATSAPP}?text=${encodeURIComponent(isHi ? "नमस्ते StashSaarthi टीम" : "Hi StashSaarthi Team")}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-400 hover:text-emerald-300 transition-colors"
+              className="min-h-[44px] inline-flex items-center gap-2 text-xs font-semibold text-emerald-400 hover:text-emerald-300 transition-colors py-2"
             >
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
               {isHi
                 ? `फाउंडर लाइन: ${FOUNDER_PHONE_DISPLAY}`
                 : `Founder Line: ${FOUNDER_PHONE_DISPLAY}`}
             </a>
           </div>
 
-          <div className="mt-4 flex flex-wrap gap-1.5">
+          <div className="mt-4 flex flex-wrap gap-2.5">
             <button
               type="button"
               onClick={() => setShowInvestorModal(true)}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-white/10 bg-black/40 px-2.5 py-1.5 text-xs font-semibold text-muted-foreground transition-colors hover:border-amber-500/40 hover:text-amber-400 cursor-pointer active:scale-95"
+              className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-black/40 min-h-[48px] px-3.5 py-2.5 text-xs font-semibold text-muted-foreground transition-colors hover:border-amber-500/40 hover:text-amber-400 cursor-pointer active:scale-95"
             >
-              <Download className="h-3 w-3" /> {t.footer.investorCTA}
+              <Download className="h-4 w-4" /> {t.footer.investorCTA}
             </button>
 
             <button
               type="button"
               onClick={() => setShowCaptainModal(true)}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-cyan-500/30 bg-cyan-500/10 px-2.5 py-1.5 text-xs font-semibold text-cyan-300 transition-colors hover:border-cyan-500/50 hover:bg-cyan-500/20 cursor-pointer active:scale-95"
+              className="inline-flex items-center gap-2 rounded-xl border border-cyan-500/30 bg-cyan-500/10 min-h-[48px] px-3.5 py-2.5 text-xs font-semibold text-cyan-300 transition-colors hover:border-cyan-500/50 hover:bg-cyan-500/20 cursor-pointer active:scale-95"
             >
-              <Award className="h-3 w-3" /> {isHi ? "कैंपस कैप्टन (₹5k+)" : "Campus Captain (₹5k+)"}
+              <Award className="h-4 w-4" /> {isHi ? "कैंपस कैप्टन (₹5k+)" : "Campus Captain (₹5k+)"}
             </button>
 
             <Link
               to="/kakadeo-survival-guide"
-              className="inline-flex items-center gap-1.5 rounded-lg border border-emerald-500/40 bg-emerald-500/10 px-2.5 py-1.5 text-xs font-semibold text-emerald-300 transition-colors hover:border-emerald-500/60 hover:bg-emerald-500/20 cursor-pointer active:scale-95"
+              className="inline-flex items-center gap-2 rounded-xl border border-emerald-500/40 bg-emerald-500/10 min-h-[48px] px-3.5 py-2.5 text-xs font-semibold text-emerald-300 transition-colors hover:border-emerald-500/60 hover:bg-emerald-500/20 cursor-pointer active:scale-95"
             >
-              <BookOpen className="h-3 w-3" /> {isHi ? "काकादेव गाइड (PDF)" : "Kakadeo Guide (PDF)"}
+              <BookOpen className="h-4 w-4" /> {isHi ? "काकादेव गाइड (PDF)" : "Kakadeo Guide (PDF)"}
             </Link>
 
             <a
@@ -642,7 +642,7 @@ export const FooterSection = memo(function FooterSection() {
                 <a
                   href={`#${l.target}`}
                   onClick={smoothScrollTo(l.target)}
-                  className="min-h-[28px] inline-flex items-center text-muted-foreground transition hover:text-cyan py-0.5"
+                  className="min-h-[44px] inline-flex items-center text-muted-foreground transition hover:text-cyan py-1.5"
                 >
                   {l.label}
                 </a>
@@ -651,7 +651,7 @@ export const FooterSection = memo(function FooterSection() {
             <li>
               <Link
                 to="/kanpur-student-council"
-                className="min-h-[28px] inline-flex items-center text-cyan-400 hover:text-cyan-300 transition-colors py-0.5 font-semibold"
+                className="min-h-[44px] inline-flex items-center text-cyan-400 hover:text-cyan-300 transition-colors py-1.5 font-semibold"
               >
                 {isHi ? "🏛️ कानपुर छात्र परिषद" : "🏛️ Kanpur Student Council"}
               </Link>
@@ -660,7 +660,7 @@ export const FooterSection = memo(function FooterSection() {
               <a
                 href="#rooms"
                 onClick={smoothScrollTo("rooms")}
-                className="min-h-[28px] inline-flex items-center text-muted-foreground transition hover:text-cyan py-0.5"
+                className="min-h-[44px] inline-flex items-center text-muted-foreground transition hover:text-cyan py-1.5"
               >
                 {isHi ? "सत्यापित कमरे" : "Verified Rooms"}
               </a>
@@ -668,7 +668,7 @@ export const FooterSection = memo(function FooterSection() {
             <li>
               <Link
                 to="/tiffin-services-near-motion"
-                className="min-h-[28px] inline-flex items-center text-emerald-400 hover:text-emerald-300 transition-colors py-0.5 font-medium"
+                className="min-h-[44px] inline-flex items-center text-emerald-400 hover:text-emerald-300 transition-colors py-1.5 font-medium"
               >
                 {isHi ? "मोशन कोचिंग टिफिन (काकादेव)" : "Tiffin near Motion Coaching"}
               </Link>
@@ -676,7 +676,7 @@ export const FooterSection = memo(function FooterSection() {
             <li>
               <Link
                 to="/tiffin-services-near-physics-wallah"
-                className="min-h-[28px] inline-flex items-center text-emerald-400 hover:text-emerald-300 transition-colors py-0.5 font-medium"
+                className="min-h-[44px] inline-flex items-center text-emerald-400 hover:text-emerald-300 transition-colors py-1.5 font-medium"
               >
                 {isHi ? "PW फिजिक्स वाला टिफिन (काकादेव)" : "Tiffin near Physics Wallah"}
               </Link>
@@ -684,7 +684,7 @@ export const FooterSection = memo(function FooterSection() {
             <li>
               <Link
                 to="/tiffin-services-near-allen"
-                className="min-h-[28px] inline-flex items-center text-emerald-400 hover:text-emerald-300 transition-colors py-0.5 font-medium"
+                className="min-h-[44px] inline-flex items-center text-emerald-400 hover:text-emerald-300 transition-colors py-1.5 font-medium"
               >
                 {isHi ? "एलन कोचिंग टिफिन (काकादेव)" : "Tiffin near Allen Coaching"}
               </Link>
@@ -743,11 +743,11 @@ export const FooterSection = memo(function FooterSection() {
           </div>
           <button
             onClick={() => smoothScrollTo("top")(undefined as any)}
-            className="flex items-center gap-1.5 font-semibold hover:text-emerald-400 transition-colors cursor-pointer"
+            className="min-h-[48px] px-3 py-2 flex items-center gap-2 font-semibold hover:text-emerald-400 transition-colors cursor-pointer rounded-lg"
             aria-label="Scroll to top"
           >
             <span>{isHi ? "शीर्ष पर जाएँ" : "Back to top"}</span>
-            <ArrowUp className="h-3.5 w-3.5" />
+            <ArrowUp className="h-4 w-4" />
           </button>
         </div>
       </div>
@@ -778,7 +778,7 @@ function DocCol({
             <button
               type="button"
               onClick={() => onOpen(l.doc)}
-              className="text-left text-sm text-muted-foreground transition hover:text-cyan cursor-pointer min-h-[28px] inline-flex items-center py-0.5"
+              className="text-left text-sm text-muted-foreground transition hover:text-cyan cursor-pointer min-h-[44px] inline-flex items-center py-1.5"
             >
               {l.label}
             </button>

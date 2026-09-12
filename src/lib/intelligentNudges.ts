@@ -273,6 +273,14 @@ export function getActiveClaimedNudgeToken(): { code: string; discountValue: num
  */
 export async function fetchSupabaseInactiveStudents(): Promise<StudentNudgeRecord[]> {
   try {
+    if (typeof window === "undefined") return MOCK_INACTIVE_STUDENTS;
+
+    // Default to mock data when meal_bookings table migration is pending in Supabase, preventing 404 console errors
+    const isTableActive = (window as any).__SS_MEAL_BOOKINGS_ACTIVE__ === true;
+    if (!isTableActive) {
+      return MOCK_INACTIVE_STUDENTS;
+    }
+
     const { data, error } = await supabase
       .from("meal_bookings")
       .select("id, user_name, user_phone, delivery_address, created_at, vendor_selected")

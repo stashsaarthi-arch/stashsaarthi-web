@@ -1,0 +1,33 @@
+{
+  "projectId": "cb681ff4-a1c9-4217-9828-cee01f4e0850",
+  "type": "frontend",
+  "name": "Solutions hub tabs switch between student services and render corresponding cards",
+  "description": "When a student clicks each solution tab (Spaces, Kitchen, Connect, Stash) in the Solutions Hub, the tab panel activates and renders the corresponding service offerings with pricing badges.",
+  "priority": "p1",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to the homepage"
+    },
+    {
+      "type": "action",
+      "description": "Click the Saarthi Spaces solution tab in the Solutions Hub"
+    },
+    {
+      "type": "action",
+      "description": "Click the Saarthi Kitchen solution tab in the Solutions Hub"
+    },
+    {
+      "type": "action",
+      "description": "Click the Saarthi Connect solution tab in the Solutions Hub"
+    },
+    {
+      "type": "action",
+      "description": "Click the Saarthi Stash solution tab in the Solutions Hub"
+    },
+    {
+      "type": "assertion",
+      "description": "Verify the Saarthi Stash panel displays micro-storage offerings with ₹300 pricing cards laid out correctly"
+    }
+  ]
+}

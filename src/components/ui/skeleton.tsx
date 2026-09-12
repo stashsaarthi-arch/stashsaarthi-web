@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 function Skeleton({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn("animate-pulse rounded-md bg-white/10 dark:bg-slate-800/80", className)}
+      className={cn("shimmer-skeleton rounded-lg bg-white/[0.04] dark:bg-white/[0.04]", className)}
       {...props}
     />
   );
@@ -14,7 +14,7 @@ function CardSkeleton({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "glass rounded-2xl p-5 border border-white/10 space-y-4 animate-pulse bg-slate-900/60",
+        "rounded-2xl p-5 border border-white/[0.06] space-y-4 bg-[#0D1216]/80 backdrop-blur-xl",
         className
       )}
     >
@@ -26,7 +26,7 @@ function CardSkeleton({ className }: { className?: string }) {
         </div>
         <Skeleton className="h-4 w-4/5 rounded-md" />
       </div>
-      <div className="space-y-2 pt-2 border-t border-white/5">
+      <div className="space-y-2 pt-2 border-t border-white/[0.04]">
         <Skeleton className="h-3 w-full rounded-md" />
         <Skeleton className="h-3 w-5/6 rounded-md" />
       </div>
@@ -40,7 +40,7 @@ function CardSkeleton({ className }: { className?: string }) {
 
 function RoomCardSkeleton() {
   return (
-    <div className="glass rounded-2xl overflow-hidden border border-white/10 animate-pulse bg-slate-900/60 flex flex-col h-full">
+    <div className="rounded-2xl overflow-hidden border border-white/[0.06] bg-[#0D1216]/80 backdrop-blur-xl flex flex-col h-full">
       <Skeleton className="h-48 w-full rounded-none" />
       <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
         <div className="space-y-3">
@@ -51,13 +51,13 @@ function RoomCardSkeleton() {
           <Skeleton className="h-4 w-4/5 rounded-md" />
           <Skeleton className="h-3 w-3/4 rounded-md" />
         </div>
-        <div className="p-3 rounded-xl bg-white/5 border border-white/5 space-y-2">
+        <div className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.04] space-y-2">
           <Skeleton className="h-3 w-full rounded-md" />
           <Skeleton className="h-3 w-4/5 rounded-md" />
         </div>
         <div className="flex items-center gap-2 pt-2">
           <Skeleton className="h-10 flex-1 rounded-xl" />
-          <Skeleton className="h-10 h-10 w-10 shrink-0 rounded-xl" />
+          <Skeleton className="h-10 w-10 shrink-0 rounded-xl" />
         </div>
       </div>
     </div>
@@ -66,7 +66,7 @@ function RoomCardSkeleton() {
 
 function ReviewCardSkeleton() {
   return (
-    <div className="glass rounded-2xl p-5 border border-white/10 animate-pulse bg-slate-900/60 space-y-3">
+    <div className="rounded-2xl p-5 border border-white/[0.06] bg-[#0D1216]/80 backdrop-blur-xl space-y-3">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <Skeleton className="h-10 w-10 rounded-full shrink-0" />
@@ -88,7 +88,7 @@ function ReviewCardSkeleton() {
 
 function MealCardSkeleton() {
   return (
-    <div className="glass rounded-2xl p-5 border border-white/10 animate-pulse bg-slate-900/60 space-y-4">
+    <div className="rounded-2xl p-5 border border-white/[0.06] bg-[#0D1216]/80 backdrop-blur-xl space-y-4">
       <div className="flex gap-4 items-center">
         <Skeleton className="h-20 w-20 rounded-xl shrink-0" />
         <div className="space-y-2 flex-1">
@@ -100,7 +100,7 @@ function MealCardSkeleton() {
           <Skeleton className="h-3 w-3/4 rounded-md" />
         </div>
       </div>
-      <div className="flex justify-between items-center pt-2 border-t border-white/5">
+      <div className="flex justify-between items-center pt-2 border-t border-white/[0.04]">
         <Skeleton className="h-4 w-28 rounded-md" />
         <Skeleton className="h-9 w-24 rounded-xl" />
       </div>
@@ -110,7 +110,7 @@ function MealCardSkeleton() {
 
 function NodeSkeleton() {
   return (
-    <div className="glass rounded-xl p-3.5 border border-white/10 animate-pulse bg-slate-900/60 flex items-center justify-between gap-3">
+    <div className="rounded-xl p-3.5 border border-white/[0.06] bg-[#0D1216]/80 backdrop-blur-xl flex items-center justify-between gap-3">
       <div className="flex items-center gap-3">
         <Skeleton className="h-9 w-9 rounded-lg shrink-0" />
         <div className="space-y-1.5">
@@ -125,7 +125,7 @@ function NodeSkeleton() {
 
 function TableRowSkeleton({ columns = 5 }: { columns?: number }) {
   return (
-    <tr className="animate-pulse border-b border-white/5">
+    <tr className="border-b border-white/[0.04]">
       {Array.from({ length: columns }).map((_, i) => (
         <td key={i} className="px-6 py-4">
           <Skeleton

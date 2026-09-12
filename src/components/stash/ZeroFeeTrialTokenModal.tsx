@@ -312,10 +312,10 @@ export function StashWalletBadge({ onClick }: { onClick: () => void }) {
         <Wallet className="w-3.5 h-3.5" />
       </div>
       <div className="flex flex-col text-left leading-none">
-        <span className="text-[10px] text-slate-400 font-mono uppercase">
+        <span className="text-[10px] text-slate-300 dark:text-slate-400 font-mono uppercase font-semibold">
           {isHi ? "स्टैश वॉलेट" : "Stash Wallet"}
         </span>
-        <span className="text-xs font-bold text-emerald-400 font-mono">
+        <span className="text-xs font-extrabold text-emerald-300 dark:text-emerald-400 font-mono tracking-wide">
           {hasToken ? `₹${wallet.balance} Trial` : "Claim ₹60 Free"}
         </span>
       </div>

@@ -575,29 +575,6 @@
   - **StashPass Digital Custody & Tamper Seal Integration**:
     • Enhanced `StashPass.tsx` (`StashPassProps`) with `items` array support.
     • Rendered official itemized storage inventory breakdown on the StashPass digital pass with individual barcode tags and custom labels.
-    • Formatted structured inquiry payload (`serviceMeta`) on checkout with full itemization details for local nodal concierges.
-  - Type-check & build verified: `npx tsc --noEmit` (**0 errors**) and `npm run build` compiled cleanly with **0 errors** across client and server environments.
-
-- [x] **[UI - Motion] Task 64: Implement a Micro-Interaction where the Peacock Feather "dusts off" the matki of butter when a student selects the Standard Thali** (2026-09-06)
-  - **Peacock Feather & Matki Desi Makhan Dusting Micro-Interaction**:
-    • Created `PeacockFeatherMatkiDusting` component (`src/components/stash/PeacockFeatherMatkiDusting.tsx`) featuring custom SVG matki pot with white butter mound and animated peacock feather (Mor-Pankh) sweep animation.
-    • Integrated Web Audio API haptic sound effect (`playPop()`), animated sparkle particles (`✨`, `🧈`, `💛`), and counter tracking (`Fresh Makhan #N`).
-    • Provided both full visual stage variant and compact inline pill variant (`🪶 Fresh Makhan Dusted`).
-  - **Integrated into TokenMealHub**:
-    • Auto-triggers Mor-Pankh dusting animation whenever the user selects the Standard Thali (`selectedMeal.id === "standard"`).
-    • Rendered compact trigger button directly on the Standard Thali tier card and full stage banner within the meal selection view (`src/components/TokenMealHub.tsx`).
-  - Type-check & build verified: `npx tsc --noEmit` (**0 errors**) and `npm run build` compiled cleanly with **0 errors** across client and server environments.
-
-- [x] **[UX - Local Navigation] Task 65: Implement "Find My Stash" directions that open natively in Google Maps or Apple Maps** (2026-09-06)
-  - **Hyperlocal Campus Navigation & Back-Alley Entrance Engine** (`src/lib/stashNavigation.ts`):
-    • Structured Kanpur ground nodes (Kakadeo PW Vidyapeeth Hub, IIT Kanpur Nankari Gate 1, CSJMU Kalyanpur Gate 2, HBTI Nawabganj West Campus) with exact coordinates, main road landmarks, and step-by-step back-alley entrance instructions.
-    • Built native walking route URL generators for Google Maps (`/maps/dir/?api=1&destination=lat,lng&travelmode=walking`) and Apple Maps (`/maps/?daddr=lat,lng&dirflg=w`) with OS auto-detection (`isAppleDevice()`).
-    • Formatted pre-crafted WhatsApp direction sharing links for instant student-to-host or roommate sharing.
-  - **Interactive "Find My Stash" Directions Modal** (`src/components/stash/FindMyStashModal.tsx`):
-    • Built responsive dialog featuring node selector pills, campus proximity badges, step-by-step walking checkpoint cards, and high-contrast back-alley route alert ("⚠️ Kakadeo Narrow Lane Notice: Google Maps stops at Chhapeda Pulia main road. Take Gali #3 behind Sharma Tea Stall...").
-    • Integrated 1-tap "Open in Google Maps Walking", "Open in Apple Maps", "Copy Address", "Share via WhatsApp", and "Call Host" action triggers.
-  - **Integrated into Campus Radar & Search List** (`src/components/stash/CampusNodeChecker.tsx`):
-    • Added "📍 Find Directions / दिशाएं" button on every verified node card and live campus radar inspector box.
     • Mounted `FindMyStashModal` state initialized with selected node ID.
   - Type-check & build verified: `npx tsc --noEmit` (**0 errors**) and `npm run build` compiled cleanly with **0 errors** across client and server environments.
 
@@ -1183,13 +1160,64 @@
     - Built 100-sample automated stress benchmark suite (`runBarcodeScanStressTest`) evaluating decode performance across 4 lighting & surface profiles: Normal Daylight, Dim Hostel Hallway (<30 lx), Crumpled Tamper Tape, and Dim + Crumpled Extreme.
   - **Interactive Operator UI Modal (`src/components/stash/BarcodeScanStressModal.tsx` & `src/routes/admin.tsx`)**:
     - Designed 3-tab modal featuring 100-sample test suite runner with real-time pass rate metrics, live scanner preprocessing simulator with adjustable stress profiles, and QA Decode Charter specs.
-    - Added "Barcode Stress Test" launcher button to the operator dashboard header toolbar in `src/routes/admin.tsx`.
-  - **Automated Verification Script (`execution/test-barcode-scan-stress.mjs`)**:
-    - Created standalone verification script testing signal preprocessing, single barcode decode simulation, and running the 100-sample benchmark suite.
-    - Verified decode rate achieved 100% (exceeding the >= 95.0% SLA requirement).
+- [x] **[CSO] Task 128: Automated Visual Diff & Damage Claims System** (2026-09-12)
+  - **Visual Variance Calculation Engine (`src/lib/damageClaimsEngine.ts`)**:
+    - Created automated visual variance computation engine (`computeVisualDiff`) evaluating pixel contrast variance between intake (host pickup) and unboxing (student drop-off) photos.
+    - Computes `diffScore` (0-100%), `similarityScore`, `damageSeverity` (`NONE`, `MINOR`, `MODERATE`, `SEVERE`), and `suggestedPayout` (up to ₹10,000 max insurance cover).
+    - Features local claim management helpers (`getDamageClaims`, `submitDamageClaim`, `updateClaimStatus`, `getDamageClaimStats`).
+  - **Interactive Operator & Student Modal (`src/components/stash/DamageClaimsModal.tsx` & `src/routes/admin.tsx`)**:
+    - Built 3-tab modal console featuring (1) Unboxing Claim Submission with live preset demo photos and real-time visual variance analysis, (2) Claims Registry & Diff Inspector with side-by-side photo comparison and payout approval controls, and (3) CSO ₹10k Micro-Insurance Charter.
+    - Integrated `<DamageClaimsModal>` in `src/routes/admin.tsx` header toolbar and root render.
+  - **Student Booking Drawer Integration (`src/components/stash/BookingDetailDrawer.tsx`)**:
+    - Added "File Unboxing Damage Claim (₹10k Cover)" trigger button inside `BookingDetailDrawer.tsx` that dispatches custom `stashsaarthi:open-damage-claims` event.
+  - **Automated Verification Suite (`execution/test-damage-claims-workflow.mjs`)**:
+    - Created unit & integration test runner validating engine functions, visual diff calculations, modal components, and event triggers.
+- [x] **[CTO] Task 129: Encrypted SMS Fallback Gateway for Offline Runner OTP Verification** (2026-09-12)
+  - **Cryptographic Payload Engine (`src/lib/smsFallbackGatewayEngine.ts`)**:
+    - Engineered HMAC-SHA256 salted hash signature generator (`generateEncryptedSmsOtpPayload`) for runner OTP validation in 2G/No-Data campus zones (e.g. Kakadeo basements, IITK hostels).
+    - Built string parser & verifier (`parseAndVerifySmsOtpPayload`) with pipe-delimited formatting (`STASH-SMS-OTP|...`), 30-minute timestamp replay prevention, and signature match validation.
+    - Integrated native `smsto:+919369454350` URI generator for single-tap SMS client dispatch without internet access.
+    - Created local storage telemetry logger (`ss_sms_fallback_logs`) tracking offline verification status.
+  - **Runner & Admin Modal Console (`src/components/stash/SmsFallbackGatewayModal.tsx` & `src/routes/admin.tsx`)**:
+    - Built 3-tab modal featuring (1) Runner SMS Generator with instant `smsto:` action and offline QR pass, (2) Gateway Verifier for operators to test incoming SMS strings, and (3) Telemetry & CTO Security Charter.
+    - Integrated SMS Gateway trigger button into `src/routes/admin.tsx` toolbar and linked event listener `stashsaarthi:open-sms-fallback`.
+    - Integrated SMS Fallback toggle & tab in `DeliveryFleetScannerModal.tsx` for campus runners.
+  - **Build & Verification**:
+    - Compiled cleanly with `npm run build` (**0 errors**).
 
-
-
+- [x] **[UX] Task 130: Luggage Weight & Recommended Box Size Estimator** (2026-09-12)
+  - **Weight Matrix & Box Recommendation Engine (`src/lib/luggageWeightEstimatorEngine.ts`)**:
+    - Created luggage item database across 4 categories (Clothing, Books & Tech, Kitchen, Misc) with precise weight metrics in kg.
+    - Implemented estimation algorithm (`calculateLuggageEstimate`) computing total luggage weight (kg), item count, capacity utilization %, recommended box type (`STANDARD` 15kg / `JUMBO` 25kg / `MULTI_BOX`), monthly storage price (₹300/mo base), and dead-rent savings (~₹6,200/mo).
+    - Included pre-configured student presets (`Short Break`, `Full Summer Break`, `Entire PG Room Exit`).
+  - **Interactive Visual Estimator Modal (`src/components/stash/LuggageWeightEstimatorModal.tsx` & `src/components/stash/Calculator.tsx`)**:
+    - Built responsive modal featuring interactive item counter controls (+/-), category tabs, real-time visual progress weight meter gauge, recommended box recommendation card, and 1-tap booking transition.
+    - Integrated `<LuggageWeightEstimatorModal>` trigger in `Calculator.tsx` ("Weight Estimator" button) and `admin.tsx` toolbar.
+  - **Automated Verification Suite (`execution/test-luggage-weight-estimator.mjs`)**:
+    - Built integration test verifying engine math, preset items, modal UI bindings, and calculator integration.
+- [x] **[UX & System] Task 133: Tier-1 Tactile Product Experience Overhaul (Micro-Interactions, Synthetic Sound Architecture, Emil Kowalski Fluid Dynamics & Instant Perception Engine)** (2026-09-12)
+  - **Tactile Synthetic Audio Engine (`src/lib/audio.ts` & `src/components/ui/SoundToggle.tsx`)**:
+    - Engineered zero-asset Web Audio API micro-haptics synthesizer generating custom oscillator wave curves (~10ms–120ms):
+      • `playMicroClick`: Ultra-short 10ms high-precision micro-click (1200Hz → 350Hz exponential ramp) for counters, toggles, and item interactions.
+      • `playTab`: 12ms physical detent tick (950Hz → 280Hz) for segment switching.
+      • `playToggle`: 20ms dual-pitch frequency shift (750Hz → 520Hz) for option selection.
+      • `playConfirm`: 120ms warm dual harmonic sine chime (C5/E5 → G5/C6) for bookings and order locks.
+    - Added user opt-in/opt-out persistence via `localStorage` (`ss_audio_feedback`) and safe `AudioContext` resumption on first user gesture to prevent browser autoplay blocking.
+    - Created `<SoundToggle>` component with desktop/mobile compact modes, integrated into `Navbar.tsx` beside Theme and LowData toggles.
+  - **Emil Kowalski Fluid Dynamics & Spatial Consistency**:
+    - `src/components/stash/SolutionsHub.tsx`: Upgraded navigation tabs with `motion.button` spring sliding indicator (`layoutId="activeSolutionsHubTab"`, stiffness 450, damping 32) and `<AnimatePresence mode="wait">` spatial crossfade (`duration: 0.22s, ease: [0.16, 1, 0.3, 1]`).
+    - `src/components/stash/BookingDetailDrawer.tsx`: Wrapped drawer panel in spring transition (`initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }} transition={{ type: "spring", damping: 32, stiffness: 350 }}`) with blurred backdrop fade and spring-eased scale for offline QR pass.
+    - `src/components/stash/MobileStickyCTA.tsx`: Re-engineered floating mobile bottom bar into a cushioned floating pill (`bottom-3 left-3 right-3 pb-[env(safe-area-inset-bottom)]`) with deep elevation shadow and `backdrop-blur-2xl`.
+  - **Taste, Typographic Excellence & Shimmer Skeletons**:
+    - `src/styles.css`: Added pure GPU-composited `@utility shimmer-skeleton` with linear-gradient pseudo-element sweep animation (`animation: shimmer 2s infinite ease-in-out`).
+    - `src/components/ui/skeleton.tsx`: Replaced jarring `animate-pulse bg-white/10` across `Skeleton`, `CardSkeleton`, `RoomCardSkeleton`, `ReviewCardSkeleton`, `MealCardSkeleton`, and `NodeSkeleton` with `shimmer-skeleton`, subtle 1px border gradient (`border-white/[0.06]`), and obsidian depth.
+  - **Instant Perception Engine (Zero-Lag UI & Optimistic Balance)**:
+    - `src/components/TokenMealHub.tsx`: Implemented optimistic balance deduction in `handleConfirmBooking` and `handleQuickReorderSubmit` with instant rollback on network error, eliminating perceived network delay.
+    - `src/components/stash/Calculator.tsx`: Connected synthetic micro-clicks and toggles to sliders, zone selectors, and booking actions with 60fps memoized math updates.
+  - **Build & Verification**:
+    - `npx tsc --noEmit`: ✅ **0 errors**.
+    - `npm run build`: ✅ **0 errors** (Vite production bundle compiled cleanly in 1.93s).
+    - Unit tests (`execution/test-luggage-weight-estimator.mjs`, `execution/test-meal-token-ledger.mjs`): ✅ **All tests passed**.
 
 
 

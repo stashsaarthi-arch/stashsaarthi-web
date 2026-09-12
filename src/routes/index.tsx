@@ -9,17 +9,17 @@ import type { BookingPrefill } from "@/components/stash/types";
 import { Navbar } from "@/components/stash/Navbar";
 import { Hero } from "@/components/stash/Hero";
 import { QuickCategoryNav } from "@/components/stash/QuickCategoryNav";
-import { RoleLane } from "@/components/stash/RoleLane";
-import { CalculatorHub } from "@/components/stash/CalculatorHub";
 import { SolutionsHub } from "@/components/stash/SolutionsHub";
 
-// ─── Small utilities (eagerly loaded — negligible size) ──────────────────────
 import { ScrollProgress } from "@/components/stash/ScrollProgress";
 import { FloatingPersonaToggle } from "@/components/stash/FloatingPersonaToggle";
 import { MobileStickyCTA } from "@/components/stash/MobileStickyCTA";
 import { WhatsAppButton } from "@/components/stash/WhatsAppButton";
+import { ServiceQuickJumpPill } from "@/components/stash/ServiceQuickJumpPill";
 
 // ─── Below-the-fold heavy components (lazy-loaded for bundle optimization) ───
+const RoleLane = lazy(() => import("@/components/stash/RoleLane").then((m) => ({ default: m.RoleLane })));
+const CalculatorHub = lazy(() => import("@/components/stash/CalculatorHub").then((m) => ({ default: m.CalculatorHub })));
 const DualCrisis = lazy(() => import("@/components/stash/DualCrisis").then((m) => ({ default: m.DualCrisis })));
 const PgComparisonTable = lazy(() => import("@/components/stash/PgComparisonTable").then((m) => ({ default: m.PgComparisonTable })));
 const StashTimeline = lazy(() => import("@/components/stash/StashTimeline").then((m) => ({ default: m.StashTimeline })));
@@ -130,6 +130,9 @@ function Index() {
         />
       </ErrorBoundary>
 
+      {/* Floating in-page quick jump sub-nav pill */}
+      <ServiceQuickJumpPill />
+
       <ErrorBoundary sectionName="Hero Section">
         <Hero role={role} onBook={open} onRefer={handleRefer} />
       </ErrorBoundary>
@@ -140,12 +143,16 @@ function Index() {
       </ErrorBoundary>
 
       <ErrorBoundary sectionName="Role Switcher">
-        <RoleLane role={role} onBook={open} />
+        <Suspense fallback={null}>
+          <RoleLane role={role} onBook={open} />
+        </Suspense>
       </ErrorBoundary>
 
       {/* High-Converting Savings Calculator Module placed high up for optimal scroll-depth conversion */}
       <ErrorBoundary sectionName="Calculator Hub">
-        <CalculatorHub onBook={open} />
+        <Suspense fallback={null}>
+          <CalculatorHub onBook={open} />
+        </Suspense>
       </ErrorBoundary>
 
       {/* Core Solutions Hub (Stash / Rooms / Kitchen / Connect) */}
@@ -155,96 +162,98 @@ function Index() {
 
 
       {/* Why StashSaarthi vs. Traditional PGs Comparison Table */}
-      <ErrorBoundary sectionName="Why StashSaarthi vs Traditional PGs">
-        <Suspense fallback={null}>
-          <PgComparisonTable onBook={open} />
-        </Suspense>
-      </ErrorBoundary>
+      <div className="content-visibility-auto">
+        <ErrorBoundary sectionName="Why StashSaarthi vs Traditional PGs">
+          <Suspense fallback={null}>
+            <PgComparisonTable onBook={open} />
+          </Suspense>
+        </ErrorBoundary>
 
-      <ErrorBoundary sectionName="Dual Crisis Overview">
-        <Suspense fallback={null}>
-          <DualCrisis />
-        </Suspense>
-      </ErrorBoundary>
+        <ErrorBoundary sectionName="Dual Crisis Overview">
+          <Suspense fallback={null}>
+            <DualCrisis />
+          </Suspense>
+        </ErrorBoundary>
 
-      {/* Interactive Timeline of a Stash (Pickup -> Custody -> Return) */}
-      <ErrorBoundary sectionName="Timeline of a Stash">
-        <Suspense fallback={null}>
-          <StashTimeline onBook={open} />
-        </Suspense>
-      </ErrorBoundary>
+        {/* Interactive Timeline of a Stash (Pickup -> Custody -> Return) */}
+        <ErrorBoundary sectionName="Timeline of a Stash">
+          <Suspense fallback={null}>
+            <StashTimeline onBook={open} />
+          </Suspense>
+        </ErrorBoundary>
 
-      {/* 3. 100% Radical Transparency & Custody Console Hub */}
-      <ErrorBoundary sectionName="Trust & Custody Console">
-        <Suspense fallback={null}>
-          <TrustConsoleHub />
-        </Suspense>
-      </ErrorBoundary>
+        {/* 3. 100% Radical Transparency & Custody Console Hub */}
+        <ErrorBoundary sectionName="Trust & Custody Console">
+          <Suspense fallback={null}>
+            <TrustConsoleHub />
+          </Suspense>
+        </ErrorBoundary>
 
-      {/* Dedicated Student & Host Success Stories Carousel */}
-      <ErrorBoundary sectionName="Student Success Stories">
-        <Suspense fallback={null}>
-          <StudentStoriesCarousel onBook={open} />
-        </Suspense>
-      </ErrorBoundary>
+        {/* Dedicated Student & Host Success Stories Carousel */}
+        <ErrorBoundary sectionName="Student Success Stories">
+          <Suspense fallback={null}>
+            <StudentStoriesCarousel onBook={open} />
+          </Suspense>
+        </ErrorBoundary>
 
-      {/* Interactive Referral Leaderboard */}
-      <ErrorBoundary sectionName="Referral Leaderboard">
-        <Suspense fallback={null}>
-          <ReferralLeaderboard onRefer={handleRefer} />
-        </Suspense>
-      </ErrorBoundary>
+        {/* Interactive Referral Leaderboard */}
+        <ErrorBoundary sectionName="Referral Leaderboard">
+          <Suspense fallback={null}>
+            <ReferralLeaderboard onRefer={handleRefer} />
+          </Suspense>
+        </ErrorBoundary>
 
-      {/* Top 3 Rated Kitchens of the Week Widget */}
-      <ErrorBoundary sectionName="Top Rated Kitchens">
-        <Suspense fallback={null}>
-          <TopRatedKitchensWidget
-            onOrderMeal={(kId) =>
-              open({
-                service: "kitchen",
-                note: `Selected Top Rated Kitchen of the Week: ${kId}`,
-              })
-            }
-          />
-        </Suspense>
-      </ErrorBoundary>
+        {/* Top 3 Rated Kitchens of the Week Widget */}
+        <ErrorBoundary sectionName="Top Rated Kitchens">
+          <Suspense fallback={null}>
+            <TopRatedKitchensWidget
+              onOrderMeal={(kId) =>
+                open({
+                  service: "kitchen",
+                  note: `Selected Top Rated Kitchen of the Week: ${kId}`,
+                })
+              }
+            />
+          </Suspense>
+        </ErrorBoundary>
 
-      {/* Official Kanpur Student Council Section */}
-      <ErrorBoundary sectionName="Kanpur Student Council">
-        <Suspense fallback={null}>
-          <KanpurStudentCouncil />
-        </Suspense>
-      </ErrorBoundary>
+        {/* Official Kanpur Student Council Section */}
+        <ErrorBoundary sectionName="Kanpur Student Council">
+          <Suspense fallback={null}>
+            <KanpurStudentCouncil />
+          </Suspense>
+        </ErrorBoundary>
 
-      {/* Host Specific Dashboard Norms */}
-      {role === "host" && (
-        <>
-          <ErrorBoundary sectionName="Host House Rules">
-            <Suspense fallback={null}>
-              <HostRules />
-            </Suspense>
-          </ErrorBoundary>
-          <ErrorBoundary sectionName="Family Dashboard">
-            <Suspense fallback={null}>
-              <FamilyDashboard />
-            </Suspense>
-          </ErrorBoundary>
-        </>
-      )}
+        {/* Host Specific Dashboard Norms */}
+        {role === "host" && (
+          <>
+            <ErrorBoundary sectionName="Host House Rules">
+              <Suspense fallback={null}>
+                <HostRules />
+              </Suspense>
+            </ErrorBoundary>
+            <ErrorBoundary sectionName="Family Dashboard">
+              <Suspense fallback={null}>
+                <FamilyDashboard />
+              </Suspense>
+            </ErrorBoundary>
+          </>
+        )}
 
-      {/* 4. Community Reviews & Improvement Suggestions Hub */}
-      <ErrorBoundary sectionName="Community Feedback & Suggestions">
-        <Suspense fallback={null}>
-          <FeedbackSuggestions />
-        </Suspense>
-      </ErrorBoundary>
+        {/* 4. Community Reviews & Improvement Suggestions Hub */}
+        <ErrorBoundary sectionName="Community Feedback & Suggestions">
+          <Suspense fallback={null}>
+            <FeedbackSuggestions />
+          </Suspense>
+        </ErrorBoundary>
 
-      {/* 5. FAQ */}
-      <ErrorBoundary sectionName="FAQ Section">
-        <Suspense fallback={null}>
-          <FAQ />
-        </Suspense>
-      </ErrorBoundary>
+        {/* 5. FAQ */}
+        <ErrorBoundary sectionName="FAQ Section">
+          <Suspense fallback={null}>
+            <FAQ />
+          </Suspense>
+        </ErrorBoundary>
+      </div>
 
       {/* Footer */}
       <ErrorBoundary sectionName="Footer">

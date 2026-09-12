@@ -352,20 +352,24 @@ export const StudentStoriesCarousel = memo(function StudentStoriesCarousel({
             </motion.div>
           </AnimatePresence>
 
-          {/* Navigation Arrows */}
+          {/* Navigation Arrows & Accessible Hit Targets */}
           <div className="mt-4 flex items-center justify-between">
             <div className="flex items-center gap-1">
               {filteredStories.map((_, idx) => (
                 <button
                   key={idx}
                   onClick={() => setCurrentIndex(idx)}
-                  className={`h-2 rounded-full transition-all ${
-                    currentIndex === idx
-                      ? "w-6 bg-emerald-400"
-                      : "w-2 bg-white/20 hover:bg-white/40"
-                  }`}
+                  className="flex h-12 min-w-[28px] sm:min-w-[32px] items-center justify-center p-1 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 rounded-full"
                   aria-label={`Go to slide ${idx + 1}`}
-                />
+                >
+                  <span
+                    className={`block h-2 rounded-full transition-all ${
+                      currentIndex === idx
+                        ? "w-6 bg-emerald-400"
+                        : "w-2 bg-white/20 hover:bg-white/40"
+                    }`}
+                  />
+                </button>
               ))}
             </div>
 
@@ -374,19 +378,19 @@ export const StudentStoriesCarousel = memo(function StudentStoriesCarousel({
                 variant="ghost"
                 size="icon"
                 onClick={prevSlide}
-                className="h-8 w-8 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 text-white"
+                className="h-12 w-12 min-h-[48px] min-w-[48px] rounded-full border border-white/10 bg-white/5 hover:bg-white/10 text-white cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-400"
                 aria-label="Previous story"
               >
                 <ChevronLeft className="h-4 w-4" />
               </Button>
-              <span className="text-xs font-mono text-slate-400">
+              <span className="text-xs font-mono text-slate-400 px-1">
                 {currentIndex + 1} / {filteredStories.length}
               </span>
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={nextSlide}
-                className="h-8 w-8 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 text-white"
+                className="h-12 w-12 min-h-[48px] min-w-[48px] rounded-full border border-white/10 bg-white/5 hover:bg-white/10 text-white cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-400"
                 aria-label="Next story"
               >
                 <ChevronRight className="h-4 w-4" />

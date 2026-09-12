@@ -8,6 +8,8 @@ import { Connect } from "./Connect";
 import { useLanguage } from "@/context/LanguageContext";
 import { usePersona } from "@/context/PersonaContext";
 import { trackPersonaLayoutRecording } from "@/lib/abTesting";
+import { motion, AnimatePresence } from "motion/react";
+import { playTab } from "@/lib/audio";
 import type { OpenBooking } from "./types";
 
 interface SolutionsHubProps {
@@ -122,6 +124,11 @@ export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: S
       const detail = (e as CustomEvent).detail;
       if (["stash", "rooms", "kitchen", "connect"].includes(detail)) {
         setActiveTab(detail as "stash" | "rooms" | "kitchen" | "connect");
+        const el = document.getElementById("solutions");
+        if (el) {
+          const y = el.getBoundingClientRect().top + window.scrollY - 90;
+          window.scrollTo({ top: y, behavior: "smooth" });
+        }
       }
     };
     window.addEventListener("stashsaarthi-solution-tab", handleTabChange);
@@ -254,7 +261,7 @@ export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: S
       <div className="mx-auto max-w-3xl text-center">
         <Badge
           variant="outline"
-          className="border-white/15 bg-white/5 text-xs text-muted-foreground"
+          className="border-white/[0.08] bg-white/[0.03] text-xs text-muted-foreground tracking-[0.02em]"
         >
           {isHi ? "एकीकृत समाधान हब" : "Integrated Solutions Hub"}
         </Badge>
@@ -281,25 +288,30 @@ export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: S
         <div
           role="tablist"
           aria-label={isHi ? "समाधान सेवा टैब" : "StashSaarthi Solutions Tabs"}
-          className="glass grid w-full max-w-4xl grid-cols-2 gap-1 rounded-xl border border-white/10 p-1 sm:grid-cols-4 sm:gap-1.5"
+          className="glass grid w-full max-w-4xl grid-cols-2 gap-1 rounded-2xl border border-white/[0.08] p-1.5 sm:grid-cols-4 sm:gap-2 shadow-2xl"
         >
           {tabs.map((tab, idx) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
             return (
-              <button
+              <motion.button
                 key={tab.id}
                 id={`solutions-tab-${tab.id}`}
                 role="tab"
                 aria-selected={isActive}
                 aria-controls={`solutions-panel-${tab.id}`}
                 tabIndex={isActive ? 0 : -1}
-                onClick={() => setActiveTab(tab.id)}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => {
+                  playTab();
+                  setActiveTab(tab.id);
+                }}
                 onKeyDown={(e) => {
                   if (e.key === "ArrowRight") {
                     e.preventDefault();
                     const nextTab = tabs[(idx + 1) % tabs.length];
                     if (nextTab) {
+                      playTab();
                       setActiveTab(nextTab.id);
                       document.getElementById(`solutions-tab-${nextTab.id}`)?.focus();
                     }
@@ -307,29 +319,33 @@ export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: S
                     e.preventDefault();
                     const prevTab = tabs[(idx - 1 + tabs.length) % tabs.length];
                     if (prevTab) {
+                      playTab();
                       setActiveTab(prevTab.id);
                       document.getElementById(`solutions-tab-${prevTab.id}`)?.focus();
                     }
                   }
                 }}
-                className={`flex flex-col items-center justify-center rounded-lg p-1.5 text-center transition-all duration-200 cursor-pointer sm:p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 ${
+                className={`relative flex flex-col items-center justify-center rounded-xl p-2 text-center transition-all duration-200 cursor-pointer sm:p-2.5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400/80 focus-visible:ring-offset-1 focus-visible:ring-offset-[#0A0D0F] z-10 ${
                   isActive
-                    ? "border border-white/20 text-white shadow-xl"
-                    : "text-muted-foreground hover:bg-white/5 hover:text-white"
+                    ? "text-white font-bold shadow-xs"
+                    : "text-muted-foreground hover:bg-white/[0.04] hover:text-white"
                 }`}
-                style={{
-                  background: isActive
-                    ? isStudent
-                      ? "color-mix(in oklab, var(--emerald) 18%, rgba(255,255,255,0.05))"
-                      : "color-mix(in oklab, var(--amber) 18%, rgba(255,255,255,0.05))"
-                    : "transparent",
-                  borderColor: isActive
-                    ? isStudent
-                      ? "color-mix(in oklab, var(--emerald) 40%, transparent)"
-                      : "color-mix(in oklab, var(--amber) 40%, transparent)"
-                    : "transparent",
-                }}
               >
+                {isActive && (
+                  <motion.div
+                    layoutId="activeSolutionsHubTab"
+                    transition={{ type: "spring", stiffness: 450, damping: 32 }}
+                    className="absolute inset-0 rounded-xl shadow-md -z-10"
+                    style={{
+                      background: isStudent
+                        ? "color-mix(in oklab, var(--emerald) 20%, rgba(255,255,255,0.05))"
+                        : "color-mix(in oklab, var(--amber) 20%, rgba(255,255,255,0.05))",
+                      border: isStudent
+                        ? "1px solid color-mix(in oklab, var(--emerald) 40%, transparent)"
+                        : "1px solid color-mix(in oklab, var(--amber) 40%, transparent)",
+                    }}
+                  />
+                )}
                 <div className="flex items-center gap-1.5">
                   <Icon
                     className="h-3.5 w-3.5 shrink-0"
@@ -358,25 +374,32 @@ export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: S
                 >
                   {isHi ? tab.badgeHi : tab.badgeEn}
                 </span>
-              </button>
+              </motion.button>
             );
           })}
         </div>
       </div>
 
-      {/* Active Tab Panel Content */}
-      <div
-        role="tabpanel"
-        id={`solutions-panel-${activeTab}`}
-        aria-labelledby={`solutions-tab-${activeTab}`}
-        tabIndex={0}
-        className="mt-2.5 transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/20 rounded-xl"
-      >
-        {activeTab === "stash" && <Ecosystem onBook={onBook} />}
-        {activeTab === "rooms" && <Rooms onList={onListRoom} onBook={onBook} />}
-        {activeTab === "kitchen" && <TokenMealHub />}
-        {activeTab === "connect" && <Connect onBook={onBook} />}
-      </div>
+      {/* Active Tab Panel Content with Spatial Continuity Transition */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeTab}
+          role="tabpanel"
+          id={`solutions-panel-${activeTab}`}
+          aria-labelledby={`solutions-tab-${activeTab}`}
+          tabIndex={0}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-2.5 transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/20 rounded-xl"
+        >
+          {activeTab === "stash" && <Ecosystem onBook={onBook} />}
+          {activeTab === "rooms" && <Rooms onList={onListRoom} onBook={onBook} />}
+          {activeTab === "kitchen" && <TokenMealHub />}
+          {activeTab === "connect" && <Connect onBook={onBook} />}
+        </motion.div>
+      </AnimatePresence>
     </section>
   );
 });

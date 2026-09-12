@@ -5,7 +5,8 @@ import type { OpenBooking } from "./types";
 import { useLanguage } from "@/context/LanguageContext";
 import { PackingChecklistModal } from "./PackingChecklistModal";
 import { LuggageItemizerModal } from "./LuggageItemizerModal";
-import { Package, FileText, Printer, ShieldCheck, ArrowRight, MapPin, Luggage } from "lucide-react";
+import { LuggageWeightEstimatorModal } from "./LuggageWeightEstimatorModal";
+import { Package, FileText, Printer, ShieldCheck, ArrowRight, MapPin, Luggage, Weight } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,6 +15,8 @@ import {
   getZoneTierBadge,
 } from "@/lib/locationPricing";
 import { calculateExtendedBreakDiscount } from "@/lib/extendedBreakUpsell";
+import { FreePickupNudgeBanner } from "./FreePickupNudgeBanner";
+import { playMicroClick, playConfirm, playToggle } from "@/lib/audio";
 
 export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
   const { language, t } = useLanguage();
@@ -27,6 +30,7 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
   const [showPackingModal, setShowPackingModal] = useState(false);
   const [showCertificateModal, setShowCertificateModal] = useState(false);
   const [showItemizerModal, setShowItemizerModal] = useState(false);
+  const [showEstimatorModal, setShowEstimatorModal] = useState(false);
 
   const safeBags = Math.max(1, bags || 1);
   const safeDays = Math.max(15, vacationDays || 15);
@@ -69,7 +73,7 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
   return (
     <div id="student-calculator" className="relative mx-auto max-w-5xl px-2 py-2 scroll-mt-20">
       <AnimatedContent distance={30} scale={0.98} duration={0.5} ease="power2.out">
-        <div className="w-full max-w-4xl mx-auto rounded-2xl bg-[#0F1318] border border-slate-800 p-4 sm:p-6 backdrop-blur-xl shadow-xl relative overflow-hidden">
+        <div className="w-full max-w-4xl mx-auto rounded-2xl glass border border-white/[0.08] p-4 sm:p-6 backdrop-blur-2xl shadow-2xl relative overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-center">
             {/* Left Controls Column */}
             <div className="space-y-4">
@@ -80,7 +84,7 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                     htmlFor="calc-zone-select"
                     className="text-xs font-medium text-slate-300 cursor-pointer flex items-center gap-1"
                   >
-                    <MapPin className="h-3.5 w-3.5 text-cyan-400" />
+                    <MapPin className="h-3.5 w-3.5 text-cyan-400 shrink-0" />
                     <span>{isHi ? "कैंपस / लोकेशन प्राइजिंग ज़ोन" : "Campus Location Pricing Zone"}</span>
                   </label>
                   <span className={`text-[10px] font-bold px-2 py-0.5 rounded border ${zoneBadge.badgeClass}`}>
@@ -90,8 +94,11 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                 <select
                   id="calc-zone-select"
                   value={selectedZoneCode}
-                  onChange={(e) => setSelectedZoneCode(e.target.value)}
-                  className="w-full h-9 rounded-xl bg-slate-900 border border-slate-700 px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-emerald-500 cursor-pointer"
+                  onChange={(e) => {
+                    playToggle();
+                    setSelectedZoneCode(e.target.value);
+                  }}
+                  className="w-full min-h-[48px] h-12 rounded-xl bg-white/[0.03] border border-white/[0.08] hover:border-white/[0.14] px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-emerald-500/80 focus-visible:ring-1 focus-visible:ring-emerald-500/80 cursor-pointer transition-all"
                 >
                   {PRESET_PRICING_ZONES.map((zone) => (
                     <option key={zone.zone_code} value={zone.zone_code}>
@@ -121,7 +128,10 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                   max="6"
                   step="1"
                   value={bags}
-                  onChange={(e) => setBags(Math.max(1, Number(e.target.value) || 1))}
+                  onChange={(e) => {
+                    playMicroClick();
+                    setBags(Math.max(1, Number(e.target.value) || 1));
+                  }}
                   aria-label={t.calculator.bagsAria}
                   className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500"
                 />
@@ -130,6 +140,16 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                   <span>3 {t.calculator.bagsUnit}</span>
                   <span>6 {t.calculator.bagsUnit}</span>
                 </div>
+
+                {/* Dynamic Free Doorstep Pickup Nudge Banner (Task 127) */}
+                <FreePickupNudgeBanner
+                  boxCount={bags}
+                  onAddBox={() => {
+                    playToggle();
+                    setBags((prev) => prev + 1);
+                  }}
+                  className="mt-3"
+                />
               </div>
 
               {/* Control 2: Vacation Duration */}
@@ -153,7 +173,10 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                   max="90"
                   step="5"
                   value={vacationDays}
-                  onChange={(e) => setVacationDays(Math.max(15, Number(e.target.value) || 15))}
+                  onChange={(e) => {
+                    playMicroClick();
+                    setVacationDays(Math.max(15, Number(e.target.value) || 15));
+                  }}
                   aria-label={t.calculator.daysAria}
                   className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500"
                 />
@@ -184,7 +207,10 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                   max="12000"
                   step="500"
                   value={monthlyRent}
-                  onChange={(e) => setMonthlyRent(Math.max(1000, Number(e.target.value) || 3000))}
+                  onChange={(e) => {
+                    playMicroClick();
+                    setMonthlyRent(Math.max(1000, Number(e.target.value) || 3000));
+                  }}
                   aria-label={t.calculator.rentAria}
                   className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500"
                 />
@@ -200,19 +226,22 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                 {vacationDays < 90 ? (
                   <button
                     type="button"
-                    onClick={() => setVacationDays(90)}
-                    className="w-full text-left p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/30 hover:border-amber-500/50 text-[11px] text-amber-300 transition cursor-pointer flex items-center justify-between gap-2 shadow-sm"
+                    onClick={() => {
+                      playToggle();
+                      setVacationDays(90);
+                    }}
+                    className="w-full text-left min-h-[48px] p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 hover:border-amber-500/50 text-[11px] text-amber-300 transition cursor-pointer flex items-center justify-between gap-2 shadow-sm"
                   >
                     <span>
                       🌴 <strong>{isHi ? "3 महीने की छुट्टी?" : "3-Month Summer Break?"}</strong>{" "}
                       {isHi ? "90 दिन चुनें और 15% छूट पाएं!" : "Set 90 days to unlock 15% OFF storage!"}
                     </span>
-                    <span className="shrink-0 bg-amber-500 hover:bg-amber-400 text-black px-2 py-0.5 rounded font-bold font-mono text-[10px]">
+                    <span className="shrink-0 bg-amber-500 hover:bg-amber-400 text-black px-2.5 py-1 rounded-lg font-bold font-mono text-[10px]">
                       {isHi ? "90 दिन चुनें" : "Set 90 Days"}
                     </span>
                   </button>
                 ) : (
-                  <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-[11px] text-emerald-300 flex items-center justify-between font-medium">
+                  <div className="min-h-[48px] p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-[11px] text-emerald-300 flex items-center justify-between font-medium">
                     <span className="flex items-center gap-1">
                       🎉 {isHi ? "15% एक्सटेंडेड ब्रेक डिस्काउंट लागू हुआ!" : "15% Extended Break Discount Active!"}
                     </span>
@@ -225,9 +254,9 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
             </div>
 
             {/* Right Results & Savings Card */}
-            <div className="rounded-xl bg-gradient-to-b from-[#161D24] to-[#0D1115] border border-emerald-500/30 p-4 sm:p-5 flex flex-col justify-between shadow-md">
+            <div className="rounded-xl bg-white/[0.03] border border-emerald-500/25 p-4 sm:p-5 flex flex-col justify-between shadow-xl backdrop-blur-md">
               <div>
-                <div className="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-0.5">
+                <div className="text-xs uppercase tracking-[0.05em] text-slate-400 font-semibold mb-0.5">
                   {t.calculator.estimatedSavings}
                 </div>
                 <div className="text-3xl sm:text-4xl font-black text-emerald-400 tracking-tight font-mono">
@@ -236,12 +265,12 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                 <div className="text-xs text-emerald-500/80 font-medium mt-0.5">
                   🎉 {t.calculator.saveCompare.replace("{percent}", String(savingsPercent))}
                 </div>
-                <div className="mt-2 inline-flex items-center gap-1 rounded-full border border-emerald-500/40 bg-emerald-500/15 px-2.5 py-0.5 text-[11px] font-bold text-emerald-300">
+                <div className="mt-2 inline-flex items-center gap-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-[11px] font-bold text-emerald-300">
                   ⚡ {isHi ? "0 रद्दीकरण शुल्क (Zero Cancellation Fee)" : "Zero Cancellation Fee Guarantee"}
                 </div>
 
                 {/* Visual comparative bar breakdown */}
-                <div className="mt-3.5 space-y-2.5 rounded-lg border border-white/10 bg-black/40 p-3">
+                <div className="mt-3.5 space-y-2.5 rounded-lg border border-white/[0.07] bg-black/30 p-3">
                   {/* Empty room bar */}
                   <div>
                     <div className="flex justify-between text-xs mb-1.5">
@@ -283,10 +312,11 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                 </div>
               </div>
 
-              <div className="mt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+              <div className="mt-4 space-y-2.5">
                 <button
                   type="button"
                   onClick={() => {
+                    playConfirm();
                     if (onBook) {
                       onBook({
                         service: "stash",
@@ -302,43 +332,75 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                       if (el) el.scrollIntoView({ behavior: "smooth" });
                     }
                   }}
-                  className="sm:flex-[2] h-10 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs whitespace-nowrap transition-all shadow-md shadow-emerald-500/25 flex items-center justify-center gap-1.5 group cursor-pointer active:scale-95"
+                  className="w-full min-h-[48px] h-12 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-sm transition-all shadow-md shadow-emerald-500/20 flex items-center justify-center gap-2 group cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400/80 focus-visible:ring-offset-1 focus-visible:ring-offset-[#0A0D0F]"
                 >
                   <span>{t.calculator.lockSavings}</span>
-                  <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform shrink-0" />
+                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform shrink-0" />
                 </button>
 
-                <button
-                  type="button"
-                  onClick={() => setShowCertificateModal(true)}
-                  className="sm:flex-1 h-10 px-3 rounded-xl border border-cyan-500/40 bg-cyan-500/10 hover:bg-cyan-500/20 text-xs font-semibold text-cyan-300 whitespace-nowrap transition-all flex items-center justify-center gap-1.5 cursor-pointer"
-                  title={isHi ? "बचत प्रमाणपत्र देखें" : "View Official Savings Certificate"}
-                >
-                  <FileText className="h-3.5 w-3.5 shrink-0" />
-                  <span>{t.calculator.savingsProofBtn}</span>
-                </button>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-1">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      playMicroClick();
+                      setShowCertificateModal(true);
+                    }}
+                    className="min-h-[48px] px-2.5 py-2 rounded-xl border border-cyan-500/30 bg-cyan-500/10 hover:bg-cyan-500/20 hover:border-cyan-500/50 hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-cyan-400/80 focus-visible:ring-offset-1 focus-visible:ring-offset-[#0A0D0F] text-[11px] font-semibold text-cyan-300 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                    title={isHi ? "बचत प्रमाणपत्र देखें" : "View Official Savings Certificate"}
+                  >
+                    <FileText className="h-4 w-4 shrink-0" />
+                    <span className="truncate">{t.calculator.savingsProofBtn}</span>
+                  </button>
 
-                <button
-                  type="button"
-                  onClick={() => setShowItemizerModal(true)}
-                  className="sm:flex-1 h-10 px-3 rounded-xl border border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-500/20 text-xs font-semibold text-emerald-300 whitespace-nowrap transition-all flex items-center justify-center gap-1.5 cursor-pointer"
-                >
-                  <Luggage className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
-                  <span>{isHi ? "सामान आईटमाइज़ करें" : "Itemize Luggage"}</span>
-                </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      playMicroClick();
+                      setShowEstimatorModal(true);
+                    }}
+                    className="min-h-[48px] px-2.5 py-2 rounded-xl border border-amber-500/30 bg-amber-500/10 hover:bg-amber-500/20 hover:border-amber-500/50 hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-amber-400/80 focus-visible:ring-offset-1 focus-visible:ring-offset-[#0A0D0F] text-[11px] font-semibold text-amber-300 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                    title={isHi ? "वजन एवं बॉक्स साइज़ कैलकुलेटर" : "Estimate Weight & Box Size"}
+                  >
+                    <Weight className="h-4 w-4 text-amber-400 shrink-0" />
+                    <span className="truncate">{isHi ? "वजन कैलकुलेटर" : "Weight Estimator"}</span>
+                  </button>
 
-                <button
-                  type="button"
-                  onClick={() => setShowPackingModal(true)}
-                  className="sm:flex-1 h-10 px-3 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-xs font-semibold text-slate-300 whitespace-nowrap transition-all flex items-center justify-center gap-1.5 cursor-pointer"
-                >
-                  <Package className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
-                  <span>{t.calculator.packingGuide}</span>
-                </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      playMicroClick();
+                      setShowItemizerModal(true);
+                    }}
+                    className="min-h-[48px] px-2.5 py-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 hover:border-emerald-500/50 hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400/80 focus-visible:ring-offset-1 focus-visible:ring-offset-[#0A0D0F] text-[11px] font-semibold text-emerald-300 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                    title={isHi ? "सामान आईटमाइज़ करें" : "Itemize Luggage"}
+                  >
+                    <Luggage className="h-4 w-4 text-emerald-400 shrink-0" />
+                    <span className="truncate">{isHi ? "सामान आईटमाइज़" : "Itemize Luggage"}</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      playMicroClick();
+                      setShowPackingModal(true);
+                    }}
+                    className="min-h-[48px] px-2.5 py-2 rounded-xl border border-white/[0.08] bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/[0.15] hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400/80 focus-visible:ring-offset-1 focus-visible:ring-offset-[#0A0D0F] text-[11px] font-semibold text-slate-300 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                    title={t.calculator.packingGuide}
+                  >
+                    <Package className="h-4 w-4 text-emerald-400 shrink-0" />
+                    <span className="truncate">{t.calculator.packingGuide}</span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
+
+        <LuggageWeightEstimatorModal
+          isOpen={showEstimatorModal}
+          onClose={() => setShowEstimatorModal(false)}
+          onSelectStorage={(boxCount) => setBags(boxCount)}
+        />
 
         {/* Printable Official Savings Certificate Dialog */}
         <Dialog open={showCertificateModal} onOpenChange={setShowCertificateModal}>

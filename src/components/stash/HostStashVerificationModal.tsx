@@ -296,6 +296,10 @@ export function HostStashVerificationModal({
                       <img
                         src={rec.photoProofUrl}
                         alt="Photo Proof"
+                        loading="lazy"
+                        decoding="async"
+                        width={96}
+                        height={64}
                         className="h-16 w-24 object-cover rounded-xl border border-white/20 shrink-0"
                       />
                     )}
@@ -360,6 +364,10 @@ export function HostStashVerificationModal({
                     <img
                       src={completedRecord.photoProofUrl}
                       alt="Verified Box Proof"
+                      loading="lazy"
+                      decoding="async"
+                      width={400}
+                      height={144}
                       className="h-36 w-full object-cover rounded-xl border border-white/20"
                     />
                   </div>
@@ -644,12 +652,16 @@ export function HostStashVerificationModal({
                       <img
                         src={photoProofUrl}
                         alt="Photo Proof Preview"
+                        loading="lazy"
+                        decoding="async"
+                        width={400}
+                        height={160}
                         className="h-40 w-full object-cover rounded-xl border border-emerald-500/30"
                       />
                       <button
                         type="button"
                         onClick={() => setPhotoProofUrl("")}
-                        className="text-xs text-rose-400 hover:underline"
+                        className="min-h-[48px] inline-flex items-center justify-center px-3 py-2 text-xs text-rose-400 hover:text-rose-300 hover:underline cursor-pointer"
                       >
                         {isHi ? "दूसरी फोटो चुनें" : "Remove & re-capture"}
                       </button>

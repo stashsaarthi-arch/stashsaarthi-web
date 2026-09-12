@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { logSupabaseError } from "@/lib/supabaseLogger";
 import { saveMealOrder } from "@/lib/localSubmissions";
+import { enqueueOfflineSubmission } from "@/lib/offlineSubmissionQueue";
 import { useComponentTelemetry } from "@/lib/interactionTelemetry";
 import { toast } from "sonner";
 import { TasteShieldModal } from "./TasteShieldModal";
 import { PeacockFeatherMatkiDusting } from "./stash/PeacockFeatherMatkiDusting";
 import { RoommateMenuShareModal, MenuShareDetails } from "./stash/RoommateMenuShareModal";
-import { ShieldCheck, Repeat, Zap, Check, X, ChevronRight, Clock, MapPin, Phone, Share2, MessageCircle } from "lucide-react";
-import { playClick, playPop } from "@/lib/audio";
+import { ShieldCheck, Repeat, Zap, Check, X, ChevronRight, Clock, MapPin, Phone, Share2, MessageCircle, Ticket } from "lucide-react";
+import { playClick, playPop, playMicroClick, playToggle, playConfirm } from "@/lib/audio";
 import { SaarthiKitchenSchema } from "@/components/seo/SaarthiKitchenSchema";
 import { IntelligentNudgesWidget } from "./stash/IntelligentNudgesWidget";
 import { MealPersonalizationSelector } from "./stash/MealPersonalizationSelector";
@@ -16,6 +17,8 @@ import { formatPersonalizationsSummary } from "@/lib/mealPersonalization";
 import { DeliveryCutoffCountdown } from "./stash/DeliveryCutoffCountdown";
 import { useThaliPriceLabelVariant, trackThaliPriceClick, ThaliPriceLabelVariant } from "@/lib/abTesting";
 import { CsoKitchenSealModal } from "./stash/CsoKitchenSealModal";
+import { MealTokenLedgerModal } from "./stash/MealTokenLedgerModal";
+import { motion, AnimatePresence } from "motion/react";
 
 
 type FulfillmentType = "DineIn_Pickup" | "RoomDelivery";
@@ -209,8 +212,9 @@ const ThaliPriceVariantToggle: React.FC = () => {
       <span className="text-[10px] font-bold text-slate-400 px-2 uppercase tracking-wider">
         A/B Price Label:
       </span>
-      <button
+      <motion.button
         type="button"
+        whileTap={{ scale: 0.96 }}
         onClick={() => {
           playClick();
           const next = variant === "classic" ? "value_save" : "classic";
@@ -224,7 +228,7 @@ const ThaliPriceVariantToggle: React.FC = () => {
         }`}
       >
         {variant === "value_save" ? "✨ From ₹50, save more..." : "₹50 (pickup) / ₹60 (delivery)"}
-      </button>
+      </motion.button>
     </div>
   );
 };
@@ -245,19 +249,23 @@ const MealTierCard: React.FC<MealTierCardProps> = ({ tier, isSelected, tierCost,
   const { variant, getLabel } = useThaliPriceLabelVariant();
 
   return (
-    <div
+    <motion.div
       {...telemetryProps}
+      whileHover={{ y: -3 }}
+      whileTap={{ scale: 0.98 }}
+      transition={{ type: "spring", stiffness: 400, damping: 25 }}
       onClick={() => {
+        playToggle();
         if (tier.id === "standard") {
           trackThaliPriceClick(variant, `select_thali_${variant}`);
         }
         trackClick({ action: "select_thali_tier" });
         onSelect(tier);
       }}
-      className={`relative cursor-pointer rounded-2xl p-5 border transition-all duration-300 ${
+      className={`relative cursor-pointer rounded-2xl p-5 border transition-colors duration-200 ${
         isSelected
-          ? "bg-slate-900 border-emerald-500 shadow-[0_0_20px_-5px_rgba(16,185,129,0.3)] transform -translate-y-1"
-          : "bg-slate-950/80 border-white/15 hover:border-emerald-500/40 hover:bg-slate-900/90"
+          ? "bg-slate-900 border-emerald-500/80 shadow-[0_8px_25px_-5px_rgba(16,185,129,0.35)]"
+          : "bg-slate-950/80 border-white/[0.08] hover:border-emerald-500/40 hover:bg-slate-900/90"
       }`}
     >
       {tier.badge && (
@@ -294,7 +302,7 @@ const MealTierCard: React.FC<MealTierCardProps> = ({ tier, isSelected, tierCost,
       <p className="text-xs text-slate-400 leading-relaxed font-medium">
         {tier.description}
       </p>
-    </div>
+    </motion.div>
   );
 };
 
@@ -383,6 +391,9 @@ export const TokenMealHub: React.FC = () => {
       return;
     }
 
+    const prevBalance = tokenBalance;
+    // Optimistic balance update for instant perception
+    setTokenBalance((prev) => prev - reorderCost);
     setIsReorderSubmitting(true);
     playPop();
 
@@ -429,9 +440,6 @@ export const TokenMealHub: React.FC = () => {
         throw error;
       }
 
-      // Deduct balance
-      setTokenBalance((prev) => prev - reorderCost);
-
       // Save updated last order
       const updatedOrder: LastMealOrder = {
         ...lastMeal,
@@ -457,6 +465,7 @@ export const TokenMealHub: React.FC = () => {
       };
       setRecentBooking(activeBooking);
 
+      playConfirm();
       toast.success("Last Meal Re-Ordered! ⚡", {
         description: `${reorderCost} Tokens debited for ${reorderSlot} slot at ${lastMeal.vendorNode}. ${generatedPickupCode ? `Fast-Track Code: ${generatedPickupCode}.` : ""} Protected by 50% Taste Shield.`,
         action: {
@@ -470,6 +479,8 @@ export const TokenMealHub: React.FC = () => {
       setReorderStep(1);
     } catch (err: unknown) {
       console.error("Failed to quick re-order", err);
+      // Rollback optimistic balance
+      setTokenBalance(prevBalance);
       toast.error("Re-order Failed", {
         description: (err as Error)?.message || "Check network connection.",
       });
@@ -481,6 +492,7 @@ export const TokenMealHub: React.FC = () => {
   // Taste Shield Protection State
   const [isTasteShieldOpen, setIsTasteShieldOpen] = useState<boolean>(false);
   const [isCsoSealModalOpen, setIsCsoSealModalOpen] = useState<boolean>(false);
+  const [isMealTokenLedgerOpen, setIsMealTokenLedgerOpen] = useState<boolean>(false);
   const [selectedCsoNodeId, setSelectedCsoNodeId] = useState<string | undefined>(undefined);
   const [recentBooking, setRecentBooking] = useState<{
     id: string;
@@ -585,6 +597,9 @@ export const TokenMealHub: React.FC = () => {
       return;
     }
 
+    const prevBalance = tokenBalance;
+    // Optimistic balance debit for zero perceived latency
+    setTokenBalance((prev) => prev - currentCost);
     setIsSubmitting(true);
 
     try {
@@ -597,27 +612,27 @@ export const TokenMealHub: React.FC = () => {
         generatedPickupCode = "K-" + Math.floor(10 + Math.random() * 90);
       }
 
-      // Strictly typed payload insert
+      // Capture payload for both supabase and offline queue fallback
+      const mealPayload = {
+        user_name: userName.trim(),
+        user_phone: phone.trim(),
+        menu_id: selectedMeal.id,
+        vendor_selected: vendorNode,
+        fulfillment_type: fulfillmentType,
+        delivery_address: fulfillmentType === "RoomDelivery" ? deliveryAddress.trim() : null,
+        pickup_code: generatedPickupCode,
+        meal_date: today ?? null,
+        meal_slot: deliverySlot,
+        tokens_debited: currentCost,
+        vendor_payout: selectedMeal.vendorPayout,
+        delivery_runner_payout: fulfillmentType === "RoomDelivery" ? 7 : 0,
+        cutoff_time: cutoffTime.toISOString(),
+        order_status: "confirmed",
+      };
+
       const { data: insertedBooking, error } = await supabase
         .from("meal_bookings")
-        .insert([
-          {
-            user_name: userName.trim(),
-            user_phone: phone.trim(),
-            menu_id: selectedMeal.id,
-            vendor_selected: vendorNode,
-            fulfillment_type: fulfillmentType,
-            delivery_address: fulfillmentType === "RoomDelivery" ? deliveryAddress.trim() : null,
-            pickup_code: generatedPickupCode,
-            meal_date: today ?? null,
-            meal_slot: deliverySlot,
-            tokens_debited: currentCost,
-            vendor_payout: selectedMeal.vendorPayout,
-            delivery_runner_payout: fulfillmentType === "RoomDelivery" ? 7 : 0,
-            cutoff_time: cutoffTime.toISOString(),
-            order_status: "confirmed",
-          },
-        ])
+        .insert([mealPayload])
         .select("id, created_at")
         .maybeSingle();
 
@@ -628,11 +643,8 @@ export const TokenMealHub: React.FC = () => {
           error: error,
           context: "TokenMealHub_submitOrder",
         });
-        throw error;
+        enqueueOfflineSubmission("meal", mealPayload);
       }
-
-      // Deduct balance locally
-      setTokenBalance((prev) => prev - currentCost);
 
       // Register active booking for review & Taste Shield
       const activeBooking = {
@@ -661,6 +673,7 @@ export const TokenMealHub: React.FC = () => {
         timestamp: new Date().toISOString(),
       });
 
+      playConfirm();
       toast.success("Order Confirmed! 🎉", {
         description: `${currentCost} Tokens debited. Delivery scheduled for ${deliverySlot} slot. ${generatedPickupCode ? `Your Fast-Track Pickup Code is ${generatedPickupCode}.` : ""} Protected by 50% Taste Shield.`,
         action: {
@@ -675,19 +688,45 @@ export const TokenMealHub: React.FC = () => {
       setDeliveryAddress("");
     } catch (err: unknown) {
       console.error("Failed to submit order", err);
+      // Rollback optimistic balance
+      setTokenBalance(prevBalance);
       logSupabaseError({
         table: "meal_bookings",
         operation: "insert",
         error: err,
         context: "TokenMealHub_submitOrder_catch",
       });
-      toast.error("Failed to submit order", {
-        description: (err as Error)?.message || "Check your internet connection.",
+
+      const fallbackMealPayload = {
+        user_name: userName.trim(),
+        user_phone: phone.trim(),
+        menu_id: selectedMeal.id,
+        vendor_selected: vendorNode,
+        fulfillment_type: fulfillmentType,
+        delivery_address: fulfillmentType === "RoomDelivery" ? deliveryAddress.trim() : null,
+        pickup_code: "K-" + Math.floor(10 + Math.random() * 90),
+        meal_date: new Date().toISOString().split("T")[0] ?? null,
+        meal_slot: deliverySlot,
+        tokens_debited: currentCost,
+        vendor_payout: selectedMeal.vendorPayout,
+        delivery_runner_payout: fulfillmentType === "RoomDelivery" ? 7 : 0,
+        cutoff_time: new Date().toISOString(),
+        order_status: "confirmed",
+      };
+      enqueueOfflineSubmission("meal", fallbackMealPayload);
+
+      toast.info("Offline: Order Queued! 📡", {
+        description: "Your meal token order has been saved locally and will auto-sync once back online.",
       });
+      setUserName("");
+      setPhone("");
+      setDeliveryAddress("");
     } finally {
       setIsSubmitting(false);
     }
   };
+
+
 
   const handleQuickRecharge = (tokensToAdd: number, price: number) => {
     setTokenBalance((prev) => prev + tokensToAdd);
@@ -756,6 +795,17 @@ export const TokenMealHub: React.FC = () => {
                 <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
                 <span>CSO Barcode Seal 🛡️</span>
               </button>
+              <button
+                type="button"
+                onClick={() => {
+                  playClick();
+                  setIsMealTokenLedgerOpen(true);
+                }}
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-950 border border-emerald-500/40 hover:border-emerald-400 hover:scale-105 text-emerald-300 text-xs font-bold transition-all cursor-pointer shadow-sm"
+              >
+                <Ticket className="w-3.5 h-3.5 text-emerald-400" />
+                <span>Meal Token Ledger 🎟️</span>
+              </button>
             </div>
             <h2 className="text-3xl font-extrabold tracking-tight text-white">
               Hyperlocal <span className="text-emerald-400">Home-Cooked Meals</span>
@@ -792,16 +842,20 @@ export const TokenMealHub: React.FC = () => {
             </span>
             <div className="grid grid-cols-2 gap-2.5">
               {RECHARGE_PACKS.map((pack) => (
-                <button
+                <motion.button
                   key={pack.id}
                   type="button"
-                  onClick={() => handleQuickRecharge(pack.tokens, pack.price)}
+                  whileTap={{ scale: 0.96 }}
+                  onClick={() => {
+                    playMicroClick();
+                    handleQuickRecharge(pack.tokens, pack.price);
+                  }}
                   className={`p-3 sm:py-3.5 text-center rounded-xl bg-slate-950 border transition-all text-xs cursor-pointer flex flex-col justify-between ${pack.recommended ? "border-emerald-500/50 hover:bg-emerald-500/10" : "border-slate-800 hover:border-slate-700 hover:bg-slate-800/50"}`}
                 >
                   <div className="font-bold text-white text-xs">+{pack.tokens} Tokens</div>
                   <div className="text-xs text-emerald-400 font-semibold mt-1">₹{pack.price}</div>
                   <div className="text-xs text-slate-400 mt-1">{pack.desc}</div>
-                </button>
+                </motion.button>
               ))}
             </div>
           </div>
@@ -898,21 +952,51 @@ export const TokenMealHub: React.FC = () => {
               Choose how you want to receive your meal.
             </p>
           </div>
-          <div className="flex bg-slate-950 p-1 rounded-2xl border border-slate-800">
-            <button
+          <div className="flex bg-slate-950 p-1 rounded-2xl border border-slate-800 relative">
+            <motion.button
               type="button"
-              onClick={() => setFulfillmentType("DineIn_Pickup")}
-              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl transition-all cursor-pointer font-bold text-sm ${fulfillmentType === "DineIn_Pickup" ? "bg-emerald-500 text-slate-950 shadow-md" : "bg-slate-800/60 border border-slate-700/60 text-slate-300 hover:text-white hover:bg-slate-800"}`}
+              whileTap={{ scale: 0.97 }}
+              onClick={() => {
+                playToggle();
+                setFulfillmentType("DineIn_Pickup");
+              }}
+              className={`relative flex items-center gap-2 px-4 py-2.5 rounded-xl transition-colors cursor-pointer font-bold text-sm z-10 ${
+                fulfillmentType === "DineIn_Pickup"
+                  ? "text-slate-950"
+                  : "text-slate-300 hover:text-white"
+              }`}
             >
+              {fulfillmentType === "DineIn_Pickup" && (
+                <motion.span
+                  layoutId="activeFulfillmentType"
+                  transition={{ type: "spring", stiffness: 450, damping: 32 }}
+                  className="absolute inset-0 rounded-xl bg-emerald-500 shadow-md -z-10"
+                />
+              )}
               🏪 Self-Pickup (Free)
-            </button>
-            <button
+            </motion.button>
+            <motion.button
               type="button"
-              onClick={() => setFulfillmentType("RoomDelivery")}
-              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl transition-all cursor-pointer font-bold text-sm ${fulfillmentType === "RoomDelivery" ? "bg-emerald-500 text-slate-950 shadow-md" : "bg-slate-800/60 border border-slate-700/60 text-slate-300 hover:text-white hover:bg-slate-800"}`}
+              whileTap={{ scale: 0.97 }}
+              onClick={() => {
+                playToggle();
+                setFulfillmentType("RoomDelivery");
+              }}
+              className={`relative flex items-center gap-2 px-4 py-2.5 rounded-xl transition-colors cursor-pointer font-bold text-sm z-10 ${
+                fulfillmentType === "RoomDelivery"
+                  ? "text-slate-950"
+                  : "text-slate-300 hover:text-white"
+              }`}
             >
+              {fulfillmentType === "RoomDelivery" && (
+                <motion.span
+                  layoutId="activeFulfillmentType"
+                  transition={{ type: "spring", stiffness: 450, damping: 32 }}
+                  className="absolute inset-0 rounded-xl bg-emerald-500 shadow-md -z-10"
+                />
+              )}
               🛵 Room Delivery (+10 T)
-            </button>
+            </motion.button>
           </div>
         </div>
 
@@ -933,7 +1017,7 @@ export const TokenMealHub: React.FC = () => {
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+          <div className="flex sm:grid overflow-x-auto sm:overflow-visible snap-x snap-mandatory gap-3.5 sm:grid-cols-2 lg:grid-cols-4 pb-3 no-scrollbar touch-pan-x overscroll-x-contain">
             {KITCHEN_NODES.map((node) => {
               const isSelected = vendorNode === node.name;
               const percentSold = deliverySlot === "Lunch" ? node.percentSoldLunch : node.percentSoldDinner;
@@ -955,7 +1039,7 @@ export const TokenMealHub: React.FC = () => {
                       setVendorNode(node.name);
                     }
                   }}
-                  className={`cursor-pointer rounded-xl p-4 border transition-all duration-300 flex flex-col justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 ${
+                  className={`cursor-pointer rounded-xl p-4 border transition-all duration-300 flex flex-col justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 min-w-[250px] max-w-[280px] sm:min-w-0 sm:max-w-none shrink-0 sm:shrink snap-center ${
                     isSelected
                       ? "bg-slate-900 border-emerald-500 shadow-[0_0_15px_-3px_rgba(16,185,129,0.3)] ring-1 ring-emerald-500"
                       : "bg-slate-900/60 border-slate-800 hover:border-slate-700 hover:bg-slate-900/90"
@@ -1043,20 +1127,21 @@ export const TokenMealHub: React.FC = () => {
             <ThaliPriceVariantToggle />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="flex md:grid overflow-x-auto md:overflow-visible snap-x snap-mandatory gap-4 pb-3 no-scrollbar touch-pan-x overscroll-x-contain">
             {MEAL_TIERS.map((tier) => {
               const isSelected = selectedMeal.id === tier.id;
               const tierCost =
                 fulfillmentType === "RoomDelivery" ? tier.costDelivery : tier.costPickup;
 
               return (
-                <MealTierCard
-                  key={tier.id}
-                  tier={tier}
-                  isSelected={isSelected}
-                  tierCost={tierCost}
-                  onSelect={setSelectedMeal}
-                />
+                <div key={tier.id} className="min-w-[260px] max-w-[290px] md:min-w-0 md:max-w-none shrink-0 md:shrink snap-center">
+                  <MealTierCard
+                    tier={tier}
+                    isSelected={isSelected}
+                    tierCost={tierCost}
+                    onSelect={setSelectedMeal}
+                  />
+                </div>
               );
             })}
           </div>
@@ -1465,6 +1550,14 @@ export const TokenMealHub: React.FC = () => {
         isOpen={isCsoSealModalOpen}
         onClose={() => setIsCsoSealModalOpen(false)}
         initialNodeId={selectedCsoNodeId}
+      />
+
+      {/* Cryptographic Meal Token Ledger Modal (Task 132) */}
+      <MealTokenLedgerModal
+        isOpen={isMealTokenLedgerOpen}
+        onClose={() => setIsMealTokenLedgerOpen(false)}
+        userPhone={phone || "9369454350"}
+        userName={userName || "Rahul Sharma (IIT Kanpur)"}
       />
     </section>
   );

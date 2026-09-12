@@ -13,6 +13,7 @@ import {
 import { toast } from "sonner";
 import { useAuth } from "@/hooks/useAuth";
 import { useLanguage } from "@/context/LanguageContext";
+import { usePersona } from "@/context/PersonaContext";
 import { useGoogleLogin } from "@react-oauth/google";
 import { ProfileModal } from "./ProfileModal";
 
@@ -97,10 +98,11 @@ export function AuthButton({ compact = false }: { compact?: boolean }) {
     );
   }
 
+  const { role: activePersona } = usePersona();
   const name = user.name || user.email || "User";
   const first = (name.split(" ")[0] || "User").trim();
-  const roleBadge =
-    user.role === "student" ? (isHi ? "छात्र" : "Student") : isHi ? "होस्ट" : "Host";
+  const isHostActive = activePersona === "host";
+  const roleBadge = isHostActive ? (isHi ? "होस्ट" : "Host") : isHi ? "छात्र" : "Student";
 
   return (
     <DropdownMenu>
@@ -114,7 +116,7 @@ export function AuthButton({ compact = false }: { compact?: boolean }) {
           </Avatar>
           <div className="flex flex-col items-start leading-none">
             <span className="max-w-[7rem] truncate text-xs font-semibold text-white">{first}</span>
-            <span className="text-[9px] text-cyan-400 font-medium uppercase tracking-wider">
+            <span className={`text-[9px] font-medium uppercase tracking-wider ${isHostActive ? "text-amber-400" : "text-cyan-400"}`}>
               {roleBadge}
             </span>
           </div>

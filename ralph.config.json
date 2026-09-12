@@ -1,6 +1,6 @@
 {
   "mode": "Fast",
-  "taskFile": "docs/tasks/tasks.md",
+  "taskFile": "docs/tasks/PRD.md",
   "promptFile": "docs/tasks/prompt.md",
   "autoAcceptChanges": true,
   "stopOnFailure": false,
@@ -8,5 +8,5 @@
     "enabled": false
   },
   "maxIterations": 100,
-  "completionPromise": "SPRINT_CYCLE_COMPLETE"
+  "completionPromise": "ALL_SPRINT_TASKS_FINISHED"
 }

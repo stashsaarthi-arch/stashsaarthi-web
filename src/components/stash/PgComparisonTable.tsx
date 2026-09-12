@@ -341,7 +341,7 @@ export const PgComparisonTable: React.FC<PgComparisonTableProps> = ({ onBook }) 
         </div>
 
         {/* Category Filter Tabs */}
-        <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto pb-3 mb-6 no-scrollbar">
+        <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto overscroll-x-contain touch-pan-x pb-3 mb-6 no-scrollbar">
           {categories.map((cat) => (
             <button
               key={cat.id}

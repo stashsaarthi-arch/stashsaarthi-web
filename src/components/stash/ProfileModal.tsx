@@ -126,7 +126,15 @@ export function ProfileModal({ open, onOpenChange, initialTab = "settings" }: Pr
           <div className="flex items-center gap-3 mb-1">
             <div className="h-10 w-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shadow-lg shrink-0 overflow-hidden">
               {formData.avatar ? (
-                <img src={formData.avatar} alt="Avatar" className="h-full w-full object-cover" />
+                <img
+                  src={formData.avatar}
+                  alt="Avatar"
+                  loading="lazy"
+                  decoding="async"
+                  width={40}
+                  height={40}
+                  className="h-full w-full object-cover"
+                />
               ) : (
                 <User className="h-5 w-5" />
               )}
@@ -188,6 +196,10 @@ export function ProfileModal({ open, onOpenChange, initialTab = "settings" }: Pr
                   <img
                     src={formData.avatar || AVATAR_PRESETS[0]?.url || ""}
                     alt="Current Avatar"
+                    loading="lazy"
+                    decoding="async"
+                    width={48}
+                    height={48}
                     className="h-full w-full object-cover"
                   />
                 </div>
@@ -197,14 +209,23 @@ export function ProfileModal({ open, onOpenChange, initialTab = "settings" }: Pr
                       key={preset.id}
                       type="button"
                       onClick={() => setFormData({ ...formData, avatar: preset.url })}
-                      className={`p-1 rounded-xl border transition-all flex items-center justify-center bg-black/60 ${
+                      className={`min-h-[48px] min-w-[48px] p-2 rounded-xl border transition-all flex items-center justify-center bg-black/60 cursor-pointer ${
                         formData.avatar === preset.url
                           ? "border-cyan-400 bg-cyan-500/30 ring-2 ring-cyan-500/50 scale-105"
                           : "border-white/10 hover:border-white/30"
                       }`}
                       title={preset.name}
+                      aria-label={`Select ${preset.name} avatar`}
                     >
-                      <img src={preset.url} alt={preset.name} className="h-7 w-7 rounded-full" />
+                      <img
+                        src={preset.url}
+                        alt={preset.name}
+                        loading="lazy"
+                        decoding="async"
+                        width={28}
+                        height={28}
+                        className="h-7 w-7 rounded-full"
+                      />
                     </button>
                   ))}
                 </div>

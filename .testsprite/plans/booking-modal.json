@@ -1,0 +1,21 @@
+{
+  "projectId": "cb681ff4-a1c9-4217-9828-cee01f4e0850",
+  "type": "frontend",
+  "name": "Student opens booking modal from hero and verifies storage configuration",
+  "description": "When a student clicks the primary booking CTA in the hero, the booking modal dialog opens and displays storage configuration options, campus node selection, and pricing breakdown.",
+  "priority": "p1",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to the homepage"
+    },
+    {
+      "type": "action",
+      "description": "Click the primary booking call-to-action button in the hero section"
+    },
+    {
+      "type": "assertion",
+      "description": "Verify the booking modal dialog opens displaying the storage booking configuration and campus cluster selection"
+    }
+  ]
+}

@@ -214,11 +214,11 @@ export const FAQ = memo(function FAQ() {
                 }
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="pl-8 pr-3 py-2 h-9 rounded-xl border-white/10 bg-black/40 backdrop-blur-md text-xs text-foreground focus-visible:ring-emerald-500/50"
+                className="pl-8 pr-3 py-2 h-9 rounded-xl border border-white/[0.08] bg-white/[0.025] hover:border-white/[0.14] backdrop-blur-md text-xs text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500/80 transition-all"
               />
             </div>
 
-            <div className="flex flex-wrap items-center justify-center gap-1">
+            <div className="flex flex-wrap items-center justify-center gap-1.5">
               {categories.map((cat) => {
                 const count = getCategoryCount(cat.id);
                 const isActive = activeCategory === cat.id;
@@ -226,16 +226,16 @@ export const FAQ = memo(function FAQ() {
                   <button
                     key={cat.id}
                     onClick={() => setActiveCategory(cat.id)}
-                    className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold transition-all cursor-pointer ${
+                    className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold tracking-[0.02em] transition-all cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-cyan-400/80 focus-visible:ring-offset-1 focus-visible:ring-offset-[#0A0D0F] ${
                       isActive
-                        ? "border border-cyan-500/50 bg-cyan-500/15 text-cyan-300 shadow-sm"
-                        : "border border-white/10 bg-white/5 text-slate-400 hover:border-white/20 hover:text-white"
+                        ? "border border-cyan-500/40 bg-cyan-500/15 text-cyan-300 shadow-sm"
+                        : "border border-white/[0.08] bg-white/[0.03] text-slate-400 hover:border-white/[0.16] hover:bg-white/[0.06] hover:text-white"
                     }`}
                   >
                     <span>{cat.label}</span>
                     <span
-                      className={`text-[9px] font-mono px-1 py-0.2 rounded-full ${
-                        isActive ? "bg-cyan-500/20 text-cyan-300" : "bg-white/10 text-slate-400"
+                      className={`text-[9px] font-mono px-1.5 py-0.2 rounded-full ${
+                        isActive ? "bg-cyan-500/25 text-cyan-300" : "bg-white/10 text-slate-400"
                       }`}
                     >
                       {count}
@@ -246,7 +246,7 @@ export const FAQ = memo(function FAQ() {
             </div>
           </div>
 
-          <div className="glass rounded-2xl border border-white/10 p-3.5 sm:p-4">
+          <div className="glass rounded-2xl border border-white/[0.08] p-3.5 sm:p-4 shadow-2xl">
             {filteredFaqs.length > 0 ? (
               <Accordion
                 type="single"
@@ -258,9 +258,9 @@ export const FAQ = memo(function FAQ() {
                   <AccordionItem
                     key={index}
                     value={`item-${index}`}
-                    className="border border-neutral-800 bg-neutral-950/60 rounded-xl px-4 overflow-hidden transition-all hover:border-neutral-700"
+                    className="border border-white/[0.06] bg-white/[0.02] rounded-xl px-4 overflow-hidden transition-all hover:border-white/[0.12] hover:bg-white/[0.035]"
                   >
-                    <AccordionTrigger className="text-left font-semibold text-xs sm:text-sm hover:no-underline py-2.5 text-foreground/95">
+                    <AccordionTrigger className="text-left font-semibold text-xs sm:text-sm hover:no-underline py-2.5 text-foreground/95 active:scale-[0.99] transition-transform">
                       {isHi && faq.question_hi ? faq.question_hi : faq.question}
                     </AccordionTrigger>
                     <AccordionContent className="text-xs text-muted-foreground leading-relaxed pb-3 pt-0.5">

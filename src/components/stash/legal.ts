@@ -5,7 +5,7 @@ export const dispatchNavTab = (type: "solution" | "calculator" | "trust", tab: s
 };
 
 export const smoothScrollTo =
-  (id: string, offset = -75) =>
+  (id: string, offset = -90) =>
   (e?: React.MouseEvent) => {
     if (e) e.preventDefault();
     if (!id || typeof window === "undefined") return;

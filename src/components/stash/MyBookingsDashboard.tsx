@@ -564,6 +564,10 @@ export function MyBookingsDashboard() {
               <img
                 src={user.avatar || "https://api.dicebear.com/7.x/bottts/svg?seed=Saarthi"}
                 alt={user.name}
+                loading="lazy"
+                decoding="async"
+                width={40}
+                height={40}
                 className="h-10 w-10 rounded-full border-2 border-cyan-400 bg-black/80 object-cover shadow"
               />
               <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-emerald-400 border-2 border-black" title="Verified Session" />

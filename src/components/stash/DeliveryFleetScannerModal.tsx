@@ -19,6 +19,13 @@ import {
   Navigation,
   ChevronRight,
   Sparkles,
+  SignalLow,
+  Send,
+  Smartphone,
+  ShieldAlert,
+  Copy,
+  Radio,
+  Check,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -30,6 +37,13 @@ import {
   getRunnerStats,
   type RunnerTask,
 } from "@/lib/deliveryFleetEngine";
+import {
+  generateRunnerOtp,
+  generateEncryptedSmsPayload,
+  parseAndVerifySmsPayload,
+  verifyRunnerOtpSms,
+  getNativeSmsUri,
+} from "@/lib/smsFallbackGateway";
 
 interface DeliveryFleetScannerModalProps {
   isOpen: boolean;
@@ -37,7 +51,7 @@ interface DeliveryFleetScannerModalProps {
 }
 
 export function DeliveryFleetScannerModal({ isOpen, onClose }: DeliveryFleetScannerModalProps) {
-  const [activeTab, setActiveTab] = useState<"scanner" | "queue" | "stats">("scanner");
+  const [activeTab, setActiveTab] = useState<"scanner" | "queue" | "stats" | "sms">("scanner");
   const [tasks, setTasks] = useState<RunnerTask[]>([]);
   const [scannedInput, setScannedInput] = useState("");
   const [torchOn, setTorchOn] = useState(false);
@@ -45,6 +59,13 @@ export function DeliveryFleetScannerModal({ isOpen, onClose }: DeliveryFleetScan
   const [intakeWeight, setIntakeWeight] = useState<number>(18.5);
   const [isScanning, setIsScanning] = useState(false);
   const [stats, setStats] = useState(getRunnerStats());
+  
+  // SMS Fallback Gateway State (Task 129)
+  const [isCellularDataOff, setIsCellularDataOff] = useState(false);
+  const [smsOtpInput, setSmsOtpInput] = useState("");
+  const [smsRawPacketInput, setSmsRawPacketInput] = useState("");
+  const [selectedTaskForSms, setSelectedTaskForSms] = useState<RunnerTask | null>(null);
+  const [copiedSms, setCopiedSms] = useState(false);
 
   const refreshTasks = useCallback(() => {
     const loaded = getRunnerTasks();
@@ -116,12 +137,38 @@ export function DeliveryFleetScannerModal({ isOpen, onClose }: DeliveryFleetScan
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-sm font-bold text-foreground">Delivery Fleet Mini-PWA</span>
-                <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-400">
-                  ⚡ 5G/Offline Ready
-                </span>
+                <button
+                  onClick={() => {
+                    const nextState = !isCellularDataOff;
+                    setIsCellularDataOff(nextState);
+                    if (nextState) {
+                      setActiveTab("sms");
+                      toast.warning("Cellular Data Offline", { description: "Switched to encrypted SMS OTP fallback mode." });
+                    } else {
+                      toast.success("Cellular Data Restored", { description: "Connected back to 5G / High-speed internet." });
+                    }
+                  }}
+                  className={`text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full border transition-all flex items-center gap-1 ${
+                    isCellularDataOff
+                      ? "bg-amber-500/20 border-amber-500/40 text-amber-300 animate-pulse"
+                      : "bg-emerald-500/20 border-emerald-500/30 text-emerald-400"
+                  }`}
+                  title="Click to toggle cellular data simulation mode"
+                >
+                  {isCellularDataOff ? (
+                    <>
+                      <SignalLow className="h-3 w-3 text-amber-400" />
+                      <span>SMS Fallback Mode</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>⚡ 5G Online</span>
+                    </>
+                  )}
+                </button>
               </div>
               <p className="text-xs text-muted-foreground">
-                Runner: <span className="text-emerald-400 font-medium">{stats.runnerName}</span> • SLA SLA: <span className="text-amber-400 font-mono font-bold">14m Avg</span>
+                Runner: <span className="text-emerald-400 font-medium">{stats.runnerName}</span> • SLA: <span className="text-amber-400 font-mono font-bold">14m Avg</span>
               </p>
             </div>
           </div>
@@ -134,39 +181,50 @@ export function DeliveryFleetScannerModal({ isOpen, onClose }: DeliveryFleetScan
         </div>
 
         {/* Tab Selector */}
-        <div className="flex border-b border-white/10 bg-white/[0.02] p-1.5 gap-1.5 shrink-0">
+        <div className="flex border-b border-white/10 bg-white/[0.02] p-1.5 gap-1.5 shrink-0 overflow-x-auto">
           <button
             onClick={() => setActiveTab("scanner")}
-            className={`flex-1 py-2.5 px-3 rounded-2xl text-xs font-semibold flex items-center justify-center gap-2 transition-all ${
+            className={`flex-1 min-w-[100px] py-2.5 px-3 rounded-2xl text-xs font-semibold flex items-center justify-center gap-2 transition-all ${
               activeTab === "scanner"
                 ? "bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 shadow-md"
                 : "text-muted-foreground hover:bg-white/5"
             }`}
           >
             <Camera className="h-3.5 w-3.5" />
-            Barcode Scanner
+            Scanner
           </button>
           <button
             onClick={() => setActiveTab("queue")}
-            className={`flex-1 py-2.5 px-3 rounded-2xl text-xs font-semibold flex items-center justify-center gap-2 transition-all ${
+            className={`flex-1 min-w-[100px] py-2.5 px-3 rounded-2xl text-xs font-semibold flex items-center justify-center gap-2 transition-all ${
               activeTab === "queue"
                 ? "bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 shadow-md"
                 : "text-muted-foreground hover:bg-white/5"
             }`}
           >
             <Package className="h-3.5 w-3.5" />
-            Doorstep Queue ({pendingTasks.length})
+            Queue ({pendingTasks.length})
           </button>
           <button
             onClick={() => setActiveTab("stats")}
-            className={`flex-1 py-2.5 px-3 rounded-2xl text-xs font-semibold flex items-center justify-center gap-2 transition-all ${
+            className={`flex-1 min-w-[100px] py-2.5 px-3 rounded-2xl text-xs font-semibold flex items-center justify-center gap-2 transition-all ${
               activeTab === "stats"
                 ? "bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 shadow-md"
                 : "text-muted-foreground hover:bg-white/5"
             }`}
           >
             <TrendingUp className="h-3.5 w-3.5" />
-            SLA Telemetry
+            Telemetry
+          </button>
+          <button
+            onClick={() => setActiveTab("sms")}
+            className={`flex-1 min-w-[110px] py-2.5 px-3 rounded-2xl text-xs font-semibold flex items-center justify-center gap-2 transition-all ${
+              activeTab === "sms"
+                ? "bg-amber-500/20 border border-amber-500/40 text-amber-300 shadow-md"
+                : "text-muted-foreground hover:bg-white/5"
+            }`}
+          >
+            <SignalLow className="h-3.5 w-3.5 text-amber-400" />
+            SMS Gateway
           </button>
         </div>
 

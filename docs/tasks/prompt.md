@@ -8,4 +8,4 @@ DIRECTIVE: 100% AUTONOMOUS FAST EXECUTION MODE ACTIVE.
 3. Verify changes compile cleanly with `npm run build`.
 4. Mark completed item as `- [x]` in `docs/tasks/PRD.md` and append progress to `docs/tasks/progress.md`.
 5. Append a summary of changes into `progress.md`.
-6. Output strictly: SPRINT_CYCLE_COMPLETE
+6. If there are still pending tasks (- [ ]) remaining in docs/tasks/PRD.md, do NOT output the completion promise; summarize the completed task and proceed. If and only if ALL tasks in docs/tasks/PRD.md are completed (- [x]), output strictly: ALL_SPRINT_TASKS_FINISHED

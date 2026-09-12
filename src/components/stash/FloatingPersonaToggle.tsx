@@ -31,43 +31,55 @@ export const FloatingPersonaToggle = memo(function FloatingPersonaToggle() {
           transition={{ duration: 0.2 }}
           role="radiogroup"
           aria-label={isHi ? "यूज़र पर्सोना चुनें" : "Select User Persona"}
-          className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 hidden sm:flex items-center gap-1 rounded-full border border-white/10 bg-[#0A0D0F]/90 p-1.5 shadow-2xl backdrop-blur-xl pointer-events-auto"
+          className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 hidden sm:flex items-center gap-1 rounded-full border border-white/[0.08] bg-[#0A0D0F]/85 p-1 shadow-[0_12px_36px_-6px_rgba(0,0,0,0.8),inset_0_1px_0_0_rgba(255,255,255,0.08)] backdrop-blur-2xl pointer-events-auto"
         >
-          <button
+          <motion.button
             type="button"
             role="radio"
             aria-checked={role === "student"}
+            whileTap={{ scale: 0.98 }}
             onClick={() => {
               playPop();
               setRole("student");
             }}
-            className={`flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-bold transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 ${
-              role === "student"
-                ? "bg-emerald-500 text-black shadow-lg shadow-emerald-500/25"
-                : "text-slate-400 hover:text-white"
+            className={`relative flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-bold tracking-[0.02em] transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400/80 focus-visible:ring-offset-1 focus-visible:ring-offset-[#0A0D0F] z-10 ${
+              role === "student" ? "text-black font-extrabold" : "text-slate-400 hover:text-white"
             }`}
           >
-            <GraduationCap className="h-3.5 w-3.5" aria-hidden="true" />
+            {role === "student" && (
+              <motion.span
+                layoutId="activeFloatingPersona"
+                transition={{ type: "spring", stiffness: 450, damping: 32 }}
+                className="absolute inset-0 rounded-full bg-emerald-500 shadow-md -z-10"
+              />
+            )}
+            <GraduationCap className="h-3.5 w-3.5 shrink-0 translate-y-[-0.5px]" aria-hidden="true" />
             <span>{isHi ? "छात्र मोड" : "Student Mode"}</span>
-          </button>
+          </motion.button>
 
-          <button
+          <motion.button
             type="button"
             role="radio"
             aria-checked={role === "host"}
+            whileTap={{ scale: 0.98 }}
             onClick={() => {
               playPop();
               setRole("host");
             }}
-            className={`flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-bold transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
-              role === "host"
-                ? "bg-amber-500 text-black shadow-lg shadow-amber-500/25"
-                : "text-slate-400 hover:text-white"
+            className={`relative flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-bold tracking-[0.02em] transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-amber-400/80 focus-visible:ring-offset-1 focus-visible:ring-offset-[#0A0D0F] z-10 ${
+              role === "host" ? "text-black font-extrabold" : "text-slate-400 hover:text-white"
             }`}
           >
-            <HeartHandshake className="h-3.5 w-3.5" aria-hidden="true" />
+            {role === "host" && (
+              <motion.span
+                layoutId="activeFloatingPersona"
+                transition={{ type: "spring", stiffness: 450, damping: 32 }}
+                className="absolute inset-0 rounded-full bg-amber-500 shadow-md -z-10"
+              />
+            )}
+            <HeartHandshake className="h-3.5 w-3.5 shrink-0 translate-y-[-0.5px]" aria-hidden="true" />
             <span>{isHi ? "सीनियर होस्ट" : "Senior Host"}</span>
-          </button>
+          </motion.button>
         </motion.div>
       )}
     </AnimatePresence>
