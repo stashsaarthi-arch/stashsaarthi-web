@@ -44,3 +44,6 @@ gemini_web2api.py
 gemini_web2api/
 cookie.txt
 config.json
+
+# Playwright MCP artifacts
+.playwright-mcp/

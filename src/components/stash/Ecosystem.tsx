@@ -65,7 +65,7 @@ export function Ecosystem({ onBook }: { onBook: OpenBooking }) {
 
   return (
     <div id="ecosystem" className="relative mx-auto max-w-4xl px-2 py-2 scroll-mt-20">
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="flex sm:grid overflow-x-auto sm:overflow-visible snap-x snap-mandatory gap-3 sm:gap-4 pb-2 no-scrollbar touch-pan-x overscroll-x-contain sm:grid-cols-2">
         {NODES_BASE.map((n, i) => {
           const Icon = n.icon;
           const textData = t.ecosystem[n.id];
@@ -77,6 +77,7 @@ export function Ecosystem({ onBook }: { onBook: OpenBooking }) {
               duration={0.6}
               threshold={0.15}
               delay={Math.min(i * 0.05, 0.3)}
+              className="snap-center min-w-[85vw] max-w-[88vw] sm:min-w-0 sm:max-w-none shrink-0 sm:shrink"
             >
               <Tilt3D max={3} lift={6} className="rounded-2xl h-full">
                 <div className="glass h-full flex flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.025] hover:border-white/[0.15] shadow-2xl transition-all">

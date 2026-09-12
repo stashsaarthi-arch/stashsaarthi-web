@@ -17,7 +17,9 @@ import { MobileStickyCTA } from "@/components/stash/MobileStickyCTA";
 import { WhatsAppButton } from "@/components/stash/WhatsAppButton";
 import { ServiceQuickJumpPill } from "@/components/stash/ServiceQuickJumpPill";
 
-// ─── Below-the-fold heavy components (lazy-loaded for bundle optimization) ───
+const MobileSecondaryAccordions = lazy(() =>
+  import("@/components/stash/MobileSecondaryAccordions").then((m) => ({ default: m.MobileSecondaryAccordions }))
+);
 const RoleLane = lazy(() => import("@/components/stash/RoleLane").then((m) => ({ default: m.RoleLane })));
 const CalculatorHub = lazy(() => import("@/components/stash/CalculatorHub").then((m) => ({ default: m.CalculatorHub })));
 const DualCrisis = lazy(() => import("@/components/stash/DualCrisis").then((m) => ({ default: m.DualCrisis })));
@@ -137,16 +139,20 @@ function Index() {
         <Hero role={role} onBook={open} onRefer={handleRefer} />
       </ErrorBoundary>
 
-      {/* TI.com-inspired Quick Jump Sticky Category Bar */}
-      <ErrorBoundary sectionName="Category Navigation" compact>
-        <QuickCategoryNav />
-      </ErrorBoundary>
+      {/* TI.com-inspired Quick Jump Sticky Category Bar (Desktop only — mobile uses sticky bottom dock) */}
+      <div className="hidden md:block">
+        <ErrorBoundary sectionName="Category Navigation" compact>
+          <QuickCategoryNav />
+        </ErrorBoundary>
+      </div>
 
-      <ErrorBoundary sectionName="Role Switcher">
-        <Suspense fallback={null}>
-          <RoleLane role={role} onBook={open} />
-        </Suspense>
-      </ErrorBoundary>
+      <div className="hidden md:block">
+        <ErrorBoundary sectionName="Role Switcher">
+          <Suspense fallback={null}>
+            <RoleLane role={role} onBook={open} />
+          </Suspense>
+        </ErrorBoundary>
+      </div>
 
       {/* High-Converting Savings Calculator Module placed high up for optimal scroll-depth conversion */}
       <ErrorBoundary sectionName="Calculator Hub">
@@ -160,9 +166,17 @@ function Index() {
         <SolutionsHub onBook={open} onListRoom={handleListRoom} />
       </ErrorBoundary>
 
+      {/* Mobile Collapsible Resource Trays (< md) — Eliminates 12,000+ vertical pixels */}
+      <div className="block md:hidden">
+        <ErrorBoundary sectionName="Mobile Resource Trays" compact>
+          <Suspense fallback={null}>
+            <MobileSecondaryAccordions role={role} onBook={open} onRefer={handleRefer} />
+          </Suspense>
+        </ErrorBoundary>
+      </div>
 
-      {/* Why StashSaarthi vs. Traditional PGs Comparison Table */}
-      <div className="content-visibility-auto">
+      {/* Why StashSaarthi vs. Traditional PGs Comparison Table (Desktop Only) */}
+      <div className="hidden md:block content-visibility-auto">
         <ErrorBoundary sectionName="Why StashSaarthi vs Traditional PGs">
           <Suspense fallback={null}>
             <PgComparisonTable onBook={open} />

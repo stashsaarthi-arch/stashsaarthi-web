@@ -741,7 +741,9 @@ export const TokenMealHub: React.FC = () => {
       <SaarthiKitchenSchema />
 
       {/* CAO Intelligent Nudges for Inactive Students (Task 77) */}
-      <IntelligentNudgesWidget />
+      <div className="hidden md:block">
+        <IntelligentNudgesWidget />
+      </div>
 
       {/* Background Accent Gradients */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[32rem] h-[32rem] bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
@@ -824,8 +826,8 @@ export const TokenMealHub: React.FC = () => {
           />
         </div>
 
-        {/* Live Token Wallet Card */}
-        <div className="bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between shadow-xl">
+        {/* Live Token Wallet Card (Desktop) */}
+        <div className="hidden md:flex bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 rounded-2xl p-6 flex-col justify-between shadow-xl">
           <div>
             <div className="flex justify-between items-center text-xs uppercase tracking-wider font-semibold text-slate-400 mb-2">
               <span>Token Wallet</span>
@@ -863,7 +865,7 @@ export const TokenMealHub: React.FC = () => {
       </div>
 
       {/* Taste Shield Active Protection Banner */}
-      <div className="bg-slate-900/80 border border-emerald-500/30 rounded-2xl p-5 mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xl backdrop-blur-sm">
+      <div className="hidden md:flex bg-slate-900/80 border border-emerald-500/30 rounded-2xl p-5 mb-8 flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xl backdrop-blur-sm">
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-2xl shrink-0">
             🛡️
@@ -893,7 +895,7 @@ export const TokenMealHub: React.FC = () => {
       </div>
 
       {/* 2-Step "Re-order My Last Meal" Shortcut Bar (Task 61) */}
-      <div className="mb-8 bg-gradient-to-r from-slate-900 via-slate-900/95 to-slate-950 border border-emerald-500/30 hover:border-emerald-500/50 rounded-2xl p-5 shadow-xl transition-all relative overflow-hidden group">
+      <div className="hidden md:block mb-8 bg-gradient-to-r from-slate-900 via-slate-900/95 to-slate-950 border border-emerald-500/30 hover:border-emerald-500/50 rounded-2xl p-5 shadow-xl transition-all relative overflow-hidden group">
         <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-emerald-500/15 transition-all" />
         
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
@@ -1039,7 +1041,7 @@ export const TokenMealHub: React.FC = () => {
                       setVendorNode(node.name);
                     }
                   }}
-                  className={`cursor-pointer rounded-xl p-4 border transition-all duration-300 flex flex-col justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 min-w-[250px] max-w-[280px] sm:min-w-0 sm:max-w-none shrink-0 sm:shrink snap-center ${
+                  className={`cursor-pointer rounded-xl p-4 border transition-all duration-300 flex flex-col justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 snap-center min-w-[85vw] max-w-[88vw] sm:min-w-0 sm:max-w-none shrink-0 sm:shrink ${
                     isSelected
                       ? "bg-slate-900 border-emerald-500 shadow-[0_0_15px_-3px_rgba(16,185,129,0.3)] ring-1 ring-emerald-500"
                       : "bg-slate-900/60 border-slate-800 hover:border-slate-700 hover:bg-slate-900/90"
@@ -1134,7 +1136,7 @@ export const TokenMealHub: React.FC = () => {
                 fulfillmentType === "RoomDelivery" ? tier.costDelivery : tier.costPickup;
 
               return (
-                <div key={tier.id} className="min-w-[260px] max-w-[290px] md:min-w-0 md:max-w-none shrink-0 md:shrink snap-center">
+                <div key={tier.id} className="snap-center min-w-[85vw] max-w-[88vw] md:min-w-0 md:max-w-none shrink-0 md:shrink">
                   <MealTierCard
                     tier={tier}
                     isSelected={isSelected}
@@ -1146,21 +1148,23 @@ export const TokenMealHub: React.FC = () => {
             })}
           </div>
 
-          {/* Micro-Interaction: Peacock Feather Matki Butter Dusting (Task 64) */}
-          <PeacockFeatherMatkiDusting
-            isAutoTriggered={selectedMeal.id === "standard"}
-            className="mt-5"
-          />
-
-          {/* Step 2.5: Meal Personalization (Task 78) */}
-          <div className="mt-6">
-            <MealPersonalizationSelector
-              selectedIds={selectedPersonalizations}
-              onChange={(ids, delta) => {
-                setSelectedPersonalizations(ids);
-                setPersonalizationDelta(delta);
-              }}
+          {/* Micro-Interaction: Peacock Feather Matki Butter Dusting & Personalization (Desktop) */}
+          <div className="hidden md:block">
+            <PeacockFeatherMatkiDusting
+              isAutoTriggered={selectedMeal.id === "standard"}
+              className="mt-5"
             />
+
+            {/* Step 2.5: Meal Personalization (Task 78) */}
+            <div className="mt-6">
+              <MealPersonalizationSelector
+                selectedIds={selectedPersonalizations}
+                onChange={(ids, delta) => {
+                  setSelectedPersonalizations(ids);
+                  setPersonalizationDelta(delta);
+                }}
+              />
+            </div>
           </div>
         </div>
 

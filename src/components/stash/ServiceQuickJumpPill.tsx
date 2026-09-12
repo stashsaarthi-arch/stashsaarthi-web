@@ -71,7 +71,7 @@ export const ServiceQuickJumpPill = memo(function ServiceQuickJumpPill() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: -16, scale: 0.94 }}
           transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed top-16 sm:top-18 left-1/2 -translate-x-1/2 z-40 max-w-[calc(100vw-1.5rem)] sm:max-w-md pointer-events-auto select-none"
+          className="hidden sm:block fixed top-16 sm:top-18 left-1/2 -translate-x-1/2 z-40 max-w-[calc(100vw-1.5rem)] sm:max-w-md pointer-events-auto select-none"
         >
           <div className="flex items-center gap-1 rounded-full border border-white/12 bg-[#0A0D0F]/90 px-1.5 py-1 shadow-2xl backdrop-blur-2xl ring-1 ring-white/5">
             {SERVICE_CHIPS.map((chip) => {

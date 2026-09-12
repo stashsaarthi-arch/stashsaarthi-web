@@ -1,3 +1,25 @@
+- [x] **[Mobile UX & Responsive Architecture] Task 144: Mobile Viewport Redesign & Scroll Fatigue Elimination (<= 768px) — 2026-09-12**:
+  - **Scroll Reduction Metric**: Reduced mobile initial scroll height from **8,386px** (expanding to 28,000+px) down to **2,164px** at viewport `390x844` (**74.2% scroll reduction**, exceeding the >= 65% target and satisfying the < 2200px initial height threshold).
+  - **Key Structural Refactors**:
+    1. **Strict Single-Service View & Floating Bottom Dock (`src/components/stash/MobileStickyCTA.tsx`)**:
+       - Compact 52px floating dock (`h-[52px] max-h-[56px]`) with 4 icon chips: `[🍱 Food] [🧳 Stash] [🏠 Rooms] [🤝 Connect]` + `[⚡ Book]`/`[List]` quick CTA.
+       - Tapping instantly switches active service in-place and smoothly navigates to `#solutions`.
+    2. **Horizontal Snap-Scroll Carousels (`src/components/stash/Ecosystem.tsx`, `Rooms.tsx`, `TokenMealHub.tsx`)**:
+       - Converted multi-item vertical stacks into single-row horizontal swipe carousels: `flex sm:grid overflow-x-auto sm:overflow-visible snap-x snap-mandatory gap-3 sm:gap-4 pb-2 no-scrollbar touch-pan-x overscroll-x-contain`.
+       - Standardized card snapping: `snap-center min-w-[85vw] max-w-[88vw] sm:min-w-0 sm:max-w-none shrink-0 sm:shrink`.
+    3. **Slide-Up Bottom Sheet Drawers for Heavy Forms (`src/components/stash/CalculatorHub.tsx`, `FooterSection.tsx`)**:
+       - Replaced 1,342px inline calculator on mobile with a compact ~106px teaser micro-card that launches the full savings simulator in a slide-up bottom drawer (`Sheet side="bottom"`). Desktop view remains 100% inline.
+       - Replaced 1,200px waitlist form on mobile with a compact teaser card that triggers a slide-up bottom drawer.
+    4. **Thematic Collapsible Trays (`src/components/stash/MobileSecondaryAccordions.tsx`, `FooterSection.tsx`)**:
+       - Replaced 12 loose modules with 5 grouped thematic expandable trays (Trust & Flow, Economics & Mission, Community & Council, FAQs, Rewards & Governance), dropping accordion footprint to 344px.
+       - Wrapped footer links and legal columns in a mobile collapsible directory accordion, shrinking footer height from 1,364px to 389px while keeping full 4-column layout on desktop.
+    5. **Desktop Navigation Cleanup on Mobile**:
+       - Set `QuickCategoryNav`, `RoleLane`, and `Hero` bouncing mouse scroll indicator to `hidden md:block` / `hidden sm:flex` to eliminate redundant vertical consumption.
+  - **Verification Matrix**:
+    - `npm run build`: ✅ 0 errors (Vite client + Nitro SSR build clean).
+    - Playwright MCP at `390x844`: `scrollHeight: 2164px` (< 2200px target), fluid horizontal swipe confirmed on cards, bottom dock chip switching verified, drawer forms verified.
+  - **Deployment**: Pushed to Git (`ralph-loop-i67ws` & `main`) and deployed to Vercel production.
+
 - [x] **[DevOps & Deployment] Task 143: Production Release Sync & Multi-Platform Deployment (Git & Vercel) — 2026-09-12**:
   - **Build Verification**: `npm run build` executed and passed with 0 errors (Vite production client + Nitro SSR server bundle compiled cleanly in 4.18s).
   - **Git Operations**:

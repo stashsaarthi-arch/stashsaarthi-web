@@ -40,6 +40,19 @@ import { InvestorModal } from "./InvestorModal";
 import { CampusCaptainModal } from "./CampusCaptainModal";
 import { AndroidGoPerformanceModal } from "./AndroidGoPerformanceModal";
 import { LowDataToggle } from "@/components/ui/LowDataToggle";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+} from "@/components/ui/sheet";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@/components/ui/accordion";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useLanguage } from "@/context/LanguageContext";
 import { FOUNDER_WHATSAPP, FOUNDER_PHONE_DISPLAY, FOUNDER_LINKEDIN } from "@/lib/constants";
@@ -116,6 +129,7 @@ export const FooterSection = memo(function FooterSection() {
   const [showInvestorModal, setShowInvestorModal] = useState(false);
   const [showCaptainModal, setShowCaptainModal] = useState(false);
   const [showAndroidGoModal, setShowAndroidGoModal] = useState(false);
+  const [waitlistDrawerOpen, setWaitlistDrawerOpen] = useState(false);
   const [touched, setTouched] = useState<{ name?: boolean; email?: boolean; phone?: boolean }>({});
 
   const isPhoneValid = phone.trim() ? isValidPhone(phone) : false;
@@ -263,38 +277,14 @@ export const FooterSection = memo(function FooterSection() {
     setSubmitting(false);
   };
 
-  return (
-    <footer id="waitlist-form" className="relative mt-4 border-t border-white/10 scroll-mt-20">
-      <div className="relative mx-auto max-w-5xl px-4 py-6 sm:py-8 text-center">
-        <h2 className="text-xl font-extrabold tracking-tight sm:text-3xl">
-          <span className="text-gradient">{t.footer.title}</span>
-        </h2>
-        <p className="mx-auto mt-1 max-w-xl text-xs sm:text-sm text-muted-foreground">
-          {t.footer.subtitle}
-        </p>
-
-        {submitted ? (
-          <div className="mt-4 mb-3">
-            <p className="text-base font-bold text-emerald-400 mb-1">
-              {isHi
-                ? "🎉 आप प्राथमिकता सूची में शामिल हो गए हैं!"
-                : "🎉 You're on the priority list!"}
-            </p>
-            <p className="text-xs text-muted-foreground mb-3">
-              {isHi
-                ? "हमने आपके स्टैशक्रेडिट सुरक्षित कर लिए हैं। हमारी टीम 24 घंटे में संपर्क करेगी।"
-                : "We've reserved your StashCredits. Our team will reach out within 24 hours."}
-            </p>
-            <StashPass tokenId={tokenId} name={fullName} type={userType} />
-          </div>
-        ) : (
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              void handleSubmit();
-            }}
-            className="glass mx-auto mt-4 max-w-xl rounded-2xl p-3.5 sm:p-4"
-          >
+  const renderWaitlistForm = () => (
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        void handleSubmit();
+      }}
+      className="glass mx-auto mt-4 max-w-xl rounded-2xl p-3.5 sm:p-4 text-left"
+    >
             {/* User Type Toggle */}
             <div className="mb-3 flex items-center justify-center gap-2">
               <button
@@ -495,10 +485,98 @@ export const FooterSection = memo(function FooterSection() {
                 : "Zero spam. Only alerts when nodes go live in your campus area."}
             </p>
           </form>
-        )}
+  );
+
+  return (
+    <footer id="waitlist-form" className="relative mt-4 border-t border-white/10 scroll-mt-20">
+      <div className="relative mx-auto max-w-5xl px-4 py-3.5 sm:py-8 text-center">
+        {/* ── Mobile Compact Teaser Card (< md) ── */}
+        <div className="block md:hidden mx-auto max-w-xl">
+          <div className="glass rounded-2xl border border-white/12 p-3.5 text-center shadow-lg">
+            <h3 className="text-sm font-extrabold text-white">
+              {isHi ? "स्टैशसारथी प्राथमिकता सूची में शामिल हों" : "Join the Priority Waitlist"}
+            </h3>
+            <p className="mt-0.5 text-[11px] text-muted-foreground">
+              {isHi ? "अपने स्टैशक्रेडिट और अर्ली-बर्ड बचत सुरक्षित करें" : "Reserve your StashCredits & early-bird perks"}
+            </p>
+            {submitted ? (
+              <div className="mt-2.5">
+                <p className="text-xs font-bold text-emerald-400">🎉 StashPass Active: {tokenId}</p>
+                <Button
+                  onClick={() => setWaitlistDrawerOpen(true)}
+                  variant="outline"
+                  className="mt-2 h-8 text-xs font-bold border-emerald-500/40 text-emerald-300"
+                >
+                  View Digital Pass
+                </Button>
+              </div>
+            ) : (
+              <Button
+                onClick={() => setWaitlistDrawerOpen(true)}
+                className="mt-2.5 w-full bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold text-xs h-9 rounded-xl shadow-md cursor-pointer"
+              >
+                ⚡ {isHi ? "वेटलिस्ट में शामिल हों (मुफ़्त)" : "Join Priority Waitlist (Free)"}
+              </Button>
+            )}
+          </div>
+
+          {/* Slide-up Bottom Drawer on Mobile */}
+          <Sheet open={waitlistDrawerOpen} onOpenChange={setWaitlistDrawerOpen}>
+            <SheetContent side="bottom" className="max-h-[88vh] overflow-y-auto rounded-t-3xl bg-[#0A0D0F]/98 border-t border-white/15 p-4 sm:p-6 focus:outline-none shadow-2xl">
+              <SheetHeader className="text-left pb-2 border-b border-white/10">
+                <SheetTitle className="text-base font-extrabold text-white">
+                  {t.footer.title}
+                </SheetTitle>
+                <SheetDescription className="text-xs text-muted-foreground">
+                  {t.footer.subtitle}
+                </SheetDescription>
+              </SheetHeader>
+              <div className="py-2">
+                {submitted ? (
+                  <div className="mt-4 mb-3 text-center">
+                    <p className="text-base font-bold text-emerald-400 mb-1">
+                      {isHi ? "🎉 आप प्राथमिकता सूची में शामिल हो गए हैं!" : "🎉 You're on the priority list!"}
+                    </p>
+                    <StashPass tokenId={tokenId} name={fullName} type={userType} />
+                  </div>
+                ) : (
+                  renderWaitlistForm()
+                )}
+              </div>
+            </SheetContent>
+          </Sheet>
+        </div>
+
+        {/* ── Desktop Inline Waitlist (>= md) ── */}
+        <div className="hidden md:block">
+          <h2 className="text-xl font-extrabold tracking-tight sm:text-3xl">
+            <span className="text-gradient">{t.footer.title}</span>
+          </h2>
+          <p className="mx-auto mt-1 max-w-xl text-xs sm:text-sm text-muted-foreground">
+            {t.footer.subtitle}
+          </p>
+
+          {submitted ? (
+            <div className="mt-4 mb-3">
+              <p className="text-base font-bold text-emerald-400 mb-1">
+                {isHi
+                  ? "🎉 आप प्राथमिकता सूची में शामिल हो गए हैं!"
+                  : "🎉 You're on the priority list!"}
+              </p>
+              <p className="text-xs text-muted-foreground mb-3">
+                {isHi
+                  ? "हमने आपके स्टैशक्रेडिट सुरक्षित कर लिए हैं। हमारी टीम 24 घंटे में संपर्क करेगी।"
+                  : "We've reserved your StashCredits. Our team will reach out within 24 hours."}
+              </p>
+              <StashPass tokenId={tokenId} name={fullName} type={userType} />
+            </div>
+          ) : (
+            renderWaitlistForm()
+          )}
+        </div>
       </div>
 
-      <div className="overflow-hidden border-y border-white/10 py-2.5">
+      <div className="overflow-hidden border-y border-white/10 py-2">
         <div className="flex gap-8 whitespace-nowrap text-xs uppercase tracking-[0.2em] text-muted-foreground">
           {[0, 1].map((k) => (
             <div key={k} className="flex shrink-0 animate-[marquee_28s_linear_infinite] gap-8">
@@ -512,7 +590,95 @@ export const FooterSection = memo(function FooterSection() {
         </div>
       </div>
 
-      <div className="mx-auto grid max-w-7xl gap-6 px-4 py-6 sm:py-8 md:grid-cols-4">
+      {/* ── Mobile Compact Directory Accordion (< md) ── */}
+      <div className="block md:hidden mx-auto max-w-xl px-4 py-2">
+        <Accordion type="single" collapsible className="w-full">
+          <AccordionItem value="directory" className="border-white/10 rounded-xl bg-white/[0.02] px-3">
+            <AccordionTrigger className="text-xs font-bold text-muted-foreground hover:text-white py-2.5">
+              <span className="flex items-center gap-2">
+                <span>📁 {isHi ? "स्टैशसारथी निर्देशिका व नीतियां" : "Directory, Ecosystem & Legal"}</span>
+                <span className="text-[9px] bg-white/10 text-slate-300 px-1.5 py-0.5 rounded">
+                  {isHi ? "विस्तार करें" : "Expand"}
+                </span>
+              </span>
+            </AccordionTrigger>
+            <AccordionContent className="pt-2 pb-4">
+              <div className="grid grid-cols-2 gap-4 text-left">
+                {/* Ecosystem Links */}
+                <div>
+                  <h4 className="text-xs font-bold text-white mb-2">{isHi ? "इकोसिस्टम" : "Ecosystem"}</h4>
+                  <ul className="space-y-1.5 text-xs text-muted-foreground">
+                    {ECOSYSTEM.map((l) => (
+                      <li key={l.label}>
+                        <a href={`#${l.target}`} onClick={smoothScrollTo(l.target)} className="hover:text-cyan block py-0.5">
+                          {l.label}
+                        </a>
+                      </li>
+                    ))}
+                    <li>
+                      <Link to="/kanpur-student-council" className="text-cyan-400 font-semibold block py-0.5">
+                        {isHi ? "🏛️ छात्र परिषद" : "🏛️ Student Council"}
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/kakadeo-survival-guide" className="text-emerald-400 font-semibold block py-0.5">
+                        {isHi ? "काकादेव गाइड (PDF)" : "Kakadeo Guide (PDF)"}
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+                {/* Legal & Company */}
+                <div>
+                  <h4 className="text-xs font-bold text-white mb-2">{isHi ? "कंपनी व कानूनी" : "Company & Legal"}</h4>
+                  <ul className="space-y-1.5 text-xs text-muted-foreground">
+                    {COMPANY.map((l) => (
+                      <li key={l.label}>
+                        <button type="button" onClick={() => setDoc(l.doc)} className="hover:text-cyan text-left block py-0.5">
+                          {l.label}
+                        </button>
+                      </li>
+                    ))}
+                    {LEGAL.map((l) => (
+                      <li key={l.label}>
+                        <button type="button" onClick={() => setDoc(l.doc)} className="hover:text-cyan text-left block py-0.5">
+                          {l.label}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              <div className="mt-4 pt-3 border-t border-white/10 flex flex-wrap gap-2 justify-center">
+                <button
+                  type="button"
+                  onClick={() => setShowInvestorModal(true)}
+                  className="rounded-lg border border-white/10 bg-black/40 px-2.5 py-1 text-[11px] font-semibold text-muted-foreground hover:text-amber-400 cursor-pointer"
+                >
+                  <Download className="inline h-3 w-3 mr-1" /> {t.footer.investorCTA}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setShowCaptainModal(true)}
+                  className="rounded-lg border border-cyan-500/30 bg-cyan-500/10 px-2.5 py-1 text-[11px] font-semibold text-cyan-300 cursor-pointer"
+                >
+                  <Award className="inline h-3 w-3 mr-1" /> {isHi ? "कैंपस कैप्टन" : "Captain"}
+                </button>
+                <a
+                  href={`https://wa.me/${FOUNDER_WHATSAPP}?text=${encodeURIComponent(isHi ? "नमस्ते StashSaarthi टीम" : "Hi StashSaarthi Team")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-lg border border-emerald-500/40 bg-emerald-500/10 px-2.5 py-1 text-[11px] font-semibold text-emerald-400 cursor-pointer"
+                >
+                  <MessageCircle className="inline h-3 w-3 mr-1" /> WhatsApp
+                </a>
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      </div>
+
+      {/* ── Desktop Inline Directory (>= md) ── */}
+      <div className="hidden md:grid mx-auto max-w-7xl gap-4 px-4 py-8 grid-cols-4">
         <div>
           <div className="flex items-center gap-2 mb-3">
             <BrandLogo height={36} className="h-8 sm:h-9" />
@@ -696,30 +862,26 @@ export const FooterSection = memo(function FooterSection() {
         <DocCol title={isHi ? "कानूनी" : "Legal"} links={LEGAL} onOpen={setDoc} />
       </div>
 
-      <div className="border-t border-white/10 px-4 py-6">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 sm:flex-row text-xs text-muted-foreground">
+      <div className="border-t border-white/10 px-4 py-3 sm:py-6">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 sm:gap-4 sm:flex-row text-[11px] sm:text-xs text-muted-foreground">
           <div className="space-y-1 text-center sm:text-left">
-            <p>
+            <p className="text-[11px] sm:text-xs">
               {isHi
-                ? "© 2026 StashSaarthi Technologies. 100% प्रामाणिक पारदर्शिता के साथ कानपुर, उत्तर प्रदेश में निर्मित।"
-                : "© 2026 StashSaarthi Technologies. Built with radical honesty & physical accountability in Kanpur, Uttar Pradesh, India."}
+                ? "© 2026 StashSaarthi Technologies • कानपुर, उत्तर प्रदेश"
+                : "© 2026 StashSaarthi Technologies • Kanpur, UP"}
             </p>
-            <p className="font-mono">
+            <p className="hidden sm:block font-mono text-xs">
               {isHi
                 ? "नोडल परिचालन कार्यालय: 117/के-ब्लॉक, कल्याणपुर, कानपुर — 208016 | सीधा ईमेल: stashsaarthi@gmail.com"
                 : "Operational Hub: 117/K-Block, Kalyanpur, Kanpur — 208016 | Direct Email: stashsaarthi@gmail.com"}
             </p>
-            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 pt-1 text-[11px]">
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-2.5 gap-y-1 pt-0.5 text-[10.5px] sm:text-[11px]">
               <Link to="/privacy" className="text-emerald-400 hover:underline font-semibold">
-                {isHi ? "गोपनीयता नीति (Privacy Policy)" : "Privacy Policy"}
-              </Link>
-              <span>•</span>
-              <Link to="/privacy" className="text-cyan-400 hover:underline font-semibold">
-                {isHi ? "🛡️ DPDP 2023 ऑडिट पोर्टल" : "🛡️ DPDP & GDPR Audit Portal"}
+                {isHi ? "गोपनीयता नीति" : "Privacy"}
               </Link>
               <span>•</span>
               <Link to="/terms" className="text-amber-400 hover:underline font-semibold">
-                {isHi ? "सेवा की शर्तें (Terms of Service)" : "Terms of Service"}
+                {isHi ? "सेवा शर्तें" : "Terms"}
               </Link>
               <span>•</span>
               <button
@@ -727,7 +889,7 @@ export const FooterSection = memo(function FooterSection() {
                 onClick={() => setDoc("liability")}
                 className="hover:text-white transition-colors cursor-pointer"
               >
-                {isHi ? "₹10k बीमा चार्टर" : "₹10k Insurance Charter"}
+                {isHi ? "₹10k बीमा चार्टर" : "₹10k Cover"}
               </button>
               <span>•</span>
               <button
@@ -735,7 +897,7 @@ export const FooterSection = memo(function FooterSection() {
                 onClick={() => setShowAndroidGoModal(true)}
                 className="text-cyan-400 hover:text-cyan-300 transition-colors cursor-pointer font-medium"
               >
-                {isHi ? "📱 एंड्रॉइड गो परफॉर्मेंस टेस्ट" : "📱 Android Go Audit"}
+                {isHi ? "एंड्रॉइड गो" : "Android Go"}
               </button>
               <span>•</span>
               <LowDataToggle compact />

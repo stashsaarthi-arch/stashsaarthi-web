@@ -361,8 +361,9 @@ export function Rooms({ onList, onBook }: { onList: () => void; onBook?: OpenBoo
                 direction="vertical"
                 duration={0.5}
                 delay={i * 0.05}
+                className="snap-center min-w-[85vw] max-w-[88vw] sm:min-w-0 sm:max-w-none shrink-0 sm:shrink"
               >
-                <article className="glass flex flex-col rounded-2xl p-3 group min-w-[285px] max-w-[325px] sm:min-w-0 sm:max-w-none shrink-0 sm:shrink snap-center border border-white/[0.08]">
+                <article className="glass flex flex-col rounded-2xl p-3 group w-full h-full border border-white/[0.08]">
                   <div className="relative w-full h-36 rounded-xl overflow-hidden mb-2.5 border border-white/10 bg-slate-900">
                     <RoomImage
                       src={l.image || FALLBACK_IMAGES[i % 3] || DEFAULT_ROOM_SVG}
