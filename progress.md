@@ -1,3 +1,25 @@
+- [x] **[Conversion & Multi-Service Booking Flow UX] Task 146: Booking Friction Elimination Across All 6 Services — 2026-09-12**:
+  - **Context & Audit**: Executed an autonomous full-funnel booking audit acting as a real user across all 6 platform services on mobile & desktop, diagnosing context loss on room booking, disconnect between kitchen showcase & official checkout, persona role mismatch on host onboarding, and missing transaction verification on UPI QR payments.
+  - **Key Structural Solutions Implemented**:
+    1. **Room Booking Context & Visit Scheduling (`Rooms.tsx`, `BookingModal.tsx`, `types.ts`, `routes/index.tsx`)**:
+       - When clicking *"Book Directly"* on any verified room card, the specific room address, rent amount, and room type are automatically prefilled into `BookingModal` (tested & verified in Playwright: prefilled *"Kakadeo, Kanpur · 3 min walk to PW & Allen"* and exact rent *"₹5,800"*).
+       - Added a dedicated *"Schedule 15-min Room Visit"* button alongside Book Directly, setting initial deposit to ₹0 so students can inspect properties prior to committing.
+    2. **Kitchen Showcase Direct Subscription Checkout (`TokenMealHub.tsx`, `SolutionsHub.tsx`)**:
+       - Connected `onBook` to `TokenMealHub`'s Quick Top-Up packages (`Starter Trial ₹300`, `Smart Hopper ₹599`, `Monthly Freedom ₹1,449`, `Semester Pro ₹2,799`).
+       - Added a prominent *"Subscribe via Official Escrow & StashPass"* CTA button, allowing direct subscription via 100% Escrow / UPI rather than only simulated in-memory demo balance debits.
+    3. **Host Persona Room Listing Adaptation (`RoomListingModal.tsx`)**:
+       - Integrated `usePersona()` into the listing modal. When in `host` persona mode, replaced the student landlord-review form (*"Owner Behaviour rating"*, *"Landlord Pros & Cons"*) with dignified host-centric fields: *"House Norms & Discipline"*, *"Student Profile & Habit Preferences"*, and a *"Verified Host Safety Charter"* badge with ₹10k safety cover.
+    4. **12-Digit UPI UTR / Reference ID Auto-Verification (`BookingModal.tsx`)**:
+       - Added an explicit 12-digit UPI Reference / UTR input field under the static UPI QR code on Step 2 with real-time numeric constraint checking and badge indicators (`12 Digits ✓`).
+       - Formatted UTR into the booking payload and confirmation message so students feel confident their payment receipt is officially bound to their digital StashPass.
+    5. **Saarthi Connect Senior Host Context & Match Tokens (`Connect.tsx`, `MatchDrawer.tsx`)**:
+       - Passed active senior host's name, mutual exchange offers, and compatibility score into `MatchDrawer`.
+       - Rendered an amber senior match badge at the top of the drawer and issued a structured reference tracking token (`#SC-XXXXX`) upon submission.
+  - **Verification Matrix**:
+    - `npm run build`: ✅ 0 errors (Vite client + Nitro SSR build clean in 5.20s).
+    - Playwright MCP: Tested and verified room prefill (`Kakadeo, Kanpur`, `₹5,800`), Step 2 UTR input validation (`bk-utr`), and dialog flow.
+  - **Deployment**: Pushed to GitHub and deployed live.
+
 - [x] **[Mobile UX Refinement] Task 145: Balanced Medium-Length Mobile Scroll Architecture — 2026-09-12**:
   - **Context & Adjustment**: Following user feedback (*"abhi bhot kmm scrolling kr di medium length rkho"*), relaxed over-aggressive hiding to establish a rich, balanced medium-length page flow (~8,300px vs 28,000+px previously).
   - **Key Structural Adjustments**:

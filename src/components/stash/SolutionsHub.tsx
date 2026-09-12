@@ -396,7 +396,7 @@ export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: S
         >
           {activeTab === "stash" && <Ecosystem onBook={onBook} />}
           {activeTab === "rooms" && <Rooms onList={onListRoom} onBook={onBook} />}
-          {activeTab === "kitchen" && <TokenMealHub />}
+          {activeTab === "kitchen" && <TokenMealHub onBook={onBook} />}
           {activeTab === "connect" && <Connect onBook={onBook} />}
         </motion.div>
       </AnimatePresence>

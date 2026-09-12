@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Loader2 } from "lucide-react";
+import { Loader2, Heart, CheckCircle2 } from "lucide-react";
 import { toast } from "sonner";
 import {
   Sheet,
@@ -23,11 +23,19 @@ export function MatchDrawer({
   onOpenChange,
   city,
   presetRole = "student",
+  seniorName,
+  seniorDetail,
+  seniorOffer,
+  compatibilityScore,
 }: {
   open: boolean;
   onOpenChange: (v: boolean) => void;
   city?: string;
   presetRole?: "student" | "senior";
+  seniorName?: string;
+  seniorDetail?: string;
+  seniorOffer?: string;
+  compatibilityScore?: number;
 }) {
   const { language } = useLanguage();
   const isHi = language === "hi";
@@ -70,6 +78,9 @@ export function MatchDrawer({
     }
 
     setSubmitting(true);
+    const matchToken = `SC-${Math.floor(10000 + Math.random() * 90000)}`;
+    const fullMessage = `${seniorName ? `[Match with ${seniorName}] ` : ""}${message.trim() ? `${message.trim()} · ` : ""}Token: ${matchToken}`;
+
     const payload = {
       user_id: user?.id ?? null,
       name: name.trim(),
@@ -77,7 +88,7 @@ export function MatchDrawer({
       phone: phone.trim(),
       role: presetRole,
       preferred_location: location.trim() || null,
-      message: message.trim() || null,
+      message: fullMessage,
     };
 
     try {
@@ -99,12 +110,12 @@ export function MatchDrawer({
       onOpenChange(false);
       toast.success(
         isHi
-          ? "🎉 आपका अनुरोध प्राप्त हुआ! हमारी टीम 24 घंटे में संपर्क करेगी।"
-          : "Welcome aboard! Our team will reach out within 24 hours",
+          ? `🎉 मैचिंग टोकन #${matchToken} जनरेट हुआ!`
+          : `🎉 Match Token #${matchToken} Generated!`,
         {
           description: isHi
-            ? "आपका मैचिंग अनुरोध हमारी कम्युनिटी टीम के पास है।"
-            : "Your match request is with our community team.",
+            ? `${seniorName || "वरिष्ठ साथी"} के साथ आपका अनुरोध कम्युनिटी टीम को भेज दिया गया है। 24 घंटे में पुष्टि होगी।`
+            : `Your request to connect with ${seniorName || "Senior Host"} is queued for 24h verification.`,
         },
       );
     } catch (err: unknown) {
@@ -137,6 +148,28 @@ export function MatchDrawer({
               ? "अपने बारे में थोड़ा बताएं — हम हर जोड़ी का व्यक्तिगत सत्यापन करके 24 घंटे में पुष्टि करते हैं।"
               : "Tell us a little about you — we hand-match every pair and confirm within 24 hours."}
           </SheetDescription>
+
+          {/* Selected Senior Context Banner */}
+          {(seniorName || city) && (
+            <div className="mt-3 p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-left space-y-1">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold text-amber-300 flex items-center gap-1.5">
+                  <Heart className="w-3.5 h-3.5 text-amber-400" />
+                  {seniorName ? `Connecting with ${seniorName}` : "Senior Living Match"}
+                </span>
+                {compatibilityScore && (
+                  <span className="font-mono text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                    {compatibilityScore}% Match
+                  </span>
+                )}
+              </div>
+              {seniorOffer && (
+                <p className="text-[11px] text-slate-300">
+                  Offers: <strong className="text-white">{seniorOffer}</strong>
+                </p>
+              )}
+            </div>
+          )}
         </SheetHeader>
 
         <form onSubmit={submit} className="mt-6 space-y-4">

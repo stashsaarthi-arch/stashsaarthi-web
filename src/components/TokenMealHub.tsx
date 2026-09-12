@@ -19,6 +19,7 @@ import { useThaliPriceLabelVariant, trackThaliPriceClick, ThaliPriceLabelVariant
 import { CsoKitchenSealModal } from "./stash/CsoKitchenSealModal";
 import { MealTokenLedgerModal } from "./stash/MealTokenLedgerModal";
 import { motion, AnimatePresence } from "motion/react";
+import type { OpenBooking } from "./stash/types";
 
 
 type FulfillmentType = "DineIn_Pickup" | "RoomDelivery";
@@ -306,7 +307,7 @@ const MealTierCard: React.FC<MealTierCardProps> = ({ tier, isSelected, tierCost,
   );
 };
 
-export const TokenMealHub: React.FC = () => {
+export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => {
   // Wallet State
   const [tokenBalance, setTokenBalance] = useState<number>(450); // Demo user balance
   const [fulfillmentType, setFulfillmentType] = useState<FulfillmentType>("DineIn_Pickup");
@@ -850,7 +851,16 @@ export const TokenMealHub: React.FC = () => {
                   whileTap={{ scale: 0.96 }}
                   onClick={() => {
                     playMicroClick();
-                    handleQuickRecharge(pack.tokens, pack.price);
+                    if (onBook) {
+                      onBook({
+                        service: "kitchen",
+                        note: `Subscription Pack: ${pack.name} (+${pack.tokens} Tokens · ${pack.desc})`,
+                        amount: pack.price,
+                        mealPlan: pack.id as any,
+                      });
+                    } else {
+                      handleQuickRecharge(pack.tokens, pack.price);
+                    }
                   }}
                   className={`p-3 sm:py-3.5 text-center rounded-xl bg-slate-950 border transition-all text-xs cursor-pointer flex flex-col justify-between ${pack.recommended ? "border-emerald-500/50 hover:bg-emerald-500/10" : "border-slate-800 hover:border-slate-700 hover:bg-slate-800/50"}`}
                 >
@@ -860,6 +870,25 @@ export const TokenMealHub: React.FC = () => {
                 </motion.button>
               ))}
             </div>
+
+            {onBook && (
+              <button
+                type="button"
+                onClick={() => {
+                  playClick();
+                  onBook({
+                    service: "kitchen",
+                    note: "Monthly Homestyle Tiffin Subscription with 100% Escrow",
+                    amount: 599,
+                    mealPlan: "smart",
+                  });
+                }}
+                className="w-full mt-3 py-2 px-3 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-400 text-black font-extrabold text-xs flex items-center justify-center gap-1.5 shadow-md hover:opacity-95 transition cursor-pointer"
+              >
+                <Ticket className="w-3.5 h-3.5" />
+                <span>Subscribe via Official Escrow & StashPass →</span>
+              </button>
+            )}
           </div>
         </div>
       </div>

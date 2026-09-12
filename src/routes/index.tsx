@@ -283,6 +283,9 @@ function Index() {
             bags={prefill.bags}
             months={prefill.months}
             amount={prefill.amount}
+            address={prefill.address}
+            roomType={prefill.roomType}
+            mealPlan={prefill.mealPlan}
           />
         </ErrorBoundary>
         <ErrorBoundary sectionName="Room Listing Modal" compact>

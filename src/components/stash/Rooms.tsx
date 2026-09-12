@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
-import { BadgeCheck, MessageCircle, Phone, MapPin, Star, Gift, Compass, Zap, Search, Home } from "lucide-react";
+import { BadgeCheck, MessageCircle, Phone, MapPin, Star, Gift, Compass, Zap, Search, Home, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AnimatedContent from "@/components/ui/AnimatedContent";
 import { supabase } from "@/integrations/supabase/client";
@@ -447,14 +447,44 @@ export function Rooms({ onList, onBook }: { onList: () => void; onBook?: OpenBoo
 
                     <div className="mt-3 flex items-center justify-between gap-1.5 pt-2 border-t border-white/[0.06]">
                       {onBook ? (
-                        <Button
-                          variant="heroEmerald"
-                          size="sm"
-                          className="flex-1 text-xs py-1.5 font-bold min-h-[36px]"
-                          onClick={() => onBook({ service: "spaces" })}
-                        >
-                          {t.rooms.bookDirectly}
-                        </Button>
+                        <div className="flex-1 flex items-center gap-1.5">
+                          <Button
+                            variant="heroEmerald"
+                            size="sm"
+                            className="flex-1 text-xs py-1.5 font-bold min-h-[36px]"
+                            onClick={() => {
+                              const roomRent = l.rent_amount || 6000;
+                              const roomTypePref = roomRent > 8000 ? "floor" : roomRent <= 4500 ? "shared" : "single";
+                              onBook({
+                                service: "spaces",
+                                note: `Selected Room: ${l.address_location} (₹${roomRent.toLocaleString("en-IN")}/mo)`,
+                                amount: roomRent,
+                                address: l.address_location || undefined,
+                                roomType: roomTypePref,
+                              });
+                            }}
+                          >
+                            {t.rooms.bookDirectly}
+                          </Button>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="text-[11px] py-1.5 px-2 border-emerald-500/30 text-emerald-300 hover:bg-emerald-500/10 min-h-[36px]"
+                            onClick={() => {
+                              onBook({
+                                service: "spaces",
+                                note: `Schedule Verified Visit: ${l.address_location} (₹${(l.rent_amount || 6000).toLocaleString("en-IN")}/mo)`,
+                                amount: 0,
+                                address: l.address_location || undefined,
+                                roomType: (l.rent_amount || 6000) > 8000 ? "floor" : (l.rent_amount || 6000) <= 4500 ? "shared" : "single",
+                              });
+                            }}
+                            title={isHi ? "15-मिनट ऑन-साइट रूम विजिट शेड्यूल करें" : "Schedule 15-min Room Visit"}
+                          >
+                            <Calendar className="h-3 w-3 sm:mr-1 text-emerald-400" />
+                            <span className="hidden sm:inline">{isHi ? "विजिट" : "Visit"}</span>
+                          </Button>
+                        </div>
                       ) : (
                         <Button
                           variant="outline"

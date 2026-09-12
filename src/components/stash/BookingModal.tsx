@@ -73,6 +73,9 @@ export function BookingModal({
   bags: initialBags = 1,
   months: initialMonths = 1,
   amount: initialAmount,
+  address: initialAddress,
+  roomType: initialRoomType,
+  mealPlan: initialMealPlan,
 }: {
   open: boolean;
   onOpenChange: (v: boolean) => void;
@@ -81,6 +84,9 @@ export function BookingModal({
   bags?: number | undefined;
   months?: number | undefined;
   amount?: number | undefined;
+  address?: string | undefined;
+  roomType?: "single" | "shared" | "floor" | undefined;
+  mealPlan?: "trial" | "smart" | "freedom" | "semester" | undefined;
 }) {
   const { user } = useAuth();
   const { language } = useLanguage();
@@ -221,6 +227,7 @@ export function BookingModal({
   const [paymentMode, setPaymentMode] = useState<"upi_qr" | "partial_cash" | "escrow_reserve">("upi_qr");
   const [copiedUpi, setCopiedUpi] = useState(false);
   const [tokenId, setTokenId] = useState<string>("");
+  const [utrNumber, setUtrNumber] = useState("");
   const [touched, setTouched] = useState<{
     name?: boolean;
     email?: boolean;
@@ -282,7 +289,7 @@ export function BookingModal({
   // Dynamic Amount Calculation across all 6 services
   const calcAmount = (() => {
     let base = 0;
-    if (initialAmount) {
+    if (initialAmount !== undefined) {
       base = initialAmount;
     } else {
       switch (service) {
@@ -332,13 +339,19 @@ export function BookingModal({
         setTokenId("");
         setTouched({});
         setPaymentMode("upi_qr");
+        setUtrNumber("");
       }, 300);
       return;
     }
     setService(serviceProp);
+    if (initialAddress) setAddressDetail(initialAddress);
+    if (initialRoomType) setRoomType(initialRoomType);
+    if (initialMealPlan) setMealPlan(initialMealPlan);
+    if (initialBags) setBags(initialBags);
+    if (initialMonths) setMonths(initialMonths);
     if (user?.name) setName((n) => n || user.name!);
     if (user?.email) setEmail((e) => e || user.email!);
-  }, [open, serviceProp, user]);
+  }, [open, serviceProp, user, initialAddress, initialRoomType, initialMealPlan, initialBags, initialMonths]);
 
   const isPhoneValid = !phone.trim() ? true : isValidPhone(phone);
   const isEmailValid = !email.trim() ? true : isValidEmail(email);
@@ -449,7 +462,8 @@ export function BookingModal({
           ? `100% Instant UPI (₹${calcAmount})`
           : `Escrow Reserve Hold (₹${calcAmount})`;
 
-      const fullMessage = `${note ? `${note} · ` : ""}${serviceMeta} · EstAmount: ₹${calcAmount} · Token: ${generatedToken} · PIN: ${pincode || "N/A"} · PayMode: ${payModeTag}`;
+      const utrTag = utrNumber.trim() ? ` · UTR: ${utrNumber.trim()}` : "";
+      const fullMessage = `${note ? `${note} · ` : ""}${serviceMeta} · EstAmount: ₹${calcAmount} · Token: ${generatedToken} · PIN: ${pincode || "N/A"} · PayMode: ${payModeTag}${utrTag}`;
 
       const cleanName = name.trim() || (service === "micro" ? "Host Partner" : "Campus Student");
       const cleanPhone = phone.trim();
@@ -1771,6 +1785,36 @@ export function BookingModal({
                         {calcAmount === 0 ? "₹0" : `₹${calcAmount.toLocaleString("en-IN")}`}
                       </span>
                     </div>
+                  </div>
+                )}
+
+                {/* 12-Digit UPI Ref / UTR Input Box */}
+                {(paymentMode === "upi_qr" || paymentMode === "partial_cash") && calcAmount > 0 && (
+                  <div className="rounded-xl border border-white/10 bg-black/40 p-3 space-y-1.5 text-left">
+                    <div className="flex items-center justify-between">
+                      <Label htmlFor="bk-utr" className="text-[11px] font-semibold text-slate-200 flex items-center gap-1.5">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                        {isHi ? "12-अंकीय UPI UTR / संदर्भ नंबर (वैकल्पिक):" : "12-Digit UPI Ref / UTR No. (Optional):"}
+                      </Label>
+                      {utrNumber && (
+                        <span className={`text-[10px] font-mono ${utrNumber.trim().length === 12 ? "text-emerald-400" : "text-amber-400"}`}>
+                          {utrNumber.trim().length === 12 ? (isHi ? "सत्यापित UTR ✓" : "12 Digits ✓") : `${utrNumber.trim().length}/12 digits`}
+                        </span>
+                      )}
+                    </div>
+                    <Input
+                      id="bk-utr"
+                      value={utrNumber}
+                      onChange={(e) => setUtrNumber(e.target.value.replace(/\D/g, "").slice(0, 12))}
+                      placeholder={isHi ? "उदा. 423456789012" : "e.g. 423456789012"}
+                      maxLength={12}
+                      className="h-8 border-white/10 bg-black/60 text-xs font-mono text-white placeholder:text-slate-600"
+                    />
+                    <p className="text-[10px] text-slate-400">
+                      {isHi
+                        ? "Google Pay, PhonePe या Paytm भुगतान के बाद 12 अंकों का UPI UTR दर्ज करें।"
+                        : "Enter the 12-digit UTR from your GPay / PhonePe / Paytm receipt to auto-verify."}
+                    </p>
                   </div>
                 )}
 

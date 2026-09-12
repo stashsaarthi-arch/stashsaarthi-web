@@ -6,10 +6,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Check, ImagePlus, Loader2, Star, X, Sparkles, Trash2 } from "lucide-react";
+import { Check, ImagePlus, Loader2, Star, X, Sparkles, Trash2, ShieldCheck } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useLanguage } from "@/context/LanguageContext";
+import { usePersona } from "@/context/PersonaContext";
 import { logSupabaseError } from "@/lib/supabaseLogger";
 import { checkAndRecordRateLimit, showRateLimitToast } from "@/lib/rateLimiter";
 
@@ -32,6 +33,8 @@ export function RoomListingModal({
   const { user } = useAuth();
   const { language } = useLanguage();
   const isHi = language === "hi";
+  const { role } = usePersona();
+  const isHost = role === "host";
 
   const [step, setStep] = useState(0);
   const [address, setAddress] = useState("");
@@ -58,11 +61,23 @@ export function RoomListingModal({
 
   const STEPS = useMemo(
     () => [
-      isHi ? "कमरे का विवरण" : "Room details",
+      isHi
+        ? isHost
+          ? "कमरे का विवरण व किराया"
+          : "कमरे का विवरण"
+        : isHost
+          ? "Room Details & Rent"
+          : "Room details",
       isHi ? "सुविधाएं और फोटो" : "Amenities & photos",
-      isHi ? "छात्र समीक्षा" : "Student review",
+      isHi
+        ? isHost
+          ? "घर के नियम व सुरक्षा"
+          : "छात्र समीक्षा"
+        : isHost
+          ? "House Norms & Safety"
+          : "Student review",
     ],
-    [isHi],
+    [isHi, isHost],
   );
 
   const toggleAmenity = (name: string) => {
@@ -94,16 +109,19 @@ export function RoomListingModal({
 
     setSubmitting(true);
     const photos: string[] = [];
-    const reviewNote = `${pros ? `Pros: ${pros}. ` : ""}${cons ? `Cons: ${cons}. ` : ""}Amenities: ${amenities.join(", ") || "Standard"}. Food/Water: ${foodWater}/5, Owner: ${ownerBehaviour}/5`;
+    const reviewNote = isHost
+      ? `Host Partner Listing by ${ownerName || "Senior Host"}. House Norms: ${pros || "Standard norms"}. Student Preferences: ${cons || "Quiet & verified student"}. Amenities: ${amenities.join(", ") || "Standard"}. Senior Host Safety Guarantee.`
+      : `${pros ? `Pros: ${pros}. ` : ""}${cons ? `Cons: ${cons}. ` : ""}Amenities: ${amenities.join(", ") || "Standard"}. Food/Water: ${foodWater}/5, Owner: ${ownerBehaviour}/5`;
+
     const payload = {
       student_id: user?.id ?? null,
       address_location: address,
       rent_amount: rent ? parseInt(rent, 10) : null,
-      owner_name: ownerName || null,
+      owner_name: ownerName || (isHost ? "Senior Host Partner" : null),
       owner_phone: ownerPhone || null,
       photos_urls: photos,
       student_review: reviewNote,
-      ratings: Math.round(((foodWater + ownerBehaviour) / 2) * 10) / 10,
+      ratings: isHost ? 5.0 : Math.round(((foodWater + ownerBehaviour) / 2) * 10) / 10,
       status: "pending_audit",
     };
 
@@ -353,46 +371,96 @@ export function RoomListingModal({
 
             {step === 2 && (
               <>
-                <Field
-                  label={
-                    isHi ? "इस कमरे में क्या सबसे अच्छा था?" : "What was good about this room?"
-                  }
-                >
-                  <Textarea
-                    value={pros}
-                    onChange={(e) => setPros(e.target.value)}
-                    rows={2}
-                    placeholder={
-                      isHi ? "शांत गली, कॉलेज से 5 मिनट की दूरी…" : "Quiet street, 5 min to campus…"
-                    }
-                    className="border-white/10 bg-white/5"
-                  />
-                </Field>
-                <Field
-                  label={
-                    isHi ? "अगले छात्र को क्या जानना चाहिए?" : "What should the next student know?"
-                  }
-                >
-                  <Textarea
-                    value={cons}
-                    onChange={(e) => setCons(e.target.value)}
-                    rows={2}
-                    placeholder={
-                      isHi ? "गर्मियों में पानी का कम प्रेशर…" : "Low water pressure in summer…"
-                    }
-                    className="border-white/10 bg-white/5"
-                  />
-                </Field>
-                <RatingRow
-                  label={isHi ? "भोजन एवं पानी की उपलब्धता" : "Food & water availability"}
-                  value={foodWater}
-                  onChange={setFoodWater}
-                />
-                <RatingRow
-                  label={isHi ? "मकान मालिक का व्यवहार" : "Owner behaviour"}
-                  value={ownerBehaviour}
-                  onChange={setOwnerBehaviour}
-                />
+                {isHost ? (
+                  <>
+                    <Field
+                      label={
+                        isHi ? "घर के नियम व अनुशासन:" : "House Norms & Discipline:"
+                      }
+                    >
+                      <Textarea
+                        value={pros}
+                        onChange={(e) => setPros(e.target.value)}
+                        rows={2}
+                        placeholder={
+                          isHi ? "उदा. शाकाहारी भोजन, रात 10:30 बजे गेट बंद, शांत अध्ययन वातावरण…" : "e.g. Pure Veg preferred, quiet hours after 10 PM, main gate lock by 10:30 PM…"
+                        }
+                        className="border-white/10 bg-white/5"
+                      />
+                    </Field>
+                    <Field
+                      label={
+                        isHi ? "छात्र प्रोफाइल व सहभागिता प्राथमिकता:" : "Student Profile & Habit Preferences:"
+                      }
+                    >
+                      <Textarea
+                        value={cons}
+                        onChange={(e) => setCons(e.target.value)}
+                        rows={2}
+                        placeholder={
+                          isHi ? "उदा. गंभीर प्रतियोगी परीक्षा छात्र, टेक व स्मार्टफोन में सहयोग…" : "e.g. Serious exam aspirant, willing to help with tech/errands occasionally…"
+                        }
+                        className="border-white/10 bg-white/5"
+                      />
+                    </Field>
+                    <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-3 flex gap-2.5 items-center">
+                      <ShieldCheck className="h-5 w-5 text-amber-400 shrink-0" />
+                      <div>
+                        <div className="text-xs font-bold text-amber-300">
+                          {isHi ? "100% होस्ट सुरक्षा व पूर्ण नियंत्रण चार्टर" : "100% Host Safety & Total Control Charter"}
+                        </div>
+                        <p className="text-[11px] text-slate-300 mt-0.5">
+                          {isHi
+                            ? "जीरो-ब्रोकरेज, ₹10,000 संपत्ति सुरक्षा कवर, और नोड कैप्टन द्वारा पुलिस व कॉलेज आईडी सत्यापित छात्र।"
+                            : "Zero-Brokerage, ₹10,000 property protection cover, and 100% police & college ID verified students."}
+                        </p>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <Field
+                      label={
+                        isHi ? "इस कमरे में क्या सबसे अच्छा था?" : "What was good about this room?"
+                      }
+                    >
+                      <Textarea
+                        value={pros}
+                        onChange={(e) => setPros(e.target.value)}
+                        rows={2}
+                        placeholder={
+                          isHi ? "शांत गली, कॉलेज से 5 मिनट की दूरी…" : "Quiet street, 5 min to campus…"
+                        }
+                        className="border-white/10 bg-white/5"
+                      />
+                    </Field>
+                    <Field
+                      label={
+                        isHi ? "अगले छात्र को क्या जानना चाहिए?" : "What should the next student know?"
+                      }
+                    >
+                      <Textarea
+                        value={cons}
+                        onChange={(e) => setCons(e.target.value)}
+                        rows={2}
+                        placeholder={
+                          isHi ? "गर्मियों में पानी का कम प्रेशर…" : "Low water pressure in summer…"
+                        }
+                        className="border-white/10 bg-white/5"
+                      />
+                    </Field>
+                    <RatingRow
+                      label={isHi ? "भोजन एवं पानी की उपलब्धता" : "Food & water availability"}
+                      value={foodWater}
+                      onChange={setFoodWater}
+                    />
+                    <RatingRow
+                      label={isHi ? "मकान मालिक का व्यवहार" : "Owner behaviour"}
+                      value={ownerBehaviour}
+                      onChange={setOwnerBehaviour}
+                    />
+                  </>
+                )}
               </>
             )}
           </motion.div>
