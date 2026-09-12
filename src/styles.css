@@ -17,6 +17,7 @@
  */
 
 @theme inline {
+  --radius-xs: calc(var(--radius) - 6px);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -24,6 +25,7 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
+  --radius-full: 9999px;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -431,6 +433,36 @@ html.lenis body {
   transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+@utility rounded-badge {
+  border-radius: var(--radius-sm);
+}
+
+@utility rounded-btn {
+  border-radius: var(--radius-md);
+}
+
+@utility rounded-input {
+  border-radius: var(--radius-md);
+}
+
+@utility rounded-card-ui {
+  border-radius: var(--radius-xl);
+}
+
+@utility rounded-panel-ui {
+  border-radius: var(--radius-2xl);
+}
+
+@utility rounded-modal-ui {
+  border-radius: var(--radius-3xl);
+}
+
+@utility ring-focus-persona {
+  outline: 2px solid var(--persona-accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-md);
+}
+
 @utility gradient-mint-emerald {
   background-image: var(--gradient-mint-emerald);
 }
@@ -714,7 +746,7 @@ html.lenis body {
 :focus-visible {
   outline: 2px solid oklch(0.868 0.16 178);
   outline-offset: 3px;
-  border-radius: 0.5rem;
+  border-radius: var(--radius-md);
 }
 
 [data-role="host"] :focus-visible {

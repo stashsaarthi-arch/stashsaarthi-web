@@ -42,13 +42,33 @@ export const GLOBAL_SPACING_SCALE = {
 } as const;
 
 export const GLOBAL_RADIUS_SCALE = {
+  xs: "calc(var(--radius) - 6px)",
   sm: "calc(var(--radius) - 4px)",
   md: "calc(var(--radius) - 2px)",
   lg: "var(--radius)",
   xl: "calc(var(--radius) + 4px)",
   "2xl": "calc(var(--radius) + 8px)",
   "3xl": "calc(var(--radius) + 12px)",
+  "4xl": "calc(var(--radius) + 16px)",
+  full: "9999px",
 } as const;
+
+export const SEMANTIC_RADIUS_TOKENS = {
+  badge: GLOBAL_RADIUS_SCALE.sm,
+  button: GLOBAL_RADIUS_SCALE.md,
+  input: GLOBAL_RADIUS_SCALE.md,
+  card: GLOBAL_RADIUS_SCALE.xl,
+  panel: GLOBAL_RADIUS_SCALE["2xl"],
+  modal: GLOBAL_RADIUS_SCALE["3xl"],
+  pill: GLOBAL_RADIUS_SCALE.full,
+} as const;
+
+/**
+ * Helper to retrieve unified radius token for a UI role
+ */
+export function getSemanticRadius(role: keyof typeof SEMANTIC_RADIUS_TOKENS): string {
+  return SEMANTIC_RADIUS_TOKENS[role];
+}
 
 /**
  * Helper to retrieve persona-specific primary OKLCH token

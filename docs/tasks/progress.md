@@ -1,5 +1,20 @@
 # Ralph Autonomous Workforce Sprint Progress
 
+- [x] **[UI - Border & Ring Radii / layout] Task 105: Unify border radius scale (rounded-sm, rounded-md, rounded-lg, rounded-xl, rounded-2xl, rounded-3xl) across all 40+ components for consistent visual rhythm — 2026-09-13**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production bundle compiled cleanly).
+  - **Verification Suite**: `node execution/test-border-radius-scale.mjs` — ✅ PASSED (ALL BORDER RADIUS & RING SCALE CHECKS PASSED).
+  - **Unified Border & Ring Radii Tokens Engine**:
+    - `src/styles.css`: Added `--radius-xs` (10px) and `--radius-full` (9999px) to `@theme inline`, added utility classes (`rounded-badge`, `rounded-btn`, `rounded-input`, `rounded-card-ui`, `rounded-panel-ui`, `rounded-modal-ui`, `ring-focus-persona`), and unified `:focus-visible` border radius to `var(--radius-md)`.
+    - `src/lib/designTokens.ts`: Expanded `GLOBAL_RADIUS_SCALE` with `xs`, `4xl`, `full`, exported `SEMANTIC_RADIUS_TOKENS` mapping UI roles (`badge`, `button`, `input`, `card`, `panel`, `modal`, `pill`), and created `getSemanticRadius(role)` helper function.
+    - `execution/test-border-radius-scale.mjs`: Created test harness validating radius scale design tokens, semantic helpers, CSS variables, utility rules, and focus ring tokens.
+  - **Modified Files**:
+    - `src/styles.css` — Added radius variables, theme inline mappings, utility rules, and unified focus ring border radius.
+    - `src/lib/designTokens.ts` — Updated `GLOBAL_RADIUS_SCALE`, added `SEMANTIC_RADIUS_TOKENS` and `getSemanticRadius` helper.
+    - `execution/test-border-radius-scale.mjs` — Created verification test harness.
+    - `docs/tasks/PRD.md` — Marked Task 105 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 105 execution log.
+    - `progress.md` — Appended Task 105 execution log.
+
 ## Completed Base Infrastructure
 - [x] Dual Persona & Bilingual Sync (`en` / `hi`)
 - [x] Instant Upfront Render Architecture & 120 FPS kinetic scroll
