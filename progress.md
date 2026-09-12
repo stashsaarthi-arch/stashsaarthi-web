@@ -1,3 +1,18 @@
+- [x] **[Mobile UX Refinement] Task 145: Balanced Medium-Length Mobile Scroll Architecture — 2026-09-12**:
+  - **Context & Adjustment**: Following user feedback (*"abhi bhot kmm scrolling kr di medium length rkho"*), relaxed over-aggressive hiding to establish a rich, balanced medium-length page flow (~8,300px vs 28,000+px previously).
+  - **Key Structural Adjustments**:
+    1. **Inline Savings Calculator (`CalculatorHub.tsx`)**: Restored the interactive savings engine inline across mobile viewports so students and hosts directly see dead-rent calculations without drawer friction.
+    2. **Inline High-Trust Journey Modules (`src/routes/index.tsx`)**: Restored `StashTimeline` (3-step visual custody journey), `TrustConsoleHub` (₹10k safety charter), `StudentStoriesCarousel` (verified 4.9★ reviews), and `FAQ` inline on mobile.
+    3. **Inline Waitlist Registration (`FooterSection.tsx`)**: Restored the direct waitlist form fields directly above the footer so users can input and join in 1 click.
+    4. **Retained Mobile Optimizations**:
+       - 52px Sticky Bottom Dock (`[🍱 Food] [🧳 Stash] [🏠 Rooms] [🤝 Connect]` + `[⚡ Book]`) remains fully active for instant 1-tap service switching.
+       - Horizontal snap-scroll carousels (`snap-center min-w-[85vw] max-w-[88vw]`) prevent repetitive vertical card stacks.
+       - Deep secondary community modules (`PgComparisonTable`, `DualCrisis`, `KanpurStudentCouncil`, `TopRatedKitchens`, `ReferralLeaderboard`) remain neatly organized in collapsible trays.
+  - **Verification Matrix**:
+    - `npm run build`: ✅ 0 errors (compiled cleanly in 2.70s).
+    - Playwright MCP at `390x844`: `scrollHeight: 8,381px` (balanced medium-length flow), dock functional, cards swiping fluidly.
+  - **Deployment**: Pushed to GitHub (`ralph-loop-i67ws` & `main`) and deployed to Vercel production.
+
 - [x] **[Mobile UX & Responsive Architecture] Task 144: Mobile Viewport Redesign & Scroll Fatigue Elimination (<= 768px) — 2026-09-12**:
   - **Scroll Reduction Metric**: Reduced mobile initial scroll height from **8,386px** (expanding to 28,000+px) down to **2,164px** at viewport `390x844` (**74.2% scroll reduction**, exceeding the >= 65% target and satisfying the < 2200px initial height threshold).
   - **Key Structural Refactors**:

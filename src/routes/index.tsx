@@ -166,7 +166,35 @@ function Index() {
         <SolutionsHub onBook={open} onListRoom={handleListRoom} />
       </ErrorBoundary>
 
-      {/* Mobile Collapsible Resource Trays (< md) — Eliminates 12,000+ vertical pixels */}
+      {/* Interactive Timeline of a Stash (Pickup -> Custody -> Return) */}
+      <ErrorBoundary sectionName="Timeline of a Stash">
+        <Suspense fallback={null}>
+          <StashTimeline onBook={open} />
+        </Suspense>
+      </ErrorBoundary>
+
+      {/* 3. 100% Radical Transparency & Custody Console Hub */}
+      <ErrorBoundary sectionName="Trust & Custody Console">
+        <Suspense fallback={null}>
+          <TrustConsoleHub />
+        </Suspense>
+      </ErrorBoundary>
+
+      {/* Dedicated Student & Host Success Stories Carousel */}
+      <ErrorBoundary sectionName="Student Success Stories">
+        <Suspense fallback={null}>
+          <StudentStoriesCarousel onBook={open} />
+        </Suspense>
+      </ErrorBoundary>
+
+      {/* FAQ Section */}
+      <ErrorBoundary sectionName="FAQ Section">
+        <Suspense fallback={null}>
+          <FAQ />
+        </Suspense>
+      </ErrorBoundary>
+
+      {/* Mobile Collapsible Resource Trays for Deep Comparison & Council (< md) */}
       <div className="block md:hidden">
         <ErrorBoundary sectionName="Mobile Resource Trays" compact>
           <Suspense fallback={null}>
@@ -175,7 +203,7 @@ function Index() {
         </ErrorBoundary>
       </div>
 
-      {/* Why StashSaarthi vs. Traditional PGs Comparison Table (Desktop Only) */}
+      {/* Desktop Inline Deep Modules (>= md) */}
       <div className="hidden md:block content-visibility-auto">
         <ErrorBoundary sectionName="Why StashSaarthi vs Traditional PGs">
           <Suspense fallback={null}>
@@ -189,35 +217,6 @@ function Index() {
           </Suspense>
         </ErrorBoundary>
 
-        {/* Interactive Timeline of a Stash (Pickup -> Custody -> Return) */}
-        <ErrorBoundary sectionName="Timeline of a Stash">
-          <Suspense fallback={null}>
-            <StashTimeline onBook={open} />
-          </Suspense>
-        </ErrorBoundary>
-
-        {/* 3. 100% Radical Transparency & Custody Console Hub */}
-        <ErrorBoundary sectionName="Trust & Custody Console">
-          <Suspense fallback={null}>
-            <TrustConsoleHub />
-          </Suspense>
-        </ErrorBoundary>
-
-        {/* Dedicated Student & Host Success Stories Carousel */}
-        <ErrorBoundary sectionName="Student Success Stories">
-          <Suspense fallback={null}>
-            <StudentStoriesCarousel onBook={open} />
-          </Suspense>
-        </ErrorBoundary>
-
-        {/* Interactive Referral Leaderboard */}
-        <ErrorBoundary sectionName="Referral Leaderboard">
-          <Suspense fallback={null}>
-            <ReferralLeaderboard onRefer={handleRefer} />
-          </Suspense>
-        </ErrorBoundary>
-
-        {/* Top 3 Rated Kitchens of the Week Widget */}
         <ErrorBoundary sectionName="Top Rated Kitchens">
           <Suspense fallback={null}>
             <TopRatedKitchensWidget
@@ -231,10 +230,15 @@ function Index() {
           </Suspense>
         </ErrorBoundary>
 
-        {/* Official Kanpur Student Council Section */}
         <ErrorBoundary sectionName="Kanpur Student Council">
           <Suspense fallback={null}>
             <KanpurStudentCouncil />
+          </Suspense>
+        </ErrorBoundary>
+
+        <ErrorBoundary sectionName="Referral Leaderboard">
+          <Suspense fallback={null}>
+            <ReferralLeaderboard onRefer={handleRefer} />
           </Suspense>
         </ErrorBoundary>
 
@@ -254,17 +258,9 @@ function Index() {
           </>
         )}
 
-        {/* 4. Community Reviews & Improvement Suggestions Hub */}
         <ErrorBoundary sectionName="Community Feedback & Suggestions">
           <Suspense fallback={null}>
             <FeedbackSuggestions />
-          </Suspense>
-        </ErrorBoundary>
-
-        {/* 5. FAQ */}
-        <ErrorBoundary sectionName="FAQ Section">
-          <Suspense fallback={null}>
-            <FAQ />
           </Suspense>
         </ErrorBoundary>
       </div>

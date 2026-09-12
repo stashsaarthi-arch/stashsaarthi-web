@@ -490,65 +490,8 @@ export const FooterSection = memo(function FooterSection() {
   return (
     <footer id="waitlist-form" className="relative mt-4 border-t border-white/10 scroll-mt-20">
       <div className="relative mx-auto max-w-5xl px-4 py-3.5 sm:py-8 text-center">
-        {/* ── Mobile Compact Teaser Card (< md) ── */}
-        <div className="block md:hidden mx-auto max-w-xl">
-          <div className="glass rounded-2xl border border-white/12 p-3.5 text-center shadow-lg">
-            <h3 className="text-sm font-extrabold text-white">
-              {isHi ? "स्टैशसारथी प्राथमिकता सूची में शामिल हों" : "Join the Priority Waitlist"}
-            </h3>
-            <p className="mt-0.5 text-[11px] text-muted-foreground">
-              {isHi ? "अपने स्टैशक्रेडिट और अर्ली-बर्ड बचत सुरक्षित करें" : "Reserve your StashCredits & early-bird perks"}
-            </p>
-            {submitted ? (
-              <div className="mt-2.5">
-                <p className="text-xs font-bold text-emerald-400">🎉 StashPass Active: {tokenId}</p>
-                <Button
-                  onClick={() => setWaitlistDrawerOpen(true)}
-                  variant="outline"
-                  className="mt-2 h-8 text-xs font-bold border-emerald-500/40 text-emerald-300"
-                >
-                  View Digital Pass
-                </Button>
-              </div>
-            ) : (
-              <Button
-                onClick={() => setWaitlistDrawerOpen(true)}
-                className="mt-2.5 w-full bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold text-xs h-9 rounded-xl shadow-md cursor-pointer"
-              >
-                ⚡ {isHi ? "वेटलिस्ट में शामिल हों (मुफ़्त)" : "Join Priority Waitlist (Free)"}
-              </Button>
-            )}
-          </div>
-
-          {/* Slide-up Bottom Drawer on Mobile */}
-          <Sheet open={waitlistDrawerOpen} onOpenChange={setWaitlistDrawerOpen}>
-            <SheetContent side="bottom" className="max-h-[88vh] overflow-y-auto rounded-t-3xl bg-[#0A0D0F]/98 border-t border-white/15 p-4 sm:p-6 focus:outline-none shadow-2xl">
-              <SheetHeader className="text-left pb-2 border-b border-white/10">
-                <SheetTitle className="text-base font-extrabold text-white">
-                  {t.footer.title}
-                </SheetTitle>
-                <SheetDescription className="text-xs text-muted-foreground">
-                  {t.footer.subtitle}
-                </SheetDescription>
-              </SheetHeader>
-              <div className="py-2">
-                {submitted ? (
-                  <div className="mt-4 mb-3 text-center">
-                    <p className="text-base font-bold text-emerald-400 mb-1">
-                      {isHi ? "🎉 आप प्राथमिकता सूची में शामिल हो गए हैं!" : "🎉 You're on the priority list!"}
-                    </p>
-                    <StashPass tokenId={tokenId} name={fullName} type={userType} />
-                  </div>
-                ) : (
-                  renderWaitlistForm()
-                )}
-              </div>
-            </SheetContent>
-          </Sheet>
-        </div>
-
-        {/* ── Desktop Inline Waitlist (>= md) ── */}
-        <div className="hidden md:block">
+        {/* ── Inline Waitlist Form (Mobile & Desktop) ── */}
+        <div>
           <h2 className="text-xl font-extrabold tracking-tight sm:text-3xl">
             <span className="text-gradient">{t.footer.title}</span>
           </h2>

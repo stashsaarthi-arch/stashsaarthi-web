@@ -272,12 +272,12 @@ export const Hero = memo(function Hero({
           </div>
         )}
 
-        {/* ── Scroll Indicator (Desktop only) ── */}
+        {/* ── Scroll Indicator ── */}
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="hidden sm:flex mt-3 flex-col items-center justify-center gap-1 text-center"
+          className="mt-3 flex flex-col items-center justify-center gap-1 text-center"
         >
           <a
             href="#role-lane"

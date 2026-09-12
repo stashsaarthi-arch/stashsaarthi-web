@@ -139,70 +139,8 @@ export const CalculatorHub = memo(function CalculatorHub({ onBook }: { onBook: O
       id="calculator"
       className="relative mx-auto max-w-6xl px-4 py-2 sm:py-5 scroll-mt-20"
     >
-      {/* ── Mobile Compact Teaser Micro-Card (< md) — Eliminates 1,200px of scroll ── */}
-      <div className="block md:hidden">
-        <div className="glass relative overflow-hidden rounded-2xl border border-emerald-500/25 bg-gradient-to-r from-emerald-500/[0.08] via-teal-500/[0.04] to-transparent p-3.5 shadow-xl">
-          <div className="flex items-center justify-between gap-3">
-            <div className="min-w-0 flex-1">
-              <div className="flex items-center gap-1.5">
-                <span className="inline-flex items-center gap-1 rounded-full border border-emerald-500/30 bg-emerald-500/15 px-2 py-0.5 text-[9px] font-bold text-emerald-400">
-                  <Sparkles className="h-2.5 w-2.5" />
-                  {isHi ? "100% सटीक बचत कैलकुलेटर" : "Instant Savings Engine"}
-                </span>
-              </div>
-              <h3 className="mt-1 text-sm font-extrabold text-white truncate">
-                {isHi ? "बचत और कमाई का त्वरित हिसाब" : "Savings & Passive Income Simulator"}
-              </h3>
-              <p className="text-[10.5px] text-muted-foreground mt-0.5 truncate">
-                {isHi
-                  ? "छात्र ₹8,400 बचाएँ · मेज़बान ₹11,500+/माह कमाएँ"
-                  : "Students save ~₹8,400 · Hosts earn ₹11.5k+/mo"}
-              </p>
-            </div>
-            <Button
-              type="button"
-              variant={isStudent ? "hero" : "warm"}
-              size="sm"
-              onClick={() => {
-                playPop();
-                setIsDrawerOpen(true);
-              }}
-              className="shrink-0 h-10 px-3.5 text-xs font-black shadow-lg cursor-pointer"
-            >
-              <span>{isHi ? "हिसाब लगाएँ ⚡" : "Calculate ⚡"}</span>
-              <ChevronRight className="h-3.5 w-3.5 ml-1" />
-            </Button>
-          </div>
-        </div>
-
-        {/* Slide-Up Bottom Drawer on Mobile */}
-        <Sheet open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
-          <SheetContent
-            side="bottom"
-            className="max-h-[88vh] overflow-y-auto rounded-t-3xl border-t border-white/15 bg-[#0A0D0F]/98 backdrop-blur-2xl p-4 sm:p-6 shadow-2xl focus:outline-none"
-          >
-            <SheetHeader className="text-left pb-2 border-b border-white/10">
-              <div className="flex items-center justify-between">
-                <SheetTitle className="text-base font-extrabold text-white flex items-center gap-2">
-                  <Calculator className="h-4 w-4 text-emerald-400" />
-                  <span>{isHi ? "इंटरएक्टिव बचत व कमाई सिम्युलेटर" : "Savings & Earnings Engine"}</span>
-                </SheetTitle>
-              </div>
-              <SheetDescription className="text-xs text-muted-foreground">
-                {isHi
-                  ? "आईआईटी कानपुर और सीएसजेएमयू कॉरिडोर के लिए वास्तविक गणित।"
-                  : "Real Kanpur unit economics for campus students and verified senior hosts."}
-              </SheetDescription>
-            </SheetHeader>
-            <div className="py-3">
-              {renderCalculatorContent()}
-            </div>
-          </SheetContent>
-        </Sheet>
-      </div>
-
-      {/* ── Desktop Inline Full Display (>= md) ── */}
-      <div className="hidden md:block">
+      {/* Inline Interactive Display */}
+      <div>
         {/* Header */}
         <div className="mx-auto max-w-3xl text-center">
           <Badge

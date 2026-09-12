@@ -56,23 +56,6 @@ export const MobileSecondaryAccordions = React.memo(function MobileSecondaryAcco
 
   const groups = [
     {
-      id: "trust-timeline",
-      icon: ShieldCheck,
-      titleEn: "Trust, Custody & Step-by-Step Flow",
-      titleHi: "सुरक्षा, कस्टडी व चरण-दर-चरण प्रक्रिया",
-      badgeEn: "₹10k Cover • 3 Steps",
-      badgeHi: "₹10,000 कवर • 3 चरण",
-      accent: "var(--emerald)",
-      render: () => (
-        <div className="space-y-6">
-          <StashTimeline onBook={onBook} />
-          <div className="border-t border-white/10 pt-4">
-            <TrustConsoleHub />
-          </div>
-        </div>
-      ),
-    },
-    {
       id: "economics-comparison",
       icon: Scale,
       titleEn: "PG vs StashSaarthi & Housing Mission",
@@ -90,50 +73,37 @@ export const MobileSecondaryAccordions = React.memo(function MobileSecondaryAcco
       ),
     },
     {
-      id: "community-stories",
-      icon: MessageSquareQuote,
-      titleEn: "Kitchens, Reviews & Student Council",
-      titleHi: "रसोई, छात्र समीक्षाएं व छात्र परिषद",
-      badgeEn: "4.9 ★ • IITK & CSJMU",
-      badgeHi: "4.9 ★ • आईआईटीके व सीएसजेएमयू",
-      accent: "var(--amber)",
+      id: "council-kitchens",
+      icon: Award,
+      titleEn: "Student Council & Weekly Top Kitchens",
+      titleHi: "छात्र परिषद समर्थन व शीर्ष रसोई",
+      badgeEn: "IITK & CSJMU Endorsed",
+      badgeHi: "आईआईटीके व सीएसजेएमयू",
+      accent: "var(--emerald)",
       render: () => (
         <div className="space-y-6">
-          <TopRatedKitchensWidget
-            onOrderMeal={(kId) =>
-              onBook({
-                service: "kitchen",
-                note: `Selected Top Rated Kitchen: ${kId}`,
-              })
-            }
-          />
+          <KanpurStudentCouncil />
           <div className="border-t border-white/10 pt-4">
-            <StudentStoriesCarousel onBook={onBook} />
-          </div>
-          <div className="border-t border-white/10 pt-4">
-            <KanpurStudentCouncil />
+            <TopRatedKitchensWidget
+              onOrderMeal={(kId) =>
+                onBook({
+                  service: "kitchen",
+                  note: `Selected Top Rated Kitchen: ${kId}`,
+                })
+              }
+            />
           </div>
         </div>
       ),
     },
     {
-      id: "faq",
-      icon: HelpCircle,
-      titleEn: "Frequently Asked Questions (FAQ)",
-      titleHi: "अक्सर पूछे जाने वाले प्रश्न (FAQ)",
-      badgeEn: "Instant Answers",
-      badgeHi: "त्वरित समाधान",
-      accent: "var(--cyan)",
-      render: () => <FAQ />,
-    },
-    {
       id: "rewards-governance",
       icon: Trophy,
-      titleEn: "Rewards, Feedback & Host Governance",
-      titleHi: "रिवॉर्ड्स, सुझाव व मेज़बान नियम",
-      badgeEn: "Free Storage & Badges",
-      badgeHi: "फ्री स्टोरेज व बैज",
-      accent: "var(--emerald)",
+      titleEn: "Referral Rewards & Community Feedback",
+      titleHi: "रेफरल रिवॉर्ड्स व समुदाय सुझाव",
+      badgeEn: "Win Storage • Open Ledger",
+      badgeHi: "फ्री स्टोरेज • ओपन लेजर",
+      accent: "var(--amber)",
       render: () => (
         <div className="space-y-6">
           <ReferralLeaderboard onRefer={onRefer} />
