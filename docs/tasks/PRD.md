@@ -1,4 +1,4 @@
-# 📋 MASTER CONTINUOUS TASK QUEUE (50-TASK SPRINT ROADMAP)
+# 📋 MASTER CONTINUOUS TASK QUEUE (200-TASK ROADMAP)
 
 ## Sprint 0: Foundation & Polish (Completed)
 - [x] 1. **[CTO - Database]**: Audit Supabase telemetry and offline persistence queues for zero data drops.
@@ -120,3 +120,123 @@ Sprint 10: QA, CSO & CEO (Total Assurance, Compliance & Strategic Direction)
 - [x] 99. [QA - Performance]: Audit the final webpack bundle size and ensure it's minimal by using code splitting and lazy loading heavy components.
 - [x] 100. [CTO]: add my bookings dashboard in user login profile.
 - [x] 101. [CEO]: Compile all Sprint Reports into a single Master Release Note (v3.0) and push to production.
+
+## Sprint 11: CTO & CAO (Next-Gen AI, Real-Time Edge & Offline Resilience)
+- [ ] 102. [CTO - Offline PWA]: Implement background periodic sync API and dynamic IndexedDB queue for offline booking requests when cell service drops in Kakadeo basements.
+- [ ] 103. [CAO - Multi-lingual RAG]: Integrate multilingual embedding search (Hindi-English transliteration / Hinglish) in the FAQ chatbot to understand queries like "hostel se bag uthane ka kya charge hai".
+- [ ] 104. [CTO - Edge Functions]: Build a Supabase Edge Function to generate instant dynamic QR codes with signed UPI intent links (`upi://pay?pa=...&am=...&tn=...`) for instant settlement.
+- [ ] 105. [CAO - Vision AI]: Train an automated luggage volume and luggage tag OCR scanner using canvas capture to verify standard 80L luggage limits before dispatch.
+- [ ] 106. [CTO - Performance]: Implement route-based bundle prefetching and speculative resource hints (`<link rel="prefetch">`) on user hover over Navbar tabs.
+- [ ] 107. [CTO - WebSockets]: Set up Supabase Realtime channels for live kitchen inventory counter ("Only 4 thalis remaining for today's lunch!").
+- [ ] 108. [CAO - Dynamic Pricing]: Deploy client-side predictive surge and vacancy pricing logic adjusting storage rates based on Kanpur university exam calendars (IITK midsems, CSJMU finals).
+- [ ] 109. [CTO - Audio / Telemetry]: Add Web Audio sound effects toggle with persistent localStorage preference and sound effects for QR scan, payment success, and SOS trigger.
+- [ ] 110. [CTO - Security]: Implement strict Content Security Policy (CSP) headers and Subresource Integrity (SRI) hashes in the Nitro server configuration.
+- [ ] 111. [QA - Automated Benchmarks]: Build a synthetic benchmark script in `execution/` measuring Time-to-Interactive (TTI) and First Input Delay (FID) across simulated slow 3G network conditions.
+
+## Sprint 12: CPO & UX (Hyperlocal Intergenerational Living & Roommate Matching)
+- [ ] 112. [CPO - Roommate Matching]: Design and implement an interactive "Habits & Study Hours" compatibility questionnaire for students booking Saarthi Spaces.
+- [ ] 113. [UX - Senior House Norms]: Build an interactive visual "House Rules Agreement" selector for Elderly Hosts (e.g., Gate curfew, veg-only kitchen, silent study hours).
+- [ ] 114. [UI - 3D Floorplan Viewer]: Create an interactive CSS 3D isometric room visualizer allowing students to inspect desk space, wardrobe, and natural light before booking.
+- [ ] 115. [CPO - Host Verification Badge]: Implement a multi-level visual trust badge system on host cards (e.g., "DigiLocker Verified", "IITK Alumni Host", "SuperHost 5★").
+- [ ] 116. [UX - Booking Schedule]: Build a date-range picker with visual campus semester presets (e.g., "Summer Vacations May-July", "Diwali Break", "Endsem Sprint").
+- [ ] 117. [UI - Neighborhood Vibe Guide]: Add an interactive Kakadeo & Kalyanpur neighborhood map layer showing distance to coaching centers (Allen, PW, Motion, Resonance).
+- [ ] 118. [UX - Parent Portal]: Create a simplified, high-contrast "Parents View" mode that presents safety certifications, CCTV node verification, and landlord police verification.
+- [ ] 119. [CPO - Room Inventory Filter]: Implement instantaneous multi-attribute filtering (single room, shared room, attached washroom, balcony, AC/cooler) without page reloads.
+- [ ] 120. [UI - Senior Voice Intro]: Implement an embedded audio snippet player on host cards where elderly hosts can record a 20-second warm welcome message in Hindi.
+- [ ] 121. [UX - Move-in Checklist]: Build an interactive digital move-in checklist with photo upload proof for students and hosts to document room condition at check-in.
+
+## Sprint 13: CRO & Growth (Micro-Payments, UPI Deep-Links & Dynamic Pricing Engine)
+- [ ] 122. [CRO - Split Payment]: Implement a "Split with Roommate" feature generating dual UPI payment links for double-occupancy Saarthi Spaces rooms.
+- [ ] 123. [CRO - Dead Rent Calculator]: Build an interactive before/after financial infographic modal showing exact rupee savings comparing 3 months dead hostel rent vs. Saarthi Stash.
+- [ ] 124. [CRO - Urgency Triggers]: Add subtle, non-intrusive micro-banners showing real-time inventory scarcity (e.g., "Only 2 micro-storage lockers left near Kakadeo Thana node").
+- [ ] 125. [CRO - Stash Pass Subscriptions]: Design a multi-semester "Stash Pass" recurring subscription tier offering free locker pickup and 15% discount across all 4 years.
+- [ ] 126. [CRO - One-Click WhatsApp Checkout]: Create a frictionless fallback modal for students with unstable 4G allowing 1-tap WhatsApp booking pre-filled with cart payload.
+- [ ] 127. [CRO - Host Earnings Simulator]: Upgrade the host passive income calculator with dynamic sliders for spare bedrooms, kitchen meal capacity, and attic storage square footage.
+- [ ] 128. [CRO - Abandoned Cart Nudge]: Implement local session storage intent tracking that prompts a polite exit notification with a ₹50 first-order discount code.
+- [ ] 129. [CRO - Group Booking Perks]: Add a "Book with Batchmates" referral mechanic unlocking free pickup when 3 or more hostel friends book storage together.
+- [ ] 130. [CRO - Gamified Loyalty Badges]: Design a "Campus Saarthi Ambassador" progress meter rewarding students with meal tokens when their friends book a room.
+- [ ] 131. [CRO - Fast-Track Deposit Refund]: Build a visual escrow tracker displaying guaranteed 24-hour security deposit return upon room checkout or luggage retrieval.
+
+## Sprint 14: CMO & Hyperlocal SEO (Campus Domination, Referral Loops & Viral Growth)
+- [ ] 132. [CMO - Campus Landing Pages]: Build dedicated, SEO-optimized landing pages for `/iit-kanpur-luggage-storage`, `/hbti-kanpur-hostels`, and `/csjmu-rooms`.
+- [ ] 133. [CMO - Coaching Hub Directories]: Create structured directory hubs for Allen Kakadeo, Physics Wallah Vidyapeeth, and Aakash Institute with walking distance calculations.
+- [ ] 134. [CMO - Dynamic Social Share Cards]: Generate automated SVG-to-Canvas dynamic OG share cards showing personalized savings certificates for students to share on Instagram/WhatsApp.
+- [ ] 135. [CMO - Printable Noticeboard Posters]: Build an automated printable PDF generator in the operator console creating QR-coded noticeboard flyers for Kanpur coaching hostels.
+- [ ] 136. [CMO - Student Ambassador Dashboard]: Create a dedicated onboarding and tracking route `/ambassador` with custom UTM referral links and live commission analytics.
+- [ ] 137. [CMO - Localized Video Embeds]: Integrate responsive, lightweight video embed modals showcasing authentic interviews with senior hosts in Kidwai Nagar and Swaroop Nagar.
+- [ ] 138. [CMO - Programmatic Schema Markup]: Implement schema.org `LodgingBusiness`, `SelfStorage`, and `Restaurant` JSON-LD structured tags across all dynamic listing routes.
+- [ ] 139. [CMO - Hindi Voice Search Support]: Optimize meta tags and conversational search queries targeting common Hindi voice search phrases (e.g., "Kanpur me sasta luggage store").
+- [ ] 140. [CMO - Campus Fest Sponsorship Hub]: Build an interactive landing page section highlighting StashSaarthi's partnership with IIT Kanpur Antaragni and Techkriti student festivals.
+- [ ] 141. [CMO - Wall of Gratitude]: Build an interactive, filterable community appreciation board displaying thank-you messages from students to their host "Nanis and Dadis".
+
+## Sprint 15: CSO & Legal (4-Tier Senior Safety, DigiLocker e-KYC & DPDP 2023 Enforcement)
+- [ ] 142. [CSO - DigiLocker Integration]: Implement a mock/live DigiLocker e-KYC verification bridge verifying student college enrollment and Aadhaar identity.
+- [ ] 143. [CSO - Police Verification Form]: Create a downloadable and auto-filled Kanpur Nagar Police verification tenant certificate generator for elderly hosts.
+- [ ] 144. [CSO - TPA Sec 105 Leave & License]: Build an automated digital Leave & License agreement generator embedding statutory Transfer of Property Act Sec 105 non-tenancy clauses.
+- [ ] 145. [CSO - DPDP Consent Ledger]: Implement a granular consent management banner complying with India's Digital Personal Data Protection (DPDP) Act 2023.
+- [ ] 146. [CSO - ₹10k Luggage Guarantee Vault]: Build an interactive insurance policy certificate generator showing the itemized protection terms backed by platform micro-reserves.
+- [ ] 147. [CSO - Emergency Bedside SOS Link]: Implement a one-tap emergency SOS broadcast system triggering instant SMS/WhatsApp alerts to registered local wardens and verified volunteers.
+- [ ] 148. [CSO - Anti-Tamper Barcode Scanner]: Build a client-side camera QR/Barcode scanner component for luggage pickup agents to verify physical tamper-evident seals.
+- [ ] 149. [CSO - Data Anonymization Engine]: Build an automated data masking routine that scrambles student phone numbers and addresses for non-active bookings in logs.
+- [ ] 150. [CSO - Dispute Resolution Portal]: Design and implement an arbitration and resolution claim workflow allowing hosts and students to file damage or delay reports.
+- [ ] 151. [CSO - Senior Safety Hotline Widget]: Create a persistent, high-contrast floating emergency widget tailored for elderly hosts with one-tap Hindi telephone connection.
+
+## Sprint 16: CPO & Operations (Saarthi Kitchen 2.0, Meal Subscriptions & Tiffin Logistics)
+- [ ] 152. [CPO - Dietary Customization]: Implement dietary preferences selector (Satvik, Jain, Low-Spicy, Diabetic-friendly) in the Saarthi Kitchen subscription flow.
+- [ ] 153. [UX - Meal Pause & Resume]: Build a flexible calendar modal allowing students to pause their tiffin plan during coaching exam holidays or hometown visits.
+- [ ] 154. [UI - Kitchen Live Hygiene Preview]: Design a verified hygiene badge section with timestamped kitchen hygiene inspection photos and FSSAI certificate previews.
+- [ ] 155. [CPO - Thali Meal Planner]: Build a weekly rolling menu widget displaying daily rotating vegetables, dals, and regional specials (e.g., Dal Bati Churma, Poori Sabzi).
+- [ ] 156. [UX - Delivery Slot Selector]: Add precise lunch (12:30 PM - 2:00 PM) and dinner (7:30 PM - 9:30 PM) delivery window selector matching coaching batch schedules.
+- [ ] 157. [CPO - Eco Tiffin Box Deposit]: Implement an eco-friendly stainless steel dabba exchange ledger tracking reusable tiffin box deposits and returns.
+- [ ] 158. [UI - Kitchen Host Bio Card]: Create heartwarming host profiles for home chefs featuring their culinary background, signature dish, and love for feeding students.
+- [ ] 159. [UX - Instant Meal Rating]: Implement a 1-tap post-meal emoji feedback modal (Roti softness, Dal taste, Temperature) piped to host analytics.
+- [ ] 160. [CPO - Special Sunday Feasts]: Build an upsell module for Sunday special meals and celebratory festival feasts (e.g., Holi Gujiya, Diwali Kheer tokens).
+- [ ] 161. [UX - Real-Time Tiffin ETA]: Build a simulated courier dispatch and delivery ETA tracker showing bike courier progress from senior home to student hostel.
+
+## Sprint 17: CTO & QA (Enterprise E2E Test Matrix, Chaos Engineering & Android Go V2)
+- [ ] 162. [QA - Playwright Multi-Role Matrix]: Expand E2E Playwright test suites covering full concurrent flows: Student booking, Host approval, and Operator dispatch.
+- [ ] 163. [CTO - Client-Side Error Telemetry]: Implement a lightweight client-side crash and unhandled promise rejection reporter sending error logs to Supabase telemetry.
+- [ ] 164. [QA - 2G Network Throttling Test]: Create an automated script in `execution/` validating page interactivity and critical CSS rendering under 50kbps network throttling.
+- [ ] 165. [CTO - Web Worker Computation]: Offload heavy client-side filtering, distance calculations, and savings math to a background dedicated Web Worker.
+- [ ] 166. [QA - Cross-Browser Safari/iOS Glitch Test]: Audit and fix webkit-specific CSS flexbox stretching, safe-area-inset padding, and 100dvh viewport height bugs on mobile Safari.
+- [ ] 167. [CTO - Memory Leak Profiler]: Implement an automated script testing continuous page scroll and modal open/close cycles for JavaScript heap memory leaks.
+- [ ] 168. [QA - Form Validation Boundary Test]: Build comprehensive automated unit tests covering phone number regex (`+91`), Aadhaar formatting, and SQL injection sanitization.
+- [ ] 169. [CTO - Dynamic Asset Compression]: Configure automated build-time AVIF/WebP image generation pipeline with responsive image placeholders (LQIP).
+- [ ] 170. [QA - Dark/Light Contrast Audit]: Conduct an automated WCAG 2.1 AAA color contrast ratio audit across all text and icon components in both Student and Host modes.
+- [ ] 171. [CTO - Edge Regional Failover]: Implement client-side automatic fallback to secondary REST endpoints when primary Supabase edge gateways experience high latency.
+
+## Sprint 18: CPO & Community (Saarthi Connect, Intergenerational Mentorship & Senior SOS)
+- [ ] 172. [CPO - Saarthi Connect Matching]: Build a mutual interest matching algorithm pairing student study disciplines (e.g., Tech, Literature, Music) with senior citizen hobbies.
+- [ ] 173. [UI - Tech Assist Request Board]: Create an in-app noticeboard where senior hosts can post simple smartphone/computer tech help tasks (e.g., "Need help booking railway ticket").
+- [ ] 174. [UX - Karma Points Redemption]: Build an exchange store where students can redeem volunteer Karma points earned through senior mentorship for free meal tokens.
+- [ ] 175. [UI - Evening Chai Meetup Scheduler]: Design a calendar scheduling module for weekly communal terrace gatherings and storytelling sessions between hosts and students.
+- [ ] 176. [CPO - Emergency Contact Sync]: Implement a one-click sync feature allowing parents to link directly with the elderly host's WhatsApp for real-time safety updates.
+- [ ] 177. [UI - Digital Memory Book]: Create a shared digital photobook where departing students can leave handwritten notes and graduation photos for their senior hosts.
+- [ ] 178. [UX - Senior Accessibility Controls]: Add an instant 1-tap "Elderly High Legibility" control setting 18px+ base typography, high contrast, and simplified button labels.
+- [ ] 179. [CPO - Community Forum]: Build a moderated student-host discussion forum for sharing campus updates, second-hand books, and coaching advice.
+- [ ] 180. [UI - Host Milestone Celebrations]: Design celebratory visual confetti and anniversary milestone banners for hosts completing 1 year of hosting with StashSaarthi.
+- [ ] 181. [UX - Wellbeing Check-in]: Build a daily gentle notification prompt asking senior hosts for a 1-tap morning wellness check ("Sab theek hai?").
+
+## Sprint 19: CRO & Operator Ops (Fleet & Logistics Routing, Warehouse Hubs & Pickup Schedulers)
+- [ ] 182. [CRO - Multi-Item Stash Bundler]: Build an intuitive multi-item drag-and-drop luggage builder (Carton, Suitcase, Bicycle, Cooler, Books) with volume calculations.
+- [ ] 183. [Operator - Dispatch Route Optimizer]: Design an operator routing view grouping hostel pickups in Kakadeo by street nodes to minimize travel time for logistics captains.
+- [ ] 184. [UI - Logistics Captain App View]: Build a dedicated mobile web portal `/captain` for pickup drivers with barcode scanner, receipt printer trigger, and GPS route map.
+- [ ] 185. [CRO - Same-Day Express Pickup]: Implement an "Express 2-Hour Pickup" upsell toggle with real-time captain availability confirmation.
+- [ ] 186. [Operator - Warehouse Node Inventory Grid]: Create an interactive visual grid map of the micro-storage facility showing occupied vs. empty locker slots and shelf numbers.
+- [ ] 187. [UX - Luggage Retrieval Scheduler]: Build an appointment scheduler for students returning to Kanpur after vacation to request locker drop-off at their new room.
+- [ ] 188. [Operator - Host Payout Ledger]: Build an automated weekly payout calculation dashboard for elderly hosts with instant NEFT/IMPS payout CSV export.
+- [ ] 189. [CRO - Fragile Item Insurance Addon]: Add a micro-insurance upgrade option for delicate electronics (laptops, monitors, guitar) during transit and storage.
+- [ ] 190. [UI - Physical Seal Verification Screen]: Build a side-by-side photographic verification tool comparing bag seal photos taken at pickup vs. warehouse arrival.
+- [ ] 191. [Operator - Real-Time Incident Reporting]: Create a quick-dispatch ticket logger for captains to flag broken bags, unverified contents, or rescheduled pickups.
+
+## Sprint 20: CEO & Analytics (Investor Pitch Metrics, Unit Economics Scale & v4.0 Release)
+- [ ] 192. [CEO - Unit Economics Heatmap]: Build an interactive unit economics cohort visualization showing monthly revenue per active student and host margin progression.
+- [ ] 193. [CEO - Campus Market Penetration Tracker]: Create an executive dashboard module calculating market share across IIT Kanpur, HBTI, CSJMU, and Allen Kakadeo.
+- [ ] 194. [CEO - Live Investor Deck Mode]: Implement an investor presentation mode on `/pitch` featuring real-time platform KPIs, unit margins, and growth trajectory.
+- [ ] 195. [CEO - Founder WhatsApp Escalation Bot]: Build an automated routing system flagging critical host or safety tickets directly to the founder's WhatsApp (`+91 9369454350`).
+- [ ] 196. [CEO - Impact Metrics Display]: Create a live public impact ticker showcasing total dead rent saved by students (₹) and dignified retirement income paid to seniors (₹).
+- [ ] 197. [CEO - Multi-City Expansion Simulator]: Build an interactive financial model forecasting expansion to Kota, Lucknow, and Prayagraj student hubs.
+- [ ] 198. [CEO - Operational SLA Dashboard]: Create an executive SLA monitoring console tracking average luggage pickup time, meal delivery punctuality, and host support response.
+- [ ] 199. [CEO - Automated Daily Executive Digest]: Implement an automated cron script generating a daily operational summary of bookings, revenues, and active node capacity.
+- [ ] 200. [CEO - Dynamic Prototype Toggle Guard]: Formalize and verify the global `SHOW_PROTOTYPE_TAGS` flag across all 200 feature modules for instant production switch.
+- [ ] 201. [CEO - Master Release Note v4.0]: Compile all 200 tasks and Sprint 0-20 technical breakthroughs into the comprehensive StashSaarthi v4.0 Master Release Manifest.
