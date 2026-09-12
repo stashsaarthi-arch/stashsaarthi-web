@@ -52,6 +52,16 @@ export const FONT_SPECS: Record<string, FontSpec> = {
     descentOverride: "24%",
     lineGapOverride: "0%",
   },
+  devanagari: {
+    family: "Mukta",
+    weights: [400, 500, 600, 700, 800],
+    display: "swap",
+    fallbacks: ["Mukta Fallback", "Rozha One", "Tiro Devanagari Hindi", "Noto Sans Devanagari", "Kohinoor Devanagari", "ITF Devanagari", "sans-serif"],
+    sizeAdjust: "100%",
+    ascentOverride: "98%",
+    descentOverride: "26%",
+    lineGapOverride: "0%",
+  },
 };
 
 export const FONT_PRELOAD_CONFIG: FontPreloadConfig = {
@@ -64,7 +74,7 @@ export const FONT_PRELOAD_CONFIG: FontPreloadConfig = {
     "https://fonts.gstatic.com",
   ],
   stylesheetUrl:
-    "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&family=Inter:wght@400;500;600;700&display=swap",
+    "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&family=Inter:wght@400;500;600;700&family=Mukta:wght@400;500;600;700;800&family=Rozha+One&display=swap",
   displayMode: "swap",
   clsProtectionEnabled: true,
 };
@@ -72,9 +82,10 @@ export const FONT_PRELOAD_CONFIG: FontPreloadConfig = {
 /**
  * Returns CSS font family string with fallbacks for zero CLS.
  */
-export function getFontFamilyWithFallbacks(key: "sans" | "body" = "sans"): string {
+export function getFontFamilyWithFallbacks(key: "sans" | "body" | "devanagari" = "sans"): string {
   const spec = FONT_SPECS[key];
-  if (!spec) return FONT_SPECS["sans"].fallbacks.join(", ");
+  const sansSpec = FONT_SPECS["sans"];
+  if (!spec) return sansSpec ? sansSpec.fallbacks.join(", ") : "sans-serif";
   return `"${spec.family}", ${spec.fallbacks.map((f) => (f.includes(" ") ? `"${f}"` : f)).join(", ")}`;
 }
 
@@ -102,18 +113,19 @@ export function generateFontPreloadTags() {
 /**
  * Checks whether browser has loaded the custom fonts or fallen back smoothly.
  */
-export async function verifyFontLoaded(fontFamily: string = "Plus Jakarta Sans"): Promise<boolean> {
+export function verifyFontLoaded(fontFamily: string = "Plus Jakarta Sans"): Promise<boolean> {
   if (typeof document === "undefined" || !("fonts" in document)) {
-    return true; // SSR or fallback environment
+    return Promise.resolve(true); // SSR or fallback environment
   }
 
   try {
     const isLoaded = document.fonts.check(`16px "${fontFamily}"`);
-    if (isLoaded) return true;
-    await document.fonts.load(`16px "${fontFamily}"`);
-    return document.fonts.check(`16px "${fontFamily}"`);
+    if (isLoaded) return Promise.resolve(true);
+    return document.fonts.load(`16px "${fontFamily}"`).then(() => {
+      return document.fonts.check(`16px "${fontFamily}"`);
+    });
   } catch {
-    return false;
+    return Promise.resolve(false);
   }
 }
 
@@ -146,6 +158,15 @@ export function injectFontMetricOverrides(): void {
       size-adjust: 100%;
       font-display: swap;
     }
+    @font-face {
+      font-family: "Mukta Fallback";
+      src: local("Arial"), local("Helvetica"), local("sans-serif");
+      ascent-override: 98%;
+      descent-override: 26%;
+      line-gap-override: 0%;
+      size-adjust: 100%;
+      font-display: swap;
+    }
   `;
   document.head.appendChild(styleEl);
 }
@@ -158,17 +179,17 @@ export function initFontOptimization(): () => void {
     return () => {};
   }
 
-  const doc = document;
   injectFontMetricOverrides();
 
-  if ("fonts" in doc) {
-    doc.fonts.ready.then(() => {
-      doc.documentElement.classList.add("fonts-loaded");
+  const navDoc = document as any;
+  if (navDoc && navDoc.fonts && typeof navDoc.fonts.ready !== "undefined") {
+    navDoc.fonts.ready.then(() => {
+      document.documentElement.classList.add("fonts-loaded");
     }).catch(() => {
-      doc.documentElement.classList.add("fonts-fallback");
+      document.documentElement.classList.add("fonts-fallback");
     });
   } else {
-    doc.documentElement.classList.add("fonts-loaded");
+    document.documentElement.classList.add("fonts-loaded");
   }
 
   return () => {

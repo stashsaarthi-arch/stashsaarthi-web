@@ -229,6 +229,9 @@ export interface FluidTypographySpec {
   fontSize: string;
   lineHeight: number | string;
   letterSpacing?: string;
+  fontFamily?: string;
+  maxFontWeight?: number | undefined;
+  paddingAdjust?: string | undefined;
 }
 
 export const FLUID_TYPOGRAPHY_TOKENS = {
@@ -276,12 +279,150 @@ export const FLUID_TYPOGRAPHY_TOKENS = {
 
 export type FluidTypographyLevel = keyof typeof FLUID_TYPOGRAPHY_TOKENS;
 
+export interface DevanagariTypographySpec {
+  fontFamily: string;
+  lineHeight: number;
+  letterSpacing: string;
+  maxFontWeight?: number;
+  paddingAdjust?: string;
+}
+
+export const DEVANAGARI_TYPOGRAPHY_TOKENS: Record<FluidTypographyLevel, DevanagariTypographySpec> = {
+  display: {
+    fontFamily: 'var(--font-devanagari, "Rozha One", "Mukta", sans-serif)',
+    lineHeight: 1.32,
+    letterSpacing: "0.01em",
+    maxFontWeight: 800,
+    paddingAdjust: "0.06em",
+  },
+  h1: {
+    fontFamily: 'var(--font-devanagari, "Mukta", sans-serif)',
+    lineHeight: 1.35,
+    letterSpacing: "0.01em",
+    maxFontWeight: 700,
+    paddingAdjust: "0.05em",
+  },
+  h2: {
+    fontFamily: 'var(--font-devanagari, "Mukta", sans-serif)',
+    lineHeight: 1.38,
+    letterSpacing: "0.01em",
+    maxFontWeight: 700,
+    paddingAdjust: "0.04em",
+  },
+  h3: {
+    fontFamily: 'var(--font-devanagari, "Mukta", sans-serif)',
+    lineHeight: 1.4,
+    letterSpacing: "0.01em",
+    maxFontWeight: 600,
+    paddingAdjust: "0.03em",
+  },
+  h4: {
+    fontFamily: 'var(--font-devanagari, "Mukta", sans-serif)',
+    lineHeight: 1.45,
+    letterSpacing: "0em",
+    maxFontWeight: 600,
+    paddingAdjust: "0.02em",
+  },
+  body: {
+    fontFamily: 'var(--font-devanagari, "Mukta", sans-serif)',
+    lineHeight: 1.7,
+    letterSpacing: "0em",
+    maxFontWeight: 500,
+  },
+  caption: {
+    fontFamily: 'var(--font-devanagari, "Mukta", sans-serif)',
+    lineHeight: 1.5,
+    letterSpacing: "0.01em",
+    maxFontWeight: 500,
+  },
+  overline: {
+    fontFamily: 'var(--font-devanagari, "Mukta", sans-serif)',
+    lineHeight: 1.4,
+    letterSpacing: "0.05em",
+    maxFontWeight: 600,
+  },
+} as const;
+
 /**
  * Helper to retrieve fluid typography specification for a given level
  */
 export function getFluidTypographySpec(level: FluidTypographyLevel): FluidTypographySpec {
   return FLUID_TYPOGRAPHY_TOKENS[level];
 }
+
+/**
+ * Helper to retrieve language-calibrated typography specification (English vs Devanagari Hindi)
+ */
+export function getCalibratedTypographySpec(
+  level: FluidTypographyLevel,
+  language: "en" | "hi" = "en"
+): FluidTypographySpec {
+  const fluidSpec = FLUID_TYPOGRAPHY_TOKENS[level];
+  if (language === "hi") {
+    const devanagariSpec = DEVANAGARI_TYPOGRAPHY_TOKENS[level];
+    return {
+      fontSize: fluidSpec.fontSize,
+      fontFamily: devanagariSpec.fontFamily,
+      lineHeight: devanagariSpec.lineHeight,
+      letterSpacing: devanagariSpec.letterSpacing,
+      maxFontWeight: devanagariSpec.maxFontWeight,
+      paddingAdjust: devanagariSpec.paddingAdjust,
+    };
+  }
+  return fluidSpec;
+}
+
+/**
+ * Helper to retrieve dual typography styles (English vs Devanagari Hindi) for direct inline styling or CSS object mapping
+ */
+export function getDualTypographyStyles(
+  language: "en" | "hi" = "en",
+  level: FluidTypographyLevel = "body"
+): {
+  fontFamily?: string;
+  lineHeight: number | string;
+  letterSpacing: string;
+  paddingTop?: string;
+  paddingBottom?: string;
+} {
+  const spec = getCalibratedTypographySpec(level, language);
+  if (language === "hi") {
+    const res: {
+      fontFamily?: string;
+      lineHeight: number | string;
+      letterSpacing: string;
+      paddingTop?: string;
+      paddingBottom?: string;
+    } = {
+      lineHeight: spec.lineHeight,
+      letterSpacing: spec.letterSpacing || "0.01em",
+    };
+    if (spec.fontFamily) res.fontFamily = spec.fontFamily;
+    if (spec.paddingAdjust) {
+      res.paddingTop = spec.paddingAdjust;
+      res.paddingBottom = spec.paddingAdjust;
+    } else {
+      res.paddingTop = "0.04em";
+      res.paddingBottom = "0.04em";
+    }
+    return res;
+  }
+  return {
+    lineHeight: spec.lineHeight,
+    letterSpacing: spec.letterSpacing || "0em",
+  };
+}
+
+/**
+ * Helper to retrieve safe Hindi utility classes when language is 'hi'
+ */
+export function getHindiTypographyClasses(isHindi: boolean, isHeading: boolean = false): string {
+  if (!isHindi) return "";
+  return isHeading
+    ? "font-devanagari hi-heading-safe tracking-normal overflow-visible"
+    : "font-devanagari hi-text-safe tracking-normal";
+}
+
 
 
 

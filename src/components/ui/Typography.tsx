@@ -1,11 +1,17 @@
 import React from "react";
 import { cn } from "@/lib/utils";
-import { type FluidTypographyLevel } from "@/lib/designTokens";
+import {
+  type FluidTypographyLevel,
+  getCalibratedTypographySpec,
+  getHindiTypographyClasses,
+} from "@/lib/designTokens";
+import { useLanguage } from "@/context/LanguageContext";
 
 export interface TypographyProps extends React.HTMLAttributes<HTMLElement> {
   variant?: FluidTypographyLevel;
   as?: React.ElementType;
   gradient?: "mint" | "amber" | "persona" | "none";
+  lang?: "en" | "hi";
   children: React.ReactNode;
 }
 
@@ -39,15 +45,28 @@ const gradientUtilityMap: Record<"mint" | "amber" | "persona" | "none", string> 
 };
 
 export const Typography = React.forwardRef<HTMLElement, TypographyProps>(
-  ({ variant = "body", as, gradient = "none", className, children, ...props }, ref) => {
+  ({ variant = "body", as, gradient = "none", lang: customLang, className, children, ...props }, ref) => {
+    const { language: contextLang } = useLanguage();
+    const activeLang = customLang || contextLang || "en";
+    const isHindi = activeLang === "hi";
+
     const Component = as || variantElementMap[variant];
     const variantClasses = variantUtilityMap[variant];
     const gradientClasses = gradientUtilityMap[gradient];
 
+    const calibratedSpec = getCalibratedTypographySpec(variant, activeLang);
+
+    const isHeading = ["display", "h1", "h2", "h3", "h4"].includes(variant);
+    const devanagariClasses = getHindiTypographyClasses(isHindi, isHeading);
+
     return (
       <Component
         ref={ref as any}
-        className={cn(variantClasses, gradientClasses, className)}
+        lang={activeLang}
+        data-lang={activeLang}
+        data-calibrated-line-height={calibratedSpec.lineHeight}
+        data-calibrated-letter-spacing={calibratedSpec.letterSpacing}
+        className={cn(variantClasses, devanagariClasses, gradientClasses, className)}
         {...props}
       >
         {children}
@@ -57,3 +76,4 @@ export const Typography = React.forwardRef<HTMLElement, TypographyProps>(
 );
 
 Typography.displayName = "Typography";
+

@@ -134,7 +134,7 @@ Sprint 10: QA, CSO & CEO (Total Assurance, Compliance & Strategic Direction)
 ## Sprint 12: Typography, Hierarchy & Global Layout Engine (impeccable typeset, layout)
 - [x] 111. **[UI - Fluid Typography Scale / typeset]**: Implement clamp-based fluid typography (`clamp(1.5rem, 4vw, 3rem)`) ensuring smooth font scaling from 320px mobile to 4K displays.
 - [x] 112. **[UI - Font Loading & FOUT / optimize]**: Optimize Plus Jakarta Sans and Inter Google Fonts loading with `font-display: swap`, preload hints, and zero Cumulative Layout Shift (CLS).
-- [ ] 113. **[UI - Hindi & English Dual Typography / typeset]**: Calibrate line-height, letter-spacing, and font-weight adjustments specifically for Devanagari Hindi text to prevent glyph clipping.
+- [x] 113. **[UI - Hindi & English Dual Typography / typeset]**: Calibrate line-height, letter-spacing, and font-weight adjustments specifically for Devanagari Hindi text to prevent glyph clipping.
 - [ ] 114. **[UI - Visual Text Hierarchy / layout]**: Overhaul heading hierarchy (`h1`, `h2`, `h3`, `h4`, `overline`, `caption`) across all views, ensuring strict visual dominance and scanability.
 - [ ] 115. **[UI - Bento Grid Architecture / layout]**: Refactor feature showcases into modern, asymmetric Bento Grid layouts with dynamic aspect ratios and responsive auto-flow.
 - [ ] 116. **[UI - Spacing & Padding Rhythm / layout]**: Standardize section vertical rhythms (4rem / 6rem / 8rem) and container maximum widths (`max-w-7xl`, `max-w-6xl`) across the entire web app.

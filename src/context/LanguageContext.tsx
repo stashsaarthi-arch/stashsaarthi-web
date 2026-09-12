@@ -1017,21 +1017,20 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguageState] = useState<Language>("en");
 
-  // Ensure fresh page loads always start in English
+  // Ensure fresh page loads sync document lang & data-lang attributes
   useEffect(() => {
     if (typeof window !== "undefined") {
-      document.documentElement.lang = "en";
       try {
         const saved = sessionStorage.getItem("ss-language") as Language;
-        if (saved && (saved === "en" || saved === "hi")) {
-          setLanguageState(saved);
-          document.documentElement.lang = saved;
-        } else {
-          setLanguageState("en");
-          document.documentElement.lang = "en";
-        }
+        const activeLang = saved && (saved === "en" || saved === "hi") ? saved : "en";
+        setLanguageState(activeLang);
+        document.documentElement.lang = activeLang;
+        document.documentElement.setAttribute("data-lang", activeLang);
+        if (document.body) document.body.setAttribute("data-lang", activeLang);
       } catch (e) {
         document.documentElement.lang = "en";
+        document.documentElement.setAttribute("data-lang", "en");
+        if (document.body) document.body.setAttribute("data-lang", "en");
       }
     }
   }, []);
@@ -1042,6 +1041,8 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
       try {
         sessionStorage.setItem("ss-language", lang);
         document.documentElement.lang = lang;
+        document.documentElement.setAttribute("data-lang", lang);
+        if (document.body) document.body.setAttribute("data-lang", lang);
       } catch (e) {
         // Ignore storage write issues
       }

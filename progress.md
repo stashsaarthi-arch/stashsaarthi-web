@@ -1,3 +1,22 @@
+- [x] **[UI - Hindi & English Dual Typography / typeset] Task 113: Calibrate line-height, letter-spacing, and font-weight adjustments specifically for Devanagari Hindi text to prevent glyph clipping — 2026-09-13**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-hindi-dual-typography.mjs` — ✅ PASSED (14/14 HINDI & ENGLISH DUAL TYPOGRAPHY CHECKS PASSED SUCCESSFULLY).
+  - **Hindi & English Dual Typography Calibration Architecture**:
+    - `src/styles.css`: Added Devanagari Hindi dual typography rules for `:root[data-lang="hi"]`, `:lang(hi)`, `[data-lang="hi"] h1-h4` (line-height: 1.4, tracking: 0.01em, padding-top/bottom: 0.04em to prevent top/bottom matra glyph clipping), and `[data-lang="hi"] p` (line-height: 1.68, tracking: 0.005em). Added utilities (`devanagari-typeset`, `hi-heading-safe`, `hi-text-safe`, `hi-leading-relaxed`, `hi-tracking-normal`).
+    - `src/context/LanguageContext.tsx`: Updated `useEffect` mount and `setLanguage` to sync both `document.documentElement.lang` and `document.documentElement.setAttribute("data-lang", lang)` / `document.body.setAttribute("data-lang", lang)`.
+    - `src/lib/designTokens.ts`: Exported `DEVANAGARI_TYPOGRAPHY_TOKENS`, `getCalibratedTypographySpec(level, lang)`, `getDualTypographyStyles(lang, level)`, and `getHindiTypographyClasses(isHindi, isHeading)`.
+    - `src/components/ui/Typography.tsx`: Leveraged `getHindiTypographyClasses` and `data-lang` element attributes for automatic Devanagari typography calibration.
+    - `execution/test-hindi-dual-typography.mjs`: Created test harness script verifying CSS variables, `data-lang` sync, design tokens, and component exports.
+  - **Modified Files**:
+    - `src/styles.css` — Added Devanagari typography rules, letter spacing resets, and utility classes.
+    - `src/context/LanguageContext.tsx` — Synced `data-lang` attribute on html and body elements.
+    - `src/lib/designTokens.ts` — Added `getDualTypographyStyles` and `getHindiTypographyClasses` helpers.
+    - `src/components/ui/Typography.tsx` — Integrated `getHindiTypographyClasses` in component rendering.
+    - `execution/test-hindi-dual-typography.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 113 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 113 execution log.
+    - `progress.md` — Appended Task 113 execution log.
+
 - [x] **[UI - Font Loading & FOUT / optimize] Task 112: Optimize Plus Jakarta Sans and Inter Google Fonts loading with `font-display: swap`, preload hints, and zero Cumulative Layout Shift (CLS) — 2026-09-13**:
   - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
   - **Verification Suite**: `node execution/test-font-loading-fout.mjs` — ✅ PASSED (14/14 FONT LOADING & ZERO CLS CHECKS PASSED SUCCESSFULLY).
