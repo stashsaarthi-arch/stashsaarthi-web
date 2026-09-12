@@ -1,3 +1,18 @@
+- [x] **[UI - Shadow & Depth Hierarchy / layout] Task 106: Establish a 4-tier elevation shadow system (--shadow-subtle, --shadow-card, --shadow-floating, --shadow-glow) mapped to persona accent colors — 2026-09-13**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production bundle compiled cleanly).
+  - **Verification Suite**: `node execution/test-shadow-system.mjs` — ✅ PASSED (ALL 4-TIER ELEVATION SHADOW SYSTEM CHECKS PASSED).
+  - **4-Tier Elevation Shadow System Engine**:
+    - `src/styles.css`: Defined 4-tier shadow CSS variables (`--shadow-subtle`, `--shadow-card`, `--shadow-floating`, `--shadow-glow`) across `:root`, `[data-role="host"]`, and `[data-theme="light"]`, registered `@theme inline` mappings, and created Tailwind `@utility` classes (`shadow-subtle`, `shadow-card`, `shadow-floating`, `shadow-glow`).
+    - `src/lib/designTokens.ts`: Exported typed `SHADOW_TOKENS` object (`subtle`, `card`, `floating`, `glow`) and created `getPersonaShadowGlow(role)` helper function for runtime persona shadow lookup.
+    - `execution/test-shadow-system.mjs`: Created verification test harness script asserting shadow design tokens, persona helpers, CSS variables, light mode overrides, and utility rules.
+  - **Modified Files**:
+    - `src/styles.css` — Added shadow variables, theme inline mappings, light mode overrides, and utility rules.
+    - `src/lib/designTokens.ts` — Added `SHADOW_TOKENS` and `getPersonaShadowGlow` export.
+    - `execution/test-shadow-system.mjs` — Created verification test harness.
+    - `docs/tasks/PRD.md` — Marked Task 106 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 106 execution log.
+    - `progress.md` — Appended Task 106 execution log.
+
 - [x] **[UI - Border & Ring Radii / layout] Task 105: Unify border radius scale (rounded-sm, rounded-md, rounded-lg, rounded-xl, rounded-2xl, rounded-3xl) across all 40+ components for consistent visual rhythm — 2026-09-13**:
   - **Build**: `npm run build` — ✅ 0 errors (Vite production bundle compiled cleanly).
   - **Verification Suite**: `node execution/test-border-radius-scale.mjs` — ✅ PASSED (ALL BORDER RADIUS & RING SCALE CHECKS PASSED).

@@ -81,6 +81,10 @@
   --color-gradient-amber-gold: var(--gradient-amber-gold);
   --color-gradient-cyan-emerald: var(--gradient-cyan-emerald);
   --color-gradient-persona-radiant: var(--gradient-persona-radiant);
+  --shadow-subtle: var(--shadow-subtle);
+  --shadow-card: var(--shadow-card);
+  --shadow-floating: var(--shadow-floating);
+  --shadow-glow: var(--shadow-glow);
   --font-sans: "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --breakpoint-3xl: 160rem;
@@ -154,6 +158,10 @@
     oklch(0.98 0.01 220) 100%
   );
   --shadow-glass: 0 24px 60px -22px oklch(0 0 0 / 75%), inset 0 1px 0 oklch(1 0 0 / 7%);
+  --shadow-subtle: 0 2px 8px -2px oklch(0 0 0 / 40%), inset 0 1px 0 oklch(1 0 0 / 5%);
+  --shadow-card: 0 8px 24px -6px oklch(0 0 0 / 60%), inset 0 1px 0 oklch(1 0 0 / 8%);
+  --shadow-floating: 0 20px 48px -12px oklch(0 0 0 / 75%), inset 0 1px 0 oklch(1 0 0 / 12%);
+  --shadow-glow: 0 0 32px -4px var(--persona-glow), 0 12px 32px -8px oklch(0 0 0 / 65%);
   --glow-cyan: 0 0 40px -8px oklch(0.868 0.16 178 / 55%);
   --chart-1: oklch(0.868 0.16 178);
   --chart-2: oklch(0.769 0.165 70);
@@ -273,6 +281,10 @@ html.light {
   --surface-panel: oklch(0.975 0.006 220 / 92%);
   --surface-card: oklch(0.965 0.006 220 / 85%);
   --shadow-glass: 0 20px 40px -15px oklch(0 0 0 / 8%), inset 0 1px 0 oklch(1 0 0 / 80%);
+  --shadow-subtle: 0 2px 6px 0 oklch(0 0 0 / 5%), inset 0 1px 0 oklch(1 0 0 / 90%);
+  --shadow-card: 0 6px 18px -4px oklch(0 0 0 / 10%), inset 0 1px 0 oklch(1 0 0 / 90%);
+  --shadow-floating: 0 16px 36px -8px oklch(0 0 0 / 15%), inset 0 1px 0 oklch(1 0 0 / 90%);
+  --shadow-glow: 0 0 28px -4px var(--persona-glow), 0 8px 20px -6px oklch(0 0 0 / 12%);
 }
 
 [data-theme="light"][data-role="host"] {
@@ -429,8 +441,24 @@ html.lenis body {
 @utility surface-elevated-card {
   background-color: var(--surface-elevated);
   border: 1px solid oklch(1 0 0 / 16%);
-  box-shadow: 0 16px 40px -12px oklch(0 0 0 / 50%);
+  box-shadow: var(--shadow-card);
   transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@utility shadow-subtle {
+  box-shadow: var(--shadow-subtle);
+}
+
+@utility shadow-card {
+  box-shadow: var(--shadow-card);
+}
+
+@utility shadow-floating {
+  box-shadow: var(--shadow-floating);
+}
+
+@utility shadow-glow {
+  box-shadow: var(--shadow-glow);
 }
 
 @utility rounded-badge {

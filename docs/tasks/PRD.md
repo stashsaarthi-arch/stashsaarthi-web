@@ -125,7 +125,7 @@ Sprint 10: QA, CSO & CEO (Total Assurance, Compliance & Strategic Direction)
 - [x] 103. **[UI - Glassmorphism Standards / polish]**: Refactor all glass card utilities (`.glass`, `.glass-hover`, `.glass-panel`) to use performant CSS backdrop-filter with hardware acceleration and clean borders.
 - [x] 104. **[UI - Gradient Systems / colorize]**: Standardize dynamic radiant gradients across Hero and Featured cards, replacing ad-hoc inline gradients with reusable CSS token classes (`gradient-mint-emerald`, `gradient-amber-gold`).
 - [x] 105. **[UI - Border & Ring Radii / layout]**: Unify border radius scale (`rounded-sm`, `rounded-md`, `rounded-lg`, `rounded-xl`, `rounded-2xl`, `rounded-3xl`) across all 40+ components for consistent visual rhythm.
-- [ ] 106. **[UI - Shadow & Depth Hierarchy / layout]**: Establish a 4-tier elevation shadow system (`--shadow-subtle`, `--shadow-card`, `--shadow-floating`, `--shadow-glow`) mapped to persona accent colors.
+- [x] 106. **[UI - Shadow & Depth Hierarchy / layout]**: Establish a 4-tier elevation shadow system (`--shadow-subtle`, `--shadow-card`, `--shadow-floating`, `--shadow-glow`) mapped to persona accent colors.
 - [ ] 107. **[UI - Component Primitives / extract]**: Extract reusable button primitives (`Button`, `IconButton`, `PillBadge`, `Chip`) into a dedicated `src/components/ui/` primitives folder.
 - [ ] 108. **[UI - Dark Obsidian Depth / bolder]**: Introduce subtle ambient noise and depth textures (`.bg-noise`, `.radial-mesh`) to eliminate flat, dead dark backgrounds on OLED/retina displays.
 - [ ] 109. **[UI - Status & Feedback Tokens / clarify]**: Harmonize warning, error, info, and success tokens across both personas so status indicators remain instantly recognizable.

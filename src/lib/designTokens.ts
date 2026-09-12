@@ -134,5 +134,20 @@ export function getPersonaGradient(role: "student" | "host"): string {
   return role === "host" ? GRADIENT_TOKENS.amberGold : GRADIENT_TOKENS.mintEmerald;
 }
 
+export const SHADOW_TOKENS = {
+  subtle: "var(--shadow-subtle)",
+  card: "var(--shadow-card)",
+  floating: "var(--shadow-floating)",
+  glow: "var(--shadow-glow)",
+} as const;
+
+/**
+ * Helper to retrieve persona-specific shadow glow specification
+ */
+export function getPersonaShadowGlow(role: "student" | "host"): string {
+  const glowColor = role === "host" ? "oklch(0.809 0.165 76 / 40%)" : "oklch(0.72 0.19 160 / 40%)";
+  return `0 0 32px -4px ${glowColor}, 0 12px 32px -8px oklch(0 0 0 / 65%)`;
+}
+
 
 
