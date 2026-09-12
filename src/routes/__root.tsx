@@ -170,9 +170,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      { rel: "dns-prefetch", href: "https://fonts.googleapis.com" },
+      { rel: "dns-prefetch", href: "https://fonts.gstatic.com" },
+      {
+        rel: "preload",
+        as: "style",
+        href: "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&family=Inter:wght@400;500;600;700&display=swap",
+      },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&family=Inter:wght@400;500;600;700&display=swap",
       },
       { rel: "icon", href: "/favicon.png", type: "image/png" },
       { rel: "manifest", href: "/manifest.json" },
@@ -487,6 +494,7 @@ import { initSessionSecurityListener } from "@/lib/sessionSecurity";
 import { initVisitorTracking, trackPageView } from "@/lib/visitorTracking";
 import { initAutoDataRetentionPurge } from "@/lib/dataRetentionEngine";
 import { initOfflineQueueAutoSync } from "@/lib/offlineBookingQueue";
+import { initFontOptimization } from "@/lib/fontOptimization";
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
@@ -497,6 +505,7 @@ function RootComponent() {
     initWebGLSafetyGuard();
     initAutoDataRetentionPurge();
     initOfflineQueueAutoSync();
+    const cleanupFontOpt = initFontOptimization();
     const { unsubscribe } = initSessionSecurityListener();
     const stopTracking = initVisitorTracking();
 
@@ -513,6 +522,7 @@ function RootComponent() {
     window.addEventListener("stashsaarthi:offline-bookings-synced", handleSyncedEvent);
 
     return () => {
+      cleanupFontOpt();
       unsubscribe();
       stopTracking();
       window.removeEventListener("stashsaarthi:offline-bookings-synced", handleSyncedEvent);

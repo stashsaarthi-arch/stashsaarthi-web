@@ -225,6 +225,65 @@ export function getStatusTokenSpec(status: StatusType): StatusTokenSpec {
   return STATUS_TOKENS[status];
 }
 
+export interface FluidTypographySpec {
+  fontSize: string;
+  lineHeight: number | string;
+  letterSpacing?: string;
+}
+
+export const FLUID_TYPOGRAPHY_TOKENS = {
+  display: {
+    fontSize: "clamp(2.25rem, 3.5vw + 1rem, 5.5rem)",
+    lineHeight: 1.08,
+    letterSpacing: "-0.03em",
+  },
+  h1: {
+    fontSize: "clamp(1.5rem, 4vw, 3rem)",
+    lineHeight: 1.12,
+    letterSpacing: "-0.02em",
+  },
+  h2: {
+    fontSize: "clamp(1.35rem, 1.8vw + 0.6rem, 2.85rem)",
+    lineHeight: 1.2,
+    letterSpacing: "-0.015em",
+  },
+  h3: {
+    fontSize: "clamp(1.15rem, 1.2vw + 0.5rem, 2rem)",
+    lineHeight: 1.25,
+    letterSpacing: "-0.01em",
+  },
+  h4: {
+    fontSize: "clamp(1rem, 0.8vw + 0.45rem, 1.5rem)",
+    lineHeight: 1.3,
+    letterSpacing: "0em",
+  },
+  body: {
+    fontSize: "clamp(0.875rem, 0.6vw + 0.65rem, 1.25rem)",
+    lineHeight: 1.6,
+    letterSpacing: "0em",
+  },
+  caption: {
+    fontSize: "clamp(0.75rem, 0.4vw + 0.55rem, 1rem)",
+    lineHeight: 1.4,
+    letterSpacing: "0.01em",
+  },
+  overline: {
+    fontSize: "clamp(0.7rem, 0.35vw + 0.5rem, 0.875rem)",
+    lineHeight: 1.3,
+    letterSpacing: "0.08em",
+  },
+} as const;
+
+export type FluidTypographyLevel = keyof typeof FLUID_TYPOGRAPHY_TOKENS;
+
+/**
+ * Helper to retrieve fluid typography specification for a given level
+ */
+export function getFluidTypographySpec(level: FluidTypographyLevel): FluidTypographySpec {
+  return FLUID_TYPOGRAPHY_TOKENS[level];
+}
+
+
 
 
 

@@ -1,3 +1,35 @@
+- [x] **[UI - Font Loading & FOUT / optimize] Task 112: Optimize Plus Jakarta Sans and Inter Google Fonts loading with `font-display: swap`, preload hints, and zero Cumulative Layout Shift (CLS) — 2026-09-13**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-font-loading-fout.mjs` — ✅ PASSED (14/14 FONT LOADING & ZERO CLS CHECKS PASSED SUCCESSFULLY).
+  - **Font Loading & FOUT / Zero CLS Architecture**:
+    - `src/lib/fontOptimization.ts`: Enhanced font specs, CLS fallback definitions, preconnect/preload helpers, dynamic metric override injector (`injectFontMetricOverrides`), font loading ready monitor (`initFontOptimization`), and telemetry statistics (`getFontLoadingStats`).
+    - `src/styles.css`: Added `@font-face` metric override fallbacks for `"Plus Jakarta Sans Fallback"` and `"Inter Fallback"` (`ascent-override: 95%`/`96%`, `descent-override: 25%`/`24%`, `size-adjust: 100%`, `font-display: swap`) and bound them into `--font-sans`, `--font-body`, and `--font-display`.
+    - `src/routes/__root.tsx`: Ensured Google Fonts preconnect (`fonts.googleapis.com`, `fonts.gstatic.com` with `crossOrigin: "anonymous"`), dns-prefetch, stylesheet preload links with `display=swap`, and mounted `initFontOptimization()` on app initialization.
+    - `execution/test-font-loading-fout.mjs`: Created test harness script verifying preconnect links, stylesheet params, `@font-face` metric overrides, module exports, and runtime initialization.
+  - **Modified Files**:
+    - `src/lib/fontOptimization.ts` — Enhanced font specs, preloads, metric override injector, and loading monitor.
+    - `src/styles.css` — Added zero CLS font fallback rules and updated font stack variables.
+    - `src/routes/__root.tsx` — Mounted `initFontOptimization()` on app mount.
+    - `execution/test-font-loading-fout.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 112 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 112 execution log.
+    - `progress.md` — Appended Task 112 execution log.
+
+- [x] **[UI - Fluid Typography Scale / typeset] Task 111: Implement clamp-based fluid typography (`clamp(1.5rem, 4vw, 3rem)`) ensuring smooth font scaling from 320px mobile to 4K displays — 2026-09-13**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-fluid-typography.mjs` — ✅ PASSED (ALL FLUID TYPOGRAPHY SCALE CHECKS PASSED SUCCESSFULLY).
+  - **Fluid Typography Engine & Scaling Architecture**:
+    - `src/styles.css`: Defined clamp-based typography CSS custom properties (`--text-fluid-display`, `--text-fluid-h1: clamp(1.5rem, 4vw, 3rem)`, `--text-fluid-h2`, `--text-fluid-h3`, `--text-fluid-h4`, `--text-fluid-body`, `--text-fluid-caption`, `--text-fluid-overline`), mapped Tailwind utility classes (`text-fluid-display`, `text-fluid-h1`, `text-fluid-h2`, `text-fluid-h3`, `text-fluid-h4`, `text-fluid-body`, `text-fluid-caption`, `text-fluid-overline`), and bound base HTML heading elements (`h1`, `h2`, `h3`, `h4`) in `@layer base` for automatic responsive scaling from 320px viewports up to 4K displays.
+    - `src/lib/designTokens.ts`: Defined `FLUID_TYPOGRAPHY_TOKENS` object and exported `getFluidTypographySpec(level)` helper for typed runtime font scaling lookup.
+    - `src/components/ui/Typography.tsx`: Leveraged fluid typography levels across heading/body variants and re-exported via `src/components/ui/primitives.ts`.
+    - `execution/test-fluid-typography.mjs`: Created test harness script verifying CSS variables, clamp formulas, utility rules, design tokens, and component exports.
+  - **Modified Files**:
+    - `src/styles.css` — Added base HTML heading fluid typography styles.
+    - `execution/test-fluid-typography.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 111 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 111 execution log.
+    - `progress.md` — Appended Task 111 execution log.
+
 - [x] **[UI - Design System Documentation / document] Task 110: Generate living UI token documentation in `DESIGN.md` cataloging colors, typography, elevations, spacing scales, and micro-interaction states — 2026-09-13**:
   - **Build**: `npm run build` — ✅ 0 errors (Vite production bundle compiled cleanly).
   - **Verification Suite**: `node execution/test-design-doc.mjs` — ✅ PASSED (ALL REQUIRED SECTIONS & TOKEN CONCEPTS VERIFIED).
