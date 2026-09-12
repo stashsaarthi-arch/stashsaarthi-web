@@ -1,3 +1,61 @@
+- [x] **[UI - Spacing & Padding Rhythm / layout] Task 116: Standardize section vertical rhythms (4rem / 6rem / 8rem) and container maximum widths (`max-w-7xl`, `max-w-6xl`) across the entire web app — 2026-09-13**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-spacing-padding-rhythm.mjs` — ✅ PASSED (16/16 SPACING & PADDING RHYTHM CHECKS PASSED SUCCESSFULLY).
+  - **Spacing & Padding Rhythm Architecture**:
+    - `src/lib/designTokens.ts`: Defined `VERTICAL_RHYTHM_TOKENS` (`compact`: 3rem/4rem, `standard`: 4rem/6rem, `relaxed`: 5rem/8rem, `hero`: 6rem/9rem), `CONTAINER_WIDTH_TOKENS` (`sm`, `md`, `lg`: 72rem/max-w-6xl, `xl`: 80rem/max-w-7xl, `full`), `CONTAINER_GUTTER_TOKENS` (`compact`, `standard`: px-4/px-6/px-8, `relaxed`), and helper methods `getVerticalRhythmClasses`, `getContainerWidthClasses`, `getContainerGutterClasses`, and `getSectionContainerClasses`.
+    - `src/styles.css`: Added Tailwind `@utility` rules for `section-py-compact`, `section-py-standard`, `section-py-relaxed`, `section-py-hero`, `container-max-6xl`, `container-max-7xl`, and `section-container-gutter` ensuring standardized vertical rhythm and max-width layout containment across viewports.
+    - `src/components/ui/SectionWrapper.tsx`: Created reusable layout primitives `SectionWrapper` and `SectionContainer` supporting rhythm tiers (`compact`, `standard`, `relaxed`, `hero`), container widths (`sm`, `md`, `lg`, `xl`, `full`), and gutter padding options.
+    - `src/components/ui/primitives.ts`: Re-exported `SectionWrapper` and `SectionContainer`.
+    - `src/components/stash/Ecosystem.tsx`: Integrated `SectionWrapper` primitive for platform ecosystem section layout containment.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Defined spacing & container layout tokens and helper functions.
+    - `src/styles.css` — Added `@utility` rules for section vertical rhythm and container max-widths.
+    - `src/components/ui/SectionWrapper.tsx` — Created layout primitive component.
+    - `src/components/ui/primitives.ts` — Re-exported `SectionWrapper` and `SectionContainer`.
+    - `src/components/stash/Ecosystem.tsx` — Integrated `SectionWrapper`.
+    - `execution/test-spacing-padding-rhythm.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 116 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 116 execution log.
+    - `progress.md` — Appended Task 116 execution log.
+
+- [x] **[UI - Bento Grid Architecture / layout] Task 115: Refactor feature showcases into modern, asymmetric Bento Grid layouts with dynamic aspect ratios and responsive auto-flow — 2026-09-13**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-bento-grid.mjs` — ✅ PASSED (ALL 5/5 BENTO GRID ARCHITECTURE CHECKS PASSED SUCCESSFULLY).
+  - **Bento Grid Architecture & Layout Engine**:
+    - `src/lib/designTokens.ts`: Enhanced `BENTO_GRID_TOKENS` with dynamic aspect ratios (`square`, `standard`, `video`, `wide`, `portrait`, `auto`), asymmetric item spans (`featured`, `wide`, `tall`, `normal`, `half`, `full`), gap tiers (`sm`, `md`, `lg`, `xl`), and helper functions `getBentoSpanClasses` and `getBentoGapClasses`.
+    - `src/styles.css`: Added Tailwind `@utility` rules for `bento-grid`, `bento-card`, `bento-span-featured`, `bento-span-wide`, `bento-span-tall`, `bento-span-normal`, `bento-span-half`, and `bento-span-full` ensuring hardware-accelerated grid auto-flow (`grid-flow-dense`) and responsive column spans.
+    - `src/components/ui/BentoGrid.tsx`: Refactored `BentoGrid` and `BentoCard` primitives supporting asymmetric span configurations, dynamic aspect ratio classes, custom accent radial glows, surface layer variants (`glass`, `surface1`, `surface2`, `elevated`), and optional `Tilt3D` micro-interactions.
+    - `src/components/stash/Ecosystem.tsx`: Refactored core platform ecosystem showcase to utilize `BentoGrid` and `BentoCard` with asymmetric spans and dynamic aspect ratios (`standard`, `video`, `portrait`, `square`, `wide`).
+    - `src/components/ui/primitives.ts`: Re-exported `BentoGrid`, `BentoCard`, `BentoHeader`, `BentoTitle`, and `BentoDescription`.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Enhanced `BENTO_GRID_TOKENS` and exported `getBentoGapClasses`.
+    - `src/styles.css` — Added `@utility` rules for Bento Grid layout system.
+    - `src/components/ui/BentoGrid.tsx` — Enhanced BentoGrid primitives suite.
+    - `src/components/stash/Ecosystem.tsx` — Refactored to Bento Grid architecture.
+    - `execution/test-bento-grid.mjs` — Verified test harness.
+    - `docs/tasks/PRD.md` — Marked Task 115 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 115 execution log.
+    - `progress.md` — Appended Task 115 execution log.
+
+- [x] **[UI - Visual Text Hierarchy / layout] Task 114: Overhaul heading hierarchy (`h1`, `h2`, `h3`, `h4`, `overline`, `caption`) across all views, ensuring strict visual dominance and scanability — 2026-09-13**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-visual-text-hierarchy.mjs` — ✅ PASSED (16/16 VISUAL TEXT HIERARCHY CHECKS PASSED SUCCESSFULLY).
+  - **Visual Text Hierarchy Architecture**:
+    - `src/lib/designTokens.ts`: Defined `TEXT_HIERARCHY_TOKENS` mapping font weight, line-height, letter-spacing, font-family, and contrast roles across `display` (800 weight, -0.03em tracking), `h1` (800 weight, -0.02em tracking), `h2` (700 weight, -0.015em tracking), `h3` (700 weight, -0.01em tracking), `h4` (600 weight, 0em tracking), `overline` (600 weight, uppercase, 0.08em tracking), `caption` (500 weight, 0.01em tracking), and `body` (400 weight). Added `getHeadingHierarchyClasses(level)` helper.
+    - `src/styles.css`: Added `@utility heading-display`, `@utility heading-h1`, `@utility heading-h2`, `@utility heading-h3`, `@utility heading-h4`, `@utility text-overline`, `@utility text-caption`, and `@utility section-header-wrapper`. Updated base `@layer base` `h1`-`h4` HTML heading elements to enforce font family `var(--font-display)` and font weight defaults.
+    - `src/components/ui/Typography.tsx`: Updated `Typography` component to leverage `getHeadingHierarchyClasses` for visual hierarchy dominance and added reusable `SectionHeader` component for standardized section header visual hierarchy (overline + heading + body description).
+    - `src/components/ui/primitives.ts`: Re-exported `SectionHeader` alongside `Typography`.
+    - `execution/test-visual-text-hierarchy.mjs`: Created test harness script verifying token specifications, CSS utilities, base heading rules, and component exports.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `TEXT_HIERARCHY_TOKENS` and `getHeadingHierarchyClasses` helper.
+    - `src/styles.css` — Added heading hierarchy utilities, section header wrapper, and updated base heading elements.
+    - `src/components/ui/Typography.tsx` — Integrated `getHeadingHierarchyClasses` and added `SectionHeader` component.
+    - `src/components/ui/primitives.ts` — Re-exported `SectionHeader`.
+    - `execution/test-visual-text-hierarchy.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 114 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 114 execution log.
+    - `progress.md` — Appended Task 114 execution log.
+
 - [x] **[UI - Hindi & English Dual Typography / typeset] Task 113: Calibrate line-height, letter-spacing, and font-weight adjustments specifically for Devanagari Hindi text to prevent glyph clipping — 2026-09-13**:
   - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
   - **Verification Suite**: `node execution/test-hindi-dual-typography.mjs` — ✅ PASSED (14/14 HINDI & ENGLISH DUAL TYPOGRAPHY CHECKS PASSED SUCCESSFULLY).

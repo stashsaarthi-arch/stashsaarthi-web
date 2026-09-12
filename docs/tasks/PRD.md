@@ -135,9 +135,9 @@ Sprint 10: QA, CSO & CEO (Total Assurance, Compliance & Strategic Direction)
 - [x] 111. **[UI - Fluid Typography Scale / typeset]**: Implement clamp-based fluid typography (`clamp(1.5rem, 4vw, 3rem)`) ensuring smooth font scaling from 320px mobile to 4K displays.
 - [x] 112. **[UI - Font Loading & FOUT / optimize]**: Optimize Plus Jakarta Sans and Inter Google Fonts loading with `font-display: swap`, preload hints, and zero Cumulative Layout Shift (CLS).
 - [x] 113. **[UI - Hindi & English Dual Typography / typeset]**: Calibrate line-height, letter-spacing, and font-weight adjustments specifically for Devanagari Hindi text to prevent glyph clipping.
-- [ ] 114. **[UI - Visual Text Hierarchy / layout]**: Overhaul heading hierarchy (`h1`, `h2`, `h3`, `h4`, `overline`, `caption`) across all views, ensuring strict visual dominance and scanability.
-- [ ] 115. **[UI - Bento Grid Architecture / layout]**: Refactor feature showcases into modern, asymmetric Bento Grid layouts with dynamic aspect ratios and responsive auto-flow.
-- [ ] 116. **[UI - Spacing & Padding Rhythm / layout]**: Standardize section vertical rhythms (4rem / 6rem / 8rem) and container maximum widths (`max-w-7xl`, `max-w-6xl`) across the entire web app.
+- [x] 114. **[UI - Visual Text Hierarchy / layout]**: Overhaul heading hierarchy (`h1`, `h2`, `h3`, `h4`, `overline`, `caption`) across all views, ensuring strict visual dominance and scanability.
+- [x] 115. **[UI - Bento Grid Architecture / layout]**: Refactor feature showcases into modern, asymmetric Bento Grid layouts with dynamic aspect ratios and responsive auto-flow.
+- [x] 116. **[UI - Spacing & Padding Rhythm / layout]**: Standardize section vertical rhythms (4rem / 6rem / 8rem) and container maximum widths (`max-w-7xl`, `max-w-6xl`) across the entire web app.
 - [ ] 117. **[UI - Content Containers & Gutters / adapt]**: Fix mobile gutter padding (`px-4 sm:px-6 lg:px-8`) ensuring zero text-to-edge crowding on iPhone SE and narrow Android viewports.
 - [ ] 118. **[UI - Micro-Copy Alignment / polish]**: Re-align badges, icons, price tags, and helper captions with strict baseline grid alignment.
 - [ ] 119. **[UI - Truncation & Multi-line Clamping / harden]**: Apply responsive line-clamping (`line-clamp-1`, `line-clamp-2`, `line-clamp-3`) with tooltip fallbacks to prevent card layout breakage on verbose Hindi strings.

@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
 import {
   Boxes,
   Briefcase,
@@ -7,16 +5,15 @@ import {
   Home,
   ShieldCheck,
   Soup,
-  ChevronDown,
   Check,
 } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import type { OpenBooking } from "./types";
-import { Tilt3D } from "./Tilt3D";
 import AnimatedContent from "@/components/ui/AnimatedContent";
-import { PrototypeBadge } from "@/components/ui/PrototypeBadge";
 import { useLanguage } from "@/context/LanguageContext";
+import { BentoGrid, BentoCard } from "@/components/ui/BentoGrid";
+import { BentoSpanType, BentoAspectRatioType } from "@/lib/designTokens";
+import { SectionWrapper } from "@/components/ui/SectionWrapper";
 
 type NodeKey = "stash" | "spaces" | "kitchen" | "connect" | "trust" | "micro";
 
@@ -24,6 +21,8 @@ type NodeBase = {
   id: NodeKey;
   accent: string;
   icon: typeof Home;
+  span: BentoSpanType;
+  aspectRatio: BentoAspectRatioType;
 };
 
 const NODES_BASE: NodeBase[] = [
@@ -31,31 +30,43 @@ const NODES_BASE: NodeBase[] = [
     id: "stash",
     accent: "var(--cyan)",
     icon: Boxes,
+    span: "featured",
+    aspectRatio: "standard",
   },
   {
     id: "spaces",
     accent: "var(--cyan)",
     icon: Home,
+    span: "wide",
+    aspectRatio: "video",
   },
   {
     id: "kitchen",
     accent: "var(--amber)",
     icon: Soup,
+    span: "tall",
+    aspectRatio: "portrait",
   },
   {
     id: "connect",
     accent: "var(--amber)",
     icon: HandHeart,
+    span: "normal",
+    aspectRatio: "square",
   },
   {
     id: "trust",
     accent: "var(--emerald)",
     icon: ShieldCheck,
+    span: "normal",
+    aspectRatio: "square",
   },
   {
     id: "micro",
     accent: "var(--emerald)",
     icon: Briefcase,
+    span: "wide",
+    aspectRatio: "wide",
   },
 ];
 
@@ -64,11 +75,13 @@ export function Ecosystem({ onBook }: { onBook: OpenBooking }) {
   const isHi = language === "hi";
 
   return (
-    <div id="ecosystem" className="relative mx-auto max-w-4xl px-2 py-2 scroll-mt-20">
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <SectionWrapper id="ecosystem" rhythm="compact" containerSize="lg" className="scroll-mt-20">
+
+      <BentoGrid columns={4} autoFlow="dense">
         {NODES_BASE.map((n, i) => {
           const Icon = n.icon;
           const textData = t.ecosystem[n.id];
+          const isFeatured = n.span === "featured";
           return (
             <AnimatedContent
               key={n.id}
@@ -77,10 +90,18 @@ export function Ecosystem({ onBook }: { onBook: OpenBooking }) {
               duration={0.6}
               threshold={0.15}
               delay={Math.min(i * 0.05, 0.3)}
+              className={n.span === "featured" ? "bento-span-featured col-span-1 md:col-span-2 row-span-1 md:row-span-2" : ""}
+
             >
-              <Tilt3D max={3} lift={6} className="rounded-2xl h-full">
-                <div className="glass h-full flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-black/40">
-                  <div className="flex items-center gap-3 p-4 sm:p-5 border-b border-white/10">
+              <BentoCard
+                span={n.span}
+                aspectRatio={n.aspectRatio}
+                accentColor={n.accent}
+                enableTilt={true}
+                className="h-full flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center gap-3 pb-3 border-b border-white/10">
                     <span
                       className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-white/10"
                       style={{ background: `color-mix(in oklab, ${n.accent} 18%, transparent)` }}
@@ -88,7 +109,7 @@ export function Ecosystem({ onBook }: { onBook: OpenBooking }) {
                       <Icon className="h-5 w-5" style={{ color: n.accent }} />
                     </span>
                     <div className="min-w-0 flex-1">
-                      <div className="truncate text-base font-bold">{textData.title}</div>
+                      <div className="truncate text-base sm:text-lg font-bold">{textData.title}</div>
                       <div
                         className="truncate text-xs font-medium mt-0.5 flex items-center gap-1.5 flex-wrap"
                         style={{ color: n.accent }}
@@ -101,8 +122,8 @@ export function Ecosystem({ onBook }: { onBook: OpenBooking }) {
                     </div>
                   </div>
 
-                  <div className="flex-1 p-4 sm:p-5 flex flex-col">
-                    <p className="text-xs leading-relaxed text-muted-foreground sm:text-sm">
+                  <div className="pt-3 flex-1 flex flex-col">
+                    <p className={`text-xs leading-relaxed text-muted-foreground ${isFeatured ? 'sm:text-base' : 'sm:text-sm'}`}>
                       {textData.subtitle}
                     </p>
                     <div
@@ -124,25 +145,26 @@ export function Ecosystem({ onBook }: { onBook: OpenBooking }) {
                         </li>
                       ))}
                     </ul>
-
-                    <Button
-                      onClick={() => onBook({ service: n.id as any, note: textData.title })}
-                      className="mt-4 w-full rounded-xl py-4 font-bold shadow-lg transition-all active:scale-95 text-xs sm:text-sm cursor-pointer"
-                      style={{
-                        backgroundColor: n.accent,
-                        color: "black",
-                        boxShadow: `0 4px 14px 0 color-mix(in oklab, ${n.accent} 40%, transparent)`,
-                      }}
-                    >
-                      {isHi ? `${textData.title} बुक करें` : `Book ${textData.title}`}
-                    </Button>
                   </div>
                 </div>
-              </Tilt3D>
+
+                <Button
+                  onClick={() => onBook({ service: n.id as any, note: textData.title })}
+                  className="mt-4 w-full rounded-xl py-4 font-bold shadow-lg transition-all active:scale-95 text-xs sm:text-sm cursor-pointer"
+                  style={{
+                    backgroundColor: n.accent,
+                    color: "black",
+                    boxShadow: `0 4px 14px 0 color-mix(in oklab, ${n.accent} 40%, transparent)`,
+                  }}
+                >
+                  {isHi ? `${textData.title} बुक करें` : `Book ${textData.title}`}
+                </Button>
+              </BentoCard>
             </AnimatedContent>
           );
         })}
-      </div>
-    </div>
+      </BentoGrid>
+    </SectionWrapper>
   );
 }
+

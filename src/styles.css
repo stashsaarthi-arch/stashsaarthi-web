@@ -475,24 +475,36 @@ html.light {
     text-rendering: optimizeLegibility;
   }
   h1 {
+    font-family: var(--font-display);
     font-size: var(--text-fluid-h1);
+    font-weight: 800;
     line-height: 1.12;
     letter-spacing: -0.02em;
+    color: var(--foreground);
   }
   h2 {
+    font-family: var(--font-display);
     font-size: var(--text-fluid-h2);
+    font-weight: 700;
     line-height: 1.2;
     letter-spacing: -0.015em;
+    color: var(--foreground);
   }
   h3 {
+    font-family: var(--font-display);
     font-size: var(--text-fluid-h3);
+    font-weight: 700;
     line-height: 1.25;
     letter-spacing: -0.01em;
+    color: var(--foreground);
   }
   h4 {
+    font-family: var(--font-sans);
     font-size: var(--text-fluid-h4);
+    font-weight: 600;
     line-height: 1.3;
     letter-spacing: 0em;
+    color: var(--foreground);
   }
 
   /* Devanagari / Hindi Dual Typography Calibration (Task 113) */
@@ -818,6 +830,77 @@ html.lenis body {
   -webkit-text-fill-color: transparent;
 }
 
+/* Standardized Section Vertical Rhythms & Container Max Widths (Task 116) */
+@utility section-py-compact {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  @media (min-width: 768px) {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}
+
+@utility section-py-standard {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  @media (min-width: 768px) {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
+
+@utility section-py-relaxed {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  @media (min-width: 768px) {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+}
+
+@utility section-py-hero {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  @media (min-width: 768px) {
+    padding-top: 9rem;
+    padding-bottom: 9rem;
+  }
+}
+
+@utility container-max-6xl {
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+@utility container-max-7xl {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+@utility section-container-gutter {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  @media (min-width: 640px) {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  @media (min-width: 1024px) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@utility section-wrapper {
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+}
+
+
 @utility text-gradient-persona {
   background-image: var(--gradient-persona-radiant);
   background-clip: text;
@@ -881,6 +964,148 @@ html.lenis body {
   line-height: 1.3;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+/* Visual Heading & Text Hierarchy Utilities (Task 114) */
+@utility heading-display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--text-fluid-display);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+
+@utility heading-h1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--text-fluid-h1);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+
+@utility heading-h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-fluid-h2);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+@utility heading-h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-fluid-h3);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+@utility heading-h4 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--text-fluid-h4);
+  line-height: 1.3;
+  letter-spacing: 0em;
+}
+
+@utility text-overline {
+  font-size: var(--text-fluid-overline);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+@utility text-caption {
+  font-size: var(--text-fluid-caption);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+  color: var(--muted-foreground);
+}
+
+@utility section-header-wrapper {
+  text-align: center;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 3rem;
+}
+
+/* Bento Grid Architecture Utilities (Task 115) */
+@utility bento-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1rem;
+  grid-auto-flow: dense;
+  grid-auto-rows: minmax(180px, auto);
+}
+
+@media (min-width: 768px) {
+  .bento-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .bento-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@utility bento-span-featured {
+  grid-column: span 1 / span 1;
+  grid-row: span 1 / span 1;
+}
+
+@media (min-width: 768px) {
+  .bento-span-featured {
+    grid-column: span 2 / span 2;
+    grid-row: span 2 / span 2;
+  }
+}
+
+@utility bento-span-wide {
+  grid-column: span 1 / span 1;
+}
+
+@media (min-width: 768px) {
+  .bento-span-wide {
+    grid-column: span 2 / span 2;
+  }
+}
+
+@utility bento-span-tall {
+  grid-row: span 1 / span 1;
+}
+
+@media (min-width: 768px) {
+  .bento-span-tall {
+    grid-row: span 2 / span 2;
+  }
+}
+
+@utility bento-span-normal {
+  grid-column: span 1 / span 1;
+  grid-row: span 1 / span 1;
+}
+
+@utility bento-span-full {
+  grid-column: span 1 / span 1;
+}
+
+@media (min-width: 768px) {
+  .bento-span-full {
+    grid-column: span 3 / span 3;
+  }
+}
+
+@media (min-width: 1024px) {
+  .bento-span-full {
+    grid-column: span 4 / span 4;
+  }
 }
 
 @utility grid-noise {
@@ -1353,6 +1578,89 @@ html.light .text-cyan-400 {
   .absolute-pointer-guard a,
   .absolute-pointer-guard [role="button"] {
     pointer-events: auto !important;
+  }
+}
+
+/* ==========================================================================
+   Bento Grid Architecture & Asymmetric Layout Utilities
+   ========================================================================== */
+
+@utility bento-grid {
+  display: grid;
+  width: 100%;
+  grid-auto-flow: dense;
+}
+
+@utility bento-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  transition: all 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@utility bento-span-featured {
+  grid-column: span 1 / span 1;
+  grid-row: span 1 / span 1;
+}
+
+@media (min-width: 768px) {
+  .bento-span-featured {
+    grid-column: span 2 / span 2;
+    grid-row: span 2 / span 2;
+  }
+}
+
+@utility bento-span-wide {
+  grid-column: span 1 / span 1;
+}
+
+@media (min-width: 768px) {
+  .bento-span-wide {
+    grid-column: span 2 / span 2;
+  }
+}
+
+@utility bento-span-tall {
+  grid-column: span 1 / span 1;
+}
+
+@media (min-width: 768px) {
+  .bento-span-tall {
+    grid-row: span 2 / span 2;
+  }
+}
+
+@utility bento-span-normal {
+  grid-column: span 1 / span 1;
+  grid-row: span 1 / span 1;
+}
+
+@utility bento-span-half {
+  grid-column: span 1 / span 1;
+}
+
+@media (min-width: 768px) {
+  .bento-span-half {
+    grid-column: span 2 / span 2;
+  }
+}
+
+@utility bento-span-full {
+  grid-column: span 1 / span 1;
+}
+
+@media (min-width: 768px) {
+  .bento-span-full {
+    grid-column: span 3 / span 3;
+  }
+}
+
+@media (min-width: 1024px) {
+  .bento-span-full {
+    grid-column: span 4 / span 4;
   }
 }
 

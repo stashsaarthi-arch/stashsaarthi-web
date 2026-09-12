@@ -279,6 +279,107 @@ export const FLUID_TYPOGRAPHY_TOKENS = {
 
 export type FluidTypographyLevel = keyof typeof FLUID_TYPOGRAPHY_TOKENS;
 
+export interface HierarchyTokenSpec {
+  level: FluidTypographyLevel;
+  fontWeight: number;
+  lineHeight: number;
+  letterSpacing: string;
+  fontFamily: string;
+  contrastRole: "display-contrast" | "heading-contrast" | "body-contrast" | "muted-contrast";
+}
+
+export const TEXT_HIERARCHY_TOKENS: Record<FluidTypographyLevel, HierarchyTokenSpec> = {
+  display: {
+    level: "display",
+    fontWeight: 800,
+    lineHeight: 1.08,
+    letterSpacing: "-0.03em",
+    fontFamily: 'var(--font-display, "Plus Jakarta Sans", sans-serif)',
+    contrastRole: "display-contrast",
+  },
+  h1: {
+    level: "h1",
+    fontWeight: 800,
+    lineHeight: 1.12,
+    letterSpacing: "-0.02em",
+    fontFamily: 'var(--font-display, "Plus Jakarta Sans", sans-serif)',
+    contrastRole: "heading-contrast",
+  },
+  h2: {
+    level: "h2",
+    fontWeight: 700,
+    lineHeight: 1.2,
+    letterSpacing: "-0.015em",
+    fontFamily: 'var(--font-display, "Plus Jakarta Sans", sans-serif)',
+    contrastRole: "heading-contrast",
+  },
+  h3: {
+    level: "h3",
+    fontWeight: 700,
+    lineHeight: 1.25,
+    letterSpacing: "-0.01em",
+    fontFamily: 'var(--font-display, "Plus Jakarta Sans", sans-serif)',
+    contrastRole: "heading-contrast",
+  },
+  h4: {
+    level: "h4",
+    fontWeight: 600,
+    lineHeight: 1.3,
+    letterSpacing: "0em",
+    fontFamily: 'var(--font-sans, "Plus Jakarta Sans", sans-serif)',
+    contrastRole: "heading-contrast",
+  },
+  body: {
+    level: "body",
+    fontWeight: 400,
+    lineHeight: 1.6,
+    letterSpacing: "0em",
+    fontFamily: 'var(--font-body, "Inter", sans-serif)',
+    contrastRole: "body-contrast",
+  },
+  caption: {
+    level: "caption",
+    fontWeight: 500,
+    lineHeight: 1.4,
+    letterSpacing: "0.01em",
+    fontFamily: 'var(--font-body, "Inter", sans-serif)',
+    contrastRole: "muted-contrast",
+  },
+  overline: {
+    level: "overline",
+    fontWeight: 600,
+    lineHeight: 1.3,
+    letterSpacing: "0.08em",
+    fontFamily: 'var(--font-display, "Plus Jakarta Sans", sans-serif)',
+    contrastRole: "muted-contrast",
+  },
+} as const;
+
+/**
+ * Helper to retrieve text hierarchy utility classes for a given level
+ */
+export function getHeadingHierarchyClasses(level: FluidTypographyLevel): string {
+  switch (level) {
+    case "display":
+      return "heading-display text-fluid-display font-extrabold tracking-tight";
+    case "h1":
+      return "heading-h1 text-fluid-h1 font-extrabold tracking-tight";
+    case "h2":
+      return "heading-h2 text-fluid-h2 font-bold tracking-tight";
+    case "h3":
+      return "heading-h3 text-fluid-h3 font-bold tracking-tight";
+    case "h4":
+      return "heading-h4 text-fluid-h4 font-semibold";
+    case "overline":
+      return "text-overline text-fluid-overline font-semibold text-muted-foreground uppercase tracking-widest";
+    case "caption":
+      return "text-caption text-fluid-caption font-medium text-muted-foreground";
+    case "body":
+    default:
+      return "text-fluid-body font-normal leading-relaxed";
+  }
+}
+
 export interface DevanagariTypographySpec {
   fontFamily: string;
   lineHeight: number;
@@ -422,6 +523,136 @@ export function getHindiTypographyClasses(isHindi: boolean, isHeading: boolean =
     ? "font-devanagari hi-heading-safe tracking-normal overflow-visible"
     : "font-devanagari hi-text-safe tracking-normal";
 }
+
+export const BENTO_GRID_TOKENS = {
+  columns: {
+    mobile: 1,
+    tablet: 2,
+    desktop: 4,
+  },
+  aspectRatios: {
+    square: "aspect-square",
+    standard: "aspect-[4/3]",
+    video: "aspect-[16/9]",
+    wide: "aspect-[2/1]",
+    portrait: "aspect-[3/4]",
+    auto: "aspect-auto",
+  },
+  spans: {
+    featured: "bento-span-featured col-span-1 md:col-span-2 row-span-1 md:row-span-2",
+    wide: "bento-span-wide col-span-1 md:col-span-2 row-span-1",
+    tall: "bento-span-tall col-span-1 row-span-1 md:row-span-2",
+    normal: "bento-span-normal col-span-1 row-span-1",
+    half: "bento-span-half col-span-1 md:col-span-2 row-span-1",
+    full: "bento-span-full col-span-1 md:col-span-3 lg:col-span-4 row-span-1",
+  },
+  gap: {
+    sm: "gap-3 sm:gap-4",
+    md: "gap-4 sm:gap-6",
+    lg: "gap-4 sm:gap-6 lg:gap-8",
+    xl: "gap-6 sm:gap-8 lg:gap-10",
+  },
+  autoFlow: {
+    dense: "grid-flow-dense",
+    row: "grid-flow-row",
+    column: "grid-flow-col",
+  },
+} as const;
+
+export type BentoSpanType = keyof typeof BENTO_GRID_TOKENS.spans;
+export type BentoAspectRatioType = keyof typeof BENTO_GRID_TOKENS.aspectRatios;
+export type BentoGapType = keyof typeof BENTO_GRID_TOKENS.gap;
+
+/**
+ * Helper to retrieve Bento Grid item span utility classes
+ */
+export function getBentoSpanClasses(span: BentoSpanType = "normal"): string {
+  return BENTO_GRID_TOKENS.spans[span] || BENTO_GRID_TOKENS.spans.normal;
+}
+
+/**
+ * Helper to retrieve Bento Grid gap utility classes
+ */
+export function getBentoGapClasses(gap: BentoGapType = "lg"): string {
+  return BENTO_GRID_TOKENS.gap[gap] || BENTO_GRID_TOKENS.gap.lg;
+}
+
+export const VERTICAL_RHYTHM_TOKENS = {
+  compact: {
+    pyMobile: "3rem",
+    pyDesktop: "4rem",
+    classes: "section-py-compact py-12 md:py-16",
+  },
+  standard: {
+    pyMobile: "4rem",
+    pyDesktop: "6rem",
+    classes: "section-py-standard py-16 md:py-24",
+  },
+  relaxed: {
+    pyMobile: "5rem",
+    pyDesktop: "8rem",
+    classes: "section-py-relaxed py-20 md:py-32",
+  },
+  hero: {
+    pyMobile: "6rem",
+    pyDesktop: "9rem",
+    classes: "section-py-hero py-24 md:py-36",
+  },
+} as const;
+
+export type VerticalRhythmTier = keyof typeof VERTICAL_RHYTHM_TOKENS;
+
+export const CONTAINER_WIDTH_TOKENS = {
+  sm: { maxWidth: "48rem", classes: "max-w-3xl" },
+  md: { maxWidth: "64rem", classes: "max-w-5xl" },
+  lg: { maxWidth: "72rem", classes: "max-w-6xl container-max-6xl" },
+  xl: { maxWidth: "80rem", classes: "max-w-7xl container-max-7xl" },
+  full: { maxWidth: "100%", classes: "max-w-full" },
+} as const;
+
+export type ContainerSizeTier = keyof typeof CONTAINER_WIDTH_TOKENS;
+
+export const CONTAINER_GUTTER_TOKENS = {
+  compact: "px-3 sm:px-4 lg:px-6",
+  standard: "px-4 sm:px-6 lg:px-8",
+  relaxed: "px-6 sm:px-8 lg:px-12",
+} as const;
+
+export type ContainerGutterTier = keyof typeof CONTAINER_GUTTER_TOKENS;
+
+/**
+ * Helper to retrieve section vertical rhythm utility classes
+ */
+export function getVerticalRhythmClasses(rhythm: VerticalRhythmTier = "standard"): string {
+  return VERTICAL_RHYTHM_TOKENS[rhythm]?.classes || VERTICAL_RHYTHM_TOKENS.standard.classes;
+}
+
+/**
+ * Helper to retrieve container maximum width utility classes
+ */
+export function getContainerWidthClasses(size: ContainerSizeTier = "xl"): string {
+  return CONTAINER_WIDTH_TOKENS[size]?.classes || CONTAINER_WIDTH_TOKENS.xl.classes;
+}
+
+/**
+ * Helper to retrieve container responsive horizontal gutter padding classes
+ */
+export function getContainerGutterClasses(gutter: ContainerGutterTier = "standard"): string {
+  return CONTAINER_GUTTER_TOKENS[gutter] || CONTAINER_GUTTER_TOKENS.standard;
+}
+
+/**
+ * Helper to retrieve complete standardized section container class string
+ */
+export function getSectionContainerClasses(
+  rhythm: VerticalRhythmTier = "standard",
+  width: ContainerSizeTier = "xl",
+  gutter: ContainerGutterTier = "standard"
+): string {
+  return `${getVerticalRhythmClasses(rhythm)} ${getContainerWidthClasses(width)} ${getContainerGutterClasses(gutter)} mx-auto w-full`;
+}
+
+
 
 
 
