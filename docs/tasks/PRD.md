@@ -129,7 +129,7 @@ Sprint 10: QA, CSO & CEO (Total Assurance, Compliance & Strategic Direction)
 - [x] 107. **[UI - Component Primitives / extract]**: Extract reusable button primitives (`Button`, `IconButton`, `PillBadge`, `Chip`) into a dedicated `src/components/ui/` primitives folder.
 - [x] 108. **[UI - Dark Obsidian Depth / bolder]**: Introduce subtle ambient noise and depth textures (`.bg-noise`, `.radial-mesh`) to eliminate flat, dead dark backgrounds on OLED/retina displays.
 - [x] 109. **[UI - Status & Feedback Tokens / clarify]**: Harmonize warning, error, info, and success tokens across both personas so status indicators remain instantly recognizable.
-- [ ] 110. **[UI - Design System Documentation / document]**: Generate living UI token documentation in `DESIGN.md` cataloging colors, typography, elevations, spacing scales, and micro-interaction states.
+- [x] 110. **[UI - Design System Documentation / document]**: Generate living UI token documentation in `DESIGN.md` cataloging colors, typography, elevations, spacing scales, and micro-interaction states.
 
 ## Sprint 12: Typography, Hierarchy & Global Layout Engine (impeccable typeset, layout)
 - [ ] 111. **[UI - Fluid Typography Scale / typeset]**: Implement clamp-based fluid typography (`clamp(1.5rem, 4vw, 3rem)`) ensuring smooth font scaling from 320px mobile to 4K displays.
