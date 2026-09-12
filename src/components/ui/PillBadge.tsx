@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const pillBadgeVariants = cva(
-  "inline-flex items-center gap-1.5 rounded-full font-medium tracking-wide transition-all duration-200 select-none",
+  "inline-flex items-baseline gap-1.5 rounded-full font-medium tracking-wide transition-all duration-200 select-none badge-align-baseline micro-copy-baseline",
   {
     variants: {
       variant: {
@@ -58,7 +58,7 @@ function PillBadge({
   return (
     <div className={cn(pillBadgeVariants({ variant, size, className }))} {...props}>
       {pulseDot && (
-        <span className="relative flex h-2 w-2 items-center justify-center">
+        <span className="relative flex h-2 w-2 items-center justify-center self-center">
           <span
             className={cn(
               "absolute inline-flex h-full w-full animate-ping rounded-full opacity-75",
@@ -68,7 +68,7 @@ function PillBadge({
           <span className={cn("relative inline-flex h-1.5 w-1.5 rounded-full", pulseColorClasses[pulseColor])} />
         </span>
       )}
-      {icon && <span className="shrink-0 [&_svg]:size-3.5">{icon}</span>}
+      {icon && <span className="shrink-0 [&_svg]:size-3.5 icon-align-baseline">{icon}</span>}
       <span>{children}</span>
     </div>
   );

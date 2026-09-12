@@ -1,5 +1,26 @@
 # Ralph Autonomous Workforce Sprint Progress
 
+- [x] **[UI - Content Containers & Gutters / adapt] Task 117: Fix mobile gutter padding (`px-4 sm:px-6 lg:px-8`) ensuring zero text-to-edge crowding on iPhone SE and narrow Android viewports — 2026-09-13**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-content-containers-gutters.mjs` — ✅ PASSED (18/18 CONTENT CONTAINERS & GUTTERS CHECKS PASSED SUCCESSFULLY).
+  - **Content Containers & Mobile Gutters Architecture**:
+    - `src/lib/designTokens.ts`: Enhanced `CONTAINER_GUTTER_TOKENS` (`compact`, `standard`, `relaxed`, `narrowSafe`) with responsive `px-4 sm:px-6 lg:px-8` classes and added helper functions `getContainerGutterClasses`, `getMobileGutterSafetyClasses`, and updated `getSectionContainerClasses`.
+    - `src/styles.css`: Added Tailwind `@utility` rules for `section-container-gutter`, `container-gutter-compact`, `container-gutter-standard`, `container-gutter-relaxed`, and `mobile-gutter-safe` (utilizing `env(safe-area-inset)` and `box-sizing: border-box`). Added narrow mobile viewport media queries (`@media (max-width: 380px)`) enforcing `overflow-wrap: break-word` and 1rem minimum gutter safety padding on iPhone SE / narrow Android viewports.
+    - `src/components/ui/SectionWrapper.tsx`: Updated `SectionWrapper` and `SectionContainer` primitives to default to `section-container-gutter mobile-gutter-safe` ensuring standardized horizontal margins and zero text crowding.
+    - `src/components/stash/Hero.tsx`, `Navbar.tsx`, `FooterSection.tsx`: Standardized top-level containers to incorporate `section-container-gutter mobile-gutter-safe px-4 sm:px-6 lg:px-8`.
+    - `execution/test-content-containers-gutters.mjs`: Created test script verifying token specifications, CSS utilities, mobile safety rules, component primitives, and key layout containers.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Enhanced container gutter tokens and added `getMobileGutterSafetyClasses` helper.
+    - `src/styles.css` — Added `@utility` rules for section container gutters and narrow viewport safety guards.
+    - `src/components/ui/SectionWrapper.tsx` — Updated primitives with `mobile-gutter-safe`.
+    - `src/components/stash/Hero.tsx` — Updated layout container with responsive gutter padding.
+    - `src/components/stash/Navbar.tsx` — Updated navbar container padding.
+    - `src/components/stash/FooterSection.tsx` — Updated footer container padding.
+    - `execution/test-content-containers-gutters.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 117 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 117 execution log.
+    - `progress.md` — Appended Task 117 execution log.
+
 - [x] **[UI - Spacing & Padding Rhythm / layout] Task 116: Standardize section vertical rhythms (4rem / 6rem / 8rem) and container maximum widths (`max-w-7xl`, `max-w-6xl`) across the entire web app — 2026-09-13**:
   - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
   - **Verification Suite**: `node execution/test-spacing-padding-rhythm.mjs` — ✅ PASSED (16/16 SPACING & PADDING RHYTHM CHECKS PASSED SUCCESSFULLY).
@@ -1243,6 +1264,28 @@
     - `docs/tasks/PRD.md` — Marked Task 108 as completed (`- [x]`).
     - `docs/tasks/progress.md` — Appended Task 108 execution log.
     - `progress.md` — Appended Task 108 execution log.
+
+- [x] **[UI - Micro-Copy Alignment / polish] Task 118: Re-align badges, icons, price tags, and helper captions with strict baseline grid alignment — 2026-09-13**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production bundle compiled cleanly).
+  - **Verification Suite**: `npx tsx execution/test-micro-copy-alignment.mjs` — ✅ PASSED (17/17 checks verified).
+  - **Micro-Copy Baseline Alignment Engine**:
+    - `src/lib/microCopyAlignment.ts`: Engineered typed micro-copy specifications (`MICRO_COPY_SPECS`) defining baseline alignment metrics for badges (`0.75rem`, line-height `1.2`), price tags (`tabular-nums`, lining-nums), captions (`0.75rem`, line-height `1.4`), icon labels (`0.875rem`, line-height `1.3`), and status indicators. Created helper functions `getMicroCopyAlignmentClass()`, `formatPriceMicroCopy()`, and `auditMicroCopyElements()`.
+    - `src/styles.css`: Added `@utility` classes for baseline grid micro-copy alignment (`micro-copy-baseline`, `micro-copy-center`, `icon-align-baseline`, `badge-align-baseline`, `price-tag-alignment`, `caption-grid-alignment`, `tabular-numeric-tag`, `helper-caption-baseline`).
+    - `src/components/ui/PillBadge.tsx`: Enhanced `pillBadgeVariants` with `items-baseline badge-align-baseline micro-copy-baseline` and icon baseline alignment.
+    - `src/components/ui/Chip.tsx`: Updated `chipVariants` to incorporate baseline grid micro-copy alignment.
+    - `src/components/ui/badge.tsx`: Standardized `badgeVariants` with baseline grid alignment classes.
+    - `execution/test-micro-copy-alignment.mjs`: Created test runner validating specs, helper exports, CSS utilities, and UI component primitive updates.
+  - **Modified Files**:
+    - `src/lib/microCopyAlignment.ts` — Created micro-copy alignment engine.
+    - `src/styles.css` — Added micro-copy baseline alignment utilities.
+    - `src/components/ui/PillBadge.tsx` — Updated PillBadge baseline alignment.
+    - `src/components/ui/Chip.tsx` — Updated Chip baseline alignment.
+    - `src/components/ui/badge.tsx` — Updated Badge baseline alignment.
+    - `execution/test-micro-copy-alignment.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 118 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 118 execution log.
+    - `progress.md` — Appended Task 118 execution log.
+
 
 
 

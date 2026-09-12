@@ -5,7 +5,7 @@ import { playClick } from "@/lib/audio";
 import { X } from "lucide-react";
 
 const chipVariants = cva(
-  "inline-flex items-center gap-1.5 rounded-xl border text-xs font-medium transition-all duration-200 select-none cursor-pointer hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+  "inline-flex items-baseline gap-1.5 rounded-xl border text-xs font-medium transition-all duration-200 select-none cursor-pointer badge-align-baseline micro-copy-baseline hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
   {
     variants: {
       variant: {
@@ -91,13 +91,13 @@ function Chip({
       onKeyDown={handleKeyDown}
       {...props}
     >
-      {icon && <span className="shrink-0 [&_svg]:size-3.5">{icon}</span>}
+      {icon && <span className="shrink-0 [&_svg]:size-3.5 icon-align-baseline">{icon}</span>}
       <span>{children}</span>
       {onRemove && (
         <button
           type="button"
           aria-label="Remove chip"
-          className="ml-0.5 rounded-full p-0.5 hover:bg-black/20 dark:hover:bg-white/20 transition-colors"
+          className="ml-0.5 rounded-full p-0.5 hover:bg-black/20 dark:hover:bg-white/20 transition-colors self-center"
           onClick={handleRemove}
         >
           <X className="size-3" />
