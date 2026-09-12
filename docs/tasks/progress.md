@@ -1,5 +1,26 @@
 # Ralph Autonomous Workforce Sprint Progress
 
+- [x] **[UI - Component Primitives / extract] Task 107: Extract reusable button primitives (`Button`, `IconButton`, `PillBadge`, `Chip`) into a dedicated `src/components/ui/` primitives folder — 2026-09-13**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production bundle compiled cleanly).
+  - **Verification Suite**: `node execution/test-component-primitives.mjs` — ✅ PASSED (ALL UI COMPONENT PRIMITIVES CHECKS PASSED).
+  - **Reusable UI Component Primitives Suite**:
+    - `src/components/ui/button.tsx`: Enhanced base `Button` component with persona variant support (`persona`, `personaOutline`), `isLoading` state with spinner, `leftIcon`, `rightIcon` support, and Web Audio click haptics.
+    - `src/components/ui/IconButton.tsx`: Created accessible icon-only button primitive with required `aria-label`, variant scaling (`default`, `outline`, `ghost`, `glass`, `persona`, `destructive`), size scales (`sm`, `default`, `lg`), and loading state.
+    - `src/components/ui/PillBadge.tsx`: Created rounded pill badge primitive supporting dual persona tokens (Electric Mint vs Warm Amber), status variants (`default`, `persona`, `emerald`, `amber`, `cyan`, `glass`, `glow`, `subtle`), and live `pulseDot` indicators.
+    - `src/components/ui/Chip.tsx`: Created interactive filter/action chip primitive featuring selection states (`isSelected`), dismissible remove triggers (`onRemove`), keyboard navigation support (Enter / Space), and micro-haptics.
+    - `src/components/ui/primitives.ts`: Re-exported unified primitive suite (`Button`, `IconButton`, `PillBadge`, `Chip`).
+    - `execution/test-component-primitives.mjs`: Created test harness validating primitive exports, accessibility rules, persona variants, pulse indicators, and selection handlers.
+  - **Modified Files**:
+    - `src/components/ui/button.tsx` — Enhanced with persona variants, loading state, icon slots.
+    - `src/components/ui/IconButton.tsx` — Created accessible IconButton primitive.
+    - `src/components/ui/PillBadge.tsx` — Created PillBadge primitive with live pulse dot.
+    - `src/components/ui/Chip.tsx` — Created Chip primitive with selection & remove states.
+    - `src/components/ui/primitives.ts` — Exported primitives collection module.
+    - `execution/test-component-primitives.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 107 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 107 execution log.
+    - `progress.md` — Appended Task 107 execution log.
+
 - [x] **[UI - Shadow & Depth Hierarchy / layout] Task 106: Establish a 4-tier elevation shadow system (--shadow-subtle, --shadow-card, --shadow-floating, --shadow-glow) mapped to persona accent colors — 2026-09-13**:
   - **Build**: `npm run build` — ✅ 0 errors (Vite production bundle compiled cleanly).
   - **Verification Suite**: `node execution/test-shadow-system.mjs` — ✅ PASSED (ALL 4-TIER ELEVATION SHADOW SYSTEM CHECKS PASSED).

@@ -3,6 +3,7 @@ import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import { playClick } from "@/lib/audio";
+import { Loader2 } from "lucide-react";
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover:scale-[1.02] hover:-translate-y-1 active:scale-[0.98] active:translate-y-0.5 active:duration-75 select-none",
@@ -25,6 +26,10 @@ const buttonVariants = cva(
         warm: "relative overflow-hidden bg-[image:var(--gradient-amber)] text-primary-foreground font-semibold hover:brightness-110 btn-shimmer pulse-glow-amber",
         frost:
           "glass glass-hover text-foreground font-semibold backdrop-blur-xl hover:text-foreground",
+        persona:
+          "bg-[var(--persona-accent)] text-slate-950 font-bold shadow-[0_0_20px_var(--persona-glow)] hover:brightness-110 btn-shimmer",
+        personaOutline:
+          "border border-[var(--persona-accent)]/40 bg-[var(--surface-card)] text-[var(--persona-accent)] hover:bg-[var(--persona-accent)]/10 hover:border-[var(--persona-accent)]",
       },
       size: {
         default: "h-9 px-4 py-2 max-sm:min-h-[48px]",
@@ -44,13 +49,17 @@ const buttonVariants = cva(
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
   asChild?: boolean;
+  isLoading?: boolean;
+  leftIcon?: React.ReactNode;
+  rightIcon?: React.ReactNode;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, onClick, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, isLoading = false, leftIcon, rightIcon, onClick, children, disabled, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+      if (isLoading || disabled) return;
       playClick();
       if (onClick) onClick(e);
     };
@@ -60,8 +69,14 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         onClick={handleClick}
+        disabled={isLoading || disabled}
         {...props}
-      />
+      >
+        {isLoading && <Loader2 className="animate-spin" />}
+        {!isLoading && leftIcon && <span className="shrink-0">{leftIcon}</span>}
+        {children}
+        {!isLoading && rightIcon && <span className="shrink-0">{rightIcon}</span>}
+      </Comp>
     );
   },
 );
