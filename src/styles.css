@@ -60,6 +60,21 @@
   --color-cyan: var(--cyan);
   --color-amber: var(--amber);
   --color-emerald: var(--emerald);
+  --color-mint: var(--mint);
+  --color-gold: var(--gold);
+  --color-obsidian: var(--obsidian);
+  --color-student-mint: var(--student-mint);
+  --color-student-emerald: var(--student-emerald);
+  --color-student-cyan: var(--student-cyan);
+  --color-student-obsidian: var(--student-obsidian);
+  --color-host-amber: var(--host-amber);
+  --color-host-gold: var(--host-gold);
+  --color-host-obsidian: var(--host-obsidian);
+  --color-persona-accent: var(--persona-accent);
+  --color-persona-glow: var(--persona-glow);
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-surface-elevated: var(--surface-elevated);
   --font-sans: "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --breakpoint-3xl: 160rem;
@@ -68,6 +83,33 @@
 
 :root {
   --radius: 1rem;
+  /* Persona OKLCH Design Tokens - Student Persona (Electric Mint & Dark Obsidian) */
+  --obsidian: oklch(0.12 0.012 230);
+  --mint: oklch(0.72 0.19 160);
+  --emerald: oklch(0.696 0.149 162);
+  --cyan: oklch(0.868 0.16 178);
+
+  --student-mint: oklch(0.72 0.19 160);
+  --student-emerald: oklch(0.696 0.149 162);
+  --student-cyan: oklch(0.868 0.16 178);
+  --student-obsidian: oklch(0.12 0.012 230);
+
+  /* Persona OKLCH Design Tokens - Senior Host Persona (Warm Amber & Sunset Gold) */
+  --amber: oklch(0.769 0.165 70);
+  --gold: oklch(0.837 0.175 82);
+
+  --host-amber: oklch(0.769 0.165 70);
+  --host-gold: oklch(0.837 0.175 82);
+  --host-obsidian: oklch(0.13 0.015 65);
+
+  --persona-accent: var(--student-mint);
+  --persona-glow: oklch(0.72 0.19 160 / 40%);
+
+  /* Surface Layer Tokens (Student Obsidian Base) */
+  --surface-1: oklch(0.16 0.012 230);
+  --surface-2: oklch(0.198 0.013 223);
+  --surface-elevated: oklch(0.24 0.016 223);
+
   --background: oklch(0.145 0.011 232);
   --foreground: oklch(0.97 0.008 220);
   --card: oklch(0.198 0.013 223);
@@ -87,9 +129,6 @@
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 14%);
   --ring: oklch(0.868 0.16 178);
-  --cyan: oklch(0.868 0.16 178);
-  --amber: oklch(0.769 0.165 70);
-  --emerald: oklch(0.696 0.149 162);
   --surface: oklch(0.198 0.013 223 / 72%);
   --gradient-cyan: linear-gradient(135deg, oklch(0.868 0.16 178), oklch(0.696 0.149 162));
   --gradient-amber: linear-gradient(135deg, oklch(0.837 0.164 84), oklch(0.769 0.165 70));
@@ -118,6 +157,14 @@
 }
 
 [data-role="host"] {
+  --obsidian: oklch(0.13 0.015 65);
+  --amber: oklch(0.809 0.165 76);
+  --gold: oklch(0.85 0.18 84);
+  --persona-accent: var(--host-amber);
+  --persona-glow: oklch(0.809 0.165 76 / 40%);
+  --surface-1: oklch(0.17 0.015 65);
+  --surface-2: oklch(0.21 0.017 62);
+  --surface-elevated: oklch(0.25 0.019 62);
   --background: oklch(0.16 0.014 60);
   --card: oklch(0.21 0.017 62);
   --surface: oklch(0.22 0.018 62 / 74%);
@@ -318,6 +365,25 @@ html.lenis body {
     box-shadow: var(--shadow-glass), var(--glow-cyan);
     transform: translateY(-4px);
   }
+}
+
+@utility surface-1-card {
+  background-color: var(--surface-1);
+  border: 1px solid oklch(1 0 0 / 8%);
+  transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@utility surface-2-card {
+  background-color: var(--surface-2);
+  border: 1px solid oklch(1 0 0 / 12%);
+  transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@utility surface-elevated-card {
+  background-color: var(--surface-elevated);
+  border: 1px solid oklch(1 0 0 / 16%);
+  box-shadow: 0 16px 40px -12px oklch(0 0 0 / 50%);
+  transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @utility text-gradient {

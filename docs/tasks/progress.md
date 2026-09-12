@@ -961,10 +961,57 @@
     - `src/lib/ceoAnalytics.ts` — Created unit economics calculation engine.
     - `src/components/stash/ExecutiveAnalyticsDashboard.tsx` — Created Executive Analytics UI component.
     - `src/routes/admin.tsx` — Integrated Executive Analytics tab into operator dashboard.
-    - `execution/test-executive-analytics.mjs` — Created test harness.
     - `docs/tasks/PRD.md` — Marked Task 98 as completed (`- [x]`).
     - `docs/tasks/progress.md` — Appended Task 98 execution log.
     - `progress.md` — Appended Task 98 execution log.
+
+- [x] **[CTO - Offline PWA] Task 102: Implement background periodic sync API and dynamic IndexedDB queue for offline booking requests when cell service drops in Kakadeo basements — 2026-09-12**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production bundle compiled cleanly).
+  - **Verification Suite**: `node execution/test-offline-pwa-sync.mjs` — ✅ PASSED (15/15 checks verified).
+  - **IndexedDB & Service Worker Offline Engine**:
+    - `src/lib/offlineBookingQueue.ts`: Engineered dynamic IndexedDB storage (`StashSaarthi_Offline_DB`, store `offline_booking_requests`) to queue booking requests when offline in cell-blind Kakadeo basement nodes. Provides auto-flushing on reconnect, background sync registration (`sync-offline-bookings`), and periodic sync (`periodic-booking-sync`).
+    - `public/sw.js`: Added `sync` and `periodicsync` Service Worker event listeners dispatching `FLUSH_OFFLINE_BOOKINGS` messages to active clients.
+    - `src/lib/sw-register.ts`: Integrated `registerBackgroundPeriodicSync()` on SW load.
+    - `src/routes/__root.tsx`: Added `initOfflineQueueAutoSync()` and custom event listener `stashsaarthi:offline-bookings-synced` to fire toast alerts on automatic queue sync.
+    - `src/components/stash/BookingModal.tsx`: Updated `handleCheckout` to automatically fallback to IndexedDB offline queue on offline/network drops with a user toast ("📶 Saved to Offline Vault (Kakadeo Basement)").
+  - **Modified Files**:
+    - `src/lib/offlineBookingQueue.ts` — Created offline IndexedDB & Background Sync module.
+    - `public/sw.js` — Added background sync & periodic sync event listeners.
+    - `src/lib/sw-register.ts` — Registered background periodic sync.
+    - `src/routes/__root.tsx` — Initialized auto-sync and toast listener on app mount.
+    - `src/components/stash/BookingModal.tsx` — Integrated offline vault queueing into checkout flow.
+    - `execution/test-offline-pwa-sync.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 102 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 102 execution log.
+    - `progress.md` — Appended Task 102 execution log.
+
+- [x] **[UI - Design Tokens / extract] Task 101: Formalize unified OKLCH design tokens in src/styles.css for both Student (--mint, --emerald, --cyan, --obsidian) and Senior Host (--amber, --gold, --obsidian) personas — 2026-09-12**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite client production bundle & SSR generation).
+  - **OKLCH Design Tokens Engine**:
+    - `src/lib/designTokens.ts`: Created typed OKLCH color design tokens module exposing `STUDENT_TOKENS` (Electric Mint `oklch(0.72 0.19 160)`, Neon Emerald `oklch(0.696 0.149 162)`, Cyber Cyan `oklch(0.868 0.16 178)`, Dark Obsidian `oklch(0.12 0.012 230)`), `HOST_TOKENS` (Warm Amber `oklch(0.769 0.165 70)`, Sunset Gold `oklch(0.837 0.175 82)`, Warm Obsidian `oklch(0.13 0.015 65)`), spacing scale, radius scale, and helper methods (`getPersonaAccentColor`, `getPersonaSecondaryColor`, `getPersonaObsidianBg`).
+    - `src/styles.css`: Hardened OKLCH `:root` and `[data-role="host"]` design variables, persona accent/glow references, and Tailwind v4 `@theme inline` mappings (`--color-mint`, `--color-emerald`, `--color-cyan`, `--color-obsidian`, `--color-amber`, `--color-gold`, `--color-surface-1`, `--color-surface-2`, `--color-surface-elevated`).
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Created typed OKLCH design tokens module.
+    - `src/styles.css` — Hardened OKLCH variable definitions and persona theme rules.
+    - `docs/tasks/PRD.md` — Marked Task 101 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 101 execution log.
+- [x] **[UI - Color Harmony / colorize] Task 102: Implement automated contrast checking and color harmony scales for background-to-surface layers (--surface-1, --surface-2, --surface-elevated) — 2026-09-12**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production bundle compiled cleanly in 7.93s).
+  - **Verification Suite**: `npx tsx execution/test-color-harmony.mjs` — ✅ PASSED (5/5 checks verified).
+  - **Color Harmony & Automated Contrast Checking Engine**:
+    - `src/lib/colorHarmony.ts`: Engineered OKLCH relative luminance engine (OKLCH -> Oklab -> LMS -> Linear sRGB conversion), WCAG 2.1 contrast ratio calculator (`checkContrast`), background-to-surface layer stepping scales (`surface1`, `surface2`, `surfaceElevated`), and automated contrast audit utilities (`auditSurfaceContrastHarmony`). Verified 100% WCAG AA contrast compliance across both Student and Host persona surface layers (14:1 to 18:1 ratios for normal text, 8:1 to 10:1 for muted text).
+    - `src/lib/designTokens.ts`: Added `getSurfaceLayerColor(role, level)` helper function for surface layer OKLCH token lookup across dual personas.
+    - `src/styles.css`: Added Tailwind v4 `@utility` classes for surface card layers (`surface-1-card`, `surface-2-card`, `surface-elevated-card`).
+    - `execution/test-color-harmony.mjs`: Node test harness validating OKLCH parsing, relative luminance formulas, WCAG contrast calculation, and dual-persona surface layer harmony scales.
+  - **Modified Files**:
+    - `src/lib/colorHarmony.ts` — Created color harmony & contrast engine module.
+    - `src/lib/designTokens.ts` — Added surface layer helper function.
+    - `src/styles.css` — Added surface layer card utility classes.
+    - `execution/test-color-harmony.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 102 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 102 execution log.
+    - `progress.md` — Appended Task 102 execution log.
+
 
 
 

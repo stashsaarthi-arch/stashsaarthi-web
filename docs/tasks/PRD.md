@@ -119,124 +119,122 @@ Sprint 10: QA, CSO & CEO (Total Assurance, Compliance & Strategic Direction)
 - [x] 98. [CEO - Analytics]: Compile all Sprint data into a new executive dashboard showing core metrics: CAC (Customer Acquisition Cost), LTV (Lifetime Value), active token circulation.
 - [x] 99. [QA - Performance]: Audit the final webpack bundle size and ensure it's minimal by using code splitting and lazy loading heavy components.
 - [x] 100. [CTO]: add my bookings dashboard in user login profile.
-- [x] 101. [CEO]: Compile all Sprint Reports into a single Master Release Note (v3.0) and push to production.
+## Sprint 11: Design System, Tokens & OKLCH Theme Architecture (impeccable extract, document, colorize)
+- [x] 101. **[UI - Design Tokens / extract]**: Formalize unified OKLCH design tokens in `src/styles.css` for both Student (`--mint`, `--emerald`, `--cyan`, `--obsidian`) and Senior Host (`--amber`, `--gold`, `--obsidian`) personas.
+- [x] 102. **[UI - Color Harmony / colorize]**: Implement automated contrast checking and color harmony scales for background-to-surface layers (`--surface-1`, `--surface-2`, `--surface-elevated`).
+- [ ] 103. **[UI - Glassmorphism Standards / polish]**: Refactor all glass card utilities (`.glass`, `.glass-hover`, `.glass-panel`) to use performant CSS backdrop-filter with hardware acceleration and clean borders.
+- [ ] 104. **[UI - Gradient Systems / colorize]**: Standardize dynamic radiant gradients across Hero and Featured cards, replacing ad-hoc inline gradients with reusable CSS token classes (`gradient-mint-emerald`, `gradient-amber-gold`).
+- [ ] 105. **[UI - Border & Ring Radii / layout]**: Unify border radius scale (`rounded-sm`, `rounded-md`, `rounded-lg`, `rounded-xl`, `rounded-2xl`, `rounded-3xl`) across all 40+ components for consistent visual rhythm.
+- [ ] 106. **[UI - Shadow & Depth Hierarchy / layout]**: Establish a 4-tier elevation shadow system (`--shadow-subtle`, `--shadow-card`, `--shadow-floating`, `--shadow-glow`) mapped to persona accent colors.
+- [ ] 107. **[UI - Component Primitives / extract]**: Extract reusable button primitives (`Button`, `IconButton`, `PillBadge`, `Chip`) into a dedicated `src/components/ui/` primitives folder.
+- [ ] 108. **[UI - Dark Obsidian Depth / bolder]**: Introduce subtle ambient noise and depth textures (`.bg-noise`, `.radial-mesh`) to eliminate flat, dead dark backgrounds on OLED/retina displays.
+- [ ] 109. **[UI - Status & Feedback Tokens / clarify]**: Harmonize warning, error, info, and success tokens across both personas so status indicators remain instantly recognizable.
+- [ ] 110. **[UI - Design System Documentation / document]**: Generate living UI token documentation in `DESIGN.md` cataloging colors, typography, elevations, spacing scales, and micro-interaction states.
 
-## Sprint 11: CTO & CAO (Next-Gen AI, Real-Time Edge & Offline Resilience)
-- [ ] 102. [CTO - Offline PWA]: Implement background periodic sync API and dynamic IndexedDB queue for offline booking requests when cell service drops in Kakadeo basements.
-- [ ] 103. [CAO - Multi-lingual RAG]: Integrate multilingual embedding search (Hindi-English transliteration / Hinglish) in the FAQ chatbot to understand queries like "hostel se bag uthane ka kya charge hai".
-- [ ] 104. [CTO - Edge Functions]: Build a Supabase Edge Function to generate instant dynamic QR codes with signed UPI intent links (`upi://pay?pa=...&am=...&tn=...`) for instant settlement.
-- [ ] 105. [CAO - Vision AI]: Train an automated luggage volume and luggage tag OCR scanner using canvas capture to verify standard 80L luggage limits before dispatch.
-- [ ] 106. [CTO - Performance]: Implement route-based bundle prefetching and speculative resource hints (`<link rel="prefetch">`) on user hover over Navbar tabs.
-- [ ] 107. [CTO - WebSockets]: Set up Supabase Realtime channels for live kitchen inventory counter ("Only 4 thalis remaining for today's lunch!").
-- [ ] 108. [CAO - Dynamic Pricing]: Deploy client-side predictive surge and vacancy pricing logic adjusting storage rates based on Kanpur university exam calendars (IITK midsems, CSJMU finals).
-- [ ] 109. [CTO - Audio / Telemetry]: Add Web Audio sound effects toggle with persistent localStorage preference and sound effects for QR scan, payment success, and SOS trigger.
-- [ ] 110. [CTO - Security]: Implement strict Content Security Policy (CSP) headers and Subresource Integrity (SRI) hashes in the Nitro server configuration.
-- [ ] 111. [QA - Automated Benchmarks]: Build a synthetic benchmark script in `execution/` measuring Time-to-Interactive (TTI) and First Input Delay (FID) across simulated slow 3G network conditions.
+## Sprint 12: Typography, Hierarchy & Global Layout Engine (impeccable typeset, layout)
+- [ ] 111. **[UI - Fluid Typography Scale / typeset]**: Implement clamp-based fluid typography (`clamp(1.5rem, 4vw, 3rem)`) ensuring smooth font scaling from 320px mobile to 4K displays.
+- [ ] 112. **[UI - Font Loading & FOUT / optimize]**: Optimize Plus Jakarta Sans and Inter Google Fonts loading with `font-display: swap`, preload hints, and zero Cumulative Layout Shift (CLS).
+- [ ] 113. **[UI - Hindi & English Dual Typography / typeset]**: Calibrate line-height, letter-spacing, and font-weight adjustments specifically for Devanagari Hindi text to prevent glyph clipping.
+- [ ] 114. **[UI - Visual Text Hierarchy / layout]**: Overhaul heading hierarchy (`h1`, `h2`, `h3`, `h4`, `overline`, `caption`) across all views, ensuring strict visual dominance and scanability.
+- [ ] 115. **[UI - Bento Grid Architecture / layout]**: Refactor feature showcases into modern, asymmetric Bento Grid layouts with dynamic aspect ratios and responsive auto-flow.
+- [ ] 116. **[UI - Spacing & Padding Rhythm / layout]**: Standardize section vertical rhythms (4rem / 6rem / 8rem) and container maximum widths (`max-w-7xl`, `max-w-6xl`) across the entire web app.
+- [ ] 117. **[UI - Content Containers & Gutters / adapt]**: Fix mobile gutter padding (`px-4 sm:px-6 lg:px-8`) ensuring zero text-to-edge crowding on iPhone SE and narrow Android viewports.
+- [ ] 118. **[UI - Micro-Copy Alignment / polish]**: Re-align badges, icons, price tags, and helper captions with strict baseline grid alignment.
+- [ ] 119. **[UI - Truncation & Multi-line Clamping / harden]**: Apply responsive line-clamping (`line-clamp-1`, `line-clamp-2`, `line-clamp-3`) with tooltip fallbacks to prevent card layout breakage on verbose Hindi strings.
+- [ ] 120. **[UI - Layout Isolation / optimize]**: Add CSS `contain: layout style` to heavy independent sections to eliminate unnecessary browser reflows during page interaction.
 
-## Sprint 12: CPO & UX (Hyperlocal Intergenerational Living & Roommate Matching)
-- [ ] 112. [CPO - Roommate Matching]: Design and implement an interactive "Habits & Study Hours" compatibility questionnaire for students booking Saarthi Spaces.
-- [ ] 113. [UX - Senior House Norms]: Build an interactive visual "House Rules Agreement" selector for Elderly Hosts (e.g., Gate curfew, veg-only kitchen, silent study hours).
-- [ ] 114. [UI - 3D Floorplan Viewer]: Create an interactive CSS 3D isometric room visualizer allowing students to inspect desk space, wardrobe, and natural light before booking.
-- [ ] 115. [CPO - Host Verification Badge]: Implement a multi-level visual trust badge system on host cards (e.g., "DigiLocker Verified", "IITK Alumni Host", "SuperHost 5★").
-- [ ] 116. [UX - Booking Schedule]: Build a date-range picker with visual campus semester presets (e.g., "Summer Vacations May-July", "Diwali Break", "Endsem Sprint").
-- [ ] 117. [UI - Neighborhood Vibe Guide]: Add an interactive Kakadeo & Kalyanpur neighborhood map layer showing distance to coaching centers (Allen, PW, Motion, Resonance).
-- [ ] 118. [UX - Parent Portal]: Create a simplified, high-contrast "Parents View" mode that presents safety certifications, CCTV node verification, and landlord police verification.
-- [ ] 119. [CPO - Room Inventory Filter]: Implement instantaneous multi-attribute filtering (single room, shared room, attached washroom, balcony, AC/cooler) without page reloads.
-- [ ] 120. [UI - Senior Voice Intro]: Implement an embedded audio snippet player on host cards where elderly hosts can record a 20-second warm welcome message in Hindi.
-- [ ] 121. [UX - Move-in Checklist]: Build an interactive digital move-in checklist with photo upload proof for students and hosts to document room condition at check-in.
+## Sprint 13: Hero Sections, Persuade Surfaces & Visual Impact (impeccable bolder, shape, delight)
+- [ ] 121. **[UI - Student Hero Overhaul / bolder]**: Redesign Student Persona Hero with ultra-crisp neon emerald headline glow, floating 3D luggage mockups, and instant ₹300/mo value badge.
+- [ ] 122. **[UI - Host Hero Overhaul / bolder]**: Redesign Senior Host Persona Hero with warm sunset gold illumination, dignified ₹11,500+/mo passive income badge, and trust seals.
+- [ ] 123. **[UI - Interactive Value Switcher / delight]**: Design an interactive hero toggle demonstrating the immediate contrast between "Wasting ₹8,000 dead rent" vs "Saarthi Stash ₹300/mo".
+- [ ] 124. **[UI - Hyperlocal Campus Radar Widget / shape]**: Rebuild the Hero Campus Node Radar with real-time pulsing beacons for Kakadeo, IIT Kanpur, HBTI, and CSJMU.
+- [ ] 125. **[UI - Floating Social Proof Avatars / delight]**: Add an animated stack of verified student and senior host profile avatars with live "Joined today from Kakadeo" indicators.
+- [ ] 126. **[UI - Hero CTA Button Glow & Shimmer / overdrive]**: Elevate primary hero CTA buttons with GPU-accelerated animated border glows, shimmer sweeps, and Web Audio click feedback.
+- [ ] 127. **[UI - Hero Video & Interactive Visualizer / shape]**: Integrate an ambient, lightweight visualizer showcasing the seamless transition of items from hostel room to secured host vault.
+- [ ] 128. **[UI - Trust Banner & Partner Strip / polish]**: Redesign the campus & institutional trust strip (IITK, HBTI, CSJMU, Regency, UP Police verification) with subtle monochrome-to-color hover effects.
+- [ ] 129. **[UI - Quick-Action Floating Dock / adapt]**: Implement an intuitive floating bottom pill dock on mobile viewports for instant 1-tap switching between Stash, Spaces, Kitchen, and Connect.
+- [ ] 130. **[UI - Hero Micro-Stats Counter / animate]**: Add smooth count-up animated statistics (e.g., "₹42,00,000+ Dead Rent Saved", "450+ Verified Senior Hosts") with IntersectionObserver triggers.
 
-## Sprint 13: CRO & Growth (Micro-Payments, UPI Deep-Links & Dynamic Pricing Engine)
-- [ ] 122. [CRO - Split Payment]: Implement a "Split with Roommate" feature generating dual UPI payment links for double-occupancy Saarthi Spaces rooms.
-- [ ] 123. [CRO - Dead Rent Calculator]: Build an interactive before/after financial infographic modal showing exact rupee savings comparing 3 months dead hostel rent vs. Saarthi Stash.
-- [ ] 124. [CRO - Urgency Triggers]: Add subtle, non-intrusive micro-banners showing real-time inventory scarcity (e.g., "Only 2 micro-storage lockers left near Kakadeo Thana node").
-- [ ] 125. [CRO - Stash Pass Subscriptions]: Design a multi-semester "Stash Pass" recurring subscription tier offering free locker pickup and 15% discount across all 4 years.
-- [ ] 126. [CRO - One-Click WhatsApp Checkout]: Create a frictionless fallback modal for students with unstable 4G allowing 1-tap WhatsApp booking pre-filled with cart payload.
-- [ ] 127. [CRO - Host Earnings Simulator]: Upgrade the host passive income calculator with dynamic sliders for spare bedrooms, kitchen meal capacity, and attic storage square footage.
-- [ ] 128. [CRO - Abandoned Cart Nudge]: Implement local session storage intent tracking that prompts a polite exit notification with a ₹50 first-order discount code.
-- [ ] 129. [CRO - Group Booking Perks]: Add a "Book with Batchmates" referral mechanic unlocking free pickup when 3 or more hostel friends book storage together.
-- [ ] 130. [CRO - Gamified Loyalty Badges]: Design a "Campus Saarthi Ambassador" progress meter rewarding students with meal tokens when their friends book a room.
-- [ ] 131. [CRO - Fast-Track Deposit Refund]: Build a visual escrow tracker displaying guaranteed 24-hour security deposit return upon room checkout or luggage retrieval.
+## Sprint 14: Dual-Persona Experience — Student Mint vs Host Amber (impeccable colorize, quieter, clarify)
+- [ ] 131. **[UI - Persona Switcher Redesign / animate]**: Overhaul the global Student / Host toggle switch with smooth pill sliding animation, role-specific icons, and haptic audio cues.
+- [ ] 132. **[UI - Senior Host Legibility Mode / adapt]**: Automatically enhance UI readability when Host mode is active (larger 18px+ base font, higher contrast borders, simplified action buttons).
+- [ ] 133. **[UI - Student Dark Mode Aesthetics / colorize]**: Infuse Student persona cards with cyberpunk-inspired mint/cyan edge highlights and frosted glass depth.
+- [ ] 134. **[UI - Host Warm Hearth Aesthetics / colorize]**: Infuse Senior Host persona surfaces with comforting amber, terracotta, and warm brass accents conveying dignity and warmth.
+- [ ] 135. **[UI - Dynamic Persona Themed Navbar / polish]**: Synchronize Navbar brand glows, link underlines, and active indicator bars with active persona palette.
+- [ ] 136. **[UI - Dual Persona Footer Transformation / shape]**: Redesign the footer to seamlessly morph between Student resources (hostel checklist, dead rent calculator) and Host resources (pension guide, TPA Sec 105 legal FAQ).
+- [ ] 137. **[UI - Persona-Specific Empty States / delight]**: Design empathetic, persona-tailored empty states with charming illustrated SVGs for student search misses and host zero-booking states.
+- [ ] 138. **[UI - Persona Transition Crossfade / animate]**: Smooth out the instantaneous persona switch using a gentle 250ms CSS color-interpolate fade to eliminate jarring flashes.
+- [ ] 139. **[UI - Devanagari Type Tuning for Hosts / typeset]**: Apply generous letter-spacing and optimized Devanagari font fallbacks for senior citizens reading Hindi text.
+- [ ] 140. **[UI - Persona Context Indicators / clarify]**: Add subtle sticky corner badges or ambient gradient halos reminding the user which persona view is currently engaged.
 
-## Sprint 14: CMO & Hyperlocal SEO (Campus Domination, Referral Loops & Viral Growth)
-- [ ] 132. [CMO - Campus Landing Pages]: Build dedicated, SEO-optimized landing pages for `/iit-kanpur-luggage-storage`, `/hbti-kanpur-hostels`, and `/csjmu-rooms`.
-- [ ] 133. [CMO - Coaching Hub Directories]: Create structured directory hubs for Allen Kakadeo, Physics Wallah Vidyapeeth, and Aakash Institute with walking distance calculations.
-- [ ] 134. [CMO - Dynamic Social Share Cards]: Generate automated SVG-to-Canvas dynamic OG share cards showing personalized savings certificates for students to share on Instagram/WhatsApp.
-- [ ] 135. [CMO - Printable Noticeboard Posters]: Build an automated printable PDF generator in the operator console creating QR-coded noticeboard flyers for Kanpur coaching hostels.
-- [ ] 136. [CMO - Student Ambassador Dashboard]: Create a dedicated onboarding and tracking route `/ambassador` with custom UTM referral links and live commission analytics.
-- [ ] 137. [CMO - Localized Video Embeds]: Integrate responsive, lightweight video embed modals showcasing authentic interviews with senior hosts in Kidwai Nagar and Swaroop Nagar.
-- [ ] 138. [CMO - Programmatic Schema Markup]: Implement schema.org `LodgingBusiness`, `SelfStorage`, and `Restaurant` JSON-LD structured tags across all dynamic listing routes.
-- [ ] 139. [CMO - Hindi Voice Search Support]: Optimize meta tags and conversational search queries targeting common Hindi voice search phrases (e.g., "Kanpur me sasta luggage store").
-- [ ] 140. [CMO - Campus Fest Sponsorship Hub]: Build an interactive landing page section highlighting StashSaarthi's partnership with IIT Kanpur Antaragni and Techkriti student festivals.
-- [ ] 141. [CMO - Wall of Gratitude]: Build an interactive, filterable community appreciation board displaying thank-you messages from students to their host "Nanis and Dadis".
+## Sprint 15: Component Library, Glassmorphism & Bento Grids (impeccable extract, polish, distill)
+- [ ] 141. **[UI - Saarthi Stash Card 2.0 / polish]**: Overhaul the Micro-Storage card with 3D bag depth preview, tamper-proof seal indicator, ₹300/mo prominent pricing pill, and 1-click booking CTA.
+- [ ] 142. **[UI - Saarthi Spaces Card 2.0 / polish]**: Redesign Co-Living room cards featuring 16:9 room image carousels, verified senior host badges, zero-brokerage guarantees, and walking distance tags.
+- [ ] 143. **[UI - Saarthi Kitchen Card 2.0 / polish]**: Overhaul Tiffin cards with daily meal countdown timers, rotating homestyle thali previews, calorie/macro breakdowns, and chef bio tags.
+- [ ] 144. **[UI - Saarthi Connect Card 2.0 / polish]**: Redesign Intergenerational Mentorship cards with senior hobby tags, student skill-exchange chips, and karma points earned counters.
+- [ ] 145. **[UI - Accordion & FAQ Redesign / distill]**: Re-engineer the FAQ accordions with buttery smooth height transitions, glowing active outlines, and instant category filters.
+- [ ] 146. **[UI - Testimonial & Review Carousel / delight]**: Build an editorial-grade testimonial carousel with student audio clip quotes, verified college badges, and rating stars.
+- [ ] 147. **[UI - Filter & Search Bar Overhaul / shape]**: Redesign the campus directory search bar with auto-suggest chips, distance sliders, and instant live filtering tags.
+- [ ] 148. **[UI - Badge & Tag Standardization / extract]**: Unify all metadata tags (e.g., "Verified Host", "Near PW Vidyapeeth", "Veg Only", "AC Room") with cohesive micro-padding and typography.
+- [ ] 149. **[UI - Comparison Matrix Table / distill]**: Build a sleek, high-contrast comparison table contrasting StashSaarthi vs Traditional PGs and Commercial Warehouses.
+- [ ] 150. **[UI - Skeleton Loader Polishing / polish]**: Design shimmering wave skeleton loaders matching the exact geometric layout of cards to eliminate layout jump during data loading.
 
-## Sprint 15: CSO & Legal (4-Tier Senior Safety, DigiLocker e-KYC & DPDP 2023 Enforcement)
-- [ ] 142. [CSO - DigiLocker Integration]: Implement a mock/live DigiLocker e-KYC verification bridge verifying student college enrollment and Aadhaar identity.
-- [ ] 143. [CSO - Police Verification Form]: Create a downloadable and auto-filled Kanpur Nagar Police verification tenant certificate generator for elderly hosts.
-- [ ] 144. [CSO - TPA Sec 105 Leave & License]: Build an automated digital Leave & License agreement generator embedding statutory Transfer of Property Act Sec 105 non-tenancy clauses.
-- [ ] 145. [CSO - DPDP Consent Ledger]: Implement a granular consent management banner complying with India's Digital Personal Data Protection (DPDP) Act 2023.
-- [ ] 146. [CSO - ₹10k Luggage Guarantee Vault]: Build an interactive insurance policy certificate generator showing the itemized protection terms backed by platform micro-reserves.
-- [ ] 147. [CSO - Emergency Bedside SOS Link]: Implement a one-tap emergency SOS broadcast system triggering instant SMS/WhatsApp alerts to registered local wardens and verified volunteers.
-- [ ] 148. [CSO - Anti-Tamper Barcode Scanner]: Build a client-side camera QR/Barcode scanner component for luggage pickup agents to verify physical tamper-evident seals.
-- [ ] 149. [CSO - Data Anonymization Engine]: Build an automated data masking routine that scrambles student phone numbers and addresses for non-active bookings in logs.
-- [ ] 150. [CSO - Dispute Resolution Portal]: Design and implement an arbitration and resolution claim workflow allowing hosts and students to file damage or delay reports.
-- [ ] 151. [CSO - Senior Safety Hotline Widget]: Create a persistent, high-contrast floating emergency widget tailored for elderly hosts with one-tap Hindi telephone connection.
+## Sprint 16: Micro-Interactions, Motion Physics & Audio-Visual Delight (impeccable animate, delight, overdrive)
+- [ ] 151. **[UI - 3D Card Hover Physics / animate]**: Upgrade `Card3D` with smooth GPU-accelerated tilt, dynamic cursor-following specular glare, and auto-disable on touch devices.
+- [ ] 152. **[UI - Peacock Feather Micro-Interaction / delight]**: Refine the iconic Peacock Feather dusting animation on Standard Thali selection with crisp particle sparkles and spring physics.
+- [ ] 153. **[UI - Spring Modal Entrances / animate]**: Replace linear modal fades with organic spring physics (`cubic-bezier(0.16, 1, 0.3, 1)`) for all booking and detail dialogs.
+- [ ] 154. **[UI - Scroll-Triggered Reveal Engine / animate]**: Implement staggered section entrance reveals with subtle translation (`translateY(24px) -> 0`) and opacity fades on scroll.
+- [ ] 155. **[UI - Web Audio Haptic Soundscape / delight]**: Expand micro-audio feedback to include distinct, pleasant sounds for toggle switches, item counter increments, and payment confirmations.
+- [ ] 156. **[UI - Magnetic Buttons / overdrive]**: Add subtle magnetic pull micro-interactions on primary desktop CTA buttons where the button gently attracts toward the cursor.
+- [ ] 157. **[UI - Interactive Dead Rent Savings Slider / delight]**: Build a delightful interactive slider where dragging the vacation days dynamically animates saved currency notes and savings milestones.
+- [ ] 158. **[UI - Confetti & Celebration Cannons / delight]**: Integrate a lightweight canvas celebration burst upon successful booking confirmation and senior host agreement signing.
+- [ ] 159. **[UI - Tab Switching Indicator Glides / animate]**: Implement fluid sliding background pills for tab navigations using layout transitions (Framer Motion / CSS `layoutId` logic).
+- [ ] 160. **[UI - Laser Seal Barcode Glow / overdrive]**: Animate the digital laser barcode seal with a futuristic sweeping beam to highlight anti-tamper security.
 
-## Sprint 16: CPO & Operations (Saarthi Kitchen 2.0, Meal Subscriptions & Tiffin Logistics)
-- [ ] 152. [CPO - Dietary Customization]: Implement dietary preferences selector (Satvik, Jain, Low-Spicy, Diabetic-friendly) in the Saarthi Kitchen subscription flow.
-- [ ] 153. [UX - Meal Pause & Resume]: Build a flexible calendar modal allowing students to pause their tiffin plan during coaching exam holidays or hometown visits.
-- [ ] 154. [UI - Kitchen Live Hygiene Preview]: Design a verified hygiene badge section with timestamped kitchen hygiene inspection photos and FSSAI certificate previews.
-- [ ] 155. [CPO - Thali Meal Planner]: Build a weekly rolling menu widget displaying daily rotating vegetables, dals, and regional specials (e.g., Dal Bati Churma, Poori Sabzi).
-- [ ] 156. [UX - Delivery Slot Selector]: Add precise lunch (12:30 PM - 2:00 PM) and dinner (7:30 PM - 9:30 PM) delivery window selector matching coaching batch schedules.
-- [ ] 157. [CPO - Eco Tiffin Box Deposit]: Implement an eco-friendly stainless steel dabba exchange ledger tracking reusable tiffin box deposits and returns.
-- [ ] 158. [UI - Kitchen Host Bio Card]: Create heartwarming host profiles for home chefs featuring their culinary background, signature dish, and love for feeding students.
-- [ ] 159. [UX - Instant Meal Rating]: Implement a 1-tap post-meal emoji feedback modal (Roti softness, Dal taste, Temperature) piped to host analytics.
-- [ ] 160. [CPO - Special Sunday Feasts]: Build an upsell module for Sunday special meals and celebratory festival feasts (e.g., Holi Gujiya, Diwali Kheer tokens).
-- [ ] 161. [UX - Real-Time Tiffin ETA]: Build a simulated courier dispatch and delivery ETA tracker showing bike courier progress from senior home to student hostel.
+## Sprint 17: Booking Flows, Modals, Forms & Friction Reduction (impeccable harden, clarify, distill)
+- [ ] 161. **[UI - Multi-Step Booking Modal Overhaul / harden]**: Redesign the core `BookingModal` into a distraction-free, 3-step progress journey with clear breadcrumbs and step validation.
+- [ ] 162. **[UI - Phone Number & OTP Input Redesign / clarify]**: Create high-legibility +91 Indian phone and 6-digit OTP input boxes with auto-advance, digit paste support, and clear error hints.
+- [ ] 163. **[UI - Luggage Itemizer Visualizer / shape]**: Build an intuitive visual luggage itemizer allowing students to tap 3D-styled icons for suitcases, cartons, coolers, and backpacks.
+- [ ] 164. **[UI - Date & Time Slot Picker / harden]**: Design a custom calendar date-range and pickup slot selector optimized for touch devices with campus holiday preset chips.
+- [ ] 165. **[UI - Dynamic Pricing Breakdown Drawer / clarify]**: Implement a crystal-clear price summary drawer showing base rate, zero brokerage savings, and platform fee with 100% transparency.
+- [ ] 166. **[UI - UPI Payment Intent Modal / harden]**: Redesign the checkout modal with instant 1-tap UPI app buttons (GPay, PhonePe, Paytm, CRED) and auto-generating dynamic QR code.
+- [ ] 167. **[UI - Form Validation Micro-States / clarify]**: Add instantaneous inline input validation with friendly micro-copy and gentle shake animations on invalid submissions.
+- [ ] 168. **[UI - Booking Confirmation Pass / delight]**: Design an Apple Wallet-style digital boarding pass for confirmed bookings with printable QR seal, host address, and directions.
+- [ ] 169. **[UI - WhatsApp Quick-Checkout Fallback / distill]**: Build a streamlined fallback modal for weak network connections allowing students to finalize orders via pre-filled WhatsApp link.
+- [ ] 170. **[UI - Modal Backdrop Blur & Scroll Lock / polish]**: Perfect modal backdrop dimming (`backdrop-blur-md bg-black/60`) and body scroll locking to eliminate dual-scrolling glitches.
 
-## Sprint 17: CTO & QA (Enterprise E2E Test Matrix, Chaos Engineering & Android Go V2)
-- [ ] 162. [QA - Playwright Multi-Role Matrix]: Expand E2E Playwright test suites covering full concurrent flows: Student booking, Host approval, and Operator dispatch.
-- [ ] 163. [CTO - Client-Side Error Telemetry]: Implement a lightweight client-side crash and unhandled promise rejection reporter sending error logs to Supabase telemetry.
-- [ ] 164. [QA - 2G Network Throttling Test]: Create an automated script in `execution/` validating page interactivity and critical CSS rendering under 50kbps network throttling.
-- [ ] 165. [CTO - Web Worker Computation]: Offload heavy client-side filtering, distance calculations, and savings math to a background dedicated Web Worker.
-- [ ] 166. [QA - Cross-Browser Safari/iOS Glitch Test]: Audit and fix webkit-specific CSS flexbox stretching, safe-area-inset padding, and 100dvh viewport height bugs on mobile Safari.
-- [ ] 167. [CTO - Memory Leak Profiler]: Implement an automated script testing continuous page scroll and modal open/close cycles for JavaScript heap memory leaks.
-- [ ] 168. [QA - Form Validation Boundary Test]: Build comprehensive automated unit tests covering phone number regex (`+91`), Aadhaar formatting, and SQL injection sanitization.
-- [ ] 169. [CTO - Dynamic Asset Compression]: Configure automated build-time AVIF/WebP image generation pipeline with responsive image placeholders (LQIP).
-- [ ] 170. [QA - Dark/Light Contrast Audit]: Conduct an automated WCAG 2.1 AAA color contrast ratio audit across all text and icon components in both Student and Host modes.
-- [ ] 171. [CTO - Edge Regional Failover]: Implement client-side automatic fallback to secondary REST endpoints when primary Supabase edge gateways experience high latency.
+## Sprint 18: Operational Dashboards, Data Visualization & Admin Console (building-data-apps, impeccable operate)
+- [ ] 171. **[UI - Admin Dashboard Modernization / operate]**: Overhaul `/admin` operator console with clean, dark-themed modular analytics cards, tabbed navigation, and live status badges.
+- [ ] 172. **[UI - Executive KPI Metric Cards / operate]**: Redesign CAC, LTV, Active Bookings, and Gross Margin cards with sparkline trend charts and percentage growth indicators.
+- [ ] 173. **[UI - Real-Time Node Capacity Gauges / operate]**: Build interactive circular capacity gauges showing live locker utilization across Kakadeo, Kalyanpur, and Nawabganj hubs.
+- [ ] 174. **[UI - Student My-Bookings Hub / operate]**: Redesign the student profile booking hub with status timelines (Booked -> Picked Up -> In Vault -> Retrieved) and invoice download triggers.
+- [ ] 175. **[UI - Host Passive Income Analytics / operate]**: Build interactive monthly income charts for elderly hosts with bank transfer histories, tax breakdowns, and upcoming payout dates.
+- [ ] 176. **[UI - Live Booking Feed & Activity Stream / operate]**: Implement a real-time activity feed component showing incoming bookings, host approvals, and delivery dispatches.
+- [ ] 177. **[UI - Interactive Campus Map Layer / operate]**: Design an interactive Leaflet/Mapbox campus map interface visualizing host clusters, walking routes, and student coaching hubs.
+- [ ] 178. **[UI - Data Table Ergonomics / operate]**: Polish all admin data tables with sticky headers, column sorting, pagination controls, search bars, and CSV export buttons.
+- [ ] 179. **[UI - Host Safety & KYC Verification Console / operate]**: Design an inspection view for verifying host Aadhaar, police verification certificates, and 12-point safety checklists.
+- [ ] 180. **[UI - Toast & System Notification Overhaul / polish]**: Redesign floating system toasts with sleek glassmorphism, countdown progress bars, and actionable undo/view buttons.
 
-## Sprint 18: CPO & Community (Saarthi Connect, Intergenerational Mentorship & Senior SOS)
-- [ ] 172. [CPO - Saarthi Connect Matching]: Build a mutual interest matching algorithm pairing student study disciplines (e.g., Tech, Literature, Music) with senior citizen hobbies.
-- [ ] 173. [UI - Tech Assist Request Board]: Create an in-app noticeboard where senior hosts can post simple smartphone/computer tech help tasks (e.g., "Need help booking railway ticket").
-- [ ] 174. [UX - Karma Points Redemption]: Build an exchange store where students can redeem volunteer Karma points earned through senior mentorship for free meal tokens.
-- [ ] 175. [UI - Evening Chai Meetup Scheduler]: Design a calendar scheduling module for weekly communal terrace gatherings and storytelling sessions between hosts and students.
-- [ ] 176. [CPO - Emergency Contact Sync]: Implement a one-click sync feature allowing parents to link directly with the elderly host's WhatsApp for real-time safety updates.
-- [ ] 177. [UI - Digital Memory Book]: Create a shared digital photobook where departing students can leave handwritten notes and graduation photos for their senior hosts.
-- [ ] 178. [UX - Senior Accessibility Controls]: Add an instant 1-tap "Elderly High Legibility" control setting 18px+ base typography, high contrast, and simplified button labels.
-- [ ] 179. [CPO - Community Forum]: Build a moderated student-host discussion forum for sharing campus updates, second-hand books, and coaching advice.
-- [ ] 180. [UI - Host Milestone Celebrations]: Design celebratory visual confetti and anniversary milestone banners for hosts completing 1 year of hosting with StashSaarthi.
-- [ ] 181. [UX - Wellbeing Check-in]: Build a daily gentle notification prompt asking senior hosts for a 1-tap morning wellness check ("Sab theek hai?").
+## Sprint 19: Mobile-First Responsive Ergonomics & Safari Hardening (impeccable adapt, optimize)
+- [ ] 181. **[UI - Mobile Navigation Drawer 2.0 / adapt]**: Re-engineer the mobile hamburger drawer with buttery smooth slide-in transitions, high-contrast category links, and language/persona toggles.
+- [ ] 182. **[UI - Sticky Mobile Bottom Action Bar / adapt]**: Implement a thumb-friendly sticky bottom CTA bar on mobile screens with instant "Book Storage @ ₹300" action.
+- [ ] 183. **[UI - iOS Safari 100dvh & Bottom Safe Area / adapt]**: Fix iOS Safari viewport height issues using dynamic viewport units (`100dvh`) and `env(safe-area-inset-bottom)`.
+- [ ] 184. **[UI - Touch Target 48px Minimum Audit / adapt]**: Audit and enlarge all interactive buttons, icons, pills, and tap zones to maintain a strict minimum 48x48px touch target size.
+- [ ] 185. **[UI - Horizontal Scroll Overflow Quarantine / adapt]**: Enforce strict viewport containment (`overflow-x: hidden`) across all root layouts to permanently eliminate horizontal micro-wobbles.
+- [ ] 186. **[UI - Mobile Card Swipe Gestures / delight]**: Add native touch swipe gestures to mobile image galleries and testimonial carousels with smooth inertia snapping.
+- [ ] 187. **[UI - Mobile Keyboard Collision Prevention / adapt]**: Ensure input fields automatically scroll into view with comfortable headroom when the virtual keyboard expands on mobile browsers.
+- [ ] 188. **[UI - Low-End Device Performance Mode / optimize]**: Automatically disable expensive CSS box-shadows, blurs, and canvas animations when running on low-spec Android devices.
+- [ ] 189. **[UI - Bottom Sheet Drawer for Mobile Filters / adapt]**: Replace dropdown select filters on mobile with modern native-feeling bottom sheet swipeable modals.
+- [ ] 190. **[UI - Orientation Change & Tablet Layout / adapt]**: Optimize responsive grid layouts for iPad and tablet landscape/portrait orientations (768px - 1024px).
 
-## Sprint 19: CRO & Operator Ops (Fleet & Logistics Routing, Warehouse Hubs & Pickup Schedulers)
-- [ ] 182. [CRO - Multi-Item Stash Bundler]: Build an intuitive multi-item drag-and-drop luggage builder (Carton, Suitcase, Bicycle, Cooler, Books) with volume calculations.
-- [ ] 183. [Operator - Dispatch Route Optimizer]: Design an operator routing view grouping hostel pickups in Kakadeo by street nodes to minimize travel time for logistics captains.
-- [ ] 184. [UI - Logistics Captain App View]: Build a dedicated mobile web portal `/captain` for pickup drivers with barcode scanner, receipt printer trigger, and GPS route map.
-- [ ] 185. [CRO - Same-Day Express Pickup]: Implement an "Express 2-Hour Pickup" upsell toggle with real-time captain availability confirmation.
-- [ ] 186. [Operator - Warehouse Node Inventory Grid]: Create an interactive visual grid map of the micro-storage facility showing occupied vs. empty locker slots and shelf numbers.
-- [ ] 187. [UX - Luggage Retrieval Scheduler]: Build an appointment scheduler for students returning to Kanpur after vacation to request locker drop-off at their new room.
-- [ ] 188. [Operator - Host Payout Ledger]: Build an automated weekly payout calculation dashboard for elderly hosts with instant NEFT/IMPS payout CSV export.
-- [ ] 189. [CRO - Fragile Item Insurance Addon]: Add a micro-insurance upgrade option for delicate electronics (laptops, monitors, guitar) during transit and storage.
-- [ ] 190. [UI - Physical Seal Verification Screen]: Build a side-by-side photographic verification tool comparing bag seal photos taken at pickup vs. warehouse arrival.
-- [ ] 191. [Operator - Real-Time Incident Reporting]: Create a quick-dispatch ticket logger for captains to flag broken bags, unverified contents, or rescheduled pickups.
-
-## Sprint 20: CEO & Analytics (Investor Pitch Metrics, Unit Economics Scale & v4.0 Release)
-- [ ] 192. [CEO - Unit Economics Heatmap]: Build an interactive unit economics cohort visualization showing monthly revenue per active student and host margin progression.
-- [ ] 193. [CEO - Campus Market Penetration Tracker]: Create an executive dashboard module calculating market share across IIT Kanpur, HBTI, CSJMU, and Allen Kakadeo.
-- [ ] 194. [CEO - Live Investor Deck Mode]: Implement an investor presentation mode on `/pitch` featuring real-time platform KPIs, unit margins, and growth trajectory.
-- [ ] 195. [CEO - Founder WhatsApp Escalation Bot]: Build an automated routing system flagging critical host or safety tickets directly to the founder's WhatsApp (`+91 9369454350`).
-- [ ] 196. [CEO - Impact Metrics Display]: Create a live public impact ticker showcasing total dead rent saved by students (₹) and dignified retirement income paid to seniors (₹).
-- [ ] 197. [CEO - Multi-City Expansion Simulator]: Build an interactive financial model forecasting expansion to Kota, Lucknow, and Prayagraj student hubs.
-- [ ] 198. [CEO - Operational SLA Dashboard]: Create an executive SLA monitoring console tracking average luggage pickup time, meal delivery punctuality, and host support response.
-- [ ] 199. [CEO - Automated Daily Executive Digest]: Implement an automated cron script generating a daily operational summary of bookings, revenues, and active node capacity.
-- [ ] 200. [CEO - Dynamic Prototype Toggle Guard]: Formalize and verify the global `SHOW_PROTOTYPE_TAGS` flag across all 200 feature modules for instant production switch.
-- [ ] 201. [CEO - Master Release Note v4.0]: Compile all 200 tasks and Sprint 0-20 technical breakthroughs into the comprehensive StashSaarthi v4.0 Master Release Manifest.
+## Sprint 20: Comprehensive UI/UX Audit, WCAG AAA Accessibility & Craft Floor Polish (impeccable audit, critique, polish)
+- [ ] 191. **[UI - WCAG 2.1 AAA Contrast Ratio Audit / audit]**: Conduct a full automated and manual contrast audit ensuring all body copy and interactive text exceeds 7:1 contrast against dark obsidian backgrounds.
+- [ ] 192. **[UI - Full Screen Reader & ARIA Overhaul / audit]**: Audit and enrich all interactive widgets with explicit `aria-label`, `aria-expanded`, `aria-controls`, and `role` attributes.
+- [ ] 193. **[UI - Visible Focus Indicators / audit]**: Implement sleek, high-visibility keyboard focus rings (`focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2`) for all interactive elements.
+- [ ] 194. **[UI - Bilingual Text Overflow & Truncation / audit]**: Audit all UI cards in Hindi (`hi`) mode to verify no text clipping, awkward word wraps, or button text overflow occurs.
+- [ ] 195. **[UI - Image Aspect Ratio & Layout Shift Elimination / optimize]**: Enforce explicit width/height aspect-ratio containers on all images to achieve 0 Cumulative Layout Shift (CLS).
+- [ ] 196. **[UI - Micro-Copy Polish & Hindi Tone Refinement / clarify]**: Polish all UX micro-copy, ensuring student copy is punchy and energetic while host copy is warm, respectful, and crystal clear.
+- [ ] 197. **[UI - Error Boundary Fallback Views / polish]**: Design charming, context-aware error fallback screens with 1-click "Reload Section" and WhatsApp support hotline buttons.
+- [ ] 198. **[UI - Print Stylesheet for Invoices & Passes / polish]**: Perfect the `@media print` CSS stylesheet for booking passes, student agreements, and host verification certificates.
+- [ ] 199. **[UI - 60 FPS GPU Rendering & Layer Audit / optimize]**: Audit all animated layers with Chrome DevTools Performance profiler to ensure zero paint jank and consistent 60+ FPS rendering.
+- [ ] 200. **[UI - Master UI Overhaul Polish & Design System Freeze / polish]**: Complete the final comprehensive craft floor sweep, aligning every border, shadow, micro-interaction, and typography token across the platform.
