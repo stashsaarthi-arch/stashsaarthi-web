@@ -486,6 +486,7 @@ import { initWebGLSafetyGuard } from "@/lib/webgl-fallback";
 import { initSessionSecurityListener } from "@/lib/sessionSecurity";
 import { initVisitorTracking, trackPageView } from "@/lib/visitorTracking";
 import { initAutoDataRetentionPurge } from "@/lib/dataRetentionEngine";
+import { initOfflineQueueAutoSync } from "@/lib/offlineBookingQueue";
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
@@ -495,13 +496,29 @@ function RootComponent() {
   useEffect(() => {
     initWebGLSafetyGuard();
     initAutoDataRetentionPurge();
+    initOfflineQueueAutoSync();
     const { unsubscribe } = initSessionSecurityListener();
     const stopTracking = initVisitorTracking();
+
+    const handleSyncedEvent = (e: Event) => {
+      const customEv = e as CustomEvent<{ syncedCount: number; failedCount: number }>;
+      const { syncedCount } = customEv.detail || {};
+      if (syncedCount > 0) {
+        toast.success(`⚡ ${syncedCount} Offline Booking(s) Synced!`, {
+          description: "Your requests queued while offline in Kakadeo basement have been submitted successfully.",
+        });
+      }
+    };
+
+    window.addEventListener("stashsaarthi:offline-bookings-synced", handleSyncedEvent);
+
     return () => {
       unsubscribe();
       stopTracking();
+      window.removeEventListener("stashsaarthi:offline-bookings-synced", handleSyncedEvent);
     };
   }, []);
+
 
   // Track page views on route changes
   useEffect(() => {

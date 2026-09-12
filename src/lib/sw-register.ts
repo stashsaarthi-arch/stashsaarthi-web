@@ -1,11 +1,4 @@
-/**
- * Service Worker Registration Utility
- * ------------------------------------
- * Registers /sw.js on production or preview builds.
- * Skips registration during Vite dev mode to avoid stale-cache headaches.
- *
- * Call once from the client-side root (e.g. __root.tsx useEffect).
- */
+import { registerBackgroundPeriodicSync } from "./offlineBookingQueue";
 
 export function registerServiceWorker(): void {
   if (typeof window === "undefined") return; // SSR guard
@@ -32,6 +25,9 @@ export function registerServiceWorker(): void {
 
       console.info("[SW] Registered:", registration.scope);
 
+      // Register Background Sync & Periodic Sync for offline bookings
+      await registerBackgroundPeriodicSync();
+
       // Listen for updates and notify user when a new version is available
       registration.addEventListener("updatefound", () => {
         const newWorker = registration.installing;
@@ -42,10 +38,6 @@ export function registerServiceWorker(): void {
             newWorker.state === "activated" &&
             navigator.serviceWorker.controller
           ) {
-            // A new SW is active and the old one is gone — the user should
-            // reload to get the latest assets.  We don't force-reload; a
-            // non-intrusive console log suffices for now.  A Sonner toast
-            // can be wired here later.
             console.info(
               "[SW] New content available — reload for the latest version.",
             );
@@ -65,3 +57,4 @@ export function registerServiceWorker(): void {
     }
   });
 }
+

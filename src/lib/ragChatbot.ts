@@ -21,6 +21,90 @@ export interface RagResponse {
   suggestedQuestionsHi: string[];
 }
 
+// Hinglish Transliteration & Phonetic Normalization Map
+export const HINGLISH_TRANSLITERATION_MAP: Record<string, string[]> = {
+  // Storage & Luggage terms
+  bag: ["bag", "basta", "luggage", "attachi", "peti", "trunk", "saman", " सामान", "बैग"],
+  bags: ["bag", "basta", "luggage", "saman"],
+  basta: ["bag", "luggage", "saman"],
+  saman: ["luggage", "storage", "bag", "items", "saman"],
+  attachi: ["bag", "luggage", "suitcase"],
+  peti: ["bag", "trunk", "storage"],
+  hostel: ["hostel", "pg", "room", "storage", "pickup"],
+  uthane: ["pickup", "pickup_service", "collect", "uthana", "le jana", "uthane"],
+  uthana: ["pickup", "collect", "uthane", "le jana"],
+  le: ["pickup", "collect", "take"],
+  jana: ["pickup", "collect", "go"],
+  rakhne: ["storage", "store", "rakhna"],
+  rakhna: ["storage", "store", "rakhne"],
+  stashing: ["storage", "stash"],
+
+  // Pricing, Cost & Rates
+  charge: ["price", "cost", "rate", "fee", "pricing", "charge", "कीमत", "दर"],
+  charges: ["price", "cost", "rate", "fee", "charge"],
+  kiraya: ["rent", "price", "cost", "rate", "kiraya"],
+  paisa: ["money", "cost", "price", "fee", "rupees"],
+  paise: ["money", "cost", "price"],
+  kitna: ["how_much", "cost", "price", "rate", "300", "kitna"],
+  kitne: ["how_much", "cost", "price", "rate", "300", "kitne"],
+  kya: ["what", "cost", "price", "rate", "how_much", "kya"],
+  dam: ["price", "cost", "rate"],
+  daam: ["price", "cost", "rate"],
+  rate: ["price", "cost", "rate", "pricing"],
+  rates: ["price", "cost", "rate"],
+  kharcha: ["cost", "price", "charge", "rate", "fee"],
+  kharch: ["cost", "price", "charge", "rate", "fee"],
+  lagega: ["cost", "charge", "price", "fee"],
+  lagenge: ["cost", "charge", "price", "fee"],
+  lagte: ["cost", "charge", "price", "fee"],
+
+  // Rooms & Co-living
+  kamra: ["room", "co-living", "pg", "stay", "accommodation"],
+  kamre: ["room", "rooms", "pg"],
+  room: ["room", "co-living", "pg", "stay"],
+  rooms: ["room", "rooms", "pg"],
+  brokerage: ["brokerage", "commission", "broker_fee", "dalali"],
+  dalali: ["brokerage", "commission"],
+
+  // Kitchen & Meals
+  khana: ["food", "meal", "tiffin", "kitchen", "thali"],
+  khaana: ["food", "meal", "tiffin", "kitchen"],
+  tiffin: ["tiffin", "kitchen", "meal", "food"],
+  dabba: ["tiffin", "meal", "food"],
+  nashta: ["food", "meal", "breakfast"],
+  thali: ["meal", "thali", "food"],
+  mess: ["kitchen", "tiffin", "canteen"],
+
+  // Safety, Claim & Insurance
+  safe: ["safety", "insurance", "security", "safe"],
+  suraksha: ["safety", "security", "insurance"],
+  bima: ["insurance", "claim", "10000", "safety"],
+  claim: ["claim", "insurance", "10000", "damage"],
+  damage: ["damage", "loss", "toot", "chori"],
+  toot: ["damage", "broken", "loss"],
+  chori: ["loss", "stolen", "theft"],
+
+  // Host & Earnings
+  host: ["host", "senior", "passive_income"],
+  kamai: ["earning", "passive_income", "money", "profit", "11500"],
+  kamaye: ["earn", "earning", "income", "11500"],
+  kamayenge: ["earn", "earning", "income", "11500"],
+  kamayengi: ["earn", "earning", "income", "11500"],
+  kamana: ["earn", "earning", "income", "11500"],
+  kama: ["earn", "earning", "income", "11500"],
+  senior: ["senior", "host", "elderly"],
+
+  // Cancellation & Emergency
+  cancel: ["cancel", "emergency", "relocation", "sla"],
+  cancle: ["cancel", "emergency"],
+  mana: ["cancel", "refuse", "lockout"],
+
+  // Founder & Support
+  founder: ["founder", "contact", "phone", "whatsapp"],
+  advik: ["founder", "contact"],
+  sampark: ["contact", "phone", "whatsapp"],
+};
+
 export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
   {
     id: "kb-01",
@@ -43,6 +127,10 @@ export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
       "escrow",
       "seal",
       "kanpur",
+      "vishwasniya",
+      "kaise",
+      "kam",
+      "vishwas",
       "विश्वसनीय",
       "काम",
       "सुरक्षित",
@@ -68,6 +156,9 @@ export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
       "share",
       "security",
       "trackers",
+      "gopniyata",
+      "bechna",
+      "number",
       "डेटा",
       "गोपनीयता",
       "आधार",
@@ -92,6 +183,10 @@ export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
       "relocation",
       "backup",
       "sla",
+      "mana",
+      "cancle",
+      "tala",
+      "host",
       "मना",
       "ताला",
       "बैकअप",
@@ -117,6 +212,9 @@ export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
       "pricing",
       "cost",
       "earning",
+      "kamai",
+      "paisa",
+      "dalali",
       "कमाई",
       "ब्रोकरेज",
       "शुल्क",
@@ -142,6 +240,18 @@ export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
       "300",
       "luggage",
       "weight",
+      "uthane",
+      "uthana",
+      "rakhne",
+      "rakhna",
+      "charge",
+      "charges",
+      "saman",
+      "basta",
+      "kitna",
+      "kitne",
+      "hostel",
+      "pickup",
       "दर",
       "कीमत",
       "बैग",
@@ -166,6 +276,10 @@ export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
       "return",
       "plans change",
       "notice",
+      "vapas",
+      "wapas",
+      "samay se pehle",
+      "samay",
       "समय से पहले",
       "वापसी",
       "पिकअप",
@@ -190,6 +304,9 @@ export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
       "cash",
       "liquids",
       "weapons",
+      "manahi",
+      "kya nahi rakh sakte",
+      "banned saman",
       "मनाही",
       "प्रतिबंधित",
       "वस्तुएं",
@@ -214,6 +331,13 @@ export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
       "compensation",
       "seal",
       "barcode",
+      "bima",
+      "safe",
+      "safety",
+      "toot",
+      "kharab",
+      "chori",
+      "suraksha",
       "बीमा",
       "क्लेम",
       "क्षति",
@@ -240,6 +364,11 @@ export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
       "single",
       "sharing",
       "rent",
+      "kamra",
+      "kamre",
+      "kiraya",
+      "room ka rent",
+      "brokerage fee",
       "कमरा",
       "पीजी",
       "ब्रोकरेज",
@@ -266,6 +395,12 @@ export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
       "price",
       "90",
       "2400",
+      "khana",
+      "khaana",
+      "dabba",
+      "nashta",
+      "rasoi",
+      "mess",
       "खाना",
       "टिफिन",
       "भोजन",
@@ -291,6 +426,13 @@ export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
       "spare room",
       "payout",
       "escrow",
+      "kamai",
+      "kamaye",
+      "kamana",
+      "paisa kamana",
+      "aanti",
+      "dadi",
+      "hoist",
       "होस्ट",
       "सीनियर",
       "कमाई",
@@ -315,6 +457,10 @@ export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
       "number",
       "founder",
       "help",
+      "sampark",
+      "baat",
+      "phone number",
+      "advik",
       "संपर्क",
       "फोन",
       "व्हाट्सएप",
@@ -325,9 +471,9 @@ export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
 ];
 
 /**
- * Clean & tokenize text string into keywords (lowercase, stripped punctuation)
+ * Clean & tokenize text string into raw tokens
  */
-function tokenize(text: string): string[] {
+export function tokenize(text: string): string[] {
   return text
     .toLowerCase()
     .replace(/[^\w\s\u0900-\u097F]/g, " ")
@@ -336,33 +482,92 @@ function tokenize(text: string): string[] {
 }
 
 /**
- * Retrieve top relevant knowledge chunks using TF-IDF / keyword overlap matching
+ * Multilingual & Hinglish token expansion engine
+ * Converts Hinglish phonetic words (e.g. "uthane", "charge", "kamra", "dabba") to canonical intent tokens.
+ */
+export function normalizeHinglishTokens(tokens: string[]): string[] {
+  const expanded: string[] = [...tokens];
+
+  for (const token of tokens) {
+    // Check direct match in transliteration map
+    if (HINGLISH_TRANSLITERATION_MAP[token]) {
+      expanded.push(...HINGLISH_TRANSLITERATION_MAP[token]);
+    }
+
+    // Stemming heuristic for common Hinglish suffixes (-e, -i, -o, -ing)
+    const stemmed = token.replace(/(e|i|o|ing|s)$/, "");
+    if (stemmed !== token && HINGLISH_TRANSLITERATION_MAP[stemmed]) {
+      expanded.push(...HINGLISH_TRANSLITERATION_MAP[stemmed]);
+    }
+  }
+
+  return Array.from(new Set(expanded));
+}
+
+/**
+ * Extract 2-gram and 3-gram phrases from query for exact multi-word Hinglish matching
+ */
+export function extractPhrases(tokens: string[]): string[] {
+  const phrases: string[] = [];
+  for (let i = 0; i < tokens.length - 1; i++) {
+    phrases.push(`${tokens[i]} ${tokens[i + 1]}`);
+    if (i < tokens.length - 2) {
+      phrases.push(`${tokens[i]} ${tokens[i + 1]} ${tokens[i + 2]}`);
+    }
+  }
+  return phrases;
+}
+
+/**
+ * Retrieve top relevant knowledge chunks using Multilingual / Hinglish embedding-like score matching
  */
 export function retrieveKnowledgeChunks(query: string, limit = 3): KnowledgeChunk[] {
-  const queryTokens = tokenize(query);
-  if (queryTokens.length === 0) return KNOWLEDGE_BASE.slice(0, limit);
+  const rawTokens = tokenize(query);
+  if (rawTokens.length === 0) return KNOWLEDGE_BASE.slice(0, limit);
+
+  const normalizedTokens = normalizeHinglishTokens(rawTokens);
+  const queryPhrases = extractPhrases(rawTokens);
 
   const scored = KNOWLEDGE_BASE.map((chunk) => {
     let score = 0;
 
-    // Check keyword exact matches (weight: 3)
-    chunk.keywords.forEach((kw) => {
-      const kwTokens = tokenize(kw);
-      if (kwTokens.some((t) => queryTokens.includes(t))) {
-        score += 3;
+    const chunkKeywordTokens = normalizeHinglishTokens(
+      chunk.keywords.flatMap((kw) => tokenize(kw))
+    );
+
+    // 1. Keyword exact & transliterated match (weight: 5)
+    normalizedTokens.forEach((token) => {
+      if (chunkKeywordTokens.includes(token)) {
+        score += 5;
       }
     });
 
-    // Check question title overlap (weight: 4)
-    const qTokens = tokenize(chunk.question + " " + chunk.questionHi);
-    queryTokens.forEach((qt) => {
-      if (qTokens.includes(qt)) score += 4;
+    // 2. Question title overlap (weight: 6)
+    const titleTokens = normalizeHinglishTokens(
+      tokenize(chunk.question + " " + chunk.questionHi)
+    );
+    normalizedTokens.forEach((token) => {
+      if (titleTokens.includes(token)) score += 6;
     });
 
-    // Check answer content overlap (weight: 1)
-    const aTokens = tokenize(chunk.answer + " " + chunk.answerHi);
-    queryTokens.forEach((qt) => {
-      if (aTokens.includes(qt)) score += 1;
+    // 3. Answer content overlap (weight: 2)
+    const answerTokens = tokenize(chunk.answer + " " + chunk.answerHi);
+    normalizedTokens.forEach((token) => {
+      if (answerTokens.includes(token)) score += 2;
+    });
+
+    // 4. Exact multi-word phrase matching (weight: 8)
+    queryPhrases.forEach((phrase) => {
+      const fullText = (
+        chunk.question +
+        " " +
+        chunk.questionHi +
+        " " +
+        chunk.keywords.join(" ")
+      ).toLowerCase();
+      if (fullText.includes(phrase)) {
+        score += 8;
+      }
     });
 
     return { chunk, score };
@@ -372,7 +577,6 @@ export function retrieveKnowledgeChunks(query: string, limit = 3): KnowledgeChun
   const filtered = scored.filter((item) => item.score > 0);
 
   if (filtered.length === 0) {
-    // Return top 2 default transparency chunks if no match
     return KNOWLEDGE_BASE.slice(0, limit);
   }
 
@@ -380,29 +584,36 @@ export function retrieveKnowledgeChunks(query: string, limit = 3): KnowledgeChun
 }
 
 /**
- * RAG Generator: Synthesizes a contextual answer from retrieved knowledge chunks
+ * RAG Generator: Synthesizes a contextual answer from retrieved knowledge chunks with Hinglish support
  */
 export function generateRagResponse(userQuery: string, language: "en" | "hi" = "en"): RagResponse {
   const chunks = retrieveKnowledgeChunks(userQuery, 3);
-  const queryTokens = tokenize(userQuery);
+  const rawTokens = tokenize(userQuery);
+  const normalizedTokens = normalizeHinglishTokens(rawTokens);
 
   // Determine top match quality
   let topScore = 0;
   const primaryChunk: KnowledgeChunk = chunks[0] ?? KNOWLEDGE_BASE[0]!;
 
-  if (queryTokens.length > 0) {
-    primaryChunk.keywords.forEach((kw) => {
-      if (queryTokens.includes(kw.toLowerCase())) topScore += 25;
+  if (normalizedTokens.length > 0) {
+    const chunkKeywords = normalizeHinglishTokens(
+      primaryChunk.keywords.flatMap((kw) => tokenize(kw))
+    );
+    normalizedTokens.forEach((token) => {
+      if (chunkKeywords.includes(token)) topScore += 25;
     });
-    const titleTokens = tokenize(primaryChunk.question + " " + primaryChunk.questionHi);
-    queryTokens.forEach((qt) => {
-      if (titleTokens.includes(qt)) topScore += 30;
+
+    const titleTokens = normalizeHinglishTokens(
+      tokenize(primaryChunk.question + " " + primaryChunk.questionHi)
+    );
+    normalizedTokens.forEach((token) => {
+      if (titleTokens.includes(token)) topScore += 30;
     });
   } else {
     topScore = 50;
   }
 
-  const confidenceScore = Math.min(98, Math.max(35, topScore > 0 ? topScore + 30 : 40));
+  const confidenceScore = Math.min(98, Math.max(45, topScore > 0 ? topScore + 35 : 45));
 
   const isHi = language === "hi";
 
@@ -450,3 +661,4 @@ export function generateRagResponse(userQuery: string, language: "en" | "hi" = "
     suggestedQuestionsHi,
   };
 }
+

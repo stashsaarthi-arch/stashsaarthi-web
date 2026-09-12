@@ -82,3 +82,37 @@ export function getSurfaceLayerColor(
   return tokens[level].raw;
 }
 
+export const GLASSMORPHISM_TOKENS = {
+  glass: {
+    backdropFilter: "blur(16px) saturate(140%)",
+    border: "1px solid oklch(1 0 0 / 12%)",
+    shadow: "var(--shadow-glass)",
+  },
+  glassPanel: {
+    backdropFilter: "blur(20px) saturate(160%)",
+    border: "1px solid oklch(1 0 0 / 15%)",
+    shadow: "0 28px 64px -16px oklch(0 0 0 / 70%), inset 0 1px 0 oklch(1 0 0 / 12%)",
+  },
+  glassCard: {
+    backdropFilter: "blur(14px) saturate(135%)",
+    border: "1px solid oklch(1 0 0 / 11%)",
+    shadow: "0 14px 36px -10px oklch(0 0 0 / 55%), inset 0 1px 0 oklch(1 0 0 / 9%)",
+  },
+} as const;
+
+export const GRADIENT_TOKENS = {
+  mintEmerald: "linear-gradient(135deg, oklch(0.72 0.19 160), oklch(0.696 0.149 162))",
+  amberGold: "linear-gradient(135deg, oklch(0.769 0.165 70), oklch(0.837 0.175 82))",
+  cyanEmerald: "linear-gradient(135deg, oklch(0.868 0.16 178), oklch(0.696 0.149 162))",
+  obsidianMesh: "radial-gradient(ellipse at 50% 0%, oklch(0.24 0.016 223 / 50%) 0%, oklch(0.12 0.012 230 / 95%) 100%)",
+} as const;
+
+/**
+ * Helper to retrieve persona-specific gradient CSS string
+ */
+export function getPersonaGradient(role: "student" | "host"): string {
+  return role === "host" ? GRADIENT_TOKENS.amberGold : GRADIENT_TOKENS.mintEmerald;
+}
+
+
+

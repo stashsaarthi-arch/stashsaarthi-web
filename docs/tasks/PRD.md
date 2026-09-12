@@ -122,8 +122,8 @@ Sprint 10: QA, CSO & CEO (Total Assurance, Compliance & Strategic Direction)
 ## Sprint 11: Design System, Tokens & OKLCH Theme Architecture (impeccable extract, document, colorize)
 - [x] 101. **[UI - Design Tokens / extract]**: Formalize unified OKLCH design tokens in `src/styles.css` for both Student (`--mint`, `--emerald`, `--cyan`, `--obsidian`) and Senior Host (`--amber`, `--gold`, `--obsidian`) personas.
 - [x] 102. **[UI - Color Harmony / colorize]**: Implement automated contrast checking and color harmony scales for background-to-surface layers (`--surface-1`, `--surface-2`, `--surface-elevated`).
-- [ ] 103. **[UI - Glassmorphism Standards / polish]**: Refactor all glass card utilities (`.glass`, `.glass-hover`, `.glass-panel`) to use performant CSS backdrop-filter with hardware acceleration and clean borders.
-- [ ] 104. **[UI - Gradient Systems / colorize]**: Standardize dynamic radiant gradients across Hero and Featured cards, replacing ad-hoc inline gradients with reusable CSS token classes (`gradient-mint-emerald`, `gradient-amber-gold`).
+- [x] 103. **[UI - Glassmorphism Standards / polish]**: Refactor all glass card utilities (`.glass`, `.glass-hover`, `.glass-panel`) to use performant CSS backdrop-filter with hardware acceleration and clean borders.
+- [x] 104. **[UI - Gradient Systems / colorize]**: Standardize dynamic radiant gradients across Hero and Featured cards, replacing ad-hoc inline gradients with reusable CSS token classes (`gradient-mint-emerald`, `gradient-amber-gold`).
 - [ ] 105. **[UI - Border & Ring Radii / layout]**: Unify border radius scale (`rounded-sm`, `rounded-md`, `rounded-lg`, `rounded-xl`, `rounded-2xl`, `rounded-3xl`) across all 40+ components for consistent visual rhythm.
 - [ ] 106. **[UI - Shadow & Depth Hierarchy / layout]**: Establish a 4-tier elevation shadow system (`--shadow-subtle`, `--shadow-card`, `--shadow-floating`, `--shadow-glow`) mapped to persona accent colors.
 - [ ] 107. **[UI - Component Primitives / extract]**: Extract reusable button primitives (`Button`, `IconButton`, `PillBadge`, `Chip`) into a dedicated `src/components/ui/` primitives folder.

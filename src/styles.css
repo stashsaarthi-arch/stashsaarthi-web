@@ -75,6 +75,10 @@
   --color-surface-1: var(--surface-1);
   --color-surface-2: var(--surface-2);
   --color-surface-elevated: var(--surface-elevated);
+  --color-gradient-mint-emerald: var(--gradient-mint-emerald);
+  --color-gradient-amber-gold: var(--gradient-amber-gold);
+  --color-gradient-cyan-emerald: var(--gradient-cyan-emerald);
+  --color-gradient-persona-radiant: var(--gradient-persona-radiant);
   --font-sans: "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --breakpoint-3xl: 160rem;
@@ -130,8 +134,15 @@
   --input: oklch(1 0 0 / 14%);
   --ring: oklch(0.868 0.16 178);
   --surface: oklch(0.198 0.013 223 / 72%);
+  --surface-panel: oklch(0.198 0.013 223 / 88%);
+  --surface-card: oklch(0.16 0.012 230 / 80%);
   --gradient-cyan: linear-gradient(135deg, oklch(0.868 0.16 178), oklch(0.696 0.149 162));
   --gradient-amber: linear-gradient(135deg, oklch(0.837 0.164 84), oklch(0.769 0.165 70));
+  --gradient-mint-emerald: linear-gradient(135deg, oklch(0.72 0.19 160), oklch(0.696 0.149 162));
+  --gradient-amber-gold: linear-gradient(135deg, oklch(0.769 0.165 70), oklch(0.837 0.175 82));
+  --gradient-cyan-emerald: linear-gradient(135deg, oklch(0.868 0.16 178), oklch(0.696 0.149 162));
+  --gradient-obsidian-mesh: radial-gradient(ellipse at 50% 0%, oklch(0.24 0.016 223 / 50%) 0%, oklch(0.12 0.012 230 / 95%) 100%);
+  --gradient-persona-radiant: var(--gradient-mint-emerald);
   --gradient-hero: linear-gradient(
     100deg,
     oklch(0.98 0.01 220) 0%,
@@ -168,11 +179,14 @@
   --background: oklch(0.16 0.014 60);
   --card: oklch(0.21 0.017 62);
   --surface: oklch(0.22 0.018 62 / 74%);
+  --surface-panel: oklch(0.21 0.017 62 / 88%);
+  --surface-card: oklch(0.17 0.015 65 / 80%);
   --primary: oklch(0.809 0.165 76);
   --ring: oklch(0.809 0.165 76);
   --cyan: oklch(0.809 0.165 76);
   --emerald: oklch(0.837 0.13 90);
   --gradient-cyan: var(--gradient-amber);
+  --gradient-persona-radiant: var(--gradient-amber-gold);
   --gradient-hero: linear-gradient(
     100deg,
     oklch(0.99 0.01 90) 0%,
@@ -254,6 +268,8 @@ html.light {
   --input: oklch(0.15 0.01 220 / 14%);
   --ring: oklch(0.55 0.18 165);
   --surface: oklch(0.98 0.006 220 / 88%);
+  --surface-panel: oklch(0.975 0.006 220 / 92%);
+  --surface-card: oklch(0.965 0.006 220 / 85%);
   --shadow-glass: 0 20px 40px -15px oklch(0 0 0 / 8%), inset 0 1px 0 oklch(1 0 0 / 80%);
 }
 
@@ -343,16 +359,17 @@ html.lenis body {
 
 @utility glass {
   background: var(--surface);
-  backdrop-filter: blur(10px) saturate(120%);
-  -webkit-backdrop-filter: blur(10px) saturate(120%);
-  border: 1px solid oklch(1 0 0 / 10%);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid oklch(1 0 0 / 12%);
   box-shadow: var(--shadow-glass);
-  transform: translateZ(0);
+  transform: translate3d(0, 0, 0);
   contain: layout style;
   transition:
     border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-    background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @utility glass-hover {
@@ -361,10 +378,38 @@ html.lenis body {
     box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   &:hover {
-    border-color: oklch(1 0 0 / 20%);
-    box-shadow: var(--shadow-glass), var(--glow-cyan);
-    transform: translateY(-4px);
+    border-color: oklch(1 0 0 / 22%);
+    box-shadow: var(--shadow-glass), var(--persona-glow);
+    transform: translate3d(0, -4px, 0);
   }
+}
+
+@utility glass-panel {
+  background: var(--surface-panel, oklch(0.198 0.013 223 / 88%));
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid oklch(1 0 0 / 15%);
+  box-shadow: 0 28px 64px -16px oklch(0 0 0 / 70%), inset 0 1px 0 oklch(1 0 0 / 12%);
+  transform: translate3d(0, 0, 0);
+  contain: layout style;
+  transition:
+    border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@utility glass-card {
+  background: var(--surface-card, oklch(0.16 0.012 230 / 80%));
+  backdrop-filter: blur(14px) saturate(135%);
+  -webkit-backdrop-filter: blur(14px) saturate(135%);
+  border: 1px solid oklch(1 0 0 / 11%);
+  box-shadow: 0 14px 36px -10px oklch(0 0 0 / 55%), inset 0 1px 0 oklch(1 0 0 / 9%);
+  transform: translate3d(0, 0, 0);
+  contain: layout style;
+  transition:
+    border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @utility surface-1-card {
@@ -384,6 +429,47 @@ html.lenis body {
   border: 1px solid oklch(1 0 0 / 16%);
   box-shadow: 0 16px 40px -12px oklch(0 0 0 / 50%);
   transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@utility gradient-mint-emerald {
+  background-image: var(--gradient-mint-emerald);
+}
+
+@utility gradient-amber-gold {
+  background-image: var(--gradient-amber-gold);
+}
+
+@utility gradient-cyan-emerald {
+  background-image: var(--gradient-cyan-emerald);
+}
+
+@utility gradient-obsidian-mesh {
+  background-image: var(--gradient-obsidian-mesh);
+}
+
+@utility gradient-persona-radiant {
+  background-image: var(--gradient-persona-radiant);
+}
+
+@utility text-gradient-mint {
+  background-image: var(--gradient-mint-emerald);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@utility text-gradient-amber {
+  background-image: var(--gradient-amber-gold);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@utility text-gradient-persona {
+  background-image: var(--gradient-persona-radiant);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 @utility text-gradient {

@@ -57,6 +57,8 @@ import {
   calculateExtendedBreakDiscount,
   getExtendedBreakUpsellMessage,
 } from "@/lib/extendedBreakUpsell";
+import { enqueueOfflineBooking } from "@/lib/offlineBookingQueue";
+
 
 export function BookingModal({
   open,
@@ -481,29 +483,72 @@ export function BookingModal({
       }
 
 
-      // Save inquiry to supabase with zero data drop
-      const { error } = await supabase.from("co_living_inquiries").insert(payload);
+      let isOfflineMode = typeof navigator !== "undefined" && !navigator.onLine;
 
-      if (error) {
-        logSupabaseError({
-          table: "co_living_inquiries",
-          operation: "insert",
-          payload,
-          error,
-          context: "booking_modal_insert",
+      if (isOfflineMode) {
+        await enqueueOfflineBooking({
+          user_id: user?.id ?? null,
+          role: service,
+          name: cleanName,
+          email: cleanEmail,
+          phone: cleanPhone || "N/A",
+          preferred_location: city.trim(),
+          message: fullMessage,
+          token: generatedToken,
+          service,
+          amount: calcAmount,
         });
-        // Don't throw — booking already saved locally
+      } else {
+        // Save inquiry to supabase with zero data drop
+        const { error } = await supabase.from("co_living_inquiries").insert(payload);
+
+        if (error) {
+          logSupabaseError({
+            table: "co_living_inquiries",
+            operation: "insert",
+            payload,
+            error,
+            context: "booking_modal_insert",
+          });
+          // Queue into IndexedDB for background sync when cell service drops (e.g. Kakadeo basement)
+          await enqueueOfflineBooking({
+            user_id: user?.id ?? null,
+            role: service,
+            name: cleanName,
+            email: cleanEmail,
+            phone: cleanPhone || "N/A",
+            preferred_location: city.trim(),
+            message: fullMessage,
+            token: generatedToken,
+            service,
+            amount: calcAmount,
+          });
+          isOfflineMode = true;
+        }
       }
 
       setStep(3);
-      toast.success(
-        isHi ? "🎉 सेवा आरक्षण व एस्क्रो लॉक सफल!" : "🎉 Service Reservation & Escrow Locked!",
-        {
-          description: isHi
-            ? "आपका आधिकारिक डिजिटल स्टैशपास तैयार है।"
-            : "Your digital StashPass is ready.",
-        },
-      );
+      if (isOfflineMode) {
+        toast.success(
+          isHi
+            ? "📶 ऑफलाईन वॉल्ट में सहेजा गया (काकादेव बेसमेंट)"
+            : "📶 Saved to Offline Vault (Kakadeo Basement)",
+          {
+            description: isHi
+              ? "नेटवर्क वापस आते ही आपकी बुकिंग स्वतः सिंक हो जाएगी। डिजिटल पास तैयार है।"
+              : "Your booking is queued offline & will auto-sync when network returns. StashPass generated.",
+          }
+        );
+      } else {
+        toast.success(
+          isHi ? "🎉 सेवा आरक्षण व एस्क्रो लॉक सफल!" : "🎉 Service Reservation & Escrow Locked!",
+          {
+            description: isHi
+              ? "आपका आधिकारिक डिजिटल स्टैशपास तैयार है।"
+              : "Your digital StashPass is ready.",
+          }
+        );
+      }
     } catch (err: unknown) {
       logSupabaseError({
         table: "co_living_inquiries",
@@ -512,11 +557,36 @@ export function BookingModal({
         error: err,
         context: "booking_modal_catch",
       });
-      toast.error(isHi ? "आरक्षण करने में असमर्थ" : "We couldn't process your booking", {
-        description: isHi
-          ? "कृपया अपना इंटरनेट कनेक्शन जांचें और पुनः प्रयास करें।"
-          : "Please check your connection and try again.",
-      });
+      // Even if catch occurs, attempt offline enqueue
+      try {
+        await enqueueOfflineBooking({
+          user_id: user?.id ?? null,
+          role: service,
+          name: name.trim() || "Campus Student",
+          email: email.trim() || "offline@stashsaarthi-web.vercel.app",
+          phone: phone.trim() || "N/A",
+          preferred_location: city.trim(),
+          message: `${note ? `${note} · ` : ""}EstAmount: ₹${calcAmount}`,
+          token: tokenId || `ST-${Math.floor(Math.random() * 90000) + 10000}`,
+          service,
+          amount: calcAmount,
+        });
+        setStep(3);
+        toast.info(
+          isHi ? "📶 बुकिंग ऑफलाईन सहेजी गई" : "📶 Booking Saved Offline",
+          {
+            description: isHi
+              ? "सेल नेटवर्क उपलब्ध होने पर स्वतः सिंक होगी।"
+              : "Saved locally. Auto-syncing when signal returns.",
+          }
+        );
+      } catch {
+        toast.error(isHi ? "आरक्षण करने में असमर्थ" : "We couldn't process your booking", {
+          description: isHi
+            ? "कृपया अपना इंटरनेट कनेक्शन जांचें और पुनः प्रयास करें।"
+            : "Please check your connection and try again.",
+        });
+      }
     } finally {
       setSubmitting(false);
     }

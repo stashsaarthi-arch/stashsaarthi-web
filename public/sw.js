@@ -263,3 +263,24 @@ self.addEventListener("message", (event) => {
     trimCache(RUNTIME_CACHE, 120);
   }
 });
+
+// ─── Background Sync & Periodic Sync ──────────────────────────
+self.addEventListener("sync", (event) => {
+  if (event.tag === "sync-offline-bookings") {
+    event.waitUntil(notifyClientsToFlushOfflineQueue());
+  }
+});
+
+self.addEventListener("periodicsync", (event) => {
+  if (event.tag === "periodic-booking-sync") {
+    event.waitUntil(notifyClientsToFlushOfflineQueue());
+  }
+});
+
+async function notifyClientsToFlushOfflineQueue() {
+  const allClients = await self.clients.matchAll({ includeUncontrolled: true, type: "window" });
+  for (const client of allClients) {
+    client.postMessage({ type: "FLUSH_OFFLINE_BOOKINGS" });
+  }
+}
+

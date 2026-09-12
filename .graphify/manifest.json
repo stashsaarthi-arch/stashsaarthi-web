@@ -1,0 +1,1286 @@
+{
+  "C:/Users/Dell/Downloads/stashsaarthi-web/ai_workforce/engine.js": {
+    "mtime": 1788037130899.2517,
+    "hash": "153aac16fb378d983b7c8493e810ed80"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/ai_workforce/orchestrator.js": {
+    "mtime": 1788037130972.6096,
+    "hash": "14c4340794a7798fc1a9e56875fb1d44"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/ai_workforce/orchestrator.py": {
+    "mtime": 1787987240759.8198,
+    "hash": "2d6c128ccec4312bb3ef1392f553b626"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/ai_workforce/runner.js": {
+    "mtime": 1788037131000.2656,
+    "hash": "5d137fb77003a9cbe485e8729bb22ea2"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/e2e/android-go-performance.spec.ts": {
+    "mtime": 1789198204583.3225,
+    "hash": "6e393624d4627a0ec7ff5430bb9c1740"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/e2e/booking.spec.ts": {
+    "mtime": 1788720423853.6853,
+    "hash": "ef4354873ef3b157474055b90862668b"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/e2e/data-privacy-dpdp-audit.spec.ts": {
+    "mtime": 1789198204583.3225,
+    "hash": "c6518f9bd3e38d14364e27d5bfcb8848"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/e2e/kitchen-sw-2g-performance.spec.ts": {
+    "mtime": 1789198204583.3225,
+    "hash": "e58f82a50edec619bb7fb1b25c849588"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/e2e/legacy-android-emulation.spec.ts": {
+    "mtime": 1788720423862.041,
+    "hash": "f77ac6a0cb715a6d56a5d8cd656da572"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/e2e/storage-qr-booking.spec.ts": {
+    "mtime": 1789198204583.3225,
+    "hash": "47e672d673b42080be9cf9cbfd8d1066"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/eslint.config.js": {
+    "mtime": 1788037161785.8604,
+    "hash": "d27dec01901af3305e5892ee0400acde"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/execution/audit-supabase-rls.mjs": {
+    "mtime": 1789198204591.5225,
+    "hash": "865022c18517b47fa27f46ef100a1bab"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/execution/audit-vulnerabilities.mjs": {
+    "mtime": 1788720423866.2559,
+    "hash": "41a90b8f97a2dd35bdf4907c0811ac1c"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/execution/deploy-edge-functions-multi-region.mjs": {
+    "mtime": 1788720423866.2559,
+    "hash": "0492d780d4122b339e493c05bce3fc68"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/execution/generate-og-images.mjs": {
+    "mtime": 1788720423868.3335,
+    "hash": "f581daa16c0f05a73dc9051224b7080e"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/execution/generate-responsive-images.mjs": {
+    "mtime": 1788720423870.5576,
+    "hash": "cdacbf76a05165244588829e41d5541b"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/execution/run-api-pentest.mjs": {
+    "mtime": 1789198204591.5225,
+    "hash": "bdf4df34cfba7628081750e5b71cc810"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/execution/run-e2e-tests.mjs": {
+    "mtime": 1789198204591.5225,
+    "hash": "98e1c44d42be8208ca70239fc094cff4"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/execution/test-data-retention-policy.mjs": {
+    "mtime": 1789198204607.8904,
+    "hash": "491c7e53fdcbd50a82fc809752d2e9fb"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/execution/test-executive-analytics.mjs": {
+    "mtime": 1789198204613.7207,
+    "hash": "8ccb2758bc670152cbca811e6fe9ebda"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/execution/test-multilingual-rag.mjs": {
+    "mtime": 1789219732484.1785,
+    "hash": "57acef5f3da35b9639d04695c2b5ee73"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/execution/test-offline-pwa-sync.mjs": {
+    "mtime": 1789204402857.7786,
+    "hash": "c4e8a3755659ee8d9e84b57c7a623af4"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/execution/verify-android-go-perf.mjs": {
+    "mtime": 1789198204658.3796,
+    "hash": "f0e0a44f439e79f7d8be0cda99799d7a"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/find_keys.js": {
+    "mtime": 1789203659460.2637,
+    "hash": "6cc9b7ade38656f27690ff6fd3ac41de"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/gemini_web2api.py": {
+    "mtime": 1789197510459.23,
+    "hash": "020d381cd2d70dd988b34ec412a2c33a"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/gemini_web2api/__init__.py": {
+    "mtime": 1789197510459.23,
+    "hash": "5b6c9c24c1816166eaae0b44ddeff14f"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/gemini_web2api/__main__.py": {
+    "mtime": 1789197510467.4585,
+    "hash": "ac5fe2579e42dfcb4b135ba7585c5e8c"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/gemini_web2api/config.py": {
+    "mtime": 1789197510467.4585,
+    "hash": "1acfba5880b2976d06b7e2e7269c5d3d"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/gemini_web2api/gemini.py": {
+    "mtime": 1789197510467.4585,
+    "hash": "2aa757ab650ef7e624f95f76795d276c"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/gemini_web2api/models.py": {
+    "mtime": 1789197510467.4585,
+    "hash": "1ac521a34e7bdae265dea6dd377864fe"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/gemini_web2api/multimodal.py": {
+    "mtime": 1789197510467.4585,
+    "hash": "5439e321ee3136d585afdd462cbd4a24"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/gemini_web2api/server.py": {
+    "mtime": 1789197510467.4585,
+    "hash": "5aae4bb80c0c48498e02041e434b1f65"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/gemini_web2api/tools.py": {
+    "mtime": 1789197510467.4585,
+    "hash": "b9b9ddce0ecc388df24947f1217ea0ea"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/playwright.config.ts": {
+    "mtime": 1788720423895.3477,
+    "hash": "aaa6c2d57c80431dc62c3e17ebef9204"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/public/sw.js": {
+    "mtime": 1789204351731.7732,
+    "hash": "d7b493fd76be3d52c7fdad191b2ac38e"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/TasteShieldModal.tsx": {
+    "mtime": 1789203659496.9263,
+    "hash": "7ca5259c47cc75ed54c8ca1c03a6d0c5"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/seo/DynamicOGHead.tsx": {
+    "mtime": 1788720423953.559,
+    "hash": "31c067f1c852397896c628b333d27d78"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/seo/SaarthiKitchenSchema.tsx": {
+    "mtime": 1788720423961.9304,
+    "hash": "cf99c3d212bead37e80acfb7679d1f55"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/ActivityTicker.tsx": {
+    "mtime": 1789203659501.421,
+    "hash": "f19e558a9b8da0d059e609d23b51ac50"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/AndroidGoPerfModal.tsx": {
+    "mtime": 1789198204700.345,
+    "hash": "a1699f273951b6ccdbdd973908612175"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/AndroidGoPerformanceModal.tsx": {
+    "mtime": 1789198204701.83,
+    "hash": "0cbc38a6b25ff1a7a298ad8de29bcb75"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/AnimatedStat.tsx": {
+    "mtime": 1788037184238.2659,
+    "hash": "71a49d7348292221dad6ec0d19996b28"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/ApiPenTestModal.tsx": {
+    "mtime": 1789198204701.83,
+    "hash": "1dab4fe9417ca1db7e61417900c3c743"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/AuthButton.tsx": {
+    "mtime": 1789203659502.4556,
+    "hash": "e54686afc55754855a8b8e1b2a493d18"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/BookingModal.tsx": {
+    "mtime": 1789204396337.8904,
+    "hash": "2f769e641f87b228a3b9ebc22e29b783"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/Calculator.tsx": {
+    "mtime": 1789203659508.5222,
+    "hash": "673ab9a4121da2ca4ae25bd83284221b"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/CalculatorHub.tsx": {
+    "mtime": 1789203659511.2607,
+    "hash": "168c143f848b2b620a7dcc1ce131a1ef"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/CampusCaptainModal.tsx": {
+    "mtime": 1788720423970.41,
+    "hash": "19edd5ad94e75ab27bc3a834117bc2aa"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/CampusNodeChecker.tsx": {
+    "mtime": 1788720423970.41,
+    "hash": "e19c40e4bbb6c2116bb44b0b0530e663"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/ChangelogModal.tsx": {
+    "mtime": 1789203659512.8022,
+    "hash": "a9d1ce5aedf9157652ddf7ab3d643680"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/CoachingHubTiffinPage.tsx": {
+    "mtime": 1789198204717.9846,
+    "hash": "314fb74f03c4b6b51f77447a502c4b25"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/Connect.tsx": {
+    "mtime": 1789203659515.5618,
+    "hash": "e5bff9f61d87fd2b7a34cc5d954ddf60"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/ConnectAudioWidget.tsx": {
+    "mtime": 1788720423978.6404,
+    "hash": "85afa9da6477cc5571e1e1a025120a5b"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/CsoKitchenSealModal.tsx": {
+    "mtime": 1789198204724.3647,
+    "hash": "09aed410c6ba992b72c2b3ae9d621fa0"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/DataPrivacyAuditModal.tsx": {
+    "mtime": 1789198204726.2322,
+    "hash": "e0a86c35c6d6c391d8ce37c3ff8a685a"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/DataPrivacyCommitment.tsx": {
+    "mtime": 1788450672723.9956,
+    "hash": "923fd0975b2c2e53d29da0c47fcef238"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/DataRetentionModal.tsx": {
+    "mtime": 1789198204726.2322,
+    "hash": "3fa4fb54d0dc26605b78d3a5b0b93862"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/DeliveryCutoffCountdown.tsx": {
+    "mtime": 1789198204726.2322,
+    "hash": "faff070275bc1173d10153539d8c4c88"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/DualCrisis.tsx": {
+    "mtime": 1788720423978.6404,
+    "hash": "b4aafa54f58fdd362a6d2388f6e13da2"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/EarlyAccessModal.tsx": {
+    "mtime": 1788720423978.6404,
+    "hash": "ccc7c0c1eb809c95363ad800ef61c257"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/Ecosystem.tsx": {
+    "mtime": 1789203659517.9712,
+    "hash": "f1f3655ea5ff860050ddb0429a9bf686"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/EdgeRegionMonitorWidget.tsx": {
+    "mtime": 1788720423986.798,
+    "hash": "3a741c6b88035ce1ea7712501554f619"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/ExecutiveAnalyticsDashboard.tsx": {
+    "mtime": 1789198204733.1062,
+    "hash": "833cb6b7dc759b96ca14b2e247883788"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/ExitIntentModal.tsx": {
+    "mtime": 1788720423986.798,
+    "hash": "526dba727e73572b264d6800f8cd4626"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/FAQ.tsx": {
+    "mtime": 1789203659520.2383,
+    "hash": "492dde2e9d2ac25ec7eb3e738e52e897"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/FamilyDashboard.tsx": {
+    "mtime": 1788720423986.798,
+    "hash": "6073a819ecf1f01674bb92c0909bf1e6"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/FeedbackSuggestions.tsx": {
+    "mtime": 1788720423995.0657,
+    "hash": "a6079bee014349607a9156f1bc777137"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/FindMyStashModal.tsx": {
+    "mtime": 1788720423995.0657,
+    "hash": "7e8805479393b4e98742b3dbc24fe04d"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/FloatingPersonaToggle.tsx": {
+    "mtime": 1789203659522.014,
+    "hash": "153cd6874761b14f72a53d99cd12b91f"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/FooterSection.tsx": {
+    "mtime": 1789203659524.0808,
+    "hash": "0856c31ff1146bf3edfca5cd3956da71"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/FounderAccountability.tsx": {
+    "mtime": 1788720424003.425,
+    "hash": "830795e5e75f2d16ad2bd7011a9fd3b1"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/FounderEscalationWidget.tsx": {
+    "mtime": 1788720424003.425,
+    "hash": "e9fef1c358e29525a988cdf6fbd665d4"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/Hero.tsx": {
+    "mtime": 1789203659526.1694,
+    "hash": "322958418d79aeee118079749b41d6bf"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/HostIncomeChart.tsx": {
+    "mtime": 1789203659528.1628,
+    "hash": "0b76fdaf5a9830f129d1889f334b4afa"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/HostOnboardingAgreementModal.tsx": {
+    "mtime": 1789203659530.56,
+    "hash": "764c8226a3f2545f78fcf94f7b82f856"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/HostPayoutCharterModal.tsx": {
+    "mtime": 1788037132704.147,
+    "hash": "54bc29e0a771080dc6d89f9fd569fe5c"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/HostRules.tsx": {
+    "mtime": 1788720424012.0483,
+    "hash": "7052e12f5dd4cc58adbdd213c68310ac"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/HostSimulator.tsx": {
+    "mtime": 1789203659532.6333,
+    "hash": "79f74f47d5955435c7a3ee2cc0554df9"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/HostVettingFlow.tsx": {
+    "mtime": 1788720424012.0483,
+    "hash": "2631c678aeea3826d787d6f41f9a721b"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/HostVettingProcess.tsx": {
+    "mtime": 1789203659534.0247,
+    "hash": "933a1abc0438f9050ef689185da45e95"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/IntelligentNudgesWidget.tsx": {
+    "mtime": 1788720424019.624,
+    "hash": "14c6059c88f46744bafa0b67acb85f3b"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/InvestorModal.tsx": {
+    "mtime": 1788447847331.2104,
+    "hash": "7707dbcc62b67cc2df84492d7cdddd59"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/KakadeoSurvivalGuide.tsx": {
+    "mtime": 1788720424020.6274,
+    "hash": "20e2fa8f710dc00161be9cda3b7938ef"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/KakadeoSurvivalGuideModal.tsx": {
+    "mtime": 1789203659535.3606,
+    "hash": "8aae1e67d75d0315ae0c0c85b01d9722"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/KanpurStudentCouncil.tsx": {
+    "mtime": 1788720424020.6274,
+    "hash": "f810e916fd7bbb81b9401fa2431d48f0"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/KarmaPointsModal.tsx": {
+    "mtime": 1788720424020.6274,
+    "hash": "5833832ffbaebd795c3c460badf3ef0d"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/LegalDialog.tsx": {
+    "mtime": 1788720424028.6826,
+    "hash": "f7a9e582855a1afb705aa65caf2b558a"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/LuggageItemizerModal.tsx": {
+    "mtime": 1788720424028.6826,
+    "hash": "5ac782ba1c862ff6a24c34d0a2007571"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/MatchDrawer.tsx": {
+    "mtime": 1789203659537.4192,
+    "hash": "8f8b4d99430d15cb4269f73fd38670ff"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/MealPersonalizationSelector.tsx": {
+    "mtime": 1788720424028.6826,
+    "hash": "1cee0b835e4b353745e2a612222b7f92"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/MobileStickyCTA.tsx": {
+    "mtime": 1789203659538.339,
+    "hash": "403eb0762b38a612d2ae3ffcc5782e16"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/MyBookingsDashboard.tsx": {
+    "mtime": 1789203659540.7302,
+    "hash": "c50a7358bbf4e9b46881cc88eb1981ff"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/Navbar.tsx": {
+    "mtime": 1789203659542.7363,
+    "hash": "1e71505d98f6204cdbcf6b07fe6067c3"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/NetworkStatus.tsx": {
+    "mtime": 1788037133036.056,
+    "hash": "fbfab96ddf16b7193a87dc15b191a09f"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/PackingChecklistModal.tsx": {
+    "mtime": 1788447984559.8684,
+    "hash": "79879b98ccc64b62b03939160efa70f6"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/PeacockFeatherMatkiDusting.tsx": {
+    "mtime": 1789198204775.0305,
+    "hash": "8a6eb15e7d70baf61ae2a8d65b55b77c"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/PgComparisonTable.tsx": {
+    "mtime": 1789203659544.6865,
+    "hash": "3509b72435abbfb41696bf9eef294ffc"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/PredictivePersonaWidget.tsx": {
+    "mtime": 1788720424036.9485,
+    "hash": "7ccf983de55326de2df4073ceb5de395"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/ProcessTransparency.tsx": {
+    "mtime": 1788450672725.917,
+    "hash": "54e8ae7ef90399b71437ce910291c1b0"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/ProductSandbox.tsx": {
+    "mtime": 1788450672725.917,
+    "hash": "4c2f87fe1d26530d91b1bfe6f2c134fd"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/ProfileModal.tsx": {
+    "mtime": 1789203659546.8103,
+    "hash": "738d20f50bc00ecca9c8e307604ee9e2"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/QuickCategoryNav.tsx": {
+    "mtime": 1789203659548.846,
+    "hash": "1a1d86aa570578e73898482f22d07de0"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/RagChatbotWidget.tsx": {
+    "mtime": 1789203659549.8403,
+    "hash": "8b7c51db26131706955881237423e5eb"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/ReferralLeaderboard.tsx": {
+    "mtime": 1788720424045.601,
+    "hash": "9e698cb445050032419309fd4e1dce05"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/ReferralPill.tsx": {
+    "mtime": 1788720424045.601,
+    "hash": "f01242a55f1d3fe561dbd0d31699798b"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/RoleLane.tsx": {
+    "mtime": 1788720424045.601,
+    "hash": "01bf77de792b9ce53ebf5b816565fa9e"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/Room360Viewer.tsx": {
+    "mtime": 1788720424045.601,
+    "hash": "4341b604545d8d1d79400fde522b937e"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/RoomListingModal.tsx": {
+    "mtime": 1789203659553.1433,
+    "hash": "a7f9e407163fb44652c4bc188686ba55"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/RoommateMenuShareModal.tsx": {
+    "mtime": 1788720424053.9658,
+    "hash": "0f254e957384119839517f2700070bb5"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/Rooms.tsx": {
+    "mtime": 1789203659555.4673,
+    "hash": "b6ea04f5b2bf0e51adc68d7a965e5ded"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/SafetyAuditModal.tsx": {
+    "mtime": 1788037133326.1848,
+    "hash": "c921f57adaf76e39aa872f781ed03a24"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/ScrollProgress.tsx": {
+    "mtime": 1788500985636.679,
+    "hash": "6c5f88cf58fdabbbb223ace1404cc070"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/SolutionsHub.tsx": {
+    "mtime": 1789203659556.4966,
+    "hash": "8dd5580a8223a22c2d5cb47b1e4e3cfd"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/StashPass.tsx": {
+    "mtime": 1789203659558.4963,
+    "hash": "001f1399a713a79128f7d983f845ef49"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/StashTimeline.tsx": {
+    "mtime": 1788720424061.9197,
+    "hash": "f82ed2ed7e0fef850817ad7ad19f1c8b"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/StudentStoriesCarousel.tsx": {
+    "mtime": 1789203659560.1167,
+    "hash": "a01e5f4090081dd9c20a7bb34c2094c8"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/StudentTestimonialVideosWidget.tsx": {
+    "mtime": 1788720424061.9197,
+    "hash": "7c734c8afe81d0c3905ff272e62fc683"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/Tilt3D.tsx": {
+    "mtime": 1788720424069.588,
+    "hash": "09c115441fad02ac440c573f58ec3f5a"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/TopRatedKitchensWidget.tsx": {
+    "mtime": 1788720424070.5593,
+    "hash": "fb4abfd46c5588a81c45720dbaaa30aa"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/TpaLegalOverviewSection.tsx": {
+    "mtime": 1789203659562.7117,
+    "hash": "b7bde6c9060ebeb7b28a08153ea3ade7"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/TrustConsoleHub.tsx": {
+    "mtime": 1788720424070.5593,
+    "hash": "f8b884c5b92bbaefb953bf1bbefcdca5"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/VisionAiPhotoVerifier.tsx": {
+    "mtime": 1789203659564.296,
+    "hash": "b5c076e098f6d612866fd73c2e34031b"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/WhatsAppButton.tsx": {
+    "mtime": 1788720424080.2493,
+    "hash": "f24aad6cf828807adffdb97bb2202ac6"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/WhatsAppReferralModal.tsx": {
+    "mtime": 1789198204820.8801,
+    "hash": "08c09277cd2d7c17dbc1ab40d32305dc"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/ZeroRisk.tsx": {
+    "mtime": 1788720424080.2493,
+    "hash": "0efd5f49b601810a3219786ea0e1d53a"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/legal.ts": {
+    "mtime": 1789203659567.7097,
+    "hash": "4fa4f4a7d17333837626e4a7dfc3f81a"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/stash/types.ts": {
+    "mtime": 1789203659568.6423,
+    "hash": "9959810a3e6675f984fd4282fc92fb92"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/ui/AccessibilityAnnouncer.tsx": {
+    "mtime": 1788720424086.1074,
+    "hash": "ce0df37eceb39b097356e20ed727fafa"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/ui/AmbientNodes.tsx": {
+    "mtime": 1788113616988.7988,
+    "hash": "92b70466ac029cadb132fa2e010c67e2"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/ui/AnimatedContent.tsx": {
+    "mtime": 1788720424086.1074,
+    "hash": "6bd558f11b86cbca2da3ebe84898622d"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/ui/BrandLogo.tsx": {
+    "mtime": 1789203659571.1643,
+    "hash": "890c4ddee4121b8c1972f67150d02483"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/ui/Card3D.tsx": {
+    "mtime": 1789203659573.094,
+    "hash": "081699e040f8bd9ff87167ed753df25a"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/ui/ErrorBoundary.tsx": {
+    "mtime": 1788720424094.626,
+    "hash": "a4521f35dcd7fa90de1d55417bc930cd"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/ui/LowDataToggle.tsx": {
+    "mtime": 1788720424094.626,
+    "hash": "7b8929f3d50d1f5cf520a8c7132945d3"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/ui/OptimizedImage.tsx": {
+    "mtime": 1788720424094.626,
+    "hash": "fa519bea3146943989bcaaae4b24b2aa"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/ui/PageTransition.tsx": {
+    "mtime": 1788450672726.878,
+    "hash": "c512ce8ee8b132efc538ffe244314695"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/ui/PrototypeBadge.tsx": {
+    "mtime": 1788720424100.4707,
+    "hash": "b0d266e582c92da4ab1b8b87dd26821e"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/ui/ThemeToggle.tsx": {
+    "mtime": 1789203659574.1929,
+    "hash": "7ddbbd79bbbbd43bd7fb0fca90b3b9ba"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/ui/accordion.tsx": {
+    "mtime": 1787746853859.964,
+    "hash": "55f9dda62b4e3913c9b23e5015a86aef"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/ui/avatar.tsx": {
+    "mtime": 1787746853889.7869,
+    "hash": "72989cd32f72c4122802540ef32525a5"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/ui/badge.tsx": {
+    "mtime": 1789203659576.1604,
+    "hash": "f712eba47d4263bea5f224eacc090cb0"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/ui/button.tsx": {
+    "mtime": 1789203659577.1733,
+    "hash": "a535256ced8a4fb3c8ef6f1d1672f9b3"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/ui/dialog.tsx": {
+    "mtime": 1789203659579.684,
+    "hash": "79b74d5876df6c4d696734273de5390a"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/ui/dropdown-menu.tsx": {
+    "mtime": 1787746853953.8145,
+    "hash": "28d6e98d3c7811fc0514bfa69416f087"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/ui/input.tsx": {
+    "mtime": 1789203659581.7449,
+    "hash": "25ef2f005b31cdbeee3ec22a012b5fc7"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/ui/label.tsx": {
+    "mtime": 1787746853989.0369,
+    "hash": "7e35df4ca8edd0835efd97ca7937ef92"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/ui/separator.tsx": {
+    "mtime": 1789203659582.7002,
+    "hash": "81c2922b4be835b7455accbff8ec0ecd"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/ui/sheet.tsx": {
+    "mtime": 1789203659584.8748,
+    "hash": "a9760583b48b4192927e8f26bb2ef318"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/ui/skeleton.tsx": {
+    "mtime": 1789203659586.9092,
+    "hash": "8e11b91a348976f57313cb7310a27536"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/ui/slider.tsx": {
+    "mtime": 1787857116123.454,
+    "hash": "fc567795bad38601ca158ed7d27753cf"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/ui/sonner.tsx": {
+    "mtime": 1789203659587.8997,
+    "hash": "bdd1b9b20e6cd7b6977d371849d4c1e9"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/ui/textarea.tsx": {
+    "mtime": 1789203659589.9292,
+    "hash": "1b230007443ef12f365fbd94d443ea5c"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/ui/toggle.tsx": {
+    "mtime": 1789203659590.8662,
+    "hash": "b411abadaeca033bc272e0f2c2e84238"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/components/ui/tooltip.tsx": {
+    "mtime": 1789203659591.9314,
+    "hash": "6dd894a539d5f97a0615c049be79a355"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/context/LanguageContext.tsx": {
+    "mtime": 1788720424111.2957,
+    "hash": "89f893d52fd32842997fabfe6ea37d2d"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/context/LowDataContext.tsx": {
+    "mtime": 1788720424116.268,
+    "hash": "71bae9d6c2b6b1c22b9f88dc9de5884f"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/context/PersonaContext.tsx": {
+    "mtime": 1788037134748.649,
+    "hash": "2e77a103d54b1edeb30522da1e064514"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/context/ThemeContext.tsx": {
+    "mtime": 1788720424119.6086,
+    "hash": "9772dde8ecc43a4aa3c3dffc9e40fe44"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/context/ToastContext.tsx": {
+    "mtime": 1788720424119.6086,
+    "hash": "618da39611e2eb685272e066e804c393"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/hooks/use-mobile.tsx": {
+    "mtime": 1787746854127.1008,
+    "hash": "c0a0bdd4638c391a1dd06ac82074e60b"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/hooks/useAuth.tsx": {
+    "mtime": 1789203659593.49,
+    "hash": "35695bde2162fb61d4d24851a4b7ea95"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/hooks/useCountUp.ts": {
+    "mtime": 1789198204855.133,
+    "hash": "857b1b9d7ada190679381743243c7f7b"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/integrations/supabase/auth-attacher.ts": {
+    "mtime": 1788720424123.4585,
+    "hash": "4a9e51b5d43e06d48bf45b6b7ce98c41"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/integrations/supabase/auth-middleware.ts": {
+    "mtime": 1788720424127.7007,
+    "hash": "a0b403f7be083e945639c358ba015029"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/integrations/supabase/client.server.ts": {
+    "mtime": 1788037134848.5205,
+    "hash": "fb286d34a346b2ca4d073b9b60f67392"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/integrations/supabase/client.ts": {
+    "mtime": 1788720424128.559,
+    "hash": "94b324c952f6125ad59c05a5c7546129"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/integrations/supabase/types.ts": {
+    "mtime": 1789203659597.8535,
+    "hash": "81fce739d41552b37a20121b1597a956"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/abTesting.ts": {
+    "mtime": 1789203659599.857,
+    "hash": "70d1c049aa840ee4aa919b31ccc8df47"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/accessibility.ts": {
+    "mtime": 1788720424136.295,
+    "hash": "3c6b0b0610ccf1385818923178a252d7"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/androidGoGuard.ts": {
+    "mtime": 1789198204862.746,
+    "hash": "20161529195d7396fe60d6ef6a3a6eaf"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/androidGoPerformanceAudit.ts": {
+    "mtime": 1789198204864.1729,
+    "hash": "bfc1fdc7556fe14bf664ff74ac060d18"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/apiPenTestEngine.ts": {
+    "mtime": 1789198204866.394,
+    "hash": "df6765eb04069cc1516500f4c1a7cab3"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/audio.ts": {
+    "mtime": 1789203659600.8735,
+    "hash": "ee669ea627dc8ed59ecdea798a505020"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/cache.ts": {
+    "mtime": 1788720424136.295,
+    "hash": "3b3d854f1a088f32dfa0e2566f34fa38"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/ceoAnalytics.ts": {
+    "mtime": 1789198204872.0774,
+    "hash": "0a03493182d177f0c1c5770ad45cdf46"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/connectAudioEngine.ts": {
+    "mtime": 1788720424139.0532,
+    "hash": "ff49fdd99bc110e9fc4a0c4c1029b555"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/constants.ts": {
+    "mtime": 1788103202529.4268,
+    "hash": "f5f4856f1f4fbfc4a86fbf08f488ed16"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/csoKitchenSealingService.ts": {
+    "mtime": 1789198204875.0752,
+    "hash": "0e194c4bc4407304700a2101faea1c4a"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/dataPrivacyAudit.ts": {
+    "mtime": 1789198204879.1323,
+    "hash": "4223bdb44b8d2666bf9c836573ab1d42"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/dataRetentionEngine.ts": {
+    "mtime": 1789198204880.5576,
+    "hash": "2dd966d55a19a609a8c4992c1e266b7a"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/error-capture.ts": {
+    "mtime": 1787746854189.1902,
+    "hash": "f630d9686a9a989170f22eff4de7b30d"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/error-page.ts": {
+    "mtime": 1787746854190.7021,
+    "hash": "8da0ddd7569bac2676b9a5c8edff8a36"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/error-reporting.ts": {
+    "mtime": 1788023937615.6018,
+    "hash": "1811f689266f1abe68ad709f60af19e1"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/extendedBreakUpsell.ts": {
+    "mtime": 1789198204884.5234,
+    "hash": "5359540adde06a3306e8c7d83d03a081"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/hostVettingPolicy.ts": {
+    "mtime": 1789198204899.6516,
+    "hash": "db196955d9a716ab9921ace6151b79cc"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/intelligentNudges.ts": {
+    "mtime": 1789203659602.9265,
+    "hash": "6f98692303ff432bedda1ddf271ed681"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/interactionTelemetry.ts": {
+    "mtime": 1788720424139.0532,
+    "hash": "5849d62bc05fa2db511b409b4d198d84"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/kitchenSwStressTest.ts": {
+    "mtime": 1789203659604.6375,
+    "hash": "0ec63f22636105593cda0c4d94a6ee79"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/localSubmissions.ts": {
+    "mtime": 1789203659605.8745,
+    "hash": "7629acc03f5b4615b17f82a550f1f300"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/locationPricing.ts": {
+    "mtime": 1788720424145.3042,
+    "hash": "227bfdb2890edb4fbf2df2e561567eef"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/mealPersonalization.ts": {
+    "mtime": 1788720424145.3042,
+    "hash": "e8b50816ba424ac7b75cbf793c404668"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/multiRegionEdgeRouter.ts": {
+    "mtime": 1788720424145.3042,
+    "hash": "207a521d2f888063fae34eff324e1f7f"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/offlineBookingQueue.ts": {
+    "mtime": 1789204345280.8223,
+    "hash": "8d633e1b782e69927298469bb1ff835d"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/predictiveAI.ts": {
+    "mtime": 1789198204917.4004,
+    "hash": "52cbfff2c1871f280ab17331426d91d1"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/ragChatbot.ts": {
+    "mtime": 1789219727254.834,
+    "hash": "b006114b79fd18fb465cfac54f10a847"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/ragChatbotEngine.ts": {
+    "mtime": 1788720424155.8323,
+    "hash": "4414953955da9864603073c95141d146"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/rateLimiter.ts": {
+    "mtime": 1789198204921.8347,
+    "hash": "df10da409a6442b9d69b1543b035d4e5"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/seo-coliving-schema.ts": {
+    "mtime": 1788720424161.9314,
+    "hash": "53f6124149efa4ce0b3c2d27593239e3"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/seo-keywords.ts": {
+    "mtime": 1788720424161.9314,
+    "hash": "96e2399e1d4ab7175135589d5f05705d"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/sessionSecurity.ts": {
+    "mtime": 1788720424164.0662,
+    "hash": "5308ac9189c4877e9f8c2395e8022333"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/stashNavigation.ts": {
+    "mtime": 1788720424164.0662,
+    "hash": "ddedb083e3b04a57f3d89073e8204750"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/stashWallet.ts": {
+    "mtime": 1789198204934.0305,
+    "hash": "aa3d563491eda47f4c5c65211318c287"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/storageQrValidator.ts": {
+    "mtime": 1789203659607.913,
+    "hash": "6b0bf6c6349433c7cf6489c54e694c2f"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/supabase.ts": {
+    "mtime": 1788450672726.878,
+    "hash": "defc22d172d8932e249b479a9e2a7a2a"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/supabaseLogger.ts": {
+    "mtime": 1789203659609.9148,
+    "hash": "12ddb012594868f04acf4c9e487694cc"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/sw-register.ts": {
+    "mtime": 1789204360918.6787,
+    "hash": "9d6a0690797e4aa1c9872ad755dcf114"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/tasteShieldService.ts": {
+    "mtime": 1788720424172.36,
+    "hash": "d5920e8ee38a5849d38ebc353cdad87c"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/utils.ts": {
+    "mtime": 1787746854206.3909,
+    "hash": "d9837f38cc05303254571985e3164050"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/visionAiHostVetting.ts": {
+    "mtime": 1788720424174.4675,
+    "hash": "dedf13c525c9cf133fe8f89101f4383a"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/visitorTracking.ts": {
+    "mtime": 1789198204958.6892,
+    "hash": "15d3006df35586e4de895229c84ef7d7"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/waitlistService.ts": {
+    "mtime": 1789203659610.896,
+    "hash": "c1cd0c06d28ca0f5ad3a399b8733f0e0"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/lib/webgl-fallback.ts": {
+    "mtime": 1788720424180.055,
+    "hash": "4222e7b5d5394365362b46e1c738c240"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/routeTree.gen.ts": {
+    "mtime": 1788758863362.425,
+    "hash": "f3155b610270183eb7eb10777da54324"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/router.tsx": {
+    "mtime": 1787746853683.0806,
+    "hash": "8f905e713b0eba7fa8148b7995a708c9"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/routes/__root.tsx": {
+    "mtime": 1789204370424.5164,
+    "hash": "4dd291579c040cfbb20c512581fb96ce"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/routes/admin.tsx": {
+    "mtime": 1789203659616.537,
+    "hash": "0a40dc36bc61a90c1290a6b5ded12997"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/routes/index.tsx": {
+    "mtime": 1789203659618.6372,
+    "hash": "11466f80ae86dc0c13a311c7b906b75b"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/routes/kakadeo-survival-guide.tsx": {
+    "mtime": 1788720424186.43,
+    "hash": "a6d4b4b26bacfa8f3e080de4341e3c31"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/routes/kanpur-student-council.tsx": {
+    "mtime": 1788720424186.43,
+    "hash": "fa7c938c37494469ab141b1ca7e23b36"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/routes/privacy.tsx": {
+    "mtime": 1789198204970.2905,
+    "hash": "d349739f3b257f61e97d5df3d4575986"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/routes/terms.tsx": {
+    "mtime": 1789198204972.0818,
+    "hash": "cd1cd1bcfc915377eda9e0d07e2011d6"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/routes/tiffin-services-near-allen.tsx": {
+    "mtime": 1788720424194.7388,
+    "hash": "cb659c743ca4a0196656a8d99e093266"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/routes/tiffin-services-near-motion.tsx": {
+    "mtime": 1788720424194.7388,
+    "hash": "0aca4233d69c6f343403e3263210e21f"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/routes/tiffin-services-near-physics-wallah.tsx": {
+    "mtime": 1788720424202.892,
+    "hash": "e39eb2a8ee47ba5e5f7a8918218b3747"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/server.ts": {
+    "mtime": 1787746853688.4495,
+    "hash": "c7bbc49bb70e318af618d92775ee0f27"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/start.ts": {
+    "mtime": 1787746853688.4495,
+    "hash": "d77c1c12904be5077c6955d9b30071af"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/supabase/functions/verify-host-photo/index.ts": {
+    "mtime": 1788720424211.532,
+    "hash": "2fa304d9683c69d43bd3458d5c397652"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/supabase/migrations/20260815080735_4b05d7d6-2132-43b9-ac90-cfb62ff6f1ef.sql": {
+    "mtime": 1787746854238.132,
+    "hash": "309a5cffe56ca8b6c9012a6725ab4585"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/supabase/migrations/20260815081104_5b9ef56a-fedf-4b93-b0d6-ffb5e0663a46.sql": {
+    "mtime": 1787746854238.132,
+    "hash": "a8b30791a7f861749b29cbf25e981913"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/supabase/migrations/20260818080416_653af444-3317-4b54-8474-6e73a111e197.sql": {
+    "mtime": 1787746854238.132,
+    "hash": "0851aef6d5e9675a7b953bea2bc52c38"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/supabase/migrations/20260818080448_d3747ccc-493c-4454-8dae-1564055175c6.sql": {
+    "mtime": 1787746854253.8462,
+    "hash": "b67eb6b0acadea0b70bc91e97d1ae5c8"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/supabase/migrations/20260818080523_5fdb4231-10fd-4b1c-ac5f-76227f5a3eda.sql": {
+    "mtime": 1787746854253.8462,
+    "hash": "831e93225eaaffbd2b3f1fc3fb4ea84e"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/supabase/migrations/20260826_create_users_waitlist.sql": {
+    "mtime": 1787758301227.0718,
+    "hash": "0215c78a05d5ca891954522cee627ef9"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/supabase/migrations/20260903_taste_shield_and_meal_reviews.sql": {
+    "mtime": 1788441533120.2021,
+    "hash": "a0eb07ae6fa337b72e04f3da28f3d61e"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/supabase/migrations/20260906_component_interaction_telemetry.sql": {
+    "mtime": 1788720424211.532,
+    "hash": "0c229aed8a65b98e027d4d7f9259954e"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/supabase/migrations/20260906_location_pricing_tiers.sql": {
+    "mtime": 1788720424211.532,
+    "hash": "3619554db264c36c9894da1a6e40330a"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/supabase/migrations/20260906_rls_security_audit_hardening.sql": {
+    "mtime": 1788720424211.532,
+    "hash": "e807e6be9553d4d325fe6eb25a1d7fb0"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/supabase/migrations/20260907_data_retention_auto_purge.sql": {
+    "mtime": 1789198204980.6638,
+    "hash": "bde4c0ed1b601e6fe6451bd8abf9aecc"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/supabase/migrations/20260907_sensitive_data_rls_audit.sql": {
+    "mtime": 1789198204983.2617,
+    "hash": "884e85333b56d69bf65a771d2c0e96a9"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/supabase/migrations/20260907_visitor_sessions.sql": {
+    "mtime": 1788720424211.532,
+    "hash": "94be58c9d5b1edfe3014f7bafa60eaad"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/supabase_taste_shield_migration.sql": {
+    "mtime": 1788441533122.2021,
+    "hash": "4770901bce63ce1a89f865ebeb6382ec"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/test_enum.ps1": {
+    "mtime": 1789203659624.1865,
+    "hash": "bf36033040f16d7865b7cda36ae6cecd"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/test_enum2.ps1": {
+    "mtime": 1789203659626.2722,
+    "hash": "3ce5d7cd85f320ba2a10ed855f1b2800"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/vite.config.ts": {
+    "mtime": 1789203659628.3015,
+    "hash": "6eb15a373daf263c427a0d6a93d46551"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/AGENTS.md": {
+    "mtime": 1789203659445.5664,
+    "hash": "71c3a106acbea92c684a1949f8acdd67"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/EXECUTIVE_DASHBOARD.md": {
+    "mtime": 1788441533012.2961,
+    "hash": "dd3d8605b00f7ef238f537281897b1c4"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/GEMINI.md": {
+    "mtime": 1788037131419.1648,
+    "hash": "edd7b89c685edfbbbd54a6ca71bf7c31"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/README.md": {
+    "mtime": 1788115699550.6426,
+    "hash": "cf335f9c5c82818daa5973578b30f525"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/ai_workforce/00_AUTONOMOUS_LOOP_PROTOCOL.md": {
+    "mtime": 1788037130469.8096,
+    "hash": "7c2a122db7a1c0c2ba1f0af0678f00df"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/ai_workforce/01_CEO_ORCHESTRATOR.md": {
+    "mtime": 1788037130488.829,
+    "hash": "71236cbede63cc0fb70ff4d1d9efbeca"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/ai_workforce/02_CTO_TECH_ARCHITECT.md": {
+    "mtime": 1788037130505.3997,
+    "hash": "17796f1ca58c9da0f98ea074faa09d13"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/ai_workforce/03_CMO_GROWTH_LEAD.md": {
+    "mtime": 1788037130527.8252,
+    "hash": "389591f9a25765dadfd18a5a0451c052"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/ai_workforce/04_CPO_PRODUCT_UX_LEAD.md": {
+    "mtime": 1788037130549.5393,
+    "hash": "87876f26fd688341b232c16f77892b8f"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/ai_workforce/05_QA_SITE_RELIABILITY.md": {
+    "mtime": 1788037130567.1997,
+    "hash": "ce674916a55c20ef859587b548dc76ca"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/ai_workforce/06_CRO_CONVERSION_SPECIALIST.md": {
+    "mtime": 1788037130578.8738,
+    "hash": "642fca10aede5d16962e9f0c8a8cc0a7"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/ai_workforce/AGENT_REPORTS.md": {
+    "mtime": 1788720423836.8337,
+    "hash": "93d6cca85ab0962a55805dc50cde99bc"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/ai_workforce/COMPANY_LOG.md": {
+    "mtime": 1788441533016.2974,
+    "hash": "66fb0b164f8a613084b0b3d33b287fb7"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/ai_workforce/DAEMON_CONTROL.md": {
+    "mtime": 1788037130648.4062,
+    "hash": "fdb3f10fc21c3e96288475d0bcc63f31"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/ai_workforce/EXECUTIVE_DASHBOARD.md": {
+    "mtime": 1788441533017.2974,
+    "hash": "eb9ab1d66825ef0c783a7c9da7e6ad63"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/ai_workforce/TASK_BOARD.md": {
+    "mtime": 1788441533018.2964,
+    "hash": "ce80479d6664f1696b6a3a6ad22c448a"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/ai_workforce/cmo_agent.md": {
+    "mtime": 1788037130608.118,
+    "hash": "d4a833a4f192eb94aad5bc028c56a287"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/ai_workforce/deliverables/marketing/campus_captain_recruitment_pitch.md": {
+    "mtime": 1788037130673.1394,
+    "hash": "7cca912c60f703c77039f1548a64a93e"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/ai_workforce/deliverables/marketing/campus_tiffin_tasting_event_playbook.md": {
+    "mtime": 1788037130686.5388,
+    "hash": "75993654a1cd3e77960140edcd8a204a"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/ai_workforce/deliverables/marketing/reel_script_csjmu_dead_rent.md": {
+    "mtime": 1788037130717.0002,
+    "hash": "57f576727187466d91e5f735a8b951eb"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/ai_workforce/deliverables/marketing/reelscript.md": {
+    "mtime": 1788441533021.3047,
+    "hash": "838c8f6787820814a9f06e3d30fd26ff"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/ai_workforce/deliverables/marketing/whatsapp_hostel_group_broadcast.md": {
+    "mtime": 1788037130731.1663,
+    "hash": "c7499a0a91a8cb2fc97c8a372714f8e1"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/ai_workforce/deliverables/operations/sop_elderly_host_home_audit.md": {
+    "mtime": 1788037130760.071,
+    "hash": "29e1d07a2e16b3895da78b4995258949"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/ai_workforce/deliverables/operations/sop_emergency_sos_escalation.md": {
+    "mtime": 1788037130782.4688,
+    "hash": "e60996a04cc2c9530518dfe2d69b5ef6"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/ai_workforce/deliverables/operations/sop_saarthi_kitchen_hygiene_audit.md": {
+    "mtime": 1788037130810.0137,
+    "hash": "cf7706d3373686e44331882fa6c106b6"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/ai_workforce/deliverables/operations/sop_tamper_evident_seal_custody.md": {
+    "mtime": 1788037130849.6946,
+    "hash": "14583b39964e00c17cdec5e671548799"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/ai_workforce/ops_manager.md": {
+    "mtime": 1788037130913.676,
+    "hash": "9b9a64bfa708250e30fbc14867bb698b"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/ai_workforce/tech_lead.md": {
+    "mtime": 1788037131050.4363,
+    "hash": "8f777373bd570fbc1cb5ea3deda7e61a"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/cookie.txt": {
+    "mtime": 1789197510459.23,
+    "hash": "982be8bd3895cbffe8bdb3285b390288"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/directives/autonomous_engine.md": {
+    "mtime": 1788037131081.2793,
+    "hash": "3b7a4316cabd879fcb04b599001ab72c"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/directives/pricing_engine.md": {
+    "mtime": 1788037131104.6729,
+    "hash": "a9f1ceed18691b1a7409146290ce5438"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/directives/safety_protocol.md": {
+    "mtime": 1788037131142.376,
+    "hash": "78efbaa102aa473dcfcb8980a2436827"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/directives/self_discovery_engine.md": {
+    "mtime": 1788037131161.8914,
+    "hash": "c944378f034dd9922b61bb0d61770dae"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/directives/theme_guidelines.md": {
+    "mtime": 1788037131333.3748,
+    "hash": "7e58ee39f80553070ef56bb1d6d41e66"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/docs/RELEASE_NOTES_V3.md": {
+    "mtime": 1789198204568.6494,
+    "hash": "f77652834431d126aafa87bf57d34074"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/docs/RELEASE_NOTES_v2.0.md": {
+    "mtime": 1788720423845.1772,
+    "hash": "569a828028414fff16ac6bfe5120d56b"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/docs/tasks/PRD.md": {
+    "mtime": 1789219946898.876,
+    "hash": "bd09c38e35ae01b4d3c08f854114baa4"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/docs/tasks/progress.md": {
+    "mtime": 1789204450047.409,
+    "hash": "bd22704fa33f3b1b61c2c262f9579876"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/docs/tasks/progress.txt": {
+    "mtime": 1788120003482.322,
+    "hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/docs/tasks/prompt.md": {
+    "mtime": 1789203659454.2253,
+    "hash": "5b395946477e35e22c16f465c81ff655"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/docs/tasks/tasks.md": {
+    "mtime": 1789203659456.286,
+    "hash": "591ed6fedfed1b548bceddb549acd799"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/execution/README.md": {
+    "mtime": 1788037131371.9045,
+    "hash": "61a705e9ba72d45d68f94979db0bcf9e"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/launch.md": {
+    "mtime": 1788103480350.8872,
+    "hash": "e23ea2252de1b2782043ee9d7db26e00"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/progress.md": {
+    "mtime": 1789219986673.6287,
+    "hash": "cd415b2c227a424cefd155e5e1b71ff0"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/progress.txt": {
+    "mtime": 1788120003511.4512,
+    "hash": "d6cbdcbc535d04d769993783cbf43307"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/prompt.md": {
+    "mtime": 1789203659486.3635,
+    "hash": "784d09680bf565177096f4fea525090c"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/public/googlec3390cf96e97cc6c.html": {
+    "mtime": 1788114537292.9705,
+    "hash": "0f21f7c44375cd915349a91fb1acaedd"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/public/robots.txt": {
+    "mtime": 1788500985625.6814,
+    "hash": "ac558fd287508d94879770323078aa74"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/tasks.md": {
+    "mtime": 1788441533124.2036,
+    "hash": "4f93f78f4d7a5b082903d6a7e8403e96"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/public/app-icon.png": {
+    "mtime": 1788500985621.6814,
+    "hash": "31e6e283c6e632e9e3cde1e809d7f1ff"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/public/app-icon.webp": {
+    "mtime": 1788720423895.3477,
+    "hash": "866ffd46c62f857b4374563aef20dcaa"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/public/favicon.png": {
+    "mtime": 1788500985623.6772,
+    "hash": "845329edc257b26064c0036d28c80a66"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/public/images/founder_advik-200w.webp": {
+    "mtime": 1788720423903.4312,
+    "hash": "947a115de57a637a0f48810fec44e0cd"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/public/images/founder_advik-400w.webp": {
+    "mtime": 1788720423903.4312,
+    "hash": "97236e2ff82e8bb3c455b0b0f6c42746"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/public/images/founder_advik.jpg": {
+    "mtime": 1788100393210.1228,
+    "hash": "e0b905c2b02d930c7a11c33c7ad345f4"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/public/images/founder_advik.webp": {
+    "mtime": 1788720423903.4312,
+    "hash": "97236e2ff82e8bb3c455b0b0f6c42746"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/public/images/og-admin.png": {
+    "mtime": 1788720423903.4312,
+    "hash": "e6bb314480054e69e2717d702c3072dc"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/public/images/og-admin.svg": {
+    "mtime": 1788720423912.1853,
+    "hash": "0bad3810e93080e4d9477227e10661f7"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/public/images/og-admin.webp": {
+    "mtime": 1788720423912.1853,
+    "hash": "2ae45aa61b23491928944536f1800bca"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/public/images/og-banner-new-1200w.webp": {
+    "mtime": 1788720423912.1853,
+    "hash": "a9543225ba173cecc504f360429b4ad8"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/public/images/og-banner-new-640w.webp": {
+    "mtime": 1788720423912.1853,
+    "hash": "4eea8019d3773282ff7babb231996f5f"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/public/images/og-banner-new.png": {
+    "mtime": 1788451547548.7039,
+    "hash": "22511f1014d83f07759b24b5c133322f"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/public/images/og-banner-new.webp": {
+    "mtime": 1788720423920.4998,
+    "hash": "a7032134a0304e5b9e06b0ef6ebb5553"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/public/images/og-host.png": {
+    "mtime": 1788720423920.4998,
+    "hash": "7bdd15ab3f5eb081d69cbae26254c435"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/public/images/og-host.svg": {
+    "mtime": 1788720423928.5886,
+    "hash": "26ec1c543303f531306bd4b067fd70e3"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/public/images/og-host.webp": {
+    "mtime": 1788720423928.5886,
+    "hash": "346d1a5194e26c715559ff2e6481ff27"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/public/images/og-student.png": {
+    "mtime": 1788720423936.4163,
+    "hash": "fe44ba69b3d9c24259679c7a5664b0d6"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/public/images/og-student.svg": {
+    "mtime": 1788720423937.0852,
+    "hash": "17a77fd49db544d314d4d4b015f05490"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/public/images/og-student.webp": {
+    "mtime": 1788720423937.0852,
+    "hash": "280e521c841dba9b422e75c666e09977"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/public/images/product-microstorage-1024w.webp": {
+    "mtime": 1788720423937.0852,
+    "hash": "654e4ff64d24015761f191787d1e07b5"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/public/images/product-microstorage-320w.webp": {
+    "mtime": 1788720423945.3335,
+    "hash": "c45a445c1c42d8e47bf85afc999a7beb"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/public/images/product-microstorage-640w.webp": {
+    "mtime": 1788720423945.3335,
+    "hash": "5e4abfe8be0a48933ebfc06a6aab2461"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/public/images/product-microstorage.jpg": {
+    "mtime": 1788441533056.8386,
+    "hash": "31b612de73071186ee284a05079dc721"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/public/images/product-microstorage.webp": {
+    "mtime": 1788720423945.3335,
+    "hash": "e8cd4eede253073c8a6c93e418375755"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/public/stashsaarthi-logo.png": {
+    "mtime": 1788104163467.7166,
+    "hash": "0ad3c70e50301998925f683f48fa5e8f"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/public/stashsaarthi-logo.webp": {
+    "mtime": 1788720423945.3335,
+    "hash": "400058219317d24dca27a5eb0a762e18"
+  },
+  "C:/Users/Dell/Downloads/stashsaarthi-web/src/assets/stashsaarthi-logo.png": {
+    "mtime": 1788104163475.9624,
+    "hash": "0ad3c70e50301998925f683f48fa5e8f"
+  }
+}

@@ -1012,6 +1012,38 @@
     - `docs/tasks/progress.md` — Appended Task 102 execution log.
     - `progress.md` — Appended Task 102 execution log.
 
+- [x] **[UI - Glassmorphism Standards / polish] Task 103: Refactor all glass card utilities (.glass, .glass-hover, .glass-panel, .glass-card) to use performant CSS backdrop-filter with hardware acceleration and clean borders — 2026-09-12**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production bundle compiled cleanly).
+  - **Verification Suite**: `npx tsx execution/test-glassmorphism.mjs` — ✅ PASSED (12/12 checks verified).
+  - **Glassmorphism Standards & GPU Hardware Acceleration Layer**:
+    - `src/styles.css`: Refactored `@utility glass`, `@utility glass-hover`, `@utility glass-panel`, and `@utility glass-card` utilities with `backdrop-filter` (14px–20px blur, 135%–160% saturation), 3D transform hardware acceleration (`transform: translate3d(0, 0, 0)`), translucent borders (`oklch(1 0 0 / 11% - 15%)`), inset light border highlights (`inset 0 1px 0`), and dynamic persona glow elevation on hover (`var(--persona-glow)`).
+    - `src/styles.css`: Defined surface panel (`--surface-panel`) and surface card (`--surface-card`) OKLCH tokens across `:root` (Student Obsidian), `[data-role="host"]` (Host Obsidian), and `[data-theme="light"]` (Light Mode).
+    - `src/lib/designTokens.ts`: Exported typed `GLASSMORPHISM_TOKENS` object (`glass`, `glassPanel`, `glassCard`) mapping CSS backdrop-filter, border, and shadow specifications.
+    - `execution/test-glassmorphism.mjs`: Node test harness validating glass token exports, CSS rules, GPU hardware acceleration flags, and OKLCH theme variables.
+  - **Modified Files**:
+    - `src/styles.css` — Refactored glass utilities and surface panel/card tokens.
+    - `src/lib/designTokens.ts` — Added `GLASSMORPHISM_TOKENS` export.
+    - `execution/test-glassmorphism.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 103 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 103 execution log.
+    - `progress.md` — Appended Task 103 execution log.
+
+- [x] **[UI - Gradient Systems / colorize] Task 104: Standardize dynamic radiant gradients across Hero and Featured cards, replacing ad-hoc inline gradients with reusable CSS token classes (gradient-mint-emerald, gradient-amber-gold) — 2026-09-13**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production bundle compiled cleanly in 7.41s).
+  - **Verification Suite**: `node execution/test-gradient-systems.mjs` — ✅ PASSED (ALL GRADIENT SYSTEMS CHECKS PASSED).
+  - **Standardized Gradient Tokens & Utility Engine**:
+    - `src/styles.css`: Added OKLCH gradient variables (`--gradient-mint-emerald`, `--gradient-amber-gold`, `--gradient-cyan-emerald`, `--gradient-obsidian-mesh`, `--gradient-persona-radiant`) across `:root` and `[data-role="host"]`, registered `@theme inline` mappings, and created Tailwind `@utility` classes (`gradient-mint-emerald`, `gradient-amber-gold`, `gradient-cyan-emerald`, `gradient-obsidian-mesh`, `gradient-persona-radiant`, `text-gradient-mint`, `text-gradient-amber`, `text-gradient-persona`).
+    - `src/lib/designTokens.ts`: Exported `GRADIENT_TOKENS` object and `getPersonaGradient(role)` helper function.
+    - `execution/test-gradient-systems.mjs`: Created test harness validating gradient tokens, utility rules, and runtime persona helper functions.
+  - **Modified Files**:
+    - `src/styles.css` — Added gradient tokens, theme mappings, and utility rules.
+    - `src/lib/designTokens.ts` — Added `GRADIENT_TOKENS` and `getPersonaGradient` export.
+    - `execution/test-gradient-systems.mjs` — Created verification test harness.
+    - `docs/tasks/PRD.md` — Marked Task 104 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 104 execution log.
+    - `progress.md` — Appended Task 104 execution log.
+
+
 
 
 
