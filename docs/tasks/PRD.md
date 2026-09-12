@@ -127,8 +127,8 @@ Sprint 10: QA, CSO & CEO (Total Assurance, Compliance & Strategic Direction)
 - [x] 105. **[UI - Border & Ring Radii / layout]**: Unify border radius scale (`rounded-sm`, `rounded-md`, `rounded-lg`, `rounded-xl`, `rounded-2xl`, `rounded-3xl`) across all 40+ components for consistent visual rhythm.
 - [x] 106. **[UI - Shadow & Depth Hierarchy / layout]**: Establish a 4-tier elevation shadow system (`--shadow-subtle`, `--shadow-card`, `--shadow-floating`, `--shadow-glow`) mapped to persona accent colors.
 - [x] 107. **[UI - Component Primitives / extract]**: Extract reusable button primitives (`Button`, `IconButton`, `PillBadge`, `Chip`) into a dedicated `src/components/ui/` primitives folder.
-- [ ] 108. **[UI - Dark Obsidian Depth / bolder]**: Introduce subtle ambient noise and depth textures (`.bg-noise`, `.radial-mesh`) to eliminate flat, dead dark backgrounds on OLED/retina displays.
-- [ ] 109. **[UI - Status & Feedback Tokens / clarify]**: Harmonize warning, error, info, and success tokens across both personas so status indicators remain instantly recognizable.
+- [x] 108. **[UI - Dark Obsidian Depth / bolder]**: Introduce subtle ambient noise and depth textures (`.bg-noise`, `.radial-mesh`) to eliminate flat, dead dark backgrounds on OLED/retina displays.
+- [x] 109. **[UI - Status & Feedback Tokens / clarify]**: Harmonize warning, error, info, and success tokens across both personas so status indicators remain instantly recognizable.
 - [ ] 110. **[UI - Design System Documentation / document]**: Generate living UI token documentation in `DESIGN.md` cataloging colors, typography, elevations, spacing scales, and micro-interaction states.
 
 ## Sprint 12: Typography, Hierarchy & Global Layout Engine (impeccable typeset, layout)

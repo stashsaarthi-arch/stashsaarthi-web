@@ -77,10 +77,17 @@
   --color-surface-1: var(--surface-1);
   --color-surface-2: var(--surface-2);
   --color-surface-elevated: var(--surface-elevated);
+  --color-status-success: var(--status-success);
+  --color-status-warning: var(--status-warning);
+  --color-status-error: var(--status-error);
+  --color-status-info: var(--status-info);
   --color-gradient-mint-emerald: var(--gradient-mint-emerald);
   --color-gradient-amber-gold: var(--gradient-amber-gold);
   --color-gradient-cyan-emerald: var(--gradient-cyan-emerald);
   --color-gradient-persona-radiant: var(--gradient-persona-radiant);
+  --color-radial-mesh-student: var(--radial-mesh-student);
+  --color-radial-mesh-host: var(--radial-mesh-host);
+  --color-radial-mesh-persona: var(--radial-mesh-persona);
   --shadow-subtle: var(--shadow-subtle);
   --shadow-card: var(--shadow-card);
   --shadow-floating: var(--shadow-floating);
@@ -120,6 +127,27 @@
   --surface-2: oklch(0.198 0.013 223);
   --surface-elevated: oklch(0.24 0.016 223);
 
+  /* Harmonized Status & Feedback OKLCH Tokens */
+  --status-success: oklch(0.72 0.19 160);
+  --status-success-bg: oklch(0.72 0.19 160 / 12%);
+  --status-success-border: oklch(0.72 0.19 160 / 30%);
+  --status-success-text: oklch(0.85 0.16 160);
+
+  --status-warning: oklch(0.78 0.17 75);
+  --status-warning-bg: oklch(0.78 0.17 75 / 12%);
+  --status-warning-border: oklch(0.78 0.17 75 / 30%);
+  --status-warning-text: oklch(0.88 0.15 75);
+
+  --status-error: oklch(0.65 0.22 25);
+  --status-error-bg: oklch(0.65 0.22 25 / 12%);
+  --status-error-border: oklch(0.65 0.22 25 / 30%);
+  --status-error-text: oklch(0.82 0.18 25);
+
+  --status-info: oklch(0.82 0.16 195);
+  --status-info-bg: oklch(0.82 0.16 195 / 12%);
+  --status-info-border: oklch(0.82 0.16 195 / 30%);
+  --status-info-text: oklch(0.90 0.14 195);
+
   --background: oklch(0.145 0.011 232);
   --foreground: oklch(0.97 0.008 220);
   --card: oklch(0.198 0.013 223);
@@ -148,6 +176,9 @@
   --gradient-amber-gold: linear-gradient(135deg, oklch(0.769 0.165 70), oklch(0.837 0.175 82));
   --gradient-cyan-emerald: linear-gradient(135deg, oklch(0.868 0.16 178), oklch(0.696 0.149 162));
   --gradient-obsidian-mesh: radial-gradient(ellipse at 50% 0%, oklch(0.24 0.016 223 / 50%) 0%, oklch(0.12 0.012 230 / 95%) 100%);
+  --radial-mesh-student: radial-gradient(ellipse 80% 50% at 50% -10%, oklch(0.72 0.19 160 / 18%) 0%, transparent 70%), radial-gradient(circle 600px at 100% 100%, oklch(0.868 0.16 178 / 12%) 0%, transparent 60%), radial-gradient(circle 500px at 0% 50%, oklch(0.696 0.149 162 / 10%) 0%, transparent 50%);
+  --radial-mesh-host: radial-gradient(ellipse 80% 50% at 50% -10%, oklch(0.809 0.165 76 / 18%) 0%, transparent 70%), radial-gradient(circle 600px at 100% 100%, oklch(0.85 0.18 84 / 12%) 0%, transparent 60%), radial-gradient(circle 500px at 0% 50%, oklch(0.769 0.165 70 / 10%) 0%, transparent 50%);
+  --radial-mesh-persona: var(--radial-mesh-student);
   --gradient-persona-radiant: var(--gradient-mint-emerald);
   --gradient-hero: linear-gradient(
     100deg,
@@ -197,6 +228,7 @@
   --emerald: oklch(0.837 0.13 90);
   --gradient-cyan: var(--gradient-amber);
   --gradient-persona-radiant: var(--gradient-amber-gold);
+  --radial-mesh-persona: var(--radial-mesh-host);
   --gradient-hero: linear-gradient(
     100deg,
     oklch(0.99 0.01 90) 0%,
@@ -491,6 +523,54 @@ html.lenis body {
   border-radius: var(--radius-md);
 }
 
+@utility status-badge-success {
+  background-color: var(--status-success-bg);
+  border: 1px solid var(--status-success-border);
+  color: var(--status-success-text);
+}
+
+@utility status-badge-warning {
+  background-color: var(--status-warning-bg);
+  border: 1px solid var(--status-warning-border);
+  color: var(--status-warning-text);
+}
+
+@utility status-badge-error {
+  background-color: var(--status-error-bg);
+  border: 1px solid var(--status-error-border);
+  color: var(--status-error-text);
+}
+
+@utility status-badge-info {
+  background-color: var(--status-info-bg);
+  border: 1px solid var(--status-info-border);
+  color: var(--status-info-text);
+}
+
+@utility status-card-success {
+  background-color: var(--status-success-bg);
+  border: 1px solid var(--status-success-border);
+  box-shadow: 0 0 20px -4px oklch(0.72 0.19 160 / 20%);
+}
+
+@utility status-card-warning {
+  background-color: var(--status-warning-bg);
+  border: 1px solid var(--status-warning-border);
+  box-shadow: 0 0 20px -4px oklch(0.78 0.17 75 / 20%);
+}
+
+@utility status-card-error {
+  background-color: var(--status-error-bg);
+  border: 1px solid var(--status-error-border);
+  box-shadow: 0 0 20px -4px oklch(0.65 0.22 25 / 20%);
+}
+
+@utility status-card-info {
+  background-color: var(--status-info-bg);
+  border: 1px solid var(--status-info-border);
+  box-shadow: 0 0 20px -4px oklch(0.82 0.16 195 / 20%);
+}
+
 @utility gradient-mint-emerald {
   background-image: var(--gradient-mint-emerald);
 }
@@ -545,6 +625,39 @@ html.lenis body {
     linear-gradient(oklch(1 0 0 / 3.5%) 1px, transparent 1px),
     linear-gradient(90deg, oklch(1 0 0 / 3.5%) 1px, transparent 1px);
   background-size: 64px 64px;
+}
+
+@utility bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+}
+
+@utility bg-noise-subtle {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.018'/%3E%3C/svg%3E");
+}
+
+@utility bg-noise-dense {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.06'/%3E%3C/svg%3E");
+}
+
+@utility radial-mesh-student {
+  background-image: var(--radial-mesh-student);
+}
+
+@utility radial-mesh-host {
+  background-image: var(--radial-mesh-host);
+}
+
+@utility radial-mesh-persona {
+  background-image: var(--radial-mesh-persona);
+}
+
+@utility radial-mesh {
+  background-image: var(--radial-mesh-persona);
+}
+
+@utility bg-obsidian-depth {
+  background-color: var(--background);
+  background-image: var(--radial-mesh-persona), url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
 }
 
 @keyframes gradient-sweep {

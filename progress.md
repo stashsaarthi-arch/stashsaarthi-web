@@ -1,3 +1,22 @@
+- [x] **[UI - Status & Feedback Tokens / clarify] Task 109: Harmonize warning, error, info, and success tokens across both personas so status indicators remain instantly recognizable — 2026-09-13**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production bundle compiled cleanly).
+  - **Verification Suite**: `node execution/test-status-feedback-tokens.mjs` — ✅ PASSED (ALL STATUS & FEEDBACK TOKENS CHECKS PASSED).
+  - **Harmonized Status & Feedback Tokens Engine**:
+    - `src/lib/designTokens.ts`: Defined OKLCH status tokens (`STATUS_TOKENS`) for `success`, `warning`, `error`, `info` with raw color, background tint, translucent border, high-contrast text, and subtle glow specifications, along with `getStatusTokenSpec` helper.
+    - `src/styles.css`: Defined root OKLCH status variables (`--status-success`, `--status-warning`, `--status-error`, `--status-info`), registered `@theme inline` mappings (`--color-status-*`), and created Tailwind `@utility` classes (`status-badge-success`, `status-badge-warning`, `status-badge-error`, `status-badge-info`, `status-card-success`, `status-card-warning`, `status-card-error`, `status-card-info`).
+    - `src/components/ui/StatusIndicator.tsx`: Created reusable status indicator primitive supporting variants (`badge`, `card`, `dot`, `banner`), live pulse dot, custom titles/descriptions, and Lucide status icons.
+    - `src/components/ui/primitives.ts`: Re-exported `StatusIndicator` primitive.
+    - `execution/test-status-feedback-tokens.mjs`: Created test harness validating status tokens, CSS variables, utility rules, and component exports.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `STATUS_TOKENS` and `getStatusTokenSpec`.
+    - `src/styles.css` — Added status CSS variables, theme inline mappings, and utility classes.
+    - `src/components/ui/StatusIndicator.tsx` — Created StatusIndicator component.
+    - `src/components/ui/primitives.ts` — Re-exported StatusIndicator primitive.
+    - `execution/test-status-feedback-tokens.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 109 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 109 execution log.
+    - `progress.md` — Appended Task 109 execution log.
+
 - [x] **[UI - Component Primitives / extract] Task 107: Extract reusable button primitives (`Button`, `IconButton`, `PillBadge`, `Chip`) into a dedicated `src/components/ui/` primitives folder — 2026-09-13**:
   - **Build**: `npm run build` — ✅ 0 errors (Vite production bundle compiled cleanly).
   - **Verification Suite**: `node execution/test-component-primitives.mjs` — ✅ PASSED (ALL UI COMPONENT PRIMITIVES CHECKS PASSED).
@@ -440,19 +459,21 @@
       • Added crawlable links in `src/components/stash/FooterSection.tsx` for immediate crawler discovery.
   - **Verification**: `npx tsc --noEmit` (**0 errors**) and `npm run build` compiled cleanly with **0 errors**. Next task: 70.
 
-- [x] **[UI - Gamification] Task 66: Design a "Karma Points" UI badge for Saarthi Connect, rewarding active seniors for their participation**:
-  - **Identified Directive**: Design a "Karma Points" UI badge for Saarthi Connect, rewarding active seniors for their participation.
-  - **Applied Solution**:
-    - **Senior Host Karma Rewards & Perks Engine** (`src/components/stash/KarmaPointsModal.tsx`):
-      • **Gamified Tier Architecture**: Defined 4 senior participation tiers (Bronze Saarthi 0+ Pts, Silver Mentor 500+ Pts, Gold Community Anchor 1200+ Pts, Platinum Champion 2500+ Pts) with customized badges, icon tokens, theme colors, and unlocked perk charters (0% platform commission, free grocery vouchers, annual awards trophy, VIP founder hotline).
-      • **Karma Points Matrix**: Structured senior earning model (+100 Pts/mo for warm co-living room, +30 Pts/session for evening mentorship/tea, +50 Pts/review for 5-star student ratings).
-      • **Interactive Karma Badge Component (`KarmaPointsBadge`)**: Compact & detailed UI badges rendering active senior karma points, tier level, and click triggers.
-      • **Karma Rewards Modal (`KarmaPointsModal`)**: Full modal dialog showcasing senior profiles (Sudha Tripathi Ji 1480 Pts, Col. R. Bajpai 1320 Pts, Vasant Deshpande Ji 1150 Pts, Kamla Arora Ji 980 Pts), XP progress bar to next tier, earned badges, recent activity, unlocked perk charters, and 1-tap reward voucher claim button.
-    - **Integrated into Saarthi Connect Network** (`src/components/stash/Connect.tsx`):
-      • Mounted "Senior Karma Points & Perks Charter" trigger badge in `Connect.tsx` header.
-      • Rendered `KarmaPointsBadge` on senior host profile cards within the verified host pairs simulator.
-      • Mounted `KarmaPointsModal` state trigger for seamless user inspection.
-  - **Verification**: `npx tsc --noEmit` (**0 errors**) and `npm run build` compiled cleanly with **0 errors** across client, SSR, and Nitro server bundles.
+- [x] **[UI - Dark Obsidian Depth / bolder] Task 108: Introduce subtle ambient noise and depth textures (.bg-noise, .radial-mesh) to eliminate flat, dead dark backgrounds on OLED/retina displays — 2026-09-13**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production bundle compiled cleanly in 14.19s).
+  - **Verification Suite**: `node execution/test-dark-obsidian-depth.mjs` — ✅ PASSED (ALL DARK OBSIDIAN DEPTH & AMBIENT NOISE TEXTURES CHECKS PASSED).
+  - **Dark Obsidian Depth & Ambient Noise System**:
+    - `src/styles.css`: Registered `--color-radial-mesh-student`, `--color-radial-mesh-host`, `--color-radial-mesh-persona` in `@theme inline`, added radial mesh OKLCH gradients across `:root` and `[data-role="host"]`, and created Tailwind `@utility` classes (`bg-noise`, `bg-noise-subtle`, `bg-noise-dense`, `radial-mesh`, `radial-mesh-student`, `radial-mesh-host`, `radial-mesh-persona`, `bg-obsidian-depth`).
+    - `src/lib/designTokens.ts`: Exported `DEPTH_TEXTURE_TOKENS` object (`noiseDataUri`, `radialMeshStudent`, `radialMeshHost`, `radialMeshPersona`) and depth helpers (`getPersonaRadialMesh`, `getObsidianDepthTexture`).
+    - `execution/test-dark-obsidian-depth.mjs`: Created test runner script validating depth tokens, utility rules, and runtime persona depth helpers.
+  - **Modified Files**:
+    - `src/styles.css` — Added radial mesh tokens, theme mappings, and noise/depth utility classes.
+    - `src/lib/designTokens.ts` — Exported `DEPTH_TEXTURE_TOKENS` and helper functions.
+    - `execution/test-dark-obsidian-depth.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 108 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 108 execution log.
+    - `progress.md` — Appended Task 108 execution log.
+
 
 - [x] **[UX - Local Navigation] Task 65: Implement "Find My Stash" directions that open natively in Google Maps or Apple Maps**:
   - **Identified Directive**: Implement "Find My Stash" directions that open natively in Google Maps or Apple Maps, specifically guiding students to the back-alley entrances often found in Kakadeo.

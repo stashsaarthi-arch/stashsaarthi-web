@@ -149,5 +149,82 @@ export function getPersonaShadowGlow(role: "student" | "host"): string {
   return `0 0 32px -4px ${glowColor}, 0 12px 32px -8px oklch(0 0 0 / 65%)`;
 }
 
+export const DEPTH_TEXTURE_TOKENS = {
+  noiseDataUri: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E\")",
+  radialMeshStudent: "radial-gradient(ellipse 80% 50% at 50% -10%, oklch(0.72 0.19 160 / 18%) 0%, transparent 70%), radial-gradient(circle 600px at 100% 100%, oklch(0.868 0.16 178 / 12%) 0%, transparent 60%), radial-gradient(circle 500px at 0% 50%, oklch(0.696 0.149 162 / 10%) 0%, transparent 50%)",
+  radialMeshHost: "radial-gradient(ellipse 80% 50% at 50% -10%, oklch(0.809 0.165 76 / 18%) 0%, transparent 70%), radial-gradient(circle 600px at 100% 100%, oklch(0.85 0.18 84 / 12%) 0%, transparent 60%), radial-gradient(circle 500px at 0% 50%, oklch(0.769 0.165 70 / 10%) 0%, transparent 50%)",
+  radialMeshPersona: "var(--radial-mesh-persona)",
+} as const;
+
+/**
+ * Helper to retrieve persona-specific radial mesh CSS gradient
+ */
+export function getPersonaRadialMesh(role: "student" | "host"): string {
+  return role === "host" ? DEPTH_TEXTURE_TOKENS.radialMeshHost : DEPTH_TEXTURE_TOKENS.radialMeshStudent;
+}
+
+/**
+ * Helper to retrieve complete obsidian depth background specification with ambient noise
+ */
+export function getObsidianDepthTexture(role: "student" | "host"): {
+  backgroundColor: string;
+  backgroundImage: string;
+} {
+  const mesh = getPersonaRadialMesh(role);
+  return {
+    backgroundColor: getPersonaObsidianBg(role),
+    backgroundImage: `${mesh}, ${DEPTH_TEXTURE_TOKENS.noiseDataUri}`,
+  };
+}
+
+export interface StatusTokenSpec {
+  raw: string;
+  bg: string;
+  border: string;
+  text: string;
+  glow: string;
+}
+
+export const STATUS_TOKENS: Record<"success" | "warning" | "error" | "info", StatusTokenSpec> = {
+  success: {
+    raw: "oklch(0.72 0.19 160)",
+    bg: "oklch(0.72 0.19 160 / 12%)",
+    border: "oklch(0.72 0.19 160 / 30%)",
+    text: "oklch(0.85 0.16 160)",
+    glow: "0 0 16px -2px oklch(0.72 0.19 160 / 35%)",
+  },
+  warning: {
+    raw: "oklch(0.78 0.17 75)",
+    bg: "oklch(0.78 0.17 75 / 12%)",
+    border: "oklch(0.78 0.17 75 / 30%)",
+    text: "oklch(0.88 0.15 75)",
+    glow: "0 0 16px -2px oklch(0.78 0.17 75 / 35%)",
+  },
+  error: {
+    raw: "oklch(0.65 0.22 25)",
+    bg: "oklch(0.65 0.22 25 / 12%)",
+    border: "oklch(0.65 0.22 25 / 30%)",
+    text: "oklch(0.82 0.18 25)",
+    glow: "0 0 16px -2px oklch(0.65 0.22 25 / 35%)",
+  },
+  info: {
+    raw: "oklch(0.82 0.16 195)",
+    bg: "oklch(0.82 0.16 195 / 12%)",
+    border: "oklch(0.82 0.16 195 / 30%)",
+    text: "oklch(0.90 0.14 195)",
+    glow: "0 0 16px -2px oklch(0.82 0.16 195 / 35%)",
+  },
+} as const;
+
+export type StatusType = "success" | "warning" | "error" | "info";
+
+/**
+ * Helper to retrieve harmonized status token specification
+ */
+export function getStatusTokenSpec(status: StatusType): StatusTokenSpec {
+  return STATUS_TOKENS[status];
+}
+
+
 
 
