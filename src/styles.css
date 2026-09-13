@@ -657,6 +657,43 @@ html.lenis body {
   contain-intrinsic-size: 1px 650px;
 }
 
+/* Layout Isolation & Reflow Elimination (Task 120) */
+@utility layout-isolated {
+  contain: layout style;
+  isolation: isolate;
+}
+
+@utility layout-isolated-strict {
+  contain: strict;
+  isolation: isolate;
+}
+
+@utility layout-isolated-paint {
+  contain: layout style paint;
+  isolation: isolate;
+}
+
+@utility contain-layout-style {
+  contain: layout style;
+}
+
+@utility contain-layout-paint {
+  contain: layout style paint;
+}
+
+@utility contain-strict {
+  contain: strict;
+}
+
+@utility isolation-auto {
+  isolation: isolate;
+}
+
+@utility section-isolated {
+  contain: layout style;
+  isolation: isolate;
+}
+
 @utility glass {
   background: var(--surface);
   backdrop-filter: blur(16px) saturate(140%);
@@ -941,6 +978,39 @@ html.lenis body {
   width: 100%;
   position: relative;
   box-sizing: border-box;
+}
+
+/* CSS Layout Isolation Utilities (Task 120) */
+@utility layout-isolated {
+  contain: layout style;
+  isolation: isolate;
+}
+
+@utility layout-isolated-strict {
+  contain: strict;
+  isolation: isolate;
+}
+
+@utility layout-isolated-paint {
+  contain: layout style paint;
+  isolation: isolate;
+}
+
+@utility contain-layout-style {
+  contain: layout style;
+}
+
+@utility contain-layout-paint {
+  contain: layout style paint;
+}
+
+@utility contain-strict {
+  contain: strict;
+}
+
+@utility section-isolated {
+  contain: layout style;
+  isolation: isolate;
 }
 
 

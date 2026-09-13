@@ -3,9 +3,11 @@ import {
   VerticalRhythmTier,
   ContainerSizeTier,
   ContainerGutterTier,
+  LayoutIsolationTier,
   getVerticalRhythmClasses,
   getContainerWidthClasses,
   getContainerGutterClasses,
+  getLayoutIsolationClasses,
 } from "@/lib/designTokens";
 import { cn } from "@/lib/utils";
 
@@ -15,6 +17,8 @@ export interface SectionWrapperProps extends React.HTMLAttributes<HTMLElement> {
   containerSize?: ContainerSizeTier;
   gutter?: ContainerGutterTier;
   isFullWidth?: boolean;
+  isIsolated?: boolean;
+  isolationTier?: LayoutIsolationTier;
   wrapperClassName?: string;
   containerClassName?: string;
   children: React.ReactNode;
@@ -23,7 +27,7 @@ export interface SectionWrapperProps extends React.HTMLAttributes<HTMLElement> {
 /**
  * Standardized Section Wrapper Component
  * Enforces vertical rhythm (4rem / 6rem / 8rem), container max-widths (max-w-7xl, max-w-6xl),
- * and responsive horizontal gutters across the platform.
+ * responsive horizontal gutters, and layout isolation (contain: layout style) across the platform.
  */
 export const SectionWrapper = React.forwardRef<HTMLElement, SectionWrapperProps>(
   (
@@ -33,6 +37,8 @@ export const SectionWrapper = React.forwardRef<HTMLElement, SectionWrapperProps>
       containerSize = "xl",
       gutter = "standard",
       isFullWidth = false,
+      isIsolated = true,
+      isolationTier = "layoutStyle",
       wrapperClassName,
       containerClassName,
       className,
@@ -44,11 +50,18 @@ export const SectionWrapper = React.forwardRef<HTMLElement, SectionWrapperProps>
     const rhythmClasses = getVerticalRhythmClasses(rhythm);
     const containerClasses = getContainerWidthClasses(containerSize);
     const gutterClasses = getContainerGutterClasses(gutter);
+    const isolationClasses = isIsolated ? getLayoutIsolationClasses(isolationTier) : "";
 
     return (
       <Component
         ref={ref}
-        className={cn("section-wrapper relative w-full overflow-hidden", rhythmClasses, wrapperClassName, className)}
+        className={cn(
+          "section-wrapper relative w-full overflow-hidden",
+          rhythmClasses,
+          isolationClasses,
+          wrapperClassName,
+          className
+        )}
         {...props}
       >
         {isFullWidth ? (
@@ -56,7 +69,7 @@ export const SectionWrapper = React.forwardRef<HTMLElement, SectionWrapperProps>
         ) : (
           <div
             className={cn(
-              "section-container-gutter mx-auto w-full",
+              "section-container-gutter mobile-gutter-safe mx-auto w-full",
               containerClasses,
               gutterClasses,
               containerClassName
@@ -87,7 +100,7 @@ export const SectionContainer = React.forwardRef<HTMLDivElement, SectionContaine
       <div
         ref={ref}
         className={cn(
-          "section-container-gutter mx-auto w-full",
+          "section-container-gutter mobile-gutter-safe mx-auto w-full",
           getContainerWidthClasses(size),
           getContainerGutterClasses(gutter),
           className

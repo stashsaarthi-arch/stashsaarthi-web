@@ -56,7 +56,7 @@ export const Hero = memo(function Hero({
   };
 
   return (
-    <section id="top" className="relative overflow-hidden pb-4 pt-16 sm:pb-6 md:pt-20">
+    <section id="top" className="section-isolated layout-isolated relative overflow-hidden pb-4 pt-16 sm:pb-6 md:pt-20">
       {/* 2D Clean Background (Phone-view parity across all screens) */}
       <div className="absolute inset-0 grid-noise opacity-50 pointer-events-none" />
       <div
@@ -78,7 +78,7 @@ export const Hero = memo(function Hero({
         }}
       />
 
-      <div className="relative mx-auto max-w-6xl px-4 text-center">
+      <div className="relative section-container-gutter mobile-gutter-safe mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 text-center">
         <AnimatedContent
           distance={30}
           direction="vertical"

@@ -1,3 +1,23 @@
+- [x] **[UI - Layout Isolation / optimize] Task 120: Add CSS `contain: layout style` to heavy independent sections to eliminate unnecessary browser reflows during page interaction — 2026-09-13**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-layout-isolation.mjs` — ✅ PASSED (12/12 LAYOUT ISOLATION CHECKS PASSED SUCCESSFULLY).
+  - **CSS Layout Isolation & Reflow Elimination Architecture**:
+    - `src/lib/designTokens.ts`: Defined `LAYOUT_ISOLATION_TOKENS` (`layoutStyle: "contain: layout style"`, `layoutPaint`, `strict`, `isolation`, `classes`), `LayoutIsolationTier` type, and exported helper function `getLayoutIsolationClasses(tier)`.
+    - `src/styles.css`: Added Tailwind `@utility` rules for `layout-isolated`, `layout-isolated-strict`, `layout-isolated-paint`, `contain-layout-style`, `contain-layout-paint`, `contain-strict`, and `section-isolated` enforcing `contain: layout style` and `isolation: isolate` to eliminate browser layout reflow cascades.
+    - `src/components/ui/SectionWrapper.tsx`: Enhanced `SectionWrapper` primitive with `isIsolated` (defaulting to `true`) and `isolationTier` props to automatically apply CSS layout isolation to top-level section containers.
+    - `src/components/stash/Hero.tsx`, `SolutionsHub.tsx`: Applied `section-isolated layout-isolated` classes to top-level independent section elements.
+    - `execution/test-layout-isolation.mjs`: Verification test script confirming design tokens, CSS utility rules, `SectionWrapper` props, and section-level class application.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Defined `LAYOUT_ISOLATION_TOKENS` and `getLayoutIsolationClasses` helper.
+    - `src/styles.css` — Added `@utility` rules for CSS layout containment and isolation.
+    - `src/components/ui/SectionWrapper.tsx` — Added `isIsolated` and `isolationTier` props.
+    - `src/components/stash/Hero.tsx` — Applied `layout-isolated` to section container.
+    - `src/components/stash/SolutionsHub.tsx` — Applied `layout-isolated` to section container.
+    - `execution/test-layout-isolation.mjs` — Verified test harness.
+    - `docs/tasks/PRD.md` — Marked Task 120 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 120 execution log.
+    - `progress.md` — Appended Task 120 execution log.
+
 - [x] **[UI - Truncation & Multi-line Clamping / harden] Task 119: Apply responsive line-clamping (`line-clamp-1`, `line-clamp-2`, `line-clamp-3`) with tooltip fallbacks to prevent card layout breakage on verbose Hindi strings — 2026-09-13**:
   - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
   - **Verification Suite**: `node execution/test-truncation-clamping.mjs` — ✅ PASSED (11/11 TRUNCATION & MULTI-LINE CLAMPING CHECKS PASSED SUCCESSFULLY).

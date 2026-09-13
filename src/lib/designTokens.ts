@@ -709,6 +709,35 @@ export function getHindiTruncationSpec(
   };
 }
 
+export const LAYOUT_ISOLATION_TOKENS = {
+  layoutStyle: "contain: layout style",
+  layoutPaint: "contain: layout style paint",
+  strict: "contain: strict",
+  isolation: "isolate",
+  classes: "layout-isolated contain-layout-style isolate",
+} as const;
+
+export type LayoutIsolationTier = "layoutStyle" | "layoutPaint" | "strict" | "none";
+
+/**
+ * Helper to retrieve CSS layout isolation utility classes preventing browser reflow cascades
+ */
+export function getLayoutIsolationClasses(tier: LayoutIsolationTier = "layoutStyle"): string {
+  switch (tier) {
+    case "layoutStyle":
+      return "layout-isolated contain-layout-style isolate";
+    case "layoutPaint":
+      return "layout-isolated-paint contain-layout-paint isolate";
+    case "strict":
+      return "layout-isolated-strict contain-strict isolate";
+    case "none":
+      return "";
+    default:
+      return "layout-isolated contain-layout-style isolate";
+  }
+}
+
+
 
 
 
