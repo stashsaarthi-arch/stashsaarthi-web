@@ -26,6 +26,7 @@ import { smoothScrollTo } from "./legal";
 import { useHeroCtaVariant, trackCtaClick, type HeroCtaVariant } from "@/lib/abTesting";
 import { Floating3DLuggage } from "./Floating3DLuggage";
 import { HostHeroSeals } from "./HostHeroSeals";
+import { InteractiveValueSwitcher } from "./InteractiveValueSwitcher";
 
 
 export const Hero = memo(function Hero({
@@ -326,6 +327,9 @@ export const Hero = memo(function Hero({
             })}
           </div>
         </Card3D>
+
+        {/* Interactive Value Switcher: Wasting ₹8,000 Dead Rent vs Saarthi Stash ₹300/mo */}
+        {student && <InteractiveValueSwitcher onBook={onBook} />}
 
         {/* Trust Strip */}
         <motion.div
