@@ -25,6 +25,7 @@ import { LiveChangelogBadge } from "./ChangelogModal";
 import { smoothScrollTo } from "./legal";
 import { useHeroCtaVariant, trackCtaClick, type HeroCtaVariant } from "@/lib/abTesting";
 import { Floating3DLuggage } from "./Floating3DLuggage";
+import { HostHeroSeals } from "./HostHeroSeals";
 
 
 export const Hero = memo(function Hero({
@@ -81,8 +82,8 @@ export const Hero = memo(function Hero({
       />
 
       <div className="relative section-container-gutter mobile-gutter-safe mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 text-center">
-        {/* Floating 3D Luggage Mockups for Student Persona Mode */}
-        {student && <Floating3DLuggage />}
+        {/* Floating 3D Luggage Mockups for Student Persona Mode / Host Hero Seals for Senior Host Mode */}
+        {student ? <Floating3DLuggage /> : <HostHeroSeals />}
 
         <AnimatedContent
           distance={30}
@@ -115,14 +116,14 @@ export const Hero = memo(function Hero({
             key={`h-${role}`}
             className="mx-auto mt-2 max-w-4xl text-balance text-2xl font-extrabold leading-[1.1] tracking-tight sm:text-4xl md:text-5xl 3xl:text-6xl 4xl:text-7xl relative z-10"
           >
-            <span className="block text-xs font-bold tracking-wider text-emerald mb-1.5 uppercase">
+            <span className={`block text-xs font-bold tracking-wider mb-1.5 uppercase ${student ? "text-emerald" : "text-amber-400 font-mono tracking-widest"}`}>
               StashSaarthi Living & Storage
             </span>
             <span
               className={`text-gradient ${
                 student
                   ? "text-gradient-mint drop-shadow-[0_0_45px_rgba(0,245,160,0.75)] [text-shadow:0_0_50px_rgba(16,185,129,0.65)]"
-                  : "text-gradient-amber"
+                  : "text-gradient-amber drop-shadow-[0_0_45px_rgba(251,191,36,0.7)] [text-shadow:0_0_50px_rgba(245,158,11,0.6)]"
               }`}
             >
               {student ? t.hero.student.title : t.hero.host.title}
@@ -138,7 +139,7 @@ export const Hero = memo(function Hero({
 
           {/* Instant ₹300/mo Value Badge & Dynamic Live Proof Badge */}
           <div className="mt-3 flex flex-col items-center justify-center gap-2">
-            {student && (
+            {student ? (
               <div className="group relative inline-flex items-center gap-2.5 rounded-full border border-emerald-400/50 bg-emerald-950/60 px-4.5 py-2 backdrop-blur-2xl shadow-glow hover:border-emerald-300 transition-all cursor-pointer">
                 <span className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-400 text-black font-black text-xs shadow-lg group-hover:scale-110 transition-transform">
                   ₹
@@ -152,6 +153,23 @@ export const Hero = memo(function Hero({
                   </div>
                   <div className="text-[11px] text-emerald-300/90 font-mono font-medium mt-0.5">
                     Zero Deposit • Save ₹8,000 Dead-Rent Every Vacation
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="group relative inline-flex items-center gap-2.5 rounded-full border border-amber-400/50 bg-amber-950/70 px-4.5 py-2 backdrop-blur-2xl shadow-[0_0_30px_rgba(245,158,11,0.3)] hover:border-amber-300 transition-all cursor-pointer">
+                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-amber-400 to-yellow-400 text-black font-black text-xs shadow-lg group-hover:scale-110 transition-transform">
+                  ₹
+                </span>
+                <div className="text-left leading-tight">
+                  <div className="flex items-center gap-2 text-xs sm:text-sm font-extrabold text-amber-100">
+                    <span>Dignified Passive Income</span>
+                    <span className="rounded-md bg-gradient-to-r from-amber-400 to-yellow-400 text-black px-2 py-0.5 text-xs font-black shadow-sm">
+                      ₹11,500+/mo
+                    </span>
+                  </div>
+                  <div className="text-[11px] text-amber-300/90 font-mono font-medium mt-0.5">
+                    Zero Intrusion • 100% Control Over House Norms • Direct Weekly Deposit
                   </div>
                 </div>
               </div>
