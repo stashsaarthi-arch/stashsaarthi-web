@@ -613,9 +613,10 @@ export const CONTAINER_WIDTH_TOKENS = {
 export type ContainerSizeTier = keyof typeof CONTAINER_WIDTH_TOKENS;
 
 export const CONTAINER_GUTTER_TOKENS = {
-  compact: "px-3 sm:px-4 lg:px-6",
-  standard: "px-4 sm:px-6 lg:px-8",
-  relaxed: "px-6 sm:px-8 lg:px-12",
+  compact: "container-gutter-compact px-3 sm:px-4 lg:px-6",
+  standard: "container-gutter-standard px-4 sm:px-6 lg:px-8",
+  relaxed: "container-gutter-relaxed px-6 sm:px-8 lg:px-12",
+  narrowSafe: "container-gutter-standard mobile-gutter-safe px-4 sm:px-6 lg:px-8",
 } as const;
 
 export type ContainerGutterTier = keyof typeof CONTAINER_GUTTER_TOKENS;
@@ -642,6 +643,13 @@ export function getContainerGutterClasses(gutter: ContainerGutterTier = "standar
 }
 
 /**
+ * Helper to retrieve zero text-to-edge crowding mobile safety classes for narrow viewports (iPhone SE / Android)
+ */
+export function getMobileGutterSafetyClasses(): string {
+  return "section-container-gutter mobile-gutter-safe px-4 sm:px-6 lg:px-8 w-full box-border break-words";
+}
+
+/**
  * Helper to retrieve complete standardized section container class string
  */
 export function getSectionContainerClasses(
@@ -649,8 +657,58 @@ export function getSectionContainerClasses(
   width: ContainerSizeTier = "xl",
   gutter: ContainerGutterTier = "standard"
 ): string {
-  return `${getVerticalRhythmClasses(rhythm)} ${getContainerWidthClasses(width)} ${getContainerGutterClasses(gutter)} mx-auto w-full`;
+  return `${getVerticalRhythmClasses(rhythm)} ${getContainerWidthClasses(width)} ${getContainerGutterClasses(gutter)} mobile-gutter-safe mx-auto w-full`;
 }
+
+export const TRUNCATION_TOKENS = {
+  clamp1: "line-clamp-1 overflow-hidden text-ellipsis break-words",
+  clamp2: "line-clamp-2 overflow-hidden text-ellipsis break-words",
+  clamp3: "line-clamp-3 overflow-hidden text-ellipsis break-words",
+  none: "line-clamp-none overflow-visible whitespace-normal",
+  truncationSafe: "truncation-safe overflow-hidden text-ellipsis break-words",
+} as const;
+
+export type LineClampTier = 1 | 2 | 3 | "none";
+
+/**
+ * Helper to retrieve line clamping utility classes
+ */
+export function getTruncationClasses(lines: LineClampTier = 2): string {
+  switch (lines) {
+    case 1:
+      return TRUNCATION_TOKENS.clamp1;
+    case 2:
+      return TRUNCATION_TOKENS.clamp2;
+    case 3:
+      return TRUNCATION_TOKENS.clamp3;
+    case "none":
+      return TRUNCATION_TOKENS.none;
+    default:
+      return TRUNCATION_TOKENS.clamp2;
+  }
+}
+
+/**
+ * Helper to retrieve Devanagari Hindi text line clamp safety classes preventing bottom matra clipping
+ */
+export function getHindiTruncationClasses(isHindi: boolean, lines: LineClampTier = 2): string {
+  if (!isHindi || lines === "none") return "";
+  return "hi-clamp-safe hi-leading-relaxed pb-[0.05em]";
+}
+
+/**
+ * Helper to retrieve full specification for text truncation and Devanagari safety
+ */
+export function getHindiTruncationSpec(
+  isHindi: boolean,
+  lines: LineClampTier = 2
+): { className: string; lineClamp: LineClampTier } {
+  return {
+    className: `${getTruncationClasses(lines)} ${getHindiTruncationClasses(isHindi, lines)}`,
+    lineClamp: lines,
+  };
+}
+
 
 
 

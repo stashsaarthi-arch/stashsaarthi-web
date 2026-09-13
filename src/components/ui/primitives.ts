@@ -22,6 +22,7 @@ export {
   type SectionWrapperProps,
   type SectionContainerProps,
 } from "./SectionWrapper";
+export { TruncatedText, type TruncatedTextProps } from "./TruncatedText";
 
 
 

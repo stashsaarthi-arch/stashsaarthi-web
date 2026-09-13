@@ -140,7 +140,7 @@ Sprint 10: QA, CSO & CEO (Total Assurance, Compliance & Strategic Direction)
 - [x] 116. **[UI - Spacing & Padding Rhythm / layout]**: Standardize section vertical rhythms (4rem / 6rem / 8rem) and container maximum widths (`max-w-7xl`, `max-w-6xl`) across the entire web app.
 - [x] 117. **[UI - Content Containers & Gutters / adapt]**: Fix mobile gutter padding (`px-4 sm:px-6 lg:px-8`) ensuring zero text-to-edge crowding on iPhone SE and narrow Android viewports.
 - [x] 118. **[UI - Micro-Copy Alignment / polish]**: Re-align badges, icons, price tags, and helper captions with strict baseline grid alignment.
-- [ ] 119. **[UI - Truncation & Multi-line Clamping / harden]**: Apply responsive line-clamping (`line-clamp-1`, `line-clamp-2`, `line-clamp-3`) with tooltip fallbacks to prevent card layout breakage on verbose Hindi strings.
+- [x] 119. **[UI - Truncation & Multi-line Clamping / harden]**: Apply responsive line-clamping (`line-clamp-1`, `line-clamp-2`, `line-clamp-3`) with tooltip fallbacks to prevent card layout breakage on verbose Hindi strings.
 - [ ] 120. **[UI - Layout Isolation / optimize]**: Add CSS `contain: layout style` to heavy independent sections to eliminate unnecessary browser reflows during page interaction.
 
 ## Sprint 13: Hero Sections, Persuade Surfaces & Visual Impact (impeccable bolder, shape, delight)

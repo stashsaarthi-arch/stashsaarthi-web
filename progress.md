@@ -1,3 +1,24 @@
+- [x] **[UI - Truncation & Multi-line Clamping / harden] Task 119: Apply responsive line-clamping (`line-clamp-1`, `line-clamp-2`, `line-clamp-3`) with tooltip fallbacks to prevent card layout breakage on verbose Hindi strings — 2026-09-13**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-truncation-clamping.mjs` — ✅ PASSED (11/11 TRUNCATION & MULTI-LINE CLAMPING CHECKS PASSED SUCCESSFULLY).
+  - **Truncation & Multi-line Clamping Architecture**:
+    - `src/lib/designTokens.ts`: Defined `TRUNCATION_TOKENS` (`clamp1`, `clamp2`, `clamp3`, `none`, `truncationSafe`), `LineClampTier` type, and exported truncation helper methods `getTruncationClasses`, `getHindiTruncationClasses`, and `getHindiTruncationSpec`.
+    - `src/styles.css`: Defined Tailwind `@utility` rules for `line-clamp-1`, `line-clamp-2`, `line-clamp-3`, `line-clamp-none`, `hi-clamp-safe`, `clamp-with-tooltip`, and `truncation-safe` to enforce Devanagari bottom matra padding and overflow ellipsis.
+    - `src/components/ui/TruncatedText.tsx`: Reusable text clamping primitive supporting dynamic line clamp levels (`1`, `2`, `3`, `"none"`), Devanagari line-height safety padding, overflow detection, and tooltip (`title`) fallback on truncation.
+    - `src/components/ui/primitives.ts`: Re-exported `TruncatedText` primitive and `TruncatedTextProps`.
+    - `src/components/ui/BentoGrid.tsx`: Integrated `TruncatedText` inside `BentoTitle` and `BentoDescription` primitives for responsive line clamping.
+    - `execution/test-truncation-clamping.mjs`: Verification test script confirming design tokens, CSS utility rules, primitive exports, Devanagari clamp safety, and BentoGrid integration.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Defined `TRUNCATION_TOKENS` and truncation helper functions.
+    - `src/styles.css` — Added `@utility` rules for line clamping and Devanagari clamp safety.
+    - `src/components/ui/TruncatedText.tsx` — Created reusable TruncatedText component with tooltip fallback.
+    - `src/components/ui/primitives.ts` — Re-exported TruncatedText.
+    - `src/components/ui/BentoGrid.tsx` — Integrated TruncatedText in BentoTitle and BentoDescription.
+    - `execution/test-truncation-clamping.mjs` — Verified test harness.
+    - `docs/tasks/PRD.md` — Marked Task 119 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 119 execution log.
+    - `progress.md` — Appended Task 119 execution log.
+
 - [x] **[UI - Content Containers & Gutters / adapt] Task 117: Fix mobile gutter padding (`px-4 sm:px-6 lg:px-8`) ensuring zero text-to-edge crowding on iPhone SE and narrow Android viewports — 2026-09-13**:
   - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
   - **Verification Suite**: `node execution/test-content-containers-gutters.mjs` — ✅ PASSED (18/18 CONTENT CONTAINERS & GUTTERS CHECKS PASSED SUCCESSFULLY).
