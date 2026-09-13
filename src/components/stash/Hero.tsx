@@ -24,6 +24,8 @@ import { AnimatedStat } from "./AnimatedStat";
 import { LiveChangelogBadge } from "./ChangelogModal";
 import { smoothScrollTo } from "./legal";
 import { useHeroCtaVariant, trackCtaClick, type HeroCtaVariant } from "@/lib/abTesting";
+import { Floating3DLuggage } from "./Floating3DLuggage";
+
 
 export const Hero = memo(function Hero({
   role,
@@ -79,6 +81,9 @@ export const Hero = memo(function Hero({
       />
 
       <div className="relative section-container-gutter mobile-gutter-safe mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 text-center">
+        {/* Floating 3D Luggage Mockups for Student Persona Mode */}
+        {student && <Floating3DLuggage />}
+
         <AnimatedContent
           distance={30}
           direction="vertical"
@@ -108,12 +113,18 @@ export const Hero = memo(function Hero({
 
           <h1
             key={`h-${role}`}
-            className="mx-auto mt-2 max-w-4xl text-balance text-2xl font-extrabold leading-[1.1] tracking-tight sm:text-4xl md:text-5xl 3xl:text-6xl 4xl:text-7xl"
+            className="mx-auto mt-2 max-w-4xl text-balance text-2xl font-extrabold leading-[1.1] tracking-tight sm:text-4xl md:text-5xl 3xl:text-6xl 4xl:text-7xl relative z-10"
           >
-            <span className="block text-xs font-bold tracking-wider text-emerald mb-1.5">
+            <span className="block text-xs font-bold tracking-wider text-emerald mb-1.5 uppercase">
               StashSaarthi Living & Storage
             </span>
-            <span className="text-gradient">
+            <span
+              className={`text-gradient ${
+                student
+                  ? "text-gradient-mint drop-shadow-[0_0_45px_rgba(0,245,160,0.75)] [text-shadow:0_0_50px_rgba(16,185,129,0.65)]"
+                  : "text-gradient-amber"
+              }`}
+            >
               {student ? t.hero.student.title : t.hero.host.title}
             </span>
           </h1>
@@ -125,25 +136,46 @@ export const Hero = memo(function Hero({
             {student ? t.hero.student.subtitle : t.hero.host.subtitle}
           </p>
 
-          {/* Dynamic Live Proof Badge */}
-          <div className="mt-3 flex justify-center">
-            {student ? (
-              <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-0.5 text-xs font-semibold text-emerald-400 backdrop-blur-md shadow-sm">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+          {/* Instant ₹300/mo Value Badge & Dynamic Live Proof Badge */}
+          <div className="mt-3 flex flex-col items-center justify-center gap-2">
+            {student && (
+              <div className="group relative inline-flex items-center gap-2.5 rounded-full border border-emerald-400/50 bg-emerald-950/60 px-4.5 py-2 backdrop-blur-2xl shadow-glow hover:border-emerald-300 transition-all cursor-pointer">
+                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-400 text-black font-black text-xs shadow-lg group-hover:scale-110 transition-transform">
+                  ₹
                 </span>
-                <span>⚡ 48+ Bags Stored Near IITK & HBTI • 100% Tamper-Proof QR Seal</span>
-              </div>
-            ) : (
-              <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-0.5 text-xs font-semibold text-amber-400 backdrop-blur-md shadow-sm">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-500" />
-                </span>
-                <span>🛡️ ₹10,000 Safety Cover Active • 12+ Verified Senior Hosts in Kanpur</span>
+                <div className="text-left leading-tight">
+                  <div className="flex items-center gap-2 text-xs sm:text-sm font-extrabold text-white">
+                    <span>Instant Micro-Storage</span>
+                    <span className="rounded-md bg-emerald-400 text-black px-2 py-0.5 text-xs font-black shadow-sm">
+                      ₹300/bag/mo
+                    </span>
+                  </div>
+                  <div className="text-[11px] text-emerald-300/90 font-mono font-medium mt-0.5">
+                    Zero Deposit • Save ₹8,000 Dead-Rent Every Vacation
+                  </div>
+                </div>
               </div>
             )}
+
+            <div>
+              {student ? (
+                <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-0.5 text-xs font-semibold text-emerald-400 backdrop-blur-md shadow-sm">
+                  <span className="relative flex h-2 w-2">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                  </span>
+                  <span>⚡ 48+ Bags Stored Near IITK & HBTI • 100% Tamper-Proof QR Seal</span>
+                </div>
+              ) : (
+                <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-0.5 text-xs font-semibold text-amber-400 backdrop-blur-md shadow-sm">
+                  <span className="relative flex h-2 w-2">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-500" />
+                  </span>
+                  <span>🛡️ ₹10,000 Safety Cover Active • 12+ Verified Senior Hosts in Kanpur</span>
+                </div>
+              )}
+            </div>
           </div>
 
           <div className="mt-3.5 flex flex-col items-stretch justify-center gap-2 sm:flex-row sm:items-center">

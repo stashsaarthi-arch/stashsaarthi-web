@@ -1,5 +1,20 @@
 # Ralph Autonomous Workforce Sprint Progress
 
+- [x] **[UI - Student Hero Overhaul / bolder] Task 121: Redesign Student Persona Hero with ultra-crisp neon emerald headline glow, floating 3D luggage mockups, and instant ₹300/mo value badge — 2026-09-13**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite client & SSR production bundles compiled cleanly in 12.88s).
+  - **Verification Suite**: `node execution/test-student-hero-overhaul.mjs` — ✅ PASSED (5/5 STUDENT HERO OVERHAUL CHECKS PASSED SUCCESSFULLY).
+  - **Student Hero Overhaul & Floating 3D Luggage Architecture**:
+    - `src/components/stash/Floating3DLuggage.tsx`: Created reusable 3D floating luggage mockup component rendering 3D cards with hover specular glare, tilt physics (`Card3D`), tamper-proof seal IDs (`QR-SEAL-8839`, `QR-SEAL-4412`, `QR-SEAL-9011`), item labels ("Winter Suitcase #042", "Study Carton #108", "Cooler Vault #019"), and instant `₹300/mo` pricing pills. Includes mobile/tablet horizontal scroll preview strip.
+    - `src/components/stash/Hero.tsx`: Integrated `Floating3DLuggage` for Student mode, added ultra-crisp neon emerald title drop-shadow glow (`text-gradient-mint drop-shadow-[0_0_35px_rgba(0,245,160,0.55)] [text-shadow:0_0_40px_rgba(16,185,129,0.45)]`), and mounted instant ₹300/mo value badge (`Instant Micro-Storage @ ₹300/bag/mo`, `Zero Deposit • Save ₹8,000 Dead-Rent Every Vacation`).
+    - `execution/test-student-hero-overhaul.mjs`: Created test harness validating Floating3DLuggage component creation, 3D tilt pricing, Hero integration, neon emerald glow drop-shadow, and instant value badge presence.
+  - **Modified Files**:
+    - `src/components/stash/Floating3DLuggage.tsx` — Created 3D floating luggage mockup component with QR seals and price pills.
+    - `src/components/stash/Hero.tsx` — Overhauled Student Hero layout with Floating3DLuggage, neon emerald title glow, and instant ₹300/mo value badge.
+    - `execution/test-student-hero-overhaul.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 121 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 121 execution log.
+    - `progress.md` — Appended Task 121 execution log.
+
 - [x] **[UI - Layout Isolation / optimize] Task 120: Add CSS `contain: layout style` to heavy independent sections to eliminate unnecessary browser reflows during page interaction — 2026-09-13**:
   - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
   - **Verification Suite**: `node execution/test-layout-isolation.mjs` — ✅ PASSED (12/12 LAYOUT ISOLATION CHECKS PASSED SUCCESSFULLY).
@@ -1311,13 +1326,12 @@
   - **Build**: `npm run build` — ✅ 0 errors (Vite production bundle compiled cleanly).
   - **Verification Suite**: `npx tsx execution/test-micro-copy-alignment.mjs` — ✅ PASSED (17/17 checks verified).
   - **Micro-Copy Baseline Alignment Engine**:
-    - `src/lib/microCopyAlignment.ts`: Engineered typed micro-copy specifications (`MICRO_COPY_SPECS`) defining baseline alignment metrics for badges (`0.75rem`, line-height `1.2`), price tags (`tabular-nums`, lining-nums), captions (`0.75rem`, line-height `1.4`), icon labels (`0.875rem`, line-height `1.3`), and status indicators. Created helper functions `getMicroCopyAlignmentClass()`, `formatPriceMicroCopy()`, and `auditMicroCopyElements()`.
-    - `src/styles.css`: Added `@utility` classes for baseline grid micro-copy alignment (`micro-copy-baseline`, `micro-copy-center`, `icon-align-baseline`, `badge-align-baseline`, `price-tag-alignment`, `caption-grid-alignment`, `tabular-numeric-tag`, `helper-caption-baseline`).
-    - `src/components/ui/PillBadge.tsx`: Enhanced `pillBadgeVariants` with `items-baseline badge-align-baseline micro-copy-baseline` and icon baseline alignment.
-    - `src/components/ui/Chip.tsx`: Updated `chipVariants` to incorporate baseline grid micro-copy alignment.
+    - `src/lib/microCopyAlignment.ts`: Created micro-copy alignment engine.
+    - `src/styles.css`: Added micro-copy baseline alignment utilities.
+    - `src/components/ui/PillBadge.tsx`: Updated PillBadge baseline alignment.
+    - `src/components/ui/Chip.tsx`: Updated Chip baseline alignment.
     - `src/components/ui/badge.tsx`: Standardized `badgeVariants` with baseline grid alignment classes.
     - `execution/test-micro-copy-alignment.mjs`: Created test runner validating specs, helper exports, CSS utilities, and UI component primitive updates.
-  - **Modified Files**:
     - `src/lib/microCopyAlignment.ts` — Created micro-copy alignment engine.
     - `src/styles.css` — Added micro-copy baseline alignment utilities.
     - `src/components/ui/PillBadge.tsx` — Updated PillBadge baseline alignment.

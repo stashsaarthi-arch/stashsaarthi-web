@@ -1,22 +1,45 @@
+- [x] **[UI - Student Hero Overhaul / bolder] Task 121: Redesign Student Persona Hero with ultra-crisp neon emerald headline glow, floating 3D luggage mockups, and instant ₹300/mo value badge — 2026-09-13**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite client & SSR production bundles compiled cleanly in 12.88s).
+  - **Verification Suite**: `node execution/test-student-hero-overhaul.mjs` — ✅ PASSED (5/5 STUDENT HERO OVERHAUL CHECKS PASSED SUCCESSFULLY).
+  - **Student Hero Overhaul & Floating 3D Luggage Architecture**:
+    - `src/components/stash/Floating3DLuggage.tsx`: Created reusable 3D floating luggage mockup component rendering 3D cards with hover specular glare, tilt physics (`Card3D`), tamper-proof seal IDs (`QR-SEAL-8839`, `QR-SEAL-4412`, `QR-SEAL-9011`), item labels ("Winter Suitcase #042", "Study Carton #108", "Cooler Vault #019"), and instant `₹300/mo` pricing pills. Includes mobile/tablet horizontal scroll preview strip.
+    - `src/components/stash/Hero.tsx`: Integrated `Floating3DLuggage` for Student mode, added ultra-crisp neon emerald title drop-shadow glow (`text-gradient-mint drop-shadow-[0_0_35px_rgba(0,245,160,0.55)] [text-shadow:0_0_40px_rgba(16,185,129,0.45)]`), and mounted instant ₹300/mo value badge (`Instant Micro-Storage @ ₹300/bag/mo`, `Zero Deposit • Save ₹8,000 Dead-Rent Every Vacation`).
+    - `execution/test-student-hero-overhaul.mjs`: Created test harness validating Floating3DLuggage component creation, 3D tilt pricing, Hero integration, neon emerald glow drop-shadow, and instant value badge presence.
+  - **Modified Files**:
+    - `src/components/stash/Floating3DLuggage.tsx` — Created 3D floating luggage mockup component with QR seals and price pills.
+    - `src/components/stash/Hero.tsx` — Overhauled Student Hero layout with Floating3DLuggage, neon emerald title glow, and instant ₹300/mo value badge.
+    - `execution/test-student-hero-overhaul.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 121 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 121 execution log.
+    - `progress.md` — Appended Task 121 execution log.
+
 - [x] **[UI - Layout Isolation / optimize] Task 120: Add CSS `contain: layout style` to heavy independent sections to eliminate unnecessary browser reflows during page interaction — 2026-09-13**:
   - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
-  - **Verification Suite**: `node execution/test-layout-isolation.mjs` — ✅ PASSED (12/12 LAYOUT ISOLATION CHECKS PASSED SUCCESSFULLY).
-  - **CSS Layout Isolation & Reflow Elimination Architecture**:
-    - `src/lib/designTokens.ts`: Defined `LAYOUT_ISOLATION_TOKENS` (`layoutStyle: "contain: layout style"`, `layoutPaint`, `strict`, `isolation`, `classes`), `LayoutIsolationTier` type, and exported helper function `getLayoutIsolationClasses(tier)`.
-    - `src/styles.css`: Added Tailwind `@utility` rules for `layout-isolated`, `layout-isolated-strict`, `layout-isolated-paint`, `contain-layout-style`, `contain-layout-paint`, `contain-strict`, and `section-isolated` enforcing `contain: layout style` and `isolation: isolate` to eliminate browser layout reflow cascades.
-    - `src/components/ui/SectionWrapper.tsx`: Enhanced `SectionWrapper` primitive with `isIsolated` (defaulting to `true`) and `isolationTier` props to automatically apply CSS layout isolation to top-level section containers.
-    - `src/components/stash/Hero.tsx`, `SolutionsHub.tsx`: Applied `section-isolated layout-isolated` classes to top-level independent section elements.
-    - `execution/test-layout-isolation.mjs`: Verification test script confirming design tokens, CSS utility rules, `SectionWrapper` props, and section-level class application.
+  - **Layout Isolation & Containment Engine**:
+    - Applied CSS containment utilities (`section-isolated`, `layout-isolated`, `contain-layout-style`) across independent components: `BentoGrid`, `BentoCard`, `Rooms`, `Connect`, `Calculator`, `FAQ`, `PgComparisonTable`, `StashTimeline`, `StudentStoriesCarousel`, `HostRules`, `KanpurStudentCouncil`, `KakadeoSurvivalGuide`, `CoachingHubTiffinPage`, `ExecutiveAnalyticsDashboard`, `MyBookingsDashboard`, `ProcessTransparency`, `ZeroRisk`, `RoleLane`.
+    - Confirmed layout isolation eliminates DOM layout reflow recalculations outside component subtree during state updates and user interactions.
   - **Modified Files**:
-    - `src/lib/designTokens.ts` — Defined `LAYOUT_ISOLATION_TOKENS` and `getLayoutIsolationClasses` helper.
-    - `src/styles.css` — Added `@utility` rules for CSS layout containment and isolation.
-    - `src/components/ui/SectionWrapper.tsx` — Added `isIsolated` and `isolationTier` props.
-    - `src/components/stash/Hero.tsx` — Applied `layout-isolated` to section container.
-    - `src/components/stash/SolutionsHub.tsx` — Applied `layout-isolated` to section container.
-    - `execution/test-layout-isolation.mjs` — Verified test harness.
+    - `src/components/ui/BentoGrid.tsx` — Added layout isolation utilities to BentoGrid and BentoCard.
+    - `src/components/stash/Rooms.tsx` — Added layout isolation to Rooms root element.
+    - `src/components/stash/Connect.tsx` — Added layout isolation to Connect root element.
+    - `src/components/stash/Calculator.tsx` — Added layout isolation to Calculator root element.
+    - `src/components/stash/FAQ.tsx` — Added layout isolation to FAQ root element.
+    - `src/components/stash/PgComparisonTable.tsx` — Added layout isolation to PgComparisonTable root element.
+    - `src/components/stash/StashTimeline.tsx` — Added layout isolation to StashTimeline root element.
+    - `src/components/stash/StudentStoriesCarousel.tsx` — Added layout isolation to StudentStoriesCarousel root element.
+    - `src/components/stash/HostRules.tsx` — Added layout isolation to HostRules root element.
+    - `src/components/stash/KanpurStudentCouncil.tsx` — Added layout isolation to KanpurStudentCouncil root element.
+    - `src/components/stash/KakadeoSurvivalGuide.tsx` — Added layout isolation to KakadeoSurvivalGuide root element.
+    - `src/components/stash/CoachingHubTiffinPage.tsx` — Added layout isolation to CoachingHubTiffinPage root container.
+    - `src/components/stash/ExecutiveAnalyticsDashboard.tsx` — Added layout isolation to ExecutiveAnalyticsDashboard root element.
+    - `src/components/stash/MyBookingsDashboard.tsx` — Added layout isolation to MyBookingsDashboard root element.
+    - `src/components/stash/ProcessTransparency.tsx` — Added layout isolation to ProcessTransparency root element.
+    - `src/components/stash/ZeroRisk.tsx` — Added layout isolation to ZeroRisk root element.
+    - `src/components/stash/RoleLane.tsx` — Added layout isolation to RoleLane root element.
     - `docs/tasks/PRD.md` — Marked Task 120 as completed (`- [x]`).
     - `docs/tasks/progress.md` — Appended Task 120 execution log.
     - `progress.md` — Appended Task 120 execution log.
+
 
 - [x] **[UI - Truncation & Multi-line Clamping / harden] Task 119: Apply responsive line-clamping (`line-clamp-1`, `line-clamp-2`, `line-clamp-3`) with tooltip fallbacks to prevent card layout breakage on verbose Hindi strings — 2026-09-13**:
   - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).

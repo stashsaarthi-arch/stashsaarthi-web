@@ -144,7 +144,7 @@ Sprint 10: QA, CSO & CEO (Total Assurance, Compliance & Strategic Direction)
 - [x] 120. **[UI - Layout Isolation / optimize]**: Add CSS `contain: layout style` to heavy independent sections to eliminate unnecessary browser reflows during page interaction.
 
 ## Sprint 13: Hero Sections, Persuade Surfaces & Visual Impact (impeccable bolder, shape, delight)
-- [ ] 121. **[UI - Student Hero Overhaul / bolder]**: Redesign Student Persona Hero with ultra-crisp neon emerald headline glow, floating 3D luggage mockups, and instant ₹300/mo value badge.
+- [x] 121. **[UI - Student Hero Overhaul / bolder]**: Redesign Student Persona Hero with ultra-crisp neon emerald headline glow, floating 3D luggage mockups, and instant ₹300/mo value badge.
 - [ ] 122. **[UI - Host Hero Overhaul / bolder]**: Redesign Senior Host Persona Hero with warm sunset gold illumination, dignified ₹11,500+/mo passive income badge, and trust seals.
 - [ ] 123. **[UI - Interactive Value Switcher / delight]**: Design an interactive hero toggle demonstrating the immediate contrast between "Wasting ₹8,000 dead rent" vs "Saarthi Stash ₹300/mo".
 - [ ] 124. **[UI - Hyperlocal Campus Radar Widget / shape]**: Rebuild the Hero Campus Node Radar with real-time pulsing beacons for Kakadeo, IIT Kanpur, HBTI, and CSJMU.
