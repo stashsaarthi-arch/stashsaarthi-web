@@ -504,6 +504,17 @@ function RootComponent() {
   const routerState = useRouterState();
   const currentRoute = routerState.location.pathname;
 
+  // Detect mobile viewport to disable Lenis smooth scroll (native touch is faster on budget phones)
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined" ? window.innerWidth < 768 : false
+  );
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener("resize", handleResize, { passive: true });
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   useEffect(() => {
     initWebGLSafetyGuard();
     initAutoDataRetentionPurge();

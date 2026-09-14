@@ -254,6 +254,64 @@ body[data-lang="hi"] {
 
 
 
+/* ═══════════════════════════════════════════════════════════════════════════
+ * MOBILE PERFORMANCE GUARD — Anti-Jank, Anti-Overflow, Anti-Frame-Drop
+ * Applied globally to prevent horizontal micro-scrolls and GPU overload.
+ * ═══════════════════════════════════════════════════════════════════════════ */
+
+html,
+body {
+  overflow-x: hidden !important;
+  overscroll-behavior-x: none;
+}
+
+/* ── Mobile-Only Performance Optimizations (<768px) ──────────────────────── */
+@media (max-width: 767px) {
+  /* Kill backdrop-blur on fixed overlays — #1 GPU killer on Android Go / budget phones */
+  .fixed[class*="backdrop-blur"],
+  [class*="fixed"][class*="backdrop-blur"] {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  /* Reduce all blur() to max 20px on mobile to cut composite cost */
+  [class*="blur-[80px]"],
+  [class*="blur-[90px]"] {
+    filter: blur(20px) !important;
+  }
+
+  /* Pause gratuitous infinite animations that burn GPU cycles off-screen */
+  .animate-bounce {
+    animation: none !important;
+  }
+
+  /* Reduce ping animations to a simpler opacity pulse */
+  .animate-ping {
+    animation: mobile-gentle-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite !important;
+  }
+
+  @keyframes mobile-gentle-ping {
+    0% { opacity: 1; }
+    75%, 100% { opacity: 0; }
+  }
+
+  /* Cap hero glow width to prevent horizontal overflow */
+  [class*="w-[min(900px,140vw)"] {
+    max-width: 100vw !important;
+  }
+}
+
+/* ── Reduced Motion: Respect accessibility preferences ──────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 
 :root {
   --radius: 1rem;
