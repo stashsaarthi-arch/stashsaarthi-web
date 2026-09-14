@@ -3,11 +3,14 @@ import { Button, type ButtonProps } from "@/components/ui/button";
 import { playHeroCtaClick } from "@/lib/audio";
 import { getHeroCtaGlowClasses, type HeroCtaVariantTier } from "@/lib/designTokens";
 import { cn } from "@/lib/utils";
+import { MagneticButton } from "@/components/ui/MagneticButton";
 
 export interface HeroCtaButtonProps extends ButtonProps {
   heroVariant?: HeroCtaVariantTier;
   showBorderGlow?: boolean;
   wrapperClassName?: string;
+  enableMagnetic?: boolean;
+  magneticStrength?: number;
 }
 
 export const HeroCtaButton = React.forwardRef<HTMLButtonElement, HeroCtaButtonProps>(
@@ -16,6 +19,8 @@ export const HeroCtaButton = React.forwardRef<HTMLButtonElement, HeroCtaButtonPr
       heroVariant = "mint",
       showBorderGlow = true,
       wrapperClassName,
+      enableMagnetic = true,
+      magneticStrength = 0.35,
       className,
       variant,
       onClick,
@@ -33,35 +38,38 @@ export const HeroCtaButton = React.forwardRef<HTMLButtonElement, HeroCtaButtonPr
 
     const resolvedVariant = variant || (heroVariant === "amber" || heroVariant === "warm" ? "warm" : heroVariant === "emerald" || heroVariant === "heroEmerald" ? "heroEmerald" : heroVariant === "cyan" || heroVariant === "heroCyan" ? "heroCyan" : "heroMint");
 
-    if (!showBorderGlow) {
+    const innerButton = (
+      <Button
+        ref={ref}
+        variant={resolvedVariant}
+        onClick={handleClick}
+        className={cn(glowSpec.buttonClasses, className)}
+        {...props}
+      >
+        {children}
+      </Button>
+    );
+
+    const buttonWithGlow = showBorderGlow ? (
+      <div className={cn(glowSpec.wrapperClasses, wrapperClassName)}>
+        <div className={glowSpec.borderClasses} aria-hidden="true" />
+        {innerButton}
+      </div>
+    ) : (
+      innerButton
+    );
+
+    if (enableMagnetic) {
       return (
-        <Button
-          ref={ref}
-          variant={resolvedVariant}
-          onClick={handleClick}
-          className={cn(glowSpec.buttonClasses, className)}
-          {...props}
-        >
-          {children}
-        </Button>
+        <MagneticButton strength={magneticStrength} showGlow={false} soundEffect={false}>
+          {buttonWithGlow}
+        </MagneticButton>
       );
     }
 
-    return (
-      <div className={cn(glowSpec.wrapperClasses, wrapperClassName)}>
-        <div className={glowSpec.borderClasses} aria-hidden="true" />
-        <Button
-          ref={ref}
-          variant={resolvedVariant}
-          onClick={handleClick}
-          className={cn(glowSpec.buttonClasses, className)}
-          {...props}
-        >
-          {children}
-        </Button>
-      </div>
-    );
+    return buttonWithGlow;
   }
 );
 
 HeroCtaButton.displayName = "HeroCtaButton";
+

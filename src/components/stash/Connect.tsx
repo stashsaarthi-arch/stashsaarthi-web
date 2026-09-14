@@ -19,6 +19,8 @@ import { useLanguage } from "@/context/LanguageContext";
 import { ConnectAudioWidget } from "./ConnectAudioWidget";
 import { KarmaPointsBadge, KarmaPointsModal, type SeniorTier } from "./KarmaPointsModal";
 import { StudentTestimonialVideosWidget } from "./StudentTestimonialVideosWidget";
+import { SaarthiConnectCard2 } from "@/components/ui/SaarthiConnectCard2";
+
 
 const CITIES = ["Kanpur", "Lucknow", "Delhi NCR", "Pune"] as const;
 type City = (typeof CITIES)[number];
@@ -232,69 +234,16 @@ export function Connect(_props: { onBook: OpenBooking }) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ type: "spring", stiffness: 220, damping: 24 }}
-              className="glass mt-4 rounded-2xl p-4 sm:p-5"
+              className="mt-4"
             >
-              <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2">
-                <div className="flex items-center gap-2 truncate">
-                  <span className="text-[11px] uppercase tracking-widest text-muted-foreground">
-                    {isHi
-                      ? `${CITIES_HI[match.city]} ${t.connectSection.liveSimulation}`
-                      : `${match.city} Live Simulation`}
-                  </span>
-                  <PrototypeBadge variant="text" />
-                </div>
-                <span className="flex shrink-0 items-center gap-1 rounded-full border border-emerald/30 bg-emerald/10 px-2.5 py-0.5 text-xs font-bold text-emerald">
-                  <Sparkles className="h-3 w-3" /> {match.score}% {t.connectSection.compatibility}
-                </span>
-              </div>
-
-              <div className="mt-3.5 grid items-stretch gap-2.5 sm:grid-cols-[1fr_auto_1fr]">
-                <ProfileCard
-                  icon={<GraduationCap className="h-4 w-4 text-cyan" />}
-                  accent="var(--cyan)"
-                  name={match.student.name}
-                  detail={
-                    isHi && match.student.detail_hi ? match.student.detail_hi : match.student.detail
-                  }
-                  label={t.connectSection.gives}
-                  items={
-                    isHi && match.student.gives_hi ? match.student.gives_hi : match.student.gives
-                  }
-                />
-
-                <div className="flex items-center justify-center">
-                  <span className="grid h-8 w-8 place-items-center rounded-full border border-white/10 bg-white/5 text-muted-foreground">
-                    <ArrowLeftRight className="h-3.5 w-3.5" />
-                  </span>
-                </div>
-
-                <ProfileCard
-                  icon={<Heart className="h-4 w-4 text-amber" />}
-                  accent="var(--amber)"
-                  name={match.senior.name}
-                  detail={
-                    isHi && match.senior.detail_hi ? match.senior.detail_hi : match.senior.detail
-                  }
-                  label={t.connectSection.offers}
-                  items={
-                    isHi && match.senior.offers_hi ? match.senior.offers_hi : match.senior.offers
-                  }
-                  karmaPoints={match.senior.karmaPoints}
-                  karmaTier={match.senior.karmaTier}
-                  onKarmaClick={() => setKarmaModal(true)}
-                />
-              </div>
-
-              <Button
-                variant="hero"
-                size="lg"
-                className="mt-6 w-full cursor-pointer"
-                onClick={() => setDrawer(true)}
-              >
-                {t.connectSection.requestMatch}
-              </Button>
+              <SaarthiConnectCard2
+                match={match}
+                onRequestMatch={() => setDrawer(true)}
+                onKarmaClick={() => setKarmaModal(true)}
+              />
             </motion.div>
           </AnimatePresence>
+
         </>
       ) : activeTab === "quiz" ? (
         <motion.div

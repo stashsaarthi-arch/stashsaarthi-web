@@ -1,4 +1,404 @@
+ralph-done-atufh
+
 # Ralph Autonomous Workforce Sprint Progress
+
+
+- [x] **[UI - Dynamic Pricing Breakdown Drawer / clarify] Task 165: Implement a crystal-clear price summary drawer showing base rate, zero brokerage savings, and platform fee with 100% transparency — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-pricing-breakdown-drawer.mjs` — ✅ PASSED (Task 165 verification checks passed 100%).
+  - **Dynamic Pricing Breakdown Drawer Architecture**:
+    - `src/lib/designTokens.ts`: Defined `PRICING_BREAKDOWN_DRAWER_TOKENS` (`feeStructure` for ₹300/bag/mo base rate, ₹180 host payout, ₹80 net margin, ₹10k free insurance cover, ₹0 doorstep seal fee, ₹4,000 dead rent savings; `transparencyPills` for 0% brokerage, ₹10k safety cover, doorstep pickup & laser seal; `personaAccents` for Emerald/Cyan Student vs Amber/Gold Host) and exported `getPricingBreakdownDrawerTokens` helper function.
+    - `src/styles.css`: Added CSS utilities (`.pricing-drawer-container`, `.pricing-breakdown-row`, `.pricing-savings-pill`) for glassmorphism backdrop blur and persona-aware savings pills.
+    - `src/components/ui/PricingBreakdownDrawer.tsx`: Created reusable primitive `PricingBreakdownDrawer` featuring live itemized breakdown (Base micro-storage rate, zero brokerage savings, ₹10,000 complimentary insurance shield, doorstep pickup + laser QR seal, transparent platform micro-fee), dead-rent savings shield callout banner, 3 transparency trust pills, net total payable card with escrow lock badge, Web Audio haptic feedback (`playPop`, `playClick`), dual-persona theme support (`usePersona()`), and bilingual support (`en`/`hi`).
+    - `src/components/ui/primitives.ts`: Re-exported `PricingBreakdownDrawer`, `PricingBreakdownDrawerProps`, and `PricingBreakdownItem`.
+    - `execution/test-pricing-breakdown-drawer.mjs`: Created test harness validating design tokens, CSS rules, component implementation, primitive re-exports, and clean production build compilation.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `PRICING_BREAKDOWN_DRAWER_TOKENS` & `getPricingBreakdownDrawerTokens`.
+    - `src/styles.css` — Added Pricing Breakdown Drawer CSS rules.
+    - `src/components/ui/PricingBreakdownDrawer.tsx` — Created PricingBreakdownDrawer primitive component.
+    - `src/components/ui/primitives.ts` — Re-exported PricingBreakdownDrawer primitive.
+    - `execution/test-pricing-breakdown-drawer.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 165 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 165 execution log.
+    - `progress.md` — Appended Task 165 execution log.
+
+
+
+- [x] **[UI - Date & Time Slot Picker / harden] Task 164: Design a custom calendar date-range and pickup slot selector optimized for touch devices with campus holiday preset chips — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-date-time-slot-picker.mjs` — ✅ PASSED (Task 164 verification checks passed 100%).
+  - **Date & Time Slot Picker Architecture**:
+    - `src/lib/designTokens.ts`: Defined `DATE_TIME_SLOT_PICKER_TOKENS` (`holidayPresets` for Summer Break 71d, Diwali Holidays 13d, Holi Break 10d, Semester Exit 35d, Quick Storage 7d; `timeSlots` for Morning 8-11am, Afternoon 12-3pm, Evening 4-7pm, Night 7-9:30pm; `touchTargets` min 48px; `personaAccents` for Emerald/Cyan Student vs Amber/Gold Host) and exported `getDateTimeSlotPickerTokens` helper function.
+    - `src/styles.css`: Added CSS utilities (`.date-time-picker-stage`, `.preset-holiday-chip`, `.preset-holiday-chip-active`, `.time-slot-card`, `.time-slot-card-active`, `@keyframes slot-select-pop`) with persona accent glows and active pop animations.
+    - `src/components/ui/DateTimeSlotPicker.tsx`: Created touch-optimized `DateTimeSlotPicker` primitive component featuring campus holiday preset chips (1-tap auto-fill of start & end dates), custom touch-friendly date inputs (min today limit, auto-duration & dead-rent savings calculator), 4 pickup time slot cards (min 48px touch height, traffic badges), Web Audio haptic feedback (`playPop`, `playClick`), summary savings callout pill, dual-persona theme support (`usePersona()`), and bilingual support (`en`/`hi`).
+    - `src/components/ui/primitives.ts`: Re-exported `DateTimeSlotPicker`, `DateTimeSlotPickerProps`, and `DateTimeSlotSelection`.
+    - `execution/test-date-time-slot-picker.mjs`: Created test harness validating design tokens, CSS rules, component implementation, primitive re-exports, and clean production build compilation.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `DATE_TIME_SLOT_PICKER_TOKENS` & `getDateTimeSlotPickerTokens`.
+    - `src/styles.css` — Added Date & Time Slot Picker CSS rules & `@keyframes slot-select-pop`.
+    - `src/components/ui/DateTimeSlotPicker.tsx` — Created DateTimeSlotPicker primitive component.
+    - `src/components/ui/primitives.ts` — Re-exported DateTimeSlotPicker primitive.
+    - `execution/test-date-time-slot-picker.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 164 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 164 execution log.
+    - `progress.md` — Appended Task 164 execution log.
+
+
+
+- [x] **[UI - Luggage Itemizer Visualizer / shape] Task 163: Build an intuitive visual luggage itemizer allowing students to tap 3D-styled icons for suitcases, cartons, coolers, and backpacks — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-luggage-itemizer.mjs` — ✅ PASSED (5/5 LUGGAGE ITEMIZER VISUALIZER CHECKS PASSED 100%).
+  - **Luggage Itemizer Visualizer Architecture**:
+    - `src/lib/designTokens.ts`: Defined `LUGGAGE_ITEMIZER_TOKENS` (`categories` for Trolley Suitcases ₹300/mo 100L, Books/Gear Cartons ₹250/mo 60L, Air Coolers ₹400/mo 140L, Backpacks ₹150/mo 40L, Bedding Rolls ₹200/mo 80L; `presets` for Hostel Vacation Standard, Full Semester Moveout, Light Summer Break; `spaceCalculation` for 500L vault capacity, 10% multi-item bundle discount; `personaAccents` for Emerald/Cyan Student vs Amber/Gold Host) and exported `getLuggageItemizerTokens` helper function.
+    - `src/styles.css`: Added CSS utilities (`.luggage-itemizer-container`, `.luggage-item-card`, `.luggage-item-card-active`, `.luggage-3d-icon-stage`, `.luggage-count-badge`, `@keyframes luggage-pop-bounce`, `.luggage-vault-meter`, `.luggage-vault-meter-fill`) with persona accent glows, focus transforms, and bounce animations.
+    - `src/components/ui/LuggageItemizerVisualizer.tsx`: Created reusable primitive component `LuggageItemizerVisualizer` featuring 3D-styled item cards with pop count badges, interactive increment/decrement counters, quick bundle preset chips, host vault volume capacity meter (Liters & % fill bar), 10% bundle discount indicator, dead rent savings callout, Web Audio haptic feedback (`playCounterIncrement`, `playCounterDecrement`, `playPop`), dual-persona theme support (`usePersona()`), and bilingual support (`en`/`hi`).
+    - `src/components/ui/primitives.ts`: Re-exported `LuggageItemizerVisualizer`, `LuggageItemizerVisualizerProps`, and `LuggageItemSelection`.
+    - `execution/test-luggage-itemizer.mjs`: Created test harness validating design tokens, CSS rules, component implementation, primitive re-exports, and clean production build compilation.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `LUGGAGE_ITEMIZER_TOKENS` & `getLuggageItemizerTokens`.
+    - `src/styles.css` — Added luggage itemizer CSS rules & `@keyframes luggage-pop-bounce`.
+    - `src/components/ui/LuggageItemizerVisualizer.tsx` — Created LuggageItemizerVisualizer primitive component.
+    - `src/components/ui/primitives.ts` — Re-exported LuggageItemizerVisualizer primitive.
+    - `execution/test-luggage-itemizer.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 163 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 163 execution log.
+    - `progress.md` — Appended Task 163 execution log.
+
+- [x] **[UI - Phone Number & OTP Input Redesign / clarify] Task 162: Create high-legibility +91 Indian phone and 6-digit OTP input boxes with auto-advance, digit paste support, and clear error hints — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-phone-otp-input.mjs` — ✅ PASSED (5/5 PHONE & 6-DIGIT OTP INPUT CHECKS PASSED 100%).
+  - **Phone & 6-Digit OTP Input Architecture**:
+    - `src/lib/designTokens.ts`: Defined `PHONE_OTP_INPUT_TOKENS` (`countryCode: "+91"`, `countryFlag: "🇮🇳"`, `otpLength: 6`, `phoneLength: 10`, `validPrefixes: ["6","7","8","9"]`, `resendCooldownSec: 30`, `errorHints`, `personaAccents` for Emerald/Cyan Student vs Amber/Gold Host) and exported `getPhoneOtpInputTokens` helper function.
+    - `src/styles.css`: Added CSS utilities (`.phone-input-wrapper`, `.phone-prefix-pill`, `.otp-digit-grid`, `.otp-digit-cell`, `.otp-digit-filled`, `.otp-digit-error`, `@keyframes otp-shake`) with persona accent glows, focus transforms, and shake error animations.
+    - `src/components/ui/PhoneOtpInput.tsx`: Created reusable primitives `IndianPhoneInput` (with +91 country badge, live digit formatting, validation checkmark, error hints, Web Audio feedback), `OtpSixDigitInput` (6 digit cells, auto-advance focus navigation, backspace focus traversal, clipboard digit paste support, left/right arrow key navigation, resend countdown timer), and `PhoneOtpAuthFlow` (unified phone -> send OTP -> verification flow).
+    - `src/components/ui/primitives.ts`: Re-exported `IndianPhoneInput`, `OtpSixDigitInput`, `PhoneOtpAuthFlow`, and their prop types.
+    - `src/components/stash/BookingModal.tsx`: Integrated `IndianPhoneInput` directly into Step 1 contact details form for verified +91 mobile entry.
+    - `execution/test-phone-otp-input.mjs`: Created test harness validating design tokens, CSS rules, component implementation, primitive re-exports, BookingModal integration, and clean production build compilation.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `PHONE_OTP_INPUT_TOKENS` & `getPhoneOtpInputTokens`.
+    - `src/styles.css` — Added phone & OTP input CSS rules & `@keyframes otp-shake`.
+    - `src/components/ui/PhoneOtpInput.tsx` — Created IndianPhoneInput, OtpSixDigitInput, and PhoneOtpAuthFlow components.
+    - `src/components/ui/primitives.ts` — Re-exported PhoneOtpInput primitives.
+    - `src/components/stash/BookingModal.tsx` — Integrated IndianPhoneInput into BookingModal contact step.
+    - `execution/test-phone-otp-input.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 162 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 162 execution log.
+    - `progress.md` — Appended Task 162 execution log.
+
+- [x] **[UI - Multi-Step Booking Modal Overhaul / harden] Task 161: Redesign the core `BookingModal` into a distraction-free, 3-step progress journey with clear breadcrumbs and step validation — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-multi-step-booking-modal.mjs` — ✅ PASSED (3/3 MULTI-STEP BOOKING MODAL CHECKS PASSED 100%).
+  - **Multi-Step Booking Modal Overhaul Architecture**:
+    - `src/lib/designTokens.ts`: Defined `MULTI_STEP_BOOKING_TOKENS` (`stepBreadcrumbs` for Step 1: Config & Contact, Step 2: Escrow Lock, Step 3: Digital StashPass; `validationGlows` for error shakes & valid states; `personaAccents` for Emerald/Cyan Student vs Amber/Gold Host) and exported `getMultiStepBookingTokens` helper function.
+    - `src/styles.css`: Added CSS utilities (`.distraction-free-booking-stage`, `.booking-breadcrumb-pill`, `.booking-validation-error-glow`) for zero-distraction modal containment, interactive breadcrumb navigation pills, and glowing error warning banners.
+    - `src/components/stash/BookingModal.tsx`: Refactored `BookingModal` into a hardened 3-step progress journey featuring `usePersona()` theme integration, interactive step breadcrumb navigation bar, real-time input validation (Name >= 2 chars, Phone 10 digits, valid email/PIN), inline error alert banners, Web Audio feedback (`playPop`, `playClick`), escrow terms waiver validation, and seamless StashPass pass generation.
+    - `execution/test-multi-step-booking-modal.mjs`: Created verification test script asserting design tokens, CSS rules, component implementation, audio feedback, and clean production build compilation.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `MULTI_STEP_BOOKING_TOKENS` & `getMultiStepBookingTokens`.
+    - `src/styles.css` — Added distraction-free modal & breadcrumbs CSS utilities.
+    - `src/components/stash/BookingModal.tsx` — Refactored BookingModal into hardened 3-step progress journey.
+    - `execution/test-multi-step-booking-modal.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 161 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 161 execution log.
+    - `progress.md` — Appended Task 161 execution log.
+
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-laser-seal-barcode-glow.mjs` — ✅ PASSED (ALL LASER SEAL BARCODE GLOW VERIFICATIONS PASSED SUCCESSFULLY).
+  - **Laser Seal Barcode Glow Architecture**:
+    - `src/lib/designTokens.ts`: Defined `LASER_BARCODE_SEAL_TOKENS` (`beamSweepDurationMs: 2400`, `glowColorStudent: "#10B981"`, `glowColorHost: "#F59E0B"`, `laserBeamColorStudent`, `laserBeamColorHost`, `laserTrailGradientStudent`, `laserTrailGradientHost`, `defaultSerialCode: "QR-SEAL-8839-X"`, `securityStandards`) and exported `getLaserBarcodeSealTokens` helper function.
+    - `src/styles.css`: Added keyframes (`@keyframes laser-barcode-beam-sweep`, `@keyframes barcode-lines-rhythmic-glow`, `@keyframes laser-seal-pulse-ring`) and CSS utility classes (`.laser-barcode-seal-container`, `.laser-barcode-beam`, `laser-seal-beam-student`, `laser-seal-beam-host`, `laser-seal-glow-student`, `laser-seal-glow-host`, `.barcode-lines-glow-active`) with prefers-reduced-motion overrides.
+    - `src/components/ui/LaserSealBarcode.tsx`: Built feature-packed `LaserSealBarcode` primitive component displaying sweeping laser beam animation, realistic SVG barcode pattern, dual-persona accent glows (`usePersona()`), interactive verification status ("SEAL INTACT", "SCANNING..."), Web Audio sound chimes (`playSuccessChime`, `playClick`, `playPop`), serial code display, and security badges (TPA Sec 105 & ₹10,000 Micro-Insurance Shield).
+    - `src/components/ui/primitives.ts`: Re-exported `LaserSealBarcode` and `LaserSealBarcodeProps`.
+    - `src/components/ui/SaarthiStashCard2.tsx`: Integrated `LaserSealBarcode` into the Micro-Storage tamper-proof seal indicator section.
+    - `execution/test-laser-seal-barcode-glow.mjs`: Created test harness validating design tokens, CSS rules, component implementation, primitive re-exports, card integration, and clean production build compilation.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `LASER_BARCODE_SEAL_TOKENS` & `getLaserBarcodeSealTokens`.
+    - `src/styles.css` — Added laser barcode glow keyframes & CSS utility classes.
+    - `src/components/ui/LaserSealBarcode.tsx` — Created LaserSealBarcode primitive component.
+    - `src/components/ui/primitives.ts` — Re-exported LaserSealBarcode primitive.
+    - `src/components/ui/SaarthiStashCard2.tsx` — Integrated LaserSealBarcode into storage card.
+    - `execution/test-laser-seal-barcode-glow.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 160 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 160 execution log.
+    - `progress.md` — Appended Task 160 execution log.
+
+- [x] **[UI - Tab Switching Indicator Glides / animate] Task 159: Implement fluid sliding background pills for tab navigations using layout transitions (Framer Motion / CSS layoutId logic) — 2026-09-14**:
+
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-tab-gliding-indicator.mjs` — ✅ PASSED (ALL TAB SWITCHING INDICATOR GLIDE VERIFICATIONS PASSED SUCCESSFULLY).
+  - **Tab Switching Indicator Glides Architecture**:
+    - `src/lib/designTokens.ts`: Defined `TAB_GLIDER_TOKENS` (`springConfig` with stiffness 450 & damping 32; `variants` for pills, segmented, underline, contained; dual-persona glows for Mint/Emerald vs Amber/Gold) and exported `getTabGliderTokens` helper function.
+    - `src/styles.css`: Added CSS utility classes (`.tab-glider-container`, `.tab-glider-pill`, `tab-glider-pill-student`, `tab-glider-pill-host`, `tab-glider-item`, `tab-glider-underline`) with high-performance CSS hardware acceleration and reduced-motion overrides.
+    - `src/components/ui/GlidingTabs.tsx`: Built feature-packed `GlidingTabs` primitive component utilizing Framer Motion `motion.div` with dynamic `layoutId` layout transitions, dual-persona accent glow themes (`usePersona()`), Web Audio haptic feedback on tab change (`playToggleSwitch`), low-data mode performance fallback (`isLowDataModeEnabled()`), and accessible tablist ARIA attributes.
+    - `src/components/ui/primitives.ts`: Re-exported `GlidingTabs`, `GlidingTabsProps`, and `TabOption` types.
+    - `src/components/stash/SolutionsHub.tsx`: Integrated `GlidingTabs` primitive across the main landing page solutions hub switcher for smooth, fluid sliding tab indicator glides.
+    - `execution/test-tab-gliding-indicator.mjs`: Created test harness validating design tokens, CSS rules, component implementation, primitive re-exports, SolutionsHub integration, and clean production build compilation.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `TAB_GLIDER_TOKENS` & `getTabGliderTokens`.
+    - `src/styles.css` — Added tab glider CSS utility rules.
+    - `src/components/ui/GlidingTabs.tsx` — Created GlidingTabs component with motion layoutId sliding pill logic.
+    - `src/components/ui/primitives.ts` — Re-exported GlidingTabs primitive.
+    - `src/components/stash/SolutionsHub.tsx` — Integrated GlidingTabs in SolutionsHub.
+    - `execution/test-tab-gliding-indicator.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 159 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 159 execution log.
+    - `progress.md` — Appended Task 159 execution log.
+
+
+
+- [x] **[UI - Magnetic Buttons / overdrive] Task 156: Add subtle magnetic pull micro-interactions on primary desktop CTA buttons where the button gently attracts toward the cursor — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-magnetic-buttons.mjs` — ✅ PASSED (11/11 MAGNETIC BUTTONS MICRO-INTERACTION CHECKS PASSED 100%).
+  - **Magnetic Buttons Micro-Interaction Architecture**:
+    - `src/lib/designTokens.ts`: Defined `MAGNETIC_BUTTON_TOKENS` (`magneticStrength: 0.35`, `magneticRadiusPx: 120`, `maxDisplacementPx: 18`, `touchThresholdPx: 768`, `springConfig`, `resetTransitionCss`, `pullTransitionCss`, `personaGlows`) along with `getMagneticButtonTokens(role)` helper function.
+    - `src/styles.css`: Added CSS classes (`.magnetic-button-wrapper`, `.magnetic-button-stage`, `.magnetic-button-pulled`), dual-persona pull glow utility classes (`magnetic-button-glow-student`, `magnetic-button-glow-host`), fallback rule (`magnetic-button-disabled`), and reduced motion media query (`@media (prefers-reduced-motion: reduce)`).
+    - `src/components/ui/MagneticButton.tsx`: Created reusable `MagneticButton` component incorporating dual-persona theme integration (`usePersona()`), low-data mode check (`isLowDataModeEnabled()`), touch/mobile safety guard (<768px viewports, `hover: none`, or touch pointer), `requestAnimationFrame`-throttled cursor attraction displacement calculation, and Web Audio haptics (`playHeroCtaClick()`).
+    - `src/components/ui/primitives.ts`: Re-exported `MagneticButton` primitive and `MagneticButtonProps`.
+    - `src/components/ui/HeroCtaButton.tsx`: Integrated `MagneticButton` wrapper with `enableMagnetic` option into `HeroCtaButton` for primary hero CTAs.
+    - `execution/test-magnetic-buttons.mjs`: Created test harness validating design tokens, CSS rules, component implementation, primitive re-export, HeroCtaButton integration, and clean production build compilation.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `MAGNETIC_BUTTON_TOKENS` & `getMagneticButtonTokens`.
+    - `src/styles.css` — Added magnetic button CSS utility rules & glow classes.
+    - `src/components/ui/MagneticButton.tsx` — Created reusable MagneticButton component.
+    - `src/components/ui/primitives.ts` — Re-exported MagneticButton primitive.
+    - `src/components/ui/HeroCtaButton.tsx` — Integrated MagneticButton in HeroCtaButton.
+    - `execution/test-magnetic-buttons.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 156 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 156 execution log.
+    - `progress.md` — Appended Task 156 execution log.
+
+
+
+ralph-done-f37qa
+
+- [x] **[UI - Interactive Dead Rent Savings Slider / delight] Task 157: Build a delightful interactive slider where dragging the vacation days dynamically animates saved currency notes and savings milestones — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-dead-rent-savings-slider.mjs` — ✅ PASSED (ALL TASK 157 CHECKS PASSED PERFECTLY).
+  - **Interactive Dead Rent Savings Slider Architecture**:
+    - `src/lib/designTokens.ts`: Defined `DEAD_RENT_SLIDER_TOKENS` (`milestones` for 30, 60, 90, 120 days; `currencyNoteParticles` particle burst physics; `presetDays`; `mathFormulas` for ₹4,000/mo PG rent vs ₹300/bag/mo storage rate) and exported `getDeadRentSliderTokens` helper function.
+    - `src/styles.css`: Added `@keyframes note-float-up`, `@keyframes milestone-pulse-glow`, `.currency-note-particle` class, `.milestone-pulse`, `.dead-rent-slider-thumb` CSS rules with custom green glowing handle and drag interactions.
+    - `src/components/ui/DeadRentSavingsSlider.tsx`: Built feature-packed `DeadRentSavingsSlider` primitive component featuring live drag input (10-120 days), animated currency note particle bursts on slider movement with spring physics (`requestAnimationFrame`), interactive milestone chips with pop haptics, persona color integration (`usePersona()`), zero-brokerage cash savings callouts, and 1-click booking CTA.
+    - `src/components/ui/primitives.ts`: Re-exported `DeadRentSavingsSlider` primitive and `DeadRentSavingsSliderProps`.
+    - `src/components/stash/InteractiveValueSwitcher.tsx`: Added `slider` mode toggle pill ("🎚️ Live Drag Slider") and embedded `DeadRentSavingsSlider` into the comparison view.
+    - `execution/test-dead-rent-savings-slider.mjs`: Created test harness validating design tokens, CSS rules, component structure, primitive re-export, InteractiveValueSwitcher integration, and clean production build.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `DEAD_RENT_SLIDER_TOKENS` & `getDeadRentSliderTokens`.
+    - `src/styles.css` — Added `@keyframes note-float-up`, currency note particle styles & `.dead-rent-slider-thumb`.
+    - `src/components/ui/DeadRentSavingsSlider.tsx` — Created DeadRentSavingsSlider component.
+    - `src/components/ui/primitives.ts` — Re-exported DeadRentSavingsSlider.
+    - `src/components/stash/InteractiveValueSwitcher.tsx` — Integrated DeadRentSavingsSlider and added mode toggle.
+    - `execution/test-dead-rent-savings-slider.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 157 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 157 execution log.
+    - `progress.md` — Appended Task 157 execution log.
+
+- [x] **[UI - Web Audio Haptic Soundscape / delight] Task 155: Expand micro-audio feedback to include distinct, pleasant sounds for toggle switches, item counter increments, and payment confirmations — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-web-audio-soundscape.mjs` — ✅ PASSED (5/5 WEB AUDIO HAPTIC SOUNDSCAPE CHECKS PASSED 100%).
+  - **Web Audio Haptic Soundscape Architecture**:
+    - `src/lib/designTokens.ts`: Defined `WEB_AUDIO_SOUNDSCAPE_TOKENS` (`toggleSwitch` for 440Hz -> 880Hz ON snap vs 750Hz -> 360Hz OFF tick; `counterIncrement` for cheerful ascending pitch step 520Hz + count * 45Hz; `counterDecrement` for descending tick 640Hz -> 320Hz; `paymentConfirmation` for 4-note C5/E5/G5/C6 major chord arpeggio; `successChime` for D5/A5/D6 chime; `warningBeep` for double-beep; `personaGlows`) along with `getAudioSoundscapeTokens` helper function.
+    - `src/lib/audio.ts`: Expanded Web Audio engine with `playToggleSwitch(on)`, `playCounterIncrement(count)`, `playCounterDecrement(count)`, `playPaymentConfirmation()`, `playSuccessChime()`, `playWarningBeep()`, and `isWebAudioSupported()` synthesizer routines.
+    - `src/components/ui/SoundscapePrimitives.tsx`: Created reusable `SoundscapeToggleSwitch`, `HapticItemCounter`, and `HapticPaymentButton` primitive components with accessible ARIA state management, dual-persona theme support (`usePersona()`), and instant Web Audio feedback.
+    - `src/components/ui/primitives.ts`: Re-exported `SoundscapeToggleSwitch`, `HapticItemCounter`, `HapticPaymentButton`, and their TypeScript prop types.
+    - `src/components/stash/ProductSandbox.tsx`: Integrated `playCounterIncrement` and `playCounterDecrement` across luggage count and storage duration sliders.
+    - `execution/test-web-audio-soundscape.mjs`: Created test harness validating design tokens, Web Audio engine functions, Soundscape primitives, primitive re-exports, component integration, and clean production build compilation.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `WEB_AUDIO_SOUNDSCAPE_TOKENS` & `getAudioSoundscapeTokens`.
+    - `src/lib/audio.ts` — Expanded Web Audio soundscape functions.
+    - `src/components/ui/SoundscapePrimitives.tsx` — Created reusable Soundscape primitives.
+    - `src/components/ui/primitives.ts` — Re-exported Soundscape primitives.
+    - `src/components/stash/ProductSandbox.tsx` — Integrated Web Audio soundscape into sandbox sliders.
+    - `execution/test-web-audio-soundscape.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 155 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 155 execution log.
+    - `progress.md` — Appended Task 155 execution log.
+
+
+- [x] **[UI - Scroll-Triggered Reveal Engine / animate] Task 154: Implement staggered section entrance reveals with subtle translation (`translateY(24px) -> 0`) and opacity fades on scroll — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-scroll-reveal-engine.mjs` — ✅ PASSED (9/9 SCROLL-TRIGGERED REVEAL ENGINE CHECKS PASSED 100%).
+  - **Scroll-Triggered Reveal Engine Architecture**:
+    - `src/lib/designTokens.ts`: Defined `SCROLL_REVEAL_TOKENS` (`translateYPx: 24`, `durationMs: 600`, `staggerDelayMs: 120`, `easing: "cubic-bezier(0.16, 1, 0.3, 1)"`, `threshold: 0.15`, `directionOffsets` for `up`/`down`/`left`/`right`/`fade`, persona glow specifications) along with `getScrollRevealTokens`, `getScrollRevealInlineStyles`, and `getScrollRevealClasses` helper functions.
+    - `src/styles.css`: Added keyframes (`@keyframes scroll-reveal-fade-up`, `@keyframes scroll-reveal-fade-in`), CSS classes (`.scroll-reveal-initial`, `.scroll-reveal-active`), `@utility scroll-reveal-stage`, `@utility scroll-reveal-stagger`, Android Go & low-data fallbacks (`[data-android-go="true"]`, `.android-go-mode`), reduced motion accessibility overrides (`@media (prefers-reduced-motion: reduce)`), and persona glow highlights (`[data-persona="student"]`, `[data-persona="host"]`).
+    - `src/components/ui/ScrollReveal.tsx`: Enhanced `ScrollReveal`, `ScrollRevealContainer`, and `ScrollRevealItem` components with IntersectionObserver trigger (`rootMargin: "0px 0px -40px 0px"`), low-data/reduced motion safety guards, persona glow attributes (`data-glow`), staggered delays, and `as` element wrappers.
+    - `src/components/ui/primitives.ts`: Re-exported `ScrollReveal`, `ScrollRevealContainer`, and `ScrollRevealItem` primitives.
+    - `src/routes/index.tsx`: Integrated `ScrollReveal` across primary landing page sections for staggered entrance reveals on scroll.
+    - `execution/test-scroll-reveal-engine.mjs`: Created test harness validating design tokens, CSS rules, component implementation, primitive exports, route integration, and clean production build compilation.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `getScrollRevealClasses` helper & verified `SCROLL_REVEAL_TOKENS`.
+    - `src/styles.css` — Added `@keyframes scroll-reveal-fade-up`, fallbacks, & persona glow CSS rules.
+    - `src/components/ui/ScrollReveal.tsx` — Updated `ScrollReveal` component with `data-glow` attribute.
+    - `src/components/ui/primitives.ts` — Re-exported ScrollReveal primitives.
+    - `execution/test-scroll-reveal-engine.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 154 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 154 execution log.
+    - `progress.md` — Appended Task 154 execution log.
+
+- [x] **[UI - Peacock Feather Micro-Interaction / delight] Task 152: Refine the iconic Peacock Feather dusting animation on Standard Thali selection with crisp particle sparkles and spring physics — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-peacock-feather-interaction.mjs` — ✅ PASSED (PEACOCK FEATHER MICRO-INTERACTION CHECKS PASSED 100%).
+  - **Peacock Feather Micro-Interaction & Sparkle Physics Architecture**:
+    - `src/lib/designTokens.ts`: Defined `PEACOCK_FEATHER_TOKENS` (`sweepPhysics` for 850ms rotational spring arc & scale transforms; `sparkleBurst` for 12 particle sparkles with Amber, Emerald, Cyan, Yellow, White, Indigo colors; `makhanMound` growth specs; `personaAccents`) and helper function `getPeacockFeatherTokens(role)`.
+    - `src/styles.css`: Added keyframes (`@keyframes peacock-spring-sweep`, `@keyframes makhan-particle-float-out`, `@keyframes ghee-matki-radial-pulse`) and CSS utilities (`.peacock-spring-active`, `.makhan-particle-sparkle`, `.matki-ghee-glow`) for physics-based spring rotation, 360-degree floating particle burst, and matki pot ghee lighting.
+    - `src/components/stash/PeacockFeatherMatkiDusting.tsx`: Overhauled component to trigger a 12-particle sparkle burst with random angles and distance vectors, enhanced SVG Peacock Feather with iridescent eye gradient and barb details, SVG clay matki pot with expanding white butter mound, dual-persona theme integration (`usePersona()`), and Web Audio micro-haptics (`playPop()`, `playClick()`).
+    - `src/components/ui/primitives.ts`: Re-exported `PeacockFeatherMatkiDusting` primitive and `PeacockFeatherMatkiDustingProps`.
+    - `src/components/ui/SaarthiKitchenCard2.tsx`: Rendered compact `PeacockFeatherMatkiDusting` trigger inline with Standard Thali card title.
+    - `execution/test-peacock-feather-interaction.mjs`: Created test harness validating design tokens, CSS rules, component implementation, primitive re-export, card integration, and clean production build compilation.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `PEACOCK_FEATHER_TOKENS` & `getPeacockFeatherTokens`.
+    - `src/styles.css` — Added `@keyframes peacock-spring-sweep`, particle sparkle CSS rules & utilities.
+    - `src/components/stash/PeacockFeatherMatkiDusting.tsx` — Overhauled PeacockFeatherMatkiDusting component.
+    - `src/components/ui/primitives.ts` — Re-exported PeacockFeatherMatkiDusting primitive.
+    - `src/components/ui/SaarthiKitchenCard2.tsx` — Rendered PeacockFeatherMatkiDusting in Standard Thali card.
+    - `execution/test-peacock-feather-interaction.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 152 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 152 execution log.
+    - `progress.md` — Appended Task 152 execution log.
+
+- [x] **[UI - 3D Card Hover Physics / animate] Task 151: Upgrade `Card3D` with smooth GPU-accelerated tilt, dynamic cursor-following specular glare, and auto-disable on touch devices — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-card-3d-hover-physics.mjs` — ✅ PASSED (3D CARD HOVER PHYSICS CHECKS PASSED 100%).
+  - **3D Card Hover Physics Architecture**:
+    - `src/lib/designTokens.ts`: Defined `CARD_3D_TOKENS` (`maxTiltDeg: 12`, `tiltCoefficient: 1.0`, `perspectivePx: 1000`, `glareMaxOpacity: 0.35`, `touchThresholdPx: 768`, `transitionTiming`, dual-persona `glareGradients`) and helper function `getCard3DTokens(role)`.
+    - `src/styles.css`: Added CSS utilities (`.card-3d-stage`, `.card-3d-wrapper`, `.card-3d-glare`, `[data-persona="host"] .card-3d-glare`, `.card-3d-glare-active`, `.card-3d-disabled`) providing GPU-accelerated 3D perspective containment, specular glare blending, and auto-disabled layout fallbacks.
+    - `src/components/ui/Card3D.tsx`: Upgraded `Card3D` primitive with `requestAnimationFrame`-throttled cursor tracking, relative 3D tilt calculation (`rotateX`, `rotateY`, `scale3d(1.02, 1.02, 1.02)`), dynamic cursor-following specular glare position (`--glare-x`, `--glare-y`), persona gradient awareness via `usePersona()`, low-data mode check (`isLowDataModeEnabled()`), and auto-disable touch protection (<768px viewports, `hover: none`, or touch pointer) to preserve locked 60-120 FPS scrolling.
+    - `src/components/ui/primitives.ts`: Re-exported `Card3D` and `Card3DProps`.
+    - `execution/test-card-3d-hover-physics.mjs`: Created test harness validating design tokens, CSS rules, component upgrade, primitive re-export, and clean production build compilation.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `CARD_3D_TOKENS` & `getCard3DTokens`.
+    - `src/styles.css` — Added `.card-3d` CSS utilities & glare rules.
+    - `src/components/ui/Card3D.tsx` — Upgraded Card3D primitive component.
+    - `src/components/ui/primitives.ts` — Re-exported Card3D primitive.
+    - `execution/test-card-3d-hover-physics.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 151 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 151 execution log.
+    - `progress.md` — Appended Task 151 execution log.
+
+- [x] **[UI - Skeleton Loader Polishing / polish] Task 150: Design shimmering wave skeleton loaders matching the exact geometric layout of cards to eliminate layout jump during data loading — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-skeleton-loader-polishing.mjs` — ✅ PASSED (SKELETON LOADER POLISHING CHECKS PASSED 100%).
+  - **Skeleton Loader Polishing Architecture**:
+    - `src/lib/designTokens.ts`: Defined `SKELETON_LOADER_TOKENS` (`animation` specs for 1.8s `shimmer-wave-sweep`; `personaShimmers` for Emerald/Cyan Student vs Amber/Gold Host; `geometries` for Stash, Spaces, Kitchen, Connect, FAQ, Testimonials, & Comparison Matrix cards) and helper function `getSkeletonLoaderTokens(role)`.
+    - `src/styles.css`: Added `@keyframes shimmer-wave-sweep` animation and CSS utility classes (`.shimmer-wave-skeleton`, `[data-persona="student"] .shimmer-wave-skeleton::after`, `[data-persona="host"] .shimmer-wave-skeleton::after`, `shimmer-wave-student`, `shimmer-wave-host`) for smooth glowing wave shimmer sweeps.
+    - `src/components/ui/skeleton.tsx`: Built feature-packed `ShimmerWaveSkeleton` base primitive and 7 geometrically exact skeleton loaders matching card components (`SaarthiStashCardSkeleton`, `SaarthiSpacesCardSkeleton`, `SaarthiKitchenCardSkeleton`, `SaarthiConnectCardSkeleton`, `FaqAccordionSkeleton`, `TestimonialCarouselSkeleton`, `ComparisonMatrixSkeleton`) to eliminate cumulative layout shift (CLS) during data fetching.
+    - `src/components/ui/primitives.ts`: Re-exported all skeleton loader primitives and types.
+    - `execution/test-skeleton-loader-polishing.mjs`: Created verification test script asserting design tokens, CSS keyframes, component implementations, primitive re-exports, and clean production build compilation.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `SKELETON_LOADER_TOKENS` & `getSkeletonLoaderTokens`.
+    - `src/styles.css` — Added `@keyframes shimmer-wave-sweep` & skeleton shimmer CSS utility classes.
+    - `src/components/ui/skeleton.tsx` — Created ShimmerWaveSkeleton and geometrically exact card skeletons.
+    - `src/components/ui/primitives.ts` — Re-exported skeleton primitives.
+    - `execution/test-skeleton-loader-polishing.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 150 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 150 execution log.
+    - `progress.md` — Appended Task 150 execution log.
+
+- [x] **[UI - Comparison Matrix Table / distill] Task 149: Build a sleek, high-contrast comparison table contrasting StashSaarthi vs Traditional PGs and Commercial Warehouses — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-comparison-matrix-table.mjs` — ✅ PASSED (COMPARISON MATRIX TABLE CHECKS PASSED 100%).
+  - **Comparison Matrix Table Architecture**:
+    - `src/lib/designTokens.ts`: Defined `COMPARISON_MATRIX_TOKENS` (`columns` specs for Traditional PGs, Commercial Warehouses, StashSaarthi WINNER; `categories` filter tags for Storage, Pricing, Logistics, Safety, Lifestyle; `statsHighlights` math callouts) and helper function `getComparisonMatrixTokens(role)`.
+    - `src/components/ui/ComparisonMatrixTable.tsx`: Created high-contrast `ComparisonMatrixTable` primitive contrasting 7 key operational metrics (Vacation Dead-Rent, Brokerage & Lock-In, Doorstep Logistics, Campus Proximity <500m, Laser QR Tamper Seals & ₹10,000 Micro-Insurance, Homestyle Kitchen @ ₹90, and 3-Tier Police Vetted Senior Hosts) across Desktop 4-column matrix grid and Mobile card stack view with persona accents (Emerald/Cyan Student vs Amber Host), Web Audio haptics, category filter tabs, and action CTA callout banner.
+    - `src/components/ui/primitives.ts`: Re-exported `ComparisonMatrixTable`, `COMPARISON_MATRIX_ROWS`, `ComparisonMatrixTableProps`, `ComparisonMatrixRow`, and `ComparisonCategoryFilter`.
+    - `src/components/stash/PgComparisonTable.tsx`: Re-engineered `PgComparisonTable` to render `ComparisonMatrixTable` primitive directly while maintaining backward compatibility with `onBook` handler.
+    - `execution/test-comparison-matrix-table.mjs`: Created verification test script asserting design tokens, primitive exports, component integration, metric rows, and clean production build compilation.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `COMPARISON_MATRIX_TOKENS`, `getComparisonMatrixTokens`.
+    - `src/components/ui/ComparisonMatrixTable.tsx` — Created ComparisonMatrixTable primitive component.
+    - `src/components/ui/primitives.ts` — Re-exported ComparisonMatrixTable.
+    - `src/components/stash/PgComparisonTable.tsx` — Integrated ComparisonMatrixTable into landing page section `#comparison`.
+    - `src/routes/__root.tsx` — Updated `ErrorComponent` prop types.
+    - `execution/test-comparison-matrix-table.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 149 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 149 execution log.
+    - `progress.md` — Appended Task 149 execution log.
+
+
+- [x] **[UI - Badge & Tag Standardization / extract] Task 148: Unify all metadata tags (e.g., "Verified Host", "Near PW Vidyapeeth", "Veg Only", "AC Room") with cohesive micro-padding and typography — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-badge-tag-standardization.mjs` — ✅ PASSED (BADGE & TAG STANDARDIZATION CHECKS PASSED 100%).
+  - **Badge & Tag Standardization Architecture**:
+    - `src/lib/designTokens.ts`: Defined `METADATA_TAG_TOKENS` (`microPadding` for sm/default/lg sizes, `typography` specs, presets for `verifiedHost`, `campusProximity`, `lifestyle`, `amenity`, `pricingSave`, `statusLive`) and helper functions (`getMetadataTagTokens`, `getMetadataTagClasses`).
+    - `src/styles.css`: Added CSS utilities (`metadata-tag-base`, `metadata-tag-micro-padding`, `metadata-tag-verified-host`, `metadata-tag-campus-proximity`, `metadata-tag-lifestyle`, `metadata-tag-amenity`, `metadata-tag-pricing-save`, `metadata-tag-status-live`).
+    - `src/components/ui/StandardMetadataTag.tsx`: Created reusable `StandardMetadataTag` (and alias `MetadataTag`) primitive supporting presets, custom icons, pulse indicators, dual-language labels (`labelEn`/`labelHi`), persona awareness (`data-persona`), and WCAG AAA contrast compliance.
+    - `src/components/ui/primitives.ts`: Re-exported `StandardMetadataTag`, `MetadataTag`, and `StandardMetadataTagProps`.
+    - `src/components/ui/SaarthiSpacesCard2.tsx`: Integrated `StandardMetadataTag` across room listing cards for zero brokerage and campus distance proximity tags.
+    - `execution/test-badge-tag-standardization.mjs`: Created verification test script asserting design tokens, CSS rules, component implementation, primitive exports, component integration, and clean production build compilation.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `METADATA_TAG_TOKENS`, `getMetadataTagTokens`, `getMetadataTagClasses`.
+    - `src/styles.css` — Added metadata tag CSS utility classes.
+    - `src/components/ui/StandardMetadataTag.tsx` — Created StandardMetadataTag primitive component.
+    - `src/components/ui/primitives.ts` — Re-exported StandardMetadataTag.
+    - `src/components/ui/SaarthiSpacesCard2.tsx` — Integrated StandardMetadataTag into room listings.
+    - `execution/test-badge-tag-standardization.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 148 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 148 execution log.
+    - `progress.md` — Appended Task 148 execution log.
+
+- [x] **[UI - Testimonial & Review Carousel / delight] Task 146: Build an editorial-grade testimonial carousel with student audio clip quotes, verified college badges, and rating stars — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-testimonial-carousel-2.mjs` — ✅ PASSED (TESTIMONIAL CAROUSEL 2.0 CHECKS PASSED 100%).
+  - **Testimonial & Review Carousel 2.0 Architecture**:
+    - `src/lib/designTokens.ts`: Defined `TESTIMONIAL_CAROUSEL_TOKENS` (`editorialStage` with glassmorphic backdrop & glowing radial glows; `audioClipPlayer` with equalizer waveform simulation; `verifiedCollegeBadge` for IIT Kanpur, HBTI, Kakadeo PW, CSJMU, Regency Health) and helper functions (`getTestimonialCarouselTokens`, `getTestimonialCarouselClasses`).
+    - `src/styles.css`: Added keyframe animations (`@keyframes waveform-bar-bounce`, `@keyframes editorial-shimmer-sweep`) & CSS utilities (`testimonial-editorial-stage`, `audio-waveform-bar`, `verified-college-badge-pill`, `rating-star-sparkle`).
+    - `src/components/ui/TestimonialCarousel2.tsx`: Built editorial-grade `TestimonialCarousel2` component featuring simulated audio clip quote playback with animated equalizer bars, verified college badge pills ("IIT Kanpur Hall 12", "Kakadeo PW", "HBTI Kanpur", "CSJMU"), star ratings, category filters ("Vacation Stash", "Co-Living Rooms", "Ghar Ka Swaad", "Senior Hosts"), auto-slide pauses on hover/touch, persona-aware glow accents, and direct booking CTA triggers.
+    - `src/components/ui/primitives.ts`: Re-exported `TestimonialCarousel2` primitive and type definitions.
+    - `src/components/stash/StudentStoriesCarousel.tsx`: Re-engineered `StudentStoriesCarousel` to render `TestimonialCarousel2` while preserving backward compatibility with `OpenBooking` handlers.
+    - `execution/test-testimonial-carousel-2.mjs`: Created test harness validating design tokens, CSS rules, primitive re-export, StudentStoriesCarousel integration, and clean production build compilation.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `TESTIMONIAL_CAROUSEL_TOKENS`, `getTestimonialCarouselTokens`, `getTestimonialCarouselClasses`.
+    - `src/styles.css` — Added audio waveform & editorial stage CSS keyframes & utilities.
+    - `src/components/ui/TestimonialCarousel2.tsx` — Created TestimonialCarousel2 primitive component.
+    - `src/components/ui/primitives.ts` — Re-exported TestimonialCarousel2.
+    - `src/components/stash/StudentStoriesCarousel.tsx` — Integrated TestimonialCarousel2 into StudentStoriesCarousel.
+    - `execution/test-testimonial-carousel-2.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 146 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 146 execution log.
+    - `progress.md` — Appended Task 146 execution log.
+
+- [x] **[UI - Accordion & FAQ Redesign / distill] Task 145: Re-engineer the FAQ accordions with buttery smooth height transitions, glowing active outlines, and instant category filters — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-faq-accordion-2.mjs` — ✅ PASSED (FAQ ACCORDION 2.0 CHECKS PASSED 100%).
+  - **FAQ Accordion 2.0 Architecture**:
+    - `src/lib/designTokens.ts`: Defined `FAQ_ACCORDION_TOKENS` (`smoothTransitionDuration`, `activeOutlines` for Emerald/Cyan Student vs Amber Host, category filter tags, radical transparency badges) and helper functions (`getFaqAccordionTokens`, `getFaqAccordionItemClasses`).
+    - `src/styles.css`: Added keyframes `@keyframes accordion-smooth-down` & `@keyframes accordion-smooth-up` and CSS utilities (`accordion-item-stage`, `accordion-glowing-outline-student`, `accordion-glowing-outline-host`, `accordion-category-pill`).
+    - `src/components/ui/accordion.tsx`: Updated Radix UI trigger & content wrappers with smooth height transitions (`cubic-bezier(0.16, 1, 0.3, 1)`), state-driven chevron rotation, and layout isolation.
+    - `src/components/ui/FaqAccordion2.tsx`: Built feature-packed `FaqAccordion2` primitive with live text search, category filters ("Radical Transparency", "Student Storage", "Safety & Claims", "Senior Host Norms"), persona-aware active glowing outlines, audio haptic cues on tab select/accordion toggle (`playPop`, `playClick`), direct WhatsApp founder fallback SLA trigger, and full bilingual support (`en`/`hi`).
+    - `src/components/ui/primitives.ts`: Re-exported `FaqAccordion2` primitive and type definitions.
+    - `src/components/stash/FAQ.tsx`: Updated main landing page FAQ section to consume `FaqAccordion2` primitive.
+    - `execution/test-faq-accordion-2.mjs`: Created test harness validating design tokens, CSS rules, primitive exports, FAQ integration, and clean production build compilation.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `FAQ_ACCORDION_TOKENS`, `getFaqAccordionTokens`, `getFaqAccordionItemClasses`.
+    - `src/styles.css` — Added smooth accordion keyframes & glowing outline utilities.
+    - `src/components/ui/accordion.tsx` — Updated transition timing and arrow rotation.
+    - `src/components/ui/FaqAccordion2.tsx` — Created FaqAccordion2 primitive component.
+    - `src/components/ui/primitives.ts` — Re-exported FaqAccordion2.
+    - `src/components/stash/FAQ.tsx` — Integrated FaqAccordion2 into main landing FAQ.
+    - `execution/test-faq-accordion-2.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 145 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 145 execution log.
+    - `progress.md` — Appended Task 145 execution log.
+
+- [x] **[UI - Saarthi Connect Card 2.0 / polish] Task 144: Redesign Intergenerational Mentorship cards with senior hobby tags, student skill-exchange chips, and karma points earned counters — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-saarthi-connect-card-2.mjs` — ✅ PASSED (5/5 SAARTHI CONNECT CARD 2.0 CHECKS PASSED SUCCESSFULLY).
+  - **Saarthi Connect Card 2.0 Architecture**:
+    - `src/lib/designTokens.ts`: Defined `SAARTHI_CONNECT_CARD_TOKENS` (`seniorHobbyTags` for Senior passions & wisdom; `studentSkillExchangeChips` for Student contribution chips; `karmaPointsCounter` for Karma Points earned badges & Gold/Silver tiers; `compatibilityBadge`) along with `getSaarthiConnectCardTokens` helper function.
+    - `src/styles.css`: Added utility classes (`connect-card-stage`, `senior-hobby-chip`, `student-skill-chip`, `karma-points-counter-glow`) for hover scale physics and glowing karma points badges.
+    - `src/components/ui/SaarthiConnectCard2.tsx`: Built feature-packed `SaarthiConnectCard2` primitive featuring dual profile cards (Student Mentee & Senior Mentor Host), Senior Hobby Tags ("Organic Gardening 🌿", "Hindi Literature 📖", "Financial Wisdom 💼", "Chess ♟️"), Student Skill-Exchange Chips ("Smartphone & UPI 📱", "Video Calls 📹", "Medicine Pickups 🛒", "Tech Help 💻"), Karma Points Earned Counter badge pill with interactive modal/charter trigger, match compatibility percentage badge (`96% Match ✨`), and 1-click CTA button with Web Audio micro-haptics (`playPop`, `playHeroCtaClick`).
+    - `src/components/ui/primitives.ts`: Re-exported `SaarthiConnectCard2` primitive and type definitions.
+    - `src/components/stash/Connect.tsx`: Integrated `SaarthiConnectCard2` into the core Intergenerational Mentorship verified pairs view.
+    - `execution/test-saarthi-connect-card-2.mjs`: Created test harness validating design tokens, CSS rules, primitive exports, Connect integration, and clean production build compilation.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `SAARTHI_CONNECT_CARD_TOKENS` & `getSaarthiConnectCardTokens`.
+    - `src/styles.css` — Added Saarthi Connect Card 2.0 CSS utilities.
+    - `src/components/ui/SaarthiConnectCard2.tsx` — Created SaarthiConnectCard2 component.
+    - `src/components/ui/primitives.ts` — Re-exported SaarthiConnectCard2.
+    - `src/components/stash/Connect.tsx` — Integrated SaarthiConnectCard2 into verified host pairs view.
+    - `execution/test-saarthi-connect-card-2.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 144 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 144 execution log.
+    - `progress.md` — Appended Task 144 execution log.
 
 - [x] **[UI - Saarthi Kitchen Card 2.0 / polish] Task 143: Overhaul Tiffin cards with daily meal countdown timers, rotating homestyle thali previews, calorie/macro breakdowns, and chef bio tags — 2026-09-14**:
   - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
@@ -1745,6 +2145,25 @@
     - `docs/tasks/progress.md` — Appended Task 142 execution log.
     - `progress.md` — Appended Task 142 execution log.
 
+- [x] **[UI - Filter & Search Bar Overhaul / shape] Task 147: Redesign the campus directory search bar with auto-suggest chips, distance sliders, and instant live filtering tags — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite client & SSR production bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-filter-search-bar-2.mjs` — ✅ PASSED (ALL 5/5 FILTER & SEARCH BAR CHECKS PASSED SUCCESSFULLY).
+  - **Filter & Search Bar Architecture**:
+    - `src/lib/designTokens.ts`: Defined `FILTER_SEARCH_BAR_TOKENS` (auto-suggest chips with location distance tags, interactive distance slider specs `0.1km - 5.0km`, live filter category tags, sort options) and helper function `getFilterSearchBarTokens(role)`.
+    - `src/styles.css`: Added `@utility` rules (`filter-search-bar-stage`, `auto-suggest-chip-pill`, `distance-slider-range`, `live-filter-tag-pill`) supporting frosted glass container aesthetics, interactive chip hover micro-scales, glowing accent borders, and range slider accenting.
+    - `src/components/ui/FilterSearchBar2.tsx`: Built reusable, accessible primitive component with real-time text query search, keyboard shortcut listener (`/` or `Ctrl+K`), auto-suggest location chip pills (`IIT Kanpur 650m`, `CSJMU Gate 1 300m`, `Kakadeo PW 150m`), expandable advanced filter drawer with distance range slider (`0.1km to 5.0km`), sort dropdown selector (`Nearest First`, `Highest Rated`, `Max Stash Space`, `Fastest Pickup`), live filter tags (`All Nodes`, `Stash Lockers`, `Co-Living Rooms`, `Instant 10-Min Pickup`, `Top Rated ★4.8+`, `Walking Distance <500m`), 1-tap reset actions, Web Audio micro-haptics (`playPop`, `playClick`), and bilingual (`en`/`hi`) support.
+    - `src/components/ui/primitives.ts`: Re-exported `FilterSearchBar2` and `FilterSearchBar2Props`.
+    - `src/components/stash/CampusNodeChecker.tsx`: Integrated `FilterSearchBar2` into `CampusNodeChecker`, adding parsed distance filtering (`parseDistanceKm`), category filtering, sorting, and seamless integration with `PersonaEmptyState` and `HeroCampusRadar`.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `FILTER_SEARCH_BAR_TOKENS` & `getFilterSearchBarTokens` helper.
+    - `src/styles.css` — Added Task 147 CSS utility rules.
+    - `src/components/ui/FilterSearchBar2.tsx` — Created reusable FilterSearchBar2 primitive component.
+    - `src/components/ui/primitives.ts` — Re-exported FilterSearchBar2 primitive.
+    - `src/components/stash/CampusNodeChecker.tsx` — Integrated FilterSearchBar2 with distance parser, sorting & live filters.
+    - `execution/test-filter-search-bar-2.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 147 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 147 execution log.
+    - `progress.md` — Appended Task 147 execution log.
 
 
 
@@ -1752,6 +2171,55 @@
 
 
 
+
+
+
+
+
+- [x] **[UI - Spring Modal Entrances / animate] Task 153: Replace linear modal fades with organic spring physics (cubic-bezier(0.16, 1, 0.3, 1)) for all booking and detail dialogs — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-spring-modal-entrances.mjs` — ✅ PASSED (6/6 SPRING MODAL ENTRANCES CHECKS PASSED SUCCESSFULLY).
+  - **Organic Spring Modal Entrances Architecture**:
+    - `src/lib/designTokens.ts`: Defined `SPRING_MODAL_TOKENS` (`springEasing: "cubic-bezier(0.16, 1, 0.3, 1)"`, `backdropEasing: "cubic-bezier(0.16, 1, 0.3, 1)"`, `entranceDurationMs: 350`, `exitDurationMs: 220`, `springConfig: { stiffness: 380, damping: 28, mass: 0.9 }`, `personaGlows`) along with `getSpringModalTokens` helper function.
+    - `src/styles.css`: Injected `@keyframes modal-spring-enter`, `@keyframes modal-spring-exit`, `@keyframes overlay-spring-fade-in`, `@keyframes overlay-spring-fade-out`, `.modal-spring-entrance`, `.modal-spring-overlay`, `@utility modal-spring-stage`, `@utility modal-persona-border-student`, `@utility modal-persona-border-host`.
+    - `src/components/ui/dialog.tsx`: Updated Radix `DialogOverlay` and `DialogContent` with organic spring physics timing (`cubic-bezier(0.16, 1, 0.3, 1)`) and spring scale/translation transforms.
+    - `src/components/ui/SpringModal.tsx`: Created reusable `SpringModal` and `SpringModalContent` primitive component utilizing Framer Motion spring physics (`{ type: "spring", stiffness: 380, damping: 28 }`), dual-persona ambient top accent lines & glows, backdrop blur overlay dimming, Web Audio pop/click sound cues (`playPop`, `playClick`), and accessibility attributes (`role="dialog"`, `aria-modal="true"`).
+    - `src/components/ui/primitives.ts`: Re-exported `SpringModal`, `SpringModalContent`, and `SpringModalProps`.
+    - `execution/test-spring-modal-entrances.mjs`: Created verification test script asserting design tokens, CSS rules, Radix dialog spring updates, `SpringModal` component structure, primitive re-export, and clean production build.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `SPRING_MODAL_TOKENS` & `getSpringModalTokens` helper.
+    - `src/styles.css` — Added Spring Modal Entrances keyframes & utility classes.
+    - `src/components/ui/dialog.tsx` — Updated DialogOverlay & DialogContent with spring transition timing.
+    - `src/components/ui/SpringModal.tsx` — Created reusable SpringModal primitive component.
+    - `src/components/ui/primitives.ts` — Re-exported SpringModal primitives.
+    - `execution/test-spring-modal-entrances.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 153 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 153 execution log.
+    - `progress.md` — Appended Task 153 execution log.
+
+- [x] **[UI - Confetti & Celebration Cannons / delight] Task 158: Integrate a lightweight canvas celebration burst upon successful booking confirmation and senior host agreement signing — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Confetti & Celebration Cannon Physics Architecture**:
+    - `src/lib/designTokens.ts`: Defined `CONFETTI_CELEBRATION_TOKENS` (`particleCount`, `gravity: 0.28`, `drag: 0.96`, `decayMs: 3200`, `palette: { student, host }`, `triggerTypes: { booking_confirmation, host_agreement_signing, milestone_unlocked }`), `ConfettiTriggerType`, and `getConfettiCelebrationTokens(role)` helper.
+    - `src/styles.css`: Added `.confetti-canvas-container`, `.confetti-canvas`, `@utility confetti-stage`, and `@media (prefers-reduced-motion: reduce)` fallbacks.
+    - `src/components/ui/ConfettiCelebration.tsx`: Built lightweight, standalone 2D Canvas confetti particle physics system supporting square/circle/ribbon/star particle shapes, dual-persona colors, `requestAnimationFrame` render loop, high DPI scaling, Web Audio chimes (`playPaymentConfirmation`, `playSuccessChime`), and imperative launcher `fireConfettiCannon(options)`.
+    - `src/components/ui/primitives.ts`: Re-exported `ConfettiCelebration`, `fireConfettiCannon`, `ConfettiCelebrationProps`, and `ConfettiCelebrationOptions`.
+    - `src/components/stash/BookingModal.tsx`: Mounted `<ConfettiCelebration />` on Step 3 StashPass confirmation screen (`triggerType="booking_confirmation"`).
+    - `src/components/stash/HostOnboardingAgreementModal.tsx`: Mounted `<ConfettiCelebration />` on Tab 3 Host Certificate screen (`triggerType="host_agreement_signing"`).
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `CONFETTI_CELEBRATION_TOKENS` and helper function.
+    - `src/styles.css` — Added confetti canvas & stage CSS rules.
+    - `src/components/ui/ConfettiCelebration.tsx` — Created 2D Canvas confetti celebration component.
+    - `src/components/ui/primitives.ts` — Re-exported ConfettiCelebration & fireConfettiCannon.
+    - `src/components/stash/BookingModal.tsx` — Mounted ConfettiCelebration on booking confirmation.
+    - `src/components/stash/HostOnboardingAgreementModal.tsx` — Mounted ConfettiCelebration on host agreement signing.
+    - `docs/tasks/PRD.md` — Marked Task 158 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 158 execution log.
+    - `progress.md` — Appended Task 158 execution log.
+
+# All Tasks Completed
+ralph-done-73s7f
+ralph-done-f37qa
 
 
 

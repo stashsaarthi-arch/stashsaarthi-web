@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, memo } from "react";
 import { Boxes, Home, Soup, HandHeart } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { GlidingTabs } from "@/components/ui/GlidingTabs";
 import { Ecosystem } from "./Ecosystem";
 import { Rooms } from "./Rooms";
 import { TokenMealHub } from "../TokenMealHub";
@@ -278,90 +279,26 @@ export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: S
 
       {/* Tab Switcher */}
       <div className="mt-3 flex items-center justify-center">
-        <div
-          role="tablist"
-          aria-label={isHi ? "समाधान सेवा टैब" : "StashSaarthi Solutions Tabs"}
-          className="glass grid w-full max-w-4xl grid-cols-2 gap-1 rounded-xl border border-white/10 p-1 sm:grid-cols-4 sm:gap-1.5"
-        >
-          {tabs.map((tab, idx) => {
+        <GlidingTabs
+          tabs={tabs.map((tab) => {
             const Icon = tab.icon;
-            const isActive = activeTab === tab.id;
-            return (
-              <button
-                key={tab.id}
-                id={`solutions-tab-${tab.id}`}
-                role="tab"
-                aria-selected={isActive}
-                aria-controls={`solutions-panel-${tab.id}`}
-                tabIndex={isActive ? 0 : -1}
-                onClick={() => setActiveTab(tab.id)}
-                onKeyDown={(e) => {
-                  if (e.key === "ArrowRight") {
-                    e.preventDefault();
-                    const nextTab = tabs[(idx + 1) % tabs.length];
-                    if (nextTab) {
-                      setActiveTab(nextTab.id);
-                      document.getElementById(`solutions-tab-${nextTab.id}`)?.focus();
-                    }
-                  } else if (e.key === "ArrowLeft") {
-                    e.preventDefault();
-                    const prevTab = tabs[(idx - 1 + tabs.length) % tabs.length];
-                    if (prevTab) {
-                      setActiveTab(prevTab.id);
-                      document.getElementById(`solutions-tab-${prevTab.id}`)?.focus();
-                    }
-                  }
-                }}
-                className={`flex flex-col items-center justify-center rounded-lg p-1.5 text-center transition-all duration-200 cursor-pointer sm:p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 ${
-                  isActive
-                    ? "border border-white/20 text-white shadow-xl"
-                    : "text-muted-foreground hover:bg-white/5 hover:text-white"
-                }`}
-                style={{
-                  background: isActive
-                    ? isStudent
-                      ? "color-mix(in oklab, var(--emerald) 18%, rgba(255,255,255,0.05))"
-                      : "color-mix(in oklab, var(--amber) 18%, rgba(255,255,255,0.05))"
-                    : "transparent",
-                  borderColor: isActive
-                    ? isStudent
-                      ? "color-mix(in oklab, var(--emerald) 40%, transparent)"
-                      : "color-mix(in oklab, var(--amber) 40%, transparent)"
-                    : "transparent",
-                }}
-              >
-                <div className="flex items-center gap-1.5">
-                  <Icon
-                    className="h-3.5 w-3.5 shrink-0"
-                    aria-hidden="true"
-                    style={{
-                      color: isActive
-                        ? isStudent
-                          ? "var(--emerald)"
-                          : "var(--amber)"
-                        : "currentColor",
-                    }}
-                  />
-                  <span className="text-xs font-bold sm:text-sm">
-                    {isHi ? tab.nameHi : tab.nameEn}
-                  </span>
-                </div>
-                <span
-                  className="mt-0.5 text-xs font-medium"
-                  style={{
-                    color: isActive
-                      ? isStudent
-                        ? "var(--emerald)"
-                        : "var(--amber)"
-                      : "var(--muted-foreground)",
-                  }}
-                >
-                  {isHi ? tab.badgeHi : tab.badgeEn}
-                </span>
-              </button>
-            );
+            return {
+              id: tab.id,
+              labelEn: tab.nameEn,
+              labelHi: tab.nameHi,
+              icon: <Icon className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />,
+              badge: isHi ? tab.badgeHi : tab.badgeEn,
+            };
           })}
-        </div>
+          activeTab={activeTab}
+          onChange={(tabId) => setActiveTab(tabId as "stash" | "rooms" | "kitchen" | "connect")}
+          layoutId="solutions-hub-tab-glider"
+          variant="segmented"
+          size="md"
+          fullWidth
+          ariaLabel={isHi ? "समाधान सेवा टैब" : "StashSaarthi Solutions Tabs"}
+          className="w-full max-w-4xl"
+        />
       </div>
 
       {/* Active Tab Panel Content */}

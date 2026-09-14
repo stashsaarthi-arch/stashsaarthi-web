@@ -5,6 +5,8 @@ import { playPop, playHeroCtaClick, playClick } from "@/lib/audio";
 import { getSaarthiKitchenCardTokens } from "@/lib/designTokens";
 import { usePersona } from "@/context/PersonaContext";
 import { useLanguage } from "@/context/LanguageContext";
+import { PeacockFeatherMatkiDusting } from "../stash/PeacockFeatherMatkiDusting";
+
 
 export interface MacroBreakdownSpec {
   calories: number; // e.g. 680
@@ -228,13 +230,19 @@ export const SaarthiKitchenCard2: React.FC<SaarthiKitchenCard2Props> = ({
       {/* Title & Pricing Pill */}
       <div className="flex items-start justify-between gap-3 mb-3">
         <div>
-          <h3 className="text-xl font-black text-white group-hover:text-emerald-300 transition-colors">
-            {isHindi && thali.nameHi ? thali.nameHi : thali.name}
-          </h3>
+          <div className="flex flex-wrap items-center gap-2">
+            <h3 className="text-xl font-black text-white group-hover:text-emerald-300 transition-colors">
+              {isHindi && thali.nameHi ? thali.nameHi : thali.name}
+            </h3>
+            {thali.id === "standard" && (
+              <PeacockFeatherMatkiDusting compact isAutoTriggered={isSelected} />
+            )}
+          </div>
           <p className="text-xs text-slate-400 mt-1 line-clamp-2 leading-relaxed">
             {isHindi && thali.descriptionHi ? thali.descriptionHi : thali.description}
           </p>
         </div>
+
         <div className="text-right shrink-0">
           <div className="text-2xl font-black text-white">
             {effectiveCost} <span className="text-xs font-bold text-emerald-400">Tokens</span>

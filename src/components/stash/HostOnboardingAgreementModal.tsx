@@ -22,6 +22,8 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { useLanguage } from "@/context/LanguageContext";
 import { playPop } from "@/lib/audio";
+import { ConfettiCelebration } from "@/components/ui/ConfettiCelebration";
+
 import {
   OFFICIAL_HOST_VETTING_POLICY,
   HostAgreementRecord,
@@ -462,8 +464,10 @@ export function HostOnboardingAgreementModal({
 
             {/* TAB 3: CERTIFICATE */}
             {activeTab === "certificate" && existingRecord && (
-              <div className="space-y-4 text-xs">
+              <div className="space-y-4 text-xs relative">
+                <ConfettiCelebration isActive={activeTab === "certificate"} triggerType="host_agreement_signing" role="host" />
                 <div className="rounded-3xl border border-emerald-500/40 bg-gradient-to-b from-emerald-950/40 via-black to-black p-6 relative overflow-hidden text-center sm:text-left">
+
                   <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-white/10 pb-4">
                     <div>
                       <Badge className="bg-emerald-500 text-black font-extrabold text-[10px] mb-1">

@@ -23,7 +23,20 @@ import { NodeSkeleton } from "@/components/ui/skeleton";
 import { FindMyStashModal } from "./FindMyStashModal";
 import { HeroCampusRadar } from "./HeroCampusRadar";
 import { PersonaEmptyState } from "@/components/ui/PersonaEmptyState";
+import { FilterSearchBar2 } from "@/components/ui/FilterSearchBar2";
 
+function parseDistanceKm(distStr: string): number {
+  const lower = distStr.toLowerCase().trim();
+  if (lower.includes("km")) {
+    const val = parseFloat(lower.replace("km", "").trim());
+    return isNaN(val) ? 99 : val;
+  }
+  if (lower.includes("m")) {
+    const val = parseFloat(lower.replace("m", "").trim());
+    return isNaN(val) ? 99 : val / 1000;
+  }
+  return 99;
+}
 
 interface NodeData {
   id: string;
@@ -242,11 +255,12 @@ export function CampusNodeChecker({ onBook }: { onBook: OpenBooking }) {
   const { language, t } = useLanguage();
   const isHi = language === "hi";
   const [query, setQuery] = useState("");
+  const [maxDistanceKm, setMaxDistanceKm] = useState(5.0);
+  const [activeFilterTag, setActiveFilterTag] = useState("all");
+  const [sortOption, setSortOption] = useState("distance");
   const [isSearching, setIsSearching] = useState(false);
   const [debouncedQuery, setDebouncedQuery] = useState("");
-  const [hasInteracted, setHasInteracted] = useState(false);
   const [viewMode, setViewMode] = useState<"search" | "radar">("search");
-  const [selectedRadarNode, setSelectedRadarNode] = useState<NodeData | null>(null);
   const [navModalOpen, setNavModalOpen] = useState(false);
   const [activeNavNodeId, setActiveNavNodeId] = useState<string | undefined>(undefined);
 
@@ -259,54 +273,58 @@ export function CampusNodeChecker({ onBook }: { onBook: OpenBooking }) {
     const timer = setTimeout(() => {
       setDebouncedQuery(query);
       setIsSearching(false);
-    }, 400);
+    }, 250);
     return () => clearTimeout(timer);
   }, [query]);
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(e.target.value);
+  const handleQueryChange = (q: string) => {
+    setQuery(q);
     setIsSearching(true);
-    setHasInteracted(true);
   };
-
-  const handleChipClick = (q: string, label: string) => {
-    setQuery(label);
-    setDebouncedQuery(q);
-    setIsSearching(false);
-    setHasInteracted(true);
-  };
-
-  const allRadarNodes = useMemo(() => Object.values(MOCK_NODES).flat(), []);
 
   const results = useMemo(() => {
-    if (!debouncedQuery.trim()) return null;
+    const allNodes = Object.values(MOCK_NODES).flat();
     const searchLower = debouncedQuery.toLowerCase().trim();
 
-    // Find matching keys or nodes with matching locality/pincode/name
-    const allNodes = Object.values(MOCK_NODES).flat();
-    const matched = allNodes.filter((node) => {
-      return (
-        node.name.toLowerCase().includes(searchLower) ||
-        (node.name_hi && node.name_hi.includes(searchLower)) ||
-        node.locality.toLowerCase().includes(searchLower) ||
-        (node.locality_hi && node.locality_hi.includes(searchLower)) ||
-        node.pincode.includes(searchLower) ||
-        node.gateNearby.toLowerCase().includes(searchLower)
-      );
+    let filtered = allNodes.filter((node) => {
+      // 1. Text search match
+      if (searchLower) {
+        const matchesText =
+          node.name.toLowerCase().includes(searchLower) ||
+          (node.name_hi && node.name_hi.includes(searchLower)) ||
+          node.locality.toLowerCase().includes(searchLower) ||
+          (node.locality_hi && node.locality_hi.includes(searchLower)) ||
+          node.pincode.includes(searchLower) ||
+          node.gateNearby.toLowerCase().includes(searchLower);
+        if (!matchesText) return false;
+      }
+
+      // 2. Distance slider filter
+      const nodeKm = parseDistanceKm(node.distance);
+      if (nodeKm > maxDistanceKm) return false;
+
+      // 3. Live filter tag
+      if (activeFilterTag === "stash" && node.stashAvailable <= 0) return false;
+      if (activeFilterTag === "rooms" && node.roomsAvailable <= 0) return false;
+      if (activeFilterTag === "fast_pickup" && !node.pickupTime.includes("10")) return false;
+      if (activeFilterTag === "top_rated" && node.rating < 4.8) return false;
+      if (activeFilterTag === "walking" && nodeKm > 0.5) return false;
+
+      return true;
     });
 
-    if (matched.length > 0) return matched;
+    // 4. Sorting
+    filtered.sort((a, b) => {
+      if (sortOption === "rating") return b.rating - a.rating;
+      if (sortOption === "stash_capacity") return b.stashAvailable - a.stashAvailable;
+      if (sortOption === "pickup_speed") return parseInt(a.pickupTime) - parseInt(b.pickupTime);
+      // default: distance
+      return parseDistanceKm(a.distance) - parseDistanceKm(b.distance);
+    });
 
-    // Check college name matching
-    const matchedColleges = Object.keys(MOCK_NODES).filter((key) =>
-      key.toLowerCase().includes(searchLower),
-    );
-    if (matchedColleges.length > 0) {
-      return matchedColleges.flatMap((k) => MOCK_NODES[k] || []);
-    }
+    return filtered;
+  }, [debouncedQuery, maxDistanceKm, activeFilterTag, sortOption]);
 
-    return [];
-  }, [debouncedQuery]);
 
   return (
     <div className="relative mx-auto mt-4 sm:mt-5 max-w-2xl text-left z-20">
@@ -354,46 +372,27 @@ export function CampusNodeChecker({ onBook }: { onBook: OpenBooking }) {
 
           {viewMode === "search" ? (
             <>
-              <div className="p-1.5 sm:p-2">
-                <div className="relative flex items-center rounded-2xl bg-white/5 px-4 py-2 sm:px-5 sm:py-3 border border-white/10 focus-within:border-emerald-500/50 transition-colors">
-                  <Search className="h-5 w-5 text-muted-foreground shrink-0" />
-                  <Input
-                    value={query}
-                    onChange={handleSearch}
-                    placeholder={t.campusNodeChecker.placeholder}
-                    className="border-0 bg-transparent text-sm sm:text-base focus-visible:ring-0 text-foreground h-10 w-full ml-2 outline-none"
-                  />
-                </div>
+              <div className="p-2 sm:p-3">
+                <FilterSearchBar2
+                  query={query}
+                  onQueryChange={handleQueryChange}
+                  maxDistanceKm={maxDistanceKm}
+                  onMaxDistanceKmChange={setMaxDistanceKm}
+                  activeFilterTag={activeFilterTag}
+                  onFilterTagChange={setActiveFilterTag}
+                  sortOption={sortOption}
+                  onSortOptionChange={setSortOption}
+                  onResetFilters={() => {
+                    setQuery("");
+                    setMaxDistanceKm(5.0);
+                    setActiveFilterTag("all");
+                    setSortOption("distance");
+                  }}
+                />
               </div>
 
               <AnimatePresence mode="wait">
-                {!hasInteracted || !debouncedQuery.trim() ? (
-                  <motion.div
-                    key="empty"
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    className="px-5 pb-5 pt-3"
-                  >
-                    <p className="text-xs text-muted-foreground mb-2.5 font-medium">
-                      {t.campusNodeChecker.popularHubs}
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {POPULAR_CHIPS.map((chip) => (
-                        <button
-                          key={chip.q}
-                          onClick={() =>
-                            handleChipClick(chip.q, isHi ? chip.label_hi || chip.label : chip.label)
-                          }
-                          className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:bg-white/10 hover:text-foreground cursor-pointer"
-                        >
-                          <MapPin className="mr-1.5 h-3 w-3" />
-                          {isHi ? chip.label_hi || chip.label : chip.label}
-                        </button>
-                      ))}
-                    </div>
-                  </motion.div>
-                ) : isSearching ? (
+                {isSearching ? (
                   <motion.div
                     key="searching"
                     initial={{ opacity: 0, height: 0 }}
@@ -411,9 +410,9 @@ export function CampusNodeChecker({ onBook }: { onBook: OpenBooking }) {
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: "auto" }}
                     exit={{ opacity: 0, height: 0 }}
-                    className="max-h-[260px] overflow-y-auto px-2 pb-2"
+                    className="max-h-[300px] overflow-y-auto px-2.5 pb-3"
                   >
-                    <div className="space-y-1.5">
+                    <div className="space-y-2">
                       {results.map((node, i) => (
                         <motion.div
                           key={node.id}
@@ -514,20 +513,22 @@ export function CampusNodeChecker({ onBook }: { onBook: OpenBooking }) {
                       variant="student_search_miss"
                       onPrimaryAction={() => {
                         setQuery("");
-                        setDebouncedQuery("");
+                        setMaxDistanceKm(5.0);
+                        setActiveFilterTag("all");
+                        setSortOption("distance");
                       }}
-                      primaryActionLabel="Reset Search"
-                      primaryActionLabelHi="खोज रीसेट करें"
-                      onSuggestionClick={(s) => handleChipClick(s, s)}
+                      primaryActionLabel="Reset Search & Filters"
+                      primaryActionLabelHi="खोज व फ़िल्टर रीसेट करें"
+                      onSuggestionClick={(s) => setQuery(s)}
                     />
                   </div>
                 )}
-
               </AnimatePresence>
             </>
           ) : (
             <HeroCampusRadar onBook={onBook} />
           )}
+
         </div>
       </AnimatedContent>
 

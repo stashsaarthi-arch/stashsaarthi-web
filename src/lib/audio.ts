@@ -1,16 +1,25 @@
+import { WEB_AUDIO_SOUNDSCAPE_TOKENS } from "./designTokens";
+
 // Ultra-low latency Web Audio API based micro-haptics/clicks
 
 let audioCtx: AudioContext | null = null;
 
-const getAudioContext = () => {
+export const getAudioContext = (): AudioContext | null => {
   if (typeof window === "undefined") return null;
   if (!audioCtx) {
-    audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+    const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+    if (!AudioContextClass) return null;
+    audioCtx = new AudioContextClass();
   }
   if (audioCtx.state === "suspended") {
     audioCtx.resume();
   }
   return audioCtx;
+};
+
+export const isWebAudioSupported = (): boolean => {
+  if (typeof window === "undefined") return false;
+  return !!(window.AudioContext || (window as any).webkitAudioContext);
 };
 
 export const playClick = () => {
@@ -125,5 +134,178 @@ export const playPersonaSwitch = (targetRole: "student" | "host") => {
     osc.stop(ctx.currentTime + 0.1);
   }
 };
+
+/**
+ * Play distinct pleasant audio feedback for toggle switch state transitions (ON / OFF)
+ */
+export const playToggleSwitch = (on: boolean) => {
+  const ctx = getAudioContext();
+  if (!ctx) return;
+
+  const config = on ? WEB_AUDIO_SOUNDSCAPE_TOKENS.toggleSwitch.on : WEB_AUDIO_SOUNDSCAPE_TOKENS.toggleSwitch.off;
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+
+  osc.type = config.waveform;
+  osc.frequency.setValueAtTime(config.baseFreq, ctx.currentTime);
+  osc.frequency.exponentialRampToValueAtTime(config.targetFreq, ctx.currentTime + config.durationMs / 1000);
+
+  gain.gain.setValueAtTime(0, ctx.currentTime);
+  gain.gain.linearRampToValueAtTime(config.volume, ctx.currentTime + 0.01);
+  gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + config.durationMs / 1000);
+
+  osc.start(ctx.currentTime);
+  osc.stop(ctx.currentTime + config.durationMs / 1000);
+};
+
+/**
+ * Play cheerful ascending micro-pitch chime for item counter increments
+ */
+export const playCounterIncrement = (currentCount: number = 1) => {
+  const ctx = getAudioContext();
+  if (!ctx) return;
+
+  const cfg = WEB_AUDIO_SOUNDSCAPE_TOKENS.counterIncrement;
+  const targetPitch = Math.min(cfg.maxPitchHz, cfg.baseFreq + Math.max(0, currentCount - 1) * cfg.pitchStepHz);
+
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+
+  osc.type = cfg.waveform;
+  osc.frequency.setValueAtTime(cfg.baseFreq, ctx.currentTime);
+  osc.frequency.exponentialRampToValueAtTime(targetPitch, ctx.currentTime + cfg.durationMs / 1000);
+
+  gain.gain.setValueAtTime(0, ctx.currentTime);
+  gain.gain.linearRampToValueAtTime(cfg.volume, ctx.currentTime + 0.008);
+  gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + cfg.durationMs / 1000);
+
+  osc.start(ctx.currentTime);
+  osc.stop(ctx.currentTime + cfg.durationMs / 1000);
+};
+
+/**
+ * Play subtle descending tick sound for item counter decrements
+ */
+export const playCounterDecrement = (currentCount: number = 1) => {
+  const ctx = getAudioContext();
+  if (!ctx) return;
+
+  const cfg = WEB_AUDIO_SOUNDSCAPE_TOKENS.counterDecrement;
+  const startPitch = Math.max(cfg.minPitchHz, cfg.baseFreq - Math.max(0, currentCount - 1) * cfg.pitchStepHz);
+
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+
+  osc.type = cfg.waveform;
+  osc.frequency.setValueAtTime(startPitch, ctx.currentTime);
+  osc.frequency.exponentialRampToValueAtTime(cfg.minPitchHz, ctx.currentTime + cfg.durationMs / 1000);
+
+  gain.gain.setValueAtTime(0, ctx.currentTime);
+  gain.gain.linearRampToValueAtTime(cfg.volume, ctx.currentTime + 0.008);
+  gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + cfg.durationMs / 1000);
+
+  osc.start(ctx.currentTime);
+  osc.stop(ctx.currentTime + cfg.durationMs / 1000);
+};
+
+/**
+ * Play rich 4-note major chord arpeggio for payment and booking confirmations
+ */
+export const playPaymentConfirmation = () => {
+  const ctx = getAudioContext();
+  if (!ctx) return;
+
+  const cfg = WEB_AUDIO_SOUNDSCAPE_TOKENS.paymentConfirmation;
+  const now = ctx.currentTime;
+
+  cfg.frequencies.forEach((freq, index) => {
+    const startTime = now + (index * cfg.staggerMs) / 1000;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.type = cfg.waveform;
+    osc.frequency.setValueAtTime(freq, startTime);
+
+    gain.gain.setValueAtTime(0, startTime);
+    gain.gain.linearRampToValueAtTime(cfg.volume, startTime + 0.015);
+    gain.gain.exponentialRampToValueAtTime(0.001, startTime + cfg.durationMs / 1000);
+
+    osc.start(startTime);
+    osc.stop(startTime + cfg.durationMs / 1000);
+  });
+};
+
+/**
+ * Play pleasant 3-note success chime
+ */
+export const playSuccessChime = () => {
+  const ctx = getAudioContext();
+  if (!ctx) return;
+
+  const cfg = WEB_AUDIO_SOUNDSCAPE_TOKENS.successChime;
+  const now = ctx.currentTime;
+
+  cfg.frequencies.forEach((freq, index) => {
+    const startTime = now + (index * cfg.staggerMs) / 1000;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.type = cfg.waveform;
+    osc.frequency.setValueAtTime(freq, startTime);
+
+    gain.gain.setValueAtTime(0, startTime);
+    gain.gain.linearRampToValueAtTime(cfg.volume, startTime + 0.01);
+    gain.gain.exponentialRampToValueAtTime(0.001, startTime + cfg.durationMs / 1000);
+
+    osc.start(startTime);
+    osc.stop(startTime + cfg.durationMs / 1000);
+  });
+};
+
+/**
+ * Play warning/error double-beep sound
+ */
+export const playWarningBeep = () => {
+  const ctx = getAudioContext();
+  if (!ctx) return;
+
+  const cfg = WEB_AUDIO_SOUNDSCAPE_TOKENS.warningBeep;
+  const now = ctx.currentTime;
+
+  cfg.frequencies.forEach((freq, index) => {
+    const startTime = now + (index * cfg.staggerMs) / 1000;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.type = cfg.waveform;
+    osc.frequency.setValueAtTime(freq, startTime);
+
+    gain.gain.setValueAtTime(0, startTime);
+    gain.gain.linearRampToValueAtTime(cfg.volume, startTime + 0.01);
+    gain.gain.exponentialRampToValueAtTime(0.001, startTime + cfg.durationMs / 1000);
+
+    osc.start(startTime);
+    osc.stop(startTime + cfg.durationMs / 1000);
+  });
+};
+
 
 

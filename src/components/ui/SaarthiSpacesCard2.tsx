@@ -14,6 +14,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { Button } from "./button";
+import { StandardMetadataTag } from "./StandardMetadataTag";
 import { usePersona } from "@/context/PersonaContext";
 import { useLanguage } from "@/context/LanguageContext";
 import { getSaarthiSpacesCardTokens } from "@/lib/designTokens";
@@ -247,10 +248,10 @@ export function SaarthiSpacesCard2({
             <span className="text-lg font-black text-white tracking-tight">
               {listing.rent_amount ? `${inr(listing.rent_amount)}/mo` : isHi ? "अनुरोध पर किराया" : "Rent on Request"}
             </span>
-            <span className="inline-flex items-center gap-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-[10px] font-bold text-emerald-400">
+            <StandardMetadataTag preset="pricingSave" size="sm">
               <Sparkles className="h-3 w-3 text-emerald-400" />
               {isHi ? "0% ब्रोकरेज" : "0% Brokerage"}
-            </span>
+            </StandardMetadataTag>
           </div>
 
           {listing.ratings ? (
@@ -268,8 +269,10 @@ export function SaarthiSpacesCard2({
         </p>
 
         {/* Walking Distance / Proximity Tag */}
-        <div className="mb-2 inline-flex items-center rounded-lg border border-emerald-500/25 bg-emerald-500/10 px-2.5 py-1 text-[11px] font-bold text-emerald-300">
-          <span>{walkingDist}</span>
+        <div className="mb-2">
+          <StandardMetadataTag preset="campusProximity" size="default">
+            {walkingDist}
+          </StandardMetadataTag>
         </div>
 
         {/* Student Review Highlight */}

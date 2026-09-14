@@ -47,6 +47,13 @@ import {
 import { StashPass } from "./StashPass";
 import { LuggageItemizerModal, type LuggageStorageItem } from "./LuggageItemizerModal";
 import { useLanguage } from "@/context/LanguageContext";
+import { usePersona } from "@/context/PersonaContext";
+import { getMultiStepBookingTokens } from "@/lib/designTokens";
+import { playClick, playPop } from "@/lib/audio";
+import { ConfettiCelebration } from "@/components/ui/ConfettiCelebration";
+import { IndianPhoneInput } from "@/components/ui/PhoneOtpInput";
+
+
 import { MealPersonalizationSelector } from "./MealPersonalizationSelector";
 import {
   getStashWallet,
@@ -79,12 +86,16 @@ export function BookingModal({
 }) {
   const { user } = useAuth();
   const { language } = useLanguage();
+  const { role } = usePersona();
   const isHi = language === "hi";
+  const bookingTokens = getMultiStepBookingTokens(role);
 
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [service, setService] = useState(serviceProp);
+  const [stepValidationError, setStepValidationError] = useState<string | null>(null);
 
   // Common Contact Fields
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -346,40 +357,70 @@ export function BookingModal({
   const handleNextToSummary = () => {
     setTouched({ name: true, email: true, phone: true, pincode: true });
 
+    const cleanName = name.trim();
     const cleanPhone = phone.trim();
     const cleanEmail = email.trim();
 
+    if (!cleanName || cleanName.length < 2) {
+      const msg = isHi ? "कृपया अपना पूरा नाम दर्ज करें।" : "Please enter your full name.";
+      setStepValidationError(msg);
+      toast.error(msg);
+      playClick();
+      return;
+    }
+
     // At least 1 contact method required (Phone OR Email)
     if (!cleanPhone && !cleanEmail) {
-      toast.error(
-        isHi
-          ? "कृपया संपर्क के लिए व्हाट्सएप नंबर या ईमेल दर्ज करें।"
-          : "Please enter either a phone number or email address.",
-      );
+      const msg = isHi
+        ? "कृपया संपर्क के लिए व्हाट्सएप नंबर या ईमेल दर्ज करें।"
+        : "Please enter either a phone number or email address.";
+      setStepValidationError(msg);
+      toast.error(msg);
+      playClick();
       return;
     }
     if (cleanPhone && !isValidPhone(cleanPhone)) {
-      toast.error(
-        isHi
-          ? "कृपया एक वैध 10-अंकीय फोन नंबर दर्ज करें।"
-          : "Please enter a valid 10-digit phone number.",
-      );
+      const msg = isHi
+        ? "कृपया एक वैध 10-अंकीय फोन नंबर दर्ज करें।"
+        : "Please enter a valid 10-digit phone number.";
+      setStepValidationError(msg);
+      toast.error(msg);
+      playClick();
       return;
     }
     if (cleanEmail && !isValidEmail(cleanEmail)) {
-      toast.error(
-        isHi ? "कृपया एक मान्य ईमेल पता दर्ज करें।" : "Please enter a valid email address.",
-      );
+      const msg = isHi ? "कृपया एक मान्य ईमेल पता दर्ज करें।" : "Please enter a valid email address.";
+      setStepValidationError(msg);
+      toast.error(msg);
+      playClick();
       return;
     }
     if (pincode.trim() && !isValidIndianPin(pincode)) {
-      toast.error(
-        isHi ? "कृपया 6-अंकों का वैध पिन कोड दर्ज करें।" : "Please enter a valid 6-digit PIN code.",
-      );
+      const msg = isHi ? "कृपया 6-अंकों का वैध पिन कोड दर्ज करें।" : "Please enter a valid 6-digit PIN code.";
+      setStepValidationError(msg);
+      toast.error(msg);
+      playClick();
       return;
     }
+
+    setStepValidationError(null);
+    playPop();
     setStep(2);
   };
+
+  const handleStepClick = (targetStep: 1 | 2 | 3) => {
+    if (targetStep === step) return;
+    if (targetStep < step) {
+      playClick();
+      setStepValidationError(null);
+      setStep(targetStep);
+      return;
+    }
+    if (targetStep === 2 && step === 1) {
+      handleNextToSummary();
+    }
+  };
+
 
   const copyUpiId = () => {
     navigator.clipboard.writeText(upiId);
@@ -594,7 +635,7 @@ export function BookingModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="glass max-h-[92vh] overflow-y-auto sm:max-w-xl border-white/10 p-5 sm:p-7">
+      <DialogContent className="glass distraction-free-booking-stage max-h-[92vh] overflow-y-auto sm:max-w-xl border-white/10 p-5 sm:p-7">
         <DialogHeader className="space-y-3 pb-1">
           <div className="flex items-center justify-between">
             <DialogTitle className="text-lg sm:text-xl font-bold text-foreground">
@@ -603,21 +644,29 @@ export function BookingModal({
                 (isHi ? "एस्क्रो भुगतान व आरक्षण पुष्टि" : "Escrow Lock & Confirmation")}
               {step === 3 && (isHi ? "बुकिंग की पुष्टि हो गई!" : "Booking Confirmed!")}
             </DialogTitle>
-            <span className="text-xs font-mono font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 rounded-full">
+            <span className={`text-xs font-mono font-bold px-2.5 py-0.5 rounded-full border ${
+              role === "host"
+                ? "text-amber-300 bg-amber-500/10 border-amber-500/30"
+                : "text-emerald-400 bg-emerald-500/10 border-emerald-500/30"
+            }`}>
               {step === 1 ? (isHi ? "चरण 01/03" : "Step 01/03") : step === 2 ? (isHi ? "चरण 02/03" : "Step 02/03") : (isHi ? "चरण 03/03" : "Step 03/03")}
             </span>
           </div>
 
-          {/* Multi-Step Visual Progress Bar */}
+          {/* Multi-Step Visual Progress Bar & Breadcrumbs Journey */}
           <div className="w-full space-y-2 pt-1 border-t border-white/10">
             <div className="flex items-center justify-between text-xs">
               <span className="text-muted-foreground font-medium flex items-center gap-1.5">
-                <Clock className="w-3.5 h-3.5 text-emerald-400" />
+                <Clock className={`w-3.5 h-3.5 ${role === "host" ? "text-amber-400" : "text-emerald-400"}`} />
                 {step === 1 && (isHi ? "चरण 1: सेवा व संपर्क विवरण" : "Step 1: Details & Customization")}
                 {step === 2 && (isHi ? "चरण 2: एस्क्रो सुरक्षा व समीक्षा" : "Step 2: Escrow Lock & Review")}
                 {step === 3 && (isHi ? "चरण 3: डिजिटल स्टैशपास जारी" : "Step 3: StashPass Issued")}
               </span>
-              <span className="font-mono text-[11px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+              <span className={`font-mono text-[11px] font-bold px-2 py-0.5 rounded-full border ${
+                role === "host"
+                  ? "text-amber-300 bg-amber-500/10 border-amber-500/30"
+                  : "text-emerald-400 bg-emerald-500/10 border-emerald-500/30"
+              }`}>
                 {step === 1 ? "33%" : step === 2 ? "66%" : "100%"} {isHi ? "पूर्ण" : "Complete"}
               </span>
             </div>
@@ -625,60 +674,79 @@ export function BookingModal({
             {/* Animated Progress Bar Track */}
             <div className="relative h-2 w-full overflow-hidden rounded-full bg-white/10">
               <motion.div
-                className="h-full bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-400 shadow-[0_0_12px_rgba(16,185,129,0.5)]"
+                className={`h-full ${
+                  role === "host"
+                    ? "bg-gradient-to-r from-amber-500 via-gold-400 to-yellow-300 shadow-[0_0_12px_rgba(245,158,11,0.5)]"
+                    : "bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-400 shadow-[0_0_12px_rgba(16,185,129,0.5)]"
+                }`}
                 initial={{ width: "33%" }}
                 animate={{ width: step === 1 ? "33%" : step === 2 ? "66%" : "100%" }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
               />
             </div>
 
-            {/* Step Nodes Row */}
-            <div className="grid grid-cols-3 pt-1 text-center">
+            {/* Interactive Breadcrumbs Row */}
+            <div className="grid grid-cols-3 pt-1 text-center gap-1">
               <button
                 type="button"
-                onClick={() => step > 1 && setStep(1)}
-                disabled={step === 3}
-                className={`flex items-center justify-start gap-1.5 text-[11px] font-medium transition ${
-                  step >= 1 ? "text-emerald-400" : "text-muted-foreground"
-                } ${step === 3 ? "cursor-default opacity-80" : "cursor-pointer hover:underline"}`}
+                onClick={() => handleStepClick(1)}
+                className={`booking-breadcrumb-pill flex items-center justify-start gap-1.5 text-[11px] font-medium p-1 rounded-lg cursor-pointer transition ${
+                  step === 1
+                    ? role === "host"
+                      ? "text-amber-300 font-bold bg-amber-500/15 border border-amber-500/30"
+                      : "text-emerald-400 font-bold bg-emerald-500/15 border border-emerald-500/30"
+                    : step > 1
+                    ? "text-slate-300 hover:text-white"
+                    : "text-muted-foreground"
+                }`}
               >
-                <div className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold font-mono transition-all ${
+                <div className={`flex h-4.5 w-4.5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold font-mono transition-all ${
                   step > 1
-                    ? "bg-emerald-500 text-black"
+                    ? role === "host" ? "bg-amber-500 text-black" : "bg-emerald-500 text-black"
                     : step === 1
-                    ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/50 shadow-[0_0_8px_rgba(16,185,129,0.3)]"
+                    ? role === "host" ? "bg-amber-500/20 text-amber-300 border border-amber-500/50" : "bg-emerald-500/20 text-emerald-400 border border-emerald-500/50"
                     : "bg-white/10 text-slate-400"
                 }`}>
                   {step > 1 ? <Check className="h-3 w-3 stroke-[3]" /> : "1"}
                 </div>
-                <span className="truncate hidden sm:inline">{isHi ? "विवरण व चयन" : "Config & Contact"}</span>
+                <span className="truncate hidden sm:inline">{isHi ? "विवरण व संपर्क" : "Service & Contact"}</span>
                 <span className="sm:hidden">{isHi ? "विवरण" : "Details"}</span>
               </button>
 
-              <div
-                className={`flex items-center justify-center gap-1.5 text-[11px] font-medium transition ${
-                  step >= 2 ? "text-emerald-400" : "text-muted-foreground"
+              <button
+                type="button"
+                onClick={() => handleStepClick(2)}
+                className={`booking-breadcrumb-pill flex items-center justify-center gap-1.5 text-[11px] font-medium p-1 rounded-lg transition ${
+                  step === 2
+                    ? role === "host"
+                      ? "text-amber-300 font-bold bg-amber-500/15 border border-amber-500/30"
+                      : "text-emerald-400 font-bold bg-emerald-500/15 border border-emerald-500/30"
+                    : step > 2
+                    ? "text-slate-300 hover:text-white cursor-pointer"
+                    : step === 1
+                    ? "text-muted-foreground cursor-pointer hover:text-slate-200"
+                    : "text-muted-foreground"
                 }`}
               >
-                <div className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold font-mono transition-all ${
+                <div className={`flex h-4.5 w-4.5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold font-mono transition-all ${
                   step > 2
-                    ? "bg-emerald-500 text-black"
+                    ? role === "host" ? "bg-amber-500 text-black" : "bg-emerald-500 text-black"
                     : step === 2
-                    ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/50 shadow-[0_0_8px_rgba(16,185,129,0.3)]"
+                    ? role === "host" ? "bg-amber-500/20 text-amber-300 border border-amber-500/50" : "bg-emerald-500/20 text-emerald-400 border border-emerald-500/50"
                     : "bg-white/10 text-slate-400"
                 }`}>
                   {step > 2 ? <Check className="h-3 w-3 stroke-[3]" /> : "2"}
                 </div>
-                <span className="truncate hidden sm:inline">{isHi ? "एस्क्रो समीक्षा" : "Escrow & Review"}</span>
+                <span className="truncate hidden sm:inline">{isHi ? "एस्क्रो ताला" : "Escrow Lock"}</span>
                 <span className="sm:hidden">{isHi ? "एस्क्रो" : "Escrow"}</span>
-              </div>
+              </button>
 
-              <div className={`flex items-center justify-end gap-1.5 text-[11px] font-medium transition ${
-                step === 3 ? "text-emerald-400" : "text-muted-foreground"
+              <div className={`flex items-center justify-end gap-1.5 text-[11px] font-medium p-1 transition ${
+                step === 3 ? (role === "host" ? "text-amber-300 font-bold" : "text-emerald-400 font-bold") : "text-muted-foreground"
               }`}>
-                <div className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold font-mono transition-all ${
+                <div className={`flex h-4.5 w-4.5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold font-mono transition-all ${
                   step === 3
-                    ? "bg-emerald-500 text-black shadow-[0_0_10px_rgba(16,185,129,0.5)]"
+                    ? role === "host" ? "bg-amber-500 text-black shadow-[0_0_10px_rgba(245,158,11,0.5)]" : "bg-emerald-500 text-black shadow-[0_0_10px_rgba(16,185,129,0.5)]"
                     : "bg-white/10 text-slate-400"
                 }`}>
                   {step === 3 ? <Check className="h-3 w-3 stroke-[3]" /> : "3"}
@@ -687,8 +755,30 @@ export function BookingModal({
                 <span className="sm:hidden">{isHi ? "पास" : "Pass"}</span>
               </div>
             </div>
+
+            {/* Inline Step Validation Error Warning Banner */}
+            {stepValidationError && (
+              <motion.div
+                initial={{ opacity: 0, y: -4 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="booking-validation-error-glow rounded-xl border border-destructive/40 bg-destructive/15 p-2.5 flex items-center justify-between text-xs text-rose-300"
+              >
+                <div className="flex items-center gap-2">
+                  <AlertCircle className="w-4 h-4 text-rose-400 shrink-0" />
+                  <span>{stepValidationError}</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setStepValidationError(null)}
+                  className="text-[10px] underline hover:text-white shrink-0 ml-2"
+                >
+                  {isHi ? "बन्द करें" : "Dismiss"}
+                </button>
+              </motion.div>
+            )}
           </div>
         </DialogHeader>
+
 
         <div className="mt-4">
           <AnimatePresence mode="wait">
@@ -1283,51 +1373,12 @@ export function BookingModal({
                     </div>
                   </div>
 
-                  <div className="grid gap-1.5">
-                    <div className="flex justify-between items-center">
-                      <Label htmlFor="bk-phone" className="text-xs">
-                        {isHi ? "व्हाट्सएप / मोबाइल फोन *" : "WhatsApp / Mobile *"}
-                      </Label>
-                      {touched.phone && (
-                        <span
-                          className={`text-[10px] ${isPhoneValid ? "text-emerald-400" : "text-destructive"}`}
-                        >
-                          {isPhoneValid
-                            ? isHi
-                              ? "सत्यापित नंबर"
-                              : "Valid Phone"
-                            : isHi
-                              ? "वैध नंबर आवश्यक"
-                              : "Valid number required"}
-                        </span>
-                      )}
-                    </div>
-                    <div className="relative">
-                      <Input
-                        id="bk-phone"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        onBlur={() => setTouched((t) => ({ ...t, phone: true }))}
-                        placeholder="9876543210"
-                        className={`border-white/10 bg-white/5 pr-8 text-xs font-mono ${
-                          touched.phone && !isPhoneValid
-                            ? "border-destructive/60 focus-visible:ring-destructive"
-                            : touched.phone && isPhoneValid
-                              ? "border-emerald-500/50"
-                              : ""
-                        }`}
-                      />
-                      {touched.phone && (
-                        <div className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none">
-                          {isPhoneValid ? (
-                            <Check className="h-3.5 w-3.5 text-emerald-400" />
-                          ) : (
-                            <AlertCircle className="h-3.5 w-3.5 text-destructive" />
-                          )}
-                        </div>
-                      )}
-                    </div>
-                  </div>
+                  <IndianPhoneInput
+                    id="bk-phone"
+                    value={phone}
+                    onChange={setPhone}
+                    label={isHi ? "व्हाट्सएप / मोबाइल फोन *" : "WhatsApp / Mobile *"}
+                  />
 
                   <div className="grid gap-1.5">
                     <div className="flex justify-between items-center">
@@ -1806,8 +1857,10 @@ export function BookingModal({
                 key="step3"
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="space-y-5 text-center"
+                className="space-y-5 text-center relative"
               >
+                <ConfettiCelebration isActive={step === 3} triggerType="booking_confirmation" role="student" />
+
                 <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
                   <CheckCircle2 className="h-8 w-8" />
                 </div>

@@ -1371,3 +1371,1653 @@ export function getSaarthiKitchenCardTokens(role: "student" | "host" = "student"
       : "0 0 28px -4px rgba(16, 185, 129, 0.35)",
   };
 }
+
+/**
+ * Saarthi Connect Card 2.0 Design Tokens (Task 144)
+ * Intergenerational Mentorship cards with senior hobby tags, student skill-exchange chips, and karma points earned counters.
+ */
+export const SAARTHI_CONNECT_CARD_TOKENS = {
+  seniorHobbyTags: {
+    labelEn: "Senior Passions & Wisdom",
+    labelHi: "वरिष्ठ रुचि व अनुभव क्षेत्र",
+    hobbies: [
+      { id: "music", nameEn: "Sitar & Classical Music", nameHi: "सितार व शास्त्रीय संगीत", icon: "🎵", color: "#F59E0B" },
+      { id: "gardening", nameEn: "Organic Gardening & Herbs", nameHi: "जैविक बागवानी व पौधे", icon: "🌿", color: "#10B981" },
+      { id: "chess", nameEn: "Chess & Mind Puzzles", nameHi: "शतरंज व दिमागी खेल", icon: "♟️", color: "#06B6D4" },
+      { id: "literature", nameEn: "Hindi Literature & Poetry", nameHi: "हिंदी साहित्य व काव्य", icon: "📖", color: "#EC4899" },
+      { id: "finance", nameEn: "Banking & Financial Wisdom", nameHi: "बैंकिंग व वित्तीय मार्गदर्शन", icon: "💼", color: "#FBBF24" },
+    ],
+  },
+  studentSkillExchangeChips: {
+    labelEn: "Student Contribution & Skill Exchange",
+    labelHi: "छात्र कौशल आदान-प्रदान",
+    skills: [
+      { id: "smartphone", nameEn: "Smartphone & UPI Setup", nameHi: "स्मार्टफोन व यूपीआई सेट-अप", icon: "📱", color: "#00F5A0" },
+      { id: "videocall", nameEn: "Family Video-Call Setup", nameHi: "परिवार संग वीडियो-कॉल", icon: "📹", color: "#38BDF8" },
+      { id: "errands", nameEn: "Grocery & Medicine Pickups", nameHi: "राशन व दवाइयां लाना", icon: "🛒", color: "#A855F7" },
+      { id: "techhelp", nameEn: "Laptop & App Troubleshooting", nameHi: "लैपटॉप व ऐप सहायता", icon: "💻", color: "#10B981" },
+      { id: "walks", nameEn: "Evening Walks & Companionship", nameHi: "शाम की सैर व बातचीत", icon: "🚶", color: "#F59E0B" },
+    ],
+  },
+  karmaPointsCounter: {
+    labelEn: "Karma Points Earned",
+    labelHi: "अर्जित कर्म अंक",
+    defaultPoints: 1480,
+    defaultTier: "Gold" as const,
+    tierBadges: {
+      Gold: { labelEn: "Gold Mentor • Top 5%", labelHi: "गोल्ड मेंटर • शीर्ष 5%", color: "#F59E0B", icon: "🏆" },
+      Silver: { labelEn: "Silver Mentor • Verified", labelHi: "सिल्वर मेंटर • सत्यापित", color: "#94A3B8", icon: "🥈" },
+      Bronze: { labelEn: "Community Saarthi", labelHi: "कम्युनिटी सारथी", color: "#CD7F32", icon: "🥉" },
+    },
+  },
+  compatibilityBadge: {
+    labelEn: "Match Compatibility",
+    labelHi: "अनुकूलता मैच",
+    highMatchThreshold: 90,
+  },
+  ctaEn: "Request Mentorship Pair 🤝",
+  ctaHi: "मार्गदर्शन जोड़ी का अनुरोध करें 🤝",
+} as const;
+
+/**
+ * Helper to retrieve Saarthi Connect Card 2.0 tokens based on active role
+ */
+export function getSaarthiConnectCardTokens(role: "student" | "host" = "student") {
+  const isHost = role === "host";
+  return {
+    ...SAARTHI_CONNECT_CARD_TOKENS,
+    primaryAccent: isHost ? "#F59E0B" : "#06B6D4",
+    secondaryAccent: isHost ? "#FBBF24" : "#10B981",
+    glowShadow: isHost
+      ? "0 0 28px -4px rgba(245, 158, 11, 0.35)"
+      : "0 0 28px -4px rgba(6, 182, 212, 0.35)",
+  };
+}
+
+/**
+ * FAQ Accordion 2.0 Design Tokens (Task 145)
+ * Buttery smooth height transitions, glowing active outlines, and instant category filters.
+ */
+export const FAQ_ACCORDION_TOKENS = {
+  animation: {
+    durationMs: 300,
+    durationCss: "300ms",
+    easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+    utilityClass: "accordion-smooth-height",
+  },
+  activeOutlines: {
+    student: {
+      borderColor: "rgba(16, 185, 129, 0.45)",
+      backgroundColor: "rgba(6, 78, 59, 0.25)",
+      glowShadow: "0 0 24px -4px rgba(16, 185, 129, 0.3)",
+      activeClass: "accordion-glowing-outline-student",
+      pillActiveClass: "border-emerald-500/50 bg-emerald-500/15 text-emerald-300 shadow-sm",
+      pillBadgeActiveClass: "bg-emerald-500/20 text-emerald-300",
+    },
+    host: {
+      borderColor: "rgba(245, 158, 11, 0.45)",
+      backgroundColor: "rgba(120, 53, 15, 0.25)",
+      glowShadow: "0 0 24px -4px rgba(245, 158, 11, 0.3)",
+      activeClass: "accordion-glowing-outline-host",
+      pillActiveClass: "border-amber-500/50 bg-amber-500/15 text-amber-300 shadow-sm",
+      pillBadgeActiveClass: "bg-amber-500/20 text-amber-300",
+    },
+  },
+  categories: [
+    { id: "transparency", labelEn: "Radical Transparency", labelHi: "पूर्ण पारदर्शिता एवं कठिन प्रश्न", icon: "🔍" },
+    { id: "all", labelEn: "All Questions", labelHi: "सभी प्रश्न", icon: "📚" },
+    { id: "storage", labelEn: "Student Storage", labelHi: "छात्र स्टोरेज", icon: "📦" },
+    { id: "safety", labelEn: "Safety & Claims", labelHi: "सुरक्षा व ₹10k क्लेम", icon: "🛡️" },
+    { id: "host", labelEn: "Senior Host Norms", labelHi: "सीनियर होस्ट नियम", icon: "🏡" },
+  ],
+} as const;
+
+/**
+ * Helper to retrieve FAQ Accordion 2.0 tokens based on active role
+ */
+export function getFaqAccordionTokens(role: "student" | "host" = "student") {
+  const isHost = role === "host";
+  return {
+    ...FAQ_ACCORDION_TOKENS,
+    activeRole: role,
+    primaryAccent: isHost ? "#F59E0B" : "#10B981",
+    activeOutlineSpec: isHost ? FAQ_ACCORDION_TOKENS.activeOutlines.host : FAQ_ACCORDION_TOKENS.activeOutlines.student,
+  };
+}
+
+/**
+ * Helper to compute accordion item CSS classes dynamically based on open state and active role
+ */
+export function getFaqAccordionItemClasses(
+  isOpen: boolean,
+  role: "student" | "host" = "student"
+): string {
+  const isHost = role === "host";
+  const base =
+    "accordion-item-stage border rounded-xl overflow-hidden transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]";
+  if (!isOpen) {
+    return `${base} border-neutral-800/80 bg-neutral-950/60 hover:border-neutral-700/90`;
+  }
+  return isHost
+    ? `${base} ${FAQ_ACCORDION_TOKENS.activeOutlines.host.activeClass}`
+    : `${base} ${FAQ_ACCORDION_TOKENS.activeOutlines.student.activeClass}`;
+}
+
+/**
+ * Editorial-Grade Testimonial & Review Carousel Tokens (Task 146)
+ * Student audio clip quotes, verified college badges, rating stars, and editorial typography.
+ */
+export const TESTIMONIAL_CAROUSEL_TOKENS = {
+  audioClipQuotes: {
+    equalizerBarsCount: 16,
+    defaultDurationText: "0:42",
+    pulseAnimationSpeedMs: 600,
+    audioWaveformHeights: [35, 60, 85, 45, 95, 70, 40, 80, 65, 90, 50, 75, 40, 85, 60, 30],
+    playingGlowStudent: "0 0 20px -2px rgba(16, 185, 129, 0.4)",
+    playingGlowHost: "0 0 20px -2px rgba(245, 158, 11, 0.4)",
+  },
+  collegeBadges: {
+    "IIT Kanpur": {
+      nameEn: "IIT Kanpur",
+      nameHi: "आईआईटी कानपुर",
+      badgeTextEn: "IIT Kanpur • Hall 12",
+      badgeTextHi: "आईआईटी कानपुर • हॉल 12",
+      color: "#10B981",
+      borderColor: "rgba(16, 185, 129, 0.35)",
+      bg: "rgba(16, 185, 129, 0.12)",
+      icon: "🎓",
+    },
+    "HBTI Kanpur": {
+      nameEn: "HBTI Kanpur",
+      nameHi: "एचबीटीआई कानपुर",
+      badgeTextEn: "HBTI Kanpur • Chemical",
+      badgeTextHi: "एचबीटीआई कानपुर • केमिकल",
+      color: "#06B6D4",
+      borderColor: "rgba(6, 182, 212, 0.35)",
+      bg: "rgba(6, 182, 212, 0.12)",
+      icon: "🏛️",
+    },
+    "CSJM University": {
+      nameEn: "CSJM University",
+      nameHi: "सीएसजेएम यूनिवर्सिटी",
+      badgeTextEn: "CSJM University • BCA",
+      badgeTextHi: "सीएसजेएम यूनिवर्सिटी • बीसीए",
+      color: "#A855F7",
+      borderColor: "rgba(168, 85, 247, 0.35)",
+      bg: "rgba(168, 85, 247, 0.12)",
+      icon: "📚",
+    },
+    "PW Vidyapeeth Kakadeo": {
+      nameEn: "PW Kakadeo Hub",
+      nameHi: "पीडब्लू काकादेव हब",
+      badgeTextEn: "Physics Wallah • Kakadeo",
+      badgeTextHi: "फिजिक्स वाला • काकादेव",
+      color: "#3B82F6",
+      borderColor: "rgba(59, 130, 246, 0.35)",
+      bg: "rgba(59, 130, 246, 0.12)",
+      icon: "⚡",
+    },
+    "Senior Host Vault": {
+      nameEn: "Senior Host Vault",
+      nameHi: "सीनियर होस्ट वॉल्ट",
+      badgeTextEn: "Senior Host • Kalyanpur",
+      badgeTextHi: "सीनियर होस्ट • कल्याणपुर",
+      color: "#F59E0B",
+      borderColor: "rgba(245, 158, 11, 0.35)",
+      bg: "rgba(245, 158, 11, 0.12)",
+      icon: "🏡",
+    },
+  },
+  ratingStars: {
+    maxStars: 5,
+    starGlowColorStudent: "#F59E0B",
+    starGlowColorHost: "#FBBF24",
+    glowShadow: "0 0 12px rgba(245, 158, 11, 0.5)",
+  },
+  editorialLayout: {
+    cardBorderRadius: "1.25rem",
+    backdropBlur: "blur(20px) saturate(150%)",
+    activeGlowStudent: "0 20px 50px -12px rgba(16, 185, 129, 0.25)",
+    activeGlowHost: "0 20px 50px -12px rgba(245, 158, 11, 0.25)",
+  },
+} as const;
+
+/**
+ * Helper to retrieve Testimonial Carousel tokens based on active role
+ */
+export function getTestimonialCarouselTokens(role: "student" | "host" = "student") {
+  const isHost = role === "host";
+  return {
+    ...TESTIMONIAL_CAROUSEL_TOKENS,
+    primaryAccent: isHost ? "#F59E0B" : "#10B981",
+    secondaryAccent: isHost ? "#FBBF24" : "#06B6D4",
+    cardGlow: isHost
+      ? TESTIMONIAL_CAROUSEL_TOKENS.editorialLayout.activeGlowHost
+      : TESTIMONIAL_CAROUSEL_TOKENS.editorialLayout.activeGlowStudent,
+  };
+}
+
+/**
+ * Campus Directory Search Bar & Live Filter Tokens (Task 147)
+ * Auto-suggest chips, distance sliders, live filter tags, and instant query state.
+ */
+export const FILTER_SEARCH_BAR_TOKENS = {
+  autoSuggestChips: [
+    { id: "iitk", labelEn: "IIT Kanpur (208016)", labelHi: "आईआईटी कानपुर (208016)", query: "208016", badge: "650m" },
+    { id: "csjmu", labelEn: "CSJMU Gate 1 (208024)", labelHi: "सीएसजेएमयू (208024)", query: "208024", badge: "300m" },
+    { id: "kakadeo", labelEn: "Kakadeo PW (208002)", labelHi: "काकादेव पीडब्लू (208002)", query: "208002", badge: "150m" },
+    { id: "kalyanpur", labelEn: "Kalyanpur (208025)", labelHi: "कल्याणपुर (208025)", query: "208025", badge: "1.2km" },
+    { id: "hbti", labelEn: "HBTI Nawabganj (208001)", labelHi: "एचबीटीआई नवाबगंज (208001)", query: "208001", badge: "800m" },
+    { id: "lucknow", labelEn: "LU Babuganj (226007)", labelHi: "लखनऊ बाबूगंज (226007)", query: "226007", badge: "500m" },
+  ],
+  distanceSlider: {
+    minKm: 0.1,
+    maxKm: 5.0,
+    stepKm: 0.1,
+    defaultMaxKm: 2.5,
+    unitEn: "km radius",
+    unitHi: "किमी दायरा",
+  },
+  liveFilterTags: [
+    { id: "all", labelEn: "All Nodes", labelHi: "सभी नोड्स", icon: "🌐" },
+    { id: "stash", labelEn: "Stash Lockers Available", labelHi: "स्टैश लॉकर उपलब्ध", icon: "📦" },
+    { id: "rooms", labelEn: "Co-Living Rooms", labelHi: "को-लिविंग कमरा", icon: "🏠" },
+    { id: "fast_pickup", labelEn: "Instant 10-Min Pickup", labelHi: "10-मिनट पिकअप", icon: "⚡" },
+    { id: "top_rated", labelEn: "Top Rated (★ 4.8+)", labelHi: "टॉप रेटेड (★ 4.8+)", icon: "⭐" },
+    { id: "walking", labelEn: "Walking Distance (< 500m)", labelHi: "पैदल दूरी (< 500मी)", icon: "🚶" },
+  ],
+  sortOptions: [
+    { id: "distance", labelEn: "Nearest First", labelHi: "नज़दीकी पहले" },
+    { id: "rating", labelEn: "Highest Rated", labelHi: "सर्वश्रेष्ठ रेटिंग" },
+    { id: "stash_capacity", labelEn: "Max Stash Space", labelHi: "अधिकतम स्टैश" },
+    { id: "pickup_speed", labelEn: "Fastest Pickup", labelHi: "तेज़ पिकअप" },
+  ],
+  personaAccents: {
+    student: {
+      primaryColor: "#10B981",
+      secondaryColor: "#06B6D4",
+      activeRingClass: "ring-emerald-500/50 border-emerald-500/40 bg-emerald-500/10",
+      glowShadow: "0 0 25px rgba(16, 185, 129, 0.25)",
+      chipActive: "bg-emerald-500/20 text-emerald-300 border-emerald-500/40",
+      sliderThumb: "bg-emerald-400 border-emerald-500",
+    },
+    host: {
+      primaryColor: "#F59E0B",
+      secondaryColor: "#FBBF24",
+      activeRingClass: "ring-amber-500/50 border-amber-500/40 bg-amber-500/10",
+      glowShadow: "0 0 25px rgba(245, 158, 11, 0.25)",
+      chipActive: "bg-amber-500/20 text-amber-300 border-amber-500/40",
+      sliderThumb: "bg-amber-400 border-amber-500",
+    },
+  },
+} as const;
+
+export function getFilterSearchBarTokens(role: "student" | "host" = "student") {
+  const isHost = role === "host";
+  return {
+    ...FILTER_SEARCH_BAR_TOKENS,
+    activeAccents: isHost
+      ? FILTER_SEARCH_BAR_TOKENS.personaAccents.host
+      : FILTER_SEARCH_BAR_TOKENS.personaAccents.student,
+  };
+}
+
+/**
+ * Badge & Tag Standardization Tokens (Task 148)
+ * Standardized metadata tags across cards and views with cohesive micro-padding, typography, and persona accents.
+ */
+export const METADATA_TAG_TOKENS = {
+  microPadding: {
+    sm: "px-2 py-0.5 text-[10px]",
+    default: "px-2.5 py-0.5 text-[11px]",
+    lg: "px-3 py-1 text-xs",
+  },
+  typography: {
+    fontFamily: "var(--font-sans)",
+    fontWeight: "600",
+    letterSpacing: "0.025em",
+    lineHeight: "1.2",
+  },
+  presets: {
+    verifiedHost: {
+      id: "verifiedHost",
+      labelEn: "Verified Host",
+      labelHi: "सत्यापित होस्ट",
+      icon: "🛡️",
+      bgStudent: "rgba(16, 185, 129, 0.12)",
+      bgHost: "rgba(245, 158, 11, 0.15)",
+      borderStudent: "rgba(16, 185, 129, 0.35)",
+      borderHost: "rgba(245, 158, 11, 0.4)",
+      textStudent: "#34D399",
+      textHost: "#FCD34D",
+      glowStudent: "0 0 10px rgba(16, 185, 129, 0.2)",
+      glowHost: "0 0 10px rgba(245, 158, 11, 0.25)",
+      badgeClass: "metadata-tag-verified-host",
+    },
+    campusProximity: {
+      id: "campusProximity",
+      labelEn: "Near Campus",
+      labelHi: "कैंपस के समीप",
+      icon: "📍",
+      bgStudent: "rgba(6, 182, 212, 0.12)",
+      bgHost: "rgba(245, 158, 11, 0.12)",
+      borderStudent: "rgba(6, 182, 212, 0.35)",
+      borderHost: "rgba(245, 158, 11, 0.35)",
+      textStudent: "#22D3EE",
+      textHost: "#FBBF24",
+      glowStudent: "0 0 10px rgba(6, 182, 212, 0.2)",
+      glowHost: "0 0 10px rgba(245, 158, 11, 0.2)",
+      badgeClass: "metadata-tag-campus-proximity",
+    },
+    lifestyle: {
+      id: "lifestyle",
+      labelEn: "Veg Only",
+      labelHi: "शुद्ध शाकाहारी",
+      icon: "🥗",
+      bgStudent: "rgba(16, 185, 129, 0.12)",
+      bgHost: "rgba(234, 179, 8, 0.12)",
+      borderStudent: "rgba(16, 185, 129, 0.35)",
+      borderHost: "rgba(234, 179, 8, 0.35)",
+      textStudent: "#34D399",
+      textHost: "#FACC15",
+      glowStudent: "0 0 10px rgba(16, 185, 129, 0.15)",
+      glowHost: "0 0 10px rgba(234, 179, 8, 0.15)",
+      badgeClass: "metadata-tag-lifestyle",
+    },
+    amenity: {
+      id: "amenity",
+      labelEn: "AC Room",
+      labelHi: "एसी कमरा",
+      icon: "❄️",
+      bgStudent: "rgba(30, 41, 59, 0.8)",
+      bgHost: "rgba(45, 35, 20, 0.8)",
+      borderStudent: "rgba(51, 65, 85, 0.6)",
+      borderHost: "rgba(180, 120, 40, 0.4)",
+      textStudent: "#E2E8F0",
+      textHost: "#FDE68A",
+      glowStudent: "none",
+      glowHost: "none",
+      badgeClass: "metadata-tag-amenity",
+    },
+    pricingSave: {
+      id: "pricingSave",
+      labelEn: "0% Brokerage",
+      labelHi: "0% ब्रोकरेज",
+      icon: "⚡",
+      bgStudent: "rgba(16, 185, 129, 0.18)",
+      bgHost: "rgba(245, 158, 11, 0.18)",
+      borderStudent: "rgba(16, 185, 129, 0.45)",
+      borderHost: "rgba(245, 158, 11, 0.45)",
+      textStudent: "#6EE7B7",
+      textHost: "#FDE68A",
+      glowStudent: "0 0 12px rgba(16, 185, 129, 0.3)",
+      glowHost: "0 0 12px rgba(245, 158, 11, 0.3)",
+      badgeClass: "metadata-tag-pricing-save",
+    },
+    statusLive: {
+      id: "statusLive",
+      labelEn: "Instant Active",
+      labelHi: "तुरंत सक्रिय",
+      icon: "🟢",
+      bgStudent: "rgba(16, 185, 129, 0.15)",
+      bgHost: "rgba(245, 158, 11, 0.15)",
+      borderStudent: "rgba(16, 185, 129, 0.15)",
+      borderHost: "rgba(245, 158, 11, 0.35)",
+      textStudent: "#34D399",
+      textHost: "#FCD34D",
+      glowStudent: "0 0 8px rgba(16, 185, 129, 0.25)",
+      glowHost: "0 0 8px rgba(245, 158, 11, 0.25)",
+      badgeClass: "metadata-tag-status-live",
+    },
+  },
+} as const;
+
+export function getMetadataTagTokens(
+  presetKey: keyof typeof METADATA_TAG_TOKENS.presets = "verifiedHost",
+  role: "student" | "host" = "student"
+) {
+  const isHost = role === "host";
+  const preset = METADATA_TAG_TOKENS.presets[presetKey] || METADATA_TAG_TOKENS.presets.verifiedHost;
+  return {
+    ...preset,
+    bg: isHost ? preset.bgHost : preset.bgStudent,
+    border: isHost ? preset.borderHost : preset.borderStudent,
+    text: isHost ? preset.textHost : preset.textStudent,
+    glow: isHost ? preset.glowHost : preset.glowStudent,
+  };
+}
+
+export function getMetadataTagClasses(
+  presetKey: keyof typeof METADATA_TAG_TOKENS.presets = "verifiedHost",
+  size: "sm" | "default" | "lg" = "default"
+): string {
+  const paddingClass = METADATA_TAG_TOKENS.microPadding[size];
+  const preset = METADATA_TAG_TOKENS.presets[presetKey] || METADATA_TAG_TOKENS.presets.verifiedHost;
+  return `metadata-tag-base ${paddingClass} ${preset.badgeClass}`;
+}
+
+/**
+ * Comparison Matrix Table Tokens (Task 149)
+ * Sleek, high-contrast comparison matrix contrasting StashSaarthi vs Traditional PGs vs Commercial Warehouses.
+ */
+export const COMPARISON_MATRIX_TOKENS = {
+  columns: {
+    traditionalPg: {
+      id: "traditionalPg",
+      titleEn: "Traditional PGs / Hostels",
+      titleHi: "पारंपरिक PGs / कमर्शियल हॉस्टल",
+      subtitleEn: "Rigid 11-mo lock-in & full dead-rent",
+      subtitleHi: "11-महीने सख्त लॉक-इन व पूरा मृत-किराया",
+      badgeColor: "#F43F5E",
+      bgClass: "bg-rose-500/5 dark:bg-rose-950/15 border-rose-500/20 text-rose-300",
+      pillClass: "bg-rose-500/10 text-rose-400 border-rose-500/20",
+    },
+    commercialWarehouse: {
+      id: "commercialWarehouse",
+      titleEn: "Commercial Warehouses",
+      titleHi: "कमर्शियल वेयरहाउस (सेल्फ-स्टोरेज)",
+      subtitleEn: "Suburban industrial units & heavy min volume",
+      subtitleHi: "दूर औद्योगिक इलाके व भारी न्यूनतम शुल्क",
+      badgeColor: "#F59E0B",
+      bgClass: "bg-amber-500/5 dark:bg-amber-950/15 border-amber-500/20 text-amber-300",
+      pillClass: "bg-amber-500/10 text-amber-400 border-amber-500/20",
+    },
+    stashSaarthi: {
+      id: "stashSaarthi",
+      titleEn: "StashSaarthi Network",
+      titleHi: "स्टैशसारथी नेटवर्क (StashSaarthi)",
+      subtitleEn: "Hyperlocal verified hosts & 0% brokerage",
+      subtitleHi: "पड़ोस के सत्यापित होस्ट व 0% ब्रोकरेज",
+      badgeColor: "#10B981",
+      winnerTextEn: "WINNER",
+      winnerTextHi: "सर्वश्रेष्ठ विकल्प",
+      bgClass: "bg-emerald-500/10 dark:bg-emerald-950/30 border-emerald-500/50 text-emerald-300 shadow-[0_0_30px_-5px_rgba(16,185,129,0.25)]",
+      pillClass: "bg-emerald-500/20 text-emerald-300 border-emerald-500/40 font-bold",
+    },
+  },
+  categories: [
+    { id: "all", labelEn: "All Metrics", labelHi: "सभी मानक", icon: "📊" },
+    { id: "storage", labelEn: "Vacation Storage", labelHi: "वैकेशन स्टोरेज", icon: "📦" },
+    { id: "pricing", labelEn: "Pricing & Lock-In", labelHi: "कीमत व लॉक-इन", icon: "💰" },
+    { id: "logistics", labelEn: "Logistics & Pickup", labelHi: "पिकअप व पहुंच", icon: "🚚" },
+    { id: "safety", labelEn: "Safety & Insurance", labelHi: "सुरक्षा व बीमा", icon: "🛡️" },
+    { id: "lifestyle", labelEn: "Food & Community", labelHi: "भोजन व समुदाय", icon: "🍲" },
+  ],
+  statsHighlights: {
+    deadRentSavedEn: "₹6,400 Avg Saved / Break",
+    deadRentSavedHi: "₹6,400 औसतन बचत / ब्रेक",
+    brokerageEn: "0% Brokerage (Direct Host)",
+    brokerageHi: "0% ब्रोकरेज (सीधा होस्ट)",
+    microStoragePriceEn: "₹300 / bag / mo",
+    microStoragePriceHi: "₹300 / बैग / माह",
+    lockInPenaltyEn: "0 Days Lock-In",
+    lockInPenaltyHi: "0 दिन का लॉक-इन",
+  },
+} as const;
+
+export function getComparisonMatrixTokens(role: "student" | "host" = "student") {
+  const isHost = role === "host";
+  return {
+    ...COMPARISON_MATRIX_TOKENS,
+    primaryAccent: isHost ? "#F59E0B" : "#10B981",
+    secondaryAccent: isHost ? "#FBBF24" : "#06B6D4",
+  };
+}
+
+/**
+ * Skeleton Loader Design Tokens (Task 150)
+ * Shimmering wave skeleton loaders matching exact geometric card layouts to eliminate layout jumps.
+ */
+export const SKELETON_LOADER_TOKENS = {
+  animation: {
+    durationMs: 1800,
+    durationCss: "1.8s",
+    easing: "ease-in-out",
+    keyframeName: "shimmer-wave-sweep",
+    baseClass: "shimmer-wave-skeleton relative overflow-hidden rounded-xl bg-slate-900/60 border border-white/5",
+  },
+  personaShimmers: {
+    student: {
+      gradient: "linear-gradient(90deg, transparent 0%, oklch(0.72 0.19 160 / 22%) 50%, transparent 100%)",
+      glowColor: "rgba(16, 185, 129, 0.25)",
+      accentBorder: "border-emerald-500/20",
+      shimmerClass: "shimmer-wave-student",
+    },
+    host: {
+      gradient: "linear-gradient(90deg, transparent 0%, oklch(0.769 0.165 70 / 25%) 50%, transparent 100%)",
+      glowColor: "rgba(245, 158, 11, 0.25)",
+      accentBorder: "border-amber-500/20",
+      shimmerClass: "shimmer-wave-host",
+    },
+  },
+  geometries: {
+    stashCard: {
+      height: "440px",
+      depthStageHeight: "180px",
+      sealPillHeight: "36px",
+      pricePillHeight: "56px",
+      ctaHeight: "48px",
+    },
+    spacesCard: {
+      height: "480px",
+      imageCarouselAspect: "16/9",
+      badgeRowHeight: "28px",
+      titleHeight: "28px",
+      walkingPillHeight: "32px",
+      ctaRowHeight: "44px",
+    },
+    kitchenCard: {
+      height: "460px",
+      timerPulseHeight: "32px",
+      thaliStageHeight: "160px",
+      macroGridHeight: "48px",
+      chefBioHeight: "36px",
+      ctaHeight: "48px",
+    },
+    connectCard: {
+      height: "450px",
+      headerAvatarHeight: "64px",
+      hobbiesRowHeight: "32px",
+      skillsRowHeight: "32px",
+      karmaCounterHeight: "36px",
+      ctaHeight: "48px",
+    },
+    faqAccordion: {
+      searchBarHeight: "52px",
+      categoryChipsHeight: "38px",
+      accordionItemHeight: "64px",
+      accordionItemExpandedHeight: "180px",
+    },
+    testimonialCarousel: {
+      stageHeight: "320px",
+      audioWaveformHeight: "40px",
+      collegeBadgeHeight: "28px",
+      ratingStarsHeight: "24px",
+    },
+    comparisonMatrix: {
+      headerRowHeight: "72px",
+      dataRowHeight: "60px",
+      mobileCardHeight: "320px",
+    },
+  },
+} as const;
+
+/**
+ * Helper to retrieve Skeleton Loader design tokens based on active role
+ */
+export function getSkeletonLoaderTokens(role: "student" | "host" = "student") {
+  const isHost = role === "host";
+  const personaSpec = isHost
+    ? SKELETON_LOADER_TOKENS.personaShimmers.host
+    : SKELETON_LOADER_TOKENS.personaShimmers.student;
+  return {
+    ...SKELETON_LOADER_TOKENS,
+    activeRole: role,
+    primaryAccent: isHost ? "#F59E0B" : "#10B981",
+    personaSpec,
+  };
+}
+
+/**
+ * 3D Card Hover Physics & Specular Glare Design Tokens (Task 151)
+ * GPU-accelerated tilt, specular glare follow, and auto-disable touch protection.
+ */
+export const CARD_3D_TOKENS = {
+  maxTiltDeg: 12,
+  tiltCoefficient: 1.0,
+  perspectivePx: 1000,
+  glareMaxOpacity: 0.35,
+  touchThresholdPx: 768,
+  transitionTiming: "cubic-bezier(0.16, 1, 0.3, 1)",
+  resetDurationMs: 300,
+  glareGradients: {
+    student: "radial-gradient(circle at var(--glare-x, 50%) var(--glare-y, 50%), oklch(0.72 0.19 160 / 35%) 0%, oklch(0.868 0.16 178 / 15%) 40%, transparent 80%)",
+    host: "radial-gradient(circle at var(--glare-x, 50%) var(--glare-y, 50%), oklch(0.769 0.165 70 / 35%) 0%, oklch(0.837 0.175 82 / 15%) 40%, transparent 80%)",
+  },
+} as const;
+
+export function getCard3DTokens(role: "student" | "host" = "student") {
+  const isHost = role === "host";
+  return {
+    ...CARD_3D_TOKENS,
+    activeRole: role,
+    primaryAccent: isHost ? "#F59E0B" : "#10B981",
+    glareGradient: isHost ? CARD_3D_TOKENS.glareGradients.host : CARD_3D_TOKENS.glareGradients.student,
+  };
+}
+
+/**
+ * Peacock Feather Micro-Interaction & Sparkle Physics Tokens (Task 152)
+ * Refined Mor-Pankh dusting animation for Standard Thali selection with particle sparkles & spring physics.
+ */
+export const PEACOCK_FEATHER_TOKENS = {
+  sweepPhysics: {
+    durationMs: 850,
+    sweepAngleDeg: 35,
+    springStiffness: 260,
+    springDamping: 18,
+    featherRotationRange: [-12, 32],
+    featherScaleMax: 1.3,
+    easing: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+  },
+  sparkleBurst: {
+    particleCount: 12,
+    colors: [
+      "#FBBF24", // Amber Gold
+      "#10B981", // Electric Mint
+      "#06B6D4", // Cyan
+      "#FEF08A", // Makhan Yellow
+      "#FFFBEB", // Desi Butter White
+      "#6366F1", // Peacock Indigo
+    ],
+    spreadRadiusPx: 48,
+    fadeDurationMs: 1200,
+  },
+  makhanMound: {
+    baseScale: 1.0,
+    dustScale: 1.22,
+    gheeGlowColor: "rgba(245, 158, 11, 0.35)",
+    glowPulseDurationMs: 1400,
+  },
+  personaAccents: {
+    student: {
+      glow: "rgba(16, 185, 129, 0.3)",
+      badgeBg: "bg-emerald-950/80 border-emerald-500/40 text-emerald-300",
+      featherBorder: "#10B981",
+    },
+    host: {
+      glow: "rgba(245, 158, 11, 0.3)",
+      badgeBg: "bg-amber-950/80 border-amber-500/40 text-amber-300",
+      featherBorder: "#F59E0B",
+    },
+  },
+} as const;
+
+export function getPeacockFeatherTokens(role: "student" | "host" = "student") {
+  const isHost = role === "host";
+  return {
+    ...PEACOCK_FEATHER_TOKENS,
+    activeRole: role,
+    primaryAccent: isHost ? "#F59E0B" : "#10B981",
+    personaSpec: isHost
+      ? PEACOCK_FEATHER_TOKENS.personaAccents.host
+      : PEACOCK_FEATHER_TOKENS.personaAccents.student,
+  };
+}
+
+/**
+ * Organic Spring Modal Entrances Design Tokens (Task 153)
+ * Replaces linear modal fades with organic spring physics cubic-bezier(0.16, 1, 0.3, 1) across dialogs.
+ */
+export const SPRING_MODAL_TOKENS = {
+  springEasing: "cubic-bezier(0.16, 1, 0.3, 1)",
+  backdropEasing: "cubic-bezier(0.16, 1, 0.3, 1)",
+  entranceDurationMs: 350,
+  exitDurationMs: 220,
+  springConfig: {
+    type: "spring",
+    stiffness: 380,
+    damping: 28,
+    mass: 0.9,
+  },
+  transformScale: {
+    initial: 0.94,
+    animate: 1.0,
+    exit: 0.96,
+  },
+  transformY: {
+    initial: 14,
+    animate: 0,
+    exit: 8,
+  },
+  backdropBlurPx: 16,
+  backdropOpacity: {
+    initial: 0,
+    animate: 1,
+    exit: 0,
+  },
+  personaGlows: {
+    student: {
+      borderGlow: "rgba(16, 185, 129, 0.3)",
+      boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.75), 0 0 30px -4px rgba(16, 185, 129, 0.25)",
+      topAccent: "linear-gradient(90deg, #10B981, #06B6D4, #00F5A0)",
+    },
+    host: {
+      borderGlow: "rgba(245, 158, 11, 0.3)",
+      boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.75), 0 0 30px -4px rgba(245, 158, 11, 0.28)",
+      topAccent: "linear-gradient(90deg, #F59E0B, #FBBF24, #F59E0B)",
+    },
+  },
+} as const;
+
+export function getSpringModalTokens(role: "student" | "host" = "student") {
+  const isHost = role === "host";
+  return {
+    ...SPRING_MODAL_TOKENS,
+    activeRole: role,
+    primaryAccent: isHost ? "#F59E0B" : "#10B981",
+    personaGlow: isHost
+      ? SPRING_MODAL_TOKENS.personaGlows.host
+      : SPRING_MODAL_TOKENS.personaGlows.student,
+  };
+}
+
+/**
+ * Scroll-Triggered Reveal Engine Design Tokens (Task 154)
+ * Staggered section entrance reveals with subtle translation (translateY(24px) -> 0) and opacity fades on scroll.
+ */
+export const SCROLL_REVEAL_TOKENS = {
+  translateYPx: 24,
+  translateYCss: "24px",
+  durationMs: 600,
+  durationCss: "600ms",
+  staggerDelayMs: 120, // 0.12s per staggered child item
+  easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+  threshold: 0.15,
+  directionOffsets: {
+    up: { x: 0, y: 24 },
+    down: { x: 0, y: -24 },
+    left: { x: 24, y: 0 },
+    right: { x: -24, y: 0 },
+    fade: { x: 0, y: 0 },
+  },
+  personaAccents: {
+    student: {
+      glowColor: "rgba(16, 185, 129, 0.25)",
+      borderColor: "rgba(16, 185, 129, 0.3)",
+      haloGradient: "radial-gradient(ellipse 60% 40% at 50% 0%, rgba(16, 185, 129, 0.15) 0%, transparent 70%)",
+    },
+    host: {
+      glowColor: "rgba(245, 158, 11, 0.25)",
+      borderColor: "rgba(245, 158, 11, 0.3)",
+      haloGradient: "radial-gradient(ellipse 60% 40% at 50% 0%, rgba(245, 158, 11, 0.15) 0%, transparent 70%)",
+    },
+  },
+} as const;
+
+export type ScrollRevealDirection = keyof typeof SCROLL_REVEAL_TOKENS.directionOffsets;
+
+/**
+ * Helper to retrieve Scroll Reveal design tokens based on active role
+ */
+export function getScrollRevealTokens(role: "student" | "host" = "student") {
+  const isHost = role === "host";
+  return {
+    ...SCROLL_REVEAL_TOKENS,
+    activeRole: role,
+    primaryAccent: isHost ? "#F59E0B" : "#10B981",
+    personaSpec: isHost
+      ? SCROLL_REVEAL_TOKENS.personaAccents.host
+      : SCROLL_REVEAL_TOKENS.personaAccents.student,
+  };
+}
+
+/**
+ * Helper to calculate inline style transitions for scroll reveal elements with custom delay & stagger
+ */
+export function getScrollRevealInlineStyles(
+  isVisible: boolean,
+  delayMs: number = 0,
+  direction: ScrollRevealDirection = "up",
+  translateYPx: number = 24
+): Record<string, string | number> {
+  const offset = SCROLL_REVEAL_TOKENS.directionOffsets[direction] || { x: 0, y: translateYPx };
+  const targetX = isVisible ? 0 : offset.x;
+  const targetY = isVisible ? 0 : offset.y;
+
+  return {
+    opacity: isVisible ? 1 : 0,
+    transform: `translate3d(${targetX}px, ${targetY}px, 0)`,
+    transitionProperty: "opacity, transform",
+    transitionDuration: SCROLL_REVEAL_TOKENS.durationCss,
+    transitionTimingFunction: SCROLL_REVEAL_TOKENS.easing,
+    transitionDelay: `${delayMs}ms`,
+    willChange: "opacity, transform",
+  };
+}
+
+/**
+ * Helper to construct CSS class names for Scroll Reveal elements
+ */
+export function getScrollRevealClasses(
+  isVisible: boolean,
+  role: "student" | "host" = "student",
+  direction: ScrollRevealDirection = "up",
+  showPersonaGlow: boolean = false
+): string {
+  const baseClasses = "scroll-reveal-stage transition-all duration-600 ease-[cubic-bezier(0.16,1,0.3,1)]";
+  const visibilityClass = isVisible ? "scroll-reveal-active opacity-100 translate-x-0 translate-y-0" : "scroll-reveal-initial opacity-0";
+  const personaGlowClass = showPersonaGlow && isVisible
+    ? role === "host"
+      ? "shadow-[0_0_28px_-4px_rgba(245,158,11,0.25)] border-amber-500/30"
+      : "shadow-[0_0_28px_-4px_rgba(16,185,129,0.25)] border-emerald-500/30"
+    : "";
+
+  return `${baseClasses} ${visibilityClass} ${personaGlowClass}`.trim();
+}
+
+/**
+ * Web Audio Haptic Soundscape Tokens & Audio Parameters
+ * Formalized sound synthesis frequencies, ramps, and timings for toggles, counters, and payment confirmations.
+ */
+export const WEB_AUDIO_SOUNDSCAPE_TOKENS = {
+  toggleSwitch: {
+    on: { baseFreq: 440, targetFreq: 880, durationMs: 65, volume: 0.15, waveform: "sine" as OscillatorType },
+    off: { baseFreq: 750, targetFreq: 360, durationMs: 65, volume: 0.12, waveform: "sine" as OscillatorType },
+  },
+  counterIncrement: {
+    baseFreq: 520,
+    pitchStepHz: 45,
+    maxPitchHz: 1200,
+    durationMs: 50,
+    volume: 0.14,
+    waveform: "sine" as OscillatorType,
+  },
+  counterDecrement: {
+    baseFreq: 640,
+    pitchStepHz: 35,
+    minPitchHz: 320,
+    durationMs: 45,
+    volume: 0.1,
+    waveform: "triangle" as OscillatorType,
+  },
+  paymentConfirmation: {
+    frequencies: [523.25, 659.25, 783.99, 1046.5], // C5, E5, G5, C6 (Triumphant major chord arpeggio)
+    staggerMs: 55,
+    durationMs: 380,
+    volume: 0.22,
+    waveform: "sine" as OscillatorType,
+  },
+  successChime: {
+    frequencies: [587.33, 880, 1174.66], // D5, A5, D6
+    staggerMs: 45,
+    durationMs: 260,
+    volume: 0.18,
+    waveform: "sine" as OscillatorType,
+  },
+  warningBeep: {
+    frequencies: [320, 280],
+    staggerMs: 60,
+    durationMs: 140,
+    volume: 0.12,
+    waveform: "sawtooth" as OscillatorType,
+  },
+  personaGlows: {
+    student: "rgba(16, 185, 129, 0.3)",
+    host: "rgba(245, 158, 11, 0.3)",
+  },
+} as const;
+
+export type AudioSoundscapeEventType = keyof typeof WEB_AUDIO_SOUNDSCAPE_TOKENS;
+
+/**
+ * Helper to retrieve soundscape token specs for a given event type
+ */
+export function getAudioSoundscapeTokens(eventType?: AudioSoundscapeEventType) {
+  if (eventType && WEB_AUDIO_SOUNDSCAPE_TOKENS[eventType]) {
+    return WEB_AUDIO_SOUNDSCAPE_TOKENS[eventType];
+  }
+  return WEB_AUDIO_SOUNDSCAPE_TOKENS;
+}
+
+/**
+ * Magnetic Buttons Micro-Interaction Tokens (Task 156)
+ * Subtle magnetic pull micro-interactions on primary desktop CTA buttons attracting toward cursor.
+ */
+export const MAGNETIC_BUTTON_TOKENS = {
+  magneticStrength: 0.35,
+  magneticRadiusPx: 120,
+  maxDisplacementPx: 18,
+  touchThresholdPx: 768,
+  springConfig: {
+    stiffness: 220,
+    damping: 18,
+    mass: 0.4,
+  },
+  resetTransitionCss: "transform 350ms cubic-bezier(0.16, 1, 0.3, 1)",
+  pullTransitionCss: "transform 100ms cubic-bezier(0.16, 1, 0.3, 1)",
+  personaGlows: {
+    student: {
+      glowShadow: "0 0 25px rgba(16, 185, 129, 0.45)",
+      borderColor: "rgba(16, 185, 129, 0.5)",
+      ringClass: "ring-emerald-500/40",
+    },
+    host: {
+      glowShadow: "0 0 25px rgba(245, 158, 11, 0.45)",
+      borderColor: "rgba(245, 158, 11, 0.5)",
+      ringClass: "ring-amber-500/40",
+    },
+  },
+} as const;
+
+export function getMagneticButtonTokens(role: "student" | "host" = "student") {
+  const isHost = role === "host";
+  return {
+    ...MAGNETIC_BUTTON_TOKENS,
+    activeRole: role,
+    primaryAccent: isHost ? "#F59E0B" : "#10B981",
+    personaSpec: isHost
+      ? MAGNETIC_BUTTON_TOKENS.personaGlows.host
+      : MAGNETIC_BUTTON_TOKENS.personaGlows.student,
+  };
+}
+
+/**
+ * Interactive Dead Rent Savings Slider Design Tokens (Task 157)
+ * Interactive vacation days slider dynamically animating saved currency notes and savings milestones.
+ */
+export const DEAD_RENT_SLIDER_TOKENS = {
+  minDays: 5,
+  maxDays: 90,
+  defaultDays: 45,
+  step: 1,
+  dailyHostelRent: 250, // ₹250/day (₹7,500/mo avg room rent)
+  monthlyStashCostPerBag: 300,
+  milestones: [
+    { days: 15, labelEn: "Weekend Getaway", labelHi: "वीकेंड ट्रिप", icon: "🏖️", savingsMultiplier: 0.2 },
+    { days: 30, labelEn: "1 Month Break", labelHi: "1 माह छुट्टी", icon: "🎓", savingsMultiplier: 0.4 },
+    { days: 45, labelEn: "Mid-Term Vacation", labelHi: "मिड-टर्म वेकेशन", icon: "🚀", savingsMultiplier: 0.6 },
+    { days: 60, labelEn: "Summer Semester", labelHi: "समर सेमेस्टर", icon: "☀️", savingsMultiplier: 0.8 },
+    { days: 90, labelEn: "Annual Internship", labelHi: "वार्षिक इंटरनशिप", icon: "💎", savingsMultiplier: 1.0 },
+  ],
+  animatedNotes: {
+    burstParticleCount: 8,
+    noteSymbol: "₹500",
+    floatDurationMs: 1200,
+    floatEasing: "cubic-bezier(0.16, 1, 0.3, 1)",
+    noteGradients: [
+      "linear-gradient(135deg, #10B981, #059669)", // Emerald 500
+      "linear-gradient(135deg, #34D399, #059669)", // Mint 400
+      "linear-gradient(135deg, #06B6D4, #0891B2)", // Cyan 500
+      "linear-gradient(135deg, #F59E0B, #D97706)", // Amber 500
+    ],
+  },
+  personaAccents: {
+    student: {
+      primaryColor: "#10B981",
+      secondaryColor: "#00F5A0",
+      cyanColor: "#06B6D4",
+      sliderTrackBg: "linear-gradient(90deg, #10B981 0%, #06B6D4 50%, #00F5A0 100%)",
+      thumbGlow: "0 0 20px rgba(16, 185, 129, 0.6)",
+      milestoneActiveBg: "bg-emerald-500/20 text-emerald-300 border-emerald-500/50",
+      savingsTextGradient: "from-emerald-400 via-teal-300 to-cyan-400",
+    },
+    host: {
+      primaryColor: "#F59E0B",
+      secondaryColor: "#FBBF24",
+      cyanColor: "#F59E0B",
+      sliderTrackBg: "linear-gradient(90deg, #F59E0B 0%, #FBBF24 50%, #D97706 100%)",
+      thumbGlow: "0 0 20px rgba(245, 158, 11, 0.6)",
+      milestoneActiveBg: "bg-amber-500/20 text-amber-300 border-amber-500/50",
+      savingsTextGradient: "from-amber-400 via-yellow-300 to-amber-500",
+    },
+  },
+} as const;
+
+export function getDeadRentSliderTokens(role: "student" | "host" = "student") {
+  const isHost = role === "host";
+  return {
+    ...DEAD_RENT_SLIDER_TOKENS,
+    activeRole: role,
+    primaryAccent: isHost ? "#F59E0B" : "#10B981",
+    personaSpec: isHost
+      ? DEAD_RENT_SLIDER_TOKENS.personaAccents.host
+      : DEAD_RENT_SLIDER_TOKENS.personaAccents.student,
+  };
+}
+
+/**
+ * Confetti & Celebration Cannon Tokens (Task 158)
+ * Lightweight canvas celebration particle physics upon booking confirmation & host agreement signing.
+ */
+export const CONFETTI_CELEBRATION_TOKENS = {
+  particleCount: {
+    standard: 90,
+    grand: 160,
+    burst: 60,
+  },
+  gravity: 0.28,
+  drag: 0.96,
+  decayMs: 3200,
+  shapes: ["square", "circle", "ribbon", "star"] as const,
+  palette: {
+    student: [
+      "#10B981", // Emerald 500
+      "#00F5A0", // Mint Neon
+      "#06B6D4", // Cyan 500
+      "#FBBF24", // Sunset Gold
+      "#14B8A6", // Teal 500
+      "#8B5CF6", // Purple 500
+    ],
+    host: [
+      "#F59E0B", // Warm Amber
+      "#FBBF24", // Sunset Gold
+      "#EA580C", // Terracotta
+      "#F43F5E", // Rose Accent
+      "#10B981", // Mint Secondary
+    ],
+  },
+  triggerTypes: {
+    booking_confirmation: {
+      count: 120,
+      soundEffect: "paymentConfirmation",
+      labelEn: "Booking Escrow Locked Celebration",
+      labelHi: "बुकिंग एस्क्रो सुरक्षित उत्सव",
+    },
+    host_agreement_signing: {
+      count: 150,
+      soundEffect: "successChime",
+      labelEn: "Verified Senior Host Charter Signed",
+      labelHi: "सत्यापित सीनियर होस्ट समझौता पूर्ण",
+    },
+    milestone_unlocked: {
+      count: 80,
+      soundEffect: "counterIncrement",
+      labelEn: "Milestone Unlocked",
+      labelHi: "माइलस्टोन अनलॉक हुआ",
+    },
+  },
+} as const;
+
+export type ConfettiTriggerType = keyof typeof CONFETTI_CELEBRATION_TOKENS.triggerTypes;
+
+export function getConfettiCelebrationTokens(role: "student" | "host" = "student") {
+  const isHost = role === "host";
+  return {
+    ...CONFETTI_CELEBRATION_TOKENS,
+    activeRole: role,
+    palette: isHost
+      ? CONFETTI_CELEBRATION_TOKENS.palette.host
+      : CONFETTI_CELEBRATION_TOKENS.palette.student,
+  };
+}
+
+/**
+ * Tab Switching Indicator Glides Tokens (Task 159)
+ * Design tokens for fluid sliding background pills and underlines
+ */
+export const TAB_GLIDER_TOKENS = {
+  springConfig: {
+    type: "spring",
+    stiffness: 450,
+    damping: 32,
+    mass: 0.8,
+  },
+  transitionDurationMs: 250,
+  easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+  layoutIdDefault: "tab-glider-pill-active",
+  variants: {
+    pills: {
+      activeBgStudent: "bg-emerald-500/15 border-emerald-500/35 text-emerald-400",
+      activeBgHost: "bg-amber-500/15 border-amber-500/35 text-amber-300",
+      glowStudent: "0 0 16px -2px oklch(0.72 0.19 160 / 30%)",
+      glowHost: "0 0 16px -2px oklch(0.809 0.165 76 / 30%)",
+    },
+    segmented: {
+      activeBgStudent: "bg-emerald-950/80 border-emerald-500/50 text-emerald-300 shadow-md",
+      activeBgHost: "bg-amber-950/80 border-amber-500/50 text-amber-200 shadow-md",
+      glowStudent: "0 0 20px -4px oklch(0.72 0.19 160 / 35%)",
+      glowHost: "0 0 20px -4px oklch(0.809 0.165 76 / 35%)",
+    },
+    underline: {
+      indicatorHeightPx: 3,
+      glowStudent: "0 2px 10px oklch(0.72 0.19 160 / 60%)",
+      glowHost: "0 2px 10px oklch(0.809 0.165 76 / 60%)",
+    },
+  },
+} as const;
+
+export function getTabGliderTokens(role: "student" | "host" = "student") {
+  const isHost = role === "host";
+  return {
+    ...TAB_GLIDER_TOKENS,
+    activeRole: role,
+    accentGlow: isHost
+      ? TAB_GLIDER_TOKENS.variants.pills.glowHost
+      : TAB_GLIDER_TOKENS.variants.pills.glowStudent,
+  };
+}
+
+/**
+ * Laser Seal Barcode Glow Tokens (Task 160)
+ * Design tokens for futuristic sweeping beam, barcode line glow, and anti-tamper verification status.
+ */
+export const LASER_BARCODE_SEAL_TOKENS = {
+  beamSweepDurationMs: 2400,
+  beamEasing: "cubic-bezier(0.4, 0, 0.2, 1)",
+  glowColorStudent: "#10B981",
+  glowColorHost: "#F59E0B",
+  laserBeamColorStudent: "rgba(0, 245, 160, 0.9)",
+  laserBeamColorHost: "rgba(251, 191, 36, 0.9)",
+  laserTrailGradientStudent: "linear-gradient(90deg, transparent 0%, rgba(16, 185, 129, 0.15) 50%, rgba(0, 245, 160, 0.85) 95%, #ffffff 100%)",
+  laserTrailGradientHost: "linear-gradient(90deg, transparent 0%, rgba(245, 158, 11, 0.15) 50%, rgba(251, 191, 36, 0.85) 95%, #ffffff 100%)",
+  defaultSerialCode: "QR-SEAL-8839-X",
+  securityStandards: [
+    "Laser-Etched Tamper Hologram",
+    "TPA Sec 105 Legal Protection",
+    "₹10,000 Micro-Insurance Shield",
+    "Encrypted Node Verification",
+  ],
+  pulseFrequencyMs: 1800,
+  scannerWidthPx: 3,
+} as const;
+
+export function getLaserBarcodeSealTokens(role: "student" | "host" = "student") {
+  const isHost = role === "host";
+  return {
+    ...LASER_BARCODE_SEAL_TOKENS,
+    activeRole: role,
+    glowColor: isHost
+      ? LASER_BARCODE_SEAL_TOKENS.glowColorHost
+      : LASER_BARCODE_SEAL_TOKENS.glowColorStudent,
+    laserBeamColor: isHost
+      ? LASER_BARCODE_SEAL_TOKENS.laserBeamColorHost
+      : LASER_BARCODE_SEAL_TOKENS.laserBeamColorStudent,
+    laserTrailGradient: isHost
+      ? LASER_BARCODE_SEAL_TOKENS.laserTrailGradientHost
+      : LASER_BARCODE_SEAL_TOKENS.laserTrailGradientStudent,
+  };
+}
+
+/**
+ * Multi-Step Booking Journey Tokens (Task 161)
+ * Design tokens for distraction-free 3-step progress journey, breadcrumb navigation, and step validation.
+ */
+export const MULTI_STEP_BOOKING_TOKENS = {
+  steps: [
+    {
+      id: 1,
+      stepNumber: 1,
+      titleEn: "Service & Contact Details",
+      titleHi: "सेवा विवरण व संपर्क",
+      subtitleEn: "Select service dimension and fill verified contact details",
+      subtitleHi: "अपनी सेवा चुनें और सत्यापित संपर्क विवरण भरें",
+      completionPercent: 33,
+      validationKeys: ["name", "phone", "email", "pincode"],
+    },
+    {
+      id: 2,
+      stepNumber: 2,
+      titleEn: "Escrow Lock & Review",
+      titleHi: "एस्क्रो सुरक्षा व समीक्षा",
+      subtitleEn: "Choose payment mode, accept safety charter, and review escrow",
+      subtitleHi: "भुगतान विधि चुनें, सुरक्षा चार्टर स्वीकार करें और समीक्षा करें",
+      completionPercent: 66,
+      validationKeys: ["waiverAccepted", "paymentMode"],
+    },
+    {
+      id: 3,
+      stepNumber: 3,
+      titleEn: "StashPass Issued",
+      titleHi: "डिजिटल स्टैशपास जारी",
+      subtitleEn: "Official digital QR pass and local nodal concierge assigned",
+      subtitleHi: "आधिकारिक डिजिटल QR पास और लोकल नोडल कंसीयज आवंटित",
+      completionPercent: 100,
+      validationKeys: ["tokenId"],
+    },
+  ],
+  breadcrumbs: {
+    activeBorderStudent: "border-emerald-500/50",
+    activeBorderHost: "border-amber-500/50",
+    activeBgStudent: "bg-emerald-500/20 text-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.3)]",
+    activeBgHost: "bg-amber-500/20 text-amber-300 shadow-[0_0_12px_rgba(245,158,11,0.3)]",
+    completedBgStudent: "bg-emerald-500 text-black",
+    completedBgHost: "bg-amber-500 text-black",
+  },
+  distractionFreeModal: {
+    backdropFilter: "blur(24px) saturate(160%)",
+    containerMaxWidth: "max-w-xl",
+    shadow: "0 32px 80px -16px rgba(0, 0, 0, 0.85)",
+  },
+  stepValidationRules: {
+    requireContact: true,
+    requireWaiver: true,
+    phoneMinDigits: 10,
+    pinCodeDigits: 6,
+  },
+} as const;
+
+export function getMultiStepBookingTokens(role: "student" | "host" = "student") {
+  const isHost = role === "host";
+  return {
+    ...MULTI_STEP_BOOKING_TOKENS,
+    activeRole: role,
+    accentColor: isHost ? "#F59E0B" : "#10B981",
+    activeBreadcrumbClass: isHost
+      ? MULTI_STEP_BOOKING_TOKENS.breadcrumbs.activeBgHost
+      : MULTI_STEP_BOOKING_TOKENS.breadcrumbs.activeBgStudent,
+    completedBreadcrumbClass: isHost
+      ? MULTI_STEP_BOOKING_TOKENS.breadcrumbs.completedBgHost
+      : MULTI_STEP_BOOKING_TOKENS.breadcrumbs.completedBgStudent,
+  };
+}
+
+/**
+ * Phone Number & 6-Digit OTP Input Tokens (Task 162)
+ * High-legibility +91 Indian phone and 6-digit OTP input design tokens with auto-advance, digit paste support, and clear error hints.
+ */
+export const PHONE_OTP_INPUT_TOKENS = {
+  countryCode: "+91",
+  countryFlag: "🇮🇳",
+  countryName: "India",
+  otpLength: 6,
+  phoneLength: 10,
+  validPrefixes: ["6", "7", "8", "9"],
+  resendCooldownSec: 30,
+  placeholders: {
+    phoneEn: "98765 43210",
+    phoneHi: "98765 43210",
+    otpEn: "• • • • • •",
+  },
+  errorHints: {
+    invalidPhoneEn: "Enter a valid 10-digit Indian mobile number starting with 6-9",
+    invalidPhoneHi: "कृपया 6-9 से शुरू होने वाला 10-अंकीय वैध भारतीय मोबाइल नंबर दर्ज करें",
+    invalidOtpEn: "Enter complete 6-digit verification code",
+    invalidOtpHi: "कृपया 6-अंकों का पूरा सत्यापन कोड दर्ज करें",
+  },
+  personaAccents: {
+    student: {
+      border: "border-emerald-500/50",
+      ring: "focus-within:ring-emerald-500/50",
+      bg: "bg-emerald-500/10",
+      text: "text-emerald-400",
+      glow: "shadow-[0_0_15px_rgba(16,185,129,0.35)]",
+    },
+    host: {
+      border: "border-amber-500/50",
+      ring: "focus-within:ring-amber-500/50",
+      bg: "bg-amber-500/10",
+      text: "text-amber-300",
+      glow: "shadow-[0_0_15px_rgba(245,158,11,0.35)]",
+    },
+  },
+} as const;
+
+export function getPhoneOtpInputTokens(role: "student" | "host" = "student") {
+  const isHost = role === "host";
+  return {
+    ...PHONE_OTP_INPUT_TOKENS,
+    activeRole: role,
+    accent: isHost ? PHONE_OTP_INPUT_TOKENS.personaAccents.host : PHONE_OTP_INPUT_TOKENS.personaAccents.student,
+  };
+}
+
+export const LUGGAGE_ITEMIZER_TOKENS = {
+  categories: [
+    {
+      id: "suitcase",
+      titleEn: "Large Trolley Suitcase",
+      titleHi: "बड़ा ट्रॉली सूटकेस",
+      subtitleEn: "28-32 inch heavy check-in trolley",
+      subtitleHi: "28-32 इंच भारी चेक-इन सूटकेस",
+      icon: "🧳",
+      monthlyRate: 300,
+      volumeLiters: 100,
+      dimensions: "75 x 50 x 30 cm",
+      maxWeightKg: 25,
+      suggestedItems: ["Winter clothes", "Jackets", "Heavy coats", "Blankets"],
+    },
+    {
+      id: "carton",
+      titleEn: "Study Books & Gear Carton",
+      titleHi: "किताबें एवं सामान कार्टन",
+      subtitleEn: "Standard 7-ply heavy corrugated box",
+      subtitleHi: "मानक 7-प्लाई कार्टन बॉक्स",
+      icon: "📦",
+      monthlyRate: 250,
+      volumeLiters: 60,
+      dimensions: "50 x 40 x 30 cm",
+      maxWeightKg: 20,
+      suggestedItems: ["JEE/NEET books", "Lab manuals", "Stationery", "Utensils"],
+    },
+    {
+      id: "cooler",
+      titleEn: "Room Air Cooler / Appliances",
+      titleHi: "कमरे का एयर कूलर / उपकरण",
+      subtitleEn: "Personal/desert cooler or mini fridge",
+      subtitleHi: "पर्सनल/डेजर्ट कूलर या मिनी फ्रिज",
+      icon: "❄️",
+      monthlyRate: 400,
+      volumeLiters: 140,
+      dimensions: "60 x 60 x 90 cm",
+      maxWeightKg: 18,
+      suggestedItems: ["Symphony/Crompton cooler", "Pedestal fan", "Mini heater"],
+    },
+    {
+      id: "backpack",
+      titleEn: "Backpack & Duffel Bag",
+      titleHi: "बैकपैक एवं डफ़ल बैग",
+      subtitleEn: "35-45L laptop or travel bag",
+      subtitleHi: "35-45 लीटर लैपटॉप या ट्रैवल बैग",
+      icon: "🎒",
+      monthlyRate: 150,
+      volumeLiters: 40,
+      dimensions: "45 x 35 x 20 cm",
+      maxWeightKg: 10,
+      suggestedItems: ["Laptops", "Gadgets", "Documents", "Daily clothes"],
+    },
+    {
+      id: "bedding",
+      titleEn: "Mattress & Bedding Roll",
+      titleHi: "गद्दा एवं बिस्तर रोल",
+      subtitleEn: "Single bed cotton/foam mattress roll",
+      subtitleHi: "सिंगल बेड गद्दा एवं रजाई रोल",
+      icon: "🛏️",
+      monthlyRate: 200,
+      volumeLiters: 80,
+      dimensions: "90 x 40 x 40 cm (rolled)",
+      maxWeightKg: 8,
+      suggestedItems: ["Cotton mattress", "Quilt/Rajai", "Pillows", "Bed sheets"],
+    },
+  ],
+  presets: [
+    {
+      id: "standard_vacation",
+      nameEn: "Hostel Vacation Standard",
+      nameHi: "हॉस्टल छुट्टी स्टैंडर्ड",
+      icon: "🏖️",
+      items: { suitcase: 1, carton: 1, backpack: 1 },
+      badgeEn: "Most Popular",
+      badgeHi: "सबसे लोकप्रिय",
+    },
+    {
+      id: "heavy_moveout",
+      nameEn: "Full Semester Moveout",
+      nameHi: "फूल सेमेस्टर खाली करना",
+      icon: "🚚",
+      items: { suitcase: 2, carton: 2, cooler: 1, bedding: 1 },
+      badgeEn: "Maximum Value",
+      badgeHi: "अधिकतम बचत",
+    },
+    {
+      id: "minimalist",
+      nameEn: "Light Summer Break",
+      nameHi: "हल्की गर्मी की छुट्टी",
+      icon: "⚡",
+      items: { suitcase: 1, backpack: 1 },
+      badgeEn: "Fast Pick",
+      badgeHi: "त्वरित चयन",
+    },
+  ],
+  spaceCalculation: {
+    baseVaultCapacityLiters: 500,
+    deadRentPgMonthlyAvg: 4000,
+    multiItemBundleDiscountPercentage: 10,
+    insuranceCoverageAmount: 10000,
+  },
+  personaAccents: {
+    student: {
+      accentColor: "#10B981",
+      secondaryColor: "#00F5A0",
+      glow: "rgba(16, 185, 129, 0.35)",
+      cardBorder: "border-emerald-500/30",
+      cardActiveBorder: "border-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.3)]",
+      badgeBg: "bg-emerald-500/20 text-emerald-300 border-emerald-500/40",
+      meterBar: "from-emerald-500 to-teal-400",
+      text: "text-emerald-400",
+    },
+    host: {
+      accentColor: "#F59E0B",
+      secondaryColor: "#FBBF24",
+      glow: "rgba(245, 158, 11, 0.35)",
+      cardBorder: "border-amber-500/30",
+      cardActiveBorder: "border-amber-400 shadow-[0_0_20px_rgba(245,158,11,0.3)]",
+      badgeBg: "bg-amber-500/20 text-amber-300 border-amber-500/40",
+      meterBar: "from-amber-500 to-yellow-400",
+      text: "text-amber-300",
+    },
+  },
+
+} as const;
+
+export function getLuggageItemizerTokens(role: "student" | "host" = "student") {
+  const isHost = role === "host";
+  return {
+    ...LUGGAGE_ITEMIZER_TOKENS,
+    activeRole: role,
+    accent: isHost ? LUGGAGE_ITEMIZER_TOKENS.personaAccents.host : LUGGAGE_ITEMIZER_TOKENS.personaAccents.student,
+  };
+}
+
+export const DATE_TIME_SLOT_PICKER_TOKENS = {
+  holidayPresets: [
+    {
+      id: "summer_break",
+      nameEn: "Summer Break ☀️",
+      nameHi: "ग्रीष्मकालीन अवकाश ☀️",
+      subEn: "71 Days Vacation (May 15 – Jul 25)",
+      subHi: "71 दिन अवकाश (15 मई - 25 जुलाई)",
+      startOffsetDays: 1,
+      durationDays: 71,
+      estimatedSavings: "₹18,900",
+      badgeEn: "Most Saved",
+      badgeHi: "अधिकतम बचत",
+      icon: "☀️",
+    },
+    {
+      id: "diwali_break",
+      nameEn: "Diwali Holidays 🪔",
+      nameHi: "दीपावली छुट्टी 🪔",
+      subEn: "13 Days Holiday (Oct 20 – Nov 02)",
+      subHi: "13 दिन छुट्टी (20 अक्टू - 02 नवं)",
+      startOffsetDays: 3,
+      durationDays: 13,
+      estimatedSavings: "₹3,400",
+      badgeEn: "Popular",
+      badgeHi: "लोकप्रिय",
+      icon: "🪔",
+    },
+    {
+      id: "holi_vacation",
+      nameEn: "Holi Break 🎨",
+      nameHi: "होली का त्यौहार 🎨",
+      subEn: "10 Days Vacation (Mar 10 – Mar 20)",
+      subHi: "10 दिन अवकाश (10 मार्च - 20 मार्च)",
+      startOffsetDays: 2,
+      durationDays: 10,
+      estimatedSavings: "₹2,600",
+      badgeEn: "Express",
+      badgeHi: "एक्सप्रेस",
+      icon: "🎨",
+    },
+    {
+      id: "semester_end",
+      nameEn: "Semester Exit 🎓",
+      nameHi: "सेमेस्टर समाप्ति 🎓",
+      subEn: "35 Days Break (Dec 01 – Jan 05)",
+      subHi: "35 दिन ब्रेक (01 दिसं - 05 जन)",
+      startOffsetDays: 5,
+      durationDays: 35,
+      estimatedSavings: "₹9,300",
+      badgeEn: "Term End",
+      badgeHi: "सत्र समाप्ति",
+      icon: "🎓",
+    },
+    {
+      id: "weekend_express",
+      nameEn: "Quick Storage 🎒",
+      nameHi: "त्वरित स्टैश 🎒",
+      subEn: "Flexible Short Trip (7 Days)",
+      subHi: "7 दिन का लघु प्रवास",
+      startOffsetDays: 0,
+      durationDays: 7,
+      estimatedSavings: "₹1,800",
+      badgeEn: "Short Stay",
+      badgeHi: "लघु प्रवास",
+      icon: "🎒",
+    },
+  ],
+  timeSlots: [
+    {
+      id: "slot_morning",
+      labelEn: "08:00 AM – 11:00 AM",
+      labelHi: "सुबह 08:00 – 11:00",
+      badgeEn: "Morning Express",
+      badgeHi: "प्रातः सेवा",
+      icon: "🌅",
+      trafficEn: "Low Traffic",
+      trafficHi: "कम ट्रैफिक",
+    },
+    {
+      id: "slot_afternoon",
+      labelEn: "12:00 PM – 03:00 PM",
+      labelHi: "दोपहर 12:00 – 03:00",
+      badgeEn: "Afternoon Slot",
+      badgeHi: "मध्याह्न सेवा",
+      icon: "☀️",
+      trafficEn: "Standard",
+      trafficHi: "सामान्य",
+    },
+    {
+      id: "slot_evening",
+      labelEn: "04:00 PM – 07:00 PM",
+      labelHi: "शाम 04:00 – 07:00",
+      badgeEn: "Evening Prime",
+      badgeHi: "सायं प्राइम",
+      icon: "🌆",
+      trafficEn: "Campus Peak",
+      trafficHi: "कैंपस पीक",
+    },
+    {
+      id: "slot_night",
+      labelEn: "07:00 PM – 09:30 PM",
+      labelHi: "रात्रि 07:00 – 09:30",
+      badgeEn: "Late Night",
+      badgeHi: "रात्रि सेवा",
+      icon: "🌙",
+      trafficEn: "Quiet Hours",
+      trafficHi: "शांत समय",
+    },
+  ],
+  touchTargets: {
+    minWidthPx: 48,
+    minHeightPx: 48,
+  },
+  personaAccents: {
+    student: {
+      accentColor: "#10B981",
+      secondaryColor: "#00F5A0",
+      glow: "rgba(16, 185, 129, 0.35)",
+      cardBorder: "border-emerald-500/30",
+      cardActiveBorder: "border-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.35)]",
+      chipBg: "bg-emerald-500/20 text-emerald-300 border-emerald-500/40",
+      text: "text-emerald-400",
+    },
+    host: {
+      accentColor: "#F59E0B",
+      secondaryColor: "#FBBF24",
+      glow: "rgba(245, 158, 11, 0.35)",
+      cardBorder: "border-amber-500/30",
+      cardActiveBorder: "border-amber-400 shadow-[0_0_20px_rgba(245,158,11,0.35)]",
+      chipBg: "bg-amber-500/20 text-amber-300 border-amber-500/40",
+      text: "text-amber-300",
+    },
+  },
+} as const;
+
+export function getDateTimeSlotPickerTokens(role: "student" | "host" = "student") {
+  const isHost = role === "host";
+  return {
+    ...DATE_TIME_SLOT_PICKER_TOKENS,
+    activeRole: role,
+    accent: isHost ? DATE_TIME_SLOT_PICKER_TOKENS.personaAccents.host : DATE_TIME_SLOT_PICKER_TOKENS.personaAccents.student,
+  };
+}
+
+/**
+ * Dynamic Pricing Breakdown Drawer Tokens (Task 165)
+ * Crystal-clear price summary drawer showing base rate, zero brokerage savings, and platform fee with 100% transparency.
+ */
+export const PRICING_BREAKDOWN_DRAWER_TOKENS = {
+  feeStructure: {
+    storageBaseMonthlyRate: 300, // ₹300/bag/mo
+    hostPayoutMonthlyRate: 180,  // ₹180/bag/mo
+    platformNetMargin: 80,       // ₹80/bag/mo
+    insuranceCoverAmount: 10000, // ₹10,000 coverage
+    insuranceFee: 0,            // ₹0 (Included)
+    pickupSealFee: 0,           // ₹0 (Included)
+    zeroBrokerageSavingsEstimate: 4000, // ₹4,000 avg PG dead rent savings
+  },
+  transparencyPills: [
+    {
+      id: "zero_brokerage",
+      titleEn: "0% Brokerage Charged",
+      titleHi: "0% ब्रोकरेज शुल्क",
+      descEn: "Direct peer-to-peer senior host connection.",
+      descHi: "वरिष्ठ नागरिक होस्ट से सीधा जुड़ाव।",
+      icon: "⚡",
+      color: "#10B981",
+    },
+    {
+      id: "insurance_included",
+      titleEn: "₹10,000 Safety Cover",
+      titleHi: "₹10,000 सुरक्षा बीमा",
+      descEn: "Complimentary damage & loss protection included.",
+      descHi: "निःशुल्क क्षति व सामान सुरक्षा शामिल।",
+      icon: "🛡️",
+      color: "#06B6D4",
+    },
+    {
+      id: "doorstep_pickup",
+      titleEn: "Doorstep Pickup & Laser Seal",
+      titleHi: "डोरस्टेप पिकअप व लेजर सील",
+      descEn: "QR tamper-proof seals applied at pickup.",
+      descHi: "पिकअप पर QR लेजर सील टैम्पर्ड सुरक्षा।",
+      icon: "🔒",
+      color: "#F59E0B",
+    },
+  ],
+  personaAccents: {
+    student: {
+      accentColor: "#10B981",
+      secondaryColor: "#00F5A0",
+      glow: "rgba(16, 185, 129, 0.35)",
+      drawerBg: "bg-slate-950/95 border-emerald-500/30",
+      totalHighlightBg: "bg-emerald-500/15 border-emerald-500/40 text-emerald-300",
+      badgeBg: "bg-emerald-500/20 text-emerald-300 border-emerald-500/40",
+      text: "text-emerald-400",
+    },
+    host: {
+      accentColor: "#F59E0B",
+      secondaryColor: "#FBBF24",
+      glow: "rgba(245, 158, 11, 0.35)",
+      drawerBg: "bg-slate-950/95 border-amber-500/30",
+      totalHighlightBg: "bg-amber-500/15 border-amber-500/40 text-amber-300",
+      badgeBg: "bg-amber-500/20 text-amber-300 border-amber-500/40",
+      text: "text-amber-300",
+    },
+  },
+} as const;
+
+export function getPricingBreakdownDrawerTokens(role: "student" | "host" = "student") {
+  const isHost = role === "host";
+  return {
+    ...PRICING_BREAKDOWN_DRAWER_TOKENS,
+    activeRole: role,
+    accent: isHost ? PRICING_BREAKDOWN_DRAWER_TOKENS.personaAccents.host : PRICING_BREAKDOWN_DRAWER_TOKENS.personaAccents.student,
+  };
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

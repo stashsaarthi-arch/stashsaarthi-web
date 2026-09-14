@@ -703,6 +703,65 @@ body[data-lang="hi"] {
   animation: persona-indicator-pulse-ring 2.5s infinite cubic-bezier(0.4, 0, 0.6, 1);
 }
 
+/* Dead Rent Savings Slider Animated Currency Notes & Milestone Keyframes (Task 157) */
+@keyframes note-float-up {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) scale(0.6) rotate(0deg);
+  }
+  20% {
+    opacity: 1;
+    transform: translate3d(var(--float-x, 0px), -20px, 0) scale(1.1) rotate(var(--float-rot, 12deg));
+  }
+  80% {
+    opacity: 0.9;
+    transform: translate3d(var(--float-x, 0px), -65px, 0) scale(1) rotate(var(--float-rot, -12deg));
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--float-x, 0px), -95px, 0) scale(0.7) rotate(var(--float-rot, 24deg));
+  }
+}
+
+@keyframes milestone-pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 12px rgba(16, 185, 129, 0.3);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 24px rgba(16, 185, 129, 0.7);
+    transform: scale(1.05);
+  }
+}
+
+.currency-note-particle {
+  position: absolute;
+  pointer-events: none;
+  z-index: 40;
+  animation: note-float-up 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.dead-rent-slider-thumb {
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #10B981;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.8);
+  cursor: grab;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.dead-rent-slider-thumb:active {
+  cursor: grabbing;
+  transform: scale(1.25);
+  box-shadow: 0 0 28px rgba(0, 245, 160, 0.9);
+}
+
+
+
 
 /* Dynamic Persona Themed Footer CSS Specifications (Task 136) */
 [data-persona="student"] footer#waitlist-form {
@@ -2647,5 +2706,1188 @@ html[lang="hi"][data-persona="host"] h4.font-devanagari,
   box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.6), 0 0 12px -2px rgba(245, 158, 11, 0.3);
 }
 
+/* ==========================================================================
+   Saarthi Connect Card 2.0 Engine (Task 144)
+   Senior hobby tags, student skill-exchange chips, karma points counters
+   ========================================================================== */
+
+@utility connect-card-stage {
+  position: relative;
+  overflow: hidden;
+  contain: layout style;
+}
+
+@utility senior-hobby-chip {
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  color: #FDE68A;
+  transition: all 0.2s ease-out;
+  &:hover {
+    background: rgba(245, 158, 11, 0.22);
+    border-color: rgba(245, 158, 11, 0.6);
+    transform: translateY(-1px);
+  }
+}
+
+@utility student-skill-chip {
+  background: rgba(6, 182, 212, 0.12);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  color: #A5F3FC;
+  transition: all 0.2s ease-out;
+  &:hover {
+    background: rgba(6, 182, 212, 0.22);
+    border-color: rgba(6, 182, 212, 0.6);
+    transform: translateY(-1px);
+  }
+}
+
+@utility karma-points-counter-glow {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(16, 185, 129, 0.15));
+  border: 1px solid rgba(245, 158, 11, 0.45);
+  box-shadow: 0 0 20px -2px rgba(245, 158, 11, 0.35);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  &:hover {
+    border-color: rgba(245, 158, 11, 0.8);
+    box-shadow: 0 0 28px 0px rgba(245, 158, 11, 0.55);
+  }
+}
+
+/* ==========================================================================
+   FAQ Accordion 2.0 Engine (Task 145)
+   Buttery smooth height transitions, glowing active outlines & instant filters
+   ========================================================================== */
+
+@keyframes accordion-smooth-down {
+  from {
+    height: 0;
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes accordion-smooth-up {
+  from {
+    height: var(--radix-accordion-content-height);
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    height: 0;
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+@utility accordion-item-stage {
+  position: relative;
+  contain: layout style;
+  transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@utility accordion-glowing-outline-student {
+  border-color: rgba(16, 185, 129, 0.45) !important;
+  background-color: rgba(6, 78, 59, 0.22) !important;
+  box-shadow: 0 0 24px -4px rgba(16, 185, 129, 0.35), inset 0 0 12px -4px rgba(16, 185, 129, 0.15);
+}
+
+@utility accordion-glowing-outline-host {
+  border-color: rgba(245, 158, 11, 0.45) !important;
+  background-color: rgba(120, 53, 15, 0.22) !important;
+  box-shadow: 0 0 24px -4px rgba(245, 158, 11, 0.35), inset 0 0 12px -4px rgba(245, 158, 11, 0.15);
+}
+
+@utility accordion-smooth-height {
+  transition: height 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@utility accordion-category-pill {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  &:hover {
+    transform: translateY(-1px);
+  }
+  &:active {
+    transform: translateY(0) scale(0.98);
+  }
+}
+
+/* ==========================================================================
+   Testimonial & Review Carousel 2.0 Engine (Task 146)
+   Editorial-grade cards, audio clip quotes, equalizer bars & college badges
+   ========================================================================== */
+
+@utility testimonial-editorial-stage {
+  position: relative;
+  contain: layout style;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@utility audio-waveform-bar {
+  transition: height 0.15s ease-in-out, background-color 0.2s ease;
+  will-change: height;
+}
+
+@utility audio-quote-playing-pulse {
+  animation: audio-pulse-glow 1.5s ease-in-out infinite;
+}
+
+@keyframes audio-pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 16px -2px rgba(16, 185, 129, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 28px 2px rgba(16, 185, 129, 0.6);
+  }
+}
+
+@utility college-badge-pill {
+  transition: all 0.2s ease-out;
+  &:hover {
+    transform: translateY(-1px) scale(1.02);
+  }
+}
+
+@utility star-rating-glow {
+  filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.5));
+}
+
+/* ==========================================================================
+   Campus Directory Search Bar & Live Filter Overhaul (Task 147)
+   Auto-suggest chips, distance sliders, live filter tags & search ergonomics
+   ========================================================================== */
+
+@utility filter-search-bar-stage {
+  position: relative;
+  contain: layout style;
+  border-radius: 1.25rem;
+  background: rgba(10, 13, 15, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(20px) saturate(160%);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@utility auto-suggest-chip-pill {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  &:hover {
+    transform: translateY(-1px) scale(1.03);
+    border-color: rgba(16, 185, 129, 0.4);
+    box-shadow: 0 4px 12px -2px rgba(16, 185, 129, 0.2);
+  }
+  &:active {
+    transform: translateY(0) scale(0.97);
+  }
+}
+
+@utility distance-slider-range {
+  accent-color: #10b981;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+@utility live-filter-tag-pill {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  &:hover {
+    transform: translateY(-1px);
+  }
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+/* ==========================================================================
+   Badge & Tag Standardization Architecture (Task 148)
+   Micro-padding, standardized typography, WCAG AAA contrast & tag presets
+   ========================================================================== */
+
+@utility metadata-tag-base {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  border-radius: 9999px;
+  border-width: 1px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  line-height: 1.2;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+
+@utility metadata-tag-micro-padding {
+  padding: 0.125rem 0.625rem;
+  font-size: 0.6875rem;
+}
+
+@utility metadata-tag-verified-host {
+  background-color: rgba(245, 158, 11, 0.12);
+  border-color: rgba(245, 158, 11, 0.35);
+  color: #fcd34d;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.15);
+}
+
+@utility metadata-tag-campus-proximity {
+  background-color: rgba(6, 182, 212, 0.12);
+  border-color: rgba(6, 182, 212, 0.35);
+  color: #22d3ee;
+  box-shadow: 0 0 10px rgba(6, 182, 212, 0.15);
+}
+
+@utility metadata-tag-lifestyle {
+  background-color: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.35);
+  color: #34d399;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.15);
+}
+
+@utility metadata-tag-amenity {
+  background-color: rgba(30, 41, 59, 0.8);
+  border-color: rgba(51, 65, 85, 0.6);
+  color: #e2e8f0;
+}
+
+@utility metadata-tag-pricing-save {
+  background-color: rgba(16, 185, 129, 0.18);
+  border-color: rgba(16, 185, 129, 0.45);
+  color: #6ee7b7;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.25);
+}
+
+@utility metadata-tag-status-live {
+  background-color: rgba(16, 185, 129, 0.15);
+  border-color: rgba(16, 185, 129, 0.35);
+  color: #34d399;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.2);
+}
+
+/* Skeleton Loader Polishing CSS Specifications (Task 150) */
+@keyframes shimmer-wave-sweep {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.shimmer-wave-skeleton {
+  position: relative;
+  overflow: hidden;
+  background-color: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.shimmer-wave-skeleton::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    transparent 100%
+  );
+  animation: shimmer-wave-sweep 1.8s infinite ease-in-out;
+  pointer-events: none;
+}
+
+[data-persona="student"] .shimmer-wave-skeleton::after,
+.shimmer-wave-student::after {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    oklch(0.72 0.19 160 / 22%) 50%,
+    transparent 100%
+  );
+}
+
+[data-persona="host"] .shimmer-wave-skeleton::after,
+.shimmer-wave-host::after {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    oklch(0.769 0.165 70 / 25%) 50%,
+    transparent 100%
+  );
+}
+
+@utility shimmer-wave-student {
+  border-color: oklch(0.72 0.19 160 / 20%);
+  box-shadow: 0 0 15px -3px oklch(0.72 0.19 160 / 15%);
+}
+
+@utility shimmer-wave-host {
+  border-color: oklch(0.769 0.165 70 / 22%);
+  box-shadow: 0 0 15px -3px oklch(0.769 0.165 70 / 18%);
+}
+
+/* 3D Card Hover Physics & Specular Glare CSS Specifications (Task 151) */
+.card-3d-stage {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.card-3d-wrapper {
+  position: relative;
+  will-change: transform;
+  transform-style: preserve-3d;
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-3d-glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 25;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  mix-blend-mode: overlay;
+  background: radial-gradient(
+    circle at var(--glare-x, 50%) var(--glare-y, 50%),
+    oklch(0.72 0.19 160 / 35%) 0%,
+    oklch(0.868 0.16 178 / 15%) 40%,
+    transparent 80%
+  );
+}
+
+[data-persona="host"] .card-3d-glare,
+.card-3d-glare-host {
+  background: radial-gradient(
+    circle at var(--glare-x, 50%) var(--glare-y, 50%),
+    oklch(0.769 0.165 70 / 35%) 0%,
+    oklch(0.837 0.175 82 / 15%) 40%,
+    transparent 80%
+  );
+}
+
+.card-3d-glare-active {
+  opacity: 1;
+}
+
+@utility card-3d-disabled {
+  transform: none !important;
+  perspective: none !important;
+}
+
+/* Peacock Feather Micro-Interaction & Sparkle Physics Specifications (Task 152) */
+@keyframes peacock-spring-sweep {
+  0% {
+    transform: rotate(-10deg) translate(0px, 0px) scale(1);
+  }
+  25% {
+    transform: rotate(35deg) translate(4px, -8px) scale(1.28);
+  }
+  50% {
+    transform: rotate(-5deg) translate(-2px, -3px) scale(1.15);
+  }
+  75% {
+    transform: rotate(15deg) translate(2px, -5px) scale(1.08);
+  }
+  100% {
+    transform: rotate(0deg) translate(0px, 0px) scale(1);
+  }
+}
+
+@keyframes makhan-particle-float-out {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(0.6) rotate(0deg);
+  }
+  60% {
+    opacity: 0.95;
+    transform: translate(var(--px, 20px), var(--py, -30px)) scale(1.2) rotate(180deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(var(--px, 20px) * 1.5), calc(var(--py, -30px) * 1.5)) scale(0.2) rotate(360deg);
+  }
+}
+
+@keyframes ghee-matki-radial-pulse {
+  0%, 100% {
+    box-shadow: 0 0 12px 2px rgba(245, 158, 11, 0.25), inset 0 0 8px rgba(251, 191, 36, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 28px 8px rgba(245, 158, 11, 0.55), inset 0 0 16px rgba(251, 191, 36, 0.4);
+  }
+}
+
+.peacock-spring-active {
+  animation: peacock-spring-sweep 0.85s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.makhan-particle-sparkle {
+  position: absolute;
+  pointer-events: none;
+  z-index: 30;
+  animation: makhan-particle-float-out 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@utility matki-ghee-glow {
+  animation: ghee-matki-radial-pulse 1.4s ease-in-out infinite;
+}
+
+/* Organic Spring Modal Entrances (Task 153) */
+@keyframes modal-spring-enter {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -46%) scale(0.92);
+  }
+  70% {
+    opacity: 1;
+    transform: translate(-50%, -50.5%) scale(1.008);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes modal-spring-exit {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -48%) scale(0.95);
+  }
+}
+
+@keyframes overlay-spring-fade-in {
+  0% {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+}
+
+@keyframes overlay-spring-fade-out {
+  0% {
+    opacity: 1;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  100% {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+  }
+}
+
+.modal-spring-entrance {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-spring-overlay {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@utility modal-spring-stage {
+  transform-origin: center center;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@utility modal-persona-border-student {
+  border-color: rgba(16, 185, 129, 0.35);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 35px -5px rgba(16, 185, 129, 0.28);
+}
+
+@utility modal-persona-border-host {
+  border-color: rgba(245, 158, 11, 0.38);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 35px -5px rgba(245, 158, 11, 0.3);
+}
+
+/* Scroll-Triggered Reveal Engine CSS Specifications (Task 154) */
+@keyframes scroll-reveal-fade-up {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes scroll-reveal-fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.scroll-reveal-initial {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+  transition: opacity 600ms cubic-bezier(0.16, 1, 0.3, 1), transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.scroll-reveal-active {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@utility scroll-reveal-stage {
+  will-change: opacity, transform;
+  transition: opacity 600ms cubic-bezier(0.16, 1, 0.3, 1), transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@utility scroll-reveal-stagger {
+  transition-property: opacity, transform;
+  transition-duration: 600ms;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Reduced Motion & Low-Data / Android Go Fallbacks for Scroll Reveal */
+[data-android-go="true"] .scroll-reveal-stage,
+.android-go-mode .scroll-reveal-stage {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal-stage,
+  .scroll-reveal-initial {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
 
 
+/* Persona Ambient Glow Highlights on Scroll Reveal */
+[data-persona="student"] .scroll-reveal-stage[data-glow="true"][data-visible="true"] {
+  box-shadow: 0 0 28px -4px rgba(16, 185, 129, 0.25);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+[data-persona="host"] .scroll-reveal-stage[data-glow="true"][data-visible="true"] {
+  box-shadow: 0 0 28px -4px rgba(245, 158, 11, 0.25);
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+/* Magnetic Buttons Micro-Interaction Specifications (Task 156) */
+.magnetic-button-wrapper {
+  position: relative;
+  display: inline-block;
+  will-change: transform;
+}
+
+.magnetic-button-stage {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 350ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow;
+}
+
+.magnetic-button-pulled {
+  transition: transform 100ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 150ms ease-out;
+}
+
+@utility magnetic-button-glow-student {
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.45), 0 0 10px rgba(0, 245, 160, 0.3);
+}
+
+@utility magnetic-button-glow-host {
+  box-shadow: 0 0 25px rgba(245, 158, 11, 0.45), 0 0 10px rgba(251, 191, 36, 0.3);
+}
+
+@utility magnetic-button-disabled {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .magnetic-button-stage,
+  .magnetic-button-wrapper {
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ==========================================================================
+   CONFETTI & CELEBRATION CANNON STYLES (Task 158)
+   ========================================================================== */
+.confetti-canvas-container {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.confetti-canvas {
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+@utility confetti-stage {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* Reduced motion accessibility override */
+@media (prefers-reduced-motion: reduce) {
+  .confetti-canvas-container,
+  .confetti-canvas {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   TAB SWITCHING INDICATOR GLIDES STYLES (Task 159)
+   ========================================================================== */
+.tab-glider-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background-color: oklch(0.16 0.012 230 / 60%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid oklch(1 0 0 / 10%);
+  border-radius: 9999px;
+  padding: 0.25rem;
+  user-select: none;
+}
+
+.tab-glider-pill {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  pointer-events: none;
+  z-index: 0;
+  transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1), width 250ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, width, left;
+}
+
+@utility tab-glider-pill-student {
+  background: linear-gradient(135deg, oklch(0.72 0.19 160 / 22%), oklch(0.696 0.149 162 / 18%));
+  border: 1px solid oklch(0.72 0.19 160 / 40%);
+  box-shadow: 0 0 16px -2px oklch(0.72 0.19 160 / 35%);
+}
+
+@utility tab-glider-pill-host {
+  background: linear-gradient(135deg, oklch(0.769 0.165 70 / 22%), oklch(0.837 0.175 82 / 18%));
+  border: 1px solid oklch(0.769 0.165 70 / 40%);
+  box-shadow: 0 0 16px -2px oklch(0.809 0.165 76 / 35%);
+}
+
+@utility tab-glider-item {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  transition: color 200ms ease, opacity 200ms ease;
+  cursor: pointer;
+}
+
+@utility tab-glider-underline {
+  position: absolute;
+  bottom: 0;
+  height: 3px;
+  border-radius: 9999px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tab-glider-pill,
+  .tab-glider-underline {
+    transition: none !important;
+  }
+}
+
+/* ==========================================================================
+   LASER SEAL BARCODE GLOW STYLES (Task 160)
+   ========================================================================== */
+@keyframes laser-barcode-beam-sweep {
+  0% {
+    left: 0%;
+    opacity: 0.2;
+  }
+  15% {
+    opacity: 1;
+  }
+  50% {
+    left: calc(100% - 4px);
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    left: 0%;
+    opacity: 0.2;
+  }
+}
+
+@keyframes barcode-lines-rhythmic-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 2px rgba(16, 185, 129, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 8px rgba(0, 245, 160, 0.85)) drop-shadow(0 0 16px rgba(16, 185, 129, 0.5));
+  }
+}
+
+@keyframes laser-seal-pulse-ring {
+  0%, 100% {
+    box-shadow: 0 0 0 0px rgba(16, 185, 129, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+  }
+}
+
+.laser-barcode-seal-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  background-color: oklch(0.12 0.015 230 / 90%);
+  border: 1px solid oklch(1 0 0 / 12%);
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.6);
+  user-select: none;
+}
+
+.laser-barcode-beam {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: #ffffff;
+  pointer-events: none;
+  z-index: 10;
+  will-change: left, opacity;
+  animation: laser-barcode-beam-sweep 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@utility laser-seal-beam-student {
+  background: #ffffff;
+  box-shadow: 0 0 12px 3px #00F5A0, 0 0 24px 6px #10B981, -20px 0 30px 4px rgba(16, 185, 129, 0.35);
+}
+
+@utility laser-seal-beam-host {
+  background: #ffffff;
+  box-shadow: 0 0 12px 3px #FBBF24, 0 0 24px 6px #F59E0B, -20px 0 30px 4px rgba(245, 158, 11, 0.35);
+}
+
+@utility laser-seal-glow-student {
+  border-color: oklch(0.72 0.19 160 / 45%);
+  box-shadow: 0 0 24px -4px oklch(0.72 0.19 160 / 40%), inset 0 0 16px -2px oklch(0.72 0.19 160 / 20%);
+}
+
+@utility laser-seal-glow-host {
+  border-color: oklch(0.769 0.165 70 / 45%);
+  box-shadow: 0 0 24px -4px oklch(0.769 0.165 70 / 40%), inset 0 0 16px -2px oklch(0.769 0.165 70 / 20%);
+}
+
+.barcode-lines-svg {
+  transition: filter 300ms ease;
+}
+
+.barcode-lines-glow-active {
+  animation: barcode-lines-rhythmic-glow 2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .laser-barcode-beam,
+  .barcode-lines-glow-active {
+    animation: none !important;
+  }
+}
+
+/* Multi-Step Booking Modal Distraction-Free Styling (Task 161) */
+.distraction-free-booking-stage {
+  backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 32px 80px -16px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  contain: layout style;
+}
+
+.booking-breadcrumb-pill {
+  transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.booking-breadcrumb-pill:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.booking-validation-error-glow {
+  animation: booking-shake-error 400ms cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  border-color: rgba(239, 68, 68, 0.6) !important;
+  box-shadow: 0 0 16px -2px rgba(239, 68, 68, 0.4) !important;
+}
+
+@keyframes booking-shake-error {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-3px, 0, 0); }
+  40%, 60% { transform: translate3d(3px, 0, 0); }
+}
+
+@utility booking-step-active-student {
+  border-color: oklch(0.72 0.19 160 / 50%);
+  background-color: oklch(0.72 0.19 160 / 15%);
+  color: oklch(0.85 0.16 160);
+  box-shadow: 0 0 12px -2px oklch(0.72 0.19 160 / 30%);
+}
+
+@utility booking-step-active-host {
+  border-color: oklch(0.769 0.165 70 / 50%);
+  background-color: oklch(0.769 0.165 70 / 15%);
+  color: oklch(0.88 0.15 75);
+  box-shadow: 0 0 12px -2px oklch(0.769 0.165 70 / 30%);
+}
+
+/* Phone & 6-Digit OTP Input Redesign Styling (Task 162) */
+.phone-input-wrapper {
+  display: flex;
+  align-items: center;
+  border-radius: var(--radius-xl, 0.75rem);
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 200ms ease;
+  contain: layout style;
+}
+
+.phone-input-wrapper:focus-within {
+  border-color: rgba(16, 185, 129, 0.6);
+  box-shadow: 0 0 16px -2px rgba(16, 185, 129, 0.35);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-persona="host"] .phone-input-wrapper:focus-within {
+  border-color: rgba(245, 158, 11, 0.6);
+  box-shadow: 0 0 16px -2px rgba(245, 158, 11, 0.35);
+}
+
+.phone-prefix-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.625rem 0.875rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+  background-color: rgba(255, 255, 255, 0.04);
+  font-family: var(--font-mono, monospace);
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.9);
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.otp-digit-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.otp-digit-cell {
+  height: 3.25rem;
+  width: 100%;
+  border-radius: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  text-align: center;
+  font-family: var(--font-mono, monospace);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #ffffff;
+  transition: all 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+
+.otp-digit-cell:focus {
+  border-color: #10B981;
+  box-shadow: 0 0 16px 0 rgba(16, 185, 129, 0.4);
+  background-color: rgba(16, 185, 129, 0.12);
+  transform: translateY(-2px);
+}
+
+[data-persona="host"] .otp-digit-cell:focus {
+  border-color: #F59E0B;
+  box-shadow: 0 0 16px 0 rgba(245, 158, 11, 0.4);
+  background-color: rgba(245, 158, 11, 0.12);
+}
+
+.otp-digit-filled {
+  border-color: rgba(16, 185, 129, 0.5);
+  background-color: rgba(16, 185, 129, 0.08);
+}
+
+[data-persona="host"] .otp-digit-filled {
+  border-color: rgba(245, 158, 11, 0.5);
+  background-color: rgba(245, 158, 11, 0.08);
+}
+
+.otp-digit-error {
+  animation: otp-shake 400ms cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  border-color: rgba(239, 68, 68, 0.7) !important;
+  box-shadow: 0 0 16px 0 rgba(239, 68, 68, 0.4) !important;
+  background-color: rgba(239, 68, 68, 0.1) !important;
+}
+
+@keyframes otp-shake {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+  40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
+/* Task 163: Luggage Itemizer Visualizer CSS Rules */
+.luggage-itemizer-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.luggage-item-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.875rem 1rem;
+  border-radius: 1rem;
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.luggage-item-card:hover {
+  background-color: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.luggage-item-card-active {
+  background-color: rgba(16, 185, 129, 0.08);
+  border-color: rgba(16, 185, 129, 0.4);
+  box-shadow: 0 0 20px 0 rgba(16, 185, 129, 0.25);
+}
+
+[data-persona="host"] .luggage-item-card-active {
+  background-color: rgba(245, 158, 11, 0.08);
+  border-color: rgba(245, 158, 11, 0.4);
+  box-shadow: 0 0 20px 0 rgba(245, 158, 11, 0.25);
+}
+
+.luggage-3d-icon-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 0.875rem;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.03));
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 1.75rem;
+  flex-shrink: 0;
+  transition: transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.luggage-item-card:hover .luggage-3d-icon-stage {
+  transform: scale(1.1) rotate(4deg);
+}
+
+.luggage-count-badge {
+  position: absolute;
+  top: -0.375rem;
+  right: -0.375rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.35rem;
+  height: 1.35rem;
+  padding: 0 0.25rem;
+  border-radius: 9999px;
+  background: #10B981;
+  color: #0A0D0F;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  font-weight: 800;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.5);
+  animation: luggage-pop-bounce 260ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+[data-persona="host"] .luggage-count-badge {
+  background: #F59E0B;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.5);
+}
+
+@keyframes luggage-pop-bounce {
+  0% { transform: scale(0.6); }
+  60% { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+
+.luggage-vault-meter {
+  height: 0.5rem;
+  width: 100%;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.luggage-vault-meter-fill {
+  height: 100%;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #10B981, #00F5A0);
+  transition: width 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-persona="host"] .luggage-vault-meter-fill {
+  background: linear-gradient(90deg, #F59E0B, #FBBF24);
+}
+
+/* ==========================================================================
+   Task 164: Date & Time Slot Picker CSS Engine & Micro-Interactions
+   ========================================================================== */
+
+.date-time-picker-stage {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius-2xl, 1.25rem);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.25rem;
+  box-sizing: border-box;
+}
+
+.preset-holiday-chip {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.875rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--muted-foreground, #94a3b8);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.preset-holiday-chip:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.preset-holiday-chip-active {
+  background: rgba(16, 185, 129, 0.18);
+  border-color: rgba(16, 185, 129, 0.5);
+  color: #10B981;
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.25);
+}
+
+[data-persona="host"] .preset-holiday-chip-active {
+  background: rgba(245, 158, 11, 0.18);
+  border-color: rgba(245, 158, 11, 0.5);
+  color: #F59E0B;
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.25);
+}
+
+.time-slot-card {
+  min-height: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.75rem 1rem;
+  border-radius: 0.875rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: all 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.time-slot-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.time-slot-card-active {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: #10B981;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+  animation: slot-select-pop 240ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+[data-persona="host"] .time-slot-card-active {
+  background: rgba(245, 158, 11, 0.12);
+  border-color: #F59E0B;
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+}
+
+@keyframes slot-select-pop {
+  0% { transform: scale(0.97); }
+  60% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+/* Pricing Breakdown Drawer Utilities (Task 165) */
+.pricing-drawer-container {
+  border-radius: 1.5rem 1.5rem 0 0;
+  backdrop-filter: blur(24px) saturate(180%);
+}
+
+.pricing-breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.625rem 0;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+}
+
+.pricing-savings-pill {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #34D399;
+}
+
+[data-persona="host"] .pricing-savings-pill {
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  color: #FCD34D;
+}

@@ -22,6 +22,8 @@ import AnimatedContent from "@/components/ui/AnimatedContent";
 import { Badge } from "@/components/ui/badge";
 import { Card3D } from "@/components/ui/Card3D";
 import { useLanguage } from "@/context/LanguageContext";
+import { playCounterIncrement, playCounterDecrement } from "@/lib/audio";
+
 
 export function ProductSandbox() {
   const { language } = useLanguage();
@@ -400,7 +402,12 @@ export function ProductSandbox() {
                       min={1}
                       max={10}
                       value={bagCount}
-                      onChange={(e) => setBagCount(Number(e.target.value))}
+                      onChange={(e) => {
+                        const val = Number(e.target.value);
+                        if (val > bagCount) playCounterIncrement(val);
+                        else if (val < bagCount) playCounterDecrement(val);
+                        setBagCount(val);
+                      }}
                       aria-label={isHi ? "बैग की संख्या" : "Luggage bag count"}
                       className="w-full max-w-sm h-2 rounded-lg bg-white/10 accent-cyan-400 cursor-pointer block mx-auto lg:mx-0"
                     />
@@ -425,7 +432,12 @@ export function ProductSandbox() {
                       min={1}
                       max={6}
                       value={months}
-                      onChange={(e) => setMonths(Number(e.target.value))}
+                      onChange={(e) => {
+                        const val = Number(e.target.value);
+                        if (val > months) playCounterIncrement(val);
+                        else if (val < months) playCounterDecrement(val);
+                        setMonths(val);
+                      }}
                       aria-label={isHi ? "स्टोरेज अवधि (माह)" : "Storage duration in months"}
                       className="w-full max-w-sm h-2 rounded-lg bg-white/10 accent-cyan-400 cursor-pointer block mx-auto lg:mx-0"
                     />

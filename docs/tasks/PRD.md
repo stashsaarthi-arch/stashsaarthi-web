@@ -172,32 +172,35 @@ Sprint 10: QA, CSO & CEO (Total Assurance, Compliance & Strategic Direction)
 - [x] 141. **[UI - Saarthi Stash Card 2.0 / polish]**: Overhaul the Micro-Storage card with 3D bag depth preview, tamper-proof seal indicator, ₹300/mo prominent pricing pill, and 1-click booking CTA.
 - [x] 142. **[UI - Saarthi Spaces Card 2.0 / polish]**: Redesign Co-Living room cards featuring 16:9 room image carousels, verified senior host badges, zero-brokerage guarantees, and walking distance tags.
 - [x] 143. **[UI - Saarthi Kitchen Card 2.0 / polish]**: Overhaul Tiffin cards with daily meal countdown timers, rotating homestyle thali previews, calorie/macro breakdowns, and chef bio tags.
-- [ ] 144. **[UI - Saarthi Connect Card 2.0 / polish]**: Redesign Intergenerational Mentorship cards with senior hobby tags, student skill-exchange chips, and karma points earned counters.
-- [ ] 145. **[UI - Accordion & FAQ Redesign / distill]**: Re-engineer the FAQ accordions with buttery smooth height transitions, glowing active outlines, and instant category filters.
-- [ ] 146. **[UI - Testimonial & Review Carousel / delight]**: Build an editorial-grade testimonial carousel with student audio clip quotes, verified college badges, and rating stars.
-- [ ] 147. **[UI - Filter & Search Bar Overhaul / shape]**: Redesign the campus directory search bar with auto-suggest chips, distance sliders, and instant live filtering tags.
-- [ ] 148. **[UI - Badge & Tag Standardization / extract]**: Unify all metadata tags (e.g., "Verified Host", "Near PW Vidyapeeth", "Veg Only", "AC Room") with cohesive micro-padding and typography.
-- [ ] 149. **[UI - Comparison Matrix Table / distill]**: Build a sleek, high-contrast comparison table contrasting StashSaarthi vs Traditional PGs and Commercial Warehouses.
-- [ ] 150. **[UI - Skeleton Loader Polishing / polish]**: Design shimmering wave skeleton loaders matching the exact geometric layout of cards to eliminate layout jump during data loading.
+- [x] 144. **[UI - Saarthi Connect Card 2.0 / polish]**: Redesign Intergenerational Mentorship cards with senior hobby tags, student skill-exchange chips, and karma points earned counters.
+- [x] 145. **[UI - Accordion & FAQ Redesign / distill]**: Re-engineer the FAQ accordions with buttery smooth height transitions, glowing active outlines, and instant category filters.
+- [x] 146. **[UI - Testimonial & Review Carousel / delight]**: Build an editorial-grade testimonial carousel with student audio clip quotes, verified college badges, and rating stars.
+- [x] 147. **[UI - Filter & Search Bar Overhaul / shape]**: Redesign the campus directory search bar with auto-suggest chips, distance sliders, and instant live filtering tags.
+- [x] 148. **[UI - Badge & Tag Standardization / extract]**: Unify all metadata tags (e.g., "Verified Host", "Near PW Vidyapeeth", "Veg Only", "AC Room") with cohesive micro-padding and typography.
+- [x] 149. **[UI - Comparison Matrix Table / distill]**: Build a sleek, high-contrast comparison table contrasting StashSaarthi vs Traditional PGs and Commercial Warehouses.
+
+- [x] 150. **[UI - Skeleton Loader Polishing / polish]**: Design shimmering wave skeleton loaders matching the exact geometric layout of cards to eliminate layout jump during data loading.
 
 ## Sprint 16: Micro-Interactions, Motion Physics & Audio-Visual Delight (impeccable animate, delight, overdrive)
-- [ ] 151. **[UI - 3D Card Hover Physics / animate]**: Upgrade `Card3D` with smooth GPU-accelerated tilt, dynamic cursor-following specular glare, and auto-disable on touch devices.
-- [ ] 152. **[UI - Peacock Feather Micro-Interaction / delight]**: Refine the iconic Peacock Feather dusting animation on Standard Thali selection with crisp particle sparkles and spring physics.
-- [ ] 153. **[UI - Spring Modal Entrances / animate]**: Replace linear modal fades with organic spring physics (`cubic-bezier(0.16, 1, 0.3, 1)`) for all booking and detail dialogs.
-- [ ] 154. **[UI - Scroll-Triggered Reveal Engine / animate]**: Implement staggered section entrance reveals with subtle translation (`translateY(24px) -> 0`) and opacity fades on scroll.
-- [ ] 155. **[UI - Web Audio Haptic Soundscape / delight]**: Expand micro-audio feedback to include distinct, pleasant sounds for toggle switches, item counter increments, and payment confirmations.
-- [ ] 156. **[UI - Magnetic Buttons / overdrive]**: Add subtle magnetic pull micro-interactions on primary desktop CTA buttons where the button gently attracts toward the cursor.
-- [ ] 157. **[UI - Interactive Dead Rent Savings Slider / delight]**: Build a delightful interactive slider where dragging the vacation days dynamically animates saved currency notes and savings milestones.
-- [ ] 158. **[UI - Confetti & Celebration Cannons / delight]**: Integrate a lightweight canvas celebration burst upon successful booking confirmation and senior host agreement signing.
-- [ ] 159. **[UI - Tab Switching Indicator Glides / animate]**: Implement fluid sliding background pills for tab navigations using layout transitions (Framer Motion / CSS `layoutId` logic).
-- [ ] 160. **[UI - Laser Seal Barcode Glow / overdrive]**: Animate the digital laser barcode seal with a futuristic sweeping beam to highlight anti-tamper security.
+- [x] 151. **[UI - 3D Card Hover Physics / animate]**: Upgrade `Card3D` with smooth GPU-accelerated tilt, dynamic cursor-following specular glare, and auto-disable on touch devices.
+- [x] 152. **[UI - Peacock Feather Micro-Interaction / delight]**: Refine the iconic Peacock Feather dusting animation on Standard Thali selection with crisp particle sparkles and spring physics.
+- [x] 153. **[UI - Spring Modal Entrances / animate]**: Replace linear modal fades with organic spring physics (`cubic-bezier(0.16, 1, 0.3, 1)`) for all booking and detail dialogs.
+- [x] 154. **[UI - Scroll-Triggered Reveal Engine / animate]**: Implement staggered section entrance reveals with subtle translation (`translateY(24px) -> 0`) and opacity fades on scroll.
+- [x] 155. **[UI - Web Audio Haptic Soundscape / delight]**: Expand micro-audio feedback to include distinct, pleasant sounds for toggle switches, item counter increments, and payment confirmations.
+- [x] 156. **[UI - Magnetic Buttons / overdrive]**: Add subtle magnetic pull micro-interactions on primary desktop CTA buttons where the button gently attracts toward the cursor.
+- [x] 157. **[UI - Interactive Dead Rent Savings Slider / delight]**: Build a delightful interactive slider where dragging the vacation days dynamically animates saved currency notes and savings milestones.
+
+- [x] 158. **[UI - Confetti & Celebration Cannons / delight]**: Integrate a lightweight canvas celebration burst upon successful booking confirmation and senior host agreement signing.
+- [x] 159. **[UI - Tab Switching Indicator Glides / animate]**: Implement fluid sliding background pills for tab navigations using layout transitions (Framer Motion / CSS `layoutId` logic).
+- [x] 160. **[UI - Laser Seal Barcode Glow / overdrive]**: Animate the digital laser barcode seal with a futuristic sweeping beam to highlight anti-tamper security.
+
 
 ## Sprint 17: Booking Flows, Modals, Forms & Friction Reduction (impeccable harden, clarify, distill)
-- [ ] 161. **[UI - Multi-Step Booking Modal Overhaul / harden]**: Redesign the core `BookingModal` into a distraction-free, 3-step progress journey with clear breadcrumbs and step validation.
-- [ ] 162. **[UI - Phone Number & OTP Input Redesign / clarify]**: Create high-legibility +91 Indian phone and 6-digit OTP input boxes with auto-advance, digit paste support, and clear error hints.
-- [ ] 163. **[UI - Luggage Itemizer Visualizer / shape]**: Build an intuitive visual luggage itemizer allowing students to tap 3D-styled icons for suitcases, cartons, coolers, and backpacks.
-- [ ] 164. **[UI - Date & Time Slot Picker / harden]**: Design a custom calendar date-range and pickup slot selector optimized for touch devices with campus holiday preset chips.
-- [ ] 165. **[UI - Dynamic Pricing Breakdown Drawer / clarify]**: Implement a crystal-clear price summary drawer showing base rate, zero brokerage savings, and platform fee with 100% transparency.
+- [x] 161. **[UI - Multi-Step Booking Modal Overhaul / harden]**: Redesign the core `BookingModal` into a distraction-free, 3-step progress journey with clear breadcrumbs and step validation.
+- [x] 162. **[UI - Phone Number & OTP Input Redesign / clarify]**: Create high-legibility +91 Indian phone and 6-digit OTP input boxes with auto-advance, digit paste support, and clear error hints.
+- [x] 163. **[UI - Luggage Itemizer Visualizer / shape]**: Build an intuitive visual luggage itemizer allowing students to tap 3D-styled icons for suitcases, cartons, coolers, and backpacks.
+- [x] 164. **[UI - Date & Time Slot Picker / harden]**: Design a custom calendar date-range and pickup slot selector optimized for touch devices with campus holiday preset chips.
+- [x] 165. **[UI - Dynamic Pricing Breakdown Drawer / clarify]**: Implement a crystal-clear price summary drawer showing base rate, zero brokerage savings, and platform fee with 100% transparency.
 - [ ] 166. **[UI - UPI Payment Intent Modal / harden]**: Redesign the checkout modal with instant 1-tap UPI app buttons (GPay, PhonePe, Paytm, CRED) and auto-generating dynamic QR code.
 - [ ] 167. **[UI - Form Validation Micro-States / clarify]**: Add instantaneous inline input validation with friendly micro-copy and gentle shake animations on invalid submissions.
 - [ ] 168. **[UI - Booking Confirmation Pass / delight]**: Design an Apple Wallet-style digital boarding pass for confirmed bookings with printable QR seal, host address, and directions.

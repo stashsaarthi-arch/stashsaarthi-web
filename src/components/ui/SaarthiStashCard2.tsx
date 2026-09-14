@@ -23,6 +23,8 @@ import {
   getDevanagariHostTypographyClasses,
 } from "@/lib/designTokens";
 
+import { LaserSealBarcode } from "./LaserSealBarcode";
+
 export interface SaarthiStashCard2Props {
   onBook?: (details: { service: "stash"; note: string }) => void;
   className?: string;
@@ -38,6 +40,7 @@ export function SaarthiStashCard2({
   const isHi = language === "hi";
   const { role } = usePersona();
   const isHost = role === "host";
+
 
   const [activeTabDepth, setActiveTabDepth] = useState<"compact" | "exploded">("compact");
   const [isHovered, setIsHovered] = useState(false);
@@ -249,49 +252,18 @@ export function SaarthiStashCard2({
         {/* Tamper-Proof Laser Seal Scanner Indicator */}
         <div
           data-testid="tamper-proof-seal-indicator"
-          className="laser-seal-scanner relative rounded-xl border border-white/10 bg-slate-950/70 p-4 flex flex-col justify-between"
+          className="relative rounded-xl overflow-hidden mt-3"
         >
-          <div className="flex items-center justify-between pb-2 border-b border-white/10 text-xs">
-            <span className="font-bold flex items-center gap-1.5 text-white">
-              <ShieldCheck className="h-4 w-4 text-emerald-400" />
-              {isHi
-                ? SAARTHI_STASH_CARD_TOKENS.tamperProofSeal.labelHi
-                : SAARTHI_STASH_CARD_TOKENS.tamperProofSeal.labelEn}
-            </span>
-            <span className="font-mono text-[10px] text-cyan-300 bg-cyan-950/80 px-1.5 py-0.5 rounded border border-cyan-800">
-              {SAARTHI_STASH_CARD_TOKENS.tamperProofSeal.code}
-            </span>
-          </div>
-
-          {/* Barcode Laser Scan Display */}
-          <div className="my-3 flex flex-col items-center justify-center p-3 rounded-lg border border-emerald-500/20 bg-slate-900/60">
-            <div className="flex items-center gap-2 mb-2">
-              <QrCode className="h-10 w-10 text-emerald-400 animate-pulse" />
-              <div className="text-left">
-                <div className="text-xs font-mono font-bold text-white tracking-widest">
-                  ||||| ||| |||| || |||||
-                </div>
-                <div className="text-[10px] text-emerald-400 font-semibold flex items-center gap-1 mt-0.5">
-                  <Lock className="h-3 w-3" /> OTP Pickup Lock Verified
-                </div>
-              </div>
-            </div>
-
-            <div className="w-full flex items-center justify-center gap-2 text-[11px] text-amber-300 bg-amber-500/10 py-1 px-2 rounded border border-amber-500/20">
-              <Shield className="h-3.5 w-3.5 shrink-0 text-amber-400" />
-              <span className="font-bold">
-                {isHi
-                  ? SAARTHI_STASH_CARD_TOKENS.tamperProofSeal.shieldCoverHi
-                  : SAARTHI_STASH_CARD_TOKENS.tamperProofSeal.shieldCoverEn}
-              </span>
-            </div>
-          </div>
-
-          <div className="pt-2 border-t border-white/10 text-[11px] text-muted-foreground flex items-center justify-between">
-            <span>{isHi ? "0% दलाली • सीधे वरिष्ठ होस्ट के घर" : "Zero Brokerage • Senior Host Household"}</span>
-            <span className="text-emerald-400 font-bold">Verified</span>
-          </div>
+          <LaserSealBarcode
+            serialCode={SAARTHI_STASH_CARD_TOKENS.tamperProofSeal.code}
+            verifiedTimestamp="2026-ACTIVE-SEAL"
+            size="sm"
+            showSecurityBadge={true}
+            showScanButton={true}
+            interactive={true}
+          />
         </div>
+
       </div>
 
       {/* Bottom Breakdown & 1-Click Booking CTA */}
