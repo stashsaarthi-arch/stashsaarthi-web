@@ -4358,6 +4358,58 @@ html[lang="hi"][data-persona="host"] h4.font-devanagari,
   touch-action: none;
 }
 
+/* Admin Dashboard Modernization Utilities (Task 171) */
+.admin-dashboard-container {
+  background: radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.05) 0%, rgba(10, 13, 15, 0.98) 70%);
+  min-height: 100vh;
+}
+
+.admin-metric-card-modern {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.25rem;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.admin-metric-card-modern:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.045);
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes admin-badge-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(0.96);
+  }
+}
+
+.admin-status-badge-pulse {
+  animation: admin-badge-pulse 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.admin-node-meter-bar {
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  position: relative;
+}
+
+.admin-node-meter-fill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
 
 
 

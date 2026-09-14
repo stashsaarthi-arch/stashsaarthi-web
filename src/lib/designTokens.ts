@@ -3398,6 +3398,40 @@ export function getModalBackdropTokens(role: "student" | "host" = "student") {
   };
 }
 
+export const ADMIN_DASHBOARD_TOKENS = {
+  consoleTitle: "StashSaarthi Operator Console v2.0",
+  operatorStatus: "ONLINE ● OFFLINE FIRST ENGINE",
+  statusBadges: {
+    online: { label: "OPERATOR ACTIVE", color: "emerald", bg: "rgba(16, 185, 129, 0.15)", text: "#10B981", border: "rgba(16, 185, 129, 0.3)" },
+    synced: { label: "LOCAL STORAGE SYNCED", color: "cyan", bg: "rgba(6, 182, 212, 0.15)", text: "#06B6D4", border: "rgba(6, 182, 212, 0.3)" },
+    operational: { label: "NODES OPERATIONAL", color: "amber", bg: "rgba(245, 158, 11, 0.15)", text: "#F59E0B", border: "rgba(245, 158, 11, 0.3)" },
+  },
+  metrics: [
+    { id: "bookings", label: "Total Bookings", icon: "Boxes", color: "emerald", subText: "Active micro-storage & spaces" },
+    { id: "waitlist", label: "Waitlist Leads", icon: "Users", color: "sky", subText: "Verified student & host leads" },
+    { id: "meals", label: "Meal Orders", icon: "Soup", color: "amber", subText: "Token meals in dispatch" },
+    { id: "reviews", label: "Reviews & Ratings", icon: "Star", color: "violet", subText: "Average student satisfaction" },
+    { id: "revenue", label: "Est. Gross Revenue", icon: "TrendingUp", color: "orange", subText: "Calculated from active orders" },
+  ],
+  nodeCapacities: [
+    { name: "Kakadeo Hub", utilization: 82, badge: "HIGH DEMAND", color: "emerald" },
+    { name: "Kalyanpur Campus Node", utilization: 64, badge: "OPTIMAL", color: "cyan" },
+    { name: "Nawabganj Vault", utilization: 91, badge: "NEAR CAPACITY", color: "amber" },
+  ],
+  tabNavigation: {
+    activeGliderBg: "bg-emerald-500/15 border-emerald-500/30 text-emerald-400",
+    inactiveTabBg: "bg-white/5 border-white/10 text-muted-foreground hover:bg-white/8 hover:text-foreground",
+    badgeActive: "bg-emerald-500/20 text-emerald-300",
+    badgeInactive: "bg-white/10 text-muted-foreground",
+  },
+} as const;
+
+export function getAdminDashboardTokens() {
+  return ADMIN_DASHBOARD_TOKENS;
+}
+
+
+
 
 
 

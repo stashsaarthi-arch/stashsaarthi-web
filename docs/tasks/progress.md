@@ -2,6 +2,32 @@ ralph-done-atufh
 
 # Ralph Autonomous Workforce Sprint Progress
 
+- [x] **[UI - Modal Backdrop Blur & Scroll Lock / polish] Task 170: Perfect modal backdrop dimming (`backdrop-blur-md bg-black/60`) and body scroll locking to eliminate dual-scrolling glitches — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test_modal_backdrop_scroll_lock.mjs` — ✅ PASSED (Task 170 verification checks passed 100%).
+  - **Modal Backdrop Blur & Body Scroll Locking Architecture**:
+    - `src/lib/designTokens.ts`: Defined `MODAL_BACKDROP_SCROLL_LOCK_TOKENS` (`backdropClasses: "backdrop-blur-md bg-black/60 modal-backdrop-overlay"`, `blurStrength: "12px"`, `dimmingOpacity: "0.60"`, `scrollLock` settings, `personaAccents` for Emerald/Cyan Student vs Amber/Gold Host) and exported `getModalBackdropTokens` helper function.
+    - `src/lib/useScrollLock.ts`: Created custom hook `useScrollLock` featuring global reference counter (`activeScrollLockCount`) for nested modal safety, automatic scrollbar width calculation (`getScrollbarWidth()`), dynamic `--scrollbar-width` CSS variable setting to prevent layout shifts when scrollbars disappear, and `modal-scroll-lock-active` class management on `document.body`.
+    - `src/styles.css`: Added CSS utilities (`.modal-backdrop-overlay`, `.modal-backdrop-student`, `.modal-backdrop-host`, `.modal-scroll-lock-active`) with `backdrop-filter: blur(12px) saturate(160%)`, fallback rules for non-backdrop-filter browsers, persona radial gradient halos, and strict `overscroll-behavior: none`.
+    - `src/components/ui/ModalBackdrop.tsx`: Created reusable primitive `ModalBackdrop` component featuring backdrop-blur-md dimming, persona theme integration (`usePersona()`), built-in `useScrollLock(open)` hook, and click backdrop dismiss.
+    - `src/components/ui/SpringModal.tsx`: Updated `SpringModal` to incorporate `useScrollLock(open)` hook and persona-aware `modal-backdrop-overlay` backdrop classes.
+    - `src/components/ui/dialog.tsx`: Updated `DialogOverlay` to incorporate `modal-backdrop-overlay` and `bg-black/60 backdrop-blur-md`.
+    - `src/components/ui/primitives.ts`: Re-exported `ModalBackdrop`, `ModalBackdropProps`, `useScrollLock`, and `getScrollbarWidth`.
+    - `execution/test_modal_backdrop_scroll_lock.mjs`: Created verification test script asserting design tokens, scroll lock hook implementation, CSS rules, component integration, primitive re-exports, and clean production build compilation.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `MODAL_BACKDROP_SCROLL_LOCK_TOKENS` & `getModalBackdropTokens`.
+    - `src/lib/useScrollLock.ts` — Created useScrollLock hook for body scroll locking & layout shift prevention.
+    - `src/styles.css` — Added modal backdrop blur & body scroll lock CSS rules.
+    - `src/components/ui/ModalBackdrop.tsx` — Created ModalBackdrop primitive component.
+    - `src/components/ui/SpringModal.tsx` — Updated SpringModal with useScrollLock & backdrop tokens.
+    - `src/components/ui/dialog.tsx` — Updated DialogOverlay with modal-backdrop-overlay.
+    - `src/components/ui/primitives.ts` — Re-exported ModalBackdrop & useScrollLock primitives.
+    - `execution/test_modal_backdrop_scroll_lock.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 170 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 170 execution log.
+    - `progress.md` — Appended Task 170 execution log.
+
+
 - [x] **[UI - WhatsApp Quick-Checkout Fallback / distill] Task 169: Build a streamlined fallback modal for weak network connections allowing students to finalize orders via pre-filled WhatsApp link — 2026-09-14**:
   - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
   - **Verification Suite**: `node execution/test_task169_whatsapp_fallback.mjs` — ✅ PASSED (Task 169 verification checks passed 100%).

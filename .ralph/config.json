@@ -1,9 +1,11 @@
 {
   "project": "StashSaarthi",
-  "prd": "../prd.json",
-  "prompt": "../prompt.md",
-  "progress": "../progress.txt",
+  "prd": "docs/tasks/PRD.md",
+  "prompt": "docs/tasks/prompt.md",
+  "progress": "docs/tasks/progress.md",
   "verification": "npm run build",
   "maxIterations": 50,
-  "autoCommit": true
+  "autoCommit": true,
+  "stopOnTaskComplete": false,
+  "continueUntilAllDone": true
 }
