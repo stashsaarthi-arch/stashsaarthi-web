@@ -16,6 +16,8 @@ import { formatPersonalizationsSummary } from "@/lib/mealPersonalization";
 import { DeliveryCutoffCountdown } from "./stash/DeliveryCutoffCountdown";
 import { useThaliPriceLabelVariant, trackThaliPriceClick, ThaliPriceLabelVariant } from "@/lib/abTesting";
 import { CsoKitchenSealModal } from "./stash/CsoKitchenSealModal";
+import { SaarthiKitchenCard2 } from "./ui/primitives";
+
 
 
 type FulfillmentType = "DineIn_Pickup" | "RoomDelivery";
@@ -1043,23 +1045,26 @@ export const TokenMealHub: React.FC = () => {
             <ThaliPriceVariantToggle />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-5">
             {MEAL_TIERS.map((tier) => {
               const isSelected = selectedMeal.id === tier.id;
-              const tierCost =
-                fulfillmentType === "RoomDelivery" ? tier.costDelivery : tier.costPickup;
-
               return (
-                <MealTierCard
+                <SaarthiKitchenCard2
                   key={tier.id}
-                  tier={tier}
+                  thali={tier}
                   isSelected={isSelected}
-                  tierCost={tierCost}
-                  onSelect={setSelectedMeal}
+                  selectedFulfillment={fulfillmentType}
+                  onSelect={(t) => setSelectedMeal(t as MealOption)}
+                  onOrder={(t) => {
+                    setSelectedMeal(t as MealOption);
+                    toast.success(`Selected ${t.name}! Confirm your order details below.`);
+                  }}
+
                 />
               );
             })}
           </div>
+
 
           {/* Micro-Interaction: Peacock Feather Matki Butter Dusting (Task 64) */}
           <PeacockFeatherMatkiDusting

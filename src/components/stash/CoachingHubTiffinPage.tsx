@@ -124,7 +124,7 @@ export function CoachingHubTiffinPage({ config }: { config: HubConfig }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <div className="min-h-screen bg-[#0A0D0F] text-slate-100 selection:bg-emerald-500/30 selection:text-emerald-300 font-sans antialiased overflow-x-hidden">
+      <div className="section-isolated layout-isolated min-h-screen bg-[#0A0D0F] text-slate-100 selection:bg-emerald-500/30 selection:text-emerald-300 font-sans antialiased overflow-x-hidden">
         {/* Navigation Header */}
         <header className="sticky top-0 z-50 backdrop-blur-xl bg-[#0A0D0F]/90 border-b border-emerald-500/10 px-4 lg:px-8 py-3.5 flex items-center justify-between">
           <div className="flex items-center gap-4">

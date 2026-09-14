@@ -527,7 +527,7 @@ export function ZeroRisk() {
     <div
       id="safety-protocol"
       data-section="zero-risk"
-      className="relative overflow-hidden py-2 scroll-mt-20"
+      className="section-isolated layout-isolated relative overflow-hidden py-2 scroll-mt-20"
     >
       <div className="relative mx-auto max-w-5xl px-2">
         {/* ── 5 Risk-Mitigation Cards — Bento Grid ── */}

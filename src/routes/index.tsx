@@ -16,6 +16,7 @@ import { SolutionsHub } from "@/components/stash/SolutionsHub";
 // ─── Small utilities (eagerly loaded — negligible size) ──────────────────────
 import { ScrollProgress } from "@/components/stash/ScrollProgress";
 import { FloatingPersonaToggle } from "@/components/stash/FloatingPersonaToggle";
+import { PersonaContextIndicator } from "@/components/ui/PersonaContextIndicator";
 import { MobileStickyCTA } from "@/components/stash/MobileStickyCTA";
 import { WhatsAppButton } from "@/components/stash/WhatsAppButton";
 
@@ -119,6 +120,9 @@ function Index() {
         Skip to main content
       </a>
       <AmbientNodes />
+      <ErrorBoundary sectionName="Persona Context Indicator" compact>
+        <PersonaContextIndicator />
+      </ErrorBoundary>
       <ErrorBoundary sectionName="Navbar" compact>
         <Navbar
           role={role}
@@ -303,7 +307,7 @@ function Index() {
         </ErrorBoundary>
       </Suspense>
       <ErrorBoundary sectionName="Mobile Sticky CTA Widget" compact>
-        <MobileStickyCTA onBook={open} />
+        <MobileStickyCTA onBook={open} onListRoom={handleListRoom} />
       </ErrorBoundary>
       <ErrorBoundary sectionName="WhatsApp Floating Action Button" compact>
         <WhatsAppButton onBook={open} />

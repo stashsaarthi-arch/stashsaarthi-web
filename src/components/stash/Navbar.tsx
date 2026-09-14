@@ -10,6 +10,13 @@ import { smoothScrollTo } from "./legal";
 import { useLanguage } from "@/context/LanguageContext";
 import type { Role } from "./types";
 import { StashWalletBadge, ZeroFeeTrialTokenModal } from "./ZeroFeeTrialTokenModal";
+import { PersonaSwitcher } from "@/components/ui/PersonaSwitcher";
+import {
+  DYNAMIC_PERSONA_NAVBAR_TOKENS,
+  getPersonaNavbarTokens,
+  getNavbarBrandGlowClasses,
+  getNavbarLinkIndicatorClasses,
+} from "@/lib/designTokens";
 
 const NAV_LINKS = [
   {
@@ -86,8 +93,12 @@ export const Navbar = memo(function Navbar({
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [showTrialModal, setShowTrialModal] = useState(false);
+  const [activeHash, setActiveHash] = useState("#stash");
   const { language, setLanguage, t } = useLanguage();
   const isHi = language === "hi";
+
+  const tokens = getPersonaNavbarTokens(role);
+  const isHost = role === "host";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -96,16 +107,34 @@ export const Navbar = memo(function Navbar({
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    const handleHashChange = () => {
+      if (window.location.hash) {
+        setActiveHash(window.location.hash);
+      }
+    };
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
+
   return (
     <header
+      data-persona={role}
       className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${
         scrolled
-          ? "bg-[#0A0D0F]/95 backdrop-blur-2xl border-b border-white/10 shadow-2xl shadow-black/80"
-          : "bg-[#0A0D0F]/70 backdrop-blur-md border-b border-white/[0.04]"
+          ? `bg-[#0A0D0F]/95 backdrop-blur-2xl ${tokens.scrolledBorder}`
+          : isHost
+          ? "bg-[#0A0D0F]/80 backdrop-blur-md border-b border-amber-500/15"
+          : "bg-[#0A0D0F]/70 backdrop-blur-md border-b border-emerald-500/15"
       }`}
     >
+      {/* Dynamic Persona Top Accent Gradient Line */}
       <div
-        className={`max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-4 xl:px-6 w-full flex items-center justify-between gap-1 sm:gap-2 transition-all duration-300 ${
+        className={`h-0.5 w-full transition-all duration-500 ${tokens.topAccentLine}`}
+      />
+
+      <div
+        className={`section-container-gutter mobile-gutter-safe max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 w-full flex items-center justify-between gap-1 sm:gap-2 transition-all duration-300 ${
           scrolled ? "h-14 sm:h-16" : "h-15 sm:h-20"
         }`}
       >
@@ -114,17 +143,23 @@ export const Navbar = memo(function Navbar({
           <button
             type="button"
             className="flex items-center gap-1.5 shrink-0 cursor-pointer group bg-transparent border-0 p-0 transition-transform active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50 rounded-lg"
-            onClick={() => smoothScrollTo("top")(undefined as any)}
+            onClick={() => {
+              setActiveHash("#stash");
+              smoothScrollTo("top")(undefined as any);
+            }}
             aria-label="Scroll to top of page"
             title="StashSaarthi - Back to top"
           >
-            <BrandLogo height={28} className="h-6 sm:h-7 md:h-8 w-auto" />
+            <div className={`navbar-brand-logo transition-all duration-300 ${getNavbarBrandGlowClasses(role)}`}>
+              <BrandLogo height={28} className="h-6 sm:h-7 md:h-8 w-auto" />
+            </div>
           </button>
 
-          {/* Desktop Navigation Links */}
+          {/* Desktop Navigation Links with Dynamic Persona Underlines */}
           <nav aria-label="Main Navigation" className="hidden xl:flex items-center gap-0.5 shrink-0">
             {NAV_LINKS.map((l) => {
               const label = isHi ? l.labelHi : l.labelEn;
+              const isActive = activeHash === l.href;
 
               return (
                 <a
@@ -132,12 +167,32 @@ export const Navbar = memo(function Navbar({
                   href={l.href}
                   onClick={(e) => {
                     e.preventDefault();
+                    setActiveHash(l.href);
                     smoothScrollTo(l.href.replace(/^#/, ""))(e);
                   }}
-                  className="whitespace-nowrap rounded-lg px-1.5 min-[1650px]:px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground shrink-0 flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+                  className={`whitespace-nowrap rounded-lg px-2 min-[1650px]:px-3 py-1.5 text-xs font-medium transition-all shrink-0 flex items-center gap-1.5 relative group focus-visible:outline-none focus-visible:ring-2 ${
+                    isHost ? "focus-visible:ring-amber-400" : "focus-visible:ring-emerald-400"
+                  } ${
+                    isActive
+                      ? isHost
+                        ? "text-amber-300 font-semibold bg-amber-500/10"
+                        : "text-emerald-300 font-semibold bg-emerald-500/10"
+                      : isHost
+                      ? "text-slate-300 hover:text-amber-300 hover:bg-amber-500/10"
+                      : "text-slate-300 hover:text-emerald-300 hover:bg-emerald-500/10"
+                  }`}
                 >
                   <span className="text-xs" aria-hidden="true">{l.icon}</span>
                   <span>{label}</span>
+
+                  {/* Dynamic Persona Sliding Active Indicator Bar */}
+                  {isActive && (
+                    <motion.div
+                      layoutId="navbar-active-link-indicator"
+                      className={`absolute bottom-0 left-1.5 right-1.5 h-0.5 rounded-full ${tokens.activeIndicator}`}
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
                 </a>
               );
             })}
@@ -147,37 +202,14 @@ export const Navbar = memo(function Navbar({
         {/* 2. Right: Action Controls (Responsive & Mobile Fitted) */}
         <div className="flex items-center gap-1 sm:gap-2 lg:gap-2.5 shrink-0">
           {/* Persona Toggle on Desktop */}
-          <div role="radiogroup" aria-label="User Persona Selector" className="hidden min-[1650px]:flex items-center p-0.5 bg-[#161B22] border border-slate-700/60 rounded-full shrink-0">
-            <button
-              type="button"
-              role="radio"
-              aria-checked={role === "student"}
-              onClick={() => setRole("student")}
-              className={`px-2.5 py-1 rounded-full text-xs font-semibold transition-all flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 ${
-                role === "student"
-                  ? "bg-emerald-500 text-black shadow-md font-bold"
-                  : "text-slate-400 hover:text-white"
-              }`}
-            >
-              <span aria-hidden="true">🎓</span>
-              <span>{isHi ? "छात्र" : "Student"}</span>
-              <span className="opacity-80 text-xs">({isHi ? "₹6.4k बचत" : "Save ₹6.4k"})</span>
-            </button>
-            <button
-              type="button"
-              role="radio"
-              aria-checked={role === "host"}
-              onClick={() => setRole("host")}
-              className={`px-2.5 py-1 rounded-full text-xs font-semibold transition-all flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
-                role === "host"
-                  ? "bg-amber-500 text-black shadow-md font-bold"
-                  : "text-slate-400 hover:text-white"
-              }`}
-            >
-              <span aria-hidden="true">🏡</span>
-              <span>{isHi ? "होस्ट" : "Host"}</span>
-              <span className="opacity-80 text-xs">({isHi ? "₹11.5k आय" : "Earn ₹11.5k"})</span>
-            </button>
+          <div className="hidden min-[1650px]:flex items-center shrink-0">
+            <PersonaSwitcher
+              id="navbar-desktop-persona-switcher"
+              role={role}
+              onRoleChange={setRole}
+              variant="compact"
+              showBadges
+            />
           </div>
 
           {/* Compact Language Switcher & Theme Toggle */}
@@ -189,7 +221,9 @@ export const Navbar = memo(function Navbar({
                 aria-checked={language === "en"}
                 aria-label="Switch to English"
                 onClick={() => setLanguage("en")}
-                className={`rounded-full px-2 py-0.5 text-xs font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 ${
+                className={`rounded-full px-2 py-0.5 text-xs font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 ${
+                  isHost ? "focus-visible:ring-amber-400" : "focus-visible:ring-emerald-400"
+                } ${
                   language === "en"
                     ? "bg-white/15 text-white"
                     : "text-muted-foreground hover:text-white"
@@ -203,7 +237,9 @@ export const Navbar = memo(function Navbar({
                 aria-checked={language === "hi"}
                 aria-label="Switch to Hindi"
                 onClick={() => setLanguage("hi")}
-                className={`rounded-full px-2 py-0.5 text-xs font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 ${
+                className={`rounded-full px-2 py-0.5 text-xs font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 ${
+                  isHost ? "focus-visible:ring-amber-400" : "focus-visible:ring-emerald-400"
+                } ${
                   language === "hi"
                     ? "bg-white/15 text-white"
                     : "text-muted-foreground hover:text-white"
@@ -231,7 +267,11 @@ export const Navbar = memo(function Navbar({
             <button
               type="button"
               onClick={onEarlyAccess}
-              className="hidden min-[1650px]:inline-flex items-center gap-1.5 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-3 py-1.5 text-xs font-bold text-emerald-300 hover:bg-emerald-500/20 transition-all shrink-0 cursor-pointer active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+              className={`hidden min-[1650px]:inline-flex items-center gap-1.5 rounded-xl border px-3 py-1.5 text-xs font-bold transition-all shrink-0 cursor-pointer active:scale-95 focus-visible:outline-none focus-visible:ring-2 ${
+                isHost
+                  ? "border-amber-500/40 bg-amber-500/10 text-amber-300 hover:bg-amber-500/20 focus-visible:ring-amber-400"
+                  : "border-emerald-500/40 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/20 focus-visible:ring-emerald-400"
+              }`}
             >
               <span aria-hidden="true">⚡</span>
               <span>{isHi ? "अर्ली एक्सेस" : "Early Access"}</span>
@@ -252,15 +292,13 @@ export const Navbar = memo(function Navbar({
             </button>
           )}
 
-          {/* Action CTA Button */}
+          {/* Dynamic Persona Action CTA Button */}
           <button
             type="button"
             onClick={role === "student" ? onBook : onListRoom}
-            className={`px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all shrink-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 ${
-              role === "student"
-                ? "bg-emerald-500 hover:bg-emerald-400 text-black shadow-md shadow-emerald-500/20 active:scale-95"
-                : "bg-amber-500 hover:bg-amber-400 text-black shadow-md shadow-amber-500/20 active:scale-95"
-            }`}
+            className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all shrink-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 ${
+              isHost ? "focus-visible:ring-amber-400" : "focus-visible:ring-emerald-400"
+            } ${tokens.ctaButton}`}
           >
             {role === "student"
               ? isHi
@@ -286,7 +324,7 @@ export const Navbar = memo(function Navbar({
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile Menu Dropdown with Persona Border */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -296,40 +334,20 @@ export const Navbar = memo(function Navbar({
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="glass border-t border-slate-800/80 flex flex-col gap-2 px-4 py-4 xl:hidden bg-[#0A0D0F]/98 backdrop-blur-2xl overflow-hidden shadow-2xl"
+            className={`glass flex flex-col gap-2 px-4 py-4 xl:hidden bg-[#0A0D0F]/98 backdrop-blur-2xl overflow-hidden shadow-2xl ${tokens.mobileDrawerBorder}`}
           >
             {/* Mobile Persona Switcher in Menu */}
-            <div className="p-1 bg-[#161B22] border border-slate-700/60 rounded-xl flex items-center gap-1 mb-2">
-              <button
-                type="button"
-                onClick={() => {
-                  setRole("student");
+            <div className="flex justify-center mb-2">
+              <PersonaSwitcher
+                id="navbar-mobile-persona-switcher"
+                role={role}
+                onRoleChange={(r) => {
+                  setRole(r);
                   setOpen(false);
                 }}
-                className={`flex-1 py-2 px-2.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
-                  role === "student"
-                    ? "bg-emerald-500 text-black shadow-md"
-                    : "text-slate-400 hover:text-white"
-                }`}
-              >
-                <GraduationCap className="h-4 w-4" />
-                <span>{isHi ? "छात्र मोड" : "Student Mode"}</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setRole("host");
-                  setOpen(false);
-                }}
-                className={`flex-1 py-2 px-2.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
-                  role === "host"
-                    ? "bg-amber-500 text-black shadow-md"
-                    : "text-slate-400 hover:text-white"
-                }`}
-              >
-                <HeartHandshake className="h-4 w-4" />
-                <span>{isHi ? "सीनियर होस्ट" : "Senior Host"}</span>
-              </button>
+                variant="standard"
+                className="w-full justify-center"
+              />
             </div>
 
             {/* Mobile Language & Theme Switcher in Menu */}
@@ -365,6 +383,7 @@ export const Navbar = memo(function Navbar({
               {NAV_LINKS.map((l) => {
                 const label = isHi ? l.labelHi : l.labelEn;
                 const desc = isHi ? l.descHi : l.descEn;
+                const isActive = activeHash === l.href;
 
                 return (
                   <button
@@ -372,12 +391,19 @@ export const Navbar = memo(function Navbar({
                     type="button"
                     onClick={(e) => {
                       setOpen(false);
+                      setActiveHash(l.href);
                       smoothScrollTo(l.href.replace(/^#/, ""))(e);
                     }}
-                    className="flex flex-col items-start rounded-xl p-2.5 bg-white/5 hover:bg-white/10 border border-white/5 transition-all text-left cursor-pointer active:scale-98"
+                    className={`flex flex-col items-start rounded-xl p-2.5 border transition-all text-left cursor-pointer active:scale-98 ${
+                      isActive
+                        ? isHost
+                          ? "bg-amber-500/15 border-amber-500/40 text-amber-300"
+                          : "bg-emerald-500/15 border-emerald-500/40 text-emerald-300"
+                        : "bg-white/5 hover:bg-white/10 border-white/5 text-white"
+                    }`}
                   >
                     <span className="text-base mb-1">{l.icon}</span>
-                    <span className="text-xs font-bold text-white">{label}</span>
+                    <span className="text-xs font-bold">{label}</span>
                     <span className="text-[10px] text-muted-foreground mt-0.5">{desc}</span>
                   </button>
                 );
@@ -393,7 +419,11 @@ export const Navbar = memo(function Navbar({
                     setOpen(false);
                     onEarlyAccess();
                   }}
-                  className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl border border-emerald-500/40 bg-emerald-500/15 text-xs font-bold text-emerald-300 hover:bg-emerald-500/25 transition-all cursor-pointer"
+                  className={`w-full flex items-center justify-center gap-2 py-2.5 rounded-xl border text-xs font-bold transition-all cursor-pointer ${
+                    isHost
+                      ? "border-amber-500/40 bg-amber-500/15 text-amber-300 hover:bg-amber-500/25"
+                      : "border-emerald-500/40 bg-emerald-500/15 text-emerald-300 hover:bg-emerald-500/25"
+                  }`}
                 >
                   <span>⚡</span>
                   <span>{isHi ? "प्राथमिकता अर्ली एक्सेस लें" : "Get Priority Early Access"}</span>

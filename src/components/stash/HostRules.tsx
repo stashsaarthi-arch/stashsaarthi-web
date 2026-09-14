@@ -39,7 +39,7 @@ export const HostRules = memo(function HostRules() {
   const activeCount = Object.values(activeRules).filter(Boolean).length;
 
   return (
-    <section className="relative mx-auto max-w-5xl px-4 py-4 sm:py-6">
+    <section className="section-isolated layout-isolated relative mx-auto max-w-5xl px-4 py-4 sm:py-6">
       <AnimatedContent distance={20} direction="vertical" duration={0.5}>
         <div className="text-center mb-4">
           <div className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-[10px] sm:text-xs font-semibold text-amber-400 mb-2 uppercase tracking-widest">

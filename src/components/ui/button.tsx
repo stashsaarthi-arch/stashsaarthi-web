@@ -64,6 +64,24 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       if (onClick) onClick(e);
     };
 
+    // When asChild=true, Slot requires a SINGLE React element child.
+    // Rendering isLoading/leftIcon/rightIcon siblings alongside {children}
+    // produces an array that Slot rejects with "Expected a single React element
+    // child or Slottable" in @radix-ui/react-slot v1.2.x. Pass only {children}.
+    if (asChild) {
+      return (
+        <Comp
+          className={cn(buttonVariants({ variant, size, className }))}
+          ref={ref}
+          onClick={handleClick}
+          disabled={isLoading || disabled}
+          {...props}
+        >
+          {children}
+        </Comp>
+      );
+    }
+
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
@@ -80,6 +98,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     );
   },
 );
+
 Button.displayName = "Button";
 
 export { Button, buttonVariants };

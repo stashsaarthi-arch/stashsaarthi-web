@@ -15,6 +15,8 @@ import { BentoGrid, BentoCard } from "@/components/ui/BentoGrid";
 import { BentoSpanType, BentoAspectRatioType } from "@/lib/designTokens";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 
+import { SaarthiStashCard2 } from "@/components/ui/SaarthiStashCard2";
+
 type NodeKey = "stash" | "spaces" | "kitchen" | "connect" | "trust" | "micro";
 
 type NodeBase = {
@@ -82,6 +84,23 @@ export function Ecosystem({ onBook }: { onBook: OpenBooking }) {
           const Icon = n.icon;
           const textData = t.ecosystem[n.id];
           const isFeatured = n.span === "featured";
+
+          if (n.id === "stash") {
+            return (
+              <AnimatedContent
+                key={n.id}
+                distance={30}
+                direction="vertical"
+                duration={0.6}
+                threshold={0.15}
+                delay={Math.min(i * 0.05, 0.3)}
+                className="bento-span-featured col-span-1 md:col-span-2 row-span-1 md:row-span-2"
+              >
+                <SaarthiStashCard2 onBook={onBook} className="h-full" />
+              </AnimatedContent>
+            );
+          }
+
           return (
             <AnimatedContent
               key={n.id}
@@ -167,4 +186,5 @@ export function Ecosystem({ onBook }: { onBook: OpenBooking }) {
     </SectionWrapper>
   );
 }
+
 

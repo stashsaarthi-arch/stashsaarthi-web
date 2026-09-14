@@ -77,8 +77,9 @@ export const Floating3DLuggage = memo(function Floating3DLuggage() {
           }}
         >
           <Card3D maxTilt={10} className="w-full">
-            <div className="glass-card relative overflow-hidden rounded-2xl border border-emerald-500/30 bg-black/60 p-3.5 backdrop-blur-xl shadow-glow hover:border-emerald-400/60 transition-colors group">
-              <div className="absolute -right-6 -top-6 h-20 w-20 rounded-full bg-emerald-500/15 blur-xl group-hover:bg-emerald-400/25 transition-all" />
+            <div className="glass-card student-cyberpunk-card student-frosted-glass-depth student-mint-cyan-edge relative overflow-hidden rounded-2xl border border-emerald-500/35 p-3.5 shadow-glow hover:border-cyan-400/60 transition-all group">
+              <div className="absolute -right-6 -top-6 h-20 w-20 rounded-full bg-cyan-400/20 blur-xl group-hover:bg-emerald-400/30 transition-all" />
+
               
               {/* Card Header */}
               <div className="flex items-center justify-between gap-2 border-b border-emerald-500/20 pb-2 mb-2">

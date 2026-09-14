@@ -4,8 +4,10 @@ import {
   type FluidTypographyLevel,
   getCalibratedTypographySpec,
   getHindiTypographyClasses,
+  getHeadingHierarchyClasses,
 } from "@/lib/designTokens";
 import { useLanguage } from "@/context/LanguageContext";
+import { usePersona } from "@/context/PersonaContext";
 
 export interface TypographyProps extends React.HTMLAttributes<HTMLElement> {
   variant?: FluidTypographyLevel;
@@ -26,17 +28,6 @@ const variantElementMap: Record<FluidTypographyLevel, React.ElementType> = {
   overline: "span",
 };
 
-const variantUtilityMap: Record<FluidTypographyLevel, string> = {
-  display: "text-fluid-display font-extrabold tracking-tight",
-  h1: "text-fluid-h1 font-extrabold tracking-tight",
-  h2: "text-fluid-h2 font-bold tracking-tight",
-  h3: "text-fluid-h3 font-bold tracking-tight",
-  h4: "text-fluid-h4 font-semibold",
-  body: "text-fluid-body font-normal leading-relaxed",
-  caption: "text-fluid-caption font-medium text-muted-foreground",
-  overline: "text-fluid-overline font-semibold text-muted-foreground uppercase",
-};
-
 const gradientUtilityMap: Record<"mint" | "amber" | "persona" | "none", string> = {
   mint: "text-gradient-mint",
   amber: "text-gradient-amber",
@@ -47,23 +38,25 @@ const gradientUtilityMap: Record<"mint" | "amber" | "persona" | "none", string> 
 export const Typography = React.forwardRef<HTMLElement, TypographyProps>(
   ({ variant = "body", as, gradient = "none", lang: customLang, className, children, ...props }, ref) => {
     const { language: contextLang } = useLanguage();
+    const { isHost } = usePersona();
     const activeLang = customLang || contextLang || "en";
     const isHindi = activeLang === "hi";
 
     const Component = as || variantElementMap[variant];
-    const variantClasses = variantUtilityMap[variant];
+    const variantClasses = getHeadingHierarchyClasses(variant);
     const gradientClasses = gradientUtilityMap[gradient];
 
     const calibratedSpec = getCalibratedTypographySpec(variant, activeLang);
 
     const isHeading = ["display", "h1", "h2", "h3", "h4"].includes(variant);
-    const devanagariClasses = getHindiTypographyClasses(isHindi, isHeading);
+    const devanagariClasses = getHindiTypographyClasses(isHindi, isHeading, isHost);
 
     return (
       <Component
         ref={ref as any}
         lang={activeLang}
         data-lang={activeLang}
+        data-typography-level={variant}
         data-calibrated-line-height={calibratedSpec.lineHeight}
         data-calibrated-letter-spacing={calibratedSpec.letterSpacing}
         className={cn(variantClasses, devanagariClasses, gradientClasses, className)}
@@ -77,3 +70,43 @@ export const Typography = React.forwardRef<HTMLElement, TypographyProps>(
 
 Typography.displayName = "Typography";
 
+export interface SectionHeaderProps {
+  overline?: React.ReactNode;
+  heading: React.ReactNode;
+  description?: React.ReactNode;
+  align?: "center" | "left" | "right";
+  gradient?: "mint" | "amber" | "persona" | "none";
+  className?: string;
+  headingAs?: "h1" | "h2" | "h3" | "h4";
+}
+
+export const SectionHeader: React.FC<SectionHeaderProps> = ({
+  overline,
+  heading,
+  description,
+  align = "center",
+  gradient = "none",
+  className,
+  headingAs = "h2",
+}) => {
+  const alignClass =
+    align === "left" ? "text-left items-start" : align === "right" ? "text-right items-end" : "text-center items-center";
+
+  return (
+    <header className={cn("section-header-wrapper flex flex-col space-y-3", alignClass, className)}>
+      {overline && (
+        <Typography variant="overline" className="tracking-widest font-semibold">
+          {overline}
+        </Typography>
+      )}
+      <Typography variant={headingAs} gradient={gradient} className="font-extrabold tracking-tight">
+        {heading}
+      </Typography>
+      {description && (
+        <Typography variant="body" className="text-muted-foreground max-w-2xl text-balance">
+          {description}
+        </Typography>
+      )}
+    </header>
+  );
+};

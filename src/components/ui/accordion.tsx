@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
+import { Slottable } from "@radix-ui/react-slot";
 import { ChevronDown } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -27,7 +28,14 @@ const AccordionTrigger = React.forwardRef<
       )}
       {...props}
     >
-      {children}
+      {/*
+        Slottable marks the user-provided children as the "slottable" portion.
+        ChevronDown sits OUTSIDE Slottable so Radix Slot doesn't try to merge
+        it into the child element — this is the v1.2.x pattern that fixes:
+        "Slot failed to slot onto its children. Expected a single React element
+        child or Slottable."
+      */}
+      <Slottable>{children}</Slottable>
       <ChevronDown className="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200" />
     </AccordionPrimitive.Trigger>
   </AccordionPrimitive.Header>

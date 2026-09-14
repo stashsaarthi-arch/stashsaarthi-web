@@ -95,7 +95,7 @@
   --font-sans: "Plus Jakarta Sans", "Plus Jakarta Sans Fallback", "Inter", "Inter Fallback", ui-sans-serif, system-ui, sans-serif;
   --font-body: "Inter", "Inter Fallback", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Plus Jakarta Sans", "Plus Jakarta Sans Fallback", ui-sans-serif, system-ui, sans-serif;
-  --font-devanagari: "Rozha One", "Mukta", "Mukta Fallback", "Tiro Devanagari Hindi", "Noto Sans Devanagari", "Kohinoor Devanagari", "ITF Devanagari", ui-sans-serif, system-ui, sans-serif;
+  --font-devanagari: "Mukta", "Mukta Fallback", "Rozha One", "Noto Sans Devanagari", "Tiro Devanagari Hindi", "Kohinoor Devanagari", "ITF Devanagari", "Hind", "Baloo 2", "Anek Devanagari", "Mangal", "Utsaah", "Arial Unicode MS", ui-sans-serif, system-ui, sans-serif;
   --breakpoint-3xl: 160rem;
   --breakpoint-4xl: 240rem;
 }
@@ -391,8 +391,12 @@ body[data-lang="hi"] {
   --surface-card: oklch(0.17 0.015 65 / 80%);
   --primary: oklch(0.809 0.165 76);
   --ring: oklch(0.809 0.165 76);
+  --border: oklch(0.809 0.165 76 / 35%);
+  --input: oklch(0.809 0.165 76 / 45%);
   --cyan: oklch(0.809 0.165 76);
   --emerald: oklch(0.837 0.13 90);
+  --text-fluid-body: clamp(1.125rem, 0.8vw + 0.85rem, 1.45rem);
+  --text-fluid-caption: clamp(0.95rem, 0.5vw + 0.75rem, 1.15rem);
   --gradient-cyan: var(--gradient-amber);
   --gradient-persona-radiant: var(--gradient-amber-gold);
   --radial-mesh-persona: var(--radial-mesh-host);
@@ -407,6 +411,328 @@ body[data-lang="hi"] {
   --glow-cyan: 0 0 40px -8px oklch(0.809 0.165 76 / 55%);
   --sidebar-ring: oklch(0.868 0.16 178);
 }
+
+/* Senior Host Legibility Mode CSS Specifications (Task 132) */
+[data-role="host"] body,
+[data-role="host"] .text-fluid-body,
+[data-role="host"] p {
+  font-size: clamp(1.125rem, 0.8vw + 0.85rem, 1.45rem);
+  line-height: 1.7;
+}
+
+[data-role="host"] .glass,
+[data-role="host"] .glass-panel,
+[data-role="host"] .glass-card,
+[data-role="host"] .bento-card,
+[data-role="host"] .surface-1-card,
+[data-role="host"] .surface-2-card,
+[data-role="host"] .surface-elevated-card {
+  border-width: 2px;
+  border-color: oklch(0.809 0.165 76 / 35%);
+  box-shadow: 0 8px 30px -6px oklch(0 0 0 / 70%), 0 0 16px -2px oklch(0.809 0.165 76 / 25%);
+}
+
+[data-role="host"] button,
+[data-role="host"] a.button,
+[data-role="host"] .btn-action,
+[data-role="host"] .host-action-btn {
+  min-height: 52px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+@utility senior-host-text-lg {
+  font-size: clamp(1.125rem, 0.8vw + 0.85rem, 1.45rem);
+  line-height: 1.7;
+}
+
+@utility senior-host-border-contrast {
+  border: 2px solid oklch(0.809 0.165 76 / 45%);
+  box-shadow: 0 0 20px -2px oklch(0.809 0.165 76 / 30%);
+}
+
+@utility senior-host-btn-accessible {
+  min-height: 52px;
+  font-size: 1.125rem;
+  font-weight: 700;
+  padding-left: 1.75rem;
+  padding-right: 1.75rem;
+  border: 2px solid oklch(0.809 0.165 76 / 60%);
+  background: linear-gradient(135deg, oklch(0.809 0.165 76), oklch(0.85 0.18 84));
+  color: oklch(0.12 0.015 65);
+  box-shadow: 0 6px 20px -3px oklch(0.809 0.165 76 / 45%);
+}
+
+/* Student Persona Cyberpunk Aesthetics CSS Specifications (Task 133) */
+[data-role="student"] .glass,
+[data-role="student"] .glass-panel,
+[data-role="student"] .glass-card,
+[data-role="student"] .bento-card,
+[data-role="student"] .student-cyberpunk-card {
+  border: 1px solid oklch(0.72 0.19 160 / 22%);
+  box-shadow: 0 12px 36px -8px oklch(0 0 0 / 70%),
+              inset 0 1px 0 oklch(0.868 0.16 178 / 25%),
+              0 0 20px -4px oklch(0.72 0.19 160 / 15%);
+  backdrop-filter: blur(16px) saturate(145%);
+}
+
+[data-role="student"] .glass-card:hover,
+[data-role="student"] .bento-card:hover,
+[data-role="student"] .student-cyberpunk-card:hover {
+  border-color: oklch(0.868 0.16 178 / 45%);
+  box-shadow: 0 16px 42px -10px oklch(0 0 0 / 80%),
+              inset 0 1px 0 oklch(0.72 0.19 160 / 40%),
+              0 0 28px -2px oklch(0.868 0.16 178 / 30%);
+}
+
+@utility student-cyberpunk-card {
+  background: linear-gradient(145deg, oklch(0.14 0.014 230 / 85%), oklch(0.11 0.01 230 / 92%));
+  border: 1px solid oklch(0.72 0.19 160 / 25%);
+  backdrop-filter: blur(16px) saturate(150%);
+  box-shadow: 0 14px 38px -10px oklch(0 0 0 / 75%),
+              inset 0 1px 0 oklch(0.868 0.16 178 / 30%),
+              0 0 22px -5px oklch(0.72 0.19 160 / 18%);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@utility student-mint-cyan-edge {
+  border: 1px solid oklch(0.72 0.19 160 / 35%);
+  box-shadow: 0 0 20px -4px oklch(0.868 0.16 178 / 25%), inset 0 1px 0 oklch(0.72 0.19 160 / 30%);
+}
+
+@utility student-frosted-glass-depth {
+  backdrop-filter: blur(20px) saturate(160%);
+  background: radial-gradient(circle at 50% 0%, oklch(0.72 0.19 160 / 10%), transparent 70%),
+              linear-gradient(160deg, oklch(0.16 0.015 230 / 82%), oklch(0.11 0.01 230 / 94%));
+}
+
+@utility student-neon-mint-glow {
+  box-shadow: 0 0 25px -3px oklch(0.72 0.19 160 / 45%), inset 0 0 15px -3px oklch(0.72 0.19 160 / 25%);
+}
+
+@utility student-neon-cyan-glow {
+  box-shadow: 0 0 25px -3px oklch(0.868 0.16 178 / 45%), inset 0 0 15px -3px oklch(0.868 0.16 178 / 25%);
+}
+
+/* Senior Host Persona Warm Hearth Aesthetics CSS Specifications (Task 134) */
+[data-role="host"] .glass,
+[data-role="host"] .glass-panel,
+[data-role="host"] .glass-card,
+[data-role="host"] .bento-card,
+[data-role="host"] .host-warm-hearth-card {
+  border: 1px solid oklch(0.769 0.165 70 / 28%);
+  box-shadow: 0 12px 36px -8px oklch(0 0 0 / 70%),
+              inset 0 1px 0 oklch(0.837 0.175 82 / 30%),
+              0 0 22px -4px oklch(0.769 0.165 70 / 20%);
+  backdrop-filter: blur(16px) saturate(140%);
+}
+
+[data-role="host"] .glass-card:hover,
+[data-role="host"] .bento-card:hover,
+[data-role="host"] .host-warm-hearth-card:hover {
+  border-color: oklch(0.837 0.175 82 / 50%);
+  box-shadow: 0 16px 44px -10px oklch(0 0 0 / 80%),
+              inset 0 1px 0 oklch(0.769 0.165 70 / 45%),
+              0 0 30px -2px oklch(0.837 0.175 82 / 35%);
+}
+
+@utility host-warm-hearth-card {
+  background: linear-gradient(145deg, oklch(0.16 0.016 65 / 90%), oklch(0.12 0.012 55 / 95%));
+  border: 1px solid oklch(0.769 0.165 70 / 30%);
+  backdrop-filter: blur(16px) saturate(140%);
+  box-shadow: 0 14px 38px -10px oklch(0 0 0 / 75%),
+              inset 0 1px 0 oklch(0.837 0.175 82 / 32%),
+              0 0 24px -5px oklch(0.769 0.165 70 / 22%);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@utility host-hearth-amber-brass-edge {
+  border: 1px solid oklch(0.769 0.165 70 / 40%);
+  box-shadow: 0 0 22px -4px oklch(0.837 0.175 82 / 30%), inset 0 1px 0 oklch(0.769 0.165 70 / 35%);
+}
+
+@utility host-warm-hearth-depth {
+  backdrop-filter: blur(18px) saturate(145%);
+  background: radial-gradient(circle at 50% 0%, oklch(0.769 0.165 70 / 12%), transparent 70%),
+              linear-gradient(160deg, oklch(0.17 0.017 65 / 85%), oklch(0.12 0.012 55 / 95%));
+}
+
+@utility host-hearth-amber-glow {
+  box-shadow: 0 0 28px -3px oklch(0.769 0.165 70 / 50%), inset 0 0 16px -3px oklch(0.769 0.165 70 / 30%);
+}
+
+@utility host-hearth-terracotta-glow {
+  box-shadow: 0 0 28px -3px oklch(0.60 0.14 45 / 50%), inset 0 0 16px -3px oklch(0.60 0.14 45 / 30%);
+}
+
+@utility host-hearth-brass-glow {
+  box-shadow: 0 0 28px -3px oklch(0.82 0.15 85 / 50%), inset 0 0 16px -3px oklch(0.82 0.15 85 / 30%);
+}
+
+/* Saarthi Kitchen Card 2.0 Utility Classes (Task 143) */
+@utility kitchen-card-stage {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px) saturate(140%);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@utility kitchen-macro-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  background-color: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #34d399;
+}
+
+@utility kitchen-chef-bio-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background-color: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  color: #fbbf24;
+}
+
+@utility kitchen-timer-pulse {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background-color: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #6ee7b7;
+  box-shadow: 0 0 16px -2px rgba(16, 185, 129, 0.3);
+}
+
+
+/* Dynamic Persona Themed Navbar CSS Specifications (Task 135) */
+[data-persona="student"] .navbar-brand-logo,
+.navbar-brand-glow-student {
+  filter: drop-shadow(0 0 14px rgba(16, 185, 129, 0.55)) drop-shadow(0 0 20px rgba(0, 245, 160, 0.4));
+  transition: filter 0.3s ease;
+}
+
+[data-persona="host"] .navbar-brand-logo,
+.navbar-brand-glow-host {
+  filter: drop-shadow(0 0 14px rgba(245, 158, 11, 0.6)) drop-shadow(0 0 20px rgba(251, 191, 36, 0.45));
+  transition: filter 0.3s ease;
+}
+
+@utility navbar-brand-glow-student {
+  filter: drop-shadow(0 0 14px rgba(16, 185, 129, 0.55)) drop-shadow(0 0 20px rgba(0, 245, 160, 0.4));
+}
+
+@utility navbar-brand-glow-host {
+  filter: drop-shadow(0 0 14px rgba(245, 158, 11, 0.6)) drop-shadow(0 0 20px rgba(251, 191, 36, 0.45));
+}
+
+@utility navbar-top-accent-line-student {
+  background: linear-gradient(90deg, oklch(0.72 0.19 160), oklch(0.868 0.16 178), oklch(0.696 0.149 162));
+}
+
+@utility navbar-top-accent-line-host {
+  background: linear-gradient(90deg, oklch(0.769 0.165 70), oklch(0.837 0.175 82), oklch(0.769 0.165 70));
+}
+
+@utility navbar-link-underline-student {
+  background: linear-gradient(90deg, oklch(0.72 0.19 160), oklch(0.868 0.16 178));
+  box-shadow: 0 0 12px oklch(0.72 0.19 160 / 70%);
+}
+
+@utility navbar-link-underline-host {
+  background: linear-gradient(90deg, oklch(0.769 0.165 70), oklch(0.837 0.175 82));
+  box-shadow: 0 0 12px oklch(0.769 0.165 70 / 70%);
+}
+
+@utility navbar-scrolled-student {
+  border-bottom: 1px solid oklch(0.72 0.19 160 / 25%);
+  box-shadow: 0 12px 32px -6px oklch(0 0 0 / 85%), 0 4px 20px -2px oklch(0.72 0.19 160 / 18%);
+}
+
+@utility navbar-scrolled-host {
+  border-bottom: 1px solid oklch(0.769 0.165 70 / 25%);
+  box-shadow: 0 12px 32px -6px oklch(0 0 0 / 85%), 0 4px 20px -2px oklch(0.769 0.165 70 / 18%);
+}
+
+/* Persona Context Indicators CSS Specifications (Task 140) */
+@utility persona-context-halo-student {
+  background-image: radial-gradient(circle 380px at 100% 0%, oklch(0.72 0.19 160 / 18%) 0%, oklch(0.868 0.16 178 / 8%) 50%, transparent 80%);
+}
+
+@utility persona-context-halo-host {
+  background-image: radial-gradient(circle 380px at 100% 0%, oklch(0.769 0.165 70 / 20%) 0%, oklch(0.837 0.175 82 / 9%) 50%, transparent 80%);
+}
+
+@utility sticky-persona-corner-badge {
+  backdrop-filter: blur(16px) saturate(150%);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes persona-indicator-pulse-ring {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 0.2;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+}
+
+.persona-indicator-pulse-dot {
+  animation: persona-indicator-pulse-ring 2.5s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+
+/* Dynamic Persona Themed Footer CSS Specifications (Task 136) */
+[data-persona="student"] footer#waitlist-form {
+  border-top-color: oklch(0.72 0.19 160 / 25%);
+}
+
+[data-persona="host"] footer#waitlist-form {
+  border-top-color: oklch(0.769 0.165 70 / 30%);
+}
+
+@utility footer-top-accent-student {
+  background: linear-gradient(90deg, oklch(0.72 0.19 160), oklch(0.868 0.16 178), oklch(0.696 0.149 162));
+}
+
+@utility footer-top-accent-host {
+  background: linear-gradient(90deg, oklch(0.769 0.165 70), oklch(0.837 0.175 82), oklch(0.769 0.165 70));
+}
+
+@utility footer-glow-student {
+  box-shadow: 0 -12px 40px -10px oklch(0.72 0.19 160 / 15%);
+}
+
+@utility footer-glow-host {
+  box-shadow: 0 -12px 40px -10px oklch(0.769 0.165 70 / 18%);
+}
+
+
+
+
+
 
 .dark {
   --background: oklch(0.129 0.042 264.695);
@@ -453,6 +779,33 @@ html.theme-transitioning *::after {
               border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
               box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
+
+/* Gentle 250ms Persona Transition Crossfade Engine (Task 138) */
+html.persona-transitioning,
+html.persona-transitioning *,
+html.persona-transitioning *::before,
+html.persona-transitioning *::after,
+.persona-transitioning,
+.persona-transitioning * {
+  transition: background-color 250ms cubic-bezier(0.16, 1, 0.3, 1),
+              color 250ms cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 250ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 250ms cubic-bezier(0.16, 1, 0.3, 1),
+              text-shadow 250ms cubic-bezier(0.16, 1, 0.3, 1),
+              fill 250ms cubic-bezier(0.16, 1, 0.3, 1),
+              stroke 250ms cubic-bezier(0.16, 1, 0.3, 1),
+              filter 250ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+@utility persona-crossfade-250ms {
+  transition: background-color 250ms cubic-bezier(0.16, 1, 0.3, 1),
+              color 250ms cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 250ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 250ms cubic-bezier(0.16, 1, 0.3, 1),
+              text-shadow 250ms cubic-bezier(0.16, 1, 0.3, 1),
+              filter 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 
 /* Pristine Light Mode Palette Overrides */
 [data-theme="light"],
@@ -1987,10 +2340,312 @@ html.light .text-cyan-400 {
   letter-spacing: 0.01em;
 }
 
+/* ==========================================================================
+   Hero CTA Button Glow & Shimmer Overdrive Engine (Task 126)
+   GPU-accelerated animated border glows, shimmer sweeps & overdrive effects
+   ========================================================================== */
+
+@keyframes border-glow-rotate {
+  0% {
+    transform: rotate(0deg) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: rotate(360deg) translate3d(0, 0, 0);
+  }
+}
+
+@keyframes shimmer-sweep {
+  0% {
+    transform: translateX(-150%) skewX(-20deg);
+  }
+  50%, 100% {
+    transform: translateX(250%) skewX(-20deg);
+  }
+}
+
+@keyframes pulse-glow-overdrive {
+  0%, 100% {
+    box-shadow: 0 0 25px rgba(16, 185, 129, 0.45), 0 0 45px rgba(0, 245, 160, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 45px rgba(16, 185, 129, 0.75), 0 0 85px rgba(0, 245, 160, 0.5);
+  }
+}
+
+@utility btn-shimmer-sweep {
+  position: relative;
+  overflow: hidden;
+  &::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.05) 40%,
+      rgba(255, 255, 255, 0.6) 50%,
+      rgba(255, 255, 255, 0.05) 60%,
+      transparent 100%
+    );
+    transform: translateX(-150%) skewX(-20deg);
+    animation: shimmer-sweep 3.5s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+    pointer-events: none;
+    will-change: transform;
+  }
+}
+
+@utility hero-cta-glow-wrapper {
+  position: relative;
+  display: inline-flex;
+  border-radius: var(--radius-xl);
+  padding: 2px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+@utility hero-cta-animated-border {
+  position: absolute;
+  inset: -200%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    var(--color-emerald) 90deg,
+    var(--color-mint) 180deg,
+    var(--color-cyan) 270deg,
+    transparent 360deg
+  );
+  animation: border-glow-rotate 4s linear infinite;
+  will-change: transform;
+  pointer-events: none;
+}
+
+@utility hero-cta-amber-border {
+  position: absolute;
+  inset: -200%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    var(--color-amber) 90deg,
+    var(--color-gold) 180deg,
+    var(--color-amber) 270deg,
+    transparent 360deg
+  );
+  animation: border-glow-rotate 4s linear infinite;
+  will-change: transform;
+  pointer-events: none;
+}
+
+@utility hero-cta-overdrive {
+  position: relative;
+  transform: translate3d(0, 0, 0);
+  will-change: transform, box-shadow;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  &:hover {
+    transform: translate3d(0, -3px, 0) scale(1.02);
+  }
+  &:active {
+    transform: translate3d(0, 1px, 0) scale(0.98);
+  }
+}
+
+/* ==========================================================================
+   Devanagari Type Tuning Engine for Senior Hosts (Task 139)
+   Generous letter-spacing, line-height & font fallbacks for senior citizens reading Hindi
+   ========================================================================== */
+
+@utility font-devanagari {
+  font-family: var(--font-devanagari);
+}
+
+@utility tracking-devanagari-host {
+  letter-spacing: 0.035em;
+}
+
+@utility devanagari-host-text {
+  font-family: var(--font-devanagari);
+  letter-spacing: 0.035em;
+  line-height: 1.75;
+  font-size: 1.08em;
+  padding-block: 0.06em;
+  overflow: visible;
+}
+
+@utility devanagari-host-heading {
+  font-family: var(--font-devanagari);
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+  font-size: 1.05em;
+  padding-block: 0.08em;
+  overflow: visible;
+}
+
+html[lang="hi"][data-persona="host"] .font-devanagari,
+[data-persona="host"][lang="hi"] .font-devanagari,
+[data-role="host"][lang="hi"] .font-devanagari,
+.senior-host-devanagari-active {
+  letter-spacing: 0.035em;
+  line-height: 1.75;
+  padding-top: 0.06em;
+  padding-bottom: 0.06em;
+  overflow: visible;
+}
+
+html[lang="hi"][data-persona="host"] h1.font-devanagari,
+html[lang="hi"][data-persona="host"] h2.font-devanagari,
+html[lang="hi"][data-persona="host"] h3.font-devanagari,
+html[lang="hi"][data-persona="host"] h4.font-devanagari,
+[data-role="host"][lang="hi"] h1.font-devanagari,
+[data-role="host"][lang="hi"] h2.font-devanagari,
+[data-role="host"][lang="hi"] h3.font-devanagari,
+[data-role="host"][lang="hi"] h4.font-devanagari {
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+  padding-top: 0.08em;
+  padding-bottom: 0.08em;
+  overflow: visible;
+}
+
+/* ==========================================================================
+   Persona Context Indicators & Sticky Corner Badges Engine (Task 140)
+   ========================================================================== */
+
+@utility persona-context-halo-student {
+  background-image: radial-gradient(circle 380px at 100% 0%, oklch(0.72 0.19 160 / 18%) 0%, oklch(0.868 0.16 178 / 8%) 50%, transparent 80%);
+}
+
+@utility persona-context-halo-host {
+  background-image: radial-gradient(circle 380px at 100% 0%, oklch(0.769 0.165 70 / 20%) 0%, oklch(0.837 0.175 82 / 9%) 50%, transparent 80%);
+}
+
+@utility sticky-persona-corner-badge {
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  pointer-events: auto;
+}
+
+@utility persona-indicator-pulse-dot {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* ==========================================================================
+   Saarthi Stash Card 2.0 Engine (Task 141)
+   3D bag depth preview, laser tamper-proof seal scanning & glowing price pill
+   ========================================================================== */
+
+@keyframes laser-seal-beam-sweep {
+  0% {
+    top: -10%;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    top: 110%;
+    opacity: 0;
+  }
+}
+
+@utility laser-seal-scanner {
+  position: relative;
+  overflow: hidden;
+}
+
+.laser-seal-scanner::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #00F5A0, #06B6D4, transparent);
+  box-shadow: 0 0 12px #00F5A0, 0 0 24px #06B6D4;
+  animation: laser-seal-beam-sweep 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  pointer-events: none;
+}
 
 
+[data-persona="host"] .laser-seal-scanner::after {
+  background: linear-gradient(90deg, transparent, #F59E0B, #FBBF24, transparent);
+  box-shadow: 0 0 12px #F59E0B, 0 0 24px #FBBF24;
+}
 
+@utility stash-card-3d-stage {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
 
+@utility stash-card-3d-layer {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+@utility stash-price-pill-glow {
+  background: linear-gradient(135deg, rgba(0, 245, 160, 0.18), rgba(6, 182, 212, 0.15));
+  border: 1px solid rgba(0, 245, 160, 0.45);
+  box-shadow: 0 0 20px -3px rgba(0, 245, 160, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+[data-persona="host"] .stash-price-pill-glow {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(251, 191, 36, 0.15));
+  border: 1px solid rgba(245, 158, 11, 0.5);
+  box-shadow: 0 0 20px -3px rgba(245, 158, 11, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* ==========================================================================
+   Saarthi Spaces Card 2.0 Engine (Task 142)
+   16:9 room image carousels, verified senior host badges, zero-brokerage guarantees
+   ========================================================================== */
+
+@utility spaces-card-16-9-stage {
+  aspect-ratio: 16 / 9;
+  position: relative;
+  overflow: hidden;
+}
+
+@utility spaces-carousel-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@utility spaces-carousel-dot-active {
+  width: 18px;
+  background-color: #10B981;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.8);
+}
+
+[data-persona="host"] .spaces-carousel-dot-active {
+  background-color: #F59E0B;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.8);
+}
+
+@utility zero-brokerage-pill-glow {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(6, 182, 212, 0.15));
+  border: 1px solid rgba(16, 185, 129, 0.45);
+  box-shadow: 0 0 16px -2px rgba(16, 185, 129, 0.35);
+}
+
+[data-persona="host"] .zero-brokerage-pill-glow {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.22), rgba(251, 191, 36, 0.16));
+  border: 1px solid rgba(245, 158, 11, 0.5);
+  box-shadow: 0 0 16px -2px rgba(245, 158, 11, 0.4);
+}
+
+@utility verified-host-shield-badge {
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(245, 158, 11, 0.45);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.6), 0 0 12px -2px rgba(245, 158, 11, 0.3);
+}
 
 
 

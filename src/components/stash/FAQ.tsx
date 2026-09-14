@@ -172,7 +172,7 @@ export const FAQ = memo(function FAQ() {
   };
 
   return (
-    <section id="faq" className="relative px-4 py-4 sm:py-6 scroll-mt-20">
+    <section id="faq" className="section-isolated layout-isolated relative px-4 py-4 sm:py-6 scroll-mt-20">
       <div className="mx-auto max-w-3xl">
         <AnimatedContent distance={20} direction="vertical" duration={0.5}>
           <div className="text-center mb-4">

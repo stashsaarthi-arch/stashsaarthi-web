@@ -139,7 +139,7 @@ export function ProcessTransparency() {
       ];
 
   return (
-    <div id="how-it-works" className="relative mx-auto max-w-6xl px-2 py-2 scroll-mt-20">
+    <div id="how-it-works" className="section-isolated layout-isolated relative mx-auto max-w-6xl px-2 py-2 scroll-mt-20">
       {/* ── 3-Stage Interactive Blueprint ── */}
       <div>
         {/* Stage Selector Pills */}

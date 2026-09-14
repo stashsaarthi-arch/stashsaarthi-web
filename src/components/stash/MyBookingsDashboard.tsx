@@ -21,6 +21,8 @@ import {
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { useAuth } from "@/hooks/useAuth";
+import { PersonaEmptyState } from "@/components/ui/PersonaEmptyState";
+
 import {
   getBookings,
   getMealOrders,
@@ -286,31 +288,39 @@ export function MyBookingsDashboard() {
   // ─── Empty state ─────────────────────────────────────────────────────
 
   const renderEmpty = () => (
-    <div className="text-center py-10 px-4">
-      <div className="text-4xl mb-3">📭</div>
-      <p className="text-sm font-semibold text-slate-300">
-        {isHi ? "अभी तक कोई रिकॉर्ड नहीं" : "No records yet"}
-      </p>
-      <p className="text-xs text-slate-500 mt-1">
-        {activeTab === "bookings"
-          ? isHi
-            ? "जब आप स्टैश, रूम या किचन बुक करेंगे तो यहाँ दिखेगा।"
-            : "Your bookings will appear here once you book a stash, room, or meal."
-          : activeTab === "meals"
+    <div className="py-2">
+      <PersonaEmptyState
+        title={isHi ? "अभी तक कोई सक्रिय बुकिंग नहीं" : "No Active Records Found"}
+        titleHi="अभी तक कोई सक्रिय बुकिंग नहीं"
+        description={
+          activeTab === "bookings"
             ? isHi
-              ? "जब आप भोजन ऑर्डर करेंगे तो यहाँ दिखेगा।"
-              : "Your meal orders will appear here."
-            : isHi
-              ? "आपकी प्रतीक्षा सूची यहाँ दिखेगी।"
-              : "Your waitlist submissions will appear here."}
-      </p>
+              ? "जब आप स्टैश, रूम या किचन बुक करेंगे तो आपकी डिजिटल रसीदें यहाँ दिखाई देंगी।"
+              : "Your active micro-storage bookings and room passes will appear here automatically."
+            : activeTab === "meals"
+              ? isHi
+                ? "जब आप भोजन ऑर्डर करेंगे तो आपके लाइव टिफिन ऑर्डर टोकन यहाँ दिखाई देंगे।"
+                : "Your homestyle thali and meal delivery orders will appear here."
+              : isHi
+                ? "आपकी प्रतीक्षा सूची और होस्ट पूछताछ आवेदन यहाँ दिखाई देंगे।"
+                : "Your campus waitlist and senior host inquiries will appear here."
+        }
+        descriptionHi={
+          activeTab === "bookings"
+            ? "जब आप स्टैश, रूम या किचन बुक करेंगे तो आपकी डिजिटल रसीदें यहाँ दिखाई देंगी।"
+            : activeTab === "meals"
+              ? "जब आप भोजन ऑर्डर करेंगे तो आपके लाइव टिफिन ऑर्डर टोकन यहाँ दिखाई देंगे।"
+              : "आपकी प्रतीक्षा सूची और होस्ट पूछताछ आवेदन यहाँ दिखाई देंगे।"
+        }
+      />
     </div>
   );
+
 
   // ─── Main Render ─────────────────────────────────────────────────────
 
   return (
-    <div className="space-y-3">
+    <div className="section-isolated layout-isolated space-y-3">
       {/* Tab Pills */}
       <div className="flex bg-black/50 border border-white/10 rounded-lg p-1 gap-0.5">
         {tabs.map((tab) => (

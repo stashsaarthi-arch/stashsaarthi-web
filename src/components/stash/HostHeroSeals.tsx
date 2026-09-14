@@ -2,6 +2,7 @@ import { memo } from "react";
 import { motion } from "motion/react";
 import { ShieldCheck, Banknote, FileCheck, UserCheck, Lock, Award, HeartHandshake } from "lucide-react";
 import { Card3D } from "@/components/ui/Card3D";
+import { HostLegibilityBadge } from "@/components/ui/SeniorHostLegibility";
 
 interface HostTrustSealItem {
   id: string;
@@ -53,14 +54,17 @@ export const HostHeroSeals = memo(function HostHeroSeals() {
       {/* Warm Sunset Gold Background Illumination Halo */}
       <div className="pointer-events-none absolute -top-12 left-1/2 -z-10 h-64 w-[min(900px,100%)] -translate-x-1/2 rounded-full bg-gradient-to-r from-amber-500/20 via-yellow-400/25 to-amber-600/20 opacity-60 blur-3xl" />
 
-      {/* Top Floating Passive Income Pill Header */}
-      <div className="mb-4 flex items-center justify-center">
+      {/* Senior Host Legibility Mode Active Badge & Passive Income Header */}
+      <div className="mb-4 flex flex-wrap items-center justify-center gap-3">
+        <HostLegibilityBadge />
+
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.1 }}
           className="group relative inline-flex items-center gap-3 rounded-full border border-amber-500/40 bg-amber-950/70 px-5 py-2.5 backdrop-blur-2xl shadow-[0_0_35px_rgba(245,158,11,0.25)] hover:border-amber-400 transition-all cursor-pointer"
         >
+
           <span className="flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-amber-400 to-yellow-500 text-black font-black text-xs shadow-lg group-hover:scale-110 transition-transform">
             ₹
           </span>
@@ -90,9 +94,10 @@ export const HostHeroSeals = memo(function HostHeroSeals() {
               transition={{ duration: 0.4, delay: 0.08 * idx }}
             >
               <Card3D maxTilt={8} className="h-full">
-                <div className="group relative flex h-full flex-col justify-between overflow-hidden rounded-xl border border-amber-500/30 bg-amber-950/40 p-3.5 backdrop-blur-xl transition-all duration-300 hover:border-amber-400/70 hover:bg-amber-950/60 hover:shadow-[0_0_25px_rgba(245,158,11,0.2)]">
+                <div className="group relative flex h-full flex-col justify-between overflow-hidden rounded-xl host-warm-hearth-card host-warm-hearth-depth host-hearth-amber-brass-edge p-3.5 backdrop-blur-xl transition-all duration-300 hover:border-amber-400/70 hover:shadow-[0_0_30px_rgba(245,158,11,0.35)]">
                   {/* Sunset Gold Specular Light Beam */}
                   <div className="pointer-events-none absolute -right-10 -top-10 h-24 w-24 rounded-full bg-amber-400/10 blur-xl group-hover:bg-amber-400/25 transition-all" />
+
 
                   <div>
                     {/* Header Row */}

@@ -57,7 +57,7 @@ export const RoleLane = memo(function RoleLane({ role, onBook }: { role: Role; o
     : [IndianRupee, Users, ShieldCheck];
 
   return (
-    <section id="role-lane" className="relative px-4 py-3.5 sm:py-5">
+    <section id="role-lane" className="section-isolated layout-isolated relative px-4 py-3.5 sm:py-5">
       <div className="mx-auto max-w-6xl">
         <AnimatedContent distance={25} direction="vertical" duration={0.6} ease="power3.out">
           <AnimatePresence mode="wait">

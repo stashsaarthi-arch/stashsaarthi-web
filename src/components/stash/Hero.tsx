@@ -14,6 +14,7 @@ import {
   Share2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { HeroCtaButton } from "@/components/ui/HeroCtaButton";
 import { Card3D } from "@/components/ui/Card3D";
 import { CampusNodeChecker } from "./CampusNodeChecker";
 import AnimatedContent from "@/components/ui/AnimatedContent";
@@ -27,6 +28,10 @@ import { useHeroCtaVariant, trackCtaClick, type HeroCtaVariant } from "@/lib/abT
 import { Floating3DLuggage } from "./Floating3DLuggage";
 import { HostHeroSeals } from "./HostHeroSeals";
 import { InteractiveValueSwitcher } from "./InteractiveValueSwitcher";
+import { SocialProofAvatars } from "./SocialProofAvatars";
+import { HeroVisualizer } from "./HeroVisualizer";
+import { TrustPartnerStrip } from "./TrustPartnerStrip";
+import { HeroMicroStats } from "./HeroMicroStats";
 
 
 export const Hero = memo(function Hero({
@@ -108,7 +113,7 @@ export const Hero = memo(function Hero({
                 <BadgeCheck className="h-3.5 w-3.5 shrink-0 text-emerald" />
               )}
               <span className="text-balance">
-                {student ? t.hero.student.badge : t.hero.host.badge}
+                {student ? t.hero?.student?.badge ?? '' : t.hero?.host?.badge ?? ''}
               </span>
             </span>
           </div>
@@ -127,7 +132,7 @@ export const Hero = memo(function Hero({
                   : "text-gradient-amber drop-shadow-[0_0_45px_rgba(251,191,36,0.7)] [text-shadow:0_0_50px_rgba(245,158,11,0.6)]"
               }`}
             >
-              {student ? t.hero.student.title : t.hero.host.title}
+              {student ? t.hero?.student?.title ?? '' : t.hero?.host?.title ?? ''}
             </span>
           </h1>
 
@@ -135,7 +140,7 @@ export const Hero = memo(function Hero({
             key={`p-${role}`}
             className="mx-auto mt-2 max-w-2xl text-pretty text-xs leading-relaxed text-muted-foreground sm:text-sm"
           >
-            {student ? t.hero.student.subtitle : t.hero.host.subtitle}
+            {student ? t.hero?.student?.subtitle ?? '' : t.hero?.host?.subtitle ?? ''}
           </p>
 
           {/* Instant ₹300/mo Value Badge & Dynamic Live Proof Badge */}
@@ -176,38 +181,23 @@ export const Hero = memo(function Hero({
               </div>
             )}
 
-            <div>
-              {student ? (
-                <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-0.5 text-xs font-semibold text-emerald-400 backdrop-blur-md shadow-sm">
-                  <span className="relative flex h-2 w-2">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                    <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-                  </span>
-                  <span>⚡ 48+ Bags Stored Near IITK & HBTI • 100% Tamper-Proof QR Seal</span>
-                </div>
-              ) : (
-                <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-0.5 text-xs font-semibold text-amber-400 backdrop-blur-md shadow-sm">
-                  <span className="relative flex h-2 w-2">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75" />
-                    <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-500" />
-                  </span>
-                  <span>🛡️ ₹10,000 Safety Cover Active • 12+ Verified Senior Hosts in Kanpur</span>
-                </div>
-              )}
+            <div className="mt-1">
+              <SocialProofAvatars role={role} onExploreClick={smoothScrollTo("top")} />
             </div>
           </div>
 
           <div className="mt-3.5 flex flex-col items-stretch justify-center gap-2 sm:flex-row sm:items-center">
-            <Button
+            <HeroCtaButton
               data-magnetic
+              heroVariant={student ? (ctaVariant as any) : "amber"}
               variant={getButtonVariant()}
               size="default"
               onClick={handleCtaClick}
-              className="group w-full sm:w-auto text-xs sm:text-sm px-5 py-4"
+              className="group w-full sm:w-auto text-xs sm:text-sm px-6 py-4"
             >
-              <span className="truncate">{student ? t.hero.student.cta : t.hero.host.cta}</span>
+              <span className="truncate">{student ? t.hero?.student?.cta ?? '' : t.hero?.host?.cta ?? ''}</span>
               <ArrowRight className="shrink-0 transition-transform group-hover:translate-x-1 ml-1.5 h-3.5 w-3.5" />
-            </Button>
+            </HeroCtaButton>
             {student ? (
               <Button
                 data-magnetic
@@ -217,7 +207,7 @@ export const Hero = memo(function Hero({
                 className="w-full sm:w-auto px-5 py-4 text-xs sm:text-sm bg-white/5 hover:bg-white/10"
               >
                 <a href="#ecosystem" onClick={smoothScrollTo("ecosystem")}>
-                  {t.hero.student.secondaryCta}
+                  {t.hero?.student?.secondaryCta ?? ''}
                 </a>
               </Button>
             ) : (
@@ -234,7 +224,7 @@ export const Hero = memo(function Hero({
                   rel="noopener noreferrer"
                 >
                   <Phone className="mr-1.5 h-3.5 w-3.5" />
-                  {t.hero.host.secondaryCta}
+                  {t.hero?.host?.secondaryCta ?? ''}
                 </a>
               </Button>
             )}
@@ -295,74 +285,18 @@ export const Hero = memo(function Hero({
           )}
         </AnimatedContent>
 
-        <Card3D maxTilt={5} className="mx-auto mt-4 max-w-4xl rounded-xl">
-          <div className="glass grid grid-cols-2 gap-px overflow-hidden rounded-xl md:grid-cols-4">
-            {STATS.map((s, i) => {
-              const Icon = ICONS[i] || ShieldCheck;
-              return (
-                <AnimatedContent
-                  key={s.label}
-                  distance={15}
-                  direction="vertical"
-                  duration={0.5}
-                  delay={0.06 * i}
-                  className="min-w-0 px-2.5 py-2.5 text-center sm:px-3 sm:py-3"
-                >
-                  <Icon
-                    className={`mx-auto mb-1 h-3 w-3 ${student ? "text-cyan" : "text-amber-400"}`}
-                  />
-                  <AnimatedStat
-                    value={s.value}
-                    className="text-base font-extrabold tracking-tight sm:text-lg"
-                    style={{ transform: "translateZ(15px)", color: student ? "" : "#FDE68A" }}
-                  />
-                  <div
-                    className="mt-0.5 text-[8.5px] uppercase tracking-wider text-muted-foreground sm:text-[9.5px] leading-tight"
-                    style={{ transform: "translateZ(20px)" }}
-                  >
-                    {s.label}
-                  </div>
-                </AnimatedContent>
-              );
-            })}
-          </div>
-        </Card3D>
+        {/* Hero Micro-Stats Counter: Count-up animated statistics with IntersectionObserver */}
+        <HeroMicroStats role={role} className="mt-4" />
+
 
         {/* Interactive Value Switcher: Wasting ₹8,000 Dead Rent vs Saarthi Stash ₹300/mo */}
         {student && <InteractiveValueSwitcher onBook={onBook} />}
 
-        {/* Trust Strip */}
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-3 mx-auto max-w-2xl px-2"
-        >
-          <div
-            className={`relative rounded-lg border ${student ? "border-cyan-500/20 bg-cyan-950/10" : "border-amber-500/20 bg-amber-950/10"} px-3 py-1.5 backdrop-blur-md overflow-hidden`}
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.03] to-transparent animate-[shimmer_3s_infinite]" />
-            <div
-              className={`absolute -inset-1 bg-gradient-to-r ${student ? "from-cyan-500/0 via-cyan-500/10 to-cyan-500/0" : "from-amber-500/0 via-amber-500/10 to-amber-500/0"} opacity-50 blur-xl animate-pulse`}
-            />
+        {/* Ambient Lightweight Visualizer: Seamless transition of items from hostel room to host vault */}
+        <HeroVisualizer role={role} onExploreVault={handleCtaClick} />
 
-            <p className="relative z-10 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-0.5 text-xs font-semibold text-muted-foreground">
-              <span
-                className={`flex items-center ${student ? "text-amber-400" : "text-amber-300"}`}
-              >
-                <span className="mr-1 text-xs">⚡</span> Validated at IIT Bombay NEC 2026
-              </span>
-              <span className="hidden sm:inline opacity-30">•</span>
-              <span className="flex items-center text-emerald-400">
-                {student ? "100% Escrow Protected" : "₹10,000 Safety Cover"}
-              </span>
-              <span className="hidden sm:inline opacity-30">•</span>
-              <span className={`flex items-center ${student ? "text-cyan-400" : "text-amber-400"}`}>
-                {student ? "Zero-Brokerage Charter" : "Weekly Tuesday Payouts"}
-              </span>
-            </p>
-          </div>
-        </motion.div>
+        {/* Institutional Trust Banner & Partner Strip */}
+        <TrustPartnerStrip role={role} />
 
         {student && <CampusNodeChecker onBook={onBook} />}
 

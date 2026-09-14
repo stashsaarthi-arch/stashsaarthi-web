@@ -1,4 +1,4 @@
-import { useState, memo } from "react";
+import { useState, useEffect, memo } from "react";
 import { Link } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { useAuth } from "@/hooks/useAuth";
@@ -18,7 +18,6 @@ import {
   User,
   Phone,
   GraduationCap,
-  ShieldCheck,
   Download,
   MessageCircle,
   Check,
@@ -27,12 +26,16 @@ import {
   Share2,
   ArrowUp,
   BookOpen,
+  ShieldCheck,
+  FileText,
+  Calculator,
+  HeartHandshake,
+  Sparkles,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { AuthButton } from "./AuthButton";
 import { LegalDialog } from "./LegalDialog";
-import { smoothScrollTo, handleDownloadInvestorMemo } from "./legal";
+import { smoothScrollTo } from "./legal";
 import { ReferralPill } from "./ReferralPill";
 import { StashPass } from "./StashPass";
 import { BrandLogo } from "@/components/ui/BrandLogo";
@@ -42,8 +45,12 @@ import { AndroidGoPerformanceModal } from "./AndroidGoPerformanceModal";
 import { LowDataToggle } from "@/components/ui/LowDataToggle";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useLanguage } from "@/context/LanguageContext";
+import { usePersona } from "@/context/PersonaContext";
+import { getPersonaFooterTokens } from "@/lib/designTokens";
+import { playPersonaSwitch, playPop } from "@/lib/audio";
 import { FOUNDER_WHATSAPP, FOUNDER_PHONE_DISPLAY, FOUNDER_LINKEDIN } from "@/lib/constants";
 import { checkAndRecordRateLimit, showRateLimitToast } from "@/lib/rateLimiter";
+import { motion, AnimatePresence } from "framer-motion";
 
 function GoogleGlyph() {
   return (
@@ -101,12 +108,14 @@ const SOCIALS = [
 export const FooterSection = memo(function FooterSection() {
   const { user, loginWithProfile } = useAuth();
   const { language, t } = useLanguage();
+  const { role, setRole, isHost } = usePersona();
   const isHi = language === "hi";
+  const tokens = getPersonaFooterTokens(role);
 
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [userType, setUserType] = useState<"student" | "host">("student");
+  const [userType, setUserType] = useState<"student" | "host">(role);
   const [college, setCollege] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -118,16 +127,105 @@ export const FooterSection = memo(function FooterSection() {
   const [showAndroidGoModal, setShowAndroidGoModal] = useState(false);
   const [touched, setTouched] = useState<{ name?: boolean; email?: boolean; phone?: boolean }>({});
 
+  // Sync internal userType state whenever global persona role changes
+  useEffect(() => {
+    setUserType(role);
+  }, [role]);
+
+  const handleToggleUserType = (targetRole: "student" | "host") => {
+    setUserType(targetRole);
+    setRole(targetRole);
+    playPersonaSwitch(targetRole);
+  };
+
   const isPhoneValid = phone.trim() ? isValidPhone(phone) : false;
   const isEmailValid = email.trim() ? isValidEmail(email) : false;
   const isNameValid = !fullName.trim() || fullName.trim().length >= 2;
 
-  const ECOSYSTEM = [
-    { label: isHi ? "सार्थी स्पेसेस (कमरे)" : "Saarthi Spaces", target: "ecosystem" },
-    { label: isHi ? "सार्थी किचन (भोजन)" : "Saarthi Kitchen", target: "ecosystem" },
-    { label: isHi ? "सार्थी स्टैश (स्टोरेज)" : "Saarthi Stash", target: "calculator" },
-    { label: isHi ? "सार्थी कनेक्ट (मैचिंग)" : "Saarthi Connect", target: "connect" },
+  interface FooterResourceItem {
+    label: string;
+    to?: string;
+    isInternal?: boolean;
+    highlight?: boolean;
+    target?: string;
+    doc?: string;
+  }
+
+  // Student specific resource items
+  const STUDENT_RESOURCES: FooterResourceItem[] = [
+    {
+      label: isHi ? "🏛️ कानपुर छात्र परिषद" : "🏛️ Kanpur Student Council",
+      to: "/kanpur-student-council",
+      isInternal: true,
+      highlight: true,
+    },
+    {
+      label: isHi ? "📚 काकादेव सरवाइवल गाइड (PDF)" : "📚 Kakadeo Survival Guide (PDF)",
+      to: "/kakadeo-survival-guide",
+      isInternal: true,
+    },
+    {
+      label: isHi ? "💰 डेड-रेंट बचत कैलकुलेटर" : "💰 Dead Rent Savings Calculator",
+      target: "calculator",
+    },
+    {
+      label: isHi ? "📦 सार्थी स्टैश (माइक्रो-स्टोरेज @ ₹300)" : "📦 Saarthi Stash (Micro-Storage @ ₹300)",
+      target: "calculator",
+    },
+    {
+      label: isHi ? "🎒 छात्रावास वैकेशन चेकलिस्ट" : "🎒 Hostel Vacation Checklist",
+      doc: "terms",
+    },
+    {
+      label: isHi ? "🍲 मोशन कोचिंग टिफिन (काकादेव)" : "🍲 Tiffin near Motion Coaching",
+      to: "/tiffin-services-near-motion",
+      isInternal: true,
+    },
+    {
+      label: isHi ? "🍲 PW फिजिक्स वाला टिफिन (काकादेव)" : "🍲 Tiffin near Physics Wallah",
+      to: "/tiffin-services-near-physics-wallah",
+      isInternal: true,
+    },
+    {
+      label: isHi ? "🤝 अंतर-पीढ़ी मेंटरशिप नेटवर्क" : "🤝 Intergenerational Mentorship",
+      target: "connect",
+    },
   ];
+
+  // Senior Host specific resource items
+  const HOST_RESOURCES: FooterResourceItem[] = [
+    {
+      label: isHi ? "📜 TPA Sec 105 कानूनी सुरक्षा चार्टर" : "📜 TPA Sec 105 Legal Protection FAQ",
+      doc: "liability",
+      highlight: true,
+    },
+    {
+      label: isHi ? "📈 वरिष्ठ नागरिक निष्क्रिय आय कैलकुलेटर" : "📈 Senior Passive Income Calculator",
+      doc: "micro",
+    },
+    {
+      label: isHi ? "🛡️ ₹10,000 संपत्ति सुरक्षा व बीमा" : "🛡️ ₹10,000 Host Safety & Cover Charter",
+      doc: "liability",
+    },
+    {
+      label: isHi ? "🔍 4-स्तरीय पुलिस-सत्यापित अतिथि सुरक्षा" : "🔍 4-Tier Verified Guest Security",
+      doc: "partner",
+    },
+    {
+      label: isHi ? "👵 गरिमापूर्ण पेंशनभोगी जीवन गाइड" : "👵 Dignified Senior Life & Community",
+      doc: "about",
+    },
+    {
+      label: isHi ? "🏠 सार्थी स्पेसेस (कमरा लिस्टिंग @ 0 ब्रोकरेज)" : "🏠 Saarthi Spaces (Zero-Brokerage Hosting)",
+      target: "ecosystem",
+    },
+    {
+      label: isHi ? "⚖️ शिकायत निवारण व नोडल अधिकारी" : "⚖️ Grievance & Nodal Officer Contact",
+      doc: "grievance",
+    },
+  ];
+
+  const CURRENT_RESOURCES = isHost ? HOST_RESOURCES : STUDENT_RESOURCES;
 
   const COMPANY = [
     { label: isHi ? "हमारे बारे में" : "About us", doc: "about" },
@@ -195,7 +293,6 @@ export const FooterSection = memo(function FooterSection() {
     const cleanPhone = phone.trim();
     const cleanName = fullName.trim() || (userType === "student" ? "Priority Student" : "Priority Host");
 
-    // Require at least 1 contact method (Email OR Phone)
     if (!cleanEmail && !cleanPhone) {
       toast.error(
         isHi
@@ -264,14 +361,44 @@ export const FooterSection = memo(function FooterSection() {
   };
 
   return (
-    <footer id="waitlist-form" className="relative mt-4 border-t border-white/10 scroll-mt-20">
-      <div className="relative mx-auto max-w-5xl px-4 py-6 sm:py-8 text-center">
-        <h2 className="text-xl font-extrabold tracking-tight sm:text-3xl">
-          <span className="text-gradient">{t.footer.title}</span>
-        </h2>
-        <p className="mx-auto mt-1 max-w-xl text-xs sm:text-sm text-muted-foreground">
-          {t.footer.subtitle}
-        </p>
+    <footer
+      id="waitlist-form"
+      data-persona={role}
+      className={`relative mt-4 border-t border-white/10 scroll-mt-20 transition-all duration-500 ${
+        isHost ? "footer-glow-host" : "footer-glow-student"
+      }`}
+    >
+      {/* Dynamic Persona Top Accent Line */}
+      <div className={`h-[2.5px] w-full ${tokens.topAccentLine} transition-all duration-500`} />
+
+      <div className="relative section-container-gutter mobile-gutter-safe mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-6 sm:py-8 text-center">
+        {/* Dynamic Dual Persona Header */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={role}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.25 }}
+          >
+            <h2 className="text-xl font-extrabold tracking-tight sm:text-3xl">
+              <span className={`bg-gradient-to-r ${tokens.titleGradient} bg-clip-text text-transparent drop-shadow-md`}>
+                {isHost
+                  ? isHi
+                    ? "वरिष्ठ नागरिकों के लिए ₹11,500+/माह गरिमापूर्ण निष्क्रिय आय"
+                    : "Earn ₹11,500+/mo Dignified Passive Income"
+                  : t.footer.title}
+              </span>
+            </h2>
+            <p className="mx-auto mt-1 max-w-xl text-xs sm:text-sm text-muted-foreground">
+              {isHost
+                ? isHi
+                  ? "450+ कानपुर वरिष्ठ नागरिकों के साथ जुड़ें जो शून्य घुसपैठ और 100% TPA Sec 105 सुरक्षा के साथ आय कमा रहे हैं।"
+                  : "Join 450+ verified Kanpur senior hosts earning zero-intrusion passive income with 100% legal TPA Sec 105 protection."
+                : t.footer.subtitle}
+            </p>
+          </motion.div>
+        </AnimatePresence>
 
         {submitted ? (
           <div className="mt-4 mb-3">
@@ -293,16 +420,16 @@ export const FooterSection = memo(function FooterSection() {
               e.preventDefault();
               void handleSubmit();
             }}
-            className="glass mx-auto mt-4 max-w-xl rounded-2xl p-3.5 sm:p-4"
+            className={`glass mx-auto mt-4 max-w-xl rounded-2xl p-3.5 sm:p-4 transition-all duration-500 ${tokens.formBorder}`}
           >
-            {/* User Type Toggle */}
+            {/* Dual Persona Interactive Selector Switch */}
             <div className="mb-3 flex items-center justify-center gap-2">
               <button
                 type="button"
-                onClick={() => setUserType("student")}
-                className={`rounded-full border px-3.5 py-1 text-xs font-semibold transition cursor-pointer ${
+                onClick={() => handleToggleUserType("student")}
+                className={`rounded-full border px-3.5 py-1 text-xs font-semibold transition-all duration-300 cursor-pointer ${
                   userType === "student"
-                    ? "border-cyan/50 bg-cyan/15 text-foreground"
+                    ? "border-cyan/50 bg-cyan/15 text-emerald-300 shadow-[0_0_12px_rgba(16,185,129,0.3)]"
                     : "border-white/10 bg-white/5 text-muted-foreground hover:border-white/25"
                 }`}
               >
@@ -310,10 +437,10 @@ export const FooterSection = memo(function FooterSection() {
               </button>
               <button
                 type="button"
-                onClick={() => setUserType("host")}
-                className={`rounded-full border px-3.5 py-1 text-xs font-semibold transition cursor-pointer ${
+                onClick={() => handleToggleUserType("host")}
+                className={`rounded-full border px-3.5 py-1 text-xs font-semibold transition-all duration-300 cursor-pointer ${
                   userType === "host"
-                    ? "border-amber/50 bg-amber/15 text-foreground"
+                    ? "border-amber/50 bg-amber/15 text-amber-300 shadow-[0_0_12px_rgba(245,158,11,0.35)]"
                     : "border-white/10 bg-white/5 text-muted-foreground hover:border-white/25"
                 }`}
               >
@@ -498,13 +625,14 @@ export const FooterSection = memo(function FooterSection() {
         )}
       </div>
 
+      {/* Marquee Cities Banner */}
       <div className="overflow-hidden border-y border-white/10 py-2.5">
         <div className="flex gap-8 whitespace-nowrap text-xs uppercase tracking-[0.2em] text-muted-foreground">
           {[0, 1].map((k) => (
             <div key={k} className="flex shrink-0 animate-[marquee_28s_linear_infinite] gap-8">
               {(isHi ? CITIES_HI : CITIES).map((c) => (
                 <span key={c} className="flex items-center gap-8">
-                  {c} <span className="text-cyan">◆</span>
+                  {c} <span className={tokens.accentDot}>◆</span>
                 </span>
               ))}
             </div>
@@ -512,7 +640,9 @@ export const FooterSection = memo(function FooterSection() {
         </div>
       </div>
 
+      {/* Dynamic 4-Column Footer Navigation Matrix */}
       <div className="mx-auto grid max-w-7xl gap-6 px-4 py-6 sm:py-8 md:grid-cols-4">
+        {/* Column 1: Brand & Socials & Persona Action Pills */}
         <div>
           <div className="flex items-center gap-2 mb-3">
             <BrandLogo height={36} className="h-8 sm:h-9" />
@@ -593,6 +723,7 @@ export const FooterSection = memo(function FooterSection() {
             </a>
           </div>
 
+          {/* Dynamic Persona Action Badges */}
           <div className="mt-4 flex flex-wrap gap-1.5">
             <button
               type="button"
@@ -602,13 +733,33 @@ export const FooterSection = memo(function FooterSection() {
               <Download className="h-3 w-3" /> {t.footer.investorCTA}
             </button>
 
-            <button
-              type="button"
-              onClick={() => setShowCaptainModal(true)}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-cyan-500/30 bg-cyan-500/10 px-2.5 py-1.5 text-xs font-semibold text-cyan-300 transition-colors hover:border-cyan-500/50 hover:bg-cyan-500/20 cursor-pointer active:scale-95"
-            >
-              <Award className="h-3 w-3" /> {isHi ? "कैंपस कैप्टन (₹5k+)" : "Campus Captain (₹5k+)"}
-            </button>
+            <AnimatePresence mode="wait">
+              {isHost ? (
+                <motion.button
+                  key="host-cta-badge"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  type="button"
+                  onClick={() => setDoc("liability")}
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-amber-500/30 bg-amber-500/10 px-2.5 py-1.5 text-xs font-semibold text-amber-300 transition-colors hover:border-amber-500/50 hover:bg-amber-500/20 cursor-pointer active:scale-95"
+                >
+                  <ShieldCheck className="h-3 w-3" /> {isHi ? "TPA Sec 105 गाइड (PDF)" : "TPA Sec 105 Guide (PDF)"}
+                </motion.button>
+              ) : (
+                <motion.button
+                  key="student-cta-badge"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  type="button"
+                  onClick={() => setShowCaptainModal(true)}
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-cyan-500/30 bg-cyan-500/10 px-2.5 py-1.5 text-xs font-semibold text-cyan-300 transition-colors hover:border-cyan-500/50 hover:bg-cyan-500/20 cursor-pointer active:scale-95"
+                >
+                  <Award className="h-3 w-3" /> {isHi ? "कैंपस कैप्टन (₹5k+)" : "Campus Captain (₹5k+)"}
+                </motion.button>
+              )}
+            </AnimatePresence>
 
             <Link
               to="/kakadeo-survival-guide"
@@ -619,83 +770,90 @@ export const FooterSection = memo(function FooterSection() {
 
             <a
               href={`https://api.whatsapp.com/send?text=${encodeURIComponent(
-                isHi
-                  ? `🎒 *स्टैशसारथी — कैंपस वैकेशन लगेज स्टोरेज व आवास*\n\nअरे! छुट्टियों से पहले इसे देखें — खाली पीजी रूम के ₹6,000–₹8,000 डेड-रेंट में फूंकने के बजाय, अपना सामान कैंपस के पास मात्र *₹300/बैग/माह* में लेजर सील और ₹10k बीमा के साथ सुरक्षित रखें।\n\n👉 *यहाँ देखें:* https://stashsaarthi-web.vercel.app`
-                  : `🎒 *StashSaarthi — Campus Vacation Luggage Storage & Living*\n\nHey! Check this out before vacation starts — instead of burning ₹6,000–₹8,000 in dead rent for empty PG rooms, you can store your luggage securely for just *₹300/bag/mo* with laser tamper seals & ₹10k insurance near campus.\n\n👉 *Check it out here:* https://stashsaarthi-web.vercel.app`,
+                isHost
+                  ? `🏠 *स्टैशसारथी — वरिष्ठ नागरिक गरिमापूर्ण निष्क्रिय आय व कमरा लिस्टिंग*\n\nनमस्ते! यदि आपके घर में खाली कमरे या अलमारी का स्थान है, तो शून्य घुसपैठ और 100% कानून (TPA Sec 105) सुरक्षा के साथ ₹11,500+/माह तक कमाएं।\n\n👉 *यहाँ देखें:* https://stashsaarthi-web.vercel.app`
+                  : `🎒 *स्टैशसारथी — कैंपस वैकेशन लगेज स्टोरेज व आवास*\n\nअरे! छुट्टियों से पहले इसे देखें — खाली पीजी रूम के ₹6,000–₹8,000 डेड-रент में फूंकने के बजाय, अपना सामान कैंपस के पास मात्र *₹300/बैग/माह* में लेजर सील और ₹10k बीमा के साथ सुरक्षित रखें।\n\n👉 *यहाँ देखें:* https://stashsaarthi-web.vercel.app`,
               )}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 rounded-lg border border-[#25D366]/40 bg-[#25D366]/10 px-2.5 py-1.5 text-xs font-semibold text-[#25D366] transition-colors hover:border-[#25D366]/60 hover:bg-[#25D366]/20 cursor-pointer active:scale-95"
             >
-              <Share2 className="h-3 w-3" /> {isHi ? "रेफर करें" : "Refer"}
+              <Share2 className="h-3 w-3" /> {isHi ? (isHost ? "होस्ट रेफर करें" : "रेफर करें") : (isHost ? "Refer Host" : "Refer")}
             </a>
           </div>
         </div>
 
+        {/* Column 2: Dynamic Dual Persona Resources (Student vs Host Resources Column) */}
         <div>
-          <h3 className="text-xs font-bold uppercase tracking-wider text-white">
-            {isHi ? "इकोसिस्टम" : "Ecosystem"}
-          </h3>
-          <ul className="mt-3 space-y-1 text-xs">
-            {ECOSYSTEM.map((l) => (
-              <li key={l.label}>
-                <a
-                  href={`#${l.target}`}
-                  onClick={smoothScrollTo(l.target)}
-                  className="min-h-[28px] inline-flex items-center text-muted-foreground transition hover:text-cyan py-0.5"
-                >
-                  {l.label}
-                </a>
-              </li>
-            ))}
-            <li>
-              <Link
-                to="/kanpur-student-council"
-                className="min-h-[28px] inline-flex items-center text-cyan-400 hover:text-cyan-300 transition-colors py-0.5 font-semibold"
-              >
-                {isHi ? "🏛️ कानपुर छात्र परिषद" : "🏛️ Kanpur Student Council"}
-              </Link>
-            </li>
-            <li>
-              <a
-                href="#rooms"
-                onClick={smoothScrollTo("rooms")}
-                className="min-h-[28px] inline-flex items-center text-muted-foreground transition hover:text-cyan py-0.5"
-              >
-                {isHi ? "सत्यापित कमरे" : "Verified Rooms"}
-              </a>
-            </li>
-            <li>
-              <Link
-                to="/tiffin-services-near-motion"
-                className="min-h-[28px] inline-flex items-center text-emerald-400 hover:text-emerald-300 transition-colors py-0.5 font-medium"
-              >
-                {isHi ? "मोशन कोचिंग टिफिन (काकादेव)" : "Tiffin near Motion Coaching"}
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/tiffin-services-near-physics-wallah"
-                className="min-h-[28px] inline-flex items-center text-emerald-400 hover:text-emerald-300 transition-colors py-0.5 font-medium"
-              >
-                {isHi ? "PW फिजिक्स वाला टिफिन (काकादेव)" : "Tiffin near Physics Wallah"}
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/tiffin-services-near-allen"
-                className="min-h-[28px] inline-flex items-center text-emerald-400 hover:text-emerald-300 transition-colors py-0.5 font-medium"
-              >
-                {isHi ? "एलन कोचिंग टिफिन (काकादेव)" : "Tiffin near Allen Coaching"}
-              </Link>
-            </li>
-          </ul>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={role}
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 10 }}
+              transition={{ duration: 0.25 }}
+            >
+              <h3 className="text-xs font-bold uppercase tracking-wider text-white flex items-center gap-1.5">
+                {isHost ? (
+                  <>
+                    <HeartHandshake className="h-3.5 w-3.5 text-amber-400" />
+                    <span>{isHi ? tokens.resourcesTitleHi : tokens.resourcesTitle}</span>
+                  </>
+                ) : (
+                  <>
+                    <GraduationCap className="h-3.5 w-3.5 text-cyan-400" />
+                    <span>{isHi ? tokens.resourcesTitleHi : tokens.resourcesTitle}</span>
+                  </>
+                )}
+              </h3>
+              <ul className="mt-3 space-y-1 text-xs">
+                {CURRENT_RESOURCES.map((item, idx) => (
+                  <li key={idx}>
+                    {item.to ? (
+                      <Link
+                        to={item.to as any}
+                        className={`min-h-[28px] inline-flex items-center transition-colors py-0.5 font-medium ${
+                          item.highlight
+                            ? isHost
+                              ? "text-amber-300 font-semibold hover:text-amber-200"
+                              : "text-cyan-300 font-semibold hover:text-cyan-200"
+                            : "text-muted-foreground hover:text-white"
+                        }`}
+                      >
+                        {item.label}
+                      </Link>
+                    ) : item.target ? (
+                      <a
+                        href={`#${item.target}`}
+                        onClick={smoothScrollTo(item.target)}
+                        className="min-h-[28px] inline-flex items-center text-muted-foreground transition hover:text-white py-0.5"
+                      >
+                        {item.label}
+                      </a>
+                    ) : item.doc ? (
+                      <button
+                        type="button"
+                        onClick={() => setDoc(item.doc as string)}
+                        className="min-h-[28px] inline-flex items-center text-muted-foreground transition hover:text-white text-left cursor-pointer py-0.5"
+                      >
+                        {item.label}
+                      </button>
+                    ) : null}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          </AnimatePresence>
         </div>
 
+        {/* Column 3: Company & Operational Information */}
         <DocCol title={isHi ? "कंपनी" : "Company"} links={COMPANY} onOpen={setDoc} />
-        <DocCol title={isHi ? "कानूनी" : "Legal"} links={LEGAL} onOpen={setDoc} />
+
+        {/* Column 4: Legal & Compliance Documents */}
+        <DocCol title={isHi ? "कानूनी व सुरक्षा" : "Legal & Safety"} links={LEGAL} onOpen={setDoc} />
       </div>
 
+      {/* Bottom Bar & Copyright */}
       <div className="border-t border-white/10 px-4 py-6">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 sm:flex-row text-xs text-muted-foreground">
           <div className="space-y-1 text-center sm:text-left">
@@ -704,7 +862,7 @@ export const FooterSection = memo(function FooterSection() {
                 ? "© 2026 StashSaarthi Technologies. 100% प्रामाणिक पारदर्शिता के साथ कानपुर, उत्तर प्रदेश में निर्मित।"
                 : "© 2026 StashSaarthi Technologies. Built with radical honesty & physical accountability in Kanpur, Uttar Pradesh, India."}
             </p>
-            <p className="font-mono">
+            <p className="font-mono text-[11px]">
               {isHi
                 ? "नोडल परिचालन कार्यालय: 117/के-ब्लॉक, कल्याणपुर, कानपुर — 208016 | सीधा ईमेल: stashsaarthi@gmail.com"
                 : "Operational Hub: 117/K-Block, Kalyanpur, Kanpur — 208016 | Direct Email: stashsaarthi@gmail.com"}

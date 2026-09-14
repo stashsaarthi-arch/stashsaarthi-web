@@ -56,13 +56,43 @@ export const FONT_SPECS: Record<string, FontSpec> = {
     family: "Mukta",
     weights: [400, 500, 600, 700, 800],
     display: "swap",
-    fallbacks: ["Mukta Fallback", "Rozha One", "Tiro Devanagari Hindi", "Noto Sans Devanagari", "Kohinoor Devanagari", "ITF Devanagari", "sans-serif"],
+    fallbacks: [
+      "Mukta Fallback",
+      "Rozha One",
+      "Noto Sans Devanagari",
+      "Tiro Devanagari Hindi",
+      "Kohinoor Devanagari",
+      "ITF Devanagari",
+      "Hind",
+      "Baloo 2",
+      "Anek Devanagari",
+      "Mangal",
+      "Utsaah",
+      "Arial Unicode MS",
+      "sans-serif",
+    ],
     sizeAdjust: "100%",
     ascentOverride: "98%",
     descentOverride: "26%",
     lineGapOverride: "0%",
   },
 };
+
+export const DEVANAGARI_FONT_FALLBACK_CHAIN = [
+  "Mukta",
+  "Rozha One",
+  "Noto Sans Devanagari",
+  "Tiro Devanagari Hindi",
+  "Kohinoor Devanagari",
+  "ITF Devanagari",
+  "Hind",
+  "Baloo 2",
+  "Anek Devanagari",
+  "Mangal",
+  "Utsaah",
+  "Arial Unicode MS",
+  "sans-serif",
+] as const;
 
 export const FONT_PRELOAD_CONFIG: FontPreloadConfig = {
   preconnectUrls: [
@@ -74,7 +104,7 @@ export const FONT_PRELOAD_CONFIG: FontPreloadConfig = {
     "https://fonts.gstatic.com",
   ],
   stylesheetUrl:
-    "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&family=Inter:wght@400;500;600;700&family=Mukta:wght@400;500;600;700;800&family=Rozha+One&display=swap",
+    "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&family=Inter:wght@400;500;600;700&family=Mukta:wght@400;500;600;700;800&family=Rozha+One&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap",
   displayMode: "swap",
   clsProtectionEnabled: true,
 };

@@ -153,7 +153,7 @@ export function Connect(_props: { onBook: OpenBooking }) {
   const match = MATCHES.find((m) => m.city === city) ?? MATCHES[0]!;
 
   return (
-    <div id="connect" className="relative mx-auto max-w-4xl px-2 py-2 scroll-mt-20">
+    <div id="connect" className="section-isolated layout-isolated relative mx-auto max-w-4xl px-2 py-2 scroll-mt-20">
       <div className="text-center space-y-2">
         {/* Tab Switcher: Live Pairs vs Interactive Quiz vs 2G Audio */}
         <div className="inline-flex flex-wrap justify-center items-center gap-1 rounded-2xl sm:rounded-full border border-white/10 bg-black/40 p-1 backdrop-blur-md">

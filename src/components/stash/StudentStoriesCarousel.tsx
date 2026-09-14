@@ -191,7 +191,7 @@ export const StudentStoriesCarousel = memo(function StudentStoriesCarousel({
   return (
     <section
       id="student-stories"
-      className="relative overflow-hidden py-8 sm:py-12 bg-slate-950/60 border-y border-white/5"
+      className="section-isolated layout-isolated relative overflow-hidden py-8 sm:py-12 bg-slate-950/60 border-y border-white/5"
       role="region"
       aria-label={isHindi ? "छात्र सफलता और होस्ट की कहानियां" : "Student Success & Host Stories"}
     >

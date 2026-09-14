@@ -1,6 +1,347 @@
 # Ralph Autonomous Workforce Sprint Progress
 
-- [x] **[UI - Interactive Value Switcher / delight] Task 123: Design an interactive hero toggle demonstrating the immediate contrast between "Wasting ₹8,000 dead rent" vs "Saarthi Stash ₹300/mo" — 2026-09-13**:
+- [x] **[UI - Saarthi Kitchen Card 2.0 / polish] Task 143: Overhaul Tiffin cards with daily meal countdown timers, rotating homestyle thali previews, calorie/macro breakdowns, and chef bio tags — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-saarthi-kitchen-card-2.mjs` — ✅ PASSED (SAARTHI KITCHEN CARD 2.0 TOKENS VERIFIED SUCCESSFULLY).
+  - **Saarthi Kitchen Card 2.0 Architecture**:
+    - `src/lib/designTokens.ts`: Defined `SAARTHI_KITCHEN_CARD_TOKENS` (`countdownTimer` for Lunch 7 AM / Dinner 2 PM cutoffs; `macroBreakdown` for Calories/Protein/Carbs/Fats; `chefBioTag` for Senior Host Chef experience & trust seal; `pricePill` for Pickup vs Delivery 1 Token = ₹1 rate) and exported `getSaarthiKitchenCardTokens` helper function.
+    - `src/styles.css`: Added utility classes (`kitchen-card-stage`, `kitchen-macro-badge`, `kitchen-chef-bio-pill`, `kitchen-timer-pulse`) for layout isolation, macro chip styling, and pulse countdown rings.
+    - `src/components/ui/SaarthiKitchenCard2.tsx`: Built feature-packed `SaarthiKitchenCard2` primitive featuring live daily meal countdown timer (Lunch cutoff vs Dinner cutoff), interactive rotating homestyle thali dish preview with slide animations and selector dots, calorie & macro breakdown grid (Calories, Protein, Carbs, Fats), Senior Host Chef profile bio badge ("Sunita Sharma • 22 Yrs Exp • Satvik Thali • Ghar Jaisa 🏡"), pricing breakdown (Pickup vs Room Delivery), and 1-click booking CTA with Web Audio haptics (`playPop`, `playHeroCtaClick`).
+    - `src/components/ui/primitives.ts`: Re-exported `SaarthiKitchenCard2` primitive and type definitions.
+    - `src/components/TokenMealHub.tsx`: Integrated `SaarthiKitchenCard2` across the core meal booking grid.
+    - `execution/test-saarthi-kitchen-card-2.mjs`: Created test harness validating design tokens, persona accents, primitive exports, TokenMealHub integration, and clean production build compilation.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `SAARTHI_KITCHEN_CARD_TOKENS` & `getSaarthiKitchenCardTokens`.
+    - `src/styles.css` — Added Kitchen Card 2.0 CSS utilities.
+    - `src/components/ui/SaarthiKitchenCard2.tsx` — Created SaarthiKitchenCard2 component.
+    - `src/components/ui/primitives.ts` — Re-exported SaarthiKitchenCard2.
+    - `src/components/TokenMealHub.tsx` — Integrated SaarthiKitchenCard2 into meal tier grid.
+    - `execution/test-saarthi-kitchen-card-2.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 143 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 143 execution log.
+    - `progress.md` — Appended Task 143 execution log.
+
+
+- [x] **[UI - Saarthi Stash Card 2.0 / polish] Task 141: Overhaul the Micro-Storage card with 3D bag depth preview, tamper-proof seal indicator, ₹300/mo prominent pricing pill, and 1-click booking CTA — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-saarthi-stash-card-2.mjs` — ✅ PASSED (5/5 SAARTHI STASH CARD 2.0 CHECKS PASSED SUCCESSFULLY).
+  - **Saarthi Stash Card 2.0 Architecture**:
+    - `src/lib/designTokens.ts`: Defined `SAARTHI_STASH_CARD_TOKENS` (`pricePill` with ₹300/bag/mo amount, EN/HI units & dead rent savings breakdown; `tamperProofSeal` with QR code `QR-SEAL-8839`, laser scan labels & ₹10k insurance shield cover; `depthPreview` with 35kg capacity & stacked luggage layers) along with `getSaarthiStashCardTokens` helper function.
+    - `src/styles.css`: Added keyframe `@keyframes laser-seal-beam-sweep` and utility classes (`.laser-seal-scanner::after`, `stash-card-3d-stage`, `stash-card-3d-layer`, `stash-price-pill-glow`) for sweeping laser security scanning and 3D depth layer animation.
+    - `src/components/ui/SaarthiStashCard2.tsx`: Built comprehensive `SaarthiStashCard2` primitive featuring interactive 3D bag depth preview with layer toggle ("Compact" vs "Exploded Vault Layers"), tamper-proof laser QR seal scanner (`QR-SEAL-8839`), prominent glowing ₹300/mo pricing pill with dead-rent savings badge, zero brokerage transparency breakdown, and 1-click booking CTA with Web Audio haptic feedback (`playHeroCtaClick`).
+    - `src/components/ui/primitives.ts`: Re-exported `SaarthiStashCard2` primitive and `SaarthiStashCard2Props`.
+    - `src/components/stash/Ecosystem.tsx`: Integrated `SaarthiStashCard2` into `Ecosystem.tsx` for the featured `stash` node.
+    - `execution/test-saarthi-stash-card-2.mjs`: Created test harness verifying design tokens, CSS rules, primitive re-export, component structure, Ecosystem integration, and clean production build.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `SAARTHI_STASH_CARD_TOKENS` & `getSaarthiStashCardTokens`.
+    - `src/styles.css` — Added `@keyframes laser-seal-beam-sweep` & CSS utilities.
+    - `src/components/ui/SaarthiStashCard2.tsx` — Created SaarthiStashCard2 component.
+    - `src/components/ui/primitives.ts` — Re-exported SaarthiStashCard2.
+    - `src/components/stash/Ecosystem.tsx` — Integrated SaarthiStashCard2 for stash node.
+    - `execution/test-saarthi-stash-card-2.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 141 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 141 execution log.
+    - `progress.md` — Appended Task 141 execution log.
+
+
+- [x] **[UI - Persona Context Indicators / clarify] Task 140: Add subtle sticky corner badges or ambient gradient halos reminding the user which persona view is currently engaged — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-persona-context-indicators.mjs` — ✅ PASSED (6/6 PERSONA CONTEXT INDICATOR CHECKS PASSED SUCCESSFULLY).
+  - **Persona Context Indicators Architecture**:
+    - `src/lib/designTokens.ts`: Defined `PERSONA_CONTEXT_INDICATOR_TOKENS` for Student mode (Electric Mint `#10B981`, Kakadeo Campus Nodes subtext, switch to Host CTA) and Host mode (Warm Amber `#F59E0B`, ₹11.5k/mo Income Shield subtext, switch to Student CTA), along with `getPersonaContextIndicatorTokens` and `getPersonaHaloStyles` helper functions.
+    - `src/styles.css`: Added Tailwind `@utility` rules (`persona-context-halo-student`, `persona-context-halo-host`, `sticky-persona-corner-badge`, `persona-indicator-pulse-dot`) providing radial backdrop lighting, glassmorphism blur, and animated pulse dots.
+    - `src/components/ui/PersonaContextIndicator.tsx`: Built reusable component rendering a top-right ambient background halo and a subtle sticky top-left/top-right corner badge displaying active persona indicator, live pulsing status dot, location context subtext, and instant 1-tap persona quick-switch toggle button with Web Audio haptics (`playPersonaSwitch`).
+    - `src/components/ui/primitives.ts`: Re-exported `PersonaContextIndicator` primitive and `PersonaContextIndicatorProps`.
+    - `src/routes/index.tsx`: Mounted `<PersonaContextIndicator />` inside layout under `<AmbientNodes />`.
+    - `execution/test-persona-context-indicators.mjs`: Created test harness validating design tokens, CSS rules, component structure, primitive re-export, route mounting, and clean production build.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Defined `PERSONA_CONTEXT_INDICATOR_TOKENS` & helper functions.
+    - `src/styles.css` — Added `@utility` rules for persona context halos & sticky corner badges.
+    - `src/components/ui/PersonaContextIndicator.tsx` — Created reusable PersonaContextIndicator component.
+    - `src/components/ui/primitives.ts` — Re-exported PersonaContextIndicator primitive.
+    - `src/routes/index.tsx` — Mounted PersonaContextIndicator in landing page route index.tsx.
+    - `execution/test-persona-context-indicators.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 140 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 140 execution log.
+    - `progress.md` — Appended Task 140 execution log.
+
+- [x] **[UI - Devanagari Type Tuning for Hosts / typeset] Task 139: Apply generous letter-spacing and optimized Devanagari font fallbacks for senior citizens reading Hindi text — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-devanagari-host-tuning.mjs` — ✅ PASSED (13/13 DEVANAGARI TYPE TUNING CHECKS PASSED SUCCESSFULLY).
+  - **Devanagari Type Tuning & Senior Host Legibility Architecture**:
+    - `src/lib/designTokens.ts`: Defined `DEVANAGARI_HOST_TYPOGRAPHY_TOKENS` (generous `0.035em` body letter-spacing, `1.75` line-height, `0.02em` heading letter-spacing, `1.4` heading line-height, `1.08` size scale, matra padding clearance, complete Devanagari fallback chain), along with `getDevanagariHostTypographyClasses` and `getDevanagariHostStyles` helper functions.
+    - `src/lib/fontOptimization.ts`: Expanded `FONT_SPECS.devanagari` fallback chain (`Mukta`, `Rozha One`, `Noto Sans Devanagari`, `Tiro Devanagari Hindi`, `Kohinoor Devanagari`, `ITF Devanagari`, `Hind`, `Baloo 2`, `Anek Devanagari`), exported `DEVANAGARI_FONT_FALLBACK_CHAIN`, and preloaded `Noto+Sans+Devanagari` and `Tiro+Devanagari+Hindi` Google Fonts.
+    - `src/styles.css`: Updated `--font-devanagari` CSS token and added `@utility font-devanagari`, `@utility tracking-devanagari-host`, `@utility devanagari-host-text`, `@utility devanagari-host-heading`, `.senior-host-devanagari-active`, and automatic CSS rules for `[data-persona="host"][lang="hi"]`.
+    - `src/components/ui/Typography.tsx`: Updated `Typography` component to consume `usePersona()` context and pass `isHost` to `getHindiTypographyClasses` for Senior Host Devanagari letter-spacing and line-height scaling.
+    - `src/components/ui/DevanagariHostText.tsx`: Created reusable `DevanagariHostText` primitive component tuned specifically for Senior Hosts reading Hindi copy without glyph clipping or matra crowding.
+    - `src/components/ui/primitives.ts`: Re-exported `DevanagariHostText` primitive and `DevanagariHostTextProps`.
+    - `execution/test-devanagari-host-tuning.mjs`: Created verification test script asserting design token exports, font fallback stacks, CSS utility definitions, component integrations, and clean production build.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `DEVANAGARI_HOST_TYPOGRAPHY_TOKENS` & helper functions.
+    - `src/lib/fontOptimization.ts` — Expanded Devanagari font fallbacks & preload stylesheet.
+    - `src/styles.css` — Updated `--font-devanagari` token & added Devanagari Host CSS rules & utilities.
+    - `src/components/ui/Typography.tsx` — Integrated `usePersona` context for Devanagari host legibility.
+    - `src/components/ui/DevanagariHostText.tsx` — Created reusable DevanagariHostText primitive.
+    - `src/components/ui/primitives.ts` — Re-exported DevanagariHostText primitive.
+    - `execution/test-devanagari-host-tuning.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 139 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 139 execution log.
+    - `progress.md` — Appended Task 139 execution log.
+
+- [x] **[UI - Persona Transition Crossfade / animate] Task 138: Smooth out the instantaneous persona switch using a gentle 250ms CSS color-interpolate fade to eliminate jarring flashes — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-persona-crossfade.mjs` — ✅ PASSED (7/7 PERSONA TRANSITION CROSSFADE CHECKS PASSED SUCCESSFULLY).
+  - **Persona Transition Crossfade Architecture**:
+    - `src/lib/designTokens.ts`: Defined `PERSONA_CROSSFADE_TOKENS` (`durationMs: 250`, `durationCss: "250ms"`, `easing: "cubic-bezier(0.16, 1, 0.3, 1)"`, `transitionClass: "persona-transitioning"`, `cssProperties`), along with `getPersonaTransitionClasses` and `getPersonaCrossfadeStyles` helper functions.
+    - `src/styles.css`: Injected `html.persona-transitioning` and `.persona-transitioning` CSS transition rules for background-color, color, border-color, box-shadow, text-shadow, fill, stroke, and filter with 250ms `cubic-bezier(0.16, 1, 0.3, 1)` easing. Added `@utility persona-crossfade-250ms`.
+    - `src/context/PersonaContext.tsx`: Enhanced `PersonaProvider` to attach `persona-transitioning` class to `document.documentElement` during role switches and automatically remove it after 250ms. Exported `isPersonaTransitioning: boolean` in `PersonaContextType` and `usePersona()` context.
+    - `src/components/ui/PersonaCrossfade.tsx`: Created reusable `PersonaCrossfade` primitive component wrapping persona surfaces with 250ms Framer Motion and CSS color-interpolate crossfades.
+    - `src/components/ui/primitives.ts`: Re-exported `PersonaCrossfade` primitive and `PersonaCrossfadeProps`.
+    - `execution/test-persona-crossfade.mjs`: Created verification test harness validating design tokens, CSS transition rules, context state management, primitive exports, and clean production build.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `PERSONA_CROSSFADE_TOKENS` & helper functions.
+    - `src/styles.css` — Added `html.persona-transitioning` CSS crossfade rules & utility classes.
+    - `src/context/PersonaContext.tsx` — Added 250ms crossfade transition state & class management.
+    - `src/components/ui/PersonaCrossfade.tsx` — Created reusable PersonaCrossfade component.
+    - `src/components/ui/primitives.ts` — Re-exported PersonaCrossfade primitive.
+    - `execution/test-persona-crossfade.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 138 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 138 execution log.
+    - `progress.md` — Appended Task 138 execution log.
+
+- [x] **[UI - Persona-Specific Empty States / delight] Task 137: Design empathetic, persona-tailored empty states with charming illustrated SVGs for student search misses and host zero-booking states — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-persona-empty-states.mjs` — ✅ PASSED (5/5 PERSONA-SPECIFIC EMPTY STATES CHECKS PASSED SUCCESSFULLY).
+  - **Persona-Specific Empty States Architecture**:
+    - `src/lib/designTokens.ts`: Defined `PERSONA_EMPTY_STATE_TOKENS` for Student search misses (Electric Mint/Cyan cyberpunk vector styling, default titles/descriptions in EN & HI, suggestion chips) and Host zero bookings (Warm Amber/Sunset Gold cozy hearth vector styling, action CTAs), along with `getPersonaEmptyStateTokens` helper function.
+    - `src/components/ui/PersonaEmptyState.tsx`: Created reusable `PersonaEmptyState` component featuring custom SVG artwork (`StudentSearchMissSvg` with animated radar sweep and cyberpunk luggage, `HostZeroBookingsSvg` with glowing lantern and house hearth), empathetic bilingual titles and descriptions, quick suggestion chips (`onSuggestionClick`), tactile audio haptics (`playPop`), dual action button triggers, and trust seal footer text.
+    - `src/components/ui/primitives.ts`: Re-exported `PersonaEmptyState` primitive and `PersonaEmptyStateProps`.
+    - `src/components/stash/CampusNodeChecker.tsx`: Integrated `PersonaEmptyState` for zero search results matching campus queries.
+    - `src/components/stash/MyBookingsDashboard.tsx`: Integrated `PersonaEmptyState` for zero active bookings, meal orders, or waitlist entries.
+    - `execution/test-persona-empty-states.mjs`: Created verification test script asserting design token exports, SVG artwork, primitive re-exports, component integrations, and clean production build.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `PERSONA_EMPTY_STATE_TOKENS` & helper function.
+    - `src/components/ui/PersonaEmptyState.tsx` — Created reusable PersonaEmptyState component with SVG artwork.
+    - `src/components/ui/primitives.ts` — Re-exported PersonaEmptyState primitive.
+    - `src/components/stash/CampusNodeChecker.tsx` — Integrated PersonaEmptyState for search misses.
+    - `src/components/stash/MyBookingsDashboard.tsx` — Integrated PersonaEmptyState for empty bookings.
+    - `execution/test-persona-empty-states.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 137 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 137 execution log.
+    - `progress.md` — Appended Task 137 execution log.
+
+- [x] **[UI - Dynamic Persona Themed Navbar / polish] Task 135: Synchronize Navbar brand glows, link underlines, and active indicator bars with active persona palette — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client bundle compiled cleanly).
+  - **Verification Suite**: `node execution/test-persona-themed-navbar.mjs` — ✅ PASSED (14/14 DYNAMIC PERSONA THEMED NAVBAR CHECKS PASSED SUCCESSFULLY).
+  - **Dynamic Persona Themed Navbar Architecture**:
+    - `src/lib/designTokens.ts`: Defined `DYNAMIC_PERSONA_NAVBAR_TOKENS` (Electric Mint/Cyan for Student vs Warm Amber/Gold for Host), mapping brand glows, top accent gradient lines, active link indicator bars, link hover/active states, scrolled borders, CTA buttons, and mobile drawer borders. Exported helper functions `getPersonaNavbarTokens`, `getNavbarBrandGlowClasses`, and `getNavbarLinkIndicatorClasses`.
+    - `src/styles.css`: Added `[data-persona]` CSS rules and `@utility` rules (`navbar-brand-glow-student`, `navbar-brand-glow-host`, `navbar-top-accent-line-student`, `navbar-top-accent-line-host`, `navbar-link-underline-student`, `navbar-link-underline-host`, `navbar-scrolled-student`, `navbar-scrolled-host`) for dynamic persona header styling.
+    - `src/components/stash/Navbar.tsx`: Refactored `Navbar` to attach `data-persona={role}`, render top persona gradient accent bar, apply dynamic brand logo halo glow, implement `motion.div` active link sliding indicator bar with spring physics (`layoutId="navbar-active-link-indicator"`), dynamic persona CTA buttons, and persona-themed mobile drawer borders.
+    - `execution/test-persona-themed-navbar.mjs`: Created verification test harness validating design tokens, CSS rules, Navbar primitive exports, component structure, active hash tracking, and clean production build.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `DYNAMIC_PERSONA_NAVBAR_TOKENS` & helper functions.
+    - `src/styles.css` — Added `[data-persona]` navbar CSS rules & utility classes.
+    - `src/components/stash/Navbar.tsx` — Synchronized Navbar branding, top accent line, sliding link underlines, CTA buttons, and mobile menu with persona palette.
+    - `execution/test-persona-themed-navbar.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 135 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 135 execution log.
+    - `progress.md` — Appended Task 135 execution log.
+
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client bundle compiled cleanly).
+  - **Verification Suite**: `node execution/test-host-warm-hearth.mjs` — ✅ PASSED (6/6 SENIOR HOST WARM HEARTH CHECKS PASSED SUCCESSFULLY).
+  - **Senior Host Warm Hearth Architecture**:
+    - `src/lib/designTokens.ts`: Defined `HOST_WARM_HEARTH_TOKENS` (amber, terracotta, warm brass accents, warm hearth background gradient, glow shadows) and exported helper functions `getHostWarmHearthCardClasses` and `getHostHearthAccentClasses`.
+    - `src/styles.css`: Injected `[data-role="host"]` CSS rules and `@utility` rules (`host-warm-hearth-card`, `host-hearth-amber-brass-edge`, `host-warm-hearth-depth`, `host-hearth-amber-glow`, `host-hearth-terracotta-glow`, `host-hearth-brass-glow`) for comforting hearth card borders, ambient top spotlight glows, and warm depth (`backdrop-filter: blur(18px) saturate(145%)`).
+    - `src/components/ui/HostWarmHearthCard.tsx`: Created reusable, accessible `HostWarmHearthCard` primitive with amber/terracotta/brass accents, ambient top spotlight glow, top brass line accent, optional badge header, and spring hover physics.
+    - `src/components/ui/primitives.ts`: Re-exported `HostWarmHearthCard` and `HostWarmHearthCardProps`.
+    - `src/components/stash/HostHeroSeals.tsx`: Updated host trust seal cards to integrate `host-warm-hearth-card host-warm-hearth-depth host-hearth-amber-brass-edge` styling.
+    - `execution/test-host-warm-hearth.mjs`: Created verification test harness validating design tokens, CSS rules, primitive exports, component structure, and layout integration.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `HOST_WARM_HEARTH_TOKENS` & helper functions.
+    - `src/styles.css` — Added `[data-role="host"]` warm hearth CSS rules & utility classes.
+    - `src/components/ui/HostWarmHearthCard.tsx` — Created reusable HostWarmHearthCard component.
+    - `src/components/ui/primitives.ts` — Re-exported HostWarmHearthCard primitive.
+    - `src/components/stash/HostHeroSeals.tsx` — Integrated Host Warm Hearth styling into trust seal cards.
+    - `execution/test-host-warm-hearth.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 134 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 134 execution log.
+    - `progress.md` — Appended Task 134 execution log.
+
+- [x] **[UI - Student Dark Mode Aesthetics / colorize] Task 133: Infuse Student persona cards with cyberpunk-inspired mint/cyan edge highlights and frosted glass depth — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client bundle compiled cleanly).
+  - **Verification Suite**: `node execution/test-student-cyberpunk-aesthetics.mjs` — ✅ PASSED (6/6 STUDENT CYBERPUNK AESTHETICS CHECKS PASSED SUCCESSFULLY).
+  - **Student Dark Mode Cyberpunk Architecture**:
+    - `src/lib/designTokens.ts`: Defined `STUDENT_CYBERPUNK_TOKENS` (mint/cyan edge highlights, frosted glass blur, cyberpunk background gradient, neon glow shadow) and exported helper functions `getStudentCyberpunkCardClasses` and `getStudentEdgeHighlightClasses`.
+    - `src/styles.css`: Injected `[data-role="student"]` CSS rules and `@utility` rules (`student-cyberpunk-card`, `student-mint-cyan-edge`, `student-frosted-glass-depth`, `student-neon-mint-glow`, `student-neon-cyan-glow`) for cyberpunk-inspired card borders, inset light glows, and frosted glass depth (`backdrop-filter: blur(20px) saturate(160%)`).
+    - `src/components/ui/StudentCyberpunkCard.tsx`: Created reusable, accessible `StudentCyberpunkCard` primitive with mint/cyan edge highlights, ambient top spotlight glow, cyberpunk top neon line accent, optional badge header, and spring hover physics.
+    - `src/components/ui/primitives.ts`: Re-exported `StudentCyberpunkCard` and `StudentCyberpunkCardProps`.
+    - `src/components/stash/Floating3DLuggage.tsx`: Updated floating 3D luggage mockups to integrate `student-cyberpunk-card student-frosted-glass-depth student-mint-cyan-edge` styling.
+    - `execution/test-student-cyberpunk-aesthetics.mjs`: Created verification test harness validating design tokens, CSS rules, primitive exports, component structure, and layout integration.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `STUDENT_CYBERPUNK_TOKENS` & helper functions.
+    - `src/styles.css` — Added `[data-role="student"]` cyberpunk CSS rules & utility classes.
+    - `src/components/ui/StudentCyberpunkCard.tsx` — Created reusable StudentCyberpunkCard component.
+    - `src/components/ui/primitives.ts` — Re-exported StudentCyberpunkCard primitive.
+    - `src/components/stash/Floating3DLuggage.tsx` — Integrated Student Cyberpunk styling.
+    - `execution/test-student-cyberpunk-aesthetics.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 133 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 133 execution log.
+    - `progress.md` — Appended Task 133 execution log.
+
+- [x] **[UI - Senior Host Legibility Mode / adapt] Task 132: Automatically enhance UI readability when Host mode is active (larger 18px+ base font, higher contrast borders, simplified action buttons) — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client bundle compiled cleanly).
+  - **Verification Suite**: `node execution/test-senior-host-legibility.mjs` — ✅ PASSED (5/5 SENIOR HOST LEGIBILITY MODE CHECKS PASSED SUCCESSFULLY).
+  - **Senior Host Legibility Architecture**:
+    - `src/styles.css`: Injected `[data-role="host"]` legibility rules scaling base text size to 18px+ (`clamp(1.125rem, 0.8vw + 0.85rem, 1.45rem)`), high-contrast amber border tokens (`oklch(0.809 0.165 76 / 35%)`), 52px+ minimum touch target sizes for buttons, and utilities (`@utility senior-host-text-lg`, `@utility senior-host-border-contrast`, `@utility senior-host-btn-accessible`).
+    - `src/lib/designTokens.ts`: Added `SENIOR_HOST_LEGIBILITY_TOKENS` (base font scale, WCAG AAA 7:1+ contrast ratios) and helper functions (`getSeniorHostLegibilityClasses`, `getHostBorderContrastClasses`, `getHostTypographyClasses`).
+    - `src/components/ui/SeniorHostLegibility.tsx`: Created accessible `HostLegibilityBadge` indicator and `SeniorHostActionButton` primitive tuned specifically for senior citizens (18px text, 52px min-height, tactile audio feedback, high-contrast amber styling).
+    - `src/components/ui/primitives.ts`: Re-exported `HostLegibilityBadge`, `SeniorHostActionButton`, and props interfaces.
+    - `src/components/stash/HostHeroSeals.tsx`: Mounted `HostLegibilityBadge` in top header area when Senior Host persona is active.
+    - `execution/test-senior-host-legibility.mjs`: Created test harness verifying design tokens, CSS legibility rules, primitive exports, and HostHeroSeals integration.
+  - **Modified Files**:
+    - `src/styles.css` — Added Senior Host legibility rules & utility classes.
+    - `src/lib/designTokens.ts` — Added `SENIOR_HOST_LEGIBILITY_TOKENS` & helper functions.
+    - `src/components/ui/SeniorHostLegibility.tsx` — Created `HostLegibilityBadge` & `SeniorHostActionButton`.
+    - `src/components/ui/primitives.ts` — Re-exported Senior Host Legibility components.
+    - `src/components/stash/HostHeroSeals.tsx` — Mounted `HostLegibilityBadge`.
+    - `execution/test-senior-host-legibility.mjs` — Test suite for Task 132.
+    - `docs/tasks/PRD.md` — Marked Task 132 as completed.
+
+- [x] **[UI - Persona Switcher Redesign / animate] Task 131: Overhaul the global Student / Host toggle switch with smooth pill sliding animation, role-specific icons, and haptic audio cues — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-persona-switcher.mjs` — ✅ PASSED (6/6 PERSONA SWITCHER REDESIGN CHECKS PASSED SUCCESSFULLY).
+  - **Persona Switcher Redesign & Sliding Pill Architecture**:
+    - `src/components/ui/PersonaSwitcher.tsx`: Created reusable, accessible persona switcher primitive supporting `compact`, `standard`, and `hero` size variants, active sliding background pill with spring physics (`motion.div` with `layoutId`), role-specific icons (`GraduationCap`, `HeartHandshake`, `Sparkles`, `ShieldCheck`), Web Audio haptic feedback (`playPersonaSwitch`), Electric Mint (`#10B981`) vs Warm Amber (`#F59E0B`) gradient glows, optional value badges (`Save ₹6.4k` vs `Earn ₹11.5k`), and full bilingual (`en`/`hi`) support.
+    - `src/lib/audio.ts`: Added `playPersonaSwitch(targetRole)` Web Audio haptic feedback function synthesizing high-frequency bright chimes for Student mode and warm resonant chimes for Senior Host mode.
+    - `src/components/ui/primitives.ts`: Re-exported `PersonaSwitcher` primitive and `PersonaSwitcherProps`.
+    - `src/components/stash/FloatingPersonaToggle.tsx`: Updated floating scroll toggle to mount `PersonaSwitcher`.
+    - `src/components/stash/Navbar.tsx`: Updated desktop header and mobile menu drawer to mount `PersonaSwitcher`.
+    - `execution/test-persona-switcher.mjs`: Created test harness verifying component creation, `playPersonaSwitch` export, primitive re-export, FloatingPersonaToggle and Navbar integration, and dual-persona token styling.
+  - **Modified Files**:
+    - `src/components/ui/PersonaSwitcher.tsx` — Created reusable PersonaSwitcher component with sliding pill animation.
+    - `src/lib/audio.ts` — Added `playPersonaSwitch` audio cue function.
+    - `src/components/ui/primitives.ts` — Re-exported `PersonaSwitcher`.
+    - `src/components/stash/FloatingPersonaToggle.tsx` — Mounted PersonaSwitcher in floating toggle.
+    - `src/components/stash/Navbar.tsx` — Mounted PersonaSwitcher in desktop & mobile navigation bar.
+    - `execution/test-persona-switcher.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 131 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 131 execution log.
+    - `progress.md` — Appended Task 131 execution log.
+
+- [x] **[UI - Hero Micro-Stats Counter / animate] Task 130: Add smooth count-up animated statistics (e.g., "₹42,00,000+ Dead Rent Saved", "450+ Verified Senior Hosts") with IntersectionObserver triggers — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-hero-micro-stats.mjs` — ✅ PASSED (6/6 HERO MICRO-STATS COUNTER CHECKS PASSED SUCCESSFULLY).
+  - **Hero Micro-Stats Counter Architecture**:
+    - `src/components/stash/HeroMicroStats.tsx`: Built standalone count-up animated statistics card component featuring dual-persona mode datasets (Student: `₹42,00,000+` Dead Rent Saved, `450+` Verified Senior Hosts, `1,280+` Luggage Bags Vaulted, `100%` Zero Brokerage Guarantee; Senior Host: `₹11,500/mo` Avg Passive Income, `₹10,000` Property Cover Shield, `100%` Police-Vetted Guests, `24×7` Dedicated Support), IntersectionObserver triggers via `AnimatedStat` & `useCountUp` hook with `easeOutExpo` easing physics, Web Audio micro-haptics (`playPop`), dynamic badge pills, and bilingual text (`en`/`hi`).
+    - `src/components/stash/Hero.tsx`: Mounted `HeroMicroStats` inside the primary Hero layout container for both Student and Host views.
+    - `execution/test-hero-micro-stats.mjs`: Created test harness script asserting component existence, count-up stat values, Web Audio haptics, Hero component mounting, `useCountUp` IntersectionObserver integration, and dual-persona support.
+  - **Modified Files**:
+    - `src/components/stash/HeroMicroStats.tsx` — Created HeroMicroStats component with count-up animated statistics.
+    - `src/components/stash/Hero.tsx` — Mounted HeroMicroStats in Hero layout.
+    - `execution/test-hero-micro-stats.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 130 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 130 execution log.
+    - `progress.md` — Appended Task 130 execution log.
+
+- [x] **[UI - Quick-Action Floating Dock / adapt] Task 129: Implement an intuitive floating bottom pill dock on mobile viewports for instant 1-tap switching between Stash, Spaces, Kitchen, and Connect — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-quick-action-floating-dock.mjs` — ✅ PASSED (5/5 QUICK-ACTION FLOATING DOCK CHECKS PASSED SUCCESSFULLY).
+  - **Quick-Action Floating Bottom Dock Architecture**:
+    - `src/components/stash/QuickActionFloatingDock.tsx`: Created standalone floating bottom pill dock for mobile viewports (`sm:hidden`, `fixed bottom-3`) supporting instant 1-tap tab switching between `Stash`, `Spaces`, `Kitchen`, and `Connect`. Features dynamic persona styling (Electric Mint vs Warm Amber glow), Web Audio micro-haptics (`playPop`, `playClick`), bilingual text (`en`/`hi`), smooth spring entrance animation (`motion.div`), global `stashsaarthi-solution-tab` custom event dispatching, and primary quick action CTA trigger ("Book" / "List").
+    - `src/components/stash/MobileStickyCTA.tsx`: Integrated `QuickActionFloatingDock` into `MobileStickyCTA` component layout wrapper.
+    - `src/routes/index.tsx`: Updated `MobileStickyCTA` invocation to pass `onListRoom` handler.
+    - `execution/test-quick-action-floating-dock.mjs`: Created test harness script asserting component existence, 4 tab items, mobile positioning, Web Audio haptics, event dispatching, and layout integration.
+  - **Modified Files**:
+    - `src/components/stash/QuickActionFloatingDock.tsx` — Created quick-action floating dock component for mobile viewports.
+    - `src/components/stash/MobileStickyCTA.tsx` — Integrated QuickActionFloatingDock in MobileStickyCTA component.
+    - `src/routes/index.tsx` — Updated MobileStickyCTA props in landing page route.
+    - `execution/test-quick-action-floating-dock.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 129 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 129 execution log.
+    - `progress.md` — Appended Task 129 execution log.
+
+- [x] **[UI - Trust Banner & Partner Strip / polish] Task 128: Redesign the campus & institutional trust strip (IITK, HBTI, CSJMU, Regency, UP Police verification) with subtle monochrome-to-color hover effects — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-trust-partner-strip.mjs` — ✅ PASSED (ALL 5/5 TRUST BANNER & PARTNER STRIP CHECKS PASSED SUCCESSFULLY).
+  - **Trust Banner & Institutional Partner Strip Architecture**:
+    - `src/components/stash/TrustPartnerStrip.tsx`: Built standalone institutional trust partner strip component showcasing key partner nodes (`IIT Kanpur`, `HBTI / HBTU`, `CSJM University`, `Regency Health`, `UP Police Vetted`). Features subtle monochrome-to-color grayscale hover transitions (`grayscale opacity-60` -> `grayscale-0 opacity-100 scale-105`), category badges, vibrant brand gradient glows, Web Audio micro-haptics (`playPop`), and interactive tooltip hover drawers.
+    - `src/components/stash/Hero.tsx`: Mounted `TrustPartnerStrip` inside the Hero section layout container for both Student and Host persona views.
+    - `execution/test-trust-partner-strip.mjs`: Created test harness script asserting component existence, 5 partner nodes, monochrome hover transition classes, Web Audio haptics, and Hero mounting.
+  - **Modified Files**:
+    - `src/components/stash/TrustPartnerStrip.tsx` — Created TrustPartnerStrip component with monochrome-to-color hover effects.
+    - `src/components/stash/Hero.tsx` — Mounted TrustPartnerStrip in Hero layout.
+    - `execution/test-trust-partner-strip.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 128 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 128 execution log.
+    - `progress.md` — Appended Task 128 execution log.
+
+- [x] **[UI - Hero Video & Interactive Visualizer / shape] Task 127: Integrate an ambient, lightweight visualizer showcasing the seamless transition of items from hostel room to secured host vault — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-hero-visualizer.mjs` — ✅ PASSED (ALL 4/4 HERO VIDEO & INTERACTIVE VISUALIZER CHECKS PASSED SUCCESSFULLY).
+  - **Hero Video & Interactive Visualizer Architecture**:
+    - `src/components/stash/HeroVisualizer.tsx`: Built reusable, ambient visualizer component illustrating the 3-step transition journey (`1. Hostel Room Packing` -> `2. Doorstep Saarthi Transit` -> `3. Secured Senior Host Vault`). Features interactive vector node path animation, step tabs selection, auto-play interval loop, Web Audio micro-haptics (`playPop`), digital QR anti-tamper seal inspection (`QR-SEAL-8839`), live metrics display, 100% escrow protection badges, and persona-tailored CTAs.
+    - `src/components/stash/Hero.tsx`: Mounted `HeroVisualizer` inside the Hero layout container for both Student and Host persona modes.
+    - `execution/test-hero-visualizer.mjs`: Created test harness script asserting component existence, 3 transition stages, Web Audio micro-haptics, and Hero component mounting.
+  - **Modified Files**:
+    - `src/components/stash/HeroVisualizer.tsx` — Created interactive item transition visualizer component.
+    - `src/components/stash/Hero.tsx` — Mounted HeroVisualizer in Hero section layout.
+    - `execution/test-hero-visualizer.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 127 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 127 execution log.
+    - `progress.md` — Appended Task 127 execution log.
+
+- [x] **[UI - Hero CTA Button Glow & Shimmer / overdrive] Task 126: Elevate primary hero CTA buttons with GPU-accelerated animated border glows, shimmer sweeps, and Web Audio click feedback — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-hero-cta-glow.mjs` — ✅ PASSED (11/11 HERO CTA BUTTON GLOW & SHIMMER CHECKS PASSED SUCCESSFULLY).
+  - **Hero CTA Button Glow, Shimmer Sweeps & Audio Overdrive Architecture**:
+    - `src/lib/audio.ts`: Added `playHeroCtaClick()` Web Audio function synthesizing high-frequency tactile sweeps, triangle wave resonances, and crisp click transients for primary hero CTA buttons.
+    - `src/styles.css`: Added GPU-accelerated animated border glow keyframes (`@keyframes border-glow-rotate`), diagonal light beam sweep keyframes (`@keyframes shimmer-sweep`), breathing overdrive glow pulse (`@keyframes pulse-glow-overdrive`), and Tailwind `@utility` rules (`btn-shimmer-sweep`, `hero-cta-glow-wrapper`, `hero-cta-animated-border`, `hero-cta-amber-border`, `hero-cta-overdrive`) with hardware acceleration (`will-change: transform`).
+    - `src/lib/designTokens.ts`: Defined `HERO_CTA_TOKENS` for mint, emerald, cyan, and amber CTA variants, along with `getHeroCtaGlowClasses(variant)` helper returning GPU-accelerated wrapper, rotating border glow, and button overdrive classes.
+    - `src/components/ui/HeroCtaButton.tsx`: Created reusable, accessible `HeroCtaButton` component wrapping buttons with rotating conic-gradient animated border glow rings, diagonal shimmer sweep beams, hover magnetic/scale micro-interactions, and Web Audio click haptics (`playHeroCtaClick`).
+    - `src/components/ui/primitives.ts`: Re-exported `HeroCtaButton` primitive and `HeroCtaButtonProps`.
+    - `src/components/stash/Hero.tsx`: Updated primary Student & Host Hero CTA buttons to mount `HeroCtaButton` with GPU-accelerated animated border glows, shimmer sweeps, and Web Audio click feedback.
+    - `execution/test-hero-cta-glow.mjs`: Created test harness script verifying Web Audio export, design tokens, CSS animations, primitive re-export, and Hero CTA component mounting.
+  - **Modified Files**:
+    - `src/lib/audio.ts` — Added `playHeroCtaClick` Web Audio feedback function.
+    - `src/styles.css` — Added `@keyframes` and `@utility` rules for GPU-accelerated animated border glow & shimmer sweep.
+    - `src/lib/designTokens.ts` — Added `HERO_CTA_TOKENS` and `getHeroCtaGlowClasses` helper.
+    - `src/components/ui/HeroCtaButton.tsx` — Created HeroCtaButton component.
+    - `src/components/ui/primitives.ts` — Re-exported HeroCtaButton primitive.
+    - `src/components/stash/Hero.tsx` — Mounted HeroCtaButton in Hero layout.
+    - `execution/test-hero-cta-glow.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 126 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 126 execution log.
+    - `progress.md` — Appended Task 126 execution log.
+
+- [x] **[UI - Floating Social Proof Avatars / delight] Task 125: Add an animated stack of verified student and senior host profile avatars with live "Joined today from Kakadeo" indicators — 2026-09-13**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-social-proof-avatars.mjs` — ✅ PASSED (5/5 FLOATING SOCIAL PROOF AVATARS CHECKS PASSED SUCCESSFULLY).
+  - **Floating Social Proof Avatars Architecture**:
+    - `src/components/stash/SocialProofAvatars.tsx`: Built standalone floating social proof avatars component rendering an animated stack of verified student and senior host profile avatars with initial badges (`RS`, `AD`, `PM`, `VS`, `AK`), verified shield dots, rating indicators (`4.9/5 • 480+ Members`), live pulsing beacon dot (`animate-ping`), auto-rotating ticker message (`12m ago from Kakadeo`, `45m ago from Swaroop Nagar`, `1h ago from Kakadeo`, `2h ago from CSJMU`), Web Audio micro-haptics (`playPop`), and interactive hover profile cards showing campus nodes and activity status.
+    - `src/components/stash/Hero.tsx`: Integrated `SocialProofAvatars` into the Hero section layout supporting both Student and Host persona modes.
+    - `execution/test-social-proof-avatars.mjs`: Created verification test script asserting component export, campus member locations, live pulsing beacon, Web Audio micro-haptics, and Hero integration.
+  - **Modified Files**:
+    - `src/components/stash/SocialProofAvatars.tsx` — Created floating social proof avatars component.
+    - `src/components/stash/Hero.tsx` — Integrated SocialProofAvatars into Hero layout.
+    - `execution/test-social-proof-avatars.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 125 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 125 execution log.
+    - `progress.md` — Appended Task 125 execution log.
+
+- [x] **[UI - Hyperlocal Campus Radar Widget / shape] Task 124: Rebuild the Hero Campus Node Radar with real-time pulsing beacons for Kakadeo, IIT Kanpur, HBTI, and CSJMU — 2026-09-13**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite client & SSR production bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-hyperlocal-campus-radar.mjs` — ✅ PASSED (5/5 HYPERLOCAL CAMPUS RADAR CHECKS PASSED SUCCESSFULLY).
+  - **Hyperlocal Campus Radar Widget Architecture**:
+    - `src/components/stash/HeroCampusRadar.tsx`: Built standalone visual 2D radar widget with concentric distance rings (100m, 300m, 500m), rotating 360° radar sweep beam, interactive pulsing beacon pins with live signal latency ("12ms - 26ms • LIVE SCAN"), real-time node capacity badges, campus quick-filter tabs ("Kakadeo (PW/Allen)", "IIT Kanpur (Hall 13)", "HBTI (Nawabganj)", "CSJMU (Kalyanpur)"), Web Audio micro-haptics (`playPop`), bilingual (`en`/`hi`) support, active node inspection drawer, and direct "Reserve Node @ ₹300" action.
+    - `src/components/stash/CampusNodeChecker.tsx`: Updated node dataset with `Kakadeo Coaching Hub` (PW Vidyapeeth / Allen Kakadeo, 208002) and integrated `HeroCampusRadar` component as the live campus radar view mode.
+    - `execution/test-hyperlocal-campus-radar.mjs`: Created test harness validating component existence, campus beacon presence (Kakadeo, IITK, HBTI, CSJMU), Web Audio haptics, CampusNodeChecker integration, and clean production build.
+  - **Modified Files**:
+    - `src/components/stash/HeroCampusRadar.tsx` — Created hyperlocal campus radar widget component.
+    - `src/components/stash/CampusNodeChecker.tsx` — Added Kakadeo node and integrated HeroCampusRadar.
+    - `execution/test-hyperlocal-campus-radar.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 124 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 124 execution log.
+    - `progress.md` — Appended Task 124 execution log.
   - **Build**: `npm run build` — ✅ 0 errors (Vite client & SSR production bundles compiled cleanly).
   - **Verification Suite**: `node execution/test-interactive-value-switcher.mjs` — ✅ PASSED (5/5 INTERACTIVE VALUE SWITCHER CHECKS PASSED SUCCESSFULLY).
   - **Interactive Value Switcher Architecture**:
@@ -1366,11 +1707,44 @@
     - `src/styles.css` — Added micro-copy baseline alignment utilities.
     - `src/components/ui/PillBadge.tsx` — Updated PillBadge baseline alignment.
     - `src/components/ui/Chip.tsx` — Updated Chip baseline alignment.
-    - `src/components/ui/badge.tsx` — Updated Badge baseline alignment.
-    - `execution/test-micro-copy-alignment.mjs` — Created verification test script.
-    - `docs/tasks/PRD.md` — Marked Task 118 as completed (`- [x]`).
-    - `docs/tasks/progress.md` — Appended Task 118 execution log.
-    - `progress.md` — Appended Task 118 execution log.
+- [x] **[UI - Dual Persona Footer Transformation / shape] Task 136: Redesign the footer to seamlessly morph between Student resources (hostel checklist, dead rent calculator) and Host resources (pension guide, TPA Sec 105 legal FAQ) — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-dual-persona-footer.mjs` — ✅ PASSED (DUAL PERSONA FOOTER TRANSFORMATION CHECKS PASSED SUCCESSFULLY).
+  - **Dual Persona Footer Transformation Architecture**:
+    - `src/lib/designTokens.ts`: Defined `DYNAMIC_PERSONA_FOOTER_TOKENS` for Student mode (Electric Mint/Cyan gradients, student titles, resources, form borders) and Host mode (Warm Amber/Sunset Gold gradients, senior host legal charters, form borders), along with `getPersonaFooterTokens(role)` helper.
+    - `src/styles.css`: Added `@utility` rules for `footer-top-accent-student`, `footer-top-accent-host`, `footer-glow-student`, `footer-glow-host`, and dataset attribute persona border rules for `[data-persona]`.
+    - `src/components/stash/FooterSection.tsx`: Overhauled footer section to synchronize with `usePersona()` context (`role`, `setRole`, `isHost`). Features dynamic top header title morphing, top persona accent gradient bar, dual-persona waitlist form background & borders, smooth Framer Motion `AnimatePresence` morphing between **Student Ecosystem Resources** (Kanpur Student Council, Kakadeo Survival Guide, Dead Rent Calculator, Saarthi Stash, Tiffin near Motion/PW) and **Senior Host Ecosystem & Legal Charters** (TPA Sec 105 Protection FAQ, Senior Passive Income Calculator, ₹10k Insurance Charter, 4-Tier Verified Security, Nodal Officer), quick action CTAs (Campus Captain vs TPA Sec 105 Guide PDF), and Web Audio micro-haptics (`playPersonaSwitch`).
+    - `execution/test-dual-persona-footer.mjs`: Created verification test script asserting token exports, title mappings for both personas, and clean build integration.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `DYNAMIC_PERSONA_FOOTER_TOKENS` and `getPersonaFooterTokens` helper.
+    - `src/styles.css` — Added CSS utilities for dynamic persona footer.
+    - `src/components/stash/FooterSection.tsx` — Overhauled FooterSection component with dual persona morphing.
+    - `execution/test-dual-persona-footer.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 136 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 136 execution log.
+    - `progress.md` — Appended Task 136 execution log.
+
+- [x] **[UI - Saarthi Spaces Card 2.0 / polish] Task 142: Redesign Co-Living room cards featuring 16:9 room image carousels, verified senior host badges, zero-brokerage guarantees, and walking distance tags — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client bundle compiled cleanly).
+  - **Verification Suite**: `node execution/test-saarthi-spaces-card-2.mjs` — ✅ PASSED (5/5 SAARTHI SPACES CARD 2.0 CHECKS PASSED SUCCESSFULLY).
+  - **Saarthi Spaces Card 2.0 Architecture**:
+    - `src/lib/designTokens.ts`: Defined `SAARTHI_SPACES_CARD_TOKENS` (16:9 aspect ratio, 4s auto-advance carousel specs, Verified Senior Host badge metadata, Zero Brokerage Guarantee specs, walking distance tags for IITK / Kakadeo / CSJMU) and exported helper function `getSaarthiSpacesCardTokens(role)`.
+    - `src/styles.css`: Injected `@utility` rules (`spaces-card-16-9-stage`, `spaces-carousel-dot`, `spaces-carousel-dot-active`, `zero-brokerage-pill-glow`, `verified-host-shield-badge`) for 16:9 aspect ratio containment, glowing zero-brokerage pill effects, and frosted glass host verification shield badges.
+    - `src/components/ui/SaarthiSpacesCard2.tsx`: Created reusable, accessible `SaarthiSpacesCard2` primitive with 16:9 interactive room image carousel (with slide navigation arrows, slide indicator dots, swipe/tap support), Verified Senior Host Badge (with TPA Sec 105 shield tag), 0% Brokerage Guarantee badge, walking distance / campus proximity tags (`🚶 650m to IIT Gate 1 • 7 min walk`), rating star, student review quote, 1-click booking CTA (`Instant Booking ⚡`), direct WhatsApp trigger, Call trigger, and Web Audio haptic feedback (`playHeroCtaClick`, `playPop`).
+    - `src/components/ui/primitives.ts`: Re-exported `SaarthiSpacesCard2`, `SaarthiSpacesCard2Props`, and `SaarthiSpacesListing`.
+    - `src/components/stash/Rooms.tsx`: Integrated `SaarthiSpacesCard2` to render verified co-living room listings with image carousels and verified host badges.
+    - `execution/test-saarthi-spaces-card-2.mjs`: Created verification test harness validating design tokens, CSS rules, primitive exports, component structure, and Rooms integration.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `SAARTHI_SPACES_CARD_TOKENS` & `getSaarthiSpacesCardTokens` helper.
+    - `src/styles.css` — Added CSS utilities for 16:9 stage, carousel dots, zero brokerage pill glow, and verified host shield badge.
+    - `src/components/ui/SaarthiSpacesCard2.tsx` — Created reusable SaarthiSpacesCard2 component.
+    - `src/components/ui/primitives.ts` — Re-exported SaarthiSpacesCard2 primitive.
+    - `src/components/stash/Rooms.tsx` — Rendered SaarthiSpacesCard2 in co-living room grid.
+    - `execution/test-saarthi-spaces-card-2.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 142 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 142 execution log.
+    - `progress.md` — Appended Task 142 execution log.
+
 
 
 

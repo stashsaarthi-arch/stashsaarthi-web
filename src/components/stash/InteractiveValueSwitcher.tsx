@@ -30,7 +30,7 @@ export const InteractiveValueSwitcher = memo(function InteractiveValueSwitcher({
   const [bags, setBags] = useState<number>(2);
   const [viewMode, setViewMode] = useState<ViewMode>("contrast");
 
-  const currentPreset = DURATION_PRESETS[activePresetIndex];
+  const currentPreset = (DURATION_PRESETS[activePresetIndex] ?? DURATION_PRESETS[0])!;
   const monthlyStorageRatePerBag = 300;
   const stashTotal = bags * currentPreset.months * monthlyStorageRatePerBag;
   const deadRentTotal = currentPreset.deadRent;

@@ -45,9 +45,9 @@ export function parseOklch(raw: string): OklchColor {
     return { l: 0.12, c: 0.012, h: 230, alpha: 1, raw: "oklch(0.12 0.012 230)" };
   }
 
-  const l = parseFloat(match[1]);
-  const c = parseFloat(match[2]);
-  const h = parseFloat(match[3]);
+  const l = parseFloat(match[1] ?? "0");
+  const c = parseFloat(match[2] ?? "0");
+  const h = parseFloat(match[3] ?? "0");
   let alpha = 1;
 
   if (match[4]) {

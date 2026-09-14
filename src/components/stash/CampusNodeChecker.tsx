@@ -21,6 +21,9 @@ import type { OpenBooking } from "./types";
 import { useLanguage } from "@/context/LanguageContext";
 import { NodeSkeleton } from "@/components/ui/skeleton";
 import { FindMyStashModal } from "./FindMyStashModal";
+import { HeroCampusRadar } from "./HeroCampusRadar";
+import { PersonaEmptyState } from "@/components/ui/PersonaEmptyState";
+
 
 interface NodeData {
   id: string;
@@ -45,6 +48,29 @@ interface NodeData {
 }
 
 const MOCK_NODES: Record<string, NodeData[]> = {
+  "Kakadeo Coaching Hub": [
+    {
+      id: "kakadeo-1",
+      name: "Kakadeo PW Vidyapeeth Saarthi Hub",
+      name_hi: "काकादेव पीडब्ल्यू विद्यापीठ सार्थी हब",
+      locality: "Geeta Nagar / Kakadeo, Kanpur",
+      locality_hi: "गीता नगर / काकादेव, कानपुर",
+      pincode: "208002",
+      distance: "150m",
+      distance_hi: "150मी",
+      walkTime: "2-min walk",
+      walkTime_hi: "2 मिनट पैदल",
+      gateNearby: "PW Vidyapeeth & Allen Kakadeo",
+      gateNearby_hi: "पीडब्ल्यू विद्यापीठ व एलन काकादेव",
+      stashAvailable: 19,
+      roomsAvailable: 5,
+      pickupTime: "10-min",
+      pickupTime_hi: "10 मिनट",
+      rating: 4.9,
+      x: 48,
+      y: 44,
+    },
+  ],
   "CSJMU Kanpur": [
     {
       id: "knp-1",
@@ -483,122 +509,24 @@ export function CampusNodeChecker({ onBook }: { onBook: OpenBooking }) {
                     </div>
                   </motion.div>
                 ) : (
-                  <motion.div
-                    key="no-results"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="py-6 px-4 text-center text-xs text-muted-foreground"
-                  >
-                    {t.campusNodeChecker.noResults}
-                  </motion.div>
+                  <div key="no-results" className="p-3">
+                    <PersonaEmptyState
+                      variant="student_search_miss"
+                      onPrimaryAction={() => {
+                        setQuery("");
+                        setDebouncedQuery("");
+                      }}
+                      primaryActionLabel="Reset Search"
+                      primaryActionLabelHi="खोज रीसेट करें"
+                      onSuggestionClick={(s) => handleChipClick(s, s)}
+                    />
+                  </div>
                 )}
+
               </AnimatePresence>
             </>
           ) : (
-            /* Interactive Visual Campus Radar Map */
-            <div className="p-3 space-y-3">
-              <div className="relative w-full h-[210px] sm:h-[240px] rounded-xl bg-[#070A0D] border border-cyan-500/20 overflow-hidden flex items-center justify-center">
-                {/* Radar Grid Circles */}
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <div className="w-[85%] h-[85%] rounded-full border border-cyan-500/15" />
-                  <div className="absolute w-[60%] h-[60%] rounded-full border border-cyan-500/20" />
-                  <div className="absolute w-[35%] h-[35%] rounded-full border border-cyan-500/25" />
-                  <div className="absolute w-[10%] h-[10%] rounded-full bg-cyan-500/20 border border-cyan-400/40" />
-                  {/* Crosshairs */}
-                  <div className="absolute w-full h-[1px] bg-cyan-500/10" />
-                  <div className="absolute h-full w-[1px] bg-cyan-500/10" />
-                </div>
-
-                {/* Rotating Radar Beam Sweep */}
-                <div
-                  className="absolute inset-0 pointer-events-none opacity-40"
-                  style={{
-                    background:
-                      "conic-gradient(from 0deg at 50% 50%, rgba(6, 182, 212, 0.4) 0deg, transparent 60deg)",
-                    animation: "spin 5s linear infinite",
-                  }}
-                />
-
-                {/* Interactive Node Pins */}
-                {allRadarNodes.map((node) => {
-                  const isSelected = selectedRadarNode?.id === node.id;
-                  const nodeName = isHi && node.name_hi ? node.name_hi : node.name;
-                  return (
-                    <button
-                      key={node.id}
-                      type="button"
-                      onClick={() => setSelectedRadarNode(node)}
-                      style={{ left: `${node.x || 50}%`, top: `${node.y || 50}%` }}
-                      className="absolute -translate-x-1/2 -translate-y-1/2 group z-10 cursor-pointer"
-                    >
-                      <span className="relative flex h-5 w-5 items-center justify-center">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60" />
-                        <span
-                          className={`relative inline-flex rounded-full h-3 w-3 ${isSelected ? "bg-cyan-400 ring-4 ring-cyan-400/30 scale-125" : "bg-emerald-500"} transition-all`}
-                        />
-                      </span>
-                      <span className="absolute top-6 left-1/2 -translate-x-1/2 whitespace-nowrap text-[9px] font-bold font-mono bg-black/80 text-white px-1.5 py-0.5 rounded border border-white/20 shadow-md">
-                        {nodeName.split(" ")[0]}
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
-
-              {/* Selected Radar Node Inspection Box */}
-              {selectedRadarNode ? (
-                <div className="p-3.5 rounded-2xl border border-cyan-500/30 bg-cyan-500/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-sm font-bold text-white">
-                        {isHi && selectedRadarNode.name_hi
-                          ? selectedRadarNode.name_hi
-                          : selectedRadarNode.name}
-                      </span>
-                      <span className="text-[10px] font-mono font-bold text-emerald-400 bg-emerald-500/20 px-1.5 py-0.5 rounded">
-                        {selectedRadarNode.stashAvailable} {isHi ? "स्पॉट उपलब्ध" : "spots left"}
-                      </span>
-                    </div>
-                    <p className="text-xs text-slate-300 mt-0.5">
-                      {isHi && selectedRadarNode.locality_hi
-                        ? selectedRadarNode.locality_hi
-                        : selectedRadarNode.locality}{" "}
-                      · {selectedRadarNode.distance} ({selectedRadarNode.walkTime})
-                    </p>
-                  </div>
-
-                  <div className="flex items-center gap-2 w-full sm:w-auto shrink-0">
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      onClick={() => openDirections(selectedRadarNode.id)}
-                      className="w-full sm:w-auto border-emerald-500/30 bg-emerald-500/10 text-emerald-300 text-xs cursor-pointer gap-1"
-                    >
-                      <Footprints className="h-3.5 w-3.5 text-cyan-400" />
-                      <span>{isHi ? "मार्ग देखें" : "Directions"}</span>
-                    </Button>
-
-                    <Button
-                      size="sm"
-                      variant="hero"
-                      onClick={() =>
-                        onBook({ service: "stash", note: `Radar Booked: ${selectedRadarNode.name}` })
-                      }
-                      className="w-full sm:w-auto shrink-0 cursor-pointer text-xs"
-                    >
-                      {isHi ? "यह नोड बुक करें" : "Reserve Node"}
-                    </Button>
-                  </div>
-                </div>
-              ) : (
-                <p className="text-xs text-center text-slate-400 italic">
-                  {isHi
-                    ? "👆 विवरण और स्लॉट उपलब्धता देखने के लिए रडार पर किसी भी नोड पर क्लिक करें।"
-                    : "👆 Click any radar pin above to inspect live storage capacity and reserve instantly."}
-                </p>
-              )}
-            </div>
+            <HeroCampusRadar onBook={onBook} />
           )}
         </div>
       </AnimatedContent>

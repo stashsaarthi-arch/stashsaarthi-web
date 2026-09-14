@@ -266,7 +266,7 @@ export const PgComparisonTable: React.FC<PgComparisonTableProps> = ({ onBook }) 
   ];
 
   return (
-    <section id="comparison" className="relative py-8 sm:py-12 bg-background border-t border-b border-border/40 overflow-hidden">
+    <section id="comparison" className="section-isolated layout-isolated relative py-8 sm:py-12 pb-32 bg-background border-t border-b border-border/40 overflow-hidden">
       {/* Glow Effects */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-emerald-500/5 dark:bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 right-10 w-72 h-72 bg-cyan-500/5 dark:bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />

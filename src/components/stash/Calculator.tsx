@@ -67,7 +67,7 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
   }, [safeBags, safeDays, safeRent, activeZone]);
 
   return (
-    <div id="student-calculator" className="relative mx-auto max-w-5xl px-2 py-2 scroll-mt-20">
+    <div id="student-calculator" className="section-isolated layout-isolated relative mx-auto max-w-5xl px-2 py-2 scroll-mt-20">
       <AnimatedContent distance={30} scale={0.98} duration={0.5} ease="power2.out">
         <div className="w-full max-w-4xl mx-auto rounded-2xl bg-[#0F1318] border border-slate-800 p-4 sm:p-6 backdrop-blur-xl shadow-xl relative overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-center">

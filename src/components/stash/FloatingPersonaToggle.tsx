@@ -1,14 +1,10 @@
 import { useState, useEffect, memo } from "react";
 import { usePersona } from "@/context/PersonaContext";
-import { useLanguage } from "@/context/LanguageContext";
-import { GraduationCap, HeartHandshake } from "lucide-react";
-import { playPop } from "@/lib/audio";
 import { motion, AnimatePresence } from "motion/react";
+import { PersonaSwitcher } from "@/components/ui/PersonaSwitcher";
 
 export const FloatingPersonaToggle = memo(function FloatingPersonaToggle() {
   const { role, setRole } = usePersona();
-  const { language } = useLanguage();
-  const isHi = language === "hi";
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -29,45 +25,14 @@ export const FloatingPersonaToggle = memo(function FloatingPersonaToggle() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 16 }}
           transition={{ duration: 0.2 }}
-          role="radiogroup"
-          aria-label={isHi ? "यूज़र पर्सोना चुनें" : "Select User Persona"}
-          className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 hidden sm:flex items-center gap-1 rounded-full border border-white/10 bg-[#0A0D0F]/90 p-1.5 shadow-2xl backdrop-blur-xl pointer-events-auto"
+          className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 hidden sm:flex pointer-events-auto"
         >
-          <button
-            type="button"
-            role="radio"
-            aria-checked={role === "student"}
-            onClick={() => {
-              playPop();
-              setRole("student");
-            }}
-            className={`flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-bold transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 ${
-              role === "student"
-                ? "bg-emerald-500 text-black shadow-lg shadow-emerald-500/25"
-                : "text-slate-400 hover:text-white"
-            }`}
-          >
-            <GraduationCap className="h-3.5 w-3.5" aria-hidden="true" />
-            <span>{isHi ? "छात्र मोड" : "Student Mode"}</span>
-          </button>
-
-          <button
-            type="button"
-            role="radio"
-            aria-checked={role === "host"}
-            onClick={() => {
-              playPop();
-              setRole("host");
-            }}
-            className={`flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-bold transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
-              role === "host"
-                ? "bg-amber-500 text-black shadow-lg shadow-amber-500/25"
-                : "text-slate-400 hover:text-white"
-            }`}
-          >
-            <HeartHandshake className="h-3.5 w-3.5" aria-hidden="true" />
-            <span>{isHi ? "सीनियर होस्ट" : "Senior Host"}</span>
-          </button>
+          <PersonaSwitcher
+            id="floating-persona-toggle-switcher"
+            role={role}
+            onRoleChange={setRole}
+            variant="standard"
+          />
         </motion.div>
       )}
     </AnimatePresence>

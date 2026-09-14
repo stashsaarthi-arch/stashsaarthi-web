@@ -147,30 +147,31 @@ Sprint 10: QA, CSO & CEO (Total Assurance, Compliance & Strategic Direction)
 - [x] 121. **[UI - Student Hero Overhaul / bolder]**: Redesign Student Persona Hero with ultra-crisp neon emerald headline glow, floating 3D luggage mockups, and instant ₹300/mo value badge.
 - [x] 122. **[UI - Host Hero Overhaul / bolder]**: Redesign Senior Host Persona Hero with warm sunset gold illumination, dignified ₹11,500+/mo passive income badge, and trust seals.
 - [x] 123. **[UI - Interactive Value Switcher / delight]**: Design an interactive hero toggle demonstrating the immediate contrast between "Wasting ₹8,000 dead rent" vs "Saarthi Stash ₹300/mo".
-- [ ] 124. **[UI - Hyperlocal Campus Radar Widget / shape]**: Rebuild the Hero Campus Node Radar with real-time pulsing beacons for Kakadeo, IIT Kanpur, HBTI, and CSJMU.
-- [ ] 125. **[UI - Floating Social Proof Avatars / delight]**: Add an animated stack of verified student and senior host profile avatars with live "Joined today from Kakadeo" indicators.
-- [ ] 126. **[UI - Hero CTA Button Glow & Shimmer / overdrive]**: Elevate primary hero CTA buttons with GPU-accelerated animated border glows, shimmer sweeps, and Web Audio click feedback.
-- [ ] 127. **[UI - Hero Video & Interactive Visualizer / shape]**: Integrate an ambient, lightweight visualizer showcasing the seamless transition of items from hostel room to secured host vault.
-- [ ] 128. **[UI - Trust Banner & Partner Strip / polish]**: Redesign the campus & institutional trust strip (IITK, HBTI, CSJMU, Regency, UP Police verification) with subtle monochrome-to-color hover effects.
-- [ ] 129. **[UI - Quick-Action Floating Dock / adapt]**: Implement an intuitive floating bottom pill dock on mobile viewports for instant 1-tap switching between Stash, Spaces, Kitchen, and Connect.
-- [ ] 130. **[UI - Hero Micro-Stats Counter / animate]**: Add smooth count-up animated statistics (e.g., "₹42,00,000+ Dead Rent Saved", "450+ Verified Senior Hosts") with IntersectionObserver triggers.
+- [x] 124. **[UI - Hyperlocal Campus Radar Widget / shape]**: Rebuild the Hero Campus Node Radar with real-time pulsing beacons for Kakadeo, IIT Kanpur, HBTI, and CSJMU.
+- [x] 125. **[UI - Floating Social Proof Avatars / delight]**: Add an animated stack of verified student and senior host profile avatars with live "Joined today from Kakadeo" indicators.
+- [x] 126. **[UI - Hero CTA Button Glow & Shimmer / overdrive]**: Elevate primary hero CTA buttons with GPU-accelerated animated border glows, shimmer sweeps, and Web Audio click feedback.
+- [x] 127. **[UI - Hero Video & Interactive Visualizer / shape]**: Integrate an ambient, lightweight visualizer showcasing the seamless transition of items from hostel room to secured host vault.
+- [x] 128. **[UI - Trust Banner & Partner Strip / polish]**: Redesign the campus & institutional trust strip (IITK, HBTI, CSJMU, Regency, UP Police verification) with subtle monochrome-to-color hover effects.
+- [x] 129. **[UI - Quick-Action Floating Dock / adapt]**: Implement an intuitive floating bottom pill dock on mobile viewports for instant 1-tap switching between Stash, Spaces, Kitchen, and Connect.
+- [x] 130. **[UI - Hero Micro-Stats Counter / animate]**: Add smooth count-up animated statistics (e.g., "₹42,00,000+ Dead Rent Saved", "450+ Verified Senior Hosts") with IntersectionObserver triggers.
 
 ## Sprint 14: Dual-Persona Experience — Student Mint vs Host Amber (impeccable colorize, quieter, clarify)
-- [ ] 131. **[UI - Persona Switcher Redesign / animate]**: Overhaul the global Student / Host toggle switch with smooth pill sliding animation, role-specific icons, and haptic audio cues.
-- [ ] 132. **[UI - Senior Host Legibility Mode / adapt]**: Automatically enhance UI readability when Host mode is active (larger 18px+ base font, higher contrast borders, simplified action buttons).
-- [ ] 133. **[UI - Student Dark Mode Aesthetics / colorize]**: Infuse Student persona cards with cyberpunk-inspired mint/cyan edge highlights and frosted glass depth.
-- [ ] 134. **[UI - Host Warm Hearth Aesthetics / colorize]**: Infuse Senior Host persona surfaces with comforting amber, terracotta, and warm brass accents conveying dignity and warmth.
-- [ ] 135. **[UI - Dynamic Persona Themed Navbar / polish]**: Synchronize Navbar brand glows, link underlines, and active indicator bars with active persona palette.
-- [ ] 136. **[UI - Dual Persona Footer Transformation / shape]**: Redesign the footer to seamlessly morph between Student resources (hostel checklist, dead rent calculator) and Host resources (pension guide, TPA Sec 105 legal FAQ).
-- [ ] 137. **[UI - Persona-Specific Empty States / delight]**: Design empathetic, persona-tailored empty states with charming illustrated SVGs for student search misses and host zero-booking states.
-- [ ] 138. **[UI - Persona Transition Crossfade / animate]**: Smooth out the instantaneous persona switch using a gentle 250ms CSS color-interpolate fade to eliminate jarring flashes.
-- [ ] 139. **[UI - Devanagari Type Tuning for Hosts / typeset]**: Apply generous letter-spacing and optimized Devanagari font fallbacks for senior citizens reading Hindi text.
-- [ ] 140. **[UI - Persona Context Indicators / clarify]**: Add subtle sticky corner badges or ambient gradient halos reminding the user which persona view is currently engaged.
+- [x] 131. **[UI - Persona Switcher Redesign / animate]**: Overhaul the global Student / Host toggle switch with smooth pill sliding animation, role-specific icons, and haptic audio cues.
+- [x] 132. **[UI - Senior Host Legibility Mode / adapt]**: Automatically enhance UI readability when Host mode is active (larger 18px+ base font, higher contrast borders, simplified action buttons).
+- [x] 133. **[UI - Student Dark Mode Aesthetics / colorize]**: Infuse Student persona cards with cyberpunk-inspired mint/cyan edge highlights and frosted glass depth.
+- [x] 134. **[UI - Host Warm Hearth Aesthetics / colorize]**: Infuse Senior Host persona surfaces with comforting amber, terracotta, and warm brass accents conveying dignity and warmth.
+- [x] 135. **[UI - Dynamic Persona Themed Navbar / polish]**: Synchronize Navbar brand glows, link underlines, and active indicator bars with active persona palette.
+- [x] 136. **[UI - Dual Persona Footer Transformation / shape]**: Redesign the footer to seamlessly morph between Student resources (hostel checklist, dead rent calculator) and Host resources (pension guide, TPA Sec 105 legal FAQ).
+- [x] 137. **[UI - Persona-Specific Empty States / delight]**: Design empathetic, persona-tailored empty states with charming illustrated SVGs for student search misses and host zero-booking states.
+
+- [x] 138. **[UI - Persona Transition Crossfade / animate]**: Smooth out the instantaneous persona switch using a gentle 250ms CSS color-interpolate fade to eliminate jarring flashes.
+- [x] 139. **[UI - Devanagari Type Tuning for Hosts / typeset]**: Apply generous letter-spacing and optimized Devanagari font fallbacks for senior citizens reading Hindi text.
+- [x] 140. **[UI - Persona Context Indicators / clarify]**: Add subtle sticky corner badges or ambient gradient halos reminding the user which persona view is currently engaged.
 
 ## Sprint 15: Component Library, Glassmorphism & Bento Grids (impeccable extract, polish, distill)
-- [ ] 141. **[UI - Saarthi Stash Card 2.0 / polish]**: Overhaul the Micro-Storage card with 3D bag depth preview, tamper-proof seal indicator, ₹300/mo prominent pricing pill, and 1-click booking CTA.
-- [ ] 142. **[UI - Saarthi Spaces Card 2.0 / polish]**: Redesign Co-Living room cards featuring 16:9 room image carousels, verified senior host badges, zero-brokerage guarantees, and walking distance tags.
-- [ ] 143. **[UI - Saarthi Kitchen Card 2.0 / polish]**: Overhaul Tiffin cards with daily meal countdown timers, rotating homestyle thali previews, calorie/macro breakdowns, and chef bio tags.
+- [x] 141. **[UI - Saarthi Stash Card 2.0 / polish]**: Overhaul the Micro-Storage card with 3D bag depth preview, tamper-proof seal indicator, ₹300/mo prominent pricing pill, and 1-click booking CTA.
+- [x] 142. **[UI - Saarthi Spaces Card 2.0 / polish]**: Redesign Co-Living room cards featuring 16:9 room image carousels, verified senior host badges, zero-brokerage guarantees, and walking distance tags.
+- [x] 143. **[UI - Saarthi Kitchen Card 2.0 / polish]**: Overhaul Tiffin cards with daily meal countdown timers, rotating homestyle thali previews, calorie/macro breakdowns, and chef bio tags.
 - [ ] 144. **[UI - Saarthi Connect Card 2.0 / polish]**: Redesign Intergenerational Mentorship cards with senior hobby tags, student skill-exchange chips, and karma points earned counters.
 - [ ] 145. **[UI - Accordion & FAQ Redesign / distill]**: Re-engineer the FAQ accordions with buttery smooth height transitions, glowing active outlines, and instant category filters.
 - [ ] 146. **[UI - Testimonial & Review Carousel / delight]**: Build an editorial-grade testimonial carousel with student audio clip quotes, verified college badges, and rating stars.

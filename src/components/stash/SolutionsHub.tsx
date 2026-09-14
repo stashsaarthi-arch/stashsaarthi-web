@@ -201,7 +201,7 @@ export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: S
   const tabs = isStudent ? studentTabs : hostTabs;
 
   return (
-    <section id="solutions" ref={sectionRef} className="section-isolated layout-isolated relative mx-auto max-w-6xl px-4 py-3.5 sm:py-5 scroll-mt-20 overflow-hidden">
+    <section id="solutions" ref={sectionRef} className="section-isolated layout-isolated relative mx-auto max-w-6xl px-4 py-3.5 sm:py-5 pb-32 scroll-mt-20 overflow-hidden">
       {/* Background Ambient Parallax Elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden -z-10 select-none">
         {/* Ambient Gradient Orb Top Left */}

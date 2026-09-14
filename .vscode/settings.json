@@ -9,6 +9,7 @@
   "ralphLoop.autoAcceptChanges": true,
   "ralphLoop.maxIterations": 100,
   "ralphLoop.defaultModel": "Gemini 3 Flash",
+  "ralphLoop.antigravity.port": 0,
   "ralphLoop.antigravity.oauthToken": "auto",
   "files.autoSave": "afterDelay",
   "files.autoSaveDelay": 500,
@@ -59,7 +60,6 @@
   "chat.tools.eligibleForAutoApproval": {
     "runInTerminal": true,
     "runTask": true,
-    "runTests": true,
     "runSubagent": true
   },
   "chat.tools.terminal.autoReplyToPrompts": true,

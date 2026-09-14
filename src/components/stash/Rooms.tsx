@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
-import { BadgeCheck, MessageCircle, Phone, MapPin, Star, Gift, Compass, Zap, Search, Home } from "lucide-react";
+import { Gift, Compass, Zap, Search, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AnimatedContent from "@/components/ui/AnimatedContent";
 import { supabase } from "@/integrations/supabase/client";
 import { SafetyAuditModal } from "./SafetyAuditModal";
 import { Room360Viewer } from "./Room360Viewer";
-import { FOUNDER_WHATSAPP, getWhatsAppUrl } from "@/lib/constants";
-import { PrototypeBadge } from "@/components/ui/PrototypeBadge";
 import { useLanguage } from "@/context/LanguageContext";
 import { RoomCardSkeleton } from "@/components/ui/skeleton";
+import { SaarthiSpacesCard2, type SaarthiSpacesListing } from "@/components/ui/primitives";
 import type { OpenBooking } from "./types";
 
 type Listing = {
@@ -226,7 +225,7 @@ export function Rooms({ onList, onBook }: { onList: () => void; onBook?: OpenBoo
   };
 
   return (
-    <div id="rooms" className="relative mx-auto max-w-6xl px-2 py-2 scroll-mt-20">
+    <div id="rooms" className="section-isolated layout-isolated relative mx-auto max-w-6xl px-2 py-2 scroll-mt-20">
       {/* ── High-Contrast Action Banner: Find Broker-Free Rooms & Instant Booking ── */}
       <div className="flex flex-wrap items-center justify-between gap-3 mb-3.5 p-3 rounded-2xl bg-slate-900/90 border border-emerald-500/30 backdrop-blur-md shadow-xl">
         <div className="flex items-center gap-2.5">
@@ -304,167 +303,28 @@ export function Rooms({ onList, onBook }: { onList: () => void; onBook?: OpenBoo
             </>
           ) : (
             filteredListings.map((l, i) => (
-            <AnimatedContent
-              key={l.id}
-              distance={30}
-              direction="vertical"
-              duration={0.5}
-              delay={i * 0.05}
-            >
-              <article className="glass flex flex-col rounded-2xl p-3 group">
-                <div className="relative w-full h-36 rounded-xl overflow-hidden mb-2.5 border border-white/10 bg-slate-900">
-                  <RoomImage
-                    src={l.image || FALLBACK_IMAGES[i % 3] || DEFAULT_ROOM_SVG}
-                    alt={l.address_location || "Student Room"}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 pointer-events-none" />
-
-                  {/* Badge positioned inside image overlay */}
-                  <div className="absolute top-2 left-2 right-2 flex items-center justify-between gap-1.5 pointer-events-none">
-                    <button
-                      onClick={() => setAuditOpen(true)}
-                      className="pointer-events-auto bg-black/60 backdrop-blur-md border border-white/10 text-amber-400 text-[9px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 hover:bg-black/85 transition-colors cursor-pointer"
-                    >
-                      <span>✓</span> {t.rooms.studentReviewedBadge}
-                    </button>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleOpen360(l);
-                      }}
-                      className="pointer-events-auto bg-emerald-950/80 backdrop-blur-md border border-emerald-500/40 text-emerald-300 text-[9px] font-extrabold px-2.5 py-0.5 rounded-full flex items-center gap-1 hover:bg-emerald-500 hover:text-black transition-all cursor-pointer shadow-lg group/tour"
-                    >
-                      <Compass className="h-3 w-3 text-emerald-400 group-hover/tour:rotate-180 transition-transform duration-500" />
-                      <span>{isHi ? "360° टूर" : "360° Tour"}</span>
-                    </button>
-                  </div>
-                </div>
-
-                <div className="flex flex-1 flex-col px-1 pb-1">
-                  <div className="flex items-start justify-between gap-2 flex-wrap">
-                    <div className="flex items-center gap-1.5 flex-wrap">
-                      <span className="text-base font-extrabold">
-                        {l.rent_amount
-                          ? `${inr(l.rent_amount)}${t.rooms.perMonth}`
-                          : t.rooms.rentOnRequest}
-                      </span>
-                      <span className="inline-flex items-center gap-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-[10px] font-bold text-emerald-400">
-                        ⚡ {isHi ? "0 रद्दीकरण शुल्क" : "Zero Cancellation Fee"}
-                      </span>
-                    </div>
-                    {l.ratings ? (
-                      <span className="flex shrink-0 items-center gap-1 text-xs font-bold text-amber">
-                        <Star className="h-3 w-3 fill-current" /> {l.ratings}
-                      </span>
-                    ) : null}
-                  </div>
-
-                  <p className="mt-1 flex items-center flex-wrap gap-1 text-[11px] text-muted-foreground">
-                    <MapPin className="h-3 w-3 shrink-0 text-cyan" />
-                    <span className="min-w-0">{l.address_location}</span>
-                    <PrototypeBadge variant="text" />
-                  </p>
-
-                  {(isHi && l.transit_estimate_hi ? l.transit_estimate_hi : l.transit_estimate) && (
-                    <div className="mt-1.5 inline-flex items-center rounded-md border border-emerald-500/20 bg-emerald-500/5 px-2 py-0.5 text-[10px] font-medium text-emerald-300">
-                      {isHi && l.transit_estimate_hi ? l.transit_estimate_hi : l.transit_estimate}
-                    </div>
-                  )}
-
-                  {(l as any).capacity_badge && (
-                    <div
-                      className={`mt-1.5 inline-flex items-center w-fit rounded-full border px-2 py-0.5 text-[10px] font-medium 
-                      ${(l as any).capacity_badge.color === "emerald" ? "border-emerald-500/20 bg-emerald-500/10 text-emerald-400" : ""}
-                      ${(l as any).capacity_badge.color === "amber" ? "border-amber-500/20 bg-amber-500/10 text-amber-400" : ""}
-                      ${(l as any).capacity_badge.color === "cyan" ? "border-cyan-500/20 bg-cyan-500/10 text-cyan-400" : ""}
-                    `}
-                    >
-                      <div
-                        className={`mr-1 h-1.5 w-1.5 rounded-full 
-                        ${(l as any).capacity_badge.color === "emerald" ? "bg-emerald-500" : ""}
-                        ${(l as any).capacity_badge.color === "amber" ? "bg-amber-500" : ""}
-                        ${(l as any).capacity_badge.color === "cyan" ? "bg-cyan-500" : ""}
-                      `}
-                      />
-                      {isHi && (l as any).capacity_badge.text_hi
-                        ? (l as any).capacity_badge.text_hi
-                        : (l as any).capacity_badge.text}
-                    </div>
-                  )}
-
-                  {l.student_review ? (
-                    <p className="mt-2 whitespace-pre-line text-xs leading-relaxed text-muted-foreground line-clamp-3">
-                      {formatReview(l.student_review)}
-                    </p>
-                  ) : null}
-
-                  <div className="mt-3 flex flex-wrap gap-1.5 pt-1">
-                    {onBook && (
-                      <Button
-                        variant="hero"
-                        size="sm"
-                        className="bg-gradient-to-r from-emerald-400 to-teal-400 text-slate-950 font-extrabold hover:brightness-110 shadow-[0_0_12px_-2px_rgba(16,185,129,0.5)] text-xs px-2.5 py-1.5 flex items-center gap-1 shrink-0"
-                        onClick={() => onBook({ service: "spaces" })}
-                      >
-                        <Zap className="h-3.5 w-3.5 fill-current text-slate-950" />
-                        <span>{isHi ? "इन्स्टेंट बुकिंग ⚡" : "Instant Booking ⚡"}</span>
-                      </Button>
-                    )}
-                    <Button
-                      asChild
-                      variant="outline"
-                      size="sm"
-                      className="flex-1 whitespace-normal border-white/15 bg-white/5 hover:bg-slate-900 text-xs leading-snug py-1.5"
-                    >
-                      <a
-                        href={(() => {
-                          const phone = l.owner_phone
-                            ? l.owner_phone.replace(/\D/g, "")
-                            : FOUNDER_WHATSAPP;
-                          const targetPhone = phone.length >= 10 ? phone : FOUNDER_WHATSAPP;
-                          const text = isHi
-                            ? l.owner_name
-                              ? `नमस्ते ${l.owner_name}, मैंने StashSaarthi पर आपका कमरा (${l.address_location || "कानपुर"}) देखा और मैं इसे देखना चाहता/चाहती हूं।`
-                              : `नमस्ते StashSaarthi, मैं कानपुर में सत्यापित कमरा बुक करने में रुचि रखता हूं (${l.address_location || "कानपुर"})।`
-                            : l.owner_name
-                              ? `Hi ${l.owner_name}, I found your room (${l.address_location || "Kanpur"}) on StashSaarthi and would like to visit.`
-                              : `Hi StashSaarthi, I am interested in booking a verified room in Kanpur (${l.address_location || "Kanpur"}).`;
-                          return getWhatsAppUrl(text, targetPhone);
-                        })()}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <MessageCircle className="h-3.5 w-3.5 mr-1 text-emerald-400" /> {t.rooms.bookDirectly}
-                      </a>
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="border-emerald-500/40 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/20 text-xs px-2.5 py-1.5 flex items-center gap-1"
-                      onClick={() => handleOpen360(l)}
-                      title={isHi ? "360° वर्चुअल रूम टूर" : "360° Virtual Room Tour"}
-                    >
-                      <Compass className="h-3.5 w-3.5 text-emerald-400" />
-                      <span>360°</span>
-                    </Button>
-                    <Button
-                      asChild
-                      variant="outline"
-                      size="icon"
-                      className="h-8 w-8 shrink-0"
-                      aria-label={
-                        isHi ? "मालिक या सार्थी कंसीयज को कॉल करें" : "Call owner or concierge"
-                      }
-                    >
-                      <a href={`tel:${(l.owner_phone || FOUNDER_WHATSAPP).replace(/\s/g, "")}`}>
-                        <Phone className="h-3.5 w-3.5" />
-                      </a>
-                    </Button>
-                  </div>
-                </div>
-              </article>
-            </AnimatedContent>
-          )))}
+              <AnimatedContent
+                key={l.id}
+                distance={30}
+                direction="vertical"
+                duration={0.5}
+                delay={i * 0.05}
+              >
+                <SaarthiSpacesCard2
+                  listing={{
+                    ...l,
+                    images: [
+                      l.image || FALLBACK_IMAGES[i % 3] || "",
+                      FALLBACK_IMAGES[(i + 1) % 3] || "",
+                      FALLBACK_IMAGES[(i + 2) % 3] || "",
+                    ],
+                  }}
+                  onBook={() => onBook?.({ service: "spaces" })}
+                  onOpen360={(item) => handleOpen360(item as any)}
+                  onOpenAudit={() => setAuditOpen(true)}
+                />
+              </AnimatedContent>
+            )))}
         </div>
       </div>
 

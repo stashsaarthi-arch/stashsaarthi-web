@@ -63,7 +63,7 @@ export function ExecutiveAnalyticsDashboard() {
   };
 
   return (
-    <div className="w-full space-y-6">
+    <div className="section-isolated layout-isolated w-full space-y-6">
       {/* Header bar */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-5 rounded-2xl bg-white/[0.03] border border-amber-500/30 backdrop-blur-xl">
         <div className="flex items-center gap-3">

@@ -120,7 +120,7 @@ export function KakadeoSurvivalGuide() {
   };
 
   return (
-    <div className="w-full max-w-5xl mx-auto px-4 py-8 space-y-8 font-sans text-slate-100 print:text-slate-900 print:bg-white print:p-0 print:m-0 print:max-w-none">
+    <div className="section-isolated layout-isolated w-full max-w-5xl mx-auto px-4 py-8 space-y-8 font-sans text-slate-100 print:text-slate-900 print:bg-white print:p-0 print:m-0 print:max-w-none">
       {/* Printable Header styling injected for browser print mode */}
       <style>{`
         @media print {
