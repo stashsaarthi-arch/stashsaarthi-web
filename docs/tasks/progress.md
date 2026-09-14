@@ -2,6 +2,90 @@ ralph-done-atufh
 
 # Ralph Autonomous Workforce Sprint Progress
 
+- [x] **[UI - WhatsApp Quick-Checkout Fallback / distill] Task 169: Build a streamlined fallback modal for weak network connections allowing students to finalize orders via pre-filled WhatsApp link — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test_task169_whatsapp_fallback.mjs` — ✅ PASSED (Task 169 verification checks passed 100%).
+  - **WhatsApp Quick-Checkout Fallback Architecture**:
+    - `src/lib/designTokens.ts`: Defined `WHATSAPP_CHECKOUT_FALLBACK_TOKENS` (`whatsappNumber: "+91 9369454350"`, `whatsappNumberDigits: "919369454350"`, `bilingualCopy` for English and Hindi title, subtitle, CTAs, signal badge, prefill copied text, QR scan text; `speedGuarantee: "10-Sec Dispatch"`, `trustBadges`, `accent` gradients and button glows for Student vs Host persona) and exported `getWhatsAppCheckoutFallbackTokens` helper function.
+    - `src/styles.css`: Added CSS utilities (`.whatsapp-fallback-modal-overlay`, `.whatsapp-fallback-card`, `.whatsapp-signal-badge`, `@keyframes whatsapp-pulse-ring`, `.whatsapp-pulse-ring-active`, `.whatsapp-prefill-preview-box`) for weak-signal indicator badges, pulsing green ring animations, and message pre-fill preview styling.
+    - `src/components/ui/WhatsAppCheckoutFallbackModal.tsx`: Created reusable `WhatsAppCheckoutFallbackModal` primitive featuring weak-signal banner, pre-filled WhatsApp order dispatch message generator, 1-tap copy button with toast feedback, direct `wa.me/919369454350` deep link launch button, desktop QR code scanner view for phone scanning, dual-persona theme support (`usePersona()`), Web Audio haptics (`playClick`, `playPop`, `playSuccessChime`), and bilingual support (`en`/`hi`).
+    - `src/components/ui/primitives.ts`: Re-exported `WhatsAppCheckoutFallbackModal`, `WhatsAppCheckoutFallbackModalProps`, and `FallbackBookingSummary`.
+    - `src/components/stash/BookingModal.tsx`: Integrated `WhatsAppCheckoutFallbackModal` trigger button into Step 2 checkout view ("⚡ Slow / 2G Network? Quick Checkout via WhatsApp").
+    - `execution/test_task169_whatsapp_fallback.mjs`: Ran verification script asserting design tokens, CSS rules, component implementation, primitive re-exports, BookingModal integration, and clean production build compilation.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `WHATSAPP_CHECKOUT_FALLBACK_TOKENS` & `getWhatsAppCheckoutFallbackTokens`.
+    - `src/styles.css` — Added WhatsApp fallback CSS rules & `@keyframes whatsapp-pulse-ring`.
+    - `src/components/ui/WhatsAppCheckoutFallbackModal.tsx` — Created WhatsAppCheckoutFallbackModal primitive component.
+    - `src/components/ui/primitives.ts` — Re-exported WhatsAppCheckoutFallbackModal primitive.
+    - `src/components/stash/BookingModal.tsx` — Integrated WhatsApp fallback trigger and modal in Step 2.
+    - `execution/test_task169_whatsapp_fallback.mjs` — Ran verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 169 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 169 execution log.
+    - `progress.md` — Appended Task 169 execution log.
+
+
+- [x] **[UI - Booking Confirmation Pass / delight] Task 168: Design an Apple Wallet-style digital boarding pass for confirmed bookings with printable QR seal, host address, and directions — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test_task168_booking_pass.mjs` — ✅ PASSED (Task 168 verification checks passed 100%).
+  - **Booking Confirmation Digital Pass Architecture**:
+    - `src/lib/designTokens.ts`: Defined `BOOKING_CONFIRMATION_PASS_TOKENS` (`header` issuer, pass types, seal badge; `accent` gradients and QR glow colors for Student vs Host persona; `actions` bilingual CTA labels; `defaultBooking` values for student, host, address, distance tag, storage item, pickup slot, vault seal code, total paid, maps query, support whatsapp) and exported `getBookingConfirmationPassTokens` helper function.
+    - `src/styles.css`: Added CSS utilities (`.booking-pass-card`, `.pass-notch-cutout-left`, `.pass-notch-cutout-right`, `.pass-divider-line`, `@media print` rules for printable pass rendering) for ticket notch cutouts, glassmorphism containment, and print stylesheet isolation.
+    - `src/components/ui/BookingConfirmationPass.tsx`: Created reusable primitive `BookingConfirmationPass` featuring Apple Wallet card styling with ticket notch cutouts, verified status badge, pass ID copy button, student & host details, storage itemization pill, verified nodal host vault address with distance tag, printable vector QR seal matrix with digital vault code, 1-tap Google Maps directions, WhatsApp sharing triggers, PDF print action, dual-persona theme support (`usePersona()`), Web Audio haptics (`playClick`, `playPop`, `playSuccessChime`), and bilingual support (`en`/`hi`).
+    - `src/components/ui/primitives.ts`: Re-exported `BookingConfirmationPass`, `BookingConfirmationPassProps`, and `BookingDetails`.
+    - `src/components/stash/BookingModal.tsx`: Integrated `BookingConfirmationPass` into Step 3 booking confirmation view to display the official digital pass upon reservation completion.
+    - `execution/test_task168_booking_pass.mjs`: Ran verification script asserting design tokens, CSS rules, component implementation, primitive re-exports, BookingModal integration, and clean production build compilation.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `BOOKING_CONFIRMATION_PASS_TOKENS` & `getBookingConfirmationPassTokens`.
+    - `src/styles.css` — Added booking pass CSS rules, notch cutouts, and print media query.
+    - `src/components/ui/BookingConfirmationPass.tsx` — Created BookingConfirmationPass component.
+    - `src/components/ui/primitives.ts` — Re-exported BookingConfirmationPass primitive.
+    - `src/components/stash/BookingModal.tsx` — Integrated BookingConfirmationPass in Step 3 confirmation view.
+    - `execution/test_task168_booking_pass.mjs` — Ran verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 168 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 168 execution log.
+    - `progress.md` — Appended Task 168 execution log.
+
+- [x] **[UI - Form Validation Micro-States / clarify] Task 167: Add instantaneous inline input validation with friendly micro-copy and gentle shake animations on invalid submissions — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-form-validation-micro-states.mjs` — ✅ PASSED (5/5 Task 167 verification checks passed 100%).
+  - **Form Validation Micro-States Architecture**:
+    - `src/lib/designTokens.ts`: Defined `FORM_VALIDATION_TOKENS` (`shakeAnimationMs: 500`, `debounceMs: 250`, `shakeKeyframe: "form-shake-error"`, bilingual `microCopy` for name, phone, email, pincode, and custom fields; `personaAccents` for Emerald/Cyan Student vs Amber/Gold Host) and exported `getFormValidationTokens` helper function.
+    - `src/styles.css`: Added keyframes (`@keyframes form-shake-error`) and CSS utility classes (`.form-shake-active`, `.validation-hint-text`, `.form-input-valid`, `.form-input-invalid`) supporting physics-based rotational shake micro-animations, persona-aware valid glows, and crisp validation hint text.
+    - `src/components/ui/FormValidationInput.tsx`: Created reusable primitive `FormValidationInput` featuring instantaneous inline input validation (on blur/change), friendly bilingual micro-copy, built-in validation rules for Indian names, +91 mobile numbers, emails, and 6-digit PIN codes, `shakeTrigger` support (auto-shake on invalid submit), Web Audio haptics (`playClick`, `playPop`, `playWarningBeep`), dual-persona theme integration (`usePersona()`), and accessible ARIA attributes (`aria-invalid`, `aria-describedby`, `role="alert"`).
+    - `src/components/ui/primitives.ts`: Re-exported `FormValidationInput`, `FormValidationInputProps`, and `ValidationInputType`.
+    - `execution/test-form-validation-micro-states.mjs`: Created test harness validating design tokens, CSS keyframes, component implementation, primitive re-exports, and clean production build compilation.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `FORM_VALIDATION_TOKENS` & `getFormValidationTokens`.
+    - `src/styles.css` — Added `@keyframes form-shake-error` & form validation CSS rules.
+    - `src/components/ui/FormValidationInput.tsx` — Created FormValidationInput primitive component.
+    - `src/components/ui/primitives.ts` — Re-exported FormValidationInput primitive.
+    - `execution/test-form-validation-micro-states.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 167 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 167 execution log.
+    - `progress.md` — Appended Task 167 execution log.
+
+
+- [x] **[UI - UPI Payment Intent Modal / harden] Task 166: Redesign the checkout modal with instant 1-tap UPI app buttons (GPay, PhonePe, Paytm, CRED) and auto-generating dynamic QR code — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test-upi-payment-intent.mjs` — ✅ PASSED (Task 166 verification checks passed 100%).
+  - **UPI Payment Intent Modal Architecture**:
+    - `src/lib/designTokens.ts`: Defined `UPI_PAYMENT_INTENT_TOKENS` (`vpaHandle: "stashsaarthi@upi"`, `merchantName`, `upiApps` for Google Pay, PhonePe, Paytm UPI, CRED Pay, BHIM UPI with scheme prefixes, color gradients, and popular badges; `qrConfig` for dynamic SVG QR matrix, scan beam colors, and 10-min countdown timer; `trustSignals` for NPCI 256-bit encryption, 0% surcharge, ₹10k insurance cover; `personaAccents` for Emerald/Cyan Student vs Amber/Gold Host) and exported `getUpiPaymentIntentTokens` helper function.
+    - `src/styles.css`: Added CSS utilities (`.upi-modal-container`, `.upi-app-tile`, `.upi-qr-stage`, `.upi-qr-scan-beam`, `@keyframes upi-qr-sweep`, `.upi-vpa-copy-box`, `.upi-timer-pill`) providing glassmorphism modal containment, tile hover transforms, sweeping laser beam QR animation, and copy VPA pill styles.
+    - `src/components/ui/UpiPaymentIntentModal.tsx`: Created reusable primitives `DynamicUpiQrCode` (crisp vector 21x21 QR matrix with center logo badge and laser beam sweep animation) and `UpiPaymentIntentModal` featuring 1-tap instant UPI app tile buttons, dynamic QR scanner view, 10-minute expiry countdown timer, VPA copy handle, instant NPCI payment verification simulator, dual-persona theme support (`usePersona()`), Web Audio haptics (`playClick`, `playPop`, `playPaymentConfirmation`, `playSuccessChime`), and bilingual support (`en`/`hi`).
+    - `src/components/ui/primitives.ts`: Re-exported `UpiPaymentIntentModal`, `DynamicUpiQrCode`, `UpiPaymentIntentModalProps`, and `UpiAppOption`.
+    - `src/components/stash/BookingModal.tsx`: Integrated `UpiPaymentIntentModal` trigger button into Step 2 checkout flow allowing 1-tap UPI app launching and dynamic QR scanning.
+    - `execution/test-upi-payment-intent.mjs`: Created test harness validating design tokens, CSS rules, component implementation, primitive re-exports, BookingModal integration, and clean production build compilation.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `UPI_PAYMENT_INTENT_TOKENS` & `getUpiPaymentIntentTokens`.
+    - `src/styles.css` — Added UPI modal CSS rules & `@keyframes upi-qr-sweep`.
+    - `src/components/ui/UpiPaymentIntentModal.tsx` — Created UpiPaymentIntentModal & DynamicUpiQrCode primitives.
+    - `src/components/ui/primitives.ts` — Re-exported UpiPaymentIntentModal primitives.
+    - `src/components/stash/BookingModal.tsx` — Integrated UpiPaymentIntentModal in checkout flow.
+    - `execution/test-upi-payment-intent.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 166 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 166 execution log.
+    - `progress.md` — Appended Task 166 execution log.
+
 
 - [x] **[UI - Dynamic Pricing Breakdown Drawer / clarify] Task 165: Implement a crystal-clear price summary drawer showing base rate, zero brokerage savings, and platform fee with 100% transparency — 2026-09-14**:
   - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
@@ -2215,11 +2299,31 @@ ralph-done-f37qa
     - `src/components/stash/HostOnboardingAgreementModal.tsx` — Mounted ConfettiCelebration on host agreement signing.
     - `docs/tasks/PRD.md` — Marked Task 158 as completed (`- [x]`).
     - `docs/tasks/progress.md` — Appended Task 158 execution log.
-    - `progress.md` — Appended Task 158 execution log.
+- [x] **[UI - Booking Confirmation Pass / delight] Task 168: Design an Apple Wallet-style digital boarding pass for confirmed bookings with printable QR seal, host address, and directions — 2026-09-14**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client bundle compiled cleanly).
+  - **Verification Suite**: `node execution/test_task168_booking_pass.mjs` — ✅ PASSED (5/5 BOOKING CONFIRMATION PASS CHECKS PASSED SUCCESSFULLY).
+  - **Apple Wallet Boarding Pass & QR Seal Architecture**:
+    - `src/lib/designTokens.ts`: Defined `BOOKING_CONFIRMATION_PASS_TOKENS` and exported `getBookingConfirmationPassTokens` helper for Student (emerald/mint) and Host (amber/gold) pass themes.
+    - `src/styles.css`: Added CSS rules `.booking-pass-card`, ticket notch cutouts `.pass-notch-cutout-left`, `.pass-notch-cutout-right`, `.pass-divider-line`, and `@media print` rules (`.printable-stash-pass`, `.no-print`) for clean paper printing or PDF export.
+    - `src/components/ui/BookingConfirmationPass.tsx`: Created reusable Apple Wallet digital pass component with top banner header, confirmed status badge, student/host names, storage item details, pickup time slot, verified host vault address, distance tag, printable vector QR seal matrix, and 1-tap Google Maps directions, WhatsApp sharing, and PDF printing triggers.
+    - `src/components/ui/primitives.ts`: Re-exported `BookingConfirmationPass` primitive and types.
+    - `src/components/stash/BookingModal.tsx`: Integrated `BookingConfirmationPass` into Step 3 (Confirmation View) displaying live booking details.
+    - `execution/test_task168_booking_pass.mjs`: Verification script checking design tokens, CSS rules, component implementation, primitive exports, and BookingModal integration.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `BOOKING_CONFIRMATION_PASS_TOKENS` & `getBookingConfirmationPassTokens`.
+    - `src/styles.css` — Added Apple Wallet pass CSS rules & printable styles.
+    - `src/components/ui/BookingConfirmationPass.tsx` — Created BookingConfirmationPass component.
+    - `src/components/ui/primitives.ts` — Re-exported BookingConfirmationPass.
+    - `src/components/stash/BookingModal.tsx` — Mounted BookingConfirmationPass in Step 3.
+    - `execution/test_task168_booking_pass.mjs` — Verification test script.
+    - `docs/tasks/progress.md` — Appended Task 168 execution log.
 
 # All Tasks Completed
 ralph-done-73s7f
 ralph-done-f37qa
+ralph-done-z7tv4
+
+
 
 
 

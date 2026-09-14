@@ -196,6 +196,37 @@ export {
   type PricingBreakdownDrawerProps,
   type PricingBreakdownItem,
 } from "./PricingBreakdownDrawer";
+export {
+  UpiPaymentIntentModal,
+  DynamicUpiQrCode,
+  type UpiPaymentIntentModalProps,
+  type UpiAppOption,
+} from "./UpiPaymentIntentModal";
+export {
+  FormValidationInput,
+  type FormValidationInputProps,
+  type ValidationInputType,
+} from "./FormValidationInput";
+export {
+  BookingConfirmationPass,
+  type BookingConfirmationPassProps,
+  type BookingDetails,
+} from "./BookingConfirmationPass";
+export {
+  WhatsAppCheckoutFallbackModal,
+  type WhatsAppCheckoutFallbackModalProps,
+  type FallbackBookingSummary,
+} from "./WhatsAppCheckoutFallbackModal";
+export {
+  ModalBackdrop,
+  type ModalBackdropProps,
+} from "./ModalBackdrop";
+export { useScrollLock, getScrollbarWidth } from "@/lib/useScrollLock";
+
+
+
+
+
 
 
 

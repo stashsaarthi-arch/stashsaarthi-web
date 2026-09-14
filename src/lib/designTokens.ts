@@ -2998,6 +2998,411 @@ export function getPricingBreakdownDrawerTokens(role: "student" | "host" = "stud
   };
 }
 
+/**
+ * UPI Payment Intent Modal Tokens (Task 166)
+ * Instant 1-tap UPI app launcher specs, dynamic QR code matrix settings, VPA copy handles, and trust signals.
+ */
+export const UPI_PAYMENT_INTENT_TOKENS = {
+  vpaHandle: "stashsaarthi@upi",
+  merchantName: "StashSaarthi Micro-Storage",
+  upiApps: [
+    {
+      id: "gpay",
+      nameEn: "Google Pay",
+      nameHi: "गूगल पे",
+      badgeEn: "Most Popular",
+      badgeHi: "सर्वाधिक लोकप्रिय",
+      color: "#4285F4",
+      bgGradient: "from-blue-600/90 to-blue-500/90 hover:from-blue-500 hover:to-blue-400",
+      borderGlow: "border-blue-400/40 shadow-blue-500/20",
+      schemePrefix: "upi://pay",
+      icon: "🔷",
+    },
+    {
+      id: "phonepe",
+      nameEn: "PhonePe",
+      nameHi: "फोन पे",
+      badgeEn: "Instant Refund",
+      badgeHi: "तत्काल रिफंड",
+      color: "#5F259F",
+      bgGradient: "from-purple-700/90 to-purple-600/90 hover:from-purple-600 hover:to-purple-500",
+      borderGlow: "border-purple-400/40 shadow-purple-500/20",
+      schemePrefix: "phonepe://pay",
+      icon: "🟣",
+    },
+    {
+      id: "paytm",
+      nameEn: "Paytm UPI",
+      nameHi: "पेटीएम UPI",
+      badgeEn: "Zero Fee",
+      badgeHi: "शून्य शुल्क",
+      color: "#00BAF2",
+      bgGradient: "from-sky-600/90 to-cyan-500/90 hover:from-sky-500 hover:to-cyan-400",
+      borderGlow: "border-sky-400/40 shadow-sky-500/20",
+      schemePrefix: "paytmmp://pay",
+      icon: "🌐",
+    },
+    {
+      id: "cred",
+      nameEn: "CRED Pay",
+      nameHi: "क्रेड पे",
+      badgeEn: "Cashback Eligible",
+      badgeHi: "कैशबैक योग्य",
+      color: "#FFFFFF",
+      bgGradient: "from-zinc-900 to-black hover:from-zinc-800 hover:to-zinc-900",
+      borderGlow: "border-zinc-500/40 shadow-zinc-500/20",
+      schemePrefix: "cred://pay",
+      icon: "⚡",
+    },
+    {
+      id: "bhim",
+      nameEn: "BHIM UPI",
+      nameHi: "भीम UPI",
+      badgeEn: "NPCI Verified",
+      badgeHi: "NPCI सत्यापित",
+      color: "#FF6600",
+      bgGradient: "from-amber-600/90 to-orange-500/90 hover:from-amber-500 hover:to-orange-400",
+      borderGlow: "border-orange-400/40 shadow-orange-500/20",
+      schemePrefix: "bhim://pay",
+      icon: "🇮🇳",
+    },
+  ],
+  qrConfig: {
+    baseUrl: "upi://pay",
+    defaultAmount: 300,
+    currency: "INR",
+    expiresInSec: 600,
+    scanningBeamColorStudent: "#10B981",
+    scanningBeamColorHost: "#F59E0B",
+  },
+  trustSignals: [
+    {
+      id: "npci_security",
+      labelEn: "NPCI 256-bit Encrypted",
+      labelHi: "NPCI 256-बिट सुरक्षित",
+      icon: "🔒",
+    },
+    {
+      id: "zero_fee",
+      labelEn: "0% Gateway Surcharge",
+      labelHi: "0% अतिरिक्त शुल्क",
+      icon: "⚡",
+    },
+    {
+      id: "insurance_cover",
+      labelEn: "₹10,000 Insurance Cover",
+      labelHi: "₹10,000 बीमा सुरक्षा",
+      icon: "🛡️",
+    },
+  ],
+  personaAccents: {
+    student: {
+      accentColor: "#10B981",
+      secondaryColor: "#00F5A0",
+      glow: "rgba(16, 185, 129, 0.35)",
+      modalBg: "bg-slate-950/95 border-emerald-500/30",
+      qrBorder: "border-emerald-500/40 shadow-emerald-500/20",
+      actionBtnBg: "bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold",
+      badgeBg: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30",
+    },
+    host: {
+      accentColor: "#F59E0B",
+      secondaryColor: "#FBBF24",
+      glow: "rgba(245, 158, 11, 0.35)",
+      modalBg: "bg-slate-950/95 border-amber-500/30",
+      qrBorder: "border-amber-500/40 shadow-amber-500/20",
+      actionBtnBg: "bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold",
+      badgeBg: "bg-amber-500/15 text-amber-300 border-amber-500/30",
+    },
+  },
+} as const;
+
+export function getUpiPaymentIntentTokens(role: "student" | "host" = "student") {
+  const isHost = role === "host";
+  return {
+    ...UPI_PAYMENT_INTENT_TOKENS,
+    activeRole: role,
+    accent: isHost ? UPI_PAYMENT_INTENT_TOKENS.personaAccents.host : UPI_PAYMENT_INTENT_TOKENS.personaAccents.student,
+  };
+}
+
+export const FORM_VALIDATION_TOKENS = {
+  shakeAnimationMs: 500,
+  debounceMs: 250,
+  shakeKeyframe: "form-shake-error",
+  microCopy: {
+    name: {
+      defaultEn: "Enter your full legal name",
+      validEn: "Looking good! Clear name",
+      invalidEn: "Please enter at least 2 characters",
+      defaultHi: "अपना पूरा नाम दर्ज करें",
+      validHi: "नाम सही है!",
+      invalidHi: "कम से कम 2 अक्षर दर्ज करें",
+    },
+    phone: {
+      defaultEn: "+91 10-digit mobile number",
+      validEn: "Verified 10-digit mobile number",
+      invalidEn: "Enter valid 10-digit mobile (starts with 6-9)",
+      defaultHi: "+91 10-अंकों का मोबाइल नंबर",
+      validHi: "सत्यापित 10-अंकों का नंबर",
+      invalidHi: "वैध 10-अंकों का मोबाइल नंबर (6-9 से शुरू)",
+    },
+    email: {
+      defaultEn: "College or personal email address",
+      validEn: "Valid email address format",
+      invalidEn: "Please enter a valid email address (e.g. name@domain.com)",
+      defaultHi: "कॉलेज या व्यक्तिगत ईमेल पता",
+      validHi: "वैध ईमेल फ़ॉर्मैट",
+      invalidHi: "कृपया वैध ईमेल पता दर्ज करें (उदा. name@domain.com)",
+    },
+    pincode: {
+      defaultEn: "6-digit Indian PIN code",
+      validEn: "Valid Kanpur / Indian PIN code",
+      invalidEn: "PIN code must be exactly 6 digits",
+      defaultHi: "6-अंकों का भारतीय पिन कोड",
+      validHi: "सत्यापित पिन कोड",
+      invalidHi: "पिन कोड ठीक 6 अंकों का होना चाहिए",
+    },
+    custom: {
+      defaultEn: "Fill required field",
+      validEn: "Input verified",
+      invalidEn: "Please check this input field",
+      defaultHi: "आवश्यक फ़ील्ड भरें",
+      validHi: "इनपुट सत्यापित",
+      invalidHi: "कृपया यह फ़ील्ड भरें",
+    },
+  },
+  personaAccents: {
+    student: {
+      validBorder: "border-emerald-500/60 shadow-[0_0_12px_rgba(16,185,129,0.25)]",
+      validText: "text-emerald-400",
+      validBg: "bg-emerald-500/10",
+      invalidBorder: "border-rose-500/70 shadow-[0_0_14px_rgba(244,63,94,0.3)]",
+      invalidText: "text-rose-400",
+      invalidBg: "bg-rose-500/10",
+      focusBorder: "border-cyan-400 shadow-[0_0_12px_rgba(6,182,212,0.25)]",
+    },
+    host: {
+      validBorder: "border-amber-500/60 shadow-[0_0_12px_rgba(245,158,11,0.25)]",
+      validText: "text-amber-400",
+      validBg: "bg-amber-500/10",
+      invalidBorder: "border-rose-500/70 shadow-[0_0_14px_rgba(244,63,94,0.3)]",
+      invalidText: "text-rose-400",
+      invalidBg: "bg-rose-500/10",
+      focusBorder: "border-amber-400 shadow-[0_0_12px_rgba(251,191,36,0.25)]",
+    },
+  },
+} as const;
+
+export function getFormValidationTokens(role: "student" | "host" = "student") {
+  const isHost = role === "host";
+  return {
+    ...FORM_VALIDATION_TOKENS,
+    activeRole: role,
+    accent: isHost ? FORM_VALIDATION_TOKENS.personaAccents.host : FORM_VALIDATION_TOKENS.personaAccents.student,
+  };
+}
+
+/**
+ * Booking Confirmation Digital Boarding Pass Tokens (Task 168)
+ * Apple Wallet-style digital pass layout specs, QR seal matrix, host address metadata, directions, and print styling.
+ */
+export const BOOKING_CONFIRMATION_PASS_TOKENS = {
+  header: {
+    passTypeEn: "DIGITAL STASHPASS • CONFIRMED",
+    passTypeHi: "डिजिटल स्टैशपास • सत्यापित",
+    issuer: "StashSaarthi Intergenerational Micro-Storage",
+    sealBadgeEn: "₹10,000 Insured Seal",
+    sealBadgeHi: "₹10,000 बीमित सील",
+  },
+  cardDimensions: {
+    borderRadius: "1.5rem",
+    notchRadius: "1rem",
+    aspectRatio: "auto",
+    maxWidth: "28rem",
+  },
+  defaultBooking: {
+    passId: "STASH-2026-8839-KNP",
+    studentName: "Rahul Sharma",
+    hostName: "Mrs. Savitri Devi",
+    hostAddressEn: "House 42, Near PW Vidyapeeth, Kakadeo, Kanpur - 208025",
+    hostAddressHi: "मकान 42, पीडब्लू विद्यापीठ के पास, काकादेव, कानपुर - 208025",
+    distanceTagEn: "350m from IIT Kanpur Gate 1",
+    distanceTagHi: "आईआईटी कानपुर गेट 1 से 350मी",
+    storageItemEn: "2x Standard Suitcases (₹300/mo)",
+    storageItemHi: "2x स्टैंडर ट्रॉली बैग (₹300/माह)",
+    pickupSlotEn: "Tomorrow • Morning (8:00 AM - 11:00 AM)",
+    pickupSlotHi: "कल • सुबह (8:00 AM - 11:00 AM)",
+    vaultSealCode: "QR-SEAL-8839-X",
+    totalPaid: "₹300",
+    mapsQuery: "PW+Vidyapeeth+Kakadeo+Kanpur",
+    supportWhatsapp: "+919369454350",
+  },
+  actions: {
+    printEn: "Print / Save PDF Pass",
+    printHi: "पास प्रिंट / पीडीएफ सेव करें",
+    directionsEn: "Get Directions (Google Maps)",
+    directionsHi: "दिशा-निर्देश (गूगल मैप्स)",
+    shareEn: "Share Pass via WhatsApp",
+    shareHi: "व्हाट्सएप पर पास शेयर करें",
+  },
+  personaAccents: {
+    student: {
+      accentColor: "#10B981",
+      secondaryColor: "#00F5A0",
+      bgGradient: "from-slate-900 via-emerald-950/80 to-slate-950",
+      topBannerGradient: "from-emerald-500 via-teal-400 to-cyan-400",
+      borderGlow: "border-emerald-500/40 shadow-[0_0_30px_rgba(16,185,129,0.25)]",
+      badgeBg: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30",
+      qrGlow: "shadow-[0_0_20px_rgba(0,245,160,0.3)]",
+      actionBtnBg: "bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-400 text-slate-950 font-bold",
+    },
+    host: {
+      accentColor: "#F59E0B",
+      secondaryColor: "#FBBF24",
+      bgGradient: "from-slate-900 via-amber-950/80 to-slate-950",
+      topBannerGradient: "from-amber-500 via-yellow-400 to-amber-500",
+      borderGlow: "border-amber-500/40 shadow-[0_0_30px_rgba(245,158,11,0.25)]",
+      badgeBg: "bg-amber-500/15 text-amber-300 border-amber-500/30",
+      qrGlow: "shadow-[0_0_20px_rgba(251,191,36,0.3)]",
+      actionBtnBg: "bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 text-slate-950 font-bold",
+    },
+  },
+} as const;
+
+export function getBookingConfirmationPassTokens(role: "student" | "host" = "student") {
+  const isHost = role === "host";
+  return {
+    ...BOOKING_CONFIRMATION_PASS_TOKENS,
+    activeRole: role,
+    accent: isHost ? BOOKING_CONFIRMATION_PASS_TOKENS.personaAccents.host : BOOKING_CONFIRMATION_PASS_TOKENS.personaAccents.student,
+  };
+}
+
+export const WHATSAPP_CHECKOUT_FALLBACK_TOKENS = {
+  whatsappNumber: "+91 9369454350",
+  whatsappNumberDigits: "919369454350",
+  fallbackReason: "Weak Network / Low Signal Instant Order",
+  speedGuarantee: "⚡ Instant 10-Second WhatsApp Dispatch",
+  trustBadges: [
+    "Zero Network Latency",
+    "Verified StashSaarthi Nodal Dispatch",
+    "Pay Cash or UPI at Pickup",
+  ],
+  personaAccents: {
+    student: {
+      accentColor: "#10B981",
+      secondaryColor: "#00F5A0",
+      bgGradient: "from-slate-900 via-emerald-950/80 to-slate-950",
+      whatsappBtnBg: "bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-400 text-slate-950 font-bold hover:shadow-[0_0_25px_rgba(16,185,129,0.4)]",
+      badgeBg: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30",
+      signalGlow: "shadow-[0_0_15px_rgba(16,185,129,0.3)]",
+    },
+    host: {
+      accentColor: "#F59E0B",
+      secondaryColor: "#FBBF24",
+      bgGradient: "from-slate-900 via-amber-950/80 to-slate-950",
+      whatsappBtnBg: "bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 text-slate-950 font-bold hover:shadow-[0_0_25px_rgba(245,158,11,0.4)]",
+      badgeBg: "bg-amber-500/15 text-amber-300 border-amber-500/30",
+      signalGlow: "shadow-[0_0_15px_rgba(245,158,11,0.3)]",
+    },
+  },
+  bilingualCopy: {
+    en: {
+      title: "⚡ WhatsApp Quick-Checkout Fallback",
+      subtitle: "Having network glitches or slow Internet? Send your order details directly to our 24/7 Kanpur Dispatch desk on WhatsApp with 1 tap.",
+      networkSignalText: "Weak Signal Detected — 2G / Slow Network Fallback Mode Active",
+      launchWhatsAppCta: "Launch WhatsApp & Finalize Order",
+      copyPrefillCta: "Copy WhatsApp Order Message",
+      prefillCopied: "Copied to Clipboard!",
+      qrScanText: "Scan QR with mobile WhatsApp if ordering from laptop:",
+      directNumberText: "Or message directly on WhatsApp:",
+      howItWorksHeader: "How WhatsApp Fallback Works:",
+      howItWorksSteps: [
+        "1. Click button below to open official StashSaarthi WhatsApp",
+        "2. Message pre-fills with your bag selection & pickup dates",
+        "3. Instant verification badge & pickup team dispatched!"
+      ],
+      cancelCta: "Back to Checkout"
+    },
+    hi: {
+      title: "⚡ व्हाट्सएप त्वरित बुकिंग फ़ॉलबैक",
+      subtitle: "धीमे इंटरनेट या नेटवर्क समस्या का सामना कर रहे हैं? 1 टैप में व्हाट्सएप पर हमारी कानपुर डिस्पैच टीम को ऑर्डर भेजें।",
+      networkSignalText: "कमजोर सिग्नल - धीमा नेटवर्क फ़ॉलबैक मोड सक्रिय",
+      launchWhatsAppCta: "व्हाट्सएप खोलें और ऑर्डर पूरा करें",
+      copyPrefillCta: "व्हाट्सएप संदेश कॉपी करें",
+      prefillCopied: "क्लिपबोर्ड पर कॉपी हो गया!",
+      qrScanText: "लैपटॉप से बुकिंग कर रहे हैं? मोबाइल व्हाट्सएप से स्कैन करें:",
+      directNumberText: "या सीधे व्हाट्सएप पर संदेश भेजें:",
+      howItWorksHeader: "व्हाट्सएप फ़ॉलबैक कैसे काम करता है:",
+      howItWorksSteps: [
+        "1. नीचे बटन दबाकर StashSaarthi आधिकारिक व्हाट्सएप खोलें",
+        "2. बैग और पिकअप विवरण संदेश में स्वतः भर जाएगा",
+        "3. तुरंत पिकअप टीम पुष्टि करेगी!"
+      ],
+      cancelCta: "चेकआउट पर वापस जाएं"
+    }
+  }
+} as const;
+
+export function getWhatsAppCheckoutFallbackTokens(role: "student" | "host" = "student") {
+  const isHost = role === "host";
+  return {
+    ...WHATSAPP_CHECKOUT_FALLBACK_TOKENS,
+    activeRole: role,
+    accent: isHost ? WHATSAPP_CHECKOUT_FALLBACK_TOKENS.personaAccents.host : WHATSAPP_CHECKOUT_FALLBACK_TOKENS.personaAccents.student,
+  };
+}
+
+export const MODAL_BACKDROP_SCROLL_LOCK_TOKENS = {
+  backdropClasses: "backdrop-blur-md bg-black/60 modal-backdrop-overlay",
+  blurStrength: "12px",
+  dimmingOpacity: "0.60",
+  dimmingBgClass: "bg-black/60",
+  zIndex: 50,
+  transitionDurationMs: 300,
+  easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+  scrollLock: {
+    activeClass: "modal-scroll-lock-active",
+    bodyOverflow: "hidden",
+    touchAction: "none",
+    overscrollBehavior: "none",
+    scrollbarWidthVar: "--scrollbar-width",
+  },
+  personaAccents: {
+    student: {
+      accentColor: "#10B981",
+      tintBg: "rgba(16, 185, 129, 0.04)",
+      borderGlow: "rgba(16, 185, 129, 0.25)",
+      radialHalo: "radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.12) 0%, rgba(10, 13, 15, 0.6) 70%)",
+      overlayClass: "modal-backdrop-student",
+    },
+    host: {
+      accentColor: "#F59E0B",
+      tintBg: "rgba(245, 158, 11, 0.04)",
+      borderGlow: "rgba(245, 158, 11, 0.25)",
+      radialHalo: "radial-gradient(circle at 50% 0%, rgba(245, 158, 11, 0.12) 0%, rgba(10, 13, 15, 0.6) 70%)",
+      overlayClass: "modal-backdrop-host",
+    },
+  },
+} as const;
+
+export function getModalBackdropTokens(role: "student" | "host" = "student") {
+  const isHost = role === "host";
+  return {
+    ...MODAL_BACKDROP_SCROLL_LOCK_TOKENS,
+    activeRole: role,
+    accent: isHost
+      ? MODAL_BACKDROP_SCROLL_LOCK_TOKENS.personaAccents.host
+      : MODAL_BACKDROP_SCROLL_LOCK_TOKENS.personaAccents.student,
+  };
+}
+
+
+
+
+
+
 
 
 

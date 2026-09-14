@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { usePersona } from "@/context/PersonaContext";
 import { getSpringModalTokens } from "@/lib/designTokens";
 import { playPop, playClick } from "@/lib/audio";
+import { useScrollLock } from "@/lib/useScrollLock";
 
 export interface SpringModalProps {
   open: boolean;
@@ -130,18 +131,18 @@ export const SpringModal: React.FC<SpringModalProps> = ({
   showClose = true,
   className,
   overlayClassName,
-  persona,
+  persona: personaProp,
 }) => {
+  const { role } = usePersona();
+  const activeRole = personaProp || role;
+  const isHost = activeRole === "host";
+
+  useScrollLock(open);
+
   useEffect(() => {
     if (open) {
       playPop();
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
     }
-    return () => {
-      document.body.style.overflow = "";
-    };
   }, [open]);
 
   return (
@@ -159,7 +160,8 @@ export const SpringModal: React.FC<SpringModalProps> = ({
               onOpenChange(false);
             }}
             className={cn(
-              "fixed inset-0 z-40 bg-black/80 backdrop-blur-md modal-spring-overlay",
+              "fixed inset-0 z-40 backdrop-blur-md bg-black/60 modal-backdrop-overlay modal-spring-overlay",
+              isHost ? "modal-backdrop-host" : "modal-backdrop-student",
               overlayClassName
             )}
           />
@@ -172,7 +174,7 @@ export const SpringModal: React.FC<SpringModalProps> = ({
             maxWidth={maxWidth}
             showClose={showClose}
             {...(className !== undefined ? { className } : {})}
-            {...(persona !== undefined ? { persona } : {})}
+            {...(personaProp !== undefined ? { persona: personaProp } : {})}
           >
             {children}
           </SpringModalContent>
@@ -181,3 +183,4 @@ export const SpringModal: React.FC<SpringModalProps> = ({
     </AnimatePresence>
   );
 };
+

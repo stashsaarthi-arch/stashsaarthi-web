@@ -3877,6 +3877,201 @@ html[lang="hi"][data-persona="host"] h4.font-devanagari,
   justify-content: space-between;
   align-items: center;
   padding: 0.625rem 0;
+  justify-content: space-between;
+  padding: 0.875rem 1rem;
+  border-radius: 1rem;
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.luggage-item-card:hover {
+  background-color: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.luggage-item-card-active {
+  background-color: rgba(16, 185, 129, 0.08);
+  border-color: rgba(16, 185, 129, 0.4);
+  box-shadow: 0 0 20px 0 rgba(16, 185, 129, 0.25);
+}
+
+[data-persona="host"] .luggage-item-card-active {
+  background-color: rgba(245, 158, 11, 0.08);
+  border-color: rgba(245, 158, 11, 0.4);
+  box-shadow: 0 0 20px 0 rgba(245, 158, 11, 0.25);
+}
+
+.luggage-3d-icon-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 0.875rem;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.03));
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 1.75rem;
+  flex-shrink: 0;
+  transition: transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.luggage-item-card:hover .luggage-3d-icon-stage {
+  transform: scale(1.1) rotate(4deg);
+}
+
+.luggage-count-badge {
+  position: absolute;
+  top: -0.375rem;
+  right: -0.375rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.35rem;
+  height: 1.35rem;
+  padding: 0 0.25rem;
+  border-radius: 9999px;
+  background: #10B981;
+  color: #0A0D0F;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  font-weight: 800;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.5);
+  animation: luggage-pop-bounce 260ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+[data-persona="host"] .luggage-count-badge {
+  background: #F59E0B;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.5);
+}
+
+@keyframes luggage-pop-bounce {
+  0% { transform: scale(0.6); }
+  60% { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+
+.luggage-vault-meter {
+  height: 0.5rem;
+  width: 100%;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.luggage-vault-meter-fill {
+  height: 100%;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #10B981, #00F5A0);
+  transition: width 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-persona="host"] .luggage-vault-meter-fill {
+  background: linear-gradient(90deg, #F59E0B, #FBBF24);
+}
+
+/* ==========================================================================
+   Task 164: Date & Time Slot Picker CSS Engine & Micro-Interactions
+   ========================================================================== */
+
+.date-time-picker-stage {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius-2xl, 1.25rem);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.25rem;
+  box-sizing: border-box;
+}
+
+.preset-holiday-chip {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.875rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--muted-foreground, #94a3b8);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.preset-holiday-chip:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.preset-holiday-chip-active {
+  background: rgba(16, 185, 129, 0.18);
+  border-color: rgba(16, 185, 129, 0.5);
+  color: #10B981;
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.25);
+}
+
+[data-persona="host"] .preset-holiday-chip-active {
+  background: rgba(245, 158, 11, 0.18);
+  border-color: rgba(245, 158, 11, 0.5);
+  color: #F59E0B;
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.25);
+}
+
+.time-slot-card {
+  min-height: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.75rem 1rem;
+  border-radius: 0.875rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: all 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.time-slot-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.time-slot-card-active {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: #10B981;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+  animation: slot-select-pop 240ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+[data-persona="host"] .time-slot-card-active {
+  background: rgba(245, 158, 11, 0.12);
+  border-color: #F59E0B;
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+}
+
+@keyframes slot-select-pop {
+  0% { transform: scale(0.97); }
+  60% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+/* Pricing Breakdown Drawer Utilities (Task 165) */
+.pricing-drawer-container {
+  border-radius: 1.5rem 1.5rem 0 0;
+  backdrop-filter: blur(24px) saturate(180%);
+}
+
+.pricing-breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.625rem 0;
   border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
 }
 
@@ -3891,3 +4086,278 @@ html[lang="hi"][data-persona="host"] h4.font-devanagari,
   border: 1px solid rgba(245, 158, 11, 0.4);
   color: #FCD34D;
 }
+
+/* UPI Payment Intent Modal Utilities (Task 166) */
+.upi-modal-container {
+  backdrop-filter: blur(28px) saturate(190%);
+  border-radius: 1.5rem;
+}
+
+.upi-app-tile {
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.875rem 1.125rem;
+  border-radius: 1rem;
+  transition: all 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  user-select: none;
+}
+
+.upi-app-tile:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+}
+
+.upi-app-tile:active {
+  transform: translateY(0) scale(0.99);
+}
+
+.upi-qr-stage {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  padding: 1.25rem;
+  background: #ffffff;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
+}
+
+.upi-qr-scan-beam {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, #10B981, #00F5A0, transparent);
+  box-shadow: 0 0 16px #10B981;
+  animation: upi-qr-sweep 2.4s ease-in-out infinite;
+}
+
+[data-persona="host"] .upi-qr-scan-beam {
+  background: linear-gradient(90deg, transparent, #F59E0B, #FBBF24, transparent);
+  box-shadow: 0 0 16px #F59E0B;
+}
+
+@keyframes upi-qr-sweep {
+  0% { top: 4%; opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { top: 92%; opacity: 0; }
+}
+
+.upi-timer-pill {
+  font-family: var(--font-mono, monospace);
+  letter-spacing: 0.05em;
+}
+
+.upi-vpa-copy-box {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+  border-radius: 0.75rem;
+  padding: 0.625rem 0.875rem;
+  transition: all 180ms ease;
+}
+
+.upi-vpa-copy-box:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Form Validation Micro-States & Error Shake Keyframes (Task 167) */
+@keyframes form-shake-error {
+  0%, 100% { transform: translateX(0); }
+  15% { transform: translateX(-6px) rotate(-0.5deg); }
+  30% { transform: translateX(6px) rotate(0.5deg); }
+  45% { transform: translateX(-4px); }
+  60% { transform: translateX(4px); }
+  75% { transform: translateX(-2px); }
+}
+
+.form-shake-active {
+  animation: form-shake-error 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+.validation-hint-text {
+  font-size: 0.8125rem;
+  line-height: 1.25rem;
+  transition: all 180ms ease;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.form-input-valid {
+  border-color: rgba(16, 185, 129, 0.6) !important;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.2) !important;
+}
+
+[data-persona="host"] .form-input-valid {
+  border-color: rgba(245, 158, 11, 0.6) !important;
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.2) !important;
+}
+
+.form-input-invalid {
+  border-color: rgba(244, 63, 94, 0.7) !important;
+  box-shadow: 0 0 14px rgba(244, 63, 94, 0.25) !important;
+}
+
+/* Booking Confirmation Digital Boarding Pass Utilities (Task 168) */
+.booking-pass-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  backdrop-filter: blur(28px) saturate(180%);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+  transition: all 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.booking-pass-card:hover {
+  transform: translateY(-3px);
+}
+
+.pass-notch-cutout-left {
+  position: absolute;
+  left: -12px;
+  top: 55%;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #0a0d0f;
+  z-index: 20;
+}
+
+.pass-notch-cutout-right {
+  position: absolute;
+  right: -12px;
+  top: 55%;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #0a0d0f;
+  z-index: 20;
+}
+
+.pass-divider-line {
+  border-bottom: 2px dashed rgba(255, 255, 255, 0.15);
+  margin: 0.75rem 0;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .printable-stash-pass, .printable-stash-pass * {
+    visibility: visible;
+  }
+  .printable-stash-pass {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 20px;
+    background: #ffffff !important;
+    color: #000000 !important;
+    box-shadow: none !important;
+    border: 2px solid #000000 !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* WhatsApp Quick-Checkout Fallback Modal Utilities (Task 169) */
+.whatsapp-fallback-modal-overlay {
+  background: rgba(10, 13, 15, 0.88);
+  backdrop-filter: blur(20px);
+}
+
+.whatsapp-fallback-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  backdrop-filter: blur(24px) saturate(160%);
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.whatsapp-signal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  color: #fbbf24;
+}
+
+@keyframes whatsapp-pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 14px rgba(34, 197, 94, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+  }
+}
+
+.whatsapp-pulse-ring-active {
+  animation: whatsapp-pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.whatsapp-prefill-preview-box {
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  font-family: monospace;
+  font-size: 0.825rem;
+  line-height: 1.5;
+  color: #e2e8f0;
+  white-space: pre-wrap;
+}
+
+/* Modal Backdrop Blur & Body Scroll Locking Utilities (Task 170) */
+.modal-backdrop-overlay {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  backdrop-filter: blur(12px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(160%) !important;
+  transition: opacity 300ms cubic-bezier(0.16, 1, 0.3, 1), backdrop-filter 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .modal-backdrop-overlay {
+    background-color: rgba(10, 13, 15, 0.92) !important;
+  }
+}
+
+.modal-backdrop-student {
+  background: radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.12) 0%, rgba(10, 13, 15, 0.6) 70%), rgba(0, 0, 0, 0.6) !important;
+}
+
+.modal-backdrop-host {
+  background: radial-gradient(circle at 50% 0%, rgba(245, 158, 11, 0.12) 0%, rgba(10, 13, 15, 0.6) 70%), rgba(0, 0, 0, 0.6) !important;
+}
+
+.modal-scroll-lock-active {
+  overflow: hidden !important;
+  overscroll-behavior: none !important;
+  padding-right: var(--scrollbar-width, 0px);
+}
+
+.modal-scroll-lock-active body {
+  overflow: hidden !important;
+  overscroll-behavior: none !important;
+  touch-action: none;
+}
+
+
+
+

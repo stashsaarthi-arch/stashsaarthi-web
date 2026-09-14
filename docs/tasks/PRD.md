@@ -201,11 +201,12 @@ Sprint 10: QA, CSO & CEO (Total Assurance, Compliance & Strategic Direction)
 - [x] 163. **[UI - Luggage Itemizer Visualizer / shape]**: Build an intuitive visual luggage itemizer allowing students to tap 3D-styled icons for suitcases, cartons, coolers, and backpacks.
 - [x] 164. **[UI - Date & Time Slot Picker / harden]**: Design a custom calendar date-range and pickup slot selector optimized for touch devices with campus holiday preset chips.
 - [x] 165. **[UI - Dynamic Pricing Breakdown Drawer / clarify]**: Implement a crystal-clear price summary drawer showing base rate, zero brokerage savings, and platform fee with 100% transparency.
-- [ ] 166. **[UI - UPI Payment Intent Modal / harden]**: Redesign the checkout modal with instant 1-tap UPI app buttons (GPay, PhonePe, Paytm, CRED) and auto-generating dynamic QR code.
-- [ ] 167. **[UI - Form Validation Micro-States / clarify]**: Add instantaneous inline input validation with friendly micro-copy and gentle shake animations on invalid submissions.
-- [ ] 168. **[UI - Booking Confirmation Pass / delight]**: Design an Apple Wallet-style digital boarding pass for confirmed bookings with printable QR seal, host address, and directions.
-- [ ] 169. **[UI - WhatsApp Quick-Checkout Fallback / distill]**: Build a streamlined fallback modal for weak network connections allowing students to finalize orders via pre-filled WhatsApp link.
-- [ ] 170. **[UI - Modal Backdrop Blur & Scroll Lock / polish]**: Perfect modal backdrop dimming (`backdrop-blur-md bg-black/60`) and body scroll locking to eliminate dual-scrolling glitches.
+- [x] 166. **[UI - UPI Payment Intent Modal / harden]**: Redesign the checkout modal with instant 1-tap UPI app buttons (GPay, PhonePe, Paytm, CRED) and auto-generating dynamic QR code.
+- [x] 167. **[UI - Form Validation Micro-States / clarify]**: Add instantaneous inline input validation with friendly micro-copy and gentle shake animations on invalid submissions.
+- [x] 168. **[UI - Booking Confirmation Pass / delight]**: Design an Apple Wallet-style digital boarding pass for confirmed bookings with printable QR seal, host address, and directions.
+- [x] 169. **[UI - WhatsApp Quick-Checkout Fallback / distill]**: Build a streamlined fallback modal for weak network connections allowing students to finalize orders via pre-filled WhatsApp link.
+
+- [x] 170. **[UI - Modal Backdrop Blur & Scroll Lock / polish]**: Perfect modal backdrop dimming (`backdrop-blur-md bg-black/60`) and body scroll locking to eliminate dual-scrolling glitches.
 
 ## Sprint 18: Operational Dashboards, Data Visualization & Admin Console (building-data-apps, impeccable operate)
 - [ ] 171. **[UI - Admin Dashboard Modernization / operate]**: Overhaul `/admin` operator console with clean, dark-themed modular analytics cards, tabbed navigation, and live status badges.

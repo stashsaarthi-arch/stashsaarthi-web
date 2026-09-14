@@ -37,6 +37,7 @@ import {
   Package,
   Luggage,
   BookOpen,
+  MessageSquare,
 } from "lucide-react";
 import {
   isValidEmail,
@@ -52,6 +53,12 @@ import { getMultiStepBookingTokens } from "@/lib/designTokens";
 import { playClick, playPop } from "@/lib/audio";
 import { ConfettiCelebration } from "@/components/ui/ConfettiCelebration";
 import { IndianPhoneInput } from "@/components/ui/PhoneOtpInput";
+import { UpiPaymentIntentModal } from "@/components/ui/UpiPaymentIntentModal";
+import { BookingConfirmationPass } from "@/components/ui/BookingConfirmationPass";
+import { WhatsAppCheckoutFallbackModal } from "@/components/ui/WhatsAppCheckoutFallbackModal";
+
+
+
 
 
 import { MealPersonalizationSelector } from "./MealPersonalizationSelector";
@@ -93,6 +100,10 @@ export function BookingModal({
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [service, setService] = useState(serviceProp);
   const [stepValidationError, setStepValidationError] = useState<string | null>(null);
+  const [showUpiModal, setShowUpiModal] = useState(false);
+  const [showWhatsAppFallbackModal, setShowWhatsAppFallbackModal] = useState(false);
+
+
 
   // Common Contact Fields
 
@@ -1724,14 +1735,32 @@ export function BookingModal({
                         : "Scan with GPay, PhonePe, Paytm or BHIM to lock your digital escrow."}
                     </p>
 
-                    {/* Mobile Deep Link Button */}
-                    <a
-                      href={upiDeepLink}
-                      className="mt-2 md:hidden flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-emerald-500 text-black font-bold text-sm shadow-lg shadow-emerald-500/25 active:scale-95 transition-transform"
+                    <button
+                      type="button"
+                      onClick={() => setShowUpiModal(true)}
+                      className="mt-2 flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-500 text-slate-950 font-extrabold text-xs sm:text-sm shadow-lg shadow-emerald-500/25 hover:from-emerald-400 hover:to-cyan-400 active:scale-98 transition-all cursor-pointer"
                     >
-                      {isHi ? "UPI ऐप से भुगतान करें" : "Pay with UPI App"}
-                    </a>
+                      <Sparkles className="w-4 h-4 text-slate-950" />
+                      <span>{isHi ? "1-टैप UPI ऐप्स लॉन्च करें (GPay, PhonePe, Paytm, CRED)" : "Open 1-Tap UPI App Modal (GPay, PhonePe, Paytm, CRED)"}</span>
+                    </button>
+
+                    {/* WhatsApp Quick-Checkout Fallback Trigger (Task 169) */}
+                    <div className="pt-2">
+                      <button
+                        type="button"
+                        onClick={() => setShowWhatsAppFallbackModal(true)}
+                        className="w-full py-2.5 px-3 rounded-xl border border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 text-xs font-semibold flex items-center justify-center gap-2 transition cursor-pointer"
+                      >
+                        <MessageSquare className="w-4 h-4 text-emerald-400 animate-pulse" />
+                        <span>
+                          {isHi
+                            ? "⚡ नेटवर्क धीमा है? व्हाट्सएप पर 1-टैप त्वरित बुकिंग"
+                            : "⚡ Slow / 2G Network? Quick Checkout via WhatsApp"}
+                        </span>
+                      </button>
+                    </div>
                   </div>
+
                 ) : (
                   <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-xs space-y-2.5">
                     <div className="flex justify-between border-b border-white/10 pb-2">
@@ -1876,6 +1905,18 @@ export function BookingModal({
                   </p>
                 </div>
 
+                <BookingConfirmationPass
+                  bookingDetails={{
+                    passId: tokenId || `STASH-${Math.floor(100000 + Math.random() * 900000)}`,
+                    studentName: name || "Campus Student",
+                    hostName: "Mrs. Savitri Devi",
+                    hostAddress: addressDetail || "House 42, Kakadeo, Near PW Vidyapeeth, Kanpur - 208025",
+                    storageItem: `${bags} Bag${bags > 1 ? "s" : ""} (${months} Mo Storage)`,
+                    totalPaid: `₹${calcAmount}`,
+                    vaultSealCode: `QR-SEAL-${tokenId.slice(-4) || "8839"}`,
+                  }}
+                />
+
                 <StashPass
                   tokenId={tokenId}
                   name={name}
@@ -1885,6 +1926,7 @@ export function BookingModal({
                   items={service === "stash" ? luggageItems : undefined}
                   paymentMode={paymentMode}
                 />
+
 
                 <Button
                   variant="outline"
@@ -1922,6 +1964,38 @@ export function BookingModal({
           setBags(newItems.length);
         }}
       />
+
+      <UpiPaymentIntentModal
+        isOpen={showUpiModal}
+        onClose={() => setShowUpiModal(false)}
+        amount={calcAmount}
+        bookingId={tokenId || `STASH-${Math.floor(100000 + Math.random() * 900000)}`}
+        itemSummary={`${bags} Bag${bags > 1 ? "s" : ""} × ${months} Mo Micro-Storage`}
+        language={language}
+        onPaymentSuccess={(txnId) => {
+          setPaymentMode("upi_qr");
+          toast.success(`Payment verified! Transaction: ${txnId}`);
+        }}
+      />
+
+      <WhatsAppCheckoutFallbackModal
+        isOpen={showWhatsAppFallbackModal}
+        onClose={() => setShowWhatsAppFallbackModal(false)}
+        bookingSummary={{
+          studentName: name || "Campus Student",
+          studentPhone: phone || "+91 9369454350",
+          itemsSummary: `${bags}x Stash Bags (${itemType})`,
+          pickupDate: "Next Day Pickup",
+          pickupSlot: "Morning 8-11am",
+          totalAmount: `₹${calcAmount}`,
+          campusLocation: `${city} Node`,
+          paymentMethod: paymentMode === "partial_cash" ? "50% Upfront + 50% Cash" : "Cash / UPI on Doorstep Pickup",
+        }}
+        onOrderCompleted={() => {
+          toast.success(isHi ? "व्हाट्सएप ऑर्डर दर्ज किया गया!" : "WhatsApp Order Requested!");
+        }}
+      />
     </Dialog>
   );
 }
+
