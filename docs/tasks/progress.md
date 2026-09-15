@@ -1,6 +1,274 @@
+ralph-done-xb699
 ralph-done-atufh
 
 # Ralph Autonomous Workforce Sprint Progress
+
+- [x] **[UI - Sticky Mobile Bottom Action Bar / adapt] Task 182: Implement a thumb-friendly sticky bottom CTA bar on mobile screens with instant "Book Storage @ ₹300" action — 2026-09-15**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test_task182_sticky_mobile_bottom_bar.mjs` — ✅ PASSED (16/16 Task 182 verification checks passed 100%).
+  - **Sticky Mobile Bottom Action Bar Architecture**:
+    - `src/lib/designTokens.ts`: Defined `STICKY_MOBILE_BOTTOM_BAR_TOKENS` (`header` title & subtitle in EN/HI, `primaryAction` for "Book Storage @ ₹300" / "₹300 में स्टोरेज बुक करें", `priceTag: "₹300/mo"`, `trustBadges` for Laser Barcode Sealed & ₹10,000 Micro-Insurance, `personaAccents` for Student vs Host) and exported `getStickyMobileBottomBarTokens` helper function.
+    - `src/styles.css`: Added CSS utilities (`.sticky-mobile-bottom-bar-container`, `.sticky-mobile-bottom-bar-panel`, `.sticky-mobile-bottom-bar-primary-cta`, `.sticky-mobile-bottom-bar-badge-pill`, `@keyframes sticky-bar-pulse-ring`) providing fixed bottom positioning, glassmorphism backdrop blur, active spring scaling, and safe area inset bottom support (`env(safe-area-inset-bottom)`).
+    - `src/components/ui/StickyMobileBottomBar.tsx`: Created reusable primitive component `StickyMobileBottomBar` featuring thumb-friendly ergonomic touch targets (min 48px), instant "Book Storage @ ₹300" primary CTA button, Web Audio micro-haptics (`playClick`, `playPop`, `playSuccessChime`), dual-persona theme awareness (`usePersona()`), bilingual EN/HI support (`useLanguage()`), auto-hide/show viewport scroll detection, and full WCAG ARIA accessibility compliance.
+    - `src/components/ui/primitives.ts`: Re-exported `StickyMobileBottomBar` and `StickyMobileBottomBarProps`.
+    - `src/components/ui/index.ts`: Re-exported `StickyMobileBottomBar`.
+    - `src/components/stash/MobileStickyCTA.tsx`: Integrated `<StickyMobileBottomBar />` alongside `QuickActionFloatingDock` in global mobile bottom CTA controls.
+    - `execution/test_task182_sticky_mobile_bottom_bar.mjs`: Created test harness asserting design tokens, CSS rules, component implementation, primitive re-exports, MobileStickyCTA integration, and clean production build compilation.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `STICKY_MOBILE_BOTTOM_BAR_TOKENS` & `getStickyMobileBottomBarTokens`.
+    - `src/styles.css` — Added Sticky Mobile Bottom Bar CSS utility rules & keyframe animation.
+    - `src/components/ui/StickyMobileBottomBar.tsx` — Created StickyMobileBottomBar primitive component.
+    - `src/components/ui/primitives.ts` — Re-exported StickyMobileBottomBar primitives.
+    - `src/components/ui/index.ts` — Re-exported StickyMobileBottomBar primitive.
+    - `src/components/stash/MobileStickyCTA.tsx` — Integrated StickyMobileBottomBar into global MobileStickyCTA.
+    - `execution/test_task182_sticky_mobile_bottom_bar.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 182 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 182 execution log.
+    - `progress.md` — Appended Task 182 execution log.
+
+
+- [x] **[UI - Mobile Navigation Drawer 2.0 / adapt] Task 181: Re-engineer the mobile hamburger drawer with buttery smooth slide-in transitions, high-contrast category links, and language/persona toggles — 2026-09-15**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test_task181_mobile_nav_drawer.mjs` — ✅ PASSED (15/15 Task 181 verification checks passed 100%).
+  - **Mobile Navigation Drawer 2.0 Architecture**:
+    - `src/lib/designTokens.ts`: Defined `MOBILE_NAV_DRAWER_TOKENS` (`header` title, subtitle & version badge in EN/HI, `transition` spring parameters stiffness 350 / damping 32, `categories` grouping Core Services and Tools & Assistance with icons, descriptions, and feature badges, `personaAccents` for Student vs Host) and exported `getMobileNavDrawerTokens` helper function.
+    - `src/styles.css`: Added CSS utilities (`.mobile-nav-drawer-backdrop`, `.mobile-nav-drawer-panel`, `.mobile-nav-drawer-header`, `.mobile-nav-drawer-category-title`, `.mobile-nav-drawer-link-card`, `.mobile-nav-drawer-toggle-bar`) supporting backdrop blur dimming, spring slide-in panel rendering, high-contrast category links, and theme toggle bars.
+    - `src/components/ui/MobileNavDrawer.tsx`: Created reusable primitive component `MobileNavDrawer` featuring `useScrollLock(open)` body scroll locking, Framer Motion spring slide-in animation, high-contrast category link cards with badges, integrated Language (EN/HI) switcher, Theme toggle, Low-Data mode toggle, Persona Switcher pill, Web Audio haptic click triggers (`playClick`, `playPop`), fast-action CTAs (Book Storage / List Space, Priority Early Access, WhatsApp Referral, Auth Button), and full WCAG dialog ARIA compliance.
+    - `src/components/ui/primitives.ts`: Re-exported `MobileNavDrawer` and `MobileNavDrawerProps`.
+    - `src/components/ui/index.ts`: Re-exported `MobileNavDrawer`.
+    - `src/components/stash/Navbar.tsx`: Integrated `<MobileNavDrawer />` directly into global header responsive controls.
+    - `execution/test_task181_mobile_nav_drawer.mjs`: Created test harness asserting design tokens, CSS rules, component implementation, primitive re-exports, Navbar integration, and clean production build compilation.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `MOBILE_NAV_DRAWER_TOKENS` & `getMobileNavDrawerTokens`.
+    - `src/styles.css` — Added Mobile Navigation Drawer 2.0 CSS utility rules.
+    - `src/components/ui/MobileNavDrawer.tsx` — Created MobileNavDrawer primitive component.
+    - `src/components/ui/primitives.ts` — Re-exported MobileNavDrawer primitive.
+    - `src/components/ui/index.ts` — Re-exported MobileNavDrawer primitive.
+    - `src/components/stash/Navbar.tsx` — Integrated MobileNavDrawer into global Navbar header.
+    - `execution/test_task181_mobile_nav_drawer.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 181 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 181 execution log.
+    - `progress.md` — Appended Task 181 execution log.
+
+
+- [x] **[UI - Toast & System Notification Overhaul / polish] Task 180: Redesign floating system toasts with sleek glassmorphism, countdown progress bars, and actionable undo/view buttons — 2026-09-15**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test_task180_toast_notification_overhaul.mjs` — ✅ PASSED (16/16 Task 180 verification checks passed 100%).
+  - **Toast & System Notification Overhaul Engine Architecture**:
+    - `src/lib/designTokens.ts`: Defined `TOAST_NOTIFICATION_TOKENS` (`header` title & subtitle in EN/HI, `types` for success, error, warning, info, loading with glow shadows, progress bar backgrounds, and borders, `actions` with undo/view labels for Student & Host personas) and exported `getToastNotificationTokens` helper function.
+    - `src/styles.css`: Added CSS utilities (`.toast-glassmorphism-card`, `.toast-countdown-progress-bar`, `.toast-action-undo-btn`, `.toast-action-view-btn`, `.toast-border-student`, `.toast-border-host`) providing glassmorphism backdrop blur, hover elevation transforms, high-contrast action buttons, and type-specific countdown progress bars.
+    - `src/components/ui/ToastNotification.tsx`: Created reusable primitive component `ToastNotificationCard` featuring countdown progress bar timer, hover-to-pause countdown interaction, high-contrast actionable Undo and View buttons with Lucide icons (`RotateCcw`, `Eye`), persona theme awareness (`usePersona()`), and clean dismissal handling.
+    - `src/context/ToastContext.tsx`: Overhauled toast store and context provider with helper shortcut methods `toast.undo()` and `toast.view()`, web audio micro-haptic chime triggers (`playToastChime`), and integration of `ToastNotificationCard` inside `ToastContainer`.
+    - `src/components/ui/primitives.ts`: Re-exported `ToastNotificationCard`, `ToastNotificationProps`, `ToastActionSpec`, `ToastUndoSpec`, and `ToastViewSpec`.
+    - `src/components/ui/index.ts`: Re-exported `ToastNotification`.
+    - `execution/test_task180_toast_notification_overhaul.mjs`: Created test harness validating design tokens, CSS rules, component implementation, context shortcuts, primitive re-exports, and clean production build compilation.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `TOAST_NOTIFICATION_TOKENS` & `getToastNotificationTokens`.
+    - `src/styles.css` — Added Toast & System Notification CSS utility rules.
+    - `src/components/ui/ToastNotification.tsx` — Created ToastNotificationCard primitive component.
+    - `src/context/ToastContext.tsx` — Overhauled ToastContext with toast.undo & toast.view shortcuts and ToastNotificationCard rendering.
+    - `src/components/ui/primitives.ts` — Re-exported ToastNotificationCard primitives.
+    - `src/components/ui/index.ts` — Re-exported ToastNotification primitive.
+    - `execution/test_task180_toast_notification_overhaul.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 180 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 180 execution log.
+    - `progress.md` — Appended Task 180 execution log.
+
+
+- [x] **[UI - Host Safety & KYC Verification Console / operate] Task 179: Design an inspection view for verifying host Aadhaar, police verification certificates, and 12-point safety checklists — 2026-09-15**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test_task179_host_safety_kyc_console.mjs` — ✅ PASSED (14/14 Task 179 verification checks passed 100%).
+  - **Host Safety & KYC Verification Console Architecture**:
+    - `src/lib/designTokens.ts`: Defined `HOST_SAFETY_KYC_TOKENS` (`header` title & subtitle in EN/HI, `checklist12Points` with categories like Locking & Physical Security, Surveillance, Fire & Safety, Environmental Protection, Legal & Insurance, `sampleHostRecords` with masked Aadhaar, DigiLocker status, UP Police clearance certificate ID, Thana details, issuance dates, inspection scores, and overall statuses) and exported `getHostSafetyKycTokens` helper function.
+    - `src/styles.css`: Added CSS utilities (`.host-kyc-console-container`, `.host-kyc-inspection-card`, `.kyc-document-preview-stage`, `.police-verification-seal-badge`, `.checklist-12point-grid`, `.checklist-item-row`, `.aadhaar-verified-badge`, `@keyframes kyc-seal-pulse`, `@keyframes kyc-stamp-pop`) providing glassmorphism backdrop blur, pulsing verification seal badges, interactive checklist grids, and stamp pop animations.
+    - `src/components/ui/HostSafetyKycConsole.tsx`: Created reusable primitive component `HostSafetyKycConsole` featuring host list sidebar with search filter & status pills, document inspection stage for UIDAI Aadhaar (DigiLocker XML seal, masked UID) and UP Police Clearance Certificate (Cert ID, Thana name, issuance date, verified badge), interactive 12-point vault safety checklist with real-time score calculator, vault approval/hold/reject quick actions with Web Audio haptics (`playClick`, `playPop`, `playSuccessChime`, `playWarningBeep`), dual-persona theme support (`usePersona()`), and bilingual support.
+    - `src/components/ui/primitives.ts`: Re-exported `HostSafetyKycConsole`, `HostKycRecord`, and `HostSafetyKycConsoleProps`.
+    - `src/components/ui/index.ts`: Re-exported `HostSafetyKycConsole`.
+    - `src/routes/admin.tsx`: Integrated `<HostSafetyKycConsole />` into `/admin` operator console route.
+    - `execution/test_task179_host_safety_kyc_console.mjs`: Created test harness validating design tokens, CSS rules, component implementation, primitive re-exports, route integration, and clean production build compilation.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `HOST_SAFETY_KYC_TOKENS` & `getHostSafetyKycTokens`.
+    - `src/styles.css` — Added Host Safety & KYC CSS utility rules & keyframe animations.
+    - `src/components/ui/HostSafetyKycConsole.tsx` — Created HostSafetyKycConsole primitive component.
+    - `src/components/ui/primitives.ts` — Re-exported HostSafetyKycConsole primitives.
+    - `src/components/ui/index.ts` — Re-exported HostSafetyKycConsole primitive.
+    - `src/routes/admin.tsx` — Integrated HostSafetyKycConsole in Admin operator console.
+    - `execution/test_task179_host_safety_kyc_console.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 179 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 179 execution log.
+    - `progress.md` — Appended Task 179 execution log.
+
+
+- [x] **[UI - Data Table Ergonomics / operate] Task 178: Polish all admin data tables with sticky headers, column sorting, pagination controls, search bars, and CSV export buttons — 2026-09-15**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test_task178_data_table_ergonomics.mjs` — ✅ PASSED (Task 178 verification checks passed 100%).
+  - **Data Table Ergonomics Engine Architecture**:
+    - `src/lib/designTokens.ts`: Defined `DATA_TABLE_ERGONOMICS_TOKENS` (`header` title & subtitle, `stickyHeaderStyle`, `paginationOptions` [5, 10, 25, 50, 100], `sortDirections`, `csvExportConfig`, `personaAccents` for Student vs Host) and exported `getDataTableErgonomicsTokens` helper function.
+    - `src/styles.css`: Added CSS utilities (`.admin-data-table-container`, `.admin-sticky-table-header`, `.data-table-sort-button`, `.data-table-row-hover`, `.data-table-pagination-bar`) for sticky headers, column sorting indicators, hover highlights, and pagination controls.
+    - `src/components/ui/DataTableErgonomics.tsx`: Created generic reusable `DataTableErgonomics<T>` component and `exportToCsv` utility featuring sticky table header, interactive column sorting (asc/desc/none with arrow icons), real-time search input filter, row count stats indicator, rows-per-page dropdown, pagination navigation buttons, sanitized CSV exporter with Web Audio feedback (`playSuccessChime`, `playClick`, `playPop`), dual-persona theme support (`usePersona()`), and accessible table structure.
+    - `src/components/ui/primitives.ts`: Re-exported `DataTableErgonomics`, `exportToCsv`, `ColumnSpec`, and `DataTableErgonomicsProps`.
+    - `src/components/ui/index.ts`: Re-exported `DataTableErgonomics`.
+    - `src/routes/admin.tsx`: Upgraded `/admin` operator console Waitlist tab with `DataTableErgonomics<WaitlistRecord>` and configured `waitlistColumns` for full sorting, filtering, pagination, and CSV export capabilities.
+    - `execution/test_task178_data_table_ergonomics.mjs`: Created verification test script asserting design tokens, CSS rules, component implementation, primitive re-exports, route integration, and clean production build compilation.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `DATA_TABLE_ERGONOMICS_TOKENS` & `getDataTableErgonomicsTokens`.
+    - `src/styles.css` — Added Data Table Ergonomics CSS utility rules.
+    - `src/components/ui/DataTableErgonomics.tsx` — Created DataTableErgonomics component & exportToCsv helper.
+    - `src/components/ui/primitives.ts` — Re-exported DataTableErgonomics primitives.
+    - `src/components/ui/index.ts` — Re-exported DataTableErgonomics primitive.
+    - `src/routes/admin.tsx` — Upgraded Waitlist tab with DataTableErgonomics component & column specs.
+    - `execution/test_task178_data_table_ergonomics.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 178 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 178 execution log.
+    - `progress.md` — Appended Task 178 execution log.
+
+- [x] **[UI - Interactive Campus Map Layer / operate] Task 177: Design an interactive Leaflet/Mapbox campus map interface visualizing host clusters, walking routes, and student coaching hubs — 2026-09-15**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test_task177_campus_map_layer.mjs` — ✅ PASSED (12/12 Task 177 verification checks passed 100%).
+  - **Interactive Campus Map Layer Architecture**:
+    - `src/lib/designTokens.ts`: Defined `CAMPUS_MAP_LAYER_TOKENS` (`header` title & subtitle; `campusPresets` for Kakadeo Hub, Kalyanpur & CSJMU Zone, HBTI West Campus, Nawabganj Residential; `layerFilters` for Senior Host Vaults, Coaching Hubs, Safe Walking Routes, Saarthi Kitchens; `nodes` with coordinates, capacity %, ratings, prices; `walkingRoutes` with step-by-step coords, distances in meters, walk times in mins, safety scores, lighting ratings) and exported `getCampusMapLayerTokens` helper function.
+    - `src/styles.css`: Added CSS utilities (`.campus-map-container`, `.campus-map-canvas-stage`, `.map-node-marker`, `.map-marker-pin-host`, `.map-marker-pin-coaching`, `.map-marker-pin-kitchen`, `.map-pulse-ring-active`, `.map-walking-route-line`, `@keyframes map-pin-pulse-ring`, `@keyframes map-route-dash-walk`, `.map-drawer-popup-card`) providing glassmorphism map containment, pulsing marker rings, animated walking route dash lines, and node details popup card styles.
+    - `src/components/ui/InteractiveCampusMap.tsx`: Created reusable primitive component `InteractiveCampusMap` featuring interactive vector map canvas with smooth zoom controls (+, -, reset), campus hub preset switcher tabs, category layer filter toggles, live node marker pins with capacity fill & pricing pills, animated SVG polyline walking route overlays with distance & walk time tags, node inspection drawer modal popup (host info, rating, distance, Aadhaar verified badge, 1-tap book storage CTA, Google Maps direction link), Web Audio haptics (`playClick`, `playPop`, `playSuccessChime`), dual-persona theme support (`usePersona()`), and bilingual EN/HI support.
+    - `src/components/ui/primitives.ts`: Re-exported `InteractiveCampusMap`, `InteractiveCampusMapProps`, `CampusMapNode`, and `WalkingRouteSpec`.
+    - `src/components/ui/index.ts`: Re-exported `InteractiveCampusMap`.
+    - `src/routes/admin.tsx`: Integrated `<InteractiveCampusMap />` directly into `/admin` operator console route above NodeCapacityGauge section.
+    - `execution/test_task177_campus_map_layer.mjs`: Created test harness validating design tokens, CSS rules, component implementation, primitive re-exports, route integration, and clean production build compilation.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `CAMPUS_MAP_LAYER_TOKENS` & `getCampusMapLayerTokens`.
+    - `src/styles.css` — Added campus map CSS utility rules & animations.
+    - `src/components/ui/InteractiveCampusMap.tsx` — Created InteractiveCampusMap primitive component.
+    - `src/components/ui/primitives.ts` — Re-exported InteractiveCampusMap primitives.
+    - `src/components/ui/index.ts` — Re-exported InteractiveCampusMap primitive.
+    - `src/routes/admin.tsx` — Integrated InteractiveCampusMap in Admin operator console.
+    - `execution/test_task177_campus_map_layer.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 177 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 177 execution log.
+    - `progress.md` — Appended Task 177 execution log.
+
+- [x] **[UI - Live Booking Feed & Activity Stream / operate] Task 176: Implement a real-time activity feed component showing incoming bookings, host approvals, and delivery dispatches — 2026-09-15**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test_task176_live_activity_feed.mjs` — ✅ PASSED (Task 176 verification checks passed 100%).
+  - **Live Activity Feed & Dispatch Radar Architecture**:
+    - `src/lib/designTokens.ts`: Defined `LIVE_ACTIVITY_FEED_TOKENS` (`header` title, subtitle, telemetry status badge; `filters` for All Streams, Incoming Bookings, Host Approvals, Pickups & Dispatches, Vault Check-ins; `statsSummary` counts; sample telemetry feed stream data for Kakadeo, Kalyanpur, Nawabganj, HBTI campus nodes) and exported `getLiveActivityFeedTokens` helper function.
+    - `src/styles.css`: Added CSS utilities (`.live-activity-feed-container`, `.activity-feed-item-card`, `.feed-filter-pill-modern`, `.activity-beacon-pulse-active`, `@keyframes activity-beacon-pulse`, `@keyframes feed-item-slide-in`) providing glassmorphism backdrop blur, pulsing status beacons, filter pill hover states, and smooth event slide-in animations.
+    - `src/components/ui/LiveActivityFeed.tsx`: Created reusable primitive component `LiveActivityFeed` featuring live stream play/pause control, manual simulated live event generator with Web Audio chimes (`playPop`, `playClick`, `playSuccessChime`), category filter pills, real-time search filtering, summary stats KPI header, inspect item modal dialog, dual-persona theme support (`usePersona()`), and bilingual EN/HI support.
+    - `src/components/ui/primitives.ts`: Re-exported `LiveActivityFeed`, `LiveActivityFeedProps`, and `ActivityFeedItem`.
+    - `src/components/ui/index.ts`: Re-exported `LiveActivityFeed`.
+    - `src/routes/admin.tsx`: Integrated `<LiveActivityFeed />` directly into `/admin` operator console route below NodeCapacityGauge section.
+    - `execution/test_task176_live_activity_feed.mjs`: Created test harness validating design tokens, CSS rules, component implementation, primitive re-exports, route integration, and clean production build compilation.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `LIVE_ACTIVITY_FEED_TOKENS` & `getLiveActivityFeedTokens`.
+    - `src/styles.css` — Added live activity feed CSS utility rules & animations.
+    - `src/components/ui/LiveActivityFeed.tsx` — Created LiveActivityFeed primitive component.
+    - `src/components/ui/primitives.ts` — Re-exported LiveActivityFeed primitives.
+    - `src/components/ui/index.ts` — Re-exported LiveActivityFeed primitive.
+    - `src/routes/admin.tsx` — Integrated LiveActivityFeed in Admin operator console.
+    - `execution/test_task176_live_activity_feed.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 176 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 176 execution log.
+    - `progress.md` — Appended Task 176 execution log.
+
+- [x] **[UI - Host Passive Income Analytics / operate] Task 175: Build interactive monthly income charts for elderly hosts with bank transfer histories, tax breakdowns, and upcoming payout dates — 2026-09-15**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test_task175_host_passive_income.mjs` — ✅ PASSED (Task 175 verification checks passed 100%).
+  - **Host Passive Income Analytics Architecture**:
+    - `src/lib/designTokens.ts`: Defined `HOST_PASSIVE_INCOME_TOKENS` (`taxShieldInfo` for Section 80TTB ₹50,000 senior citizen tax exemption, zero GST micro-lease shield; `bankTransferConfig` for IMPS/NEFT automated Monday payouts; `seniorModeConfig` for large high-contrast fonts, simplified charts, and voice assistance hints; sample transactions & payout schedules) and exported `getHostPassiveIncomeTokens` helper function.
+    - `src/styles.css`: Added CSS utilities (`.host-income-analytics-container`, `.host-transfer-row`, `.host-tax-shield-card`, `.senior-contrast-mode`) for glassmorphism card styling, high-legibility typography, transfer status pills, and senior citizen toggle states.
+    - `src/components/ui/HostPassiveIncomeAnalytics.tsx`: Created reusable primitive component `HostPassiveIncomeAnalytics` featuring Senior Citizen high-legibility toggle mode, 12-month passive income projection summary, automated bank transfer history timeline with IMPS reference IDs, Section 80TTB Tax Exemption Shield breakdown card, and upcoming weekly payout simulator.
+    - `src/components/ui/primitives.ts`: Re-exported `HostPassiveIncomeAnalytics`, `HostPassiveIncomeAnalyticsProps`, `BankTransferItem`, and `PayoutScheduleItem`.
+    - `src/components/ui/index.ts`: Re-exported `HostPassiveIncomeAnalytics`.
+    - `src/components/stash/HostIncomeChart.tsx`: Embedded `HostPassiveIncomeAnalytics` into host earnings dashboard under tab control ("Tax & Bank Hub" / "टैक्स व बैंक हब").
+    - `execution/test_task175_host_passive_income.mjs`: Created test harness validating design tokens, CSS rules, component implementation, primitive re-exports, HostIncomeChart integration, and clean production build compilation.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `HOST_PASSIVE_INCOME_TOKENS` & `getHostPassiveIncomeTokens`.
+    - `src/styles.css` — Added host passive income analytics CSS utility rules.
+    - `src/components/ui/HostPassiveIncomeAnalytics.tsx` — Created HostPassiveIncomeAnalytics primitive component.
+    - `src/components/ui/primitives.ts` — Re-exported HostPassiveIncomeAnalytics primitives.
+    - `src/components/ui/index.ts` — Re-exported HostPassiveIncomeAnalytics primitive.
+    - `src/components/stash/HostIncomeChart.tsx` — Embedded HostPassiveIncomeAnalytics in Senior Tax & Bank Hub tab.
+    - `execution/test_task175_host_passive_income.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 175 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 175 execution log.
+    - `progress.md` — Appended Task 175 execution log.
+
+
+- [x] **[UI - Student My-Bookings Hub / operate] Task 174: Redesign the student profile booking hub with status timelines (Booked -> Picked Up -> In Vault -> Retrieved) and invoice download triggers — 2026-09-15**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test_task174_my_bookings_hub.mjs` — ✅ PASSED (6/6 verification checks passed 100%).
+  - **Student My-Bookings Hub Architecture**:
+    - `src/lib/designTokens.ts`: Defined `STUDENT_MY_BOOKINGS_TOKENS` (`timelineStages` for Step 1: Booked, Step 2: Picked Up, Step 3: In Vault, Step 4: Retrieved; `filterOptions` for All, Active, Booked, Completed; `invoiceConfig` for company legal name, GSTIN `09AAACS8839X1Z5`, HSN `997712`, TPA Sec 105 legal shield, ₹10,000 micro-insurance shield) and exported `getStudentMyBookingsTokens` helper function.
+    - `src/styles.css`: Added CSS utilities (`.student-bookings-hub-container`, `.my-bookings-timeline-bar`, `.timeline-track-progress`, `.invoice-download-btn`, `@keyframes timeline-step-pulse`) providing glassmorphism containment, animated progress bar fill, glowing step pulses, and active invoice buttons.
+    - `src/components/stash/MyBookingsDashboard.tsx`: Redesigned `MyBookingsDashboard` with `StudentBookingTimeline` component displaying real-time 4-step status timelines, status filter pills, and instant GST Tax Invoice download generator with Web Audio feedback (`playSuccessChime`, `playClick`, `playPop`) and dual-persona support (`usePersona()`).
+    - `src/components/ui/primitives.ts`: Re-exported `MyBookingsDashboard`, `StudentBookingTimeline`, and `BookingTimelineStage`.
+    - `src/lib/localSubmissions.ts`: Updated `BookingRecord` interface with optional `status` field.
+    - `execution/test_task174_my_bookings_hub.mjs`: Created test harness validating design tokens, CSS rules, component implementation, primitive re-exports, and clean production build compilation.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `STUDENT_MY_BOOKINGS_TOKENS` & `getStudentMyBookingsTokens`.
+    - `src/styles.css` — Added timeline & invoice CSS rules.
+    - `src/components/stash/MyBookingsDashboard.tsx` — Overhauled MyBookingsDashboard with StudentBookingTimeline & invoice generator.
+    - `src/components/ui/primitives.ts` — Re-exported MyBookingsDashboard & StudentBookingTimeline primitives.
+    - `src/lib/localSubmissions.ts` — Updated BookingRecord interface.
+    - `execution/test_task174_my_bookings_hub.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 174 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 174 execution log.
+    - `progress.md` — Appended Task 174 execution log.
+
+- [x] **[UI - Real-Time Node Capacity Gauges / operate] Task 173: Build interactive circular capacity gauges showing live locker utilization across Kakadeo, Kalyanpur, and Nawabganj hubs — 2026-09-15**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Node Capacity Telemetry Architecture**:
+    - `src/lib/designTokens.ts`: Defined `NODE_CAPACITY_GAUGE_TOKENS` (`gaugeConfig` for SVG radius 42 & strokeWidth 8, `statusThresholds` for Available <65%, Optimal <85%, Critical 100%, node telemetry data for Kakadeo Central Vault 82%, Kalyanpur Campus Hub 94%, Nawabganj Storage Hub 45%, Gurudev Palace Vault 68%, locker category breakdowns) and exported `getNodeCapacityTokens` helper function.
+    - `src/components/ui/NodeCapacityGauge.tsx`: Created reusable circular SVG telemetry component `CircularGauge` and `NodeCapacityGauge` featuring real-time node switcher tabs, status badges, locker category breakdown grids (Small Box, Medium Trunk, Large Appliance, Climate Controlled), emergency reserve buffer controls, and interactive booking simulation.
+    - `src/components/ui/primitives.ts`: Re-exported `NodeCapacityGauge`, `CircularGauge`, `NodeCapacityGaugeProps`, and `CircularGaugeProps`.
+    - `src/components/ui/index.ts`: Re-exported `NodeCapacityGauge` primitive.
+    - `src/routes/admin.tsx`: Integrated `NodeCapacityGauge` into `/admin` operator console route.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `NODE_CAPACITY_GAUGE_TOKENS` & `getNodeCapacityTokens`.
+    - `src/components/ui/NodeCapacityGauge.tsx` — Created NodeCapacityGauge telemetry component with circular SVG gauges.
+    - `src/components/ui/primitives.ts` — Re-exported NodeCapacityGauge primitives.
+    - `src/components/ui/index.ts` — Re-exported NodeCapacityGauge primitive.
+    - `src/routes/admin.tsx` — Integrated NodeCapacityGauge component into Admin page.
+    - `docs/tasks/PRD.md` — Marked Task 173 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 173 execution log.
+    - `progress.md` — Appended Task 173 execution log.
+
+- [x] **[UI - Executive KPI Metric Cards / operate] Task 172: Redesign CAC, LTV, Active Bookings, and Gross Margin cards with sparkline trend charts and percentage growth indicators — 2026-09-15**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Executive KPI Cards Architecture**:
+    - `src/lib/designTokens.ts`: Defined `EXECUTIVE_KPI_CARDS_TOKENS` with metric specifications for Blended CAC, Net Student LTV, Active Bookings, Platform Gross Margin, and LTV/CAC Ratio. Added `getExecutiveKpiCardTokens` helper function.
+    - `src/components/ui/ExecutiveKpiCard.tsx`: Created reusable primitive `ExecutiveKpiCard` and SVG `SparklineChart` component featuring cubic bezier interpolation curves, trend pulse beacons, color-coded themes (emerald, cyan, amber, rose, violet), percentage growth badges, and full TypeScript type safety.
+    - `src/components/ui/primitives.ts`: Re-exported `ExecutiveKpiCard` and `SparklineChart`.
+    - `src/components/ui/index.ts`: Re-exported `ExecutiveKpiCard`.
+    - `src/components/stash/ExecutiveAnalyticsDashboard.tsx`: Integrated `ExecutiveKpiCard` primitives into executive metrics highlight grid.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `EXECUTIVE_KPI_CARDS_TOKENS` & `getExecutiveKpiCardTokens`.
+    - `src/components/ui/ExecutiveKpiCard.tsx` — Created ExecutiveKpiCard & SparklineChart primitive components.
+    - `src/components/ui/primitives.ts` — Re-exported ExecutiveKpiCard primitives.
+    - `src/components/ui/index.ts` — Re-exported ExecutiveKpiCard primitive.
+    - `src/components/stash/ExecutiveAnalyticsDashboard.tsx` — Integrated ExecutiveKpiCard primitives.
+    - `docs/tasks/PRD.md` — Marked Task 172 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 172 execution log.
+    - `progress.md` — Appended Task 172 execution log.
+
+- [x] **[UI - Admin Dashboard Modernization / operate] Task 171: Overhaul `/admin` operator console with clean, dark-themed modular analytics cards, tabbed navigation, and live status badges — 2026-09-15**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test_task171_admin_dashboard.mjs` — ✅ PASSED (Task 171 verification checks passed 100%).
+  - **Admin Dashboard Modernization Architecture**:
+    - `src/lib/designTokens.ts`: Defined `ADMIN_DASHBOARD_TOKENS` (`consoleTitle: "StashSaarthi Operator Console v2.0"`, `operatorStatus: "ONLINE ● OFFLINE FIRST ENGINE"`, `statusBadges` for online/synced/operational, `metrics` configuration, `nodeCapacities` for Kakadeo 82%, Kalyanpur 64%, Nawabganj 91%, `tabNavigation` active glider styles) and exported `getAdminDashboardTokens` helper function.
+    - `src/styles.css`: Added CSS utilities (`.admin-dashboard-container`, `.admin-metric-card-modern`, `.admin-status-badge-pulse`, `@keyframes admin-badge-pulse`, `.admin-node-meter-bar`, `.admin-node-meter-fill`) for dark-themed modular dashboard cards, pulsing badge indicators, and node utilization meter bars.
+    - `src/components/ui/AdminStatusBadge.tsx`: Created reusable primitive component `AdminStatusBadge` featuring live operator status badges ("Operator Active", "Local Storage Synced", "Nodes Operational") with pulsing status beacons and count badges.
+    - `src/components/ui/primitives.ts`: Re-exported `AdminStatusBadge` and `AdminStatusBadgeProps`.
+    - `src/routes/admin.tsx`: Overhauled the `/admin` operator console page with live operator status bar, modular analytics metric cards (`admin-metric-card-modern`) with trend badges, `NodeCapacityGauges` interactive utilization cards widget for Kakadeo, Kalyanpur, and Nawabganj hubs, and tabbed navigation.
+    - `execution/test_task171_admin_dashboard.mjs`: Created test harness validating design tokens, CSS rules, component implementation, primitive re-exports, route integration, and clean production build compilation.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Verified `ADMIN_DASHBOARD_TOKENS` & `getAdminDashboardTokens`.
+    - `src/styles.css` — Added admin dashboard CSS utility rules & meter fill animation.
+    - `src/components/ui/AdminStatusBadge.tsx` — Created AdminStatusBadge primitive component.
+    - `src/components/ui/primitives.ts` — Re-exported AdminStatusBadge primitive.
+    - `src/routes/admin.tsx` — Overhauled Admin console page with status bar, modernized metric cards & NodeCapacityGauges.
+    - `execution/test_task171_admin_dashboard.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 171 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 171 execution log.
+    - `progress.md` — Appended Task 171 execution log.
 
 - [x] **[UI - Modal Backdrop Blur & Scroll Lock / polish] Task 170: Perfect modal backdrop dimming (`backdrop-blur-md bg-black/60`) and body scroll locking to eliminate dual-scrolling glitches — 2026-09-14**:
   - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).

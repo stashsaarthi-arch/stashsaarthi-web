@@ -209,20 +209,20 @@ Sprint 10: QA, CSO & CEO (Total Assurance, Compliance & Strategic Direction)
 - [x] 170. **[UI - Modal Backdrop Blur & Scroll Lock / polish]**: Perfect modal backdrop dimming (`backdrop-blur-md bg-black/60`) and body scroll locking to eliminate dual-scrolling glitches.
 
 ## Sprint 18: Operational Dashboards, Data Visualization & Admin Console (building-data-apps, impeccable operate)
-- [ ] 171. **[UI - Admin Dashboard Modernization / operate]**: Overhaul `/admin` operator console with clean, dark-themed modular analytics cards, tabbed navigation, and live status badges.
-- [ ] 172. **[UI - Executive KPI Metric Cards / operate]**: Redesign CAC, LTV, Active Bookings, and Gross Margin cards with sparkline trend charts and percentage growth indicators.
-- [ ] 173. **[UI - Real-Time Node Capacity Gauges / operate]**: Build interactive circular capacity gauges showing live locker utilization across Kakadeo, Kalyanpur, and Nawabganj hubs.
-- [ ] 174. **[UI - Student My-Bookings Hub / operate]**: Redesign the student profile booking hub with status timelines (Booked -> Picked Up -> In Vault -> Retrieved) and invoice download triggers.
-- [ ] 175. **[UI - Host Passive Income Analytics / operate]**: Build interactive monthly income charts for elderly hosts with bank transfer histories, tax breakdowns, and upcoming payout dates.
-- [ ] 176. **[UI - Live Booking Feed & Activity Stream / operate]**: Implement a real-time activity feed component showing incoming bookings, host approvals, and delivery dispatches.
-- [ ] 177. **[UI - Interactive Campus Map Layer / operate]**: Design an interactive Leaflet/Mapbox campus map interface visualizing host clusters, walking routes, and student coaching hubs.
-- [ ] 178. **[UI - Data Table Ergonomics / operate]**: Polish all admin data tables with sticky headers, column sorting, pagination controls, search bars, and CSV export buttons.
-- [ ] 179. **[UI - Host Safety & KYC Verification Console / operate]**: Design an inspection view for verifying host Aadhaar, police verification certificates, and 12-point safety checklists.
-- [ ] 180. **[UI - Toast & System Notification Overhaul / polish]**: Redesign floating system toasts with sleek glassmorphism, countdown progress bars, and actionable undo/view buttons.
+- [x] 171. **[UI - Admin Dashboard Modernization / operate]**: Overhaul `/admin` operator console with clean, dark-themed modular analytics cards, tabbed navigation, and live status badges.
+- [x] 172. **[UI - Executive KPI Metric Cards / operate]**: Redesign CAC, LTV, Active Bookings, and Gross Margin cards with sparkline trend charts and percentage growth indicators.
+- [x] 173. **[UI - Real-Time Node Capacity Gauges / operate]**: Build interactive circular capacity gauges showing live locker utilization across Kakadeo, Kalyanpur, and Nawabganj hubs.
+- [x] 174. **[UI - Student My-Bookings Hub / operate]**: Redesign the student profile booking hub with status timelines (Booked -> Picked Up -> In Vault -> Retrieved) and invoice download triggers.
+- [x] 175. **[UI - Host Passive Income Analytics / operate]**: Build interactive monthly income charts for elderly hosts with bank transfer histories, tax breakdowns, and upcoming payout dates.
+- [x] 176. **[UI - Live Booking Feed & Activity Stream / operate]**: Implement a real-time activity feed component showing incoming bookings, host approvals, and delivery dispatches.
+- [x] 177. **[UI - Interactive Campus Map Layer / operate]**: Design an interactive Leaflet/Mapbox campus map interface visualizing host clusters, walking routes, and student coaching hubs.
+- [x] 178. **[UI - Data Table Ergonomics / operate]**: Polish all admin data tables with sticky headers, column sorting, pagination controls, search bars, and CSV export buttons.
+- [x] 179. **[UI - Host Safety & KYC Verification Console / operate]**: Design an inspection view for verifying host Aadhaar, police verification certificates, and 12-point safety checklists.
+- [x] 180. **[UI - Toast & System Notification Overhaul / polish]**: Redesign floating system toasts with sleek glassmorphism, countdown progress bars, and actionable undo/view buttons.
 
 ## Sprint 19: Mobile-First Responsive Ergonomics & Safari Hardening (impeccable adapt, optimize)
-- [ ] 181. **[UI - Mobile Navigation Drawer 2.0 / adapt]**: Re-engineer the mobile hamburger drawer with buttery smooth slide-in transitions, high-contrast category links, and language/persona toggles.
-- [ ] 182. **[UI - Sticky Mobile Bottom Action Bar / adapt]**: Implement a thumb-friendly sticky bottom CTA bar on mobile screens with instant "Book Storage @ ₹300" action.
+- [x] 181. **[UI - Mobile Navigation Drawer 2.0 / adapt]**: Re-engineer the mobile hamburger drawer with buttery smooth slide-in transitions, high-contrast category links, and language/persona toggles.
+- [x] 182. **[UI - Sticky Mobile Bottom Action Bar / adapt]**: Implement a thumb-friendly sticky bottom CTA bar on mobile screens with instant "Book Storage @ ₹300" action.
 - [ ] 183. **[UI - iOS Safari 100dvh & Bottom Safe Area / adapt]**: Fix iOS Safari viewport height issues using dynamic viewport units (`100dvh`) and `env(safe-area-inset-bottom)`.
 - [ ] 184. **[UI - Touch Target 48px Minimum Audit / adapt]**: Audit and enlarge all interactive buttons, icons, pills, and tap zones to maintain a strict minimum 48x48px touch target size.
 - [ ] 185. **[UI - Horizontal Scroll Overflow Quarantine / adapt]**: Enforce strict viewport containment (`overflow-x: hidden`) across all root layouts to permanently eliminate horizontal micro-wobbles.

@@ -3430,6 +3430,1306 @@ export function getAdminDashboardTokens() {
   return ADMIN_DASHBOARD_TOKENS;
 }
 
+/**
+ * Executive KPI Metric Cards & Sparkline Trend Tokens (Task 172)
+ * CAC, LTV, Active Bookings, and Gross Margin cards with sparkline trend charts and percentage growth indicators.
+ */
+export const EXECUTIVE_KPI_CARDS_TOKENS = {
+  sparklineConfig: {
+    strokeWidth: 2.5,
+    heightPx: 42,
+    smoothingRatio: 0.2,
+    dotRadiusPx: 3.5,
+    pulseBeaconSpeedMs: 1800,
+  },
+  metrics: {
+    cac: {
+      id: "cac",
+      titleEn: "Blended CAC",
+      titleHi: "मिश्रित ग्राहक अधिग्रहण लागत (CAC)",
+      valueFormatted: "₹175",
+      rawNumeric: 175,
+      unit: "₹",
+      growthPercent: -14.2,
+      isPositiveGrowth: true, // Lower CAC is positive for business!
+      growthLabelEn: "vs ₹204 target",
+      growthLabelHi: "लक्ष्य ₹204 की तुलना में",
+      subtitleEn: "Campus referral & organic hubs",
+      subtitleHi: "कैंपस रेफरल एवं ऑर्गेनिक हब",
+      trendPoints: [240, 220, 205, 190, 182, 175],
+      trendDates: ["W1", "W2", "W3", "W4", "W5", "W6"],
+      accentColor: "#10B981",
+      accentBg: "rgba(16, 185, 129, 0.12)",
+      borderColor: "rgba(16, 185, 129, 0.3)",
+      glowShadow: "0 0 20px rgba(16, 185, 129, 0.25)",
+      badgeColor: "emerald",
+      icon: "Target",
+    },
+    ltv: {
+      id: "ltv",
+      titleEn: "Student LTV (Net)",
+      titleHi: "छात्र जीवनकाल मूल्य (Net LTV)",
+      valueFormatted: "₹3,825",
+      rawNumeric: 3825,
+      unit: "₹",
+      growthPercent: 28.5,
+      isPositiveGrowth: true,
+      growthLabelEn: "+₹850 vs last term",
+      growthLabelHi: "पिछले सत्र से +₹850 अधिक",
+      subtitleEn: "Net contribution across 4.5 mo stay",
+      subtitleHi: "4.5 माह प्रवास पर शुद्ध योगदान",
+      trendPoints: [2800, 3050, 3200, 3450, 3600, 3825],
+      trendDates: ["W1", "W2", "W3", "W4", "W5", "W6"],
+      accentColor: "#06B6D4",
+      accentBg: "rgba(6, 182, 212, 0.12)",
+      borderColor: "rgba(6, 182, 212, 0.3)",
+      glowShadow: "0 0 20px rgba(6, 182, 212, 0.25)",
+      badgeColor: "cyan",
+      icon: "TrendingUp",
+    },
+    activeBookings: {
+      id: "activeBookings",
+      titleEn: "Active Bookings",
+      titleHi: "सक्रिय बुकिंग संख्या",
+      valueFormatted: "1,248",
+      rawNumeric: 1248,
+      unit: "",
+      growthPercent: 18.4,
+      isPositiveGrowth: true,
+      growthLabelEn: "+194 new this month",
+      growthLabelHi: "इस महीने +194 नए",
+      subtitleEn: "Stashes & spaces in vault network",
+      subtitleHi: "वॉल्ट नेटवर्क में स्टैश व स्पेस",
+      trendPoints: [850, 920, 980, 1050, 1140, 1248],
+      trendDates: ["W1", "W2", "W3", "W4", "W5", "W6"],
+      accentColor: "#F59E0B",
+      accentBg: "rgba(245, 158, 11, 0.12)",
+      borderColor: "rgba(245, 158, 11, 0.3)",
+      glowShadow: "0 0 20px rgba(245, 158, 11, 0.25)",
+      badgeColor: "amber",
+      icon: "Boxes",
+    },
+    grossMargin: {
+      id: "grossMargin",
+      titleEn: "Platform Gross Margin",
+      titleHi: "प्लेटफॉर्म सकल मार्जिन",
+      valueFormatted: "24.5%",
+      rawNumeric: 24.5,
+      unit: "%",
+      growthPercent: 5.2,
+      isPositiveGrowth: true,
+      growthLabelEn: "+1.2% efficiency gain",
+      growthLabelHi: "+1.2% दक्षता वृद्धि",
+      subtitleEn: "Zero-CapEx asset light margin",
+      subtitleHi: "ज़ीरो-CapEx एसेट लाइट मार्जिन",
+      trendPoints: [18.2, 19.5, 21.0, 22.4, 23.8, 24.5],
+      trendDates: ["W1", "W2", "W3", "W4", "W5", "W6"],
+      accentColor: "#F43F5E",
+      accentBg: "rgba(244, 63, 94, 0.12)",
+      borderColor: "rgba(244, 63, 94, 0.3)",
+      glowShadow: "0 0 20px rgba(244, 63, 94, 0.25)",
+      badgeColor: "rose",
+      icon: "Zap",
+    },
+  },
+} as const;
+
+export function getExecutiveKpiCardTokens(metricKey?: keyof typeof EXECUTIVE_KPI_CARDS_TOKENS.metrics) {
+  const metricSpec = metricKey && EXECUTIVE_KPI_CARDS_TOKENS.metrics[metricKey]
+    ? EXECUTIVE_KPI_CARDS_TOKENS.metrics[metricKey]
+    : null;
+  return {
+    ...EXECUTIVE_KPI_CARDS_TOKENS,
+    metricSpec,
+  };
+}
+
+/**
+ * Design Tokens for Real-Time Node Capacity Gauges (Task 173)
+ */
+export const NODE_CAPACITY_GAUGE_TOKENS = {
+  gaugeConfig: {
+    strokeWidthPx: 8,
+    radiusPx: 42,
+    svgSizePx: 100,
+    animationDurationMs: 1200,
+  },
+  statusThresholds: {
+    available: { maxPercent: 65, colorHex: "#10B981", badgeClass: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30" },
+    optimal: { maxPercent: 85, colorHex: "#F59E0B", badgeClass: "bg-amber-500/15 text-amber-300 border-amber-500/30" },
+    critical: { maxPercent: 100, colorHex: "#F43F5E", badgeClass: "bg-rose-500/15 text-rose-300 border-rose-500/30" },
+  },
+  nodes: [
+    {
+      id: "kakadeo-central",
+      nameEn: "Kakadeo Central Vault",
+      nameHi: "काकादेव सेंट्रल वॉल्ट",
+      campusEn: "IITK & Coaching Hub",
+      campusHi: "आईआईटीके व कोचिंग हब",
+      totalLockers: 200,
+      usedLockers: 164,
+      reservedBuffer: 10,
+      breakdown: {
+        smallBox: { total: 80, used: 72 },
+        mediumTrunk: { total: 60, used: 48 },
+        largeAppliance: { total: 40, used: 32 },
+        climateControl: { total: 20, used: 12 },
+      },
+    },
+    {
+      id: "kalyanpur-campus",
+      nameEn: "Kalyanpur Campus Hub",
+      nameHi: "कल्याणपुर कैंपस हब",
+      campusEn: "CSJM University Zone",
+      campusHi: "सीएसजेएम यूनिवर्सिटी जोन",
+      totalLockers: 150,
+      usedLockers: 141,
+      reservedBuffer: 5,
+      breakdown: {
+        smallBox: { total: 50, used: 49 },
+        mediumTrunk: { total: 50, used: 46 },
+        largeAppliance: { total: 30, used: 28 },
+        climateControl: { total: 20, used: 18 },
+      },
+    },
+    {
+      id: "nawabganj-hub",
+      nameEn: "Nawabganj Storage Hub",
+      nameHi: "नवाबगंज स्टोरेज हब",
+      campusEn: "HBTI & Medical Belt",
+      campusHi: "एचबीटीआई व मेडिकल बेल्ट",
+      totalLockers: 100,
+      usedLockers: 45,
+      reservedBuffer: 15,
+      breakdown: {
+        smallBox: { total: 40, used: 18 },
+        mediumTrunk: { total: 30, used: 14 },
+        largeAppliance: { total: 20, used: 8 },
+        climateControl: { total: 10, used: 5 },
+      },
+    },
+    {
+      id: "gurudev-palace",
+      nameEn: "Gurudev Palace Vault",
+      nameHi: "गुरुदेव पैलेस वॉल्ट",
+      campusEn: "Panki Industrial & Transit Hub",
+      campusHi: "पनकी इंडस्ट्रियल व ट्रांजिट हब",
+      totalLockers: 120,
+      usedLockers: 82,
+      reservedBuffer: 10,
+      breakdown: {
+        smallBox: { total: 45, used: 31 },
+        mediumTrunk: { total: 40, used: 28 },
+        largeAppliance: { total: 25, used: 16 },
+        climateControl: { total: 10, used: 7 },
+      },
+    },
+  ],
+} as const;
+
+export function getNodeCapacityTokens(nodeId?: string) {
+  const node = nodeId
+    ? NODE_CAPACITY_GAUGE_TOKENS.nodes.find((n) => n.id === nodeId)
+    : NODE_CAPACITY_GAUGE_TOKENS.nodes[0];
+  return {
+    ...NODE_CAPACITY_GAUGE_TOKENS,
+    currentNode: node || NODE_CAPACITY_GAUGE_TOKENS.nodes[0],
+  };
+}
+
+/**
+ * Student My-Bookings Hub Design Tokens (Task 174)
+ * Status timelines (Booked -> Picked Up -> In Vault -> Retrieved), status filters, and invoice download configuration.
+ */
+export const STUDENT_MY_BOOKINGS_TOKENS = {
+  consoleTitleEn: "Student Booking & Vault Journey",
+  consoleTitleHi: "छात्र बुकिंग व वॉल्ट यात्रा",
+  timelineStages: [
+    {
+      id: "booked",
+      step: 1,
+      labelEn: "Booked",
+      labelHi: "सत्यापित बुकिंग",
+      color: "emerald",
+      badgeTextEn: "Step 1: Confirmed",
+      badgeTextHi: "चरण 1: पुष्टि हुई",
+      descriptionEn: "Booking token issued & host matched",
+      descriptionHi: "बुकिंग टोकन जारी व होस्ट का मिलान",
+    },
+    {
+      id: "picked_up",
+      step: 2,
+      labelEn: "Picked Up",
+      labelHi: "पिकअप संपन्न",
+      color: "cyan",
+      badgeTextEn: "Step 2: In Transit",
+      badgeTextHi: "चरण 2: मार्ग में",
+      descriptionEn: "Doorstep pickup completed & laser sealed",
+      descriptionHi: "डोरस्टेप पिकअप पूर्ण व डिजिटल सील",
+    },
+    {
+      id: "in_vault",
+      step: 3,
+      labelEn: "In Vault",
+      labelHi: "वॉल्ट में सुरक्षित",
+      color: "amber",
+      badgeTextEn: "Step 3: Vault Secured",
+      badgeTextHi: "चरण 3: वॉल्ट सुरक्षित",
+      descriptionEn: "Camera-monitored senior host vault",
+      descriptionHi: "कैमरा-निगरानी वाले सीनियर वॉल्ट में सुरक्षित",
+    },
+    {
+      id: "retrieved",
+      step: 4,
+      labelEn: "Retrieved",
+      labelHi: "पुनः प्राप्त",
+      color: "violet",
+      badgeTextEn: "Step 4: Retrieved",
+      badgeTextHi: "चरण 4: वापस लिया गया",
+      descriptionEn: "Laser barcode verified & handed over",
+      descriptionHi: "लेजर बारकोड सत्यापित व सुपुर्दगी पूर्ण",
+    },
+  ],
+  filterOptions: [
+    { id: "all", labelEn: "All Bookings", labelHi: "सभी बुकिंग" },
+    { id: "active", labelEn: "Active (In Vault / Transit)", labelHi: "सक्रिय (वॉल्ट / मार्ग में)" },
+    { id: "booked", labelEn: "Booked", labelHi: "बुकिंग हुई" },
+    { id: "retrieved", labelEn: "Completed", labelHi: "संपन्न" },
+  ],
+  invoiceConfig: {
+    companyName: "StashSaarthi Technologies Pvt. Ltd.",
+    gstin: "09AAACS8839X1Z5",
+    hsnCode: "997712",
+    legalShield: "TPA Sec 105 Safe Custody Protections",
+    insuranceCover: "₹10,000 Free Micro-Insurance Shield",
+    downloadBtnEn: "Download Tax Invoice",
+    downloadBtnHi: "जीएसटी टैक्स चालान डाउनलोड करें",
+  },
+  accentTheme: {
+    student: {
+      timelineGradient: "from-emerald-400 via-teal-400 to-cyan-400",
+      activeStepGlow: "shadow-[0_0_20px_rgba(16,185,129,0.5)] border-emerald-400 text-emerald-300",
+      lineColorActive: "bg-gradient-to-r from-emerald-500 to-cyan-400",
+      lineColorInactive: "bg-white/10",
+      invoiceBtn: "bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-black shadow-lg shadow-cyan-500/20",
+    },
+    host: {
+      timelineGradient: "from-amber-400 via-yellow-400 to-amber-500",
+      activeStepGlow: "shadow-[0_0_20px_rgba(245,158,11,0.5)] border-amber-400 text-amber-300",
+      lineColorActive: "bg-gradient-to-r from-amber-500 to-yellow-400",
+      lineColorInactive: "bg-white/10",
+      invoiceBtn: "bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-black shadow-lg shadow-amber-500/20",
+    },
+  },
+} as const;
+
+export function getStudentMyBookingsTokens(role: "student" | "host" = "student") {
+  const isHost = role === "host";
+  return {
+    ...STUDENT_MY_BOOKINGS_TOKENS,
+    currentTheme: isHost
+      ? STUDENT_MY_BOOKINGS_TOKENS.accentTheme.host
+      : STUDENT_MY_BOOKINGS_TOKENS.accentTheme.student,
+  };
+}
+
+/**
+ * Host Passive Income Analytics Design Tokens (Task 175)
+ * Monthly income charts, bank transfer histories, tax breakdowns (Sec 80TTB / 194-IB / GST), and upcoming payout dates.
+ */
+export const HOST_PASSIVE_INCOME_TOKENS = {
+  consoleTitleEn: "Senior Host Passive Income & Payout Hub",
+  consoleTitleHi: "सीनियर होस्ट निष्क्रिय आय व भुगतान हब",
+  bankTransferHistory: [
+    {
+      id: "tx-883901",
+      utr: "UTR-SBIN-2026090812",
+      date: "2026-09-08",
+      bankNameEn: "State Bank of India",
+      bankNameHi: "भारतीय स्टेट बैंक",
+      accountMask: "•••• 4821",
+      amount: 4250,
+      typeEn: "Weekly Escrow Settlement",
+      typeHi: "साप्ताहिक एस्क्रौ निपटान",
+      status: "Completed",
+      statusBadgeEn: "Deposited",
+      statusBadgeHi: "खाते में जमा",
+    },
+    {
+      id: "tx-883902",
+      utr: "UTR-BARB-2026090108",
+      date: "2026-09-01",
+      bankNameEn: "Bank of Baroda",
+      bankNameHi: "बैंक ऑफ बड़ौदा",
+      accountMask: "•••• 4821",
+      amount: 3900,
+      typeEn: "Weekly Escrow Settlement",
+      typeHi: "साप्ताहिक एस्क्रौ निपटान",
+      status: "Completed",
+      statusBadgeEn: "Deposited",
+      statusBadgeHi: "खाते में जमा",
+    },
+    {
+      id: "tx-883903",
+      utr: "UTR-PUNB-2026082504",
+      date: "2026-08-25",
+      bankNameEn: "Punjab National Bank",
+      bankNameHi: "पंजाब नेशनल बैंक",
+      accountMask: "•••• 4821",
+      amount: 4600,
+      typeEn: "Vacation Peak Bonus Payout",
+      typeHi: "वैकेशन पीक बोनस भुगतान",
+      status: "Completed",
+      statusBadgeEn: "Deposited",
+      statusBadgeHi: "खाते में जमा",
+    },
+    {
+      id: "tx-883904",
+      utr: "UTR-PEND-2026091599",
+      date: "2026-09-15",
+      bankNameEn: "State Bank of India",
+      bankNameHi: "भारतीय स्टेट बैंक",
+      accountMask: "•••• 4821",
+      amount: 4800,
+      typeEn: "Upcoming Monday Settlement",
+      typeHi: "आगामी सोमवार निपटान",
+      status: "In Escrow",
+      statusBadgeEn: "Escrow Locked",
+      statusBadgeHi: "एस्क्रौ सुरक्षित",
+    },
+  ],
+  taxBreakdowns: {
+    sec80TTB: {
+      section: "Section 80TTB Shield",
+      titleEn: "Senior Citizen Interest & Income Exemption",
+      titleHi: "वरिष्ठ नागरिक ब्याज व आय छूट (धारा 80TTB)",
+      limitFormatted: "₹50,000 / yr Tax Free",
+      descriptionEn: "Elderly hosts aged 60+ enjoy up to ₹50,000 tax-free exemption on micro-income.",
+      descriptionHi: "60 वर्ष से अधिक के बुजुर्ग मेज़बान ₹50,000 तक की आय पर 100% कर छूट प्राप्त करते हैं।",
+      badgeColor: "#10B981",
+    },
+    sec194IB: {
+      section: "Section 194-IB Exemption",
+      titleEn: "Zero TDS Threshold (< ₹50,000/mo)",
+      titleHi: "शून्य टीडीएस सीमा (< ₹50,000/माह)",
+      limitFormatted: "0% TDS Deduction",
+      descriptionEn: "Monthly storage & room payouts under ₹50,000/mo incur zero withholding TDS.",
+      descriptionHi: "₹50,000/माह से कम की मासिक आय पर शून्य टीडीएस कटौती होती है।",
+      badgeColor: "#F59E0B",
+    },
+    sec23GST: {
+      section: "GST Exemption Sec 23",
+      titleEn: "Small Vendor GST Threshold (< ₹20 Lakhs)",
+      titleHi: "लघु मेज़बान जीएसटी छूट (< ₹20 लाख)",
+      limitFormatted: "0% GST Applicable",
+      descriptionEn: "Residential hosts with total turnover under ₹20L are 100% exempt from GST registration.",
+      descriptionHi: "₹20 लाख से कम वार्षिक टर्नओवर वाले होम-होस्ट जीएसटी पंजीकरण से 100% मुक्त हैं।",
+      badgeColor: "#06B6D4",
+    },
+    netTaxFreeYield: {
+      titleEn: "100% Net Legally Compliant Payout",
+      titleHi: "100% शुद्ध वैध व कर-मुक्त भुगतान",
+      valueFormatted: "₹0 Tax Deduction At Source",
+      valueFormattedHi: "स्रोत पर ₹0 कर कटौती",
+    },
+  },
+  upcomingPayoutSchedule: {
+    nextPayoutDateEn: "Monday, Sep 21, 2026 (10:00 AM)",
+    nextPayoutDateHi: "सोमवार, 21 सितंबर 2026 (सुबह 10:00 बजे)",
+    daysRemaining: 6,
+    pendingEscrowAmount: 4800,
+    lockedBagsCount: 24,
+    bankAccountMask: "State Bank of India (•••• 4821)",
+    neftReference: "NEFT-AUTOPAY-STASH-20260921",
+    triggerBtnEn: "Simulate Instant NEFT Payout",
+    triggerBtnHi: "तत्काल NEFT भुगतान सिमुलेट करें",
+  },
+  seniorLegibility: {
+    baseFontSizePx: 18,
+    headingFontSizePx: 24,
+    highContrastBorder: "border-amber-500/40",
+    bgCard: "bg-amber-500/10",
+    accentGlow: "0 0 25px rgba(245, 158, 11, 0.3)",
+  },
+} as const;
+
+export function getHostPassiveIncomeTokens(role: "student" | "host" = "host") {
+  const isHost = role === "host";
+  return {
+    ...HOST_PASSIVE_INCOME_TOKENS,
+    activeRole: role,
+    primaryAccent: isHost ? "#F59E0B" : "#10B981",
+    secondaryAccent: isHost ? "#FBBF24" : "#06B6D4",
+  };
+}
+
+/**
+ * Live Activity Feed & Activity Stream Tokens (Task 176)
+ * Real-time activity telemetry for incoming bookings, host approvals, and delivery dispatches.
+ */
+export const LIVE_ACTIVITY_FEED_TOKENS = {
+  header: {
+    titleEn: "Live Operator Stream & Dispatch Radar",
+    titleHi: "लाइव ऑपरेटर फीड व डिस्पैच राडार",
+    subtitleEn: "Real-time activity telemetry for incoming bookings, host approvals, and delivery dispatches across Kanpur campus nodes.",
+    subtitleHi: "कानपुर कैंपस नोड्स में नए बुकिंग्स, होस्ट अप्रूवल और डिलीवरी डिस्पैच की रीयल-टाइम ऑपरेटर गतिविधि।",
+    statusBadgeEn: "LIVE TELEMETRY STREAM",
+    statusBadgeHi: "लाइव टेलीमेट्री स्ट्रीम",
+  },
+  filters: [
+    { key: "all", labelEn: "All Streams", labelHi: "सभी स्ट्रीम्स", count: 28 },
+    { key: "booking", labelEn: "Incoming Bookings", labelHi: "नए बुकिंग्स", count: 12 },
+    { key: "approval", labelEn: "Host Approvals", labelHi: "होस्ट अप्रूवल", count: 7 },
+    { key: "dispatch", labelEn: "Pickups & Dispatches", labelHi: "पिकअप व डिस्पैच", count: 6 },
+    { key: "checkin", labelEn: "Vault Check-ins", labelHi: "वॉल्ट चेक-इन", count: 3 },
+  ],
+  statsSummary: {
+    totalEventsToday: 48,
+    activeBookingsCount: 24,
+    verifiedHostsCount: 12,
+    activeDispatchesCount: 12,
+  },
+  feedItems: [
+    {
+      id: "act-101",
+      category: "booking",
+      titleEn: "New Micro-Storage Booking",
+      titleHi: "नया माइक्रो-स्टोरेज बुकिंग",
+      actorName: "Aman Sharma (IITK)",
+      actorRole: "Student",
+      locationEn: "Kakadeo Central Hub",
+      locationHi: "काकादेव सेंट्रल हब",
+      timestamp: "Just now",
+      status: "CONFIRMED",
+      statusColor: "#10B981",
+      detailsEn: "2 Trolley Suitcases + 1 Book Carton (Vacation Break)",
+      detailsHi: "2 ट्रॉली सूटकेस + 1 किताबों का डिब्बा (छुट्टियों का ब्रेक)",
+      amount: "₹650/mo",
+      vaultSealCode: "QR-SEAL-9931",
+      actionEn: "Inspect Order",
+      actionHi: "ऑर्डर देखें",
+    },
+    {
+      id: "act-102",
+      category: "approval",
+      titleEn: "Host KYC & Safety Approved",
+      titleHi: "होस्ट केवाईसी व सुरक्षा स्वीकृत",
+      actorName: "Prof. S.K. Gupta (Retd. HBTI)",
+      actorRole: "Senior Host",
+      locationEn: "Kalyanpur Campus Vault",
+      locationHi: "कल्याणपुर कैंपस वॉल्ट",
+      timestamp: "2 mins ago",
+      status: "VERIFIED HOST",
+      statusColor: "#F59E0B",
+      detailsEn: "Aadhaar Verified, 500L Climate Controlled Locker Space Seal Passed",
+      detailsHi: "आधार सत्यापित, 500L क्लाइमेट कंट्रोल्ड लॉकर स्पेस सील पास",
+      payoutEst: "₹11,500/mo",
+      vaultSealCode: "HOST-8839-OK",
+      actionEn: "View Certificate",
+      actionHi: "प्रमाणपत्र देखें",
+    },
+    {
+      id: "act-103",
+      category: "dispatch",
+      titleEn: "Doorstep Pickup Van Dispatched",
+      titleHi: "डोरस्टेप पिकअप वैन रवाना",
+      actorName: "Rohan Verma (PW Vidyapeeth)",
+      actorRole: "Student",
+      locationEn: "Geeta Nagar Alley #4",
+      locationHi: "गीता नगर गली #4",
+      timestamp: "5 mins ago",
+      status: "VAN EN ROUTE",
+      statusColor: "#06B6D4",
+      detailsEn: "Pickup Van #04 Assigned • Estimated Arrival in 12 Mins",
+      detailsHi: "पिकअप वैन #04 आबंटित • 12 मिनट में पहुँचने का अनुमान",
+      driverName: "Vikram Singh (+91 98390 12345)",
+      vaultSealCode: "VAN-DISPATCH-04",
+      actionEn: "Track Van",
+      actionHi: "वैन ट्रैक करें",
+    },
+    {
+      id: "act-104",
+      category: "checkin",
+      titleEn: "Luggage Vaulted & Sealed",
+      titleHi: "सामान वॉल्ट में सुरक्षित और सील",
+      actorName: "Priya Trivedi (CSJMU Hostel 3)",
+      actorRole: "Student",
+      locationEn: "Nawabganj Secure Vault",
+      locationHi: "नवाबगंज सुरक्षित वॉल्ट",
+      timestamp: "12 mins ago",
+      status: "VAULT SECURED",
+      statusColor: "#8B5CF6",
+      detailsEn: "1 Cooler + 2 Bags locked in Bay #B-14 with Barcode Seal",
+      detailsHi: "1 कूलर + 2 बैग बे #B-14 में बारकोड सील के साथ लॉक",
+      vaultSealCode: "QR-SEAL-7712",
+      actionEn: "Download Pass",
+      actionHi: "पास डाउनलोड करें",
+    },
+    {
+      id: "act-105",
+      category: "booking",
+      titleEn: "Saarthi Spaces Room Reservation",
+      titleHi: "सारथी स्पेस रूम आरक्षण",
+      actorName: "Devansh Mehta (Motion Coaching)",
+      actorRole: "Student",
+      locationEn: "Kakadeo Coaching Node",
+      locationHi: "काकादेव कोचिंग नोड",
+      timestamp: "18 mins ago",
+      status: "DEPOSIT PAID",
+      statusColor: "#10B981",
+      detailsEn: "Zero-Brokerage Single Room • Host: Mrs. Pushpa Agarwal",
+      detailsHi: "शून्य ब्रोकरेज सिंगल रूम • मेज़बान: श्रीमती पुष्पा अग्रवाल",
+      amount: "₹4,500/mo",
+      vaultSealCode: "ROOM-RESERV-550",
+      actionEn: "View Agreement",
+      actionHi: "अनुबंध देखें",
+    },
+    {
+      id: "act-106",
+      category: "dispatch",
+      titleEn: "Stash Return Delivery Scheduled",
+      titleHi: "स्टैश वापसी डिलीवरी निर्धारित",
+      actorName: "Neha Chawla (HBTI Girls Hostel)",
+      actorRole: "Student",
+      locationEn: "HBTI Campus Gate 2",
+      locationHi: "एचबीटीआई कैंपस गेट 2",
+      timestamp: "25 mins ago",
+      status: "SCHEDULED",
+      statusColor: "#06B6D4",
+      detailsEn: "Return slot: Tomorrow 9:00 AM • Doorstep Drop Van #01",
+      detailsHi: "वापसी स्लॉट: कल सुबह 9:00 बजे • डोरस्टेप ड्रॉप वैन #01",
+      driverName: "Rajesh Kumar (+91 94150 99887)",
+      vaultSealCode: "DROP-SCHED-109",
+      actionEn: "Confirm Slot",
+      actionHi: "स्लॉट पुष्टि करें",
+    },
+  ],
+} as const;
+
+export function getLiveActivityFeedTokens(role: "student" | "host" = "student") {
+  const isHost = role === "host";
+  return {
+    ...LIVE_ACTIVITY_FEED_TOKENS,
+    activeRole: role,
+    primaryAccent: isHost ? "#F59E0B" : "#10B981",
+    secondaryAccent: isHost ? "#FBBF24" : "#06B6D4",
+  };
+}
+
+export const CAMPUS_MAP_LAYER_TOKENS = {
+  header: {
+    titleEn: "Kanpur Campus Interactive Radar & Storage Map",
+    titleHi: "कानपुर कैंपस इंटरएक्टिव राडार व स्टोरेज मैप",
+    subtitleEn: "Explore verified senior host vaults, coaching hubs, and safe 24/7 walking routes across Kakadeo & Kalyanpur",
+    subtitleHi: "काकादेव व कल्याणपुर के सत्यापित सीनियर होस्ट वॉल्ट, कोचिंग हब व सुरक्षित वाकिंग रूट्स देखें",
+    telemetryBadgeEn: "LIVE GPS CLUSTERS • 6 HUB NODES",
+    telemetryBadgeHi: "लाइव जीपीएस क्लस्टर • 6 हब नोड्स",
+  },
+  campusPresets: [
+    {
+      id: "kakadeo",
+      nameEn: "Kakadeo Coaching Hub",
+      nameHi: "काकादेव कोचिंग हब",
+      centerCoords: { x: 50, y: 50 },
+      zoom: 14,
+      tagEn: "35+ Host Vaults",
+      tagHi: "35+ होस्ट वॉल्ट",
+    },
+    {
+      id: "kalyanpur",
+      nameEn: "Kalyanpur & CSJMU Zone",
+      nameHi: "कल्याणपुर व सीएसजेएमयू जोन",
+      centerCoords: { x: 75, y: 30 },
+      zoom: 13,
+      tagEn: "22+ Host Vaults",
+      tagHi: "22+ होस्ट वॉल्ट",
+    },
+    {
+      id: "hbti",
+      nameEn: "HBTI West Campus",
+      nameHi: "एचबीटीआई वेस्ट कैंपस",
+      centerCoords: { x: 30, y: 70 },
+      zoom: 15,
+      tagEn: "18+ Host Vaults",
+      tagHi: "18+ होस्ट वॉल्ट",
+    },
+    {
+      id: "nawabganj",
+      nameEn: "Nawabganj Residential",
+      nameHi: "नवाबगंज रेजीडेंशियल",
+      centerCoords: { x: 60, y: 80 },
+      zoom: 14,
+      tagEn: "14+ Host Vaults",
+      tagHi: "14+ होस्ट वॉल्ट",
+    },
+  ],
+  layerFilters: [
+    { id: "all", labelEn: "All Map Layers", labelHi: "सभी मैप लेयर", count: 18 },
+    { id: "hosts", labelEn: "Senior Host Vaults", labelHi: "सीनियर होस्ट वॉल्ट", count: 8 },
+    { id: "coaching", labelEn: "Coaching Hubs", labelHi: "कोचिंग हब", count: 5 },
+    { id: "routes", labelEn: "Safe Walking Routes", labelHi: "सुरक्षित वाकिंग रूट", count: 3 },
+    { id: "kitchens", labelEn: "Saarthi Kitchens", labelHi: "सारथी किचन", count: 2 },
+  ],
+  nodes: [
+    {
+      id: "node-1",
+      titleEn: "Sharma Uncle Vault (Kakadeo Block B)",
+      titleHi: "शर्मा अंकल वॉल्ट (काकादेव ब्लॉक बी)",
+      category: "hosts",
+      campusId: "kakadeo",
+      coords: { x: 45, y: 48 },
+      rating: 4.9,
+      capacityPct: 78,
+      priceMonthly: 300,
+      hostName: "Mr. R.K. Sharma (Ex-HAL)",
+      verifiedSeal: true,
+      addressEn: "B-142, Near PW Vidyapeeth, Kakadeo",
+      addressHi: "बी-142, पीडब्ल्यू विद्यापीठ के पास, काकादेव",
+      distanceEn: "180m from PW Vidyapeeth (2 min walk)",
+      distanceHi: "पीडब्ल्यू विद्यापीठ से 180 मी (2 मिनट वाक)",
+      badgeEn: "Top Rated Host",
+      badgeHi: "टॉप रेटेड होस्ट",
+      phone: "+91 98390 11223",
+      image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&auto=format&fit=crop&q=80",
+    },
+    {
+      id: "node-2",
+      titleEn: "PW Vidyapeeth Kakadeo Main Center",
+      titleHi: "पीडब्ल्यू विद्यापीठ काकादेव मेन सेंटर",
+      category: "coaching",
+      campusId: "kakadeo",
+      coords: { x: 42, y: 52 },
+      rating: 4.8,
+      capacityPct: 95,
+      priceMonthly: 0,
+      hostName: "Coaching Institute Landmark",
+      verifiedSeal: true,
+      addressEn: "Central Market Road, Kakadeo",
+      addressHi: "सेंट्रल मार्केट रोड, काकादेव",
+      distanceEn: "0m Landmark Hub",
+      distanceHi: "0 मी लैंडमार्क हब",
+      badgeEn: "Major Coaching Hub",
+      badgeHi: "प्रमुख कोचिंग हब",
+      phone: "+91 80100 00000",
+      image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&auto=format&fit=crop&q=80",
+    },
+    {
+      id: "node-3",
+      titleEn: "Gupta Aunty Safe Storage (Kakadeo Block A)",
+      titleHi: "गुप्ता आंटी सेफ स्टोरेज (काकादेव ब्लॉक ए)",
+      category: "hosts",
+      campusId: "kakadeo",
+      coords: { x: 52, y: 42 },
+      rating: 4.95,
+      capacityPct: 62,
+      priceMonthly: 350,
+      hostName: "Mrs. Savitri Gupta",
+      verifiedSeal: true,
+      addressEn: "A-88, Back Alley Entrance, Kakadeo",
+      addressHi: "ए-88, बैक गली एंट्रेंस, काकादेव",
+      distanceEn: "250m from Allen Kakadeo (3 min walk)",
+      distanceHi: "एलन काकादेव से 250 मी (3 मिनट वाक)",
+      badgeEn: "CCTV & Laser Barcode Sealed",
+      badgeHi: "सीसीटीवी व लेजर बारकोड सील्ड",
+      phone: "+91 94150 44332",
+      image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=400&auto=format&fit=crop&q=80",
+    },
+    {
+      id: "node-4",
+      titleEn: "Allen Career Institute Kakadeo",
+      titleHi: "एलन करियर इंस्टीट्यूट काकादेव",
+      category: "coaching",
+      campusId: "kakadeo",
+      coords: { x: 55, y: 38 },
+      rating: 4.9,
+      capacityPct: 90,
+      priceMonthly: 0,
+      hostName: "Institute Hub",
+      verifiedSeal: true,
+      addressEn: "Coaching Complex, Kakadeo",
+      addressHi: "कोचिंग कॉम्प्लेक्स, काकादेव",
+      distanceEn: "0m Landmark Hub",
+      distanceHi: "0 मी लैंडमार्क हब",
+      phone: "+91 744 275 7575",
+      image: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=400&auto=format&fit=crop&q=80",
+    },
+    {
+      id: "node-5",
+      titleEn: "Verma Uncle Vault (Kalyanpur Main Road)",
+      titleHi: "वर्मा अंकल वॉल्ट (कल्याणपुर मेन रोड)",
+      category: "hosts",
+      campusId: "kalyanpur",
+      coords: { x: 72, y: 32 },
+      rating: 4.85,
+      capacityPct: 85,
+      priceMonthly: 280,
+      hostName: "Prof. S.N. Verma (Retd. CSJMU)",
+      verifiedSeal: true,
+      addressEn: "Plot 45, Gate 2 Road, Kalyanpur",
+      addressHi: "प्लाट 45, गेट 2 रोड, कल्याणपुर",
+      distanceEn: "300m from CSJMU Gate 2 (4 min walk)",
+      distanceHi: "सीएसजेएमयू गेट 2 से 300 मी (4 मिनट वाक)",
+      badgeEn: "24/7 Security Guard",
+      badgeHi: "24/7 सुरक्षा गार्ड",
+      phone: "+91 93361 77665",
+      image: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=400&auto=format&fit=crop&q=80",
+    },
+    {
+      id: "node-6",
+      titleEn: "CSJMU Kanpur Campus Central Gate",
+      titleHi: "सीएसजेएमयू कानपुर कैंपस सेंट्रल गेट",
+      category: "coaching",
+      campusId: "kalyanpur",
+      coords: { x: 78, y: 28 },
+      rating: 4.7,
+      capacityPct: 100,
+      priceMonthly: 0,
+      hostName: "University Campus Hub",
+      verifiedSeal: true,
+      addressEn: "GT Road, Kalyanpur, Kanpur",
+      addressHi: "जीटी रोड, कल्याणपुर, कानपुर",
+      distanceEn: "0m University Gate",
+      distanceHi: "0 मी यूनिवर्सिटी गेट",
+      phone: "+91 512 258 0044",
+      image: "https://images.unsplash.com/photo-1562774053-701939374585?w=400&auto=format&fit=crop&q=80",
+    },
+    {
+      id: "node-7",
+      titleEn: "Mataji Kitchen & Tiffin Hub (Kakadeo)",
+      titleHi: "माताजी किचन व टिफिन हब (काकादेव)",
+      category: "kitchens",
+      campusId: "kakadeo",
+      coords: { x: 48, y: 55 },
+      rating: 4.92,
+      capacityPct: 92,
+      priceMonthly: 50,
+      hostName: "Mrs. Shanti Devi",
+      verifiedSeal: true,
+      addressEn: "Behind Motion Coaching, Kakadeo",
+      addressHi: "मोशन कोचिंग के पीछे, काकादेव",
+      distanceEn: "120m from PW Vidyapeeth (1 min walk)",
+      distanceHi: "पीडब्ल्यू विद्यापीठ से 120 मी (1 मिनट वाक)",
+      badgeEn: "Fresh Standard Thali ₹50",
+      badgeHi: "ताजा स्टैंडर्ड थाली ₹50",
+      phone: "+91 98381 22334",
+      image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&auto=format&fit=crop&q=80",
+    },
+  ],
+  walkingRoutes: [
+    {
+      id: "route-1",
+      nameEn: "PW Vidyapeeth ➔ Sharma Uncle Vault",
+      nameHi: "पीडब्ल्यू विद्यापीठ ➔ शर्मा अंकल वॉल्ट",
+      startNodeId: "node-2",
+      endNodeId: "node-1",
+      pathCoords: [
+        { x: 42, y: 52 },
+        { x: 43.5, y: 50 },
+        { x: 45, y: 48 },
+      ],
+      distanceMeters: 180,
+      walkTimeMins: 2,
+      safetyScore: "9.8 / 10 (CCTV Lit Alley)",
+      lightingEn: "High LED Streetlights & Police Patrol Point",
+      lightingHi: "हाई एलईडी स्ट्रीटलाइट्स व पुलिस गश्त प्वाइंट",
+    },
+    {
+      id: "route-2",
+      nameEn: "Allen Kakadeo ➔ Gupta Aunty Vault",
+      nameHi: "एलन काकादेव ➔ गुप्ता आंटी वॉल्ट",
+      startNodeId: "node-4",
+      endNodeId: "node-3",
+      pathCoords: [
+        { x: 55, y: 38 },
+        { x: 53.5, y: 40 },
+        { x: 52, y: 42 },
+      ],
+      distanceMeters: 250,
+      walkTimeMins: 3,
+      safetyScore: "9.6 / 10 (Gated Alleyway)",
+      lightingEn: "24/7 Gated Community Path",
+      lightingHi: "24/7 गेटेड सोसाइटी पाथ",
+    },
+    {
+      id: "route-3",
+      nameEn: "CSJMU Gate 2 ➔ Verma Uncle Vault",
+      nameHi: "सीएसजेएमयू गेट 2 ➔ वर्मा अंकल वॉल्ट",
+      startNodeId: "node-6",
+      endNodeId: "node-5",
+      pathCoords: [
+        { x: 78, y: 28 },
+        { x: 75, y: 30 },
+        { x: 72, y: 32 },
+      ],
+      distanceMeters: 300,
+      walkTimeMins: 4,
+      safetyScore: "9.7 / 10 (Main GT Road)",
+      lightingEn: "Broad Footpath & Direct GT Road Access",
+      lightingHi: "चौड़ा फुटपाथ व डायरेक्ट जीटी रोड एक्सेस",
+    },
+  ],
+} as const;
+
+export function getCampusMapLayerTokens(role: "student" | "host" = "student") {
+  const isHost = role === "host";
+  return {
+    ...CAMPUS_MAP_LAYER_TOKENS,
+    activeRole: role,
+    primaryAccent: isHost ? "#F59E0B" : "#10B981",
+    secondaryAccent: isHost ? "#FBBF24" : "#06B6D4",
+    bgCanvasTile: isHost ? "#1A1510" : "#0B1311",
+  };
+}
+
+export const DATA_TABLE_ERGONOMICS_TOKENS = {
+  header: {
+    titleEn: "Admin Data Table Ergonomics Engine",
+    titleHi: "एडमिन डेटा टेबल एर्गोनॉमिक्स इंजन",
+    subtitleEn: "Sticky headers, multi-column sorting, instant search, and sanitized CSV exports",
+    subtitleHi: "स्टिकी हेडर, मल्टी-कॉलम सॉर्टिंग, तुरंत सर्च और सैनिटाइज्ड सीएसवी एक्सपोर्ट",
+  },
+  stickyHeaderStyle: {
+    containerClasses: "admin-data-table-container relative overflow-x-auto overflow-y-auto max-h-[620px] rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-xl shadow-2xl",
+    headerClasses: "sticky top-0 z-20 bg-slate-950/95 backdrop-blur-md border-b border-white/10 text-xs uppercase tracking-wider text-muted-foreground shadow-md",
+  },
+  paginationOptions: [5, 10, 25, 50, 100],
+  defaultPageSize: 10,
+  sortDirections: {
+    asc: "asc",
+    desc: "desc",
+    none: "none",
+  },
+  csvExportConfig: {
+    defaultFilename: "stashsaarthi-admin-data",
+    fileExtension: ".csv",
+    mimeType: "text/csv;charset=utf-8;",
+  },
+  personaAccents: {
+    student: {
+      headerBg: "bg-emerald-500/10",
+      activeText: "text-emerald-400",
+      borderGlow: "border-emerald-500/30",
+      badgeBg: "bg-emerald-500/20 text-emerald-300",
+    },
+    host: {
+      headerBg: "bg-amber-500/10",
+      activeText: "text-amber-400",
+      borderGlow: "border-amber-500/30",
+      badgeBg: "bg-amber-500/20 text-amber-300",
+    },
+  },
+} as const;
+
+export function getDataTableErgonomicsTokens(role: "student" | "host" = "student") {
+  const isHost = role === "host";
+  return {
+    ...DATA_TABLE_ERGONOMICS_TOKENS,
+    activeRole: role,
+    accent: isHost ? DATA_TABLE_ERGONOMICS_TOKENS.personaAccents.host : DATA_TABLE_ERGONOMICS_TOKENS.personaAccents.student,
+  };
+}
+
+export const HOST_SAFETY_KYC_TOKENS = {
+  header: {
+    titleEn: "Host Safety & KYC Verification Console",
+    titleHi: "होस्ट सुरक्षा एवं केवाईसी सत्यापन कंसोल",
+    subtitleEn: "Verify host Aadhaar identity, UP Police clearance certificates, and 12-point safety checklists",
+    subtitleHi: "होस्ट का आधार कार्ड, यूपी पुलिस सत्यापन प्रमाण पत्र एवं 12-बिंदु सुरक्षा चेकलिस्ट का सत्यापन करें",
+  },
+  checklist12Points: [
+    { id: "c1", labelEn: "Tamper-Proof Laser Barcode Double Lock", labelHi: "टैम्पर-प्रूफ लेजर बारकोड डबल लॉक", category: "Locking & Physical Security" },
+    { id: "c2", labelEn: "24/7 CCTV Entrance & Access Surveillance", labelHi: "24/7 सीसीटीवी प्रवेश द्वार व एक्सेस निगरानी", category: "Surveillance" },
+    { id: "c3", labelEn: "5kg ISI Certified Fire Extinguisher Ready", labelHi: "5 किग्रा आईएसआई प्रमाणित अग्निशामक तैयार", category: "Fire & Safety" },
+    { id: "c4", labelEn: "Waterproof Heavy-Duty Floor Barrier & Pallets", labelHi: "वाटरप्रूफ हेवी-ड्यूटी फ़्लोर बैरियर व पैलेट", category: "Environmental Protection" },
+    { id: "c5", labelEn: "Raised Pest-Proof Storage Platforms (6+ Inches)", labelHi: "ऊंचे पेस्ट-प्रूफ स्टोरेज प्लेटफॉर्म (6+ इंच)", category: "Environmental Protection" },
+    { id: "c6", labelEn: "Dedicated Locked Storage Room / Private Vault", labelHi: "समर्पित लॉक किया गया स्टोरेज रूम / प्राइवेट वॉल्ट", category: "Locking & Physical Security" },
+    { id: "c7", labelEn: "24/7 Senior Host Resident Presence On-Site", labelHi: "24/7 सीनियर होस्ट की भौतिक उपस्थिति", category: "Human Supervision" },
+    { id: "c8", labelEn: "Emergency Kanpur Police & Saarthi SOS Hotline Tag", labelHi: "इमरजेंसी कानपुर पुलिस व सारथी एसओएस हॉटलाइन टैग", category: "Emergency & Audit" },
+    { id: "c9", labelEn: "Zero-Flood Elevated Base Safety Elevation Shield", labelHi: "जीरो-फ्लड एलिवेटेड बेस सेफ्टी शील्ड", category: "Environmental Protection" },
+    { id: "c10", labelEn: "Smoke & Heat Detector Alarm Unit Installed", labelHi: "स्मॉक व हीट डिटैक्टर अलार्म यूनिट स्थापित", category: "Fire & Safety" },
+    { id: "c11", labelEn: "Biometric / Digital Keypad Access Gate Lock", labelHi: "बायोमेट्रिक / डिजिटल कीपैड एक्सेस गेट लॉक", category: "Locking & Physical Security" },
+    { id: "c12", labelEn: "TPA Sec 105 Legal Protection Agreement Signed", labelHi: "टीपीए सेक् 105 लीगल प्रोटेक्शन एग्रीमेंट हस्ताक्षरित", category: "Legal & Insurance" },
+  ],
+  sampleHostRecords: [
+    {
+      id: "host-kyc-101",
+      hostNameEn: "Ramesh Chandra Verma",
+      hostNameHi: "रमेश चंद्र वर्मा",
+      phone: "+91 98390 12345",
+      addressEn: "117/N/88, Near PW Vidyapeeth, Kakadeo, Kanpur",
+      addressHi: "117/एन/88, पीडब्लू विद्यापीठ के पास, काकादेव, कानपुर",
+      aadhaarNumberMasked: "XXXX-XXXX-8921",
+      digiLockerStatus: "VERIFIED",
+      policeCertificateId: "UPP-KAP-2026-98124",
+      policeStation: "Kalyanpur Thana, Kanpur",
+      policeStatus: "VERIFIED",
+      issuanceDate: "2026-01-15",
+      checklistCompleted: 12,
+      checklistTotal: 12,
+      inspectionScore: "100%",
+      overallStatus: "APPROVED",
+      verifiedBadgeTextEn: "CSO Verified Host Vault",
+      verifiedBadgeTextHi: "सीएसओ सत्यापित होस्ट वॉल्ट",
+      nodeHub: "Kakadeo Central Hub",
+    },
+    {
+      id: "host-kyc-102",
+      hostNameEn: "Sunita Devi Saxena",
+      hostNameHi: "सुनीता देवी सक्सेना",
+      phone: "+91 94151 67890",
+      addressEn: "24-A, Near CSJMU Gate 2, Kalyanpur, Kanpur",
+      addressHi: "24-ए, सीएसजेएमयू गेट 2 के पास, कल्याणपुर, कानपुर",
+      aadhaarNumberMasked: "XXXX-XXXX-4512",
+      digiLockerStatus: "VERIFIED",
+      policeCertificateId: "UPP-KAP-2026-77412",
+      policeStation: "Kalyanpur Thana, Kanpur",
+      policeStatus: "VERIFIED",
+      issuanceDate: "2026-02-01",
+      checklistCompleted: 11,
+      checklistTotal: 12,
+      inspectionScore: "92%",
+      overallStatus: "APPROVED",
+      verifiedBadgeTextEn: "Aadhaar & Police Verified",
+      verifiedBadgeTextHi: "आधार व पुलिस सत्यापित",
+      nodeHub: "Kalyanpur Zone",
+    },
+    {
+      id: "host-kyc-103",
+      hostNameEn: "Capt. R.K. Sharma (Retd.)",
+      hostNameHi: "कैप्टन आर.के. शर्मा (रिटायर्ड)",
+      phone: "+91 93361 54321",
+      addressEn: "Flat 4B, Officers Colony, Nawabganj, Kanpur",
+      addressHi: "फ्लैट 4बी, ऑफिसर्स कॉलोनी, नवाबगंज, कानपुर",
+      aadhaarNumberMasked: "XXXX-XXXX-3310",
+      digiLockerStatus: "VERIFIED",
+      policeCertificateId: "UPP-NWB-2026-10492",
+      policeStation: "Nawabganj Thana, Kanpur",
+      policeStatus: "PENDING_REVIEW",
+      issuanceDate: "2026-03-01",
+      checklistCompleted: 10,
+      checklistTotal: 12,
+      inspectionScore: "83%",
+      overallStatus: "PENDING_REVIEW",
+      verifiedBadgeTextEn: "Inspection Pending",
+      verifiedBadgeTextHi: "सत्यापन लंबित",
+      nodeHub: "Nawabganj Hub",
+    },
+  ],
+  personaAccents: {
+    student: {
+      primary: "emerald",
+      badgeBg: "bg-emerald-500/20 text-emerald-300 border-emerald-500/30",
+      activeText: "text-emerald-400",
+      glowShadow: "shadow-[0_0_25px_rgba(16,185,129,0.3)]",
+    },
+    host: {
+      primary: "amber",
+      badgeBg: "bg-amber-500/20 text-amber-300 border-amber-500/30",
+      activeText: "text-amber-400",
+      glowShadow: "shadow-[0_0_25px_rgba(245,158,11,0.3)]",
+    },
+  },
+} as const;
+
+export const TOAST_NOTIFICATION_TOKENS = {
+  containerPosition: "fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[9999] flex flex-col gap-2.5 max-w-[92vw] sm:max-w-md w-full pointer-events-none",
+  glassmorphism: {
+    cardClass: "toast-glassmorphism-card pointer-events-auto relative overflow-hidden flex flex-col text-slate-100 backdrop-blur-2xl border shadow-2xl rounded-2xl transition-all duration-300 animate-in fade-in slide-in-from-bottom-4",
+    backdropBlur: "24px",
+    dimmingOpacity: "0.90",
+  },
+  defaultDuration: {
+    success: 4000,
+    info: 4000,
+    warning: 5000,
+    error: 6000,
+    loading: 0,
+  },
+  types: {
+    success: {
+      border: "border-emerald-500/40 shadow-emerald-500/10",
+      progressBg: "bg-gradient-to-r from-emerald-500 to-teal-400",
+      accentText: "text-emerald-400",
+      badgeBg: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30",
+      glowShadow: "shadow-[0_8px_32px_rgba(16,185,129,0.15)]",
+    },
+    error: {
+      border: "border-rose-500/40 shadow-rose-500/10",
+      progressBg: "bg-gradient-to-r from-rose-500 to-red-400",
+      accentText: "text-rose-400",
+      badgeBg: "bg-rose-500/15 text-rose-300 border-rose-500/30",
+      glowShadow: "shadow-[0_8px_32px_rgba(244,63,94,0.15)]",
+    },
+    warning: {
+      border: "border-amber-500/40 shadow-amber-500/10",
+      progressBg: "bg-gradient-to-r from-amber-500 to-yellow-400",
+      accentText: "text-amber-400",
+      badgeBg: "bg-amber-500/15 text-amber-300 border-amber-500/30",
+      glowShadow: "shadow-[0_8px_32px_rgba(245,158,11,0.15)]",
+    },
+    info: {
+      border: "border-cyan-500/40 shadow-cyan-500/10",
+      progressBg: "bg-gradient-to-r from-cyan-500 to-sky-400",
+      accentText: "text-cyan-400",
+      badgeBg: "bg-cyan-500/15 text-cyan-300 border-cyan-500/30",
+      glowShadow: "shadow-[0_8px_32px_rgba(6,182,212,0.15)]",
+    },
+    loading: {
+      border: "border-emerald-500/30 shadow-emerald-500/10",
+      progressBg: "bg-gradient-to-r from-emerald-400 via-cyan-400 to-emerald-400 animate-pulse",
+      accentText: "text-emerald-400",
+      badgeBg: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30",
+      glowShadow: "shadow-[0_8px_32px_rgba(16,185,129,0.1)]",
+    },
+  },
+  actions: {
+    undoLabelEn: "Undo",
+    undoLabelHi: "पूर्ववत करें",
+    viewLabelEn: "View Details",
+    viewLabelHi: "विवरण देखें",
+    dismissLabelEn: "Dismiss",
+    dismissLabelHi: "बंद करें",
+  },
+  personaAccents: {
+    student: {
+      primary: "emerald",
+      btnClass: "bg-emerald-500/20 text-emerald-300 hover:bg-emerald-500/30 border-emerald-500/40",
+      glow: "rgba(16,185,129,0.2)",
+    },
+    host: {
+      primary: "amber",
+      btnClass: "bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 border-amber-500/40",
+      glow: "rgba(245,158,11,0.2)",
+    },
+  },
+} as const;
+
+export function getHostSafetyKycTokens(role: "student" | "host" = "host") {
+  const isHost = role === "host";
+  return {
+    ...HOST_SAFETY_KYC_TOKENS,
+    activeRole: role,
+    accent: isHost ? HOST_SAFETY_KYC_TOKENS.personaAccents.host : HOST_SAFETY_KYC_TOKENS.personaAccents.student,
+  };
+}
+
+export function getToastNotificationTokens(role: "student" | "host" = "student") {
+  const isHost = role === "host";
+  return {
+    ...TOAST_NOTIFICATION_TOKENS,
+    activeRole: role,
+    accent: isHost ? TOAST_NOTIFICATION_TOKENS.personaAccents.host : TOAST_NOTIFICATION_TOKENS.personaAccents.student,
+  };
+}
+
+export const MOBILE_NAV_DRAWER_TOKENS = {
+  header: {
+    titleEn: "Navigation Hub",
+    titleHi: "नेविगेशन हब",
+    subtitleEn: "Hyperlocal Kanpur Student Ecosystem",
+    subtitleHi: "कानपुर स्टूडेंट इकोसिस्टम",
+    badgeEn: "v2.0 Ultra-Fast",
+    badgeHi: "v2.0 द्रुत गति",
+  },
+  transition: {
+    type: "spring",
+    stiffness: 350,
+    damping: 32,
+    mass: 0.8,
+  },
+  categories: [
+    {
+      key: "core",
+      titleEn: "Core Services",
+      titleHi: "मुख्य सेवाएं",
+      links: [
+        {
+          key: "stash",
+          href: "#stash",
+          icon: "🎒",
+          labelEn: "Micro-Storage",
+          labelHi: "लगेज स्टोरेज",
+          descEn: "From ₹300/bag/mo",
+          descHi: "₹300/बैग से शुरू",
+          badgeEn: "Zero Rent",
+          badgeHi: "शून्य किराया",
+        },
+        {
+          key: "rooms",
+          href: "#rooms",
+          icon: "🏠",
+          labelEn: "Verified Rooms",
+          labelHi: "सत्यापित कमरे",
+          descEn: "0% Brokerage stays",
+          descHi: "शून्य ब्रोकरेज आवास",
+          badgeEn: "Verified Host",
+          badgeHi: "सत्यापित होस्ट",
+        },
+        {
+          key: "kitchen",
+          href: "#kitchen",
+          icon: "🍲",
+          labelEn: "Ghar Ka Khana",
+          labelHi: "घर का खाना",
+          descEn: "Homestyle tiffins ₹90",
+          descHi: "घर जैसा शुद्ध भोजन",
+          badgeEn: "Live Menu",
+          badgeHi: "लाइव मेनू",
+        },
+      ],
+    },
+    {
+      key: "tools",
+      titleEn: "Tools & Assistance",
+      titleHi: "टूल्स व सहायता",
+      links: [
+        {
+          key: "calculator",
+          href: "#calculator",
+          icon: "🧮",
+          labelEn: "Savings Simulator",
+          labelHi: "बचत कैलकुलेटर",
+          descEn: "Instant profit/savings",
+          descHi: "बचत व कमाई का हिसाब",
+          badgeEn: "Interactive",
+          badgeHi: "इंटरैक्टिव",
+        },
+        {
+          key: "trust",
+          href: "#trust",
+          icon: "🛡️",
+          labelEn: "Safety & Custody",
+          labelHi: "सुरक्षा व कस्टडी",
+          descEn: "QR seals & ₹10k cover",
+          descHi: "QR सील व ₹10k बीमा",
+          badgeEn: "TPA Sec 105",
+          badgeHi: "सुरक्षित",
+        },
+        {
+          key: "faq",
+          href: "#faq",
+          icon: "❓",
+          labelEn: "FAQ & Help",
+          labelHi: "अक्सर पूछे जाने वाले सवाल",
+          descEn: "24×7 Answers",
+          descHi: "पारदर्शी उत्तर",
+          badgeEn: "Instant",
+          badgeHi: "त्वरित",
+        },
+      ],
+    },
+  ],
+  personaAccents: {
+    student: {
+      primary: "mint",
+      glow: "rgba(16,185,129,0.25)",
+      border: "border-emerald-500/40",
+      activeBg: "bg-emerald-500/15",
+      activeText: "text-emerald-300",
+      headerBadge: "bg-emerald-500/20 text-emerald-300 border-emerald-500/40",
+      btnClass: "bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-bold hover:shadow-lg hover:shadow-emerald-500/30",
+    },
+    host: {
+      primary: "amber",
+      glow: "rgba(245,158,11,0.25)",
+      border: "border-amber-500/40",
+      activeBg: "bg-amber-500/15",
+      activeText: "text-amber-300",
+      headerBadge: "bg-amber-500/20 text-amber-300 border-amber-500/40",
+      btnClass: "bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-bold hover:shadow-lg hover:shadow-amber-500/30",
+    },
+  },
+} as const;
+
+export function getMobileNavDrawerTokens(role: "student" | "host" = "student") {
+  const isHost = role === "host";
+  return {
+    ...MOBILE_NAV_DRAWER_TOKENS,
+    activeRole: role,
+    accent: isHost ? MOBILE_NAV_DRAWER_TOKENS.personaAccents.host : MOBILE_NAV_DRAWER_TOKENS.personaAccents.student,
+  };
+}
+
+/**
+ * Sticky Mobile Bottom Action Bar Design Tokens (Task 182)
+ * Thumb-friendly sticky bottom CTA bar on mobile screens with instant "Book Storage @ ₹300" action.
+ */
+export const STICKY_MOBILE_BOTTOM_BAR_TOKENS = {
+  header: {
+    titleEn: "Instant Campus Storage",
+    titleHi: "त्वरित कैंपस स्टोरेज",
+    subtitleEn: "Lockers in Kakadeo, Kalyanpur & HBTI",
+    subtitleHi: "काकादेव, कल्याणपुर और एचबीटीआई में लॉकर्स",
+  },
+  primaryAction: {
+    labelEn: "Book Storage @ ₹300",
+    labelHi: "₹300 में स्टोरेज बुक करें",
+    priceTag: "₹300/mo",
+    priceSubtextEn: "Zero CapEx • 100% Safe",
+    priceSubtextHi: "जीरो डिपॉज़िट • 100% सुरक्षित",
+    badgeEn: "Zero Brokerage",
+    badgeHi: "0% दलाली",
+    targetService: "stash" as const,
+  },
+  secondaryAction: {
+    labelEn: "Host Earn ₹11.5k",
+    labelHi: "होस्ट कमाएं ₹11.5k",
+    badgeEn: "TPA Sec 105",
+    badgeHi: "टीपीए धारा 105",
+  },
+  trustBadges: {
+    laserSealEn: "Laser Barcode Sealed",
+    laserSealHi: "लेजर बारकोड सील",
+    insuranceShieldEn: "₹10,000 Micro-Insurance",
+    insuranceShieldHi: "₹10,000 माइक्रो-बीमा",
+    speedGuaranteeEn: "10-Sec Booking",
+    speedGuaranteeHi: "10-सेकंड बुकिंग",
+  },
+  personaAccents: {
+    student: {
+      barBg: "bg-slate-950/95 border-emerald-500/35 shadow-[0_-10px_35px_rgba(16,185,129,0.25)]",
+      ctaBg: "bg-emerald-500 hover:bg-emerald-400 text-slate-950 shadow-emerald-500/30",
+      ctaGlow: "shadow-[0_0_20px_rgba(16,185,129,0.4)]",
+      badgeBg: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30",
+      accentColor: "#10B981",
+      glowColor: "rgba(16, 185, 129, 0.4)",
+    },
+    host: {
+      barBg: "bg-slate-950/95 border-amber-500/35 shadow-[0_-10px_35px_rgba(245,158,11,0.25)]",
+      ctaBg: "bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-amber-500/30",
+      ctaGlow: "shadow-[0_0_20px_rgba(245,158,11,0.4)]",
+      badgeBg: "bg-amber-500/15 text-amber-300 border-amber-500/30",
+      accentColor: "#F59E0B",
+      glowColor: "rgba(245, 158, 11, 0.45)",
+    },
+  },
+  viewportConfig: {
+    minTouchTargetPx: 48,
+    safeAreaPaddingBottom: "env(safe-area-inset-bottom, 0px)",
+    zIndex: 90,
+  },
+} as const;
+
+export function getStickyMobileBottomBarTokens(role: "student" | "host" = "student") {
+  const isHost = role === "host";
+  const persona = isHost
+    ? STICKY_MOBILE_BOTTOM_BAR_TOKENS.personaAccents.host
+    : STICKY_MOBILE_BOTTOM_BAR_TOKENS.personaAccents.student;
+  return {
+    ...STICKY_MOBILE_BOTTOM_BAR_TOKENS,
+    persona,
+  };
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
