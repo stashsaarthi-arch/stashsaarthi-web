@@ -38,3 +38,8 @@ dist-ssr
 
 .vercel
 .env*
+
+# Local SQLite & Temporary Storage Files
+localstorage.json*
+*.json-shm
+*.json-wal
