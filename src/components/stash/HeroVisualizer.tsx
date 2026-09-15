@@ -264,7 +264,7 @@ export const HeroVisualizer = memo(function HeroVisualizer({
                   ? "bg-emerald-400 text-black shadow-emerald-500/50 ring-4 ring-emerald-500/30"
                   : "bg-amber-400 text-black shadow-amber-500/50 ring-4 ring-amber-500/30"
               }`}>
-                <Boxes className="h-6 w-6 animate-bounce" />
+                <Boxes className="h-6 w-6" />
               </div>
             </motion.div>
 

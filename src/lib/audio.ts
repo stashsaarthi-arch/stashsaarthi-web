@@ -3,9 +3,30 @@ import { WEB_AUDIO_SOUNDSCAPE_TOKENS } from "./designTokens";
 // Ultra-low latency Web Audio API based micro-haptics/clicks
 
 let audioCtx: AudioContext | null = null;
+let audioUnlockedByUser = false; // Gate: only play after genuine user gesture
+let audioMuted = false; // Global mute toggle
+
+// Unlock audio on first genuine user gesture (click, touchstart, keydown)
+if (typeof window !== "undefined") {
+  const unlockAudio = () => {
+    audioUnlockedByUser = true;
+    window.removeEventListener("click", unlockAudio);
+    window.removeEventListener("touchstart", unlockAudio);
+    window.removeEventListener("keydown", unlockAudio);
+  };
+  window.addEventListener("click", unlockAudio, { once: false, passive: true });
+  window.addEventListener("touchstart", unlockAudio, { once: false, passive: true });
+  window.addEventListener("keydown", unlockAudio, { once: false, passive: true });
+}
+
+/** Toggle global audio mute */
+export const setAudioMuted = (muted: boolean) => { audioMuted = muted; };
+export const isAudioMuted = (): boolean => audioMuted;
 
 export const getAudioContext = (): AudioContext | null => {
   if (typeof window === "undefined") return null;
+  // Don't play if muted or page is hidden or user hasn't interacted yet
+  if (audioMuted || document.hidden || !audioUnlockedByUser) return null;
   if (!audioCtx) {
     const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
     if (!AudioContextClass) return null;

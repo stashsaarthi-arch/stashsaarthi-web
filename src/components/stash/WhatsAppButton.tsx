@@ -17,7 +17,7 @@ export const WhatsAppButton = memo(function WhatsAppButton({ onBook }: { onBook:
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+    <div className="fixed bottom-[72px] right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end">
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -119,7 +119,7 @@ export const WhatsAppButton = memo(function WhatsAppButton({ onBook }: { onBook:
       >
         <span className="absolute inset-0 rounded-full bg-[#25D366] opacity-40 blur-md transition-opacity group-hover:opacity-75 group-hover:blur-xl" />
         <span
-          className="absolute inset-0 animate-ping rounded-full bg-[#25D366] opacity-30"
+          className="absolute inset-0 rounded-full bg-[#25D366] opacity-30"
           style={{ animationDuration: "2.5s" }}
         />
         {isOpen ? (

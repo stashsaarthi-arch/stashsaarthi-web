@@ -129,7 +129,7 @@ export const RagChatbotWidget = memo(function RagChatbotWidget() {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className={`fixed bottom-20 right-4 z-40 flex items-center gap-2 rounded-full px-3.5 py-2.5 shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer ${
+          className={`fixed bottom-[130px] right-4 sm:bottom-20 z-40 flex items-center gap-2 rounded-full px-3.5 py-2.5 shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer ${
             isStudent
               ? "bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 text-slate-950 shadow-emerald-500/20"
               : "bg-gradient-to-r from-amber-500 via-amber-600 to-yellow-500 text-slate-950 shadow-amber-500/20"

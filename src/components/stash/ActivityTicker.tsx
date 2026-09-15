@@ -253,7 +253,7 @@ export const ActivityTicker = memo(function ActivityTicker({ onBook, onListRoom 
   }[current.accent];
 
   return (
-    <div className="fixed bottom-20 left-3 right-3 z-40 md:bottom-5 md:left-5 md:right-auto md:max-w-[380px] pointer-events-auto">
+    <div className="fixed bottom-[72px] left-3 right-3 z-40 md:bottom-5 md:left-5 md:right-auto md:max-w-[380px] pointer-events-auto">
       <AnimatePresence mode="wait">
         {visible && (
           <motion.div

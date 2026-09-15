@@ -244,7 +244,7 @@ export const Hero = memo(function Hero({
 
           {/* CRO A/B Testing Variant Selector (Student Mode) */}
           {student && (
-            <div className="mt-2.5 flex items-center justify-center gap-1.5 text-[10px] font-mono text-muted-foreground/80">
+            <div className="mt-2.5 hidden sm:flex items-center justify-center gap-1.5 text-[10px] font-mono text-muted-foreground/80">
               <span className="opacity-60">A/B Test CTA Color:</span>
               <div className="inline-flex rounded-full border border-white/10 bg-black/30 p-0.5 backdrop-blur-md">
                 <button

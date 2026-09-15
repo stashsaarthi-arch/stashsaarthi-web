@@ -1,6 +1,31 @@
 ralph-done-atufh
 ralph-done-f37qa
 
+- [x] **[Mobile Performance Audit & Fix / harden] — Comprehensive mobile-only analysis and 9-fix performance overhaul — 2026-09-15**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Mobile Performance Audit Results** (12 issues identified, 9 fixed):
+    - **P0 Fix 1**: `styles.css` — Added `html, body { overflow-x: hidden !important; overscroll-behavior-x: none; }` to prevent horizontal micro-scrolling.
+    - **P0 Fix 2**: `styles.css` — Added `@media (max-width: 767px)` block that: (a) kills `backdrop-filter` on all fixed overlays, (b) reduces `blur-[80px]`/`blur-[90px]` to 20px, (c) kills `animate-bounce` entirely, (d) replaces `animate-ping` with a lighter fade animation, (e) caps hero glow width to 100vw.
+    - **P0 Fix 3**: `styles.css` — Added comprehensive `@media (prefers-reduced-motion: reduce)` covering all elements with 0.01ms animation/transition duration.
+    - **P0 Fix 4**: `Hero.tsx` — Reduced hero glow div from `140vw` to `100vw` and blur from `80px` to `40px` on mobile (md:80px on desktop).
+    - **P0 Fix 5**: `HeroVisualizer.tsx` — Removed infinite `animate-bounce` from transit particle Boxes icon.
+    - **P0 Fix 6**: `__root.tsx` — Added `isMobile` state detection; Lenis smooth scroll now disabled on <768px (`smoothWheel: !isMobile`, `lerp: 1`, `duration: 0`).
+    - **P1 Fix 7**: `WhatsAppButton.tsx` — Moved from `bottom-6 right-6` to `bottom-[72px] right-4 sm:bottom-6 sm:right-6`; removed infinite `animate-ping` from green pulse ring.
+    - **P1 Fix 8**: `RagChatbotWidget.tsx` — Moved from `bottom-20` to `bottom-[130px] sm:bottom-20` to clear WhatsApp button.
+    - **P1 Fix 9**: `ActivityTicker.tsx` — Moved from `bottom-20` to `bottom-[72px]` on mobile to clear FloatingDock.
+    - **P1 Fix 10**: `Hero.tsx` — Hidden A/B test variant selector on mobile with `hidden sm:flex`.
+    - **P2 Fix 11**: `audio.ts` — Added user-gesture gate (`audioUnlockedByUser`), `document.hidden` check, global `isAudioMuted()`/`setAudioMuted()` API. Audio no longer auto-fires from components like HeroVisualizer auto-advance.
+  - **Modified Files**:
+    - `src/styles.css` — Added mobile performance guard CSS block (overflow, backdrop-blur kill, animation reduction).
+    - `src/routes/__root.tsx` — Added useState import, isMobile detection, Lenis disabled on mobile.
+    - `src/components/stash/Hero.tsx` — Hero glow reduced, A/B test hidden on mobile.
+    - `src/components/stash/HeroVisualizer.tsx` — Removed animate-bounce.
+    - `src/components/stash/WhatsAppButton.tsx` — Repositioned on mobile, removed animate-ping.
+    - `src/components/stash/RagChatbotWidget.tsx` — Repositioned on mobile.
+    - `src/components/stash/ActivityTicker.tsx` — Repositioned on mobile.
+    - `src/lib/audio.ts` — Added user-gesture gate and global mute guard.
+
+
 - [x] **[UI - Modal Backdrop Blur & Scroll Lock / polish] Task 170: Perfect modal backdrop dimming (`backdrop-blur-md bg-black/60`) and body scroll locking to eliminate dual-scrolling glitches — 2026-09-14**:
   - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
   - **Verification Suite**: `node execution/test_modal_backdrop_scroll_lock.mjs` — ✅ PASSED (Task 170 verification checks passed 100%).
