@@ -5,139 +5,53 @@
 
 ## 1. Project Identity
 
-Project Name: [PROJECT_NAME]
-Project Type: [WEB APP / BACKEND / FULL STACK / OTHER]
-Primary Goal: [ONE SENTENCE DESCRIPTION]
+Project Name: StashSaarthi
+Project Type: WEB APP / FULL STACK (React 19, TanStack Start, Nitro, Supabase)
+Primary Goal: Kanpur's intergenerational living and campus micro-storage ecosystem (₹300/mo storage, ₹90 tiffins, 0% brokerage).
 
 ## 2. Current Tech Stack
 
 Frontend:
-- [e.g. React + Vite]
-- [e.g. Tailwind CSS]
+- React 19 + TypeScript + Vite + TanStack Router / TanStack Start
+- Tailwind CSS + Radix UI + Lucide Icons + Framer Motion / Motion
 
-Backend:
-- [e.g. Node.js + Express]
-
-Database:
-- [e.g. SQLite / MySQL / PostgreSQL]
-
-Authentication:
-- [e.g. JWT + bcrypt]
-
-Other:
-- [APIs / AI / storage / deployment]
-
-## 3. Project Structure Summary
-
-Only keep important paths here.
-
-```text
-src/
-  components/   -> reusable UI
-  pages/        -> application pages
-  routes/       -> routing
-  services/     -> API/business services
-backend/
-  controllers/  -> request handlers
-  routes/       -> API endpoints
-  middleware/   -> auth/security
-  models/       -> database models
-```
-
-Do NOT store entire source files in this memory.
+Backend & Database:
+- Nitro server runtime
+- Supabase (PostgreSQL, Auth, Storage, Realtime)
 
 ## 4. Important Architecture Decisions
 
-- [Decision 1]
-- [Decision 2]
-- [Decision 3]
-
-## 5. Existing Features
-
-### Completed
-- [Feature]
-- [Feature]
-
-### In Progress
-- [Feature]
-
-### Planned
-- [Feature]
-
-## 6. Important APIs / Routes
-
-| Method | Route | Purpose |
-|---|---|---|
-| POST | /api/auth/login | Login |
-| GET | /api/... | ... |
-
-Only list routes that are useful for future reasoning.
-
-## 7. Database Memory
-
-Main tables:
-- users: [important columns]
-- applications: [important columns]
-- documents: [important columns]
-
-Important relationships:
-- [relationship]
-
-Do not copy the complete SQL schema here unless essential.
-
-## 8. Security Rules
-
-- Never expose secrets or `.env`.
-- Do not weaken authentication.
-- Preserve RBAC.
-- Validate inputs.
-- Follow existing project security architecture.
-
-## 9. Coding Conventions
-
-- Keep existing folder structure.
-- Reuse existing utilities before creating new ones.
-- Avoid duplicate components/functions.
-- Keep API response format consistent.
-- Do not replace working code unless necessary.
-
-## 10. Current Known Issues
-
-- [Issue]
-- [Issue]
+- Barrel Exports: Centralized UI primitive exports via `src/components/ui/index.ts` and stash components via `src/components/stash/index.ts`.
+- Single-consumer Colocation: Micro-components used exclusively by one parent (e.g. `LegalDialog` in `FooterSection`, `SafetyAuditModal` in `Rooms`) are colocated within the parent file to reduce file bloat.
+- Mobile First: Responsive snap navigation with `pb-36` safe bottom padding for the floating navigation HUD.
+- Audio Guard: Audio playback strictly gated behind user interactions (zero autoplay on mount/timer).
 
 ## 11. Recent Changes
 
-Keep only the last 5–10 meaningful changes.
-
-- [DATE] — [Change]
-- [DATE] — [Change]
-
-## 12. Important File Map
-
-Use this to decide what files should be opened.
-
-| Topic | Files |
-|---|---|
-| Authentication | backend/routes/auth.js, backend/controllers/authController.js |
-| Database | backend/db/* |
-| Frontend auth | src/context/AuthContext.jsx |
-| Dashboard | src/pages/Dashboard.jsx |
+- 2026-09-15 — Root directory cleanup: deleted 11 obsolete docs, quarantined ad-hoc scripts to `execution/`, updated `.gitignore` for SQLite/storage cache.
+- 2026-09-15 — Implemented barrel exports for `src/components/ui` (71 primitives) and `src/components/stash` (97 components).
+- 2026-09-15 — Colocated single-consumer micro-components: `LegalDialog` into `FooterSection.tsx`, `SafetyAuditModal` into `Rooms.tsx`.
+- 2026-09-15 — Refactored and consolidated import blocks across `index.tsx`, `Hero.tsx`, `Navbar.tsx`, `FooterSection.tsx`, `Rooms.tsx`, `Connect.tsx`, `Calculator.tsx`, `TokenMealHub.tsx`.
+- 2026-09-15 — Full production build verification passed with 0 errors (`npm run build`).
 
 ## 13. Current Task Context
 
 Current task:
-[WHAT WE ARE WORKING ON]
+Codebase reorganization and barrel export consolidation completed.
 
 Relevant files:
-- [file]
-- [file]
-
-Do not open unrelated files.
+- src/components/ui/index.ts
+- src/components/stash/index.ts
+- src/components/stash/FooterSection.tsx
+- src/components/stash/Rooms.tsx
 
 ## 14. Last Session Summary
 
-[5–15 lines describing exactly what was changed, what works, what remains, and any important constraints.]
+Executed zero-breakage workspace hygiene and src/ reorganization:
+- Generated barrel files for UI primitives (`src/components/ui/index.ts`) and stash domain components (`src/components/stash/index.ts`).
+- Consolidated multi-line imports across primary pages and core components into single barrel imports.
+- Colocated single-use modals (`LegalDialog` and `SafetyAuditModal`) into their parent consumers.
+- All TypeScript checks (`npx tsc --noEmit`) and production builds (`npm run build`) succeeded with 0 errors.
 
 ---
 

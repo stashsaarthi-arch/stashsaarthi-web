@@ -1,7 +1,11 @@
 import { useState, useCallback, useEffect, lazy, Suspense } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { AmbientNodes } from "@/components/ui/AmbientNodes";
-import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
+import {
+  AmbientNodes,
+  ErrorBoundary,
+  PersonaContextIndicator,
+  ScrollReveal,
+} from "@/components/ui";
 import { usePersona } from "@/context/PersonaContext";
 import type { BookingPrefill } from "@/components/stash/types";
 
@@ -20,10 +24,7 @@ import { Connect } from "@/components/stash/Connect";
 // ─── Small utilities (eagerly loaded — negligible size) ──────────────────────
 import { ScrollProgress } from "@/components/stash/ScrollProgress";
 import { FloatingPersonaToggle } from "@/components/stash/FloatingPersonaToggle";
-import { PersonaContextIndicator } from "@/components/ui/PersonaContextIndicator";
-import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { MobileStickyCTA } from "@/components/stash/MobileStickyCTA";
-
 import { WhatsAppButton } from "@/components/stash/WhatsAppButton";
 
 // ─── Below-the-fold heavy components (lazy-loaded for bundle optimization) ───

@@ -226,7 +226,7 @@ Sprint 10: QA, CSO & CEO (Total Assurance, Compliance & Strategic Direction)
 - [x] 183. **[UI - iOS Safari 100dvh & Bottom Safe Area / adapt]**: Fix iOS Safari viewport height issues using dynamic viewport units (`100dvh`) and `env(safe-area-inset-bottom)`.
 - [x] 184. **[UI - Touch Target 48px Minimum Audit / adapt]**: Audit and enlarge all interactive buttons, icons, pills, and tap zones to maintain a strict minimum 48x48px touch target size.
 - [x] 185. **[UI - Horizontal Scroll Overflow Quarantine / adapt]**: Enforce strict viewport containment (`overflow-x: hidden`) across all root layouts to permanently eliminate horizontal micro-wobbles.
-- [ ] 186. **[UI - Mobile Card Swipe Gestures / delight]**: Add native touch swipe gestures to mobile image galleries and testimonial carousels with smooth inertia snapping.
+- [x] 186. **[UI - Mobile Card Swipe Gestures / delight]**: Add native touch swipe gestures to mobile image galleries and testimonial carousels with smooth inertia snapping.
 - [ ] 187. **[UI - Mobile Keyboard Collision Prevention / adapt]**: Ensure input fields automatically scroll into view with comfortable headroom when the virtual keyboard expands on mobile browsers.
 - [ ] 188. **[UI - Low-End Device Performance Mode / optimize]**: Automatically disable expensive CSS box-shadows, blurs, and canvas animations when running on low-spec Android devices.
 - [ ] 189. **[UI - Bottom Sheet Drawer for Mobile Filters / adapt]**: Replace dropdown select filters on mobile with modern native-feeling bottom sheet swipeable modals.

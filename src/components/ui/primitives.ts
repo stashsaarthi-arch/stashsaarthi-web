@@ -304,6 +304,17 @@ export {
 export { useHorizontalScrollQuarantine } from "@/lib/useHorizontalScrollQuarantine";
 export { useIosSafariViewport } from "@/lib/useIosSafariViewport";
 export { useScrollLock, getScrollbarWidth } from "@/lib/useScrollLock";
+export {
+  MobileSwipeGallery,
+  type MobileSwipeGalleryProps,
+} from "./MobileSwipeGallery";
+export {
+  useMobileSwipeGesture,
+  type UseMobileSwipeGestureOptions,
+  type UseMobileSwipeGestureReturn,
+  type SwipeDirection,
+} from "@/hooks/useMobileSwipeGesture";
+
 
 
 

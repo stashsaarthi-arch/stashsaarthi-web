@@ -1,13 +1,18 @@
 import { useState, useMemo } from "react";
 import { motion } from "motion/react";
-import AnimatedContent from "@/components/ui/AnimatedContent";
+import {
+  AnimatedContent,
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  Button,
+} from "@/components/ui";
 import type { OpenBooking } from "./types";
 import { useLanguage } from "@/context/LanguageContext";
 import { PackingChecklistModal } from "./PackingChecklistModal";
 import { LuggageItemizerModal } from "./LuggageItemizerModal";
 import { Package, FileText, Printer, ShieldCheck, ArrowRight, MapPin, Luggage } from "lucide-react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 import {
   PRESET_PRICING_ZONES,
   calculateLocationPricingQuote,

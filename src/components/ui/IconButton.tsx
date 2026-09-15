@@ -5,7 +5,7 @@ import { playClick } from "@/lib/audio";
 import { Loader2 } from "lucide-react";
 
 const iconButtonVariants = cva(
-  "inline-flex items-center justify-center rounded-xl transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 disabled:pointer-events-none disabled:opacity-50 select-none cursor-pointer hover:scale-105 active:scale-95",
+  "inline-flex items-center justify-center rounded-xl transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 disabled:pointer-events-none disabled:opacity-50 select-none cursor-pointer hover:scale-105 active:scale-95 touch-target-expand touch-target-min-48-icon",
   {
     variants: {
       variant: {
@@ -17,8 +17,8 @@ const iconButtonVariants = cva(
         destructive: "bg-destructive/10 text-destructive border border-destructive/20 hover:bg-destructive hover:text-destructive-foreground",
       },
       size: {
-        sm: "h-8 w-8 min-h-[32px] min-w-[32px] [&_svg]:size-4",
-        default: "h-10 w-10 min-h-[40px] min-w-[40px] [&_svg]:size-5",
+        sm: "h-8 w-8 min-h-[48px] min-w-[48px] max-sm:min-h-[48px] [&_svg]:size-4",
+        default: "h-10 w-10 min-h-[48px] min-w-[48px] max-sm:min-h-[48px] [&_svg]:size-5",
         lg: "h-12 w-12 min-h-[48px] min-w-[48px] [&_svg]:size-6",
       },
     },

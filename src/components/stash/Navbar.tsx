@@ -1,16 +1,12 @@
 import { useEffect, useState, memo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X, GraduationCap, HeartHandshake } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, BrandLogo, ThemeToggle, LowDataToggle, PersonaSwitcher, MobileNavDrawer } from "@/components/ui";
 import { AuthButton } from "./AuthButton";
-import { BrandLogo } from "@/components/ui/BrandLogo";
-import { ThemeToggle } from "@/components/ui/ThemeToggle";
-import { LowDataToggle } from "@/components/ui/LowDataToggle";
 import { smoothScrollTo } from "./legal";
 import { useLanguage } from "@/context/LanguageContext";
 import type { Role } from "./types";
 import { StashWalletBadge, ZeroFeeTrialTokenModal } from "./ZeroFeeTrialTokenModal";
-import { PersonaSwitcher } from "@/components/ui/PersonaSwitcher";
 import {
   DYNAMIC_PERSONA_NAVBAR_TOKENS,
   getPersonaNavbarTokens,
@@ -324,133 +320,19 @@ export const Navbar = memo(function Navbar({
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown with Persona Border */}
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            id="mobile-nav-drawer"
-            role="region"
-            aria-label="Mobile Navigation Menu"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className={`glass flex flex-col gap-2 px-4 py-4 xl:hidden bg-[#0A0D0F]/98 backdrop-blur-2xl overflow-hidden shadow-2xl ${tokens.mobileDrawerBorder}`}
-          >
-            {/* Mobile Persona Switcher in Menu */}
-            <div className="flex justify-center mb-2">
-              <PersonaSwitcher
-                id="navbar-mobile-persona-switcher"
-                role={role}
-                onRoleChange={(r) => {
-                  setRole(r);
-                  setOpen(false);
-                }}
-                variant="standard"
-                className="w-full justify-center"
-              />
-            </div>
-
-            {/* Mobile Language & Theme Switcher in Menu */}
-            <div className="p-1 bg-[#161B22] border border-slate-700/60 rounded-xl flex items-center gap-1 mb-2">
-              <button
-                type="button"
-                onClick={() => setLanguage("en")}
-                className={`flex-1 py-1.5 px-2.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
-                  language === "en"
-                    ? "bg-white/15 text-white shadow-md"
-                    : "text-slate-400 hover:text-white"
-                }`}
-              >
-                English
-              </button>
-              <button
-                type="button"
-                onClick={() => setLanguage("hi")}
-                className={`flex-1 py-1.5 px-2.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
-                  language === "hi"
-                    ? "bg-white/15 text-white shadow-md"
-                    : "text-slate-400 hover:text-white"
-                }`}
-              >
-                हिंदी
-              </button>
-              <ThemeToggle compact className="shrink-0" />
-              <LowDataToggle compact className="shrink-0" />
-            </div>
-
-            {/* Structured Navigation Grid */}
-            <div className="grid grid-cols-2 gap-1.5">
-              {NAV_LINKS.map((l) => {
-                const label = isHi ? l.labelHi : l.labelEn;
-                const desc = isHi ? l.descHi : l.descEn;
-                const isActive = activeHash === l.href;
-
-                return (
-                  <button
-                    key={l.key}
-                    type="button"
-                    onClick={(e) => {
-                      setOpen(false);
-                      setActiveHash(l.href);
-                      smoothScrollTo(l.href.replace(/^#/, ""))(e);
-                    }}
-                    className={`flex flex-col items-start rounded-xl p-2.5 border transition-all text-left cursor-pointer active:scale-98 ${
-                      isActive
-                        ? isHost
-                          ? "bg-amber-500/15 border-amber-500/40 text-amber-300"
-                          : "bg-emerald-500/15 border-emerald-500/40 text-emerald-300"
-                        : "bg-white/5 hover:bg-white/10 border-white/5 text-white"
-                    }`}
-                  >
-                    <span className="text-base mb-1">{l.icon}</span>
-                    <span className="text-xs font-bold">{label}</span>
-                    <span className="text-[10px] text-muted-foreground mt-0.5">{desc}</span>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Mobile Auth & Priority CTAs */}
-            <div className="mt-2 pt-2 border-t border-white/10 flex flex-col gap-2">
-              {onEarlyAccess && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setOpen(false);
-                    onEarlyAccess();
-                  }}
-                  className={`w-full flex items-center justify-center gap-2 py-2.5 rounded-xl border text-xs font-bold transition-all cursor-pointer ${
-                    isHost
-                      ? "border-amber-500/40 bg-amber-500/15 text-amber-300 hover:bg-amber-500/25"
-                      : "border-emerald-500/40 bg-emerald-500/15 text-emerald-300 hover:bg-emerald-500/25"
-                  }`}
-                >
-                  <span>⚡</span>
-                  <span>{isHi ? "प्राथमिकता अर्ली एक्सेस लें" : "Get Priority Early Access"}</span>
-                </button>
-              )}
-              {onRefer && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setOpen(false);
-                    onRefer();
-                  }}
-                  className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl border border-[#25D366]/40 bg-[#25D366]/15 text-xs font-bold text-[#25D366] hover:bg-[#25D366]/25 transition-all cursor-pointer"
-                >
-                  <span>🎁</span>
-                  <span>
-                    {isHi ? "व्हाट्सएप पर रेफर व शेयर करें" : "Refer & Share on WhatsApp"}
-                  </span>
-                </button>
-              )}
-              <div className="px-1">
-                <AuthButton compact />
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Mobile Navigation Drawer 2.0 */}
+      <MobileNavDrawer
+        open={open}
+        onClose={() => setOpen(false)}
+        role={role}
+        setRole={setRole}
+        activeHash={activeHash}
+        setActiveHash={setActiveHash}
+        onBook={onBook}
+        onListRoom={onListRoom}
+        onEarlyAccess={onEarlyAccess}
+        onRefer={onRefer}
+      />
 
       <ZeroFeeTrialTokenModal
         open={showTrialModal}

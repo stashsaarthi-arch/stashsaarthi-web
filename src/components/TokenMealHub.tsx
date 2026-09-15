@@ -16,7 +16,7 @@ import { formatPersonalizationsSummary } from "@/lib/mealPersonalization";
 import { DeliveryCutoffCountdown } from "./stash/DeliveryCutoffCountdown";
 import { useThaliPriceLabelVariant, trackThaliPriceClick, ThaliPriceLabelVariant } from "@/lib/abTesting";
 import { CsoKitchenSealModal } from "./stash/CsoKitchenSealModal";
-import { SaarthiKitchenCard2 } from "./ui/primitives";
+import { SaarthiKitchenCard2 } from "@/components/ui";
 
 
 

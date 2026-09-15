@@ -4907,6 +4907,66 @@ export function getHorizontalScrollQuarantineTokens(role: "student" | "host" = "
   };
 }
 
+/**
+ * Task 186: Mobile Card Swipe Gestures Tokens
+ * Native touch swipe gestures, inertia snapping physics, drag thresholds, and haptic feedback for image galleries and carousels.
+ */
+export const MOBILE_SWIPE_GESTURE_TOKENS = {
+  version: "2.0.0",
+  standard: "Native Mobile Touch Swipe Gestures & Inertia Snapping Engine",
+  swipeThresholdPx: 45,
+  velocityThreshold: 0.35, // px/ms
+  maxSwipeTimeMs: 500,
+  inertiaSpring: {
+    stiffness: 320,
+    damping: 28,
+    mass: 0.8,
+  },
+  snapAlignment: "center" as const,
+  touchAction: "pan-y" as const,
+  hapticFeedback: {
+    swipeLeftSound: "click",
+    swipeRightSound: "pop",
+    inertiaBounceSound: "chime",
+  },
+  utilityClasses: {
+    container: "mobile-swipe-gesture-container touch-pan-y select-none",
+    snapContainer: "mobile-swipe-inertia-snap snap-x snap-mandatory overflow-x-auto scroll-smooth",
+    snapItem: "mobile-swipe-snap-item snap-center shrink-0",
+    indicatorGlow: "mobile-swipe-indicator-glow transition-shadow duration-300",
+  },
+  personaAccents: {
+    student: {
+      accentColor: "#10B981",
+      glowColor: "rgba(16, 185, 129, 0.4)",
+      swipeGlow: "shadow-[0_0_25px_-3px_rgba(16,185,129,0.4)]",
+      activeDotBg: "bg-emerald-400 w-8",
+      trailColor: "#10B981",
+      badgeBg: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30",
+    },
+    host: {
+      accentColor: "#F59E0B",
+      glowColor: "rgba(245, 158, 11, 0.45)",
+      swipeGlow: "shadow-[0_0_25px_-3px_rgba(245,158,11,0.4)]",
+      activeDotBg: "bg-amber-400 w-8",
+      trailColor: "#F59E0B",
+      badgeBg: "bg-amber-500/15 text-amber-300 border-amber-500/30",
+    },
+  },
+} as const;
+
+export function getMobileSwipeGestureTokens(role: "student" | "host" = "student") {
+  const isHost = role === "host";
+  const persona = isHost
+    ? MOBILE_SWIPE_GESTURE_TOKENS.personaAccents.host
+    : MOBILE_SWIPE_GESTURE_TOKENS.personaAccents.student;
+  return {
+    ...MOBILE_SWIPE_GESTURE_TOKENS,
+    persona,
+  };
+}
+
+
 
 
 

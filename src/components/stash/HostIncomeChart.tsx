@@ -15,6 +15,8 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import { HostPassiveIncomeAnalytics } from "@/components/ui/HostPassiveIncomeAnalytics";
+
 
 interface HostIncomeChartProps {
   cornerMonthly: number;
@@ -44,7 +46,8 @@ export function HostIncomeChart({
   const { language } = useLanguage();
   const isHi = language === "hi";
 
-  const [activeView, setActiveView] = useState<"growth" | "breakdown" | "payouts">("growth");
+  const [activeView, setActiveView] = useState<"growth" | "breakdown" | "payouts" | "seniorHub">("growth");
+
   const [hoveredMonth, setHoveredMonth] = useState<number | null>(null);
   const [occupancyRate, setOccupancyRate] = useState<number>(90); // 60% to 100% occupancy rate
 
@@ -262,6 +265,18 @@ export function HostIncomeChart({
           >
             <Calendar className="h-3.5 w-3.5" />
             <span>{isHi ? "साप्ताहिक भुगतान" : "Weekly Payouts"}</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveView("seniorHub")}
+            className={`flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-[11px] font-semibold transition-all cursor-pointer ${
+              activeView === "seniorHub"
+                ? "bg-amber-500 text-black font-bold border border-amber-400 shadow-md shadow-amber-500/20"
+                : "text-amber-300 hover:text-white bg-amber-500/10 border border-amber-500/30"
+            }`}
+          >
+            <ShieldCheck className="h-3.5 w-3.5" />
+            <span>{isHi ? "टैक्स व बैंक हब" : "Tax & Bank Hub"}</span>
           </button>
         </div>
       </div>
@@ -829,7 +844,28 @@ export function HostIncomeChart({
             </div>
           </motion.div>
         )}
+        {activeView === "seniorHub" && (
+          <motion.div
+            key="seniorHub"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+          >
+            <HostPassiveIncomeAnalytics
+              cornerMonthly={cornerMonthly}
+              roomMonthly={roomMonthly}
+              kitchenMonthly={kitchenMonthly}
+              cornerBags={cornerBags}
+              dailyTiffins={dailyTiffins}
+              hasCorner={hasCorner}
+              hasRoom={hasRoom}
+              hasKitchen={hasKitchen}
+            />
+          </motion.div>
+        )}
       </AnimatePresence>
     </div>
   );
 }
+

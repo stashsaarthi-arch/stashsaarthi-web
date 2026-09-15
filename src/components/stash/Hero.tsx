@@ -13,11 +13,8 @@ import {
   Phone,
   Share2,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { HeroCtaButton } from "@/components/ui/HeroCtaButton";
-import { Card3D } from "@/components/ui/Card3D";
+import { Button, HeroCtaButton, Card3D, AnimatedContent } from "@/components/ui";
 import { CampusNodeChecker } from "./CampusNodeChecker";
-import AnimatedContent from "@/components/ui/AnimatedContent";
 import type { OpenBooking, Role } from "./types";
 import { FOUNDER_WHATSAPP } from "@/lib/constants";
 import { useLanguage } from "@/context/LanguageContext";

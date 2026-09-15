@@ -38,6 +38,7 @@ export interface BookingRecord {
   paymentMode: string;
   message: string;
   submittedAt: string;
+  status?: "booked" | "picked_up" | "in_vault" | "retrieved" | string;
   // Service-specific extras (optional — absent when not applicable)
   bags?: number;
   months?: number;

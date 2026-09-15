@@ -82,6 +82,8 @@ export * from './StickyMobileBottomBar';
 export * from './IosSafariViewport';
 export * from './TouchTargetAudit';
 export * from './HorizontalScrollQuarantine';
+export * from './MobileSwipeGallery';
+
 
 
 

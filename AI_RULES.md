@@ -142,3 +142,13 @@ Before finishing:
 2. Update `AI_BRAIN.md`.
 3. Keep only durable information.
 4. Write a concise Last Session Summary.
+
+## Autonomous Ralph Loop Protocol
+
+When executing tasks via Ralph Loop:
+1. NEVER scan the entire directory or read `node_modules` / `.output`.
+2. Inspect `AI_BRAIN.md` and only the target file mentioned in or implied by the unchecked PRD item `- [ ]`.
+3. Keep edits surgical and test via `npm run build` or `npx tsc --noEmit`.
+4. Log completed state into `docs/tasks/PRD.md` and update `SESSION_MEMORY.md`.
+5. Retain low context footprint across consecutive iterations.
+

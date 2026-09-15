@@ -11,15 +11,13 @@ import {
   Radio,
   Trophy,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, PrototypeBadge, SaarthiConnectCard2 } from "@/components/ui";
 import { MatchDrawer } from "./MatchDrawer";
-import { PrototypeBadge } from "@/components/ui/PrototypeBadge";
 import type { OpenBooking } from "./types";
 import { useLanguage } from "@/context/LanguageContext";
 import { ConnectAudioWidget } from "./ConnectAudioWidget";
 import { KarmaPointsBadge, KarmaPointsModal, type SeniorTier } from "./KarmaPointsModal";
 import { StudentTestimonialVideosWidget } from "./StudentTestimonialVideosWidget";
-import { SaarthiConnectCard2 } from "@/components/ui/SaarthiConnectCard2";
 
 
 const CITIES = ["Kanpur", "Lucknow", "Delhi NCR", "Pune"] as const;

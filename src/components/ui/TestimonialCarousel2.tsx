@@ -22,6 +22,7 @@ import { Button } from "@/components/ui/button";
 import AnimatedContent from "@/components/ui/AnimatedContent";
 import { useLanguage } from "@/context/LanguageContext";
 import { usePersona } from "@/context/PersonaContext";
+import { useMobileSwipeGesture } from "@/hooks/useMobileSwipeGesture";
 import { playPop, playClick } from "@/lib/audio";
 import {
   TESTIMONIAL_CAROUSEL_TOKENS,
@@ -264,6 +265,16 @@ export const TestimonialCarousel2 = memo(function TestimonialCarousel2({
     setIsPlayingAudio((prev) => !prev);
   };
 
+  const handleSwipeLeft = useCallback(() => nextSlide(true), [nextSlide]);
+  const handleSwipeRight = useCallback(() => prevSlide(true), [prevSlide]);
+
+  const { touchProps, containerProps } = useMobileSwipeGesture({
+    onSwipeLeft: handleSwipeLeft,
+    onSwipeRight: handleSwipeRight,
+    enableHaptics: true,
+    enableMouseDrag: true,
+  });
+
   const collegeBadgeSpec =
     TESTIMONIAL_CAROUSEL_TOKENS.collegeBadges[activeStory.collegeBadgeKey] ||
     TESTIMONIAL_CAROUSEL_TOKENS.collegeBadges["IIT Kanpur"];
@@ -354,9 +365,11 @@ export const TestimonialCarousel2 = memo(function TestimonialCarousel2({
           })}
         </div>
 
-        {/* Main Editorial Card Stage */}
+        {/* Main Editorial Card Stage with Touch Swipe Gestures */}
         <div
-          className="relative max-w-4xl mx-auto"
+          {...containerProps}
+          {...touchProps}
+          className={`relative max-w-4xl mx-auto ${containerProps.className}`}
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >

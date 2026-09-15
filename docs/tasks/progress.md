@@ -602,6 +602,30 @@ ralph-done-atufh
 
 
 
+- [x] **[UI - Mobile Card Swipe Gestures / delight] Task 186: Add native touch swipe gestures to mobile image galleries and testimonial carousels with smooth inertia snapping — 2026-09-15**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test_task186_mobile_swipe_gestures.mjs` — ✅ PASSED (ALL CHECKS PASSED FOR TASK 186).
+  - **Mobile Card Swipe Gestures Architecture**:
+    - `src/lib/designTokens.ts`: Defined `MOBILE_SWIPE_GESTURE_TOKENS` (`swipeThresholdPx: 45`, `maxVelThreshold: 0.3`, `inertiaDeceleration: 0.92`, `swipeVelocityMultiplier: 1.2`, `touchTouchAction: "pan-y"`, `hapticsEnabled: true`) and exported `getMobileSwipeGestureTokens(role)` helper function.
+    - `src/styles.css`: Added `.mobile-swipe-gesture-container`, `.mobile-swipe-inertia-snap`, and drag indicators (`.mobile-swipe-drag-active`) supporting smooth inertia scrolling and horizontal touch isolation.
+    - `src/hooks/useMobileSwipeGesture.ts`: Built reusable custom hook `useMobileSwipeGesture` supporting normalized touch/mouse pointer drag handlers, horizontal velocity calculations, threshold triggers (`onSwipeLeft`, `onSwipeRight`, `onSwipeUp`, `onSwipeDown`), Web Audio haptics (`playPop()`), and automatic touch-action management.
+    - `src/components/ui/MobileSwipeGallery.tsx`: Created reusable primitive `MobileSwipeGallery` featuring swipeable image slides, indicator dots, drag cursor states, and persona glow accents.
+    - `src/components/ui/TestimonialCarousel2.tsx` & `src/components/ui/SaarthiSpacesCard2.tsx`: Integrated `useMobileSwipeGesture` hook into student voice note reviews and room listing photo carousels for smooth mobile swipe navigation.
+    - `src/components/ui/primitives.ts` & `src/components/ui/index.ts`: Re-exported `MobileSwipeGallery` and `useMobileSwipeGesture`.
+    - `execution/test_task186_mobile_swipe_gestures.mjs`: Created verification test script asserting design tokens, CSS rules, hook logic, component implementations, re-exports, and clean production build.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `MOBILE_SWIPE_GESTURE_TOKENS` & `getMobileSwipeGestureTokens`.
+    - `src/styles.css` — Added mobile swipe gesture CSS utility classes & snap rules.
+    - `src/hooks/useMobileSwipeGesture.ts` — Created useMobileSwipeGesture hook.
+    - `src/components/ui/MobileSwipeGallery.tsx` — Created MobileSwipeGallery primitive component.
+    - `src/components/ui/TestimonialCarousel2.tsx` — Integrated touch swipe gestures in review stage.
+    - `src/components/ui/SaarthiSpacesCard2.tsx` — Integrated touch swipe gestures in room image carousel.
+    - `src/components/ui/primitives.ts` — Re-exported MobileSwipeGallery & useMobileSwipeGesture.
+    - `src/components/ui/index.ts` — Re-exported MobileSwipeGallery.
+    - `execution/test_task186_mobile_swipe_gestures.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 186 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 186 execution log.
+
 - [x] **[UI - Magnetic Buttons / overdrive] Task 156: Add subtle magnetic pull micro-interactions on primary desktop CTA buttons where the button gently attracts toward the cursor — 2026-09-14**:
   - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
   - **Verification Suite**: `node execution/test-magnetic-buttons.mjs` — ✅ PASSED (11/11 MAGNETIC BUTTONS MICRO-INTERACTION CHECKS PASSED 100%).

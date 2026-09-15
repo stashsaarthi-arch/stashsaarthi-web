@@ -97,10 +97,10 @@ function Chip({
         <button
           type="button"
           aria-label="Remove chip"
-          className="ml-0.5 rounded-full p-0.5 hover:bg-black/20 dark:hover:bg-white/20 transition-colors self-center"
+          className="ml-0.5 rounded-full p-1.5 hover:bg-black/20 dark:hover:bg-white/20 transition-colors self-center touch-target-expand touch-target-min-48-icon"
           onClick={handleRemove}
         >
-          <X className="size-3" />
+          <X className="size-3.5" />
         </button>
       )}
     </div>

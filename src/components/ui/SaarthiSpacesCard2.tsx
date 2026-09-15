@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { useIsIntersecting } from "@/hooks/useIntersectionObserver";
+import { useMobileSwipeGesture } from "@/hooks/useMobileSwipeGesture";
 import {
   ShieldCheck,
   Star,
@@ -107,6 +108,23 @@ export function SaarthiSpacesCard2({
     setCurrentSlide((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
   };
 
+  const handleSwipeNext = useCallback(() => {
+    playPop();
+    setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
+  }, [carouselImages.length]);
+
+  const handleSwipePrev = useCallback(() => {
+    playPop();
+    setCurrentSlide((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
+  }, [carouselImages.length]);
+
+  const { touchProps, containerProps } = useMobileSwipeGesture({
+    onSwipeLeft: handleSwipeNext,
+    onSwipeRight: handleSwipePrev,
+    enableHaptics: true,
+    enableMouseDrag: true,
+  });
+
   // Derive walking distance string
   const walkingDist =
     listing.walking_distance?.[isHi ? "hi" : "en"] ||
@@ -129,7 +147,11 @@ export function SaarthiSpacesCard2({
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* ── 16:9 Room Image Carousel ── */}
-      <div className="spaces-card-16-9-stage relative w-full rounded-2xl border border-white/10 bg-slate-950">
+      <div
+        {...containerProps}
+        {...touchProps}
+        className={`spaces-card-16-9-stage relative w-full rounded-2xl border border-white/10 bg-slate-950 ${containerProps.className}`}
+      >
         <AnimatePresence mode="wait">
           <motion.img
             key={currentSlide}
