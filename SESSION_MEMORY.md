@@ -1,52 +1,22 @@
 # SESSION MEMORY
 
-Use this file for temporary task-specific context.
+## Current Session
 
-It prevents `AI_BRAIN.md` from becoming bloated.
+Task: **Task 187: Mobile Keyboard Collision Prevention**
 
-## Current Goal
+## Active Session Summary
 
-Consolidate and reorganize `src/` codebase for token efficiency without altering UI or logic.
+Implemented site-wide mobile virtual keyboard collision prevention to ensure active text inputs, textareas, selects, and editable elements automatically scroll into view with comfortable headroom (100px) when the software keyboard opens on mobile viewports.
 
-## Files Opened
+### Key Changes
+- `src/lib/designTokens.ts`: Defined `MOBILE_KEYBOARD_COLLISION_TOKENS` and helper `getMobileKeyboardCollisionTokens()`.
+- `src/styles.css`: Added CSS scroll-margin and container utilities (`input, textarea, select, [contenteditable]`, `.mobile-keyboard-collision-container`, `.keyboard-collision-focus-headroom`, `.prevent-keyboard-collision`, `.keyboard-collision-audit-badge`).
+- `src/lib/useMobileKeyboardCollision.ts`: Created `useMobileKeyboardCollision()` custom hook to track focus events, `visualViewport` resize changes, and trigger smooth auto-scrolling with 100px headroom.
+- `src/components/ui/MobileKeyboardCollision.tsx`: Created primitive components `MobileKeyboardCollisionContainer` and `KeyboardCollisionAuditBadge` with dual-persona theme support.
+- `src/components/ui/primitives.ts` & `src/components/ui/index.ts`: Re-exported MobileKeyboardCollision primitives, hook, and types.
+- `src/routes/__root.tsx`: Integrated `useMobileKeyboardCollision()` directly into `RootComponent`.
+- `execution/test_task187_mobile_keyboard_collision.mjs`: Created and executed verification suite (7/7 checks passed 100%).
 
-- src/components/ui/index.ts
-- src/components/stash/index.ts
-- src/components/stash/FooterSection.tsx
-- src/components/stash/Rooms.tsx
-- src/components/stash/Hero.tsx
-- src/components/stash/Navbar.tsx
-- src/components/stash/Connect.tsx
-- src/components/stash/Calculator.tsx
-- src/components/TokenMealHub.tsx
-- src/routes/index.tsx
-
-## Findings
-
-- `LegalDialog.tsx` (59 lines) was solely consumed by `FooterSection.tsx`.
-- `SafetyAuditModal.tsx` (107 lines) was solely consumed by `Rooms.tsx`.
-- Barrel exports allow concise single-line imports from `@/components/ui`.
-
-## Changes Made
-
-- Created `src/components/ui/index.ts` exporting 71 UI primitives.
-- Created `src/components/stash/index.ts` exporting 97 domain components.
-- Inlined `LegalDialog` into `FooterSection.tsx` and removed separate file.
-- Inlined `SafetyAuditModal` into `Rooms.tsx` and removed separate file.
-- Consolidated multi-line import blocks in core application components and routes.
-
-## Tests / Validation
-
-- `npx tsc --noEmit`: Exited 0 (zero errors).
-- `npm run build`: Nitro/Vite production build passed cleanly in 2.17s.
-
-## Remaining Work
-
-- None for this reorganization pass.
-
----
-
-When the task is complete:
-
-1. Move durable information into `AI_BRAIN.md`.
-2. Clear this file or replace it with the next task's context.
+### Validation
+- `node execution/test_task187_mobile_keyboard_collision.mjs`: ✅ PASSED (7/7 checks passed).
+- `npx tsc --noEmit`: ✅ PASSED (0 errors).

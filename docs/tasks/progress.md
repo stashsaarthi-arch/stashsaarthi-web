@@ -3,6 +3,31 @@ ralph-done-atufh
 
 # Ralph Autonomous Workforce Sprint Progress
 
+- [x] **[UI - Mobile Keyboard Collision Prevention / adapt] Task 187: Ensure input fields automatically scroll into view with comfortable headroom when the virtual keyboard expands on mobile browsers — 2026-09-16**:
+  - **Type Check**: `npx tsc --noEmit` — ✅ 0 errors (TypeScript type safety verified 100%).
+  - **Verification Suite**: `node execution/test_task187_mobile_keyboard_collision.mjs` — ✅ PASSED (7/7 Task 187 verification checks passed 100%).
+  - **Mobile Virtual Keyboard Collision Prevention Architecture**:
+    - `src/lib/designTokens.ts`: Defined `MOBILE_KEYBOARD_COLLISION_TOKENS` (`headroomPx: 100`, `scrollBehavior: "smooth"`, `scrollBlock: "center"`, `keyboardOpenThresholdPx: 150`, `targetSelectors` for inputs/textareas/selects/contenteditable, `utilityClasses`, `hapticFeedback`, `personaAccents` for Student vs Host) and exported `getMobileKeyboardCollisionTokens` helper function.
+    - `src/styles.css`: Added CSS utilities (`input, textarea, select, [contenteditable]`, `.mobile-keyboard-collision-container`, `.keyboard-collision-focus-headroom`, `.prevent-keyboard-collision`, `.keyboard-collision-audit-badge`) enforcing 100px top and 120px bottom scroll-margin headroom on mobile focus.
+    - `src/lib/useMobileKeyboardCollision.ts`: Created custom hook `useMobileKeyboardCollision()` to monitor `focusin`/`focusout` and `visualViewport` resize events, calculate relative viewport bounds, auto-scroll focused input into view with comfortable 100px headroom, and track `isKeyboardOpen` and `keyboardHeight`.
+    - `src/components/ui/MobileKeyboardCollision.tsx`: Created reusable primitive components `MobileKeyboardCollisionContainer` and `KeyboardCollisionAuditBadge` with dual-persona theme awareness (`usePersona()`).
+    - `src/components/ui/primitives.ts`: Re-exported `MobileKeyboardCollisionContainer`, `MobileKeyboardCollision`, `KeyboardCollisionAuditBadge`, `useMobileKeyboardCollision`, and TypeScript types.
+    - `src/components/ui/index.ts`: Re-exported `MobileKeyboardCollision` module.
+    - `src/routes/__root.tsx`: Integrated `useMobileKeyboardCollision()` hook directly in `RootComponent` for site-wide mobile virtual keyboard protection.
+    - `execution/test_task187_mobile_keyboard_collision.mjs`: Created test harness asserting design tokens, CSS rules, custom hook implementation, primitive components, re-exports, root layout integration, and type safety.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `MOBILE_KEYBOARD_COLLISION_TOKENS` & `getMobileKeyboardCollisionTokens`.
+    - `src/styles.css` — Added Mobile Keyboard Collision Prevention CSS utility rules.
+    - `src/lib/useMobileKeyboardCollision.ts` — Created useMobileKeyboardCollision custom hook.
+    - `src/components/ui/MobileKeyboardCollision.tsx` — Created MobileKeyboardCollisionContainer primitive & KeyboardCollisionAuditBadge components.
+    - `src/components/ui/primitives.ts` — Re-exported MobileKeyboardCollision primitives & hook.
+    - `src/components/ui/index.ts` — Re-exported MobileKeyboardCollision module.
+    - `src/routes/__root.tsx` — Integrated useMobileKeyboardCollision hook in RootComponent.
+    - `execution/test_task187_mobile_keyboard_collision.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 187 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 187 execution log.
+
+
 - [x] **[UI - Horizontal Scroll Overflow Quarantine / adapt] Task 185: Enforce strict viewport containment (`overflow-x: hidden`) across all root layouts to permanently eliminate horizontal micro-wobbles — 2026-09-15**:
   - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
   - **Verification Suite**: `node execution/test_task185_horizontal_scroll_quarantine.mjs` — ✅ PASSED (19/19 Task 185 verification checks passed 100%).

@@ -32,26 +32,33 @@ Backend & Database:
 - 2026-09-15 — Implemented barrel exports for `src/components/ui` (71 primitives) and `src/components/stash` (97 components).
 - 2026-09-15 — Colocated single-consumer micro-components: `LegalDialog` into `FooterSection.tsx`, `SafetyAuditModal` into `Rooms.tsx`.
 - 2026-09-15 — Refactored and consolidated import blocks across `index.tsx`, `Hero.tsx`, `Navbar.tsx`, `FooterSection.tsx`, `Rooms.tsx`, `Connect.tsx`, `Calculator.tsx`, `TokenMealHub.tsx`.
-- 2026-09-15 — Full production build verification passed with 0 errors (`npm run build`).
+- 2026-09-16 — Implemented Task 187 Mobile Keyboard Collision Prevention engine (`useMobileKeyboardCollision`, `MobileKeyboardCollisionContainer`, `MOBILE_KEYBOARD_COLLISION_TOKENS`). All TypeScript checks (`npx tsc --noEmit`) passed with 0 errors.
 
 ## 13. Current Task Context
 
 Current task:
-Codebase reorganization and barrel export consolidation completed.
+Task 187: Mobile Keyboard Collision Prevention completed (`- [x]`).
 
 Relevant files:
+- src/lib/designTokens.ts
+- src/styles.css
+- src/lib/useMobileKeyboardCollision.ts
+- src/components/ui/MobileKeyboardCollision.tsx
+- src/components/ui/primitives.ts
 - src/components/ui/index.ts
-- src/components/stash/index.ts
-- src/components/stash/FooterSection.tsx
-- src/components/stash/Rooms.tsx
+- src/routes/__root.tsx
 
 ## 14. Last Session Summary
 
-Executed zero-breakage workspace hygiene and src/ reorganization:
-- Generated barrel files for UI primitives (`src/components/ui/index.ts`) and stash domain components (`src/components/stash/index.ts`).
-- Consolidated multi-line imports across primary pages and core components into single barrel imports.
-- Colocated single-use modals (`LegalDialog` and `SafetyAuditModal`) into their parent consumers.
-- All TypeScript checks (`npx tsc --noEmit`) and production builds (`npm run build`) succeeded with 0 errors.
+Completed Task 187: Mobile Keyboard Collision Prevention:
+- Created `MOBILE_KEYBOARD_COLLISION_TOKENS` and helper function in `src/lib/designTokens.ts`.
+- Added CSS utilities for input focus scroll margin (100px top / 120px bottom headroom) in `src/styles.css`.
+- Created custom hook `useMobileKeyboardCollision()` in `src/lib/useMobileKeyboardCollision.ts` to monitor viewport resize and input focus events.
+- Created `MobileKeyboardCollisionContainer` primitive and `KeyboardCollisionAuditBadge` component in `src/components/ui/MobileKeyboardCollision.tsx`.
+- Re-exported in `src/components/ui/primitives.ts` and `src/components/ui/index.ts`.
+- Integrated `useMobileKeyboardCollision()` into `RootComponent` in `src/routes/__root.tsx`.
+- Verification test suite `node execution/test_task187_mobile_keyboard_collision.mjs` passed 100% (7/7 checks).
+- `npx tsc --noEmit` passed with 0 errors.
 
 ---
 

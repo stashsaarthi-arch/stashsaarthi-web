@@ -314,6 +314,15 @@ export {
   type UseMobileSwipeGestureReturn,
   type SwipeDirection,
 } from "@/hooks/useMobileSwipeGesture";
+export {
+  MobileKeyboardCollisionContainer,
+  MobileKeyboardCollision,
+  KeyboardCollisionAuditBadge,
+  type MobileKeyboardCollisionContainerProps,
+  type KeyboardCollisionAuditBadgeProps,
+} from "./MobileKeyboardCollision";
+export { useMobileKeyboardCollision, type MobileKeyboardState } from "@/lib/useMobileKeyboardCollision";
+
 
 
 

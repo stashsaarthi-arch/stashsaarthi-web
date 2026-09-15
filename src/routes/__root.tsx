@@ -500,11 +500,14 @@ import { initOfflineQueueAutoSync } from "@/lib/offlineBookingQueue";
 import { initFontOptimization } from "@/lib/fontOptimization";
 import { useIosSafariViewport } from "@/lib/useIosSafariViewport";
 import { useHorizontalScrollQuarantine } from "@/lib/useHorizontalScrollQuarantine";
+import { useMobileKeyboardCollision } from "@/lib/useMobileKeyboardCollision";
 import { ViewportQuarantineContainer } from "@/components/ui/HorizontalScrollQuarantine";
 
 function RootComponent() {
   useIosSafariViewport();
   useHorizontalScrollQuarantine();
+  useMobileKeyboardCollision();
+
   const { queryClient } = Route.useRouteContext();
   const routerState = useRouterState();
   const currentRoute = routerState.location.pathname;

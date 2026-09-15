@@ -5522,6 +5522,59 @@ body,
   will-change: transform;
 }
 
+/* ==========================================================================
+   Mobile Virtual Keyboard Collision Prevention Engine (Task 187)
+   ========================================================================== */
+
+/* Headroom scroll margin on focus for input controls */
+input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]),
+textarea,
+select,
+[contenteditable="true"],
+.keyboard-collision-target {
+  scroll-margin-top: 100px !important;
+  scroll-margin-bottom: 120px !important;
+}
+
+/* Mobile viewport keyboard headroom adjustments */
+@media (max-width: 768px) {
+  input:focus,
+  textarea:focus,
+  select:focus,
+  [contenteditable="true"]:focus {
+    scroll-margin-top: 110px !important;
+    scroll-margin-bottom: 140px !important;
+    transition: scroll-margin 0.2s ease;
+  }
+}
+
+.mobile-keyboard-collision-container {
+  position: relative;
+  width: 100%;
+}
+
+.keyboard-collision-focus-headroom {
+  scroll-margin-top: 100px !important;
+}
+
+.prevent-keyboard-collision {
+  transition: padding-bottom 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s ease;
+}
+
+.keyboard-collision-audit-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.2s ease;
+}
+
+
 
 
 

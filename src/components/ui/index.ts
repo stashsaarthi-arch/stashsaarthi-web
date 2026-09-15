@@ -83,6 +83,8 @@ export * from './IosSafariViewport';
 export * from './TouchTargetAudit';
 export * from './HorizontalScrollQuarantine';
 export * from './MobileSwipeGallery';
+export * from './MobileKeyboardCollision';
+
 
 
 

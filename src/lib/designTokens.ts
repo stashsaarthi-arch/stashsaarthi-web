@@ -4966,6 +4966,67 @@ export function getMobileSwipeGestureTokens(role: "student" | "host" = "student"
   };
 }
 
+/**
+ * Task 187: Mobile Keyboard Collision Prevention Tokens
+ * Ergonomic auto-scroll positioning, comfortable headroom padding (100px),
+ * visualViewport expansion detection, and mobile virtual keyboard protection.
+ */
+export const MOBILE_KEYBOARD_COLLISION_TOKENS = {
+  version: "2.0.0",
+  standard: "Mobile Virtual Keyboard Collision Prevention & Auto-Headroom Engine",
+  headroomPx: 100,
+  headroomRem: "6.25rem",
+  scrollBehavior: "smooth" as const,
+  scrollBlock: "center" as const,
+  keyboardOpenThresholdPx: 150, // Minimum visualViewport height drop to signal keyboard popup
+  targetSelectors: [
+    "input:not([type='hidden']):not([type='checkbox']):not([type='radio'])",
+    "textarea",
+    "select",
+    "[contenteditable='true']",
+    ".keyboard-collision-target",
+  ],
+  utilityClasses: {
+    container: "mobile-keyboard-collision-container relative",
+    focusHeadroom: "keyboard-collision-focus-headroom scroll-m-24 sm:scroll-m-32",
+    preventCollision: "prevent-keyboard-collision transition-all duration-300",
+    headroomPadding: "pb-28 sm:pb-36",
+    auditBadge: "keyboard-collision-audit-badge flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full backdrop-blur-md border",
+  },
+  hapticFeedback: {
+    focusBeep: "click",
+    adjustChime: "pop",
+  },
+  personaAccents: {
+    student: {
+      accentColor: "#10B981",
+      glowColor: "rgba(16, 185, 129, 0.4)",
+      badgeBg: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30",
+      focusBorder: "focus:border-emerald-400 focus:ring-emerald-400/30",
+      indicatorGlow: "shadow-[0_0_15px_-2px_rgba(16,185,129,0.3)]",
+    },
+    host: {
+      accentColor: "#F59E0B",
+      glowColor: "rgba(245, 158, 11, 0.45)",
+      badgeBg: "bg-amber-500/15 text-amber-300 border-amber-500/30",
+      focusBorder: "focus:border-amber-400 focus:ring-amber-400/30",
+      indicatorGlow: "shadow-[0_0_15px_-2px_rgba(245,158,11,0.35)]",
+    },
+  },
+} as const;
+
+export function getMobileKeyboardCollisionTokens(role: "student" | "host" = "student") {
+  const isHost = role === "host";
+  const persona = isHost
+    ? MOBILE_KEYBOARD_COLLISION_TOKENS.personaAccents.host
+    : MOBILE_KEYBOARD_COLLISION_TOKENS.personaAccents.student;
+  return {
+    ...MOBILE_KEYBOARD_COLLISION_TOKENS,
+    persona,
+  };
+}
+
+
 
 
 
