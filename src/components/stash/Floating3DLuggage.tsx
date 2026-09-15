@@ -24,7 +24,7 @@ const LUGGAGE_MOCKUPS: LuggageItem[] = [
     tag: "IITK Campus Vault",
     sealId: "QR-SEAL-8839",
     iconType: "suitcase",
-    positionClass: "hidden xl:flex absolute -left-12 top-8 w-64 z-20 pointer-events-auto",
+    positionClass: "hidden",
     animationDelay: 0,
   },
   {
@@ -35,7 +35,7 @@ const LUGGAGE_MOCKUPS: LuggageItem[] = [
     tag: "Kakadeo Basement",
     sealId: "QR-SEAL-4412",
     iconType: "box",
-    positionClass: "hidden xl:flex absolute -right-12 top-16 w-64 z-20 pointer-events-auto",
+    positionClass: "hidden",
     animationDelay: 1.2,
   },
   {
@@ -46,14 +46,14 @@ const LUGGAGE_MOCKUPS: LuggageItem[] = [
     tag: "HBTI Hub Verified",
     sealId: "QR-SEAL-9011",
     iconType: "vault",
-    positionClass: "hidden lg:flex xl:hidden absolute -right-4 top-24 w-56 z-20 pointer-events-auto",
+    positionClass: "hidden",
     animationDelay: 0.6,
   },
 ];
 
 export const Floating3DLuggage = memo(function Floating3DLuggage() {
   return (
-    <>
+    <div className="hidden" aria-hidden="true">
       {/* Desktop Floating 3D Cards */}
       {LUGGAGE_MOCKUPS.map((item) => (
         <motion.div
@@ -149,6 +149,6 @@ export const Floating3DLuggage = memo(function Floating3DLuggage() {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 });

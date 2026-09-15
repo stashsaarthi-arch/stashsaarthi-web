@@ -2,7 +2,6 @@ import { useState, useEffect, useRef, memo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { useIsIntersecting } from "@/hooks/useIntersectionObserver";
 import {
-  Boxes,
   Home,
   ShieldCheck,
   Building2,
@@ -29,7 +28,7 @@ export interface TransitionStage {
   title: string;
   subtitle: string;
   location: string;
-  icon: typeof Boxes;
+  icon: typeof Building2;
   badge: string;
   details: string[];
   metrics: { label: string; value: string };
@@ -256,26 +255,9 @@ export const HeroVisualizer = memo(function HeroVisualizer({
             {/* Vector path line */}
             <div className="absolute left-10 right-10 top-1/2 h-0.5 -translate-y-1/2 bg-gradient-to-r from-emerald-500/30 via-cyan-500/30 to-amber-500/30" />
 
-            {/* Moving transit particle/suitcase icon */}
-            <motion.div
-              animate={{
-                left: activeStage === 0 ? "10%" : activeStage === 1 ? "50%" : "90%",
-              }}
-              transition={{ type: "spring", stiffness: 120, damping: 18 }}
-              className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 z-20"
-            >
-              <div className={`flex h-11 w-11 items-center justify-center rounded-xl shadow-2xl backdrop-blur-md transition-all ${
-                isStudent
-                  ? "bg-emerald-400 text-black shadow-emerald-500/50 ring-4 ring-emerald-500/30"
-                  : "bg-amber-400 text-black shadow-amber-500/50 ring-4 ring-amber-500/30"
-              }`}>
-                <Boxes className="h-6 w-6" />
-              </div>
-            </motion.div>
-
             {/* Node 1: Hostel */}
             <div className={`relative z-10 flex flex-col items-center gap-1.5 transition-all ${activeStage === 0 ? "scale-110 opacity-100" : "opacity-60"}`}>
-              <div className={`flex h-12 w-12 items-center justify-center rounded-2xl border ${activeStage === 0 ? "border-emerald-400 bg-emerald-950/80 text-emerald-300" : "border-white/10 bg-slate-800 text-muted-foreground"}`}>
+              <div className={`flex h-12 w-12 items-center justify-center rounded-2xl border transition-all ${activeStage === 0 ? "border-emerald-400 bg-emerald-950/80 text-emerald-300 ring-4 ring-emerald-500/20 shadow-lg shadow-emerald-500/20" : "border-white/10 bg-slate-800 text-muted-foreground"}`}>
                 <Building2 className="h-5 w-5" />
               </div>
               <span className="text-[11px] font-bold text-white">Hostel Room</span>
@@ -284,7 +266,7 @@ export const HeroVisualizer = memo(function HeroVisualizer({
 
             {/* Node 2: Saarthi Transit */}
             <div className={`relative z-10 flex flex-col items-center gap-1.5 transition-all ${activeStage === 1 ? "scale-110 opacity-100" : "opacity-60"}`}>
-              <div className={`flex h-12 w-12 items-center justify-center rounded-2xl border ${activeStage === 1 ? "border-cyan-400 bg-cyan-950/80 text-cyan-300" : "border-white/10 bg-slate-800 text-muted-foreground"}`}>
+              <div className={`flex h-12 w-12 items-center justify-center rounded-2xl border transition-all ${activeStage === 1 ? "border-cyan-400 bg-cyan-950/80 text-cyan-300 ring-4 ring-cyan-500/20 shadow-lg shadow-cyan-500/20" : "border-white/10 bg-slate-800 text-muted-foreground"}`}>
                 <Truck className="h-5 w-5" />
               </div>
               <span className="text-[11px] font-bold text-white">Saarthi Transit</span>
@@ -293,7 +275,7 @@ export const HeroVisualizer = memo(function HeroVisualizer({
 
             {/* Node 3: Senior Host Vault */}
             <div className={`relative z-10 flex flex-col items-center gap-1.5 transition-all ${activeStage === 2 ? "scale-110 opacity-100" : "opacity-60"}`}>
-              <div className={`flex h-12 w-12 items-center justify-center rounded-2xl border ${activeStage === 2 ? "border-amber-400 bg-amber-950/80 text-amber-300" : "border-white/10 bg-slate-800 text-muted-foreground"}`}>
+              <div className={`flex h-12 w-12 items-center justify-center rounded-2xl border transition-all ${activeStage === 2 ? "border-amber-400 bg-amber-950/80 text-amber-300 ring-4 ring-amber-500/20 shadow-lg shadow-amber-500/20" : "border-white/10 bg-slate-800 text-muted-foreground"}`}>
                 <Home className="h-5 w-5" />
               </div>
               <span className="text-[11px] font-bold text-white">Senior Host Vault</span>

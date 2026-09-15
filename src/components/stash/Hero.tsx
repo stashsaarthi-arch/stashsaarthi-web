@@ -128,7 +128,7 @@ export const Hero = memo(function Hero({
             <span
               className={`text-gradient ${
                 student
-                  ? "text-gradient-mint drop-shadow-[0_0_45px_rgba(0,245,160,0.75)] [text-shadow:0_0_50px_rgba(16,185,129,0.65)]"
+                  ? "text-gradient-mint drop-shadow-[0_0_35px_rgba(0,245,160,0.55)] [text-shadow:0_0_50px_rgba(16,185,129,0.65)]"
                   : "text-gradient-amber drop-shadow-[0_0_45px_rgba(251,191,36,0.7)] [text-shadow:0_0_50px_rgba(245,158,11,0.6)]"
               }`}
             >

@@ -93,6 +93,7 @@ export const TrustPartnerStrip = memo(function TrustPartnerStrip({
 }) {
   const [activePartner, setActivePartner] = useState<string | null>(null);
   const student = role === "student";
+  const activePartnerItem = INSTITUTIONAL_PARTNERS.find((p) => p.id === activePartner);
 
   const handleMouseEnter = (id: string) => {
     setActivePartner(id);
@@ -100,10 +101,10 @@ export const TrustPartnerStrip = memo(function TrustPartnerStrip({
   };
 
   return (
-    <div className="relative my-4 w-full overflow-hidden rounded-2xl border border-white/10 bg-black/40 p-4 sm:p-5 backdrop-blur-xl">
+    <div className="relative my-4 w-full rounded-2xl border border-white/10 bg-black/40 p-4 sm:p-5 backdrop-blur-xl">
       {/* Background Ambient Glow */}
       <div
-        className="pointer-events-none absolute inset-0 opacity-40 transition-opacity duration-500"
+        className="pointer-events-none absolute inset-0 rounded-2xl overflow-hidden opacity-40 transition-opacity duration-500"
         style={{
           background: student
             ? "radial-gradient(ellipse 70% 50% at 50% 50%, rgba(16, 185, 129, 0.08), transparent 80%)"
@@ -166,21 +167,35 @@ export const TrustPartnerStrip = memo(function TrustPartnerStrip({
               >
                 {partner.category}
               </span>
-
-              {/* Tooltip on Active Hover */}
-              {isActive && (
-                <motion.div
-                  initial={{ opacity: 0, y: 5 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="absolute bottom-full left-1/2 z-20 mb-2 w-48 -translate-x-1/2 rounded-lg border border-white/15 bg-black/90 p-2 text-[10px] leading-tight text-slate-200 shadow-2xl backdrop-blur-md pointer-events-none"
-                >
-                  <div className="font-bold text-white mb-0.5">{partner.fullName}</div>
-                  <div className="text-emerald-300">{partner.tagline}</div>
-                </motion.div>
-              )}
             </div>
           );
         })}
+      </div>
+
+      {/* Interactive Active Partner Guarantee Bar */}
+      <div className="mt-3 flex items-center justify-center min-h-[30px] px-2 text-center">
+        {activePartnerItem ? (
+          <motion.div
+            key={activePartnerItem.id}
+            initial={{ opacity: 0, y: 3 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.2 }}
+            className={`inline-flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 px-3.5 py-1.5 rounded-full border backdrop-blur-md text-xs shadow-lg ${
+              student
+                ? "bg-emerald-950/60 border-emerald-500/40 text-emerald-200 shadow-emerald-950/40"
+                : "bg-amber-950/60 border-amber-500/40 text-amber-200 shadow-amber-950/40"
+            }`}
+          >
+            <span className="font-bold text-white">{activePartnerItem.fullName}:</span>
+            <span className={student ? "text-emerald-300 font-medium" : "text-amber-300 font-medium"}>
+              {activePartnerItem.tagline}
+            </span>
+          </motion.div>
+        ) : (
+          <div className="text-[11px] font-mono text-muted-foreground/70">
+            Hover over any partner node to inspect institutional verification & emergency coverage
+          </div>
+        )}
       </div>
     </div>
   );
