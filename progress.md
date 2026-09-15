@@ -1,6 +1,41 @@
 ralph-done-atufh
 ralph-done-f37qa
 
+- [x] **[Autonomous Playwright MCP Self-Healing & Diagnostic Workflow / goal] — Detected and patched UI overflows, HUD collisions, phantom audio & endless scroll fatigue across Desktop (1440x900) & Mobile (390x844) — 2026-09-15**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite client & Nitro SSR bundle compiled cleanly in 2.18s).
+  - **Playwright MCP Verification**:
+    - **Mobile Viewport (390x844)**:
+      - `scrollHeight`: **2,914px** (Pass: strictly < 3,000px threshold, down from 6,639px — 56% scroll fatigue reduction).
+      - `isTickerVisible`: `false` (Pass: social proof toast hidden via `hidden md:flex`).
+      - `mainPaddingBottom`: `144px` (`pb-36` safe area container padding prevents HUD overlap).
+      - `activeAudiosCount`: `0` (Pass: zero unprompted background audio on load).
+      - `hasHorizontalOverflow`: `false` (`scrollWidth <= clientWidth`).
+    - **Desktop Viewport (1440x900)**:
+      - Solutions Hub equal card heights: `905.32px` across all cards (`items-stretch`).
+      - Barcode vertical text strip: wrapped in `h-full max-h-[360px] overflow-hidden` (zero card bounding box spill).
+      - `TokenMealHub` Thali cards: `flex flex-col justify-between h-full` with `line-clamp-2` description (zero CTA spillover).
+      - `hasHorizontalOverflow`: `false` (`scrollWidth === clientWidth === 1425px`).
+      - `activeAudiosCount`: `0` (Pass: strictly gated by explicit user gesture).
+  - **Key Remediation Actions Applied**:
+    - **Global Phantom Audio Kill**: `src/lib/audio.ts` enforced `isExplicitClickActive()` window (600ms user click), muting all automated intervals and on-mount triggers.
+    - **Mobile Scroll Fatigue Elimination**: Streamlined `src/components/stash/Hero.tsx` (wrapped heavy `InteractiveValueSwitcher`, `HeroVisualizer`, `TrustPartnerStrip`, `CampusNodeChecker`, and `HeroMicroStats` with `hidden md:block`); converted `Ecosystem`, `Rooms`, and `TokenMealHub` into horizontal carousels (`overflow-x-auto snap-x snap-mandatory no-scrollbar`); removed duplicate `pb-32` in `src/routes/index.tsx`.
+    - **Jank & Performance Guards**: Bound 5 heavy simulators (`HeroVisualizer`, `SaarthiSpacesCard2`, `SaarthiKitchenCard2`, `StashTimeline`, `ZeroRisk`) to `useIsIntersecting` IntersectionObserver.
+  - **Modified Files**:
+    - `src/lib/audio.ts`
+    - `src/hooks/useIntersectionObserver.ts`
+    - `src/components/stash/Hero.tsx`
+    - `src/components/stash/Floating3DLuggage.tsx`
+    - `src/components/stash/Ecosystem.tsx`
+    - `src/components/stash/Rooms.tsx`
+    - `src/components/TokenMealHub.tsx`
+    - `src/components/ui/SaarthiStashCard2.tsx`
+    - `src/components/ui/SaarthiKitchenCard2.tsx`
+    - `src/components/ui/SaarthiSpacesCard2.tsx`
+    - `src/components/stash/ActivityTicker.tsx`
+    - `src/components/stash/FooterSection.tsx`
+    - `src/routes/index.tsx`
+
+
 - [x] **[Mobile Viewport Optimization (<=768px) / goal] Eliminate endless scroll fatigue, horizontal swipe for lists, HUD cleanup & pause off-screen simulators — 2026-09-15**:
   - **Build**: `npm run build` — ✅ 0 errors (Nitro SSR and client bundle cleanly generated in 2.29s).
   - **Key Solutions Implemented**:
