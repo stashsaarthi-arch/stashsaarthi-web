@@ -1,6 +1,22 @@
 ralph-done-atufh
 ralph-done-f37qa
 
+- [x] **[UI - Ecosystem 3-Column Bento Grid Alignment / polish] Resolved empty gap void & card height asymmetry in Ecosystem section — 2026-09-15**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & Nitro SSR bundle compiled cleanly in 3.74s).
+  - **Verification**: `node execution/test-bento-grid.mjs` (✅ 100% passed), `node execution/test-saarthi-stash-card-2.mjs` (✅ 5/5 checks passed).
+  - **Root Cause Identified**:
+    - `.bento-grid` in `src/styles.css` had a hardcoded `@media (min-width: 1024px) { grid-template-columns: repeat(4, minmax(0, 1fr)); }` which forced 4 columns across 6 ecosystem cards, placing 4 cards in Row 1 and only 2 cards in Row 2, leaving the right half of Row 2 completely empty.
+    - `Tilt3D` and `cardContent` inside `BentoCard.tsx` were missing `h-full w-full flex flex-col`, preventing Cards 2, 3, 4 from stretching to match Card 1's height, leaving a massive vertical empty gap beneath Cards 2–4 in Row 1.
+  - **Remediation Implemented**:
+    - `src/styles.css`: Updated `.bento-grid` to default to 3 columns on desktop (`repeat(3, minmax(0, 1fr))`) and added attribute selectors (`[data-columns="3"]`, `[data-columns="4"]`) so the grid dynamically respects the configured columns.
+    - `src/components/ui/BentoGrid.tsx`: Set default `columns = 3`, added `data-columns` attribute, and added `h-full w-full` to both `Tilt3D` and `cardContent`.
+    - `src/components/stash/Ecosystem.tsx`: Wrapped `BentoCard` contents in `flex-1 flex flex-col justify-between` so comparison boxes and bullet points distribute evenly, locking all CTA buttons to the exact same baseline across all 6 cards in a perfectly balanced 3x2 grid.
+  - **Modified Files**:
+    - `src/styles.css`
+    - `src/components/ui/BentoGrid.tsx`
+    - `src/components/stash/Ecosystem.tsx`
+    - `progress.md`
+
 - [x] **[UI - Saarthi Stash Card 2.0 & Laser Seal Barcode Fix / polish] Fixed vertical character wrap, laser beam stretching, and dual-box void distortion in SaarthiStashCard2 — 2026-09-15**:
   - **Build**: `npm run build` — ✅ 0 errors (Vite production client & Nitro SSR bundle compiled cleanly in 3.39s).
   - **Verification**: `node execution/test-laser-seal-barcode-glow.mjs` (✅ 100% passed), `node execution/test-saarthi-stash-card-2.mjs` (✅ 5/5 checks passed).

@@ -1672,15 +1672,24 @@ html.lenis body {
 
 @media (min-width: 768px) {
   .bento-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.25rem;
   }
 }
 
 @media (min-width: 1024px) {
   .bento-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.5rem;
+  }
+  .bento-grid[data-columns="4"] {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .bento-grid[data-columns="3"] {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .bento-grid[data-columns="2"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

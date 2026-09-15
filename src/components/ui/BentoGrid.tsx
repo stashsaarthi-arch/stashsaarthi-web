@@ -22,17 +22,18 @@ export interface BentoGridProps extends React.HTMLAttributes<HTMLDivElement> {
  */
 export const BentoGrid = memo(function BentoGrid({
   children,
-  columns = 4,
+  columns = 3,
   className,
   autoFlow = "dense",
   ...props
 }: BentoGridProps) {
   return (
     <div
+      data-columns={columns}
       className={cn(
         "bento-grid section-isolated layout-isolated grid w-full gap-4 sm:gap-6 lg:gap-8 grid-flow-dense",
         columns === 2 && "grid-cols-1 md:grid-cols-2",
-        columns === 3 && "grid-cols-1 md:grid-cols-3",
+        columns === 3 && "grid-cols-1 md:grid-cols-2 lg:grid-cols-3",
         columns === 4 && "grid-cols-1 md:grid-cols-2 lg:grid-cols-4",
         autoFlow === "dense" && "grid-flow-dense",
         className
@@ -73,7 +74,7 @@ export const BentoCard = memo(function BentoCard({
   const cardContent = (
     <div
       className={cn(
-        "group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 p-5 sm:p-6 transition-all duration-300 gpu-accelerated contain-layout-style",
+        "group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 p-5 sm:p-6 transition-all duration-300 gpu-accelerated contain-layout-style h-full w-full",
         variant === "glass" && "glass glass-hover",
         variant === "surface1" && "surface-1-card hover:border-white/20",
         variant === "surface2" && "surface-2-card hover:border-white/25",
@@ -108,7 +109,7 @@ export const BentoCard = memo(function BentoCard({
 
   if (enableTilt) {
     return (
-      <Tilt3D max={3} lift={6} className={spanClasses}>
+      <Tilt3D max={3} lift={6} className={cn("h-full w-full flex flex-col", spanClasses)}>
         {cardContent}
       </Tilt3D>
     );

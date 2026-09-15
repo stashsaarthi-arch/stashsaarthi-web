@@ -119,7 +119,7 @@ export function Ecosystem({ onBook }: { onBook: OpenBooking }) {
                 enableTilt={true}
                 className="h-full flex flex-col justify-between"
               >
-                <div>
+                <div className="flex-1 flex flex-col">
                   <div className="flex items-center gap-3 pb-3 border-b border-white/10">
                     <span
                       className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-white/10"
@@ -141,19 +141,21 @@ export function Ecosystem({ onBook }: { onBook: OpenBooking }) {
                     </div>
                   </div>
 
-                  <div className="pt-3 flex-1 flex flex-col">
-                    <p className={`text-xs leading-relaxed text-muted-foreground ${isFeatured ? 'sm:text-base' : 'sm:text-sm'}`}>
-                      {textData.subtitle}
-                    </p>
-                    <div
-                      className="mt-3 rounded-xl border border-white/10 p-3 text-xs"
-                      style={{
-                        background: `color-mix(in oklab, ${n.accent} 10%, transparent)`,
-                      }}
-                    >
-                      <span className="font-semibold">{textData.price}</span>: {textData.comparison}
+                  <div className="pt-3 flex-1 flex flex-col justify-between">
+                    <div>
+                      <p className={`text-xs leading-relaxed text-muted-foreground ${isFeatured ? 'sm:text-base' : 'sm:text-sm'}`}>
+                        {textData.subtitle}
+                      </p>
+                      <div
+                        className="mt-3 rounded-xl border border-white/10 p-3 text-xs"
+                        style={{
+                          background: `color-mix(in oklab, ${n.accent} 10%, transparent)`,
+                        }}
+                      >
+                        <span className="font-semibold">{textData.price}</span>: {textData.comparison}
+                      </div>
                     </div>
-                    <ul className="mt-3 space-y-2 flex-1">
+                    <ul className="mt-4 space-y-2 flex-1">
                       {textData.bullets.map((f) => (
                         <li key={f} className="flex items-start gap-2 text-xs sm:text-sm">
                           <Check
