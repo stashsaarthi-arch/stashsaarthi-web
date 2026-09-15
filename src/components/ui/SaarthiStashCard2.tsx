@@ -173,7 +173,7 @@ export function SaarthiStashCard2({
             <div
               data-testid="3d-bag-depth-preview"
               onClick={toggleDepth}
-              className="stash-card-3d-stage rounded-xl border border-white/10 bg-slate-950/70 p-2.5 flex flex-col justify-between cursor-pointer hover:border-cyan-400/40 transition-colors"
+              className="stash-card-3d-stage rounded-xl border border-white/10 bg-slate-950/70 p-2.5 flex flex-col justify-between cursor-pointer hover:border-cyan-400/40 transition-colors min-h-[92px]"
             >
               <div className="flex items-center justify-between text-[11px] font-bold text-white mb-1">
                 <span className="flex items-center gap-1">
@@ -185,13 +185,13 @@ export function SaarthiStashCard2({
                 </span>
               </div>
               <div className="flex items-center justify-center gap-1.5 py-1">
-                <span className="grid place-items-center h-6 w-6 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-[10px]">
+                <span className="grid place-items-center h-6 w-6 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-[10px] transition-transform hover:scale-110">
                   <Luggage className="h-3.5 w-3.5" />
                 </span>
-                <span className="grid place-items-center h-6 w-6 rounded-lg bg-cyan-400/15 border border-cyan-400/30 text-cyan-300 text-[10px]">
+                <span className="grid place-items-center h-6 w-6 rounded-lg bg-cyan-400/15 border border-cyan-400/30 text-cyan-300 text-[10px] transition-transform hover:scale-110">
                   <Package className="h-3.5 w-3.5" />
                 </span>
-                <span className="grid place-items-center h-6 w-6 rounded-lg bg-amber-400/15 border border-amber-400/30 text-amber-300 text-[10px]">
+                <span className="grid place-items-center h-6 w-6 rounded-lg bg-amber-400/15 border border-amber-400/30 text-amber-300 text-[10px] transition-transform hover:scale-110">
                   <Boxes className="h-3.5 w-3.5" />
                 </span>
               </div>
@@ -203,16 +203,16 @@ export function SaarthiStashCard2({
             {/* Tamper-Proof Laser Seal Scanner Indicator */}
             <div
               data-testid="tamper-proof-seal-indicator"
-              className="rounded-xl border border-white/10 bg-slate-950/70 p-2.5 flex flex-col justify-between overflow-hidden"
+              className="laser-seal-scanner rounded-xl border border-white/10 bg-slate-950/70 p-2.5 flex flex-col justify-between overflow-hidden min-h-[92px]"
             >
-              <div className="flex items-center justify-between text-[11px] font-bold text-white mb-1">
+              <div className="flex items-center justify-between text-[11px] font-bold text-white mb-0.5">
                 <span className="flex items-center gap-1 text-emerald-400">
                   <CheckCircle2 className="h-3.5 w-3.5" />
                   <span>Laser Seal</span>
                 </span>
                 <span className="text-[9px] font-mono text-emerald-300">INTACT</span>
               </div>
-              <div className="py-0.5">
+              <div className="py-0.5 w-full">
                 <LaserSealBarcode
                   serialCode={SAARTHI_STASH_CARD_TOKENS.tamperProofSeal.code}
                   verifiedTimestamp="2026-ACTIVE-SEAL"
@@ -220,6 +220,7 @@ export function SaarthiStashCard2({
                   showSecurityBadge={false}
                   showScanButton={false}
                   interactive={true}
+                  className="border-0 bg-transparent p-0 min-h-0 shadow-none"
                 />
               </div>
               <div className="text-[9px] text-center text-emerald-400/90 font-mono">

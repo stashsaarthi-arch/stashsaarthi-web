@@ -66,13 +66,13 @@ export const LaserSealBarcode = memo(function LaserSealBarcode({
 
   // Dimensions based on size prop
   const containerDimensions = {
-    sm: "px-3 py-2 min-h-[70px]",
+    sm: "px-2 py-1 min-h-[50px]",
     md: "px-4 py-3 min-h-[90px]",
     lg: "px-6 py-4 min-h-[110px]",
   }[size];
 
   const barcodeHeight = {
-    sm: 32,
+    sm: 20,
     md: 44,
     lg: 56,
   }[size];
@@ -114,92 +114,33 @@ export const LaserSealBarcode = memo(function LaserSealBarcode({
         />
       )}
 
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 relative z-10">
-        {/* Left Side: Header & Serial Info */}
-        <div className="flex items-center gap-3">
-          <div className="relative flex items-center justify-center">
-            <div
-              className={`w-9 h-9 rounded-lg flex items-center justify-center font-mono text-xs font-bold ${
-                isHost
-                  ? "bg-amber-500/20 text-amber-300 border border-amber-500/40"
-                  : "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40"
-              }`}
-            >
-              {isScanning ? (
-                <span className="animate-spin text-base">⚡</span>
-              ) : (
-                <span className="text-base">🛡️</span>
-              )}
-            </div>
-            {scanVerified && !isScanning && (
-              <span className="absolute -top-1 -right-1 flex h-3 w-3">
-                <span
-                  className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${
-                    isHost ? "bg-amber-400" : "bg-emerald-400"
-                  }`}
-                />
-                <span
-                  className={`relative inline-flex rounded-full h-3 w-3 ${
-                    isHost ? "bg-amber-500" : "bg-emerald-500"
-                  }`}
-                />
-              </span>
-            )}
-          </div>
-
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-200">
-                {isHi ? "लेजर सील एंटी-टैम्पर" : "Laser Seal Anti-Tamper"}
-              </span>
-              <span
-                className={`text-[10px] font-mono px-1.5 py-0.5 rounded border uppercase tracking-wider ${
-                  isHost
-                    ? "bg-amber-500/10 text-amber-300 border-amber-500/30"
-                    : "bg-emerald-500/10 text-emerald-300 border-emerald-500/30"
-                }`}
-              >
-                {isScanning
-                  ? isHi
-                    ? "स्कैनिंग..."
-                    : "SCANNING..."
-                  : isHi
-                  ? "सत्यापित सील"
-                  : "SEAL INTACT"}
-              </span>
-            </div>
-            <p className="text-[11px] font-mono text-slate-400 mt-0.5 flex items-center gap-1.5">
-              <span>{serialCode}</span>
-              <span className="text-slate-600">•</span>
-              <span className="text-slate-400">{verifiedTimestamp}</span>
-            </p>
-          </div>
-        </div>
-
-        {/* Center/Right: SVG Barcode Display */}
-        <div className="flex items-center gap-3">
-          <div className="relative group cursor-pointer" onClick={handleReScan}>
+      {size === "sm" ? (
+        <div className="flex flex-col items-center justify-center gap-1 w-full relative z-10">
+          <div
+            className="relative group cursor-pointer w-full flex justify-center py-0.5"
+            onClick={handleReScan}
+          >
             <svg
-              width="180"
+              width="100%"
               height={barcodeHeight}
-              viewBox={`0 0 180 ${barcodeHeight}`}
+              viewBox="0 0 140 20"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className={`barcode-lines-svg ${
+              className={`barcode-lines-svg max-w-[130px] ${
                 !lowData ? "barcode-lines-glow-active" : ""
               }`}
               aria-hidden="true"
             >
-              <rect width="180" height={barcodeHeight} fill="none" />
+              <rect width="140" height="20" fill="none" />
               {barcodeLines.map((line, idx) => {
-                const xPos = idx * 6.2 + 4;
+                const xPos = idx * 4.8 + 3;
                 return (
                   <rect
                     key={idx}
                     x={xPos}
-                    y="4"
-                    width={line.w}
-                    height={barcodeHeight - 8}
+                    y="1"
+                    width={Math.max(1, line.w * 0.8)}
+                    height="18"
                     fill={accentColor}
                     opacity={line.o}
                     rx="0.5"
@@ -207,39 +148,154 @@ export const LaserSealBarcode = memo(function LaserSealBarcode({
                 );
               })}
             </svg>
-            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/50 backdrop-blur-[1px] rounded">
-              <span className="text-[10px] font-mono font-bold text-white tracking-widest uppercase">
-                {isHi ? "सत्यापित करने के लिए टैप करें" : "TAP TO VERIFY"}
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/60 backdrop-blur-[1px] rounded">
+              <span className="text-[8px] font-mono font-bold text-white tracking-widest uppercase">
+                {isHi ? "जाँचें" : "SCAN"}
               </span>
             </div>
           </div>
 
-          {/* Verification CTA Button */}
-          {showScanButton && (
-            <button
-              type="button"
-              onClick={handleReScan}
-              disabled={isScanning}
-              className={`hidden md:flex items-center gap-1.5 text-[11px] font-semibold px-3 py-1.5 rounded-lg border transition-all ${
-                isHost
-                  ? "bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border-amber-500/30 hover:border-amber-500/50"
-                  : "bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border-emerald-500/30 hover:border-emerald-500/50"
+          <div className="flex items-center justify-between w-full px-0.5 text-[9.5px] font-mono leading-none">
+            <span className="text-slate-300 font-bold tracking-wider whitespace-nowrap">
+              {serialCode}
+            </span>
+            <span
+              className={`font-semibold whitespace-nowrap ${
+                isHost ? "text-amber-400" : "text-emerald-400"
               }`}
             >
-              <span>{isScanning ? "⏳" : "🔍"}</span>
-              <span>
-                {isScanning
-                  ? isHi
-                    ? "जाँच जारी..."
-                    : "Verifying..."
-                  : isHi
-                  ? "सीलिंग जांचें"
-                  : "Verify Seal"}
-              </span>
-            </button>
-          )}
+              {isScanning ? (isHi ? "जाँच..." : "SCAN...") : (isHi ? "सील सुरक्षित" : "SEAL OK")}
+            </span>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 relative z-10">
+          {/* Left Side: Header & Serial Info */}
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="relative flex items-center justify-center shrink-0">
+              <div
+                className={`w-9 h-9 rounded-lg flex items-center justify-center font-mono text-xs font-bold ${
+                  isHost
+                    ? "bg-amber-500/20 text-amber-300 border border-amber-500/40"
+                    : "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40"
+                }`}
+              >
+                {isScanning ? (
+                  <span className="animate-spin text-base">⚡</span>
+                ) : (
+                  <span className="text-base">🛡️</span>
+                )}
+              </div>
+              {scanVerified && !isScanning && (
+                <span className="absolute -top-1 -right-1 flex h-3 w-3">
+                  <span
+                    className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${
+                      isHost ? "bg-amber-400" : "bg-emerald-400"
+                    }`}
+                  />
+                  <span
+                    className={`relative inline-flex rounded-full h-3 w-3 ${
+                      isHost ? "bg-amber-500" : "bg-emerald-500"
+                    }`}
+                  />
+                </span>
+              )}
+            </div>
+
+            <div className="min-w-0">
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-200 truncate">
+                  {isHi ? "लेजर सील एंटी-टैम्पर" : "Laser Seal Anti-Tamper"}
+                </span>
+                <span
+                  className={`text-[10px] font-mono px-1.5 py-0.5 rounded border uppercase tracking-wider shrink-0 ${
+                    isHost
+                      ? "bg-amber-500/10 text-amber-300 border-amber-500/30"
+                      : "bg-emerald-500/10 text-emerald-300 border-emerald-500/30"
+                  }`}
+                >
+                  {isScanning
+                    ? isHi
+                      ? "स्कैनिंग..."
+                      : "SCANNING..."
+                    : isHi
+                    ? "सत्यापित सील"
+                    : "SEAL INTACT"}
+                </span>
+              </div>
+              <p className="text-[11px] font-mono text-slate-400 mt-0.5 flex items-center gap-1.5 whitespace-nowrap">
+                <span className="whitespace-nowrap">{serialCode}</span>
+                <span className="text-slate-600">•</span>
+                <span className="text-slate-400 whitespace-nowrap">{verifiedTimestamp}</span>
+              </p>
+            </div>
+          </div>
+
+          {/* Center/Right: SVG Barcode Display */}
+          <div className="flex items-center gap-3 shrink-0">
+            <div className="relative group cursor-pointer" onClick={handleReScan}>
+              <svg
+                width="180"
+                height={barcodeHeight}
+                viewBox={`0 0 180 ${barcodeHeight}`}
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className={`barcode-lines-svg ${
+                  !lowData ? "barcode-lines-glow-active" : ""
+                }`}
+                aria-hidden="true"
+              >
+                <rect width="180" height={barcodeHeight} fill="none" />
+                {barcodeLines.map((line, idx) => {
+                  const xPos = idx * 6.2 + 4;
+                  return (
+                    <rect
+                      key={idx}
+                      x={xPos}
+                      y="4"
+                      width={line.w}
+                      height={barcodeHeight - 8}
+                      fill={accentColor}
+                      opacity={line.o}
+                      rx="0.5"
+                    />
+                  );
+                })}
+              </svg>
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/50 backdrop-blur-[1px] rounded">
+                <span className="text-[10px] font-mono font-bold text-white tracking-widest uppercase">
+                  {isHi ? "सत्यापित करने के लिए टैप करें" : "TAP TO VERIFY"}
+                </span>
+              </div>
+            </div>
+
+            {/* Verification CTA Button */}
+            {showScanButton && (
+              <button
+                type="button"
+                onClick={handleReScan}
+                disabled={isScanning}
+                className={`hidden md:flex items-center gap-1.5 text-[11px] font-semibold px-3 py-1.5 rounded-lg border transition-all ${
+                  isHost
+                    ? "bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border-amber-500/30 hover:border-amber-500/50"
+                    : "bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border-emerald-500/30 hover:border-emerald-500/50"
+                }`}
+              >
+                <span>{isScanning ? "⏳" : "🔍"}</span>
+                <span>
+                  {isScanning
+                    ? isHi
+                      ? "जाँच जारी..."
+                      : "Verifying..."
+                    : isHi
+                    ? "सीलिंग जांचें"
+                    : "Verify Seal"}
+                </span>
+              </button>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Footer Security Badges */}
       {showSecurityBadge && (

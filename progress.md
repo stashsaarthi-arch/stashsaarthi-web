@@ -1,7 +1,21 @@
 ralph-done-atufh
 ralph-done-f37qa
 
-- [x] **[Autonomous Playwright MCP Self-Healing & Diagnostic Workflow / goal] — Detected and patched UI overflows, HUD collisions, phantom audio & endless scroll fatigue across Desktop (1440x900) & Mobile (390x844) — 2026-09-15**:
+- [x] **[UI - Saarthi Stash Card 2.0 & Laser Seal Barcode Fix / polish] Fixed vertical character wrap, laser beam stretching, and dual-box void distortion in SaarthiStashCard2 — 2026-09-15**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & Nitro SSR bundle compiled cleanly in 3.39s).
+  - **Verification**: `node execution/test-laser-seal-barcode-glow.mjs` (✅ 100% passed), `node execution/test-saarthi-stash-card-2.mjs` (✅ 5/5 checks passed).
+  - **Root Cause Identified**:
+    - In `src/components/ui/LaserSealBarcode.tsx`, the layout was using viewport media query `sm:flex-row` which forced a side-by-side row inside narrow ~140px card columns on desktop/tablet viewports (>=640px).
+    - This crushed the serial info column to ~10px width, causing `"QR-SEAL-8839"` to wrap 1 character per line vertically into a 12-line vertical strip (`Q\nR\n-\nS\nE\nA\nL\n-\n8\n8\n3\n9`) with broken text `"E R"` from `"Laser Seal Anti-Tamper"`.
+    - The `.laser-barcode-beam` with `height: 100%` stretched into a giant 350px vertical green laser bar.
+    - Because of CSS grid `items-stretch` in `grid-cols-2`, the adjacent `3d-bag-depth-preview` box was forced to stretch to 350px, separating its icons from the bottom volume caption and leaving a massive 250px black empty void in the middle.
+  - **Remediation Implemented**:
+    - `src/components/ui/LaserSealBarcode.tsx`: Added dedicated responsive layout for `size="sm"` featuring a scaled vector SVG barcode (`max-w-[130px]`), horizontal monospace serial code with `whitespace-nowrap`, and compact verification status pill without media-query flex breakage. Also added `whitespace-nowrap` guards to `md`/`lg` serial codes.
+    - `src/components/ui/SaarthiStashCard2.tsx`: Added `laser-seal-scanner` class to `tamper-proof-seal-indicator`, set clean borderless wrapper styles for embedded `LaserSealBarcode`, and locked both `3d-bag-depth-preview` and `tamper-proof-seal-indicator` to a balanced, compact minimum height (`min-h-[92px]`), eliminating all empty voids and preventing vertical layout distortion.
+  - **Modified Files**:
+    - `src/components/ui/LaserSealBarcode.tsx`
+    - `src/components/ui/SaarthiStashCard2.tsx`
+    - `progress.md`
   - **Build**: `npm run build` — ✅ 0 errors (Vite client & Nitro SSR bundle compiled cleanly in 2.18s).
   - **Playwright MCP Verification**:
     - **Mobile Viewport (390x844)**:
