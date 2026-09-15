@@ -8,7 +8,7 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { AnimatePresence } from "framer-motion";
 import { PageTransition } from "@/components/ui/PageTransition";
 
@@ -597,9 +597,9 @@ function RootComponent() {
                       <ReactLenis
                         root
                         options={{
-                          lerp: 0.12,
-                          duration: 0.8,
-                          smoothWheel: true,
+                          lerp: isMobile ? 1 : 0.12, // Instant on mobile, smooth on desktop
+                          duration: isMobile ? 0 : 0.8,
+                          smoothWheel: !isMobile, // Disable smooth scroll on mobile for native perf
                           wheelMultiplier: 1.05,
                           touchMultiplier: 1.0,
                           syncTouch: false,
