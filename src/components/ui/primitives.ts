@@ -287,6 +287,21 @@ export {
   IosViewportContainer,
   type IosViewportContainerProps,
 } from "./IosSafariViewport";
+export {
+  TouchTargetWrapper,
+  TouchTargetAuditBadge,
+  useTouchTargetAudit,
+  type TouchTargetWrapperProps,
+  type TouchTargetAuditBadgeProps,
+} from "./TouchTargetAudit";
+export {
+  ViewportQuarantineContainer,
+  HorizontalScrollQuarantine,
+  HorizontalScrollAuditBadge,
+  type ViewportQuarantineContainerProps,
+  type HorizontalScrollAuditBadgeProps,
+} from "./HorizontalScrollQuarantine";
+export { useHorizontalScrollQuarantine } from "@/lib/useHorizontalScrollQuarantine";
 export { useIosSafariViewport } from "@/lib/useIosSafariViewport";
 export { useScrollLock, getScrollbarWidth } from "@/lib/useScrollLock";
 

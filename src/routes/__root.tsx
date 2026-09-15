@@ -499,9 +499,12 @@ import { initAutoDataRetentionPurge } from "@/lib/dataRetentionEngine";
 import { initOfflineQueueAutoSync } from "@/lib/offlineBookingQueue";
 import { initFontOptimization } from "@/lib/fontOptimization";
 import { useIosSafariViewport } from "@/lib/useIosSafariViewport";
+import { useHorizontalScrollQuarantine } from "@/lib/useHorizontalScrollQuarantine";
+import { ViewportQuarantineContainer } from "@/components/ui/HorizontalScrollQuarantine";
 
 function RootComponent() {
   useIosSafariViewport();
+  useHorizontalScrollQuarantine();
   const { queryClient } = Route.useRouteContext();
   const routerState = useRouterState();
   const currentRoute = routerState.location.pathname;
@@ -596,30 +599,32 @@ function RootComponent() {
                 <ToastProvider>
                   <QueryClientProvider client={queryClient}>
                     <DynamicOGHead />
-                    <ErrorBoundary>
-                      <ReactLenis
-                        root
-                        options={{
-                          lerp: isMobile ? 1 : 0.12, // Instant on mobile, smooth on desktop
-                          duration: isMobile ? 0 : 0.8,
-                          smoothWheel: !isMobile, // Disable smooth scroll on mobile for native perf
-                          wheelMultiplier: 1.05,
-                          touchMultiplier: 1.0,
-                          syncTouch: false,
-                          autoRaf: false, // GSAP is driving the raf now
-                        }}
-                      >
-                        <LenisHandler />
-                        <AnimatePresence mode="wait" initial={false}>
-                          <PageTransition key={currentRoute} routeKey={currentRoute}>
-                            {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-                            <Outlet />
-                          </PageTransition>
-                        </AnimatePresence>
-                        <NetworkStatus />
-                        <AccessibilityAnnouncer />
-                      </ReactLenis>
-                    </ErrorBoundary>
+                    <ViewportQuarantineContainer>
+                      <ErrorBoundary>
+                        <ReactLenis
+                          root
+                          options={{
+                            lerp: isMobile ? 1 : 0.12, // Instant on mobile, smooth on desktop
+                            duration: isMobile ? 0 : 0.8,
+                            smoothWheel: !isMobile, // Disable smooth scroll on mobile for native perf
+                            wheelMultiplier: 1.05,
+                            touchMultiplier: 1.0,
+                            syncTouch: false,
+                            autoRaf: false, // GSAP is driving the raf now
+                          }}
+                        >
+                          <LenisHandler />
+                          <AnimatePresence mode="wait" initial={false}>
+                            <PageTransition key={currentRoute} routeKey={currentRoute}>
+                              {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+                              <Outlet />
+                            </PageTransition>
+                          </AnimatePresence>
+                          <NetworkStatus />
+                          <AccessibilityAnnouncer />
+                        </ReactLenis>
+                      </ErrorBoundary>
+                    </ViewportQuarantineContainer>
                     <Toaster
                       position="top-center"
                       richColors

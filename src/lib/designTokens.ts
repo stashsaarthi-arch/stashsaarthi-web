@@ -4794,6 +4794,121 @@ export function getIosSafariViewportTokens(role: "student" | "host" = "student")
   };
 }
 
+export const TOUCH_TARGET_AUDIT_TOKENS = {
+  minTouchTargetPx: 48,
+  minTouchTargetRem: "3rem",
+  wcagStandard: "WCAG 2.1 AAA (2.5.5 Target Size) & WCAG 2.2 AA (2.5.8 Target Size Minimum 24px/48px)",
+  touchTargetRules: {
+    minWidthPx: 48,
+    minHeightPx: 48,
+    hitAreaExpandOffset: "-8px",
+    minimumGapBetweenTargets: "8px",
+  },
+  auditedCategories: {
+    buttons: ["Button", "IconButton", "HeroCtaButton", "MagneticButton"],
+    togglesAndSwitches: ["ThemeToggle", "PersonaSwitcher", "LowDataToggle", "SoundToggle"],
+    pillsAndChips: ["PillBadge", "Chip", "FilterChip", "CategoryPill"],
+    modalsAndDrawers: ["ModalCloseButton", "SheetDismissButton", "DrawerHandle"],
+    formControls: ["Checkbox", "RadioGroup", "QuantityStepper", "InputSubmit"],
+  },
+  utilityClasses: {
+    min48: "touch-target-min-48",
+    min48Icon: "touch-target-min-48-icon",
+    expand: "touch-target-expand",
+    pill: "touch-target-pill",
+    stepper: "touch-target-stepper",
+  },
+  personaAccents: {
+    student: {
+      accentColor: "#10B981",
+      glowColor: "rgba(16, 185, 129, 0.4)",
+      focusRing: "focus-visible:ring-emerald-400",
+      badgeBg: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30",
+    },
+    host: {
+      accentColor: "#F59E0B",
+      glowColor: "rgba(245, 158, 11, 0.45)",
+      focusRing: "focus-visible:ring-amber-400",
+      badgeBg: "bg-amber-500/15 text-amber-300 border-amber-500/30",
+    },
+  },
+} as const;
+
+export function getTouchTargetAuditTokens(role: "student" | "host" = "student") {
+  const isHost = role === "host";
+  const persona = isHost
+    ? TOUCH_TARGET_AUDIT_TOKENS.personaAccents.host
+    : TOUCH_TARGET_AUDIT_TOKENS.personaAccents.student;
+  return {
+    ...TOUCH_TARGET_AUDIT_TOKENS,
+    persona,
+  };
+}
+
+/**
+ * Task 185: Horizontal Scroll Overflow Quarantine Tokens
+ * Enforces strict viewport containment (overflow-x: hidden) across all root layouts to permanently eliminate horizontal micro-wobbles.
+ */
+export const HORIZONTAL_SCROLL_QUARANTINE_TOKENS = {
+  version: "2.0.0",
+  standard: "WCAG 2.1 AAA Layout Ergonomics & Viewport Containment Engine",
+  quarantineRules: {
+    overflowX: "hidden !important",
+    maxWidth: "100vw",
+    width: "100%",
+    overscrollBehaviorX: "none",
+    position: "relative",
+    boxSizing: "border-box",
+  },
+  rootSelectors: [
+    "html",
+    "body",
+    "#root",
+    "[data-router-root]",
+    ".app-root-shell",
+    ".root-viewport-quarantine",
+  ],
+  allowedScrollSelectors: [
+    ".horizontal-scroll-container",
+    ".carousel-container",
+    ".table-scroll-container",
+    ".bento-grid-scroll",
+    ".tabs-horizontal-scroll",
+  ],
+  utilityClasses: {
+    rootQuarantine: "overflow-x-quarantine",
+    viewportQuarantine: "root-viewport-quarantine",
+    preventWobble: "prevent-horizontal-wobble",
+    safeWrapper: "quarantine-safe-wrapper",
+    horizontalScrollContainer: "horizontal-scroll-container",
+  },
+  personaAccents: {
+    student: {
+      accentColor: "#10B981",
+      glowColor: "rgba(16, 185, 129, 0.4)",
+      badgeBg: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30",
+    },
+    host: {
+      accentColor: "#F59E0B",
+      glowColor: "rgba(245, 158, 11, 0.45)",
+      badgeBg: "bg-amber-500/15 text-amber-300 border-amber-500/30",
+    },
+  },
+} as const;
+
+export function getHorizontalScrollQuarantineTokens(role: "student" | "host" = "student") {
+  const isHost = role === "host";
+  const persona = isHost
+    ? HORIZONTAL_SCROLL_QUARANTINE_TOKENS.personaAccents.host
+    : HORIZONTAL_SCROLL_QUARANTINE_TOKENS.personaAccents.student;
+  return {
+    ...HORIZONTAL_SCROLL_QUARANTINE_TOKENS,
+    persona,
+  };
+}
+
+
+
 
 
 

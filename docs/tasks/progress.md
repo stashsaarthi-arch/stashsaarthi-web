@@ -3,6 +3,57 @@ ralph-done-atufh
 
 # Ralph Autonomous Workforce Sprint Progress
 
+- [x] **[UI - Horizontal Scroll Overflow Quarantine / adapt] Task 185: Enforce strict viewport containment (`overflow-x: hidden`) across all root layouts to permanently eliminate horizontal micro-wobbles — 2026-09-15**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test_task185_horizontal_scroll_quarantine.mjs` — ✅ PASSED (19/19 Task 185 verification checks passed 100%).
+  - **Horizontal Scroll Overflow Quarantine Architecture**:
+    - `src/lib/designTokens.ts`: Defined `HORIZONTAL_SCROLL_QUARANTINE_TOKENS` (`quarantineRules` for `overflowX: "hidden !important"`, `maxWidth: "100vw"`, `width: "100%"`, `overscrollBehaviorX: "none"`, `rootSelectors` for `html`, `body`, `#root`, `allowedScrollSelectors` for `.horizontal-scroll-container`, `utilityClasses`, `personaAccents` for Student vs Host) and exported `getHorizontalScrollQuarantineTokens` helper function.
+    - `src/styles.css`: Added CSS utilities (`html, body, #root`, `.overflow-x-quarantine`, `.root-viewport-quarantine`, `.prevent-horizontal-wobble`, `.quarantine-safe-wrapper`, `.horizontal-scroll-container`) enforcing strict viewport width lock, micro-wobble elimination, clip boundaries, and scrollable container exceptions.
+    - `src/lib/useHorizontalScrollQuarantine.ts`: Created custom hook `useHorizontalScrollQuarantine()` to enforce 0px horizontal scroll quarantine, monitor `window.scrollX > 0` micro-wobbles, auto-reset horizontal scroll to 0, and inject strict inline overflow-x styles on root DOM elements.
+    - `src/components/ui/HorizontalScrollQuarantine.tsx`: Created reusable primitive component `ViewportQuarantineContainer` (and alias `HorizontalScrollQuarantine`) alongside `HorizontalScrollAuditBadge` component to wrap root layouts with `.overflow-x-quarantine` and `.prevent-horizontal-wobble` with dual-persona theme awareness (`usePersona()`).
+    - `src/components/ui/primitives.ts`: Re-exported `ViewportQuarantineContainer`, `HorizontalScrollQuarantine`, `HorizontalScrollAuditBadge`, `useHorizontalScrollQuarantine`, `ViewportQuarantineContainerProps`, and `HorizontalScrollAuditBadgeProps`.
+    - `src/components/ui/index.ts`: Re-exported `HorizontalScrollQuarantine`.
+    - `src/routes/__root.tsx`: Integrated `useHorizontalScrollQuarantine()` hook and wrapped root component layout with `<ViewportQuarantineContainer>` in `RootComponent`.
+    - `execution/test_task185_horizontal_scroll_quarantine.mjs`: Created test harness asserting design tokens, CSS rules, custom hook implementation, primitive components, re-exports, root layout integration, type check, and clean production build compilation.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `HORIZONTAL_SCROLL_QUARANTINE_TOKENS` & `getHorizontalScrollQuarantineTokens`.
+    - `src/styles.css` — Added Horizontal Scroll Overflow Quarantine CSS utility rules.
+    - `src/lib/useHorizontalScrollQuarantine.ts` — Created useHorizontalScrollQuarantine custom hook.
+    - `src/components/ui/HorizontalScrollQuarantine.tsx` — Created ViewportQuarantineContainer primitive & HorizontalScrollAuditBadge components.
+    - `src/components/ui/primitives.ts` — Re-exported HorizontalScrollQuarantine primitives & hook.
+    - `src/components/ui/index.ts` — Re-exported HorizontalScrollQuarantine module.
+    - `src/routes/__root.tsx` — Integrated useHorizontalScrollQuarantine hook & ViewportQuarantineContainer wrapper.
+    - `execution/test_task185_horizontal_scroll_quarantine.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 185 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 185 execution log.
+    - `progress.md` — Appended Task 185 execution log.
+
+- [x] **[UI - Touch Target 48px Minimum Audit / adapt] Task 184: Audit and enlarge all interactive buttons, icons, pills, and tap zones to maintain a strict minimum 48x48px touch target size — 2026-09-15**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test_task184_touch_target_audit.mjs` — ✅ PASSED (26/26 Task 184 verification checks passed 100%).
+  - **Touch Target 48px Minimum Audit Engine Architecture**:
+    - `src/lib/designTokens.ts`: Defined `TOUCH_TARGET_AUDIT_TOKENS` (`minTouchTargetPx: 48`, `minTouchTargetRem: "3rem"`, `wcagStandard` for WCAG 2.1 AAA / 2.2 AA target size, `touchTargetRules` for 48x48px min dimensions & hit area expansion offsets, `auditedCategories` for buttons, toggles, pills, modals, and form controls, `utilityClasses`, `personaAccents` for Student vs Host) and exported `getTouchTargetAuditTokens` helper function.
+    - `src/styles.css`: Added CSS utilities (`.touch-target-min-48`, `.touch-target-min-48-icon`, `.touch-target-expand`, `.touch-target-pill`, `.touch-target-stepper`) providing strict 48x48px min-width/min-height enforcement, pseudo-element `::after` hit area expansion for small visual controls, pill touch padding, and quantity stepper target bounds.
+    - `src/components/ui/TouchTargetAudit.tsx`: Created reusable primitive components `TouchTargetWrapper` and `TouchTargetAuditBadge` alongside custom hook `useTouchTargetAudit()` to audit interactive DOM controls against 48x48px guidelines with dual-persona theme support (`usePersona()`).
+    - `src/components/ui/IconButton.tsx`: Enhanced `iconButtonVariants` with `touch-target-expand` and `touch-target-min-48-icon` to ensure 48x48px minimum touch targets across all button sizes (`sm`, `default`, `lg`).
+    - `src/components/ui/Chip.tsx`: Enhanced chip remove button with `touch-target-expand` and `touch-target-min-48-icon` hit area expansion.
+    - `src/components/ui/primitives.ts`: Re-exported `TouchTargetWrapper`, `TouchTargetAuditBadge`, `useTouchTargetAudit`, `TouchTargetWrapperProps`, and `TouchTargetAuditBadgeProps`.
+    - `src/components/ui/index.ts`: Re-exported `TouchTargetAudit`.
+    - `execution/test_task184_touch_target_audit.mjs`: Created test harness asserting design tokens, CSS rules, primitive component, hook implementation, component re-exports, interactive element touch target enhancements, and clean production build compilation.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `TOUCH_TARGET_AUDIT_TOKENS` & `getTouchTargetAuditTokens`.
+    - `src/styles.css` — Added Touch Target 48px CSS utility rules.
+    - `src/components/ui/TouchTargetAudit.tsx` — Created TouchTargetWrapper primitive, TouchTargetAuditBadge component, and useTouchTargetAudit hook.
+    - `src/components/ui/IconButton.tsx` — Enforced 48px touch target expansion.
+    - `src/components/ui/Chip.tsx` — Enforced 48px touch target expansion on remove button.
+    - `src/components/ui/primitives.ts` — Re-exported TouchTargetAudit primitives & hook.
+    - `src/components/ui/index.ts` — Re-exported TouchTargetAudit.
+    - `execution/test_task184_touch_target_audit.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 184 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 184 execution log.
+    - `progress.md` — Appended Task 184 execution log.
+
+
 - [x] **[UI - iOS Safari 100dvh & Bottom Safe Area / adapt] Task 183: Fix iOS Safari viewport height issues using dynamic viewport units (`100dvh`) and `env(safe-area-inset-bottom)` — 2026-09-15**:
   - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
   - **Verification Suite**: `node execution/test_task183_ios_safari_viewport.mjs` — ✅ PASSED (18/18 Task 183 verification checks passed 100%).

@@ -224,8 +224,8 @@ Sprint 10: QA, CSO & CEO (Total Assurance, Compliance & Strategic Direction)
 - [x] 181. **[UI - Mobile Navigation Drawer 2.0 / adapt]**: Re-engineer the mobile hamburger drawer with buttery smooth slide-in transitions, high-contrast category links, and language/persona toggles.
 - [x] 182. **[UI - Sticky Mobile Bottom Action Bar / adapt]**: Implement a thumb-friendly sticky bottom CTA bar on mobile screens with instant "Book Storage @ ₹300" action.
 - [x] 183. **[UI - iOS Safari 100dvh & Bottom Safe Area / adapt]**: Fix iOS Safari viewport height issues using dynamic viewport units (`100dvh`) and `env(safe-area-inset-bottom)`.
-- [ ] 184. **[UI - Touch Target 48px Minimum Audit / adapt]**: Audit and enlarge all interactive buttons, icons, pills, and tap zones to maintain a strict minimum 48x48px touch target size.
-- [ ] 185. **[UI - Horizontal Scroll Overflow Quarantine / adapt]**: Enforce strict viewport containment (`overflow-x: hidden`) across all root layouts to permanently eliminate horizontal micro-wobbles.
+- [x] 184. **[UI - Touch Target 48px Minimum Audit / adapt]**: Audit and enlarge all interactive buttons, icons, pills, and tap zones to maintain a strict minimum 48x48px touch target size.
+- [x] 185. **[UI - Horizontal Scroll Overflow Quarantine / adapt]**: Enforce strict viewport containment (`overflow-x: hidden`) across all root layouts to permanently eliminate horizontal micro-wobbles.
 - [ ] 186. **[UI - Mobile Card Swipe Gestures / delight]**: Add native touch swipe gestures to mobile image galleries and testimonial carousels with smooth inertia snapping.
 - [ ] 187. **[UI - Mobile Keyboard Collision Prevention / adapt]**: Ensure input fields automatically scroll into view with comfortable headroom when the virtual keyboard expands on mobile browsers.
 - [ ] 188. **[UI - Low-End Device Performance Mode / optimize]**: Automatically disable expensive CSS box-shadows, blurs, and canvas animations when running on low-spec Android devices.

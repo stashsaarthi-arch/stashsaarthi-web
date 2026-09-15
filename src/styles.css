@@ -5364,6 +5364,124 @@ html[lang="hi"][data-persona="host"] h4.font-devanagari,
   max-height: calc(100vh - 2rem);
 }
 
+/* ==========================================================================
+   Touch Target 48px Minimum Audit Engine (Task 184)
+   ========================================================================== */
+
+/* Strict 48x48px minimum touch target enforcement */
+.touch-target-min-48 {
+  min-width: 48px !important;
+  min-height: 48px !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* Icon button 48x48px touch target with hit area expansion */
+.touch-target-min-48-icon {
+  min-width: 48px !important;
+  min-height: 48px !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+/* Pseudo-element hit area expansion for small visual controls (WCAG AAA 48x48px) */
+.touch-target-expand {
+  position: relative;
+}
+
+.touch-target-expand::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 48px;
+  min-height: 48px;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: auto;
+}
+
+/* Touch target pill badge */
+.touch-target-pill {
+  min-height: 48px !important;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Quantity stepper button touch target (+/- controls) */
+.touch-target-stepper {
+  min-width: 48px !important;
+  min-height: 48px !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+}
+
+/* ==========================================================================
+   Horizontal Scroll Overflow Quarantine Engine (Task 185)
+   ========================================================================== */
+
+/* Root Viewport Containment */
+html,
+body,
+#root {
+  max-width: 100vw;
+  overflow-x: hidden !important;
+  overscroll-behavior-x: none;
+}
+
+/* Strict overflow-x quarantine utility class */
+.overflow-x-quarantine {
+  max-width: 100vw !important;
+  width: 100% !important;
+  overflow-x: hidden !important;
+  overscroll-behavior-x: none !important;
+  box-sizing: border-box !important;
+}
+
+/* Root layout quarantine container */
+.root-viewport-quarantine {
+  position: relative;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden !important;
+  contain: layout style;
+}
+
+/* Micro-wobble prevention wrapper for child sections */
+.prevent-horizontal-wobble {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+/* Safe wrapper container */
+.quarantine-safe-wrapper {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Allowed horizontal scroll area (e.g. carousels, data tables) */
+.horizontal-scroll-container {
+  overflow-x: auto !important;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+}
+
+
+
 
 
 
