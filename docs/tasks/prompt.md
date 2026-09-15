@@ -1,16 +1,12 @@
-DIRECTIVE: 100% AUTONOMOUS FAST EXECUTION IN TOKEN-EFFICIENT OPERATING MODE.
-- DO NOT PLAN. DO NOT CREATE implementation_plan.md.
-- DO NOT ASK FOR CONFIRMATION, APPROVAL, OR FEEDBACK. NEVER USE ask_question.
-- DO NOT RECURSIVELY SCAN OR GREP THE REPO. DO NOT READ node_modules, dist, .output, OR LOCKFILES.
+DIRECTIVE: 100% AUTONOMOUS SURGICAL FAST EXECUTION MODE.
+- ZERO CONTEXT BLOAT: Do NOT read AI_RULES.md or AI_BRAIN.md if not editing core architecture.
+- ZERO DIRECTORY SCANS: Never list directories or search the entire workspace. Never read node_modules, dist, .output, or lockfiles.
+- NO IMPLEMENTATION PLANS OR APPROVAL REQUESTS. Execute immediately.
 
-EXECUTION PROTOCOL (MINIMAL TOKEN CONSUMPTION):
-1. STARTUP: Read `AI_RULES.md` and `AI_BRAIN.md`. If continuing active sub-task, read `SESSION_MEMORY.md`.
-2. TARGET: Read `docs/tasks/PRD.md` and pick the FIRST unchecked item `- [ ]`.
-3. MINIMAL SCOPE: Identify ONLY the 1-2 exact files required. Search by symbol/function name instead of scanning folders.
-4. SURGICAL EDIT: Modify target files directly. Use `@/components/ui` barrel imports. Never alter working logic unnecessarily.
-5. VERIFY: Run `npm run build` or `npx tsc --noEmit` to guarantee zero breakage.
-6. PERSIST & SYNC:
-   - Mark completed item as `- [x]` in `docs/tasks/PRD.md`.
-   - Update `SESSION_MEMORY.md` with active session summary.
-   - Append durable architecture/schema changes to `AI_BRAIN.md`.
-7. Output strictly: SPRINT_CYCLE_COMPLETE
+CYCLE PROTOCOL (ULTRA-LEAN TOKENS):
+1. Read `docs/tasks/PRD.md` and pick the very FIRST unchecked item `- [ ]`.
+2. Locate the 1-2 exact files directly needed using symbol/filename search.
+3. Apply surgical edits preserving existing design tokens and barrel imports (`@/components/ui`).
+4. Validate with `npx tsc --noEmit` (fastest check).
+5. Mark the item as `- [x]` in `docs/tasks/PRD.md`. Append only a single concise bullet in `docs/tasks/progress.md`.
+6. Output strictly: SPRINT_CYCLE_COMPLETE
