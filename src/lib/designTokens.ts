@@ -4721,6 +4721,80 @@ export function getStickyMobileBottomBarTokens(role: "student" | "host" = "stude
   };
 }
 
+/**
+ * iOS Safari 100dvh & Bottom Safe Area Design Tokens (Task 183)
+ * Fixes iOS Safari viewport height issues using dynamic viewport units (`100dvh`) and `env(safe-area-inset-bottom)`.
+ */
+export const IOS_SAFARI_VIEWPORT_TOKENS = {
+  header: {
+    titleEn: "iOS Safari 100dvh & Safe Area Engine",
+    titleHi: "iOS सफारी 100dvh व सेफ एरिया इंजन",
+    subtitleEn: "Zero address bar jitter & bottom safe area inset padding",
+    subtitleHi: "जीरो एड्रेस बार जिटर व बॉटम सेफ एरिया पैडिंग",
+  },
+  viewportUnits: {
+    dvh: "100dvh",
+    svh: "100svh",
+    lvh: "100lvh",
+    fallback: "100vh",
+    webkitFillAvailable: "-webkit-fill-available",
+  },
+  safeAreaInsets: {
+    top: "env(safe-area-inset-top, 0px)",
+    bottom: "env(safe-area-inset-bottom, 0px)",
+    left: "env(safe-area-inset-left, 0px)",
+    right: "env(safe-area-inset-right, 0px)",
+  },
+  cssCustomVariables: {
+    vh: "--vh",
+    dvh: "--dvh",
+    sat: "--sat",
+    sab: "--sab",
+    sal: "--sal",
+    sar: "--sar",
+  },
+  utilityClasses: {
+    minHScreenDvh: "min-h-screen-dvh",
+    hScreenDvh: "h-screen-dvh",
+    maxHScreenDvh: "max-h-screen-dvh",
+    pbSafe: "pb-safe",
+    ptSafe: "pt-safe",
+    mbSafe: "mb-safe",
+    mtSafe: "mt-safe",
+    iosViewportFix: "ios-safari-viewport-fix",
+    safeAreaContainer: "safe-area-inset-container",
+  },
+  safariFixConfig: {
+    resizeListenerThrottleMs: 100,
+    detectIosSafari: true,
+    autoApplyCssVars: true,
+  },
+  personaAccents: {
+    student: {
+      accentColor: "#10B981",
+      glowColor: "rgba(16, 185, 129, 0.4)",
+      badgeBg: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30",
+    },
+    host: {
+      accentColor: "#F59E0B",
+      glowColor: "rgba(245, 158, 11, 0.45)",
+      badgeBg: "bg-amber-500/15 text-amber-300 border-amber-500/30",
+    },
+  },
+} as const;
+
+export function getIosSafariViewportTokens(role: "student" | "host" = "student") {
+  const isHost = role === "host";
+  const persona = isHost
+    ? IOS_SAFARI_VIEWPORT_TOKENS.personaAccents.host
+    : IOS_SAFARI_VIEWPORT_TOKENS.personaAccents.student;
+  return {
+    ...IOS_SAFARI_VIEWPORT_TOKENS,
+    persona,
+  };
+}
+
+
 
 
 

@@ -79,6 +79,8 @@ export * from './HostSafetyKycConsole';
 export * from './ToastNotification';
 export * from './MobileNavDrawer';
 export * from './StickyMobileBottomBar';
+export * from './IosSafariViewport';
+
 
 
 

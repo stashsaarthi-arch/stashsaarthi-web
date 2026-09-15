@@ -283,7 +283,13 @@ export {
   StickyMobileBottomBar,
   type StickyMobileBottomBarProps,
 } from "./StickyMobileBottomBar";
+export {
+  IosViewportContainer,
+  type IosViewportContainerProps,
+} from "./IosSafariViewport";
+export { useIosSafariViewport } from "@/lib/useIosSafariViewport";
 export { useScrollLock, getScrollbarWidth } from "@/lib/useScrollLock";
+
 
 
 

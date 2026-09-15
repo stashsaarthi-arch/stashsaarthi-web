@@ -5296,6 +5296,75 @@ html[lang="hi"][data-persona="host"] h4.font-devanagari,
   animation: sticky-bar-pulse-ring 2s infinite;
 }
 
+/* ==========================================================================
+   iOS Safari 100dvh & Bottom Safe Area Inset Utility Engine (Task 183)
+   ========================================================================== */
+
+/* Dynamic viewport height utilities with legacy fallback */
+.h-screen-dvh {
+  height: 100vh;
+  height: 100dvh;
+}
+
+.min-h-screen-dvh {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  min-height: 100dvh;
+}
+
+.max-h-screen-dvh {
+  max-height: 100vh;
+  max-height: 100dvh;
+}
+
+/* iOS Safari dynamic address bar jitter prevention fix */
+.ios-safari-viewport-fix {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  min-height: 100dvh;
+  box-sizing: border-box;
+}
+
+/* Safe Area Insets padding & margin utilities */
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.pl-safe {
+  padding-left: env(safe-area-inset-left, 0px);
+}
+
+.pr-safe {
+  padding-right: env(safe-area-inset-right, 0px);
+}
+
+.mt-safe {
+  margin-top: env(safe-area-inset-top, 0px);
+}
+
+.mb-safe {
+  margin-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Safe area inset wrapper container */
+.safe-area-inset-container {
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+}
+
+/* Modal and Drawer max-height 100dvh containers */
+.modal-dvh-container {
+  max-height: calc(100dvh - 2rem);
+  max-height: calc(100vh - 2rem);
+}
+
+
 
 
 

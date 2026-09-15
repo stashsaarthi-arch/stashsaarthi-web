@@ -3,6 +3,33 @@ ralph-done-atufh
 
 # Ralph Autonomous Workforce Sprint Progress
 
+- [x] **[UI - iOS Safari 100dvh & Bottom Safe Area / adapt] Task 183: Fix iOS Safari viewport height issues using dynamic viewport units (`100dvh`) and `env(safe-area-inset-bottom)` — 2026-09-15**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
+  - **Verification Suite**: `node execution/test_task183_ios_safari_viewport.mjs` — ✅ PASSED (18/18 Task 183 verification checks passed 100%).
+  - **iOS Safari 100dvh & Bottom Safe Area Inset Engine Architecture**:
+    - `src/lib/designTokens.ts`: Defined `IOS_SAFARI_VIEWPORT_TOKENS` (`viewportUnits` for `100dvh`, `100svh`, `100lvh`, `100vh`, `-webkit-fill-available`, `safeAreaInsets` for `env(safe-area-inset-bottom)` / `top` / `left` / `right`, `cssCustomVariables` for `--vh`, `--dvh`, `--sat`, `--sab`, `--sal`, `--sar`, `utilityClasses`, `safariFixConfig`, `personaAccents` for Student vs Host) and exported `getIosSafariViewportTokens` helper function.
+    - `src/styles.css`: Added CSS utilities (`.h-screen-dvh`, `.min-h-screen-dvh`, `.max-h-screen-dvh`, `.ios-safari-viewport-fix`, `.pt-safe`, `.pb-safe`, `.pl-safe`, `.pr-safe`, `.mt-safe`, `.mb-safe`, `.safe-area-inset-container`, `.modal-dvh-container`) providing fallback `-webkit-fill-available` viewport sizing, safe area padding/margin insets, and modal container dynamic heights.
+    - `src/lib/useIosSafariViewport.ts`: Created custom hook `useIosSafariViewport()` to detect iOS Safari browser environment, inject `--vh` and `--dvh` CSS variables dynamically into `document.documentElement`, and handle window resize and orientationchange events with 100ms throttling.
+    - `src/components/ui/IosSafariViewport.tsx`: Created reusable primitive layout component `IosViewportContainer` applying `.ios-safari-viewport-fix` and `.safe-area-inset-container` with dual-persona theme awareness (`usePersona()`).
+    - `src/components/ui/primitives.ts`: Re-exported `IosViewportContainer`, `IosViewportContainerProps`, and `useIosSafariViewport`.
+    - `src/components/ui/index.ts`: Re-exported `IosSafariViewport`.
+    - `src/routes/__root.tsx`: Integrated `useIosSafariViewport()` directly into `RootComponent` for site-wide iOS Safari 100dvh jitter prevention and safe area inset management.
+    - `execution/test_task183_ios_safari_viewport.mjs`: Created test harness asserting design tokens, CSS utility rules, custom hook implementation, primitive component, re-exports, root layout integration, and clean production build compilation.
+  - **Modified Files**:
+    - `src/lib/designTokens.ts` — Added `IOS_SAFARI_VIEWPORT_TOKENS` & `getIosSafariViewportTokens`.
+    - `src/styles.css` — Added iOS Safari 100dvh & safe area inset CSS utility rules.
+    - `src/lib/useIosSafariViewport.ts` — Created useIosSafariViewport custom hook.
+    - `src/components/ui/IosSafariViewport.tsx` — Created IosViewportContainer primitive component.
+    - `src/components/ui/primitives.ts` — Re-exported IosViewportContainer & useIosSafariViewport primitives.
+    - `src/components/ui/index.ts` — Re-exported IosSafariViewport primitive.
+    - `src/routes/__root.tsx` — Integrated useIosSafariViewport hook in RootComponent.
+    - `execution/test_task183_ios_safari_viewport.mjs` — Created verification test script.
+    - `docs/tasks/PRD.md` — Marked Task 183 as completed (`- [x]`).
+    - `docs/tasks/progress.md` — Appended Task 183 execution log.
+    - `progress.md` — Appended Task 183 execution log.
+
+
+
 - [x] **[UI - Sticky Mobile Bottom Action Bar / adapt] Task 182: Implement a thumb-friendly sticky bottom CTA bar on mobile screens with instant "Book Storage @ ₹300" action — 2026-09-15**:
   - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
   - **Verification Suite**: `node execution/test_task182_sticky_mobile_bottom_bar.mjs` — ✅ PASSED (16/16 Task 182 verification checks passed 100%).

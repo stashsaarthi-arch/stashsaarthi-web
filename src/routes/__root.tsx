@@ -498,11 +498,14 @@ import { initVisitorTracking, trackPageView } from "@/lib/visitorTracking";
 import { initAutoDataRetentionPurge } from "@/lib/dataRetentionEngine";
 import { initOfflineQueueAutoSync } from "@/lib/offlineBookingQueue";
 import { initFontOptimization } from "@/lib/fontOptimization";
+import { useIosSafariViewport } from "@/lib/useIosSafariViewport";
 
 function RootComponent() {
+  useIosSafariViewport();
   const { queryClient } = Route.useRouteContext();
   const routerState = useRouterState();
   const currentRoute = routerState.location.pathname;
+
 
   // Detect mobile viewport to disable Lenis smooth scroll (native touch is faster on budget phones)
   const [isMobile, setIsMobile] = useState(
