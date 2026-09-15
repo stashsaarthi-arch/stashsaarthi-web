@@ -12,6 +12,10 @@ import { QuickCategoryNav } from "@/components/stash/QuickCategoryNav";
 import { RoleLane } from "@/components/stash/RoleLane";
 import { CalculatorHub } from "@/components/stash/CalculatorHub";
 import { SolutionsHub } from "@/components/stash/SolutionsHub";
+import { Ecosystem } from "@/components/stash/Ecosystem";
+import { Rooms } from "@/components/stash/Rooms";
+import { TokenMealHub } from "@/components/TokenMealHub";
+import { Connect } from "@/components/stash/Connect";
 
 // ─── Small utilities (eagerly loaded — negligible size) ──────────────────────
 import { ScrollProgress } from "@/components/stash/ScrollProgress";
@@ -96,6 +100,30 @@ function Index() {
   const handleEarlyAccess = useCallback(() => setEarlyAccess(true), []);
   const handleRefer = useCallback(() => setReferralOpen(true), []);
 
+  // Step 1: Mobile-optimized tab state bound to bottom floating dock
+  const [activeMobileTab, setActiveMobileTab] = useState<"stash" | "rooms" | "kitchen" | "connect">(
+    role === "host" ? "connect" : "stash"
+  );
+
+  useEffect(() => {
+    if (role === "host") {
+      setActiveMobileTab("connect");
+    } else {
+      setActiveMobileTab("stash");
+    }
+  }, [role]);
+
+  useEffect(() => {
+    const handleTabChange = (e: Event) => {
+      const detail = (e as CustomEvent).detail;
+      if (["stash", "rooms", "kitchen", "connect"].includes(detail)) {
+        setActiveMobileTab(detail as "stash" | "rooms" | "kitchen" | "connect");
+      }
+    };
+    window.addEventListener("stashsaarthi-solution-tab", handleTabChange);
+    return () => window.removeEventListener("stashsaarthi-solution-tab", handleTabChange);
+  }, []);
+
   useEffect(() => {
     const handleOpenBooking = (e: Event) => {
       const customEv = e as CustomEvent<{ service?: string; promoCode?: string; note?: string }>;
@@ -117,7 +145,7 @@ function Index() {
   }, [open]);
 
   return (
-    <main id="main-content" tabIndex={-1} className="relative min-h-screen overflow-x-hidden bg-background text-foreground transition-colors duration-500 focus:outline-none">
+    <main id="main-content" tabIndex={-1} className="relative min-h-screen overflow-x-hidden bg-background text-foreground transition-colors duration-500 focus:outline-none pb-36 md:pb-40">
       <a href="#main-content" className="skip-to-content">
         Skip to main content
       </a>
@@ -145,137 +173,153 @@ function Index() {
         <QuickCategoryNav />
       </ErrorBoundary>
 
-      <ErrorBoundary sectionName="Role Switcher">
-        <RoleLane role={role} onBook={open} />
-      </ErrorBoundary>
+      {/* Role Switcher & Calculator Hub: Rendered on Desktop (>= md) to eliminate endless scroll on mobile */}
+      <div className="hidden md:block">
+        <ErrorBoundary sectionName="Role Switcher">
+          <RoleLane role={role} onBook={open} />
+        </ErrorBoundary>
 
-      {/* High-Converting Savings Calculator Module placed high up for optimal scroll-depth conversion */}
-      <ErrorBoundary sectionName="Calculator Hub">
-        <ScrollReveal direction="up" translateY={24}>
-          <CalculatorHub onBook={open} />
-        </ScrollReveal>
-      </ErrorBoundary>
-
-      {/* Core Solutions Hub (Stash / Rooms / Kitchen / Connect) */}
-      <ErrorBoundary sectionName="Solutions Hub">
-        <SolutionsHub onBook={open} onListRoom={handleListRoom} />
-      </ErrorBoundary>
-
-      {/* Why StashSaarthi vs. Traditional PGs Comparison Table */}
-      <ErrorBoundary sectionName="Why StashSaarthi vs Traditional PGs">
-        <Suspense fallback={null}>
+        {/* High-Converting Savings Calculator Module placed high up for optimal scroll-depth conversion */}
+        <ErrorBoundary sectionName="Calculator Hub">
           <ScrollReveal direction="up" translateY={24}>
-            <PgComparisonTable onBook={open} />
+            <CalculatorHub onBook={open} />
           </ScrollReveal>
-        </Suspense>
-      </ErrorBoundary>
+        </ErrorBoundary>
+      </div>
 
-      <ErrorBoundary sectionName="Dual Crisis Overview">
-        <Suspense fallback={null}>
-          <ScrollReveal direction="up" translateY={24}>
-            <DualCrisis />
-          </ScrollReveal>
-        </Suspense>
-      </ErrorBoundary>
+      {/* Step 1: Mobile-Only Active Service Tab View (Kills Endless Scroll Fatigue) */}
+      <section id="solutions" className="block md:hidden pb-4">
+        <ErrorBoundary sectionName="Mobile Active Service">
+          {activeMobileTab === "stash" && <Ecosystem onBook={open} />}
+          {activeMobileTab === "rooms" && <Rooms onList={handleListRoom} onBook={open} />}
+          {activeMobileTab === "kitchen" && <TokenMealHub />}
+          {activeMobileTab === "connect" && <Connect onBook={open} />}
+        </ErrorBoundary>
+      </section>
 
-      {/* Interactive Timeline of a Stash (Pickup -> Custody -> Return) */}
-      <ErrorBoundary sectionName="Timeline of a Stash">
-        <Suspense fallback={null}>
-          <ScrollReveal direction="up" translateY={24}>
-            <StashTimeline onBook={open} />
-          </ScrollReveal>
-        </Suspense>
-      </ErrorBoundary>
+      {/* Desktop-Only View (>= md): Keep rendering SolutionsHub and all deep sections exactly as they were */}
+      <div className="hidden md:block">
+        {/* Core Solutions Hub (Stash / Rooms / Kitchen / Connect) */}
+        <ErrorBoundary sectionName="Solutions Hub">
+          <SolutionsHub onBook={open} onListRoom={handleListRoom} />
+        </ErrorBoundary>
 
-      {/* 3. 100% Radical Transparency & Custody Console Hub */}
-      <ErrorBoundary sectionName="Trust & Custody Console">
-        <Suspense fallback={null}>
-          <ScrollReveal direction="up" translateY={24}>
-            <TrustConsoleHub />
-          </ScrollReveal>
-        </Suspense>
-      </ErrorBoundary>
+        {/* Why StashSaarthi vs. Traditional PGs Comparison Table */}
+        <ErrorBoundary sectionName="Why StashSaarthi vs Traditional PGs">
+          <Suspense fallback={null}>
+            <ScrollReveal direction="up" translateY={24}>
+              <PgComparisonTable onBook={open} />
+            </ScrollReveal>
+          </Suspense>
+        </ErrorBoundary>
 
-      {/* Dedicated Student & Host Success Stories Carousel */}
-      <ErrorBoundary sectionName="Student Success Stories">
-        <Suspense fallback={null}>
-          <ScrollReveal direction="up" translateY={24}>
-            <StudentStoriesCarousel onBook={open} />
-          </ScrollReveal>
-        </Suspense>
-      </ErrorBoundary>
+        <ErrorBoundary sectionName="Dual Crisis Overview">
+          <Suspense fallback={null}>
+            <ScrollReveal direction="up" translateY={24}>
+              <DualCrisis />
+            </ScrollReveal>
+          </Suspense>
+        </ErrorBoundary>
 
-      {/* Interactive Referral Leaderboard */}
-      <ErrorBoundary sectionName="Referral Leaderboard">
-        <Suspense fallback={null}>
-          <ScrollReveal direction="up" translateY={24}>
-            <ReferralLeaderboard onRefer={handleRefer} />
-          </ScrollReveal>
-        </Suspense>
-      </ErrorBoundary>
+        {/* Interactive Timeline of a Stash (Pickup -> Custody -> Return) */}
+        <ErrorBoundary sectionName="Timeline of a Stash">
+          <Suspense fallback={null}>
+            <ScrollReveal direction="up" translateY={24}>
+              <StashTimeline onBook={open} />
+            </ScrollReveal>
+          </Suspense>
+        </ErrorBoundary>
 
-      {/* Top 3 Rated Kitchens of the Week Widget */}
-      <ErrorBoundary sectionName="Top Rated Kitchens">
-        <Suspense fallback={null}>
-          <ScrollReveal direction="up" translateY={24}>
-            <TopRatedKitchensWidget
-              onOrderMeal={(kId) =>
-                open({
-                  service: "kitchen",
-                  note: `Selected Top Rated Kitchen of the Week: ${kId}`,
-                })
-              }
-            />
-          </ScrollReveal>
-        </Suspense>
-      </ErrorBoundary>
+        {/* 3. 100% Radical Transparency & Custody Console Hub */}
+        <ErrorBoundary sectionName="Trust & Custody Console">
+          <Suspense fallback={null}>
+            <ScrollReveal direction="up" translateY={24}>
+              <TrustConsoleHub />
+            </ScrollReveal>
+          </Suspense>
+        </ErrorBoundary>
 
-      {/* Official Kanpur Student Council Section */}
-      <ErrorBoundary sectionName="Kanpur Student Council">
-        <Suspense fallback={null}>
-          <ScrollReveal direction="up" translateY={24}>
-            <KanpurStudentCouncil />
-          </ScrollReveal>
-        </Suspense>
-      </ErrorBoundary>
+        {/* Dedicated Student & Host Success Stories Carousel */}
+        <ErrorBoundary sectionName="Student Success Stories">
+          <Suspense fallback={null}>
+            <ScrollReveal direction="up" translateY={24}>
+              <StudentStoriesCarousel onBook={open} />
+            </ScrollReveal>
+          </Suspense>
+        </ErrorBoundary>
 
-      {/* Host Specific Dashboard Norms */}
-      {role === "host" && (
-        <>
-          <ErrorBoundary sectionName="Host House Rules">
-            <Suspense fallback={null}>
-              <ScrollReveal direction="up" translateY={24}>
-                <HostRules />
-              </ScrollReveal>
-            </Suspense>
-          </ErrorBoundary>
-          <ErrorBoundary sectionName="Family Dashboard">
-            <Suspense fallback={null}>
-              <ScrollReveal direction="up" translateY={24}>
-                <FamilyDashboard />
-              </ScrollReveal>
-            </Suspense>
-          </ErrorBoundary>
-        </>
-      )}
+        {/* Interactive Referral Leaderboard */}
+        <ErrorBoundary sectionName="Referral Leaderboard">
+          <Suspense fallback={null}>
+            <ScrollReveal direction="up" translateY={24}>
+              <ReferralLeaderboard onRefer={handleRefer} />
+            </ScrollReveal>
+          </Suspense>
+        </ErrorBoundary>
 
-      {/* 4. Community Reviews & Improvement Suggestions Hub */}
-      <ErrorBoundary sectionName="Community Feedback & Suggestions">
-        <Suspense fallback={null}>
-          <ScrollReveal direction="up" translateY={24}>
-            <FeedbackSuggestions />
-          </ScrollReveal>
-        </Suspense>
-      </ErrorBoundary>
+        {/* Top 3 Rated Kitchens of the Week Widget */}
+        <ErrorBoundary sectionName="Top Rated Kitchens">
+          <Suspense fallback={null}>
+            <ScrollReveal direction="up" translateY={24}>
+              <TopRatedKitchensWidget
+                onOrderMeal={(kId) =>
+                  open({
+                    service: "kitchen",
+                    note: `Selected Top Rated Kitchen of the Week: ${kId}`,
+                  })
+                }
+              />
+            </ScrollReveal>
+          </Suspense>
+        </ErrorBoundary>
 
-      {/* 5. FAQ */}
-      <ErrorBoundary sectionName="FAQ Section">
-        <Suspense fallback={null}>
-          <ScrollReveal direction="up" translateY={24}>
-            <FAQ />
-          </ScrollReveal>
-        </Suspense>
-      </ErrorBoundary>
+        {/* Official Kanpur Student Council Section */}
+        <ErrorBoundary sectionName="Kanpur Student Council">
+          <Suspense fallback={null}>
+            <ScrollReveal direction="up" translateY={24}>
+              <KanpurStudentCouncil />
+            </ScrollReveal>
+          </Suspense>
+        </ErrorBoundary>
+
+        {/* Host Specific Dashboard Norms */}
+        {role === "host" && (
+          <>
+            <ErrorBoundary sectionName="Host House Rules">
+              <Suspense fallback={null}>
+                <ScrollReveal direction="up" translateY={24}>
+                  <HostRules />
+                </ScrollReveal>
+              </Suspense>
+            </ErrorBoundary>
+            <ErrorBoundary sectionName="Family Dashboard">
+              <Suspense fallback={null}>
+                <ScrollReveal direction="up" translateY={24}>
+                  <FamilyDashboard />
+                </ScrollReveal>
+              </Suspense>
+            </ErrorBoundary>
+          </>
+        )}
+
+        {/* 4. Community Reviews & Improvement Suggestions Hub */}
+        <ErrorBoundary sectionName="Community Feedback & Suggestions">
+          <Suspense fallback={null}>
+            <ScrollReveal direction="up" translateY={24}>
+              <FeedbackSuggestions />
+            </ScrollReveal>
+          </Suspense>
+        </ErrorBoundary>
+
+        {/* 5. FAQ */}
+        <ErrorBoundary sectionName="FAQ Section">
+          <Suspense fallback={null}>
+            <ScrollReveal direction="up" translateY={24}>
+              <FAQ />
+            </ScrollReveal>
+          </Suspense>
+        </ErrorBoundary>
+      </div>
 
 
       {/* Footer */}

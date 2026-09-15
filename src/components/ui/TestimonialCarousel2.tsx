@@ -198,15 +198,27 @@ export const TestimonialCarousel2 = memo(function TestimonialCarousel2({
 
 
 
-  const nextSlide = useCallback(() => {
-    playClick();
+  const nextSlide = useCallback((withSound = false) => {
+    if (withSound) {
+      try {
+        playClick();
+      } catch {
+        // Audio safety
+      }
+    }
     setIsPlayingAudio(false);
     setAudioPlaybackTime(0);
     setCurrentIndex((prev) => (prev + 1) % filteredStories.length);
   }, [filteredStories.length]);
 
-  const prevSlide = useCallback(() => {
-    playClick();
+  const prevSlide = useCallback((withSound = false) => {
+    if (withSound) {
+      try {
+        playClick();
+      } catch {
+        // Audio safety
+      }
+    }
     setIsPlayingAudio(false);
     setAudioPlaybackTime(0);
     setCurrentIndex((prev) => (prev - 1 + filteredStories.length) % filteredStories.length);
@@ -231,11 +243,11 @@ export const TestimonialCarousel2 = memo(function TestimonialCarousel2({
     };
   }, [isPlayingAudio]);
 
-  // Auto slide every 6 seconds unless paused or playing audio
+  // Auto slide every 6 seconds unless paused or playing audio (silent auto-transition)
   useEffect(() => {
     if (isPaused || isPlayingAudio || filteredStories.length <= 1) return;
     const timer = setInterval(() => {
-      nextSlide();
+      nextSlide(false);
     }, 6000);
     return () => clearInterval(timer);
   }, [nextSlide, isPaused, isPlayingAudio, filteredStories.length]);
@@ -571,7 +583,7 @@ export const TestimonialCarousel2 = memo(function TestimonialCarousel2({
               <Button
                 variant="ghost"
                 size="icon"
-                onClick={prevSlide}
+                onClick={() => prevSlide(true)}
                 className="h-9 w-9 rounded-full border border-white/15 bg-slate-900/80 hover:bg-white/10 text-white shadow-md"
                 aria-label="Previous review"
               >
@@ -583,7 +595,7 @@ export const TestimonialCarousel2 = memo(function TestimonialCarousel2({
               <Button
                 variant="ghost"
                 size="icon"
-                onClick={nextSlide}
+                onClick={() => nextSlide(true)}
                 className="h-9 w-9 rounded-full border border-white/15 bg-slate-900/80 hover:bg-white/10 text-white shadow-md"
                 aria-label="Next review"
               >

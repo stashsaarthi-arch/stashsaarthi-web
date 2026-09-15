@@ -129,7 +129,7 @@ export const RagChatbotWidget = memo(function RagChatbotWidget() {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className={`fixed bottom-[130px] right-4 sm:bottom-20 z-40 flex items-center gap-2 rounded-full px-3.5 py-2.5 shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer ${
+          className={`fixed bottom-20 right-3.5 sm:bottom-20 sm:right-4 z-40 flex items-center gap-2 rounded-full p-2.5 sm:px-3.5 sm:py-2.5 shadow-xl transition-all duration-300 scale-90 sm:scale-100 hover:scale-105 active:scale-95 cursor-pointer ${
             isStudent
               ? "bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 text-slate-950 shadow-emerald-500/20"
               : "bg-gradient-to-r from-amber-500 via-amber-600 to-yellow-500 text-slate-950 shadow-amber-500/20"
@@ -146,7 +146,7 @@ export const RagChatbotWidget = memo(function RagChatbotWidget() {
           <span className="text-xs font-bold font-mono tracking-tight hidden sm:inline">
             {isHi ? "सार्थी AI RAG सहायक" : "Saarthi AI RAG Bot"}
           </span>
-          <Badge variant="secondary" className="bg-black/30 text-white text-[9px] px-1.5 py-0 font-mono">
+          <Badge variant="secondary" className="bg-black/30 text-white text-[9px] px-1.5 py-0 font-mono hidden sm:inline-flex">
             RAG v2.0
           </Badge>
         </button>

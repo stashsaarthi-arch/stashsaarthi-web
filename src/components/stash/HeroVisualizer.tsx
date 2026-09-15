@@ -1,5 +1,6 @@
-import { useState, useEffect, memo } from "react";
+import { useState, useEffect, useRef, memo } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { useIsIntersecting } from "@/hooks/useIntersectionObserver";
 import {
   Boxes,
   Home,
@@ -87,18 +88,21 @@ export const HeroVisualizer = memo(function HeroVisualizer({
   role = "student",
   onExploreVault
 }: HeroVisualizerProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isIntersecting = useIsIntersecting(containerRef, { threshold: 0.05 });
   const [activeStage, setActiveStage] = useState<number>(0);
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [activeItem, setActiveItem] = useState<string>("suitcase");
   const isStudent = role === "student";
 
   useEffect(() => {
-    if (!isPlaying) return;
+    // Immediately pause simulation loop if off-screen or paused
+    if (!isPlaying || !isIntersecting) return;
     const interval = setInterval(() => {
       setActiveStage((prev) => (prev + 1) % STAGES.length);
     }, 3800);
     return () => clearInterval(interval);
-  }, [isPlaying]);
+  }, [isPlaying, isIntersecting]);
 
   const handleStageSelect = (index: number) => {
     playPop();
@@ -116,6 +120,7 @@ export const HeroVisualizer = memo(function HeroVisualizer({
 
   return (
     <div
+      ref={containerRef}
       data-testid="hero-visualizer"
       className="relative my-6 overflow-hidden rounded-2xl border border-white/10 bg-slate-950/80 p-4 sm:p-6 backdrop-blur-2xl shadow-floating text-left"
     >

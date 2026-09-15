@@ -395,16 +395,19 @@ function CustodyTimeline() {
   const isHi = language === "hi";
   const [activeStep, setActiveStep] = useState(0);
   const [showCert, setShowCert] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(containerRef, { amount: 0.05 });
 
   useEffect(() => {
+    if (!isInView) return;
     const interval = setInterval(() => {
       setActiveStep((prev) => (prev + 1) % CUSTODY_STEPS.length);
     }, 3200);
     return () => clearInterval(interval);
-  }, []);
+  }, [isInView]);
 
   return (
-    <div className="mt-14 sm:mt-20">
+    <div ref={containerRef} className="mt-14 sm:mt-20">
       <AnimatedContent distance={40} direction="vertical" duration={0.8}>
         <div className="rounded-3xl border border-white/10 bg-black/40 p-6 backdrop-blur-xl sm:p-8">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">

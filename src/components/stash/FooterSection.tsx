@@ -640,8 +640,8 @@ export const FooterSection = memo(function FooterSection() {
         </div>
       </div>
 
-      {/* Dynamic 4-Column Footer Navigation Matrix */}
-      <div className="mx-auto grid max-w-7xl gap-6 px-4 py-6 sm:py-8 md:grid-cols-4">
+      {/* Dynamic 4-Column Footer Navigation Matrix (Desktop >= md) */}
+      <div className="hidden md:grid mx-auto max-w-7xl gap-6 px-4 py-6 sm:py-8 md:grid-cols-4">
         {/* Column 1: Brand & Socials & Persona Action Pills */}
         <div>
           <div className="flex items-center gap-2 mb-3">

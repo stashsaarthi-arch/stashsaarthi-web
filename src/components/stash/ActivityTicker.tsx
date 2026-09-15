@@ -187,7 +187,7 @@ export const ActivityTicker = memo(function ActivityTicker({ onBook, onListRoom 
   const displayActivities = relevantActivities.length > 0 ? relevantActivities : ACTIVITIES;
 
   useEffect(() => {
-    if (dismissed || paused) return;
+    if (dismissed || paused || (typeof window !== "undefined" && window.innerWidth < 768)) return;
 
     const interval = setInterval(() => {
       setVisible(false);
@@ -253,7 +253,10 @@ export const ActivityTicker = memo(function ActivityTicker({ onBook, onListRoom 
   }[current.accent];
 
   return (
-    <div className="fixed bottom-[72px] left-3 right-3 z-40 md:bottom-5 md:left-5 md:right-auto md:max-w-[380px] pointer-events-auto">
+    <div
+      data-widget="live-activity-ticker"
+      className="hidden md:flex fixed md:bottom-5 md:left-5 md:right-auto md:max-w-[380px] z-40 pointer-events-auto"
+    >
       <AnimatePresence mode="wait">
         {visible && (
           <motion.div

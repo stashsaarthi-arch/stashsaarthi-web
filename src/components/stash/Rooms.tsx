@@ -294,36 +294,37 @@ export function Rooms({ onList, onBook }: { onList: () => void; onBook?: OpenBoo
       </div>
 
       <div className="relative">
-        <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="flex flex-row overflow-x-auto snap-x snap-mandatory no-scrollbar gap-4 pb-4 md:grid md:gap-3.5 sm:grid-cols-2 lg:grid-cols-3 md:overflow-visible">
           {loading ? (
             <>
-              <RoomCardSkeleton />
-              <RoomCardSkeleton />
-              <RoomCardSkeleton />
+              <div className="snap-center min-w-[85vw] md:min-w-0"><RoomCardSkeleton /></div>
+              <div className="snap-center min-w-[85vw] md:min-w-0"><RoomCardSkeleton /></div>
+              <div className="snap-center min-w-[85vw] md:min-w-0"><RoomCardSkeleton /></div>
             </>
           ) : (
             filteredListings.map((l, i) => (
-              <AnimatedContent
-                key={l.id}
-                distance={30}
-                direction="vertical"
-                duration={0.5}
-                delay={i * 0.05}
-              >
-                <SaarthiSpacesCard2
-                  listing={{
-                    ...l,
-                    images: [
-                      l.image || FALLBACK_IMAGES[i % 3] || "",
-                      FALLBACK_IMAGES[(i + 1) % 3] || "",
-                      FALLBACK_IMAGES[(i + 2) % 3] || "",
-                    ],
-                  }}
-                  onBook={() => onBook?.({ service: "spaces" })}
-                  onOpen360={(item) => handleOpen360(item as any)}
-                  onOpenAudit={() => setAuditOpen(true)}
-                />
-              </AnimatedContent>
+              <div key={l.id} className="snap-center min-w-[85vw] md:min-w-0">
+                <AnimatedContent
+                  distance={30}
+                  direction="vertical"
+                  duration={0.5}
+                  delay={i * 0.05}
+                >
+                  <SaarthiSpacesCard2
+                    listing={{
+                      ...l,
+                      images: [
+                        l.image || FALLBACK_IMAGES[i % 3] || "",
+                        FALLBACK_IMAGES[(i + 1) % 3] || "",
+                        FALLBACK_IMAGES[(i + 2) % 3] || "",
+                      ],
+                    }}
+                    onBook={() => onBook?.({ service: "spaces" })}
+                    onOpen360={(item) => handleOpen360(item as any)}
+                    onOpenAudit={() => setAuditOpen(true)}
+                  />
+                </AnimatedContent>
+              </div>
             )))}
         </div>
       </div>

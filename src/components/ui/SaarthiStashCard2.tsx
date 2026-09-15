@@ -252,7 +252,7 @@ export function SaarthiStashCard2({
         {/* Tamper-Proof Laser Seal Scanner Indicator */}
         <div
           data-testid="tamper-proof-seal-indicator"
-          className="relative rounded-xl overflow-hidden mt-3"
+          className="relative rounded-xl h-full max-h-[360px] overflow-hidden mt-3"
         >
           <LaserSealBarcode
             serialCode={SAARTHI_STASH_CARD_TOKENS.tamperProofSeal.code}

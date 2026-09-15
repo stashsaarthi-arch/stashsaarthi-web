@@ -1,5 +1,6 @@
-import { useState, useEffect, memo } from "react";
+import { useState, useEffect, useRef, memo } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { useIsIntersecting } from "@/hooks/useIntersectionObserver";
 import {
   Truck,
   ShieldCheck,
@@ -235,10 +236,13 @@ export const StashTimeline = memo(function StashTimeline({ onBook }: StashTimeli
     },
   ];
 
-  // Auto-play timer cycle
+  const sectionRef = useRef<HTMLElement>(null);
+  const isIntersecting = useIsIntersecting(sectionRef, { threshold: 0.05 });
+
+  // Auto-play timer cycle (pauses when off-screen to stop frame drops)
   useEffect(() => {
     let timer: NodeJS.Timeout | null = null;
-    if (isPlaying) {
+    if (isPlaying && isIntersecting) {
       timer = setInterval(() => {
         setActiveStep((prev) => (prev + 1) % TIMELINE_STEPS.length);
       }, 4000);
@@ -246,13 +250,13 @@ export const StashTimeline = memo(function StashTimeline({ onBook }: StashTimeli
     return () => {
       if (timer) clearInterval(timer);
     };
-  }, [isPlaying, TIMELINE_STEPS.length]);
+  }, [isPlaying, isIntersecting, TIMELINE_STEPS.length]);
 
   const currentStep = (TIMELINE_STEPS[activeStep] || TIMELINE_STEPS[0])!;
   const IconComponent = currentStep.icon;
 
   return (
-    <section id="timeline" className="section-isolated layout-isolated relative mx-auto max-w-6xl px-4 py-6 sm:py-10 scroll-mt-20">
+    <section ref={sectionRef} id="timeline" className="section-isolated layout-isolated relative mx-auto max-w-6xl px-4 py-6 sm:py-10 scroll-mt-20">
       {/* Header */}
       <AnimatedContent distance={30} direction="vertical" duration={0.6}>
         <div className="mx-auto max-w-3xl text-center">

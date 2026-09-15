@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { useIsIntersecting } from "@/hooks/useIntersectionObserver";
 import {
   ShieldCheck,
   Star,
@@ -82,15 +83,17 @@ export function SaarthiSpacesCard2({
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const cardRef = useRef<HTMLElement>(null);
+  const isIntersecting = useIsIntersecting(cardRef, { threshold: 0.05 });
 
-  // Auto-advance carousel when hovered off
+  // Auto-advance carousel when hovered off and visible on screen
   useEffect(() => {
-    if (isHovered || carouselImages.length <= 1) return;
+    if (isHovered || !isIntersecting || carouselImages.length <= 1) return;
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
     }, tokens.carousel.autoPlayIntervalMs);
     return () => clearInterval(interval);
-  }, [isHovered, carouselImages.length, tokens.carousel.autoPlayIntervalMs]);
+  }, [isHovered, isIntersecting, carouselImages.length, tokens.carousel.autoPlayIntervalMs]);
 
   const handleNextSlide = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -115,6 +118,7 @@ export function SaarthiSpacesCard2({
 
   return (
     <article
+      ref={cardRef}
       data-persona={role}
       className={`glass group relative flex flex-col rounded-3xl p-3.5 transition-all duration-300 hover:shadow-2xl ${
         isHost

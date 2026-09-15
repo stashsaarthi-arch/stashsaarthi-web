@@ -285,20 +285,34 @@ export const Hero = memo(function Hero({
           )}
         </AnimatedContent>
 
-        {/* Hero Micro-Stats Counter: Count-up animated statistics with IntersectionObserver */}
-        <HeroMicroStats role={role} className="mt-4" />
+        {/* Hero Micro-Stats Counter: Count-up animated statistics with IntersectionObserver (Desktop only) */}
+        <div className="hidden md:block">
+          <HeroMicroStats role={role} className="mt-4" />
+        </div>
 
 
-        {/* Interactive Value Switcher: Wasting ₹8,000 Dead Rent vs Saarthi Stash ₹300/mo */}
-        {student && <InteractiveValueSwitcher onBook={onBook} />}
+        {/* Interactive Value Switcher: Wasting ₹8,000 Dead Rent vs Saarthi Stash ₹300/mo (Desktop only) */}
+        {student && (
+          <div className="hidden md:block">
+            <InteractiveValueSwitcher onBook={onBook} />
+          </div>
+        )}
 
-        {/* Ambient Lightweight Visualizer: Seamless transition of items from hostel room to host vault */}
-        <HeroVisualizer role={role} onExploreVault={handleCtaClick} />
+        {/* Ambient Lightweight Visualizer: Seamless transition of items from hostel room to host vault (Desktop only) */}
+        <div className="hidden md:block">
+          <HeroVisualizer role={role} onExploreVault={handleCtaClick} />
+        </div>
 
-        {/* Institutional Trust Banner & Partner Strip */}
-        <TrustPartnerStrip role={role} />
+        {/* Institutional Trust Banner & Partner Strip (Desktop only) */}
+        <div className="hidden md:block">
+          <TrustPartnerStrip role={role} />
+        </div>
 
-        {student && <CampusNodeChecker onBook={onBook} />}
+        {student && (
+          <div className="hidden md:block">
+            <CampusNodeChecker onBook={onBook} />
+          </div>
+        )}
 
         {/* ── Scroll Indicator ── */}
         <motion.div

@@ -79,7 +79,7 @@ export function Ecosystem({ onBook }: { onBook: OpenBooking }) {
   return (
     <SectionWrapper id="ecosystem" rhythm="compact" containerSize="lg" className="scroll-mt-20">
 
-      <BentoGrid columns={4} autoFlow="dense">
+      <BentoGrid columns={3} className="flex flex-row overflow-x-auto snap-x snap-mandatory no-scrollbar gap-4 pb-4 md:grid md:grid-cols-3 items-stretch md:overflow-visible" autoFlow="dense">
         {NODES_BASE.map((n, i) => {
           const Icon = n.icon;
           const textData = t.ecosystem[n.id];
@@ -87,31 +87,31 @@ export function Ecosystem({ onBook }: { onBook: OpenBooking }) {
 
           if (n.id === "stash") {
             return (
+              <div key={n.id} className="snap-center min-w-[85vw] md:min-w-0 h-full">
+                <AnimatedContent
+                  distance={30}
+                  direction="vertical"
+                  duration={0.6}
+                  threshold={0.15}
+                  delay={Math.min(i * 0.05, 0.3)}
+                  className="col-span-1 h-full flex flex-col items-stretch"
+                >
+                  <SaarthiStashCard2 onBook={onBook} className="h-full flex flex-col justify-between" />
+                </AnimatedContent>
+              </div>
+            );
+          }
+
+          return (
+            <div key={n.id} className="snap-center min-w-[85vw] md:min-w-0 h-full">
               <AnimatedContent
-                key={n.id}
                 distance={30}
                 direction="vertical"
                 duration={0.6}
                 threshold={0.15}
                 delay={Math.min(i * 0.05, 0.3)}
-                className="bento-span-featured col-span-1 md:col-span-2 row-span-1 md:row-span-2"
+                className="col-span-1 h-full flex flex-col items-stretch"
               >
-                <SaarthiStashCard2 onBook={onBook} className="h-full" />
-              </AnimatedContent>
-            );
-          }
-
-          return (
-            <AnimatedContent
-              key={n.id}
-              distance={30}
-              direction="vertical"
-              duration={0.6}
-              threshold={0.15}
-              delay={Math.min(i * 0.05, 0.3)}
-              className={n.span === "featured" ? "bento-span-featured col-span-1 md:col-span-2 row-span-1 md:row-span-2" : ""}
-
-            >
               <BentoCard
                 span={n.span}
                 aspectRatio={n.aspectRatio}
@@ -180,8 +180,9 @@ export function Ecosystem({ onBook }: { onBook: OpenBooking }) {
                 </Button>
               </BentoCard>
             </AnimatedContent>
-          );
-        })}
+          </div>
+        );
+      })}
       </BentoGrid>
     </SectionWrapper>
   );

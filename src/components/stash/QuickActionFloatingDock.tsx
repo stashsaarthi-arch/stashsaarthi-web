@@ -72,7 +72,7 @@ export const QuickActionFloatingDock = memo(function QuickActionFloatingDock({
   onBook,
   onListRoom,
 }: QuickActionFloatingDockProps) {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(() => typeof window !== "undefined" && window.innerWidth < 768);
   const [activeTab, setActiveTab] = useState<TabKey>("stash");
   const { role } = usePersona();
   const { language } = useLanguage();
@@ -82,7 +82,7 @@ export const QuickActionFloatingDock = memo(function QuickActionFloatingDock({
   // Track scroll position to trigger floating dock visibility
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 220) {
+      if (window.innerWidth < 768 || window.scrollY > 220) {
         setIsVisible(true);
       } else {
         setIsVisible(false);
@@ -91,7 +91,11 @@ export const QuickActionFloatingDock = memo(function QuickActionFloatingDock({
 
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
   }, []);
 
   // Sync active tab with solution tab custom events
@@ -162,7 +166,7 @@ export const QuickActionFloatingDock = memo(function QuickActionFloatingDock({
           animate={{ y: 0, opacity: 1, scale: 1 }}
           exit={{ y: 90, opacity: 0, scale: 0.95 }}
           transition={{ type: "spring", stiffness: 420, damping: 32 }}
-          className="fixed bottom-3 left-3 right-3 sm:hidden z-[90] max-w-md mx-auto pointer-events-none"
+          className="fixed bottom-3 left-3 right-3 md:hidden z-[90] max-w-md mx-auto pointer-events-none"
         >
           <nav
             aria-label={isHi ? "त्वरित मोबाइल 1-टैप नेविगेशन डौक" : "Quick Action Mobile Navigation Dock"}

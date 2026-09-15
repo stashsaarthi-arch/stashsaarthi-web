@@ -5,28 +5,41 @@ import { WEB_AUDIO_SOUNDSCAPE_TOKENS } from "./designTokens";
 let audioCtx: AudioContext | null = null;
 let audioUnlockedByUser = false; // Gate: only play after genuine user gesture
 let audioMuted = false; // Global mute toggle
+let lastExplicitUserClickTime = 0; // Timestamp of last explicit user onClick gesture
 
-// Unlock audio on first genuine user gesture (click, touchstart, keydown)
+// Unlock audio on explicit user interaction (click, touch, keydown)
 if (typeof window !== "undefined") {
-  const unlockAudio = () => {
-    audioUnlockedByUser = true;
-    window.removeEventListener("click", unlockAudio);
-    window.removeEventListener("touchstart", unlockAudio);
-    window.removeEventListener("keydown", unlockAudio);
+  const registerUserClick = (e: MouseEvent | TouchEvent | KeyboardEvent) => {
+    // Only register genuine user gestures (e.isTrusted is false for programmatic events)
+    if (e.isTrusted !== false) {
+      audioUnlockedByUser = true;
+      lastExplicitUserClickTime = Date.now();
+    }
   };
-  window.addEventListener("click", unlockAudio, { once: false, passive: true });
-  window.addEventListener("touchstart", unlockAudio, { once: false, passive: true });
-  window.addEventListener("keydown", unlockAudio, { once: false, passive: true });
+  window.addEventListener("click", registerUserClick, { capture: true, passive: true });
+  window.addEventListener("touchend", registerUserClick, { capture: true, passive: true });
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      registerUserClick(e);
+    }
+  }, { capture: true, passive: true });
 }
 
 /** Toggle global audio mute */
 export const setAudioMuted = (muted: boolean) => { audioMuted = muted; };
 export const isAudioMuted = (): boolean => audioMuted;
 
+/** Checks if audio was triggered directly by a recent explicit user click/interaction (within 600ms) */
+export const isExplicitClickActive = (): boolean => {
+  if (typeof window === "undefined") return false;
+  // Sound is strictly restricted to recent explicit user clicks (blocks interval loops and load triggers)
+  return audioUnlockedByUser && (Date.now() - lastExplicitUserClickTime <= 600);
+};
+
 export const getAudioContext = (): AudioContext | null => {
   if (typeof window === "undefined") return null;
-  // Don't play if muted or page is hidden or user hasn't interacted yet
-  if (audioMuted || document.hidden || !audioUnlockedByUser) return null;
+  // FORCE MUTE on load / intervals: don't play if muted, page hidden, or no recent explicit user click
+  if (audioMuted || document.hidden || !isExplicitClickActive()) return null;
   if (!audioCtx) {
     const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
     if (!AudioContextClass) return null;

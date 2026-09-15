@@ -129,7 +129,7 @@ export const Floating3DLuggage = memo(function Floating3DLuggage() {
       ))}
 
       {/* Mobile / Tablet Compact Showcase Strip */}
-      <div className="xl:hidden mt-4 w-full overflow-x-auto no-scrollbar py-1">
+      <div className="hidden sm:flex xl:hidden mt-4 w-full overflow-x-auto no-scrollbar py-1">
         <div className="flex items-center justify-center gap-2 min-w-max px-2">
           {LUGGAGE_MOCKUPS.slice(0, 2).map((item) => (
             <div

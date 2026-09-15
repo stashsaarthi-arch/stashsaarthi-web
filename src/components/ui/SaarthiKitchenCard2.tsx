@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useIsIntersecting } from "@/hooks/useIntersectionObserver";
 import { Clock, ShieldCheck, Flame, Utensils, Award, ChevronRight, Check, Sparkles, HeartHandshake } from "lucide-react";
 import { playPop, playHeroCtaClick, playClick } from "@/lib/audio";
 import { getSaarthiKitchenCardTokens } from "@/lib/designTokens";
@@ -105,14 +106,18 @@ export const SaarthiKitchenCard2: React.FC<SaarthiKitchenCard2Props> = ({
   const chef = thali.chef || DEFAULT_CHEF;
   const dishes = thali.dishes || DEFAULT_DISHES;
 
-  // Countdown timer calculator
+  const cardRef = useRef<HTMLDivElement>(null);
+  const isIntersecting = useIsIntersecting(cardRef, { threshold: 0.05 });
+
+  // Real-time cutoff countdown timer (pauses when off-screen to stop mobile frame drops)
   useEffect(() => {
+    if (!isIntersecting) return;
     const updateCountdown = () => {
       const now = new Date();
       const target = new Date();
 
       if (activeSlot === "Lunch") {
-        target.setHours(7, 0, 0, 0);
+        target.setHours(10, 30, 0, 0);
         if (now.getTime() > target.getTime()) {
           target.setDate(target.getDate() + 1);
         }
@@ -133,16 +138,16 @@ export const SaarthiKitchenCard2: React.FC<SaarthiKitchenCard2Props> = ({
     updateCountdown();
     const timer = setInterval(updateCountdown, 1000);
     return () => clearInterval(timer);
-  }, [activeSlot]);
+  }, [activeSlot, isIntersecting]);
 
-  // Dish rotation timer (auto loop preview every 3.5s)
+  // Dish rotation timer (auto loop preview every 3.5s, pauses when off-screen)
   useEffect(() => {
-    if (dishes.length <= 1) return;
+    if (dishes.length <= 1 || !isIntersecting) return;
     const interval = setInterval(() => {
       setActiveDishIndex((prev) => (prev + 1) % dishes.length);
     }, 3500);
     return () => clearInterval(interval);
-  }, [dishes.length]);
+  }, [dishes.length, isIntersecting]);
 
   const effectiveCost = selectedFulfillment === "RoomDelivery" ? thali.costDelivery : thali.costPickup;
 
@@ -159,9 +164,10 @@ export const SaarthiKitchenCard2: React.FC<SaarthiKitchenCard2Props> = ({
 
   return (
     <motion.div
+      ref={cardRef}
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
       onClick={handleCardClick}
-      className={`group relative cursor-pointer rounded-2xl p-5 border transition-all duration-300 overflow-hidden ${
+      className={`group relative cursor-pointer rounded-2xl p-5 border transition-all duration-300 overflow-hidden flex flex-col justify-between h-full ${
         isSelected
           ? "bg-slate-900 border-emerald-500 shadow-[0_0_24px_-4px_rgba(16,185,129,0.35)]"
           : "bg-slate-950/85 border-white/15 hover:border-emerald-500/40 hover:bg-slate-900/90"
@@ -388,7 +394,7 @@ export const SaarthiKitchenCard2: React.FC<SaarthiKitchenCard2Props> = ({
       </div>
 
       {/* 5. Pricing Breakdown & 1-Click Order CTA */}
-      <div className="flex items-center justify-between gap-2 pt-2 border-t border-slate-800">
+      <div className="flex items-center justify-between gap-2 pt-2 border-t border-slate-800 mt-auto">
         <div className="text-[11px] text-slate-400 font-medium">
           <span className="block text-slate-300 font-bold">
             Pickup: {thali.costPickup} Tokens

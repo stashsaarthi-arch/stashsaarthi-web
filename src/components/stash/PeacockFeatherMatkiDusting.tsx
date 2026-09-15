@@ -53,13 +53,19 @@ export const PeacockFeatherMatkiDusting: React.FC<PeacockFeatherMatkiDustingProp
     setParticles(newParticles);
   }, []);
 
-  const triggerDusting = useCallback(() => {
+  const triggerDusting = useCallback((withSound = true) => {
     if (isDusting) return;
     setIsDusting(true);
     setShowSparkles(true);
     generateSparkles();
-    playPop();
-    playClick();
+    if (withSound) {
+      try {
+        playPop();
+        playClick();
+      } catch {
+        // Audio safety
+      }
+    }
 
     // Reset animation state after spring sweep completes
     const sweepTimer = setTimeout(() => {
@@ -80,7 +86,7 @@ export const PeacockFeatherMatkiDusting: React.FC<PeacockFeatherMatkiDustingProp
 
   useEffect(() => {
     if (isAutoTriggered) {
-      triggerDusting();
+      triggerDusting(false);
     }
   }, [isAutoTriggered, triggerDusting]);
 
@@ -89,7 +95,7 @@ export const PeacockFeatherMatkiDusting: React.FC<PeacockFeatherMatkiDustingProp
       <div
         onClick={(e) => {
           e.stopPropagation();
-          triggerDusting();
+          triggerDusting(true);
         }}
         className={`relative z-10 group cursor-pointer inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900/90 border border-emerald-500/30 hover:border-emerald-400 transition-all shadow-md ${className}`}
         title="Click to dust fresh white butter on thali (Mor-Pankh Micro-Interaction)"
@@ -258,7 +264,7 @@ export const PeacockFeatherMatkiDusting: React.FC<PeacockFeatherMatkiDustingProp
           type="button"
           onClick={(e) => {
             e.stopPropagation();
-            triggerDusting();
+            triggerDusting(true);
           }}
           disabled={isDusting}
           className={`relative z-10 flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs transition-all cursor-pointer shadow-md ${

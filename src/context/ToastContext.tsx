@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, useCallback, ReactNode } from "react";
 import { CheckCircle2, AlertTriangle, Info, ShieldAlert, Loader2, X } from "lucide-react";
+import { isAudioMuted, isExplicitClickActive } from "@/lib/audio";
 
 export type ToastType = "success" | "error" | "info" | "warning" | "loading";
 
@@ -41,6 +42,8 @@ const notifyListeners = () => {
 // Web Audio API Micro-Haptics Sound Synthesizer
 const playToastChime = (type: ToastType) => {
   if (typeof window === "undefined") return;
+  // Strictly gate audio: do NOT play on load or background interval loops, only on explicit user click
+  if (isAudioMuted() || !isExplicitClickActive()) return;
   try {
     const AudioContext = window.AudioContext || (window as unknown as { webkitAudioContext: typeof window.AudioContext }).webkitAudioContext;
     if (!AudioContext) return;

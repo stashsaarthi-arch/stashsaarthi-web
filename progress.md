@@ -1,6 +1,70 @@
 ralph-done-atufh
 ralph-done-f37qa
 
+- [x] **[Mobile Viewport Optimization (<=768px) / goal] Eliminate endless scroll fatigue, horizontal swipe for lists, HUD cleanup & pause off-screen simulators — 2026-09-15**:
+  - **Build**: `npm run build` — ✅ 0 errors (Nitro SSR and client bundle cleanly generated in 2.29s).
+  - **Key Solutions Implemented**:
+    - **Step 1 (Tab-Based Rendering / Kill Endless Scroll)**:
+      - `src/routes/index.tsx`: Added `activeMobileTab` state defaulting to `"stash"` (student) or `"connect"` (host), dynamically synchronized with global `"stashsaarthi-solution-tab"` events from the bottom navigation dock.
+      - On mobile (`< md`), conditionally renders ONLY the active service: `{activeMobileTab === 'stash' && <Ecosystem onBook={open} />}` (and spaces, kitchen, connect), with `pb-32` clearance.
+      - Deep below-the-fold vertical sections (`SolutionsHub`, `PgComparisonTable`, `DualCrisis`, `StashTimeline`, `TrustConsoleHub`, `StudentStoriesCarousel`, `ReferralLeaderboard`, `TopRatedKitchensWidget`, `KanpurStudentCouncil`, `HostRules`, `FamilyDashboard`, `FeedbackSuggestions`) wrapped in `hidden md:block` — eliminating over 8,000px of endless mobile scrolling while keeping desktop 100% intact.
+      - `src/components/stash/QuickActionFloatingDock.tsx`: Updated to `md:hidden` (<=768px) and ensured dock is immediately active and visible on mobile screens.
+    - **Step 2 (Horizontal Swipe for Lists)**:
+      - `src/components/TokenMealHub.tsx`: Converted vertical Thali tiers list to `flex flex-row overflow-x-auto snap-x snap-mandatory no-scrollbar gap-4 pb-4 md:grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 md:gap-5 md:overflow-visible` with `snap-center min-w-[85vw] md:min-w-0` on child cards.
+      - `src/components/stash/Rooms.tsx`: Converted vertical Room cards list to `flex flex-row overflow-x-auto snap-x snap-mandatory no-scrollbar gap-4 pb-4 md:grid md:gap-3.5 sm:grid-cols-2 lg:grid-cols-3 md:overflow-visible` with `snap-center min-w-[85vw] md:min-w-0` on child cards and skeletons.
+    - **Step 3 (HUD Cleanup & Toast Removal)**:
+      - `src/components/stash/ActivityTicker.tsx`: Replaced container with `hidden md:flex fixed md:bottom-5 md:left-5 md:right-auto md:max-w-[380px] z-40 pointer-events-auto` so the toast ("Sneha T. claimed...") completely disappears on mobile. Also bypassed the ticker rotation `setInterval` on mobile.
+      - `src/components/stash/RagChatbotWidget.tsx`: Scaled down the floating RAG bot trigger button on mobile with `scale-90 sm:scale-100 p-2.5 sm:px-3.5 sm:py-2.5 bottom-20 right-3.5 sm:bottom-20 sm:right-4` and hidden the text badge on small viewports.
+      - `src/routes/index.tsx`: Added `pb-32` to the mobile active service container so the fixed bottom dock never covers the last button.
+    - **Step 4 (Pause Off-Screen Simulators / Stop Frame Drops)**:
+      - `src/hooks/useIntersectionObserver.ts`: Created lightweight, type-safe `useIsIntersecting` hook.
+      - `src/components/stash/HeroVisualizer.tsx`: Attached `containerRef` and `useIsIntersecting`; pauses the 3.8s transit stage simulator loop when off-screen.
+      - `src/components/ui/SaarthiSpacesCard2.tsx`: Attached `cardRef` and `useIsIntersecting`; pauses the room image auto-advance carousel when off-screen.
+      - `src/components/ui/SaarthiKitchenCard2.tsx`: Attached `cardRef` and `useIsIntersecting`; pauses both the 1s countdown timer and 3.5s dish rotation interval when off-screen.
+      - `src/components/stash/StashTimeline.tsx`: Attached `sectionRef` and `useIsIntersecting`; pauses the 4s step rotation interval when off-screen.
+      - `src/components/stash/ZeroRisk.tsx`: Attached `containerRef` with `useInView`; pauses the 3.2s custody step interval when off-screen.
+  - **Modified Files**:
+    - `src/hooks/useIntersectionObserver.ts` (NEW)
+    - `src/routes/index.tsx`
+    - `src/components/stash/QuickActionFloatingDock.tsx`
+    - `src/components/TokenMealHub.tsx`
+    - `src/components/stash/Rooms.tsx`
+    - `src/components/stash/ActivityTicker.tsx`
+    - `src/components/stash/RagChatbotWidget.tsx`
+    - `src/components/stash/HeroVisualizer.tsx`
+    - `src/components/ui/SaarthiSpacesCard2.tsx`
+    - `src/components/ui/SaarthiKitchenCard2.tsx`
+    - `src/components/stash/StashTimeline.tsx`
+    - `src/components/stash/ZeroRisk.tsx`
+
+- [x] **[Desktop Bug Fix (>=1024px) / polish] Zero-breakage layout overflow, phantom audio kill, and HUD collision fix — 2026-09-15**:
+  - **Build**: `npm run build` — ✅ 0 errors (Vite client & Nitro SSR bundle compiled cleanly in 748ms).
+  - **Verification**: `test-saarthi-stash-card-2.mjs` (5/5 checks passed), `test-peacock-feather-interaction.mjs` (100% passed).
+  - **Key Fixes Implemented**:
+    - **Step 1 (Kill Phantom Audio)**:
+      - `src/lib/audio.ts`: Force muted on load; enforced strict `isExplicitClickActive()` window (600ms of genuine user click), blocking all interval loops and background audio.
+      - `src/context/ToastContext.tsx`: Gated `playToastChime` with `!isAudioMuted() && isExplicitClickActive()`.
+      - `src/components/stash/PeacockFeatherMatkiDusting.tsx`: Silenced auto-triggered feather dusting on mount (`triggerDusting(false)`).
+      - `src/components/ui/TestimonialCarousel2.tsx`: Silenced auto-slide interval (`nextSlide(false)`), reserving audio only for explicit button clicks.
+    - **Step 2 (Fix Vertical Text Overflow)**:
+      - `src/components/ui/SaarthiStashCard2.tsx`: Applied `h-full max-h-[360px] overflow-hidden` to `tamper-proof-seal-indicator`.
+      - `src/components/stash/Ecosystem.tsx`: Updated `BentoGrid` to `grid-cols-1 md:grid-cols-3 items-stretch` with equal card heights.
+    - **Step 3 (Fix Thali Card Text Spill)**:
+      - `src/components/TokenMealHub.tsx`: Applied `flex flex-col justify-between h-full` and `line-clamp-2 text-xs` to MealTierCard.
+      - `src/components/ui/SaarthiKitchenCard2.tsx`: Applied `flex flex-col justify-between h-full`, `mt-auto`, and `line-clamp-2 text-xs` preventing CTA button spill.
+    - **Step 4 (Fix HUD Collision)**:
+      - `src/routes/index.tsx`: Added `pb-40` to `<main id="main-content">` to allow complete scrolling past the desktop floating persona toggle.
+  - **Modified Files**:
+    - `src/lib/audio.ts`
+    - `src/context/ToastContext.tsx`
+    - `src/components/stash/PeacockFeatherMatkiDusting.tsx`
+    - `src/components/ui/TestimonialCarousel2.tsx`
+    - `src/components/ui/SaarthiStashCard2.tsx`
+    - `src/components/stash/Ecosystem.tsx`
+    - `src/components/TokenMealHub.tsx`
+    - `src/components/ui/SaarthiKitchenCard2.tsx`
+    - `src/routes/index.tsx`
+
 - [x] **[Mobile Performance Audit & Fix / harden] — Comprehensive mobile-only analysis and 9-fix performance overhaul — 2026-09-15**:
   - **Build**: `npm run build` — ✅ 0 errors (Vite production client & SSR bundles compiled cleanly).
   - **Mobile Performance Audit Results** (12 issues identified, 9 fixed):

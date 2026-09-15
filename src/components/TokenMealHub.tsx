@@ -256,7 +256,7 @@ const MealTierCard: React.FC<MealTierCardProps> = ({ tier, isSelected, tierCost,
         trackClick({ action: "select_thali_tier" });
         onSelect(tier);
       }}
-      className={`relative cursor-pointer rounded-2xl p-5 border transition-all duration-300 ${
+      className={`relative cursor-pointer rounded-2xl p-5 border transition-all duration-300 flex flex-col justify-between h-full ${
         isSelected
           ? "bg-slate-900 border-emerald-500 shadow-[0_0_20px_-5px_rgba(16,185,129,0.3)] transform -translate-y-1"
           : "bg-slate-950/80 border-white/15 hover:border-emerald-500/40 hover:bg-slate-900/90"
@@ -272,30 +272,32 @@ const MealTierCard: React.FC<MealTierCardProps> = ({ tier, isSelected, tierCost,
         </span>
       )}
 
-      <div className="flex items-center justify-between gap-2 mb-1 mt-4">
-        <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
-          {tier.name}
+      <div>
+        <div className="flex items-center justify-between gap-2 mb-1 mt-4">
+          <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+            {tier.name}
+          </div>
+          {tier.id === "standard" && (
+            <PeacockFeatherMatkiDusting compact isAutoTriggered={isSelected} />
+          )}
         </div>
+        <div className="text-3xl font-black text-white mb-2">
+          {tierCost} <span className="text-xs font-bold text-emerald-400">Tokens</span>
+        </div>
+
         {tier.id === "standard" && (
-          <PeacockFeatherMatkiDusting compact isAutoTriggered={isSelected} />
+          <div className="mb-3 text-[11px] font-bold text-emerald-300 bg-emerald-950/70 border border-emerald-500/30 px-2.5 py-1 rounded-lg flex items-center justify-between shadow-sm">
+            <span>{getLabel(false)}</span>
+            <span className="text-[9px] font-mono uppercase bg-emerald-500/20 text-emerald-400 px-1.5 py-0.5 rounded border border-emerald-500/30">
+              {variant === "classic" ? "Classic" : "Value-Save"}
+            </span>
+          </div>
         )}
-      </div>
-      <div className="text-3xl font-black text-white mb-2">
-        {tierCost} <span className="text-xs font-bold text-emerald-400">Tokens</span>
-      </div>
 
-      {tier.id === "standard" && (
-        <div className="mb-3 text-[11px] font-bold text-emerald-300 bg-emerald-950/70 border border-emerald-500/30 px-2.5 py-1 rounded-lg flex items-center justify-between shadow-sm">
-          <span>{getLabel(false)}</span>
-          <span className="text-[9px] font-mono uppercase bg-emerald-500/20 text-emerald-400 px-1.5 py-0.5 rounded border border-emerald-500/30">
-            {variant === "classic" ? "Classic" : "Value-Save"}
-          </span>
-        </div>
-      )}
-
-      <p className="text-xs text-slate-400 leading-relaxed font-medium">
-        {tier.description}
-      </p>
+        <p className="text-xs text-slate-400 leading-relaxed font-medium line-clamp-2">
+          {tier.description}
+        </p>
+      </div>
     </div>
   );
 };
@@ -1045,22 +1047,22 @@ export const TokenMealHub: React.FC = () => {
             <ThaliPriceVariantToggle />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-5">
+          <div className="flex flex-row overflow-x-auto snap-x snap-mandatory no-scrollbar gap-4 pb-4 md:grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 md:gap-5 md:overflow-visible">
             {MEAL_TIERS.map((tier) => {
               const isSelected = selectedMeal.id === tier.id;
               return (
-                <SaarthiKitchenCard2
-                  key={tier.id}
-                  thali={tier}
-                  isSelected={isSelected}
-                  selectedFulfillment={fulfillmentType}
-                  onSelect={(t) => setSelectedMeal(t as MealOption)}
-                  onOrder={(t) => {
-                    setSelectedMeal(t as MealOption);
-                    toast.success(`Selected ${t.name}! Confirm your order details below.`);
-                  }}
-
-                />
+                <div key={tier.id} className="snap-center min-w-[85vw] md:min-w-0">
+                  <SaarthiKitchenCard2
+                    thali={tier}
+                    isSelected={isSelected}
+                    selectedFulfillment={fulfillmentType}
+                    onSelect={(t) => setSelectedMeal(t as MealOption)}
+                    onOrder={(t) => {
+                      setSelectedMeal(t as MealOption);
+                      toast.success(`Selected ${t.name}! Confirm your order details below.`);
+                    }}
+                  />
+                </div>
               );
             })}
           </div>
