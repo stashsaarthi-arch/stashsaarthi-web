@@ -1,0 +1,355 @@
+- generic [active] [ref=f5e1]:
+  - main [ref=f5e3]:
+    - link "Skip to main content" [ref=f5e4] [cursor=pointer]:
+      - /url: "#main-content"
+    - generic [ref=f5e7]:
+      - button "Scroll to top of page" [ref=f5e9] [cursor=pointer]:
+        - img "StashSaarthi" [ref=f5e13]
+      - generic [ref=f5e14]:
+        - button "Explore" [ref=f5e15] [cursor=pointer]
+        - button "Open navigation menu" [ref=f5e16] [cursor=pointer]
+    - generic [ref=f5e18]:
+      - generic [ref=f5e20]:
+        - generic [ref=f5e25]:
+          - generic [ref=f5e26]: "Winter Suitcase #042"
+          - generic [ref=f5e27]: ₹300/mo • QR-SEAL-8839
+        - generic [ref=f5e32]:
+          - generic [ref=f5e33]: "Study Carton #108"
+          - generic [ref=f5e34]: ₹300/mo • QR-SEAL-4412
+      - generic [ref=f5e35]:
+        - generic [ref=f5e36]:
+          - button "Active Development • v1.0 Live →" [ref=f5e37] [cursor=pointer]:
+            - generic [ref=f5e41]: Active Development • v1.0 Live
+            - generic [ref=f5e42]: →
+          - generic [ref=f5e43]: 🚨 Stop the ₹8,000 Vacation Dead-Rent Trap
+        - heading "StashSaarthi Living & Storage Don't Pay Rent for an Empty Room. Stash Your Bags for ₹300/mo." [level=1] [ref=f5e48]:
+          - generic [ref=f5e49]: StashSaarthi Living & Storage
+          - text: Don't Pay Rent for an Empty Room. Stash Your Bags for ₹300/mo.
+        - paragraph [ref=f5e50]: Going home for semester break? Ditch your PG. Secure your luggage in verified local homes near IITK & CSJMU. Rebook broker-free rooms when you return.
+        - generic [ref=f5e51]:
+          - generic [ref=f5e52] [cursor=pointer]:
+            - generic [ref=f5e53]: ₹
+            - generic [ref=f5e54]:
+              - generic [ref=f5e55]:
+                - generic [ref=f5e56]: Instant Micro-Storage
+                - generic [ref=f5e57]: ₹300/bag/mo
+              - generic [ref=f5e58]: Zero Deposit • Save ₹8,000 Dead-Rent Every Vacation
+          - generic "Verified Community Social Proof" [ref=f5e60]:
+            - generic [ref=f5e61]:
+              - generic [ref=f5e62]:
+                - button "RS" [ref=f5e63] [cursor=pointer]
+                - button "AD" [ref=f5e69] [cursor=pointer]
+                - button "PM" [ref=f5e75] [cursor=pointer]
+                - button "VS" [ref=f5e81] [cursor=pointer]
+                - button "AK" [ref=f5e87] [cursor=pointer]
+              - generic [ref=f5e93]:
+                - generic [ref=f5e94]:
+                  - generic [ref=f5e95]: 4.9/5
+                  - generic [ref=f5e98]: •
+                  - generic [ref=f5e99]: 480+ Members
+                - generic [ref=f5e100]: Verified Kanpur Community
+            - generic [ref=f5e107] [cursor=pointer]:
+              - generic [ref=f5e108]: Rahul Sharma
+              - generic [ref=f5e109]: •
+              - generic [ref=f5e110]: Locked 3 winter bags @ ₹300/mo
+        - generic [ref=f5e113]:
+          - button "Stash Luggage for ₹300/mo" [ref=f5e117] [cursor=pointer]
+          - link "Find Broker-Free Rooms" [ref=f5e119] [cursor=pointer]:
+            - /url: "#ecosystem"
+          - button "Refer & Share" [ref=f5e120] [cursor=pointer]
+      - generic [ref=f5e125]:
+        - generic [ref=f5e126] [cursor=pointer]:
+          - generic [ref=f5e127]: 🔥 Live Audit
+          - generic [ref=f5e135]: ₹32,13,501+
+          - generic [ref=f5e136]:
+            - generic [ref=f5e137]: Dead Rent Saved
+            - generic [ref=f5e138]: By Kanpur Students
+        - generic [ref=f5e139] [cursor=pointer]:
+          - generic [ref=f5e140]: 🛡️ 3-Tier Vetted
+          - generic [ref=f5e150]: 344+
+          - generic [ref=f5e151]:
+            - generic [ref=f5e152]: Verified Senior Hosts
+            - generic [ref=f5e153]: IITK & CSJMU Belt
+        - generic [ref=f5e154] [cursor=pointer]:
+          - generic [ref=f5e155]: 📦 100% Safe
+          - generic [ref=f5e170]: 0+
+          - generic [ref=f5e171]:
+            - generic [ref=f5e172]: Luggage Bags Vaulted
+            - generic [ref=f5e173]: Laser Seal Insured
+        - generic [ref=f5e174] [cursor=pointer]:
+          - generic [ref=f5e175]: ⚡ Zero Fees
+          - generic [ref=f5e183]: 0%
+          - generic [ref=f5e184]:
+            - generic [ref=f5e185]: Zero Brokerage Rooms
+            - generic [ref=f5e186]: Direct Host Access
+      - link "Scroll down to explore features" [ref=f5e188] [cursor=pointer]:
+        - /url: "#role-lane"
+        - generic [ref=f5e189]: Explore Our Services
+    - region "Quick Category Jump Navigation" [ref=f5e192]:
+      - tablist "Category Navigation Links" [ref=f5e194]:
+        - tab "Solutions & Hub" [selected] [ref=f5e195] [cursor=pointer]
+        - tab "Savings Simulator" [ref=f5e207] [cursor=pointer]
+        - tab "Stash Journey" [ref=f5e211] [cursor=pointer]
+        - tab "Leaderboard" [ref=f5e216] [cursor=pointer]
+        - tab "Trust & Safety Pass" [ref=f5e224] [cursor=pointer]
+        - tab "Reviews & Ideas" [ref=f5e229] [cursor=pointer]
+        - tab "FAQ & Help" [ref=f5e233] [cursor=pointer]
+        - button "Search website services" [ref=f5e238] [cursor=pointer]
+    - generic [ref=f5e245]:
+      - generic [ref=f5e248]:
+        - generic [ref=f5e249]:
+          - generic [ref=f5e262]:
+            - generic [ref=f5e263]:
+              - heading "Saarthi Stash 2.0" [level=3] [ref=f5e264]
+              - generic [ref=f5e265]: MICRO-VAULT
+            - paragraph [ref=f5e269]: Zero-Brokerage Intergenerational Vault • Kanpur Campus Nodes
+          - generic "Host Earns ₹180 • Platform Net ₹80 • Zero Brokerage" [ref=f5e270] [cursor=pointer]:
+            - generic [ref=f5e271]:
+              - generic [ref=f5e272]:
+                - generic [ref=f5e273]: ₹300
+                - generic [ref=f5e274]: / bag / mo
+              - generic [ref=f5e275]: Save 80% Dead Rent
+        - generic [ref=f5e278]:
+          - generic [ref=f5e279]:
+            - generic [ref=f5e280]:
+              - generic [ref=f5e281]: 3D Bag Depth Preview
+              - button "View Vault Layers" [ref=f5e286] [cursor=pointer]
+            - generic [ref=f5e288]:
+              - generic [ref=f5e289]: TROLLEY
+              - generic [ref=f5e296]: CARTON
+              - generic [ref=f5e302]: BOOKS
+            - generic [ref=f5e314]:
+              - generic [ref=f5e315]: 35kg Max Vault Capacity
+              - generic [ref=f5e316]: 100% Insured
+          - region "Laser Seal Barcode Security" [ref=f5e321]:
+            - generic [ref=f5e322]:
+              - generic [ref=f5e323]:
+                - generic [ref=f5e324]: 🛡️
+                - generic [ref=f5e330]:
+                  - generic [ref=f5e331]:
+                    - generic [ref=f5e332]: Laser Seal Anti-Tamper
+                    - generic [ref=f5e333]: SEAL INTACT
+                  - paragraph [ref=f5e334]:
+                    - generic [ref=f5e335]: QR-SEAL-8839
+                    - generic [ref=f5e336]: •
+                    - generic [ref=f5e337]: 2026-ACTIVE-SEAL
+              - generic [ref=f5e338]: TAP TO VERIFY
+            - generic [ref=f5e372]:
+              - generic [ref=f5e373]:
+                - generic [ref=f5e374]:
+                  - generic [ref=f5e375]: ✓
+                  - text: TPA Sec 105 Security
+                - generic [ref=f5e376]:
+                  - generic [ref=f5e377]: ✓
+                  - text: ₹10k Micro-Insurance Covered
+              - generic [ref=f5e378]: Digital Tamper-Proof v2.0
+        - generic [ref=f5e379]:
+          - list [ref=f5e380]:
+            - listitem [ref=f5e381]:
+              - generic [ref=f5e384]: ₹180/mo Host Payout
+            - listitem [ref=f5e385]:
+              - generic [ref=f5e388]: ₹80 Net Platform Margin
+            - listitem [ref=f5e389]:
+              - generic [ref=f5e392]: Doorstep Saarthi Pick
+          - button "Book Saarthi Stash @ ₹300" [ref=f5e393] [cursor=pointer]
+      - generic [ref=f5e400]:
+        - generic [ref=f5e401]:
+          - generic [ref=f5e407]:
+            - generic [ref=f5e408]: Saarthi Spaces
+            - generic [ref=f5e409]:
+              - generic [ref=f5e410]: 100% Escrow Protected - Avg ₹5,500/mo
+              - generic [ref=f5e411]: ⚡ Zero Cancellation Fee
+          - generic [ref=f5e412]:
+            - paragraph [ref=f5e413]: Verified senior-hosted homes and PGs.
+            - generic [ref=f5e414]: "Avg ₹5,500/mo: Flat 10% platform fee (zero brokerage)"
+            - list [ref=f5e415]:
+              - listitem [ref=f5e416]:
+                - generic [ref=f5e419]: 3-Tier Verified Senior Family
+              - listitem [ref=f5e420]:
+                - generic [ref=f5e423]: Free 24h Relocation Guarantee
+        - button "Book Saarthi Spaces" [ref=f5e424] [cursor=pointer]
+      - generic [ref=f5e428]:
+        - generic [ref=f5e429]:
+          - generic [ref=f5e438]:
+            - generic [ref=f5e439]: Saarthi Kitchen
+            - generic [ref=f5e440]:
+              - generic [ref=f5e441]: Waitlist Only - ₹90/meal
+              - generic [ref=f5e442]: ⚡ Zero Cancellation Fee
+          - generic [ref=f5e443]:
+            - paragraph [ref=f5e444]: Neighbourhood micro-batch tiffins.
+            - generic [ref=f5e445]: "₹90/meal: Zero palm oil, 100% hygienic home kitchen"
+            - list [ref=f5e446]:
+              - listitem [ref=f5e447]:
+                - generic [ref=f5e450]: Pay-as-you-go Token Wallet
+              - listitem [ref=f5e451]:
+                - generic [ref=f5e454]: Cooked by local families
+        - button "Book Saarthi Kitchen" [ref=f5e455] [cursor=pointer]
+      - generic [ref=f5e459]:
+        - generic [ref=f5e460]:
+          - generic [ref=f5e468]:
+            - generic [ref=f5e469]: Saarthi Connect
+            - generic [ref=f5e470]:
+              - generic [ref=f5e471]: Social Infrastructure - Rent Subsidy
+              - generic [ref=f5e472]: ⚡ Zero Cancellation Fee
+          - generic [ref=f5e473]:
+            - paragraph [ref=f5e474]: Rent subsidized by helping elders.
+            - generic [ref=f5e475]: "Rent Subsidy: Up to 60% offset on monthly stays"
+            - list [ref=f5e476]:
+              - listitem [ref=f5e477]:
+                - generic [ref=f5e480]: Tech support errands
+              - listitem [ref=f5e481]:
+                - generic [ref=f5e484]: Intergenerational community building
+        - button "Book Saarthi Connect" [ref=f5e485] [cursor=pointer]
+      - generic [ref=f5e489]:
+        - generic [ref=f5e490]:
+          - generic [ref=f5e496]:
+            - generic [ref=f5e497]: Trust Infrastructure
+            - generic [ref=f5e498]:
+              - generic [ref=f5e499]: 3-tier verification - 100% Free
+              - generic [ref=f5e500]: ⚡ Zero Cancellation Fee
+          - generic [ref=f5e501]:
+            - paragraph [ref=f5e502]: Identity, background and physical audits.
+            - generic [ref=f5e503]: "100% Free: SOS button in every stay"
+            - list [ref=f5e504]:
+              - listitem [ref=f5e505]:
+                - generic [ref=f5e508]: Aadhaar + live biometric check
+              - listitem [ref=f5e509]:
+                - generic [ref=f5e512]: Police & university verification
+        - button "Book Trust Infrastructure" [ref=f5e513] [cursor=pointer]
+      - generic [ref=f5e517]:
+        - generic [ref=f5e518]:
+          - generic [ref=f5e524]:
+            - generic [ref=f5e525]: Micro-Opportunity
+            - generic [ref=f5e526]:
+              - generic [ref=f5e527]: Local hosts & chefs - Avg ₹9,200
+              - generic [ref=f5e528]: ⚡ Zero Cancellation Fee
+          - generic [ref=f5e529]:
+            - paragraph [ref=f5e530]: Neighbourhood partners earn from the network.
+            - generic [ref=f5e531]: "Avg ₹9,200: Average monthly partner earning"
+            - list [ref=f5e532]:
+              - listitem [ref=f5e533]:
+                - generic [ref=f5e536]: Earn from unused rooms
+              - listitem [ref=f5e537]:
+                - generic [ref=f5e540]: Weekly payouts
+        - button "Book Micro-Opportunity" [ref=f5e541] [cursor=pointer]
+    - generic [ref=f5e542]:
+      - generic [ref=f5e544]:
+        - generic [ref=f5e545]:
+          - heading "A City Where No One Arrives Alone." [level=2] [ref=f5e546]
+          - paragraph [ref=f5e547]: Join the priority list for your city — stash spots, verified rooms and home kitchens open in batches.
+        - generic [ref=f5e548]:
+          - generic [ref=f5e549]:
+            - button "🎓 Student" [ref=f5e550] [cursor=pointer]
+            - button "🏠 Host" [ref=f5e551] [cursor=pointer]
+          - generic [ref=f5e552]:
+            - textbox "Full name" [ref=f5e557]
+            - textbox "you@college.edu" [ref=f5e562]
+            - textbox "+91 98xxx xxxxx" [ref=f5e566]
+            - textbox "College / Campus (Optional)" [ref=f5e571]
+          - generic [ref=f5e574]:
+            - generic [ref=f5e581]:
+              - heading "Refer & Earn 1 Month FREE" [level=3] [ref=f5e582]
+              - paragraph [ref=f5e583]: Share with hostel friends to unlock ₹300 StashCredit.
+            - generic [ref=f5e584]:
+              - generic [ref=f5e585]:
+                - generic [ref=f5e586]: STASH-CAMPUS2026
+                - button "Copy referral code" [ref=f5e587] [cursor=pointer]
+              - button "Share referral invite on WhatsApp" [ref=f5e591] [cursor=pointer]:
+                - generic [ref=f5e598]: Share
+          - button "Join the Waitlist" [ref=f5e599] [cursor=pointer]
+          - generic [ref=f5e600]:
+            - generic [ref=f5e601]: or 1-click Google
+            - button "Quick join with Google" [ref=f5e606] [cursor=pointer]
+          - paragraph [ref=f5e613]: 🔒 Zero spam. Only alerts when nodes go live in your campus area.
+      - generic [ref=f5e615]:
+        - generic [ref=f5e616]:
+          - generic [ref=f5e617]:
+            - text: Kanpur
+            - generic [ref=f5e618]: ◆
+          - generic [ref=f5e619]:
+            - text: Lucknow
+            - generic [ref=f5e620]: ◆
+          - generic [ref=f5e621]:
+            - text: Delhi NCR
+            - generic [ref=f5e622]: ◆
+          - generic [ref=f5e623]:
+            - text: Pune
+            - generic [ref=f5e624]: ◆
+          - generic [ref=f5e625]:
+            - text: Varanasi
+            - generic [ref=f5e626]: ◆
+          - generic [ref=f5e627]:
+            - text: Indore
+            - generic [ref=f5e628]: ◆
+          - generic [ref=f5e629]:
+            - text: Jaipur
+            - generic [ref=f5e630]: ◆
+          - generic [ref=f5e631]:
+            - text: Bhopal
+            - generic [ref=f5e632]: ◆
+          - generic [ref=f5e633]:
+            - text: Nagpur
+            - generic [ref=f5e634]: ◆
+        - generic [ref=f5e635]:
+          - generic [ref=f5e636]:
+            - text: Kanpur
+            - generic [ref=f5e637]: ◆
+          - generic [ref=f5e638]:
+            - text: Lucknow
+            - generic [ref=f5e639]: ◆
+          - generic [ref=f5e640]:
+            - text: Delhi NCR
+            - generic [ref=f5e641]: ◆
+          - generic [ref=f5e642]:
+            - text: Pune
+            - generic [ref=f5e643]: ◆
+          - generic [ref=f5e644]:
+            - text: Varanasi
+            - generic [ref=f5e645]: ◆
+          - generic [ref=f5e646]:
+            - text: Indore
+            - generic [ref=f5e647]: ◆
+          - generic [ref=f5e648]:
+            - text: Jaipur
+            - generic [ref=f5e649]: ◆
+          - generic [ref=f5e650]:
+            - text: Bhopal
+            - generic [ref=f5e651]: ◆
+          - generic [ref=f5e652]:
+            - text: Nagpur
+            - generic [ref=f5e653]: ◆
+      - generic [ref=f5e655]:
+        - generic [ref=f5e656]:
+          - paragraph [ref=f5e657]: © 2026 StashSaarthi Technologies. Built with radical honesty & physical accountability in Kanpur, Uttar Pradesh, India.
+          - paragraph [ref=f5e658]: "Operational Hub: 117/K-Block, Kalyanpur, Kanpur — 208016 | Direct Email: stashsaarthi@gmail.com"
+          - generic [ref=f5e659]:
+            - link "Privacy Policy" [ref=f5e660] [cursor=pointer]:
+              - /url: /privacy
+            - generic [ref=f5e661]: •
+            - link "🛡️ DPDP & GDPR Audit Portal" [ref=f5e662] [cursor=pointer]:
+              - /url: /privacy
+            - generic [ref=f5e663]: •
+            - link "Terms of Service" [ref=f5e664] [cursor=pointer]:
+              - /url: /terms
+            - generic [ref=f5e665]: •
+            - button "₹10k Insurance Charter" [ref=f5e666] [cursor=pointer]
+            - generic [ref=f5e667]: •
+            - button "📱 Android Go Audit" [ref=f5e668] [cursor=pointer]
+            - generic [ref=f5e669]: •
+            - button "Standard Mode" [ref=f5e670] [cursor=pointer]:
+              - generic [ref=f5e673]: Data
+        - button "Scroll to top" [ref=f5e674] [cursor=pointer]:
+          - generic [ref=f5e675]: Back to top
+    - navigation "Quick Action Mobile Navigation Dock" [ref=f5e678]:
+      - generic [ref=f5e679]:
+        - tab "Stash" [selected] [ref=f5e680] [cursor=pointer]
+        - tab "Spaces" [ref=f5e693] [cursor=pointer]
+        - tab "Kitchen" [ref=f5e698] [cursor=pointer]
+        - tab "Connect" [ref=f5e706] [cursor=pointer]
+      - button "Book" [ref=f5e714] [cursor=pointer]
+    - button "Open WhatsApp concierge" [ref=f5e719] [cursor=pointer]
+    - button "Open RAG AI Assistant" [ref=f5e724] [cursor=pointer]
+  - generic [ref=f5e732]:
+    - status [ref=f5e733]
+    - alert [ref=f5e734]
+  - region "Notifications alt+T"
