@@ -87,7 +87,7 @@ export const PRESET_PRICING_ZONES: PricingZone[] = [
     host_payout_rate_monthly: 160,
     peak_season_multiplier: 1.0,
     tiffin_base_rate: 85,
-    description: "Budget-friendly residential cluster with spacious senior host storage capacity.",
+    description: "Budget-friendly residential cluster with spacious verified PG owner host storage capacity.",
   },
   {
     zone_code: "SWAROOP_NAGAR",

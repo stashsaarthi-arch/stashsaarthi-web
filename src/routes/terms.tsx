@@ -102,7 +102,7 @@ function TermsPage() {
           <p className="mt-2 text-sm text-muted-foreground max-w-2xl">
             {isHi
               ? "यह कानूनी समझौता स्टैशसारथी प्लेटफॉर्म के उपयोग, छात्र दायित्वों, सीनियर होस्ट अधिकारों, बारकोड सील सुरक्षा और एस्क्रो भुगतान नियमों को परिभाषित करता है।"
-              : "This agreement defines user responsibilities, senior host rights under Sec 105 TPA 1882, prohibited storage item restrictions, zero cancellation fee refunds, and escrow payout guarantees."}
+              : "This agreement defines user responsibilities, verified PG owner host rights under Sec 105 TPA 1882, prohibited storage item restrictions, zero cancellation fee refunds, and escrow payout guarantees."}
           </p>
           <div className="mt-3 text-xs text-muted-foreground">
             <span>{isHi ? "अंतिम संशोधन:" : "Last Updated:"} September 7, 2026</span> •{" "}
@@ -164,15 +164,15 @@ function TermsPage() {
                 </div>
                 <div className="rounded-xl border border-white/10 bg-black/40 p-3">
                   <h3 className="font-bold text-amber-400 mb-1">B. Saarthi Spaces</h3>
-                  <p className="text-muted-foreground">Zero-brokerage student room stays with verified senior households under transparent month-to-month leave-and-license agreements.</p>
+                  <p className="text-muted-foreground">Zero-brokerage student room stays with verified verified PG owner households under transparent month-to-month leave-and-license agreements.</p>
                 </div>
                 <div className="rounded-xl border border-white/10 bg-black/40 p-3">
                   <h3 className="font-bold text-cyan-400 mb-1">C. Saarthi Kitchen</h3>
-                  <p className="text-muted-foreground">Pure home-cooked tiffin meals prepared by verified neighborhood senior home-chefs @ ₹90/meal with 1-tap pause flexibility.</p>
+                  <p className="text-muted-foreground">Pure home-cooked tiffin meals prepared by verified neighborhood verified PG owner home-chefs @ ₹90/meal with 1-tap pause flexibility.</p>
                 </div>
                 <div className="rounded-xl border border-white/10 bg-black/40 p-3">
                   <h3 className="font-bold text-purple-400 mb-1">D. Saarthi Connect</h3>
-                  <p className="text-muted-foreground">Intergenerational compatibility matching connecting verified students with dignified senior host household mentorship.</p>
+                  <p className="text-muted-foreground">Intergenerational compatibility matching connecting verified students with tech-enabled verified PG owner host household mentorship.</p>
                 </div>
                 <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-3 sm:col-span-2">
                   <h3 className="font-bold text-amber-300 mb-1">E. Predictive AI & Client-Side UX Personalization</h3>
@@ -196,7 +196,7 @@ function TermsPage() {
               </p>
               <ul className="list-disc pl-5 space-y-1.5 text-xs text-amber-200/80">
                 <li><strong className="text-amber-300">Non-Tenancy Protection:</strong> License agreements grant temporary permissive occupancy only. They do not create permanent tenancy, leasehold equity, or property encumbrance rights.</li>
-                <li><strong className="text-amber-300">Senior Dignity Guard:</strong> Senior hosts maintain 100% legal ownership and authority to enforce house norms, quiet hours (e.g. after 10:00 PM), and visitor entry policies.</li>
+                <li><strong className="text-amber-300">Verified PG Owner Dignity Guard:</strong> Verified PG Owner hosts maintain 100% legal ownership and authority to enforce house norms, quiet hours (e.g. after 10:00 PM), and visitor entry policies.</li>
                 <li><strong className="text-amber-300">24-Hour Relocation SLA:</strong> In case of irreconcilable roommate friction, StashSaarthi provides zero-penalty student relocation to an alternate verified node within 24 hours.</li>
               </ul>
             </section>
@@ -208,7 +208,7 @@ function TermsPage() {
                 <h2>3. Prohibited Storage Items & Barcode Seal Charter</h2>
               </div>
               <p className="text-red-200">
-                To preserve physical safety across senior host households, students must strictly inspect luggage prior to laser sealing.
+                To preserve physical safety across verified PG owner host households, students must strictly inspect luggage prior to laser sealing.
               </p>
               <div className="rounded-xl border border-red-500/20 bg-black/40 p-3 space-y-2 text-xs">
                 <p className="font-bold text-red-400">Strictly Prohibited Items (Zero Exception):</p>
@@ -233,7 +233,7 @@ function TermsPage() {
               </div>
               <p>StashSaarthi operates with 100% digital bank escrow protection for both students and host keepers:</p>
               <ul className="list-disc pl-5 space-y-1.5 text-xs text-muted-foreground">
-                <li><strong className="text-white">Host Escrow Payouts:</strong> Student booking fees are held in escrow and released directly to senior host bank accounts on a weekly schedule (every Monday) following conflict-free handover.</li>
+                <li><strong className="text-white">Host Escrow Payouts:</strong> Student booking fees are held in escrow and released directly to verified PG owner host bank accounts on a weekly schedule (every Monday) following conflict-free handover.</li>
                 <li><strong className="text-white">100% Pre-Pickup Cancellation Refund:</strong> Cancellations made up to 24 hours prior to scheduled doorstep luggage pickup or stay move-in receive an instant 100% full refund with zero deduction fees.</li>
                 <li><strong className="text-white">Pro-Rata Early Withdrawal Return:</strong> If you return to campus early and withdraw stored luggage mid-vacation, unused whole months are refunded pro-rata directly to your bank account within 3–5 working days.</li>
               </ul>
@@ -258,12 +258,12 @@ function TermsPage() {
             <section id="hostcode" className="rounded-2xl border border-white/10 bg-white/5 p-6 space-y-3">
               <div className="flex items-center gap-2 text-amber-400 font-bold text-base">
                 <FileText className="h-5 w-5" />
-                <h2>6. Senior Host Charter & Community Norms</h2>
+                <h2>6. Verified PG Owner Host Charter & Community Norms</h2>
               </div>
-              <p>Senior hosts are respected community partners generating dignified passive income from spare household capacity:</p>
+              <p>Verified PG Owner hosts are respected community partners generating tech-enabled passive income from spare household capacity:</p>
               <ul className="list-disc pl-5 space-y-1.5 text-xs text-muted-foreground">
                 <li><strong className="text-white">Zero Intrusion Guarantee:</strong> Student luggage is stored in designated spare storage rooms or corner zones. Hosts will never inspect, open, or move sealed luggage without explicit student consent.</li>
-                <li><strong className="text-white">Respectful Interaction:</strong> Students residing in co-living rooms or taking home-cooked tiffins must observe household quiet hours and treat senior hosts with utmost respect.</li>
+                <li><strong className="text-white">Respectful Interaction:</strong> Students residing in co-living rooms or taking home-cooked tiffins must observe household quiet hours and treat premium hosts with utmost respect.</li>
                 <li><strong className="text-white">0% Platform Listing Fee:</strong> Hosts enjoy 0% onboarding fees, with transparent payouts disbursing ₹180 out of every ₹300 storage bag.</li>
               </ul>
             </section>

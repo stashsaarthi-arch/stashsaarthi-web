@@ -111,7 +111,7 @@ export const TIER_CONFIG: Record<
     bgColor: "bg-amber-950/30",
     borderColor: "border-amber-700/40",
     icon: Award,
-    perks: ["Verified Senior Badge", "Standard Student Matching", "24/7 Bedside SOS Access"],
+    perks: ["Verified Verified PG Owner Badge", "Standard Student Matching", "24/7 Bedside SOS Access"],
     perks_hi: ["सत्यापित वरिष्ठ बैज", "मानक छात्र मिलान", "24/7 बेडसाइड SOS सुविधा"],
   },
   Silver: {
@@ -230,7 +230,7 @@ export function KarmaPointsBadge({
             <p className="text-[11px] text-slate-300">
               {isHi
                 ? "सक्रिय वरिष्ठ भागीदारी पुरस्कार"
-                : "Active Senior Host Participation Reward"}
+                : "Active Verified PG Owner Host Participation Reward"}
             </p>
           </div>
         </div>
@@ -316,7 +316,7 @@ export function KarmaPointsModal({
                   <h2 id="karma-modal-title" className="text-base sm:text-lg font-bold text-white">
                     {isHi
                       ? "सार्थी कनेक्ट: वरिष्ठ कर्म अंक एवं सम्मान प्रणाली"
-                      : "Saarthi Connect: Senior Karma Rewards System"}
+                      : "Saarthi Connect: Verified PG Owner Karma Rewards System"}
                   </h2>
                   <span className="rounded-full bg-amber-500/20 px-2 py-0.5 text-[10px] font-bold text-amber-400 border border-amber-500/30">
                     Gamified Badging
@@ -332,10 +332,10 @@ export function KarmaPointsModal({
 
             {/* Main Content Grid */}
             <div className="mt-5 space-y-5">
-              {/* Senior Selector Pills */}
+              {/* Verified PG Owner Selector Pills */}
               <div>
                 <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2">
-                  {isHi ? "वरिष्ठ होस्ट प्रोफ़ाइल चुनें (Inspect Senior Host)" : "Inspect Senior Host Profile"}
+                  {isHi ? "वरिष्ठ होस्ट प्रोफ़ाइल चुनें (Inspect Verified PG Owner Host)" : "Inspect Verified PG Owner Host Profile"}
                 </label>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                   {LEADERBOARD_HOSTS.map((h) => {
@@ -472,7 +472,7 @@ export function KarmaPointsModal({
               <div className="rounded-xl border border-white/10 bg-slate-900/60 p-4">
                 <h3 className="text-xs font-bold text-slate-200 flex items-center gap-1.5 mb-2.5">
                   <Info className="h-4 w-4 text-cyan-400" />
-                  <span>{isHi ? "अंक कैसे अर्जित करें? (Karma Points Matrix)" : "How Senior Hosts Earn Karma Points"}</span>
+                  <span>{isHi ? "अंक कैसे अर्जित करें? (Karma Points Matrix)" : "How Premium Hosts Earn Karma Points"}</span>
                 </h3>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
@@ -512,7 +512,7 @@ export function KarmaPointsModal({
                   }}
                 >
                   <Gift className="h-4 w-4 mr-1.5" />
-                  {isHi ? "होस्ट रिवॉर्ड वाउचर का दावा करें" : "Claim Senior Host Reward Voucher"}
+                  {isHi ? "होस्ट रिवॉर्ड वाउचर का दावा करें" : "Claim Verified PG Owner Host Reward Voucher"}
                 </Button>
                 <Button
                   variant="outline"

@@ -7,7 +7,7 @@ const ALLEN_CONFIG: HubConfig = {
   coachingName: "Allen Career Institute",
   tagline: "Pure Homestyle Tiffin Service 100m from Allen Career Institute Kakadeo",
   heroDescription:
-    "Pure home-cooked tiffin service prepared by verified senior mothers in Kakadeo Kanpur. Located just 100 meters from Allen Career Institute (Allen Kakadeo Main Building). Pure desi ghee phulkas, zero commercial preservatives, and flexible meal pause during test series.",
+    "Pure home-cooked tiffin service prepared by verified verified PG owner mothers in Kakadeo Kanpur. Located just 100 meters from Allen Career Institute (Allen Kakadeo Main Building). Pure desi ghee phulkas, zero commercial preservatives, and flexible meal pause during test series.",
   distance: "100 meters",
   walkingTime: "2-min walk",
   nearbyLandmarks: [
@@ -19,11 +19,11 @@ const ALLEN_CONFIG: HubConfig = {
   canonicalUrl: "https://stashsaarthi-web.vercel.app/tiffin-services-near-allen",
   metaTitle: "Tiffin Service Near Allen Coaching Kakadeo Kanpur | Homestyle Thali ₹50",
   metaDescription:
-    "Best home-cooked tiffin service near Allen Career Institute Kakadeo Kanpur. Pure homestyle thali from ₹50 prepared by senior mothers. 100% hygienic, zero palm oil, 1-tap meal pause feature for Allen NEET/JEE students.",
+    "Best home-cooked tiffin service near Allen Career Institute Kakadeo Kanpur. Pure homestyle thali from ₹50 prepared by verified PG owner mothers. 100% hygienic, zero palm oil, 1-tap meal pause feature for Allen NEET/JEE students.",
   metaKeywords:
     "tiffin service near Allen coaching Kakadeo, Allen coaching Kanpur mess, home cooked thali near Allen Kakadeo, ghar ka swaad tiffin Allen Kanpur, cheap tiffin Kakadeo ₹50, Allen student thali Kanpur",
-  chefName: "Dadi Maa Senior Home Kitchen (Allen Lane)",
-  chefBio: "Managed by Senior Host Kamla Arora Ji. Cooking light, nutritious, digestive home meals for Allen JEE & NEET aspirants in Kakadeo for over 12 years.",
+  chefName: "Dadi Maa Verified PG Owner Home Kitchen (Allen Lane)",
+  chefBio: "Managed by Verified PG Owner Host Kamla Arora Ji. Cooking light, nutritious, digestive home meals for Allen JEE & NEET aspirants in Kakadeo for over 12 years.",
   rating: 4.9,
   totalOrders: "14,200+",
   activeStudents: 380,

@@ -92,7 +92,7 @@ const ACTIVITIES: ActivityItem[] = [
     timeAgo_hi: "6 मिनट पहले",
     type: "host",
     icon: Home,
-    badge: "Verified Senior Host",
+    badge: "Verified Verified PG Owner Host",
     badge_hi: "सत्यापित सीनियर होस्ट",
     accent: "amber",
     service: "rooms",

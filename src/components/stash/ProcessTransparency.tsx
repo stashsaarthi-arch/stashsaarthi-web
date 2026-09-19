@@ -66,7 +66,7 @@ export function ProcessTransparency() {
             "100% डिजिटल एस्क्रो बैंक लॉक — सामान सुरक्षित लौटने तक भुगतान सुरक्षित",
           ]
         : [
-            "Hyper-local matching to verified senior host node within 1.2 km",
+            "Hyper-local matching to verified verified PG owner host node within 1.2 km",
             "Physical space audit: raised wooden pallets in climate-stable rooms",
             "Laser-engraved tamper barcode sealing (#SS-KNP-XXXXX) & GPS photo log",
             "100% digital bank escrow: host paid only after student confirms safe return",
@@ -112,7 +112,7 @@ export function ProcessTransparency() {
         "कानपुर स्थानीय ग्राउंड टीम द्वारा 15 मिनट में मानवीय सहायता का वादा",
       ]
     : [
-        "Peer-to-peer micro-storage on elevated pallets inside audited senior homes (< 1.2km)",
+        "Peer-to-peer micro-storage on elevated pallets inside audited verified PG owner homes (< 1.2km)",
         "Zero-brokerage student co-living with verified local hosts and written house norms",
         "Tamper-evident laser barcode sealing + timestamped dual-photo check-in proof",
         "100% digital escrow: host payouts disbursed only after verified safe handover",

@@ -16,7 +16,7 @@ export function HostLogin() {
         <div className="relative z-10">
           <div className="mb-8 text-center">
             <h1 className="text-2xl sm:text-3xl font-extrabold text-white mb-2 tracking-tight">Partner with StashSaarthi</h1>
-            <p className="text-sm text-muted-foreground">Join our network of verified senior hosts and earn dignified passive income.</p>
+            <p className="text-sm text-muted-foreground">Join our network of verified premium hosts and earn tech-enabled passive income.</p>
           </div>
 
           {step === 'phone' ? (
@@ -33,7 +33,7 @@ export function HostLogin() {
                     maxLength={10}
                     value={phone}
                     onChange={(e) => setPhone(e.target.value.replace(/\D/g, ''))}
-                    className="w-full pl-10 pr-4 py-3 bg-black/40 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 text-white placeholder-slate-500 transition-all"
+                    className="w-full pl-24 pr-4 py-3 bg-black/40 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 text-white placeholder-slate-500 transition-all"
                     placeholder="Enter 10 digit number"
                   />
                   <div className="absolute inset-y-0 left-10 flex items-center pointer-events-none">

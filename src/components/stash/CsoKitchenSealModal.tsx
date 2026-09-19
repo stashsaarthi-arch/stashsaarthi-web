@@ -122,7 +122,7 @@ export function CsoKitchenSealModal({
       alert(
         isHi
           ? "कृपया रसोई का नाम और सीनियर शेफ का नाम दर्ज करें।"
-          : "Please enter Kitchen Name and Senior Chef Name."
+          : "Please enter Kitchen Name and Verified PG Owner Chef Name."
       );
       return;
     }
@@ -465,13 +465,13 @@ export function CsoKitchenSealModal({
 
                 <div>
                   <label className="block text-xs font-semibold text-slate-300 mb-1">
-                    {isHi ? "सीनियर शेफ / होस्ट का नाम" : "Senior Chef / Host Name"}
+                    {isHi ? "सीनियर शेफ / होस्ट का नाम" : "Verified PG Owner Chef / Host Name"}
                   </label>
                   <input
                     type="text"
                     value={newChefName}
                     onChange={(e) => setNewChefName(e.target.value)}
-                    placeholder="e.g. Pushpa Devi (Senior Host)"
+                    placeholder="e.g. Pushpa Devi (Verified PG Owner Host)"
                     className="w-full rounded-xl border border-white/15 bg-black/60 px-3 py-2 text-xs text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>

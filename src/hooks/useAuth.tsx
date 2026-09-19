@@ -92,7 +92,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
         const firstName = newUser.name.split(" ")[0];
         toast.success(`Welcome back, ${firstName}!`, {
-          description: `Logged in as ${newUser.role === "student" ? "Student" : "Elderly Host"}`,
+          description: `Logged in as ${newUser.role === "student" ? "Student" : "High-Margin ROI Host"}`,
         });
       } catch (err) {
         console.error("Google Auth Error:", err);
@@ -117,7 +117,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     const firstName = newUser.name.split(" ")[0];
     toast.success(`Welcome back, ${firstName}!`, {
-      description: `Logged in as ${newUser.role === "student" ? "Student" : "Elderly Host"}`,
+      description: `Logged in as ${newUser.role === "student" ? "Student" : "High-Margin ROI Host"}`,
     });
   }, []);
 

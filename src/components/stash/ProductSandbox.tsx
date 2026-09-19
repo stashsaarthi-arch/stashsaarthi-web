@@ -203,7 +203,7 @@ export function ProductSandbox() {
                           {isHi ? "नोड स्थान" : "NODE LOCATION"}
                         </span>
                         <span className="text-foreground font-semibold">
-                          {isHi ? "कल्याणपुर सीनियर होम #04" : "Kalyanpur Senior Home #04"}
+                          {isHi ? "कल्याणपुर सीनियर होम #04" : "Kalyanpur Verified PG Owner Home #04"}
                         </span>
                       </div>
                       <div className="p-2.5 rounded-lg bg-white/[0.03] border border-white/5">
@@ -273,7 +273,7 @@ export function ProductSandbox() {
                   </div>
 
                   <h3 className="text-xl sm:text-2xl font-bold text-foreground">
-                    Kalyanpur Senior Nodal Haven #04
+                    Kalyanpur Verified PG Owner Nodal Haven #04
                   </h3>
                   <div className="flex items-center gap-2 text-xs text-muted-foreground">
                     <MapPin className="h-3.5 w-3.5 text-amber-400" />
@@ -344,7 +344,7 @@ export function ProductSandbox() {
                       💡{" "}
                       {isHi
                         ? "सभी भुगतान डिजिटल एस्क्रो के माध्यम से होते हैं। कोई नकद लेन-देन नहीं।"
-                        : "All stay dues flow through digital escrow. Direct bank payouts to senior hosts weekly."}
+                        : "All stay dues flow through digital escrow. Direct bank payouts to premium hosts weekly."}
                     </div>
                   </div>
                 </div>
@@ -457,7 +457,7 @@ export function ProductSandbox() {
                           <div className="text-xs font-bold text-amber-300">
                             {isHi
                               ? "सीनियर होस्ट सीधा भुगतान (60.0%)"
-                              : "Senior Host Direct Payout (60.0%)"}
+                              : "Verified PG Owner Host Direct Payout (60.0%)"}
                           </div>
                           <div className="text-[11px] text-muted-foreground mt-0.5">
                             {isHi
@@ -574,7 +574,7 @@ export function ProductSandbox() {
                   <span className="text-muted-foreground">
                     {isHi ? "नोड हब:" : "Assigned Node:"}
                   </span>
-                  <span className="text-foreground font-semibold">Kalyanpur Senior Home #04</span>
+                  <span className="text-foreground font-semibold">Kalyanpur Verified PG Owner Home #04</span>
                 </div>
                 <div className="flex justify-between p-2 rounded-lg bg-white/[0.02]">
                   <span className="text-muted-foreground">

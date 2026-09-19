@@ -33,7 +33,7 @@ const MENU_OPTIONS = [
 
 const PRESET_NOTES_EN = [
   "Bro, let's order lunch together today! 🍲",
-  "Check out this homestyle Senior Mother kitchen near us! 😋",
+  "Check out this homestyle Verified PG Owner Mother kitchen near us! 😋",
   "Use code TASTE50 for flat ₹50 OFF on 1st meal! 🎁",
   "Pure Desi Ghee Phulkas & 0 Palm Oil — stomach friendly! 🌟",
 ];
@@ -102,13 +102,13 @@ export const RoommateMenuShareModal: React.FC<RoommateMenuShareModalProps> = ({
 
     return (
       `${greeting}\n\n` +
-      `🍲 *StashSaarthi Senior Mother Kitchen Menu*\n` +
+      `🍲 *StashSaarthi Verified PG Owner Mother Kitchen Menu*\n` +
       `✨ *Meal:* ${selectedMenu} (₹${menuPrice})\n` +
       `🕒 *Slot:* ${slot === "Lunch" ? "Lunch (1:00 PM)" : "Dinner (8:00 PM)"}\n` +
       `🏠 *Kitchen:* ${kitchenNode}\n` +
       `${locationText ? locationText + "\n" : ""}` +
       `💬 *Note:* "${customNote}"\n\n` +
-      `🔥 100% Homestyle Cooked by Senior Mothers • Pure Desi Ghee • 0 Palm Oil\n` +
+      `🔥 100% Homestyle Cooked by Verified PG Owner Mothers • Pure Desi Ghee • 0 Palm Oil\n` +
       `🎁 *Special Offer:* Use Code *TASTE50* for Flat ₹50 OFF on 1st Order!\n\n` +
       `👉 Order Now: https://stashsaarthi.in/tiffin?ref=TASTE50`
     );

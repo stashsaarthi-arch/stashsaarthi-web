@@ -5,7 +5,7 @@
  * 1. Vacation Micro-Storage (IIT Kanpur, HBTI, CSJMU)
  * 2. Zero-Brokerage Co-Living Rooms (Kakadeo, PW/Allen Coaching Hub)
  * 3. Homemade Tiffin Service (Ghar Ka Swaad Kanpur)
- * 4. Senior Host Dignified Passive Income & Intergenerational Living
+ * 4. Verified PG Owner Host Tech-Enabled Passive Income & Intergenerational Living
  * 5. Student Dead-Rent Savings Calculator
  */
 
@@ -39,19 +39,19 @@ export const LONG_TAIL_SEO_CONFIG: Record<SEOKey, SEOMetadata> = {
   rooms: {
     title: "Zero-Brokerage Student Rooms Kakadeo Kanpur | PGs near PW & Allen",
     description:
-      "Find zero-brokerage student rooms in Kakadeo Kanpur hosted by verified senior citizens. No broker fees, peaceful study environment, verified student community & safety cover near PW, Motion & Allen coaching centers.",
+      "Find zero-brokerage student rooms in Kakadeo Kanpur hosted by verified verified PG owner citizens. No broker fees, peaceful study environment, verified student community & safety cover near PW, Motion & Allen coaching centers.",
     keywords:
-      "zero brokerage student rooms Kanpur, broker free PG Kakadeo Kanpur, rooms near Physics Wallah Kanpur, student flat Kakadeo, senior hosted student room Kanpur, Allen coaching PG Kakadeo, single room student Kanpur",
+      "zero brokerage student rooms Kanpur, broker free PG Kakadeo Kanpur, rooms near Physics Wallah Kanpur, student flat Kakadeo, verified PG owner hosted student room Kanpur, Allen coaching PG Kakadeo, single room student Kanpur",
     ogImage: `${BASE_URL}/images/og-student.png`,
     canonicalUrl: `${BASE_URL}/?service=rooms`,
-    h1Text: "Zero-Brokerage Senior-Hosted Student Rooms in Kakadeo",
+    h1Text: "Zero-Brokerage Verified PG Owner-Hosted Student Rooms in Kakadeo",
   },
 
   // 3. Homemade Tiffin Service Long-Tail Focus
   kitchen: {
     title: "Homemade Tiffin Service Kakadeo Kanpur | Pure Home-Cooked Meals ₹90",
     description:
-      "Pure homestyle tiffin service in Kakadeo Kanpur cooked by senior mothers. Hygienic, fresh home-cooked thalis from ₹90/meal with zero preservatives, custom monthly meal plans & doorstep delivery near student hostels.",
+      "Pure homestyle tiffin service in Kakadeo Kanpur cooked by verified PG owner mothers. Hygienic, fresh home-cooked thalis from ₹90/meal with zero preservatives, custom monthly meal plans & doorstep delivery near student hostels.",
     keywords:
       "tiffin service Kakadeo Kanpur, home cooked meals student Kanpur, homemade tiffin near Physics Wallah, ghar ka swaad tiffin Kanpur, student thali service Kanpur, best tiffin service Kakadeo, healthy mess Kanpur",
     ogImage: `${BASE_URL}/images/og-student.png`,
@@ -59,16 +59,16 @@ export const LONG_TAIL_SEO_CONFIG: Record<SEOKey, SEOMetadata> = {
     h1Text: "Pure Homestyle Tiffin Service in Kakadeo Kanpur",
   },
 
-  // 4. Senior Host Passive Income Focus
+  // 4. Verified PG Owner Host Passive Income Focus
   host: {
-    title: "Senior Host Passive Income Kanpur | Rent Empty Room for ₹11,500/month",
+    title: "Verified PG Owner Host Passive Income Kanpur | Rent Empty Room for ₹11,500/month",
     description:
-      "Earn ₹11,500+/month dignified passive income in Kanpur by hosting verified university students or storing vacation luggage. 100% control over house norms, zero intrusion & ₹10,000 security cover.",
+      "Earn ₹11,500+/month tech-enabled passive income in Kanpur by hosting verified university students or storing vacation luggage. 100% control over house norms, zero intrusion & ₹10,000 security cover.",
     keywords:
-      "senior citizen passive income Kanpur, rent empty room senior host Kanpur, dignified senior living income, elderly host student accommodation Kanpur, earn from spare room Kanpur, senior host safety cover Kanpur",
+      "premium host passive income Kanpur, rent empty room verified PG owner host Kanpur, tech-enabled verified PG owner living income, high-margin ROI host student accommodation Kanpur, earn from spare room Kanpur, verified PG owner host safety cover Kanpur",
     ogImage: `${BASE_URL}/images/og-host.png`,
     canonicalUrl: `${BASE_URL}/?role=host`,
-    h1Text: "Dignified Passive Income for Senior Hosts in Kanpur",
+    h1Text: "Tech-Enabled Passive Income for Premium Hosts in Kanpur",
   },
 
   // 5. Calculator Focus
@@ -99,7 +99,7 @@ export const LONG_TAIL_SEO_CONFIG: Record<SEOKey, SEOMetadata> = {
   default: {
     title: "StashSaarthi - Campus Micro-Storage & Zero-Brokerage Living in Kanpur",
     description:
-      "India's Zero-CapEx Intergenerational Living & Campus Micro-Storage Platform in Kanpur. Vacation luggage storage at ₹300/bag/mo, zero-brokerage senior-hosted rooms, and pure homemade tiffins.",
+      "India's Zero-CapEx Intergenerational Living & Campus Micro-Storage Platform in Kanpur. Vacation luggage storage at ₹300/bag/mo, zero-brokerage verified PG owner-hosted rooms, and pure homemade tiffins.",
     keywords:
       "StashSaarthi, student luggage storage Kanpur, campus micro storage, Kanpur student rooms, broker free PG Kakadeo, IIT Kanpur luggage stash, vacation dead rent, ghar ka swaad tiffin Kanpur",
     ogImage: `${BASE_URL}/images/og-banner-new.png`,

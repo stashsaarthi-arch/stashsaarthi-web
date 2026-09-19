@@ -355,7 +355,7 @@ export const Navbar = memo(function Navbar({
                 }`}
               >
                 <HeartHandshake className="h-4 w-4" />
-                <span>{isHi ? "सीनियर होस्ट" : "Senior Host"}</span>
+                <span>{isHi ? "सीनियर होस्ट" : "Verified PG Owner Host"}</span>
               </button>
             </div>
 

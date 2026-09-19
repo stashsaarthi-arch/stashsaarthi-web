@@ -58,7 +58,7 @@ export const CalculatorHub = memo(function CalculatorHub({ onBook }: { onBook: O
         <p className="mt-1 text-[11px] text-muted-foreground sm:text-xs">
           {isHi
             ? "छात्र ₹8,000 तक की बचत कर सकते हैं, और वरिष्ठ मेज़बान ₹11,500+/माह तक कमा सकते हैं।"
-            : "Zero guesswork. 100% transparent unit economics for students & senior hosts in Kanpur."}
+            : "Zero guesswork. 100% transparent unit economics for students & premium hosts in Kanpur."}
         </p>
       </div>
 

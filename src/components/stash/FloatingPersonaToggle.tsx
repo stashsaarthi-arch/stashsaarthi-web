@@ -78,7 +78,7 @@ export const FloatingPersonaToggle = memo(function FloatingPersonaToggle() {
               />
             )}
             <HeartHandshake className="h-3.5 w-3.5 shrink-0 translate-y-[-0.5px]" aria-hidden="true" />
-            <span>{isHi ? "सीनियर होस्ट" : "Senior Host"}</span>
+            <span>{isHi ? "सीनियर होस्ट" : "Verified PG Owner Host"}</span>
           </motion.button>
         </motion.div>
       )}

@@ -74,7 +74,7 @@ const DEMO: Listing[] = [
     transit_estimate: "🛺 ₹10 to Rawatpur Metro · 500m to HBTI",
     transit_estimate_hi: "🛺 रावतपुर मेट्रो तक ₹10 · HBTI से 500मी",
     student_review:
-      "Pros: Senior host family, safe environment for girl students, high-speed Wi-Fi.\nCons: No loud late-night music.",
+      "Pros: Verified PG Owner host family, safe environment for girl students, high-speed Wi-Fi.\nCons: No loud late-night music.",
     ratings: 4.7,
     capacity_badge: {
       text: "🟡 Only 1 room left",
@@ -112,7 +112,7 @@ const DEMO: Listing[] = [
     transit_estimate: "🛺 ₹10 E-Rickshaw to Kakadeo Hub (5 min)",
     transit_estimate_hi: "🛺 काकादेव हब तक ₹10 ई-रिक्शा (5 मिनट)",
     student_review:
-      "Pros: Zero disturbance, RO drinking water, private balcony, warm senior host.\nCons: Shared kitchen stove.",
+      "Pros: Zero disturbance, RO drinking water, private balcony, warm verified PG owner host.\nCons: Shared kitchen stove.",
     ratings: 4.9,
     capacity_badge: {
       text: "🟢 2 slots left",

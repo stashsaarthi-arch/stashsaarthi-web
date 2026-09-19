@@ -30,7 +30,7 @@ export const LIFECYCLE_STEPS: Record<BookingLifecycleState, LifecycleStepInfo> =
     labelHi: "आइटम प्राप्त हुआ",
     badgeStyle: "bg-amber-500/20 text-amber-300 border-amber-500/40 shadow-amber-500/10",
     icon: "📦",
-    descriptionEn: "Item verified & handed over to Senior Host at Hub Node",
+    descriptionEn: "Item verified & handed over to Verified PG Owner Host at Hub Node",
     descriptionHi: "हब नोड पर सीनियर होस्ट द्वारा आइटम प्राप्त व सत्यापित",
   },
   in_secure_locker: {

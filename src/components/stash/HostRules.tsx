@@ -143,7 +143,7 @@ export const HostRules = memo(function HostRules() {
                       printWindow.document.write(`
                         <html>
                           <head>
-                            <title>StashSaarthi — ${isHi ? "वरिष्ठ होस्ट गृह नियम समझौता" : "Senior Host House Norms Agreement"}</title>
+                            <title>StashSaarthi — ${isHi ? "वरिष्ठ होस्ट गृह नियम समझौता" : "Verified PG Owner Host House Norms Agreement"}</title>
                             <style>
                               body { font-family: sans-serif; padding: 40px; color: #111; }
                               h1 { color: #d97706; border-bottom: 2px solid #f59e0b; padding-bottom: 10px; }
@@ -156,7 +156,7 @@ export const HostRules = memo(function HostRules() {
                           <body>
                             <h1>${isHi ? "स्टैशसारथी गृह नियम एवं सुरक्षा चार्टर" : "StashSaarthi House Norms & Safety Charter"}</h1>
                             <div class="badge">${isHi ? "आधिकारिक होस्ट समझौता · सत्यापित छात्र प्रति" : "Official Host Agreement · Verified Tenant Copy"}</div>
-                            <p><strong>${isHi ? "सीनियर होस्ट प्रॉपर्टी कोड:" : "Senior Host Property Code:"}</strong> KNP-HOST-NODE-2026</p>
+                            <p><strong>${isHi ? "सीनियर होस्ट प्रॉपर्टी कोड:" : "Verified PG Owner Host Property Code:"}</strong> KNP-HOST-NODE-2026</p>
                             <p>${isHi ? `किराएदार निम्नलिखित ${activeCount} सक्रिय गृह नियमों को बिना शर्त स्वीकार करता है:` : `The tenant acknowledges and unconditionally agrees to the following ${activeCount} active house rules:`}</p>
                             ${rules
                               .filter((_, idx) => activeRules[idx])
@@ -171,7 +171,7 @@ export const HostRules = memo(function HostRules() {
                               .join("")}
                             <div class="guarantee">
                               <strong>${isHi ? "24-घंटे रीलोकेशन गारंटी (SLA):" : "24-Hour Relocation SLA Guarantee:"}</strong>
-                              <p style="margin: 4px 0 0; font-size: 12px; color: #065f46;">${isHi ? "किसी भी नियम उल्लंघन पर सार्थी ऑपरेशंस द्वारा 24 घंटे के भीतर छात्र का तत्काल रीलोकेशन, जिससे सीनियर होस्ट के किराए का शून्य नुकसान होता है।" : "Violations trigger immediate 24h student relocation by StashSaarthi operations with zero loss of rent to the senior host."}</p>
+                              <p style="margin: 4px 0 0; font-size: 12px; color: #065f46;">${isHi ? "किसी भी नियम उल्लंघन पर सार्थी ऑपरेशंस द्वारा 24 घंटे के भीतर छात्र का तत्काल रीलोकेशन, जिससे सीनियर होस्ट के किराए का शून्य नुकसान होता है।" : "Violations trigger immediate 24h student relocation by StashSaarthi operations with zero loss of rent to the verified PG owner host."}</p>
                             </div>
                             <div class="footer">
                               ${isHi ? "स्टैशसारथी अंतर-पीढ़ी लिविंग प्लेटफॉर्म · 24×7 ऑपरेशंस डेस्क: +91 9369454350 · info@stashsaarthi.in" : "StashSaarthi Intergenerational Living Platform · 24×7 Operations Desk: +91 9369454350 · info@stashsaarthi.in"}

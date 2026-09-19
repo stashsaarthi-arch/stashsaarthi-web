@@ -7,7 +7,7 @@ const MOTION_CONFIG: HubConfig = {
   coachingName: "Motion Coaching",
   tagline: "Pure Homestyle Tiffin Service 120m from Motion Coaching Kakadeo",
   heroDescription:
-    "Pure homestyle tiffin service cooked by verified senior mothers in Kakadeo Kanpur. Located just 120 meters from Motion Coaching Main Building. Pure desi ghee rotis, zero palm oil, and 1-tap meal pause during JEE/NEET test series.",
+    "Pure homestyle tiffin service cooked by verified verified PG owner mothers in Kakadeo Kanpur. Located just 120 meters from Motion Coaching Main Building. Pure desi ghee rotis, zero palm oil, and 1-tap meal pause during JEE/NEET test series.",
   distance: "120 meters",
   walkingTime: "2-min walk",
   nearbyLandmarks: [
@@ -19,10 +19,10 @@ const MOTION_CONFIG: HubConfig = {
   canonicalUrl: "https://stashsaarthi-web.vercel.app/tiffin-services-near-motion",
   metaTitle: "Tiffin Service Near Motion Coaching Kakadeo Kanpur | Homestyle Thali ₹50",
   metaDescription:
-    "Best home-cooked tiffin service near Motion Coaching Kakadeo Kanpur. Pure homestyle thali from ₹50 cooked by senior mothers. 100% hygienic, zero palm oil, 1-tap pause feature for NEET/JEE students.",
+    "Best home-cooked tiffin service near Motion Coaching Kakadeo Kanpur. Pure homestyle thali from ₹50 cooked by verified PG owner mothers. 100% hygienic, zero palm oil, 1-tap pause feature for NEET/JEE students.",
   metaKeywords:
     "tiffin service near Motion coaching Kakadeo, Motion coaching Kanpur mess, home cooked thali near Motion Kakadeo, ghar ka swaad tiffin Motion Kanpur, cheap tiffin Kakadeo ₹50, student thali Motion coaching",
-  chefName: "Shanti Senior Home Kitchen (Motion Lane)",
+  chefName: "Shanti Verified PG Owner Home Kitchen (Motion Lane)",
   chefBio: "Cooking nutritious home meals for NEET & JEE aspirants in Kakadeo for over 14 years. Specializes in light digestible dal fry & pure desi ghee rotis.",
   rating: 4.9,
   totalOrders: "12,400+",

@@ -27,7 +27,7 @@ export function MatchDrawer({
   open: boolean;
   onOpenChange: (v: boolean) => void;
   city?: string;
-  presetRole?: "student" | "senior";
+  presetRole?: "student" | "verified PG owner";
 }) {
   const { language } = useLanguage();
   const isHi = language === "hi";
@@ -176,7 +176,7 @@ export function MatchDrawer({
             label={
               isHi
                 ? "आप किस तरह का साथ / सहायता ढूंढ रहे हैं?"
-                : "What kind of companionship are you looking for?"
+                : "What kind of zero-brokerage ecosystem are you looking for?"
             }
           >
             <Textarea

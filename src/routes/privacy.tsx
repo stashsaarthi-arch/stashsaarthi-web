@@ -179,7 +179,7 @@ function PrivacyPage() {
               <p>
                 {isHi
                   ? "स्टैशसारथी ('हम', 'हमारा' या 'प्लेटफ़ॉर्म') उपयोगकर्ताओं की गोपनीयता को सर्वोच्च प्राथमिकता देता है। हम छात्रों और बुजुर्ग सीनियर होस्ट्स के बीच सुरक्षित माइक्रो-स्टोरेज और आवास नेटवर्क संचालित करते हैं।"
-                  : "StashSaarthi Technologies ('we', 'us', or 'our') operates India's intergenerational micro-storage and co-living platform. We respect the personal data of all students, campus captains, senior hosts, and partners. This policy outlines how your data is collected, protected, and processed under India's Digital Personal Data Protection (DPDP) Act 2023."}
+                  : "StashSaarthi Technologies ('we', 'us', or 'our') operates India's intergenerational micro-storage and co-living platform. We respect the personal data of all students, campus captains, premium hosts, and partners. This policy outlines how your data is collected, protected, and processed under India's Digital Personal Data Protection (DPDP) Act 2023."}
               </p>
               <ul className="list-disc pl-5 space-y-1.5 text-xs text-muted-foreground">
                 <li>
@@ -207,7 +207,7 @@ function PrivacyPage() {
                   <p className="text-muted-foreground">Name, mobile phone number, official college email, college ID/hostel registration for student discount verification, and destination campus locality.</p>
                 </div>
                 <div className="rounded-xl border border-white/10 bg-black/40 p-3">
-                  <h3 className="font-bold text-amber-400 mb-1">B. Senior Host & Node Details</h3>
+                  <h3 className="font-bold text-amber-400 mb-1">B. Verified PG Owner Host & Node Details</h3>
                   <p className="text-muted-foreground">Host name, address in Kanpur/Lucknow, Aadhaar biometric verification proof, bank account details for weekly escrow payouts, and property safety photos.</p>
                 </div>
                 <div className="rounded-xl border border-white/10 bg-black/40 p-3">
@@ -221,7 +221,7 @@ function PrivacyPage() {
                 <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-3 sm:col-span-2">
                   <h3 className="font-bold text-emerald-300 mb-1">E. Client-Side Predictive AI & Scroll Behavior Telemetry</h3>
                   <p className="text-emerald-100/90">
-                    To deliver zero-lag persona auto-adaptation (Student vs Senior Host mode), our client-side lightweight neural network analyzes scroll velocity, section dwell time ratios, hover frequencies, and direction reversals directly inside your browser memory. <strong>100% Local Execution:</strong> Zero biometric data, zero personal profile records, and zero behavioral logs are ever sent to remote servers or external AI model providers.
+                    To deliver zero-lag persona auto-adaptation (Student vs Verified PG Owner Host mode), our client-side lightweight neural network analyzes scroll velocity, section dwell time ratios, hover frequencies, and direction reversals directly inside your browser memory. <strong>100% Local Execution:</strong> Zero biometric data, zero personal profile records, and zero behavioral logs are ever sent to remote servers or external AI model providers.
                   </p>
                 </div>
               </div>

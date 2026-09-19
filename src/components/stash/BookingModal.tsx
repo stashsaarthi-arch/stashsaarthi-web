@@ -1127,7 +1127,7 @@ export function BookingModal({
                             Smartphone & Tech Assistance for Seniors
                           </option>
                           <option value="evening_walks">
-                            Evening Walks & Social Companionship
+                            Evening Walks & Social Zero-Brokerage Ecosystem
                           </option>
                           <option value="tutoring">Academic Tutoring for Host Family</option>
                         </select>
@@ -1167,7 +1167,7 @@ export function BookingModal({
                           className="w-full mt-1.5 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white cursor-pointer"
                         >
                           <option value="host_safety_audit">
-                            4-Tier Senior Host Safety & CCTV Audit
+                            4-Tier Verified PG Owner Host Safety & CCTV Audit
                           </option>
                           <option value="student_clearance">
                             Student Police & College ID Verification

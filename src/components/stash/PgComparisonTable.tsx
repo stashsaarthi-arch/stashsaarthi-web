@@ -100,7 +100,7 @@ const COMPARISON_ROWS: ComparisonRow[] = [
       negativePoint: "Heavy Broker Extortion",
     },
     stashSaarthi: {
-      en: "Zero Brokerage. Direct connection to verified senior host family homes",
+      en: "Zero Brokerage. Direct connection to verified verified PG owner host family homes",
       hi: "0% ब्रोकरेज। सत्यापित वरिष्ठ नागरिक परिवारों से सीधा कनेक्शन",
       highlight: "100% Broker-Free",
     },
@@ -181,9 +181,9 @@ const COMPARISON_ROWS: ComparisonRow[] = [
       negativePoint: "Noisy & Cramped",
     },
     stashSaarthi: {
-      en: "Warm family environment, quiet study hours, dignified senior companionship",
+      en: "Warm family environment, quiet study hours, tech-enabled verified PG owner zero-brokerage ecosystem",
       hi: "पारिवारिक माहौल, शांत अध्ययन समय, सम्मानित वरिष्ठ नागरिकों का साथ",
-      highlight: "Dignified Family Vibe",
+      highlight: "Tech-Enabled Family Vibe",
     },
     benefitBadge: {
       en: "Quiet Study Hub",
@@ -300,7 +300,7 @@ export const PgComparisonTable: React.FC<PgComparisonTableProps> = ({ onBook }) 
           <p className="mt-2 text-sm sm:text-base text-muted-foreground">
             {isHindi
               ? "जानिए क्यों कानपुर के 1,200+ छात्र और वरिष्ठ नागरिक शोषक ब्रोकर फीस और खाली कमरे के मृत-किराए की जगह स्टैशसारथी चुनते हैं।"
-              : "See why 1,200+ students and senior hosts in Kanpur choose StashSaarthi over predatory PG lock-ins & empty room dead-rent."}
+              : "See why 1,200+ students and premium hosts in Kanpur choose StashSaarthi over predatory PG lock-ins & empty room dead-rent."}
           </p>
         </div>
 
@@ -363,13 +363,13 @@ export const PgComparisonTable: React.FC<PgComparisonTableProps> = ({ onBook }) 
             <thead>
               <tr className="border-b border-border bg-muted/40 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                 <th className="py-4 px-6 w-1/3">{isHindi ? "फ़ीचर और विवरण" : "Feature & Evaluation"}</th>
-                <th className="py-4 px-6 w-1/3 bg-rose-500/5 text-rose-600 dark:text-rose-400 border-l border-r border-border/40">
+                <th className="py-4 px-6 w-1/3 bg-rose-950/40 border border-white/10 text-rose-600 dark:text-rose-400">
                   <div className="flex items-center gap-2">
                     <Building2 className="w-4 h-4 text-rose-500" />
                     <span>{isHindi ? "पारंपरिक PGs / कमर्शियल हॉस्टल" : "Traditional PGs / Hostels"}</span>
                   </div>
                 </th>
-                <th className="py-4 px-6 w-1/3 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-bold">
+                <th className="py-4 px-6 w-1/3 bg-emerald-950/40 border border-white/10 text-emerald-600 dark:text-emerald-400 font-bold">
                   <div className="flex items-center gap-2">
                     <ShieldCheck className="w-4.5 h-4.5 text-emerald-500" />
                     <span>{isHindi ? "स्टैशसारथी नेटवर्क (StashSaarthi)" : "StashSaarthi Network"}</span>
@@ -407,7 +407,7 @@ export const PgComparisonTable: React.FC<PgComparisonTableProps> = ({ onBook }) 
                     </td>
 
                     {/* Traditional PG Cell */}
-                    <td className="py-4 px-6 align-top bg-rose-500/5 dark:bg-rose-950/10 border-l border-r border-border/40 text-muted-foreground">
+                    <td className="py-4 px-6 align-top bg-rose-950/40 border border-white/10 text-muted-foreground">
                       <div className="flex items-start gap-2">
                         <X className="w-4 h-4 text-rose-500 shrink-0 mt-0.5" />
                         <div>
@@ -422,7 +422,7 @@ export const PgComparisonTable: React.FC<PgComparisonTableProps> = ({ onBook }) 
                     </td>
 
                     {/* StashSaarthi Winner Cell */}
-                    <td className="py-4 px-6 align-top bg-emerald-500/5 dark:bg-emerald-950/20 text-foreground font-medium relative">
+                    <td className="py-4 px-6 align-top bg-emerald-950/40 border border-white/10 text-foreground font-medium relative">
                       <div className="flex items-start gap-2">
                         <Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5 stroke-[3]" />
                         <div>
@@ -444,13 +444,13 @@ export const PgComparisonTable: React.FC<PgComparisonTableProps> = ({ onBook }) 
         </div>
 
         {/* Mobile & Tablet Card-Based Comparison View */}
-        <div className="block lg:hidden space-y-4">
+        <div className="flex lg:hidden overflow-x-auto snap-x snap-mandatory gap-4 no-scrollbar pb-4">
           {filteredRows.map((row) => {
             const IconComponent = row.icon;
             return (
               <div
                 key={row.id}
-                className="rounded-xl border border-border/80 bg-card p-4 shadow-sm hover:shadow-md transition-shadow"
+                className="w-80 min-w-[85vw] snap-center shrink-0 rounded-xl border border-border/80 bg-card p-4 shadow-sm hover:shadow-md transition-shadow"
               >
                 {/* Header Feature Title */}
                 <div className="flex items-center justify-between gap-2 border-b border-border/60 pb-3 mb-3">
@@ -472,7 +472,7 @@ export const PgComparisonTable: React.FC<PgComparisonTableProps> = ({ onBook }) 
                 {/* Grid Comparison */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {/* Traditional PG */}
-                  <div className="p-3 rounded-lg bg-rose-500/5 dark:bg-rose-950/20 border border-rose-500/20">
+                  <div className="p-3 rounded-lg bg-rose-950/40 border border-white/10">
                     <div className="flex items-center gap-1.5 text-xs font-bold text-rose-600 dark:text-rose-400 mb-1">
                       <X className="w-3.5 h-3.5" />
                       <span>{isHindi ? "पारंपरिक PGs" : "Traditional PG"}</span>
@@ -483,7 +483,7 @@ export const PgComparisonTable: React.FC<PgComparisonTableProps> = ({ onBook }) 
                   </div>
 
                   {/* StashSaarthi */}
-                  <div className="p-3 rounded-lg bg-emerald-500/10 dark:bg-emerald-950/40 border border-emerald-500/30">
+                  <div className="p-3 rounded-lg bg-emerald-950/40 border border-white/10">
                     <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-500 mb-1">
                       <Check className="w-3.5 h-3.5 stroke-[3]" />
                       <span>{isHindi ? "स्टैशसारथी नेटवर्क" : "StashSaarthi"}</span>

@@ -301,7 +301,7 @@ export const VisionAiPhotoVerifier = memo(function VisionAiPhotoVerifier() {
                         {result.isApproved
                           ? isHi
                             ? "सत्यापित सीनियर होस्ट नोड पास"
-                            : "Approved: Verified Senior Host Node"
+                            : "Approved: Verified Verified PG Owner Host Node"
                           : isHi
                           ? "कार्रवाई आवश्यक: सुधार की आवश्यकता"
                           : "Action Required: Adjust Property Photo"}

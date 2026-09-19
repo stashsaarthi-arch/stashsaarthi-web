@@ -138,7 +138,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         property: "og:description",
         content:
-          "Official website of StashSaarthi. Vacation luggage storage at ₹300/bag/mo, verified senior-hosted rooms, and homemade tiffins.",
+          "Official website of StashSaarthi. Vacation luggage storage at ₹300/bag/mo, verified verified PG owner-hosted rooms, and homemade tiffins.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://stashsaarthi-web.vercel.app" },
@@ -157,7 +157,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "twitter:description",
         content:
-          "Official website of StashSaarthi. Vacation luggage storage at ₹300/bag/mo, verified senior-hosted rooms, and homemade tiffins.",
+          "Official website of StashSaarthi. Vacation luggage storage at ₹300/bag/mo, verified verified PG owner-hosted rooms, and homemade tiffins.",
       },
       {
         name: "twitter:image",
@@ -422,7 +422,7 @@ function RootShell({ children }: { children: ReactNode }) {
           }}
         />
       </head>
-      <body>
+      <body className="pb-24 sm:pb-0">
         {children}
         <Scripts />
       </body>

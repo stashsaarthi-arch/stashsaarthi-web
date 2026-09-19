@@ -66,7 +66,7 @@ export const HostVettingFlow = memo(function HostVettingFlow() {
         "Instant biometric Aadhaar e-KYC verification",
         "Local Kanpur Police station background clearance audit",
         "Property ownership deed or registered long-term lease audit",
-        "Senior host family interview & neighborhood reference check",
+        "Verified PG Owner host family interview & neighborhood reference check",
       ],
       checksHi: [
         "तत्काल बायोमेट्रिक आधार e-KYC सत्यापन",
@@ -116,7 +116,7 @@ export const HostVettingFlow = memo(function HostVettingFlow() {
       accentColor: "#F59E0B",
       checksEn: [
         "TPA Section 105 host waiver & non-interference charter agreement",
-        "Binding Senior Host House Rules agreement (quiet hours, zero intrusion)",
+        "Binding Verified PG Owner Host House Rules agreement (quiet hours, zero intrusion)",
         "₹10,000 damage & loss protection policy binding",
         "Direct digital bank escrow account link (0% listing fee guarantee)",
       ],
@@ -183,7 +183,7 @@ export const HostVettingFlow = memo(function HostVettingFlow() {
           <p className="mt-1.5 text-xs sm:text-sm text-muted-foreground max-w-2xl mx-auto">
             {isHi
               ? "कानपुर में प्रत्येक सीनियर होस्ट नोड को हमारे नेटवर्क पर सूचीबद्ध होने से पहले 4-स्तरीय बायोमेट्रिक, कानूनी और भौतिक सुरक्षा जांच से गुजरना अनिवार्य है।"
-              : "Every senior host node undergoes a mandatory 4-stage biometric, legal, and physical inspection before receiving active campus clearance."}
+              : "Every verified PG owner host node undergoes a mandatory 4-stage biometric, legal, and physical inspection before receiving active campus clearance."}
           </p>
         </div>
       </AnimatedContent>

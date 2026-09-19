@@ -46,7 +46,7 @@ const PredictivePersonaWidget = lazy(() => import("@/components/stash/Predictive
 
 const TITLE = "StashSaarthi - Campus Micro-Storage & Zero-Brokerage Co-Living";
 const DESC =
-  "Official website of StashSaarthi. India's Zero-CapEx Intergenerational Living & Campus Micro-Storage Platform. Vacation luggage storage at ₹300/bag/mo, verified senior-hosted rooms, and homemade tiffins.";
+  "Official website of StashSaarthi. India's Zero-CapEx Intergenerational Living & Campus Micro-Storage Platform. Vacation luggage storage at ₹300/bag/mo, verified verified PG owner-hosted rooms, and homemade tiffins.";
 const URL = "https://stashsaarthi-web.vercel.app/";
 const OG_IMAGE = "https://stashsaarthi-web.vercel.app/images/og-banner-new.png";
 
@@ -306,7 +306,7 @@ function Index() {
         </ErrorBoundary>
       </Suspense>
       <ErrorBoundary sectionName="Mobile Sticky CTA Widget" compact>
-        <MobileStickyCTA onBook={open} />
+        <MobileStickyCTA />
       </ErrorBoundary>
       <ErrorBoundary sectionName="WhatsApp Floating Action Button" compact>
         <WhatsAppButton onBook={open} />

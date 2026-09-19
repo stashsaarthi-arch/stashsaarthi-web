@@ -7,7 +7,7 @@
  * Features:
  * - 6-Digit Cryptographic OTP & QR Retrieval Pass generation
  * - Proxy Identity Verification (College ID / Aadhaar last 4 digits)
- * - Nodal Runner & Senior Host Handover Authorization
+ * - Nodal Runner & Verified PG Owner Host Handover Authorization
  * - Immutable Audit Trail & WhatsApp Telemetry
  */
 

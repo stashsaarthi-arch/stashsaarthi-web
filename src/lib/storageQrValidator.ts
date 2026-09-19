@@ -37,7 +37,7 @@ export function verifyStorageQrCode(
         role === "student"
           ? "View Student Digital Custody Pass"
           : role === "host"
-          ? "Verify Senior Host Node Intake"
+          ? "Verify Verified PG Owner Host Node Intake"
           : "Audit Operational Escrow & Itemization Log",
     };
   }
@@ -46,7 +46,7 @@ export function verifyStorageQrCode(
     role === "student"
       ? `Student ${foundBooking.name} verified active storage reservation (${foundBooking.bags || 1} bags).`
       : role === "host"
-      ? `Senior Host Node verified physical intake of ${foundBooking.bags || 1} luggage items.`
+      ? `Verified PG Owner Host Node verified physical intake of ${foundBooking.bags || 1} luggage items.`
       : `Admin Operations audited Escrow UPI ₹${foundBooking.amount} and barcode custody logs.`;
 
   return {

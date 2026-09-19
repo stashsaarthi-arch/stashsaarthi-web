@@ -53,7 +53,7 @@ const INITIAL_KITCHENS: TopKitchen[] = [
   {
     id: "annapurna",
     rank: 1,
-    name: "Annapurna Senior Home Kitchen",
+    name: "Annapurna Verified PG Owner Home Kitchen",
     nameHi: "अन्नपूर्णा सीनियर होम किचन",
     location: "Kakadeo Coaching Belt (PW & Allen 80m)",
     locationHi: "काकादेव कोचिंग बेल्ट (PW एवं एलन से 80 मी)",
@@ -173,7 +173,7 @@ export const TopRatedKitchensWidget: React.FC<TopRatedKitchensWidgetProps> = ({
     toast.success(
       isHi
         ? "आपका वोट दर्ज हो गया है! कानपुर की वरिष्ठ माताओं के होम किचन का समर्थन करने के लिए धन्यवाद।"
-        : "Your student vote has been recorded! Thank you for supporting verified senior home kitchens."
+        : "Your student vote has been recorded! Thank you for supporting verified verified PG owner home kitchens."
     );
   };
 
@@ -230,7 +230,7 @@ export const TopRatedKitchensWidget: React.FC<TopRatedKitchensWidgetProps> = ({
             <p className="text-slate-300 text-sm md:text-base mt-2 max-w-2xl">
               {isHi
                 ? "कानपुर (काकादेव, IITK, CSJMU, HBTI) के छात्रों द्वारा चुनी गई सर्वोत्तम वरिष्ठ माताओं की रसोईयाँ। शुद्ध देसी घी, शून्य मिलावट एवं 100% हाइजीन।"
-                : "Voted by verified students across Kanpur campuses. Authentic home-cooked meals prepared with love by senior mother chefs."}
+                : "Voted by verified students across Kanpur campuses. Authentic home-cooked meals prepared with love by verified PG owner mother chefs."}
             </p>
           </div>
 
@@ -253,7 +253,7 @@ export const TopRatedKitchensWidget: React.FC<TopRatedKitchensWidgetProps> = ({
               className="px-4 py-3 rounded-2xl bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/40 text-amber-300 font-semibold text-sm transition-all flex items-center justify-center gap-2 shadow-lg"
             >
               <ChefHat className="w-4 h-4" />
-              {isHi ? "वरिष्ठ रसोई नामंकित करें" : "Nominate Senior Kitchen"}
+              {isHi ? "वरिष्ठ रसोई नामंकित करें" : "Nominate Verified PG Owner Kitchen"}
             </button>
           </div>
         </div>
@@ -437,12 +437,12 @@ export const TopRatedKitchensWidget: React.FC<TopRatedKitchensWidgetProps> = ({
           </div>
           <div>
             <div className="font-bold text-white text-sm">
-              {isHi ? "100% खाद्य सुरक्षा एवं वरिष्ठ सम्मान गारंटी" : "100% Food Safety & Senior Dignity Assurance"}
+              {isHi ? "100% खाद्य सुरक्षा एवं वरिष्ठ सम्मान गारंटी" : "100% Food Safety & Verified PG Owner Dignity Assurance"}
             </div>
             <p className="text-slate-400 mt-0.5">
               {isHi
                 ? "प्रत्येक रसोई का 3-स्तरीय ऑडिट होता है (FSSAI मानक, RO जल परीक्षण, एवं ताज़ी सामग्री प्रमाणन)। 100% राशि सीधे वरिष्ठ माता के खाते में हस्तांतरित होती है।"
-                : "Every kitchen node undergoes 3-tier audit (FSSAI hygiene norms, RO water test & fresh ingredient check). Direct escrow payouts to senior hosts."}
+                : "Every kitchen node undergoes 3-tier audit (FSSAI hygiene norms, RO water test & fresh ingredient check). Direct escrow payouts to premium hosts."}
             </p>
           </div>
         </div>
@@ -464,18 +464,18 @@ export const TopRatedKitchensWidget: React.FC<TopRatedKitchensWidgetProps> = ({
           <div className="bg-slate-900 border border-slate-700 rounded-3xl p-6 md:p-8 max-w-lg w-full relative shadow-2xl animate-in fade-in zoom-in-95">
             <h3 className="text-xl font-extrabold text-white mb-1 flex items-center gap-2">
               <ChefHat className="w-5 h-5 text-amber-400" />
-              {isHi ? "वरिष्ठ गृहणी रसोई नामांकित करें" : "Nominate a Senior Home Kitchen"}
+              {isHi ? "वरिष्ठ गृहणी रसोई नामांकित करें" : "Nominate a Verified PG Owner Home Kitchen"}
             </h3>
             <p className="text-xs text-slate-400 mb-6">
               {isHi
                 ? "क्या आपके पड़ोस में कोई वरिष्ठ नागरिक हैं जो छात्रों के लिए स्वादिष्ट, शुद्ध भोजन बनाते हैं? उनका नाम दर्ज करें, हमारी टीम 24 घंटे में संपर्क करेगी।"
-                : "Know a senior citizen in Kanpur who prepares delicious home-cooked meals for students? Nominate them for zero-capex onboarding."}
+                : "Know a premium host in Kanpur who prepares delicious home-cooked meals for students? Nominate them for zero-capex onboarding."}
             </p>
 
             <form onSubmit={handleNominateSubmit} className="space-y-4">
               <div>
                 <label className="block text-xs font-bold text-slate-300 mb-1">
-                  {isHi ? "वरिष्ठ होस्ट का नाम *" : "Senior Host Name *"}
+                  {isHi ? "वरिष्ठ होस्ट का नाम *" : "Verified PG Owner Host Name *"}
                 </label>
                 <input
                   type="text"

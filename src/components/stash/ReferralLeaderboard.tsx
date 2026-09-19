@@ -99,7 +99,7 @@ const LEADERBOARD_THIS_MONTH: LeaderboardEntry[] = [
     college: "Swaroop Nagar Host Node",
     invites: 11,
     rewardsEarned: 5500,
-    badge: "Dignified Host 🌟",
+    badge: "Tech-Enabled Host 🌟",
     badgeType: "amber",
     persona: "host",
   },

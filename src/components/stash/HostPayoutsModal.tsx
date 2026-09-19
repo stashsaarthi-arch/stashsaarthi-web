@@ -414,7 +414,7 @@ export const HostPayoutsModal: React.FC<HostPayoutsModalProps> = ({
                       <option value="stash">Saarthi Stash (Luggage Micro-Storage @ 60% Host Share)</option>
                       <option value="spaces">Saarthi Spaces (Zero-Brokerage Room @ 95% Host Share)</option>
                       <option value="kitchen">Saarthi Kitchen (Home Tiffin @ ₹55/meal Host Share)</option>
-                      <option value="connect">Saarthi Connect (Senior Mentorship @ 80% Host Share)</option>
+                      <option value="connect">Saarthi Connect (Verified PG Owner Mentorship @ 80% Host Share)</option>
                     </select>
                   </div>
 

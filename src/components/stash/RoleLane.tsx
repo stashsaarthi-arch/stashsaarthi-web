@@ -142,15 +142,17 @@ export const RoleLane = memo(function RoleLane({ role, onBook }: { role: Role; o
                     </div>
                   </div>
 
-                  <Slider
-                    defaultValue={[33]}
+                  <input
+                    type="range"
+                    min={0}
                     max={100}
                     step={1}
-                    className="py-1.5"
-                    onValueChange={(vals: number[]) => setHostSpace(vals?.[0] ?? 33)}
+                    value={hostSpace}
+                    onChange={(e) => setHostSpace(Number(e.target.value))}
+                    className="w-full h-2 bg-amber-950/50 rounded-lg appearance-none cursor-pointer accent-amber-400 my-1.5"
                   />
 
-                  <div className="flex justify-between text-xs font-medium text-muted-foreground mt-1">
+                  <div className="w-full flex justify-between text-xs font-medium text-muted-foreground mt-1 px-1">
                     <span>{t.roleLane.host.simulator.corner}</span>
                     <span>{t.roleLane.host.simulator.verandah}</span>
                     <span>{t.roleLane.host.simulator.fullRoom}</span>

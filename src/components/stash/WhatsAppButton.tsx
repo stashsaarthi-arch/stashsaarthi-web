@@ -86,13 +86,13 @@ export const WhatsAppButton = memo(function WhatsAppButton({ onBook }: { onBook:
                   handleWhatsAppClick(
                     isHi
                       ? "नमस्ते StashSaarthi, मैं सत्यापित सीनियर-होस्टेड कमरा ढूंढ रहा/रही हूं।"
-                      : "Hi StashSaarthi, I'm looking for a verified senior-hosted room.",
+                      : "Hi StashSaarthi, I'm looking for a verified verified PG owner-hosted room.",
                   )
                 }
                 className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-left text-xs font-medium text-white/90 hover:bg-white/10 transition-colors cursor-pointer"
               >
                 <Home className="h-4 w-4 text-[#25D366]" />
-                {isHi ? "सत्यापित सीनियर कमरा खोजें" : "Find Verified Senior Room"}
+                {isHi ? "सत्यापित सीनियर कमरा खोजें" : "Find Verified Verified PG Owner Room"}
               </button>
               <button
                 onClick={() => {
