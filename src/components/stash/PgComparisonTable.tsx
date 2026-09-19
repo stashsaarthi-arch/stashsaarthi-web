@@ -306,7 +306,7 @@ export const PgComparisonTable: React.FC<PgComparisonTableProps> = ({ onBook }) 
 
         {/* Highlight Stats Banner */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-8">
-          <div className="p-3 sm:p-4 rounded-xl bg-card border border-border/80 shadow-sm flex flex-col justify-center items-center text-center">
+          <div className="p-3 sm:p-4 rounded-[2rem] bg-card border border-border/80 shadow-sm flex flex-col justify-center items-center text-center">
             <span className="text-xs text-muted-foreground font-medium uppercase">
               {isHindi ? "औसत डेड-रेंट बचत" : "Avg Dead-Rent Saved"}
             </span>
@@ -314,7 +314,7 @@ export const PgComparisonTable: React.FC<PgComparisonTableProps> = ({ onBook }) 
               ₹6,400 <span className="text-xs font-normal text-muted-foreground">/ break</span>
             </span>
           </div>
-          <div className="p-3 sm:p-4 rounded-xl bg-card border border-border/80 shadow-sm flex flex-col justify-center items-center text-center">
+          <div className="p-3 sm:p-4 rounded-[2rem] bg-card border border-border/80 shadow-sm flex flex-col justify-center items-center text-center">
             <span className="text-xs text-muted-foreground font-medium uppercase">
               {isHindi ? "ब्रोकरेज फीस" : "Brokerage Fee"}
             </span>
@@ -322,7 +322,7 @@ export const PgComparisonTable: React.FC<PgComparisonTableProps> = ({ onBook }) 
               ₹0 <span className="text-xs font-normal text-muted-foreground">(Direct Host)</span>
             </span>
           </div>
-          <div className="p-3 sm:p-4 rounded-xl bg-card border border-emerald-500/40 bg-emerald-500/5 shadow-sm flex flex-col justify-center items-center text-center">
+          <div className="p-3 sm:p-4 rounded-[2rem] bg-card border border-emerald-500/40 bg-emerald-500/5 shadow-sm flex flex-col justify-center items-center text-center">
             <span className="text-xs text-emerald-400 font-bold uppercase flex items-center gap-1">
               ⚡ {isHindi ? "रद्दीकरण नीति" : "Cancellation Fee"}
             </span>
@@ -330,7 +330,7 @@ export const PgComparisonTable: React.FC<PgComparisonTableProps> = ({ onBook }) 
               ₹0 <span className="text-xs font-normal text-emerald-300/80">(Zero Fee Guarantee)</span>
             </span>
           </div>
-          <div className="p-3 sm:p-4 rounded-xl bg-card border border-border/80 shadow-sm flex flex-col justify-center items-center text-center">
+          <div className="p-3 sm:p-4 rounded-[2rem] bg-card border border-border/80 shadow-sm flex flex-col justify-center items-center text-center">
             <span className="text-xs text-muted-foreground font-medium uppercase">
               {isHindi ? "लॉक-इन पेनल्टी" : "Lock-in Penalty"}
             </span>
@@ -358,7 +358,7 @@ export const PgComparisonTable: React.FC<PgComparisonTableProps> = ({ onBook }) 
         </div>
 
         {/* Comparison Table Component for Desktop & Tablet */}
-        <div className="hidden lg:block overflow-hidden rounded-2xl border border-border/80 bg-card/60 backdrop-blur-md shadow-xl">
+        <div className="hidden lg:block overflow-hidden rounded-[2rem] border border-border/80 bg-card/60 backdrop-blur-md shadow-xl">
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="border-b border-border bg-muted/40 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
@@ -450,7 +450,7 @@ export const PgComparisonTable: React.FC<PgComparisonTableProps> = ({ onBook }) 
             return (
               <div
                 key={row.id}
-                className="w-80 min-w-[85vw] snap-center shrink-0 rounded-xl border border-border/80 bg-card p-4 shadow-sm hover:shadow-md transition-shadow"
+                className="w-80 min-w-[85vw] snap-center shrink-0 rounded-[2rem] border border-border/80 bg-card p-4 shadow-sm hover:shadow-md transition-shadow"
               >
                 {/* Header Feature Title */}
                 <div className="flex items-center justify-between gap-2 border-b border-border/60 pb-3 mb-3">
@@ -469,10 +469,9 @@ export const PgComparisonTable: React.FC<PgComparisonTableProps> = ({ onBook }) 
                   </div>
                 </div>
 
-                {/* Grid Comparison */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {/* Traditional PG */}
-                  <div className="p-3 rounded-lg bg-rose-950/40 border border-white/10">
+                  <div className="p-3 rounded-2xl bg-rose-950/40 border border-white/10">
                     <div className="flex items-center gap-1.5 text-xs font-bold text-rose-600 dark:text-rose-400 mb-1">
                       <X className="w-3.5 h-3.5" />
                       <span>{isHindi ? "पारंपरिक PGs" : "Traditional PG"}</span>
@@ -483,7 +482,7 @@ export const PgComparisonTable: React.FC<PgComparisonTableProps> = ({ onBook }) 
                   </div>
 
                   {/* StashSaarthi */}
-                  <div className="p-3 rounded-lg bg-emerald-950/40 border border-white/10">
+                  <div className="p-3 rounded-2xl bg-emerald-950/40 border border-white/10">
                     <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-500 mb-1">
                       <Check className="w-3.5 h-3.5 stroke-[3]" />
                       <span>{isHindi ? "स्टैशसारथी नेटवर्क" : "StashSaarthi"}</span>

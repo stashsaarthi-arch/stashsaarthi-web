@@ -1,4 +1,4 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -977,9 +977,6 @@ html.light textarea::placeholder {
 }
 
 
-
-
-
-
-
-
+body {
+  background-color: #111827 !important;
+}

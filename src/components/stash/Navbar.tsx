@@ -100,14 +100,15 @@ export const Navbar = memo(function Navbar({
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] ${
         scrolled
-          ? "dark:bg-[#0A0D0F]/90 bg-white/95 backdrop-blur-2xl dark:border-b dark:border-white/[0.08] border-b border-slate-200/80 shadow-2xl dark:shadow-black/70 shadow-slate-900/5"
-          : "dark:bg-[#0A0D0F]/70 bg-white/80 backdrop-blur-md dark:border-b dark:border-white/[0.05] border-b border-slate-200/40"
+          ? "bg-black/30 backdrop-blur-2xl border-b border-white/10 shadow-[0_-10px_40px_rgba(0,0,0,0.5)]"
+          : "bg-black/10 backdrop-blur-md border-b border-white/5"
       }`}
     >
+      <div className="absolute inset-0 bg-emerald-500/10 blur-[80px] -z-10 pointer-events-none" />
       <div
-        className={`max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-4 xl:px-6 w-full flex items-center justify-between gap-1 sm:gap-2 transition-all duration-300 ${
+        className={`max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-4 xl:px-6 w-full flex items-center justify-between gap-1 sm:gap-2 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] ${
           scrolled ? "h-14 sm:h-16" : "h-15 sm:h-20"
         }`}
       >
