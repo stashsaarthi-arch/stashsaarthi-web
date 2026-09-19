@@ -24,11 +24,24 @@ export function PhoneAuth() {
 
   useEffect(() => {
     // Initialize recaptcha verifier
-    if (!window.recaptchaVerifier) {
-      window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
-        size: 'invisible',
-      });
+    if (window.recaptchaVerifier) {
+      try {
+        window.recaptchaVerifier.clear();
+      } catch (e) {
+        // Ignore if already cleared
+      }
     }
+    window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+      size: 'invisible',
+    });
+
+    return () => {
+      if (window.recaptchaVerifier) {
+        try {
+          window.recaptchaVerifier.clear();
+        } catch (e) {}
+      }
+    };
   }, []);
 
   const handleSendOtp = async (e: React.FormEvent) => {
@@ -107,12 +120,13 @@ export function PhoneAuth() {
 
   return (
     <div className="relative w-full max-w-md mx-auto z-10">
+      {/* Hidden recaptcha container placed at the absolute root to avoid conditional re-rendering */}
+      <div id="recaptcha-container" className="absolute pointer-events-none opacity-0" />
+
       {/* Ambient Apple Depth Glow strictly behind the auth container */}
       <div className="absolute inset-0 bg-emerald-500/10 blur-[80px] -z-10 pointer-events-none rounded-[2rem]" />
       
       <div className="bg-black/30 backdrop-blur-xl border border-white/10 rounded-[2rem] p-6 sm:p-8 shadow-2xl relative overflow-hidden">
-        {/* Hidden recaptcha container */}
-        <div id="recaptcha-container"></div>
 
         {error && (
           <div className="mb-4 p-3 bg-red-500/10 border border-red-500/50 rounded-xl text-red-500 text-sm text-center">
