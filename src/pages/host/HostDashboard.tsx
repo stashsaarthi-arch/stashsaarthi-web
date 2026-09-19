@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { LayoutDashboard, Home, CalendarCheck, IndianRupee, AlertCircle, Menu, X, ArrowRight } from 'lucide-react';
 import { Link } from '@tanstack/react-router';
+import { AadhaarKycModal } from '@/components/host/AadhaarKycModal';
 
 export function HostDashboard() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isKycModalOpen, setIsKycModalOpen] = useState(false);
+  const [kycStatus, setKycStatus] = useState<'unverified' | 'pending'>('unverified');
 
   const navItems = [
     { name: 'Overview', icon: LayoutDashboard, active: true },
@@ -68,25 +71,45 @@ export function HostDashboard() {
         </header>
 
         {/* KYC Action Banner */}
-        <div className="mb-8 bg-amber-500/10 border border-amber-500/30 rounded-2xl p-5 md:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-[0_0_30px_-10px_rgba(245,158,11,0.15)] relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
-          
-          <div className="flex items-start gap-4 z-10">
-            <div className="p-2 bg-amber-500/20 rounded-full shrink-0">
-              <AlertCircle className="w-6 h-6 text-amber-500" />
+        {kycStatus === 'unverified' ? (
+          <div className="mb-8 bg-amber-500/10 border border-amber-500/30 rounded-2xl p-5 md:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-[0_0_30px_-10px_rgba(245,158,11,0.15)] relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
+            
+            <div className="flex items-start gap-4 z-10">
+              <div className="p-2 bg-amber-500/20 rounded-full shrink-0">
+                <AlertCircle className="w-6 h-6 text-amber-500" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-amber-50 text-sm md:text-base">Action Required: Aadhaar KYC Pending</h3>
+                <p className="text-amber-200/80 text-xs md:text-sm mt-1 max-w-xl">
+                  Complete your Aadhaar KYC to activate your listing for January. Unverified listings are hidden from students.
+                </p>
+              </div>
             </div>
-            <div>
-              <h3 className="font-semibold text-amber-50 text-sm md:text-base">Action Required: Aadhaar KYC Pending</h3>
-              <p className="text-amber-200/80 text-xs md:text-sm mt-1 max-w-xl">
-                Complete your Aadhaar KYC to activate your listing for January. Unverified listings are hidden from students.
-              </p>
+            
+            <button 
+              onClick={() => setIsKycModalOpen(true)}
+              className="z-10 shrink-0 w-full sm:w-auto px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-amber-950 font-bold rounded-xl text-sm transition-colors shadow-lg shadow-amber-500/20">
+              Verify Aadhaar
+            </button>
+          </div>
+        ) : (
+          <div className="mb-8 bg-blue-500/10 border border-blue-500/30 rounded-2xl p-5 md:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-[0_0_30px_-10px_rgba(59,130,246,0.15)] relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
+            
+            <div className="flex items-start gap-4 z-10">
+              <div className="p-2 bg-blue-500/20 rounded-full shrink-0">
+                <AlertCircle className="w-6 h-6 text-blue-400" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-blue-50 text-sm md:text-base">KYC Under Review</h3>
+                <p className="text-blue-200/80 text-xs md:text-sm mt-1 max-w-xl">
+                  Your documents have been submitted and are currently under verification. We will notify you once approved.
+                </p>
+              </div>
             </div>
           </div>
-          
-          <button className="z-10 shrink-0 w-full sm:w-auto px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-amber-950 font-bold rounded-xl text-sm transition-colors shadow-lg shadow-amber-500/20">
-            Verify Aadhaar
-          </button>
-        </div>
+        )}
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
@@ -138,6 +161,15 @@ export function HostDashboard() {
           onClick={() => setMobileMenuOpen(false)}
         />
       )}
+      
+      <AadhaarKycModal 
+        isOpen={isKycModalOpen} 
+        onClose={() => setIsKycModalOpen(false)} 
+        onSuccess={() => {
+          setKycStatus('pending');
+          setIsKycModalOpen(false);
+        }} 
+      />
     </div>
   );
 }
