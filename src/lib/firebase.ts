@@ -20,9 +20,19 @@ const db = getFirestore(app);
 
 // Initialize Analytics safely on client side
 if (typeof window !== "undefined") {
-  isSupported().then((supported) => {
-    if (supported) getAnalytics(app);
-  });
+  isSupported()
+    .then((supported) => {
+      if (supported) {
+        try {
+          getAnalytics(app);
+        } catch (e) {
+          console.warn("Analytics initialization blocked or failed.", e);
+        }
+      }
+    })
+    .catch((err) => {
+      console.warn("Analytics not supported or blocked.", err);
+    });
 }
 
 export { app, auth, db };

@@ -61,13 +61,21 @@ export function PhoneAuth() {
       setConfirmationResult(confirmation);
       setStep('otp');
     } catch (err: any) {
-      console.error(err);
-      setError(err.message || 'Failed to send OTP. Please try again.');
-      // Reset recaptcha on error
+      console.error("Phone Auth Error:", err);
+      const isBlocked = err.message?.includes('reCAPTCHA') || err.message?.includes('network') || err.message?.includes('Timeout');
+      setError(isBlocked 
+        ? 'Verification blocked by browser. Please disable Ad-Blocker/Shields and try again.'
+        : (err.message || 'Failed to send OTP. Please try again.'));
+        
+      // Safely reset recaptcha on error
       if (window.recaptchaVerifier) {
-        window.recaptchaVerifier.render().then((widgetId: any) => {
-          grecaptcha.reset(widgetId);
-        });
+        try {
+          window.recaptchaVerifier.render().then((widgetId: any) => {
+            grecaptcha.reset(widgetId);
+          }).catch((e) => console.warn("Failed to reset reCAPTCHA:", e));
+        } catch (e) {
+          console.warn("Failed to render reCAPTCHA:", e);
+        }
       }
     } finally {
       setLoading(false);
