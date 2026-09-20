@@ -1,3 +1,6 @@
+- [x] **[Auth & Infrastructure] Task 144: Ad-Blocker Resilience & Error Elimination for Firebase & PhoneAuth — 2026-09-20**:
+  - Disabled Firebase Analytics on localhost/preview to stop `net::ERR_BLOCKED_BY_CLIENT` spam; hardened `PhoneAuth.tsx` with error code mapping and safe reCAPTCHA reset on ad-blocker or network issues.
+
 - [x] **[DevOps & Deployment] Task 143: Production Release Sync & Multi-Platform Deployment (Git & Vercel) — 2026-09-12**:
   - **Build Verification**: `npm run build` executed and passed with 0 errors (Vite production client + Nitro SSR server bundle compiled cleanly in 4.18s).
   - **Git Operations**:

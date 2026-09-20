@@ -22,24 +22,34 @@ export function PhoneAuth() {
 
   const otpRefs = useRef<(HTMLInputElement | null)[]>([]);
 
-  useEffect(() => {
-    // Initialize recaptcha verifier
-    if (window.recaptchaVerifier) {
-      try {
+  const setupRecaptcha = () => {
+    try {
+      if (window.recaptchaVerifier) {
         window.recaptchaVerifier.clear();
-      } catch (e) {
-        // Ignore if already cleared
       }
+      const container = document.getElementById('recaptcha-container');
+      if (!container) return null;
+
+      window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+        size: 'invisible',
+      });
+      return window.recaptchaVerifier;
+    } catch (e) {
+      console.warn("RecaptchaVerifier setup warning:", e);
+      return null;
     }
-    window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
-      size: 'invisible',
-    });
+  };
+
+  useEffect(() => {
+    setupRecaptcha();
 
     return () => {
       if (window.recaptchaVerifier) {
         try {
           window.recaptchaVerifier.clear();
-        } catch (e) {}
+        } catch {
+          // ignore cleanup errors
+        }
       }
     };
   }, []);
@@ -48,35 +58,51 @@ export function PhoneAuth() {
     e.preventDefault();
     setError('');
     
-    if (phone.length !== 10) {
-      setError('Please enter a valid 10-digit number');
+    const cleanPhone = phone.replace(/\D/g, '');
+    if (cleanPhone.length !== 10) {
+      setError('Please enter a valid 10-digit mobile number');
       return;
     }
 
     setLoading(true);
     try {
-      const phoneNumber = `+91${phone}`;
-      const appVerifier = window.recaptchaVerifier;
+      const phoneNumber = `+91${cleanPhone}`;
+      let appVerifier = window.recaptchaVerifier;
+      if (!appVerifier) {
+        appVerifier = setupRecaptcha() as RecaptchaVerifier;
+      }
+
       const confirmation = await signInWithPhoneNumber(auth, phoneNumber, appVerifier);
       setConfirmationResult(confirmation);
       setStep('otp');
     } catch (err: any) {
       console.error("Phone Auth Error:", err);
-      const isBlocked = err.message?.includes('reCAPTCHA') || err.message?.includes('network') || err.message?.includes('Timeout');
-      setError(isBlocked 
-        ? 'Verification blocked by browser. Please disable Ad-Blocker/Shields and try again.'
-        : (err.message || 'Failed to send OTP. Please try again.'));
-        
-      // Safely reset recaptcha on error
-      if (window.recaptchaVerifier) {
-        try {
-          window.recaptchaVerifier.render().then((widgetId: any) => {
-            grecaptcha.reset(widgetId);
-          }).catch((e) => console.warn("Failed to reset reCAPTCHA:", e));
-        } catch (e) {
-          console.warn("Failed to render reCAPTCHA:", e);
-        }
+      const errCode = err?.code || '';
+      const errMsg = err?.message || '';
+
+      const isBlocked = 
+        errCode === 'auth/network-request-failed' ||
+        errCode === 'auth/captcha-check-failed' ||
+        errCode === 'auth/web-storage-unsupported' ||
+        errMsg.includes('reCAPTCHA') ||
+        errMsg.includes('network') ||
+        errMsg.includes('Timeout') ||
+        errMsg.includes('blocked');
+
+      if (isBlocked) {
+        setError('Verification was blocked by your browser extension or shield. Please disable Ad-Blocker/Shields and try again.');
+      } else if (errCode === 'auth/too-many-requests') {
+        setError('Too many attempts. Please wait a few moments and try again.');
+      } else if (errCode === 'auth/invalid-phone-number') {
+        setError('Invalid mobile number format. Please check the 10 digits.');
+      } else if (errCode === 'auth/quota-exceeded') {
+        setError('SMS quota exceeded for today. Please try again later.');
+      } else {
+        setError(errMsg || 'Failed to send OTP. Please try again.');
       }
+        
+      // Safely reset and recreate recaptcha so the user can retry without page refresh
+      setupRecaptcha();
     } finally {
       setLoading(false);
     }
@@ -119,8 +145,15 @@ export function PhoneAuth() {
       // Successful login, redirect to dashboard
       navigate({ to: '/host/dashboard' });
     } catch (err: any) {
-      console.error(err);
-      setError('Invalid OTP. Please try again.');
+      console.error("OTP Verification Error:", err);
+      const errCode = err?.code || '';
+      if (errCode === 'auth/invalid-verification-code') {
+        setError('Incorrect OTP. Please enter the valid 6-digit code.');
+      } else if (errCode === 'auth/code-expired') {
+        setError('OTP has expired. Please go back and request a new code.');
+      } else {
+        setError(err.message || 'Verification failed. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
