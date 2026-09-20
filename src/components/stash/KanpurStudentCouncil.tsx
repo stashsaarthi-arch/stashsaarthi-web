@@ -73,8 +73,8 @@ const COUNCIL_MEMBERS: CouncilMember[] = [
     branchYear: "B.Tech Chemical '25",
     issuesSolved: 11,
     avatar: "RM",
-    badge: "Senior Host Liaison",
-    quote: "Connecting HBTI students directly with verified senior hosts in Swaroop Nagar without broker extortion.",
+    badge: "Verified PG Owner Host Liaison",
+    quote: "Connecting HBTI students directly with verified premium hosts in Swaroop Nagar without broker extortion.",
     quoteHi: "बिना दलालों के शोषण के स्वरूप नगर में एचबीटीआई छात्रों को सीधे सत्यापित वरिष्ठ मेज़बानों से जोड़ना।",
   },
   {
@@ -161,7 +161,7 @@ const INITIAL_PROPOSALS: StudentProposal[] = [
     status: "enforced",
     statusText: "StashSaarthi Policy Enforced",
     statusTextHi: "स्टैशसारथी नीति लागू",
-    councilResponse: "Verified senior home kitchens in Saarthi Kitchen hub now feature mandatory RO filtration audit Badges.",
+    councilResponse: "Verified verified PG owner home kitchens in Saarthi Kitchen hub now feature mandatory RO filtration audit Badges.",
     councilResponseHi: "सारथी किचन हब में सत्यापित वरिष्ठ होम रसोई में अब अनिवार्य आरओ निस्पंदन ऑडिट बैज शामिल हैं।",
   },
   {
@@ -175,7 +175,7 @@ const INITIAL_PROPOSALS: StudentProposal[] = [
     status: "under_review",
     statusText: "Under Council Review",
     statusTextHi: "परिषद समीक्षा के अधीन",
-    councilResponse: "Council is partnering with local auto associations & senior hosts to launch verified night route pick-ups.",
+    councilResponse: "Council is partnering with local auto associations & premium hosts to launch verified night route pick-ups.",
     councilResponseHi: "परिषद सत्यापित नाइट रूट पिक-अप शुरू करने के लिए स्थानीय ऑटो संघों और वरिष्ठ मेज़बानों के साथ साझेदारी कर रही है।",
   },
   {

@@ -281,7 +281,7 @@ export function BookingDetailDrawer({ booking, open, onClose }: BookingDetailDra
                   <p className="text-[11px] text-slate-300 font-semibold leading-tight">
                     {isHi
                       ? "पिकअप व ड्रॉप के समय सीनियर होस्ट को यह QR कोड दिखाएं।"
-                      : "Present this QR code to the senior host at node pickup/drop-off."}
+                      : "Present this QR code to the verified PG owner host at node pickup/drop-off."}
                   </p>
                   <p className="text-[10px] text-emerald-400 font-mono flex items-center gap-1 pt-1">
                     <ShieldCheck className="h-3 w-3" />
@@ -451,7 +451,7 @@ export function BookingDetailDrawer({ booking, open, onClose }: BookingDetailDra
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="font-semibold text-white">
-                      {isHi ? "सुधा त्रिपाठी जी (वरिष्ठ होस्ट)" : "Sudha Tripathi Ji (Senior Host)"}
+                      {isHi ? "सुधा त्रिपाठी जी (वरिष्ठ होस्ट)" : "Sudha Tripathi Ji (Verified PG Owner Host)"}
                     </p>
                     <p className="text-[11px] text-slate-400">
                       {isHi ? "सत्यापित 4-स्तरीय सुरक्षा ऑडिट पास" : "Verified 4-Tier Safety Audit Pass"}

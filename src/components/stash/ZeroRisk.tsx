@@ -78,7 +78,7 @@ const CARDS: RiskCard[] = [
     problem: "What if a student intrudes into the host's private living space?",
     problem_hi: "क्या होगा यदि कोई छात्र होस्ट के निजी रहने की जगह में दखल दे?",
     mitigations: [
-      "Senior master bedrooms remain smart-locked/restricted master zones",
+      "Verified PG Owner master bedrooms remain smart-locked/restricted master zones",
       "Interactions strictly limited to verified shared common spaces",
       'Mandatory 7-day trial period with structured "House Norms Matrix"',
     ],
@@ -94,7 +94,7 @@ const CARDS: RiskCard[] = [
     title: "Financial Fraud & Non-Payment → 100% Digital Escrow",
     title_hi: "वित्तीय धोखाधड़ी व भुगतान न होने का जोखिम → 100% डिजिटल एस्क्रो",
     icons: [BadgeIndianRupee, Wallet],
-    problem: "What if rent is delayed, or a senior gets scammed for cash?",
+    problem: "What if rent is delayed, or a verified PG owner gets scammed for cash?",
     problem_hi: "क्या होगा यदि किराया रुक जाए या नकद लेन-देन में कोई समस्या आए?",
     mitigations: [
       "Zero direct cash handling allowed on the platform",
@@ -110,10 +110,10 @@ const CARDS: RiskCard[] = [
   },
   {
     id: "medical",
-    title: "Senior Medical & Safety Emergencies → Wearable SOS & Family Co-Pilot",
+    title: "Verified PG Owner Medical & Safety Emergencies → Wearable SOS & Family Co-Pilot",
     title_hi: "बुजुर्गों की चिकित्सा व सुरक्षा आपातकाल → वियरेबल एसओएस व फैमिली को-पायलट",
     icons: [HeartHandshake, Activity],
-    problem: "What if the elderly host faces a sudden health emergency?",
+    problem: "What if the high-margin ROI host faces a sudden health emergency?",
     problem_hi: "क्या होगा यदि बुजुर्ग होस्ट को अचानक कोई स्वास्थ्य आपातकाल आ जाए?",
     mitigations: [
       "1-Touch bedside/wearable emergency SOS button → local response & verified student roommate",
@@ -362,7 +362,7 @@ function SealCertificate({ onClose }: { onClose: () => void }) {
           <div className="flex justify-between">
             <span className="text-muted-foreground">{isHi ? "स्टोरेज नोड:" : "Storage Node:"}</span>
             <span className="font-semibold text-foreground">
-              {isHi ? "कल्याणपुर सीनियर होम #04" : "Kalyanpur Senior Home #04"}
+              {isHi ? "कल्याणपुर सीनियर होम #04" : "Kalyanpur Verified PG Owner Home #04"}
             </span>
           </div>
           <div className="flex justify-between">

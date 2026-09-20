@@ -68,12 +68,12 @@ export function KakadeoSurvivalGuide() {
   <p>Commercial canteens often reuse palm oil and heavy spices causing digestive issues before test series. Always prefer pure homestyle tiffins prepared by verified local mother chefs.</p>
   <ul>
     <li><strong>Annapurna Home Kitchen:</strong> 80m from PW Vidyapeeth — Standard Thali @ ₹50 (Pure Desi Ghee Phulkas).</li>
-    <li><strong>Shanti Home Kitchen:</strong> 120m from Motion Kakadeo — Senior Feast @ ₹90 (Home-curd, dal fry, fresh sabzi).</li>
+    <li><strong>Shanti Home Kitchen:</strong> 120m from Motion Kakadeo — Verified PG Owner Feast @ ₹90 (Home-curd, dal fry, fresh sabzi).</li>
     <li><strong>Dadi Maa Rasoi:</strong> 100m from Allen Institute — Monthly Tiffin Pass @ ₹2,400/mo with 1-tap pause facility.</li>
   </ul>
 
   <h2>🏡 Chapter 3: Zero-Brokerage Room Hunting Checklist</h2>
-  <p>Never pay 1-month rent as brokerage to unauthorized local middlemen. Look for StashSaarthi verified senior host homes.</p>
+  <p>Never pay 1-month rent as brokerage to unauthorized local middlemen. Look for StashSaarthi verified verified PG owner host homes.</p>
   <div class="warning">
     <strong>⚠️ Red Flags to Watch Out For:</strong>
     1. Demand for non-refundable cash deposits over 1 month rent.<br/>
@@ -275,7 +275,7 @@ export function KakadeoSurvivalGuide() {
               <p className="text-xs text-slate-400">
                 {isHi
                   ? "देवकी पैलेस लेन के निकट। शांति सीनियर होम किचन निकटतम 120m दूरी पर स्थित है।"
-                  : "Near Devki Palace Hostel Lane. Shanti Senior Home Kitchen is located just 120m away."}
+                  : "Near Devki Palace Hostel Lane. Shanti Verified PG Owner Home Kitchen is located just 120m away."}
               </p>
             </div>
             <div className="p-4 rounded-xl bg-slate-950/60 border border-slate-800 space-y-2">
@@ -305,7 +305,7 @@ export function KakadeoSurvivalGuide() {
           <p className="text-slate-300 text-sm leading-relaxed">
             {isHi
               ? "कामर्शियल मेस में बार-बार गर्म किया पाम ऑयल इस्तेमाल होता है, जिससे परीक्षा से ठीक पहले पेट खराब हो सकता है। हमेशा सत्यापित वरिष्ठ माताओं (Mother Chefs) द्वारा तैयार घर का खाना ही चुनें।"
-              : "Commercial canteens frequently reuse palm oil and synthetic spices leading to digestive issues right before test series. Always prefer home meals prepared by verified senior mother chefs."}
+              : "Commercial canteens frequently reuse palm oil and synthetic spices leading to digestive issues right before test series. Always prefer home meals prepared by verified verified PG owner mother chefs."}
           </p>
 
           <div className="p-5 rounded-2xl bg-amber-950/20 border border-amber-500/20 space-y-3">
@@ -324,7 +324,7 @@ export function KakadeoSurvivalGuide() {
               </li>
               <li className="flex items-start gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                <span><strong>Senior Feast (₹90):</strong> 5 Phulkas, Paneer/Special Sabzi, Curd, Rice, Sweet.</span>
+                <span><strong>Verified PG Owner Feast (₹90):</strong> 5 Phulkas, Paneer/Special Sabzi, Curd, Rice, Sweet.</span>
               </li>
               <li className="flex items-start gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
@@ -364,9 +364,9 @@ export function KakadeoSurvivalGuide() {
                 {isHi ? "सारथी स्पेस गारंटी" : "Saarthi Spaces Advantage"}
               </div>
               <ul className="text-xs text-slate-400 space-y-1.5 list-disc pl-4">
-                <li>Direct connection with verified senior host families (Average ₹5,500/mo).</li>
+                <li>Direct connection with verified verified PG owner host families (Average ₹5,500/mo).</li>
                 <li>Zero brokerage fee, zero security deposit forfeiture traps.</li>
-                <li>Quiet study environment with senior citizen house guardians.</li>
+                <li>Quiet study environment with premium host house guardians.</li>
               </ul>
             </div>
           </div>

@@ -1,0 +1,1501 @@
+- generic [ref=e1]:
+  - main [ref=e3]:
+    - link "Skip to main content" [ref=e4] [cursor=pointer]:
+      - /url: "#main-content"
+    - generic [ref=e6]:
+      - button "Scroll to top of page" [ref=e8] [cursor=pointer]:
+        - img "StashSaarthi" [ref=e11]
+      - generic [ref=e12]:
+        - generic [ref=e13]:
+          - radiogroup "Select Language" [ref=e14]:
+            - radio "Switch to English" [checked] [ref=e15]: EN
+            - radio "Switch to Hindi" [ref=e16]: HI
+          - button "Switch to light mode" [ref=e17] [cursor=pointer]
+          - button "Standard Mode" [ref=e25] [cursor=pointer]:
+            - generic [ref=e28]: Data
+          - button "Sound feedback on" [pressed] [ref=e2534] [cursor=pointer]
+        - button "Stash Wallet Claim ₹60 Free" [ref=e35] [cursor=pointer]:
+          - generic [ref=e40]:
+            - generic [ref=e41]: Stash Wallet
+            - generic [ref=e42]: Claim ₹60 Free
+        - button "Continue with Google" [ref=e47] [cursor=pointer]
+        - button "Explore" [ref=e49] [cursor=pointer]
+        - button "Open navigation menu" [ref=e50] [cursor=pointer]
+    - navigation "Quick Service Navigation Pill" [ref=e2539]:
+      - generic [ref=e2540]:
+        - button "Kitchen" [ref=e2541] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e2542]: 🍱
+        - button "Stash" [ref=e2544] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e2546]: 🧳
+        - button "Spaces" [ref=e2548] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e2549]: 🏠
+        - button "Connect" [ref=e2551] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e2552]: 🤝
+    - generic [ref=e52]:
+      - generic [ref=e53]:
+        - generic [ref=e54]:
+          - button "Kanpur Corridor Genesis • v1.0 Live →" [ref=e55] [cursor=pointer]:
+            - generic [ref=e59]: Kanpur Corridor Genesis • v1.0 Live
+            - generic [ref=e60]: →
+          - generic [ref=e61]: 🚨 Stop the ₹8,000 Vacation Dead-Rent Trap
+        - heading "Don't Pay Rent for an Empty Room. Stash Your Bags for ₹300/mo." [level=1] [ref=e66]
+        - paragraph [ref=e68]: Going home for semester break? Ditch your PG. Secure your luggage in verified local homes near IITK & CSJMU. Rebook broker-free rooms when you return.
+        - generic [ref=e69]: ⚡ 48+ Bags Stored Near IITK & HBTI • 100% Tamper-Proof QR Seal
+        - generic [ref=e75]:
+          - button "Stash Luggage for ₹300/mo" [ref=e76] [cursor=pointer]
+          - link "Find Broker-Free Rooms" [ref=e78] [cursor=pointer]:
+            - /url: "#ecosystem"
+          - button "Refer & Share" [ref=e79] [cursor=pointer]
+      - generic [ref=e82]:
+        - generic [ref=e83]:
+          - text: 100%
+          - generic [ref=e87]: Brokerage Free
+        - generic [ref=e88]:
+          - text: 3-Tier
+          - generic [ref=e92]: Verified
+        - generic [ref=e93]:
+          - text: 1k+
+          - generic [ref=e97]: Spaces Mapped
+        - generic [ref=e98]:
+          - text: ₹300
+          - generic [ref=e109]: Stash From
+      - paragraph [ref=e114]:
+        - generic [ref=e115]:
+          - generic [ref=e116]: ⚡
+          - text: Validated at IIT Bombay NEC 2026
+        - generic [ref=e117]: •
+        - generic [ref=e118]: 100% Escrow Protected
+        - generic [ref=e119]: •
+        - generic [ref=e120]: Zero-Brokerage Charter
+      - generic [ref=e124]:
+        - generic [ref=e125]:
+          - generic [ref=e126]:
+            - button "Search List" [ref=e127] [cursor=pointer]
+            - button "Live Campus Radar" [ref=e130] [cursor=pointer]
+          - generic [ref=e141]: Live Network
+        - textbox "Enter Campus, Area, or 6-Digit PIN (e.g. 208016, IITK, Kakadeo)..." [ref=e151]
+        - generic [ref=e152]:
+          - paragraph [ref=e153]: Popular Student Hubs
+          - generic [ref=e154]:
+            - button "IITK (208016)" [ref=e155] [cursor=pointer]
+            - button "CSJMU (208024)" [ref=e159] [cursor=pointer]
+            - button "Kakadeo (208002)" [ref=e163] [cursor=pointer]
+            - button "Kalyanpur (208025)" [ref=e167] [cursor=pointer]
+            - button "Lucknow (226007)" [ref=e171] [cursor=pointer]
+      - link "Scroll down to explore features" [ref=e176] [cursor=pointer]:
+        - /url: "#role-lane"
+        - generic [ref=e177]: Explore Our Services
+    - region "Quick Category Jump Navigation" [ref=e181]:
+      - generic [ref=e183]:
+        - tablist "Category Navigation Links" [ref=e184]:
+          - tab "Solutions & Hub" [ref=e185] [cursor=pointer]
+          - tab "Savings Simulator" [selected] [ref=e197] [cursor=pointer]
+          - tab "Stash Journey" [ref=e201] [cursor=pointer]
+          - tab "Leaderboard" [ref=e206] [cursor=pointer]
+          - tab "Trust & Safety Pass" [ref=e214] [cursor=pointer]
+          - tab "Reviews & Ideas" [ref=e219] [cursor=pointer]
+          - tab "FAQ & Help" [ref=e223] [cursor=pointer]
+        - button "Search website services" [ref=e228] [cursor=pointer]:
+          - generic [ref=e231]: Quick Find
+    - generic [ref=e2557]:
+      - generic [ref=e2558]: Student Lane
+      - heading "Move light. Live cheap. Eat home." [level=2] [ref=e2559]
+      - paragraph [ref=e2560]: Built for hostel exits, semester breaks and internship shifts — store what you own, land a broker-free room and never miss a home-cooked meal.
+      - generic [ref=e2561]:
+        - generic [ref=e2562]:
+          - generic [ref=e2563]: "1"
+          - generic [ref=e2575]: Stash your bags
+          - paragraph [ref=e2576]: Doorstep pickup, sealed bins, insured storage from ₹300/month.
+        - generic [ref=e2577]:
+          - generic [ref=e2578]: "2"
+          - generic [ref=e2583]: Book a verified room
+          - paragraph [ref=e2584]: Zero brokerage rooms inside senior-hosted homes near campus.
+        - generic [ref=e2585]:
+          - generic [ref=e2586]: "3"
+          - generic [ref=e2594]: Subscribe to tiffins
+          - paragraph [ref=e2595]: Home-cooked meals from the same neighbourhood kitchens.
+      - generic [ref=e2596]:
+        - generic [ref=e2597]:
+          - text: ₹0
+          - generic [ref=e2601]: Avg. monthly saving
+        - generic [ref=e2602]:
+          - text: 0 hrs
+          - generic [ref=e2607]: Pickup window
+        - generic [ref=e2608]:
+          - text: 0%
+          - generic [ref=e2612]: Insured bags
+      - button "Start with ₹300/mo storage" [ref=e2613] [cursor=pointer]
+    - generic [ref=e2615]:
+      - generic [ref=e2616]:
+        - generic [ref=e2617]: Interactive Savings & Earnings Engine
+        - heading "Calculate Your Savings & Passive Income" [level=2] [ref=e2618]:
+          - text: Calculate Your
+          - generic [ref=e2619]: Savings & Passive Income
+        - paragraph [ref=e2620]: Zero guesswork. 100% transparent unit economics for students & senior hosts in Kanpur.
+      - tablist "Calculator Mode Selector" [ref=e2622]:
+        - tab "🎓 Student Savings (₹8k Saved)" [selected] [ref=e2623] [cursor=pointer]
+        - tab "🏡 Host Earnings (₹11.5k+/mo)" [ref=e2627] [cursor=pointer]
+      - tabpanel "🎓 Student Savings (₹8k Saved)" [ref=e2632]:
+        - generic [ref=e2636]:
+          - generic [ref=e2637]:
+            - generic [ref=e2638]:
+              - generic [ref=e2639]:
+                - generic [ref=e2640] [cursor=pointer]: Campus Location Pricing Zone
+                - generic [ref=e2645]: 🌿 Standard Zone (₹330/bag/mo)
+              - combobox "Campus Location Pricing Zone" [ref=e2646] [cursor=pointer]:
+                - option "IIT Kanpur Premium Campus Belt — ₹350/bag/mo"
+                - option "Kakadeo Coaching & PG Hub — ₹300/bag/mo" [selected]
+                - option "CSJMU University Belt — ₹300/bag/mo"
+                - option "Kalyanpur Outer & Awas Vikas — ₹270/bag/mo"
+                - option "Swaroop Nagar Medical Node — ₹340/bag/mo"
+                - option "Lucknow University Hub — ₹320/bag/mo"
+            - generic [ref=e2647]:
+              - generic [ref=e2648]:
+                - generic [ref=e2649] [cursor=pointer]: Number of Bags / Cartons
+                - generic [ref=e2650]: 2 Bags
+              - slider "Number of luggage bags to store" [ref=e2651] [cursor=pointer]: "2"
+              - generic [ref=e2652]:
+                - generic [ref=e2653]: 1 Bag
+                - generic [ref=e2654]: 3 Bags
+                - generic [ref=e2655]: 6 Bags
+              - generic [ref=e2663]:
+                - generic [ref=e2664]:
+                  - generic [ref=e2665]: FREE DOORSTEP PICKUP
+                  - generic [ref=e2666]: Verified Campus Pickup SLA
+                - paragraph [ref=e2670]: 🎉 100% Free Campus Doorstep Pickup Unlocked!
+                - paragraph [ref=e2674]:
+                  - generic [ref=e2675]: 2/2 Boxes in Cart
+                  - generic [ref=e2676]: "Doorstep Fee: ₹0 (Waived)"
+            - generic [ref=e2677]:
+              - generic [ref=e2678]:
+                - generic [ref=e2679] [cursor=pointer]: Vacation / Break Duration
+                - generic [ref=e2680]: 45 Days (1.5 mo)
+              - slider "Vacation duration in days" [ref=e2681] [cursor=pointer]: "45"
+              - generic [ref=e2682]:
+                - generic [ref=e2683]: 15 Days
+                - generic [ref=e2684]: 45 Days
+                - generic [ref=e2685]: 90 Days
+            - generic [ref=e2686]:
+              - generic [ref=e2687]:
+                - generic [ref=e2688] [cursor=pointer]: Your Current Monthly Room Rent
+                - generic [ref=e2689]: ₹6,000/mo
+              - slider "Current monthly PG or room rent in rupees" [ref=e2690] [cursor=pointer]: "6000"
+              - generic [ref=e2691]:
+                - generic [ref=e2692]: ₹3,000
+                - generic [ref=e2693]: ₹7,500
+                - generic [ref=e2694]: ₹12,000
+            - button "🌴 3-Month Summer Break? Set 90 days to unlock 15% OFF storage! Set 90 Days" [ref=e2696] [cursor=pointer]:
+              - generic [ref=e2697]:
+                - text: 🌴
+                - strong [ref=e2698]: 3-Month Summer Break?
+                - text: Set 90 days to unlock 15% OFF storage!
+              - generic [ref=e2699]: Set 90 Days
+          - generic [ref=e2700]:
+            - generic [ref=e2701]:
+              - generic [ref=e2702]: Estimated In-Pocket Savings
+              - generic [ref=e2703]: ₹8,010
+              - generic [ref=e2704]: 🎉 You save ~89% compared to locking an empty room!
+              - generic [ref=e2705]: ⚡ Zero Cancellation Fee Guarantee
+              - generic [ref=e2706]:
+                - generic [ref=e2708]:
+                  - generic [ref=e2709]: "Empty PG Room Rent:"
+                  - generic [ref=e2710]: ₹9,000
+                - generic [ref=e2714]:
+                  - generic [ref=e2715]: "StashSaarthi (2 bags):"
+                  - generic [ref=e2716]: ₹990
+            - generic [ref=e2719]:
+              - button "Lock This Saving Now" [ref=e2720] [cursor=pointer]
+              - generic [ref=e2724]:
+                - button "Savings Proof" [ref=e2725] [cursor=pointer]
+                - button "Weight Estimator" [ref=e2730] [cursor=pointer]
+                - button "Itemize Luggage" [ref=e2735] [cursor=pointer]
+                - button "Packing Guide" [ref=e2742] [cursor=pointer]
+    - generic [ref=e427]:
+      - generic [ref=e428]:
+        - generic [ref=e429]: Integrated Solutions Hub
+        - heading "Explore All StashSaarthi Solutions" [level=2] [ref=e430]:
+          - text: Explore All
+          - generic [ref=e431]: StashSaarthi Solutions
+        - paragraph [ref=e432]: A complete range of living and storage solutions for Kanpur campus corridors.
+      - tablist "StashSaarthi Solutions Tabs" [ref=e434]:
+        - tab "Saarthi Stash Zero Dead-Rent" [ref=e435] [cursor=pointer]:
+          - generic [ref=e437]: Saarthi Stash
+          - generic [ref=e449]: Zero Dead-Rent
+        - tab "Saarthi Spaces Zero Brokerage" [active] [selected] [ref=e450] [cursor=pointer]:
+          - generic [ref=e451]: Saarthi Spaces
+          - generic [ref=e456]: Zero Brokerage
+        - tab "Saarthi Kitchen From ₹90/meal" [ref=e457] [cursor=pointer]:
+          - generic [ref=e458]: Saarthi Kitchen
+          - generic [ref=e466]: From ₹90/meal
+        - tab "Saarthi Connect 100% Safe" [ref=e467] [cursor=pointer]:
+          - generic [ref=e468]: Saarthi Connect
+          - generic [ref=e475]: 100% Safe
+      - tabpanel "Saarthi Spaces Zero Brokerage" [ref=e2749]:
+        - generic [ref=e2750]:
+          - generic [ref=e2751]:
+            - generic [ref=e2757]:
+              - heading "Verified Broker-Free Rooms 0% Brokerage" [level=3] [ref=e2758]:
+                - text: Verified Broker-Free Rooms
+                - generic [ref=e2759]: 0% Brokerage
+              - paragraph [ref=e2760]: Direct host co-living rooms near IITK, CSJMU & Kakadeo coaching belt
+            - generic [ref=e2761]:
+              - button "Find Broker-Free Rooms" [ref=e2762] [cursor=pointer]
+              - button "Instant Booking ⚡" [ref=e2763] [cursor=pointer]
+          - generic [ref=e2765]:
+            - button "All Kanpur Clusters" [ref=e2766] [cursor=pointer]
+            - button "🎯 Kakadeo Coaching" [ref=e2767] [cursor=pointer]
+            - button "🎓 Kalyanpur (IITK)" [ref=e2768] [cursor=pointer]
+            - button "🚇 Rawatpur (HBTI)" [ref=e2769] [cursor=pointer]
+            - button "🏥 Gumti No. 5" [ref=e2770] [cursor=pointer]
+            - button "🌿 Sharda Nagar" [ref=e2771] [cursor=pointer]
+            - button "🏷️ Under ₹6,000/mo" [ref=e2772] [cursor=pointer]
+            - button "★ Top Rated 4.8+" [ref=e2773] [cursor=pointer]
+          - generic [ref=e2775]:
+            - article [ref=e2777]:
+              - generic [ref=e2778]:
+                - img "Kakadeo, Kanpur · 3 min walk to PW & Allen" [ref=e2780]
+                - generic:
+                  - button "✓ ✓ STUDENT REVIEWED • SAFETY VERIFIED" [ref=e2781] [cursor=pointer]:
+                    - generic [ref=e2782]: ✓
+                    - text: ✓ STUDENT REVIEWED • SAFETY VERIFIED
+                  - button "360° Tour" [ref=e2783] [cursor=pointer]
+              - generic [ref=e2788]:
+                - generic [ref=e2789]:
+                  - generic [ref=e2790]:
+                    - generic [ref=e2791]: ₹5,800/mo
+                    - generic [ref=e2792]: ⚡ Zero Cancellation
+                  - generic [ref=e2793]: "4.9"
+                - paragraph [ref=e2796]:
+                  - generic [ref=e2800]: Kakadeo, Kanpur · 3 min walk to PW & Allen
+                  - generic [ref=e2801]: "[PROTOTYPE]"
+                - generic [ref=e2802]: 🚶 350m walk to Coaching Hub · ₹10 E-Rickshaw to Metro
+                - generic [ref=e2804]: "\"Pros: Silent study room, inverter backup, hot water in winter, home tiffin available. Cons: Gate closes at 10:30 PM.\""
+                - generic [ref=e2805]:
+                  - generic [ref=e2806]:
+                    - button "Book directly" [ref=e2807] [cursor=pointer]
+                    - button "Visit" [ref=e2808] [cursor=pointer]
+                  - button "360°" [ref=e2810] [cursor=pointer]
+                  - link "Call owner or concierge" [ref=e2812] [cursor=pointer]:
+                    - /url: tel:+919369454350
+            - article [ref=e2814]:
+              - generic [ref=e2815]:
+                - img "Kalyanpur, Kanpur · 6 min to IIT Kanpur Gate 1" [ref=e2819]
+                - generic:
+                  - button "✓ ✓ STUDENT REVIEWED • SAFETY VERIFIED" [ref=e2820] [cursor=pointer]:
+                    - generic [ref=e2821]: ✓
+                    - text: ✓ STUDENT REVIEWED • SAFETY VERIFIED
+                  - button "360° Tour" [ref=e2822] [cursor=pointer]
+              - generic [ref=e2827]:
+                - generic [ref=e2828]:
+                  - generic [ref=e2829]:
+                    - generic [ref=e2830]: ₹6,500/mo
+                    - generic [ref=e2831]: ⚡ Zero Cancellation
+                  - generic [ref=e2832]: "4.8"
+                - paragraph [ref=e2835]:
+                  - generic [ref=e2839]: Kalyanpur, Kanpur · 6 min to IIT Kanpur Gate 1
+                  - generic [ref=e2840]: "[PROTOTYPE]"
+                - generic [ref=e2841]: 🛺 ₹10 E-Rickshaw (4m) · 650m walk to Gate 1
+                - generic [ref=e2843]: "\"Pros: Quiet lane, 24x7 water, owner never enters without asking. Cons: Only one power backup point.\""
+                - generic [ref=e2844]:
+                  - generic [ref=e2845]:
+                    - button "Book directly" [ref=e2846] [cursor=pointer]
+                    - button "Visit" [ref=e2847] [cursor=pointer]
+                  - button "360°" [ref=e2849] [cursor=pointer]
+                  - link "Call owner or concierge" [ref=e2851] [cursor=pointer]:
+                    - /url: tel:+919369454350
+            - article [ref=e2853]:
+              - generic [ref=e2854]:
+                - img "Rawatpur, Kanpur · 8 min to HBTI East Campus" [ref=e2858]
+                - generic:
+                  - button "✓ ✓ STUDENT REVIEWED • SAFETY VERIFIED" [ref=e2859] [cursor=pointer]:
+                    - generic [ref=e2860]: ✓
+                    - text: ✓ STUDENT REVIEWED • SAFETY VERIFIED
+                  - button "360° Tour" [ref=e2861] [cursor=pointer]
+              - generic [ref=e2866]:
+                - generic [ref=e2867]:
+                  - generic [ref=e2868]:
+                    - generic [ref=e2869]: ₹5,200/mo
+                    - generic [ref=e2870]: ⚡ Zero Cancellation
+                  - generic [ref=e2871]: "4.7"
+                - paragraph [ref=e2874]:
+                  - generic [ref=e2878]: Rawatpur, Kanpur · 8 min to HBTI East Campus
+                  - generic [ref=e2879]: "[PROTOTYPE]"
+                - generic [ref=e2880]: 🛺 ₹10 to Rawatpur Metro · 500m to HBTI
+                - generic [ref=e2882]: "\"Pros: Senior host family, safe environment for girl students, high-speed Wi-Fi. Cons: No loud late-night music.\""
+                - generic [ref=e2883]:
+                  - generic [ref=e2884]:
+                    - button "Book directly" [ref=e2885] [cursor=pointer]
+                    - button "Visit" [ref=e2886] [cursor=pointer]
+                  - button "360°" [ref=e2888] [cursor=pointer]
+                  - link "Call owner or concierge" [ref=e2890] [cursor=pointer]:
+                    - /url: tel:+919369454350
+            - article [ref=e2892]:
+              - generic [ref=e2893]:
+                - img "Gumti No. 5, Kanpur · near GSVM Medical College" [ref=e2895]
+                - generic:
+                  - button "✓ ✓ STUDENT REVIEWED • SAFETY VERIFIED" [ref=e2896] [cursor=pointer]:
+                    - generic [ref=e2897]: ✓
+                    - text: ✓ STUDENT REVIEWED • SAFETY VERIFIED
+                  - button "360° Tour" [ref=e2898] [cursor=pointer]
+              - generic [ref=e2903]:
+                - generic [ref=e2904]:
+                  - generic [ref=e2905]:
+                    - generic [ref=e2906]: ₹6,000/mo
+                    - generic [ref=e2907]: ⚡ Zero Cancellation
+                  - generic [ref=e2908]: "4.6"
+                - paragraph [ref=e2911]:
+                  - generic [ref=e2915]: Gumti No. 5, Kanpur · near GSVM Medical College
+                  - generic [ref=e2916]: "[PROTOTYPE]"
+                - generic [ref=e2917]: 🚶 800m walk to GSVM Hospital · Market corridor
+                - generic [ref=e2919]: "\"Pros: Complete market proximity, medical stores downstairs, clean attached washroom. Cons: Evening street traffic.\""
+                - generic [ref=e2920]:
+                  - generic [ref=e2921]:
+                    - button "Book directly" [ref=e2922] [cursor=pointer]
+                    - button "Visit" [ref=e2923] [cursor=pointer]
+                  - button "360°" [ref=e2925] [cursor=pointer]
+                  - link "Call owner or concierge" [ref=e2927] [cursor=pointer]:
+                    - /url: tel:+919369454350
+            - article [ref=e2929]:
+              - generic [ref=e2930]:
+                - img "Sharda Nagar, Kanpur · peaceful student residential belt" [ref=e2934]
+                - generic:
+                  - button "✓ ✓ STUDENT REVIEWED • SAFETY VERIFIED" [ref=e2935] [cursor=pointer]:
+                    - generic [ref=e2936]: ✓
+                    - text: ✓ STUDENT REVIEWED • SAFETY VERIFIED
+                  - button "360° Tour" [ref=e2937] [cursor=pointer]
+              - generic [ref=e2942]:
+                - generic [ref=e2943]:
+                  - generic [ref=e2944]:
+                    - generic [ref=e2945]: ₹4,900/mo
+                    - generic [ref=e2946]: ⚡ Zero Cancellation
+                  - generic [ref=e2947]: "4.9"
+                - paragraph [ref=e2950]:
+                  - generic [ref=e2954]: Sharda Nagar, Kanpur · peaceful student residential belt
+                  - generic [ref=e2955]: "[PROTOTYPE]"
+                - generic [ref=e2956]: 🛺 ₹10 E-Rickshaw to Kakadeo Hub (5 min)
+                - generic [ref=e2958]: "\"Pros: Zero disturbance, RO drinking water, private balcony, warm senior host. Cons: Shared kitchen stove.\""
+                - generic [ref=e2959]:
+                  - generic [ref=e2960]:
+                    - button "Book directly" [ref=e2961] [cursor=pointer]
+                    - button "Visit" [ref=e2962] [cursor=pointer]
+                  - button "360°" [ref=e2964] [cursor=pointer]
+                  - link "Call owner or concierge" [ref=e2966] [cursor=pointer]:
+                    - /url: tel:+919369454350
+          - generic [ref=e2967]:
+            - paragraph [ref=e2973]: Vacating your room? List it in 3 steps and earn ₹200 StashCredit toward your next storage booking.
+            - button "List vacating room" [ref=e2974] [cursor=pointer]
+    - generic [ref=e2975]:
+      - generic [ref=e2977]:
+        - generic [ref=e2978]: Interactive Journey of a Stash
+        - heading "From Pickup to Secure Custody" [level=2] [ref=e2979]:
+          - text: From Pickup to
+          - generic [ref=e2980]: Secure Custody
+        - paragraph [ref=e2981]: Track how your bags move through 6 deterministic stages with unbroken custody proof, laser seals, and digital escrow.
+      - generic [ref=e2983]:
+        - button "1 Doorstep Pickup" [ref=e2984] [cursor=pointer]:
+          - generic [ref=e2985]: "1"
+          - generic [ref=e2986]: Doorstep Pickup
+        - button "2 Laser Barcode" [ref=e2987] [cursor=pointer]:
+          - generic [ref=e2988]: "2"
+          - generic [ref=e2989]: Laser Barcode
+        - button "3 Climate-Safe Transit" [ref=e2990] [cursor=pointer]:
+          - generic [ref=e2991]: "3"
+          - generic [ref=e2992]: Climate-Safe Transit
+        - button "4 Pallet Placement" [ref=e2993] [cursor=pointer]:
+          - generic [ref=e2994]: "4"
+          - generic [ref=e2995]: Pallet Placement
+        - button "5 24/7 IoT" [ref=e2996] [cursor=pointer]:
+          - generic [ref=e2997]: "5"
+          - generic [ref=e2998]: 24/7 IoT
+        - button "6 On-Demand Doorstep" [ref=e2999] [cursor=pointer]:
+          - generic [ref=e3000]: "6"
+          - generic [ref=e3001]: On-Demand Doorstep
+      - generic [ref=e3002]:
+        - generic [ref=e3004]:
+          - generic [ref=e3005]:
+            - generic [ref=e3006]:
+              - generic [ref=e3013]:
+                - text: STAGE 1 OF 6
+                - heading "Doorstep Pickup & Weight Check" [level=3] [ref=e3014]
+              - generic [ref=e3015]: Within 15 Mins
+            - paragraph [ref=e3020]: 15-min arrival window at your hostel door
+            - generic [ref=e3021]:
+              - generic [ref=e3022]:
+                - generic [ref=e3023]: ✓
+                - paragraph [ref=e3024]: Verified StashSaarthi captain arrives with digital weighing scales and heavy-duty bags.
+              - generic [ref=e3025]:
+                - generic [ref=e3026]: ✓
+                - paragraph [ref=e3027]: Weight & item count recorded with photo log in your digital custody pass.
+              - generic [ref=e3028]:
+                - generic [ref=e3029]: ✓
+                - paragraph [ref=e3030]: Student ID / Hall registration fast-checked for zero-friction dispatch.
+          - generic [ref=e3031]:
+            - generic [ref=e3032]:
+              - button "Auto-Play Journey" [ref=e3033] [cursor=pointer]
+              - generic [ref=e3037]: (Click any step)
+            - button "Next Stage" [ref=e3039] [cursor=pointer]
+        - generic [ref=e3044]:
+          - generic [ref=e3045]:
+            - generic [ref=e3046]:
+              - generic [ref=e3047]: STASH CUSTODY TICKET
+              - generic [ref=e3055]: PICKUP COMPLETE
+            - generic [ref=e3056]:
+              - generic [ref=e3057]: "||||| | |||||| || | |||| |||||||| |||||"
+              - generic [ref=e3058]: "PASS ID: #SS-KNP-8921-VERIFIED"
+            - generic [ref=e3059]:
+              - generic [ref=e3060]:
+                - generic [ref=e3061]: Current Location
+                - generic [ref=e3065]: Hostel Room Doorstep (e.g. Hall 13, IITK)
+              - generic [ref=e3066]:
+                - generic [ref=e3067]: Laser Seal Status
+                - generic [ref=e3071]: Ready for Sealing
+              - generic [ref=e3072]:
+                - generic [ref=e3073]: IoT Room Sensor
+                - generic [ref=e3076]: 31°C / 48%
+              - generic [ref=e3077]:
+                - generic [ref=e3078]: Escrow Lock State
+                - generic [ref=e3082]: Initiated (₹300/mo)
+          - generic [ref=e3083]:
+            - generic [ref=e3084]: ₹10,000 Insurance Cover Active
+            - paragraph [ref=e3089]: Zero-deductible coverage against theft, water damage or fire. Handled directly by our Kanpur ops desk.
+            - button "Book Stash @ ₹300/month" [ref=e3090] [cursor=pointer]
+    - generic [ref=e3091]:
+      - generic [ref=e3092]:
+        - generic [ref=e3093]: 100% Radical Transparency Console
+        - heading "Zero Fake Badges. Verifiable Safety & Custody" [level=2] [ref=e3094]:
+          - text: Zero Fake Badges.
+          - generic [ref=e3095]: Verifiable Safety & Custody
+        - paragraph [ref=e3096]: Inspect our tamper-evident seals, ground custody protocols, and founder accountability in real time.
+      - generic [ref=e3098]:
+        - button "Live Custody Pass" [ref=e3099] [cursor=pointer]
+        - button "Host Vetting Audit" [ref=e3106] [cursor=pointer]
+        - button "3-Stage Logistics" [ref=e3112] [cursor=pointer]
+        - button "₹10,000 Safety Cover" [ref=e3117] [cursor=pointer]
+        - button "Data Privacy & SLA" [ref=e3122] [cursor=pointer]
+        - button "Founder Accountability" [ref=e3127] [cursor=pointer]
+      - generic [ref=e3134]:
+        - generic [ref=e3136]:
+          - button "1. Live Custody & Seal Tracker" [ref=e3137] [cursor=pointer]
+          - button "2. Verified Node & Room Audit" [ref=e3144] [cursor=pointer]
+          - button "3. Transparent Rupee Split" [ref=e3149] [cursor=pointer]
+        - generic [ref=e3155]:
+          - generic [ref=e3156]:
+            - generic [ref=e3157]: Seal Verification Simulator
+            - heading "Select Luggage Format to Preview Seal State" [level=3] [ref=e3164]
+            - paragraph [ref=e3165]: At doorstep pickup, a non-tearable serialized barcode seal is affixed. Only the verified student can release the custody ticket upon return.
+            - generic [ref=e3166]:
+              - text: "Luggage Type:"
+              - generic [ref=e3167]:
+                - button "Trolley Bag 24-28 inch" [ref=e3168] [cursor=pointer]:
+                  - generic [ref=e3169]: Trolley Bag
+                  - generic [ref=e3170]: 24-28 inch
+                - button "Study Box Up to 25kg" [ref=e3171] [cursor=pointer]:
+                  - generic [ref=e3172]: Study Box
+                  - generic [ref=e3173]: Up to 25kg
+                - button "Rucksack 65L Trek" [ref=e3174] [cursor=pointer]:
+                  - generic [ref=e3175]: Rucksack
+                  - generic [ref=e3176]: 65L Trek
+          - generic [ref=e3178]:
+            - generic [ref=e3179]:
+              - generic [ref=e3180]: CHAIN OF CUSTODY // VERIFIED
+              - generic [ref=e3183]: ₹10,000 COVERED
+            - generic [ref=e3184]:
+              - generic [ref=e3185]: "||| | |||| | || ||| ||"
+              - generic [ref=e3186]:
+                - text: "TAG ID:"
+                - generic [ref=e3187]: "#SS-KNP-84920"
+            - generic [ref=e3188]:
+              - generic [ref=e3189]:
+                - generic [ref=e3190]: NODE LOCATION
+                - text: "Kalyanpur Senior Home #04"
+              - generic [ref=e3191]:
+                - generic [ref=e3192]: STORAGE PLATFORM
+                - text: Elevated Dry Pallet (2.5ft)
+              - generic [ref=e3193]:
+                - generic [ref=e3194]: DUAL PHOTO LOG
+                - text: GPS Timestamp Verified
+              - generic [ref=e3195]:
+                - generic [ref=e3196]: ESCROW STATUS
+                - text: Locked in Escrow
+            - generic [ref=e3197]:
+              - generic [ref=e3198]: ✓ Live interactive output • No login required
+              - button "View Live Custody Pass" [ref=e3199] [cursor=pointer]
+    - region "Student Success & Host Stories" [ref=e3204]:
+      - generic [ref=e3205]:
+        - generic [ref=e3207]:
+          - generic [ref=e3208]: Verified Student & Host Success Stories
+          - heading "Real Stories from IITK, HBTI & Kakadeo" [level=2] [ref=e3213]
+          - paragraph [ref=e3215]: Discover how students saved ₹8,400+ dead-rent and senior hosts unlocked ₹11,500+/mo passive income.
+        - tablist "Story categories" [ref=e3216]:
+          - tab "All Stories" [selected] [ref=e3217]
+          - tab "Vacation Stash (₹300/mo)" [ref=e3222]
+          - tab "Co-Living Rooms" [ref=e3228]
+          - tab "Ghar Ka Swaad" [ref=e3234]
+          - tab "Senior Hosts" [ref=e3241]
+        - region "Student Stories Carousel" [ref=e3246]:
+          - 'group "Story 4 of 5: Sunita & Ramesh Verma" [ref=e3247]':
+            - generic [ref=e3248]:
+              - generic [ref=e3249]:
+                - generic [ref=e3250]: SU
+                - generic [ref=e3251]:
+                  - generic [ref=e3252]:
+                    - heading "Sunita & Ramesh Verma" [level=3] [ref=e3253]
+                    - generic [ref=e3254]: Verified
+                  - paragraph [ref=e3258]: Kalyanpur, Kanpur • Senior Citizens (Retd. BSNL)
+              - generic [ref=e3259]:
+                - generic [ref=e3260]: Earns ₹14,200/mo Passive Income
+                - generic [ref=e3264]: "#SS-HOST-0192"
+            - paragraph [ref=e3266]: "\"After our children moved to Bengaluru, two rooms on the first floor were empty. StashSaarthi helped us list them for micro-storage and verified IIT/HBTI student housing. We earn dignified passive income with complete safety and zero hassle.\""
+            - generic [ref=e3267]:
+              - generic [ref=e3268]: • Zero Intrusion & Verified Students
+              - button "Book Similar Experience" [ref=e3281] [cursor=pointer]
+          - generic [ref=e3283]:
+            - generic [ref=e3284]:
+              - button "Go to slide 1" [ref=e3285] [cursor=pointer]
+              - button "Go to slide 2" [ref=e3287] [cursor=pointer]
+              - button "Go to slide 3" [ref=e3289] [cursor=pointer]
+              - button "Go to slide 4" [ref=e3291] [cursor=pointer]
+              - button "Go to slide 5" [ref=e3293] [cursor=pointer]
+            - generic [ref=e3295]:
+              - button "Previous story" [ref=e3296] [cursor=pointer]
+              - generic [ref=e3297]: 4 / 5
+              - button "Next story" [ref=e3298] [cursor=pointer]
+    - generic [ref=e3301]:
+      - generic [ref=e3302]:
+        - generic [ref=e3303]: ❓ HONEST & UNFILTERED ANSWERS
+        - heading "Radical Transparency & Hard Questions" [level=2] [ref=e3304]:
+          - text: Radical Transparency
+          - generic [ref=e3305]: "& Hard Questions"
+        - paragraph [ref=e3306]: Zero corporate spin. Direct answers addressing data privacy, early-stage reliability, and guaranteed human accountability.
+      - generic [ref=e3307]:
+        - textbox "Search any question (e.g. data safety, claims, reliability, escrow)..." [ref=e3312]
+        - generic [ref=e3313]:
+          - button "🔍 Radical Transparency 5" [ref=e3314] [cursor=pointer]:
+            - generic [ref=e3315]: 🔍 Radical Transparency
+            - generic [ref=e3316]: "5"
+          - button "All Questions 12" [ref=e3317] [cursor=pointer]:
+            - generic [ref=e3318]: All Questions
+            - generic [ref=e3319]: "12"
+          - button "📦 Student Storage 3" [ref=e3320] [cursor=pointer]:
+            - generic [ref=e3321]: 📦 Student Storage
+            - generic [ref=e3322]: "3"
+          - button "🛡️ Safety & Claims 2" [ref=e3323] [cursor=pointer]:
+            - generic [ref=e3324]: 🛡️ Safety & Claims
+            - generic [ref=e3325]: "2"
+          - button "🏡 Senior Host Norms 2" [ref=e3326] [cursor=pointer]:
+            - generic [ref=e3327]: 🏡 Senior Host Norms
+            - generic [ref=e3328]: "2"
+      - generic [ref=e3330]:
+        - generic [ref=e3331]:
+          - heading [level=3] [ref=e3332]:
+            - button "Is StashSaarthi an early-stage venture? How reliable is my storage if you are new?" [expanded] [ref=e3333] [cursor=pointer]
+          - region "Is StashSaarthi an early-stage venture? How reliable is my storage if you are new?" [ref=e3336]:
+            - generic [ref=e3337]: Yes, we are proudly transparent about being a specialized hyper-local living network. We currently operate verified pilot nodes across Kanpur's academic corridor (IITK, CSJMU, HBTU, GSVM, Kakadeo). To ensure 100% operational reliability, our founder personally oversees on-site inspections, all payments sit in escrow bank accounts, and every luggage item is physically laser-sealed and insured up to ₹10,000.
+        - heading [level=3] [ref=e3339]:
+          - button "Do you sell or share my phone number, Aadhaar, or student ID with third parties?" [ref=e3340] [cursor=pointer]
+        - heading [level=3] [ref=e3344]:
+          - button "What happens if a senior host cancels or locks me out during vacations?" [ref=e3345] [cursor=pointer]
+        - heading [level=3] [ref=e3349]:
+          - button "How do you make money if you charge zero brokerage on student rooms?" [ref=e3350] [cursor=pointer]
+        - heading [level=3] [ref=e3354]:
+          - button "Can I talk directly to a human team member before booking anything?" [ref=e3355] [cursor=pointer]
+    - generic [ref=e1034]:
+      - generic [ref=e3359]:
+        - generic [ref=e3360]:
+          - generic [ref=e3361]: Radical Transparency Matrix
+          - heading "Why StashSaarthi vs. Traditional PGs" [level=2] [ref=e3366]
+          - paragraph [ref=e3367]: See why 1,200+ students and senior hosts in Kanpur choose StashSaarthi over predatory PG lock-ins & empty room dead-rent.
+        - generic [ref=e3368]:
+          - generic [ref=e3369]:
+            - generic [ref=e3370]: Avg Dead-Rent Saved
+            - generic [ref=e3371]: ₹6,400 / break
+          - generic [ref=e3372]:
+            - generic [ref=e3373]: Brokerage Fee
+            - generic [ref=e3374]: ₹0 (Direct Host)
+          - generic [ref=e3375]:
+            - generic [ref=e3376]: ⚡ Cancellation Fee
+            - generic [ref=e3377]: ₹0 (Zero Fee Guarantee)
+          - generic [ref=e3378]:
+            - generic [ref=e3379]: Lock-in Penalty
+            - generic [ref=e3380]: 0 Days (Month-to-Month)
+        - generic [ref=e3381]:
+          - button "All Comparisons" [ref=e3382]
+          - button "📦 Micro-Storage" [ref=e3383]
+          - button "🏠 Co-Living Rooms" [ref=e3384]
+          - button "🍲 Fresh Tiffins" [ref=e3385]
+          - button "🛡️ Safety & Audit" [ref=e3386]
+        - table [ref=e3388]:
+          - rowgroup [ref=e3389]:
+            - row [ref=e3390]:
+              - columnheader "Feature & Evaluation" [ref=e3391]
+              - columnheader "Traditional PGs / Hostels" [ref=e3392]
+              - columnheader "StashSaarthi Network WINNER" [ref=e3399]:
+                - generic [ref=e3400]:
+                  - generic [ref=e3404]: StashSaarthi Network
+                  - generic [ref=e3405]: WINNER
+          - rowgroup [ref=e3406]:
+            - row [ref=e3407]:
+              - cell [ref=e3408]:
+                - generic [ref=e3414]:
+                  - heading "Vacation Dead-Rent Waste" [level=3] [ref=e3415]
+                  - paragraph [ref=e3416]: What happens to rent when you go home for 2-3 months summer/winter break
+                  - generic [ref=e3417]: Saves ~₹6,400 / Break
+              - cell "Must pay 100% full rent (₹12,000–₹18,000) just to keep luggage in room ❌ ₹15,000 Average Waste" [ref=e3421]:
+                - generic [ref=e3426]:
+                  - paragraph [ref=e3427]: Must pay 100% full rent (₹12,000–₹18,000) just to keep luggage in room
+                  - generic [ref=e3428]: ❌ ₹15,000 Average Waste
+              - cell [ref=e3429]:
+                - generic [ref=e3433]:
+                  - paragraph [ref=e3434]: Vacation Micro-Storage at ₹300/bag/mo in verified neighborhood host homes
+                  - generic [ref=e3435]: Save Up to 90% Dead-Rent
+            - row [ref=e3439]:
+              - cell [ref=e3440]:
+                - generic [ref=e3447]:
+                  - heading "Brokerage & Deposit Demands" [level=3] [ref=e3448]
+                  - paragraph [ref=e3449]: Upfront fees charged before moving into a room or PG
+                  - generic [ref=e3450]: Zero Brokerage Fee
+              - cell "1 month heavy brokerage (₹5,000+) + 2-3 months non-refundable lock-in deposit ❌ Heavy Broker Extortion" [ref=e3454]:
+                - generic [ref=e3459]:
+                  - paragraph [ref=e3460]: 1 month heavy brokerage (₹5,000+) + 2-3 months non-refundable lock-in deposit
+                  - generic [ref=e3461]: ❌ Heavy Broker Extortion
+              - cell [ref=e3462]:
+                - generic [ref=e3466]:
+                  - paragraph [ref=e3467]: Zero Brokerage. Direct connection to verified senior host family homes
+                  - generic [ref=e3468]: 100% Broker-Free
+            - row [ref=e3472]:
+              - cell [ref=e3473]:
+                - generic [ref=e3479]:
+                  - heading "Luggage Safety & Insurance" [level=3] [ref=e3480]
+                  - paragraph [ref=e3481]: Protection for stored bags, laptops, and valuables during breaks
+                  - generic [ref=e3482]: Laser Barcode Sealed
+              - cell "Zero liability for missing items, dampness, pest damage or break-ins ❌ Zero Protection Contract" [ref=e3486]:
+                - generic [ref=e3491]:
+                  - paragraph [ref=e3492]: Zero liability for missing items, dampness, pest damage or break-ins
+                  - generic [ref=e3493]: ❌ Zero Protection Contract
+              - cell [ref=e3494]:
+                - generic [ref=e3498]:
+                  - paragraph [ref=e3499]: Laser Tamper Barcode Seals + IoT Climate Sensors + ₹10,000 Micro-Insurance
+                  - generic [ref=e3500]: ₹10k Insured Security
+            - row [ref=e3504]:
+              - cell [ref=e3505]:
+                - generic [ref=e3511]:
+                  - heading "Food Hygiene & Meal Quality" [level=3] [ref=e3512]
+                  - paragraph [ref=e3513]: Daily mess and meal preparation standards
+                  - generic [ref=e3514]: 100% Homestyle Hygiene
+              - cell "Mass commercial canteen cooking, reused palm oil, fixed watery menu ❌ Unhealthy Commercial Oil" [ref=e3518]:
+                - generic [ref=e3523]:
+                  - paragraph [ref=e3524]: Mass commercial canteen cooking, reused palm oil, fixed watery menu
+                  - generic [ref=e3525]: ❌ Unhealthy Commercial Oil
+              - cell [ref=e3526]:
+                - generic [ref=e3530]:
+                  - paragraph [ref=e3531]: "Saarthi Kitchen: Fresh 'Ghar Ka Swaad' cooked by local dadi/nani @ ₹90/meal"
+                  - generic [ref=e3532]: Zero Palm Oil Promise
+            - row [ref=e3536]:
+              - cell [ref=e3537]:
+                - generic [ref=e3543]:
+                  - heading "Living Atmosphere & Quiet" [level=3] [ref=e3544]
+                  - paragraph [ref=e3545]: Daily environment for quiet studying and mental well-being
+                  - generic [ref=e3546]: Quiet Study Hub
+              - cell "Crowded noisy dorms, commercial warden friction, restrictive curfews ❌ Noisy & Cramped" [ref=e3550]:
+                - generic [ref=e3555]:
+                  - paragraph [ref=e3556]: Crowded noisy dorms, commercial warden friction, restrictive curfews
+                  - generic [ref=e3557]: ❌ Noisy & Cramped
+              - cell [ref=e3558]:
+                - generic [ref=e3562]:
+                  - paragraph [ref=e3563]: Warm family environment, quiet study hours, dignified senior companionship
+                  - generic [ref=e3564]: Dignified Family Vibe
+            - row [ref=e3568]:
+              - cell [ref=e3569]:
+                - generic [ref=e3575]:
+                  - heading "Host & Tenant Safety Audits" [level=3] [ref=e3576]
+                  - paragraph [ref=e3577]: Identity and safety checks performed before housing match
+                  - generic [ref=e3578]: 24/7 Bedside SOS
+              - cell "Unverified landlords, no police checks, zero formal emergency response ❌ Unchecked Landlords" [ref=e3582]:
+                - generic [ref=e3587]:
+                  - paragraph [ref=e3588]: Unverified landlords, no police checks, zero formal emergency response
+                  - generic [ref=e3589]: ❌ Unchecked Landlords
+              - cell [ref=e3590]:
+                - generic [ref=e3594]:
+                  - paragraph [ref=e3595]: 3-Tier Audit (Aadhaar Biometric + Police Check + 24/7 Bedside Emergency SOS)
+                  - generic [ref=e3596]: 3-Tier Police Verified
+            - row [ref=e3600]:
+              - cell [ref=e3601]:
+                - generic [ref=e3607]:
+                  - heading "Contract Flexibility & Lock-in" [level=3] [ref=e3608]
+                  - paragraph [ref=e3609]: Lease duration terms and early exit flexibility
+                  - generic [ref=e3610]: Month-to-Month Flexible
+              - cell "Mandatory 11-month rigid contract with forfeit of full security deposit on exit ❌ Rigid 11-Month Lock" [ref=e3614]:
+                - generic [ref=e3619]:
+                  - paragraph [ref=e3620]: Mandatory 11-month rigid contract with forfeit of full security deposit on exit
+                  - generic [ref=e3621]: ❌ Rigid 11-Month Lock
+              - cell [ref=e3622]:
+                - generic [ref=e3626]:
+                  - paragraph [ref=e3627]: Flexible month-to-month stays with 24-hour zero-penalty relocation SLA
+                  - generic [ref=e3628]: Zero Lock-In Friction
+        - generic [ref=e3632]:
+          - generic [ref=e3633]:
+            - heading "Stop Paying Dead-Rent for Empty PG Rooms Today!" [level=4] [ref=e3634]
+            - paragraph [ref=e3638]: Store luggage at ₹300/bag/mo & return to verified broker-free rooms.
+          - button "Book Storage @ ₹300/mo" [ref=e3639]
+      - generic [ref=e3643]:
+        - generic [ref=e3644]:
+          - heading "The Harsh Reality vs. The Saarthi Secret." [level=2] [ref=e3645]:
+            - text: The Harsh Reality vs.
+            - generic [ref=e3646]: The Saarthi Secret.
+          - paragraph [ref=e3647]: See the Integrated Ecosystem to fuse both sides into a single living network.
+        - generic [ref=e3649]:
+          - generic [ref=e3652]:
+            - heading "The Exploitative Cycle" [level=3] [ref=e3658]
+            - list [ref=e3659]:
+              - listitem [ref=e3660]: "The Broker Trap: Paying 1 month brokerage for a dingy room with fake photos."
+              - listitem [ref=e3661]: "The Dead-Rent Tax: ₹8,000 burned during holidays just so your luggage doesn't get stolen."
+              - listitem [ref=e3662]: "The Mess Nightmare: Watery daal, unhygienic oil, and homesickness."
+          - generic [ref=e3665]:
+            - heading "The StashSaarthi Ecosystem" [level=3] [ref=e3670]
+            - list [ref=e3671]:
+              - listitem [ref=e3672]: "Zero Brokerage: Direct connection to audited family and senior-hosted homes."
+              - listitem [ref=e3673]: "Flat ₹300/mo Stash: Barcode-sealed, ₹10,000 insured vacation luggage storage."
+              - listitem [ref=e3674]: "Ghar Ka Khana: Fresh micro-batch meals cooked by neighbourhood dadi/nani."
+        - button "See the Integrated Ecosystem" [ref=e3676] [cursor=pointer]
+      - generic [ref=e3677]:
+        - generic [ref=e3679]:
+          - generic [ref=e3680]:
+            - generic [ref=e3681]: "Verified Student Poll • Week #36"
+            - heading "Top 3 Rated Kitchens of the Week" [level=2] [ref=e3685]
+            - paragraph [ref=e3688]: Voted by verified students across Kanpur campuses. Authentic home-cooked meals prepared with love by senior mother chefs.
+          - generic [ref=e3689]:
+            - generic [ref=e3690]:
+              - generic [ref=e3691]: Total Verified Votes
+              - generic [ref=e3692]: "846"
+            - button "Nominate Senior Kitchen" [ref=e3696]
+        - generic [ref=e3699]:
+          - generic [ref=e3700]:
+            - generic [ref=e3701]:
+              - generic [ref=e3702]: "🥇 #1 Rated Student Choice"
+              - generic [ref=e3705]: "4.95"
+            - generic [ref=e3708]:
+              - generic [ref=e3709]:
+                - generic [ref=e3710]: "#1"
+                - generic [ref=e3711]:
+                  - heading "Annapurna Senior Home Kitchen" [level=3] [ref=e3712]
+                  - paragraph [ref=e3713]: Sunita Sharma Ji (62 yrs)
+              - generic [ref=e3716]: Kakadeo Coaching Belt (PW & Allen 80m)
+              - generic [ref=e3721]:
+                - generic [ref=e3722]: Weekly Signature Dish
+                - paragraph [ref=e3726]: Desi Ghee Dal Tadka, Shahi Paneer & Tawa Rotis
+              - list [ref=e3727]:
+                - listitem [ref=e3728]:
+                  - generic [ref=e3732]: 100% Pure Desi Ghee
+                - listitem [ref=e3733]:
+                  - generic [ref=e3737]: Zero Canteen Preservatives
+                - listitem [ref=e3738]:
+                  - generic [ref=e3742]: RO Water Purified
+            - generic [ref=e3743]:
+              - generic [ref=e3744]:
+                - generic [ref=e3745]:
+                  - generic [ref=e3746]: Per Meal
+                  - generic [ref=e3747]: ₹90
+                - generic [ref=e3748]:
+                  - generic [ref=e3749]: Monthly Pass
+                  - generic [ref=e3750]: ₹2400/mo
+              - generic [ref=e3751]:
+                - button "Vote (342)" [ref=e3752]
+                - button "Order Tiffin" [ref=e3755]
+              - button "Share Menu with Roommate 📱" [ref=e3760]
+          - generic [ref=e3764]:
+            - generic [ref=e3765]:
+              - generic [ref=e3766]: "🥈 #2 Most Loved Mess"
+              - generic [ref=e3773]: "4.91"
+            - generic [ref=e3776]:
+              - generic [ref=e3777]:
+                - generic [ref=e3778]: "#2"
+                - generic [ref=e3779]:
+                  - heading "Dadi Maa Home Tiffins" [level=3] [ref=e3780]
+                  - paragraph [ref=e3781]: Sudha Tripathi Ji (67 yrs)
+              - generic [ref=e3784]: "CSJMU Kalyanpur Gate #2 & Nankari Belt"
+              - generic [ref=e3789]:
+                - generic [ref=e3790]: Weekly Signature Dish
+                - paragraph [ref=e3794]: Homestyle Matar Paneer, Chana Masala & Soft Phulka
+              - list [ref=e3795]:
+                - listitem [ref=e3796]:
+                  - generic [ref=e3800]: Low Oil Healthy Cooking
+                - listitem [ref=e3801]:
+                  - generic [ref=e3805]: Daily Fresh Sabzi Variety
+                - listitem [ref=e3806]:
+                  - generic [ref=e3810]: 1-Tap Pause Option
+            - generic [ref=e3811]:
+              - generic [ref=e3812]:
+                - generic [ref=e3813]:
+                  - generic [ref=e3814]: Per Meal
+                  - generic [ref=e3815]: ₹85
+                - generic [ref=e3816]:
+                  - generic [ref=e3817]: Monthly Pass
+                  - generic [ref=e3818]: ₹2300/mo
+              - generic [ref=e3819]:
+                - button "Vote (289)" [ref=e3820]
+                - button "Order Tiffin" [ref=e3823]
+              - button "Share Menu with Roommate 📱" [ref=e3828]
+          - generic [ref=e3832]:
+            - generic [ref=e3833]:
+              - generic [ref=e3834]: "🥉 #3 High Protein Choice"
+              - generic [ref=e3838]: "4.88"
+            - generic [ref=e3841]:
+              - generic [ref=e3842]:
+                - generic [ref=e3843]: "#3"
+                - generic [ref=e3844]:
+                  - heading "Shanti Nivas Home Food" [level=3] [ref=e3845]
+                  - paragraph [ref=e3846]: Kamla Devi Ji (64 yrs)
+              - generic [ref=e3849]: HBTI West Campus & Nawabganj Gate
+              - generic [ref=e3854]:
+                - generic [ref=e3855]: Weekly Signature Dish
+                - paragraph [ref=e3859]: Punjabi Kadhi Pakoda, Special Jeera Rice & Gulab Jamun
+              - list [ref=e3860]:
+                - listitem [ref=e3861]:
+                  - generic [ref=e3865]: Extra Sprouts & Salad
+                - listitem [ref=e3866]:
+                  - generic [ref=e3870]: Hot Stainless Steel Tiffins
+                - listitem [ref=e3871]:
+                  - generic [ref=e3875]: Sunday Special Sweet
+            - generic [ref=e3876]:
+              - generic [ref=e3877]:
+                - generic [ref=e3878]:
+                  - generic [ref=e3879]: Per Meal
+                  - generic [ref=e3880]: ₹90
+                - generic [ref=e3881]:
+                  - generic [ref=e3882]: Monthly Pass
+                  - generic [ref=e3883]: ₹2400/mo
+              - generic [ref=e3884]:
+                - button "Vote (215)" [ref=e3885]
+                - button "Order Tiffin" [ref=e3888]
+              - button "Share Menu with Roommate 📱" [ref=e3893]
+        - generic [ref=e3897]:
+          - generic [ref=e3903]:
+            - generic [ref=e3904]: 100% Food Safety & Senior Dignity Assurance
+            - paragraph [ref=e3905]: Every kitchen node undergoes 3-tier audit (FSSAI hygiene norms, RO water test & fresh ingredient check). Direct escrow payouts to senior hosts.
+          - link "Kitchen Helpline +91 9369454350" [ref=e3906] [cursor=pointer]:
+            - /url: https://wa.me/919369454350?text=Hi%20StashSaarthi%20Food%20Audit%20Team
+      - generic [ref=e3910]:
+        - generic [ref=e3911]:
+          - generic [ref=e3912]: Official Student Governance Hub
+          - heading "Kanpur Student Council" [level=2] [ref=e3919]
+          - paragraph [ref=e3920]: An autonomous, student-led council representing IIT Kanpur, HBTI, CSJMU, Kakadeo PW/Allen hubs, & GSVM. Eliminating dead-rent exploitation, broker fees, and poor mess hygiene.
+          - generic [ref=e3921]:
+            - generic [ref=e3922]:
+              - paragraph [ref=e3923]: "12"
+              - paragraph [ref=e3924]: Campus Reps
+            - generic [ref=e3925]:
+              - paragraph [ref=e3926]: 84+
+              - paragraph [ref=e3927]: Proposals Logged
+            - generic [ref=e3928]:
+              - paragraph [ref=e3929]: "38"
+              - paragraph [ref=e3930]: Policies Enforced
+            - generic [ref=e3931]:
+              - paragraph [ref=e3932]: ₹6,400
+              - paragraph [ref=e3933]: Avg Dead-Rent Saved
+        - generic [ref=e3934]:
+          - generic [ref=e3935]:
+            - generic [ref=e3936]:
+              - heading "Council Student Representatives" [level=3] [ref=e3937]
+              - paragraph [ref=e3942]: Verified student representatives across Kanpur's premier institutes.
+            - generic [ref=e3943]:
+              - button "All Institutes" [ref=e3944]
+              - button "IIT Kanpur" [ref=e3945]
+              - button "HBTI Kanpur" [ref=e3946]
+              - button "CSJMU" [ref=e3947]
+              - button "Kakadeo Hub" [ref=e3948]
+              - button "GSVM Medical" [ref=e3949]
+          - generic [ref=e3950]:
+            - generic [ref=e3951]:
+              - generic [ref=e3952]:
+                - generic [ref=e3953]:
+                  - generic [ref=e3954]:
+                    - generic [ref=e3955]: AS
+                    - generic [ref=e3956]:
+                      - heading "Aman Sharma" [level=4] [ref=e3957]
+                      - paragraph [ref=e3961]: IIT Kanpur (Hall 1)
+                  - generic [ref=e3962]: Verified Student Leader
+                - paragraph [ref=e3963]: Council President & Logistics Lead • B.Tech CSE '26
+                - blockquote [ref=e3964]: "\"Ensuring zero dead-rent loss for IITK students during summer breaks through verified micro-storage.\""
+              - generic [ref=e3965]:
+                - generic [ref=e3966]: 14 Issues Solved
+                - button "Nominate / Connect" [ref=e3971]
+            - generic [ref=e3975]:
+              - generic [ref=e3976]:
+                - generic [ref=e3977]:
+                  - generic [ref=e3978]:
+                    - generic [ref=e3979]: RM
+                    - generic [ref=e3980]:
+                      - heading "Ritika Mishra" [level=4] [ref=e3981]
+                      - paragraph [ref=e3985]: HBTI Kanpur (West Campus)
+                  - generic [ref=e3986]: Senior Host Liaison
+                - paragraph [ref=e3987]: Zero-Brokerage Housing Chair • B.Tech Chemical '25
+                - blockquote [ref=e3988]: "\"Connecting HBTI students directly with verified senior hosts in Swaroop Nagar without broker extortion.\""
+              - generic [ref=e3989]:
+                - generic [ref=e3990]: 11 Issues Solved
+                - button "Nominate / Connect" [ref=e3995]
+            - generic [ref=e3999]:
+              - generic [ref=e4000]:
+                - generic [ref=e4001]:
+                  - generic [ref=e4002]:
+                    - generic [ref=e4003]: PP
+                    - generic [ref=e4004]:
+                      - heading "Priyansh Pandey" [level=4] [ref=e4005]
+                      - paragraph [ref=e4009]: PW Vidyapeeth Kakadeo Hub
+                  - generic [ref=e4010]: Kakadeo Ground Lead
+                - paragraph [ref=e4011]: Coaching Belt Student Advocate • JEE Dropper '26
+                - blockquote [ref=e4012]: "\"Eliminating illegal PG security deposit forfeitures and ensuring transparent room rental terms.\""
+              - generic [ref=e4013]:
+                - generic [ref=e4014]: 19 Issues Solved
+                - button "Nominate / Connect" [ref=e4019]
+            - generic [ref=e4023]:
+              - generic [ref=e4024]:
+                - generic [ref=e4025]:
+                  - generic [ref=e4026]:
+                    - generic [ref=e4027]: SV
+                    - generic [ref=e4028]:
+                      - heading "Shivani Verma" [level=4] [ref=e4029]
+                      - paragraph [ref=e4033]: CSJMU Kalyanpur
+                  - generic [ref=e4034]: Ghar Ka Swaad Lead
+                - paragraph [ref=e4035]: Mess Hygiene & Nutrition Inspector • M.Sc Biotech '25
+                - blockquote [ref=e4036]: "\"Strict quality audits for ₹50 daily tiffins so outstation hostelers get hygienic home-cooked meals.\""
+              - generic [ref=e4037]:
+                - generic [ref=e4038]: 9 Issues Solved
+                - button "Nominate / Connect" [ref=e4043]
+            - generic [ref=e4047]:
+              - generic [ref=e4048]:
+                - generic [ref=e4049]:
+                  - generic [ref=e4050]:
+                    - generic [ref=e4051]: US
+                    - generic [ref=e4052]:
+                      - heading "Dr. Utkarsh Singh" [level=4] [ref=e4053]
+                      - paragraph [ref=e4057]: GSVM Medical College
+                  - generic [ref=e4058]: Emergency Response
+                - paragraph [ref=e4059]: Campus Safety & Emergency Ombudsman • MBBS Intern '25
+                - blockquote [ref=e4060]: "\"Coordinating 24/7 safe student transit routes between Swaroop Nagar, Medical Gate, and Kakadeo.\""
+              - generic [ref=e4061]:
+                - generic [ref=e4062]: 8 Issues Solved
+                - button "Nominate / Connect" [ref=e4067]
+            - generic [ref=e4071]:
+              - generic [ref=e4072]:
+                - generic [ref=e4073]:
+                  - generic [ref=e4074]:
+                    - generic [ref=e4075]: DS
+                    - generic [ref=e4076]:
+                      - heading "Devendra Shukla" [level=4] [ref=e4077]
+                      - paragraph [ref=e4081]: Allen Career Institute Kakadeo
+                  - generic [ref=e4082]: Storage Safety Audit
+                - paragraph [ref=e4083]: Student Storage Delegate • NEET Aspirant '26
+                - blockquote [ref=e4084]: "\"Guaranteeing laser tamper barcode seals and moisture-proof packaging for student luggage.\""
+              - generic [ref=e4085]:
+                - generic [ref=e4086]: 12 Issues Solved
+                - button "Nominate / Connect" [ref=e4091]
+        - generic [ref=e4095]:
+          - generic [ref=e4096]:
+            - generic [ref=e4097]:
+              - heading "Student Issue & Proposal Forum" [level=3] [ref=e4098]
+              - paragraph [ref=e4103]: Upvote active student issues to push for official StashSaarthi council policy enforcement.
+            - button "+ Submit New Proposal" [ref=e4105]
+          - generic [ref=e4109]:
+            - generic [ref=e4111]:
+              - generic [ref=e4112]:
+                - generic [ref=e4113]:
+                  - generic [ref=e4114]: StashSaarthi Policy Enforced
+                  - generic [ref=e4115]: 📍 Kakadeo Coaching Belt
+                - heading "Enforce Standardized 0-Deposit Terms for Kakadeo PG Admissions" [level=4] [ref=e4116]
+                - paragraph [ref=e4117]: "Submitted by: Priyansh Pandey (PW Vidyapeeth)"
+                - generic [ref=e4118]:
+                  - generic [ref=e4119]: "💬 Council Resolution Note:"
+                  - paragraph [ref=e4120]: All Saarthi Spaces listed in Kakadeo now operate on strict 0-brokerage and zero non-refundable deposit terms.
+              - generic [ref=e4121]:
+                - button "Upvote" [ref=e4122]
+                - generic [ref=e4126]: 142 Votes
+            - generic [ref=e4128]:
+              - generic [ref=e4129]:
+                - generic [ref=e4130]:
+                  - generic [ref=e4131]: StashSaarthi Policy Enforced
+                  - generic [ref=e4132]: 📍 CSJMU & HBTI Belt
+                - heading "Mandatory FSSAI & RO Water Certification for All ₹50 Tiffin Providers" [level=4] [ref=e4133]
+                - paragraph [ref=e4134]: "Submitted by: Shivani Verma (CSJMU)"
+                - generic [ref=e4135]:
+                  - generic [ref=e4136]: "💬 Council Resolution Note:"
+                  - paragraph [ref=e4137]: Verified senior home kitchens in Saarthi Kitchen hub now feature mandatory RO filtration audit Badges.
+              - generic [ref=e4138]:
+                - button "Upvote" [ref=e4139]
+                - generic [ref=e4143]: 118 Votes
+            - generic [ref=e4145]:
+              - generic [ref=e4146]:
+                - generic [ref=e4147]:
+                  - generic [ref=e4148]: Under Council Review
+                  - generic [ref=e4149]: 📍 Kakadeo PW/Allen Gate
+                - heading "Shared Night Auto Shuttle Service for Female Coaching Students in Kakadeo" [level=4] [ref=e4150]
+                - paragraph [ref=e4151]: "Submitted by: Ananya Saxena (Allen Kakadeo)"
+                - generic [ref=e4152]:
+                  - generic [ref=e4153]: "💬 Council Resolution Note:"
+                  - paragraph [ref=e4154]: Council is partnering with local auto associations & senior hosts to launch verified night route pick-ups.
+              - generic [ref=e4155]:
+                - button "Upvote" [ref=e4156]
+                - generic [ref=e4160]: 95 Votes
+            - generic [ref=e4162]:
+              - generic [ref=e4163]:
+                - generic [ref=e4164]:
+                  - generic [ref=e4165]: StashSaarthi Policy Enforced
+                  - generic [ref=e4166]: 📍 IIT Kanpur & CSJMU
+                - heading "Summer Vacation Luggage Free Pick-up from IITK & CSJMU Hostels" [level=4] [ref=e4167]
+                - paragraph [ref=e4168]: "Submitted by: Aman Sharma (IIT Kanpur)"
+                - generic [ref=e4169]:
+                  - generic [ref=e4170]: "💬 Council Resolution Note:"
+                  - paragraph [ref=e4171]: StashSaarthi platform introduced campus-gate direct doorstep pick-up for all ₹300/bag/mo stashes.
+              - generic [ref=e4172]:
+                - button "Upvote" [ref=e4173]
+                - generic [ref=e4177]: 164 Votes
+        - generic [ref=e4179]:
+          - generic [ref=e4180]:
+            - generic [ref=e4181]: Official WhatsApp Community
+            - heading "Join the Kanpur Student Council Community" [level=3] [ref=e4185]
+            - paragraph [ref=e4186]: Connect directly with campus chairs, participate in monthly open-mic townhalls, and get priority room & storage alerts.
+          - generic [ref=e4187]:
+            - link "Join WhatsApp Group" [ref=e4188] [cursor=pointer]:
+              - /url: https://wa.me/919369454350?text=Hi%20StashSaarthi!%20I%20want%20to%20join%20the%20Kanpur%20Student%20Council%20WhatsApp%20Group.
+            - button "Apply for Seat" [ref=e4196]
+      - generic [ref=e4202]:
+        - generic [ref=e4204]:
+          - generic [ref=e4205]: Viral Campus Referral Leaderboard
+          - heading "Refer Friends, Climb Campus Rankings & Earn Cash" [level=2] [ref=e4213]
+          - paragraph [ref=e4214]: Compete with students & hosts across IIT Kanpur, HBTI, CSJMU & Kakadeo hubs. Top referrers win ₹5,000 cash bonus + 6 months free storage!
+          - generic [ref=e4216]:
+            - button "This Month (March 2026)" [ref=e4217] [cursor=pointer]
+            - button "All-Time Legends" [ref=e4218] [cursor=pointer]
+        - generic [ref=e4220]:
+          - generic [ref=e4221]:
+            - generic [ref=e4222]: "2"
+            - generic [ref=e4223]: RV
+            - generic [ref=e4225]: Stash Pioneer 🚀
+            - heading "Riya Verma" [level=3] [ref=e4226]
+            - paragraph [ref=e4227]:
+              - generic [ref=e4231]: HBTI Kanpur (CSE)
+            - generic [ref=e4232]:
+              - generic [ref=e4233]: "Invites:"
+              - generic [ref=e4234]: 24 friends
+            - generic [ref=e4235]:
+              - generic [ref=e4236]: "Earned:"
+              - generic [ref=e4237]: ₹7,200
+          - generic [ref=e4238]:
+            - generic [ref=e4242]: AS
+            - generic [ref=e4244]: Campus Legend 👑
+            - heading "Aarav Sharma" [level=3] [ref=e4245]
+            - paragraph [ref=e4246]:
+              - generic [ref=e4250]: IIT Kanpur (Hall 2)
+            - generic [ref=e4251]:
+              - generic [ref=e4252]: "Total Invites:"
+              - generic [ref=e4253]: 32 invites
+            - generic [ref=e4254]:
+              - generic [ref=e4255]: "Cash & Rewards:"
+              - generic [ref=e4256]: ₹9,600
+          - generic [ref=e4257]:
+            - generic [ref=e4258]: "3"
+            - generic [ref=e4259]: AA
+            - generic [ref=e4261]: Super Host 🏡
+            - heading "Anil Kumar Agrawal" [level=3] [ref=e4262]
+            - paragraph [ref=e4263]:
+              - generic [ref=e4268]: "Kakadeo Host Node #14"
+            - generic [ref=e4269]:
+              - generic [ref=e4270]: "Invites:"
+              - generic [ref=e4271]: 19 invites
+            - generic [ref=e4272]:
+              - generic [ref=e4273]: "Earned:"
+              - generic [ref=e4274]: ₹9,500
+        - generic [ref=e4275]:
+          - generic [ref=e4276]:
+            - heading "Top Campus Champion Rankings" [level=3] [ref=e4277]
+            - generic [ref=e4282]:
+              - generic [ref=e4283]:
+                - generic [ref=e4284]: "#4"
+                - generic [ref=e4285]: DT
+                - generic [ref=e4286]:
+                  - generic [ref=e4287]:
+                    - generic [ref=e4288]: Devansh Tripathy
+                    - generic [ref=e4289]: Vacation Master 🧳
+                  - paragraph [ref=e4290]: CSJMU Kanpur
+              - generic [ref=e4291]:
+                - generic [ref=e4292]: 15 Invites
+                - generic [ref=e4293]: ₹4,500
+            - generic [ref=e4294]:
+              - generic [ref=e4295]:
+                - generic [ref=e4296]: "#5"
+                - generic [ref=e4297]: SG
+                - generic [ref=e4298]:
+                  - generic [ref=e4299]:
+                    - generic [ref=e4300]: Sneha Gupta
+                    - generic [ref=e4301]: Dead-Rent Slayer ⚡
+                  - paragraph [ref=e4302]: IIT Kanpur (Hall 6)
+              - generic [ref=e4303]:
+                - generic [ref=e4304]: 13 Invites
+                - generic [ref=e4305]: ₹3,900
+            - generic [ref=e4306]:
+              - generic [ref=e4307]:
+                - generic [ref=e4308]: "#6"
+                - generic [ref=e4309]: SS
+                - generic [ref=e4310]:
+                  - generic [ref=e4311]:
+                    - generic [ref=e4312]: Sunita Shukla
+                    - generic [ref=e4313]: Dignified Host 🌟
+                  - paragraph [ref=e4314]: Swaroop Nagar Host Node
+              - generic [ref=e4315]:
+                - generic [ref=e4316]: 11 Invites
+                - generic [ref=e4317]: ₹5,500
+            - generic [ref=e4318]:
+              - generic [ref=e4319]:
+                - generic [ref=e4320]: "#7"
+                - generic [ref=e4321]: KJ
+                - generic [ref=e4322]:
+                  - generic [ref=e4323]:
+                    - generic [ref=e4324]: Karan Johar
+                    - generic [ref=e4325]: Co-Living Catalyst 🤝
+                  - paragraph [ref=e4326]: Allen Kakadeo Batch '26
+              - generic [ref=e4327]:
+                - generic [ref=e4328]: 9 Invites
+                - generic [ref=e4329]: ₹2,700
+            - generic [ref=e4330]:
+              - generic [ref=e4331]:
+                - generic [ref=e4332]: "#8"
+                - generic [ref=e4333]: VS
+                - generic [ref=e4334]:
+                  - generic [ref=e4335]:
+                    - generic [ref=e4336]: Vikram Saxena
+                    - generic [ref=e4337]: Campus Captain 🏆
+                  - paragraph [ref=e4338]: PSIT Kanpur
+              - generic [ref=e4339]:
+                - generic [ref=e4340]: 8 Invites
+                - generic [ref=e4341]: ₹2,400
+          - generic [ref=e4342]:
+            - generic [ref=e4343]:
+              - generic [ref=e4344]:
+                - generic [ref=e4349]:
+                  - heading "Your Standing" [level=4] [ref=e4350]
+                  - paragraph [ref=e4351]: "Pass ID: #SS-8921"
+                - generic [ref=e4352]: "#12 Rank"
+              - generic [ref=e4353]:
+                - generic [ref=e4354]:
+                  - generic [ref=e4355]: Top 10 Milestone
+                  - generic [ref=e4356]: 4 / 5 Invites
+                - paragraph [ref=e4359]: 💡 1 more referral unlocks ₹1,000 extra bonus credit!
+              - generic [ref=e4360]:
+                - generic [ref=e4361]:
+                  - generic [ref=e4362]: Your Invite Code
+                  - text: STASH-KNP2026
+                - button "Copy Code" [ref=e4363] [cursor=pointer]
+              - button "Share Referral on WhatsApp" [ref=e4367] [cursor=pointer]
+            - generic [ref=e4375]:
+              - heading "Referral Reward Tiers" [level=5] [ref=e4376]
+              - generic [ref=e4382]:
+                - generic [ref=e4383]:
+                  - generic [ref=e4384]: "• 1 Refer:"
+                  - generic [ref=e4385]: ₹300 StashCredit
+                - generic [ref=e4386]:
+                  - generic [ref=e4387]: "• 3 Refers:"
+                  - generic [ref=e4388]: 1 Month Free Storage
+                - generic [ref=e4389]:
+                  - generic [ref=e4390]: "• 5 Refers:"
+                  - generic [ref=e4391]: ₹1,500 Cash Payout
+                - generic [ref=e4392]:
+                  - generic [ref=e4393]: "• 10+ Refers:"
+                  - generic [ref=e4394]: Campus Captain Badge 🏆
+      - generic [ref=e4396]:
+        - generic [ref=e4398]:
+          - generic [ref=e4399]: Open Community Feedback & Improvement Hub
+          - heading "Customer Reviews & Platform Improvement Ideas" [level=2] [ref=e4405]
+          - paragraph [ref=e4406]: Share your experience with star ratings & written reviews, or tell us directly what improvements, features, or city corridors we should build next.
+          - generic [ref=e4407]:
+            - button "1. Rate & Review 4" [ref=e4408] [cursor=pointer]:
+              - generic [ref=e4411]: 1. Rate & Review
+              - generic [ref=e4412]: "4"
+            - button "2. Suggest Ideas 5" [ref=e4413] [cursor=pointer]:
+              - generic [ref=e4416]: 2. Suggest Ideas
+              - generic [ref=e4417]: "5"
+        - generic [ref=e4418]:
+          - generic [ref=e4419]:
+            - generic [ref=e4420]:
+              - generic [ref=e4421]: "Filter:"
+              - button "All Reviews" [ref=e4424] [cursor=pointer]
+              - button "📦 Storage" [ref=e4425] [cursor=pointer]
+              - button "🏠 Living" [ref=e4426] [cursor=pointer]
+              - button "🍲 Kitchen" [ref=e4427] [cursor=pointer]
+            - generic [ref=e4428]:
+              - generic [ref=e4429]: 4 Reviews
+              - button "✍️ Write Review" [ref=e4430] [cursor=pointer]
+          - generic [ref=e4432]:
+            - generic [ref=e4433]:
+              - generic [ref=e4434]:
+                - generic [ref=e4435]:
+                  - generic [ref=e4436]: "5.0"
+                  - generic [ref=e4448]: 📦 Vacation Stash
+                - heading "\"Saved ₹14,000 dead rent with zero hassle!\"" [level=3] [ref=e4449]
+                - paragraph [ref=e4450]: I was paying ₹4,500/mo just to keep my 3 luggage bags in my flat during the 3-month summer break. StashSaarthi stored them safely with laser barcode seals for just ₹900 total. Delivered back in perfect condition on day one of the new semester.
+              - generic [ref=e4451]:
+                - generic [ref=e4452]:
+                  - generic [ref=e4453]: R
+                  - generic [ref=e4454]:
+                    - paragraph [ref=e4455]: Rohan Agrawal
+                    - paragraph [ref=e4456]: B.Tech CSE, 3rd Year • IIT Kanpur Belt, Kalyanpur
+                - generic [ref=e4457]:
+                  - generic [ref=e4458]: "#SS-REV-84920"
+                  - paragraph [ref=e4463]: Verified Summer 2026
+            - generic [ref=e4464]:
+              - generic [ref=e4465]:
+                - generic [ref=e4466]:
+                  - generic [ref=e4467]: "5.0"
+                  - generic [ref=e4479]: 🏠 Senior Living
+                - heading "\"Dignified monthly income & wonderful young company\"" [level=3] [ref=e4480]
+                - paragraph [ref=e4481]: Our first-floor rooms had been lying locked since our children moved abroad. StashSaarthi verified two sincere medical students for us. We earn ₹12,000 every month directly in our bank account, and the students even help us with grocery apps and evening walks.
+              - generic [ref=e4482]:
+                - generic [ref=e4483]:
+                  - generic [ref=e4484]: S
+                  - generic [ref=e4485]:
+                    - paragraph [ref=e4486]: Smt. Manju & Prof. S. N. Verma
+                    - paragraph [ref=e4487]: Senior Hosts, 69 & 74 yrs • Swaroop Nagar, Kanpur
+                - generic [ref=e4488]:
+                  - generic [ref=e4489]: "#SS-HOST-41029"
+                  - paragraph [ref=e4494]: Active Host (5 Months)
+            - generic [ref=e4495]:
+              - generic [ref=e4496]:
+                - generic [ref=e4497]:
+                  - generic [ref=e4498]: "5.0"
+                  - generic [ref=e4510]: 🍲 Saarthi Kitchen
+                - heading "\"Finally pure home-cooked tiffins with zero hostel oil\"" [level=3] [ref=e4511]
+                - paragraph [ref=e4512]: Hostel mess food was causing severe acidity. Through Saarthi Kitchen, I receive fresh, piping-hot home cooked meals prepared by Auntieji nearby for just ₹90/meal. Tastes exactly like home food from mom.
+              - generic [ref=e4513]:
+                - generic [ref=e4514]:
+                  - generic [ref=e4515]: A
+                  - generic [ref=e4516]:
+                    - paragraph [ref=e4517]: Ananya Dixit
+                    - paragraph [ref=e4518]: MBA Student, CSJMU • Kakadeo Corridor
+                - generic [ref=e4519]:
+                  - generic [ref=e4520]: "#SS-MEAL-19402"
+                  - paragraph [ref=e4525]: Subscriber (3 Months)
+            - generic [ref=e4526]:
+              - generic [ref=e4527]:
+                - generic [ref=e4528]:
+                  - generic [ref=e4529]: "5.0"
+                  - generic [ref=e4541]: 📦 Vacation Stash
+                - heading "\"Monetized 100 sq.ft empty storage room easily\"" [level=3] [ref=e4542]
+                - paragraph [ref=e4543]: I had a dry, clean spare room on ground floor. StashSaarthi audited the moisture, provided standard pallets, and now I manage 45 student bags earning ₹8,100/mo completely passive.
+              - generic [ref=e4544]:
+                - generic [ref=e4545]:
+                  - generic [ref=e4546]: D
+                  - generic [ref=e4547]:
+                    - paragraph [ref=e4548]: Devendra Shukla
+                    - paragraph [ref=e4549]: Micro-Hub Storage Partner • Rawatpur, Kanpur
+                - generic [ref=e4550]:
+                  - generic [ref=e4551]: "#SS-NODE-59301"
+                  - paragraph [ref=e4556]: Verified Node Partner
+        - generic [ref=e4557]:
+          - generic [ref=e4562]:
+            - heading "Want to share urgent suggestions directly with the founder?" [level=3] [ref=e4563]
+            - paragraph [ref=e4564]: Connect directly with founder Advik Omer on WhatsApp (+91 9369454350)
+          - link "Chat on WhatsApp" [ref=e4565] [cursor=pointer]:
+            - /url: https://wa.me/919369454350?text=Hi%20Advik%2C%20I%20have%20feedback%2Fimprovement%20suggestions%20regarding%20StashSaarthi%3A
+    - generic [ref=e4569]:
+      - generic [ref=e4571]:
+        - heading "A City Where No One Arrives Alone." [level=2] [ref=e4572]
+        - paragraph [ref=e4574]: Join the priority list for your city — stash spots, verified rooms and home kitchens open in batches.
+        - generic [ref=e4575]:
+          - generic [ref=e4576]:
+            - button "🎓 Student" [ref=e4577] [cursor=pointer]
+            - button "🏠 Host" [ref=e4578] [cursor=pointer]
+          - generic [ref=e4579]:
+            - textbox "Full name" [ref=e4584]
+            - textbox "you@college.edu" [ref=e4589]
+            - textbox "+91 98xxx xxxxx" [ref=e4593]
+            - textbox "College / Campus (Optional)" [ref=e4598]
+          - generic [ref=e4601]:
+            - generic [ref=e4608]:
+              - heading "Refer & Earn 1 Month FREE" [level=3] [ref=e4609]
+              - paragraph [ref=e4610]: Share with hostel friends to unlock ₹300 StashCredit.
+            - generic [ref=e4611]:
+              - generic [ref=e4612]:
+                - generic [ref=e4613]: STASH-CAMPUS2026
+                - button "Copy referral code" [ref=e4614] [cursor=pointer]
+              - button "Share referral invite on WhatsApp" [ref=e4618] [cursor=pointer]:
+                - generic [ref=e4625]: Share
+          - button "Join the Waitlist" [ref=e4626] [cursor=pointer]
+          - generic [ref=e4627]:
+            - generic [ref=e4628]: or 1-click Google
+            - button "Quick join with Google" [ref=e4633] [cursor=pointer]
+          - paragraph [ref=e4640]: 🔒 Zero spam. Only alerts when nodes go live in your campus area.
+      - generic [ref=e4642]:
+        - generic [ref=e4643]:
+          - generic [ref=e4644]:
+            - text: Kanpur
+            - generic [ref=e4645]: ◆
+          - generic [ref=e4646]:
+            - text: Lucknow
+            - generic [ref=e4647]: ◆
+          - generic [ref=e4648]:
+            - text: Delhi NCR
+            - generic [ref=e4649]: ◆
+          - generic [ref=e4650]:
+            - text: Pune
+            - generic [ref=e4651]: ◆
+          - generic [ref=e4652]:
+            - text: Varanasi
+            - generic [ref=e4653]: ◆
+          - generic [ref=e4654]:
+            - text: Indore
+            - generic [ref=e4655]: ◆
+          - generic [ref=e4656]:
+            - text: Jaipur
+            - generic [ref=e4657]: ◆
+          - generic [ref=e4658]:
+            - text: Bhopal
+            - generic [ref=e4659]: ◆
+          - generic [ref=e4660]:
+            - text: Nagpur
+            - generic [ref=e4661]: ◆
+        - generic [ref=e4662]:
+          - generic [ref=e4663]:
+            - text: Kanpur
+            - generic [ref=e4664]: ◆
+          - generic [ref=e4665]:
+            - text: Lucknow
+            - generic [ref=e4666]: ◆
+          - generic [ref=e4667]:
+            - text: Delhi NCR
+            - generic [ref=e4668]: ◆
+          - generic [ref=e4669]:
+            - text: Pune
+            - generic [ref=e4670]: ◆
+          - generic [ref=e4671]:
+            - text: Varanasi
+            - generic [ref=e4672]: ◆
+          - generic [ref=e4673]:
+            - text: Indore
+            - generic [ref=e4674]: ◆
+          - generic [ref=e4675]:
+            - text: Jaipur
+            - generic [ref=e4676]: ◆
+          - generic [ref=e4677]:
+            - text: Bhopal
+            - generic [ref=e4678]: ◆
+          - generic [ref=e4679]:
+            - text: Nagpur
+            - generic [ref=e4680]: ◆
+      - generic [ref=e4681]:
+        - generic [ref=e4682]:
+          - img "StashSaarthi" [ref=e4686]
+          - paragraph [ref=e4687]: India's hyper-local living ecosystem — bridging student mobility with intergenerational community support.
+          - generic [ref=e4688]:
+            - link "Follow StashSaarthi on Instagram" [ref=e4689] [cursor=pointer]:
+              - /url: https://www.instagram.com/stashsaarthi
+            - link "Chat with StashSaarthi on WhatsApp" [ref=e4693] [cursor=pointer]:
+              - /url: https://wa.me/919369454350?text=Hi%20StashSaarthi%20Team
+            - link "Connect with Founder Advik Omer on LinkedIn" [ref=e4696] [cursor=pointer]:
+              - /url: https://www.linkedin.com/in/advik-omer-07046b367
+            - button "X (Twitter)" [ref=e4701] [cursor=pointer]
+          - 'link "Founder Line: +91 9369454350" [ref=e4705] [cursor=pointer]':
+            - /url: https://wa.me/919369454350?text=Hi%20StashSaarthi%20Team
+          - generic [ref=e4707]:
+            - button "Investor One-Pager" [ref=e4708] [cursor=pointer]
+            - button "Campus Captain (₹5k+)" [ref=e4712] [cursor=pointer]
+            - link "Kakadeo Guide (PDF)" [ref=e4716] [cursor=pointer]:
+              - /url: /kakadeo-survival-guide
+            - link "Refer" [ref=e4719] [cursor=pointer]:
+              - /url: https://api.whatsapp.com/send?text=%F0%9F%8E%92%20*StashSaarthi%20%E2%80%94%20Campus%20Vacation%20Luggage%20Storage%20%26%20Living*%0A%0AHey!%20Check%20this%20out%20before%20vacation%20starts%20%E2%80%94%20instead%20of%20burning%20%E2%82%B96%2C000%E2%80%93%E2%82%B98%2C000%20in%20dead%20rent%20for%20empty%20PG%20rooms%2C%20you%20can%20store%20your%20luggage%20securely%20for%20just%20*%E2%82%B9300%2Fbag%2Fmo*%20with%20laser%20tamper%20seals%20%26%20%E2%82%B910k%20insurance%20near%20campus.%0A%0A%F0%9F%91%89%20*Check%20it%20out%20here%3A*%20https%3A%2F%2Fstashsaarthi-web.vercel.app
+        - generic [ref=e4726]:
+          - heading "Ecosystem" [level=3] [ref=e4727]
+          - list [ref=e4728]:
+            - listitem [ref=e4729]:
+              - link "Saarthi Spaces" [ref=e4730] [cursor=pointer]:
+                - /url: "#ecosystem"
+            - listitem [ref=e4731]:
+              - link "Saarthi Kitchen" [ref=e4732] [cursor=pointer]:
+                - /url: "#ecosystem"
+            - listitem [ref=e4733]:
+              - link "Saarthi Stash" [ref=e4734] [cursor=pointer]:
+                - /url: "#calculator"
+            - listitem [ref=e4735]:
+              - link "Saarthi Connect" [ref=e4736] [cursor=pointer]:
+                - /url: "#connect"
+            - listitem [ref=e4737]:
+              - link "🏛️ Kanpur Student Council" [ref=e4738] [cursor=pointer]:
+                - /url: /kanpur-student-council
+            - listitem [ref=e4739]:
+              - link "Verified Rooms" [ref=e4740] [cursor=pointer]:
+                - /url: "#rooms"
+            - listitem [ref=e4741]:
+              - link "Tiffin near Motion Coaching" [ref=e4742] [cursor=pointer]:
+                - /url: /tiffin-services-near-motion
+            - listitem [ref=e4743]:
+              - link "Tiffin near Physics Wallah" [ref=e4744] [cursor=pointer]:
+                - /url: /tiffin-services-near-physics-wallah
+            - listitem [ref=e4745]:
+              - link "Tiffin near Allen Coaching" [ref=e4746] [cursor=pointer]:
+                - /url: /tiffin-services-near-allen
+        - generic [ref=e4747]:
+          - heading "Company" [level=3] [ref=e4748]
+          - list [ref=e4749]:
+            - listitem [ref=e4750]:
+              - button "About us" [ref=e4751] [cursor=pointer]
+            - listitem [ref=e4752]:
+              - button "Micro-Opportunity" [ref=e4753] [cursor=pointer]
+            - listitem [ref=e4754]:
+              - button "Partner with us" [ref=e4755] [cursor=pointer]
+            - listitem [ref=e4756]:
+              - button "Careers" [ref=e4757] [cursor=pointer]
+        - generic [ref=e4758]:
+          - heading "Legal" [level=3] [ref=e4759]
+          - list [ref=e4760]:
+            - listitem [ref=e4761]:
+              - button "Terms of service" [ref=e4762] [cursor=pointer]
+            - listitem [ref=e4763]:
+              - button "Privacy policy (Plain English)" [ref=e4764] [cursor=pointer]
+            - listitem [ref=e4765]:
+              - button "Cancellation & Fair usage" [ref=e4766] [cursor=pointer]
+            - listitem [ref=e4767]:
+              - button "Storage liability & ₹10k cover" [ref=e4768] [cursor=pointer]
+            - listitem [ref=e4769]:
+              - button "Grievance & Nodal officer" [ref=e4770] [cursor=pointer]
+      - generic [ref=e4772]:
+        - generic [ref=e4773]:
+          - paragraph [ref=e4774]: © 2026 StashSaarthi Technologies • Kanpur, UP
+          - paragraph [ref=e4775]: "Operational Hub: 117/K-Block, Kalyanpur, Kanpur — 208016 | Direct Email: stashsaarthi@gmail.com"
+          - generic [ref=e4776]:
+            - link "Privacy" [ref=e4777] [cursor=pointer]:
+              - /url: /privacy
+            - generic [ref=e4778]: •
+            - link "Terms" [ref=e4779] [cursor=pointer]:
+              - /url: /terms
+            - generic [ref=e4780]: •
+            - button "₹10k Cover" [ref=e4781] [cursor=pointer]
+            - generic [ref=e4782]: •
+            - button "Android Go" [ref=e4783] [cursor=pointer]
+            - generic [ref=e4784]: •
+            - button "Standard Mode" [ref=e4785] [cursor=pointer]:
+              - generic [ref=e4788]: Data
+        - button "Scroll to top" [ref=e4789] [cursor=pointer]:
+          - generic [ref=e4790]: Back to top
+    - button "Priya M. (HBTI) - booked Kakadeo single room" [ref=e4793] [cursor=pointer]:
+      - generic [ref=e4802]:
+        - generic [ref=e4803]:
+          - generic [ref=e4804]: Priya M. (HBTI)
+          - generic [ref=e4805]: booked Kakadeo single room
+        - generic [ref=e4806]: Zero Brokerage · Near PW & Allen Hub
+        - generic [ref=e4811]:
+          - generic [ref=e4812]: 0% Brokerage Verified
+          - generic [ref=e4817]: 4 mins ago
+      - button "Dismiss live updates" [ref=e4818]
+    - radiogroup "Select User Persona" [ref=e4822]:
+      - radio "Student Mode" [checked] [ref=e4823] [cursor=pointer]
+      - radio "Senior Host" [ref=e4829] [cursor=pointer]
+    - button "Direct question? Chat with the builder. 💬" [ref=e2508] [cursor=pointer]:
+      - generic [ref=e2512]:
+        - text: Direct question?
+        - strong [ref=e2513]: Chat with the builder.
+      - generic [ref=e2514]: 💬
+    - button "Open WhatsApp concierge" [ref=e2516] [cursor=pointer]
+    - button "Open RAG AI Assistant" [ref=e2521] [cursor=pointer]:
+      - generic [ref=e2529]: Saarthi AI RAG Bot
+      - generic [ref=e2530]: RAG v2.0
+  - generic [ref=e2531]:
+    - status [ref=e2532]
+    - alert [ref=e2533]
+  - region "Notifications alt+T"

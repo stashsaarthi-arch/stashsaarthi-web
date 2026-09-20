@@ -154,7 +154,7 @@ export function evaluateHostTier(metrics: HostMetrics): HostEvaluationResult {
         "💸 Instant Priority Razorpay Payout Routing (Zero-Delay)",
       ]
     : [
-        "Verified Senior Host Badge",
+        "Verified Verified PG Owner Host Badge",
         "Standard Razorpay Route Payout Schedule",
       ];
 

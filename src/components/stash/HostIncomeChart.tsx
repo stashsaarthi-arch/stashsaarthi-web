@@ -411,6 +411,10 @@ export function HostIncomeChart({
                       <stop offset="50%" stopColor="#10B981" />
                       <stop offset="100%" stopColor="#00F5A0" />
                     </linearGradient>
+                    <linearGradient id="neonGreenGradient" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#00F5A0" />
+                      <stop offset="100%" stopColor="#10B981" />
+                    </linearGradient>
                   </defs>
 
                   {/* Horizontal Grid lines */}
@@ -438,18 +442,6 @@ export function HostIncomeChart({
                     stroke="rgba(255,255,255,0.1)"
                   />
 
-                  {/* Area fill */}
-                  <path d={svgAreaD} fill="url(#amberGradient)" />
-
-                  {/* Trend Curve Line */}
-                  <path
-                    d={svgPathD}
-                    fill="none"
-                    stroke="url(#lineGradient)"
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                  />
-
                   {/* SVG Bars aligned pixel-perfectly with data points */}
                   {points.map((pt, idx) => {
                     const d = monthlyData[idx];
@@ -474,23 +466,13 @@ export function HostIncomeChart({
                           width={14}
                           height={barHeightPct}
                           rx={3}
+                          fill="url(#neonGreenGradient)"
                           className={`transition-all duration-200 ${
                             isHovered
-                              ? "fill-amber-400 stroke-white stroke-1"
+                              ? "stroke-white stroke-1"
                               : d.isVacationSeason
-                                ? "fill-amber-500/70"
-                                : "fill-white/20"
-                          }`}
-                        />
-                        {/* Point Circle */}
-                        <circle
-                          cx={pt.x}
-                          cy={pt.y}
-                          r={isHovered ? 6 : 3.5}
-                          className={`transition-all duration-200 ${
-                            isHovered
-                              ? "fill-white stroke-amber-400 stroke-[3]"
-                              : "fill-amber-400 stroke-black stroke-2"
+                                ? "opacity-100"
+                                : "opacity-60"
                           }`}
                         />
                         {/* Month text label */}
@@ -499,7 +481,7 @@ export function HostIncomeChart({
                           y={chartHeight - 4}
                           textAnchor="middle"
                           className={`text-[9px] font-mono fill-current ${
-                            isHovered ? "fill-amber-400 font-bold" : "fill-slate-400"
+                            isHovered ? "fill-emerald-400 font-bold" : "fill-slate-400"
                           }`}
                         >
                           {d.month}
@@ -847,7 +829,7 @@ export function HostIncomeChart({
                   </span>{" "}
                   {isHi
                     ? "स्टैशसारथी सीनियर होस्ट्स से कोई ब्रोकरेज या कट-ऑफ नहीं लेता। पूरा ₹180/बैग व ₹55/टिफिन सीधे आपके खाते में जमा होता है।"
-                    : "StashSaarthi charges zero commission to senior hosts. Full ₹180/bag & ₹55/meal goes directly to your bank account."}
+                    : "StashSaarthi charges zero commission to premium hosts. Full ₹180/bag & ₹55/meal goes directly to your bank account."}
                 </div>
               </div>
             </div>

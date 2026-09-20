@@ -36,7 +36,7 @@ export const translations = {
         ],
       },
       host: {
-        badge: "Trusted by 12+ Senior Hosts in Kanpur",
+        badge: "Trusted by 12+ Premium Hosts in Kanpur",
         title: "Turn Spare Rooms & Corners Into ₹11,500/mo Passive Income.",
         subtitle:
           "Help verified IITK & CSJMU students store luggage or find safe housing. 100% escrow protected, zero broker hassle, and strictly on your terms.",
@@ -80,7 +80,7 @@ export const translations = {
           },
           {
             title: "Book a verified room",
-            text: "Zero brokerage rooms inside senior-hosted homes near campus.",
+            text: "Zero brokerage rooms inside verified PG owner-hosted homes near campus.",
           },
           {
             title: "Subscribe to tiffins",
@@ -94,10 +94,10 @@ export const translations = {
         ],
       },
       host: {
-        eyebrow: "Elderly Host Lane",
+        eyebrow: "High-Margin ROI Host Lane",
         title: "Earn from the room. Keep the company.",
         blurb:
-          "Your spare room becomes steady income and daily companionship — we screen every student, handle paperwork and stay on call for you.",
+          "Your spare room becomes steady income and daily zero-brokerage ecosystem — we screen every student, handle paperwork and stay on call for you.",
         cta: "List your spare room free",
         steps: [
           {
@@ -109,7 +109,7 @@ export const translations = {
             text: "3-tier ID, campus and family verification before any visit.",
           },
           {
-            title: "Match on companionship",
+            title: "Match on zero-brokerage ecosystem",
             text: "Paired on routine, language and interests — not just rent.",
           },
         ],
@@ -142,14 +142,14 @@ export const translations = {
         "The Mess Nightmare: Watery daal, unhygienic oil, and homesickness.",
       ],
       hostPoints: [
-        "Zero Brokerage: Direct connection to audited family and senior-hosted homes.",
+        "Zero Brokerage: Direct connection to audited family and verified PG owner-hosted homes.",
         "Flat ₹300/mo Stash: Barcode-sealed, ₹10,000 insured vacation luggage storage.",
         "Ghar Ka Khana: Fresh micro-batch meals cooked by neighbourhood dadi/nani.",
       ],
       fusionComplete: "Fusion complete",
       fusionTitle: "The StashSaarthi Ecosystem",
       fusionPoints: [
-        "Empty senior rooms become verified, brokerage-free student homes",
+        "Empty verified PG owner rooms become verified, brokerage-free student homes",
         "One hour a day of tech help & errands earns up to 60% rent subsidy",
         "Vacation luggage stays safe in a neighbourhood stash node at ₹300/mo",
         "Home-cooked meals replace mess food — cooked by the same community",
@@ -164,10 +164,10 @@ export const translations = {
       spaces: {
         badge: "100% Escrow Protected",
         title: "Saarthi Spaces",
-        subtitle: "Verified senior-hosted homes and PGs.",
+        subtitle: "Verified verified PG owner-hosted homes and PGs.",
         price: "Avg ₹5,500/mo",
         comparison: "Flat 10% platform fee (zero brokerage)",
-        bullets: ["3-Tier Verified Senior Family", "Free 24h Relocation Guarantee"],
+        bullets: ["3-Tier Verified Verified PG Owner Family", "Free 24h Relocation Guarantee"],
       },
       stash: {
         badge: "Live Capacity: 24 Slots",
@@ -269,7 +269,7 @@ export const translations = {
           id: "bedroom",
           title: "Spare Bedroom",
           space: "10x10 sq ft",
-          effort: "Companionship only",
+          effort: "Zero-Brokerage Ecosystem only",
           capacity: "1 Student Resident",
           incomeRange: "₹5,225/mo",
           tag: "Safe Intergenerational Stay",
@@ -317,7 +317,7 @@ export const translations = {
     connectSection: {
       heading: "Built for Youth.",
       headingGradient: "Powered by Wisdom.",
-      subtitle: "Pick a city and see a live student ↔ senior host pairing.",
+      subtitle: "Pick a city and see a live student ↔ verified PG owner host pairing.",
       liveSimulation: "Live Simulation",
       compatibility: "Compatibility",
       gives: "Gives",
@@ -371,7 +371,7 @@ export const translations = {
         subtitle:
           "Every stored bag is laser-sealed with a non-tearable serialized barcode at pickup.",
         scanTitle: "Scan Barcode Label",
-        scanDesc: "Simulates app scanning upon handover at senior host home node.",
+        scanDesc: "Simulates app scanning upon handover at verified PG owner host home node.",
         scannedStatus: "Verified & Locked to Host Node #KNP-208016",
         simBtn: "Simulate Physical Seal Scan",
       },
@@ -428,7 +428,7 @@ export const translations = {
           desc: "1-Touch bedside SOS button linked to local nodal managers for immediate assistance.",
         },
         {
-          title: "Digital Companionship",
+          title: "Digital Zero-Brokerage Ecosystem",
           desc: "Students assist with smartphone tech, medicine ordering, and light groceries.",
         },
       ],
@@ -459,11 +459,11 @@ export const translations = {
       title: "Loved by Students.",
       titleGradient: "Cherished by Elders.",
       subtitle:
-        "Listen to real stories from student guests, senior hosts, and neighborhood cloud chefs.",
+        "Listen to real stories from student guests, premium hosts, and neighborhood cloud chefs.",
       filters: [
         { id: "all", label: "All" },
         { id: "students", label: "Students" },
-        { id: "seniors", label: "Senior Hosts" },
+        { id: "seniors", label: "Premium Hosts" },
         { id: "partners", label: "Partners" },
       ],
       playAudio: "Listen to Real Host Story",
@@ -478,7 +478,7 @@ export const translations = {
         { id: "all", label: "All Questions" },
         { id: "storage", label: "📦 Student Storage" },
         { id: "safety", label: "🛡️ Safety & Claims" },
-        { id: "host", label: "🏡 Senior Host Norms" },
+        { id: "host", label: "🏡 Verified PG Owner Host Norms" },
       ],
       noResults:
         "No matching questions found. You can ask our 24×7 concierge directly on WhatsApp.",

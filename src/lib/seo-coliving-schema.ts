@@ -4,7 +4,7 @@ export const coLivingSpacesSchema = [
     "@id": "https://stashsaarthi-web.vercel.app/#coliving-kalyanpur-iitk",
     name: "Zero-Brokerage Student Room - Kalyanpur (IIT Kanpur Belt)",
     description:
-      "Verified student co-living room in Kalyanpur, Kanpur. 6-minute distance to IIT Kanpur Gate 1 with 24x7 water, zero brokerage, and verified senior host.",
+      "Verified student co-living room in Kalyanpur, Kanpur. 6-minute distance to IIT Kanpur Gate 1 with 24x7 water, zero brokerage, and verified verified PG owner host.",
     url: "https://stashsaarthi-web.vercel.app/?service=rooms#rooms",
     image:
       "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=800&q=80",
@@ -29,7 +29,7 @@ export const coLivingSpacesSchema = [
     },
     amenityFeature: [
       { "@type": "LocationFeatureSpecification", name: "Zero Brokerage", value: true },
-      { "@type": "LocationFeatureSpecification", name: "Verified Senior Host", value: true },
+      { "@type": "LocationFeatureSpecification", name: "Verified Verified PG Owner Host", value: true },
       { "@type": "LocationFeatureSpecification", name: "24x7 Water & Power Backup", value: true },
       { "@type": "LocationFeatureSpecification", name: "Proximity to IIT Kanpur Gate 1", value: true },
       { "@type": "LocationFeatureSpecification", name: "High-Speed Fiber WiFi", value: true },
@@ -115,7 +115,7 @@ export const coLivingSpacesSchema = [
   {
     "@type": "Accommodation",
     "@id": "https://stashsaarthi-web.vercel.app/#coliving-gomtinagar-lucknow",
-    name: "Furnished Senior-Hosted Co-Living Room - Gomti Nagar Lucknow",
+    name: "Furnished Verified PG Owner-Hosted Co-Living Room - Gomti Nagar Lucknow",
     description:
       "Furnished student co-living room in Gomti Nagar, Lucknow near Phoenix Palassio. Zero brokerage with home-cooked meal access.",
     url: "https://stashsaarthi-web.vercel.app/?service=rooms#rooms",
@@ -229,7 +229,7 @@ export const coLivingItemListSchema = {
   "@id": "https://stashsaarthi-web.vercel.app/#coliving-spaces-list",
   name: "StashSaarthi Verified Zero-Brokerage Co-Living Spaces",
   description:
-    "Directory of verified, senior-hosted student rooms with zero brokerage across Kanpur, Lucknow, and Pune.",
+    "Directory of verified, verified PG owner-hosted student rooms with zero brokerage across Kanpur, Lucknow, and Pune.",
   itemListElement: coLivingSpacesSchema.map((space, index) => ({
     "@type": "ListItem",
     position: index + 1,

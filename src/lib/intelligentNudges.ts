@@ -70,7 +70,7 @@ const MOCK_INACTIVE_STUDENTS: StudentNudgeRecord[] = [
     lastOrderDate: new Date(Date.now() - 5.0 * 24 * 60 * 60 * 1000).toISOString(), // 5 days ago
     daysInactive: 5,
     lastMealName: "Paneer Thali",
-    favoriteKitchenNode: "IIT Kanpur Gate 1 - Campus Senior Mess",
+    favoriteKitchenNode: "IIT Kanpur Gate 1 - Campus Verified PG Owner Mess",
     nudgeSent: true,
     lastNudgeDate: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
     tokenCode: "FREE-DELIV-3D-9988",

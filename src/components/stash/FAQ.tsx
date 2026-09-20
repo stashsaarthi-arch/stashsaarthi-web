@@ -44,7 +44,7 @@ const FAQ_ITEMS: FAQItem[] = [
   },
   {
     category: "transparency",
-    question: "What happens if a senior host cancels or locks me out during vacations?",
+    question: "What happens if a verified PG owner host cancels or locks me out during vacations?",
     question_hi:
       "क्या होगा यदि कोई सीनियर होस्ट छुट्टियों के दौरान अचानक मना कर दे या ताला लगा दे?",
     answer:
@@ -115,22 +115,22 @@ const FAQ_ITEMS: FAQItem[] = [
     answer_hi:
       "क्योंकि पिकअप पर प्रत्येक बैग पर लेजर बारकोड सील और दोहरी फोटो लॉग बनती है, वापसी पर किसी भी क्षति का मिलान तत्काल होता है। ₹10,000 तक का क्लेम 48 घंटे में सीधे आपके बैंक खाते में ट्रांसफर किया जाता है।",
   },
-  // ── Senior Host Norms ──
+  // ── Verified PG Owner Host Norms ──
   {
     category: "host",
-    question: "What are the emergency access protocols for senior hosts?",
+    question: "What are the emergency access protocols for premium hosts?",
     question_hi: "सीनियर होस्ट्स के लिए आपातकालीन सहायता प्रोटोकॉल क्या है?",
     answer:
-      "Senior Hosts have a direct 24x7 SOS line to our Kanpur operations crew. If any medical or maintenance emergency arises, our rapid response fleet steps in instantly to assist the host.",
+      "Premium Hosts have a direct 24x7 SOS line to our Kanpur operations crew. If any medical or maintenance emergency arises, our rapid response fleet steps in instantly to assist the host.",
     answer_hi:
       "वरिष्ठ नागरिकों को हमारी ऑपरेशंस टीम से जुड़ी 24×7 डायरेक्ट एसओएस लाइन मिलती है। किसी भी आपात स्थिति में हमारी त्वरित प्रतिक्रिया टीम तुरंत सहायता हेतु पहुंचती है।",
   },
   {
     category: "host",
-    question: "How does passive income escrow payout work for senior hosts?",
+    question: "How does passive income escrow payout work for premium hosts?",
     question_hi: "सीनियर होस्ट्स को मासिक कमाई का भुगतान कैसे प्राप्त होता है?",
     answer:
-      "Zero direct cash transactions. All student payments are locked in digital escrow and disbursed directly to the senior host's verified bank account on a structured weekly/monthly schedule automatically.",
+      "Zero direct cash transactions. All student payments are locked in digital escrow and disbursed directly to the verified PG owner host's verified bank account on a structured weekly/monthly schedule automatically.",
     answer_hi:
       "शून्य नकद लेन-देन। सभी छात्रों का भुगतान डिजिटल एस्क्रो में सुरक्षित रहता है और निर्धारित समय पर सीधे सीनियर होस्ट के बैंक खाते में ट्रांसफर कर दिया जाता है।",
   },
@@ -150,7 +150,7 @@ export const FAQ = memo(function FAQ() {
     { id: "all", label: isHi ? "सभी प्रश्न" : "All Questions" },
     { id: "storage", label: isHi ? "📦 छात्र स्टोरेज" : "📦 Student Storage" },
     { id: "safety", label: isHi ? "🛡️ सुरक्षा व ₹10k क्लेम" : "🛡️ Safety & Claims" },
-    { id: "host", label: isHi ? "🏡 सीनियर होस्ट नियम" : "🏡 Senior Host Norms" },
+    { id: "host", label: isHi ? "🏡 सीनियर होस्ट नियम" : "🏡 Verified PG Owner Host Norms" },
   ];
 
   const filteredFaqs = useMemo(() => {

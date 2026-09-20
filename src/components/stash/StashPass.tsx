@@ -229,7 +229,7 @@ export function StashPass({ tokenId, name, serviceLabel, type, bags, months, ite
                       : "bg-black/40 text-amber-300 border-amber-500/30 hover:bg-amber-500/10"
                   }`}
                 >
-                  🏡 {isHi ? "होस्ट भूमिका" : "Senior Host"}
+                  🏡 {isHi ? "होस्ट भूमिका" : "Verified PG Owner Host"}
                 </button>
                 <button
                   type="button"

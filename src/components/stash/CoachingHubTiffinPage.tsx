@@ -211,7 +211,7 @@ export function CoachingHubTiffinPage({ config }: { config: HubConfig }) {
                   <HeartHandshake className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
                   <div>
                     <div className="text-xs font-bold text-slate-200">
-                      {isHindi ? "100% माँ के हाथ का खाना" : "100% Senior Mother Cooked"}
+                      {isHindi ? "100% माँ के हाथ का खाना" : "100% Verified PG Owner Mother Cooked"}
                     </div>
                     <div className="text-[11px] text-slate-400">
                       {isHindi ? "शुद्ध देसी घी रोटी & 0 पाम ऑयल" : "Pure Desi Ghee & Zero Palm Oil"}
@@ -473,7 +473,7 @@ export function CoachingHubTiffinPage({ config }: { config: HubConfig }) {
                 </div>
 
                 <h3 className="text-lg font-bold text-white">
-                  {isHindi ? "सीनियर मदर स्पेशल फीस्ट" : "Senior Mother Special Feast"}
+                  {isHindi ? "सीनियर मदर स्पेशल फीस्ट" : "Verified PG Owner Mother Special Feast"}
                 </h3>
                 <p className="text-xs text-slate-400">
                   {isHindi
@@ -629,7 +629,7 @@ export function CoachingHubTiffinPage({ config }: { config: HubConfig }) {
               <p className="text-xs text-slate-400">
                 {isHindi
                   ? "हमारा खाना काकादेव की वरिष्ठ माताओं और गृहिणियों द्वारा शुद्ध देशी तरीके से बनाया जाता है। इसमें कम तेल, शुद्ध मसाले और 0% कमर्शियल कलर/प्रिजर्वेटिव होते हैं।"
-                  : "All meals are prepared by verified senior mothers in home kitchens using minimal pure oil, fresh spices, and zero commercial preservatives."}
+                  : "All meals are prepared by verified verified PG owner mothers in home kitchens using minimal pure oil, fresh spices, and zero commercial preservatives."}
               </p>
             </div>
           </div>

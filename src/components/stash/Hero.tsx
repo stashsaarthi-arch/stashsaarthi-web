@@ -139,7 +139,7 @@ export const Hero = memo(function Hero({
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75" />
                   <span className="relative inline-flex h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-amber-500" />
                 </span>
-                <span>🛡️ ₹10,000 Safety Cover Active • 12+ Verified Senior Hosts in Kanpur</span>
+                <span>🛡️ ₹10,000 Safety Cover Active • 12+ Verified Premium Hosts in Kanpur</span>
               </div>
             )}
           </div>

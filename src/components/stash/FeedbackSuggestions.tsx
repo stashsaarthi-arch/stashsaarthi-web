@@ -95,14 +95,14 @@ const INITIAL_REVIEWS: ReviewItem[] = [
     id: "rev-2",
     name: "Smt. Manju & Prof. S. N. Verma",
     name_hi: "श्रीमती मंजू एवं प्रो. एस. एन. वर्मा",
-    role: "Senior Hosts, 69 & 74 yrs",
+    role: "Premium Hosts, 69 & 74 yrs",
     role_hi: "वरिष्ठ होस्ट, 69 एवं 74 वर्ष",
     campusOrLocality: "Swaroop Nagar, Kanpur",
     campusOrLocality_hi: "स्वरूप नगर, कानपुर",
     service: "spaces",
     rating: 5,
     date: "Active Host (5 Months)",
-    title: "Dignified monthly income & wonderful young company",
+    title: "Tech-Enabled monthly income & wonderful young company",
     title_hi: "सम्मानजनक मासिक आय और युवा साथियों का आत्मीय साथ",
     comment:
       "Our first-floor rooms had been lying locked since our children moved abroad. StashSaarthi verified two sincere medical students for us. We earn ₹12,000 every month directly in our bank account, and the students even help us with grocery apps and evening walks.",
@@ -125,7 +125,7 @@ const INITIAL_REVIEWS: ReviewItem[] = [
     title: "Finally pure home-cooked tiffins with zero hostel oil",
     title_hi: "हॉस्टल के तेल-मसाले से मुक्ति, असली घर का सात्विक खाना",
     comment:
-      "Hostel mess food was causing severe acidity. Through Saarthi Kitchen, I receive fresh, piping-hot home cooked meals prepared by Auntieji nearby for just ₹90/meal. Tastes exactly like home food from mom.",
+      "Hostel mess food was causing severe acidity. Through Saarthi Kitchen, I receive fresh, piping-hot home cooked meals prepared by Auntieji nearby for just ₹90/meal. Tastes exactly like home food from premium host.",
     comment_hi:
       "हॉस्टल के खाने से लगातार पेट खराब रहता था। सारथी किचन से पास की एक आंटी के घर से सिर्फ ₹90 में शुद्ध, गरमा-गरम घर जैसा खाना मिलता है। बिल्कुल घर के स्वाद जैसा।",
     verified: true,
@@ -204,7 +204,7 @@ const INITIAL_SUGGESTIONS: SuggestionItem[] = [
     title: "Custom Diet & Calorie Preference Filter in Saarthi Kitchen",
     title_hi: "सारथी किचन में डाइट व कैलोरी के अनुसार भोजन फ़िल्टर",
     description:
-      "Allow students preparing for exams or gym training to select low-oil, high-protein, or pure Jain thali options prepared by senior home chefs.",
+      "Allow students preparing for exams or gym training to select low-oil, high-protein, or pure Jain thali options prepared by verified PG owner home chefs.",
     description_hi:
       "जिम जाने वाले या प्रतियोगी परीक्षा की तैयारी करने वाले छात्रों के लिए कम तेल, हाई-प्रोटीन या शुद्ध जैन थाली का विकल्प दिया जाए।",
     category: "kitchen",
@@ -216,10 +216,10 @@ const INITIAL_SUGGESTIONS: SuggestionItem[] = [
   },
   {
     id: "sug-5",
-    title: "Senior Host Tech Assistance Micro-Credit Rewards",
+    title: "Verified PG Owner Host Tech Assistance Micro-Credit Rewards",
     title_hi: "वरिष्ठ होस्ट की तकनीकी मदद पर छात्रों को रेंट क्रेडिट रिवॉर्ड",
     description:
-      "When student tenants spend 15 minutes helping their elderly host file digital life certificates or book train tickets, award a ₹200 rental discount token.",
+      "When student tenants spend 15 minutes helping their high-margin ROI host file digital life certificates or book train tickets, award a ₹200 rental discount token.",
     description_hi:
       "जब छात्र अपने बुजुर्ग होस्ट को डिजिटल लाइफ सर्टिफिकेट या ऑनलाइन टिकट में मदद करें, तो उन्हें किराए में ₹200 का डिस्काउंट क्रेडिट मिले।",
     category: "app",
@@ -745,8 +745,8 @@ export const FeedbackSuggestions = memo(function FeedbackSuggestions() {
                             <option value="Student">
                               {isHi ? "🎓 छात्र / Student" : "🎓 Student"}
                             </option>
-                            <option value="Senior Host">
-                              {isHi ? "🏠 सीनियर होस्ट / Host" : "🏠 Senior Host"}
+                            <option value="Verified PG Owner Host">
+                              {isHi ? "🏠 सीनियर होस्ट / Host" : "🏠 Verified PG Owner Host"}
                             </option>
                             <option value="Parent">
                               {isHi ? "👨‍👩‍👦 अभिभावक / Parent" : "👨‍👩‍👦 Parent"}
@@ -775,7 +775,7 @@ export const FeedbackSuggestions = memo(function FeedbackSuggestions() {
                               {isHi ? "📦 वेकेशन स्टोरेज (₹300/mo)" : "📦 Vacation Storage"}
                             </option>
                             <option value="spaces">
-                              {isHi ? "🏠 सीनियर लिविंग रूम" : "🏠 Senior Living Room"}
+                              {isHi ? "🏠 सीनियर लिविंग रूम" : "🏠 Verified PG Owner Living Room"}
                             </option>
                             <option value="kitchen">
                               {isHi ? "🍲 सारथी होम टिफिन" : "🍲 Saarthi Home Tiffins"}
@@ -873,7 +873,7 @@ export const FeedbackSuggestions = memo(function FeedbackSuggestions() {
                     : rev.service === "spaces"
                       ? isHi
                         ? "🏠 सीनियर होम लिविंग"
-                        : "🏠 Senior Living"
+                        : "🏠 Verified PG Owner Living"
                       : rev.service === "kitchen"
                         ? isHi
                           ? "🍲 सारथी किचन टिफिन"

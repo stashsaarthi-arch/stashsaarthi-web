@@ -66,7 +66,7 @@ export const STUDENT_STORIES: StudentStory[] = [
     serviceCategory: "rooms",
     avatarBg: "bg-cyan-500/20 text-cyan-400 border-cyan-500/40",
     rating: 5,
-    highlightBadge: "Zero Brokerage & Senior Host",
+    highlightBadge: "Zero Brokerage & Verified PG Owner Host",
     savingsOrIncome: "Saved ₹5,000 Brokerage",
     verifiedPassId: "#SS-KKD-4412",
     storyEn:
@@ -98,7 +98,7 @@ export const STUDENT_STORIES: StudentStory[] = [
     name: "Sunita & Ramesh Verma",
     role: "host",
     collegeOrLocality: "Kalyanpur, Kanpur",
-    yearOrRole: "Senior Citizens (Retd. BSNL)",
+    yearOrRole: "Verified PG Owner Citizens (Retd. BSNL)",
     serviceCategory: "host",
     avatarBg: "bg-amber-500/20 text-amber-300 border-amber-500/40",
     rating: 5,
@@ -106,7 +106,7 @@ export const STUDENT_STORIES: StudentStory[] = [
     savingsOrIncome: "Earns ₹14,200/mo Passive Income",
     verifiedPassId: "#SS-HOST-0192",
     storyEn:
-      "After our children moved to Bengaluru, two rooms on the first floor were empty. StashSaarthi helped us list them for micro-storage and verified IIT/HBTI student housing. We earn dignified passive income with complete safety and zero hassle.",
+      "After our children moved to Bengaluru, two rooms on the first floor were empty. StashSaarthi helped us list them for micro-storage and verified IIT/HBTI student housing. We earn tech-enabled passive income with complete safety and zero hassle.",
     storyHi:
       "बच्चों के बाहर चले जाने के बाद हमारे ऊपर के दो कमरे खाली पड़े थे। स्टैशसारथी की मदद से हमने सुरक्षित माइक्रो-स्टोरेज और सत्यापित छात्रों को कमरा दिया। अब बिना किसी परेशानी के सम्मानजनक मासिक आय मिलती है।",
     date: "August 2026",
@@ -211,7 +211,7 @@ export const StudentStoriesCarousel = memo(function StudentStoriesCarousel({
             <p className="mt-2 text-xs sm:text-sm text-muted-foreground text-balance">
               {isHindi
                 ? "जानिए कैसे छात्रों ने डेड-रेंट बचाए और वरिष्ठ नागरिकों ने सुरक्षित पैसिव इनकम अर्जित की।"
-                : "Discover how students saved ₹8,400+ dead-rent and senior hosts unlocked ₹11,500+/mo passive income."}
+                : "Discover how students saved ₹8,400+ dead-rent and premium hosts unlocked ₹11,500+/mo passive income."}
             </p>
           </div>
         </AnimatedContent>
@@ -223,7 +223,7 @@ export const StudentStoriesCarousel = memo(function StudentStoriesCarousel({
             { id: "stash", labelEn: "Vacation Stash (₹300/mo)", labelHi: "वैकेशन स्टोरेज", icon: Package },
             { id: "rooms", labelEn: "Co-Living Rooms", labelHi: "जीरो-ब्रोकरेज रूम्स", icon: Building2 },
             { id: "kitchen", labelEn: "Ghar Ka Swaad", labelHi: "घर का खाना", icon: UtensilsCrossed },
-            { id: "host", labelEn: "Senior Hosts", labelHi: "सीनियर होस्ट्स", icon: Home },
+            { id: "host", labelEn: "Premium Hosts", labelHi: "सीनियर होस्ट्स", icon: Home },
           ].map((tab) => {
             const Icon = tab.icon;
             const active = activeCategory === tab.id;

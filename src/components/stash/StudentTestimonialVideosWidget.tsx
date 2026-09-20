@@ -84,7 +84,7 @@ const TESTIMONIAL_VIDEOS: TestimonialVideo[] = [
     studentName: "Aarav Mishra",
     examOrCollege: "IIT Kanpur B.Tech 2nd Year",
     location: "Swaroop Nagar, Kanpur",
-    hostOrRoomName: "Stayed with Sudha Tripathi Ji (Senior Principal)",
+    hostOrRoomName: "Stayed with Sudha Tripathi Ji (Verified PG Owner Principal)",
     thumbnailGradient: "from-amber-600 via-yellow-700 to-slate-900",
     duration: "0:58",
     views: "18.9k",

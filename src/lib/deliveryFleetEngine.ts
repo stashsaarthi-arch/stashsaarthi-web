@@ -74,7 +74,7 @@ export const PRESET_RUNNER_TASKS: RunnerTask[] = [
     scannedTime: new Date(Date.now() - 15 * 60 * 1000).toISOString(),
     runnerId: 'RUNNER-KNP-09',
     distanceMeters: 800,
-    instructions: 'Intake scanned at doorstep. En route to Dadi Maa Senior Host Node.',
+    instructions: 'Intake scanned at doorstep. En route to Dadi Maa Verified PG Owner Host Node.',
   },
 ];
 
@@ -157,7 +157,7 @@ export function processDoorstepScan(
 }
 
 /**
- * Confirms delivery of luggage box from doorstep runner to verified Senior Host Locker node.
+ * Confirms delivery of luggage box from doorstep runner to verified Verified PG Owner Host Locker node.
  */
 export function confirmDeliveryToHost(taskId: string): { success: boolean; task?: RunnerTask; message: string } {
   const tasks = getRunnerTasks();

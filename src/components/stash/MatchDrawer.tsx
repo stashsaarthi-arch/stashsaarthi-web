@@ -209,7 +209,7 @@ export function MatchDrawer({
             label={
               isHi
                 ? "आप किस तरह का साथ / सहायता ढूंढ रहे हैं?"
-                : "What kind of companionship are you looking for?"
+                : "What kind of zero-brokerage ecosystem are you looking for?"
             }
           >
             <Textarea

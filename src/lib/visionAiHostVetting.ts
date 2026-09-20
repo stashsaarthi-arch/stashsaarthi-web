@@ -33,7 +33,7 @@ export interface SamplePhotoPreset {
 export const SAMPLE_PROPERTY_PHOTOS: SamplePhotoPreset[] = [
   {
     id: "photo-swaroop-bedroom",
-    titleEn: "Swaroop Nagar Senior Host Bedroom",
+    titleEn: "Swaroop Nagar Verified PG Owner Host Bedroom",
     titleHi: "स्वरूप नगर सीनियर होस्ट बेडरूम",
     category: "bedroom",
     imageUrl: "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?q=80&w=800&auto=format&fit=crop",
@@ -48,7 +48,7 @@ export const SAMPLE_PROPERTY_PHOTOS: SamplePhotoPreset[] = [
     category: "living",
     imageUrl: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=800&auto=format&fit=crop",
     expectedPass: true,
-    descriptionEn: "Neat living room with warm lighting and dignified homestyle ambiance.",
+    descriptionEn: "Neat living room with warm lighting and tech-enabled homestyle ambiance.",
     descriptionHi: "गर्म रोशनी और गरिमापूर्ण घरेलू माहौल के साथ साफ-सुथरा बैठक कमरा।",
   },
   {

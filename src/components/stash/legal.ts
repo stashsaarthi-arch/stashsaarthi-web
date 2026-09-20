@@ -39,7 +39,7 @@ export const smoothScrollTo =
     } else if (targetId === "kitchen" || targetId === "tiffin" || targetId === "food") {
       dispatchNavTab("solution", "kitchen");
       targetId = "solutions";
-    } else if (targetId === "connect" || targetId === "senior-living") {
+    } else if (targetId === "connect" || targetId === "verified PG owner-living") {
       dispatchNavTab("solution", "connect");
       targetId = "solutions";
     }
@@ -119,7 +119,7 @@ export const DOCS: Record<string, Doc> = {
     title_hi: "हमारे बारे में एवं संस्थापक मिशन",
     body: [
       "StashSaarthi is India's hyper-local living ecosystem, founded in Kanpur by Advik Omer to bridge student mobility with intergenerational community support.",
-      "We replace predatory brokerages and wasteful dead-rent with verified peer-to-peer micro-storage (₹300/bag/mo), broker-free student rooms (avg ₹5,500/mo), and pure homestyle tiffins inside verified senior households.",
+      "We replace predatory brokerages and wasteful dead-rent with verified peer-to-peer micro-storage (₹300/bag/mo), broker-free student rooms (avg ₹5,500/mo), and pure homestyle tiffins inside verified verified PG owner households.",
       "Our platform operates with software discipline and on-ground human accountability: 3-tier background verification, tamper-evident laser barcode seals, and 100% digital bank escrow.",
     ],
     body_hi: [
@@ -209,10 +209,10 @@ export const DOCS: Record<string, Doc> = {
     ],
   },
   micro: {
-    title: "Micro-Opportunity for Senior Hosts",
+    title: "Micro-Opportunity for Premium Hosts",
     title_hi: "सीनियर होस्ट्स के लिए माइक्रो-अवसर",
     body: [
-      "Every verified senior host, home chef, and stash keeper earns a recurring, dignified micro-income from existing unused home assets.",
+      "Every verified verified PG owner host, home chef, and stash keeper earns a recurring, tech-enabled micro-income from existing unused home assets.",
       "A single spare bedroom, 4 square feet of raised corner storage, or 4 daily homestyle tiffins can generate ₹3,000–₹12,000 monthly with zero capital expenditure.",
       "Our Kanpur ground team provides free space measurement, digital setup, and weekly direct bank payouts.",
     ],
@@ -274,7 +274,7 @@ export const handleDownloadInvestorMemo = (language: "en" | "hi" = "en") => {
         <p class="tagline">${isHi ? "भारत का जीरो-कैपेक्स अंतर-पीढ़ी आवास एवं कैंपस माइक्रो-स्टोरेज प्लेटफॉर्म" : "India's Zero-CapEx Intergenerational Living & Campus Micro-Storage Platform"}</p>
         
         <h3>${isHi ? "1. समस्या" : "1. The Problem"}</h3>
-        <p>${isHi ? "छात्र छुट्टियों में ₹4,000–₹8,000 का खाली किराया और 1 महीने की ब्रोकरेज देते हैं, जबकि शहरी वरिष्ठ नागरिक अकेलेपन और खाली जगहों के साथ रहते हैं।" : "Students face ₹4,000–₹8,000 dead vacation rent and 1-month broker fees, while urban senior citizens live in quiet, unmonetized spaces with isolation risks."}</p>
+        <p>${isHi ? "छात्र छुट्टियों में ₹4,000–₹8,000 का खाली किराया और 1 महीने की ब्रोकरेज देते हैं, जबकि शहरी वरिष्ठ नागरिक अकेलेपन और खाली जगहों के साथ रहते हैं।" : "Students face ₹4,000–₹8,000 dead vacation rent and 1-month broker fees, while urban verified PG owner citizens live in quiet, unmonetized spaces with isolation risks."}</p>
 
         <h3>${isHi ? "2. समाधान एवं यूनिट इकोनॉमिक्स" : "2. The Solution & Unit Economics"}</h3>
         <div class="grid">

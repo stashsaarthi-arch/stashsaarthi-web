@@ -57,7 +57,7 @@ export const MAX_ALLOWED_WEIGHT_KG = 25.0;
  */
 export function validateIntakeChecklist(
   checklist: VerificationChecklistState,
-  hostName: string = "Sudha Tripathi (Senior Host)",
+  hostName: string = "Sudha Tripathi (Verified PG Owner Host)",
   campusNode: string = "Kakadeo PW Hub",
   verifiedBy: string = "StashSaarthi Host App Intake"
 ): VerificationValidationResult {
@@ -145,9 +145,9 @@ export function validateIntakeChecklist(
 export function createAndSaveVerification(
   checklist: VerificationChecklistState,
   bookingId: string = "BK-2026-9812",
-  hostName: string = "Sudha Tripathi (Senior Host)",
+  hostName: string = "Sudha Tripathi (Verified PG Owner Host)",
   campusNode: string = "Kakadeo Hub",
-  verifiedBy: string = "Senior Host App"
+  verifiedBy: string = "Verified PG Owner Host App"
 ): HostStashVerification {
   const validation = validateIntakeChecklist(checklist, hostName, campusNode, verifiedBy);
 
@@ -209,7 +209,7 @@ export function getDefaultPresetVerifications(): HostStashVerification[] {
     {
       id: "VER-PRESET-101",
       bookingId: "BK-2026-8921",
-      hostName: "Sudha Tripathi (Senior Host)",
+      hostName: "Sudha Tripathi (Verified PG Owner Host)",
       campusNode: "Kakadeo PW Hub",
       sealIntact: true,
       barcodeSerial: "SS-KNP-BAR-8921",
@@ -220,7 +220,7 @@ export function getDefaultPresetVerifications(): HostStashVerification[] {
       status: "verified",
       verifiedAt: new Date(Date.now() - 3600000 * 4).toISOString(),
       certificateId: "SS-INTAKE-2026-8921",
-      verifiedBy: "Sudha Tripathi (Senior Host)",
+      verifiedBy: "Sudha Tripathi (Verified PG Owner Host)",
     },
     {
       id: "VER-PRESET-102",

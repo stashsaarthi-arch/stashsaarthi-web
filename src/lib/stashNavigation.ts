@@ -98,7 +98,7 @@ export const KANPUR_GROUND_NODES: GroundStashNode[] = [
     lng: 80.2325,
     mainRoadLandmark: "Nankari Handpump & Juice Corner near Gate 1",
     mainRoadLandmark_hi: "गेट 1 के पास नानकारी हैंडपंप व जूस कॉर्नर",
-    backAlleyGuide: "📍 Campus Back-Gate Navigation: From Gate 1 Nankari side exit, walk past the Handpump, take the left dirt lane behind Saini Grocery. Storage facility is Senior Host Residence #NK-42 (2-storey brick house with ramp).",
+    backAlleyGuide: "📍 Campus Back-Gate Navigation: From Gate 1 Nankari side exit, walk past the Handpump, take the left dirt lane behind Saini Grocery. Storage facility is Verified PG Owner Host Residence #NK-42 (2-storey brick house with ramp).",
     backAlleyGuide_hi: "📍 कैंपस बैक-गेट नेविगेशन: गेट 1 नानकारी साइड से हैंडपंप के आगे चलें, सैनी किराना के पीछे बाईं ओर मुड़ें। होस्ट निवास #NK-42 (रैंप वाला 2-मंजिला लाल ईंट का मकान) है।",
     stepByStepDirections: [
       {
@@ -113,7 +113,7 @@ export const KANPUR_GROUND_NODES: GroundStashNode[] = [
       },
       {
         step: 3,
-        instruction: "Walk 60m straight towards Senior Host House #NK-42.",
+        instruction: "Walk 60m straight towards Verified PG Owner Host House #NK-42.",
         instruction_hi: "सीधे 60 मीटर सीनियर होस्ट हाउस #NK-42 की ओर चलें।",
       },
     ],

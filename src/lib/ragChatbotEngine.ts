@@ -77,7 +77,7 @@ export const FAQ_KNOWLEDGE_BASE: KnowledgeChunk[] = [
     title: "Saarthi Spaces Zero Brokerage Rooms",
     title_hi: "सार्थी स्पेस शून्य ब्रोकरेज कमरे",
     content:
-      "Saarthi Spaces connects verified students with senior host spare rooms starting at avg ₹5,500/month. 100% Zero Brokerage. Students pay 10% platform fee and hosts pay 5% fee. No predatory 1-month brokerage fees.",
+      "Saarthi Spaces connects verified students with verified PG owner host spare rooms starting at avg ₹5,500/month. 100% Zero Brokerage. Students pay 10% platform fee and hosts pay 5% fee. No predatory 1-month brokerage fees.",
     content_hi:
       "सार्थी स्पेस बिना किसी दलाली (0% Brokerage) के छात्रों को वरिष्ठ नागरिकों के कमरों से जोड़ता है। औसत किराया ₹5,500/माह है। केवल 10% प्लेटफॉर्म शुल्क लागू होता है।",
     keywords: [
@@ -101,7 +101,7 @@ export const FAQ_KNOWLEDGE_BASE: KnowledgeChunk[] = [
     title: "Saarthi Kitchen Homestyle Tiffins",
     title_hi: "सार्थी किचन घर का स्वाद टिफिन",
     content:
-      "Saarthi Kitchen delivers authentic 'Ghar Ka Swaad' home-cooked meals prepared by verified senior homemakers. Standard Thali is ₹90/meal or ₹2,400/month subscription. Zero preservatives, pure desi ghee, and 1-click meal pause flexibility.",
+      "Saarthi Kitchen delivers authentic 'Ghar Ka Swaad' home-cooked meals prepared by verified verified PG owner homemakers. Standard Thali is ₹90/meal or ₹2,400/month subscription. Zero preservatives, pure desi ghee, and 1-click meal pause flexibility.",
     content_hi:
       "सार्थी किचन वरिष्ठ महिलाओं द्वारा तैयार शुद्ध घर का बना भोजन (₹90/भोजन या ₹2,400/माह) प्रदान करता है। इसमें 0-प्रिजर्वेटिव, देसी घी और 1-क्लिक पॉज की सुविधा उपलब्ध है।",
     keywords: [
@@ -144,16 +144,16 @@ export const FAQ_KNOWLEDGE_BASE: KnowledgeChunk[] = [
   {
     id: "kb-host-1",
     category: "host",
-    title: "Senior Host Passive Income & Safety",
+    title: "Verified PG Owner Host Passive Income & Safety",
     title_hi: "सीनियर होस्ट निष्क्रिय आय एवं सुरक्षा",
     content:
-      "Elderly hosts earn ₹11,500+/month in dignified passive income using spare bedrooms or dry storage space. Hosts retain 100% control over house norms, non-intrusive student matching, and benefit from 24/7 Bedside SOS support and ₹10k property protection.",
+      "High-Margin ROI hosts earn ₹11,500+/month in tech-enabled passive income using spare bedrooms or dry storage space. Hosts retain 100% control over house norms, non-intrusive student matching, and benefit from 24/7 Bedside SOS support and ₹10k property protection.",
     content_hi:
       "वरिष्ठ नागरिक अपने खाली कमरों से ₹11,500+/माह की सम्मानजनक आय कमा सकते हैं। घर के नियमों पर 100% होस्ट का नियंत्रण रहता है और 24x7 एसओएस सहायता मिलती है।",
     keywords: [
       "host",
       "income",
-      "senior",
+      "verified PG owner",
       "earnings",
       "passive",
       "dignity",

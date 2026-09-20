@@ -46,7 +46,7 @@ export const PredictivePersonaWidget = memo(function PredictivePersonaWidget() {
             <div className="flex items-center justify-between">
               <span className="text-slate-400">{isHi ? "अनुमानित मोड:" : "Predicted Role:"}</span>
               <span className="font-semibold capitalize text-white flex items-center gap-1">
-                {predictedPersona === "host" ? "🏡 Senior Host" : "🎓 Student"}
+                {predictedPersona === "host" ? "🏡 Verified PG Owner Host" : "🎓 Student"}
                 <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
                   {Math.round(confidence * 100)}% {isHi ? "सटीकता" : "conf."}
                 </span>

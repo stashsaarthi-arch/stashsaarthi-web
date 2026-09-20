@@ -515,7 +515,7 @@ export function DeliveryFleetScannerModal({ isOpen, onClose }: DeliveryFleetScan
                   <li>Har physical box par unique alphanumeric laser tamper seal ID match hona mandatory hai.</li>
                   <li>Max box weight limit: 25.0 kg per standard luggage box.</li>
                   <li>Doorstep photo proof upload automated server hash log me store hoti hai.</li>
-                  <li>Senior host handover complete hone par instant WhatsApp audit receipt push hota hai.</li>
+                  <li>Verified PG Owner host handover complete hone par instant WhatsApp audit receipt push hota hai.</li>
                 </ul>
               </div>
             </div>

@@ -165,12 +165,12 @@ export function FounderAccountability() {
                 <p>
                   {isHi
                     ? "हर सेमेस्टर ब्रेक पर मैंने अपने साथी छात्रों को केवल दो सूटकेस सुरक्षित रखने के लिए खाली पीजी कमरों का ₹4,000–₹8,000 का 'डेड-रेंट' भरते देखा। वहीं दूसरी ओर, कल्याणपुर और स्वरूप नगर में बुजुर्ग दंपत्ति खाली कमरों और अकेलेपन के साथ रहते थे।"
-                    : "Every semester transition, I watched classmates across Kanpur bleed ₹4,000 to ₹8,000 in dead vacation rent just to lock two suitcases and a mattress in empty rooms. Meanwhile, senior citizens in our own neighborhoods lived with quiet, unused spaces and fixed-pension inflation."}
+                    : "Every semester transition, I watched classmates across Kanpur bleed ₹4,000 to ₹8,000 in dead vacation rent just to lock two suitcases and a mattress in empty rooms. Meanwhile, verified PG owner citizens in our own neighborhoods lived with quiet, unused spaces and fixed-pension inflation."}
                 </p>
                 <p>
                   {isHi
                     ? "StashSaarthi किसी अमूर्त ऐप या अनाम कॉर्पोरेशन की तरह नहीं चलता। हमने सॉफ्टवेयर के अनुशासन के साथ ज़मीनी मानवीय विश्वास का ढांचा तैयार किया है — जहां हर बैग पर लेजर सील लगती है, हर भुगतान डिजिटल एस्क्रो में सुरक्षित रहता है और वरिष्ठ नागरिकों को सम्मानजनक आय मिलती है।"
-                    : "StashSaarthi isn't an anonymous corporate software layer. We combined deterministic software safeguards with real human community: tamper-evident barcode seals, 100% digital escrow, and dignified micro-earnings for senior hosts."}
+                    : "StashSaarthi isn't an anonymous corporate software layer. We combined deterministic software safeguards with real human community: tamper-evident barcode seals, 100% digital escrow, and tech-enabled micro-earnings for premium hosts."}
                 </p>
                 <p className="text-foreground/90 font-medium">
                   {isHi

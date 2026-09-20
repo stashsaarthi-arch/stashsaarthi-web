@@ -42,14 +42,13 @@ const BookingModal = lazy(() => import("@/components/stash/BookingModal").then((
 const RoomListingModal = lazy(() => import("@/components/stash/RoomListingModal").then((m) => ({ default: m.RoomListingModal })));
 const EarlyAccessModal = lazy(() => import("@/components/stash/EarlyAccessModal").then((m) => ({ default: m.EarlyAccessModal })));
 const WhatsAppReferralModal = lazy(() => import("@/components/stash/WhatsAppReferralModal").then((m) => ({ default: m.WhatsAppReferralModal })));
-const ExitIntentModal = lazy(() => import("@/components/stash/ExitIntentModal").then((m) => ({ default: m.ExitIntentModal })));
-const ActivityTicker = lazy(() => import("@/components/stash/ActivityTicker").then((m) => ({ default: m.ActivityTicker })));
+const OfferPopup = lazy(() => import("@/components/OfferPopup").then((m) => ({ default: m.OfferPopup })));
 const RagChatbotWidget = lazy(() => import("@/components/stash/RagChatbotWidget").then((m) => ({ default: m.RagChatbotWidget })));
 const PredictivePersonaWidget = lazy(() => import("@/components/stash/PredictivePersonaWidget").then((m) => ({ default: m.PredictivePersonaWidget })));
 
 const TITLE = "StashSaarthi - Campus Micro-Storage & Zero-Brokerage Co-Living";
 const DESC =
-  "Official website of StashSaarthi. India's Zero-CapEx Intergenerational Living & Campus Micro-Storage Platform. Vacation luggage storage at ₹300/bag/mo, verified senior-hosted rooms, and homemade tiffins.";
+  "Official website of StashSaarthi. India's Zero-CapEx Intergenerational Living & Campus Micro-Storage Platform. Vacation luggage storage at ₹300/bag/mo, verified verified PG owner-hosted rooms, and homemade tiffins.";
 const URL = "https://stashsaarthi-web.vercel.app/";
 const OG_IMAGE = "https://stashsaarthi-web.vercel.app/images/og-banner-new.png";
 
@@ -297,8 +296,8 @@ function Index() {
         <ErrorBoundary sectionName="WhatsApp Referral Modal" compact>
           <WhatsAppReferralModal open={referralOpen} onOpenChange={setReferralOpen} />
         </ErrorBoundary>
-        <ErrorBoundary sectionName="Exit Intent Modal" compact>
-          <ExitIntentModal
+        <ErrorBoundary sectionName="Offer Popup" compact>
+          <OfferPopup
             onClaimDiscount={(code, service) => {
               open({
                 service,
@@ -311,11 +310,6 @@ function Index() {
       <ErrorBoundary sectionName="Scroll Progress Indicator" compact>
         <ScrollProgress />
       </ErrorBoundary>
-      <Suspense fallback={null}>
-        <ErrorBoundary sectionName="Activity Ticker Widget" compact>
-          <ActivityTicker onBook={open} onListRoom={handleListRoom} />
-        </ErrorBoundary>
-      </Suspense>
       <ErrorBoundary sectionName="Floating Persona Toggle Widget" compact>
         <FloatingPersonaToggle />
       </ErrorBoundary>
@@ -325,7 +319,7 @@ function Index() {
         </ErrorBoundary>
       </Suspense>
       <ErrorBoundary sectionName="Mobile Sticky CTA Widget" compact>
-        <MobileStickyCTA onBook={open} />
+        <MobileStickyCTA />
       </ErrorBoundary>
       <ErrorBoundary sectionName="WhatsApp Floating Action Button" compact>
         <WhatsAppButton onBook={open} />

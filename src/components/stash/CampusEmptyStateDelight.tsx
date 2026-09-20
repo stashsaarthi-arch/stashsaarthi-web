@@ -198,7 +198,7 @@ export function CampusEmptyStateDelight() {
         <span>
           {isHi
             ? "100% सत्यापित सीनियर होस्ट एवं ₹10,000 सुरक्षा कवर गारंटीड"
-            : "100% Verified Senior Hosts & ₹10,000 Safety Cover Guarantee"}
+            : "100% Verified Premium Hosts & ₹10,000 Safety Cover Guarantee"}
         </span>
       </div>
     </div>

@@ -29,7 +29,7 @@ export const SaarthiKitchenSchema: React.FC<SaarthiKitchenSchemaProps> = ({
   streetAddress = "Chhapeda Pulia Road, Kakadeo Coaching Hub",
   url = typeof window !== "undefined" ? window.location.href : "https://stashsaarthi-web.vercel.app/tiffin",
   image = "https://stashsaarthi-web.vercel.app/images/og-student.png",
-  description = "Pure homestyle tiffin service cooked by senior mother hosts near PW, Allen, Motion & Motion Kakadeo. Standard Thali from ₹50 with 1-tap meal pause.",
+  description = "Pure homestyle tiffin service cooked by verified PG owner mother hosts near PW, Allen, Motion & Motion Kakadeo. Standard Thali from ₹50 with 1-tap meal pause.",
   servesCuisine = ["North Indian", "Homestyle Desi Thali", "Pure Ghee Phulkas", "Student Health Diet"],
 }) => {
   // Schema.org Google Rich Snippet JSON-LD for FoodEstablishment / Restaurant / Service

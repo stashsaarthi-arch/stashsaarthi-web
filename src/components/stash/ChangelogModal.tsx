@@ -35,7 +35,7 @@ export const CHANGELOG_DATA: ChangelogItem[] = [
     highlights: [
       "5 Verified Kanpur Academic Hubs Active (IIT Kanpur, CSJMU, HBTU, GSVM, Kakadeo)",
       "Tamper-evident serialized laser barcode seals deployed (#SS-KNP-84920)",
-      "100% Digital Bank Escrow payout system for senior hosts",
+      "100% Digital Bank Escrow payout system for premium hosts",
       "Guaranteed 15-minute direct human response SLA during campus hours",
       "Radical Process Transparency & Zero Dark Patterns framework",
     ],
@@ -74,7 +74,7 @@ export const CHANGELOG_DATA: ChangelogItem[] = [
     title_hi: "अंतर-शहर लगेज शटल एवं एकीकृत होस्ट पोर्टल",
     highlights: [
       "Inter-city student luggage shuttle route (Kanpur ↔ Delhi ↔ Pune)",
-      "Multi-language Voice AI assistant for senior hosts in Hindi & regional dialects",
+      "Multi-language Voice AI assistant for premium hosts in Hindi & regional dialects",
       "Automated hostel-to-host move-in concierge with physical vehicle dispatch",
     ],
     highlights_hi: [

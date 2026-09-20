@@ -1,0 +1,177 @@
+- generic [active] [ref=f2e1]:
+  - main [ref=f2e3]:
+    - link "Skip to main content" [ref=f2e4] [cursor=pointer]:
+      - /url: "#main-content"
+    - generic [ref=f2e6]:
+      - button "Scroll to top of page" [ref=f2e8] [cursor=pointer]:
+        - img "StashSaarthi" [ref=f2e11]
+      - generic [ref=f2e12]:
+        - button "Explore" [ref=f2e13] [cursor=pointer]
+        - button "Open navigation menu" [ref=f2e14] [cursor=pointer]
+    - generic [ref=f2e16]:
+      - generic [ref=f2e17]:
+        - generic [ref=f2e18]:
+          - button "Kanpur Corridor Genesis • v1.0 Live →" [ref=f2e19] [cursor=pointer]:
+            - generic [ref=f2e23]: Kanpur Corridor Genesis • v1.0 Live
+            - generic [ref=f2e24]: →
+          - generic [ref=f2e25]: 🚨 Stop the ₹8,000 Vacation Dead-Rent Trap
+        - heading "Don't Pay Rent for an Empty Room. Stash Your Bags for ₹300/mo." [level=1] [ref=f2e30]
+        - paragraph [ref=f2e32]: Going home for semester break? Ditch your PG. Secure your luggage in verified local homes near IITK & CSJMU. Rebook broker-free rooms when you return.
+        - generic [ref=f2e33]: ⚡ 48+ Bags Stored Near IITK & HBTI • 100% Tamper-Proof QR Seal
+        - generic [ref=f2e39]:
+          - button "Stash Luggage for ₹300/mo" [ref=f2e40] [cursor=pointer]
+          - link "Find Broker-Free Rooms" [ref=f2e42] [cursor=pointer]:
+            - /url: "#ecosystem"
+          - button "Refer & Share" [ref=f2e43] [cursor=pointer]
+      - generic [ref=f2e46]:
+        - generic [ref=f2e47]:
+          - text: 0%
+          - generic [ref=f2e51]: Brokerage Free
+        - generic [ref=f2e52]:
+          - text: 0-Tier
+          - generic [ref=f2e56]: Verified
+        - generic [ref=f2e57]:
+          - text: 0k+
+          - generic [ref=f2e61]: Spaces Mapped
+        - generic [ref=f2e62]:
+          - text: ₹0
+          - generic [ref=f2e73]: Stash From
+      - paragraph [ref=f2e78]:
+        - generic [ref=f2e79]:
+          - generic [ref=f2e80]: ⚡
+          - text: Validated at IIT Bombay NEC 2026
+        - generic [ref=f2e81]: 100% Escrow Protected
+        - generic [ref=f2e82]: Zero-Brokerage Charter
+      - link "Scroll down to explore features" [ref=f2e84] [cursor=pointer]:
+        - /url: "#role-lane"
+        - generic [ref=f2e85]: Explore Our Services
+    - region "Quick Category Jump Navigation" [ref=f2e88]:
+      - generic [ref=f2e90]:
+        - tablist "Category Navigation Links" [ref=f2e91]:
+          - tab "Solutions & Hub" [selected] [ref=f2e92] [cursor=pointer]
+          - tab "Savings Simulator" [ref=f2e104] [cursor=pointer]
+          - tab "Stash Journey" [ref=f2e108] [cursor=pointer]
+          - tab "Leaderboard" [ref=f2e113] [cursor=pointer]
+          - tab "Trust & Safety Pass" [ref=f2e121] [cursor=pointer]
+          - tab "Reviews & Ideas" [ref=f2e126] [cursor=pointer]
+          - tab "FAQ & Help" [ref=f2e130] [cursor=pointer]
+        - button "Search website services" [ref=f2e135] [cursor=pointer]
+    - generic [ref=f2e139]:
+      - generic [ref=f2e140]:
+        - generic [ref=f2e141]: Integrated Solutions Hub
+        - heading "Explore All StashSaarthi Solutions" [level=2] [ref=f2e142]:
+          - text: Explore All
+          - generic [ref=f2e143]: StashSaarthi Solutions
+        - paragraph [ref=f2e144]: A complete range of living and storage solutions for Kanpur campus corridors.
+      - tablist "StashSaarthi Solutions Tabs" [ref=f2e146]:
+        - tab "Saarthi Stash Zero Dead-Rent" [selected] [ref=f2e147] [cursor=pointer]:
+          - generic [ref=f2e149]: Saarthi Stash
+          - generic [ref=f2e161]: Zero Dead-Rent
+        - tab "Saarthi Spaces Zero Brokerage" [ref=f2e162] [cursor=pointer]:
+          - generic [ref=f2e163]: Saarthi Spaces
+          - generic [ref=f2e168]: Zero Brokerage
+        - tab "Saarthi Kitchen From ₹90/meal" [ref=f2e169] [cursor=pointer]:
+          - generic [ref=f2e170]: Saarthi Kitchen
+          - generic [ref=f2e178]: From ₹90/meal
+        - tab "Saarthi Connect 100% Safe" [ref=f2e179] [cursor=pointer]:
+          - generic [ref=f2e180]: Saarthi Connect
+          - generic [ref=f2e187]: 100% Safe
+      - tabpanel "Saarthi Stash Zero Dead-Rent" [ref=f2e188]:
+        - generic [ref=f2e190]:
+          - generic [ref=f2e193]:
+            - generic [ref=f2e206]:
+              - generic [ref=f2e207]: Saarthi Stash
+              - generic [ref=f2e208]:
+                - generic [ref=f2e209]: "Live Capacity: 24 Slots - ₹300/bag/mo"
+                - generic [ref=f2e210]: ⚡ Zero Cancellation Fee
+            - generic [ref=f2e211]:
+              - paragraph [ref=f2e212]: Insured micro-storage in local homes.
+              - generic [ref=f2e213]: "₹300/bag/mo: Save ₹3,700 vs. paying dead room rent"
+              - list [ref=f2e214]:
+                - listitem [ref=f2e215]:
+                  - generic [ref=f2e218]: Laser Tamper Seal
+                - listitem [ref=f2e219]:
+                  - generic [ref=f2e222]: ₹10k Micro-Insurance
+                - listitem [ref=f2e223]:
+                  - generic [ref=f2e226]: 24/7 Monitored Dry Space
+              - button "Book Saarthi Stash" [ref=f2e227] [cursor=pointer]
+          - generic [ref=f2e230]:
+            - generic [ref=f2e236]:
+              - generic [ref=f2e237]: Saarthi Spaces
+              - generic [ref=f2e238]:
+                - generic [ref=f2e239]: 100% Escrow Protected - Avg ₹5,500/mo
+                - generic [ref=f2e240]: ⚡ Zero Cancellation Fee
+            - generic [ref=f2e241]:
+              - paragraph [ref=f2e242]: Verified senior-hosted homes and PGs.
+              - generic [ref=f2e243]: "Avg ₹5,500/mo: Flat 10% platform fee (zero brokerage)"
+              - list [ref=f2e244]:
+                - listitem [ref=f2e245]:
+                  - generic [ref=f2e248]: 3-Tier Verified Senior Family
+                - listitem [ref=f2e249]:
+                  - generic [ref=f2e252]: Free 24h Relocation Guarantee
+              - button "Book Saarthi Spaces" [ref=f2e253] [cursor=pointer]
+          - generic [ref=f2e256]:
+            - generic [ref=f2e265]:
+              - generic [ref=f2e266]: Saarthi Kitchen
+              - generic [ref=f2e267]:
+                - generic [ref=f2e268]: Waitlist Only - ₹90/meal
+                - generic [ref=f2e269]: ⚡ Zero Cancellation Fee
+            - generic [ref=f2e270]:
+              - paragraph [ref=f2e271]: Neighbourhood micro-batch tiffins.
+              - generic [ref=f2e272]: "₹90/meal: Zero palm oil, 100% hygienic home kitchen"
+              - list [ref=f2e273]:
+                - listitem [ref=f2e274]:
+                  - generic [ref=f2e277]: Pay-as-you-go Token Wallet
+                - listitem [ref=f2e278]:
+                  - generic [ref=f2e281]: Cooked by local families
+              - button "Book Saarthi Kitchen" [ref=f2e282] [cursor=pointer]
+          - generic [ref=f2e285]:
+            - generic [ref=f2e293]:
+              - generic [ref=f2e294]: Saarthi Connect
+              - generic [ref=f2e295]:
+                - generic [ref=f2e296]: Social Infrastructure - Rent Subsidy
+                - generic [ref=f2e297]: ⚡ Zero Cancellation Fee
+            - generic [ref=f2e298]:
+              - paragraph [ref=f2e299]: Rent subsidized by helping elders.
+              - generic [ref=f2e300]: "Rent Subsidy: Up to 60% offset on monthly stays"
+              - list [ref=f2e301]:
+                - listitem [ref=f2e302]:
+                  - generic [ref=f2e305]: Tech support errands
+                - listitem [ref=f2e306]:
+                  - generic [ref=f2e309]: Intergenerational community building
+              - button "Book Saarthi Connect" [ref=f2e310] [cursor=pointer]
+          - generic [ref=f2e313]:
+            - generic [ref=f2e319]:
+              - generic [ref=f2e320]: Trust Infrastructure
+              - generic [ref=f2e321]:
+                - generic [ref=f2e322]: 3-tier verification - 100% Free
+                - generic [ref=f2e323]: ⚡ Zero Cancellation Fee
+            - generic [ref=f2e324]:
+              - paragraph [ref=f2e325]: Identity, background and physical audits.
+              - generic [ref=f2e326]: "100% Free: SOS button in every stay"
+              - list [ref=f2e327]:
+                - listitem [ref=f2e328]:
+                  - generic [ref=f2e331]: Aadhaar + live biometric check
+                - listitem [ref=f2e332]:
+                  - generic [ref=f2e335]: Police & university verification
+              - button "Book Trust Infrastructure" [ref=f2e336] [cursor=pointer]
+          - generic [ref=f2e339]:
+            - generic [ref=f2e345]:
+              - generic [ref=f2e346]: Micro-Opportunity
+              - generic [ref=f2e347]:
+                - generic [ref=f2e348]: Local hosts & chefs - Avg ₹9,200
+                - generic [ref=f2e349]: ⚡ Zero Cancellation Fee
+            - generic [ref=f2e350]:
+              - paragraph [ref=f2e351]: Neighbourhood partners earn from the network.
+              - generic [ref=f2e352]: "Avg ₹9,200: Average monthly partner earning"
+              - list [ref=f2e353]:
+                - listitem [ref=f2e354]:
+                  - generic [ref=f2e357]: Earn from unused rooms
+                - listitem [ref=f2e358]:
+                  - generic [ref=f2e361]: Weekly payouts
+              - button "Book Micro-Opportunity" [ref=f2e362] [cursor=pointer]
+    - button "Open WhatsApp concierge" [ref=f2e364] [cursor=pointer]
+  - generic [ref=f2e369]:
+    - status [ref=f2e370]
+    - alert [ref=f2e371]
+  - region "Notifications alt+T"

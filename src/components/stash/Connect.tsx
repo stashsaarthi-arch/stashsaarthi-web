@@ -39,7 +39,7 @@ type Match = {
     gives: string[];
     gives_hi?: string[];
   };
-  senior: {
+  host: {
     name: string;
     detail: string;
     detail_hi?: string;
@@ -61,7 +61,7 @@ const MATCHES: Match[] = [
       gives: ["1 hr/day tech help", "Weekly grocery errands"],
       gives_hi: ["1 घंटा/दिन तकनीकी सहायता", "साप्ताहिक राशन व सामान लाना"],
     },
-    senior: {
+    host: {
       name: "Sudha Tripathi, 71",
       detail: "Retired school principal · Swaroop Nagar",
       detail_hi: "सेवानिवृत्त प्रधानाचार्य · स्वरूप नगर",
@@ -81,7 +81,7 @@ const MATCHES: Match[] = [
       gives: ["Video-call setup with family", "Medicine pickups"],
       gives_hi: ["परिवार संग वीडियो-कॉल सेटअप", "दवाइयां लाना"],
     },
-    senior: {
+    host: {
       name: "Col. R. Bajpai, 78",
       detail: "Ex-Army · Gomti Nagar",
       detail_hi: "पूर्व सैन्य अधिकारी · गोमती नगर",
@@ -101,7 +101,7 @@ const MATCHES: Match[] = [
       gives: ["Smartphone & UPI training", "Sunday market runs"],
       gives_hi: ["स्मार्टफोन व यूपीआई प्रशिक्षण", "रविवार बाजार खरीदारी"],
     },
-    senior: {
+    host: {
       name: "Kamla Arora, 69",
       detail: "Retired banker · Noida Sec 51",
       detail_hi: "सेवानिवृत्त बैंकर · नोएडा सेक्टर 51",
@@ -118,10 +118,10 @@ const MATCHES: Match[] = [
       name: "Meghna Kulkarni",
       detail: "CS student · Kothrud",
       detail_hi: "कंप्यूटर साइंस छात्रा · कोथरूड",
-      gives: ["Bill payments & paperwork", "Evening walks companionship"],
+      gives: ["Bill payments & paperwork", "Evening walks zero-brokerage ecosystem"],
       gives_hi: ["बिल भुगतान व कागजी काम", "शाम की सैर में साथ"],
     },
-    senior: {
+    host: {
       name: "Vasant Deshpande, 74",
       detail: "Retired engineer · Kothrud",
       detail_hi: "सेवानिवृत्त इंजीनियर · कोथरूड",
@@ -202,7 +202,7 @@ export function Connect(_props: { onBook: OpenBooking }) {
             className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/40 bg-gradient-to-r from-amber-500/20 via-amber-700/20 to-emerald-500/20 px-3.5 py-1 text-xs font-bold text-amber-300 transition hover:scale-105 shadow-md shadow-amber-500/10 cursor-pointer"
           >
             <Trophy className="h-3.5 w-3.5 text-amber-400" />
-            <span>{isHi ? "होस्ट कर्म अंक एवं सम्मान चार्टर (Karma Rewards)" : "Senior Karma Points & Perks Charter"}</span>
+            <span>{isHi ? "होस्ट कर्म अंक एवं सम्मान चार्टर (Karma Rewards)" : "Verified PG Owner Karma Points & Perks Charter"}</span>
           </button>
         </div>
       </div>
@@ -271,16 +271,16 @@ export function Connect(_props: { onBook: OpenBooking }) {
                 <ProfileCard
                   icon={<Heart className="h-4 w-4 text-amber" />}
                   accent="var(--amber)"
-                  name={match.senior.name}
+                  name={match.host.name}
                   detail={
-                    isHi && match.senior.detail_hi ? match.senior.detail_hi : match.senior.detail
+                    isHi && match.host.detail_hi ? match.host.detail_hi : match.host.detail
                   }
                   label={t.connectSection.offers}
                   items={
-                    isHi && match.senior.offers_hi ? match.senior.offers_hi : match.senior.offers
+                    isHi && match.host.offers_hi ? match.host.offers_hi : match.host.offers
                   }
-                  karmaPoints={match.senior.karmaPoints}
-                  karmaTier={match.senior.karmaTier}
+                  karmaPoints={match.host.karmaPoints}
+                  karmaTier={match.host.karmaTier}
                   onKarmaClick={() => setKarmaModal(true)}
                 />
               </div>

@@ -65,7 +65,7 @@ export const ROOM_PRESETS: RoomPreset[] = [
     rows: 3,
     cols: 4,
     maxStackPerSlot: 2,
-    description: "Compact senior host lounge designed for quick vacation luggage drop-offs.",
+    description: "Compact verified PG owner host lounge designed for quick vacation luggage drop-offs.",
   },
   {
     id: "csjmu-kalyanpur",

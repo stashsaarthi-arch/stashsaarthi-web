@@ -37,7 +37,7 @@ export const OFFICIAL_HOST_VETTING_POLICY: HostVettingPolicyCharter = {
   effectiveDate: "September 1, 2026",
   titleEn: "StashSaarthi Official Host Vetting Process & Security Policy",
   titleHi: "स्टैशसारथी आधिकारिक होस्ट सत्यापन प्रक्रिया एवं सुरक्षा नीति",
-  summaryEn: "This formal company policy governs the mandatory 4-tier onboarding, legal verification, physical safety auditing, and legal protection of all senior citizen host nodes operating within the StashSaarthi network in Kanpur.",
+  summaryEn: "This formal company policy governs the mandatory 4-tier onboarding, legal verification, physical safety auditing, and legal protection of all premium host host nodes operating within the StashSaarthi network in Kanpur.",
   summaryHi: "यह आधिकारिक कंपनी नीति कानपुर में स्टैशसारथी नेटवर्क के तहत संचालित सभी वरिष्ठ नागरिक होस्ट नोड्स के अनिवार्य 4-स्तरीय ऑनबोर्डिंग, कानूनी सत्यापन, भौतिक सुरक्षा ऑडिट और कानूनी सुरक्षा को नियंत्रित करती है।",
   legalBasisEn: [
     "Transfer of Property Act (TPA) 1882 Section 105 — Permissive Leave & License model (Zero tenancy or leasehold right transfer)",
@@ -93,7 +93,7 @@ export const OFFICIAL_HOST_VETTING_POLICY: HostVettingPolicyCharter = {
       mandatoryRequirementsEn: [
         "Verification calls with 2 independent local academic/community references (e.g. IITK/HBTI faculty, RWA)",
         "Proof of stable residence (minimum 2+ years residing at current Kanpur node location)",
-        "Senior host willingness interview regarding student hospitality & quiet study norms",
+        "Verified PG Owner host willingness interview regarding student hospitality & quiet study norms",
       ],
       mandatoryRequirementsHi: [
         "2 स्वतंत्र स्थानीय शैक्षणिक/सामुदायिक संदर्भों के साथ सत्यापन कॉल (उदा. IITK/HBTI फैकल्टी, आरडब्ल्यूए)",
@@ -124,7 +124,7 @@ export const OFFICIAL_HOST_VETTING_POLICY: HostVettingPolicyCharter = {
     },
   ],
   hostGuaranteesEn: [
-    "0% Listing & Platform Commission Fee — 100% net earnings paid directly into senior host bank account",
+    "0% Listing & Platform Commission Fee — 100% net earnings paid directly into verified PG owner host bank account",
     "₹10,000 Protection & Damage Coverage — Embedded safety policy against accidental property damage",
     "24-Hour Student Relocation SLA — Immediate student relocation in case of house rule violation with zero rent loss",
     "100% Property Title Protection — Leave & License structure under TPA Sec 105 guarantees zero tenancy claim risk",

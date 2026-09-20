@@ -144,6 +144,7 @@ export const FooterSection = memo(function FooterSection() {
   ];
 
   const COMPANY = [
+    { label: isHi ? "प्रॉपर्टी लिस्ट करें" : "List your Property (B2B)", to: "/host" },
     { label: isHi ? "हमारे बारे में" : "About us", doc: "about" },
     { label: isHi ? "माइक्रो-अवसर" : "Micro-Opportunity", doc: "micro" },
     { label: isHi ? "हमारे साथ साझेदारी" : "Partner with us", doc: "partner" },
@@ -871,7 +872,7 @@ function DocCol({
   onOpen,
 }: {
   title: string;
-  links: { label: string; doc: string }[];
+  links: { label: string; doc?: string; to?: string }[];
   onOpen: (d: string) => void;
 }) {
   return (
@@ -880,13 +881,22 @@ function DocCol({
       <ul className="mt-4 space-y-1.5">
         {links.map((l) => (
           <li key={l.label}>
-            <button
-              type="button"
-              onClick={() => onOpen(l.doc)}
-              className="text-left text-sm text-muted-foreground transition hover:text-cyan cursor-pointer min-h-[44px] inline-flex items-center py-1.5"
-            >
-              {l.label}
-            </button>
+            {l.to ? (
+              <Link
+                to={l.to}
+                className="text-left text-sm text-muted-foreground transition hover:text-cyan min-h-[44px] inline-flex items-center py-1.5"
+              >
+                {l.label}
+              </Link>
+            ) : (
+              <button
+                type="button"
+                onClick={() => l.doc && onOpen(l.doc)}
+                className="text-left text-sm text-muted-foreground transition hover:text-cyan cursor-pointer min-h-[44px] inline-flex items-center py-1.5"
+              >
+                {l.label}
+              </button>
+            )}
           </li>
         ))}
       </ul>

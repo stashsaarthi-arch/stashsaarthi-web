@@ -57,7 +57,7 @@ export function HostStashVerificationModal({
   isOpen,
   onClose,
   bookingId = "BK-2026-9812",
-  hostName = "Sudha Tripathi (Senior Host)",
+  hostName = "Sudha Tripathi (Verified PG Owner Host)",
   campusNode = "Kakadeo PW Hub",
 }: HostStashVerificationModalProps) {
   const { language } = useLanguage();

@@ -51,9 +51,9 @@ export function WhatsAppReferralModal({ open, onOpenChange }: WhatsAppReferralMo
     },
     host: {
       icon: Home,
-      titleEn: "Share with Senior Hosts & Neighborhood",
+      titleEn: "Share with Premium Hosts & Neighborhood",
       titleHi: "सीनियर होस्ट्स व पड़ोसियों के साथ शेयर करें",
-      en: `🏡 *EARN ₹11,500+/MONTH FROM YOUR SPARE SPACE IN KANPUR!* 🌟\n\nNamaste! If you or someone in your family has a spare room or clean corner, turn it into dignified passive income by hosting verified university students (IITK, HBTI, CSJMU).\n\n🛡️ *Host Protections:*\n• 100% Control over House Norms & Timings\n• Zero Intrusion & 100% Escrow Direct Bank Payouts\n• ₹10,000 Property Damage Safety Cover\n\n🎁 *Claim 0% Onboarding Fee & Calculate Income:*\n👉 ${APP_BASE_URL}?role=host&ref=HOST2026`,
+      en: `🏡 *EARN ₹11,500+/MONTH FROM YOUR SPARE SPACE IN KANPUR!* 🌟\n\nNamaste! If you or someone in your family has a spare room or clean corner, turn it into tech-enabled passive income by hosting verified university students (IITK, HBTI, CSJMU).\n\n🛡️ *Host Protections:*\n• 100% Control over House Norms & Timings\n• Zero Intrusion & 100% Escrow Direct Bank Payouts\n• ₹10,000 Property Damage Safety Cover\n\n🎁 *Claim 0% Onboarding Fee & Calculate Income:*\n👉 ${APP_BASE_URL}?role=host&ref=HOST2026`,
       hi: `🏡 *कानपुर में अपने खाली कमरे से हर महीने ₹11,500+ कमाएं!* 🌟\n\nनमस्ते! यदि आपके घर में कोई खाली कमरा या कोना है, तो सत्यापित विश्वविद्यालय छात्रों (IITK, HBTI, CSJMU) को होस्ट करके सम्मानजनक आय अर्जित करें।\n\n🛡️ *होस्ट सुरक्षा गारंटियां:*\n• घर के नियमों व समय पर 100% आपका नियंत्रण\n• 0% लिस्टिंग शुल्क व 100% एस्क्रौ डायरेक्ट बैंक ट्रांसफर\n• ₹10,000 प्रॉपर्टी सुरक्षा कवर\n\n🎁 *0% ऑनबोर्डिंग शुल्क के साथ संभावित आय देखें:*\n👉 ${APP_BASE_URL}?role=host&ref=HOST2026`,
     },
     food: {
@@ -162,7 +162,7 @@ export function WhatsAppReferralModal({ open, onOpenChange }: WhatsAppReferralMo
                   label: isHi ? "छात्र स्टोरेज" : "Student Stash",
                   icon: GraduationCap,
                 },
-                { id: "host", label: isHi ? "सीनियर होस्ट" : "Senior Host", icon: Home },
+                { id: "host", label: isHi ? "सीनियर होस्ट" : "Verified PG Owner Host", icon: Home },
                 { id: "food", label: isHi ? "घर का खाना" : "Home Tiffin", icon: Utensils },
               ] as const
             ).map((tab) => {

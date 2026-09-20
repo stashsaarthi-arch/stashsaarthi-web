@@ -1,12 +1,12 @@
 import { useEffect, useState, memo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X, GraduationCap, HeartHandshake } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { AuthButton } from "./AuthButton";
 import { BrandLogo } from "@/components/ui/BrandLogo";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { LowDataToggle } from "@/components/ui/LowDataToggle";
-import { SoundToggle } from "@/components/ui/SoundToggle";
 import { smoothScrollTo } from "./legal";
 import { useLanguage } from "@/context/LanguageContext";
 import type { Role } from "./types";
@@ -100,14 +100,15 @@ export const Navbar = memo(function Navbar({
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 !z-[999] w-full transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] ${
         scrolled
-          ? "dark:bg-[#0A0D0F]/90 bg-white/95 backdrop-blur-2xl dark:border-b dark:border-white/[0.08] border-b border-slate-200/80 shadow-2xl dark:shadow-black/70 shadow-slate-900/5"
-          : "dark:bg-[#0A0D0F]/70 bg-white/80 backdrop-blur-md dark:border-b dark:border-white/[0.05] border-b border-slate-200/40"
+          ? "!bg-[#0A0D0F]/40 !backdrop-blur-[24px] !backdrop-saturate-[180%] !border-b !border-white/10 !shadow-2xl"
+          : "!bg-[#0A0D0F]/10 !backdrop-blur-[12px] !border-b !border-white/5"
       }`}
     >
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-24 bg-emerald-500/20 blur-[60px] -z-10 rounded-full pointer-events-none"></div>
       <div
-        className={`max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-4 xl:px-6 w-full flex items-center justify-between gap-1 sm:gap-2 transition-all duration-300 ${
+        className={`max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-4 xl:px-6 w-full flex items-center justify-between gap-1 sm:gap-2 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] ${
           scrolled ? "h-14 sm:h-16" : "h-15 sm:h-20"
         }`}
       >
@@ -245,7 +246,6 @@ export const Navbar = memo(function Navbar({
             </div>
             <ThemeToggle compact />
             <LowDataToggle compact />
-            <SoundToggle compact />
           </div>
 
           {/* Stash Wallet Zero-Fee Trial Token Badge (Student Persona only) */}
@@ -286,24 +286,15 @@ export const Navbar = memo(function Navbar({
             </button>
           )}
 
-          {/* Action CTA Button */}
-          <button
-            type="button"
-            onClick={role === "student" ? onBook : onListRoom}
-            className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all shrink-0 cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-offset-1 focus-visible:ring-offset-[#0A0D0F] active:scale-[0.98] ${
-              role === "student"
-                ? "bg-emerald-500 hover:bg-emerald-400 text-black shadow-md shadow-emerald-500/20 focus-visible:ring-emerald-400/80"
-                : "bg-amber-500 hover:bg-amber-400 text-black shadow-md shadow-amber-500/20 focus-visible:ring-amber-400/80"
-            }`}
+          {/* Become a Host B2B Link */}
+          <Link
+            to="/host"
+            className="hidden md:inline-flex items-center gap-1.5 rounded-full border border-slate-700 px-3 sm:px-4 py-1.5 text-xs font-semibold text-slate-300 hover:bg-slate-800 hover:text-white hover:border-slate-600 transition-all shrink-0 active:scale-[0.98]"
           >
-            {role === "student"
-              ? isHi
-                ? "इकोसिस्टम देखें"
-                : "Explore"
-              : isHi
-                ? "कमरा लिस्ट करें"
-                : "List Space"}
-          </button>
+            <span aria-hidden="true">🏠</span>
+            <span>{isHi ? "प्रॉपर्टी लिस्ट करें" : "Become a Host"}</span>
+          </Link>
+
 
           {/* Mobile Hamburger Toggle */}
           <Button
@@ -365,7 +356,7 @@ export const Navbar = memo(function Navbar({
                 }`}
               >
                 <HeartHandshake className="h-4 w-4" />
-                <span>{isHi ? "सीनियर होस्ट" : "Senior Host"}</span>
+                <span>{isHi ? "सीनियर होस्ट" : "Verified PG Owner Host"}</span>
               </button>
             </div>
 
@@ -401,7 +392,6 @@ export const Navbar = memo(function Navbar({
               </button>
               <ThemeToggle compact className="shrink-0 min-h-[48px] min-w-[48px] flex items-center justify-center" />
               <LowDataToggle compact className="shrink-0 min-h-[48px] min-w-[48px] flex items-center justify-center" />
-              <SoundToggle compact className="shrink-0 min-h-[48px] min-w-[48px] flex items-center justify-center" />
             </div>
 
             {/* Structured Navigation Grid */}
@@ -431,6 +421,14 @@ export const Navbar = memo(function Navbar({
 
             {/* Mobile Auth & Priority CTAs */}
             <div className="mt-2 pt-2 border-t border-white/10 flex flex-col gap-2.5">
+              <Link
+                to="/host"
+                onClick={() => setOpen(false)}
+                className="w-full min-h-[48px] flex items-center justify-center gap-2 py-3 rounded-xl border border-slate-700 bg-slate-900/50 text-xs font-bold text-slate-300 hover:bg-slate-800 hover:text-white transition-all cursor-pointer"
+              >
+                <span>🏠</span>
+                <span>{isHi ? "प्रॉपर्टी लिस्ट करें" : "Become a Host"}</span>
+              </Link>
               {onEarlyAccess && (
                 <button
                   type="button"

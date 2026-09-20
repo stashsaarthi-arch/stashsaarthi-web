@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { Button } from "@/components/ui/button";
-import { usePersona } from "@/context/PersonaContext";
+import React from "react";
+import { Utensils, Package, Home, Users } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { dispatchNavTab, smoothScrollTo } from "./legal";
 import { playTab, playPop } from "@/lib/audio";
 import { ArrowRight, Zap } from "lucide-react";
 import type { OpenBooking } from "./types";
+import { useState, useEffect } from "react";
+import { usePersona } from "@/context/PersonaContext";
+import { AnimatePresence, motion } from "motion/react";
 
 type ServiceId = "kitchen" | "stash" | "rooms" | "connect";
 

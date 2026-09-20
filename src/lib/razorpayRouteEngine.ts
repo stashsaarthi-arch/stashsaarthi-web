@@ -107,7 +107,7 @@ export function calculateSplitPayout(
       hostRatio = 0.611;
       break;
     case "connect":
-      // 80% to senior host mentor
+      // 80% to verified PG owner host mentor
       hostRatio = 0.8;
       break;
     default:

@@ -78,7 +78,7 @@ export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
   {
     id: "kb-03",
     category: "transparency",
-    question: "What happens if a senior host cancels or locks the house during break?",
+    question: "What happens if a verified PG owner host cancels or locks the house during break?",
     questionHi: "यदि कोई होस्ट अचानक मना कर दे तो क्या होगा?",
     answer:
       "We guarantee a 24-Hour Relocation SLA. In the rare event of a host emergency, our on-ground Kanpur operations team dispatches a concierge to immediately transfer stored luggage or relocate staying students to a pre-verified backup node in the same locality at zero extra cost.",
@@ -227,7 +227,7 @@ export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
     question: "How do zero-brokerage co-living rooms work?",
     questionHi: "जीरो-ब्रोकरेज रूम बुकिंग कैसे काम करती है?",
     answer:
-      "Saarthi Spaces lists verified single & double sharing rooms directly from senior hosts and house owners near IITK, Kakadeo, and CSJMU. You connect directly with the host, pay 0% broker fee, and enjoy verified student community stay starting at ₹5,500/month.",
+      "Saarthi Spaces lists verified single & double sharing rooms directly from premium hosts and house owners near IITK, Kakadeo, and CSJMU. You connect directly with the host, pay 0% broker fee, and enjoy verified student community stay starting at ₹5,500/month.",
     answerHi:
       "सार्थी स्पेस वरिष्ठ नागरिकों और मकान मालिकों से सीधे कमरे सूचीबद्ध करता है। आप 0% ब्रोकरेज पर सीधे होस्ट से जुड़ते हैं, ₹5,500/माह से कमरे उपलब्ध हैं।",
     keywords: [
@@ -253,7 +253,7 @@ export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
     question: "What is Saarthi Kitchen and how much does a meal cost?",
     questionHi: "सार्थी किचन क्या है और भोजन की कीमत क्या है?",
     answer:
-      "Saarthi Kitchen delivers home-cooked, pure desi ghee 'Ghar Ka Swaad' tiffins prepared by verified local Kanpur senior home-makers. Meals start at ₹90/single meal token or ₹2,400/month full tiffin plan with 1-tap pause options.",
+      "Saarthi Kitchen delivers home-cooked, pure desi ghee 'Ghar Ka Swaad' tiffins prepared by verified local Kanpur verified PG owner home-makers. Meals start at ₹90/single meal token or ₹2,400/month full tiffin plan with 1-tap pause options.",
     answerHi:
       "सार्थी किचन वरिष्ठ महिलाओं द्वारा तैयार शुद्ध देसी घी 'घर का स्वाद' टिफिन डिलीवर करता है। भोजन ₹90/मील या ₹2,400/माह टिफिन प्लान पर उपलब्ध है।",
     keywords: [
@@ -276,15 +276,15 @@ export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
   {
     id: "kb-11",
     category: "host",
-    question: "How can senior citizens earn passive income as a StashHost?",
+    question: "How can verified PG owner citizens earn passive income as a StashHost?",
     questionHi: "वरिष्ठ नागरिक स्टैशहोस्ट बनकर निष्क्रिय आय कैसे कमा सकते हैं?",
     answer:
-      "Senior Hosts earn ₹11,500+/month by monetizing spare bedrooms or clean storage rooms. Hosts maintain 100% control over house rules, receive weekly direct bank escrow payouts, get 24/7 SOS helpline coverage, and ₹10,000 property protection.",
+      "Premium Hosts earn ₹11,500+/month by monetizing spare bedrooms or clean storage rooms. Hosts maintain 100% control over house rules, receive weekly direct bank escrow payouts, get 24/7 SOS helpline coverage, and ₹10,000 property protection.",
     answerHi:
       "सीनियर होस्ट खाली कमरों को साझा करके ₹11,500+/माह कमाते हैं। होस्ट को घर के नियमों पर 100% नियंत्रण, साप्ताहिक बैंक भुगतान, और 24/7 SOS सहायता मिलती है।",
     keywords: [
       "host",
-      "senior",
+      "verified PG owner",
       "passive income",
       "earn",
       "11500",
@@ -296,7 +296,7 @@ export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
       "कमाई",
       "कमरा",
     ],
-    citation: "Directives: Senior Host Charter §1",
+    citation: "Directives: Verified PG Owner Host Charter §1",
   },
   {
     id: "kb-12",

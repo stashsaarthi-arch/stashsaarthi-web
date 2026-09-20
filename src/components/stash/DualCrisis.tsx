@@ -11,12 +11,12 @@ const STUDENT = [
   "The Mess Nightmare: Watery daal, unhygienic oil, and homesickness.",
 ];
 const SENIOR = [
-  "Zero Brokerage: Direct connection to audited family and senior-hosted homes.",
+  "Zero Brokerage: Direct connection to audited family and verified PG owner-hosted homes.",
   "Flat ₹300/mo Stash: Barcode-sealed, ₹10,000 insured vacation luggage storage.",
   "Ghar Ka Khana: Fresh micro-batch meals cooked by neighbourhood dadi/nani.",
 ];
 const FUSION = [
-  "Empty senior rooms become verified, brokerage-free student homes",
+  "Empty verified PG owner rooms become verified, brokerage-free student homes",
   "One hour a day of tech help & errands earns up to 60% rent subsidy",
   "Vacation luggage stays safe in a neighbourhood stash node at ₹300/mo",
   "Home-cooked meals replace mess food — cooked by the same community",

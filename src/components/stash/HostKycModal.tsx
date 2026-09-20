@@ -194,7 +194,7 @@ export function HostKycModal({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="text-xs font-semibold text-muted-foreground block mb-1.5">
-                    Senior Host Name
+                    Verified PG Owner Host Name
                   </label>
                   <input
                     type="text"
@@ -329,7 +329,7 @@ export function HostKycModal({
                 <div className="flex items-center gap-3">
                   <Award className="h-8 w-8 text-emerald-400 shrink-0" />
                   <div>
-                    <div className="text-sm font-bold">Verified Senior Host e-KYC Certificate Issued</div>
+                    <div className="text-sm font-bold">Verified Verified PG Owner Host e-KYC Certificate Issued</div>
                     <div className="text-xs text-emerald-300/80">
                       Fully approved under Kanpur Police clearance & DPDP Act 2023 standards
                     </div>
