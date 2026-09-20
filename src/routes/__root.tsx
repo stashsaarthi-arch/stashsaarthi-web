@@ -115,17 +115,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "google-site-verification", content: "googlec3390cf96e97cc6c" },
       { name: "robots", content: "index, follow, max-image-preview:large" },
       { name: "format-detection", content: "telephone=no" },
-      { title: "StashSaarthi Kanpur — Student Tiffin, Hostel Delivery, Bag Storage & Rooms in Kakadeo" },
-      { name: "title", content: "StashSaarthi Kanpur — Student Tiffin, Hostel Delivery, Bag Storage & Rooms in Kakadeo" },
+      { title: "StashSaarthi | Student Storage, PG Rooms, Hostels & Kitchen Services in Kanpur" },
+      { name: "title", content: "StashSaarthi | Student Storage, PG Rooms, Hostels & Kitchen Services in Kanpur" },
       {
         name: "description",
-        content:
-          "Kanpur's #1 student platform: Flexible daily tiffin from ₹50, ₹10 hostel room delivery, ₹300/mo luggage vacation storage, and broker-free student rooms in Kakadeo & Kalyanpur.",
+        content: "Affordable student luggage storage, verified PG rooms, student hostels, and tiffin/kitchen services near CSJMU Kanpur. Safe, verified, and budget-friendly.",
       },
       {
         name: "keywords",
-        content:
-          "tiffin services in kanpur, best tiffin in kakadeo, student room in kakadeo, hostel in kakadeo kanpur, luggage storage kanpur, daily mess kalyanpur, food delivery near allen kakadeo, single room pg kanpur, zero brokerage rooms kakadeo, student luggage storage IIT Kanpur, vacation stash kanpur, home cooked food CSJMU",
+        content: "student room kanpur, pg in kanpur, hostel near csjmu, student luggage storage, student kitchen tiffin kanpur, paying guest kanpur, student warehouse",
       },
       { name: "geo.region", content: "IN-UP" },
       { name: "geo.placename", content: "Kanpur, Kakadeo, Kalyanpur" },
@@ -134,11 +132,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "author", content: "StashSaarthi" },
       { property: "og:site_name", content: "StashSaarthi" },
       { property: "og:locale", content: "en_IN" },
-      { property: "og:title", content: "StashSaarthi" },
+      { property: "og:title", content: "StashSaarthi | Student Storage, PG Rooms, Hostels & Kitchen Services in Kanpur" },
       {
         property: "og:description",
-        content:
-          "Official website of StashSaarthi. Vacation luggage storage at ₹300/bag/mo, verified verified PG owner-hosted rooms, and homemade tiffins.",
+        content: "Affordable student luggage storage, verified PG rooms, student hostels, and tiffin/kitchen services near CSJMU Kanpur. Safe, verified, and budget-friendly.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://stashsaarthi-web.vercel.app" },
@@ -152,12 +149,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:creator", content: "@StashSaarthi" },
       {
         name: "twitter:title",
-        content: "StashSaarthi - Campus Micro-Storage & Zero-Brokerage Co-Living",
+        content: "StashSaarthi | Student Storage, PG Rooms, Hostels & Kitchen Services in Kanpur",
       },
       {
         name: "twitter:description",
-        content:
-          "Official website of StashSaarthi. Vacation luggage storage at ₹300/bag/mo, verified verified PG owner-hosted rooms, and homemade tiffins.",
+        content: "Affordable student luggage storage, verified PG rooms, student hostels, and tiffin/kitchen services near CSJMU Kanpur. Safe, verified, and budget-friendly.",
       },
       {
         name: "twitter:image",
@@ -190,6 +186,36 @@ function RootShell({ children }: { children: ReactNode }) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
+      {
+        "@type": "LocalBusiness",
+        "@id": "https://stashsaarthi-web.vercel.app/#localbusiness",
+        "name": "StashSaarthi",
+        "url": "https://stashsaarthi-web.vercel.app",
+        "areaServed": "Kanpur, Uttar Pradesh, India",
+        "makesOffer": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Student Luggage Storage"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "PG & Hostel Accommodation"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Student Kitchen & Meal Support"
+            }
+          }
+        ]
+      },
       {
         "@type": "WebSite",
         "@id": "https://stashsaarthi-web.vercel.app/#website",
