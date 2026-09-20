@@ -70,42 +70,45 @@ export function AadhaarKycModal({ isOpen, onClose, onSuccess }: AadhaarKycModalP
     setError('');
     const userId = auth.currentUser?.uid;
     if (!userId) {
-      setError('You must be logged in to upload KYC documents.');
+      const errorMsg = 'You must be logged in to upload KYC documents.';
+      setError(errorMsg);
+      toast.error(errorMsg);
       return;
     }
     
     if (!frontImage || !backImage) {
-      setError('Both front and back images are required.');
+      const errorMsg = 'Both front and back images are required.';
+      setError(errorMsg);
+      toast.error(errorMsg);
       return;
     }
 
-    setLoading(true);
-    console.log("STEP 1: Upload started, setting loading true.");
+    setLoading(true); // START LOADER
     try {
       const uploadToCloudinary = async (file: File) => {
         const formData = new FormData();
         formData.append('file', file);
         formData.append('upload_preset', 'stashsaarthi-web');
 
-        console.log("STEP 2: Sending fetch request to Cloudinary...");
         const response = await fetch('https://api.cloudinary.com/v1_1/nkof0cgp/image/upload', {
           method: 'POST',
           body: formData,
         });
-        console.log("STEP 3: Cloudinary response received:", response);
 
         if (!response.ok) {
-          throw new Error('Failed to upload image to Cloudinary');
+          const errData = await response.json().catch(() => null);
+          throw new Error(errData?.error?.message || 'Failed to upload image to Cloudinary');
         }
 
         const data = await response.json();
         return data.secure_url;
       };
 
+      // 1. Fetch request to Cloudinary & get secure_url
       const frontUrl = await uploadToCloudinary(frontImage);
       const backUrl = await uploadToCloudinary(backImage);
 
-      console.log("STEP 4: Saving secure_url to Firestore...");
+      // 2. await setDoc to Firestore
       const userDocRef = doc(db, 'users', userId);
       await setDoc(userDocRef, {
         kycStatus: 'pending',
@@ -113,31 +116,28 @@ export function AadhaarKycModal({ isOpen, onClose, onSuccess }: AadhaarKycModalP
         aadhaarBackUrl: backUrl,
         updatedAt: new Date().toISOString()
       }, { merge: true });
-      console.log("STEP 5: Firestore update complete!");
 
+      // If successful:
       setStep('success');
-      setLoading(false);
-      toast.success('Documents uploaded successfully!');
+      toast.success('KYC Uploaded Successfully!');
       
       // Delay closing to show success animation
       setTimeout(() => {
         onSuccess();
       }, 3000);
-      
-    } catch (err: any) {
-      console.error("CRASH AT SOME STEP:", err);
-      console.error("UPLOAD CRASH:", err);
-      const isBlocked = err.message?.includes('fetch') || err.message?.includes('Network');
+    } catch (error: any) {
+      console.error("UPLOAD FAILED:", error);
+      const isBlocked = error.message?.includes('fetch') || error.message?.includes('Network') || error.message?.includes('blocked');
       const errorMsg = isBlocked 
         ? "Network Request Blocked. Please disable your Ad-Blocker or use a different browser."
-        : (err.message || 'Cloudinary Upload Failed');
+        : (error.message || "Network blocked or upload failed. Please try again.");
         
+      // Explicitly show the error to the user so it doesn't fail silently
       setError(errorMsg);
       toast.error(errorMsg);
-      alert(errorMsg);
     } finally {
+      // THIS IS CRITICAL: It guarantees the spinner stops spinning no matter what.
       setLoading(false);
-      console.log("STEP 6: Loading state forcefully turned OFF.");
     }
   };
 

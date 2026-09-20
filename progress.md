@@ -1,3 +1,6 @@
+- [x] **[Auth & Infrastructure] Task 145: Firestore Long-Polling & KYC Infinite Loader Elimination — 2026-09-20**:
+  - Enforced `initializeFirestore` with `experimentalForceLongPolling: true` to bypass ad-blocker WebSocket blocking (`net::ERR_BLOCKED_BY_CLIENT`), and refactored KYC `uploadDocuments` into a strict `try...catch...finally` architecture guaranteeing `setLoading(false)` reset.
+
 - [x] **[Auth & Infrastructure] Task 144: Ad-Blocker Resilience & Error Elimination for Firebase & PhoneAuth — 2026-09-20**:
   - Disabled Firebase Analytics on localhost/preview to stop `net::ERR_BLOCKED_BY_CLIENT` spam; hardened `PhoneAuth.tsx` with error code mapping and safe reCAPTCHA reset on ad-blocker or network issues.
 
