@@ -28,11 +28,11 @@ export const coLivingSpacesSchema = [
       unitCode: "FTK",
     },
     amenityFeature: [
-      { "@type": "LocationFeatureSpecification", name: "Zero Brokerage", value: true },
-      { "@type": "LocationFeatureSpecification", name: "Verified Verified PG Owner Host", value: true },
-      { "@type": "LocationFeatureSpecification", name: "24x7 Water & Power Backup", value: true },
-      { "@type": "LocationFeatureSpecification", name: "Proximity to IIT Kanpur Gate 1", value: true },
-      { "@type": "LocationFeatureSpecification", name: "High-Speed Fiber WiFi", value: true },
+      "Zero Brokerage",
+      "Verified Verified PG Owner Host",
+      "24x7 Water & Power Backup",
+      "Proximity to IIT Kanpur Gate 1",
+      "High-Speed Fiber WiFi",
     ],
     offers: {
       "@type": "Offer",
@@ -47,13 +47,6 @@ export const coLivingSpacesSchema = [
       availability: "https://schema.org/InStock",
       validFrom: "2026-01-01",
       priceValidUntil: "2027-12-31",
-    },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.5",
-      reviewCount: "38",
-      bestRating: "5",
-      worstRating: "1",
     },
   },
   {
@@ -85,10 +78,10 @@ export const coLivingSpacesSchema = [
       unitCode: "FTK",
     },
     amenityFeature: [
-      { "@type": "LocationFeatureSpecification", name: "Zero Brokerage", value: true },
-      { "@type": "LocationFeatureSpecification", name: "Walking Distance to Coaching Centers", value: true },
-      { "@type": "LocationFeatureSpecification", name: "Home-Cooked Tiffin Service Available", value: true },
-      { "@type": "LocationFeatureSpecification", name: "Verified Host Safety Audit", value: true },
+      "Zero Brokerage",
+      "Walking Distance to Coaching Centers",
+      "Home-Cooked Tiffin Service Available",
+      "Verified Host Safety Audit",
     ],
     offers: {
       "@type": "Offer",
@@ -103,13 +96,6 @@ export const coLivingSpacesSchema = [
       availability: "https://schema.org/InStock",
       validFrom: "2026-01-01",
       priceValidUntil: "2027-12-31",
-    },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "52",
-      bestRating: "5",
-      worstRating: "1",
     },
   },
   {
@@ -141,9 +127,9 @@ export const coLivingSpacesSchema = [
       unitCode: "FTK",
     },
     amenityFeature: [
-      { "@type": "LocationFeatureSpecification", name: "Fully Furnished", value: true },
-      { "@type": "LocationFeatureSpecification", name: "Zero Brokerage", value: true },
-      { "@type": "LocationFeatureSpecification", name: "Metro & Transit Access", value: true },
+      "Fully Furnished",
+      "Zero Brokerage",
+      "Metro & Transit Access",
     ],
     offers: {
       "@type": "Offer",
@@ -158,13 +144,6 @@ export const coLivingSpacesSchema = [
       availability: "https://schema.org/InStock",
       validFrom: "2026-01-01",
       priceValidUntil: "2027-12-31",
-    },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      reviewCount: "29",
-      bestRating: "5",
-      worstRating: "1",
     },
   },
   {
@@ -196,9 +175,9 @@ export const coLivingSpacesSchema = [
       unitCode: "FTK",
     },
     amenityFeature: [
-      { "@type": "LocationFeatureSpecification", name: "Super-Fast Fiber Internet", value: true },
-      { "@type": "LocationFeatureSpecification", name: "Campus Shuttle Nearby", value: true },
-      { "@type": "LocationFeatureSpecification", name: "Sunlit Corner Layout", value: true },
+      "Super-Fast Fiber Internet",
+      "Campus Shuttle Nearby",
+      "Sunlit Corner Layout",
     ],
     offers: {
       "@type": "Offer",
@@ -213,13 +192,6 @@ export const coLivingSpacesSchema = [
       availability: "https://schema.org/InStock",
       validFrom: "2026-01-01",
       priceValidUntil: "2027-12-31",
-    },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.3",
-      reviewCount: "19",
-      bestRating: "5",
-      worstRating: "1",
     },
   },
 ];
