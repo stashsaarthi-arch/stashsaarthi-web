@@ -18,6 +18,7 @@ import { Route as TermsRouteImport } from './routes/terms'
 import { Route as TiffinServicesNearAllenRouteImport } from './routes/tiffin-services-near-allen'
 import { Route as TiffinServicesNearMotionRouteImport } from './routes/tiffin-services-near-motion'
 import { Route as TiffinServicesNearPhysicsWallahRouteImport } from './routes/tiffin-services-near-physics-wallah'
+import { Route as ApiUpdateKycRouteImport } from './routes/api.updateKyc'
 import { Route as HostIndexRouteImport } from './routes/host.index'
 import { Route as HostDashboardRouteImport } from './routes/host.dashboard'
 import { Route as HostLoginRouteImport } from './routes/host.login'
@@ -69,6 +70,11 @@ const TiffinServicesNearPhysicsWallahRoute =
     path: '/tiffin-services-near-physics-wallah',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiUpdateKycRoute = ApiUpdateKycRouteImport.update({
+  id: '/api/updateKyc',
+  path: '/api/updateKyc',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HostIndexRoute = HostIndexRouteImport.update({
   id: '/host/',
   path: '/host/',
@@ -95,6 +101,7 @@ export interface FileRoutesByFullPath {
   '/tiffin-services-near-allen': typeof TiffinServicesNearAllenRoute
   '/tiffin-services-near-motion': typeof TiffinServicesNearMotionRoute
   '/tiffin-services-near-physics-wallah': typeof TiffinServicesNearPhysicsWallahRoute
+  '/api/updateKyc': typeof ApiUpdateKycRoute
   '/host/dashboard': typeof HostDashboardRoute
   '/host/login': typeof HostLoginRoute
   '/host/': typeof HostIndexRoute
@@ -109,6 +116,7 @@ export interface FileRoutesByTo {
   '/tiffin-services-near-allen': typeof TiffinServicesNearAllenRoute
   '/tiffin-services-near-motion': typeof TiffinServicesNearMotionRoute
   '/tiffin-services-near-physics-wallah': typeof TiffinServicesNearPhysicsWallahRoute
+  '/api/updateKyc': typeof ApiUpdateKycRoute
   '/host/dashboard': typeof HostDashboardRoute
   '/host/login': typeof HostLoginRoute
   '/host': typeof HostIndexRoute
@@ -124,6 +132,7 @@ export interface FileRoutesById {
   '/tiffin-services-near-allen': typeof TiffinServicesNearAllenRoute
   '/tiffin-services-near-motion': typeof TiffinServicesNearMotionRoute
   '/tiffin-services-near-physics-wallah': typeof TiffinServicesNearPhysicsWallahRoute
+  '/api/updateKyc': typeof ApiUpdateKycRoute
   '/host/dashboard': typeof HostDashboardRoute
   '/host/login': typeof HostLoginRoute
   '/host/': typeof HostIndexRoute
@@ -140,6 +149,7 @@ export interface FileRouteTypes {
     | '/tiffin-services-near-allen'
     | '/tiffin-services-near-motion'
     | '/tiffin-services-near-physics-wallah'
+    | '/api/updateKyc'
     | '/host/dashboard'
     | '/host/login'
     | '/host/'
@@ -154,6 +164,7 @@ export interface FileRouteTypes {
     | '/tiffin-services-near-allen'
     | '/tiffin-services-near-motion'
     | '/tiffin-services-near-physics-wallah'
+    | '/api/updateKyc'
     | '/host/dashboard'
     | '/host/login'
     | '/host'
@@ -168,6 +179,7 @@ export interface FileRouteTypes {
     | '/tiffin-services-near-allen'
     | '/tiffin-services-near-motion'
     | '/tiffin-services-near-physics-wallah'
+    | '/api/updateKyc'
     | '/host/dashboard'
     | '/host/login'
     | '/host/'
@@ -183,6 +195,7 @@ export interface RootRouteChildren {
   TiffinServicesNearAllenRoute: typeof TiffinServicesNearAllenRoute
   TiffinServicesNearMotionRoute: typeof TiffinServicesNearMotionRoute
   TiffinServicesNearPhysicsWallahRoute: typeof TiffinServicesNearPhysicsWallahRoute
+  ApiUpdateKycRoute: typeof ApiUpdateKycRoute
   HostDashboardRoute: typeof HostDashboardRoute
   HostLoginRoute: typeof HostLoginRoute
   HostIndexRoute: typeof HostIndexRoute
@@ -253,6 +266,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TiffinServicesNearPhysicsWallahRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/updateKyc': {
+      id: '/api/updateKyc'
+      path: '/api/updateKyc'
+      fullPath: '/api/updateKyc'
+      preLoaderRoute: typeof ApiUpdateKycRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/host/': {
       id: '/host/'
       path: '/host'
@@ -287,6 +307,7 @@ const rootRouteChildren: RootRouteChildren = {
   TiffinServicesNearAllenRoute: TiffinServicesNearAllenRoute,
   TiffinServicesNearMotionRoute: TiffinServicesNearMotionRoute,
   TiffinServicesNearPhysicsWallahRoute: TiffinServicesNearPhysicsWallahRoute,
+  ApiUpdateKycRoute: ApiUpdateKycRoute,
   HostDashboardRoute: HostDashboardRoute,
   HostLoginRoute: HostLoginRoute,
   HostIndexRoute: HostIndexRoute,
@@ -294,13 +315,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

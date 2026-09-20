@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
-import { UploadCloud, CheckCircle2, X, Loader2, Image as ImageIcon } from 'lucide-react';
-import { auth, db } from '@/lib/firebase';
-import { doc, setDoc } from 'firebase/firestore';
+import { UploadCloud, CheckCircle2, X, Loader2, Image as ImageIcon, ShieldAlert } from 'lucide-react';
+import { auth } from '@/lib/firebase';
 import { toast } from 'sonner';
 
 interface AadhaarKycModalProps {
@@ -11,7 +10,7 @@ interface AadhaarKycModalProps {
 }
 
 export function AadhaarKycModal({ isOpen, onClose, onSuccess }: AadhaarKycModalProps) {
-  const [step, setStep] = useState<'front' | 'back' | 'success'>('front');
+  const [step, setStep] = useState<'front' | 'back' | 'success' | 'shield-warning'>('front');
   const [frontImage, setFrontImage] = useState<File | null>(null);
   const [backImage, setBackImage] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
@@ -104,18 +103,33 @@ export function AadhaarKycModal({ isOpen, onClose, onSuccess }: AadhaarKycModalP
         return data.secure_url;
       };
 
-      // 1. Fetch request to Cloudinary & get secure_url
-      const frontUrl = await uploadToCloudinary(frontImage);
-      const backUrl = await uploadToCloudinary(backImage);
+      // Wrap the entire async upload and db sync process
+      const uploadAndSync = async () => {
+        // 1. Fetch request to Cloudinary & get secure_url
+        const frontUrl = await uploadToCloudinary(frontImage);
+        const backUrl = await uploadToCloudinary(backImage);
 
-      // 2. await setDoc to Firestore
-      const userDocRef = doc(db, 'users', userId);
-      await setDoc(userDocRef, {
-        kycStatus: 'pending',
-        aadhaarFrontUrl: frontUrl,
-        aadhaarBackUrl: backUrl,
-        updatedAt: new Date().toISOString()
-      }, { merge: true });
+        // 2. await API Route instead of client-side Firestore
+        const apiResponse = await fetch('/api/updateKyc', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ userId, frontUrl, backUrl })
+        });
+
+        if (!apiResponse.ok) {
+          throw new Error("Network Request Blocked");
+        }
+      };
+
+      // Strict 10-second kill-switch timeout promise
+      const timeoutPromise = new Promise<never>((_, reject) => {
+        setTimeout(() => {
+          reject(new Error("Request Timeout"));
+        }, 10000);
+      });
+
+      // Execute race between the actual work and the 10-second timeout
+      await Promise.race([uploadAndSync(), timeoutPromise]);
 
       // If successful:
       setStep('success');
@@ -127,14 +141,16 @@ export function AadhaarKycModal({ isOpen, onClose, onSuccess }: AadhaarKycModalP
       }, 3000);
     } catch (error: any) {
       console.error("UPLOAD FAILED:", error);
-      const isBlocked = error.message?.includes('fetch') || error.message?.includes('Network') || error.message?.includes('blocked');
-      const errorMsg = isBlocked 
-        ? "Network Request Blocked. Please disable your Ad-Blocker or use a different browser."
-        : (error.message || "Network blocked or upload failed. Please try again.");
-        
-      // Explicitly show the error to the user so it doesn't fail silently
-      setError(errorMsg);
-      toast.error(errorMsg);
+      
+      const isBlocked = error.message === "Request Timeout" || error.message === "Network Request Blocked" || error.message?.includes('fetch') || error.message?.includes('Network') || error.message?.includes('blocked');
+      
+      if (isBlocked) {
+        setStep('shield-warning');
+      } else {
+        const errorMsg = error.message || "Network blocked or upload failed. Please try again.";
+        setError(errorMsg);
+        toast.error(errorMsg);
+      }
     } finally {
       // THIS IS CRITICAL: It guarantees the spinner stops spinning no matter what.
       setLoading(false);
@@ -147,13 +163,39 @@ export function AadhaarKycModal({ isOpen, onClose, onSuccess }: AadhaarKycModalP
       <div className="bg-[#111827]/80 backdrop-blur-xl border border-white/10 rounded-[2rem] shadow-2xl p-6 md:p-8 max-w-lg w-full relative overflow-hidden transition-all ease-[cubic-bezier(0.23,1,0.32,1)] duration-500">
         
         {/* Close Button */}
-        {step !== 'success' && !loading && (
+        {step !== 'success' && step !== 'shield-warning' && !loading && (
           <button 
             onClick={onClose}
             className="absolute top-4 right-4 p-2 bg-white/5 hover:bg-white/10 rounded-full text-slate-400 hover:text-white transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
+        )}
+
+        {/* Shield Warning Liquid UI State */}
+        {step === 'shield-warning' && (
+          <div className="flex flex-col items-center justify-center text-center py-8">
+            <div className="w-20 h-20 bg-red-500/10 rounded-full flex items-center justify-center mb-6 border border-red-500/30 relative overflow-hidden">
+              <div className="absolute inset-0 bg-red-500/20 animate-pulse rounded-full" />
+              <ShieldAlert className="w-10 h-10 text-red-400 relative z-10" />
+            </div>
+            <h2 className="text-2xl font-bold text-white tracking-tight mb-3">🛡️ Your Privacy Shield is Too Strong!</h2>
+            <p className="text-slate-300 mb-8 max-w-[280px] leading-relaxed">
+              We noticed your Ad-Blocker or Brave Shield is blocking our secure database connection. We respect your privacy, but to complete your verified Host profile, please pause the shield for just 1 minute and click Upload again.
+            </p>
+            <button 
+              onClick={() => { setStep('front'); setError(''); setPreview(null); }}
+              className="w-full py-4 bg-red-500 hover:bg-red-400 text-white font-bold rounded-full transition-all flex items-center justify-center shadow-[0_0_20px_rgba(239,68,68,0.3)] active:scale-95"
+            >
+              I've paused it, Let's Try Again
+            </button>
+            <button 
+              onClick={onClose}
+              className="mt-4 py-2 px-4 text-slate-400 hover:text-white transition-colors"
+            >
+              Cancel
+            </button>
+          </div>
         )}
 
         {/* Success State */}
@@ -168,7 +210,7 @@ export function AadhaarKycModal({ isOpen, onClose, onSuccess }: AadhaarKycModalP
         )}
 
         {/* Upload State */}
-        {step !== 'success' && (
+        {step !== 'success' && step !== 'shield-warning' && (
           <>
             <div className="mb-6">
               <h2 className="text-2xl font-bold text-white tracking-tight mb-2">Verify Aadhaar</h2>
