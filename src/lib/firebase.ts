@@ -4,13 +4,13 @@ import { getAnalytics, isSupported } from "firebase/analytics";
 import { getFirestore, initializeFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCLUfizbJpCLzIBJIjEkhnSkUgI7Vv_AOI",
-  authDomain: "stashsaarthi-web.firebaseapp.com",
-  projectId: "stashsaarthi-web",
-  storageBucket: "stashsaarthi-web.firebasestorage.app",
-  messagingSenderId: "923940918736",
-  appId: "1:923940918736:web:12eac7b57c133be8b6d5d5",
-  measurementId: "G-MJ8SQ3RNTE"
+  apiKey: import.meta.env["VITE_FIREBASE_API_KEY"] as string,
+  authDomain: import.meta.env["VITE_FIREBASE_AUTH_DOMAIN"] as string,
+  projectId: import.meta.env["VITE_FIREBASE_PROJECT_ID"] as string,
+  storageBucket: import.meta.env["VITE_FIREBASE_STORAGE_BUCKET"] as string,
+  messagingSenderId: import.meta.env["VITE_FIREBASE_MESSAGING_SENDER_ID"] as string,
+  appId: import.meta.env["VITE_FIREBASE_APP_ID"] as string,
+  measurementId: import.meta.env["VITE_FIREBASE_MEASUREMENT_ID"] as string
 };
 
 // Initialize Firebase only if it hasn't been initialized already

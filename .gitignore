@@ -37,7 +37,9 @@ dist-ssr
 *.sw?
 
 .vercel
-.env*
+.env
+.env.local
+.env.*
 
 # Gemini Web2API local files
 gemini_web2api.py

@@ -8,6 +8,7 @@ import type { OpenBooking } from "./types";
 import { useState, useEffect } from "react";
 import { usePersona } from "@/context/PersonaContext";
 import { AnimatePresence, motion } from "motion/react";
+import { Button } from "@/components/ui/button";
 
 type ServiceId = "kitchen" | "stash" | "rooms" | "connect";
 

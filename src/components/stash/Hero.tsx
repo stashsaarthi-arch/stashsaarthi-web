@@ -200,7 +200,7 @@ export const Hero = memo(function Hero({
           </div>
         </AnimatedContent>
 
-        <Card3D depth={25} className="mt-4 sm:mt-5">
+        <Card3D className="mt-4 sm:mt-5">
           <div className="glass grid grid-cols-2 gap-px overflow-hidden rounded-xl sm:rounded-2xl md:grid-cols-4 border border-white/[0.08] shadow-2xl">
             {STATS.map((s, i) => {
               const Icon = ICONS[i] || ShieldCheck;

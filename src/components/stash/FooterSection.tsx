@@ -577,14 +577,14 @@ export const FooterSection = memo(function FooterSection() {
                   <ul className="space-y-1.5 text-xs text-muted-foreground">
                     {COMPANY.map((l) => (
                       <li key={l.label}>
-                        <button type="button" onClick={() => setDoc(l.doc)} className="hover:text-cyan text-left block py-0.5">
+                        <button type="button" onClick={() => { if (l.doc) setDoc(l.doc); }} className="hover:text-cyan text-left block py-0.5">
                           {l.label}
                         </button>
                       </li>
                     ))}
                     {LEGAL.map((l) => (
                       <li key={l.label}>
-                        <button type="button" onClick={() => setDoc(l.doc)} className="hover:text-cyan text-left block py-0.5">
+                        <button type="button" onClick={() => { if (l.doc) setDoc(l.doc); }} className="hover:text-cyan text-left block py-0.5">
                           {l.label}
                         </button>
                       </li>

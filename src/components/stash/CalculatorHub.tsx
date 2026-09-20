@@ -125,9 +125,9 @@ export const CalculatorHub = memo(function CalculatorHub({ onBook }: { onBook: O
             onBook(p);
           }} />
         ) : (
-          <HostSimulator onBook={(p) => {
+          <HostSimulator onBook={() => {
             setIsDrawerOpen(false);
-            onBook(p);
+            onBook({ service: "stash" });
           }} />
         )}
       </div>

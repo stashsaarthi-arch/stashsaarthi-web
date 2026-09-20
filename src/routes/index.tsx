@@ -319,7 +319,7 @@ function Index() {
         </ErrorBoundary>
       </Suspense>
       <ErrorBoundary sectionName="Mobile Sticky CTA Widget" compact>
-        <MobileStickyCTA />
+        <MobileStickyCTA onBook={open} />
       </ErrorBoundary>
       <ErrorBoundary sectionName="WhatsApp Floating Action Button" compact>
         <WhatsAppButton onBook={open} />

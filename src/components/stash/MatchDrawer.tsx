@@ -32,9 +32,9 @@ export function MatchDrawer({
   onOpenChange: (v: boolean) => void;
   city?: string;
   presetRole?: "student" | "senior";
-  seniorName?: string;
-  seniorDetail?: string;
-  seniorOffer?: string;
+  seniorName?: string | undefined;
+  seniorDetail?: string | undefined;
+  seniorOffer?: string | undefined;
   compatibilityScore?: number;
 }) {
   const { language } = useLanguage();

@@ -456,9 +456,9 @@ export function Connect(_props: { onBook: OpenBooking }) {
         open={drawer}
         onOpenChange={setDrawer}
         city={isHi ? CITIES_HI[city] : city}
-        seniorName={match.senior.name}
-        seniorDetail={isHi && match.senior.detail_hi ? match.senior.detail_hi : match.senior.detail}
-        seniorOffer={isHi && match.senior.offers_hi ? match.senior.offers_hi[0] : match.senior.offers[0]}
+        seniorName={match.host.name}
+        seniorDetail={isHi && match.host.detail_hi ? match.host.detail_hi : match.host.detail}
+        seniorOffer={isHi && match.host.offers_hi ? match.host.offers_hi[0] : match.host.offers[0]}
         compatibilityScore={activeTab === "quiz" ? quizScore : match.score}
       />
       <KarmaPointsModal open={karmaModal} onOpenChange={setKarmaModal} />
