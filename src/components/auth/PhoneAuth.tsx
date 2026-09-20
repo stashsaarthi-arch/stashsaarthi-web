@@ -19,10 +19,17 @@ export function PhoneAuth() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [confirmationResult, setConfirmationResult] = useState<ConfirmationResult | null>(null);
-
   const otpRefs = useRef<(HTMLInputElement | null)[]>([]);
+  
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isMounted) return;
+
     if (typeof window !== "undefined" && !window.recaptchaVerifier) {
       window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
         size: 'invisible'
@@ -40,7 +47,9 @@ export function PhoneAuth() {
         }
       }
     };
-  }, []);
+  }, [isMounted]);
+
+  if (!isMounted) return null;
 
   const handleSendOtp = async (e: React.FormEvent) => {
     e.preventDefault();

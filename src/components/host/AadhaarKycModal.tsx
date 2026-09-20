@@ -19,6 +19,12 @@ export function AadhaarKycModal({ isOpen, onClose, onSuccess }: AadhaarKycModalP
   
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  const [isMounted, setIsMounted] = React.useState(false);
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) return null;
   if (!isOpen) return null;
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -84,48 +90,67 @@ export function AadhaarKycModal({ isOpen, onClose, onSuccess }: AadhaarKycModalP
 
     setLoading(true); // START LOADER
     try {
-      const uploadToCloudinary = async (file: File) => {
-        const formData = new FormData();
-        formData.append('file', file);
-        formData.append('upload_preset', 'stashsaarthi-web');
+      const convertToBase64 = async (file: File): Promise<string> => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = (event) => {
+            const img = new Image();
+            img.src = event.target?.result as string;
+            img.onload = () => {
+              const canvas = document.createElement('canvas');
+              const MAX_WIDTH = 800;
+              let width = img.width;
+              let height = img.height;
 
-        const response = await fetch('https://api.cloudinary.com/v1_1/nkof0cgp/image/upload', {
-          method: 'POST',
-          body: formData,
+              if (width > MAX_WIDTH) {
+                height = Math.round((height * MAX_WIDTH) / width);
+                width = MAX_WIDTH;
+              }
+
+              canvas.width = width;
+              canvas.height = height;
+
+              const ctx = canvas.getContext('2d');
+              if (!ctx) {
+                reject(new Error("Canvas context failed"));
+                return;
+              }
+              
+              ctx.drawImage(img, 0, 0, width, height);
+              const dataUrl = canvas.toDataURL('image/jpeg', 0.5);
+              resolve(dataUrl);
+            };
+            img.onerror = (err) => reject(err);
+          };
+          reader.onerror = (err) => reject(err);
         });
-
-        if (!response.ok) {
-          const errData = await response.json().catch(() => null);
-          throw new Error(errData?.error?.message || 'Failed to upload image to Cloudinary');
-        }
-
-        const data = await response.json();
-        return data.secure_url;
       };
 
       // Wrap the entire async upload and db sync process
       const uploadAndSync = async () => {
-        // 1. Fetch request to Cloudinary & get secure_url
-        const frontUrl = await uploadToCloudinary(frontImage);
-        const backUrl = await uploadToCloudinary(backImage);
+        // 1. Convert to Base64 locally
+        const frontBase64 = await convertToBase64(frontImage);
+        const backBase64 = await convertToBase64(backImage);
 
-        // 2. await API Route instead of client-side Firestore
+        // 2. await API Route to do both Cloudinary upload & Firestore sync atomically
         const apiResponse = await fetch('/api/updateKyc', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ userId, frontUrl, backUrl })
+          body: JSON.stringify({ userId, frontBase64, backBase64 })
         });
 
         if (!apiResponse.ok) {
-          throw new Error("Network Request Blocked");
+          const errData = await apiResponse.json().catch(() => null);
+          throw new Error(errData?.error || "Backend Upload Failed");
         }
       };
 
-      // Strict 10-second kill-switch timeout promise
+      // Strict 25-second kill-switch timeout promise for heavy backend uploads
       const timeoutPromise = new Promise<never>((_, reject) => {
         setTimeout(() => {
           reject(new Error("Request Timeout"));
-        }, 10000);
+        }, 25000);
       });
 
       // Execute race between the actual work and the 10-second timeout

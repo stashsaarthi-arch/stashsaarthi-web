@@ -2,6 +2,13 @@ import React from 'react';
 import { PhoneAuth } from '@/components/auth/PhoneAuth';
 
 export function HostLogin() {
+  const [isMounted, setIsMounted] = React.useState(false);
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) return null;
+
   return (
     <div className="min-h-screen bg-[#0A0D0F] text-foreground flex flex-col items-center justify-center p-4">
       <div className="mb-8 text-center relative z-10">
