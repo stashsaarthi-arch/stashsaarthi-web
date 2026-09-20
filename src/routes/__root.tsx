@@ -432,7 +432,6 @@ function RootShell({ children }: { children: ReactNode }) {
         ],
       },
       coLivingItemListSchema,
-      ...coLivingSpacesSchema,
     ],
   };
 

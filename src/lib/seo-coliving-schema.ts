@@ -1,6 +1,6 @@
 export const coLivingSpacesSchema = [
   {
-    "@type": "Accommodation",
+    "@type": "LodgingBusiness",
     "@id": "https://stashsaarthi-web.vercel.app/#coliving-kalyanpur-iitk",
     name: "Zero-Brokerage Student Room - Kalyanpur (IIT Kanpur Belt)",
     description:
@@ -57,7 +57,7 @@ export const coLivingSpacesSchema = [
     },
   },
   {
-    "@type": "Accommodation",
+    "@type": "LodgingBusiness",
     "@id": "https://stashsaarthi-web.vercel.app/#coliving-kakadeo-hub",
     name: "Zero-Brokerage Student Room - Kakadeo Coaching Hub",
     description:
@@ -113,7 +113,7 @@ export const coLivingSpacesSchema = [
     },
   },
   {
-    "@type": "Accommodation",
+    "@type": "LodgingBusiness",
     "@id": "https://stashsaarthi-web.vercel.app/#coliving-gomtinagar-lucknow",
     name: "Furnished Verified PG Owner-Hosted Co-Living Room - Gomti Nagar Lucknow",
     description:
@@ -168,7 +168,7 @@ export const coLivingSpacesSchema = [
     },
   },
   {
-    "@type": "Accommodation",
+    "@type": "LodgingBusiness",
     "@id": "https://stashsaarthi-web.vercel.app/#coliving-kothrud-pune",
     name: "Sunlit Student Corner Room - Kothrud Pune",
     description:
