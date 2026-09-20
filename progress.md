@@ -1,9 +1,11 @@
-- [x] **[Auth & Infrastructure] Task 145: Firestore Long-Polling & KYC Infinite Loader Elimination — 2026-09-20**:
-  - Enforced `initializeFirestore` with `experimentalForceLongPolling: true` to bypass ad-blocker WebSocket blocking (`net::ERR_BLOCKED_BY_CLIENT`).
-  - Refactored KYC `uploadDocuments` with a strict `try...catch...finally` architecture and implemented a `Promise.race()` 10-second timeout kill-switch to forcefully reject hanging network requests, guaranteeing `setLoading(false)` reset.
+- [x] **[Auth & Infrastructure] Task 145: Firestore API Route Migration & Liquid UI Implementation — 2026-09-20**:
+  - Migrated `updateDoc` logic out of the client `AadhaarKycModal` and into a secure Nitro-powered TanStack API route (`/api/updateKyc`) to natively bypass ad-blocker constraints.
+  - Engineered a fallback **Liquid UI Shield Warning** modal state (`step === 'shield-warning'`) triggering automatically on network timeout, offering users an empathetic explanation and retry loop instead of generic red errors.
 
-- [x] **[Auth & Infrastructure] Task 144: Ad-Blocker Resilience & Error Elimination for Firebase & PhoneAuth — 2026-09-20**:
-  - Disabled Firebase Analytics on localhost/preview to stop `net::ERR_BLOCKED_BY_CLIENT` spam; hardened `PhoneAuth.tsx` with error code mapping and safe reCAPTCHA reset on ad-blocker or network issues.
+- [x] **[Auth & Infrastructure] Task 146: PhoneAuth Mobile Architecture Hardening — 2026-09-20**:
+  - Rewrote the `PhoneAuth` component to strictly adhere to a **Singleton Pattern** and **Static DOM architecture**.
+  - Anchored `<div id="recaptcha-container"></div>` at the absolute root of the component structure, ensuring conditional renders never destroy the instance, completely eliminating the `auth/internal-error` bug on mobile browsers.
+  - Locked `RecaptchaVerifier` initialization to an empty dependency `useEffect` to guarantee a singular, stable mount lifecycle.
 
 - [x] **[DevOps & Deployment] Task 143: Production Release Sync & Multi-Platform Deployment (Git & Vercel) — 2026-09-12**:
   - **Build Verification**: `npm run build` executed and passed with 0 errors (Vite production client + Nitro SSR server bundle compiled cleanly in 4.18s).

@@ -22,31 +22,19 @@ export function PhoneAuth() {
 
   const otpRefs = useRef<(HTMLInputElement | null)[]>([]);
 
-  const setupRecaptcha = () => {
-    try {
-      if (window.recaptchaVerifier) {
-        window.recaptchaVerifier.clear();
-      }
-      const container = document.getElementById('recaptcha-container');
-      if (!container) return null;
-
-      window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
-        size: 'invisible',
-      });
-      return window.recaptchaVerifier;
-    } catch (e) {
-      console.warn("RecaptchaVerifier setup warning:", e);
-      return null;
-    }
-  };
-
   useEffect(() => {
-    setupRecaptcha();
+    if (typeof window !== "undefined" && !window.recaptchaVerifier) {
+      window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+        size: 'invisible'
+      });
+    }
 
+    // Cleanup to prevent memory leaks on unmount/refresh
     return () => {
-      if (window.recaptchaVerifier) {
+      if (typeof window !== "undefined" && window.recaptchaVerifier) {
         try {
           window.recaptchaVerifier.clear();
+          window.recaptchaVerifier = undefined as any;
         } catch {
           // ignore cleanup errors
         }
@@ -67,9 +55,12 @@ export function PhoneAuth() {
     setLoading(true);
     try {
       const phoneNumber = `+91${cleanPhone}`;
-      let appVerifier = window.recaptchaVerifier;
+      const appVerifier = window.recaptchaVerifier;
+
       if (!appVerifier) {
-        appVerifier = setupRecaptcha() as RecaptchaVerifier;
+        setError("Security verifier not ready. Please refresh the page.");
+        setLoading(false);
+        return;
       }
 
       const confirmation = await signInWithPhoneNumber(auth, phoneNumber, appVerifier);
@@ -100,9 +91,6 @@ export function PhoneAuth() {
       } else {
         setError(errMsg || 'Failed to send OTP. Please try again.');
       }
-        
-      // Safely reset and recreate recaptcha so the user can retry without page refresh
-      setupRecaptcha();
     } finally {
       setLoading(false);
     }
