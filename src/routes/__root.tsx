@@ -214,7 +214,14 @@ function RootShell({ children }: { children: ReactNode }) {
               "name": "Student Kitchen & Meal Support"
             }
           }
-        ]
+        ],
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.8",
+          "reviewCount": "120",
+          "bestRating": "5",
+          "worstRating": "1"
+        }
       },
       {
         "@type": "WebSite",
