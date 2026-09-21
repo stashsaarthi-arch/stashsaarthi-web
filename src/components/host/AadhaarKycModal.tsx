@@ -26,6 +26,19 @@ export function AadhaarKycModal({ isOpen, onClose, onSuccess }: AadhaarKycModalP
 
   if (!mounted || !isOpen) return null;
 
+  const updatePreview = (file: File | null) => {
+    setPreview((prev) => {
+      if (prev) URL.revokeObjectURL(prev);
+      return file ? URL.createObjectURL(file) : null;
+    });
+  };
+
+  useEffect(() => {
+    return () => {
+      if (preview) URL.revokeObjectURL(preview);
+    };
+  }, [preview]);
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -34,7 +47,7 @@ export function AadhaarKycModal({ isOpen, onClose, onSuccess }: AadhaarKycModalP
       } else if (step === 'back') {
         setBackImage(file);
       }
-      setPreview(URL.createObjectURL(file));
+      updatePreview(file);
     }
   };
 
@@ -47,14 +60,14 @@ export function AadhaarKycModal({ isOpen, onClose, onSuccess }: AadhaarKycModalP
       } else if (step === 'back') {
         setBackImage(file);
       }
-      setPreview(URL.createObjectURL(file));
+      updatePreview(file);
     }
   };
 
   const clearPreview = () => {
     if (step === 'front') setFrontImage(null);
     else setBackImage(null);
-    setPreview(null);
+    updatePreview(null);
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
@@ -63,7 +76,7 @@ export function AadhaarKycModal({ isOpen, onClose, onSuccess }: AadhaarKycModalP
   const handleNext = async () => {
     if (step === 'front' && frontImage) {
       setStep('back');
-      setPreview(null);
+      updatePreview(null);
       if (fileInputRef.current) fileInputRef.current.value = '';
     } else if (step === 'back' && backImage) {
       await uploadDocuments();
@@ -72,7 +85,14 @@ export function AadhaarKycModal({ isOpen, onClose, onSuccess }: AadhaarKycModalP
 
   const uploadDocuments = async () => {
     setError('');
-    const userId = auth.currentUser?.uid || (typeof window !== 'undefined' ? localStorage.getItem('stashsaarthi_host_uid') : null) || 'host-verified-user';
+    
+    const currentUser = auth.currentUser;
+    if (!currentUser) {
+      const errorMsg = 'Authentication required. Please log in again.';
+      setError(errorMsg);
+      toast.error(errorMsg);
+      return;
+    }
     
     if (!frontImage || !backImage) {
       const errorMsg = 'Both front and back images are required.';
@@ -150,12 +170,16 @@ export function AadhaarKycModal({ isOpen, onClose, onSuccess }: AadhaarKycModalP
 
       // 2. Efficient multipart/form-data upload with explicit 60-second timeout
       const formData = new FormData();
-      formData.append('userId', userId);
       formData.append('frontImage', frontBlob, 'front.jpg');
       formData.append('backImage', backBlob, 'back.jpg');
 
+      const idToken = await currentUser.getIdToken();
+
       const apiResponse = await fetch('/api/updateKyc', {
         method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${idToken}`
+        },
         body: formData,
         signal: AbortSignal.timeout(60000)
       });
@@ -223,7 +247,7 @@ export function AadhaarKycModal({ isOpen, onClose, onSuccess }: AadhaarKycModalP
               We noticed your Ad-Blocker or Brave Shield is blocking our secure database connection. We respect your privacy, but to complete your verified Host profile, please pause the shield for just 1 minute and click Upload again.
             </p>
             <button 
-              onClick={() => { setStep('front'); setError(''); setPreview(null); }}
+              onClick={() => { setStep('front'); setError(''); updatePreview(frontImage); }}
               className="w-full py-4 bg-red-500 hover:bg-red-400 text-white font-bold rounded-full transition-all flex items-center justify-center shadow-[0_0_20px_rgba(239,68,68,0.3)] active:scale-95"
             >
               I've paused it, Let's Try Again
@@ -314,7 +338,7 @@ export function AadhaarKycModal({ isOpen, onClose, onSuccess }: AadhaarKycModalP
               {step === 'back' && !loading && (
                 <button 
                   type="button"
-                  onClick={() => { setStep('front'); setPreview(frontImage ? URL.createObjectURL(frontImage) : null); }}
+                  onClick={() => { setStep('front'); updatePreview(frontImage); }}
                   className="px-6 py-4 bg-white/10 hover:bg-white/15 text-white font-medium rounded-full transition-colors w-1/3"
                 >
                   Back
