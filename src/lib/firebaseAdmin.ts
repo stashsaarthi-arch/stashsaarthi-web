@@ -1,8 +1,13 @@
-import { getApps, initializeApp, cert } from 'firebase-admin/app';
-import { getAuth } from 'firebase-admin/auth';
-import { getFirestore } from 'firebase-admin/firestore';
+import { createRequire } from 'node:module';
+
+// Use dynamic require so that Rollup does not hoist the CJS library
+// and evaluate it BEFORE our __dirname polyfill in src/polyfill.ts runs.
+const require = createRequire(import.meta.url);
 
 export function getAdminAuth() {
+  const { getApps, initializeApp, cert } = require('firebase-admin/app');
+  const { getAuth } = require('firebase-admin/auth');
+
   if (!getApps().length) {
     const projectId = process.env['FIREBASE_ADMIN_PROJECT_ID'];
     const clientEmail = process.env['FIREBASE_ADMIN_CLIENT_EMAIL'];
@@ -27,6 +32,9 @@ export function getAdminAuth() {
 }
 
 export function getAdminDb() {
+  const { getApps } = require('firebase-admin/app');
+  const { getFirestore } = require('firebase-admin/firestore');
+
   if (!getApps().length) {
     getAdminAuth();
   }
