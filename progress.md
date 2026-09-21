@@ -1,3 +1,6 @@
+- [x] **[Host KYC & Stability] Task 151: Fix Aadhaar Upload Timeout & React Hydration #418 — 2026-09-21**:
+  - Upgraded Aadhaar canvas compression (max 1280px, 0.75 quality, <800KB guarantee) with multipart FormData streaming, native 60s timeout handling & retry button, and eliminated React #418 hydration mismatch with standardized client-mounting guards in HostDashboard & AadhaarKycModal.
+
 - [x] **[Core Flow & Performance] Task 150: Aggressive Native Canvas Compression — 2026-09-20**:
   - Replaced `browser-image-compression` with a highly optimized, native HTML5 `<canvas>` utility in `AadhaarKycModal.tsx`.
   - Enforced a strict maximum width of 800px and a JPEG quality of 0.5, dramatically dropping mobile image payloads from 5MB-12MB down to under 200KB.

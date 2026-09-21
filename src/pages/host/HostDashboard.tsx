@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { LayoutDashboard, Home, CalendarCheck, IndianRupee, AlertCircle, Menu, X, ArrowRight } from 'lucide-react';
 import { Link } from '@tanstack/react-router';
 import { AadhaarKycModal } from '@/components/host/AadhaarKycModal';
@@ -8,12 +8,12 @@ export function HostDashboard() {
   const [isKycModalOpen, setIsKycModalOpen] = useState(false);
   const [kycStatus, setKycStatus] = useState<'unverified' | 'pending'>('unverified');
 
-  const [isMounted, setIsMounted] = React.useState(false);
-  React.useEffect(() => {
-    setIsMounted(true);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
   }, []);
 
-  if (!isMounted) return null;
+  if (!mounted) return null;
 
   const navItems = [
     { name: 'Overview', icon: LayoutDashboard, active: true },

@@ -25,6 +25,7 @@ export const Route = createFileRoute('/api/updateKyc')({
             const response = await fetch('https://api.cloudinary.com/v1_1/nkof0cgp/image/upload', {
               method: 'POST',
               body: formData,
+              signal: AbortSignal.timeout(50000)
             });
 
             if (!response.ok) {
