@@ -28,11 +28,11 @@ export const coLivingSpacesSchema = [
       unitCode: "FTK",
     },
     amenityFeature: [
-      "Zero Brokerage",
-      "Verified Verified PG Owner Host",
-      "24x7 Water & Power Backup",
-      "Proximity to IIT Kanpur Gate 1",
-      "High-Speed Fiber WiFi",
+      { "@type": "LocationFeatureSpecification", name: "Zero Brokerage", value: true },
+      { "@type": "LocationFeatureSpecification", name: "Verified Verified PG Owner Host", value: true },
+      { "@type": "LocationFeatureSpecification", name: "24x7 Water & Power Backup", value: true },
+      { "@type": "LocationFeatureSpecification", name: "Proximity to IIT Kanpur Gate 1", value: true },
+      { "@type": "LocationFeatureSpecification", name: "High-Speed Fiber WiFi", value: true },
     ],
     offers: {
       "@type": "Offer",
@@ -78,10 +78,10 @@ export const coLivingSpacesSchema = [
       unitCode: "FTK",
     },
     amenityFeature: [
-      "Zero Brokerage",
-      "Walking Distance to Coaching Centers",
-      "Home-Cooked Tiffin Service Available",
-      "Verified Host Safety Audit",
+      { "@type": "LocationFeatureSpecification", name: "Zero Brokerage", value: true },
+      { "@type": "LocationFeatureSpecification", name: "Walking Distance to Coaching Centers", value: true },
+      { "@type": "LocationFeatureSpecification", name: "Home-Cooked Tiffin Service Available", value: true },
+      { "@type": "LocationFeatureSpecification", name: "Verified Host Safety Audit", value: true },
     ],
     offers: {
       "@type": "Offer",
@@ -127,9 +127,9 @@ export const coLivingSpacesSchema = [
       unitCode: "FTK",
     },
     amenityFeature: [
-      "Fully Furnished",
-      "Zero Brokerage",
-      "Metro & Transit Access",
+      { "@type": "LocationFeatureSpecification", name: "Fully Furnished", value: true },
+      { "@type": "LocationFeatureSpecification", name: "Zero Brokerage", value: true },
+      { "@type": "LocationFeatureSpecification", name: "Metro & Transit Access", value: true },
     ],
     offers: {
       "@type": "Offer",
@@ -175,9 +175,9 @@ export const coLivingSpacesSchema = [
       unitCode: "FTK",
     },
     amenityFeature: [
-      "Super-Fast Fiber Internet",
-      "Campus Shuttle Nearby",
-      "Sunlit Corner Layout",
+      { "@type": "LocationFeatureSpecification", name: "Super-Fast Fiber Internet", value: true },
+      { "@type": "LocationFeatureSpecification", name: "Campus Shuttle Nearby", value: true },
+      { "@type": "LocationFeatureSpecification", name: "Sunlit Corner Layout", value: true },
     ],
     offers: {
       "@type": "Offer",

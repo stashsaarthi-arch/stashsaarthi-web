@@ -313,13 +313,6 @@ function RootShell({ children }: { children: ReactNode }) {
             returnFees: "https://schema.org/FreeReturn",
           },
         },
-        aggregateRating: {
-          "@type": "AggregateRating",
-          ratingValue: "4.9",
-          reviewCount: "128",
-          bestRating: "5",
-          worstRating: "1",
-        },
       },
       {
         "@type": "LocalBusiness",
