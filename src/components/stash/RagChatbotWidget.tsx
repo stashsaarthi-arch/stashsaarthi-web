@@ -123,6 +123,10 @@ export const RagChatbotWidget = memo(function RagChatbotWidget() {
     setMessages([initialGreeting]);
   };
 
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => setIsMounted(true), []);
+  if (!isMounted) return null;
+
   return (
     <>
       {/* Floating Trigger Button */}

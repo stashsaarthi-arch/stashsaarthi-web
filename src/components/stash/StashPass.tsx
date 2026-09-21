@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ShieldCheck, CalendarClock, Share2, ScanBarcode, QrCode, CheckCircle2, UserCheck, ShieldAlert, KeyRound } from "lucide-react";
 import { toast } from "sonner";
 import { Card3D } from "@/components/ui/Card3D";
@@ -78,6 +78,14 @@ export function StashPass({ tokenId, name, serviceLabel, type, bags, months, ite
 
   const validityDate = new Date();
   validityDate.setMonth(validityDate.getMonth() + (months || 1));
+
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) return null;
+
 
   return (
     <div className="w-full max-w-sm mx-auto">

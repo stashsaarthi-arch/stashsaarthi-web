@@ -4,7 +4,7 @@
  * Reads from localStorage via localSubmissions.ts, filtered by user email.
  */
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import {
   Boxes,
   Soup,
@@ -91,6 +91,11 @@ export function MyBookingsDashboard() {
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [selectedBooking, setSelectedBooking] = useState<BookingRecord | null>(null);
 
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   // Helper to resolve status for booking
   const getBookingStatus = (b: BookingRecord): "active" | "completed" | "cancelled" => {
     if (b.status) return b.status;
@@ -101,11 +106,12 @@ export function MyBookingsDashboard() {
 
   // Filter records by current user's email
   const rawUserBookings = useMemo(() => {
+    if (!isMounted) return [];
     if (!user?.email) return [];
     return getBookings().filter(
       (b) => b.email.toLowerCase() === user.email.toLowerCase(),
     );
-  }, [user?.email]);
+  }, [user?.email, isMounted]);
 
   const verticalCounts = useMemo(() => {
     const counts: Record<VerticalFilter, number> = {
@@ -143,18 +149,22 @@ export function MyBookingsDashboard() {
     return list;
   }, [rawUserBookings, statusFilter, verticalFilter]);
 
+
+
   const userMeals = useMemo(() => {
+    if (!isMounted) return [];
     if (!user?.email) return [];
     // Meal orders may not have email; show all if user is logged in
     return getMealOrders();
-  }, [user?.email]);
+  }, [user?.email, isMounted]);
 
   const userWaitlist = useMemo(() => {
+    if (!isMounted) return [];
     if (!user?.email) return [];
     return getWaitlistEntries().filter(
       (w) => w.email.toLowerCase() === user.email.toLowerCase(),
     );
-  }, [user?.email]);
+  }, [user?.email, isMounted]);
 
   const tabs: { key: Tab; labelEn: string; labelHi: string; icon: React.ReactNode; count: number }[] = [
     {

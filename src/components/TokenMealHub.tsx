@@ -728,13 +728,19 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
   };
 
 
-
   const handleQuickRecharge = (tokensToAdd: number, price: number) => {
     setTokenBalance((prev) => prev + tokensToAdd);
     toast.success(`Wallet Recharged!`, {
       description: `Successfully added ${tokensToAdd} Tokens for ₹${price}. (Demo mode)`,
     });
   };
+
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) return null;
 
   return (
     <section className="relative w-full max-w-6xl mx-auto px-4 py-12 text-slate-100 font-sans">

@@ -21,6 +21,12 @@ export const DeliveryCutoffCountdown: React.FC<DeliveryCutoffCountdownProps> = (
   const { language } = useLanguage();
   const isHindi = language === "hi";
 
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   // Determine upcoming slot based on current hour if not explicitly set
   const [activeSlot, setActiveSlot] = useState<"Lunch" | "Dinner">(() => {
     if (initialSlot) return initialSlot;
@@ -159,6 +165,10 @@ export const DeliveryCutoffCountdown: React.FC<DeliveryCutoffCountdownProps> = (
   };
 
   const theme = getThemeClasses();
+
+  if (!isMounted) {
+    return null;
+  }
 
   if (variant === "compact") {
     return (
