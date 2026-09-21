@@ -9,7 +9,7 @@ const IMAGE_CACHE = `ss-images-${CACHE_VERSION}`;
 const PRECACHE_URLS = [
   "/",
   "/manifest.json",
-  "/favicon.png",
+  "/favicon.ico",
   "/app-icon.png",
   "/stashsaarthi-logo.png",
 ];
@@ -17,10 +17,15 @@ const PRECACHE_URLS = [
 // ─── Install ──────────────────────────────────────────────────
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches
-      .open(STATIC_CACHE)
-      .then((cache) => cache.addAll(PRECACHE_URLS))
-      .then(() => self.skipWaiting()),
+    caches.open(STATIC_CACHE).then((cache) => {
+      return Promise.allSettled(
+        PRECACHE_URLS.map((url) =>
+          cache.add(url).catch((err) => {
+            console.warn(`[SW] Precache skipped for ${url}:`, err);
+          })
+        )
+      );
+    }).then(() => self.skipWaiting())
   );
 });
 

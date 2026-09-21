@@ -1,7 +1,18 @@
+import { fileURLToPath } from 'node:url';
+import { dirname } from 'node:path';
+
+// Fix for firebase-admin and @google-cloud/firestore __dirname ReferenceError in ESM
+// @ts-ignore
+if (typeof __dirname === 'undefined') {
+  // @ts-ignore
+  globalThis.__dirname = dirname(fileURLToPath(import.meta.url));
+}
+
 import "./lib/error-capture";
 
 import { consumeLastCapturedError } from "./lib/error-capture";
 import { renderErrorPage } from "./lib/error-page";
+import { handleUpdateKyc } from "./api/updateKyc";
 
 type ServerEntry = {
   fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;
@@ -47,6 +58,11 @@ function isH3SwallowedErrorBody(body: string): boolean {
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
+      const url = new URL(request.url);
+      if (url.pathname === '/api/updateKyc') {
+        return await handleUpdateKyc(request);
+      }
+
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
       return await normalizeCatastrophicSsrResponse(response);

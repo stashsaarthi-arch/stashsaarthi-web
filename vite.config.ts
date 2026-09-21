@@ -14,6 +14,14 @@ export default defineConfig({
     resolve: {
       tsconfigPaths: true,
     },
+    ssr: {
+      external: [
+        'firebase-admin',
+        'cloudinary',
+        '@google-cloud/firestore',
+        '@google-cloud/storage'
+      ]
+    },
     build: {
       chunkSizeWarningLimit: 1000,
       rollupOptions: {
