@@ -1,19 +1,39 @@
 import { createFileRoute } from '@tanstack/react-router';
-import admin from 'firebase-admin';
+import { getApps, initializeApp, applicationDefault, cert } from 'firebase-admin/app';
+import { getAuth } from 'firebase-admin/auth';
+import { getFirestore } from 'firebase-admin/firestore';
 import { v2 as cloudinary } from 'cloudinary';
 
 // Initialize Firebase Admin securely
-if (!admin.apps.length) {
-  admin.initializeApp({
-    credential: admin.credential.applicationDefault()
-  });
+if (!getApps().length) {
+  try {
+    const privateKey = process.env['FIREBASE_ADMIN_PRIVATE_KEY']
+      ? process.env['FIREBASE_ADMIN_PRIVATE_KEY'].replace(/\\n/g, '\n')
+      : undefined;
+
+    if (privateKey && process.env['FIREBASE_ADMIN_CLIENT_EMAIL'] && process.env['FIREBASE_ADMIN_PROJECT_ID']) {
+      initializeApp({
+        credential: cert({
+          projectId: process.env['FIREBASE_ADMIN_PROJECT_ID'],
+          clientEmail: process.env['FIREBASE_ADMIN_CLIENT_EMAIL'],
+          privateKey: privateKey,
+        })
+      });
+    } else {
+      initializeApp({
+        credential: applicationDefault()
+      });
+    }
+  } catch (error) {
+    console.error('Firebase Admin initialization error:', error);
+  }
 }
 
 // Configure Cloudinary from secure environment variables
 cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET
+  cloud_name: process.env['CLOUDINARY_CLOUD_NAME'] || '',
+  api_key: process.env['CLOUDINARY_API_KEY'] || '',
+  api_secret: process.env['CLOUDINARY_API_SECRET'] || ''
 });
 
 export const Route = createFileRoute('/api/updateKyc')({
@@ -28,9 +48,12 @@ export const Route = createFileRoute('/api/updateKyc')({
           }
           
           const idToken = authHeader.split('Bearer ')[1];
+          if (!idToken) {
+            return Response.json({ success: false, error: 'Unauthorized: Invalid token structure' }, { status: 401 });
+          }
           let decodedToken;
           try {
-            decodedToken = await admin.auth().verifyIdToken(idToken);
+            decodedToken = await getAuth().verifyIdToken(idToken);
           } catch (verifyError) {
             return Response.json({ success: false, error: 'Unauthorized: Token verification failed' }, { status: 401 });
           }
@@ -73,7 +96,7 @@ export const Route = createFileRoute('/api/updateKyc')({
           ]);
 
           // 3. Update Firestore securely on the backend tied exclusively to authenticatedUid
-          const db = admin.firestore();
+          const db = getFirestore();
           const userDocRef = db.collection('users').doc(authenticatedUid);
           await userDocRef.set({
             kycStatus: 'pending',
