@@ -90,7 +90,7 @@ export function AadhaarKycModal({ isOpen, onClose, onSuccess }: AadhaarKycModalP
 
     setLoading(true); // START LOADER
     try {
-      const convertToBase64 = async (file: File): Promise<string> => {
+      const compressImage = async (file: File): Promise<Blob> => {
         return new Promise((resolve, reject) => {
           const reader = new FileReader();
           reader.readAsDataURL(file);
@@ -99,7 +99,7 @@ export function AadhaarKycModal({ isOpen, onClose, onSuccess }: AadhaarKycModalP
             img.src = event.target?.result as string;
             img.onload = () => {
               const canvas = document.createElement('canvas');
-              const MAX_WIDTH = 800;
+              const MAX_WIDTH = 1280;
               let width = img.width;
               let height = img.height;
 
@@ -118,8 +118,13 @@ export function AadhaarKycModal({ isOpen, onClose, onSuccess }: AadhaarKycModalP
               }
               
               ctx.drawImage(img, 0, 0, width, height);
-              const dataUrl = canvas.toDataURL('image/jpeg', 0.5);
-              resolve(dataUrl);
+              canvas.toBlob((blob) => {
+                if (blob) {
+                  resolve(blob);
+                } else {
+                  reject(new Error("Canvas toBlob failed"));
+                }
+              }, 'image/jpeg', 0.75);
             };
             img.onerror = (err) => reject(err);
           };
@@ -129,15 +134,20 @@ export function AadhaarKycModal({ isOpen, onClose, onSuccess }: AadhaarKycModalP
 
       // Wrap the entire async upload and db sync process
       const uploadAndSync = async () => {
-        // 1. Convert to Base64 locally
-        const frontBase64 = await convertToBase64(frontImage);
-        const backBase64 = await convertToBase64(backImage);
+        // 1. Convert to compressed Blobs locally
+        const frontBlob = await compressImage(frontImage);
+        const backBlob = await compressImage(backImage);
 
         // 2. await API Route to do both Cloudinary upload & Firestore sync atomically
+        const formData = new FormData();
+        formData.append('userId', userId);
+        formData.append('frontImage', frontBlob, 'front.jpg');
+        formData.append('backImage', backBlob, 'back.jpg');
+
         const apiResponse = await fetch('/api/updateKyc', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ userId, frontBase64, backBase64 })
+          body: formData,
+          signal: AbortSignal.timeout(60000)
         });
 
         if (!apiResponse.ok) {
@@ -146,14 +156,14 @@ export function AadhaarKycModal({ isOpen, onClose, onSuccess }: AadhaarKycModalP
         }
       };
 
-      // Strict 25-second kill-switch timeout promise for heavy backend uploads
+      // Strict 60-second kill-switch timeout promise for heavy backend uploads
       const timeoutPromise = new Promise<never>((_, reject) => {
         setTimeout(() => {
           reject(new Error("Request Timeout"));
-        }, 25000);
+        }, 60000);
       });
 
-      // Execute race between the actual work and the 10-second timeout
+      // Execute race between the actual work and the 60-second timeout
       await Promise.race([uploadAndSync(), timeoutPromise]);
 
       // If successful:

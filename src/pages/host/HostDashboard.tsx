@@ -8,6 +8,13 @@ export function HostDashboard() {
   const [isKycModalOpen, setIsKycModalOpen] = useState(false);
   const [kycStatus, setKycStatus] = useState<'unverified' | 'pending'>('unverified');
 
+  const [isMounted, setIsMounted] = React.useState(false);
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) return null;
+
   const navItems = [
     { name: 'Overview', icon: LayoutDashboard, active: true },
     { name: 'Properties', icon: Home, active: false },

@@ -7,17 +7,19 @@ export const Route = createFileRoute('/api/updateKyc')({
     handlers: {
       POST: async ({ request }) => {
         try {
-          const body = await request.json();
-          const { userId, frontBase64, backBase64 } = body;
+          const formData = await request.formData();
+          const userId = formData.get('userId') as string;
+          const frontImageFile = formData.get('frontImage') as Blob | null;
+          const backImageFile = formData.get('backImage') as Blob | null;
 
-          if (!userId || !frontBase64 || !backBase64) {
+          if (!userId || !frontImageFile || !backImageFile) {
             return Response.json({ success: false, error: 'Missing required fields' }, { status: 400 });
           }
 
-          // 1. Upload Base64 images to Cloudinary from the server
-          const uploadToCloudinary = async (base64Str: string) => {
+          // 1. Upload Blob images to Cloudinary from the server
+          const uploadToCloudinary = async (imageBlob: Blob) => {
             const formData = new FormData();
-            formData.append('file', base64Str);
+            formData.append('file', imageBlob);
             formData.append('upload_preset', 'stashsaarthi-web');
 
             const response = await fetch('https://api.cloudinary.com/v1_1/nkof0cgp/image/upload', {
@@ -34,8 +36,8 @@ export const Route = createFileRoute('/api/updateKyc')({
           };
 
           const [frontUrl, backUrl] = await Promise.all([
-            uploadToCloudinary(frontBase64),
-            uploadToCloudinary(backBase64)
+            uploadToCloudinary(frontImageFile),
+            uploadToCloudinary(backImageFile)
           ]);
 
           // 2. Update Firestore securely on the backend
