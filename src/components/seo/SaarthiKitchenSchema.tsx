@@ -57,14 +57,7 @@ export const SaarthiKitchenSchema: React.FC<SaarthiKitchenSchemaProps> = ({
       "latitude": 26.4831,
       "longitude": 80.3072,
     },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": rating.toFixed(2),
-      "bestRating": "5",
-      "worstRating": "1",
-      "ratingCount": reviewCount.toString(),
-      "reviewCount": reviewCount.toString(),
-    },
+
     "hasMenu": {
       "@type": "Menu",
       "name": "Daily Homestyle Student Tiffin Menu",
@@ -108,6 +101,7 @@ export const SaarthiKitchenSchema: React.FC<SaarthiKitchenSchemaProps> = ({
   return (
     <script
       type="application/ld+json"
+      suppressHydrationWarning={true}
       dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
     />
   );

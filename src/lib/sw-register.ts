@@ -7,9 +7,11 @@
  * Call once from the client-side root (e.g. __root.tsx useEffect).
  */
 
-export function registerServiceWorker(): void {
-  if (typeof window === "undefined") return; // SSR guard
-  if (!("serviceWorker" in navigator)) return;
+export function registerServiceWorker(): () => void {
+  let intervalId: NodeJS.Timeout | undefined;
+
+  if (typeof window === "undefined") return () => {}; // SSR guard
+  if (!("serviceWorker" in navigator)) return () => {};
 
   // In dev mode the Vite dev server handles everything via HMR;
   // registering a SW would break hot-reload and serve stale modules.
@@ -19,11 +21,11 @@ export function registerServiceWorker(): void {
     window.location.hostname === "127.0.0.1";
   if (isDev) {
     console.debug("[SW] Skipping registration in dev mode");
-    return;
+    return () => {};
   }
 
   // Wait until the page finishes loading to avoid competing for bandwidth
-  window.addEventListener("load", async () => {
+  const handleLoad = async () => {
     try {
       const registration = await navigator.serviceWorker.register("/sw.js", {
         scope: "/",
@@ -54,7 +56,7 @@ export function registerServiceWorker(): void {
       });
 
       // Periodic cache trim (runs every 5 minutes while the page is open)
-      setInterval(
+      intervalId = setInterval(
         () => {
           registration.active?.postMessage({ type: "TRIM_CACHES" });
         },
@@ -63,5 +65,11 @@ export function registerServiceWorker(): void {
     } catch (err) {
       console.warn("[SW] Registration failed:", err);
     }
-  });
+  };
+  window.addEventListener("load", handleLoad);
+
+  return () => {
+    window.removeEventListener("load", handleLoad);
+    if (intervalId) clearInterval(intervalId);
+  };
 }

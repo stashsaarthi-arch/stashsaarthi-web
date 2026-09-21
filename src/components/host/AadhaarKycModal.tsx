@@ -20,8 +20,13 @@ export function AadhaarKycModal({ isOpen, onClose, onSuccess }: AadhaarKycModalP
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [mounted, setMounted] = useState(false);
+  const successTimerRef = useRef<NodeJS.Timeout | null>(null);
+
   useEffect(() => {
     setMounted(true);
+    return () => {
+      if (successTimerRef.current) clearTimeout(successTimerRef.current);
+    };
   }, []);
 
   if (!mounted || !isOpen) return null;
@@ -194,7 +199,7 @@ export function AadhaarKycModal({ isOpen, onClose, onSuccess }: AadhaarKycModalP
       toast.success('KYC Uploaded Successfully!');
       
       // Delay closing to show success animation
-      setTimeout(() => {
+      successTimerRef.current = setTimeout(() => {
         onSuccess();
       }, 2500);
     } catch (error: any) {

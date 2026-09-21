@@ -567,7 +567,7 @@ function RootComponent() {
 
   // Register Service Worker for offline-first caching (production only)
   useEffect(() => {
-    registerServiceWorker();
+    return registerServiceWorker();
   }, []);
 
   return (

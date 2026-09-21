@@ -111,17 +111,13 @@ export function CoachingHubTiffinPage({ config }: { config: HubConfig }) {
       longitude: 80.3072,
     },
     servesCuisine: ["North Indian", "Homestyle", "Desi Thali"],
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: config.rating.toString(),
-      reviewCount: "410",
-    },
   };
 
   return (
     <ErrorBoundary sectionName={`Coaching Hub Page - ${config.hubName}`}>
       <script
         type="application/ld+json"
+        suppressHydrationWarning={true}
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <div className="min-h-screen bg-[#0A0D0F] text-slate-100 selection:bg-emerald-500/30 selection:text-emerald-300 font-sans antialiased overflow-x-hidden">
