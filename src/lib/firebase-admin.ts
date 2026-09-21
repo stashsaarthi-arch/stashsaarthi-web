@@ -33,9 +33,11 @@ export function getFirebaseAdmin() {
       return null;
     }
   } else {
-    adminApp = getApps()[0];
+    adminApp = getApps()[0] || null;
   }
   
+  if (!adminApp) return null;
+
   return {
     auth: getAuth(adminApp),
     firestore: getFirestore(adminApp)
