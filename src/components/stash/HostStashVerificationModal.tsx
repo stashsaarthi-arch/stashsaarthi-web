@@ -95,7 +95,7 @@ export function HostStashVerificationModal({
     setDeviceCoords(getSimulatedDeviceLocation(campusNode, geoProximityMode));
   }, [geoProximityMode, campusNode]);
 
-  if (!isOpen) return null;
+  if (!isOpen || typeof document === 'undefined') return null;
 
   const defaultNode = PRESET_CAMPUS_HOST_NODES["Kakadeo PW Hub"]!;
   const targetNodeConfig = PRESET_CAMPUS_HOST_NODES[campusNode] ?? defaultNode;
@@ -188,8 +188,15 @@ export function HostStashVerificationModal({
   const isOverweight = measuredWeightKg > MAX_ALLOWED_WEIGHT_KG;
 
   return createPortal(
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 overflow-y-auto">
-      <div className="relative z-[10000] w-full max-w-2xl bg-[#0A0D0F] border border-amber-500/30 rounded-3xl shadow-2xl overflow-hidden my-8">
+    <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+      {/* 1. Dark Backdrop (Separate from content to avoid opacity inheritance) */}
+      <div 
+        className="absolute inset-0 bg-black/80 backdrop-blur-md"
+        onClick={onClose}
+      ></div>
+
+      {/* 2. Actual Modal Box */}
+      <div className="relative z-[100000] w-full max-w-2xl bg-[#0A0D0F] border border-amber-500/30 rounded-3xl shadow-2xl overflow-hidden my-8">
         
         {/* Header bar */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-gradient-to-r from-amber-500/10 via-emerald-500/5 to-transparent">
