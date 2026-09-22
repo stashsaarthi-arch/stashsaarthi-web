@@ -180,7 +180,12 @@ function Index() {
     <main
       id="main-content"
       tabIndex={-1}
-      className="relative min-h-screen bg-[#0a0a0a] text-white transition-colors duration-500 focus:outline-none pt-16 md:pt-20 pb-[90px] md:pb-0"
+      className="relative min-h-screen w-full overflow-x-hidden bg-[#0a0a0a] text-white transition-colors duration-500 focus:outline-none pt-16 md:pt-20 pb-[90px] md:pb-0"
+      style={{
+        transform: "translate3d(0, 0, 0)",
+        willChange: "transform",
+        contain: "paint layout",
+      }}
     >
       <a href="#main-content" className="skip-to-content">
         Skip to main content
