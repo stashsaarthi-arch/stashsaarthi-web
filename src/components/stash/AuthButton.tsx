@@ -80,6 +80,12 @@ export function AuthButton({ compact = false }: { compact?: boolean }) {
     },
   });
 
+  const { role: activePersona } = usePersona();
+  const name = user?.name || user?.email || "User";
+  const first = (name.split(" ")[0] || "User").trim();
+  const isHostActive = activePersona === "host";
+  const roleBadge = isHostActive ? (isHi ? "होस्ट" : "Host") : isHi ? "छात्र" : "Student";
+
   if (!user) {
     return (
       <Button
@@ -97,12 +103,6 @@ export function AuthButton({ compact = false }: { compact?: boolean }) {
       </Button>
     );
   }
-
-  const { role: activePersona } = usePersona();
-  const name = user.name || user.email || "User";
-  const first = (name.split(" ")[0] || "User").trim();
-  const isHostActive = activePersona === "host";
-  const roleBadge = isHostActive ? (isHi ? "होस्ट" : "Host") : isHi ? "छात्र" : "Student";
 
   return (
     <DropdownMenu>
