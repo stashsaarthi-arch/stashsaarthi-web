@@ -20,7 +20,7 @@ let diagnosticCache: WebGLDiagnosticResult | null = null;
 export function isLegacyAndroidUserAgent(): boolean {
   if (typeof navigator === "undefined") return false;
   const ua = navigator.userAgent;
-  const androidMatch = ua.match(/Android\s([0-9\.]+)/i);
+  const androidMatch = ua.match(/Android\s([0-9.]+)/i);
   if (androidMatch && androidMatch[1]) {
     const majorVersion = parseFloat(androidMatch[1]);
     return majorVersion < 8.0;

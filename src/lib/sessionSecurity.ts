@@ -35,7 +35,7 @@ export function decodeJwtPayload(token: string): JwtClaims | null {
     const parts = token.split(".");
     if (parts.length !== 3) return null;
 
-    let base64Url = parts[1];
+    const base64Url = parts[1];
     if (!base64Url) return null;
 
     // Convert base64url to standard base64

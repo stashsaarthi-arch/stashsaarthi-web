@@ -297,7 +297,9 @@ export function executeAutoPurge18Months(
   if (typeof window !== "undefined") {
     try {
       localStorage.setItem(RETENTION_AUDIT_KEY, JSON.stringify(result));
-    } catch {}
+    } catch {
+      // Silently ignore localStorage quota errors
+    }
   }
 
   return result;

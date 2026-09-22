@@ -155,9 +155,9 @@ export async function subscribeHostToPushNotifications(
   }
 
   // Generate deterministic Web Push mock endpoint keys if native PushManager unavailable
-  let endpoint = `https://fcm.googleapis.com/fcm/send/stashsaarthi-host-${hostId}-${Date.now()}`;
-  let p256dh = "BIPx37s0K8lA-mockP256dhKey_StashSaarthiHostPush2026";
-  let auth = "mockAuthToken_SS2026";
+  const endpoint = `https://fcm.googleapis.com/fcm/send/stashsaarthi-host-${hostId}-${Date.now()}`;
+  const p256dh = "BIPx37s0K8lA-mockP256dhKey_StashSaarthiHostPush2026";
+  const auth = "mockAuthToken_SS2026";
 
   if (typeof window !== "undefined" && "serviceWorker" in navigator && "PushManager" in window) {
     try {
