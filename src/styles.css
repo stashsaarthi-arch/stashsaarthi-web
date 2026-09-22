@@ -1041,3 +1041,18 @@ article {
 [data-lenis-prevent] {
   contain: layout paint style;
 }
+
+/* Scroll-Isolate Architecture: Kill all hover calculations and heavy paints while scrolling */
+body.is-scrolling * {
+  pointer-events: none !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+  transition: none !important;
+}
+
+/* Essential native overrides */
+html, body {
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: auto !important;
+}

@@ -475,8 +475,18 @@ function LenisHandler() {
     if (!lenis) return;
     (window as any).__lenis = lenis;
 
-    // Sync GSAP ScrollTrigger with Lenis
-    lenis.on("scroll", ScrollTrigger.update);
+    // Scroll-Isolate Architecture: add .is-scrolling while scrolling, remove 100ms after scroll stops
+    let isScrollingTimeout: NodeJS.Timeout;
+    const handleScroll = () => {
+      document.body.classList.add("is-scrolling");
+      clearTimeout(isScrollingTimeout);
+      isScrollingTimeout = setTimeout(() => {
+        document.body.classList.remove("is-scrolling");
+      }, 100);
+      ScrollTrigger.update();
+    };
+
+    lenis.on("scroll", handleScroll);
 
     // Force ultra-smooth 120 FPS scrolling in normal data mode
     if (!isLowData) {
@@ -501,9 +511,13 @@ function LenisHandler() {
 
     window.addEventListener("resize", handleResize, { passive: true });
     return () => {
-      lenis.off("scroll", ScrollTrigger.update);
+      lenis.off("scroll", handleScroll);
       gsap.ticker.remove(updateGsap);
       clearTimeout(resizeTimer);
+      clearTimeout(isScrollingTimeout);
+      if (typeof document !== "undefined") {
+        document.body.classList.remove("is-scrolling");
+      }
       window.removeEventListener("resize", handleResize);
       if (typeof window !== "undefined") {
         delete (window as any).__lenis;
