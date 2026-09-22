@@ -1,4 +1,4 @@
-﻿@import "tailwindcss";
+@import "tailwindcss";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -265,12 +265,20 @@ html.light {
 
 /* Lenis Smooth Scroll Engine Specifications */
 html, body {
-  overflow-x: hidden !important;
   max-width: 100vw;
   width: 100%;
+  min-height: 100%;
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch !important;
+  touch-action: pan-y !important;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
 }
 
 html.lenis,
@@ -979,4 +987,23 @@ html.light textarea::placeholder {
 
 body {
   background-color: #111827 !important;
+}
+
+/* =========================================
+   HARDWARE ACCELERATION & PAINT CONTAINMENT
+   ========================================= */
+
+/* Promote structural layout containers to their own GPU composite layer
+   without applying it globally (which causes memory bloat) */
+header, main, footer, section, article {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Strict paint containment on complex repeating elements to prevent reflow
+   during fast scrolling. layout paint style isolations guarantee the 
+   compositor doesn't redraw the whole page when scrolling through cards. */
+.glass, .card, [role="dialog"], [data-lenis-prevent] {
+  contain: layout paint style;
 }

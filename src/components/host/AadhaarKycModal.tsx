@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { UploadCloud, CheckCircle2, X, Loader2, Image as ImageIcon, ShieldAlert } from 'lucide-react';
 import { auth } from '@/lib/firebase';
 import { toast } from 'sonner';
@@ -29,7 +30,7 @@ export function AadhaarKycModal({ isOpen, onClose, onSuccess }: AadhaarKycModalP
     };
   }, []);
 
-  if (!mounted || !isOpen) return null;
+  if (!mounted || !isOpen || typeof document === 'undefined') return null;
 
   const updatePreview = (file: File | null) => {
     setPreview((prev) => {
@@ -225,10 +226,16 @@ export function AadhaarKycModal({ isOpen, onClose, onSuccess }: AadhaarKycModalP
     }
   };
 
-  return (
-    <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black/60 backdrop-blur-md p-4">
-      {/* Liquid Modal Card */}
-      <div className="bg-[#111827]/80 backdrop-blur-xl border border-white/10 rounded-[2rem] shadow-2xl p-6 md:p-8 max-w-lg w-full relative overflow-hidden transition-all ease-[cubic-bezier(0.23,1,0.32,1)] duration-500">
+  return createPortal(
+    <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 sm:p-6">
+      {/* 1. Dark Backdrop (Separate from content to avoid opacity inheritance) */}
+      <div 
+        className="absolute inset-0 bg-black/80 backdrop-blur-md"
+        onClick={onClose}
+      ></div>
+
+      {/* 2. Actual Modal Box */}
+      <div className="relative z-[100000] w-full max-w-lg bg-neutral-900 border border-white/10 rounded-2xl shadow-2xl p-6 md:p-8 overflow-hidden">
         
         {/* Close Button */}
         {step !== 'success' && step !== 'shield-warning' && !loading && (
@@ -364,6 +371,7 @@ export function AadhaarKycModal({ isOpen, onClose, onSuccess }: AadhaarKycModalP
           </>
         )}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

@@ -74,6 +74,10 @@ self.addEventListener("fetch", (event) => {
   if (url.hostname.includes("clarity.ms")) return;
   if (url.hostname.includes("googleapis.com") && !url.hostname.includes("fonts")) return;
 
+  // Let standard ES module imports (and module preloads) load chunks naturally on demand
+  // bypassing the Service Worker to prevent cross-world resource mismatches.
+  if (url.pathname.endsWith(".js") || url.pathname.endsWith(".mjs")) return;
+
   // Strategy 1: Cache-first for hashed Vite assets (/assets/*)
   if (url.pathname.startsWith("/assets/")) {
     event.respondWith(cacheFirst(request, STATIC_CACHE));

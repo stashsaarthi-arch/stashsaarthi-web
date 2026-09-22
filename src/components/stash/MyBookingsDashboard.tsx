@@ -199,7 +199,7 @@ export function MyBookingsDashboard() {
   const handleRebook = (b: BookingRecord) => {
     const serviceName = b.service === "micro" ? "stash" : b.service;
     const eventNote = `Renewing/Rebooking Token ${b.token} (${b.name || serviceName})`;
-    
+
     window.dispatchEvent(
       new CustomEvent("stashsaarthi:open-booking", {
         detail: {
@@ -417,10 +417,10 @@ export function MyBookingsDashboard() {
                 {b.service === "stash" || b.service === "micro"
                   ? (isHi ? "स्लॉट नवीनीकृत करें (Renew Storage Slot)" : "Renew Storage Slot")
                   : b.service === "kitchen" || b.service === "meal"
-                  ? (isHi ? "टिफिन कूपन पुनः ऑर्डर करें (Reorder Meal Pack)" : "Reorder Meal Pack")
-                  : b.service === "spaces"
-                  ? (isHi ? "स्टे नवीनीकृत करें (Renew Room Stay)" : "Renew Room Stay")
-                  : (isHi ? "सेक्शन पुनः बुक करें (Rebook Session)" : "Rebook Session")}
+                    ? (isHi ? "टिफिन कूपन पुनः ऑर्डर करें (Reorder Meal Pack)" : "Reorder Meal Pack")
+                    : b.service === "spaces"
+                      ? (isHi ? "स्टे नवीनीकृत करें (Renew Room Stay)" : "Renew Room Stay")
+                      : (isHi ? "सेक्शन पुनः बुक करें (Rebook Session)" : "Rebook Session")}
               </span>
             </button>
           </div>
@@ -565,7 +565,7 @@ export function MyBookingsDashboard() {
   // ─── Main Render ─────────────────────────────────────────────────────
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-3" suppressHydrationWarning={true}>
       {/* Active User Live Profile Banner (Task 108) */}
       {user && (
         <div className="bg-gradient-to-r from-cyan-950/40 via-black/60 to-emerald-950/30 border border-cyan-500/30 rounded-xl p-3 flex items-center justify-between gap-3 shadow-md">
@@ -604,21 +604,19 @@ export function MyBookingsDashboard() {
           <button
             key={tab.key}
             onClick={() => setActiveTab(tab.key)}
-            className={`flex-1 py-2 px-2 text-[11px] font-semibold rounded-md transition-colors flex items-center justify-center gap-1.5 ${
-              activeTab === tab.key
+            className={`flex-1 py-2 px-2 text-[11px] font-semibold rounded-md transition-colors flex items-center justify-center gap-1.5 ${activeTab === tab.key
                 ? "bg-cyan-500/20 text-cyan-300 shadow-sm"
                 : "text-slate-400 hover:bg-white/5"
-            }`}
+              }`}
           >
             {tab.icon}
             <span>{isHi ? tab.labelHi : tab.labelEn}</span>
             {tab.count > 0 && (
               <span
-                className={`ml-0.5 text-[9px] font-bold px-1.5 py-0.5 rounded-full ${
-                  activeTab === tab.key
+                className={`ml-0.5 text-[9px] font-bold px-1.5 py-0.5 rounded-full ${activeTab === tab.key
                     ? "bg-cyan-500/30 text-cyan-200"
                     : "bg-white/10 text-slate-400"
-                }`}
+                  }`}
               >
                 {tab.count}
               </span>
@@ -645,19 +643,17 @@ export function MyBookingsDashboard() {
                     setActiveTab("bookings");
                   }
                 }}
-                className={`px-2.5 py-1 rounded-lg border flex items-center gap-1.5 shrink-0 transition-all font-medium ${
-                  isActive
+                className={`px-2.5 py-1 rounded-lg border flex items-center gap-1.5 shrink-0 transition-all font-medium ${isActive
                     ? "bg-cyan-500/20 text-cyan-300 border-cyan-500/40 shadow-sm font-semibold"
                     : "bg-black/40 text-slate-400 border-white/5 hover:border-white/20 hover:text-slate-200"
-                }`}
+                  }`}
               >
                 <span>{vf.icon}</span>
                 <span>{isHi ? vf.labelHi : vf.labelEn}</span>
                 {count > 0 && (
                   <span
-                    className={`text-[9px] px-1.5 py-0.2 rounded-full font-bold ${
-                      isActive ? "bg-cyan-500/30 text-cyan-200" : "bg-white/10 text-slate-400"
-                    }`}
+                    className={`text-[9px] px-1.5 py-0.2 rounded-full font-bold ${isActive ? "bg-cyan-500/30 text-cyan-200" : "bg-white/10 text-slate-400"
+                      }`}
                   >
                     {count}
                   </span>
@@ -682,11 +678,10 @@ export function MyBookingsDashboard() {
             <button
               key={f.key}
               onClick={() => setStatusFilter(f.key)}
-              className={`px-2.5 py-1 rounded-full border transition-all ${
-                statusFilter === f.key
+              className={`px-2.5 py-1 rounded-full border transition-all ${statusFilter === f.key
                   ? "bg-cyan-500/20 text-cyan-300 border-cyan-500/40 font-semibold"
                   : "bg-black/30 text-slate-400 border-white/5 hover:border-white/20"
-              }`}
+                }`}
             >
               {isHi ? f.labelHi : f.labelEn}
             </button>

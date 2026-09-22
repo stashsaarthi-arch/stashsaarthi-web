@@ -1,3 +1,16 @@
+- [x] **[Performance & Diagnostics] Task 153: GPU Layer Promotion & 120 FPS Momentum Scroll Audit — 2026-09-22**:
+  - Executed a comprehensive CSS architecture audit to optimize scrolling performance at the browser compositor layer without altering visual layouts or Tailwind structures.
+  - Implemented exact inertial easing curves (`duration: 1.1`, `touchMultiplier: 1.2`) in the global `ReactLenis` wrapper and synced GSAP's RAF ticker (`gsap.ticker.lagSmoothing(0)`) to lock natively into 120 FPS displays.
+  - Added strict paint containment (`contain: layout paint style;`) to `.glass`, `.card`, and modals to isolate reflow rendering.
+  - Applied GPU hardware acceleration (`transform: translate3d(0, 0, 0);`) strictly to primary layout containers to leverage compositing without memory bloat.
+  - Prevented native mobile elastic bounce interference by locking `overscroll-behavior-y: none;` globally.
+  - Verified `npm run build` completed successfully with 0 errors.
+
+- [x] **[Performance & Debloat] Task 152: Unused Dependencies & Dead Code Removal — 2026-09-22**:
+  - Uninstalled bloated unused dependencies (`three`, `@react-three/drei`, `@react-three/fiber`, `@types/three`, and `zod`) via `npm install` for significantly faster subsequent install times and cleaner manifests.
+  - Deleted entirely unused legacy components (`ActivityTicker`, `ChangelogModal`, `HostOnboardingAgreementModal`, `Room360Viewer`, and `SuperHostBadge`) to reduce file bloat.
+  - Scrubbed trailing/unused imports from `Hero.tsx` and `Rooms.tsx` and ensured a pristine production `vite build` without errors.
+
 - [x] **[Host KYC & Stability] Task 151: Fix Aadhaar Upload Timeout & React Hydration #418 — 2026-09-21**:
   - Upgraded Aadhaar canvas compression (max 1280px, 0.75 quality, <800KB guarantee) with multipart FormData streaming, native 60s timeout handling & retry button, and eliminated React #418 hydration mismatch with standardized client-mounting guards in HostDashboard & AadhaarKycModal.
 

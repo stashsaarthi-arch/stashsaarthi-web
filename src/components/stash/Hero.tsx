@@ -21,7 +21,6 @@ import type { OpenBooking, Role } from "./types";
 import { FOUNDER_WHATSAPP } from "@/lib/constants";
 import { useLanguage } from "@/context/LanguageContext";
 import { AnimatedStat } from "./AnimatedStat";
-import { LiveChangelogBadge } from "./ChangelogModal";
 import { smoothScrollTo } from "./legal";
 import { useHeroCtaVariant, trackCtaClick, type HeroCtaVariant } from "@/lib/abTesting";
 
@@ -87,7 +86,6 @@ export const Hero = memo(function Hero({
           delay={0.05}
         >
           <div className="mb-1.5 sm:mb-2 flex items-center justify-center gap-2 flex-wrap">
-            <LiveChangelogBadge />
             <span
               className="glass inline-flex max-w-full items-center gap-2 rounded-full px-2.5 py-0.5 sm:px-3.5 sm:py-1 text-[11px] sm:text-xs font-semibold leading-tight"
               style={{ color: student ? "var(--destructive)" : "var(--muted-foreground)" }}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import {
   X,
   ShieldCheck,
@@ -186,9 +187,9 @@ export function HostStashVerificationModal({
 
   const isOverweight = measuredWeightKg > MAX_ALLOWED_WEIGHT_KG;
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md overflow-y-auto">
-      <div className="relative w-full max-w-2xl bg-[#0A0D0F] border border-amber-500/30 rounded-3xl shadow-2xl overflow-hidden my-8">
+  return createPortal(
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 overflow-y-auto">
+      <div className="relative z-[10000] w-full max-w-2xl bg-[#0A0D0F] border border-amber-500/30 rounded-3xl shadow-2xl overflow-hidden my-8">
         
         {/* Header bar */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-gradient-to-r from-amber-500/10 via-emerald-500/5 to-transparent">
@@ -718,6 +719,7 @@ export function HostStashVerificationModal({
           )}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

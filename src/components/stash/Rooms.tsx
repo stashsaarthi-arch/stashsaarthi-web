@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import AnimatedContent from "@/components/ui/AnimatedContent";
 import { supabase } from "@/integrations/supabase/client";
 import { SafetyAuditModal } from "./SafetyAuditModal";
-import { Room360Viewer } from "./Room360Viewer";
 import { FOUNDER_WHATSAPP, getWhatsAppUrl } from "@/lib/constants";
 import { PrototypeBadge } from "@/components/ui/PrototypeBadge";
 import { useLanguage } from "@/context/LanguageContext";
@@ -174,14 +173,7 @@ export function Rooms({ onList, onBook }: { onList: () => void; onBook?: OpenBoo
   const [loading, setLoading] = useState(false);
   const [activeFilter, setActiveFilter] = useState<string>("all");
   const [auditOpen, setAuditOpen] = useState(false);
-  const [viewer360Open, setViewer360Open] = useState(false);
-  const [selected360Room, setSelected360Room] = useState<Listing | null>(null);
   const [expandedReviewId, setExpandedReviewId] = useState<string | null>(null);
-
-  const handleOpen360 = (room: Listing) => {
-    setSelected360Room(room);
-    setViewer360Open(true);
-  };
 
   const filters = [
     { id: "all", label: isHi ? "सभी कानपुर क्लस्टर" : "All Kanpur Clusters" },
@@ -380,17 +372,6 @@ export function Rooms({ onList, onBook }: { onList: () => void; onBook?: OpenBoo
                       >
                         <span>✓</span> {t.rooms.studentReviewedBadge}
                       </button>
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleOpen360(l);
-                        }}
-                        className="pointer-events-auto bg-emerald-950/80 backdrop-blur-md border border-emerald-500/40 text-emerald-300 text-[9px] font-extrabold px-2.5 py-0.5 rounded-full flex items-center gap-1 hover:bg-emerald-500 hover:text-black transition-all cursor-pointer shadow-lg group/tour"
-                      >
-                        <Compass className="h-3 w-3 text-emerald-400 group-hover/tour:rotate-180 transition-transform duration-500" />
-                        <span>{isHi ? "360° टूर" : "360° Tour"}</span>
-                      </button>
                     </div>
                   </div>
 
@@ -501,16 +482,6 @@ export function Rooms({ onList, onBook }: { onList: () => void; onBook?: OpenBoo
                         </Button>
                       )}
                       <Button
-                        variant="outline"
-                        size="sm"
-                        className="border-emerald-500/40 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/20 text-xs px-2.5 py-1.5 flex items-center gap-1 min-h-[36px]"
-                        onClick={() => handleOpen360(l)}
-                        title={isHi ? "360° वर्चुअल रूम टूर" : "360° Virtual Room Tour"}
-                      >
-                        <Compass className="h-3.5 w-3.5 text-emerald-400" />
-                        <span>360°</span>
-                      </Button>
-                      <Button
                         asChild
                         variant="outline"
                         size="icon"
@@ -551,17 +522,6 @@ export function Rooms({ onList, onBook }: { onList: () => void; onBook?: OpenBoo
       </div>
 
       <SafetyAuditModal open={auditOpen} onOpenChange={setAuditOpen} />
-      <Room360Viewer
-        open={viewer360Open}
-        onOpenChange={setViewer360Open}
-        roomTitle={
-          selected360Room?.owner_name
-            ? `${selected360Room.owner_name}'s Verified Room`
-            : "Saarthi Spaces Verified Room"
-        }
-        roomLocation={selected360Room?.address_location || "Kalyanpur, Kanpur"}
-        rentAmount={selected360Room?.rent_amount || 6500}
-      />
     </div>
   );
 }

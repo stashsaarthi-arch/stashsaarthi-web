@@ -108,12 +108,12 @@ export const Navbar = memo(function Navbar({
     >
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-24 bg-emerald-500/20 blur-[60px] -z-10 rounded-full pointer-events-none"></div>
       <div
-        className={`max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-4 xl:px-6 w-full flex items-center justify-between gap-1 sm:gap-2 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] ${
+        className={`max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-4 xl:px-6 w-full max-w-full overflow-hidden flex items-center justify-between gap-1 sm:gap-2 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] ${
           scrolled ? "h-14 sm:h-16" : "h-15 sm:h-20"
         }`}
       >
-        {/* 1. Left: Brand Logo & Desktop Navigation */}
-        <div className="flex items-center gap-2 sm:gap-3 lg:gap-3 xl:gap-4 shrink-0">
+        {/* 1. Left: Brand Logo */}
+        <div className="flex items-center shrink-0">
           <button
             type="button"
             className="flex items-center gap-1.5 shrink-0 cursor-pointer group bg-transparent border-0 p-0 transition-transform active:scale-[0.98] focus:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500/70 focus-visible:ring-offset-1 focus-visible:ring-offset-[#0A0D0F] rounded-lg"
@@ -123,33 +123,33 @@ export const Navbar = memo(function Navbar({
           >
             <BrandLogo height={28} className="h-6 sm:h-7 md:h-8 w-auto" />
           </button>
-
-          {/* Desktop Navigation Links */}
-          <nav aria-label="Main Navigation" className="hidden xl:flex items-center gap-0.5 shrink-0">
-            {NAV_LINKS.map((l) => {
-              const label = isHi ? l.labelHi : l.labelEn;
-
-              return (
-                <a
-                  key={l.key}
-                  href={l.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    playTab();
-                    smoothScrollTo(l.href.replace(/^#/, ""))(e);
-                  }}
-                  className="whitespace-nowrap rounded-lg px-2 min-[1650px]:px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition-all hover:bg-white/[0.05] hover:text-foreground shrink-0 flex items-center gap-1.5 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400/80 focus-visible:ring-offset-1 focus-visible:ring-offset-[#0A0D0F]"
-                >
-                  <span className="text-xs shrink-0" aria-hidden="true">{l.icon}</span>
-                  <span>{label}</span>
-                </a>
-              );
-            })}
-          </nav>
         </div>
 
-        {/* 2. Right: Action Controls (Responsive & Mobile Fitted) */}
-        <div className="flex items-center gap-1 sm:gap-2 lg:gap-2.5 shrink-0">
+        {/* 2. Middle: Desktop Navigation Links */}
+        <nav aria-label="Main Navigation" className="hidden xl:flex flex-1 items-center justify-start gap-3 overflow-x-auto whitespace-nowrap scrollbar-hide px-4">
+          {NAV_LINKS.map((l) => {
+            const label = isHi ? l.labelHi : l.labelEn;
+
+            return (
+              <a
+                key={l.key}
+                href={l.href}
+                onClick={(e) => {
+                  e.preventDefault();
+                  playTab();
+                  smoothScrollTo(l.href.replace(/^#/, ""))(e);
+                }}
+                className="whitespace-nowrap rounded-lg px-2 min-[1650px]:px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition-all hover:bg-white/[0.05] hover:text-foreground shrink-0 flex items-center gap-1.5 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400/80 focus-visible:ring-offset-1 focus-visible:ring-offset-[#0A0D0F]"
+              >
+                <span className="text-xs shrink-0" aria-hidden="true">{l.icon}</span>
+                <span>{label}</span>
+              </a>
+            );
+          })}
+        </nav>
+
+        {/* 3. Right: Action Controls (Responsive & Mobile Fitted) */}
+        <div className="flex items-center gap-1 sm:gap-2 lg:gap-2.5 shrink-0 flex-nowrap">
           {/* Persona Toggle on Desktop */}
           <div role="radiogroup" aria-label="User Persona Selector" className="hidden min-[1650px]:flex items-center p-0.5 bg-white/[0.03] border border-white/[0.08] rounded-full shrink-0 relative backdrop-blur-md shadow-inner">
             <motion.button

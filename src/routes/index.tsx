@@ -115,7 +115,7 @@ function Index() {
   }, [open]);
 
   return (
-    <main id="main-content" tabIndex={-1} className="relative min-h-screen overflow-x-hidden bg-background text-foreground transition-colors duration-500 focus:outline-none">
+    <main id="main-content" tabIndex={-1} className="relative min-h-screen overflow-x-hidden bg-[#0a0a0a] text-white transition-colors duration-500 focus:outline-none pt-16 md:pt-20 pb-[90px] md:pb-0">
       <a href="#main-content" className="skip-to-content">
         Skip to main content
       </a>

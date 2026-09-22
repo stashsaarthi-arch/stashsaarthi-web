@@ -21,7 +21,7 @@ import { AuthProvider } from "@/hooks/useAuth";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { PersonaProvider } from "@/context/PersonaContext";
 import { ThemeProvider, useTheme } from "@/context/ThemeContext";
-import { LowDataProvider } from "@/context/LowDataContext";
+import { LowDataProvider, useLowData } from "@/context/LowDataContext";
 import { ToastProvider } from "@/context/ToastContext";
 import { AccessibilityAnnouncer } from "@/components/ui/AccessibilityAnnouncer";
 import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
@@ -437,7 +437,7 @@ function RootShell({ children }: { children: ReactNode }) {
 
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning={true}>
       <head>
         <HeadContent />
         <script
@@ -447,7 +447,7 @@ function RootShell({ children }: { children: ReactNode }) {
           }}
         />
       </head>
-      <body className="pb-24 sm:pb-0">
+      <body className="pb-24 sm:pb-0" suppressHydrationWarning={true}>
         {children}
         <Scripts />
       </body>
@@ -457,6 +457,7 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function LenisHandler() {
   const lenis = useLenis();
+  const { isLowData } = useLowData();
 
   useEffect(() => {
     if (!lenis) return;
@@ -464,6 +465,13 @@ function LenisHandler() {
 
     // Sync GSAP ScrollTrigger with Lenis
     lenis.on("scroll", ScrollTrigger.update);
+
+    // Force ultra-smooth 120 FPS scrolling in normal data mode
+    if (!isLowData) {
+      gsap.ticker.fps(120);
+    } else {
+      gsap.ticker.fps(30); // Throttle in low data mode to save battery/CPU
+    }
 
     const updateGsap = (time: number) => {
       lenis.raf(time * 1000);
@@ -490,7 +498,7 @@ function LenisHandler() {
       }
       ScrollTrigger.refresh();
     };
-  }, [lenis]);
+  }, [lenis, isLowData]);
 
   return null;
 }
@@ -586,12 +594,15 @@ function RootComponent() {
                       <ReactLenis
                         root
                         options={{
-                          lerp: 0.12,
-                          duration: 0.8,
+                          duration: 1.1,
+                          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                          orientation: "vertical",
+                          gestureOrientation: "vertical",
                           smoothWheel: true,
-                          wheelMultiplier: 1.05,
+                          wheelMultiplier: 0.9,
+                          syncTouch: false, // CRITICAL: Disable Lenis synthetic touch hijacking
                           touchMultiplier: 1.0,
-                          syncTouch: false,
+                          infinite: false,
                           autoRaf: false, // GSAP is driving the raf now
                         }}
                       >

@@ -133,7 +133,7 @@ export const RagChatbotWidget = memo(function RagChatbotWidget() {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className={`fixed bottom-[76px] right-6 z-40 flex items-center gap-2 rounded-full px-3.5 py-2.5 shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer ${
+          className={`fixed bottom-[90px] md:bottom-[76px] right-4 md:right-6 z-40 flex items-center gap-2 rounded-full px-3.5 py-2.5 shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer ${
             isStudent
               ? "bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 text-slate-950 shadow-emerald-500/20"
               : "bg-gradient-to-r from-amber-500 via-amber-600 to-yellow-500 text-slate-950 shadow-amber-500/20"
@@ -158,7 +158,7 @@ export const RagChatbotWidget = memo(function RagChatbotWidget() {
 
       {/* Floating RAG Drawer/Modal */}
       {isOpen && (
-        <div className="fixed bottom-4 right-4 z-50 w-[92vw] sm:w-[380px] max-h-[580px] flex flex-col rounded-2xl border border-white/15 bg-neutral-950/95 backdrop-blur-xl shadow-2xl overflow-hidden transition-all duration-300 animate-in fade-in slide-in-from-bottom-5">
+        <div className="fixed bottom-[80px] md:bottom-4 right-2 md:right-4 z-50 w-[calc(100vw-16px)] sm:w-[380px] max-h-[580px] flex flex-col rounded-2xl border border-white/15 bg-neutral-950/95 backdrop-blur-xl shadow-2xl overflow-hidden transition-all duration-300 animate-in fade-in slide-in-from-bottom-5">
           {/* Header */}
           <div
             className={`flex items-center justify-between px-4 py-3 border-b border-white/10 ${

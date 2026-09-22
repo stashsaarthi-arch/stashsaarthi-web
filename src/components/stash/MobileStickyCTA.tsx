@@ -71,10 +71,10 @@ export const MobileStickyCTA = React.memo(function MobileStickyCTA({ onBook }: {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 80, opacity: 0 }}
           transition={{ type: "spring", stiffness: 400, damping: 30 }}
-          className="fixed bottom-2.5 left-2 right-2 z-[100] sm:hidden pointer-events-none pb-[env(safe-area-inset-bottom)]"
+          className="fixed bottom-0 w-full z-50 sm:hidden pointer-events-none pb-[env(safe-area-inset-bottom)]"
         >
-          {/* Floating Dock: height <= 56px */}
-          <div className="h-[52px] max-h-[56px] rounded-2xl px-2 py-1 bg-[#0A0D0F]/95 backdrop-blur-2xl border border-white/[0.14] shadow-[0_12px_36px_-6px_rgba(0,0,0,0.9)] flex items-center justify-between gap-1 pointer-events-auto ring-1 ring-white/5">
+          {/* Floating Dock: height <= 64px */}
+          <div className="h-[64px] w-full px-4 py-2 bg-[#0A0D0F]/90 backdrop-blur-md border-t border-white/10 shadow-[0_-8px_30px_rgba(0,0,0,0.5)] flex items-center justify-between gap-2 pointer-events-auto">
             {/* 4 Compact Icon Chips */}
             <div className="flex items-center gap-1 flex-1 justify-around">
               {CHIPS.map((chip) => {

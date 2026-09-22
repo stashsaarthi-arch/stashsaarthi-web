@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import {
   ShieldCheck,
   CheckCircle2,
@@ -99,9 +100,11 @@ export function HostKycModal({
     setTimeout(() => setCopiedSerial(false), 2000);
   };
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl animate-in fade-in">
-      <div className="relative w-full max-w-3xl bg-[#0A0D0F] border border-white/10 rounded-3xl overflow-hidden shadow-2xl text-foreground">
+  if (!isOpen) return null;
+
+  return createPortal(
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+      <div className="relative z-[10000] w-full max-w-3xl bg-[#0A0D0F] border border-white/10 rounded-3xl overflow-hidden shadow-2xl text-foreground">
         {/* Modal Header */}
         <div className="flex items-center justify-between p-5 border-b border-white/10 bg-white/[0.02]">
           <div className="flex items-center gap-3">
@@ -406,6 +409,7 @@ export function HostKycModal({
           )}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
