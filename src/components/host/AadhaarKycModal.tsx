@@ -37,6 +37,12 @@ export function AadhaarKycModal({ isOpen, onClose, onSuccess }: AadhaarKycModalP
     };
   }, []);
 
+  useEffect(() => {
+    return () => {
+      if (preview) URL.revokeObjectURL(preview);
+    };
+  }, [preview]);
+
   if (!mounted || !isOpen || typeof document === "undefined") return null;
 
   const updatePreview = (file: File | null) => {
@@ -45,12 +51,6 @@ export function AadhaarKycModal({ isOpen, onClose, onSuccess }: AadhaarKycModalP
       return file ? URL.createObjectURL(file) : null;
     });
   };
-
-  useEffect(() => {
-    return () => {
-      if (preview) URL.revokeObjectURL(preview);
-    };
-  }, [preview]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

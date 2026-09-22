@@ -1,7 +1,7 @@
 // Supabase Edge Function: Host Property Photo Auto-Verification via Google Cloud Vision API
 // Verifies property photos for quality, safety, and "ghar jaisa" homestyle aesthetics
 
-// @ts-ignore: Deno standard library URL import for Supabase Edge Runtime
+// @ts-expect-error: Deno standard library URL import for Supabase Edge Runtime
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 
 declare const Deno: {

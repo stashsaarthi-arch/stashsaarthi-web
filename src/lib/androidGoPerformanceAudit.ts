@@ -157,7 +157,7 @@ export async function measureAndroidGoFpsBenchmark(
 
   return new Promise((resolve) => {
     const frameTimes: number[] = [];
-    let startTime = performance.now();
+    const startTime = performance.now();
     let lastTime = startTime;
 
     const onFrame = (now: number) => {

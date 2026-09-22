@@ -1,9 +1,9 @@
 // Supabase Edge Function: generate-invoice (Task 109)
 // Generates GST-compliant PDF invoice bytes using pdf-lib on Deno / Supabase Edge Runtimes
 
-// @ts-ignore: Deno standard library URL import for Supabase Edge Runtime
+// @ts-expect-error: Deno standard library URL import for Supabase Edge Runtime
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
-// @ts-ignore: Deno Skypack CDN import for Supabase Edge Runtime
+// @ts-expect-error: Deno Skypack CDN import for Supabase Edge Runtime
 import { PDFDocument, rgb, StandardFonts } from "https://cdn.skypack.dev/pdf-lib@1.17.1?dts";
 
 const corsHeaders = {

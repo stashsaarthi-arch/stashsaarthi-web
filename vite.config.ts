@@ -9,7 +9,7 @@ export default defineConfig({
   },
   nitro: {
     preset: process.env["VERCEL"] ? "vercel" : process.env["NITRO_PRESET"] || "node-server",
-    // @ts-ignore: externals is a valid nitro property but missing from the wrapper's type definition
+    // @ts-expect-error: externals is a valid nitro property but missing from the wrapper's type definition
     externals: {
       external: [
         "firebase-admin",
