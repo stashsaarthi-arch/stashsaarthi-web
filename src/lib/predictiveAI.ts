@@ -127,11 +127,7 @@ const preloadedCache = new Set<string>();
 export function preloadPersonaAssets(persona: PredictedPersona, confidence: number): string[] {
   if (typeof window === "undefined" || confidence < 0.55) return [];
 
-  const hostAssets = [
-    "/images/og-host.webp",
-    "/images/og-host.png",
-    "/images/founder_advik.webp",
-  ];
+  const hostAssets = ["/images/og-host.webp", "/images/og-host.png", "/images/founder_advik.webp"];
 
   const studentAssets = [
     "/images/og-student.webp",
@@ -277,9 +273,7 @@ class PersonaTelemetryEngine {
       this.features.hoverHostCount += 1;
     }
 
-    const studentElem = target.closest(
-      "[data-persona-target='student'], [data-persona='student']",
-    );
+    const studentElem = target.closest("[data-persona-target='student'], [data-persona='student']");
     if (studentElem) {
       this.features.hoverStudentCount += 1;
     }
@@ -311,10 +305,7 @@ class PersonaTelemetryEngine {
 
               if (hostSelectors.some((s) => s.includes(id)) || persona === "host") {
                 this.hostDwellMs += deltaMs;
-              } else if (
-                studentSelectors.some((s) => s.includes(id)) ||
-                persona === "student"
-              ) {
+              } else if (studentSelectors.some((s) => s.includes(id)) || persona === "student") {
                 this.studentDwellMs += deltaMs;
               }
               this.totalObservedMs += deltaMs;

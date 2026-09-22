@@ -34,10 +34,7 @@ interface AndroidGoPerformanceModalProps {
   onOpenChange: (open: boolean) => void;
 }
 
-export function AndroidGoPerformanceModal({
-  open,
-  onOpenChange,
-}: AndroidGoPerformanceModalProps) {
+export function AndroidGoPerformanceModal({ open, onOpenChange }: AndroidGoPerformanceModalProps) {
   const { language } = useLanguage();
   const isHi = language === "hi";
 
@@ -59,7 +56,7 @@ export function AndroidGoPerformanceModal({
         const root = document.documentElement;
         setIsGoModeActive(
           root.classList.contains("android-go-mode") ||
-            root.getAttribute("data-android-go") === "true"
+            root.getAttribute("data-android-go") === "true",
         );
       }
     }
@@ -75,7 +72,7 @@ export function AndroidGoPerformanceModal({
     toast.success(
       isHi
         ? `बेंचमार्क पूर्ण! औसतन: ${res.avgFps} FPS (न्यूनतम: ${res.minFps} FPS)`
-        : `Benchmark complete! Avg: ${res.avgFps} FPS (Min: ${res.minFps} FPS)`
+        : `Benchmark complete! Avg: ${res.avgFps} FPS (Min: ${res.minFps} FPS)`,
     );
   };
 
@@ -103,7 +100,7 @@ export function AndroidGoPerformanceModal({
           : "⚡ Android Go Ultra-Low-Memory Mode Enabled!"
         : isHi
           ? "स्टैंडर्ड प्रदर्शन मोड पुनर्स्थापित।"
-          : "Standard performance mode restored."
+          : "Standard performance mode restored.",
     );
   };
 
@@ -195,7 +192,9 @@ export function AndroidGoPerformanceModal({
             <div>
               <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2 flex items-center gap-1.5">
                 <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" />
-                {isHi ? "5-बिंदु परफॉर्मेंस व क्रैश-सुरक्षा मैट्रिक्स" : "5-Point Crash-Safety Audit Matrix"}
+                {isHi
+                  ? "5-बिंदु परफॉर्मेंस व क्रैश-सुरक्षा मैट्रिक्स"
+                  : "5-Point Crash-Safety Audit Matrix"}
               </h4>
               <div className="space-y-2">
                 {report.assertions.map((item) => (

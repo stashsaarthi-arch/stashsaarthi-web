@@ -53,7 +53,7 @@ export function getTelemetrySessionId(): string {
  * Record a component interaction event
  */
 export function recordInteraction(
-  record: Omit<ComponentInteractionRecord, "session_id" | "created_at">
+  record: Omit<ComponentInteractionRecord, "session_id" | "created_at">,
 ): void {
   if (typeof window === "undefined") return;
 
@@ -62,8 +62,7 @@ export function recordInteraction(
     return;
   }
 
-  const persona =
-    (localStorage.getItem("ss_user_persona") as "student" | "host") || "student";
+  const persona = (localStorage.getItem("ss_user_persona") as "student" | "host") || "student";
 
   const fullRecord: ComponentInteractionRecord = {
     ...record,
@@ -78,7 +77,7 @@ export function recordInteraction(
   if (import.meta.env.DEV) {
     console.debug(
       `[Telemetry:Interaction] Component: ${fullRecord.component_id} | Type: ${fullRecord.interaction_type} | Dwell: ${fullRecord.dwell_time_ms}ms`,
-      fullRecord.metadata
+      fullRecord.metadata,
     );
   }
 
@@ -112,9 +111,9 @@ export async function flushTelemetryBuffer(): Promise<void> {
   }
 
   try {
-    const { error } = await (supabase.from as any)(
-      "component_interaction_telemetry"
-    ).insert(recordsToFlush);
+    const { error } = await (supabase.from as any)("component_interaction_telemetry").insert(
+      recordsToFlush,
+    );
 
     if (error) {
       logSupabaseError({
@@ -138,7 +137,7 @@ export async function flushTelemetryBuffer(): Promise<void> {
 export function startComponentTimer(
   componentId: string,
   category: string,
-  metadata?: Record<string, unknown>
+  metadata?: Record<string, unknown>,
 ) {
   const startTime = performance.now();
   return (interactionType: "hover" | "dwell" | "view" = "hover") => {
@@ -160,7 +159,7 @@ export function startComponentTimer(
 export function useComponentTelemetry(
   componentId: string,
   category: string,
-  metadata?: Record<string, unknown>
+  metadata?: Record<string, unknown>,
 ) {
   const hoverStartRef = useRef<number | null>(null);
 
@@ -212,7 +211,7 @@ export function useComponentTelemetry(
         metadata: { ...metadata, ...extraMetadata },
       });
     },
-    [componentId, category, metadata]
+    [componentId, category, metadata],
   );
 
   return {

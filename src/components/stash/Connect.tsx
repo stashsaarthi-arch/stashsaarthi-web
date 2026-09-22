@@ -202,7 +202,11 @@ export function Connect(_props: { onBook: OpenBooking }) {
             className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/40 bg-gradient-to-r from-amber-500/20 via-amber-700/20 to-emerald-500/20 px-3.5 py-1 text-xs font-bold text-amber-300 transition hover:scale-105 shadow-md shadow-amber-500/10 cursor-pointer"
           >
             <Trophy className="h-3.5 w-3.5 text-amber-400" />
-            <span>{isHi ? "होस्ट कर्म अंक एवं सम्मान चार्टर (Karma Rewards)" : "Verified PG Owner Karma Points & Perks Charter"}</span>
+            <span>
+              {isHi
+                ? "होस्ट कर्म अंक एवं सम्मान चार्टर (Karma Rewards)"
+                : "Verified PG Owner Karma Points & Perks Charter"}
+            </span>
           </button>
         </div>
       </div>
@@ -272,13 +276,9 @@ export function Connect(_props: { onBook: OpenBooking }) {
                   icon={<Heart className="h-4 w-4 text-amber" />}
                   accent="var(--amber)"
                   name={match.host.name}
-                  detail={
-                    isHi && match.host.detail_hi ? match.host.detail_hi : match.host.detail
-                  }
+                  detail={isHi && match.host.detail_hi ? match.host.detail_hi : match.host.detail}
                   label={t.connectSection.offers}
-                  items={
-                    isHi && match.host.offers_hi ? match.host.offers_hi : match.host.offers
-                  }
+                  items={isHi && match.host.offers_hi ? match.host.offers_hi : match.host.offers}
                   karmaPoints={match.host.karmaPoints}
                   karmaTier={match.host.karmaTier}
                   onKarmaClick={() => setKarmaModal(true)}

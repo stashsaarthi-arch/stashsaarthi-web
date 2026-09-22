@@ -13,23 +13,24 @@ StashSaarthi v3.0 represents the culmination of **10 Sprint Cycles** and **101 p
 
 ### Key v3.0 Highlights
 
-| Metric | Value |
-|---|---|
-| Total Tasks Completed | 101 / 101 |
-| Total Sprints | 10 (Sprint 0–10) |
-| Total Components | 89+ React components |
-| Total Routes | 10 production routes |
-| TypeScript Errors | 0 |
-| Build Errors | 0 |
-| Bundle Reduction | 44% (routes chunk: 1,132 kB → 637 kB) |
-| DPDP & GDPR Compliance | 100% audit score |
-| Supabase RLS Coverage | 100% (14/14 tables) |
+| Metric                 | Value                                 |
+| ---------------------- | ------------------------------------- |
+| Total Tasks Completed  | 101 / 101                             |
+| Total Sprints          | 10 (Sprint 0–10)                      |
+| Total Components       | 89+ React components                  |
+| Total Routes           | 10 production routes                  |
+| TypeScript Errors      | 0                                     |
+| Build Errors           | 0                                     |
+| Bundle Reduction       | 44% (routes chunk: 1,132 kB → 637 kB) |
+| DPDP & GDPR Compliance | 100% audit score                      |
+| Supabase RLS Coverage  | 100% (14/14 tables)                   |
 
 ---
 
 ## 📋 Sprint-by-Sprint Changelog
 
 ### Sprint 0: Foundation & Polish (Tasks 1–11)
+
 - ✅ Supabase telemetry & offline persistence audit
 - ✅ Deep tab navigation synchronization & smart explore search
 - ✅ Mobile overflow elimination (<400px) & touch target safety
@@ -43,6 +44,7 @@ StashSaarthi v3.0 represents the culmination of **10 Sprint Cycles** and **101 p
 - ✅ Lighthouse 95+ score across mobile & desktop
 
 ### Sprint 1: CTO — Performance & Backend (Tasks 12–19)
+
 - ✅ Supabase RPC latency optimizations
 - ✅ Service Worker for offline-first caching
 - ✅ WEBP image refactor with automatic srcset
@@ -53,6 +55,7 @@ StashSaarthi v3.0 represents the culmination of **10 Sprint Cycles** and **101 p
 - ✅ Playwright E2E testing stub for booking flow
 
 ### Sprint 2: CPO — Product & UI Excellence (Tasks 20–27)
+
 - ✅ Dark mode toggle with smooth palette transition
 - ✅ Skeleton loaders for all data-fetching components
 - ✅ Host persona dashboard with projected income charts
@@ -63,6 +66,7 @@ StashSaarthi v3.0 represents the culmination of **10 Sprint Cycles** and **101 p
 - ✅ WCAG AA contrast ratio compliance audit
 
 ### Sprint 3: CMO — Marketing & Storytelling (Tasks 28–35)
+
 - ✅ Student Success Stories carousel component
 - ✅ Dynamic OpenGraph images per route/persona
 - ✅ Localized Hindi copy for pricing calculator
@@ -73,6 +77,7 @@ StashSaarthi v3.0 represents the culmination of **10 Sprint Cycles** and **101 p
 - ✅ "Why StashSaarthi vs. Traditional PGs" comparison table
 
 ### Sprint 4: CRO — Conversion Rate Optimization (Tasks 36–43)
+
 - ✅ Exit-intent popups with discount offers
 - ✅ A/B tested Hero CTA button color (Mint vs. Emerald)
 - ✅ Reduced mandatory fields in lead capture form
@@ -83,6 +88,7 @@ StashSaarthi v3.0 represents the culmination of **10 Sprint Cycles** and **101 p
 - ✅ Scroll-depth analysis & module reordering
 
 ### Sprint 5: QA & CSO — Quality, Safety, Compliance (Tasks 44–50)
+
 - ✅ Supabase RLS security audit
 - ✅ Older Android device WebGL crash testing
 - ✅ Host Vetting Process flow diagram
@@ -92,6 +98,7 @@ StashSaarthi v3.0 represents the culmination of **10 Sprint Cycles** and **101 p
 - ✅ Master Release Note v2.0
 
 ### Sprint 6: Advanced AI & Infrastructure (Tasks 51–59)
+
 - ✅ TensorFlow.js predictive persona detection
 - ✅ Location-based pricing tiers (Supabase schema)
 - ✅ Google Cloud Vision API host photo verification (Edge Function)
@@ -103,6 +110,7 @@ StashSaarthi v3.0 represents the culmination of **10 Sprint Cycles** and **101 p
 - ✅ Multi-region Edge Function deployment
 
 ### Sprint 7: CPO & UI/UX — Hyperlocal Mobile (Tasks 60–68)
+
 - ✅ Real-time kitchen availability percentage bars
 - ✅ "Re-order My Last Meal" shortcut
 - ✅ 360° photo viewer for Saarthi Spaces room tours
@@ -114,6 +122,7 @@ StashSaarthi v3.0 represents the culmination of **10 Sprint Cycles** and **101 p
 - ✅ Partial UPI Payment (50% cash at pickup)
 
 ### Sprint 8: CMO & CLO — Hyperlocal Growth (Tasks 69–76)
+
 - ✅ Dedicated coaching hub SEO pages (Motion, PW, Allen)
 - ✅ "Surviving Kakadeo" downloadable PDF guide
 - ✅ Kanpur Student Council community section
@@ -124,6 +133,7 @@ StashSaarthi v3.0 represents the culmination of **10 Sprint Cycles** and **101 p
 - ✅ Student Testimonial short-form video section
 
 ### Sprint 9: CRO & CAO — Intelligent Conversion (Tasks 77–84)
+
 - ✅ Personalized WhatsApp re-engagement nudges
 - ✅ Meal Personalization ("Skip Rice, Extra Roti")
 - ✅ "Instant Booking" high-contrast button for Spaces
@@ -134,6 +144,7 @@ StashSaarthi v3.0 represents the culmination of **10 Sprint Cycles** and **101 p
 - ✅ A/B test Standard Thali price label variants
 
 ### Sprint 10: QA, CSO & CEO — Total Assurance (Tasks 85–101)
+
 - ✅ Service Worker 2G stress testing
 - ✅ QR code E2E booking flow verification
 - ✅ GDPR & DPDP Act compliance audit (100% score)
@@ -156,18 +167,18 @@ StashSaarthi v3.0 represents the culmination of **10 Sprint Cycles** and **101 p
 
 ## 🏗️ Technical Stack
 
-| Layer | Technology |
-|---|---|
-| Framework | React 19 + TanStack Start + TanStack Router |
-| Language | TypeScript 5.8 (strict mode) |
-| Styling | Tailwind CSS 4 |
-| Animation | GSAP 3.15 + Lenis smooth scroll + Framer Motion |
-| Backend | Supabase (Auth, DB, Edge Functions, Storage) |
-| Build | Vite 8 + Nitro SSR |
-| Hosting | Vercel (auto-deploy) |
-| Testing | Playwright E2E + Node.js test harnesses |
-| SEO | JSON-LD schema.org + Dynamic OpenGraph |
-| Security | RLS, JWT audit, rate-limiting, DPDP/GDPR compliance |
+| Layer     | Technology                                          |
+| --------- | --------------------------------------------------- |
+| Framework | React 19 + TanStack Start + TanStack Router         |
+| Language  | TypeScript 5.8 (strict mode)                        |
+| Styling   | Tailwind CSS 4                                      |
+| Animation | GSAP 3.15 + Lenis smooth scroll + Framer Motion     |
+| Backend   | Supabase (Auth, DB, Edge Functions, Storage)        |
+| Build     | Vite 8 + Nitro SSR                                  |
+| Hosting   | Vercel (auto-deploy)                                |
+| Testing   | Playwright E2E + Node.js test harnesses             |
+| SEO       | JSON-LD schema.org + Dynamic OpenGraph              |
+| Security  | RLS, JWT audit, rate-limiting, DPDP/GDPR compliance |
 
 ---
 

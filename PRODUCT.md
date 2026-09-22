@@ -23,6 +23,7 @@ web
 StashSaarthi is India's Zero-CapEx Intergenerational Living & Campus Micro-Storage Platform. It unlocks domestic micro-storage and living inventory inside elderly residents' homes for college students, eliminating student dead rent while providing dignified supplemental income and community connection to senior hosts.
 
 Success means:
+
 - Zero student dead-rent wasted during campus vacations.
 - Zero-brokerage housing matches with escrow security and guaranteed custody.
 - Steady, dignified, zero-intrusion earnings for senior hosts.
@@ -40,9 +41,9 @@ The only hyper-local intergenerational living platform providing peer-to-peer ca
 ## Capabilities and Constraints
 
 - **Core Service Nodes:**
-  1. *Saarthi Stash (Micro-Storage):* ₹300/bag/month (Host gets ₹180, Platform Net: ₹80 / 26.7%). Laser tamper seal + ₹10,000 micro-insurance.
-  2. *Saarthi Spaces (Co-Living):* Avg ₹5,500/mo. Zero brokerage guaranteed. 10% student fee + 5% host fee. 24h relocation guarantee.
-  3. *Saarthi Kitchen (Neighbourhood Tiffins):* ₹90/meal or ₹2,400/mo (Host gets ₹55/meal).
+  1. _Saarthi Stash (Micro-Storage):_ ₹300/bag/month (Host gets ₹180, Platform Net: ₹80 / 26.7%). Laser tamper seal + ₹10,000 micro-insurance.
+  2. _Saarthi Spaces (Co-Living):_ Avg ₹5,500/mo. Zero brokerage guaranteed. 10% student fee + 5% host fee. 24h relocation guarantee.
+  3. _Saarthi Kitchen (Neighbourhood Tiffins):_ ₹90/meal or ₹2,400/mo (Host gets ₹55/meal).
 - **Dual Persona Sync:** Global state switch between Student Persona and Elderly Host Persona changing copy, hierarchy, and value proposition.
 - **Bilingual Core:** Full synchronized English (`en`) and Hindi (`hi`) across all UI elements.
 - **Technical Stack:** TanStack Start / React 19, TypeScript, Tailwind CSS (v4), Lenis kinetic smooth scrolling, Supabase backend & Edge Functions.

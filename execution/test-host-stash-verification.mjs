@@ -6,7 +6,10 @@ console.log("🧪 Running Host Stash Verification Checklist Test Harness...");
 
 // 1. Check file existence
 const enginePath = path.join(process.cwd(), "src/lib/hostVerificationEngine.ts");
-const componentPath = path.join(process.cwd(), "src/components/stash/HostStashVerificationModal.tsx");
+const componentPath = path.join(
+  process.cwd(),
+  "src/components/stash/HostStashVerificationModal.tsx",
+);
 const adminPath = path.join(process.cwd(), "src/routes/admin.tsx");
 
 assert.ok(fs.existsSync(enginePath), "hostVerificationEngine.ts should exist");
@@ -18,9 +21,18 @@ console.log("✅ 1. Required files exist.");
 // 2. Import engine dynamically
 const engine = await import("../src/lib/hostVerificationEngine.ts");
 
-assert.ok(typeof engine.validateIntakeChecklist === "function", "validateIntakeChecklist function should be exported");
-assert.ok(typeof engine.createAndSaveVerification === "function", "createAndSaveVerification function should be exported");
-assert.ok(typeof engine.getSavedVerifications === "function", "getSavedVerifications function should be exported");
+assert.ok(
+  typeof engine.validateIntakeChecklist === "function",
+  "validateIntakeChecklist function should be exported",
+);
+assert.ok(
+  typeof engine.createAndSaveVerification === "function",
+  "createAndSaveVerification function should be exported",
+);
+assert.ok(
+  typeof engine.getSavedVerifications === "function",
+  "getSavedVerifications function should be exported",
+);
 assert.strictEqual(engine.MAX_ALLOWED_WEIGHT_KG, 25.0, "MAX_ALLOWED_WEIGHT_KG should be 25.0");
 
 console.log("✅ 2. Engine exports verified.");
@@ -84,9 +96,18 @@ console.log("✅ 6. Verification record creation test PASSED.");
 
 // 7. Verify admin.tsx integration
 const adminContent = fs.readFileSync(adminPath, "utf8");
-assert.ok(adminContent.includes("HostStashVerificationModal"), "admin.tsx should import HostStashVerificationModal");
-assert.ok(adminContent.includes("setIsHostVerificationOpen"), "admin.tsx should manage host verification state");
-assert.ok(adminContent.includes("Stash Verification"), "admin.tsx should render Stash Verification button");
+assert.ok(
+  adminContent.includes("HostStashVerificationModal"),
+  "admin.tsx should import HostStashVerificationModal",
+);
+assert.ok(
+  adminContent.includes("setIsHostVerificationOpen"),
+  "admin.tsx should manage host verification state",
+);
+assert.ok(
+  adminContent.includes("Stash Verification"),
+  "admin.tsx should render Stash Verification button",
+);
 
 console.log("✅ 7. Admin dashboard integration verified.");
 

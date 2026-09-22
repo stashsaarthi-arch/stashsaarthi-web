@@ -116,7 +116,9 @@ export function AuthButton({ compact = false }: { compact?: boolean }) {
           </Avatar>
           <div className="flex flex-col items-start leading-none">
             <span className="max-w-[7rem] truncate text-xs font-semibold text-white">{first}</span>
-            <span className={`text-[9px] font-medium uppercase tracking-wider ${isHostActive ? "text-amber-400" : "text-cyan-400"}`}>
+            <span
+              className={`text-[9px] font-medium uppercase tracking-wider ${isHostActive ? "text-amber-400" : "text-cyan-400"}`}
+            >
               {roleBadge}
             </span>
           </div>

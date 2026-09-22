@@ -82,7 +82,9 @@ export const SoundToggle = React.memo(function SoundToggle({
       ) : (
         <VolumeX className="h-3.5 w-3.5" />
       )}
-      <span>{enabled ? (isHi ? "ध्वनि चालू" : "Sound On") : (isHi ? "ध्वनि म्यूट" : "Sound Off")}</span>
+      <span>
+        {enabled ? (isHi ? "ध्वनि चालू" : "Sound On") : isHi ? "ध्वनि म्यूट" : "Sound Off"}
+      </span>
     </button>
   );
 });

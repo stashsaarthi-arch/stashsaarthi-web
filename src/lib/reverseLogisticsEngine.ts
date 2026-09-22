@@ -1,9 +1,9 @@
 /**
  * StashSaarthi — Reverse Logistics Proxy-Handover Verification Engine (Task 131)
- * 
+ *
  * Enables students who cannot return to campus at the end of break to securely authorize
  * a designated friend/proxy to retrieve or receive their stored luggage boxes.
- * 
+ *
  * Features 2-factor proxy authentication (Owner Secret PIN + Proxy Aadhaar/ID match),
  * single-use authorization token invalidation, and runner release verification.
  */
@@ -18,7 +18,7 @@ export interface ProxyHandoverRequest {
   proxyGovtIdLast4: string;
   verificationPin: string;
   authCode: string;
-  status: 'AUTHORIZED' | 'CLAIMED' | 'EXPIRED' | 'REVOKED';
+  status: "AUTHORIZED" | "CLAIMED" | "EXPIRED" | "REVOKED";
   createdAt: string;
   claimedAt?: string | undefined;
   claimedByRunner?: string | undefined;
@@ -41,7 +41,7 @@ export interface ProxyHandoverStats {
   securitySlaPercent: number;
 }
 
-const STORAGE_KEY = 'ss_proxy_handover_records';
+const STORAGE_KEY = "ss_proxy_handover_records";
 
 /**
  * Generate a 6-digit verification PIN
@@ -55,8 +55,11 @@ export function generate6DigitPin(): string {
  * Generate a unique Proxy Authorization Code
  */
 export function generateAuthCode(bookingId: string, pin: string): string {
-  const cleanId = bookingId.trim().toUpperCase().replace(/[^A-Z0-9]/g, '');
-  const last4 = cleanId.slice(-4) || '8921';
+  const cleanId = bookingId
+    .trim()
+    .toUpperCase()
+    .replace(/[^A-Z0-9]/g, "");
+  const last4 = cleanId.slice(-4) || "8921";
   return `PROXY-PASS-${last4}-${pin.slice(0, 4)}`;
 }
 
@@ -75,7 +78,7 @@ export function createProxyHandoverAuthorization(params: {
 }): ProxyHandoverRequest {
   const pin = generate6DigitPin();
   const authCode = generateAuthCode(params.bookingId, pin);
-  
+
   const record: ProxyHandoverRequest = {
     id: `PROXY-AUTH-${Math.floor(10000 + Math.random() * 90000)}`,
     bookingId: params.bookingId.trim().toUpperCase(),
@@ -86,10 +89,10 @@ export function createProxyHandoverAuthorization(params: {
     proxyGovtIdLast4: params.proxyGovtIdLast4.trim(),
     verificationPin: pin,
     authCode,
-    status: 'AUTHORIZED',
+    status: "AUTHORIZED",
     createdAt: new Date().toISOString(),
-    deliveryNode: params.deliveryNode || 'Kakadeo Hub, Kanpur',
-    notes: params.notes || 'End of break proxy handover authorized by student.'
+    deliveryNode: params.deliveryNode || "Kakadeo Hub, Kanpur",
+    notes: params.notes || "End of break proxy handover authorized by student.",
   };
 
   saveProxyHandoverRecord(record);
@@ -100,7 +103,7 @@ export function createProxyHandoverAuthorization(params: {
  * Retrieve all proxy handover records
  */
 export function getProxyHandoverRecords(): ProxyHandoverRequest[] {
-  if (typeof window === 'undefined') return getMockProxyRecords();
+  if (typeof window === "undefined") return getMockProxyRecords();
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) {
@@ -120,17 +123,17 @@ export function getProxyHandoverRecords(): ProxyHandoverRequest[] {
 export function getProxyHandoverByBookingId(bookingId: string): ProxyHandoverRequest | undefined {
   const records = getProxyHandoverRecords();
   const cleanId = bookingId.trim().toUpperCase();
-  return records.find(r => r.bookingId === cleanId && r.status === 'AUTHORIZED');
+  return records.find((r) => r.bookingId === cleanId && r.status === "AUTHORIZED");
 }
 
 /**
  * Save or update a proxy handover record in local storage
  */
 export function saveProxyHandoverRecord(record: ProxyHandoverRequest): void {
-  if (typeof window === 'undefined') return;
+  if (typeof window === "undefined") return;
   try {
     const records = getProxyHandoverRecords();
-    const existingIndex = records.findIndex(r => r.id === record.id);
+    const existingIndex = records.findIndex((r) => r.id === record.id);
     let updated: ProxyHandoverRequest[];
     if (existingIndex >= 0) {
       updated = [...records];
@@ -149,12 +152,12 @@ export function saveProxyHandoverRecord(record: ProxyHandoverRequest): void {
  */
 export function verifyProxyHandoverCode(
   authCodeOrPin: string,
-  bookingId?: string
+  bookingId?: string,
 ): ProxyVerificationResult {
   const records = getProxyHandoverRecords();
   const query = authCodeOrPin.trim().toUpperCase();
 
-  const matched = records.find(r => {
+  const matched = records.find((r) => {
     const matchCode = r.authCode.toUpperCase() === query || r.verificationPin === query;
     if (!bookingId) return matchCode;
     return matchCode && r.bookingId.toUpperCase() === bookingId.trim().toUpperCase();
@@ -163,23 +166,23 @@ export function verifyProxyHandoverCode(
   if (!matched) {
     return {
       success: false,
-      message: 'Invalid authorization code or 6-digit PIN. Verification failed.'
+      message: "Invalid authorization code or 6-digit PIN. Verification failed.",
     };
   }
 
-  if (matched.status === 'CLAIMED') {
+  if (matched.status === "CLAIMED") {
     return {
       success: false,
-      message: `Authorization already claimed on ${new Date(matched.claimedAt || '').toLocaleString()}. Single-use token expired.`,
-      record: matched
+      message: `Authorization already claimed on ${new Date(matched.claimedAt || "").toLocaleString()}. Single-use token expired.`,
+      record: matched,
     };
   }
 
-  if (matched.status === 'REVOKED') {
+  if (matched.status === "REVOKED") {
     return {
       success: false,
-      message: 'This proxy handover authorization was revoked by the original student owner.',
-      record: matched
+      message: "This proxy handover authorization was revoked by the original student owner.",
+      record: matched,
     };
   }
 
@@ -187,7 +190,7 @@ export function verifyProxyHandoverCode(
     success: true,
     message: `✅ Verified! Authorized proxy: ${matched.proxyName} (${matched.proxyPhone}, ID Last4: ${matched.proxyGovtIdLast4})`,
     record: matched,
-    verificationToken: `TOKEN-RELEASE-${matched.id}`
+    verificationToken: `TOKEN-RELEASE-${matched.id}`,
   };
 }
 
@@ -196,8 +199,8 @@ export function verifyProxyHandoverCode(
  */
 export function confirmProxyHandoverRelease(
   authCodeOrPin: string,
-  runnerId: string = 'RUNNER-KNP-01',
-  bookingId?: string
+  runnerId: string = "RUNNER-KNP-01",
+  bookingId?: string,
 ): ProxyVerificationResult {
   const verification = verifyProxyHandoverCode(authCodeOrPin, bookingId);
   if (!verification.success || !verification.record) {
@@ -207,9 +210,9 @@ export function confirmProxyHandoverRelease(
   const record = verification.record;
   const updatedRecord: ProxyHandoverRequest = {
     ...record,
-    status: 'CLAIMED',
+    status: "CLAIMED",
     claimedAt: new Date().toISOString(),
-    claimedByRunner: runnerId
+    claimedByRunner: runnerId,
   };
 
   saveProxyHandoverRecord(updatedRecord);
@@ -218,7 +221,7 @@ export function confirmProxyHandoverRelease(
     success: true,
     message: `🎉 Luggage successfully released to proxy ${record.proxyName}! Handover receipt logged by ${runnerId}.`,
     record: updatedRecord,
-    verificationToken: `RELEASED-${updatedRecord.id}`
+    verificationToken: `RELEASED-${updatedRecord.id}`,
   };
 }
 
@@ -227,12 +230,12 @@ export function confirmProxyHandoverRelease(
  */
 export function revokeProxyHandoverAuthorization(id: string): boolean {
   const records = getProxyHandoverRecords();
-  const target = records.find(r => r.id === id);
-  if (!target || target.status !== 'AUTHORIZED') return false;
+  const target = records.find((r) => r.id === id);
+  if (!target || target.status !== "AUTHORIZED") return false;
 
   const updated: ProxyHandoverRequest = {
     ...target,
-    status: 'REVOKED'
+    status: "REVOKED",
   };
   saveProxyHandoverRecord(updated);
   return true;
@@ -244,9 +247,9 @@ export function revokeProxyHandoverAuthorization(id: string): boolean {
 export function getProxyHandoverStats(): ProxyHandoverStats {
   const records = getProxyHandoverRecords();
   const totalRequests = records.length;
-  const authorizedCount = records.filter(r => r.status === 'AUTHORIZED').length;
-  const claimedCount = records.filter(r => r.status === 'CLAIMED').length;
-  const revokedCount = records.filter(r => r.status === 'REVOKED').length;
+  const authorizedCount = records.filter((r) => r.status === "AUTHORIZED").length;
+  const claimedCount = records.filter((r) => r.status === "CLAIMED").length;
+  const revokedCount = records.filter((r) => r.status === "REVOKED").length;
   const securitySlaPercent = totalRequests > 0 ? 100.0 : 100.0;
 
   return {
@@ -254,7 +257,7 @@ export function getProxyHandoverStats(): ProxyHandoverStats {
     authorizedCount,
     claimedCount,
     revokedCount,
-    securitySlaPercent
+    securitySlaPercent,
   };
 }
 
@@ -264,36 +267,36 @@ export function getProxyHandoverStats(): ProxyHandoverStats {
 function getMockProxyRecords(): ProxyHandoverRequest[] {
   return [
     {
-      id: 'PROXY-AUTH-90124',
-      bookingId: 'STASH-KNP-8921',
-      studentName: 'Advik Sharma',
-      studentPhone: '+919876543210',
-      proxyName: 'Rohan Verma (Friend)',
-      proxyPhone: '+919123456789',
-      proxyGovtIdLast4: '4821',
-      verificationPin: '849201',
-      authCode: 'PROXY-PASS-8921-8492',
-      status: 'AUTHORIZED',
+      id: "PROXY-AUTH-90124",
+      bookingId: "STASH-KNP-8921",
+      studentName: "Advik Sharma",
+      studentPhone: "+919876543210",
+      proxyName: "Rohan Verma (Friend)",
+      proxyPhone: "+919123456789",
+      proxyGovtIdLast4: "4821",
+      verificationPin: "849201",
+      authCode: "PROXY-PASS-8921-8492",
+      status: "AUTHORIZED",
       createdAt: new Date(Date.now() - 2 * 3600000).toISOString(),
-      deliveryNode: 'IIT Kanpur Nankari Gate',
-      notes: 'Advik in home town; authorized roommate Rohan to collect luggage box.'
+      deliveryNode: "IIT Kanpur Nankari Gate",
+      notes: "Advik in home town; authorized roommate Rohan to collect luggage box.",
     },
     {
-      id: 'PROXY-AUTH-77120',
-      bookingId: 'STASH-IITK-4012',
-      studentName: 'Priya Mishra',
-      studentPhone: '+919988776655',
-      proxyName: 'Ananya Gupta',
-      proxyPhone: '+919887766554',
-      proxyGovtIdLast4: '1092',
-      verificationPin: '192834',
-      authCode: 'PROXY-PASS-4012-1928',
-      status: 'CLAIMED',
+      id: "PROXY-AUTH-77120",
+      bookingId: "STASH-IITK-4012",
+      studentName: "Priya Mishra",
+      studentPhone: "+919988776655",
+      proxyName: "Ananya Gupta",
+      proxyPhone: "+919887766554",
+      proxyGovtIdLast4: "1092",
+      verificationPin: "192834",
+      authCode: "PROXY-PASS-4012-1928",
+      status: "CLAIMED",
       createdAt: new Date(Date.now() - 24 * 3600000).toISOString(),
       claimedAt: new Date(Date.now() - 5 * 3600000).toISOString(),
-      claimedByRunner: 'RUNNER-KAKADEO-01',
-      deliveryNode: 'Kakadeo PW Hostel Hub',
-      notes: 'Handover verified with Aadhaar last 4 digits.'
-    }
+      claimedByRunner: "RUNNER-KAKADEO-01",
+      deliveryNode: "Kakadeo PW Hostel Hub",
+      notes: "Handover verified with Aadhaar last 4 digits.",
+    },
   ];
 }

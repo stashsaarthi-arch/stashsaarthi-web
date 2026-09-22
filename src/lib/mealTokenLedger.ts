@@ -63,7 +63,7 @@ export function generateTokenHash(
   tokenId: string,
   subscriptionId: string,
   userPhone: string,
-  index: number
+  index: number,
 ): string {
   const input = `STASH_MEAL_TOKEN::${tokenId}::${subscriptionId}::${userPhone}::${index}::SECURE_SALT_2026`;
   let hash = 0x811c9dc5;
@@ -84,7 +84,7 @@ export function verifyMealTokenSignature(token: MealMicroToken): boolean {
     token.tokenId,
     token.subscriptionId,
     token.userPhone,
-    token.tokenIndex
+    token.tokenIndex,
   );
   return token.tokenHash === expectedHash;
 }
@@ -140,7 +140,7 @@ export function mintMealTokenSubscription(
   userName: string,
   tierId: string = "special",
   tierName: string = "Special Thali",
-  packageType: PackageType = "MONTHLY_30_DAY"
+  packageType: PackageType = "MONTHLY_30_DAY",
 ): MealTokenSubscription {
   const now = new Date();
   const subscriptionId = `SUB-${now.getFullYear()}-KITCHEN-${Math.floor(1000 + Math.random() * 9000)}`;
@@ -166,10 +166,13 @@ export function mintMealTokenSubscription(
   const tokens: MealMicroToken[] = [];
 
   for (let i = 1; i <= totalTokens; i++) {
-    const randomHex = Math.floor(0x1000 + Math.random() * 0xefff).toString(16).toUpperCase();
+    const randomHex = Math.floor(0x1000 + Math.random() * 0xefff)
+      .toString(16)
+      .toUpperCase();
     const tokenId = `MTK-${Math.floor(1000 + Math.random() * 9000)}-${randomHex}`;
     const tokenHash = generateTokenHash(tokenId, subscriptionId, userPhone, i);
-    const mealSlot: MealSlot = packageType === "FLEX_10_PACK" ? "ANY" : (i % 2 === 1 ? "LUNCH" : "DINNER");
+    const mealSlot: MealSlot =
+      packageType === "FLEX_10_PACK" ? "ANY" : i % 2 === 1 ? "LUNCH" : "DINNER";
 
     tokens.push({
       tokenId,
@@ -216,7 +219,7 @@ export function mintMealTokenSubscription(
 export function burnMealToken(
   tokenIdOrSubId: string,
   vendorNodeId: string = "annapurna",
-  vendorName: string = "Kakadeo Hub - Annapurna Kitchen"
+  vendorName: string = "Kakadeo Hub - Annapurna Kitchen",
 ): { success: boolean; token?: MealMicroToken | undefined; message: string } {
   const subscriptions = getAllSubscriptions();
   let targetToken: MealMicroToken | undefined;
@@ -225,7 +228,9 @@ export function burnMealToken(
   for (const sub of subscriptions) {
     // Find active token by tokenId OR find first active token in subscription
     const token = sub.tokens.find(
-      (t) => (t.tokenId === tokenIdOrSubId || sub.subscriptionId === tokenIdOrSubId) && t.status === "ACTIVE"
+      (t) =>
+        (t.tokenId === tokenIdOrSubId || sub.subscriptionId === tokenIdOrSubId) &&
+        t.status === "ACTIVE",
     );
     if (token) {
       targetToken = token;
@@ -266,7 +271,7 @@ export function burnMealToken(
  */
 export function toggleSubscriptionFreeze(
   subscriptionId: string,
-  freeze: boolean
+  freeze: boolean,
 ): { success: boolean; updatedCount: number } {
   const subscriptions = getAllSubscriptions();
   const sub = subscriptions.find((s) => s.subscriptionId === subscriptionId);
@@ -293,7 +298,11 @@ export function toggleSubscriptionFreeze(
 export function getMealTokenStats(userPhone?: string): MealTokenStats {
   const allSubs = getAllSubscriptions();
   const filteredSubs = userPhone
-    ? allSubs.filter((s) => s.userPhone === userPhone || s.userPhone.replace(/\D/g, "").includes(userPhone.replace(/\D/g, "")))
+    ? allSubs.filter(
+        (s) =>
+          s.userPhone === userPhone ||
+          s.userPhone.replace(/\D/g, "").includes(userPhone.replace(/\D/g, "")),
+      )
     : allSubs;
 
   let totalMinted = 0;
@@ -318,7 +327,8 @@ export function getMealTokenStats(userPhone?: string): MealTokenStats {
     }
   }
 
-  const burnRatePercentage = totalMinted > 0 ? Number(((totalBurned / totalMinted) * 100).toFixed(1)) : 0;
+  const burnRatePercentage =
+    totalMinted > 0 ? Number(((totalBurned / totalMinted) * 100).toFixed(1)) : 0;
 
   return {
     totalSubscriptions: filteredSubs.length,

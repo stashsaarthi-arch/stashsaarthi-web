@@ -5,20 +5,11 @@
   "pipelines": {
     "dev": {
       "mode": "parallel",
-      "tasks": [
-        "antigravity:ui",
-        "antigravity:api",
-        "worker:booking-expiry"
-      ]
+      "tasks": ["antigravity:ui", "antigravity:api", "worker:booking-expiry"]
     },
     "deploy:prep": {
       "mode": "series",
-      "tasks": [
-        "check:types",
-        "check:lint",
-        "test:unit",
-        "antigravity:build"
-      ]
+      "tasks": ["check:types", "check:lint", "test:unit", "antigravity:build"]
     }
   },
   "tasks": {

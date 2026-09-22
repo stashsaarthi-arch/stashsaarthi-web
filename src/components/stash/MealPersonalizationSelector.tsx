@@ -68,7 +68,9 @@ export const MealPersonalizationSelector: React.FC<MealPersonalizationSelectorPr
       </div>
 
       {/* Options List */}
-      <div className={compact ? "grid grid-cols-1 gap-2" : "grid grid-cols-1 sm:grid-cols-2 gap-2.5"}>
+      <div
+        className={compact ? "grid grid-cols-1 gap-2" : "grid grid-cols-1 sm:grid-cols-2 gap-2.5"}
+      >
         {MEAL_PERSONALIZATION_OPTIONS.map((opt: MealPersonalization) => {
           const isSelected = selectedIds.includes(opt.id);
 
@@ -106,15 +108,11 @@ export const MealPersonalizationSelector: React.FC<MealPersonalizationSelectorPr
                       opt.priceDelta === 0
                         ? "bg-cyan-500/20 text-cyan-300 border-cyan-500/30"
                         : isSelected
-                        ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/40"
-                        : "bg-slate-800 text-slate-300 border-white/10"
+                          ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/40"
+                          : "bg-slate-800 text-slate-300 border-white/10"
                     }`}
                   >
-                    {opt.priceDelta === 0
-                      ? isHi
-                        ? "मुफ्त"
-                        : "FREE"
-                      : `+₹${opt.priceDelta}`}
+                    {opt.priceDelta === 0 ? (isHi ? "मुफ्त" : "FREE") : `+₹${opt.priceDelta}`}
                   </span>
                 </div>
 

@@ -107,6 +107,7 @@ stashsaarthi/
 
 <!-- BEGIN TESTSPRITE AGENT SECTION (testsprite agent install codex) -->
 <!-- testsprite-skill: testsprite-verify+testsprite-onboard v0.11.0 sha256:c67b36d1eb44 -->
+
 # TestSprite Verification Loop
 
 After a feature/fix, run relevant tests and inspect failures before reporting done.
@@ -226,5 +227,5 @@ testsprite test create --plan-from plan.json --dry-run --output json
 
 Setup: `npm install -g @testsprite/testsprite-cli`, then `testsprite setup`.
 
-**First-time setup:** if this repo has no TestSprite tests yet, seed a *broad* first suite across its main user flows — not just one test — each with a concrete, observable assertion, before reporting setup as done.
+**First-time setup:** if this repo has no TestSprite tests yet, seed a _broad_ first suite across its main user flows — not just one test — each with a concrete, observable assertion, before reporting setup as done.
 <!-- END TESTSPRITE AGENT SECTION -->

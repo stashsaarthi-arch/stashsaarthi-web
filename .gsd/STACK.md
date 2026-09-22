@@ -4,64 +4,66 @@
 
 ## Runtime
 
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| Node.js | ^22.16.5 | Build and dev environment |
-| React | ^19.2.0 | Frontend library |
-| TypeScript | ^5.8.3 | Core language |
+| Technology | Version  | Purpose                   |
+| ---------- | -------- | ------------------------- |
+| Node.js    | ^22.16.5 | Build and dev environment |
+| React      | ^19.2.0  | Frontend library          |
+| TypeScript | ^5.8.3   | Core language             |
 
 ## Dependencies
 
 ### Production
-| Package | Version | Purpose |
-|---------|---------|---------|
-| `@supabase/supabase-js` | ^2.112.3 | Database & Backend client |
-| `@tanstack/react-router` | 1.170.18 | Routing |
-| `@tanstack/react-query` | ^5.101.1 | Data fetching and state management |
-| `tailwindcss` | ^4.2.1 | Styling |
-| `@radix-ui/react-*` | Various | Accessible UI primitives |
-| `lucide-react` | ^0.575.0 | Icons |
-| `firebase` | ^12.19.0 | Auxiliary cloud services |
-| `gsap` & `motion` | ^3.15.0 & ^13.1.0 | Animations |
-| `zod` | ^3.24.2 | Schema validation |
-| `pdf-lib` | ^1.17.1 | PDF Generation |
+
+| Package                  | Version           | Purpose                            |
+| ------------------------ | ----------------- | ---------------------------------- |
+| `@supabase/supabase-js`  | ^2.112.3          | Database & Backend client          |
+| `@tanstack/react-router` | 1.170.18          | Routing                            |
+| `@tanstack/react-query`  | ^5.101.1          | Data fetching and state management |
+| `tailwindcss`            | ^4.2.1            | Styling                            |
+| `@radix-ui/react-*`      | Various           | Accessible UI primitives           |
+| `lucide-react`           | ^0.575.0          | Icons                              |
+| `firebase`               | ^12.19.0          | Auxiliary cloud services           |
+| `gsap` & `motion`        | ^3.15.0 & ^13.1.0 | Animations                         |
+| `zod`                    | ^3.24.2           | Schema validation                  |
+| `pdf-lib`                | ^1.17.1           | PDF Generation                     |
 
 ### Development
-| Package | Version | Purpose |
-|---------|---------|---------|
-| `vite` | ^8.2.0 | Build tool & dev server |
-| `@playwright/test` | ^1.63.0 | End-to-end testing |
-| `eslint` | ^9.32.0 | Linting |
-| `prettier` | ^3.7.3 | Code formatting |
+
+| Package            | Version | Purpose                 |
+| ------------------ | ------- | ----------------------- |
+| `vite`             | ^8.2.0  | Build tool & dev server |
+| `@playwright/test` | ^1.63.0 | End-to-end testing      |
+| `eslint`           | ^9.32.0 | Linting                 |
+| `prettier`         | ^3.7.3  | Code formatting         |
 
 ## Infrastructure
 
-| Service | Provider | Purpose |
-|---------|----------|---------|
-| Supabase | Supabase | Postgres Database, Edge Functions, Auth |
-| Cloudinary | Cloudinary | Asset delivery & image optimization |
-| Google OAuth | Google | Sign-In integration |
+| Service      | Provider   | Purpose                                 |
+| ------------ | ---------- | --------------------------------------- |
+| Supabase     | Supabase   | Postgres Database, Edge Functions, Auth |
+| Cloudinary   | Cloudinary | Asset delivery & image optimization     |
+| Google OAuth | Google     | Sign-In integration                     |
 
 ## Configuration
 
-| Variable | Purpose | Location |
-|----------|---------|----------|
+| Variable           | Purpose                     | Location                                     |
+| ------------------ | --------------------------- | -------------------------------------------- |
 | Database/Auth URLs | Supabase connection strings | `.env.local` (implied by StashSaarthi rules) |
 
 ## Outdated Packages
 
-| Package | Current | Latest |
-|---------|---------|--------|
-| `@eslint/js` | 9.39.5 | 10.0.1 |
-| `@lovable.dev/vite-tanstack-config` | 2.13.1 | 2.23.1 |
-| `@tanstack/react-router` | 1.170.18 | 1.170.38 |
-| `@tanstack/react-start` | 1.168.32 | 1.168.56 |
-| `@tanstack/router-plugin` | 1.168.23 | 1.168.40 |
-| `@types/node` | 22.20.4 | 26.6.2 |
-| `@vitejs/plugin-react` | 5.2.0 | 6.1.1 |
-| `eslint` | 9.39.5 | 10.11.0 |
-| `eslint-plugin-react-hooks` | 5.2.0 | 7.1.1 |
-| `globals` | 15.15.0 | 17.12.0 |
-| `lucide-react` | 0.575.0 | 1.47.0 |
-| `typescript` | 5.9.3 | 7.0.2 |
-| `zod` | 3.25.76 | 4.6.5 |
+| Package                             | Current  | Latest   |
+| ----------------------------------- | -------- | -------- |
+| `@eslint/js`                        | 9.39.5   | 10.0.1   |
+| `@lovable.dev/vite-tanstack-config` | 2.13.1   | 2.23.1   |
+| `@tanstack/react-router`            | 1.170.18 | 1.170.38 |
+| `@tanstack/react-start`             | 1.168.32 | 1.168.56 |
+| `@tanstack/router-plugin`           | 1.168.23 | 1.168.40 |
+| `@types/node`                       | 22.20.4  | 26.6.2   |
+| `@vitejs/plugin-react`              | 5.2.0    | 6.1.1    |
+| `eslint`                            | 9.39.5   | 10.11.0  |
+| `eslint-plugin-react-hooks`         | 5.2.0    | 7.1.1    |
+| `globals`                           | 15.15.0  | 17.12.0  |
+| `lucide-react`                      | 0.575.0  | 1.47.0   |
+| `typescript`                        | 5.9.3    | 7.0.2    |
+| `zod`                               | 3.25.76  | 4.6.5    |

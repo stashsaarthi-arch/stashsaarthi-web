@@ -95,7 +95,9 @@ export function HostIncomeChart({
   const monthlyData = useMemo(() => {
     return monthNames.map((month, idx) => {
       const isVacationSeason = idx === 4 || idx === 5 || idx === 6 || idx === 11;
-      const seasonalStorage = hasCorner ? adjustedCornerMonthly * (isVacationSeason ? 1.25 : 1.0) : 0;
+      const seasonalStorage = hasCorner
+        ? adjustedCornerMonthly * (isVacationSeason ? 1.25 : 1.0)
+        : 0;
       const roomVal = hasRoom ? adjustedRoomMonthly : 0;
       const kitchenVal = hasKitchen ? adjustedKitchenMonthly * (isVacationSeason ? 0.85 : 1.1) : 0;
       const monthTotal = Math.round(seasonalStorage + roomVal + kitchenVal);
@@ -139,10 +141,26 @@ export function HostIncomeChart({
     const q3 = monthlyData.slice(6, 9).reduce((acc, m) => acc + m.total, 0);
     const q4 = monthlyData.slice(9, 12).reduce((acc, m) => acc + m.total, 0);
     return [
-      { name: isHi ? "Q1 (जन-मार्च)" : "Q1 (Jan-Mar)", total: q1, tag: isHi ? "सामान्य मांग" : "Standard" },
-      { name: isHi ? "Q2 (अप-जून)" : "Q2 (Apr-Jun)", total: q2, tag: isHi ? "पीक स्टोरेज 🚀" : "Peak Stash 🚀" },
-      { name: isHi ? "Q3 (जुलाई-सितं)" : "Q3 (Jul-Sep)", total: q3, tag: isHi ? "कमरा दाखिला" : "Room Inflow" },
-      { name: isHi ? "Q4 (अक्टू-दिसं)" : "Q4 (Oct-Dec)", total: q4, tag: isHi ? "विंटर ब्रेक ❄️" : "Winter Break ❄️" },
+      {
+        name: isHi ? "Q1 (जन-मार्च)" : "Q1 (Jan-Mar)",
+        total: q1,
+        tag: isHi ? "सामान्य मांग" : "Standard",
+      },
+      {
+        name: isHi ? "Q2 (अप-जून)" : "Q2 (Apr-Jun)",
+        total: q2,
+        tag: isHi ? "पीक स्टोरेज 🚀" : "Peak Stash 🚀",
+      },
+      {
+        name: isHi ? "Q3 (जुलाई-सितं)" : "Q3 (Jul-Sep)",
+        total: q3,
+        tag: isHi ? "कमरा दाखिला" : "Room Inflow",
+      },
+      {
+        name: isHi ? "Q4 (अक्टू-दिसं)" : "Q4 (Oct-Dec)",
+        total: q4,
+        tag: isHi ? "विंटर ब्रेक ❄️" : "Winter Break ❄️",
+      },
     ];
   }, [monthlyData, isHi]);
 
@@ -217,7 +235,9 @@ export function HostIncomeChart({
             {isHi ? "मेज़बान आय विश्लेषिकी व चार्ट" : "Host Income Analytics & Projections"}
           </div>
           <h4 className="text-sm sm:text-base font-extrabold text-foreground mt-0.5 flex items-center gap-2">
-            <span>{isHi ? "अनुमानित निष्क्रिय आय डैशबोर्ड" : "Projected Passive Income Dashboard"}</span>
+            <span>
+              {isHi ? "अनुमानित निष्क्रिय आय डैशबोर्ड" : "Projected Passive Income Dashboard"}
+            </span>
             <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2 py-0.5 text-[10px] font-semibold text-emerald-400 border border-emerald-500/20">
               <Zap className="h-3 w-3" />
               {isHi ? "94% मांग (कानपुर)" : "94% Kanpur Demand"}
@@ -825,7 +845,9 @@ export function HostIncomeChart({
                 <Award className="h-4 w-4 text-amber-400 shrink-0" />
                 <div className="text-[11px] text-slate-200">
                   <span className="font-bold text-amber-300">
-                    {isHi ? "0% लिस्टिंग शुल्क व शून्य कमीशन:" : "0% Listing Fee & Zero Commission:"}
+                    {isHi
+                      ? "0% लिस्टिंग शुल्क व शून्य कमीशन:"
+                      : "0% Listing Fee & Zero Commission:"}
                   </span>{" "}
                   {isHi
                     ? "स्टैशसारथी सीनियर होस्ट्स से कोई ब्रोकरेज या कट-ऑफ नहीं लेता। पूरा ₹180/बैग व ₹55/टिफिन सीधे आपके खाते में जमा होता है।"

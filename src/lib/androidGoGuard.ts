@@ -104,7 +104,9 @@ export function initAndroidGoGuard(): void {
         if (fps < 20) {
           lowFpsCounter++;
           if (lowFpsCounter >= 3 && !root.classList.contains("android-go-mode")) {
-            console.warn("[Android Go Guard] Frame rate dropped below 20 FPS — enabling Android Go mode fallback.");
+            console.warn(
+              "[Android Go Guard] Frame rate dropped below 20 FPS — enabling Android Go mode fallback.",
+            );
             root.classList.add("android-go-mode");
             root.setAttribute("data-android-go", "true");
           }

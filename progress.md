@@ -45,13 +45,13 @@
   - **Context & Audit**: Executed an autonomous full-funnel booking audit acting as a real user across all 6 platform services on mobile & desktop, diagnosing context loss on room booking, disconnect between kitchen showcase & official checkout, persona role mismatch on host onboarding, and missing transaction verification on UPI QR payments.
   - **Key Structural Solutions Implemented**:
     1. **Room Booking Context & Visit Scheduling (`Rooms.tsx`, `BookingModal.tsx`, `types.ts`, `routes/index.tsx`)**:
-       - When clicking *"Book Directly"* on any verified room card, the specific room address, rent amount, and room type are automatically prefilled into `BookingModal` (tested & verified in Playwright: prefilled *"Kakadeo, Kanpur · 3 min walk to PW & Allen"* and exact rent *"₹5,800"*).
-       - Added a dedicated *"Schedule 15-min Room Visit"* button alongside Book Directly, setting initial deposit to ₹0 so students can inspect properties prior to committing.
+       - When clicking _"Book Directly"_ on any verified room card, the specific room address, rent amount, and room type are automatically prefilled into `BookingModal` (tested & verified in Playwright: prefilled _"Kakadeo, Kanpur · 3 min walk to PW & Allen"_ and exact rent _"₹5,800"_).
+       - Added a dedicated _"Schedule 15-min Room Visit"_ button alongside Book Directly, setting initial deposit to ₹0 so students can inspect properties prior to committing.
     2. **Kitchen Showcase Direct Subscription Checkout (`TokenMealHub.tsx`, `SolutionsHub.tsx`)**:
        - Connected `onBook` to `TokenMealHub`'s Quick Top-Up packages (`Starter Trial ₹300`, `Smart Hopper ₹599`, `Monthly Freedom ₹1,449`, `Semester Pro ₹2,799`).
-       - Added a prominent *"Subscribe via Official Escrow & StashPass"* CTA button, allowing direct subscription via 100% Escrow / UPI rather than only simulated in-memory demo balance debits.
+       - Added a prominent _"Subscribe via Official Escrow & StashPass"_ CTA button, allowing direct subscription via 100% Escrow / UPI rather than only simulated in-memory demo balance debits.
     3. **Host Persona Room Listing Adaptation (`RoomListingModal.tsx`)**:
-       - Integrated `usePersona()` into the listing modal. When in `host` persona mode, replaced the student landlord-review form (*"Owner Behaviour rating"*, *"Landlord Pros & Cons"*) with dignified host-centric fields: *"House Norms & Discipline"*, *"Student Profile & Habit Preferences"*, and a *"Verified Host Safety Charter"* badge with ₹10k safety cover.
+       - Integrated `usePersona()` into the listing modal. When in `host` persona mode, replaced the student landlord-review form (_"Owner Behaviour rating"_, _"Landlord Pros & Cons"_) with dignified host-centric fields: _"House Norms & Discipline"_, _"Student Profile & Habit Preferences"_, and a _"Verified Host Safety Charter"_ badge with ₹10k safety cover.
     4. **12-Digit UPI UTR / Reference ID Auto-Verification (`BookingModal.tsx`)**:
        - Added an explicit 12-digit UPI Reference / UTR input field under the static UPI QR code on Step 2 with real-time numeric constraint checking and badge indicators (`12 Digits ✓`).
        - Formatted UTR into the booking payload and confirmation message so students feel confident their payment receipt is officially bound to their digital StashPass.
@@ -64,7 +64,7 @@
   - **Deployment**: Pushed to GitHub and deployed live.
 
 - [x] **[Mobile UX Refinement] Task 145: Balanced Medium-Length Mobile Scroll Architecture — 2026-09-12**:
-  - **Context & Adjustment**: Following user feedback (*"abhi bhot kmm scrolling kr di medium length rkho"*), relaxed over-aggressive hiding to establish a rich, balanced medium-length page flow (~8,300px vs 28,000+px previously).
+  - **Context & Adjustment**: Following user feedback (_"abhi bhot kmm scrolling kr di medium length rkho"_), relaxed over-aggressive hiding to establish a rich, balanced medium-length page flow (~8,300px vs 28,000+px previously).
   - **Key Structural Adjustments**:
     1. **Inline Savings Calculator (`CalculatorHub.tsx`)**: Restored the interactive savings engine inline across mobile viewports so students and hosts directly see dead-rent calculations without drawer friction.
     2. **Inline High-Trust Journey Modules (`src/routes/index.tsx`)**: Restored `StashTimeline` (3-step visual custody journey), `TrustConsoleHub` (₹10k safety charter), `StudentStoriesCarousel` (verified 4.9★ reviews), and `FAQ` inline on mobile.
@@ -145,17 +145,17 @@
     - Installed TestSprite verification & onboarding agent skills in `.agents/skills/testsprite-verify/` and `.agents/skills/testsprite-onboard/`.
   - **Authored & Executed Core Frontend Test Suite via TestSprite CLI**:
     1. **Solutions Hub Navigation (`f6b1687e-6194-4cf6-a619-124d039f3e33`)**:
-       - *Plan*: Switched across all 4 student service tabs (Spaces, Kitchen, Connect, Stash) and verified micro-storage ₹300/bag/mo pricing cards and CTAs.
-       - *Run*: `dad37bbb-48a6-4b96-96a0-58f83ef699b8` — ✅ **Passed** (6/6 steps completed, 0 failures).
+       - _Plan_: Switched across all 4 student service tabs (Spaces, Kitchen, Connect, Stash) and verified micro-storage ₹300/bag/mo pricing cards and CTAs.
+       - _Run_: `dad37bbb-48a6-4b96-96a0-58f83ef699b8` — ✅ **Passed** (6/6 steps completed, 0 failures).
     2. **Dead-Rent Savings Calculator Duration & Upsell (`38a28d94-5799-4b76-8016-e1b85f625571`)**:
-       - *Plan*: Scrolled to calculator, selected 90 days extended vacation duration, verified 15% discount badge and dynamic savings recalculation without NaN.
-       - *Run*: `d5b23437-eeac-455c-b7d0-9f2b007a4175` — ✅ **Passed** (6/6 steps completed, 0 failures).
+       - _Plan_: Scrolled to calculator, selected 90 days extended vacation duration, verified 15% discount badge and dynamic savings recalculation without NaN.
+       - _Run_: `d5b23437-eeac-455c-b7d0-9f2b007a4175` — ✅ **Passed** (6/6 steps completed, 0 failures).
     3. **Dual-Persona Switcher (`cb3460e5-01e7-49fd-ba17-a46f6dc0d570`)**:
-       - *Plan*: Scrolled and switched persona to Senior Host Mode, verified instant UI transition to Host Earnings proposition and ₹10k safety cover guarantee.
-       - *Run*: `55b82512-a5ca-4f5f-afe7-984ac8b6eb67` — ✅ **Passed** (5/5 steps completed, 0 failures).
+       - _Plan_: Scrolled and switched persona to Senior Host Mode, verified instant UI transition to Host Earnings proposition and ₹10k safety cover guarantee.
+       - _Run_: `55b82512-a5ca-4f5f-afe7-984ac8b6eb67` — ✅ **Passed** (5/5 steps completed, 0 failures).
     4. **Booking Flow & Storage Configuration Modal (`bc47bd84-9860-448f-b1bf-7bc98c605035`)**:
-       - *Plan*: Clicked Hero primary CTA, verified opening of booking modal dialog, campus cluster selection, and pricing breakdown.
-       - *Run*: `3172e993-ab50-45df-ac15-76bed9ab422a` — ✅ **Passed** (6/6 steps completed, 0 failures).
+       - _Plan_: Clicked Hero primary CTA, verified opening of booking modal dialog, campus cluster selection, and pricing breakdown.
+       - _Run_: `3172e993-ab50-45df-ac15-76bed9ab422a` — ✅ **Passed** (6/6 steps completed, 0 failures).
   - **Audit Verdict**: 100% test pass rate across all 4 core end-to-end user flows. Zero regressions or broken DOM states detected.
 
 - [x] **[UI/UX & Design Craft] Task 140: Taste × Impeccable Visual Polish & Tactile Aesthetic Overhaul — 2026-09-12**:
@@ -554,7 +554,6 @@
     - `docs/tasks/progress.md` — Appended Task 105 execution details.
     - `progress.md` — Appended Task 105 execution details.
 
-
 - [x] **[CTO - Bookings Engine] Task 103: Unified user_master_bookings View & Instant Client Pagination Engine — 2026-09-11**:
   - **Build**: `npm run build` — ✅ 0 errors (Vite production client & Nitro server bundle compiled cleanly).
   - **Type Check**: `npx tsc --noEmit` — ✅ 0 errors.
@@ -687,7 +686,6 @@
     - `execution/run-e2e-tests.mjs` — Updated E2E test harness to validate `data-privacy-dpdp-audit.spec.ts`.
     - `docs/tasks/PRD.md` — Marked Task 87 as completed (`- [x]`).
     - `docs/tasks/progress.md` — Appended Task 87 execution log.
-
 
   - **Build**: `npm run build` — ✅ 0 errors (client + SSR Nitro bundles).
   - **E2E Test**: `node execution/run-e2e-tests.mjs` — ✅ PASSED.
@@ -1310,7 +1308,6 @@
     - Created GitHub Actions workflow `.github/workflows/nightly-security-audit.yml` scheduled to run nightly at 2:00 AM UTC with artifact upload.
   - **Verification**: `npx tsc --noEmit` (**0 errors**), `npm run audit:vulnerabilities` (**0 vulnerabilities across 464 dependencies**), and `npm run build` compiled cleanly.
 
-
 - [x] **[CTO - Performance] Task 15: Multi-Tier In-Memory & Redis/Upstash REST Caching Engine**:
   - **Identified Directive**: Implement caching layer for frequently accessed, non-user-specific data (campus nodes, pricing matrices, reviews).
   - **Applied Solution**:
@@ -1711,6 +1708,7 @@
 - Execute Stage 0 Category Awareness & Inbound Desire campaigns across Kanpur academic corridors.
 
 ### Session: 2026-09-02 — Profile Editing Feature
+
 - [x] **Comprehensive Profile Editing**:
   - Built `ProfileModal.tsx` to enable editing of Full Name, Phone Number, Role, College/Locality, Bio, Address, and Emergency Contact.
   - Removed Google login restriction from `AuthButton.tsx`, allowing Google-authenticated users to also update their profile.
@@ -1721,6 +1719,7 @@
   - Verification: `npx tsc --noEmit` passed with **0 errors**.
 
 ### Session: 2026-09-03 — StashSaarthi Anti-Fraud Taste Shield & Meal Review System
+
 - [x] **Database Architecture & Supabase SQL Migration**:
   - Authored comprehensive SQL migration in `supabase/migrations/20260903_taste_shield_and_meal_reviews.sql` and standalone `supabase_taste_shield_migration.sql`.
   - Created `meal_vendors` (seeded with Kanpur hubs: Kakadeo Annapurna, CSJMU Dadi Maa, IITK Campus Mess, HBTI Shanti Home Food) and `meal_bookings`.
@@ -1748,6 +1747,7 @@
   - `npm run build` compiled client, SSR, and Nitro server bundles cleanly with **0 errors**.
 
 ### Session: 2026-09-03 — Viral Instagram Reels Playbook (10 AI Scripts)
+
 - [x] **CMO & Growth Lead Execution (`ai_workforce/deliverables/marketing/reelscript.md`)**:
   - Authored 10 hyper-relatable, viral-engineered Instagram Reels scripts for AI generation across 4 core customer segments:
     1. **College & Outstation Students (4 Scripts)**:
@@ -1775,6 +1775,7 @@
   - Synced task boards (`TASK_BOARD.md`, `COMPANY_LOG.md`).
 
 ### Session: 2026-09-03 — OmniRoute Global Tooling & Native Runtime Resolution
+
 - [x] **Global CLI & npm allow-scripts Configuration**:
   - Diagnosed `npm warn install-scripts` and blocked native build scripts when installing `omniroute` globally.
   - Expanded npm user-level `allow-scripts` configuration to whitelist all native dependencies (`omniroute`, `keytar`, `onnxruntime-node`, `tls-client-node`, `sharp`, `@parcel/watcher`, `@swc/core`, `protobufjs`, `koffi`, `esbuild`, `better-sqlite3`, `@anthropic-ai/claude-code`).
@@ -1810,6 +1811,7 @@
   - Production deployment aliased to `https://stashsaarthi-web.vercel.app` (`READY`, HTTP 200 OK).
 
 ### Session: 2026-09-03 — Floto 35-Issue Usability & Heuristics Overhaul (38/100 -> 95+/100)
+
 - [x] **Comprehensive Remediation of All 35 Floto Audit Usability & Heuristic Issues**:
   - **Issues 1–4 (Design System Tokens & Visual Consistency)**:
     - Eradicated all arbitrary sub-12px font styles (`text-[8px]`, `text-[8.5px]`, `text-[10px]`, `text-[11px]`) across the codebase. Microcopy and labels now strictly adhere to standard Tailwind scale (`text-xs` >= 12px, `text-sm`, `text-base`, `text-lg`, `text-xl`, `text-2xl`), shrinking distinct sizes from 11 to <= 6.
@@ -1856,6 +1858,7 @@
   - All 35 heuristic issues fully validated against `implementation_plan.md` and documented in `walkthrough.md`.
 
 ### Session: 2026-09-03 — Floto 4 Copy & Microcopy Issues Remediation
+
 - [x] **Remediated All 4 Copy & Microcopy Jargon/Abstract Issues**:
   - **Issue 1 (`DualCrisis.tsx` & `LanguageContext.tsx`)**: Replaced abstract CTA button label `"Merge Solution"` with descriptive `"See the Integrated Ecosystem"` (Hindi: `"एकीकृत इकोसिस्टम देखें"`), and clarified the guidance subtitle.
   - **Issue 2 (`SolutionsHub.tsx`)**: Eliminated corporate jargon `"High-density, modular solution matrix for Kanpur academic corridors."` and replaced with clear, conversational copy: `"A complete range of living and storage solutions for Kanpur campus corridors."`.
@@ -1865,6 +1868,7 @@
   - `npx tsc --noEmit` verified with **0 errors**.
 
 ### Session: 2026-09-03 — Floto Web Accessibility Audit Remediation (113 Issues: 20/100 -> 95+/100)
+
 - [x] **Resolved All 19 Critical & 2 Major Floto Accessibility Issues**:
   - **Critical Form Labels (WCAG 4.1.2 - Issues 108–110)**:
     - Added explicit IDs (`calc-bags-slider`, `calc-days-slider`, `calc-rent-slider`), matching `<label htmlFor="...">`, and bilingual `aria-label` attributes to all range sliders in `Calculator.tsx`.
@@ -1885,6 +1889,7 @@
   - `npx tsc --noEmit` passed with **0 errors**.
 
 ### Session: 2026-09-06 — CPO Task 21: Skeleton Loaders for Data-Fetching Components
+
 - [x] **Design & Implement Skeleton Loaders Suite (`src/components/ui/skeleton.tsx`)**:
   - Upgraded base `Skeleton` primitive with smooth pulse/shimmer animation styling.
   - Created domain-specific skeleton layouts:
@@ -1906,6 +1911,7 @@
 - Execute Stage 0 Category Awareness & Inbound Desire campaigns across Kanpur academic corridors.
 
 ### Session: 2026-09-02 — Profile Editing Feature
+
 - [x] **Comprehensive Profile Editing**:
   - Built `ProfileModal.tsx` to enable editing of Full Name, Phone Number, Role, College/Locality, Bio, Address, and Emergency Contact.
   - Removed Google login restriction from `AuthButton.tsx`, allowing Google-authenticated users to also update their profile.
@@ -1916,6 +1922,7 @@
   - Verification: `npx tsc --noEmit` passed with **0 errors**.
 
 ### Session: 2026-09-03 — StashSaarthi Anti-Fraud Taste Shield & Meal Review System
+
 - [x] **Database Architecture & Supabase SQL Migration**:
   - Authored comprehensive SQL migration in `supabase/migrations/20260903_taste_shield_and_meal_reviews.sql` and standalone `supabase_taste_shield_migration.sql`.
   - Created `meal_vendors` (seeded with Kanpur hubs: Kakadeo Annapurna, CSJMU Dadi Maa, IITK Campus Mess, HBTI Shanti Home Food) and `meal_bookings`.
@@ -1943,6 +1950,7 @@
   - `npm run build` compiled client, SSR, and Nitro server bundles cleanly with **0 errors**.
 
 ### Session: 2026-09-03 — Viral Instagram Reels Playbook (10 AI Scripts)
+
 - [x] **CMO & Growth Lead Execution (`ai_workforce/deliverables/marketing/reelscript.md`)**:
   - Authored 10 hyper-relatable, viral-engineered Instagram Reels scripts for AI generation across 4 core customer segments:
     1. **College & Outstation Students (4 Scripts)**:
@@ -1970,6 +1978,7 @@
   - Synced task boards (`TASK_BOARD.md`, `COMPANY_LOG.md`).
 
 ### Session: 2026-09-03 — OmniRoute Global Tooling & Native Runtime Resolution
+
 - [x] **Global CLI & npm allow-scripts Configuration**:
   - Diagnosed `npm warn install-scripts` and blocked native build scripts when installing `omniroute` globally.
   - Expanded npm user-level `allow-scripts` configuration to whitelist all native dependencies (`omniroute`, `keytar`, `onnxruntime-node`, `tls-client-node`, `sharp`, `@parcel/watcher`, `@swc/core`, `protobufjs`, `koffi`, `esbuild`, `better-sqlite3`, `@anthropic-ai/claude-code`).
@@ -2005,6 +2014,7 @@
   - Production deployment aliased to `https://stashsaarthi-web.vercel.app` (`READY`, HTTP 200 OK).
 
 ### Session: 2026-09-03 — Floto 35-Issue Usability & Heuristics Overhaul (38/100 -> 95+/100)
+
 - [x] **Comprehensive Remediation of All 35 Floto Audit Usability & Heuristic Issues**:
   - **Issues 1–4 (Design System Tokens & Visual Consistency)**:
     - Eradicated all arbitrary sub-12px font styles (`text-[8px]`, `text-[8.5px]`, `text-[10px]`, `text-[11px]`) across the codebase. Microcopy and labels now strictly adhere to standard Tailwind scale (`text-xs` >= 12px, `text-sm`, `text-base`, `text-lg`, `text-xl`, `text-2xl`), shrinking distinct sizes from 11 to <= 6.
@@ -2051,6 +2061,7 @@
   - All 35 heuristic issues fully validated against `implementation_plan.md` and documented in `walkthrough.md`.
 
 ### Session: 2026-09-03 — Floto 4 Copy & Microcopy Issues Remediation
+
 - [x] **Remediated All 4 Copy & Microcopy Jargon/Abstract Issues**:
   - **Issue 1 (`DualCrisis.tsx` & `LanguageContext.tsx`)**: Replaced abstract CTA button label `"Merge Solution"` with descriptive `"See the Integrated Ecosystem"` (Hindi: `"एकीकृत इकोसिस्टम देखें"`), and clarified the guidance subtitle.
   - **Issue 2 (`SolutionsHub.tsx`)**: Eliminated corporate jargon `"High-density, modular solution matrix for Kanpur academic corridors."` and replaced with clear, conversational copy: `"A complete range of living and storage solutions for Kanpur campus corridors."`.
@@ -2060,6 +2071,7 @@
   - `npx tsc --noEmit` verified with **0 errors**.
 
 ### Session: 2026-09-03 — Floto Web Accessibility Audit Remediation (113 Issues: 20/100 -> 95+/100)
+
 - [x] **Resolved All 19 Critical & 2 Major Floto Accessibility Issues**:
   - **Critical Form Labels (WCAG 4.1.2 - Issues 108–110)**:
     - Added explicit IDs (`calc-bags-slider`, `calc-days-slider`, `calc-rent-slider`), matching `<label htmlFor="...">`, and bilingual `aria-label` attributes to all range sliders in `Calculator.tsx`.
@@ -2080,6 +2092,7 @@
   - `npx tsc --noEmit` passed with **0 errors**.
 
 ### Session: 2026-09-06 — CPO Task 21: Skeleton Loaders for Data-Fetching Components
+
 - [x] **Design & Implement Skeleton Loaders Suite (`src/components/ui/skeleton.tsx`)**:
   - Upgraded base `Skeleton` primitive with smooth pulse/shimmer animation styling.
   - Created domain-specific skeleton layouts:
@@ -2096,6 +2109,7 @@
   - `npm run build` compiled cleanly with **0 errors**.
 
 ### Session: 2026-09-07 — CSO Compliance Task 94: Predictive AI & Data Collection Disclosures
+
 - [x] **Review and Update Privacy Policy (`src/routes/privacy.tsx`)**:
   - Updated policy version to v2.5 (Predictive AI & Data Governance Standard).
   - Added Section 2.E ("Client-Side Predictive AI & Scroll Behavior Telemetry"), detailing local browser memory execution of lightweight neural network persona models, 100% zero server PII storage, and explicit user opt-out via Low-Data Mode.
@@ -2111,6 +2125,7 @@
   - `npm run build` compiled cleanly with **0 errors** (client bundle & Nitro server generated successfully).
 
 ### Session: 2026-09-07 — QA Security Task 95: Public API Endpoint Security Pen-Test
+
 - [x] **Public API Endpoint Pen-Test Engine (`src/lib/apiPenTestEngine.ts`)**:
   - Created automated penetration test suite evaluating public endpoints and form handlers against SQL Injection (SQLi parameterization), Stored/Reflected XSS (DOM HTML escaping), DoS & Rate-Limitation (sliding-window burst rejection), JWT Auth Bypass (forged claim & expiration check), Payload Bounds (250KB buffer exhaustion check), and Parameter Tampering (financial floor check for negative quantities).
 - [x] **Interactive Pen-Test Dashboard Modal (`src/components/stash/ApiPenTestModal.tsx`)**:
@@ -2125,6 +2140,7 @@
   - `npm run build` compiled cleanly with **0 errors**.
 
 ### Session: 2026-09-11 — CTO/CPO Task 102: Profile Icon Dropdown & Historical "My Bookings" Logs
+
 - [x] **Profile Dropdown Menu (`src/components/stash/AuthButton.tsx`)**:
   - Integrated responsive profile dropdown trigger rendering profile settings and direct "My Bookings" (`CalendarCheck` icon) CTA button.
 - [x] **Profile Modal Tab Synchronization (`src/components/stash/ProfileModal.tsx`)**:
@@ -2136,6 +2152,7 @@
   - `npm run build` compiled cleanly with **0 errors** (Vite production bundle & Nitro server generated successfully).
 
 ### Session: 2026-09-11 — Sprint 12 Tasks 113 & 114 (Host Inventory Grid & Host KYC Automation)
+
 - [x] **[CPO - Host Inventory Grid] Task 113: Isometric Room Capacity Grid & Box Allocation Tool**:
   - Built `src/components/stash/HostInventoryGrid.tsx` providing 3D isometric room capacity grid and floor layout matrix allowing senior hosts to manually mark box allocations (0..3 stacked 40L boxes), calculate monthly earnings @ ₹180/box/mo, and switch room presets (Kakadeo, Nankari, CSJMU).
   - Mounted `<HostInventoryGridModal>` launcher button in Admin dashboard (`src/routes/admin.tsx`).
@@ -2146,7 +2163,9 @@
   - Mounted `<HostKycModal>` launcher button in Admin console header (`src/routes/admin.tsx`).
   - Created automated test harness `execution/test-host-kyc-automation.mjs` — ✅ PASSED.
   - Verified compilation: `npm run build` — ✅ 0 errors.
+
 ### Session: 2026-09-12 — Uninstallation of All MCP Servers
+
 - [x] **MCP Server Uninstallation**:
   - Backed up original `mcp_config.json` to `C:\Users\Dell\.gemini\config\mcp_config.json.bak`.
   - Cleared all configured MCP servers (`notebooks`, `visualization`, `data-agent-kit`, and remote GCP servers) in `C:\Users\Dell\.gemini\config\mcp_config.json` (`"mcpServers": {}`).

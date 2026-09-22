@@ -16,10 +16,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { useLanguage } from "@/context/LanguageContext";
 import { playPop } from "@/lib/audio";
-import {
-  TpaDigitalAgreementRecord,
-  verifyTpaStampHash,
-} from "@/lib/tpaDigitalAgreementEngine";
+import { TpaDigitalAgreementRecord, verifyTpaStampHash } from "@/lib/tpaDigitalAgreementEngine";
 
 interface TpaDigitalAgreementModalProps {
   open: boolean;
@@ -44,7 +41,7 @@ export function TpaDigitalAgreementModal({
 
   const handleCopyHash = () => {
     navigator.clipboard.writeText(
-      `TPA Sec 105 e-Stamp Certificate: ${record.stampCertificateNo}\nGRN: ${record.grnNo}\nHost: ${record.secondPartyHostName}\nHash: ${record.verificationHash}`
+      `TPA Sec 105 e-Stamp Certificate: ${record.stampCertificateNo}\nGRN: ${record.grnNo}\nHost: ${record.secondPartyHostName}\nHash: ${record.verificationHash}`,
     );
     setCopied(true);
     playPop();
@@ -77,11 +74,17 @@ export function TpaDigitalAgreementModal({
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <Badge variant="outline" className="border-amber-500/40 bg-amber-500/10 text-amber-300 text-[10px] font-mono">
+                  <Badge
+                    variant="outline"
+                    className="border-amber-500/40 bg-amber-500/10 text-amber-300 text-[10px] font-mono"
+                  >
                     GOVT OF UP • e-STAMP CERTIFICATE ₹100
                   </Badge>
                   {isHashValid && (
-                    <Badge variant="outline" className="border-emerald-500/40 bg-emerald-500/10 text-emerald-300 text-[10px] font-mono">
+                    <Badge
+                      variant="outline"
+                      className="border-emerald-500/40 bg-emerald-500/10 text-emerald-300 text-[10px] font-mono"
+                    >
                       ✓ SEAL VERIFIED
                     </Badge>
                   )}
@@ -165,38 +168,60 @@ export function TpaDigitalAgreementModal({
                   {/* Stamp Details Grid */}
                   <div className="grid gap-2.5 sm:grid-cols-2 text-[11px] font-mono">
                     <div className="bg-black/50 p-2.5 rounded-xl border border-amber-500/20">
-                      <span className="text-amber-400 font-semibold block text-[10px]">CERTIFICATE NO:</span>
+                      <span className="text-amber-400 font-semibold block text-[10px]">
+                        CERTIFICATE NO:
+                      </span>
                       <span className="text-white font-bold">{record.stampCertificateNo}</span>
                     </div>
 
                     <div className="bg-black/50 p-2.5 rounded-xl border border-amber-500/20">
-                      <span className="text-amber-400 font-semibold block text-[10px]">GOVT GRN NO:</span>
+                      <span className="text-amber-400 font-semibold block text-[10px]">
+                        GOVT GRN NO:
+                      </span>
                       <span className="text-white font-bold">{record.grnNo}</span>
                     </div>
 
                     <div className="bg-black/50 p-2.5 rounded-xl border border-amber-500/20">
-                      <span className="text-amber-400 font-semibold block text-[10px]">FIRST PARTY (LICENSOR):</span>
+                      <span className="text-amber-400 font-semibold block text-[10px]">
+                        FIRST PARTY (LICENSOR):
+                      </span>
                       <span className="text-white font-bold">{record.firstParty}</span>
                     </div>
 
                     <div className="bg-black/50 p-2.5 rounded-xl border border-amber-500/20">
-                      <span className="text-amber-400 font-semibold block text-[10px]">SECOND PARTY (HOST LICENSEE):</span>
-                      <span className="text-white font-bold">{record.secondPartyHostName} ({record.secondPartyHostPhone})</span>
+                      <span className="text-amber-400 font-semibold block text-[10px]">
+                        SECOND PARTY (HOST LICENSEE):
+                      </span>
+                      <span className="text-white font-bold">
+                        {record.secondPartyHostName} ({record.secondPartyHostPhone})
+                      </span>
                     </div>
 
                     <div className="bg-black/50 p-2.5 rounded-xl border border-amber-500/20 sm:col-span-2">
-                      <span className="text-amber-400 font-semibold block text-[10px]">PROPERTY NODE ADDRESS (KANPUR):</span>
-                      <span className="text-white font-bold">{record.nodeAddress} — ({record.campusNode})</span>
+                      <span className="text-amber-400 font-semibold block text-[10px]">
+                        PROPERTY NODE ADDRESS (KANPUR):
+                      </span>
+                      <span className="text-white font-bold">
+                        {record.nodeAddress} — ({record.campusNode})
+                      </span>
                     </div>
 
                     <div className="bg-black/50 p-2.5 rounded-xl border border-amber-500/20">
-                      <span className="text-amber-400 font-semibold block text-[10px]">STAMP DUTY PAID:</span>
-                      <span className="text-emerald-400 font-bold">₹{record.stampDutyAmount} (UP Non-Judicial)</span>
+                      <span className="text-amber-400 font-semibold block text-[10px]">
+                        STAMP DUTY PAID:
+                      </span>
+                      <span className="text-emerald-400 font-bold">
+                        ₹{record.stampDutyAmount} (UP Non-Judicial)
+                      </span>
                     </div>
 
                     <div className="bg-black/50 p-2.5 rounded-xl border border-amber-500/20">
-                      <span className="text-amber-400 font-semibold block text-[10px]">TERM & VALIDITY:</span>
-                      <span className="text-white font-bold">{record.validityMonths} Months (Revocable at Will)</span>
+                      <span className="text-amber-400 font-semibold block text-[10px]">
+                        TERM & VALIDITY:
+                      </span>
+                      <span className="text-white font-bold">
+                        {record.validityMonths} Months (Revocable at Will)
+                      </span>
                     </div>
                   </div>
 
@@ -237,7 +262,10 @@ export function TpaDigitalAgreementModal({
                         <span className="font-bold text-amber-300 text-xs">
                           {clause.clauseNumber}. {isHi ? clause.titleHi : clause.titleEn}
                         </span>
-                        <Badge variant="outline" className="border-amber-500/30 text-[10px] text-amber-400">
+                        <Badge
+                          variant="outline"
+                          className="border-amber-500/30 text-[10px] text-amber-400"
+                        >
                           CLAUSE {clause.clauseNumber}
                         </Badge>
                       </div>
@@ -258,8 +286,20 @@ export function TpaDigitalAgreementModal({
               onClick={handleCopyHash}
               className="inline-flex items-center gap-1.5 rounded-xl border border-white/10 bg-white/5 px-3.5 py-2 text-xs font-bold text-white hover:bg-white/10 cursor-pointer"
             >
-              {copied ? <Check className="h-3.5 w-3.5 text-emerald-400" /> : <Copy className="h-3.5 w-3.5" />}
-              <span>{copied ? (isHi ? "कॉपी हो गया!" : "Copied!") : (isHi ? "स्टांप हैश कॉपी करें" : "Copy Stamp Details")}</span>
+              {copied ? (
+                <Check className="h-3.5 w-3.5 text-emerald-400" />
+              ) : (
+                <Copy className="h-3.5 w-3.5" />
+              )}
+              <span>
+                {copied
+                  ? isHi
+                    ? "कॉपी हो गया!"
+                    : "Copied!"
+                  : isHi
+                    ? "स्टांप हैश कॉपी करें"
+                    : "Copy Stamp Details"}
+              </span>
             </button>
 
             <div className="flex items-center gap-2">

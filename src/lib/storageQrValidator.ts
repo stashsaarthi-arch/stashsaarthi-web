@@ -16,7 +16,7 @@ export interface StorageQrScanResult {
  */
 export function verifyStorageQrCode(
   tokenId: string,
-  role: "student" | "host" | "admin" = "student"
+  role: "student" | "host" | "admin" = "student",
 ): StorageQrScanResult {
   const cleanToken = tokenId.trim().toUpperCase();
   const allBookings = getBookings();
@@ -37,8 +37,8 @@ export function verifyStorageQrCode(
         role === "student"
           ? "View Student Digital Custody Pass"
           : role === "host"
-          ? "Verify Verified PG Owner Host Node Intake"
-          : "Audit Operational Escrow & Itemization Log",
+            ? "Verify Verified PG Owner Host Node Intake"
+            : "Audit Operational Escrow & Itemization Log",
     };
   }
 
@@ -46,8 +46,8 @@ export function verifyStorageQrCode(
     role === "student"
       ? `Student ${foundBooking.name} verified active storage reservation (${foundBooking.bags || 1} bags).`
       : role === "host"
-      ? `Verified PG Owner Host Node verified physical intake of ${foundBooking.bags || 1} luggage items.`
-      : `Admin Operations audited Escrow UPI ₹${foundBooking.amount} and barcode custody logs.`;
+        ? `Verified PG Owner Host Node verified physical intake of ${foundBooking.bags || 1} luggage items.`
+        : `Admin Operations audited Escrow UPI ₹${foundBooking.amount} and barcode custody logs.`;
 
   return {
     isValid: true,
@@ -106,7 +106,7 @@ export function getOfflineQrSvgDataUri(tokenId: string): string {
     if (r === 6 || c === 6) return (r + c) % 2 === 0;
     // Data modules
     const bit = (hash ^ ((r + 1) * (c + 1) * 2654435761)) >>> 0;
-    return (bit % 3) === 0;
+    return bit % 3 === 0;
   };
 
   let rects = "";
@@ -121,4 +121,3 @@ export function getOfflineQrSvgDataUri(tokenId: string): string {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250" width="200" height="200"><rect width="250" height="250" fill="#fff"/>${rects}</svg>`;
   return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
 }
-

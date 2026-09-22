@@ -1,10 +1,10 @@
 /**
  * StashSaarthi Autonomous System — Host KYC & DigiLocker Automation Engine
- * 
+ *
  * CSO Security Directive (Task 114)
  * Aadhaar XML & DigiLocker verification API bridge for instant host onboarding,
  * background checks, facial liveness matching, and encrypted KYC certificate generation.
- * 
+ *
  * Compliant with:
  *  - Digital Personal Data Protection (DPDP) Act 2023
  *  - UIDAI Offline Aadhaar XML Security & Storage Norms
@@ -73,7 +73,7 @@ export async function initiateDigiLockerAuth(hostPhone: string): Promise<{
   const sessionToken = `DL-SESS-${Math.floor(100000 + Math.random() * 900000)}`;
   return {
     authUrl: `https://digilocker.gov.in/public/oauth2/1/authorize?response_type=code&client_id=stashsaarthi_knp&state=${sessionToken}&phone=${encodeURIComponent(
-      hostPhone
+      hostPhone,
     )}`,
     sessionToken,
     status: "initiated",
@@ -85,7 +85,7 @@ export async function initiateDigiLockerAuth(hostPhone: string): Promise<{
  */
 export function verifyAadhaarXml(
   xmlDataOrAadhaar: string,
-  shareCode: string = "1234"
+  shareCode: string = "1234",
 ): {
   isValid: boolean;
   name: string;
@@ -126,9 +126,7 @@ export function verifyAadhaarXml(
 /**
  * Simulates AI facial liveness detection matching live camera feed against Aadhaar photo.
  */
-export function verifyFacialMatch(
-  liveCameraBase64?: string
-): {
+export function verifyFacialMatch(liveCameraBase64?: string): {
   score: number;
   isLivenessPassed: boolean;
   confidence: "high" | "medium" | "low";
@@ -150,7 +148,7 @@ export function verifyFacialMatch(
  * Complete DigiLocker & Aadhaar XML Verification Pipeline for Host Onboarding.
  */
 export async function executeHostKycPipeline(
-  req: KycVerificationRequest
+  req: KycVerificationRequest,
 ): Promise<KycVerificationResult> {
   const masked = maskAadhaarNumber(req.aadhaarNumber);
   const facial = verifyFacialMatch(req.photoBase64);
@@ -182,8 +180,7 @@ export async function executeHostKycPipeline(
     },
   ];
 
-  const overallStatus =
-    facial.isLivenessPassed ? "approved" : "pending_review";
+  const overallStatus = facial.isLivenessPassed ? "approved" : "pending_review";
 
   const result: KycVerificationResult = {
     kycId: `KYC-KNP-${Math.floor(100000 + Math.random() * 900000)}`,
@@ -213,9 +210,7 @@ export function saveHostKycRecord(record: KycVerificationResult): void {
   if (typeof window === "undefined") return;
   try {
     localStorage.setItem(STORAGE_KYC_KEY, JSON.stringify(record));
-    window.dispatchEvent(
-      new CustomEvent("stashsaarthi:host-kyc-updated", { detail: record })
-    );
+    window.dispatchEvent(new CustomEvent("stashsaarthi:host-kyc-updated", { detail: record }));
   } catch (err) {
     console.warn("Failed to save Host KYC record:", err);
   }

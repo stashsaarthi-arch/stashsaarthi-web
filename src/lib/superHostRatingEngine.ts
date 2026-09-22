@@ -1,6 +1,6 @@
 /**
  * StashSaarthi Autonomous System — SuperHost Rating & Tiering Engine
- * 
+ *
  * CPO Directive (Task 121)
  * Evaluates host performance metrics, enforcing strict criteria for "SuperHost" badge accreditation:
  *  - ≥ 99.0% Check-in SLA Accuracy
@@ -121,7 +121,9 @@ export function evaluateHostTier(metrics: HostMetrics): HostEvaluationResult {
   }
 
   if (!ratingPass) {
-    missingEn.push(`Average rating is ${metrics.averageRating.toFixed(2)} / 5.0 (Min 4.8 required)`);
+    missingEn.push(
+      `Average rating is ${metrics.averageRating.toFixed(2)} / 5.0 (Min 4.8 required)`,
+    );
     missingHi.push(`औसत रेटिंग ${metrics.averageRating.toFixed(2)} / 5.0 है (न्यूनतम 4.8 आवश्यक)`);
   }
 
@@ -153,10 +155,7 @@ export function evaluateHostTier(metrics: HostMetrics): HostEvaluationResult {
         "🏆 Official Golden SuperHost Shield Badge & Certificate",
         "💸 Instant Priority Razorpay Payout Routing (Zero-Delay)",
       ]
-    : [
-        "Verified Verified PG Owner Host Badge",
-        "Standard Razorpay Route Payout Schedule",
-      ];
+    : ["Verified Verified PG Owner Host Badge", "Standard Razorpay Route Payout Schedule"];
 
   const perksHi = isSuperHost
     ? [
@@ -165,10 +164,7 @@ export function evaluateHostTier(metrics: HostMetrics): HostEvaluationResult {
         "🏆 आधिकारिक स्वर्णिम सुपरहोस्ट शील्ड बैज व प्रमाणपत्र",
         "💸 त्वरित प्राथमिकता रेज़रपे भुगतान (शून्य-देरी)",
       ]
-    : [
-        "सत्यापित वरिष्ठ होस्ट बैज",
-        "मानक रेज़रपे रूट भुगतान अनुसूची",
-      ];
+    : ["सत्यापित वरिष्ठ होस्ट बैज", "मानक रेज़रपे रूट भुगतान अनुसूची"];
 
   return {
     hostId: metrics.hostId,
@@ -229,7 +225,5 @@ export function getAllHostMetrics(): HostMetrics[] {
  */
 export function getHostLeaderboard(): HostEvaluationResult[] {
   const metrics = getAllHostMetrics();
-  return metrics
-    .map(evaluateHostTier)
-    .sort((a, b) => b.score - a.score);
+  return metrics.map(evaluateHostTier).sort((a, b) => b.score - a.score);
 }

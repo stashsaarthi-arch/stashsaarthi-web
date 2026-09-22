@@ -7,9 +7,15 @@ export interface BrandLogoProps {
   alt?: string;
 }
 
-export const BrandLogo = React.memo(function BrandLogo({ className = "", height = 36, alt = "StashSaarthi" }: BrandLogoProps) {
+export const BrandLogo = React.memo(function BrandLogo({
+  className = "",
+  height = 36,
+  alt = "StashSaarthi",
+}: BrandLogoProps) {
   return (
-    <div className={`inline-flex items-center select-none rounded-xl dark:bg-transparent bg-[#0A0D0F] px-2.5 py-1 dark:px-0 dark:py-0 border border-white/10 dark:border-transparent transition-all shadow-sm dark:shadow-none ${className}`}>
+    <div
+      className={`inline-flex items-center select-none rounded-xl dark:bg-transparent bg-[#0A0D0F] px-2.5 py-1 dark:px-0 dark:py-0 border border-white/10 dark:border-transparent transition-all shadow-sm dark:shadow-none ${className}`}
+    >
       <OptimizedImage
         src="/stashsaarthi-logo.png"
         alt={alt}
@@ -23,4 +29,3 @@ export const BrandLogo = React.memo(function BrandLogo({ className = "", height 
     </div>
   );
 });
-

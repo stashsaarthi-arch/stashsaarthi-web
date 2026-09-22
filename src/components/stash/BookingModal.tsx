@@ -102,7 +102,9 @@ export function BookingModal({
   const [city, setCity] = useState("Kanpur");
   const [pincode, setPincode] = useState("");
   const [addressDetail, setAddressDetail] = useState("");
-  const [scheduledPickupWindow, setScheduledPickupWindow] = useState<string>("Today: 04:00 PM - 06:00 PM");
+  const [scheduledPickupWindow, setScheduledPickupWindow] = useState<string>(
+    "Today: 04:00 PM - 06:00 PM",
+  );
 
   const handlePickupSelect = (selection: ScheduledPickupSelection) => {
     setScheduledPickupWindow(selection.formattedString);
@@ -162,13 +164,9 @@ export function BookingModal({
     });
   }, [bags]);
 
-  const updateLuggageItem = (
-    index: number,
-    field: "category" | "customLabel",
-    val: string
-  ) => {
+  const updateLuggageItem = (index: number, field: "category" | "customLabel", val: string) => {
     setLuggageItems((prev) =>
-      prev.map((item, idx) => (idx === index ? { ...item, [field]: val } : item))
+      prev.map((item, idx) => (idx === index ? { ...item, [field]: val } : item)),
     );
   };
 
@@ -190,10 +188,12 @@ export function BookingModal({
   const removeLuggageItem = (index: number) => {
     if (luggageItems.length <= 1) return;
     setLuggageItems((prev) => {
-      const updated = prev.filter((_, idx) => idx !== index).map((item, idx) => ({
-        ...item,
-        barcode: `#SS-BAG-${String(idx + 1).padStart(2, "0")}`,
-      }));
+      const updated = prev
+        .filter((_, idx) => idx !== index)
+        .map((item, idx) => ({
+          ...item,
+          barcode: `#SS-BAG-${String(idx + 1).padStart(2, "0")}`,
+        }));
       setBags(updated.length);
       return updated;
     });
@@ -224,7 +224,9 @@ export function BookingModal({
 
   const [submitting, setSubmitting] = useState(false);
   const [waiverAccepted, setWaiverAccepted] = useState(false);
-  const [paymentMode, setPaymentMode] = useState<"upi_qr" | "partial_cash" | "escrow_reserve">("upi_qr");
+  const [paymentMode, setPaymentMode] = useState<"upi_qr" | "partial_cash" | "escrow_reserve">(
+    "upi_qr",
+  );
   const [copiedUpi, setCopiedUpi] = useState(false);
   const [tokenId, setTokenId] = useState<string>("");
   const [utrNumber, setUtrNumber] = useState("");
@@ -275,16 +277,17 @@ export function BookingModal({
   ];
 
   const hasDiscount = Boolean(
-    note && (note.includes("STASH50") || note.includes("₹50") || note.includes("Discount"))
+    note && (note.includes("STASH50") || note.includes("₹50") || note.includes("Discount")),
   );
   const discountAmount = hasDiscount ? 50 : 0;
 
   const [useTrialToken, setUseTrialToken] = useState(true);
   const stashWallet = getStashWallet();
   const hasActiveTrialToken = Boolean(
-    stashWallet.trialToken && !stashWallet.trialToken.isUsed && stashWallet.balance > 0
+    stashWallet.trialToken && !stashWallet.trialToken.isUsed && stashWallet.balance > 0,
   );
-  const trialDeduction = hasActiveTrialToken && useTrialToken ? Math.min(60, stashWallet.balance) : 0;
+  const trialDeduction =
+    hasActiveTrialToken && useTrialToken ? Math.min(60, stashWallet.balance) : 0;
 
   // Dynamic Amount Calculation across all 6 services
   const calcAmount = (() => {
@@ -306,10 +309,10 @@ export function BookingModal({
             (mealPlan === "trial"
               ? 300
               : mealPlan === "smart"
-              ? 599
-              : mealPlan === "freedom"
-              ? 1449
-              : 2799) + personalizationDelta;
+                ? 599
+                : mealPlan === "freedom"
+                  ? 1449
+                  : 2799) + personalizationDelta;
           break;
         case "connect":
           base = 0;
@@ -328,7 +331,6 @@ export function BookingModal({
     const gross = Math.max(0, base - discountAmount);
     return Math.max(0, gross - trialDeduction);
   })();
-
 
   // Reset state when opened
   useEffect(() => {
@@ -351,7 +353,16 @@ export function BookingModal({
     if (initialMonths) setMonths(initialMonths);
     if (user?.name) setName((n) => n || user.name!);
     if (user?.email) setEmail((e) => e || user.email!);
-  }, [open, serviceProp, user, initialAddress, initialRoomType, initialMealPlan, initialBags, initialMonths]);
+  }, [
+    open,
+    serviceProp,
+    user,
+    initialAddress,
+    initialRoomType,
+    initialMealPlan,
+    initialBags,
+    initialMonths,
+  ]);
 
   const isPhoneValid = !phone.trim() ? true : isValidPhone(phone);
   const isEmailValid = !email.trim() ? true : isValidEmail(email);
@@ -459,15 +470,16 @@ export function BookingModal({
         paymentMode === "partial_cash"
           ? `Partial (50% Upfront UPI: ₹${partialUpfrontAmount}, 50% Pickup Cash: ₹${partialRemainingCash})`
           : paymentMode === "upi_qr"
-          ? `100% Instant UPI (₹${calcAmount})`
-          : `Escrow Reserve Hold (₹${calcAmount})`;
+            ? `100% Instant UPI (₹${calcAmount})`
+            : `Escrow Reserve Hold (₹${calcAmount})`;
 
       const utrTag = utrNumber.trim() ? ` · UTR: ${utrNumber.trim()}` : "";
       const fullMessage = `${note ? `${note} · ` : ""}${serviceMeta} · EstAmount: ₹${calcAmount} · Token: ${generatedToken} · PIN: ${pincode || "N/A"} · PayMode: ${payModeTag}${utrTag}`;
 
       const cleanName = name.trim() || (service === "micro" ? "Host Partner" : "Campus Student");
       const cleanPhone = phone.trim();
-      const cleanEmail = email.trim() || `${cleanPhone || "guest"}@temp.stashsaarthi-web.vercel.app`;
+      const cleanEmail =
+        email.trim() || `${cleanPhone || "guest"}@temp.stashsaarthi-web.vercel.app`;
 
       const payload = {
         user_id: user?.id ?? null,
@@ -497,7 +509,9 @@ export function BookingModal({
         ...(scheduledPickupWindow ? { pickupWindow: scheduledPickupWindow } : {}),
         ...(service === "stash" ? { bags, months } : {}),
         ...(service === "spaces" ? { roomType, ...(moveInDate ? { moveInDate } : {}) } : {}),
-        ...(service === "kitchen" ? { mealPlan, dietType, personalizations: selectedPersonalizations } : {}),
+        ...(service === "kitchen"
+          ? { mealPlan, dietType, personalizations: selectedPersonalizations }
+          : {}),
         ...(service === "connect" ? { connectDomain } : {}),
         ...(service === "trust" ? { auditType } : {}),
         ...(service === "micro" ? { monetizeAsset } : {}),
@@ -508,9 +522,9 @@ export function BookingModal({
       }
 
       // Schedule 24-Hour Razorpay Route Host Split Payout
-      const payoutService = (["stash", "kitchen", "spaces", "connect"].includes(service)
-        ? service
-        : "stash") as "stash" | "kitchen" | "spaces" | "connect";
+      const payoutService = (
+        ["stash", "kitchen", "spaces", "connect"].includes(service) ? service : "stash"
+      ) as "stash" | "kitchen" | "spaces" | "connect";
 
       scheduleRazorpayRoutePayout({
         bookingId: generatedToken,
@@ -530,7 +544,6 @@ export function BookingModal({
         amount: calcAmount,
         timestamp: new Date().toISOString(),
       }).catch(() => null);
-
 
       // Save inquiry to supabase with zero data drop
       let syncError = false;
@@ -555,7 +568,9 @@ export function BookingModal({
       setStep(3);
       if (syncError) {
         toast.info(
-          isHi ? "📡 ऑफ़लाइन मोड: बुकिंग सुरक्षित व कतारबद्ध!" : "📡 Offline Mode: Booking Saved & Queued!",
+          isHi
+            ? "📡 ऑफ़लाइन मोड: बुकिंग सुरक्षित व कतारबद्ध!"
+            : "📡 Offline Mode: Booking Saved & Queued!",
           {
             description: isHi
               ? "कनेक्शन पुनः जुड़ते ही आपका आरक्षण स्वतः सिंक हो जाएगा।"
@@ -592,14 +607,11 @@ export function BookingModal({
       };
       enqueueOfflineSubmission("booking", fallbackPayload);
       setStep(3);
-      toast.info(
-        isHi ? "📡 ऑफ़लाइन पास तैयार!" : "📡 Offline StashPass Generated!",
-        {
-          description: isHi
-            ? "विवरण स्थानीय रूप से सुरक्षित कर लिया गया है।"
-            : "Your StashPass is active and queued for background sync.",
-        },
-      );
+      toast.info(isHi ? "📡 ऑफ़लाइन पास तैयार!" : "📡 Offline StashPass Generated!", {
+        description: isHi
+          ? "विवरण स्थानीय रूप से सुरक्षित कर लिया गया है।"
+          : "Your StashPass is active and queued for background sync.",
+      });
     } finally {
       setSubmitting(false);
     }
@@ -617,7 +629,17 @@ export function BookingModal({
               {step === 3 && (isHi ? "बुकिंग की पुष्टि हो गई!" : "Booking Confirmed!")}
             </DialogTitle>
             <span className="text-xs font-mono font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 rounded-full">
-              {step === 1 ? (isHi ? "चरण 01/03" : "Step 01/03") : step === 2 ? (isHi ? "चरण 02/03" : "Step 02/03") : (isHi ? "चरण 03/03" : "Step 03/03")}
+              {step === 1
+                ? isHi
+                  ? "चरण 01/03"
+                  : "Step 01/03"
+                : step === 2
+                  ? isHi
+                    ? "चरण 02/03"
+                    : "Step 02/03"
+                  : isHi
+                    ? "चरण 03/03"
+                    : "Step 03/03"}
             </span>
           </div>
 
@@ -626,8 +648,10 @@ export function BookingModal({
             <div className="flex items-center justify-between text-xs">
               <span className="text-muted-foreground font-medium flex items-center gap-1.5">
                 <Clock className="w-3.5 h-3.5 text-emerald-400" />
-                {step === 1 && (isHi ? "चरण 1: सेवा व संपर्क विवरण" : "Step 1: Details & Customization")}
-                {step === 2 && (isHi ? "चरण 2: एस्क्रो सुरक्षा व समीक्षा" : "Step 2: Escrow Lock & Review")}
+                {step === 1 &&
+                  (isHi ? "चरण 1: सेवा व संपर्क विवरण" : "Step 1: Details & Customization")}
+                {step === 2 &&
+                  (isHi ? "चरण 2: एस्क्रो सुरक्षा व समीक्षा" : "Step 2: Escrow Lock & Review")}
                 {step === 3 && (isHi ? "चरण 3: डिजिटल स्टैशपास जारी" : "Step 3: StashPass Issued")}
               </span>
               <span className="font-mono text-[11px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
@@ -655,16 +679,20 @@ export function BookingModal({
                   step >= 1 ? "text-emerald-400" : "text-muted-foreground"
                 } ${step === 3 ? "cursor-default opacity-80" : "cursor-pointer hover:underline"}`}
               >
-                <div className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold font-mono transition-all ${
-                  step > 1
-                    ? "bg-emerald-500 text-black"
-                    : step === 1
-                    ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/50 shadow-[0_0_8px_rgba(16,185,129,0.3)]"
-                    : "bg-white/10 text-slate-400"
-                }`}>
+                <div
+                  className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold font-mono transition-all ${
+                    step > 1
+                      ? "bg-emerald-500 text-black"
+                      : step === 1
+                        ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/50 shadow-[0_0_8px_rgba(16,185,129,0.3)]"
+                        : "bg-white/10 text-slate-400"
+                  }`}
+                >
                   {step > 1 ? <Check className="h-3 w-3 stroke-[3]" /> : "1"}
                 </div>
-                <span className="truncate hidden sm:inline">{isHi ? "विवरण व चयन" : "Config & Contact"}</span>
+                <span className="truncate hidden sm:inline">
+                  {isHi ? "विवरण व चयन" : "Config & Contact"}
+                </span>
                 <span className="sm:hidden">{isHi ? "विवरण" : "Details"}</span>
               </button>
 
@@ -673,27 +701,35 @@ export function BookingModal({
                   step >= 2 ? "text-emerald-400" : "text-muted-foreground"
                 }`}
               >
-                <div className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold font-mono transition-all ${
-                  step > 2
-                    ? "bg-emerald-500 text-black"
-                    : step === 2
-                    ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/50 shadow-[0_0_8px_rgba(16,185,129,0.3)]"
-                    : "bg-white/10 text-slate-400"
-                }`}>
+                <div
+                  className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold font-mono transition-all ${
+                    step > 2
+                      ? "bg-emerald-500 text-black"
+                      : step === 2
+                        ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/50 shadow-[0_0_8px_rgba(16,185,129,0.3)]"
+                        : "bg-white/10 text-slate-400"
+                  }`}
+                >
                   {step > 2 ? <Check className="h-3 w-3 stroke-[3]" /> : "2"}
                 </div>
-                <span className="truncate hidden sm:inline">{isHi ? "एस्क्रो समीक्षा" : "Escrow & Review"}</span>
+                <span className="truncate hidden sm:inline">
+                  {isHi ? "एस्क्रो समीक्षा" : "Escrow & Review"}
+                </span>
                 <span className="sm:hidden">{isHi ? "एस्क्रो" : "Escrow"}</span>
               </div>
 
-              <div className={`flex items-center justify-end gap-1.5 text-[11px] font-medium transition ${
-                step === 3 ? "text-emerald-400" : "text-muted-foreground"
-              }`}>
-                <div className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold font-mono transition-all ${
-                  step === 3
-                    ? "bg-emerald-500 text-black shadow-[0_0_10px_rgba(16,185,129,0.5)]"
-                    : "bg-white/10 text-slate-400"
-                }`}>
+              <div
+                className={`flex items-center justify-end gap-1.5 text-[11px] font-medium transition ${
+                  step === 3 ? "text-emerald-400" : "text-muted-foreground"
+                }`}
+              >
+                <div
+                  className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold font-mono transition-all ${
+                    step === 3
+                      ? "bg-emerald-500 text-black shadow-[0_0_10px_rgba(16,185,129,0.5)]"
+                      : "bg-white/10 text-slate-400"
+                  }`}
+                >
                   {step === 3 ? <Check className="h-3 w-3 stroke-[3]" /> : "3"}
                 </div>
                 <span className="truncate hidden sm:inline">{isHi ? "स्टैशपास" : "StashPass"}</span>
@@ -789,7 +825,10 @@ export function BookingModal({
                       {/* Upper controls: Quantity and Duration */}
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
-                          <Label htmlFor="bk-bags" className="text-xs font-semibold cursor-pointer text-slate-200">
+                          <Label
+                            htmlFor="bk-bags"
+                            className="text-xs font-semibold cursor-pointer text-slate-200"
+                          >
                             {isHi ? "कुल स्टैश बैग संख्या:" : "Total Stash Bags Count:"}
                           </Label>
                           <select
@@ -801,14 +840,18 @@ export function BookingModal({
                           >
                             {[1, 2, 3, 4, 5, 6, 8, 10].map((b) => (
                               <option key={b} value={b} className="bg-[#0A0D0F]">
-                                {b} {isHi ? "बैग / बॉक्स" : b === 1 ? "Bag / Box" : "Bags / Boxes"} (₹{b * 300}/mo)
+                                {b} {isHi ? "बैग / बॉक्स" : b === 1 ? "Bag / Box" : "Bags / Boxes"}{" "}
+                                (₹{b * 300}/mo)
                               </option>
                             ))}
                           </select>
                         </div>
 
                         <div>
-                          <Label htmlFor="bk-months" className="text-xs font-semibold cursor-pointer text-slate-200">
+                          <Label
+                            htmlFor="bk-months"
+                            className="text-xs font-semibold cursor-pointer text-slate-200"
+                          >
                             {isHi ? "स्टोरेज अवधि (महीने):" : "Storage Duration (Months):"}
                           </Label>
                           <select
@@ -820,7 +863,8 @@ export function BookingModal({
                           >
                             {[1, 2, 3, 4, 5, 6].map((m) => (
                               <option key={m} value={m} className="bg-[#0A0D0F]">
-                                {m} {isHi ? "महीने" : m === 1 ? "Month" : "Months"} {m >= 3 ? (isHi ? " (15% छूट)" : " (15% OFF)") : ""}
+                                {m} {isHi ? "महीने" : m === 1 ? "Month" : "Months"}{" "}
+                                {m >= 3 ? (isHi ? " (15% छूट)" : " (15% OFF)") : ""}
                               </option>
                             ))}
                           </select>
@@ -852,12 +896,14 @@ export function BookingModal({
                                 onClick={() => {
                                   setMonths(3);
                                   toast.success(
-                                    isHi ? "🎉 15% एक्सटेंडेड ब्रेक डिस्काउंट लागू हुआ!" : "🎉 15% Extended Break Discount Applied!",
+                                    isHi
+                                      ? "🎉 15% एक्सटेंडेड ब्रेक डिस्काउंट लागू हुआ!"
+                                      : "🎉 15% Extended Break Discount Applied!",
                                     {
                                       description: isHi
                                         ? `आपने ₹${potentialQuote.discountAmount} की बचत की!`
                                         : `You saved ₹${potentialQuote.discountAmount} on your 3-month stash!`,
-                                    }
+                                    },
                                   );
                                 }}
                                 className="w-full sm:w-auto shrink-0 px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black text-xs font-bold font-sans transition cursor-pointer shadow-md flex items-center justify-center gap-1 active:scale-95"
@@ -893,7 +939,7 @@ export function BookingModal({
                               description: isHi
                                 ? "100% मुफ़्त कैंपस डोरस्टेप पिकअप अनलॉक हो गया!"
                                 : "100% Free Campus Doorstep Pickup unlocked!",
-                            }
+                            },
                           );
                         }}
                       />
@@ -911,34 +957,54 @@ export function BookingModal({
                             className="text-[10px] text-cyan-300 hover:text-white font-mono bg-cyan-500/15 border border-cyan-500/30 px-2 py-0.5 rounded-md transition cursor-pointer flex items-center gap-1"
                           >
                             <Luggage className="w-3 h-3 text-cyan-400" />
-                            {isHi ? "पूर्ण आईटमाइज़र व बारकोड टैग खोलें →" : "Full Itemizer & Print Tags →"}
+                            {isHi
+                              ? "पूर्ण आईटमाइज़र व बारकोड टैग खोलें →"
+                              : "Full Itemizer & Print Tags →"}
                           </button>
                         </div>
                         <div className="flex flex-wrap gap-1.5">
                           <button
                             type="button"
-                            onClick={() => addLuggageItemWithPreset("Carton Box", "Carton #1: Books & Semester Notes")}
+                            onClick={() =>
+                              addLuggageItemWithPreset(
+                                "Carton Box",
+                                "Carton #1: Books & Semester Notes",
+                              )
+                            }
                             className="px-2.5 py-1 rounded-lg border border-cyan-500/30 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 text-[11px] font-medium transition cursor-pointer flex items-center gap-1"
                           >
                             <Plus className="w-3 h-3" /> + {isHi ? "किताबें बॉक्स" : "Books Box"}
                           </button>
                           <button
                             type="button"
-                            onClick={() => addLuggageItemWithPreset("Suitcase", "Suitcase: Winter Clothes & Jackets")}
+                            onClick={() =>
+                              addLuggageItemWithPreset(
+                                "Suitcase",
+                                "Suitcase: Winter Clothes & Jackets",
+                              )
+                            }
                             className="px-2.5 py-1 rounded-lg border border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 text-[11px] font-medium transition cursor-pointer flex items-center gap-1"
                           >
-                            <Plus className="w-3 h-3" /> + {isHi ? "सूटकेस (सर्दियों के कपड़े)" : "Winter Suitcase"}
+                            <Plus className="w-3 h-3" /> +{" "}
+                            {isHi ? "सूटकेस (सर्दियों के कपड़े)" : "Winter Suitcase"}
                           </button>
                           <button
                             type="button"
-                            onClick={() => addLuggageItemWithPreset("Carton Box", "Box #2: Bedding & Linens")}
+                            onClick={() =>
+                              addLuggageItemWithPreset("Carton Box", "Box #2: Bedding & Linens")
+                            }
                             className="px-2.5 py-1 rounded-lg border border-amber-500/30 bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 text-[11px] font-medium transition cursor-pointer flex items-center gap-1"
                           >
                             <Plus className="w-3 h-3" /> + {isHi ? "बिस्तर बॉक्स" : "Bedding Box"}
                           </button>
                           <button
                             type="button"
-                            onClick={() => addLuggageItemWithPreset("Electronics", "Electronics Box: Kettle & Chargers")}
+                            onClick={() =>
+                              addLuggageItemWithPreset(
+                                "Electronics",
+                                "Electronics Box: Kettle & Chargers",
+                              )
+                            }
                             className="px-2.5 py-1 rounded-lg border border-purple-500/30 bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 text-[11px] font-medium transition cursor-pointer flex items-center gap-1"
                           >
                             <Plus className="w-3 h-3" /> + {isHi ? "इलेक्ट्रॉनिक्स" : "Electronics"}
@@ -983,16 +1049,32 @@ export function BookingModal({
                                 </Label>
                                 <select
                                   value={item.category}
-                                  onChange={(e) => updateLuggageItem(idx, "category", e.target.value)}
+                                  onChange={(e) =>
+                                    updateLuggageItem(idx, "category", e.target.value)
+                                  }
                                   className="w-full mt-1 rounded-lg border border-white/10 bg-black/80 px-2.5 py-1.5 text-xs text-white cursor-pointer"
                                 >
-                                  <option value="Carton Box">{isHi ? "कार्टन बॉक्स 📦" : "Carton Box 📦"}</option>
-                                  <option value="Suitcase">{isHi ? "सूटकेस / ट्रॉली 🧳" : "Luggage / Suitcase 🧳"}</option>
-                                  <option value="Duffle Bag">{isHi ? "डफ़ल / बैकपैक 🎒" : "Duffle / Backpack 🎒"}</option>
-                                  <option value="Books & Notes">{isHi ? "किताबें व नोट्स 📚" : "Books & Semester Notes 📚"}</option>
-                                  <option value="Bicycle/Cooler">{isHi ? "साइकिल / कूलर 🚲" : "Bicycle / Cooler 🚲"}</option>
-                                  <option value="Electronics">{isHi ? "इलेक्ट्रॉनिक्स 🔌" : "Electronics & Appliances 🔌"}</option>
-                                  <option value="Other">{isHi ? "अन्य सामान 🏷️" : "Other Miscellaneous 🏷️"}</option>
+                                  <option value="Carton Box">
+                                    {isHi ? "कार्टन बॉक्स 📦" : "Carton Box 📦"}
+                                  </option>
+                                  <option value="Suitcase">
+                                    {isHi ? "सूटकेस / ट्रॉली 🧳" : "Luggage / Suitcase 🧳"}
+                                  </option>
+                                  <option value="Duffle Bag">
+                                    {isHi ? "डफ़ल / बैकपैक 🎒" : "Duffle / Backpack 🎒"}
+                                  </option>
+                                  <option value="Books & Notes">
+                                    {isHi ? "किताबें व नोट्स 📚" : "Books & Semester Notes 📚"}
+                                  </option>
+                                  <option value="Bicycle/Cooler">
+                                    {isHi ? "साइकिल / कूलर 🚲" : "Bicycle / Cooler 🚲"}
+                                  </option>
+                                  <option value="Electronics">
+                                    {isHi ? "इलेक्ट्रॉनिक्स 🔌" : "Electronics & Appliances 🔌"}
+                                  </option>
+                                  <option value="Other">
+                                    {isHi ? "अन्य सामान 🏷️" : "Other Miscellaneous 🏷️"}
+                                  </option>
                                 </select>
                               </div>
 
@@ -1003,8 +1085,12 @@ export function BookingModal({
                                 <Input
                                   type="text"
                                   value={item.customLabel}
-                                  onChange={(e) => updateLuggageItem(idx, "customLabel", e.target.value)}
-                                  placeholder={isHi ? "उदा. कार्टन #1: पुस्तकें" : "e.g., Carton #1: Books"}
+                                  onChange={(e) =>
+                                    updateLuggageItem(idx, "customLabel", e.target.value)
+                                  }
+                                  placeholder={
+                                    isHi ? "उदा. कार्टन #1: पुस्तकें" : "e.g., Carton #1: Books"
+                                  }
                                   className="mt-1 border-white/10 bg-black/80 text-xs text-white py-1 px-2.5 h-8"
                                 />
                               </div>
@@ -1472,10 +1558,14 @@ export function BookingModal({
                       </div>
                       <div>
                         <div className="font-semibold text-emerald-300">
-                          {isHi ? "⚡ ₹60 जीरो-फी ट्रायल टोकन लागू" : "⚡ ₹60 Zero-Fee Trial Token Active"}
+                          {isHi
+                            ? "⚡ ₹60 जीरो-फी ट्रायल टोकन लागू"
+                            : "⚡ ₹60 Zero-Fee Trial Token Active"}
                         </div>
                         <div className="text-[11px] text-slate-400">
-                          {isHi ? "स्टैश वॉलेट क्रेडिट: 1st ऑर्डर पर ₹60 की छूट" : "Stash Wallet Credit: ₹60 discount applied"}
+                          {isHi
+                            ? "स्टैश वॉलेट क्रेडिट: 1st ऑर्डर पर ₹60 की छूट"
+                            : "Stash Wallet Credit: ₹60 discount applied"}
                         </div>
                       </div>
                     </div>
@@ -1489,8 +1579,12 @@ export function BookingModal({
                       }`}
                     >
                       {useTrialToken
-                        ? isHi ? "लागू है ✓" : "Applied ✓"
-                        : isHi ? "टोकन लागू करें" : "Apply Token"}
+                        ? isHi
+                          ? "लागू है ✓"
+                          : "Applied ✓"
+                        : isHi
+                          ? "टोकन लागू करें"
+                          : "Apply Token"}
                     </button>
                   </div>
                 )}
@@ -1654,7 +1748,9 @@ export function BookingModal({
                     <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-2.5 text-left text-xs space-y-1">
                       <div className="flex items-center gap-1.5 text-amber-300 font-bold">
                         <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0" />
-                        <span>{isHi ? "50% पिकअप कैश सुरक्षा" : "50% Cash at Doorstep Pickup"}</span>
+                        <span>
+                          {isHi ? "50% पिकअप कैश सुरक्षा" : "50% Cash at Doorstep Pickup"}
+                        </span>
                       </div>
                       <p className="text-[11px] text-slate-300 leading-tight">
                         {isHi
@@ -1668,7 +1764,9 @@ export function BookingModal({
                       href={upiDeepLink}
                       className="mt-2 md:hidden flex items-center justify-center gap-2 w-full min-h-[48px] py-3 rounded-xl bg-amber-500 text-black font-bold text-sm shadow-lg shadow-amber-500/25 active:scale-95 transition-transform"
                     >
-                      {isHi ? `₹${partialUpfrontAmount} UPI ऐप से दें` : `Pay ₹${partialUpfrontAmount} via UPI App`}
+                      {isHi
+                        ? `₹${partialUpfrontAmount} UPI ऐप से दें`
+                        : `Pay ₹${partialUpfrontAmount} via UPI App`}
                     </a>
                   </div>
                 ) : paymentMode === "upi_qr" && calcAmount > 0 ? (
@@ -1762,7 +1860,9 @@ export function BookingModal({
                         <span className="text-muted-foreground">
                           {isHi ? "पिकअप समय विंडो:" : "Pickup Window:"}
                         </span>
-                        <span className="font-bold font-mono text-emerald-300">{scheduledPickupWindow}</span>
+                        <span className="font-bold font-mono text-emerald-300">
+                          {scheduledPickupWindow}
+                        </span>
                       </div>
                     )}
                     {service === "stash" && (
@@ -1770,9 +1870,13 @@ export function BookingModal({
                         <span className="text-muted-foreground">
                           {isHi ? "कैंपस डोरस्टेप पिकअप शुल्क:" : "Campus Doorstep Pickup Fee:"}
                         </span>
-                        <span className={`font-bold ${bags >= 2 ? "text-emerald-400" : "text-amber-400"}`}>
+                        <span
+                          className={`font-bold ${bags >= 2 ? "text-emerald-400" : "text-amber-400"}`}
+                        >
                           {bags >= 2
-                            ? isHi ? "100% मुफ़्त (₹99 की बचत)" : "100% FREE (Saved ₹99)"
+                            ? isHi
+                              ? "100% मुफ़्त (₹99 की बचत)"
+                              : "100% FREE (Saved ₹99)"
                             : "₹99 (2+ बॉक्स पर मुफ़्त)"}
                         </span>
                       </div>
@@ -1792,13 +1896,24 @@ export function BookingModal({
                 {(paymentMode === "upi_qr" || paymentMode === "partial_cash") && calcAmount > 0 && (
                   <div className="rounded-xl border border-white/10 bg-black/40 p-3 space-y-1.5 text-left">
                     <div className="flex items-center justify-between">
-                      <Label htmlFor="bk-utr" className="text-[11px] font-semibold text-slate-200 flex items-center gap-1.5">
+                      <Label
+                        htmlFor="bk-utr"
+                        className="text-[11px] font-semibold text-slate-200 flex items-center gap-1.5"
+                      >
                         <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                        {isHi ? "12-अंकीय UPI UTR / संदर्भ नंबर (वैकल्पिक):" : "12-Digit UPI Ref / UTR No. (Optional):"}
+                        {isHi
+                          ? "12-अंकीय UPI UTR / संदर्भ नंबर (वैकल्पिक):"
+                          : "12-Digit UPI Ref / UTR No. (Optional):"}
                       </Label>
                       {utrNumber && (
-                        <span className={`text-[10px] font-mono ${utrNumber.trim().length === 12 ? "text-emerald-400" : "text-amber-400"}`}>
-                          {utrNumber.trim().length === 12 ? (isHi ? "सत्यापित UTR ✓" : "12 Digits ✓") : `${utrNumber.trim().length}/12 digits`}
+                        <span
+                          className={`text-[10px] font-mono ${utrNumber.trim().length === 12 ? "text-emerald-400" : "text-amber-400"}`}
+                        >
+                          {utrNumber.trim().length === 12
+                            ? isHi
+                              ? "सत्यापित UTR ✓"
+                              : "12 Digits ✓"
+                            : `${utrNumber.trim().length}/12 digits`}
                         </span>
                       )}
                     </div>
@@ -1935,7 +2050,7 @@ export function BookingModal({
                 <div className="pt-1">
                   <a
                     href={`https://wa.me/919369454350?text=${encodeURIComponent(
-                      `Hello StashSaarthi Concierge, my Order ID is ${tokenId} for service ${service.toUpperCase()}. Booked at ${new Date().toLocaleString("en-IN")}. Please confirm my service slot.`
+                      `Hello StashSaarthi Concierge, my Order ID is ${tokenId} for service ${service.toUpperCase()}. Booked at ${new Date().toLocaleString("en-IN")}. Please confirm my service slot.`,
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -1981,7 +2096,7 @@ export function BookingModal({
               category: ni.category,
               customLabel: ni.customLabel,
               barcode: ni.barcode,
-            }))
+            })),
           );
           setBags(newItems.length);
         }}

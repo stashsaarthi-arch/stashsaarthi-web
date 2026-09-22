@@ -116,14 +116,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "robots", content: "index, follow, max-image-preview:large" },
       { name: "format-detection", content: "telephone=no" },
       { title: "StashSaarthi | Student Storage, PG Rooms, Hostels & Kitchen Services in Kanpur" },
-      { name: "title", content: "StashSaarthi | Student Storage, PG Rooms, Hostels & Kitchen Services in Kanpur" },
+      {
+        name: "title",
+        content: "StashSaarthi | Student Storage, PG Rooms, Hostels & Kitchen Services in Kanpur",
+      },
       {
         name: "description",
-        content: "Affordable student luggage storage, verified PG rooms, student hostels, and tiffin/kitchen services near CSJMU Kanpur. Safe, verified, and budget-friendly.",
+        content:
+          "Affordable student luggage storage, verified PG rooms, student hostels, and tiffin/kitchen services near CSJMU Kanpur. Safe, verified, and budget-friendly.",
       },
       {
         name: "keywords",
-        content: "student room kanpur, pg in kanpur, hostel near csjmu, student luggage storage, student kitchen tiffin kanpur, paying guest kanpur, student warehouse",
+        content:
+          "student room kanpur, pg in kanpur, hostel near csjmu, student luggage storage, student kitchen tiffin kanpur, paying guest kanpur, student warehouse",
       },
       { name: "geo.region", content: "IN-UP" },
       { name: "geo.placename", content: "Kanpur, Kakadeo, Kalyanpur" },
@@ -132,14 +137,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "author", content: "StashSaarthi" },
       { property: "og:site_name", content: "StashSaarthi" },
       { property: "og:locale", content: "en_IN" },
-      { property: "og:title", content: "StashSaarthi | Student Storage, PG Rooms, Hostels & Kitchen Services in Kanpur" },
+      {
+        property: "og:title",
+        content: "StashSaarthi | Student Storage, PG Rooms, Hostels & Kitchen Services in Kanpur",
+      },
       {
         property: "og:description",
-        content: "Affordable student luggage storage, verified PG rooms, student hostels, and tiffin/kitchen services near CSJMU Kanpur. Safe, verified, and budget-friendly.",
+        content:
+          "Affordable student luggage storage, verified PG rooms, student hostels, and tiffin/kitchen services near CSJMU Kanpur. Safe, verified, and budget-friendly.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://stashsaarthi-web.vercel.app" },
-      { property: "og:image", content: "https://stashsaarthi-web.vercel.app/images/og-banner-new.png" },
+      {
+        property: "og:image",
+        content: "https://stashsaarthi-web.vercel.app/images/og-banner-new.png",
+      },
       {
         property: "og:image:alt",
         content: "StashSaarthi Intergenerational Living and Micro-Storage",
@@ -153,7 +165,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       {
         name: "twitter:description",
-        content: "Affordable student luggage storage, verified PG rooms, student hostels, and tiffin/kitchen services near CSJMU Kanpur. Safe, verified, and budget-friendly.",
+        content:
+          "Affordable student luggage storage, verified PG rooms, student hostels, and tiffin/kitchen services near CSJMU Kanpur. Safe, verified, and budget-friendly.",
       },
       {
         name: "twitter:image",
@@ -189,39 +202,39 @@ function RootShell({ children }: { children: ReactNode }) {
       {
         "@type": "LocalBusiness",
         "@id": "https://stashsaarthi-web.vercel.app/#localbusiness",
-        "name": "StashSaarthi",
-        "url": "https://stashsaarthi-web.vercel.app",
-        "areaServed": "Kanpur, Uttar Pradesh, India",
-        "makesOffer": [
+        name: "StashSaarthi",
+        url: "https://stashsaarthi-web.vercel.app",
+        areaServed: "Kanpur, Uttar Pradesh, India",
+        makesOffer: [
           {
             "@type": "Offer",
-            "itemOffered": {
+            itemOffered: {
               "@type": "Service",
-              "name": "Student Luggage Storage"
-            }
+              name: "Student Luggage Storage",
+            },
           },
           {
             "@type": "Offer",
-            "itemOffered": {
+            itemOffered: {
               "@type": "Service",
-              "name": "PG & Hostel Accommodation"
-            }
+              name: "PG & Hostel Accommodation",
+            },
           },
           {
             "@type": "Offer",
-            "itemOffered": {
+            itemOffered: {
               "@type": "Service",
-              "name": "Student Kitchen & Meal Support"
-            }
-          }
+              name: "Student Kitchen & Meal Support",
+            },
+          },
         ],
-        "aggregateRating": {
+        aggregateRating: {
           "@type": "AggregateRating",
-          "ratingValue": "4.8",
-          "reviewCount": "120",
-          "bestRating": "5",
-          "worstRating": "1"
-        }
+          ratingValue: "4.8",
+          reviewCount: "120",
+          bestRating: "5",
+          worstRating: "1",
+        },
       },
       {
         "@type": "WebSite",
@@ -435,7 +448,6 @@ function RootShell({ children }: { children: ReactNode }) {
     ],
   };
 
-
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <head>
@@ -545,7 +557,6 @@ function RootComponent() {
   useEffect(() => {
     trackPageView(currentRoute);
   }, [currentRoute]);
-
 
   useEffect(() => {
     const handleOffline = () => {

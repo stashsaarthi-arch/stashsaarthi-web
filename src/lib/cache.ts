@@ -1,11 +1,11 @@
 /**
  * High-Performance Multi-Tier Caching Layer
- * 
+ *
  * Supports:
  * Tier 1: In-memory Map cache with millisecond TTL (0ms instant response)
  * Tier 2: Asynchronous IndexedDB persistence via idb-keyval (survives reloads)
  * Tier 3: Upstash / Redis REST interface (if VITE_UPSTASH_REDIS_REST_URL is configured)
- * 
+ *
  * Used for frequently accessed, non-user-specific data:
  * - Campus nodes & inventory stats
  * - Public review aggregates & verified feedback
@@ -31,8 +31,10 @@ interface CacheEnvelope<T> {
 const memoryCache = new Map<string, CacheEnvelope<unknown>>();
 
 // Upstash REST configuration (read from Vite env if provided)
-const UPSTASH_REST_URL = (typeof import.meta !== "undefined" && import.meta.env?.["VITE_UPSTASH_REDIS_REST_URL"]) || "";
-const UPSTASH_REST_TOKEN = (typeof import.meta !== "undefined" && import.meta.env?.["VITE_UPSTASH_REDIS_REST_TOKEN"]) || "";
+const UPSTASH_REST_URL =
+  (typeof import.meta !== "undefined" && import.meta.env?.["VITE_UPSTASH_REDIS_REST_URL"]) || "";
+const UPSTASH_REST_TOKEN =
+  (typeof import.meta !== "undefined" && import.meta.env?.["VITE_UPSTASH_REDIS_REST_TOKEN"]) || "";
 
 /**
  * Check if Upstash Redis REST credentials are configured.
@@ -105,11 +107,7 @@ export async function getCached<T>(key: string): Promise<T | null> {
 /**
  * Set a key-value pair in cache with expiration.
  */
-export async function setCached<T>(
-  key: string,
-  data: T,
-  options?: CacheOptions
-): Promise<void> {
+export async function setCached<T>(key: string, data: T, options?: CacheOptions): Promise<void> {
   const ttlSeconds = options?.ttlSeconds ?? 300; // 5 min default
   const persistent = options?.persistent ?? true;
   const now = Date.now();
@@ -137,11 +135,14 @@ export async function setCached<T>(
   if (isUpstashConfigured()) {
     try {
       const serialized = JSON.stringify(envelope);
-      await fetch(`${UPSTASH_REST_URL}/set/${encodeURIComponent(key)}/${encodeURIComponent(serialized)}?EX=${ttlSeconds}`, {
-        headers: {
-          Authorization: `Bearer ${UPSTASH_REST_TOKEN}`,
+      await fetch(
+        `${UPSTASH_REST_URL}/set/${encodeURIComponent(key)}/${encodeURIComponent(serialized)}?EX=${ttlSeconds}`,
+        {
+          headers: {
+            Authorization: `Bearer ${UPSTASH_REST_TOKEN}`,
+          },
         },
-      });
+      );
     } catch {
       // Ignore network errors
     }
@@ -182,7 +183,7 @@ export async function invalidateCached(key: string): Promise<void> {
 export async function getOrSet<T>(
   key: string,
   fetcher: () => Promise<T>,
-  options?: CacheOptions
+  options?: CacheOptions,
 ): Promise<T> {
   const cached = await getCached<T>(key);
   if (cached !== null) {

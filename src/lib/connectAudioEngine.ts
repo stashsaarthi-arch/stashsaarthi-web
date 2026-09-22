@@ -32,7 +32,8 @@ export const NETWORK_PROFILES: Record<NetworkTier, NetworkProfile> = {
     expectedLatencyMs: 38,
     vadEnabled: true,
     codec: "Opus Narrowband (SPEECH_LOW_BITRATE)",
-    description: "Ultra-compressed 12 kbps voice stream with VAD silence suppression for weak 2G signals.",
+    description:
+      "Ultra-compressed 12 kbps voice stream with VAD silence suppression for weak 2G signals.",
     descriptionHi: "कमजोर 2G सिग्नल के लिए VAD साइलेंस सप्रेशन के साथ 12 kbps की वॉइस स्ट्रीम।",
   },
   "3G_KAKADEO": {
@@ -85,7 +86,10 @@ export function detectNetworkTier(): NetworkTier {
     return "3G_KAKADEO";
   }
 
-  const conn = (navigator as any).connection || (navigator as any).mozConnection || (navigator as any).webkitConnection;
+  const conn =
+    (navigator as any).connection ||
+    (navigator as any).mozConnection ||
+    (navigator as any).webkitConnection;
   if (!conn) return "3G_KAKADEO";
 
   const effectiveType = conn.effectiveType || "";
@@ -101,7 +105,11 @@ export function detectNetworkTier(): NetworkTier {
  * Compute Mean Opinion Score (MOS) voice call quality index (1.0 - 5.0 scale)
  * Based on ITU-T G.107 E-model calculations
  */
-export function calculateMOS(bitrateKbps: number, latencyMs: number, packetLossPercent = 0.5): number {
+export function calculateMOS(
+  bitrateKbps: number,
+  latencyMs: number,
+  packetLossPercent = 0.5,
+): number {
   // Base rating R0
   let R = 94.2;
 
@@ -153,7 +161,10 @@ export function getConnectAudioContext(): AudioContext | null {
  * Play a compressed Voice Sample preview over Web Audio API
  * Applies bandpass filtering (narrowband 300Hz-3.4kHz for 2G, wideband 50Hz-7kHz for 3G, unfiltered for 4G)
  */
-export function playCompressedVoicePreview(tier: NetworkTier, durationSec = 1.8): Promise<AudioCompressorTelemetry> {
+export function playCompressedVoicePreview(
+  tier: NetworkTier,
+  durationSec = 1.8,
+): Promise<AudioCompressorTelemetry> {
   return new Promise((resolve) => {
     const ctx = getConnectAudioContext();
     const profile = NETWORK_PROFILES[tier];

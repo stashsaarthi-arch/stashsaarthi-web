@@ -158,10 +158,7 @@ export function sealKitchenNode(input: CsoAuditInput): CsoKitchenSealCertificate
   const sealId = `#CSO-SEAL-KNP-${randomNum}`;
 
   const allChecksPassed =
-    input.roWaterAudit &&
-    input.fssaiHygienePass &&
-    input.policeClearance &&
-    input.laserBarcodeSeal;
+    input.roWaterAudit && input.fssaiHygienePass && input.policeClearance && input.laserBarcodeSeal;
 
   const issueDate = new Date();
   const expiryDate = new Date();
@@ -212,7 +209,9 @@ export function verifyBarcodeSerial(serial: string): {
 } {
   const normalized = serial.trim().toUpperCase();
   const all = getAllSealedKitchenNodes();
-  const cert = Object.values(all).find((c) => c.sealId.toUpperCase() === normalized || c.nodeId.toUpperCase() === normalized);
+  const cert = Object.values(all).find(
+    (c) => c.sealId.toUpperCase() === normalized || c.nodeId.toUpperCase() === normalized,
+  );
 
   if (cert) {
     return { isValid: true, certificate: cert };

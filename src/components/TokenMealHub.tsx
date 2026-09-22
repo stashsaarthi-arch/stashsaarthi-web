@@ -8,19 +8,35 @@ import { toast } from "sonner";
 import { TasteShieldModal } from "./TasteShieldModal";
 import { PeacockFeatherMatkiDusting } from "./stash/PeacockFeatherMatkiDusting";
 import { RoommateMenuShareModal, MenuShareDetails } from "./stash/RoommateMenuShareModal";
-import { ShieldCheck, Repeat, Zap, Check, X, ChevronRight, Clock, MapPin, Phone, Share2, MessageCircle, Ticket } from "lucide-react";
+import {
+  ShieldCheck,
+  Repeat,
+  Zap,
+  Check,
+  X,
+  ChevronRight,
+  Clock,
+  MapPin,
+  Phone,
+  Share2,
+  MessageCircle,
+  Ticket,
+} from "lucide-react";
 import { playClick, playPop, playMicroClick, playToggle, playConfirm } from "@/lib/audio";
 import { SaarthiKitchenSchema } from "@/components/seo/SaarthiKitchenSchema";
 import { IntelligentNudgesWidget } from "./stash/IntelligentNudgesWidget";
 import { MealPersonalizationSelector } from "./stash/MealPersonalizationSelector";
 import { formatPersonalizationsSummary } from "@/lib/mealPersonalization";
 import { DeliveryCutoffCountdown } from "./stash/DeliveryCutoffCountdown";
-import { useThaliPriceLabelVariant, trackThaliPriceClick, ThaliPriceLabelVariant } from "@/lib/abTesting";
+import {
+  useThaliPriceLabelVariant,
+  trackThaliPriceClick,
+  ThaliPriceLabelVariant,
+} from "@/lib/abTesting";
 import { CsoKitchenSealModal } from "./stash/CsoKitchenSealModal";
 import { MealTokenLedgerModal } from "./stash/MealTokenLedgerModal";
 import { motion, AnimatePresence } from "motion/react";
 import type { OpenBooking } from "./stash/types";
-
 
 type FulfillmentType = "DineIn_Pickup" | "RoomDelivery";
 
@@ -245,7 +261,7 @@ const MealTierCard: React.FC<MealTierCardProps> = ({ tier, isSelected, tierCost,
       cost_delivery: tier.costDelivery,
       effective_cost: tierCost,
       badge: tier.badge,
-    }
+    },
   );
   const { variant, getLabel } = useThaliPriceLabelVariant();
 
@@ -300,9 +316,7 @@ const MealTierCard: React.FC<MealTierCardProps> = ({ tier, isSelected, tierCost,
         </div>
       )}
 
-      <p className="text-xs text-slate-400 leading-relaxed font-medium">
-        {tier.description}
-      </p>
+      <p className="text-xs text-slate-400 leading-relaxed font-medium">{tier.description}</p>
     </motion.div>
   );
 };
@@ -325,7 +339,9 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
 
   // Roommate Menu Share Modal State (Task 73)
   const [isRoommateShareOpen, setIsRoommateShareOpen] = useState<boolean>(false);
-  const [roommateShareDetails, setRoommateShareDetails] = useState<MenuShareDetails | undefined>(undefined);
+  const [roommateShareDetails, setRoommateShareDetails] = useState<MenuShareDetails | undefined>(
+    undefined,
+  );
 
   // 2-Step "Re-order My Last Meal" Shortcut State (Task 61)
   const [lastMeal, setLastMeal] = useState<LastMealOrder>(() => {
@@ -340,10 +356,16 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
 
   const [isReorderModalOpen, setIsReorderModalOpen] = useState<boolean>(false);
   const [reorderStep, setReorderStep] = useState<1 | 2>(1);
-  const [reorderSlot, setReorderSlot] = useState<"Lunch" | "Dinner">(lastMeal.deliverySlot || "Lunch");
-  const [reorderFulfillment, setReorderFulfillment] = useState<FulfillmentType>(lastMeal.fulfillmentType || "RoomDelivery");
+  const [reorderSlot, setReorderSlot] = useState<"Lunch" | "Dinner">(
+    lastMeal.deliverySlot || "Lunch",
+  );
+  const [reorderFulfillment, setReorderFulfillment] = useState<FulfillmentType>(
+    lastMeal.fulfillmentType || "RoomDelivery",
+  );
   const [reorderPhone, setReorderPhone] = useState<string>(lastMeal.phone || "9876543210");
-  const [reorderAddress, setReorderAddress] = useState<string>(lastMeal.deliveryAddress || "Hostel 4, Room 204, CSJMU / Kakadeo Belt");
+  const [reorderAddress, setReorderAddress] = useState<string>(
+    lastMeal.deliveryAddress || "Hostel 4, Room 204, CSJMU / Kakadeo Belt",
+  );
   const [isReorderSubmitting, setIsReorderSubmitting] = useState<boolean>(false);
 
   const saveLastMeal = (orderData: LastMealOrder) => {
@@ -369,7 +391,8 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
 
   const handleQuickReorderSubmit = async () => {
     const mealTier = MEAL_TIERS.find((m) => m.id === lastMeal.mealId) || MEAL_TIERS[1]!;
-    const reorderCost = reorderFulfillment === "RoomDelivery" ? mealTier.costDelivery : mealTier.costPickup;
+    const reorderCost =
+      reorderFulfillment === "RoomDelivery" ? mealTier.costDelivery : mealTier.costPickup;
 
     if (tokenBalance < reorderCost) {
       toast.error("Insufficient tokens for Re-order", {
@@ -385,7 +408,10 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
       return;
     }
 
-    if (reorderFulfillment === "RoomDelivery" && (!reorderAddress || reorderAddress.trim().length < 4)) {
+    if (
+      reorderFulfillment === "RoomDelivery" &&
+      (!reorderAddress || reorderAddress.trim().length < 4)
+    ) {
       toast.error("Delivery Address Required", {
         description: "Please enter room number & hostel/PG name.",
       });
@@ -717,7 +743,8 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
       enqueueOfflineSubmission("meal", fallbackMealPayload);
 
       toast.info("Offline: Order Queued! 📡", {
-        description: "Your meal token order has been saved locally and will auto-sync once back online.",
+        description:
+          "Your meal token order has been saved locally and will auto-sync once back online.",
       });
       setUserName("");
       setPhone("");
@@ -726,7 +753,6 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
       setIsSubmitting(false);
     }
   };
-
 
   const handleQuickRecharge = (tokensToAdd: number, price: number) => {
     setTokenBalance((prev) => prev + tokensToAdd);
@@ -932,7 +958,7 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
       {/* 2-Step "Re-order My Last Meal" Shortcut Bar (Task 61) */}
       <div className="hidden md:block mb-8 bg-gradient-to-r from-slate-900 via-slate-900/95 to-slate-950 border border-emerald-500/30 hover:border-emerald-500/50 rounded-2xl p-5 shadow-xl transition-all relative overflow-hidden group">
         <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-emerald-500/15 transition-all" />
-        
+
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
           <div className="flex items-start gap-3.5">
             <div className="p-3 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 shrink-0">
@@ -952,7 +978,11 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
               <p className="text-xs text-slate-300 mt-0.5 flex flex-wrap items-center gap-2">
                 <span>📍 {lastMeal.vendorNode}</span>
                 <span className="text-slate-600">•</span>
-                <span>{lastMeal.fulfillmentType === "RoomDelivery" ? "🛵 Room Delivery" : "🏃 Dine-In Pickup"}</span>
+                <span>
+                  {lastMeal.fulfillmentType === "RoomDelivery"
+                    ? "🛵 Room Delivery"
+                    : "🏃 Dine-In Pickup"}
+                </span>
                 <span className="text-slate-600">•</span>
                 <span className="font-bold text-emerald-300">{lastMeal.cost} Tokens</span>
               </p>
@@ -1057,9 +1087,12 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
           <div className="flex sm:grid overflow-x-auto sm:overflow-visible snap-x snap-mandatory gap-3.5 sm:grid-cols-2 lg:grid-cols-4 pb-3 no-scrollbar touch-pan-x overscroll-x-contain">
             {KITCHEN_NODES.map((node) => {
               const isSelected = vendorNode === node.name;
-              const percentSold = deliverySlot === "Lunch" ? node.percentSoldLunch : node.percentSoldDinner;
-              const totalTokens = deliverySlot === "Lunch" ? node.totalTokensLunch : node.totalTokensDinner;
-              const tokensSold = deliverySlot === "Lunch" ? node.tokensSoldLunch : node.tokensSoldDinner;
+              const percentSold =
+                deliverySlot === "Lunch" ? node.percentSoldLunch : node.percentSoldDinner;
+              const totalTokens =
+                deliverySlot === "Lunch" ? node.totalTokensLunch : node.totalTokensDinner;
+              const tokensSold =
+                deliverySlot === "Lunch" ? node.tokensSoldLunch : node.tokensSoldDinner;
               const tokensLeft = totalTokens - tokensSold;
 
               return (
@@ -1084,9 +1117,13 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
                 >
                   <div>
                     <div className="flex items-center justify-between gap-1 mb-1.5">
-                      <span className="text-[11px] font-semibold text-slate-400 truncate">{node.campus}</span>
+                      <span className="text-[11px] font-semibold text-slate-400 truncate">
+                        {node.campus}
+                      </span>
                       {node.badge && (
-                        <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${percentSold > 80 ? "bg-rose-500/20 text-rose-300 border border-rose-500/30" : "bg-emerald-500/15 text-emerald-300 border border-emerald-500/20"}`}>
+                        <span
+                          className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${percentSold > 80 ? "bg-rose-500/20 text-rose-300 border border-rose-500/30" : "bg-emerald-500/15 text-emerald-300 border border-emerald-500/20"}`}
+                        >
                           {node.badge}
                         </span>
                       )}
@@ -1100,7 +1137,15 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
                   <div>
                     {/* Availability Percentage Bar */}
                     <div className="flex justify-between items-center text-[11px] font-bold mb-1.5">
-                      <span className={percentSold > 80 ? "text-rose-400" : percentSold > 60 ? "text-amber-400" : "text-emerald-400"}>
+                      <span
+                        className={
+                          percentSold > 80
+                            ? "text-rose-400"
+                            : percentSold > 60
+                              ? "text-amber-400"
+                              : "text-emerald-400"
+                        }
+                      >
                         {percentSold}% of {deliverySlot.toLowerCase()} tokens sold
                       </span>
                       <span className="text-slate-400 font-mono">{tokensLeft} left</span>
@@ -1119,8 +1164,8 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
                           percentSold > 80
                             ? "bg-gradient-to-r from-rose-500 to-amber-500"
                             : percentSold > 60
-                            ? "bg-gradient-to-r from-amber-400 to-emerald-400"
-                            : "bg-gradient-to-r from-emerald-500 to-teal-400"
+                              ? "bg-gradient-to-r from-amber-400 to-emerald-400"
+                              : "bg-gradient-to-r from-emerald-500 to-teal-400"
                         }`}
                         style={{ width: `${percentSold}%` }}
                       />
@@ -1143,7 +1188,9 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
                       className="mt-2 text-[10px] font-mono font-bold text-amber-300 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 px-2 py-0.5 rounded flex items-center justify-between w-full transition-all cursor-pointer"
                     >
                       <span>🛡️ CSO Verified Seal</span>
-                      <span className="text-[9px] text-amber-400 font-extrabold">Inspect Barcode</span>
+                      <span className="text-[9px] text-amber-400 font-extrabold">
+                        Inspect Barcode
+                      </span>
                     </button>
                   </div>
                 </div>
@@ -1171,7 +1218,10 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
                 fulfillmentType === "RoomDelivery" ? tier.costDelivery : tier.costPickup;
 
               return (
-                <div key={tier.id} className="snap-center min-w-[85vw] max-w-[88vw] md:min-w-0 md:max-w-none shrink-0 md:shrink">
+                <div
+                  key={tier.id}
+                  className="snap-center min-w-[85vw] max-w-[88vw] md:min-w-0 md:max-w-none shrink-0 md:shrink"
+                >
                   <MealTierCard
                     tier={tier}
                     isSelected={isSelected}
@@ -1263,9 +1313,12 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
                   className="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all text-sm cursor-pointer appearance-none"
                 >
                   {KITCHEN_NODES.map((node) => {
-                    const percentSold = deliverySlot === "Lunch" ? node.percentSoldLunch : node.percentSoldDinner;
-                    const totalTokens = deliverySlot === "Lunch" ? node.totalTokensLunch : node.totalTokensDinner;
-                    const tokensSold = deliverySlot === "Lunch" ? node.tokensSoldLunch : node.tokensSoldDinner;
+                    const percentSold =
+                      deliverySlot === "Lunch" ? node.percentSoldLunch : node.percentSoldDinner;
+                    const totalTokens =
+                      deliverySlot === "Lunch" ? node.totalTokensLunch : node.totalTokensDinner;
+                    const tokensSold =
+                      deliverySlot === "Lunch" ? node.tokensSoldLunch : node.tokensSoldDinner;
                     const tokensLeft = totalTokens - tokensSold;
                     return (
                       <option key={node.id} value={node.name}>
@@ -1404,11 +1457,15 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
                       <p className="text-xs text-slate-400">{lastMeal.vendorNode}</p>
                     </div>
                     <span className="text-sm font-extrabold text-emerald-400 font-mono">
-                      {reorderFulfillment === "RoomDelivery" ? lastMeal.cost : Math.max(50, lastMeal.cost - 10)} Tokens
+                      {reorderFulfillment === "RoomDelivery"
+                        ? lastMeal.cost
+                        : Math.max(50, lastMeal.cost - 10)}{" "}
+                      Tokens
                     </span>
                   </div>
                   <p className="text-xs text-slate-500 italic border-t border-slate-900 pt-2 mt-2">
-                    Includes Desi Ghee Phulka, Dal, Sabzi & Homestyle Salad. Protected by 50% Taste Shield.
+                    Includes Desi Ghee Phulka, Dal, Sabzi & Homestyle Salad. Protected by 50% Taste
+                    Shield.
                   </p>
                 </div>
 
@@ -1473,7 +1530,9 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
                 {/* Phone & Address Inputs */}
                 <div className="grid grid-cols-1 gap-3">
                   <div>
-                    <label className="block text-xs font-bold text-slate-400 mb-1">Mobile Number</label>
+                    <label className="block text-xs font-bold text-slate-400 mb-1">
+                      Mobile Number
+                    </label>
                     <input
                       type="tel"
                       value={reorderPhone}
@@ -1484,7 +1543,9 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
                   </div>
                   {reorderFulfillment === "RoomDelivery" && (
                     <div>
-                      <label className="block text-xs font-bold text-slate-400 mb-1">Room / Hostel Address</label>
+                      <label className="block text-xs font-bold text-slate-400 mb-1">
+                        Room / Hostel Address
+                      </label>
                       <input
                         type="text"
                         value={reorderAddress}
@@ -1517,8 +1578,9 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
                   </div>
                   <h4 className="text-base font-extrabold text-white">Ready for 1-Tap Execution</h4>
                   <p className="text-xs text-slate-300 mt-1">
-                    Re-ordering <strong className="text-emerald-400">{lastMeal.mealName}</strong> for{" "}
-                    <strong className="text-emerald-400">{reorderSlot} slot</strong> at {lastMeal.vendorNode}.
+                    Re-ordering <strong className="text-emerald-400">{lastMeal.mealName}</strong>{" "}
+                    for <strong className="text-emerald-400">{reorderSlot} slot</strong> at{" "}
+                    {lastMeal.vendorNode}.
                   </p>
                 </div>
 
@@ -1531,13 +1593,21 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
                   <div className="flex justify-between text-rose-400">
                     <span>Re-order Deduction:</span>
                     <span className="font-bold">
-                      -{reorderFulfillment === "RoomDelivery" ? lastMeal.cost : Math.max(50, lastMeal.cost - 10)} Tokens
+                      -
+                      {reorderFulfillment === "RoomDelivery"
+                        ? lastMeal.cost
+                        : Math.max(50, lastMeal.cost - 10)}{" "}
+                      Tokens
                     </span>
                   </div>
                   <div className="border-t border-slate-800 pt-2 flex justify-between text-emerald-400 text-sm font-extrabold">
                     <span>Remaining Balance:</span>
                     <span>
-                      {tokenBalance - (reorderFulfillment === "RoomDelivery" ? lastMeal.cost : Math.max(50, lastMeal.cost - 10))} Tokens
+                      {tokenBalance -
+                        (reorderFulfillment === "RoomDelivery"
+                          ? lastMeal.cost
+                          : Math.max(50, lastMeal.cost - 10))}{" "}
+                      Tokens
                     </span>
                   </div>
                 </div>

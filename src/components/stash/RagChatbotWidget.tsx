@@ -150,7 +150,10 @@ export const RagChatbotWidget = memo(function RagChatbotWidget() {
           <span className="text-xs font-bold font-mono tracking-tight hidden sm:inline">
             {isHi ? "सार्थी AI RAG सहायक" : "Saarthi AI RAG Bot"}
           </span>
-          <Badge variant="secondary" className="bg-black/30 text-white text-[9px] px-1.5 py-0 font-mono">
+          <Badge
+            variant="secondary"
+            className="bg-black/30 text-white text-[9px] px-1.5 py-0 font-mono"
+          >
             RAG v2.0
           </Badge>
         </button>
@@ -170,7 +173,9 @@ export const RagChatbotWidget = memo(function RagChatbotWidget() {
             <div className="flex items-center gap-2.5">
               <div
                 className={`p-1.5 rounded-lg ${
-                  isStudent ? "bg-emerald-500/20 text-emerald-400" : "bg-amber-500/20 text-amber-400"
+                  isStudent
+                    ? "bg-emerald-500/20 text-emerald-400"
+                    : "bg-amber-500/20 text-amber-400"
                 }`}
               >
                 <Bot className="h-4 w-4" />
@@ -192,7 +197,9 @@ export const RagChatbotWidget = memo(function RagChatbotWidget() {
                   </Badge>
                 </div>
                 <p className="text-[9.5px] text-muted-foreground">
-                  {isHi ? "तत्काल पारदर्शी उत्तर • शून्य बॉट जाल" : "Instant FAQ Retrieval • 0 Bot Trap"}
+                  {isHi
+                    ? "तत्काल पारदर्शी उत्तर • शून्य बॉट जाल"
+                    : "Instant FAQ Retrieval • 0 Bot Trap"}
                 </p>
               </div>
             </div>

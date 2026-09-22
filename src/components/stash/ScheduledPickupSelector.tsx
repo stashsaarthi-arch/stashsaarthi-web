@@ -79,10 +79,16 @@ export function ScheduledPickupSelector({
 
     const currentDayLabel =
       selectedDay === "today"
-        ? isHi ? "आज" : "Today"
+        ? isHi
+          ? "आज"
+          : "Today"
         : selectedDay === "tomorrow"
-        ? isHi ? "कल" : "Tomorrow"
-        : isHi ? "परसों" : "Day After";
+          ? isHi
+            ? "कल"
+            : "Tomorrow"
+          : isHi
+            ? "परसों"
+            : "Day After";
 
     const formatted = `${currentDayLabel} (${formatDateLabel(currentDayObj)}): ${selectedSlot}`;
 
@@ -95,7 +101,9 @@ export function ScheduledPickupSelector({
   }, [selectedDay, selectedSlot, language]);
 
   return (
-    <div className={`rounded-2xl border border-emerald-500/30 bg-[#0B1015]/90 p-4 space-y-3.5 shadow-lg ${className}`}>
+    <div
+      className={`rounded-2xl border border-emerald-500/30 bg-[#0B1015]/90 p-4 space-y-3.5 shadow-lg ${className}`}
+    >
       {/* Header Badge */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
@@ -104,13 +112,17 @@ export function ScheduledPickupSelector({
           </div>
           <div>
             <h4 className="text-xs font-bold text-slate-100 flex items-center gap-1.5">
-              <span>{isHi ? "अनुसूचित डोरस्टेप पिकअप विंडो" : "Scheduled Doorstep Pickup Window"}</span>
+              <span>
+                {isHi ? "अनुसूचित डोरस्टेप पिकअप विंडो" : "Scheduled Doorstep Pickup Window"}
+              </span>
               <span className="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
                 2-Hr SLA
               </span>
             </h4>
             <p className="text-[11px] text-muted-foreground">
-              {isHi ? "कैंपस रनर के आगमन के लिए 2-घंटे का समय स्लॉट चुनें" : "Select a 2-hour pickup arrival window for campus runner"}
+              {isHi
+                ? "कैंपस रनर के आगमन के लिए 2-घंटे का समय स्लॉट चुनें"
+                : "Select a 2-hour pickup arrival window for campus runner"}
             </p>
           </div>
         </div>
@@ -199,16 +211,20 @@ export function ScheduledPickupSelector({
       <div className="rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-2.5 flex items-center justify-between text-xs">
         <div className="flex items-center gap-2 text-emerald-300 font-medium">
           <Sparkles className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-          <span>
-            {isHi ? "पुष्टि की गई पिकअप विंडो:" : "Confirmed Pickup Window:"}
-          </span>
+          <span>{isHi ? "पुष्टि की गई पिकअप विंडो:" : "Confirmed Pickup Window:"}</span>
         </div>
         <span className="font-mono font-bold text-white bg-black/60 px-2.5 py-1 rounded-lg border border-emerald-500/40 text-[11px]">
           {selectedDay === "today"
-            ? isHi ? "आज" : "Today"
+            ? isHi
+              ? "आज"
+              : "Today"
             : selectedDay === "tomorrow"
-            ? isHi ? "कल" : "Tomorrow"
-            : isHi ? "परसों" : "Day After"}{" "}
+              ? isHi
+                ? "कल"
+                : "Tomorrow"
+              : isHi
+                ? "परसों"
+                : "Day After"}{" "}
           • {selectedSlot}
         </span>
       </div>

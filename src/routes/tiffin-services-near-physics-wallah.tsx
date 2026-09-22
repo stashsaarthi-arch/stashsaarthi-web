@@ -23,7 +23,8 @@ const PW_CONFIG: HubConfig = {
   metaKeywords:
     "tiffin service near Physics Wallah Kakadeo, PW Vidyapeeth Kanpur mess, home cooked thali near PW Kakadeo, ghar ka swaad tiffin PW Kanpur, cheap tiffin Kakadeo ₹50, PW student food Kanpur",
   chefName: "Annapurna Verified PG Owner Home Kitchen (PW Lane)",
-  chefBio: "Managed by Sunita Sharma Ji and local verified PG owner homemakers. Serving hygienic, less-oil homemade thalis to 400+ Physics Wallah students daily.",
+  chefBio:
+    "Managed by Sunita Sharma Ji and local verified PG owner homemakers. Serving hygienic, less-oil homemade thalis to 400+ Physics Wallah students daily.",
   rating: 4.8,
   totalOrders: "15,800+",
   activeStudents: 410,
@@ -44,12 +45,18 @@ export const Route = createFileRoute("/tiffin-services-near-physics-wallah")({
       { name: "keywords", content: PW_CONFIG.metaKeywords },
       { property: "og:title", content: PW_CONFIG.metaTitle },
       { property: "og:description", content: PW_CONFIG.metaDescription },
-      { property: "og:image", content: "https://stashsaarthi-web.vercel.app/images/og-student.png" },
+      {
+        property: "og:image",
+        content: "https://stashsaarthi-web.vercel.app/images/og-student.png",
+      },
       { property: "og:url", content: PW_CONFIG.canonicalUrl },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: PW_CONFIG.metaTitle },
       { name: "twitter:description", content: PW_CONFIG.metaDescription },
-      { name: "twitter:image", content: "https://stashsaarthi-web.vercel.app/images/og-student.png" },
+      {
+        name: "twitter:image",
+        content: "https://stashsaarthi-web.vercel.app/images/og-student.png",
+      },
     ],
     links: [{ rel: "canonical", href: PW_CONFIG.canonicalUrl }],
   }),

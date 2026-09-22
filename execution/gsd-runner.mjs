@@ -100,7 +100,9 @@ try {
     const cmd = resolveTaskCommand(targetAction);
     executeCommand(targetAction, cmd);
   } else {
-    console.warn(`⚠️ Pipeline or task '${targetAction}' not directly found in config. Attempting fallback...`);
+    console.warn(
+      `⚠️ Pipeline or task '${targetAction}' not directly found in config. Attempting fallback...`,
+    );
     executeCommand(targetAction, `npm run ${targetAction}`);
   }
 

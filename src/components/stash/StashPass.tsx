@@ -1,10 +1,24 @@
 import { useState, useEffect } from "react";
-import { ShieldCheck, CalendarClock, Share2, ScanBarcode, QrCode, CheckCircle2, UserCheck, ShieldAlert, KeyRound } from "lucide-react";
+import {
+  ShieldCheck,
+  CalendarClock,
+  Share2,
+  ScanBarcode,
+  QrCode,
+  CheckCircle2,
+  UserCheck,
+  ShieldAlert,
+  KeyRound,
+} from "lucide-react";
 import { toast } from "sonner";
 import { Card3D } from "@/components/ui/Card3D";
 import { FOUNDER_WHATSAPP, getWhatsAppUrl } from "@/lib/constants";
 import { useLanguage } from "@/context/LanguageContext";
-import { getStorageQrCodeUrl, verifyStorageQrCode, type StorageQrScanResult } from "@/lib/storageQrValidator";
+import {
+  getStorageQrCodeUrl,
+  verifyStorageQrCode,
+  type StorageQrScanResult,
+} from "@/lib/storageQrValidator";
 import { OfflineQrCode } from "@/components/ui/OfflineQrCode";
 
 export interface StashPassItem {
@@ -24,7 +38,16 @@ export interface StashPassProps {
   paymentMode?: "upi_qr" | "partial_cash" | "escrow_reserve" | string | undefined;
 }
 
-export function StashPass({ tokenId, name, serviceLabel, type, bags, months, items, paymentMode }: StashPassProps) {
+export function StashPass({
+  tokenId,
+  name,
+  serviceLabel,
+  type,
+  bags,
+  months,
+  items,
+  paymentMode,
+}: StashPassProps) {
   const { language } = useLanguage();
   const isHi = language === "hi";
 
@@ -43,7 +66,7 @@ export function StashPass({ tokenId, name, serviceLabel, type, bags, months, ite
         : `QR Code Verified for ${role.toUpperCase()} Role`,
       {
         description: `Token: ${tokenId} · Custody Hash: ${result.verificationHash}`,
-      }
+      },
     );
   };
 
@@ -86,7 +109,6 @@ export function StashPass({ tokenId, name, serviceLabel, type, bags, months, ite
 
   if (!isMounted) return null;
 
-
   return (
     <div className="w-full max-w-sm mx-auto">
       <Card3D maxTilt={10}>
@@ -105,7 +127,12 @@ export function StashPass({ tokenId, name, serviceLabel, type, bags, months, ite
                 <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-cyan-400 mb-1">
                   {isHi ? "स्टैशपास™ बोर्डिंग पास" : "StashPass™ Boarding Pass"}
                 </p>
-                <p className="text-3xl font-mono font-bold text-foreground" data-testid="stash-pass-token-id">{tokenId}</p>
+                <p
+                  className="text-3xl font-mono font-bold text-foreground"
+                  data-testid="stash-pass-token-id"
+                >
+                  {tokenId}
+                </p>
               </div>
               <ScanBarcode className="h-10 w-10 text-white/40" />
             </div>
@@ -191,7 +218,9 @@ export function StashPass({ tokenId, name, serviceLabel, type, bags, months, ite
                   {isHi ? "डिजिटल कस्टडी QR कोड" : "Digital Custody QR Code"}
                 </span>
                 <p className="text-[10px] text-slate-300 leading-tight">
-                  {isHi ? "नोड इनटेक एवं कस्टडी के लिए QR स्कैन करें" : "Scan to verify node custody & booking ID"}
+                  {isHi
+                    ? "नोड इनटेक एवं कस्टडी के लिए QR स्कैन करें"
+                    : "Scan to verify node custody & booking ID"}
                 </p>
                 <div className="flex items-center gap-1 text-[9px] font-mono text-emerald-400 pt-0.5">
                   <CheckCircle2 className="h-3 w-3" />
@@ -212,7 +241,9 @@ export function StashPass({ tokenId, name, serviceLabel, type, bags, months, ite
             <div className="mt-3 p-2.5 rounded-xl border border-white/10 bg-white/5 space-y-2">
               <p className="text-[10px] font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1">
                 <KeyRound className="h-3 w-3 text-emerald-400" />
-                {isHi ? "QR कोड रोल-आधारित स्कैन सत्यापन:" : "Scan & Verify QR Code Across User Roles:"}
+                {isHi
+                  ? "QR कोड रोल-आधारित स्कैन सत्यापन:"
+                  : "Scan & Verify QR Code Across User Roles:"}
               </p>
               <div className="grid grid-cols-3 gap-1.5 text-[10px]">
                 <button
@@ -317,4 +348,3 @@ export function StashPass({ tokenId, name, serviceLabel, type, bags, months, ite
     </div>
   );
 }
-

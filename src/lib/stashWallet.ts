@@ -66,9 +66,7 @@ export function saveStashWallet(state: StashWalletState): void {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     // Emit custom event for UI reactive updates
-    window.dispatchEvent(
-      new CustomEvent("stashsaarthi:wallet-updated", { detail: state })
-    );
+    window.dispatchEvent(new CustomEvent("stashsaarthi:wallet-updated", { detail: state }));
   } catch (err) {
     console.error("Error saving Stash Wallet:", err);
   }
@@ -87,7 +85,7 @@ export function canClaimZeroFeeTrialToken(): boolean {
  */
 export function claimZeroFeeTrialToken(
   studentPhone: string,
-  studentCollege: string = "Kanpur Campus"
+  studentCollege: string = "Kanpur Campus",
 ): { success: boolean; wallet: StashWalletState; message: string } {
   const wallet = getStashWallet();
 
@@ -102,7 +100,7 @@ export function claimZeroFeeTrialToken(
   // Rate Limit Check (Compliance - Task 90)
   const rateLimitCheck = checkAndRecordTokenRateLimit(
     studentPhone || "global_trial_token",
-    "trial_token"
+    "trial_token",
   );
   if (!rateLimitCheck.allowed) {
     return {
@@ -186,7 +184,10 @@ export function applyTrialTokenToCheckout(amountToPay: number): {
 /**
  * Consumes the trial token upon successful checkout
  */
-export function consumeTrialTokenOnBooking(bookingId: string, amountDeducted: number): StashWalletState {
+export function consumeTrialTokenOnBooking(
+  bookingId: string,
+  amountDeducted: number,
+): StashWalletState {
   const wallet = getStashWallet();
   if (!wallet.trialToken || wallet.trialToken.isUsed) return wallet;
 

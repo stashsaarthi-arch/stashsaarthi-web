@@ -173,7 +173,8 @@ const DEFAULT_SPRINTS: SprintProgressSummary[] = [
     completedTasks: 14,
     totalTasks: 17,
     status: "active",
-    keyHighlight: "2G SW stress test, DPDP/GDPR audit, 18-month data retention engine, CEO Analytics",
+    keyHighlight:
+      "2G SW stress test, DPDP/GDPR audit, 18-month data retention engine, CEO Analytics",
   },
 ];
 
@@ -221,7 +222,8 @@ export function calculateExecutiveMetrics(): ExecutiveAnalyticsData {
   const referralCreditsActive = 45;
   const totalTokensIssued = trialTokensClaimed + mealPassTokensActive + referralCreditsActive + 100;
   const totalTokensRedeemed = trialTokensRedeemed + Math.round(mealPassTokensActive * 0.7);
-  const activeTokensInCirculation = trialTokensActive + Math.round(mealPassTokensActive * 0.3) + referralCreditsActive;
+  const activeTokensInCirculation =
+    trialTokensActive + Math.round(mealPassTokensActive * 0.3) + referralCreditsActive;
 
   const totalLiabilityInr = activeTokensInCirculation * 60; // ₹60 value per token
   const redemptionRatePercent = Math.round((totalTokensRedeemed / (totalTokensIssued || 1)) * 100);

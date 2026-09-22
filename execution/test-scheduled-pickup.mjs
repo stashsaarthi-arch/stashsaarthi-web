@@ -22,7 +22,13 @@ if (!Array.isArray(PICKUP_SLOTS) || PICKUP_SLOTS.length < 4) {
   process.exit(1);
 }
 
-const requiredSlots = ["10:00 AM - 12:00 PM", "12:00 PM - 02:00 PM", "02:00 PM - 04:00 PM", "04:00 PM - 06:00 PM", "06:00 PM - 08:00 PM"];
+const requiredSlots = [
+  "10:00 AM - 12:00 PM",
+  "12:00 PM - 02:00 PM",
+  "02:00 PM - 04:00 PM",
+  "04:00 PM - 06:00 PM",
+  "06:00 PM - 08:00 PM",
+];
 const labels = PICKUP_SLOTS.map((s) => s.label);
 
 for (const req of requiredSlots) {

@@ -7,16 +7,22 @@ import {
   simulateConcurrentBookingRequests,
 } from "../src/lib/slotLockEngine.ts";
 
-console.log("=== StashSaarthi Autonomous System: Overbooking Prevention High-Concurrency Test Suite ===");
+console.log(
+  "=== StashSaarthi Autonomous System: Overbooking Prevention High-Concurrency Test Suite ===",
+);
 
 const TEST_NODE_ID = "NODE-STRESS-TEST-01";
 
 // SCENARIO 1: 50 concurrent users racing for 1 remaining slot
-console.log("\n[Test 1] Initializing node capacity: Total Slots = 10, Booked Slots = 9 (Exactly 1 slot remaining)...");
+console.log(
+  "\n[Test 1] Initializing node capacity: Total Slots = 10, Booked Slots = 9 (Exactly 1 slot remaining)...",
+);
 resetNodeSlotCapacity(TEST_NODE_ID, 10, 9);
 
 const initialStatus = getNodeAvailableSlots(TEST_NODE_ID);
-console.log(`  - Initial Available Slots: ${initialStatus.available} (Total: ${initialStatus.total}, Booked: ${initialStatus.booked})`);
+console.log(
+  `  - Initial Available Slots: ${initialStatus.available} (Total: ${initialStatus.total}, Booked: ${initialStatus.booked})`,
+);
 
 if (initialStatus.available !== 1) {
   console.error(`❌ ERROR: Expected initial available slots = 1, got ${initialStatus.available}`);
@@ -33,7 +39,9 @@ console.log(`  - Rejected (Overbooking Prevented): ${stressResult.rejectedAcquir
 console.log(`  - Rejection Reasons:`, stressResult.rejectionReasons);
 
 if (stressResult.successfulAcquires !== 1) {
-  console.error(`❌ ERROR: Overbooking detected! Expected exactly 1 successful claim, got ${stressResult.successfulAcquires}`);
+  console.error(
+    `❌ ERROR: Overbooking detected! Expected exactly 1 successful claim, got ${stressResult.successfulAcquires}`,
+  );
   process.exit(1);
 }
 
@@ -42,7 +50,9 @@ if (stressResult.rejectedAcquires !== 49) {
   process.exit(1);
 }
 
-console.log("✔ Overbooking Guard: 100% SUCCESS. Exactly 1 winner claimed the final slot; 49 requests safely rejected with SLOT_FULL_OVERBOOKING_PREVENTED.");
+console.log(
+  "✔ Overbooking Guard: 100% SUCCESS. Exactly 1 winner claimed the final slot; 49 requests safely rejected with SLOT_FULL_OVERBOOKING_PREVENTED.",
+);
 
 // SCENARIO 2: Booking Confirmation using winner lock token
 console.log("\n[Test 2] Confirming booking with winner lock token...");
@@ -51,7 +61,9 @@ const confirmSuccess = confirmSlotBookingWithLock(TEST_NODE_ID, winnerToken);
 console.log(`  - Confirm Result: ${confirmSuccess ? "SUCCESS" : "FAILED"}`);
 
 const postConfirmStatus = getNodeAvailableSlots(TEST_NODE_ID);
-console.log(`  - Post-Confirmation Node Status: Booked = ${postConfirmStatus.booked}/${postConfirmStatus.total}, Available = ${postConfirmStatus.available}`);
+console.log(
+  `  - Post-Confirmation Node Status: Booked = ${postConfirmStatus.booked}/${postConfirmStatus.total}, Available = ${postConfirmStatus.available}`,
+);
 
 if (postConfirmStatus.booked !== 10 || postConfirmStatus.available !== 0) {
   console.error("❌ ERROR: Post-confirmation node status mismatch!");

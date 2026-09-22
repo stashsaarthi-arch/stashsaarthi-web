@@ -23,7 +23,8 @@ const MOTION_CONFIG: HubConfig = {
   metaKeywords:
     "tiffin service near Motion coaching Kakadeo, Motion coaching Kanpur mess, home cooked thali near Motion Kakadeo, ghar ka swaad tiffin Motion Kanpur, cheap tiffin Kakadeo ₹50, student thali Motion coaching",
   chefName: "Shanti Verified PG Owner Home Kitchen (Motion Lane)",
-  chefBio: "Cooking nutritious home meals for NEET & JEE aspirants in Kakadeo for over 14 years. Specializes in light digestible dal fry & pure desi ghee rotis.",
+  chefBio:
+    "Cooking nutritious home meals for NEET & JEE aspirants in Kakadeo for over 14 years. Specializes in light digestible dal fry & pure desi ghee rotis.",
   rating: 4.9,
   totalOrders: "12,400+",
   activeStudents: 340,
@@ -44,12 +45,18 @@ export const Route = createFileRoute("/tiffin-services-near-motion")({
       { name: "keywords", content: MOTION_CONFIG.metaKeywords },
       { property: "og:title", content: MOTION_CONFIG.metaTitle },
       { property: "og:description", content: MOTION_CONFIG.metaDescription },
-      { property: "og:image", content: "https://stashsaarthi-web.vercel.app/images/og-student.png" },
+      {
+        property: "og:image",
+        content: "https://stashsaarthi-web.vercel.app/images/og-student.png",
+      },
       { property: "og:url", content: MOTION_CONFIG.canonicalUrl },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: MOTION_CONFIG.metaTitle },
       { name: "twitter:description", content: MOTION_CONFIG.metaDescription },
-      { name: "twitter:image", content: "https://stashsaarthi-web.vercel.app/images/og-student.png" },
+      {
+        name: "twitter:image",
+        content: "https://stashsaarthi-web.vercel.app/images/og-student.png",
+      },
     ],
     links: [{ rel: "canonical", href: MOTION_CONFIG.canonicalUrl }],
   }),

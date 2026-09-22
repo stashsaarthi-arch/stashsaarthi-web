@@ -31,7 +31,9 @@ export const VisionAiPhotoVerifier = memo(function VisionAiPhotoVerifier() {
   const isHi = language === "hi";
   const isHost = role === "host";
 
-  const [selectedSample, setSelectedSample] = useState<SamplePhotoPreset>(SAMPLE_PROPERTY_PHOTOS[0]!);
+  const [selectedSample, setSelectedSample] = useState<SamplePhotoPreset>(
+    SAMPLE_PROPERTY_PHOTOS[0]!,
+  );
   const [customPhotoUrl, setCustomPhotoUrl] = useState<string | null>(null);
   const [isScanning, setIsScanning] = useState<boolean>(false);
   const [result, setResult] = useState<HostPhotoVerificationResult | null>(null);
@@ -107,7 +109,9 @@ export const VisionAiPhotoVerifier = memo(function VisionAiPhotoVerifier() {
         </div>
 
         <span className="text-xs text-muted-foreground font-mono self-start sm:self-auto">
-          {isHi ? "100% सुरक्षित • 'घर जैसा' आराम जांच" : "100% Automated • 'Ghar Jaisa' Aesthetic Audit"}
+          {isHi
+            ? "100% सुरक्षित • 'घर जैसा' आराम जांच"
+            : "100% Automated • 'Ghar Jaisa' Aesthetic Audit"}
         </span>
       </div>
 
@@ -159,8 +163,12 @@ export const VisionAiPhotoVerifier = memo(function VisionAiPhotoVerifier() {
               <span className="px-2.5 py-1 rounded-full bg-black/70 backdrop-blur-md text-[10px] font-mono font-bold text-white border border-white/20 flex items-center gap-1.5">
                 <Eye className="h-3 w-3 text-cyan-400" />
                 {customPhotoUrl
-                  ? isHi ? "कस्टम फ़ोटो" : "Custom Upload"
-                  : isHi ? selectedSample.titleHi : selectedSample.titleEn}
+                  ? isHi
+                    ? "कस्टम फ़ोटो"
+                    : "Custom Upload"
+                  : isHi
+                    ? selectedSample.titleHi
+                    : selectedSample.titleEn}
               </span>
             </div>
           </div>
@@ -194,7 +202,13 @@ export const VisionAiPhotoVerifier = memo(function VisionAiPhotoVerifier() {
                         sample.expectedPass ? "text-emerald-400" : "text-rose-400"
                       }`}
                     >
-                      {sample.expectedPass ? (isHi ? "पास सिमुलेशन" : "Pass Sample") : (isHi ? "विफल सिमुलेशन" : "Fail Sample")}
+                      {sample.expectedPass
+                        ? isHi
+                          ? "पास सिमुलेशन"
+                          : "Pass Sample"
+                        : isHi
+                          ? "विफल सिमुलेशन"
+                          : "Fail Sample"}
                     </span>
                   </button>
                 );
@@ -266,7 +280,9 @@ export const VisionAiPhotoVerifier = memo(function VisionAiPhotoVerifier() {
                 <Sparkles className="h-6 w-6 text-amber-400 absolute inset-0 m-auto" />
               </div>
               <span className="text-xs font-mono text-amber-300 font-bold">
-                {isHi ? "सुरक्षा ऑडिट और एस्थेटिक स्कोर निकाला जा रहा है..." : "Extracting Safety Audit & Aesthetic Scores..."}
+                {isHi
+                  ? "सुरक्षा ऑडिट और एस्थेटिक स्कोर निकाला जा रहा है..."
+                  : "Extracting Safety Audit & Aesthetic Scores..."}
               </span>
             </div>
           )}
@@ -303,13 +319,14 @@ export const VisionAiPhotoVerifier = memo(function VisionAiPhotoVerifier() {
                             ? "सत्यापित सीनियर होस्ट नोड पास"
                             : "Approved: Verified Verified PG Owner Host Node"
                           : isHi
-                          ? "कार्रवाई आवश्यक: सुधार की आवश्यकता"
-                          : "Action Required: Adjust Property Photo"}
+                            ? "कार्रवाई आवश्यक: सुधार की आवश्यकता"
+                            : "Action Required: Adjust Property Photo"}
                       </h5>
                     </div>
                     <span className="text-[11px] font-mono text-muted-foreground block">
                       {isHi ? "ऑडिट बैज आईडी:" : "Audit Serial:"}{" "}
-                      <span className="text-foreground font-bold">{result.badgeId}</span> • {result.engine}
+                      <span className="text-foreground font-bold">{result.badgeId}</span> •{" "}
+                      {result.engine}
                     </span>
                   </div>
                 </div>
@@ -336,7 +353,11 @@ export const VisionAiPhotoVerifier = memo(function VisionAiPhotoVerifier() {
                     {result.safetyScore}%
                   </span>
                   <span className="text-[9px] font-mono text-emerald-400 block mt-0.5">
-                    {result.safetyAudit.adult === "VERY_UNLIKELY" ? (isHi ? "100% सुरक्षित" : "100% Clear") : "Flagged"}
+                    {result.safetyAudit.adult === "VERY_UNLIKELY"
+                      ? isHi
+                        ? "100% सुरक्षित"
+                        : "100% Clear"
+                      : "Flagged"}
                   </span>
                 </div>
 
@@ -349,7 +370,13 @@ export const VisionAiPhotoVerifier = memo(function VisionAiPhotoVerifier() {
                     {result.qualityScore}%
                   </span>
                   <span className="text-[9px] font-mono text-muted-foreground block mt-0.5">
-                    {result.qualityScore >= 75 ? (isHi ? "उत्कृष्ट रोशनी" : "Optimal Light") : (isHi ? "कम रोशनी" : "Low Light")}
+                    {result.qualityScore >= 75
+                      ? isHi
+                        ? "उत्कृष्ट रोशनी"
+                        : "Optimal Light"
+                      : isHi
+                        ? "कम रोशनी"
+                        : "Low Light"}
                   </span>
                 </div>
 
@@ -362,7 +389,13 @@ export const VisionAiPhotoVerifier = memo(function VisionAiPhotoVerifier() {
                     {result.homestyleAestheticScore}%
                   </span>
                   <span className="text-[9px] font-mono text-amber-400 block mt-0.5">
-                    {result.homestyleAestheticScore >= 70 ? (isHi ? "घरेलू आराम" : "Homestyle Cozy") : (isHi ? "अव्यवस्थित" : "Cluttered")}
+                    {result.homestyleAestheticScore >= 70
+                      ? isHi
+                        ? "घरेलू आराम"
+                        : "Homestyle Cozy"
+                      : isHi
+                        ? "अव्यवस्थित"
+                        : "Cluttered"}
                   </span>
                 </div>
               </div>

@@ -28,12 +28,18 @@ export const Route = createFileRoute("/kanpur-student-council")({
       { name: "keywords", content: COUNCIL_META.metaKeywords },
       { property: "og:title", content: COUNCIL_META.metaTitle },
       { property: "og:description", content: COUNCIL_META.metaDescription },
-      { property: "og:image", content: "https://stashsaarthi-web.vercel.app/images/og-student.png" },
+      {
+        property: "og:image",
+        content: "https://stashsaarthi-web.vercel.app/images/og-student.png",
+      },
       { property: "og:url", content: COUNCIL_META.canonicalUrl },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: COUNCIL_META.metaTitle },
       { name: "twitter:description", content: COUNCIL_META.metaDescription },
-      { name: "twitter:image", content: "https://stashsaarthi-web.vercel.app/images/og-student.png" },
+      {
+        name: "twitter:image",
+        content: "https://stashsaarthi-web.vercel.app/images/og-student.png",
+      },
     ],
     links: [{ rel: "canonical", href: COUNCIL_META.canonicalUrl }],
   }),
@@ -53,7 +59,10 @@ function KanpurStudentCouncilRoute() {
   const handleRefer = useCallback(() => setReferralOpen(true), []);
 
   return (
-    <main id="main-content" className="relative min-h-screen bg-background text-foreground transition-colors duration-500">
+    <main
+      id="main-content"
+      className="relative min-h-screen bg-background text-foreground transition-colors duration-500"
+    >
       <AmbientNodes />
       <Navbar
         role={role}

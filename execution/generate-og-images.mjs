@@ -1,9 +1,9 @@
-import { execSync } from 'child_process';
-import { writeFileSync, existsSync, mkdirSync } from 'fs';
-import { resolve, dirname } from 'path';
+import { execSync } from "child_process";
+import { writeFileSync, existsSync, mkdirSync } from "fs";
+import { resolve, dirname } from "path";
 
-const ROOT = resolve(import.meta.dirname, '..');
-const PUBLIC_IMAGES = resolve(ROOT, 'public/images');
+const ROOT = resolve(import.meta.dirname, "..");
+const PUBLIC_IMAGES = resolve(ROOT, "public/images");
 
 if (!existsSync(PUBLIC_IMAGES)) {
   mkdirSync(PUBLIC_IMAGES, { recursive: true });
@@ -246,9 +246,9 @@ function createAdminSVG() {
 
 async function generateAll() {
   const specs = [
-    { name: 'og-student', svg: createStudentSVG() },
-    { name: 'og-host', svg: createHostSVG() },
-    { name: 'og-admin', svg: createAdminSVG() }
+    { name: "og-student", svg: createStudentSVG() },
+    { name: "og-host", svg: createHostSVG() },
+    { name: "og-admin", svg: createAdminSVG() },
   ];
 
   for (const s of specs) {
@@ -256,22 +256,28 @@ async function generateAll() {
     const pngPath = resolve(PUBLIC_IMAGES, `${s.name}.png`);
     const webpPath = resolve(PUBLIC_IMAGES, `${s.name}.webp`);
 
-    writeFileSync(svgPath, s.svg.trim(), 'utf-8');
+    writeFileSync(svgPath, s.svg.trim(), "utf-8");
     console.log(`📝 Wrote ${s.name}.svg`);
 
     // Convert SVG to PNG
-    execSync(`npx -y sharp-cli -i "${svgPath}" -o "${pngPath}" --format png`, { cwd: ROOT, stdio: 'inherit' });
+    execSync(`npx -y sharp-cli -i "${svgPath}" -o "${pngPath}" --format png`, {
+      cwd: ROOT,
+      stdio: "inherit",
+    });
     console.log(`🖼️ Converted to ${s.name}.png`);
 
     // Convert SVG to WebP
-    execSync(`npx -y sharp-cli -i "${svgPath}" -o "${webpPath}" --format webp -q 85`, { cwd: ROOT, stdio: 'inherit' });
+    execSync(`npx -y sharp-cli -i "${svgPath}" -o "${webpPath}" --format webp -q 85`, {
+      cwd: ROOT,
+      stdio: "inherit",
+    });
     console.log(`⚡ Converted to ${s.name}.webp`);
   }
 
-  console.log('✅ OpenGraph image generation complete.');
+  console.log("✅ OpenGraph image generation complete.");
 }
 
-generateAll().catch(err => {
+generateAll().catch((err) => {
   console.error(err);
   process.exit(1);
 });

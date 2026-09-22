@@ -36,25 +36,15 @@ interface CsoKitchenSealModalProps {
   initialNodeId?: string | undefined;
 }
 
-export function CsoKitchenSealModal({
-  isOpen,
-  onClose,
-  initialNodeId,
-}: CsoKitchenSealModalProps) {
+export function CsoKitchenSealModal({ isOpen, onClose, initialNodeId }: CsoKitchenSealModalProps) {
   const { language } = useLanguage();
   const isHi = language === "hi";
 
-  const [activeTab, setActiveTab] = useState<"sealed_list" | "audit_new" | "verify">(
-    "sealed_list"
-  );
+  const [activeTab, setActiveTab] = useState<"sealed_list" | "audit_new" | "verify">("sealed_list");
 
   // Sealed nodes state
-  const [sealedNodes, setSealedNodes] = useState<
-    Record<string, CsoKitchenSealCertificate>
-  >({});
-  const [selectedNodeId, setSelectedNodeId] = useState<string>(
-    initialNodeId || "annapurna"
-  );
+  const [sealedNodes, setSealedNodes] = useState<Record<string, CsoKitchenSealCertificate>>({});
+  const [selectedNodeId, setSelectedNodeId] = useState<string>(initialNodeId || "annapurna");
   const [copiedSerial, setCopiedSerial] = useState<string | null>(null);
 
   // Form state for auditing & sealing a new kitchen node
@@ -100,9 +90,7 @@ export function CsoKitchenSealModal({
   if (!isOpen) return null;
 
   const currentCert =
-    sealedNodes[selectedNodeId] ||
-    Object.values(sealedNodes)[0] ||
-    getSealForNode("annapurna");
+    sealedNodes[selectedNodeId] || Object.values(sealedNodes)[0] || getSealForNode("annapurna");
 
   const handleCopySerial = (serial: string) => {
     playClick();
@@ -122,7 +110,7 @@ export function CsoKitchenSealModal({
       alert(
         isHi
           ? "कृपया रसोई का नाम और सीनियर शेफ का नाम दर्ज करें।"
-          : "Please enter Kitchen Name and Verified PG Owner Chef Name."
+          : "Please enter Kitchen Name and Verified PG Owner Chef Name.",
       );
       return;
     }
@@ -310,9 +298,7 @@ export function CsoKitchenSealModal({
                           </Badge>
                         </div>
 
-                        <div className="text-[11px] text-slate-400 mt-1">
-                          👤 {node.chefName}
-                        </div>
+                        <div className="text-[11px] text-slate-400 mt-1">👤 {node.chefName}</div>
                         <div className="flex items-center justify-between mt-2 pt-1 border-t border-white/5 text-[10px] font-mono text-emerald-400">
                           <span>{node.sealId}</span>
                           <span>Score: {node.auditScore}%</span>
@@ -337,7 +323,8 @@ export function CsoKitchenSealModal({
                           {currentCert.nodeName}
                         </h4>
                         <div className="text-xs text-slate-300">
-                          Chef: <span className="font-semibold text-white">{currentCert.chefName}</span>
+                          Chef:{" "}
+                          <span className="font-semibold text-white">{currentCert.chefName}</span>
                         </div>
                       </div>
 
@@ -360,7 +347,8 @@ export function CsoKitchenSealModal({
                         {currentCert.barcodeSequence}
                       </div>
                       <div className="text-xs font-mono text-slate-300 tracking-wider">
-                        SERIAL: <span className="text-emerald-300 font-bold">{currentCert.sealId}</span>
+                        SERIAL:{" "}
+                        <span className="text-emerald-300 font-bold">{currentCert.sealId}</span>
                       </div>
                     </div>
 
@@ -392,8 +380,16 @@ export function CsoKitchenSealModal({
                     {/* Audit Signature & Authority Footer */}
                     <div className="border-t border-white/10 pt-3 flex items-center justify-between text-[11px] text-slate-400">
                       <div>
-                        <div>Authority: <span className="text-slate-200">{currentCert.csoSignature}</span></div>
-                        <div>Valid Until: <span className="text-emerald-400">{new Date(currentCert.expiryDate).toLocaleDateString()}</span></div>
+                        <div>
+                          Authority:{" "}
+                          <span className="text-slate-200">{currentCert.csoSignature}</span>
+                        </div>
+                        <div>
+                          Valid Until:{" "}
+                          <span className="text-emerald-400">
+                            {new Date(currentCert.expiryDate).toLocaleDateString()}
+                          </span>
+                        </div>
                       </div>
 
                       <div className="flex items-center gap-2">
@@ -496,7 +492,9 @@ export function CsoKitchenSealModal({
               {/* 4 Mandatory CSO Audit Checkboxes */}
               <div className="space-y-2 pt-2 border-t border-white/10">
                 <div className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold">
-                  {isHi ? "CSO अनिवार्य सुरक्षा एवं स्वच्छता जांच (4 बिंदु)" : "Mandatory CSO Safety Checkpoints"}
+                  {isHi
+                    ? "CSO अनिवार्य सुरक्षा एवं स्वच्छता जांच (4 बिंदु)"
+                    : "Mandatory CSO Safety Checkpoints"}
                 </div>
 
                 <div className="grid gap-2 sm:grid-cols-2">
@@ -576,7 +574,11 @@ export function CsoKitchenSealModal({
                   ) : (
                     <>
                       <ShieldCheck className="h-4 w-4" />
-                      <span>{isHi ? "ऑडिट पूर्ण करें एवं बारकोड सील जारी करें 🛡️" : "Run CSO Review & Dispatch Barcode Seal 🛡️"}</span>
+                      <span>
+                        {isHi
+                          ? "ऑडिट पूर्ण करें एवं बारकोड सील जारी करें 🛡️"
+                          : "Run CSO Review & Dispatch Barcode Seal 🛡️"}
+                      </span>
                     </>
                   )}
                 </button>
@@ -631,10 +633,30 @@ export function CsoKitchenSealModal({
                         <span>Authentic CSO Barcode Seal Verified!</span>
                       </div>
                       <div className="text-xs space-y-1">
-                        <div>Kitchen: <span className="text-white font-semibold">{verifyResult.cert.nodeName}</span></div>
-                        <div>Chef: <span className="text-white font-semibold">{verifyResult.cert.chefName}</span></div>
-                        <div>Seal ID: <span className="font-mono text-emerald-300">{verifyResult.cert.sealId}</span></div>
-                        <div>Status: <Badge className="bg-emerald-500 text-black text-[9px] font-bold">100% VERIFIED</Badge></div>
+                        <div>
+                          Kitchen:{" "}
+                          <span className="text-white font-semibold">
+                            {verifyResult.cert.nodeName}
+                          </span>
+                        </div>
+                        <div>
+                          Chef:{" "}
+                          <span className="text-white font-semibold">
+                            {verifyResult.cert.chefName}
+                          </span>
+                        </div>
+                        <div>
+                          Seal ID:{" "}
+                          <span className="font-mono text-emerald-300">
+                            {verifyResult.cert.sealId}
+                          </span>
+                        </div>
+                        <div>
+                          Status:{" "}
+                          <Badge className="bg-emerald-500 text-black text-[9px] font-bold">
+                            100% VERIFIED
+                          </Badge>
+                        </div>
                       </div>
                     </div>
                   ) : (

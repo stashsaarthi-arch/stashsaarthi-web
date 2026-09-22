@@ -109,9 +109,10 @@ export async function insertWaitlistUser(
     submittedAt: new Date().toISOString(),
     source: "waitlist_form",
     ...(data.phone_number?.trim() ? { phone_number: data.phone_number.trim() } : {}),
-    ...(data.college_or_locality?.trim() ? { college_or_locality: data.college_or_locality.trim() } : {}),
+    ...(data.college_or_locality?.trim()
+      ? { college_or_locality: data.college_or_locality.trim() }
+      : {}),
   });
-
 
   try {
     const { error } = await supabase.from("users_waitlist").insert(payload);

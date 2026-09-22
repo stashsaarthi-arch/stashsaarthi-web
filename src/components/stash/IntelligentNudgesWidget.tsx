@@ -80,7 +80,7 @@ export const IntelligentNudgesWidget: React.FC<IntelligentNudgesWidgetProps> = (
     toast.success(
       isHi
         ? "🎉 1-डे फ्री डिलीवरी टोकन सक्रिय हो गया! Delivery शुल्क ₹0 रहेगा."
-        : "🎉 1-Day Free Delivery Token Activated! ₹0 Delivery Fee applied."
+        : "🎉 1-Day Free Delivery Token Activated! ₹0 Delivery Fee applied.",
     );
   };
 
@@ -97,7 +97,7 @@ export const IntelligentNudgesWidget: React.FC<IntelligentNudgesWidgetProps> = (
       toast.success(
         isHi
           ? `✅ Backend Scan Complete: ${summary.nudgesDispatched} WhatsApp Re-engagement Nudges Sent!`
-          : `✅ Backend Scan Complete: ${summary.nudgesDispatched} WhatsApp Re-engagement Nudges Dispatched!`
+          : `✅ Backend Scan Complete: ${summary.nudgesDispatched} WhatsApp Re-engagement Nudges Dispatched!`,
       );
     }, 1200);
   };
@@ -125,7 +125,7 @@ export const IntelligentNudgesWidget: React.FC<IntelligentNudgesWidgetProps> = (
     toast.info(
       isHi
         ? `📲 ${student.name} के लिए WhatsApp Re-engagement Nudge तैयार है.`
-        : `📲 WhatsApp Re-engagement Nudge opened for ${student.name}.`
+        : `📲 WhatsApp Re-engagement Nudge opened for ${student.name}.`,
     );
   };
 
@@ -146,7 +146,9 @@ export const IntelligentNudgesWidget: React.FC<IntelligentNudgesWidgetProps> = (
                 <div className="flex items-center gap-2 flex-wrap">
                   <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center gap-1">
                     <Clock className="w-3 h-3" />
-                    {isHi ? `${daysInactive} दिनों से ऑर्डर नहीं किया` : `Inactive for ${daysInactive} days`}
+                    {isHi
+                      ? `${daysInactive} दिनों से ऑर्डर नहीं किया`
+                      : `Inactive for ${daysInactive} days`}
                   </span>
                   <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
                     {isHi ? "री-एंगेजमेंट ऑफर" : "Re-engagement Special"}
@@ -171,7 +173,8 @@ export const IntelligentNudgesWidget: React.FC<IntelligentNudgesWidgetProps> = (
                 <div className="px-4 py-2.5 rounded-xl bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-xs font-bold flex items-center justify-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400" />
                   <span>
-                    {isHi ? `टोकन सक्रिय: ${claimedToken}` : `Active: ${claimedToken}`} (₹0 Delivery)
+                    {isHi ? `टोकन सक्रिय: ${claimedToken}` : `Active: ${claimedToken}`} (₹0
+                    Delivery)
                   </span>
                 </div>
               ) : (
@@ -191,7 +194,11 @@ export const IntelligentNudgesWidget: React.FC<IntelligentNudgesWidgetProps> = (
               >
                 <Zap className="w-3.5 h-3.5 text-amber-400" />
                 <span className="hidden sm:inline">{isHi ? "नज कंसोल" : "Nudge Console"}</span>
-                {showConsole ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+                {showConsole ? (
+                  <ChevronUp className="w-3.5 h-3.5" />
+                ) : (
+                  <ChevronDown className="w-3.5 h-3.5" />
+                )}
               </button>
             </div>
           </div>
@@ -237,8 +244,8 @@ export const IntelligentNudgesWidget: React.FC<IntelligentNudgesWidgetProps> = (
                     ? "स्कैन जारी है..."
                     : "Scanning Database..."
                   : isHi
-                  ? "स्वचालित क्रोन बैच रन करें"
-                  : "Run Auto Cron Batch Scan"}
+                    ? "स्वचालित क्रोन बैच रन करें"
+                    : "Run Auto Cron Batch Scan"}
               </span>
             </button>
           </div>
@@ -250,7 +257,9 @@ export const IntelligentNudgesWidget: React.FC<IntelligentNudgesWidgetProps> = (
                 <Users className="w-3 h-3 text-cyan-400" />
                 <span>{isHi ? "कुल विश्लेषित" : "Analyzed Students"}</span>
               </div>
-              <div className="text-xl font-bold text-slate-100 mt-1">{batchSummary.totalAnalyzed}</div>
+              <div className="text-xl font-bold text-slate-100 mt-1">
+                {batchSummary.totalAnalyzed}
+              </div>
               <div className="text-[10px] text-slate-500 mt-0.5">Campus Order History</div>
             </div>
 
@@ -268,7 +277,9 @@ export const IntelligentNudgesWidget: React.FC<IntelligentNudgesWidgetProps> = (
                 <Send className="w-3 h-3" />
                 <span>{isHi ? "भेजे गए WhatsApp नजेस" : "Dispatched Nudges"}</span>
               </div>
-              <div className="text-xl font-bold text-emerald-300 mt-1">{batchSummary.nudgesDispatched}</div>
+              <div className="text-xl font-bold text-emerald-300 mt-1">
+                {batchSummary.nudgesDispatched}
+              </div>
               <div className="text-[10px] text-emerald-400/70 mt-0.5">1-Day Tokens Attached</div>
             </div>
 
@@ -277,7 +288,9 @@ export const IntelligentNudgesWidget: React.FC<IntelligentNudgesWidgetProps> = (
                 <Zap className="w-3 h-3" />
                 <span>{isHi ? "अनुमानित री-एंगेजमेंट" : "Re-engagement Rate"}</span>
               </div>
-              <div className="text-xl font-bold text-cyan-300 mt-1">{batchSummary.projectedReengagementRate}%</div>
+              <div className="text-xl font-bold text-cyan-300 mt-1">
+                {batchSummary.projectedReengagementRate}%
+              </div>
               <div className="text-[10px] text-cyan-400/70 mt-0.5">Conversion Uplift</div>
             </div>
           </div>
@@ -285,8 +298,14 @@ export const IntelligentNudgesWidget: React.FC<IntelligentNudgesWidgetProps> = (
           {/* Candidate Student List */}
           <div className="mt-4">
             <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2 flex items-center justify-between">
-              <span>{isHi ? "निष्क्रिय छात्र सूची (3+ दिन)" : "Inactive Student Queue (3+ Days Inactive)"}</span>
-              <span className="text-slate-500 font-normal text-[11px]">Auto-Refreshed Realtime</span>
+              <span>
+                {isHi
+                  ? "निष्क्रिय छात्र सूची (3+ दिन)"
+                  : "Inactive Student Queue (3+ Days Inactive)"}
+              </span>
+              <span className="text-slate-500 font-normal text-[11px]">
+                Auto-Refreshed Realtime
+              </span>
             </h4>
 
             <div className="space-y-2 max-h-64 overflow-y-auto pr-1">
@@ -304,7 +323,9 @@ export const IntelligentNudgesWidget: React.FC<IntelligentNudgesWidgetProps> = (
                       <div className="flex items-center gap-2 flex-wrap">
                         <span className="text-sm font-semibold text-slate-200">{student.name}</span>
                         <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
-                          {isHi ? `${student.daysInactive} दिन से निष्क्रिय` : `${student.daysInactive}d Inactive`}
+                          {isHi
+                            ? `${student.daysInactive} दिन से निष्क्रिय`
+                            : `${student.daysInactive}d Inactive`}
                         </span>
                         <span className="text-xs text-slate-500">{student.hostelCampus}</span>
                       </div>
@@ -323,7 +344,9 @@ export const IntelligentNudgesWidget: React.FC<IntelligentNudgesWidgetProps> = (
                         <CheckCircle2 className="w-3.5 h-3.5" />
                         <span>{isHi ? "नज भेजा गया" : "Nudge Sent"}</span>
                         {student.tokenCode && (
-                          <span className="text-[10px] font-mono text-emerald-300/80">({student.tokenCode.slice(-8)})</span>
+                          <span className="text-[10px] font-mono text-emerald-300/80">
+                            ({student.tokenCode.slice(-8)})
+                          </span>
                         )}
                       </div>
                     ) : (

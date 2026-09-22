@@ -22,7 +22,9 @@ if (!saritaResult.superHostBadgeGranted || saritaResult.tier !== "Master SuperHo
   console.error("❌ ERROR: Failed to grant SuperHost status to qualifying host!");
   process.exit(1);
 }
-console.log("✔ Test 1 PASSED: Host with 100% check-in SLA & 0 disputes successfully granted Master SuperHost tier.");
+console.log(
+  "✔ Test 1 PASSED: Host with 100% check-in SLA & 0 disputes successfully granted Master SuperHost tier.",
+);
 
 // TEST 2: Host with <99% accuracy & 1 dispute (Shri Alok Tripathi)
 console.log("\n[Test 2] Evaluating host with 93.3% check-in accuracy & 1 recorded dispute...");
@@ -40,7 +42,9 @@ if (alokResult.superHostBadgeGranted || alokResult.tier === "SuperHost") {
   console.error("❌ ERROR: SuperHost badge granted to host with <99% accuracy or disputes!");
   process.exit(1);
 }
-console.log("✔ Test 2 PASSED: Host with <99% accuracy / active disputes correctly restricted from SuperHost badge.");
+console.log(
+  "✔ Test 2 PASSED: Host with <99% accuracy / active disputes correctly restricted from SuperHost badge.",
+);
 
 // TEST 3: Edge Case — 98.9% accuracy (Strict 99.0% threshold check)
 console.log("\n[Test 3] Testing strict 99.0% check-in accuracy boundary (98.9% vs 99.0%)...");

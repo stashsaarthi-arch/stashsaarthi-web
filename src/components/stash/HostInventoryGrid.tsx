@@ -56,7 +56,8 @@ export const ROOM_PRESETS: RoomPreset[] = [
     rows: 4,
     cols: 5,
     maxStackPerSlot: 3,
-    description: "Standard 10x12 sq.ft host spare room optimized for student summer luggage storage.",
+    description:
+      "Standard 10x12 sq.ft host spare room optimized for student summer luggage storage.",
   },
   {
     id: "iitk-nankari",
@@ -65,7 +66,8 @@ export const ROOM_PRESETS: RoomPreset[] = [
     rows: 3,
     cols: 4,
     maxStackPerSlot: 2,
-    description: "Compact verified PG owner host lounge designed for quick vacation luggage drop-offs.",
+    description:
+      "Compact verified PG owner host lounge designed for quick vacation luggage drop-offs.",
   },
   {
     id: "csjmu-kalyanpur",
@@ -211,8 +213,12 @@ export function HostInventoryGrid({
           ...slot,
           state: nextState,
           boxCount: nextCount,
-          studentName: nextState === "occupied" ? slot.studentName || "Verified Student" : undefined,
-          bookingRef: nextState === "occupied" ? slot.bookingRef || `STASH-${Date.now().toString().slice(-6)}` : undefined,
+          studentName:
+            nextState === "occupied" ? slot.studentName || "Verified Student" : undefined,
+          bookingRef:
+            nextState === "occupied"
+              ? slot.bookingRef || `STASH-${Date.now().toString().slice(-6)}`
+              : undefined,
         };
       }),
     );
@@ -231,7 +237,8 @@ export function HostInventoryGrid({
           ...slot,
           state: nextState,
           boxCount: targetCount,
-          studentName: nextState === "occupied" ? slot.studentName || "Verified Student" : undefined,
+          studentName:
+            nextState === "occupied" ? slot.studentName || "Verified Student" : undefined,
         };
       }),
     );
@@ -254,7 +261,8 @@ export function HostInventoryGrid({
 
     const currentMonthlyIncome = totalBoxesStored * HOST_PAYOUT_PER_BOX;
     const potentialMonthlyIncome = maxBoxesCapacity * HOST_PAYOUT_PER_BOX;
-    const occupancyRate = maxBoxesCapacity > 0 ? Math.round((totalBoxesStored / maxBoxesCapacity) * 100) : 0;
+    const occupancyRate =
+      maxBoxesCapacity > 0 ? Math.round((totalBoxesStored / maxBoxesCapacity) * 100) : 0;
 
     return {
       totalSlots: slots.length,
@@ -400,9 +408,7 @@ export function HostInventoryGrid({
               <span className="text-violet-400 font-bold">{metrics.reservedSlotsCount}</span> Hold
             </div>
           </div>
-          <div className="text-[10px] text-muted-foreground mt-1.5">
-            {selectedPreset.name}
-          </div>
+          <div className="text-[10px] text-muted-foreground mt-1.5">{selectedPreset.name}</div>
         </div>
 
         {/* Card 3: Monthly Host Income */}
@@ -522,13 +528,16 @@ export function HostInventoryGrid({
           {/* Legend Banner */}
           <div className="absolute top-3 left-3 sm:top-4 sm:left-4 flex items-center gap-3 text-[10px] text-muted-foreground bg-white/5 border border-white/10 rounded-xl px-3 py-1.5 backdrop-blur-md z-10">
             <span className="flex items-center gap-1">
-              <span className="h-2.5 w-2.5 rounded-sm bg-emerald-500 border border-emerald-300 inline-block" /> Free
+              <span className="h-2.5 w-2.5 rounded-sm bg-emerald-500 border border-emerald-300 inline-block" />{" "}
+              Free
             </span>
             <span className="flex items-center gap-1">
-              <span className="h-2.5 w-2.5 rounded-sm bg-amber-500 border border-amber-300 inline-block" /> Stashed Box
+              <span className="h-2.5 w-2.5 rounded-sm bg-amber-500 border border-amber-300 inline-block" />{" "}
+              Stashed Box
             </span>
             <span className="flex items-center gap-1">
-              <span className="h-2.5 w-2.5 rounded-sm bg-violet-500 border border-violet-300 inline-block" /> Reserved
+              <span className="h-2.5 w-2.5 rounded-sm bg-violet-500 border border-violet-300 inline-block" />{" "}
+              Reserved
             </span>
           </div>
 
@@ -561,14 +570,14 @@ export function HostInventoryGrid({
                 const topBg = isOccupied
                   ? "bg-gradient-to-br from-amber-400 to-amber-600"
                   : isReserved
-                  ? "bg-gradient-to-br from-violet-400 to-violet-600"
-                  : "bg-gradient-to-br from-emerald-500/30 to-emerald-700/20";
+                    ? "bg-gradient-to-br from-violet-400 to-violet-600"
+                    : "bg-gradient-to-br from-emerald-500/30 to-emerald-700/20";
 
                 const borderCol = isOccupied
                   ? "border-amber-300/80"
                   : isReserved
-                  ? "border-violet-300/80"
-                  : "border-emerald-500/40";
+                    ? "border-violet-300/80"
+                    : "border-emerald-500/40";
 
                 const heightPx = slot.boxCount * 22 + 20;
 
@@ -629,8 +638,12 @@ export function HostInventoryGrid({
       {viewMode === "2d" && (
         <div className="rounded-2xl bg-[#07090B] border border-white/10 p-4 sm:p-6 mb-4">
           <div className="text-xs text-muted-foreground mb-3 flex items-center justify-between">
-            <span>2D Layout Matrix ({selectedPreset.rows} Rows × {selectedPreset.cols} Columns)</span>
-            <span className="text-[10px] font-mono text-amber-400">Click any cell to update capacity</span>
+            <span>
+              2D Layout Matrix ({selectedPreset.rows} Rows × {selectedPreset.cols} Columns)
+            </span>
+            <span className="text-[10px] font-mono text-amber-400">
+              Click any cell to update capacity
+            </span>
           </div>
 
           <div
@@ -654,8 +667,8 @@ export function HostInventoryGrid({
                     isOccupied
                       ? "bg-amber-500/10 border-amber-500/40 text-amber-300 hover:bg-amber-500/20"
                       : isReserved
-                      ? "bg-violet-500/10 border-violet-500/40 text-violet-300 hover:bg-violet-500/20"
-                      : "bg-emerald-500/10 border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/20"
+                        ? "bg-violet-500/10 border-violet-500/40 text-violet-300 hover:bg-violet-500/20"
+                        : "bg-emerald-500/10 border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/20"
                   }`}
                 >
                   <div className="flex items-center justify-between mb-1">
@@ -665,7 +678,9 @@ export function HostInventoryGrid({
                     </span>
                   </div>
                   <div className="text-xs font-semibold mt-1">
-                    {slot.boxCount > 0 ? `${slot.boxCount} Box${slot.boxCount > 1 ? "es" : ""}` : "Empty"}
+                    {slot.boxCount > 0
+                      ? `${slot.boxCount} Box${slot.boxCount > 1 ? "es" : ""}`
+                      : "Empty"}
                   </div>
                   <div className="text-[10px] opacity-75 mt-0.5 truncate">
                     {slot.studentName || "Tap to allocate"}
@@ -700,8 +715,8 @@ export function HostInventoryGrid({
                       slot.state === "occupied"
                         ? "bg-amber-500/20 text-amber-300 border border-amber-500/30"
                         : slot.state === "reserved"
-                        ? "bg-violet-500/20 text-violet-300 border border-violet-500/30"
-                        : "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
+                          ? "bg-violet-500/20 text-violet-300 border border-violet-500/30"
+                          : "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
                     }`}
                   >
                     {slot.state}
@@ -799,9 +814,7 @@ export function HostInventoryGrid({
           <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" />
           <span>Verified Kanpur Host Unit Economics: ₹180 Host Payout per 40L standard box/mo</span>
         </div>
-        <div className="font-mono text-[10px] opacity-70">
-          StashSaarthi Host Engine v2.4
-        </div>
+        <div className="font-mono text-[10px] opacity-70">StashSaarthi Host Engine v2.4</div>
       </div>
     </div>
   );

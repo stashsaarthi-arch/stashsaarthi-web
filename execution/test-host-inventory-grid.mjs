@@ -36,7 +36,9 @@ for (const token of requiredTokens) {
     process.exit(1);
   }
 }
-console.log("  ✓ HostInventoryGrid.tsx verified with all 16 required exports & 3D/2D interactive triggers.");
+console.log(
+  "  ✓ HostInventoryGrid.tsx verified with all 16 required exports & 3D/2D interactive triggers.",
+);
 
 // Test 2: Verify Room Presets & Unit Economics Formula
 if (!componentContent.includes("180")) {
@@ -57,6 +59,8 @@ if (!adminContent.includes("HostInventoryGridModal") || !adminContent.includes("
   console.error("❌ admin.tsx missing HostInventoryGridModal or Host Grid button integration!");
   process.exit(1);
 }
-console.log("  ✓ admin.tsx verified with Host Inventory Grid launcher button & lazy modal component rendering.");
+console.log(
+  "  ✓ admin.tsx verified with Host Inventory Grid launcher button & lazy modal component rendering.",
+);
 
 console.log("\n✅ ALL TASK 113 VERIFICATION CHECKS PASSED SUCCESSFULLY!");

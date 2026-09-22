@@ -32,8 +32,14 @@ assert(firstResult.allowed === true, "First SMS token request is allowed");
 // Test 2: Rapid second request should be blocked by 60s cooldown
 const secondResult = checkTokenRateLimit(testPhone, "sms_token");
 assert(secondResult.allowed === false, "Immediate 2nd SMS token request is blocked by cooldown");
-assert(secondResult.remainingSeconds > 0, `Remaining cooldown reported (${secondResult.remainingSeconds}s)`);
-assert(secondResult.displayName === "SMS OTP / Token Request", "Correct channel display name reported");
+assert(
+  secondResult.remainingSeconds > 0,
+  `Remaining cooldown reported (${secondResult.remainingSeconds}s)`,
+);
+assert(
+  secondResult.displayName === "SMS OTP / Token Request",
+  "Correct channel display name reported",
+);
 
 // Test 3: Reset clears rate limit state
 resetTokenRateLimit(testPhone, "sms_token");

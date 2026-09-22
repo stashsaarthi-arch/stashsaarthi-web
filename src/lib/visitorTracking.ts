@@ -54,9 +54,7 @@ function getOrCreateSessionId(): string {
 function detectDeviceType(): "mobile" | "tablet" | "desktop" {
   const ua = navigator.userAgent;
   if (/tablet|ipad|playbook|silk/i.test(ua)) return "tablet";
-  if (
-    /mobile|iphone|ipod|android|blackberry|opera mini|iemobile|wpdesktop/i.test(ua)
-  )
+  if (/mobile|iphone|ipod|android|blackberry|opera mini|iemobile|wpdesktop/i.test(ua))
     return "mobile";
   return "desktop";
 }
@@ -182,9 +180,7 @@ export function trackServiceClick(service: string): void {
 async function flushToSupabase(): Promise<void> {
   if (!_session || typeof window === "undefined") return;
   const startTime = parseInt(sessionStorage.getItem(SESSION_START_KEY) || "0");
-  _session.time_on_site_seconds = startTime
-    ? Math.floor((Date.now() - startTime) / 1000)
-    : 0;
+  _session.time_on_site_seconds = startTime ? Math.floor((Date.now() - startTime) / 1000) : 0;
   _session.last_seen_at = new Date().toISOString();
   saveSessionData(_session);
 

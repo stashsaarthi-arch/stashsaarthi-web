@@ -59,7 +59,7 @@ export function validateIntakeChecklist(
   checklist: VerificationChecklistState,
   hostName: string = "Sudha Tripathi (Verified PG Owner Host)",
   campusNode: string = "Kakadeo PW Hub",
-  verifiedBy: string = "StashSaarthi Host App Intake"
+  verifiedBy: string = "StashSaarthi Host App Intake",
 ): VerificationValidationResult {
   const errors: string[] = [];
 
@@ -80,12 +80,14 @@ export function validateIntakeChecklist(
     targetCoords,
     campusNode,
     MAX_GEOFENCE_RADIUS_METERS,
-    checklist.overrideGeoFence || false
+    checklist.overrideGeoFence || false,
   );
   const geoFencePassed = geoFenceResult.inRange;
 
   if (!geoFencePassed) {
-    errors.push(`Geo-Fence Lock: Check-in locked! Device is ${geoFenceResult.distanceMeters}m away from node (Must be within 50m).`);
+    errors.push(
+      `Geo-Fence Lock: Check-in locked! Device is ${geoFenceResult.distanceMeters}m away from node (Must be within 50m).`,
+    );
   }
 
   // 1. Box Seal Intact Check
@@ -105,7 +107,9 @@ export function validateIntakeChecklist(
   const weight = checklist.measuredWeightKg || 0;
   const weightPassed = weight > 0 && weight <= MAX_ALLOWED_WEIGHT_KG;
   if (weight > MAX_ALLOWED_WEIGHT_KG) {
-    errors.push(`Stash weight (${weight.toFixed(1)}kg) exceeds max limit of ${MAX_ALLOWED_WEIGHT_KG}kg.`);
+    errors.push(
+      `Stash weight (${weight.toFixed(1)}kg) exceeds max limit of ${MAX_ALLOWED_WEIGHT_KG}kg.`,
+    );
   } else if (weight <= 0) {
     errors.push("Measured weight must be greater than 0 kg.");
   }
@@ -120,8 +124,8 @@ export function validateIntakeChecklist(
   const status: "verified" | "flagged" | "rejected" = isValid
     ? "verified"
     : weight > MAX_ALLOWED_WEIGHT_KG || !sealPassed || !geoFencePassed
-    ? "flagged"
-    : "rejected";
+      ? "flagged"
+      : "rejected";
 
   const certificateId = `SS-INTAKE-2026-${Math.floor(1000 + Math.random() * 9000)}`;
 
@@ -147,7 +151,7 @@ export function createAndSaveVerification(
   bookingId: string = "BK-2026-9812",
   hostName: string = "Sudha Tripathi (Verified PG Owner Host)",
   campusNode: string = "Kakadeo Hub",
-  verifiedBy: string = "Verified PG Owner Host App"
+  verifiedBy: string = "Verified PG Owner Host App",
 ): HostStashVerification {
   const validation = validateIntakeChecklist(checklist, hostName, campusNode, verifiedBy);
 
@@ -157,10 +161,13 @@ export function createAndSaveVerification(
     hostName,
     campusNode,
     sealIntact: checklist.sealIntact,
-    barcodeSerial: checklist.barcodeSerial || `SS-KNP-BAR-${Math.floor(1000 + Math.random() * 9000)}`,
+    barcodeSerial:
+      checklist.barcodeSerial || `SS-KNP-BAR-${Math.floor(1000 + Math.random() * 9000)}`,
     measuredWeightKg: checklist.measuredWeightKg,
     maxAllowedWeightKg: MAX_ALLOWED_WEIGHT_KG,
-    photoProofUrl: checklist.photoProofUrl || "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%230f172a'/%3E%3Cpath d='M150 120h100v80H150z' fill='%231e293b' stroke='%2310b981' stroke-width='2'/%3E%3Ctext x='200' y='165' fill='%2300f5a0' font-family='sans-serif' font-size='14' text-anchor='middle'%3EBOX SEAL VERIFIED%3C/text%3E%3C/svg%3E",
+    photoProofUrl:
+      checklist.photoProofUrl ||
+      "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%230f172a'/%3E%3Cpath d='M150 120h100v80H150z' fill='%231e293b' stroke='%2310b981' stroke-width='2'/%3E%3Ctext x='200' y='165' fill='%2300f5a0' font-family='sans-serif' font-size='14' text-anchor='middle'%3EBOX SEAL VERIFIED%3C/text%3E%3C/svg%3E",
     notes: checklist.notes || "3-point intake checklist completed cleanly.",
     status: validation.status,
     verifiedAt: new Date().toISOString(),
@@ -215,8 +222,10 @@ export function getDefaultPresetVerifications(): HostStashVerification[] {
       barcodeSerial: "SS-KNP-BAR-8921",
       measuredWeightKg: 18.4,
       maxAllowedWeightKg: MAX_ALLOWED_WEIGHT_KG,
-      photoProofUrl: "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%230f172a'/%3E%3Crect x='100' y='60' width='200' height='180' rx='12' fill='%231e293b' stroke='%2310b981' stroke-width='3'/%3E%3Cpath d='M100 120h200' stroke='%2310b981' stroke-width='2' stroke-dasharray='6,6'/%3E%3Ctext x='200' y='100' fill='%2300f5a0' font-family='sans-serif' font-size='14' font-weight='bold' text-anchor='middle'%3EINTACT LASER SEAL%3C/text%3E%3Ctext x='200' y='160' fill='%2394a3b8' font-family='sans-serif' font-size='12' text-anchor='middle'%3EBARCODE: SS-KNP-BAR-8921%3C/text%3E%3Ctext x='200' y='190' fill='%2338bdf8' font-family='sans-serif' font-size='14' font-weight='bold' text-anchor='middle'%3EWEIGHT: 18.4 KG (PASS)%3C/text%3E%3C/svg%3E",
-      notes: "Box intake verified on arrival. Laser barcode seal intact and verified on 24kg scale.",
+      photoProofUrl:
+        "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%230f172a'/%3E%3Crect x='100' y='60' width='200' height='180' rx='12' fill='%231e293b' stroke='%2310b981' stroke-width='3'/%3E%3Cpath d='M100 120h200' stroke='%2310b981' stroke-width='2' stroke-dasharray='6,6'/%3E%3Ctext x='200' y='100' fill='%2300f5a0' font-family='sans-serif' font-size='14' font-weight='bold' text-anchor='middle'%3EINTACT LASER SEAL%3C/text%3E%3Ctext x='200' y='160' fill='%2394a3b8' font-family='sans-serif' font-size='12' text-anchor='middle'%3EBARCODE: SS-KNP-BAR-8921%3C/text%3E%3Ctext x='200' y='190' fill='%2338bdf8' font-family='sans-serif' font-size='14' font-weight='bold' text-anchor='middle'%3EWEIGHT: 18.4 KG (PASS)%3C/text%3E%3C/svg%3E",
+      notes:
+        "Box intake verified on arrival. Laser barcode seal intact and verified on 24kg scale.",
       status: "verified",
       verifiedAt: new Date(Date.now() - 3600000 * 4).toISOString(),
       certificateId: "SS-INTAKE-2026-8921",
@@ -231,7 +240,8 @@ export function getDefaultPresetVerifications(): HostStashVerification[] {
       barcodeSerial: "SS-KNP-BAR-8922",
       measuredWeightKg: 22.1,
       maxAllowedWeightKg: MAX_ALLOWED_WEIGHT_KG,
-      photoProofUrl: "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%230f172a'/%3E%3Crect x='100' y='60' width='200' height='180' rx='12' fill='%231e293b' stroke='%2310b981' stroke-width='3'/%3E%3Ctext x='200' y='100' fill='%2300f5a0' font-family='sans-serif' font-size='14' font-weight='bold' text-anchor='middle'%3ESEAL INTACT %26 VERIFIED%3C/text%3E%3Ctext x='200' y='160' fill='%2394a3b8' font-family='sans-serif' font-size='12' text-anchor='middle'%3EBARCODE: SS-KNP-BAR-8922%3C/text%3E%3Ctext x='200' y='190' fill='%2338bdf8' font-family='sans-serif' font-size='14' font-weight='bold' text-anchor='middle'%3EWEIGHT: 22.1 KG (PASS)%3C/text%3E%3C/svg%3E",
+      photoProofUrl:
+        "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%230f172a'/%3E%3Crect x='100' y='60' width='200' height='180' rx='12' fill='%231e293b' stroke='%2310b981' stroke-width='3'/%3E%3Ctext x='200' y='100' fill='%2300f5a0' font-family='sans-serif' font-size='14' font-weight='bold' text-anchor='middle'%3ESEAL INTACT %26 VERIFIED%3C/text%3E%3Ctext x='200' y='160' fill='%2394a3b8' font-family='sans-serif' font-size='12' text-anchor='middle'%3EBARCODE: SS-KNP-BAR-8922%3C/text%3E%3Ctext x='200' y='190' fill='%2338bdf8' font-family='sans-serif' font-size='14' font-weight='bold' text-anchor='middle'%3EWEIGHT: 22.1 KG (PASS)%3C/text%3E%3C/svg%3E",
       notes: "IITK student luggage intake complete. 100% verified under 25kg safety limit.",
       status: "verified",
       verifiedAt: new Date(Date.now() - 3600000 * 18).toISOString(),

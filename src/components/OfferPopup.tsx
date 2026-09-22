@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Star, Timer, X, Copy, CheckCircle2, Zap } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { Star, Timer, X, Copy, CheckCircle2, Zap } from "lucide-react";
 
 interface OfferPopupProps {
   onClaimDiscount: (code: string, service: string) => void;
@@ -14,7 +14,7 @@ export function OfferPopup({ onClaimDiscount }: OfferPopupProps) {
     // Show popup after 15 seconds
     const timer = setTimeout(() => {
       // Basic check if they haven't seen it yet (for real usage we'd use localStorage)
-      const hasSeen = localStorage.getItem('stashsaarthi_offer_seen');
+      const hasSeen = localStorage.getItem("stashsaarthi_offer_seen");
       if (!hasSeen) {
         setIsOpen(true);
       }
@@ -33,11 +33,11 @@ export function OfferPopup({ onClaimDiscount }: OfferPopupProps) {
 
   const handleClose = () => {
     setIsOpen(false);
-    localStorage.setItem('stashsaarthi_offer_seen', 'true');
+    localStorage.setItem("stashsaarthi_offer_seen", "true");
   };
 
   const handleCopy = () => {
-    navigator.clipboard.writeText('STASH50');
+    navigator.clipboard.writeText("STASH50");
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -45,7 +45,7 @@ export function OfferPopup({ onClaimDiscount }: OfferPopupProps) {
   const formatTime = (seconds: number) => {
     const m = Math.floor(seconds / 60);
     const s = seconds % 60;
-    return `0${m}:${s < 10 ? '0' : ''}${s}`;
+    return `0${m}:${s < 10 ? "0" : ""}${s}`;
   };
 
   if (!isOpen) return null;
@@ -54,10 +54,9 @@ export function OfferPopup({ onClaimDiscount }: OfferPopupProps) {
     <>
       {/* Backdrop */}
       <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[9998]" onClick={handleClose} />
-      
+
       {/* Modal Container strictly centered to avoid scrolling bugs */}
       <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[9999] w-[90%] max-w-md bg-[#0A0D0F] border border-emerald-900/30 rounded-2xl p-6 shadow-2xl">
-        
         {/* Header */}
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-1.5 text-emerald-500 bg-emerald-500/10 px-2.5 py-1 rounded-full text-xs font-bold tracking-wider">
@@ -69,7 +68,10 @@ export function OfferPopup({ onClaimDiscount }: OfferPopupProps) {
               <Timer className="w-4 h-4" />
               {formatTime(timeLeft)}
             </div>
-            <button onClick={handleClose} className="text-slate-400 hover:text-white transition-colors">
+            <button
+              onClick={handleClose}
+              className="text-slate-400 hover:text-white transition-colors"
+            >
               <X className="w-5 h-5" />
             </button>
           </div>
@@ -81,7 +83,8 @@ export function OfferPopup({ onClaimDiscount }: OfferPopupProps) {
             Wait! Don't Leave Without Saving ₹50 on Your Vacation Stash 🧳
           </h2>
           <p className="text-sm text-slate-400">
-            Why pay thousands in dead-rent for an empty PG room during breaks? Lock in micro-storage or zero-brokerage rooms today with an instant discount.
+            Why pay thousands in dead-rent for an empty PG room during breaks? Lock in micro-storage
+            or zero-brokerage rooms today with an instant discount.
           </p>
         </div>
 
@@ -91,12 +94,12 @@ export function OfferPopup({ onClaimDiscount }: OfferPopupProps) {
             <div className="text-xs text-emerald-400/80 mb-0.5">Instant Coupon Code</div>
             <div className="text-lg font-bold text-emerald-400 tracking-wider">STASH50</div>
           </div>
-          <button 
+          <button
             onClick={handleCopy}
             className="px-4 py-2 rounded border border-emerald-500/50 text-emerald-400 hover:bg-emerald-500/10 transition-colors text-sm font-semibold flex items-center gap-2"
           >
             {copied ? <CheckCircle2 className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-            {copied ? 'Copied!' : 'Copy Code'}
+            {copied ? "Copied!" : "Copy Code"}
           </button>
         </div>
 
@@ -118,17 +121,17 @@ export function OfferPopup({ onClaimDiscount }: OfferPopupProps) {
 
         {/* Actions */}
         <div className="space-y-3">
-          <button 
+          <button
             onClick={() => {
               handleClose();
-              onClaimDiscount('STASH50', 'stash');
+              onClaimDiscount("STASH50", "stash");
             }}
             className="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-bold transition-colors shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2"
           >
             Claim ₹50 Discount & Book Now →
           </button>
-          
-          <a 
+
+          <a
             href="https://wa.me/919369454350"
             target="_blank"
             rel="noopener noreferrer"
@@ -141,11 +144,13 @@ export function OfferPopup({ onClaimDiscount }: OfferPopupProps) {
 
         {/* Bottom Text Link */}
         <div className="mt-5 text-center">
-          <button onClick={handleClose} className="text-xs text-slate-500 hover:text-slate-400 underline underline-offset-2 transition-colors">
+          <button
+            onClick={handleClose}
+            className="text-xs text-slate-500 hover:text-slate-400 underline underline-offset-2 transition-colors"
+          >
             No thanks, I'll pay full price later
           </button>
         </div>
-
       </div>
     </>
   );

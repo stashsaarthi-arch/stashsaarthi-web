@@ -7,9 +7,7 @@ export const EdgeRegionMonitorWidget: React.FC = () => {
   const { language } = useLanguage();
   const isHi = language === "hi";
 
-  const [telemetry, setTelemetry] = useState<MultiRegionTelemetry>(() =>
-    edgeRouter.getTelemetry()
-  );
+  const [telemetry, setTelemetry] = useState<MultiRegionTelemetry>(() => edgeRouter.getTelemetry());
   const [isSimulating, setIsSimulating] = useState(false);
   const [logMessages, setLogMessages] = useState<string[]>([]);
 
@@ -63,7 +61,9 @@ export const EdgeRegionMonitorWidget: React.FC = () => {
           <div>
             <div className="flex items-center gap-2">
               <h3 className="font-bold text-slate-100 text-lg">
-                {isHi ? "मल्टी-रीजन एज फंक्शन इंफ्रास्ट्रक्चर" : "Multi-Region Edge Function Telemetry"}
+                {isHi
+                  ? "मल्टी-रीजन एज फंक्शन इंफ्रास्ट्रक्चर"
+                  : "Multi-Region Edge Function Telemetry"}
               </h3>
               <span className="px-2 py-0.5 text-xs font-semibold rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
                 0ms Failover SLA
@@ -92,7 +92,9 @@ export const EdgeRegionMonitorWidget: React.FC = () => {
           ) : telemetry.primaryHealthy ? (
             <>
               <AlertTriangle className="w-4 h-4 text-amber-400" />
-              {isHi ? "प्राइमरी आउटेज टेस्ट सिमुलेट करें" : "Simulate Primary Outage (Failover Test)"}
+              {isHi
+                ? "प्राइमरी आउटेज टेस्ट सिमुलेट करें"
+                : "Simulate Primary Outage (Failover Test)"}
             </>
           ) : (
             <>
@@ -173,8 +175,8 @@ export const EdgeRegionMonitorWidget: React.FC = () => {
                   isActive
                     ? "bg-cyan-950/30 border-cyan-500/40 shadow-lg shadow-cyan-500/5 ring-1 ring-cyan-500/30"
                     : region.status === "UNREACHABLE"
-                    ? "bg-rose-950/20 border-rose-800/50 opacity-80"
-                    : "bg-slate-950/40 border-slate-800/60 hover:border-slate-700"
+                      ? "bg-rose-950/20 border-rose-800/50 opacity-80"
+                      : "bg-slate-950/40 border-slate-800/60 hover:border-slate-700"
                 }`}
               >
                 <div className="flex items-center justify-between">
@@ -183,12 +185,8 @@ export const EdgeRegionMonitorWidget: React.FC = () => {
                       {region.flag}
                     </span>
                     <div>
-                      <p className="font-semibold text-slate-100 text-xs">
-                        {region.name}
-                      </p>
-                      <p className="text-[10px] text-slate-400">
-                        {region.location}
-                      </p>
+                      <p className="font-semibold text-slate-100 text-xs">{region.name}</p>
+                      <p className="text-[10px] text-slate-400">{region.location}</p>
                     </div>
                   </div>
 
@@ -206,8 +204,8 @@ export const EdgeRegionMonitorWidget: React.FC = () => {
                         region.status === "HEALTHY"
                           ? "bg-emerald-400 animate-pulse"
                           : region.status === "DEGRADED"
-                          ? "bg-amber-400"
-                          : "bg-rose-500"
+                            ? "bg-amber-400"
+                            : "bg-rose-500"
                       }`}
                     />
                     <span
@@ -215,8 +213,8 @@ export const EdgeRegionMonitorWidget: React.FC = () => {
                         region.status === "HEALTHY"
                           ? "text-emerald-400"
                           : region.status === "DEGRADED"
-                          ? "text-amber-400"
-                          : "text-rose-400"
+                            ? "text-amber-400"
+                            : "text-rose-400"
                       }`}
                     >
                       {region.status}

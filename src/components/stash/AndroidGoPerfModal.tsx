@@ -29,7 +29,11 @@ export function AndroidGoPerfModal({ isOpen, onClose }: AndroidGoPerfModalProps)
   const { isLowData, toggleLowData } = useLowData();
   const [report, setReport] = useState<AndroidGoPerformanceAuditReport | null>(null);
   const [isMeasuringFps, setIsMeasuringFps] = useState(false);
-  const [fpsResult, setFpsResult] = useState<{ avgFps: number; minFps: number; frameTimeJitterMs: number } | null>(null);
+  const [fpsResult, setFpsResult] = useState<{
+    avgFps: number;
+    minFps: number;
+    frameTimeJitterMs: number;
+  } | null>(null);
 
   useEffect(() => {
     if (isOpen) {
@@ -61,7 +65,9 @@ export function AndroidGoPerfModal({ isOpen, onClose }: AndroidGoPerfModalProps)
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h2 className="text-lg font-bold text-foreground">Android Go & Low-End Device Audit</h2>
+                <h2 className="text-lg font-bold text-foreground">
+                  Android Go & Low-End Device Audit
+                </h2>
                 <span className="rounded-full bg-emerald-500/20 px-2.5 py-0.5 text-[10px] font-semibold text-emerald-300 border border-emerald-500/30">
                   QA Task 96
                 </span>
@@ -86,7 +92,9 @@ export function AndroidGoPerfModal({ isOpen, onClose }: AndroidGoPerfModalProps)
               <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground font-medium uppercase tracking-wider mb-1">
                 <Smartphone className="h-3 w-3 text-emerald-400" /> Device Tier
               </div>
-              <p className="text-xs font-bold text-emerald-400 truncate">{report.deviceClassification}</p>
+              <p className="text-xs font-bold text-emerald-400 truncate">
+                {report.deviceClassification}
+              </p>
               <p className="text-[10px] text-muted-foreground/70 mt-0.5">Target: Kanpur low-spec</p>
             </div>
 
@@ -95,7 +103,8 @@ export function AndroidGoPerfModal({ isOpen, onClose }: AndroidGoPerfModalProps)
                 <Cpu className="h-3 w-3 text-cyan-400" /> Cores / RAM
               </div>
               <p className="text-xs font-bold text-foreground">
-                {report.diagnostics.hardwareConcurrency || "4"} cores | {report.diagnostics.deviceMemoryGb || "2"} GB
+                {report.diagnostics.hardwareConcurrency || "4"} cores |{" "}
+                {report.diagnostics.deviceMemoryGb || "2"} GB
               </p>
               <p className="text-[10px] text-muted-foreground/70 mt-0.5">Budget memory ceiling</p>
             </div>
@@ -104,7 +113,9 @@ export function AndroidGoPerfModal({ isOpen, onClose }: AndroidGoPerfModalProps)
               <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground font-medium uppercase tracking-wider mb-1">
                 <Zap className="h-3 w-3 text-amber-400" /> Low-Data Mode
               </div>
-              <p className="text-xs font-bold text-amber-400">{isLowData ? "Active (Throttled)" : "Standard 120FPS"}</p>
+              <p className="text-xs font-bold text-amber-400">
+                {isLowData ? "Active (Throttled)" : "Standard 120FPS"}
+              </p>
               <button
                 onClick={toggleLowData}
                 className="mt-1 text-[10px] underline text-muted-foreground hover:text-foreground"
@@ -130,7 +141,9 @@ export function AndroidGoPerfModal({ isOpen, onClose }: AndroidGoPerfModalProps)
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Activity className="h-4 w-4 text-emerald-400" />
-              <span className="text-xs font-bold text-foreground">FPS & Frame-Time Jitter Benchmark</span>
+              <span className="text-xs font-bold text-foreground">
+                FPS & Frame-Time Jitter Benchmark
+              </span>
             </div>
             <button
               onClick={handleRunFpsBenchmark}
@@ -163,12 +176,15 @@ export function AndroidGoPerfModal({ isOpen, onClose }: AndroidGoPerfModalProps)
               </div>
               <div className="text-center p-2 rounded-xl bg-black/40">
                 <p className="text-[10px] text-muted-foreground">Frame Jitter</p>
-                <p className="text-base font-extrabold text-amber-400">+{fpsResult.frameTimeJitterMs} ms</p>
+                <p className="text-base font-extrabold text-amber-400">
+                  +{fpsResult.frameTimeJitterMs} ms
+                </p>
               </div>
             </div>
           ) : (
             <p className="text-[11px] text-muted-foreground">
-              Click run to evaluate real-time rendering frame stability under active component layout animations.
+              Click run to evaluate real-time rendering frame stability under active component
+              layout animations.
             </p>
           )}
         </div>
@@ -220,7 +236,9 @@ export function AndroidGoPerfModal({ isOpen, onClose }: AndroidGoPerfModalProps)
         <div className="flex items-center justify-between border-t border-white/10 pt-4 text-[11px] text-muted-foreground">
           <div className="flex items-center gap-1.5">
             <Sparkles className="h-3.5 w-3.5 text-emerald-400" />
-            <span>Guaranteed zero crashes on Android Go (Redmi A1, JioPhone Next, Samsung A01 Core)</span>
+            <span>
+              Guaranteed zero crashes on Android Go (Redmi A1, JioPhone Next, Samsung A01 Core)
+            </span>
           </div>
           <button
             onClick={onClose}

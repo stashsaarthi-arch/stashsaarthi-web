@@ -54,7 +54,7 @@ export function ExecutiveAnalyticsDashboard() {
   }, [simulatedLtvNet, targetCac]);
 
   const simulatedPaybackDays = useMemo(() => {
-    const dailyNet = (simulatedLtvNet / retentionMonths) / 30;
+    const dailyNet = simulatedLtvNet / retentionMonths / 30;
     return Math.round(targetCac / (dailyNet || 1));
   }, [targetCac, simulatedLtvNet, retentionMonths]);
 
@@ -73,7 +73,9 @@ export function ExecutiveAnalyticsDashboard() {
           <div>
             <div className="flex items-center gap-2">
               <h2 className="text-lg font-bold text-white tracking-tight">
-                {isHi ? "कार्यकारी विश्लेषिकी एवं यूनिट इकोनॉमिक्स" : "Executive Analytics & Core Unit Economics"}
+                {isHi
+                  ? "कार्यकारी विश्लेषिकी एवं यूनिट इकोनॉमिक्स"
+                  : "Executive Analytics & Core Unit Economics"}
               </h2>
               <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">
                 Sprint 10
@@ -146,7 +148,9 @@ export function ExecutiveAnalyticsDashboard() {
               <TrendingUp className="h-3.5 w-3.5" />
             </div>
           </div>
-          <div className="text-2xl font-bold text-cyan-400">₹{metrics.blendedLtvNet.toLocaleString("en-IN")}</div>
+          <div className="text-2xl font-bold text-cyan-400">
+            ₹{metrics.blendedLtvNet.toLocaleString("en-IN")}
+          </div>
           <p className="text-[11px] text-cyan-300/80 mt-1">
             ₹{metrics.blendedLtvGross.toLocaleString("en-IN")} {isHi ? "सकल GMV" : "Gross GMV"}
           </p>
@@ -178,9 +182,12 @@ export function ExecutiveAnalyticsDashboard() {
               <Coins className="h-3.5 w-3.5" />
             </div>
           </div>
-          <div className="text-2xl font-bold text-violet-400">{metrics.tokens.activeTokensInCirculation}</div>
+          <div className="text-2xl font-bold text-violet-400">
+            {metrics.tokens.activeTokensInCirculation}
+          </div>
           <p className="text-[11px] text-violet-300/80 mt-1">
-            ₹{metrics.tokens.totalLiabilityInr.toLocaleString("en-IN")} {isHi ? "सक्रिय देयता" : "Active Wallet Liability"}
+            ₹{metrics.tokens.totalLiabilityInr.toLocaleString("en-IN")}{" "}
+            {isHi ? "सक्रिय देयता" : "Active Wallet Liability"}
           </p>
         </div>
 
@@ -194,7 +201,9 @@ export function ExecutiveAnalyticsDashboard() {
               <Zap className="h-3.5 w-3.5" />
             </div>
           </div>
-          <div className="text-2xl font-bold text-rose-400">{metrics.platformNetMarginPercent}%</div>
+          <div className="text-2xl font-bold text-rose-400">
+            {metrics.platformNetMarginPercent}%
+          </div>
           <p className="text-[11px] text-rose-300/80 mt-1">
             {isHi ? "शून्य-CapEx नेटवर्क मॉडल" : "Zero-CapEx Network Margin"}
           </p>
@@ -247,7 +256,9 @@ export function ExecutiveAnalyticsDashboard() {
               <div className="flex items-center justify-between">
                 <h3 className="text-sm font-bold text-white flex items-center gap-2">
                   <Target className="h-4 w-4 text-emerald-400" />
-                  {isHi ? "चैनल-वार ग्राहक अधिग्रहण लागत (CAC)" : "Channel Customer Acquisition Cost (CAC)"}
+                  {isHi
+                    ? "चैनल-वार ग्राहक अधिग्रहण लागत (CAC)"
+                    : "Channel Customer Acquisition Cost (CAC)"}
                 </h3>
                 <span className="text-xs text-emerald-400 font-mono font-bold">
                   {isHi ? "औसत" : "Blended"}: ₹{metrics.blendedCac}
@@ -256,15 +267,24 @@ export function ExecutiveAnalyticsDashboard() {
 
               <div className="space-y-3">
                 {metrics.channelCacBreakdown.map((item, idx) => (
-                  <div key={idx} className="p-3 rounded-xl bg-white/5 border border-white/10 space-y-1.5">
+                  <div
+                    key={idx}
+                    className="p-3 rounded-xl bg-white/5 border border-white/10 space-y-1.5"
+                  >
                     <div className="flex items-center justify-between text-xs">
                       <span className="font-semibold text-slate-200">{item.channel}</span>
-                      <span className="font-mono font-bold text-emerald-400">₹{item.cac} / lead</span>
+                      <span className="font-mono font-bold text-emerald-400">
+                        ₹{item.cac} / lead
+                      </span>
                     </div>
                     <p className="text-[11px] text-slate-400">{item.description}</p>
                     <div className="flex items-center justify-between text-[10px] text-slate-400 pt-1">
-                      <span>{isHi ? "चैनल शेयर" : "Channel Share"}: {item.share}%</span>
-                      <span>{isHi ? "अनुमानित लीड" : "Volume"}: {item.volume} {isHi ? "लीड्स" : "leads"}</span>
+                      <span>
+                        {isHi ? "चैनल शेयर" : "Channel Share"}: {item.share}%
+                      </span>
+                      <span>
+                        {isHi ? "अनुमानित लीड" : "Volume"}: {item.volume} {isHi ? "लीड्स" : "leads"}
+                      </span>
                     </div>
                   </div>
                 ))}
@@ -276,37 +296,57 @@ export function ExecutiveAnalyticsDashboard() {
               <div className="flex items-center justify-between">
                 <h3 className="text-sm font-bold text-white flex items-center gap-2">
                   <TrendingUp className="h-4 w-4 text-cyan-400" />
-                  {isHi ? "सेवा-वार जीवनकाल मूल्य (LTV Matrix)" : "Service Line Lifetime Value (LTV)"}
+                  {isHi
+                    ? "सेवा-वार जीवनकाल मूल्य (LTV Matrix)"
+                    : "Service Line Lifetime Value (LTV)"}
                 </h3>
                 <span className="text-xs text-cyan-400 font-mono font-bold">
-                  {isHi ? "लाइफटाइम Net LTV" : "Net LTV"}: ₹{metrics.blendedLtvNet.toLocaleString("en-IN")}
+                  {isHi ? "लाइफटाइम Net LTV" : "Net LTV"}: ₹
+                  {metrics.blendedLtvNet.toLocaleString("en-IN")}
                 </span>
               </div>
 
               <div className="space-y-3">
                 {metrics.serviceLtvBreakdown.map((svc, idx) => (
-                  <div key={idx} className="p-3 rounded-xl bg-white/5 border border-white/10 space-y-2">
+                  <div
+                    key={idx}
+                    className="p-3 rounded-xl bg-white/5 border border-white/10 space-y-2"
+                  >
                     <div className="flex items-center justify-between text-xs">
                       <span className="font-semibold text-white flex items-center gap-1.5">
-                        {svc.service === "stash" && <Boxes className="h-3.5 w-3.5 text-emerald-400" />}
+                        {svc.service === "stash" && (
+                          <Boxes className="h-3.5 w-3.5 text-emerald-400" />
+                        )}
                         {svc.service === "spaces" && <Home className="h-3.5 w-3.5 text-cyan-400" />}
-                        {svc.service === "kitchen" && <Soup className="h-3.5 w-3.5 text-amber-400" />}
+                        {svc.service === "kitchen" && (
+                          <Soup className="h-3.5 w-3.5 text-amber-400" />
+                        )}
                         {svc.name}
                       </span>
-                      <span className="font-mono font-bold text-cyan-300">₹{svc.totalLtvNet} net</span>
+                      <span className="font-mono font-bold text-cyan-300">
+                        ₹{svc.totalLtvNet} net
+                      </span>
                     </div>
 
                     <div className="grid grid-cols-3 gap-2 text-[11px] bg-black/40 p-2 rounded-lg">
                       <div>
-                        <span className="text-slate-400 block text-[10px]">{isHi ? "औसत अवधि" : "Avg Stay"}</span>
-                        <span className="text-slate-200 font-bold">{svc.avgDurationMonths} {isHi ? "महीने" : "mo"}</span>
+                        <span className="text-slate-400 block text-[10px]">
+                          {isHi ? "औसत अवधि" : "Avg Stay"}
+                        </span>
+                        <span className="text-slate-200 font-bold">
+                          {svc.avgDurationMonths} {isHi ? "महीने" : "mo"}
+                        </span>
                       </div>
                       <div>
-                        <span className="text-slate-400 block text-[10px]">{isHi ? "मासिक राजस्व" : "Monthly Rev"}</span>
+                        <span className="text-slate-400 block text-[10px]">
+                          {isHi ? "मासिक राजस्व" : "Monthly Rev"}
+                        </span>
                         <span className="text-slate-200 font-bold">₹{svc.monthlyRevenue}</span>
                       </div>
                       <div>
-                        <span className="text-slate-400 block text-[10px]">{isHi ? "मासिक नेट मार्जिन" : "Monthly Margin"}</span>
+                        <span className="text-slate-400 block text-[10px]">
+                          {isHi ? "मासिक नेट मार्जिन" : "Monthly Margin"}
+                        </span>
                         <span className="text-emerald-400 font-bold">₹{svc.monthlyNetMargin}</span>
                       </div>
                     </div>
@@ -321,10 +361,13 @@ export function ExecutiveAnalyticsDashboard() {
             <div className="flex items-center justify-between">
               <h3 className="text-sm font-bold text-amber-300 flex items-center gap-2">
                 <Calculator className="h-4 w-4 text-amber-400" />
-                {isHi ? "इंटरएक्टिव CAC / LTV और पेबैक सिम्युलेटर" : "Interactive CAC / LTV & Payback Simulator"}
+                {isHi
+                  ? "इंटरएक्टिव CAC / LTV और पेबैक सिम्युलेटर"
+                  : "Interactive CAC / LTV & Payback Simulator"}
               </h3>
               <span className="text-[11px] text-amber-400 font-mono">
-                {isHi ? "पेबैक अवधि" : "Payback Period"}: ~{simulatedPaybackDays} {isHi ? "दिन" : "days"}
+                {isHi ? "पेबैक अवधि" : "Payback Period"}: ~{simulatedPaybackDays}{" "}
+                {isHi ? "दिन" : "days"}
               </span>
             </div>
 
@@ -347,8 +390,12 @@ export function ExecutiveAnalyticsDashboard() {
 
               <div className="space-y-2">
                 <div className="flex justify-between text-xs text-slate-300">
-                  <span>{isHi ? "औसत ग्राहक प्रतिधारण अवधि (Months)" : "Avg Customer Retention Period"}</span>
-                  <span className="font-mono font-bold text-cyan-400">{retentionMonths} {isHi ? "महीने" : "mo"}</span>
+                  <span>
+                    {isHi ? "औसत ग्राहक प्रतिधारण अवधि (Months)" : "Avg Customer Retention Period"}
+                  </span>
+                  <span className="font-mono font-bold text-cyan-400">
+                    {retentionMonths} {isHi ? "महीने" : "mo"}
+                  </span>
                 </div>
                 <input
                   type="range"
@@ -365,9 +412,13 @@ export function ExecutiveAnalyticsDashboard() {
             <div className="p-4 rounded-xl bg-black/60 border border-amber-500/20 flex flex-wrap items-center justify-between gap-4">
               <div>
                 <span className="text-[10px] text-slate-400 uppercase tracking-wider block">
-                  {isHi ? "अनुमानित लाइफटाइम शुद्ध लाभ (Simulated Net LTV)" : "Simulated Net LTV per Student"}
+                  {isHi
+                    ? "अनुमानित लाइफटाइम शुद्ध लाभ (Simulated Net LTV)"
+                    : "Simulated Net LTV per Student"}
                 </span>
-                <span className="text-xl font-bold text-emerald-400">₹{simulatedLtvNet.toLocaleString("en-IN")}</span>
+                <span className="text-xl font-bold text-emerald-400">
+                  ₹{simulatedLtvNet.toLocaleString("en-IN")}
+                </span>
               </div>
               <div>
                 <span className="text-[10px] text-slate-400 uppercase tracking-wider block">
@@ -377,9 +428,13 @@ export function ExecutiveAnalyticsDashboard() {
               </div>
               <div>
                 <span className="text-[10px] text-slate-400 uppercase tracking-wider block">
-                  {isHi ? "1000 छात्रों पर वार्षिक शुद्ध लाभ" : "Projected Annual Net Margin (1k active)"}
+                  {isHi
+                    ? "1000 छात्रों पर वार्षिक शुद्ध लाभ"
+                    : "Projected Annual Net Margin (1k active)"}
                 </span>
-                <span className="text-xl font-bold text-cyan-400">₹{((simulatedLtvNet * 1000) / 100000).toFixed(2)} Lakhs</span>
+                <span className="text-xl font-bold text-cyan-400">
+                  ₹{((simulatedLtvNet * 1000) / 100000).toFixed(2)} Lakhs
+                </span>
               </div>
             </div>
           </div>
@@ -391,26 +446,39 @@ export function ExecutiveAnalyticsDashboard() {
         <div className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="p-4 rounded-2xl bg-white/[0.03] border border-violet-500/30">
-              <span className="text-xs text-slate-400 block">{isHi ? "कुल जारी टोकन" : "Total Tokens Issued"}</span>
-              <span className="text-2xl font-bold text-violet-400">{metrics.tokens.totalTokensIssued}</span>
+              <span className="text-xs text-slate-400 block">
+                {isHi ? "कुल जारी टोकन" : "Total Tokens Issued"}
+              </span>
+              <span className="text-2xl font-bold text-violet-400">
+                {metrics.tokens.totalTokensIssued}
+              </span>
               <p className="text-[11px] text-slate-400 mt-1">
                 {isHi ? "ट्रायल, मील पास एवं रेफरल टोकन" : "Trial, Meal Pass & Referral Tokens"}
               </p>
             </div>
 
             <div className="p-4 rounded-2xl bg-white/[0.03] border border-emerald-500/30">
-              <span className="text-xs text-slate-400 block">{isHi ? "भुनाए गए टोकन" : "Redeemed Tokens"}</span>
-              <span className="text-2xl font-bold text-emerald-400">{metrics.tokens.totalTokensRedeemed}</span>
+              <span className="text-xs text-slate-400 block">
+                {isHi ? "भुनाए गए टोकन" : "Redeemed Tokens"}
+              </span>
+              <span className="text-2xl font-bold text-emerald-400">
+                {metrics.tokens.totalTokensRedeemed}
+              </span>
               <p className="text-[11px] text-emerald-300/80 mt-1">
                 {metrics.tokens.redemptionRatePercent}% {isHi ? "रिडेम्पशन दर" : "Redemption Rate"}
               </p>
             </div>
 
             <div className="p-4 rounded-2xl bg-white/[0.03] border border-amber-500/30">
-              <span className="text-xs text-slate-400 block">{isHi ? "सक्रिय वॉलेट देयता" : "Active Wallet Liability"}</span>
-              <span className="text-2xl font-bold text-amber-400">₹{metrics.tokens.totalLiabilityInr.toLocaleString("en-IN")}</span>
+              <span className="text-xs text-slate-400 block">
+                {isHi ? "सक्रिय वॉलेट देयता" : "Active Wallet Liability"}
+              </span>
+              <span className="text-2xl font-bold text-amber-400">
+                ₹{metrics.tokens.totalLiabilityInr.toLocaleString("en-IN")}
+              </span>
               <p className="text-[11px] text-amber-300/80 mt-1">
-                {metrics.tokens.activeTokensInCirculation} {isHi ? "सक्रिय टोकन (₹60 दर पर)" : "active tokens @ ₹60/token"}
+                {metrics.tokens.activeTokensInCirculation}{" "}
+                {isHi ? "सक्रिय टोकन (₹60 दर पर)" : "active tokens @ ₹60/token"}
               </p>
             </div>
           </div>
@@ -424,19 +492,32 @@ export function ExecutiveAnalyticsDashboard() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div className="p-4 rounded-xl bg-black/40 border border-white/10 space-y-2">
                 <div className="flex items-center justify-between text-xs">
-                  <span className="font-semibold text-slate-200">{isHi ? "ज़ीरो-फी ट्रायल टोकन" : "Zero-Fee Trial Tokens"}</span>
-                  <span className="font-mono text-emerald-400 font-bold">{metrics.tokens.trialTokensClaimed - metrics.tokens.trialTokensRedeemed} active</span>
+                  <span className="font-semibold text-slate-200">
+                    {isHi ? "ज़ीरो-फी ट्रायल टोकन" : "Zero-Fee Trial Tokens"}
+                  </span>
+                  <span className="font-mono text-emerald-400 font-bold">
+                    {metrics.tokens.trialTokensClaimed - metrics.tokens.trialTokensRedeemed} active
+                  </span>
                 </div>
                 <div className="text-[11px] text-slate-400">
-                  <span>{isHi ? "दावा किया:" : "Claimed:"} {metrics.tokens.trialTokensClaimed}</span> |{" "}
-                  <span>{isHi ? "भुनाया:" : "Redeemed:"} {metrics.tokens.trialTokensRedeemed}</span>
+                  <span>
+                    {isHi ? "दावा किया:" : "Claimed:"} {metrics.tokens.trialTokensClaimed}
+                  </span>{" "}
+                  |{" "}
+                  <span>
+                    {isHi ? "भुनाया:" : "Redeemed:"} {metrics.tokens.trialTokensRedeemed}
+                  </span>
                 </div>
               </div>
 
               <div className="p-4 rounded-xl bg-black/40 border border-white/10 space-y-2">
                 <div className="flex items-center justify-between text-xs">
-                  <span className="font-semibold text-slate-200">{isHi ? "सार्थी टिफिन मील पास" : "Tiffin Meal Passes"}</span>
-                  <span className="font-mono text-amber-400 font-bold">{metrics.tokens.mealPassTokensActive} active</span>
+                  <span className="font-semibold text-slate-200">
+                    {isHi ? "सार्थी टिफिन मील पास" : "Tiffin Meal Passes"}
+                  </span>
+                  <span className="font-mono text-amber-400 font-bold">
+                    {metrics.tokens.mealPassTokensActive} active
+                  </span>
                 </div>
                 <div className="text-[11px] text-slate-400">
                   <span>{isHi ? "दैनिक टोकन पास कोटा" : "Daily Meal Pass Tokens"}</span>
@@ -445,8 +526,12 @@ export function ExecutiveAnalyticsDashboard() {
 
               <div className="p-4 rounded-xl bg-black/40 border border-white/10 space-y-2">
                 <div className="flex items-center justify-between text-xs">
-                  <span className="font-semibold text-slate-200">{isHi ? "रेफरल वॉलेट क्रेडिट" : "Referral Credits"}</span>
-                  <span className="font-mono text-cyan-400 font-bold">{metrics.tokens.referralCreditsActive} active</span>
+                  <span className="font-semibold text-slate-200">
+                    {isHi ? "रेफरल वॉलेट क्रेडिट" : "Referral Credits"}
+                  </span>
+                  <span className="font-mono text-cyan-400 font-bold">
+                    {metrics.tokens.referralCreditsActive} active
+                  </span>
                 </div>
                 <div className="text-[11px] text-slate-400">
                   <span>{isHi ? "व्हाट्सएप रेफरल बोनस" : "WhatsApp Referral Bonus"}</span>
@@ -464,7 +549,9 @@ export function ExecutiveAnalyticsDashboard() {
             <div className="flex items-center justify-between">
               <h3 className="text-sm font-bold text-white flex items-center gap-2">
                 <Layers className="h-4 w-4 text-amber-400" />
-                {isHi ? "स्प्रिंट रोडमैप प्रगति एवं सत्यापन (Sprints 0-10)" : "Sprint Execution Roadmap (Sprints 0-10)"}
+                {isHi
+                  ? "स्प्रिंट रोडमैप प्रगति एवं सत्यापन (Sprints 0-10)"
+                  : "Sprint Execution Roadmap (Sprints 0-10)"}
               </h3>
               <span className="text-xs font-mono font-bold text-emerald-400">
                 98 / 101 {isHi ? "कार्य पूर्ण" : "Tasks Verified"} (97%)
@@ -473,10 +560,15 @@ export function ExecutiveAnalyticsDashboard() {
 
             <div className="space-y-3">
               {metrics.sprints.map((s, idx) => (
-                <div key={idx} className="p-4 rounded-xl bg-black/40 border border-white/10 space-y-2">
+                <div
+                  key={idx}
+                  className="p-4 rounded-xl bg-black/40 border border-white/10 space-y-2"
+                >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-bold text-amber-400 font-mono">{s.sprintId}</span>
+                      <span className="text-xs font-bold text-amber-400 font-mono">
+                        {s.sprintId}
+                      </span>
                       <span className="text-sm font-bold text-white">{s.sprintName}</span>
                     </div>
                     <span
@@ -486,7 +578,13 @@ export function ExecutiveAnalyticsDashboard() {
                           : "bg-amber-500/20 text-amber-300 border border-amber-500/30"
                       }`}
                     >
-                      {s.status === "completed" ? (isHi ? "पूर्ण" : "Completed") : (isHi ? "सक्रिय" : "Active")}
+                      {s.status === "completed"
+                        ? isHi
+                          ? "पूर्ण"
+                          : "Completed"
+                        : isHi
+                          ? "सक्रिय"
+                          : "Active"}
                     </span>
                   </div>
 
@@ -497,7 +595,8 @@ export function ExecutiveAnalyticsDashboard() {
                       {isHi ? "निष्पादित कार्य:" : "Tasks:"} {s.completedTasks} / {s.totalTasks}
                     </span>
                     <span className="font-mono text-emerald-400">
-                      {Math.round((s.completedTasks / s.totalTasks) * 100)}% {isHi ? "पूर्ण" : "complete"}
+                      {Math.round((s.completedTasks / s.totalTasks) * 100)}%{" "}
+                      {isHi ? "पूर्ण" : "complete"}
                     </span>
                   </div>
                 </div>

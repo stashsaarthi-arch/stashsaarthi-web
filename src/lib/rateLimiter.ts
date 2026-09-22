@@ -60,7 +60,7 @@ function saveTimestamps(key: string, timestamps: number[]): void {
  */
 export function checkRateLimit(
   key: string,
-  config?: RateLimitConfig
+  config?: RateLimitConfig,
 ): { allowed: boolean; remainingSeconds: number; message: string } {
   const cfg = { ...DEFAULT_CONFIG, ...config };
   const now = Date.now();
@@ -115,7 +115,7 @@ export function recordSubmission(key: string, config?: RateLimitConfig): void {
  */
 export function checkAndRecordRateLimit(
   key: string,
-  config?: RateLimitConfig
+  config?: RateLimitConfig,
 ): { allowed: boolean; remainingSeconds: number; message: string } {
   const check = checkRateLimit(key, config);
   if (check.allowed) {
@@ -147,4 +147,3 @@ export function showRateLimitToast(remainingSeconds: number, customMessage?: str
     duration: 4000,
   });
 }
-

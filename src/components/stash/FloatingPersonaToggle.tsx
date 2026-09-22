@@ -53,7 +53,10 @@ export const FloatingPersonaToggle = memo(function FloatingPersonaToggle() {
                 className="absolute inset-0 rounded-full bg-emerald-500 shadow-md -z-10"
               />
             )}
-            <GraduationCap className="h-3.5 w-3.5 shrink-0 translate-y-[-0.5px]" aria-hidden="true" />
+            <GraduationCap
+              className="h-3.5 w-3.5 shrink-0 translate-y-[-0.5px]"
+              aria-hidden="true"
+            />
             <span>{isHi ? "छात्र मोड" : "Student Mode"}</span>
           </motion.button>
 
@@ -77,7 +80,10 @@ export const FloatingPersonaToggle = memo(function FloatingPersonaToggle() {
                 className="absolute inset-0 rounded-full bg-amber-500 shadow-md -z-10"
               />
             )}
-            <HeartHandshake className="h-3.5 w-3.5 shrink-0 translate-y-[-0.5px]" aria-hidden="true" />
+            <HeartHandshake
+              className="h-3.5 w-3.5 shrink-0 translate-y-[-0.5px]"
+              aria-hidden="true"
+            />
             <span>{isHi ? "सीनियर होस्ट" : "Verified PG Owner Host"}</span>
           </motion.button>
         </motion.div>

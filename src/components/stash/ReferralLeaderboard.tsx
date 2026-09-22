@@ -16,7 +16,7 @@ import {
   ChevronRight,
   ShieldCheck,
   Building2,
-  GraduationCap
+  GraduationCap,
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { usePersona } from "@/context/PersonaContext";
@@ -215,7 +215,11 @@ export function ReferralLeaderboard({ onRefer }: { onRefer?: () => void }) {
         ? `🚨 *छुट्टियों में खाली रूम का ₹8,000 डेड-रेंट मत फूंको!* 🚨\n\nअरे! StashSaarthi हमारे सेमेस्टर लगेज को कैंपस के पास मात्र *₹300/माह* में सुरक्षित रख रहा है! लेजर सील + ₹10k बीमा।\n\n🎁 ₹300 फ्री क्रेडिट के लिए मेरा इनवाइट कोड *${mockUserCode}* उपयोग करें:\n👉 ${APP_BASE_URL}?ref=${mockUserCode}`
         : `🚨 *DON'T BURN ₹8,000 DEAD-RENT THIS VACATION!* 🚨\n\nHey! StashSaarthi stores vacation luggage for *₹300/mo* near campus with laser seals & ₹10k insurance!\n\n🎁 Use invite code *${mockUserCode}* for ₹300 free credit:\n👉 ${APP_BASE_URL}?ref=${mockUserCode}`;
 
-    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, "_blank", "noopener,noreferrer");
+    window.open(
+      `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`,
+      "_blank",
+      "noopener,noreferrer",
+    );
   };
 
   return (
@@ -235,11 +239,19 @@ export function ReferralLeaderboard({ onRefer }: { onRefer?: () => void }) {
             <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white mb-3">
               {isHi ? (
                 <>
-                  रेफर करें, <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">कैंपस रैंक बढ़ाएं</span> &amp; नकद इनाम पाएं
+                  रेफर करें,{" "}
+                  <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">
+                    कैंपस रैंक बढ़ाएं
+                  </span>{" "}
+                  &amp; नकद इनाम पाएं
                 </>
               ) : (
                 <>
-                  Refer Friends, Climb <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">Campus Rankings</span> &amp; Earn Cash
+                  Refer Friends, Climb{" "}
+                  <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">
+                    Campus Rankings
+                  </span>{" "}
+                  &amp; Earn Cash
                 </>
               )}
             </h2>
@@ -297,18 +309,24 @@ export function ReferralLeaderboard({ onRefer }: { onRefer?: () => void }) {
                 <div className="inline-block px-2.5 py-0.5 rounded-full bg-slate-800 border border-slate-700 text-slate-300 text-[10px] font-semibold mb-1">
                   {top2.badge}
                 </div>
-                <h3 className="text-base font-bold text-white group-hover:text-slate-200">{top2.name}</h3>
+                <h3 className="text-base font-bold text-white group-hover:text-slate-200">
+                  {top2.name}
+                </h3>
                 <p className="text-xs text-slate-400 flex items-center justify-center gap-1 mt-0.5">
                   <GraduationCap className="w-3 h-3 text-slate-400" />
                   <span>{top2.college}</span>
                 </p>
                 <div className="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between px-2">
                   <span className="text-xs text-slate-400">{isHi ? "रेफरल:" : "Invites:"}</span>
-                  <span className="text-sm font-extrabold text-white">{top2.invites} {isHi ? "छात्र" : "friends"}</span>
+                  <span className="text-sm font-extrabold text-white">
+                    {top2.invites} {isHi ? "छात्र" : "friends"}
+                  </span>
                 </div>
                 <div className="mt-1 flex items-center justify-between px-2">
                   <span className="text-xs text-slate-400">{isHi ? "कमाई:" : "Earned:"}</span>
-                  <span className="text-sm font-extrabold text-emerald-400">₹{top2.rewardsEarned.toLocaleString("en-IN")}</span>
+                  <span className="text-sm font-extrabold text-emerald-400">
+                    ₹{top2.rewardsEarned.toLocaleString("en-IN")}
+                  </span>
                 </div>
               </div>
             )}
@@ -327,18 +345,28 @@ export function ReferralLeaderboard({ onRefer }: { onRefer?: () => void }) {
                 <div className="inline-block px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs font-bold mb-1">
                   {top1.badge}
                 </div>
-                <h3 className="text-lg font-black text-white group-hover:text-amber-200">{top1.name}</h3>
+                <h3 className="text-lg font-black text-white group-hover:text-amber-200">
+                  {top1.name}
+                </h3>
                 <p className="text-xs text-slate-300 flex items-center justify-center gap-1 mt-0.5">
                   <GraduationCap className="w-3.5 h-3.5 text-amber-400" />
                   <span>{top1.college}</span>
                 </p>
                 <div className="mt-5 pt-3 border-t border-amber-500/20 flex items-center justify-between px-3">
-                  <span className="text-xs text-slate-300 font-medium">{isHi ? "कुल रेफरल:" : "Total Invites:"}</span>
-                  <span className="text-base font-black text-amber-300">{top1.invites} {isHi ? "सफल" : "invites"}</span>
+                  <span className="text-xs text-slate-300 font-medium">
+                    {isHi ? "कुल रेफरल:" : "Total Invites:"}
+                  </span>
+                  <span className="text-base font-black text-amber-300">
+                    {top1.invites} {isHi ? "सफल" : "invites"}
+                  </span>
                 </div>
                 <div className="mt-1 flex items-center justify-between px-3">
-                  <span className="text-xs text-slate-300 font-medium">{isHi ? "कुल पुरस्कार:" : "Cash & Rewards:"}</span>
-                  <span className="text-base font-black text-emerald-400">₹{top1.rewardsEarned.toLocaleString("en-IN")}</span>
+                  <span className="text-xs text-slate-300 font-medium">
+                    {isHi ? "कुल पुरस्कार:" : "Cash & Rewards:"}
+                  </span>
+                  <span className="text-base font-black text-emerald-400">
+                    ₹{top1.rewardsEarned.toLocaleString("en-IN")}
+                  </span>
                 </div>
               </div>
             )}
@@ -357,18 +385,24 @@ export function ReferralLeaderboard({ onRefer }: { onRefer?: () => void }) {
                 <div className="inline-block px-2.5 py-0.5 rounded-full bg-amber-950/40 border border-amber-800/40 text-amber-300 text-[10px] font-semibold mb-1">
                   {top3.badge}
                 </div>
-                <h3 className="text-base font-bold text-white group-hover:text-slate-200">{top3.name}</h3>
+                <h3 className="text-base font-bold text-white group-hover:text-slate-200">
+                  {top3.name}
+                </h3>
                 <p className="text-xs text-slate-400 flex items-center justify-center gap-1 mt-0.5">
                   <Building2 className="w-3 h-3 text-amber-400" />
                   <span>{top3.college}</span>
                 </p>
                 <div className="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between px-2">
                   <span className="text-xs text-slate-400">{isHi ? "रेफरल:" : "Invites:"}</span>
-                  <span className="text-sm font-extrabold text-white">{top3.invites} {isHi ? "रेफरल" : "invites"}</span>
+                  <span className="text-sm font-extrabold text-white">
+                    {top3.invites} {isHi ? "रेफरल" : "invites"}
+                  </span>
                 </div>
                 <div className="mt-1 flex items-center justify-between px-2">
                   <span className="text-xs text-slate-400">{isHi ? "कमाई:" : "Earned:"}</span>
-                  <span className="text-sm font-extrabold text-emerald-400">₹{top3.rewardsEarned.toLocaleString("en-IN")}</span>
+                  <span className="text-sm font-extrabold text-emerald-400">
+                    ₹{top3.rewardsEarned.toLocaleString("en-IN")}
+                  </span>
                 </div>
               </div>
             )}
@@ -390,7 +424,9 @@ export function ReferralLeaderboard({ onRefer }: { onRefer?: () => void }) {
                 className="flex items-center justify-between p-3.5 rounded-xl bg-slate-900/50 border border-slate-800/80 hover:border-slate-700/80 transition-all backdrop-blur-md"
               >
                 <div className="flex items-center gap-3">
-                  <span className="w-6 text-center text-xs font-bold text-slate-400">#{entry.rank}</span>
+                  <span className="w-6 text-center text-xs font-bold text-slate-400">
+                    #{entry.rank}
+                  </span>
                   <div className="w-9 h-9 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-xs font-bold text-slate-200">
                     {entry.avatar}
                   </div>
@@ -406,8 +442,12 @@ export function ReferralLeaderboard({ onRefer }: { onRefer?: () => void }) {
                 </div>
 
                 <div className="text-right">
-                  <div className="text-xs font-bold text-white">{entry.invites} {isHi ? "रेफरल" : "Invites"}</div>
-                  <div className="text-xs font-semibold text-emerald-400">₹{entry.rewardsEarned.toLocaleString("en-IN")}</div>
+                  <div className="text-xs font-bold text-white">
+                    {entry.invites} {isHi ? "रेफरल" : "Invites"}
+                  </div>
+                  <div className="text-xs font-semibold text-emerald-400">
+                    ₹{entry.rewardsEarned.toLocaleString("en-IN")}
+                  </div>
                 </div>
               </div>
             ))}
@@ -422,8 +462,12 @@ export function ReferralLeaderboard({ onRefer }: { onRefer?: () => void }) {
                     <Zap className="w-4 h-4" />
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-white">{isHi ? "आपकी वर्तमान रैंक" : "Your Standing"}</h4>
-                    <p className="text-xs text-slate-400">{isHi ? "कैंपस पास ID: #SS-8921" : "Pass ID: #SS-8921"}</p>
+                    <h4 className="text-sm font-bold text-white">
+                      {isHi ? "आपकी वर्तमान रैंक" : "Your Standing"}
+                    </h4>
+                    <p className="text-xs text-slate-400">
+                      {isHi ? "कैंपस पास ID: #SS-8921" : "Pass ID: #SS-8921"}
+                    </p>
                   </div>
                 </div>
                 <span className="px-2.5 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-black text-xs">
@@ -434,8 +478,12 @@ export function ReferralLeaderboard({ onRefer }: { onRefer?: () => void }) {
               {/* Progress Bar to Top 10 */}
               <div className="space-y-1.5 my-4">
                 <div className="flex justify-between text-xs">
-                  <span className="text-slate-300">{isHi ? "टॉप 10 माइलस्टोन" : "Top 10 Milestone"}</span>
-                  <span className="font-bold text-emerald-400">4 / 5 {isHi ? "रेफरल" : "Invites"}</span>
+                  <span className="text-slate-300">
+                    {isHi ? "टॉप 10 माइलस्टोन" : "Top 10 Milestone"}
+                  </span>
+                  <span className="font-bold text-emerald-400">
+                    4 / 5 {isHi ? "रेफरल" : "Invites"}
+                  </span>
                 </div>
                 <div className="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
                   <div className="h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full w-4/5" />

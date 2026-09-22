@@ -147,7 +147,7 @@ export function getSavedPushSubscription(): HostPushSubscription | null {
  */
 export async function subscribeHostToPushNotifications(
   hostId: string = "HOST-KNP-001",
-  hostName: string = "Sudha Tripathi Ji"
+  hostName: string = "Sudha Tripathi Ji",
 ): Promise<HostPushSubscription> {
   const perm = await requestPushPermission();
   if (perm !== "granted") {
@@ -167,10 +167,12 @@ export async function subscribeHostToPushNotifications(
         if (!sub) {
           // VAPID Public Key for StashSaarthi Web Push
           const dummyVapidKey = "BEl62iUYgUivxI-l_88J7g4m_829_P298Z98103-mockVapidKey";
-          sub = await reg.pushManager.subscribe({
-            userVisibleOnly: true,
-            applicationServerKey: dummyVapidKey,
-          }).catch(() => null);
+          sub = await reg.pushManager
+            .subscribe({
+              userVisibleOnly: true,
+              applicationServerKey: dummyVapidKey,
+            })
+            .catch(() => null);
         }
         if (sub) {
           endpoint = sub.endpoint;
@@ -224,7 +226,7 @@ export function clearNotificationHistory(): void {
  * Trigger incoming booking push notification & persistent alert sound
  */
 export async function triggerHostPushNotification(
-  payload: HostBookingNotificationPayload
+  payload: HostBookingNotificationPayload,
 ): Promise<boolean> {
   if (typeof window === "undefined") return false;
 
@@ -237,9 +239,7 @@ export async function triggerHostPushNotification(
   localStorage.setItem(STORAGE_LOGS_KEY, JSON.stringify(updatedHistory));
 
   // 3. Dispatch window custom event for live UI reactivity
-  window.dispatchEvent(
-    new CustomEvent("stashsaarthi:host-push-notification", { detail: payload })
-  );
+  window.dispatchEvent(new CustomEvent("stashsaarthi:host-push-notification", { detail: payload }));
 
   // 4. Trigger Native Browser Web Push Notification
   if ("Notification" in window && Notification.permission === "granted") {
@@ -279,7 +279,7 @@ export async function triggerHostPushNotification(
  * Helper to generate a realistic incoming booking request payload
  */
 export function simulateIncomingBookingRequest(
-  overrides?: Partial<HostBookingNotificationPayload>
+  overrides?: Partial<HostBookingNotificationPayload>,
 ): HostBookingNotificationPayload {
   const sampleStudents = [
     { name: "Rahul Verma", phone: "+91 98765 43210", node: "Kakadeo Hub (PW Gate 2)" },
@@ -288,9 +288,13 @@ export function simulateIncomingBookingRequest(
     { name: "Aditi Rao", phone: "+91 94567 89012", node: "HBTI Nawabganj Hub" },
   ];
 
-  const randomStudent = sampleStudents[Math.floor(Math.random() * sampleStudents.length)] || sampleStudents[0]!;
+  const randomStudent =
+    sampleStudents[Math.floor(Math.random() * sampleStudents.length)] || sampleStudents[0]!;
   const bookingTypes: Array<"stash" | "spaces" | "kitchen"> = ["stash", "spaces", "kitchen"];
-  const randomType = overrides?.bookingType || bookingTypes[Math.floor(Math.random() * bookingTypes.length)] || "stash";
+  const randomType =
+    overrides?.bookingType ||
+    bookingTypes[Math.floor(Math.random() * bookingTypes.length)] ||
+    "stash";
 
   let details = "2x Standard 40L Storage Boxes (1 Month)";
   let amount = 600;

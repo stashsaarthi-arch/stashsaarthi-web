@@ -87,7 +87,7 @@ export function handleFocusTrap(container: HTMLElement | null, e: KeyboardEvent)
   if (!container || e.key !== "Tab") return;
 
   const focusableElements = container.querySelectorAll<HTMLElement>(
-    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
   );
 
   if (focusableElements.length === 0) return;
@@ -121,7 +121,7 @@ export function runScreenReaderAudit(): { passed: number; warnings: string[] } {
 
   // Inspect interactive buttons and links
   const interactives = document.querySelectorAll<HTMLElement>(
-    'button, a, input, select, textarea, [role="button"], [role="tab"]'
+    'button, a, input, select, textarea, [role="button"], [role="tab"]',
   );
 
   interactives.forEach((el, index) => {
@@ -132,14 +132,22 @@ export function runScreenReaderAudit(): { passed: number; warnings: string[] } {
     const hasAccessibleName = textContent.length > 0 || !!ariaLabel || !!ariaLabelledBy;
 
     if (!hasAccessibleName) {
-      warnings.push(`Interactive element #${index} (<${el.tagName.toLowerCase()}>) lacks an accessible ARIA label or visible text.`);
+      warnings.push(
+        `Interactive element #${index} (<${el.tagName.toLowerCase()}>) lacks an accessible ARIA label or visible text.`,
+      );
     } else {
       passed++;
     }
 
     // Check custom roles for tabIndex
     const role = el.getAttribute("role");
-    if (role && role !== "presentation" && !el.hasAttribute("tabindex") && el.tagName !== "BUTTON" && el.tagName !== "A") {
+    if (
+      role &&
+      role !== "presentation" &&
+      !el.hasAttribute("tabindex") &&
+      el.tagName !== "BUTTON" &&
+      el.tagName !== "A"
+    ) {
       warnings.push(`Element with role="${role}" lacks explicit tabindex for keyboard navigation.`);
     }
   });

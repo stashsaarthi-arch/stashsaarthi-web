@@ -120,25 +120,26 @@ export const CalculatorHub = memo(function CalculatorHub({ onBook }: { onBook: O
         className="mt-2.5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/20 rounded-2xl"
       >
         {activeTab === "student" ? (
-          <StashCalculator onBook={(p) => {
-            setIsDrawerOpen(false);
-            onBook(p);
-          }} />
+          <StashCalculator
+            onBook={(p) => {
+              setIsDrawerOpen(false);
+              onBook(p);
+            }}
+          />
         ) : (
-          <HostSimulator onBook={() => {
-            setIsDrawerOpen(false);
-            onBook({ service: "stash" });
-          }} />
+          <HostSimulator
+            onBook={() => {
+              setIsDrawerOpen(false);
+              onBook({ service: "stash" });
+            }}
+          />
         )}
       </div>
     </>
   );
 
   return (
-    <section
-      id="calculator"
-      className="relative mx-auto max-w-6xl px-4 py-2 sm:py-5 scroll-mt-20"
-    >
+    <section id="calculator" className="relative mx-auto max-w-6xl px-4 py-2 sm:py-5 scroll-mt-20">
       {/* Inline Interactive Display */}
       <div>
         {/* Header */}

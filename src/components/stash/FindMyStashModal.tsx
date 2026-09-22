@@ -44,7 +44,9 @@ export function FindMyStashModal({
   // Find target node or default to Kakadeo PW Hub
   const defaultNode: GroundStashNode =
     KANPUR_GROUND_NODES.find((n) => n.id === initialNodeId) ||
-    KANPUR_GROUND_NODES.find((n) => nodeName && n.name.toLowerCase().includes(nodeName.toLowerCase())) ||
+    KANPUR_GROUND_NODES.find(
+      (n) => nodeName && n.name.toLowerCase().includes(nodeName.toLowerCase()),
+    ) ||
     KANPUR_GROUND_NODES[0]!;
 
   const [selectedNode, setSelectedNode] = useState<GroundStashNode>(defaultNode);
@@ -87,7 +89,9 @@ export function FindMyStashModal({
               <div>
                 <div className="flex items-center gap-2">
                   <h2 id="find-stash-title" className="text-lg sm:text-xl font-bold text-white">
-                    {isHi ? "फ़ाइंड माय स्टैश (बैक-गली नेविगेशन)" : "Find My Stash (Back-Alley Directions)"}
+                    {isHi
+                      ? "फ़ाइंड माय स्टैश (बैक-गली नेविगेशन)"
+                      : "Find My Stash (Back-Alley Directions)"}
                   </h2>
                 </div>
                 <p className="text-xs text-slate-400">
@@ -100,7 +104,9 @@ export function FindMyStashModal({
 
             <button
               onClick={onClose}
-              aria-label={isHi ? "दिशा-निर्देश मोडल बंद करें" : "Close Find My Stash Directions Modal"}
+              aria-label={
+                isHi ? "दिशा-निर्देश मोडल बंद करें" : "Close Find My Stash Directions Modal"
+              }
               className="rounded-full bg-white/5 p-2 text-slate-400 hover:bg-white/10 hover:text-white transition cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
             >
               <X className="h-4 w-4" />
@@ -165,7 +171,9 @@ export function FindMyStashModal({
             <div className="space-y-2 pt-1">
               <h4 className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
                 <Navigation className="h-3.5 w-3.5 text-emerald-400" />
-                <span>{isHi ? "चरण-दर-चरण मार्ग चेकपॉइंट" : "Step-by-Step Walking Checkpoints"}</span>
+                <span>
+                  {isHi ? "चरण-दर-चरण मार्ग चेकपॉइंट" : "Step-by-Step Walking Checkpoints"}
+                </span>
               </h4>
 
               <div className="space-y-1.5">
@@ -177,9 +185,7 @@ export function FindMyStashModal({
                     <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-500/20 font-mono text-[10px] font-bold text-emerald-400 border border-emerald-500/30">
                       {step.step}
                     </span>
-                    <span className="pt-0.5">
-                      {isHi ? step.instruction_hi : step.instruction}
-                    </span>
+                    <span className="pt-0.5">{isHi ? step.instruction_hi : step.instruction}</span>
                   </div>
                 ))}
               </div>
@@ -233,8 +239,20 @@ export function FindMyStashModal({
                 onClick={handleCopyLandmark}
                 className="text-xs text-slate-400 hover:text-white gap-1.5 cursor-pointer"
               >
-                {copied ? <Check className="h-3.5 w-3.5 text-emerald-400" /> : <Copy className="h-3.5 w-3.5" />}
-                <span>{copied ? (isHi ? "कॉपी हो गया!" : "Copied!") : (isHi ? "लैंडमार्क कॉपी करें" : "Copy Address")}</span>
+                {copied ? (
+                  <Check className="h-3.5 w-3.5 text-emerald-400" />
+                ) : (
+                  <Copy className="h-3.5 w-3.5" />
+                )}
+                <span>
+                  {copied
+                    ? isHi
+                      ? "कॉपी हो गया!"
+                      : "Copied!"
+                    : isHi
+                      ? "लैंडमार्क कॉपी करें"
+                      : "Copy Address"}
+                </span>
               </Button>
 
               <div className="flex items-center gap-2">

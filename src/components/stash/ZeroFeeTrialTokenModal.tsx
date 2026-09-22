@@ -5,11 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/context/LanguageContext";
 import { toast } from "sonner";
-import {
-  claimZeroFeeTrialToken,
-  getStashWallet,
-  type StashWalletState,
-} from "@/lib/stashWallet";
+import { claimZeroFeeTrialToken, getStashWallet, type StashWalletState } from "@/lib/stashWallet";
 import {
   Sparkles,
   ShieldCheck,
@@ -69,7 +65,7 @@ export function ZeroFeeTrialTokenModal({
       toast.error(
         isHi
           ? "कृपया 10-अंकों का वैध मोबाइल नंबर दर्ज करें"
-          : "Please enter a valid 10-digit mobile number"
+          : "Please enter a valid 10-digit mobile number",
       );
       return;
     }
@@ -107,7 +103,7 @@ export function ZeroFeeTrialTokenModal({
       window.dispatchEvent(
         new CustomEvent("stashsaarthi:open-booking", {
           detail: { service: "kitchen", bags: 1 },
-        })
+        }),
       );
     }
   };
@@ -129,9 +125,7 @@ export function ZeroFeeTrialTokenModal({
             </span>
           </div>
           <DialogTitle className="text-xl font-bold text-white tracking-tight">
-            {isHi
-              ? "⚡ ₹60 जीरो-फी ट्रायल टोकन क्लेम करें"
-              : "⚡ Claim ₹60 Zero-Fee Trial Token"}
+            {isHi ? "⚡ ₹60 जीरो-फी ट्रायल टोकन क्लेम करें" : "⚡ Claim ₹60 Zero-Fee Trial Token"}
           </DialogTitle>
           <p className="text-xs text-slate-400">
             {isHi
@@ -148,7 +142,9 @@ export function ZeroFeeTrialTokenModal({
                 <div className="flex items-center space-x-2">
                   <CheckCircle2 className="w-5 h-5 text-emerald-400" />
                   <span className="font-semibold text-sm text-emerald-300">
-                    {isHi ? "ट्रायल टोकन वॉलेट में एक्टिव है!" : "Trial Token Active in Stash Wallet!"}
+                    {isHi
+                      ? "ट्रायल टोकन वॉलेट में एक्टिव है!"
+                      : "Trial Token Active in Stash Wallet!"}
                   </span>
                 </div>
                 <span className="text-xs font-mono px-2 py-0.5 bg-emerald-500/20 text-emerald-300 rounded border border-emerald-500/30">
@@ -172,9 +168,7 @@ export function ZeroFeeTrialTokenModal({
                   </div>
                 </div>
                 <div className="text-right">
-                  <div className="text-[10px] text-emerald-400/80 font-mono">
-                    100% Zero Fee
-                  </div>
+                  <div className="text-[10px] text-emerald-400/80 font-mono">100% Zero Fee</div>
                   <div className="text-xs text-slate-300 font-medium">
                     {wallet.trialToken.studentCollege}
                   </div>
@@ -200,7 +194,9 @@ export function ZeroFeeTrialTokenModal({
                 onClick={handleUseTokenNow}
                 className="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-2.5 rounded-xl shadow-lg shadow-emerald-500/20 flex items-center justify-center space-x-2 transition-all"
               >
-                <span>{isHi ? "ऑर्डर में ₹60 टोकन इस्तेमाल करें" : "Use ₹60 Trial Token on Order"}</span>
+                <span>
+                  {isHi ? "ऑर्डर में ₹60 टोकन इस्तेमाल करें" : "Use ₹60 Trial Token on Order"}
+                </span>
                 <ArrowRight className="w-4 h-4" />
               </Button>
             </div>
@@ -246,9 +242,21 @@ export function ZeroFeeTrialTokenModal({
                   {isHi ? "इंस्टेंट क्रेडिट बेनिफिट:" : "Instant Credit Benefits:"}
                 </div>
                 <ul className="list-disc list-inside space-y-0.5 text-slate-300">
-                  <li>{isHi ? "₹60 इंस्टेंट क्रेडिट आपके स्टैश वॉलेट में" : "₹60 credited instantly to your Stash Wallet"}</li>
-                  <li>{isHi ? "1st Tiffin / Storage ऑर्डर पर शून्य डिलीवरी या सर्विस फीस" : "Zero delivery/platform fee on 1st order"}</li>
-                  <li>{isHi ? "कोई हिडन चार्ज नहीं, 100% रिफंडेबल गारंटी" : "No hidden charges, 100% money-back guarantee"}</li>
+                  <li>
+                    {isHi
+                      ? "₹60 इंस्टेंट क्रेडिट आपके स्टैश वॉलेट में"
+                      : "₹60 credited instantly to your Stash Wallet"}
+                  </li>
+                  <li>
+                    {isHi
+                      ? "1st Tiffin / Storage ऑर्डर पर शून्य डिलीवरी या सर्विस फीस"
+                      : "Zero delivery/platform fee on 1st order"}
+                  </li>
+                  <li>
+                    {isHi
+                      ? "कोई हिडन चार्ज नहीं, 100% रिफंडेबल गारंटी"
+                      : "No hidden charges, 100% money-back guarantee"}
+                  </li>
                 </ul>
               </div>
 

@@ -55,14 +55,11 @@ export function getLocalMasterBookings(userEmail?: string): MasterBookingRecord[
   // 1. Storage & Spaces Bookings from localSubmissions
   const rawBookings: BookingRecord[] = getBookings();
   const filteredBookings = userEmail
-    ? rawBookings.filter(
-        (b) => b.email && b.email.toLowerCase() === userEmail.toLowerCase()
-      )
+    ? rawBookings.filter((b) => b.email && b.email.toLowerCase() === userEmail.toLowerCase())
     : rawBookings;
 
   for (const b of filteredBookings) {
-    const type: MasterBookingType =
-      b.service === "spaces" ? "spaces" : "storage";
+    const type: MasterBookingType = b.service === "spaces" ? "spaces" : "storage";
 
     masterRecords.push({
       id: b.id,
@@ -113,8 +110,7 @@ export function getLocalMasterBookings(userEmail?: string): MasterBookingRecord[
 
   // Sort descending by created_at
   return masterRecords.sort(
-    (a, b) =>
-      new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
   );
 }
 
@@ -124,7 +120,7 @@ export function getLocalMasterBookings(userEmail?: string): MasterBookingRecord[
  */
 export function compileUnifiedUserMasterBookings(
   supabaseData: MasterBookingRecord[],
-  localData: MasterBookingRecord[]
+  localData: MasterBookingRecord[],
 ): MasterBookingRecord[] {
   const map = new Map<string, MasterBookingRecord>();
 
@@ -139,33 +135,21 @@ export function compileUnifiedUserMasterBookings(
   }
 
   const merged = Array.from(map.values());
-  return merged.sort(
-    (a, b) =>
-      new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-  );
+  return merged.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
 }
 
 /**
  * Fetches user_master_bookings from Supabase with instant pagination, fallback to local storage.
  */
 export async function getUserMasterBookings(
-  options: PaginationOptions = {}
+  options: PaginationOptions = {},
 ): Promise<PaginatedMasterBookings> {
-  const {
-    email,
-    phone,
-    page = 1,
-    pageSize = 10,
-    bookingType = "all",
-    status = "all",
-  } = options;
+  const { email, phone, page = 1, pageSize = 10, bookingType = "all", status = "all" } = options;
 
   let supabaseRecords: MasterBookingRecord[] = [];
 
   try {
-    let query = (supabase as any)
-      .from("user_master_bookings")
-      .select("*");
+    let query = (supabase as any).from("user_master_bookings").select("*");
 
     if (email) {
       query = query.eq("user_email", email);
@@ -189,10 +173,7 @@ export async function getUserMasterBookings(
   }
 
   const localRecords = getLocalMasterBookings(email);
-  let allRecords = compileUnifiedUserMasterBookings(
-    supabaseRecords,
-    localRecords
-  );
+  let allRecords = compileUnifiedUserMasterBookings(supabaseRecords, localRecords);
 
   // Apply in-memory filters if needed
   if (bookingType !== "all") {

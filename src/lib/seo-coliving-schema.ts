@@ -29,9 +29,17 @@ export const coLivingSpacesSchema = [
     },
     amenityFeature: [
       { "@type": "LocationFeatureSpecification", name: "Zero Brokerage", value: true },
-      { "@type": "LocationFeatureSpecification", name: "Verified Verified PG Owner Host", value: true },
+      {
+        "@type": "LocationFeatureSpecification",
+        name: "Verified Verified PG Owner Host",
+        value: true,
+      },
       { "@type": "LocationFeatureSpecification", name: "24x7 Water & Power Backup", value: true },
-      { "@type": "LocationFeatureSpecification", name: "Proximity to IIT Kanpur Gate 1", value: true },
+      {
+        "@type": "LocationFeatureSpecification",
+        name: "Proximity to IIT Kanpur Gate 1",
+        value: true,
+      },
       { "@type": "LocationFeatureSpecification", name: "High-Speed Fiber WiFi", value: true },
     ],
     offers: {
@@ -79,8 +87,16 @@ export const coLivingSpacesSchema = [
     },
     amenityFeature: [
       { "@type": "LocationFeatureSpecification", name: "Zero Brokerage", value: true },
-      { "@type": "LocationFeatureSpecification", name: "Walking Distance to Coaching Centers", value: true },
-      { "@type": "LocationFeatureSpecification", name: "Home-Cooked Tiffin Service Available", value: true },
+      {
+        "@type": "LocationFeatureSpecification",
+        name: "Walking Distance to Coaching Centers",
+        value: true,
+      },
+      {
+        "@type": "LocationFeatureSpecification",
+        name: "Home-Cooked Tiffin Service Available",
+        value: true,
+      },
       { "@type": "LocationFeatureSpecification", name: "Verified Host Safety Audit", value: true },
     ],
     offers: {

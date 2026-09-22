@@ -10,7 +10,7 @@
 
 ## [SPRINT #009 - GSAP SCROLL PHYSICS & GPU TRANSFORMS COMPLETED ✅]
 
-- [x] `@CTO`: Injected GSAP `ScrollTrigger` logic into `AnimatedContent.tsx`. 
+- [x] `@CTO`: Injected GSAP `ScrollTrigger` logic into `AnimatedContent.tsx`.
 - [x] `@CTO`: Utilized `gsap.context()` for React cleanup and applied `translate3d(0,0,0)` initial values.
 - [x] `@CTO`: Leveraged `clearProps: "willChange"` for aggressive GPU acceleration and memory cleanup.
 - [x] `@QA`: Certified zero layout thrashing on kinetic scroll across 20+ landing page sections.

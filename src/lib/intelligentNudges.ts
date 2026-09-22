@@ -223,7 +223,7 @@ export function runAutomatedNudgeBatchScan(): {
       JSON.stringify({
         lastRunAt: new Date().toISOString(),
         summary,
-      })
+      }),
     );
   } catch (err) {
     console.warn("Could not save nudge telemetry:", err);
@@ -294,7 +294,10 @@ export async function fetchSupabaseInactiveStudents(): Promise<StudentNudgeRecor
     // Map Supabase rows to StudentNudgeRecord
     const now = Date.now();
     return (data as Array<Record<string, unknown>>).map((row, idx) => {
-      const createdAt = typeof row["created_at"] === "string" ? (row["created_at"] as string) : new Date().toISOString();
+      const createdAt =
+        typeof row["created_at"] === "string"
+          ? (row["created_at"] as string)
+          : new Date().toISOString();
       const lastDate = new Date(createdAt).getTime();
       const days = Math.max(3, Math.floor((now - lastDate) / (1000 * 60 * 60 * 24)));
       return {
@@ -305,7 +308,8 @@ export async function fetchSupabaseInactiveStudents(): Promise<StudentNudgeRecor
         lastOrderDate: createdAt,
         daysInactive: days,
         lastMealName: "Special Thali",
-        favoriteKitchenNode: (row["vendor_selected"] as string) || "Kakadeo Hub - Annapurna Kitchen",
+        favoriteKitchenNode:
+          (row["vendor_selected"] as string) || "Kakadeo Hub - Annapurna Kitchen",
         nudgeSent: false,
         claimedToken: false,
       };

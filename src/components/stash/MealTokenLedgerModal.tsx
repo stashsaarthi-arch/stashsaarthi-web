@@ -45,7 +45,9 @@ export const MealTokenLedgerModal: React.FC<MealTokenLedgerModalProps> = ({
   userName = "Rahul Sharma (IIT Kanpur)",
 }) => {
   const [subscriptions, setSubscriptions] = useState<MealTokenSubscription[]>([]);
-  const [activeTab, setActiveTab] = useState<"passbook" | "burn" | "inspector" | "mint">("passbook");
+  const [activeTab, setActiveTab] = useState<"passbook" | "burn" | "inspector" | "mint">(
+    "passbook",
+  );
   const [selectedToken, setSelectedToken] = useState<MealMicroToken | null>(null);
   const [vendorNode, setVendorNode] = useState("annapurna");
   const [vendorName, setVendorName] = useState("Kakadeo Hub - Annapurna Kitchen");
@@ -72,7 +74,8 @@ export const MealTokenLedgerModal: React.FC<MealTokenLedgerModalProps> = ({
   if (!isOpen) return null;
 
   const stats = getMealTokenStats(userPhone);
-  const activeSub = subscriptions.find((s) => s.tokens.some((t) => t.status === "ACTIVE")) || subscriptions[0];
+  const activeSub =
+    subscriptions.find((s) => s.tokens.some((t) => t.status === "ACTIVE")) || subscriptions[0];
 
   const handleBurnToken = (tokenId?: string) => {
     playPop();
@@ -102,7 +105,9 @@ export const MealTokenLedgerModal: React.FC<MealTokenLedgerModalProps> = ({
     };
     const label = tierLabels[mintTier] || "Special Thali";
     const sub = mintMealTokenSubscription(userPhone, userName, mintTier, label, mintPackage);
-    toast.success(`Successfully minted new ${sub.packageType} subscription with ${sub.totalTokens} cryptographic tokens!`);
+    toast.success(
+      `Successfully minted new ${sub.packageType} subscription with ${sub.totalTokens} cryptographic tokens!`,
+    );
     refreshLedger();
     setActiveTab("passbook");
   };
@@ -111,7 +116,11 @@ export const MealTokenLedgerModal: React.FC<MealTokenLedgerModalProps> = ({
     playClick();
     const res = toggleSubscriptionFreeze(subId, !currentFrozen);
     if (res.success) {
-      toast.info(currentFrozen ? "Subscription unfrozen! Tokens are active again." : "Subscription frozen for weekend pause!");
+      toast.info(
+        currentFrozen
+          ? "Subscription unfrozen! Tokens are active again."
+          : "Subscription frozen for weekend pause!",
+      );
       refreshLedger();
     }
   };
@@ -156,7 +165,9 @@ export const MealTokenLedgerModal: React.FC<MealTokenLedgerModalProps> = ({
           </div>
           <div className="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/30">
             <span className="text-xs text-emerald-400 block">Active Burnable Tokens</span>
-            <span className="text-xl font-extrabold text-emerald-300">{stats.totalActiveTokens}</span>
+            <span className="text-xl font-extrabold text-emerald-300">
+              {stats.totalActiveTokens}
+            </span>
           </div>
           <div className="p-3 rounded-xl bg-amber-950/30 border border-amber-500/30">
             <span className="text-xs text-amber-400 block">Burned Meals</span>
@@ -164,7 +175,9 @@ export const MealTokenLedgerModal: React.FC<MealTokenLedgerModalProps> = ({
           </div>
           <div className="p-3 rounded-xl bg-cyan-950/30 border border-cyan-500/30">
             <span className="text-xs text-cyan-400 block">Burn Rate</span>
-            <span className="text-xl font-extrabold text-cyan-300">{stats.burnRatePercentage}%</span>
+            <span className="text-xl font-extrabold text-cyan-300">
+              {stats.burnRatePercentage}%
+            </span>
           </div>
         </div>
 
@@ -246,7 +259,10 @@ export const MealTokenLedgerModal: React.FC<MealTokenLedgerModalProps> = ({
               subscriptions.map((sub) => {
                 const isFrozen = sub.tokens.some((t) => t.status === "FROZEN");
                 return (
-                  <div key={sub.subscriptionId} className="bg-neutral-950 border border-neutral-800 rounded-2xl p-5">
+                  <div
+                    key={sub.subscriptionId}
+                    className="bg-neutral-950 border border-neutral-800 rounded-2xl p-5"
+                  >
                     <div className="flex flex-wrap items-center justify-between gap-2 border-b border-neutral-800 pb-3 mb-4">
                       <div>
                         <div className="flex items-center gap-2">
@@ -256,7 +272,8 @@ export const MealTokenLedgerModal: React.FC<MealTokenLedgerModalProps> = ({
                           </span>
                         </div>
                         <span className="text-xs text-neutral-400 block mt-0.5">
-                          Package: {sub.packageType} | Active: {sub.activeTokensCount} / {sub.totalTokens} tokens
+                          Package: {sub.packageType} | Active: {sub.activeTokensCount} /{" "}
+                          {sub.totalTokens} tokens
                         </span>
                       </div>
                       <div className="flex items-center gap-2">
@@ -268,7 +285,11 @@ export const MealTokenLedgerModal: React.FC<MealTokenLedgerModalProps> = ({
                               : "bg-neutral-800 text-neutral-300 border-neutral-700 hover:bg-neutral-700"
                           }`}
                         >
-                          {isFrozen ? <Unlock className="h-3.5 w-3.5" /> : <Lock className="h-3.5 w-3.5" />}
+                          {isFrozen ? (
+                            <Unlock className="h-3.5 w-3.5" />
+                          ) : (
+                            <Lock className="h-3.5 w-3.5" />
+                          )}
                           {isFrozen ? "Unfreeze Subscription" : "Weekend Freeze Pause"}
                         </button>
                       </div>
@@ -289,8 +310,8 @@ export const MealTokenLedgerModal: React.FC<MealTokenLedgerModalProps> = ({
                               isBurned
                                 ? "bg-neutral-900/40 border-neutral-800/80 opacity-50"
                                 : isTokenFrozen
-                                ? "bg-amber-950/20 border-amber-500/30 text-amber-300"
-                                : "bg-neutral-900 border-emerald-500/30 hover:border-emerald-400 text-white"
+                                  ? "bg-amber-950/20 border-amber-500/30 text-amber-300"
+                                  : "bg-neutral-900 border-emerald-500/30 hover:border-emerald-400 text-white"
                             }`}
                           >
                             <div className="flex items-center justify-between text-[10px] font-mono text-neutral-400 mb-1">
@@ -300,14 +321,16 @@ export const MealTokenLedgerModal: React.FC<MealTokenLedgerModalProps> = ({
                                   isBurned
                                     ? "bg-neutral-800 text-neutral-500"
                                     : isTokenFrozen
-                                    ? "bg-amber-500/20 text-amber-300"
-                                    : "bg-emerald-500/20 text-emerald-300"
+                                      ? "bg-amber-500/20 text-amber-300"
+                                      : "bg-emerald-500/20 text-emerald-300"
                                 }`}
                               >
                                 {token.status}
                               </span>
                             </div>
-                            <div className="text-xs font-bold font-mono text-neutral-200 truncate">{token.tokenId}</div>
+                            <div className="text-xs font-bold font-mono text-neutral-200 truncate">
+                              {token.tokenId}
+                            </div>
                             <div className="text-[10px] text-neutral-400 mt-1 flex items-center justify-between">
                               <span>{token.mealSlot}</span>
                               {isValid && <ShieldCheck className="h-3 w-3 text-emerald-400" />}
@@ -332,12 +355,15 @@ export const MealTokenLedgerModal: React.FC<MealTokenLedgerModalProps> = ({
                 Redeem Daily Meal (Burn 1 Micro-Token)
               </h4>
               <p className="text-xs text-neutral-400 mb-6">
-                Scan or single-tap burn 1 token from your active meal ledger. 1 Token = 1 Fresh Thali at verified partner kitchens.
+                Scan or single-tap burn 1 token from your active meal ledger. 1 Token = 1 Fresh
+                Thali at verified partner kitchens.
               </p>
 
               <div className="grid md:grid-cols-2 gap-4 mb-6">
                 <div>
-                  <label className="text-xs text-neutral-400 block mb-1.5 font-semibold">Select Kitchen Vendor Node</label>
+                  <label className="text-xs text-neutral-400 block mb-1.5 font-semibold">
+                    Select Kitchen Vendor Node
+                  </label>
                   <select
                     value={vendorNode}
                     onChange={(e) => {
@@ -351,18 +377,28 @@ export const MealTokenLedgerModal: React.FC<MealTokenLedgerModalProps> = ({
                     }}
                     className="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500"
                   >
-                    <option value="annapurna">Kakadeo Hub - Annapurna Kitchen (Kakadeo Belt)</option>
+                    <option value="annapurna">
+                      Kakadeo Hub - Annapurna Kitchen (Kakadeo Belt)
+                    </option>
                     <option value="dadi_maa">CSJMU Kalyanpur - Dadi Maa Rasoi (CSJMU Belt)</option>
-                    <option value="sharma_bhoj">HBTI Nawabganj - Sharma Bhojnalaya (HBTI Belt)</option>
+                    <option value="sharma_bhoj">
+                      HBTI Nawabganj - Sharma Bhojnalaya (HBTI Belt)
+                    </option>
                   </select>
                 </div>
 
                 <div>
-                  <label className="text-xs text-neutral-400 block mb-1.5 font-semibold">Target Subscription Pass</label>
+                  <label className="text-xs text-neutral-400 block mb-1.5 font-semibold">
+                    Target Subscription Pass
+                  </label>
                   <input
                     type="text"
                     readOnly
-                    value={activeSub ? `${activeSub.tierName} (${activeSub.subscriptionId})` : "No Active Pass"}
+                    value={
+                      activeSub
+                        ? `${activeSub.tierName} (${activeSub.subscriptionId})`
+                        : "No Active Pass"
+                    }
                     className="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3 py-2.5 text-sm text-neutral-300 font-mono"
                   />
                 </div>
@@ -371,17 +407,25 @@ export const MealTokenLedgerModal: React.FC<MealTokenLedgerModalProps> = ({
               {stats.nextBurnableToken ? (
                 <div className="p-4 bg-emerald-950/20 border border-emerald-500/30 rounded-xl mb-6">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-semibold text-emerald-400">Next Micro-Token Ready for Burn</span>
+                    <span className="text-xs font-semibold text-emerald-400">
+                      Next Micro-Token Ready for Burn
+                    </span>
                     <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-500/20 text-emerald-300">
-                      Token #{stats.nextBurnableToken.tokenIndex} of {stats.nextBurnableToken.totalInSubscription}
+                      Token #{stats.nextBurnableToken.tokenIndex} of{" "}
+                      {stats.nextBurnableToken.totalInSubscription}
                     </span>
                   </div>
-                  <div className="font-mono text-lg font-bold text-white mb-1">{stats.nextBurnableToken.tokenId}</div>
-                  <div className="text-xs text-neutral-400 font-mono break-all">{stats.nextBurnableToken.tokenHash}</div>
+                  <div className="font-mono text-lg font-bold text-white mb-1">
+                    {stats.nextBurnableToken.tokenId}
+                  </div>
+                  <div className="text-xs text-neutral-400 font-mono break-all">
+                    {stats.nextBurnableToken.tokenHash}
+                  </div>
                 </div>
               ) : (
                 <div className="p-4 bg-amber-950/20 border border-amber-500/30 rounded-xl mb-6 text-xs text-amber-300">
-                  No active burnable tokens available in your ledger. Please mint a new subscription pass.
+                  No active burnable tokens available in your ledger. Please mint a new subscription
+                  pass.
                 </div>
               )}
 
@@ -406,7 +450,8 @@ export const MealTokenLedgerModal: React.FC<MealTokenLedgerModalProps> = ({
                 Cryptographic Micro-Token Security Seal Inspector
               </h4>
               <p className="text-xs text-neutral-400 mb-6">
-                Every daily meal token is sealed with a deterministic SHA-256 cryptographic signature, preventing token duplication, fraud, or screenshot reuse.
+                Every daily meal token is sealed with a deterministic SHA-256 cryptographic
+                signature, preventing token duplication, fraud, or screenshot reuse.
               </p>
 
               {selectedToken ? (
@@ -417,7 +462,9 @@ export const MealTokenLedgerModal: React.FC<MealTokenLedgerModalProps> = ({
                   </div>
                   <div className="flex items-center justify-between border-b border-neutral-800 pb-2">
                     <span className="text-xs text-neutral-400">Subscription ID</span>
-                    <span className="font-mono text-neutral-300">{selectedToken.subscriptionId}</span>
+                    <span className="font-mono text-neutral-300">
+                      {selectedToken.subscriptionId}
+                    </span>
                   </div>
                   <div className="flex items-center justify-between border-b border-neutral-800 pb-2">
                     <span className="text-xs text-neutral-400">Passbook Index</span>
@@ -427,7 +474,9 @@ export const MealTokenLedgerModal: React.FC<MealTokenLedgerModalProps> = ({
                   </div>
                   <div className="flex items-center justify-between border-b border-neutral-800 pb-2">
                     <span className="text-xs text-neutral-400">Cryptographic Signature</span>
-                    <span className="font-mono text-xs text-emerald-300 break-all">{selectedToken.tokenHash}</span>
+                    <span className="font-mono text-xs text-emerald-300 break-all">
+                      {selectedToken.tokenHash}
+                    </span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-xs text-neutral-400">Signature Status</span>
@@ -438,7 +487,8 @@ export const MealTokenLedgerModal: React.FC<MealTokenLedgerModalProps> = ({
                 </div>
               ) : (
                 <div className="p-6 text-center bg-neutral-900 rounded-xl border border-neutral-800 text-neutral-400 text-xs">
-                  Click any micro-token card in the Passbook tab to inspect its SHA-256 seal signature.
+                  Click any micro-token card in the Passbook tab to inspect its SHA-256 seal
+                  signature.
                 </div>
               )}
             </div>
@@ -453,12 +503,15 @@ export const MealTokenLedgerModal: React.FC<MealTokenLedgerModalProps> = ({
               Mint New Kitchen Meal Token Subscription
             </h4>
             <p className="text-xs text-neutral-400 mb-6">
-              Create a fresh cryptographic token stack for student meal passes (7-Day Trial, 30-Day Monthly, or 10-Pack Flex).
+              Create a fresh cryptographic token stack for student meal passes (7-Day Trial, 30-Day
+              Monthly, or 10-Pack Flex).
             </p>
 
             <div className="grid md:grid-cols-2 gap-4 mb-6">
               <div>
-                <label className="text-xs text-neutral-400 block mb-1.5 font-semibold">Select Meal Tier</label>
+                <label className="text-xs text-neutral-400 block mb-1.5 font-semibold">
+                  Select Meal Tier
+                </label>
                 <select
                   value={mintTier}
                   onChange={(e) => setMintTier(e.target.value)}
@@ -472,13 +525,17 @@ export const MealTokenLedgerModal: React.FC<MealTokenLedgerModalProps> = ({
               </div>
 
               <div>
-                <label className="text-xs text-neutral-400 block mb-1.5 font-semibold">Select Subscription Package</label>
+                <label className="text-xs text-neutral-400 block mb-1.5 font-semibold">
+                  Select Subscription Package
+                </label>
                 <select
                   value={mintPackage}
                   onChange={(e) => setMintPackage(e.target.value as PackageType)}
                   className="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500"
                 >
-                  <option value="MONTHLY_30_DAY">30-Day Monthly Subscription (30 Micro-Tokens)</option>
+                  <option value="MONTHLY_30_DAY">
+                    30-Day Monthly Subscription (30 Micro-Tokens)
+                  </option>
                   <option value="TRIAL_7_DAY">7-Day Trial Pass (14 Micro-Tokens)</option>
                   <option value="FLEX_10_PACK">10-Pack Flex Pass (10 Micro-Tokens)</option>
                 </select>

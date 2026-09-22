@@ -48,7 +48,7 @@ export class GSDRunner {
 
   async startPipeline(
     pipelineName: string,
-    handlers?: { onTaskFail?: (taskName: string, err: Error) => void }
+    handlers?: { onTaskFail?: (taskName: string, err: Error) => void },
   ): Promise<void> {
     // Starts the designated pipeline cleanly
     return Promise.resolve();

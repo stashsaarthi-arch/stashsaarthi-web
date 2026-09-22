@@ -208,7 +208,8 @@ export const FooterSection = memo(function FooterSection() {
 
     const cleanEmail = email.trim();
     const cleanPhone = phone.trim();
-    const cleanName = fullName.trim() || (userType === "student" ? "Priority Student" : "Priority Host");
+    const cleanName =
+      fullName.trim() || (userType === "student" ? "Priority Student" : "Priority Host");
 
     // Require at least 1 contact method (Email OR Phone)
     if (!cleanEmail && !cleanPhone) {
@@ -286,206 +287,205 @@ export const FooterSection = memo(function FooterSection() {
       }}
       className="glass mx-auto mt-4 max-w-xl rounded-2xl p-3.5 sm:p-4 text-left"
     >
-            {/* User Type Toggle */}
-            <div className="mb-3 flex items-center justify-center gap-2">
-              <button
-                type="button"
-                onClick={() => setUserType("student")}
-                className={`rounded-full border px-3.5 py-1 text-xs font-semibold transition cursor-pointer ${
-                  userType === "student"
-                    ? "border-cyan/50 bg-cyan/15 text-foreground"
-                    : "border-white/10 bg-white/5 text-muted-foreground hover:border-white/25"
-                }`}
-              >
-                🎓 {t.footer.student}
-              </button>
-              <button
-                type="button"
-                onClick={() => setUserType("host")}
-                className={`rounded-full border px-3.5 py-1 text-xs font-semibold transition cursor-pointer ${
-                  userType === "host"
-                    ? "border-amber/50 bg-amber/15 text-foreground"
-                    : "border-white/10 bg-white/5 text-muted-foreground hover:border-white/25"
-                }`}
-              >
-                🏠 {t.footer.host}
-              </button>
-            </div>
+      {/* User Type Toggle */}
+      <div className="mb-3 flex items-center justify-center gap-2">
+        <button
+          type="button"
+          onClick={() => setUserType("student")}
+          className={`rounded-full border px-3.5 py-1 text-xs font-semibold transition cursor-pointer ${
+            userType === "student"
+              ? "border-cyan/50 bg-cyan/15 text-foreground"
+              : "border-white/10 bg-white/5 text-muted-foreground hover:border-white/25"
+          }`}
+        >
+          🎓 {t.footer.student}
+        </button>
+        <button
+          type="button"
+          onClick={() => setUserType("host")}
+          className={`rounded-full border px-3.5 py-1 text-xs font-semibold transition cursor-pointer ${
+            userType === "host"
+              ? "border-amber/50 bg-amber/15 text-foreground"
+              : "border-white/10 bg-white/5 text-muted-foreground hover:border-white/25"
+          }`}
+        >
+          🏠 {t.footer.host}
+        </button>
+      </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-left">
-              {/* Full Name */}
-              <div className="relative">
-                <User className="absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
-                <Input
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                  onBlur={() => setTouched((t) => ({ ...t, name: true }))}
-                  disabled={submitting}
-                  placeholder={t.footer.name}
-                  className={`h-9 border-white/10 bg-white/5 pl-8 pr-7 text-xs focus-visible:ring-1 disabled:opacity-60 ${touched.name && !isNameValid ? "border-destructive/60" : touched.name && isNameValid ? "border-emerald-500/50" : ""}`}
-                />
-                {touched.name && (
-                  <div className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none">
-                    {isNameValid ? (
-                      <Check className="h-3.5 w-3.5 text-emerald-400" />
-                    ) : (
-                      <AlertCircle className="h-3.5 w-3.5 text-destructive" />
-                    )}
-                  </div>
-                )}
-              </div>
-
-              {/* Email */}
-              <div className="relative">
-                <Mail className="absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
-                <Input
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  onBlur={() => setTouched((t) => ({ ...t, email: true }))}
-                  disabled={submitting}
-                  placeholder={t.footer.email}
-                  type="email"
-                  className={`h-9 border-white/10 bg-white/5 pl-8 pr-7 text-xs focus-visible:ring-1 disabled:opacity-60 ${touched.email && !isEmailValid ? "border-destructive/60" : touched.email && isEmailValid ? "border-emerald-500/50" : ""}`}
-                />
-                {touched.email && (
-                  <div className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none">
-                    {isEmailValid ? (
-                      <Check className="h-3.5 w-3.5 text-emerald-400" />
-                    ) : (
-                      <AlertCircle className="h-3.5 w-3.5 text-destructive" />
-                    )}
-                  </div>
-                )}
-              </div>
-
-              {/* Phone */}
-              <div className="relative">
-                <Phone className="absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
-                <Input
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  onBlur={() => setTouched((t) => ({ ...t, phone: true }))}
-                  disabled={submitting}
-                  placeholder={t.footer.phone}
-                  type="tel"
-                  className={`h-9 border-white/10 bg-white/5 pl-8 pr-7 text-xs focus-visible:ring-1 disabled:opacity-60 ${touched.phone && !isPhoneValid && phone.trim() ? "border-destructive/60" : touched.phone && isPhoneValid ? "border-emerald-500/50" : ""}`}
-                />
-                {touched.phone && phone.trim() && (
-                  <div className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none">
-                    {isPhoneValid ? (
-                      <Check className="h-3.5 w-3.5 text-emerald-400" />
-                    ) : (
-                      <AlertCircle className="h-3.5 w-3.5 text-destructive" />
-                    )}
-                  </div>
-                )}
-              </div>
-
-              {/* College / Locality */}
-              <div className="relative">
-                <GraduationCap className="absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
-                <Input
-                  value={college}
-                  onChange={(e) => setCollege(e.target.value)}
-                  disabled={submitting}
-                  placeholder={
-                    userType === "student"
-                      ? isHi
-                        ? "कॉलेज / परिसर (वैकल्पिक)"
-                        : "College / Campus (Optional)"
-                      : isHi
-                        ? "इलाका / शहर (वैकल्पिक)"
-                        : "Locality / City (Optional)"
-                  }
-                  className="h-9 border-white/10 bg-white/5 pl-8 text-xs focus-visible:ring-1 disabled:opacity-60"
-                />
-              </div>
-
-              {/* TPA Waiver Checkbox for Hosts */}
-              {userType === "host" && (
-                <div className="col-span-full flex items-start gap-2 text-left pt-0.5">
-                  <input
-                    type="checkbox"
-                    id="waiver"
-                    checked={waiverAccepted}
-                    onChange={(e) => setWaiverAccepted(e.target.checked)}
-                    className="mt-0.5 h-3.5 w-3.5 rounded border-white/20 bg-white/5 accent-amber-500 cursor-pointer"
-                  />
-                  <label
-                    htmlFor="waiver"
-                    className="text-[10px] text-muted-foreground leading-tight cursor-pointer"
-                  >
-                    {isHi ? (
-                      <>
-                        मैं स्वीकार करता/करती हूं कि यह संपत्ति अधिनियम (TPA 1882) की धारा 105 के
-                        तहत वैध लाइसेंस समझौता है।
-                      </>
-                    ) : (
-                      <>
-                        I acknowledge the standard legal protection under Sec 105 Transfer of
-                        Property Act 1882 for verified hosts.
-                      </>
-                    )}
-                  </label>
-                </div>
-              )}
-            </div>
-
-            {/* Referral Pill */}
-            <div className="mt-2">
-              <ReferralPill />
-            </div>
-
-            {/* Submit Button */}
-            <Button
-              type="submit"
-              variant={userType === "host" ? "warm" : "hero"}
-              size="default"
-              className="mt-3 w-full min-h-[48px] h-12 text-xs font-bold cursor-pointer"
-              disabled={submitting}
-            >
-              {submitting ? (
-                <span className="flex items-center gap-2">
-                  <Loader2 className="h-4 w-4 animate-spin" />{" "}
-                  {isHi ? "सहेज रहा है…" : "Submitting…"}
-                </span>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-left">
+        {/* Full Name */}
+        <div className="relative">
+          <User className="absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
+          <Input
+            value={fullName}
+            onChange={(e) => setFullName(e.target.value)}
+            onBlur={() => setTouched((t) => ({ ...t, name: true }))}
+            disabled={submitting}
+            placeholder={t.footer.name}
+            className={`h-9 border-white/10 bg-white/5 pl-8 pr-7 text-xs focus-visible:ring-1 disabled:opacity-60 ${touched.name && !isNameValid ? "border-destructive/60" : touched.name && isNameValid ? "border-emerald-500/50" : ""}`}
+          />
+          {touched.name && (
+            <div className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none">
+              {isNameValid ? (
+                <Check className="h-3.5 w-3.5 text-emerald-400" />
               ) : (
-                t.footer.submit
+                <AlertCircle className="h-3.5 w-3.5 text-destructive" />
               )}
-            </Button>
+            </div>
+          )}
+        </div>
 
-            {/* Google Sign-in Alternative */}
-            {!user && (
-              <div className="mt-2.5">
-                <div className="relative my-2">
-                  <div className="absolute inset-0 flex items-center">
-                    <span className="w-full border-t border-white/10" />
-                  </div>
-                  <div className="relative flex justify-center text-[9px] uppercase">
-                    <span className="bg-background px-2 text-muted-foreground">
-                      {isHi ? "या 1-क्लिक गूगल साइन-इन" : "or 1-click Google"}
-                    </span>
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => handleGoogleWaitlist()}
-                  className="flex min-h-[48px] h-12 w-full items-center justify-center gap-2.5 rounded-xl border border-white/10 bg-white/5 text-xs font-semibold text-foreground transition hover:bg-white/10 active:scale-[0.98] cursor-pointer"
-                >
-                  <GoogleGlyph />
-                  <span>{isHi ? "गूगल से तुरंत जुड़ें" : "Quick join with Google"}</span>
-                </button>
-              </div>
-            )}
+        {/* Email */}
+        <div className="relative">
+          <Mail className="absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
+          <Input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            onBlur={() => setTouched((t) => ({ ...t, email: true }))}
+            disabled={submitting}
+            placeholder={t.footer.email}
+            type="email"
+            className={`h-9 border-white/10 bg-white/5 pl-8 pr-7 text-xs focus-visible:ring-1 disabled:opacity-60 ${touched.email && !isEmailValid ? "border-destructive/60" : touched.email && isEmailValid ? "border-emerald-500/50" : ""}`}
+          />
+          {touched.email && (
+            <div className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none">
+              {isEmailValid ? (
+                <Check className="h-3.5 w-3.5 text-emerald-400" />
+              ) : (
+                <AlertCircle className="h-3.5 w-3.5 text-destructive" />
+              )}
+            </div>
+          )}
+        </div>
 
-            {/* Micro-Trust Note */}
-            <p className="mt-2 text-xs text-muted-foreground">
-              🔒{" "}
-              {isHi
-                ? "शून्य स्पैम। केवल आपके शहर में नोड्स लाइव होने पर अलर्ट।"
-                : "Zero spam. Only alerts when nodes go live in your campus area."}
-            </p>
-          </form>
+        {/* Phone */}
+        <div className="relative">
+          <Phone className="absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
+          <Input
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            onBlur={() => setTouched((t) => ({ ...t, phone: true }))}
+            disabled={submitting}
+            placeholder={t.footer.phone}
+            type="tel"
+            className={`h-9 border-white/10 bg-white/5 pl-8 pr-7 text-xs focus-visible:ring-1 disabled:opacity-60 ${touched.phone && !isPhoneValid && phone.trim() ? "border-destructive/60" : touched.phone && isPhoneValid ? "border-emerald-500/50" : ""}`}
+          />
+          {touched.phone && phone.trim() && (
+            <div className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none">
+              {isPhoneValid ? (
+                <Check className="h-3.5 w-3.5 text-emerald-400" />
+              ) : (
+                <AlertCircle className="h-3.5 w-3.5 text-destructive" />
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* College / Locality */}
+        <div className="relative">
+          <GraduationCap className="absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
+          <Input
+            value={college}
+            onChange={(e) => setCollege(e.target.value)}
+            disabled={submitting}
+            placeholder={
+              userType === "student"
+                ? isHi
+                  ? "कॉलेज / परिसर (वैकल्पिक)"
+                  : "College / Campus (Optional)"
+                : isHi
+                  ? "इलाका / शहर (वैकल्पिक)"
+                  : "Locality / City (Optional)"
+            }
+            className="h-9 border-white/10 bg-white/5 pl-8 text-xs focus-visible:ring-1 disabled:opacity-60"
+          />
+        </div>
+
+        {/* TPA Waiver Checkbox for Hosts */}
+        {userType === "host" && (
+          <div className="col-span-full flex items-start gap-2 text-left pt-0.5">
+            <input
+              type="checkbox"
+              id="waiver"
+              checked={waiverAccepted}
+              onChange={(e) => setWaiverAccepted(e.target.checked)}
+              className="mt-0.5 h-3.5 w-3.5 rounded border-white/20 bg-white/5 accent-amber-500 cursor-pointer"
+            />
+            <label
+              htmlFor="waiver"
+              className="text-[10px] text-muted-foreground leading-tight cursor-pointer"
+            >
+              {isHi ? (
+                <>
+                  मैं स्वीकार करता/करती हूं कि यह संपत्ति अधिनियम (TPA 1882) की धारा 105 के तहत वैध
+                  लाइसेंस समझौता है।
+                </>
+              ) : (
+                <>
+                  I acknowledge the standard legal protection under Sec 105 Transfer of Property Act
+                  1882 for verified hosts.
+                </>
+              )}
+            </label>
+          </div>
+        )}
+      </div>
+
+      {/* Referral Pill */}
+      <div className="mt-2">
+        <ReferralPill />
+      </div>
+
+      {/* Submit Button */}
+      <Button
+        type="submit"
+        variant={userType === "host" ? "warm" : "hero"}
+        size="default"
+        className="mt-3 w-full min-h-[48px] h-12 text-xs font-bold cursor-pointer"
+        disabled={submitting}
+      >
+        {submitting ? (
+          <span className="flex items-center gap-2">
+            <Loader2 className="h-4 w-4 animate-spin" /> {isHi ? "सहेज रहा है…" : "Submitting…"}
+          </span>
+        ) : (
+          t.footer.submit
+        )}
+      </Button>
+
+      {/* Google Sign-in Alternative */}
+      {!user && (
+        <div className="mt-2.5">
+          <div className="relative my-2">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t border-white/10" />
+            </div>
+            <div className="relative flex justify-center text-[9px] uppercase">
+              <span className="bg-background px-2 text-muted-foreground">
+                {isHi ? "या 1-क्लिक गूगल साइन-इन" : "or 1-click Google"}
+              </span>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={() => handleGoogleWaitlist()}
+            className="flex min-h-[48px] h-12 w-full items-center justify-center gap-2.5 rounded-xl border border-white/10 bg-white/5 text-xs font-semibold text-foreground transition hover:bg-white/10 active:scale-[0.98] cursor-pointer"
+          >
+            <GoogleGlyph />
+            <span>{isHi ? "गूगल से तुरंत जुड़ें" : "Quick join with Google"}</span>
+          </button>
+        </div>
+      )}
+
+      {/* Micro-Trust Note */}
+      <p className="mt-2 text-xs text-muted-foreground">
+        🔒{" "}
+        {isHi
+          ? "शून्य स्पैम। केवल आपके शहर में नोड्स लाइव होने पर अलर्ट।"
+          : "Zero spam. Only alerts when nodes go live in your campus area."}
+      </p>
+    </form>
   );
 
   return (
@@ -537,10 +537,15 @@ export const FooterSection = memo(function FooterSection() {
       {/* ── Mobile Compact Directory Accordion (< md) ── */}
       <div className="block md:hidden mx-auto max-w-xl px-4 py-2">
         <Accordion type="single" collapsible className="w-full">
-          <AccordionItem value="directory" className="border-white/10 rounded-xl bg-white/[0.02] px-3">
+          <AccordionItem
+            value="directory"
+            className="border-white/10 rounded-xl bg-white/[0.02] px-3"
+          >
             <AccordionTrigger className="text-xs font-bold text-muted-foreground hover:text-white py-2.5">
               <span className="flex items-center gap-2">
-                <span>📁 {isHi ? "स्टैशसारथी निर्देशिका व नीतियां" : "Directory, Ecosystem & Legal"}</span>
+                <span>
+                  📁 {isHi ? "स्टैशसारथी निर्देशिका व नीतियां" : "Directory, Ecosystem & Legal"}
+                </span>
                 <span className="text-[9px] bg-white/10 text-slate-300 px-1.5 py-0.5 rounded">
                   {isHi ? "विस्तार करें" : "Expand"}
                 </span>
@@ -550,22 +555,34 @@ export const FooterSection = memo(function FooterSection() {
               <div className="grid grid-cols-2 gap-4 text-left">
                 {/* Ecosystem Links */}
                 <div>
-                  <h4 className="text-xs font-bold text-white mb-2">{isHi ? "इकोसिस्टम" : "Ecosystem"}</h4>
+                  <h4 className="text-xs font-bold text-white mb-2">
+                    {isHi ? "इकोसिस्टम" : "Ecosystem"}
+                  </h4>
                   <ul className="space-y-1.5 text-xs text-muted-foreground">
                     {ECOSYSTEM.map((l) => (
                       <li key={l.label}>
-                        <a href={`#${l.target}`} onClick={smoothScrollTo(l.target)} className="hover:text-cyan block py-0.5">
+                        <a
+                          href={`#${l.target}`}
+                          onClick={smoothScrollTo(l.target)}
+                          className="hover:text-cyan block py-0.5"
+                        >
                           {l.label}
                         </a>
                       </li>
                     ))}
                     <li>
-                      <Link to="/kanpur-student-council" className="text-cyan-400 font-semibold block py-0.5">
+                      <Link
+                        to="/kanpur-student-council"
+                        className="text-cyan-400 font-semibold block py-0.5"
+                      >
                         {isHi ? "🏛️ छात्र परिषद" : "🏛️ Student Council"}
                       </Link>
                     </li>
                     <li>
-                      <Link to="/kakadeo-survival-guide" className="text-emerald-400 font-semibold block py-0.5">
+                      <Link
+                        to="/kakadeo-survival-guide"
+                        className="text-emerald-400 font-semibold block py-0.5"
+                      >
                         {isHi ? "काकादेव गाइड (PDF)" : "Kakadeo Guide (PDF)"}
                       </Link>
                     </li>
@@ -573,18 +590,32 @@ export const FooterSection = memo(function FooterSection() {
                 </div>
                 {/* Legal & Company */}
                 <div>
-                  <h4 className="text-xs font-bold text-white mb-2">{isHi ? "कंपनी व कानूनी" : "Company & Legal"}</h4>
+                  <h4 className="text-xs font-bold text-white mb-2">
+                    {isHi ? "कंपनी व कानूनी" : "Company & Legal"}
+                  </h4>
                   <ul className="space-y-1.5 text-xs text-muted-foreground">
                     {COMPANY.map((l) => (
                       <li key={l.label}>
-                        <button type="button" onClick={() => { if (l.doc) setDoc(l.doc); }} className="hover:text-cyan text-left block py-0.5">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            if (l.doc) setDoc(l.doc);
+                          }}
+                          className="hover:text-cyan text-left block py-0.5"
+                        >
                           {l.label}
                         </button>
                       </li>
                     ))}
                     {LEGAL.map((l) => (
                       <li key={l.label}>
-                        <button type="button" onClick={() => { if (l.doc) setDoc(l.doc); }} className="hover:text-cyan text-left block py-0.5">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            if (l.doc) setDoc(l.doc);
+                          }}
+                          className="hover:text-cyan text-left block py-0.5"
+                        >
                           {l.label}
                         </button>
                       </li>

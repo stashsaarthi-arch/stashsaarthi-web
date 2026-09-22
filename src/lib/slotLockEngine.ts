@@ -1,6 +1,6 @@
 /**
  * StashSaarthi Autonomous System — Slot Lock & Overbooking Prevention Engine
- * 
+ *
  * QA Directive (Task 120)
  * Provides atomic concurrency guards and slot locking to prevent overbooking
  * of micro-storage box slots, co-living rooms, and kitchen meal tokens under high load.
@@ -60,7 +60,7 @@ function initNodeCapacities() {
  */
 function cleanupExpiredLocks(capacity: NodeSlotCapacity, now = Date.now()): void {
   capacity.activeLocks = capacity.activeLocks.filter(
-    (lock) => lock.status === "locked" && lock.expiresAt > now
+    (lock) => lock.status === "locked" && lock.expiresAt > now,
   );
 }
 
@@ -109,7 +109,7 @@ export interface AcquireLockResult {
 export function tryAcquireSlotLock(
   nodeId: string,
   userId: string,
-  ttlMs = DEFAULT_LOCK_TTL_MS
+  ttlMs = DEFAULT_LOCK_TTL_MS,
 ): AcquireLockResult {
   initNodeCapacities();
   const capacity = nodeCapacitiesMap.get(nodeId);
@@ -163,7 +163,9 @@ export function confirmSlotBookingWithLock(nodeId: string, lockToken: string): b
   const capacity = nodeCapacitiesMap.get(nodeId);
   if (!capacity) return false;
 
-  const lockIndex = capacity.activeLocks.findIndex((l) => l.lockToken === lockToken && l.status === "locked");
+  const lockIndex = capacity.activeLocks.findIndex(
+    (l) => l.lockToken === lockToken && l.status === "locked",
+  );
   if (lockIndex === -1) return false;
 
   // Convert lock into permanent booking slot
@@ -190,7 +192,11 @@ export function releaseSlotLock(nodeId: string, lockToken: string): boolean {
 /**
  * Resets node capacity for test harness purposes.
  */
-export function resetNodeSlotCapacity(nodeId: string, totalSlots: number, bookedSlots: number): void {
+export function resetNodeSlotCapacity(
+  nodeId: string,
+  totalSlots: number,
+  bookedSlots: number,
+): void {
   nodeCapacitiesMap.set(nodeId, {
     nodeId,
     nodeName: "Test Node",
@@ -206,7 +212,7 @@ export function resetNodeSlotCapacity(nodeId: string, totalSlots: number, booked
  */
 export async function simulateConcurrentBookingRequests(
   nodeId: string,
-  concurrentUserCount: number
+  concurrentUserCount: number,
 ): Promise<{
   totalRequests: number;
   successfulAcquires: number;

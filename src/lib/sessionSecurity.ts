@@ -49,7 +49,7 @@ export function decodeJwtPayload(token: string): JwtClaims | null {
       atob(base64)
         .split("")
         .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
-        .join("")
+        .join(""),
     );
 
     return JSON.parse(jsonPayload) as JwtClaims;
@@ -149,7 +149,10 @@ export function auditSessionSecurity(session: Session | null): SessionSecurityAu
  */
 export async function ensureValidSession(): Promise<Session | null> {
   try {
-    const { data: { session }, error } = await supabase.auth.getSession();
+    const {
+      data: { session },
+      error,
+    } = await supabase.auth.getSession();
 
     if (error || !session) {
       return null;
@@ -158,7 +161,9 @@ export async function ensureValidSession(): Promise<Session | null> {
     const audit = auditSessionSecurity(session);
 
     if (audit.isExpiringSoon || !audit.isValid) {
-      console.info("[SessionSecurity] Session token expiring soon or invalid. Requesting proactive token refresh...");
+      console.info(
+        "[SessionSecurity] Session token expiring soon or invalid. Requesting proactive token refresh...",
+      );
       const { data: refreshedData, error: refreshError } = await supabase.auth.refreshSession();
 
       if (refreshError || !refreshedData.session) {
@@ -172,7 +177,10 @@ export async function ensureValidSession(): Promise<Session | null> {
         return null;
       }
 
-      console.info("[SessionSecurity] Session token proactively refreshed for user:", refreshedData.session.user.id);
+      console.info(
+        "[SessionSecurity] Session token proactively refreshed for user:",
+        refreshedData.session.user.id,
+      );
       return refreshedData.session;
     }
 
@@ -188,9 +196,11 @@ export async function ensureValidSession(): Promise<Session | null> {
  */
 export function initSessionSecurityListener(
   onTokenRefreshed?: (session: Session) => void,
-  onSignedOut?: () => void
+  onSignedOut?: () => void,
 ): { unsubscribe: () => void } {
-  const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event: AuthChangeEvent, session: Session | null) => {
+  const {
+    data: { subscription },
+  } = supabase.auth.onAuthStateChange(async (event: AuthChangeEvent, session: Session | null) => {
     console.info(`[SessionSecurity] Auth state event triggered: ${event}`);
 
     switch (event) {

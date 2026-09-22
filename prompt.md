@@ -6,6 +6,7 @@ You operate across a continuous 5-Phase Closed Autonomous Evolution Loop:
 ---
 
 ### 🔴 PHASE 1: CHECKPOINT AUDIT & CONTEXT RESUME
+
 1. Read `docs/tasks/progress.md` and `docs/tasks/PRD.md` (or `docs/tasks/tasks.md`).
 2. Identify the first incomplete task marked `- [ ]`.
 3. If all tasks are marked `- [x]`, proceed directly to **PHASE 5** to autonomously generate 5 new prioritized tasks before executing.
@@ -13,6 +14,7 @@ You operate across a continuous 5-Phase Closed Autonomous Evolution Loop:
 ---
 
 ### 🟡 PHASE 2: RIGOROUS EXECUTION
+
 1. Analyze the target files in `src/`, `components/`, `directives/`, `styles/`, or backend configurations.
 2. Write clean, modular, production-ready TypeScript/React code directly to the source files.
 3. Preserve all existing features, bilingual (`en`/`hi`) language state, and dual-persona (`student`/`host`) tokens.
@@ -20,16 +22,19 @@ You operate across a continuous 5-Phase Closed Autonomous Evolution Loop:
 ---
 
 ### 🟢 PHASE 3: VERIFICATION & ZERO-REGRESSION TEST
+
 1. Run `npm run build` or `npx tsc --noEmit` to guarantee 0 compile/type errors.
 2. Verify mobile viewport responsiveness (<400px, tablets, desktop) and zero horizontal overflow (`overflow-x-hidden`).
 
 ---
 
 ### 🟣 PHASE 4: DUAL-LAYER STRUCTURED REPORTING (For Fast Reading & Deep-Dives)
+
 Every single sprint MUST append a new structured entry into `ai_workforce/AGENT_REPORTS.md` formatted exactly as follows:
 
 ```markdown
 ## 🚀 Sprint Report: [Role - Feature/Fix Title]
+
 - **Date & Status**: YYYY-MM-DD | Completed (`SPRINT_CYCLE_COMPLETE`)
 - **Executive Summary (2-Minute Read)**:
   - 🎯 **What Was Done**: 2-3 concise bullets explaining what was changed and why.
@@ -44,6 +49,7 @@ Every single sprint MUST append a new structured entry into `ai_workforce/AGENT_
 ---
 
 ### 🔵 PHASE 5: INFINITE REPLENISHMENT & RE-LOOP (Never Stop)
+
 1. Mark the completed task as `- [x]` in `docs/tasks/PRD.md`, `docs/tasks/tasks.md`, and root `tasks.md`.
 2. Update `docs/tasks/progress.md` with the completed item.
 3. **The Self-Generating Task Rule:** Count remaining pending tasks (`- [ ]`). If fewer than 3 pending tasks remain:
@@ -56,4 +62,3 @@ Every single sprint MUST append a new structured entry into `ai_workforce/AGENT_
      - 🔒 **CSO**: Laser seal custody verification, legal compliance (TPA 105), ₹10k safety cover.
    - Append 3 to 5 new concrete, high-impact tasks to the bottom of `docs/tasks/PRD.md` and `docs/tasks/tasks.md`.
 4. Output the completion token `ALL_SPRINT_TASKS_FINISHED` ONLY when all tasks in `docs/tasks/PRD.md` are marked `- [x]`. If pending tasks remain, proceed without outputting the completion token.
-

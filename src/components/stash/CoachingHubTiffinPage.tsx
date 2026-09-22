@@ -17,7 +17,7 @@ import {
   HeartHandshake,
   Flame,
   Check,
-  Share2
+  Share2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BrandLogo } from "@/components/ui/BrandLogo";
@@ -26,7 +26,10 @@ import { useLanguage } from "@/context/LanguageContext";
 import { FOUNDER_WHATSAPP, FOUNDER_PHONE_DISPLAY } from "@/lib/constants";
 import { BookingModal } from "@/components/stash/BookingModal";
 import { FooterSection } from "@/components/stash/FooterSection";
-import { RoommateMenuShareModal, MenuShareDetails } from "@/components/stash/RoommateMenuShareModal";
+import {
+  RoommateMenuShareModal,
+  MenuShareDetails,
+} from "@/components/stash/RoommateMenuShareModal";
 import { showRateLimitToast } from "@/lib/rateLimiter";
 import { toast } from "sonner";
 import { DeliveryCutoffCountdown } from "@/components/stash/DeliveryCutoffCountdown";
@@ -63,7 +66,9 @@ export function CoachingHubTiffinPage({ config }: { config: HubConfig }) {
   const [selectedSlot, setSelectedSlot] = useState<"lunch" | "dinner">("lunch");
   const [selectedTier, setSelectedTier] = useState<"standard" | "feast">("standard");
   const [isRoommateShareOpen, setIsRoommateShareOpen] = useState<boolean>(false);
-  const [roommateShareDetails, setRoommateShareDetails] = useState<MenuShareDetails | undefined>(undefined);
+  const [roommateShareDetails, setRoommateShareDetails] = useState<MenuShareDetails | undefined>(
+    undefined,
+  );
 
   const isHindi = language === "hi";
 
@@ -77,11 +82,13 @@ export function CoachingHubTiffinPage({ config }: { config: HubConfig }) {
 
   const handleShare = () => {
     if (navigator.share) {
-      navigator.share({
-        title: config.metaTitle,
-        text: config.metaDescription,
-        url: window.location.href,
-      }).catch(() => {});
+      navigator
+        .share({
+          title: config.metaTitle,
+          text: config.metaDescription,
+          url: window.location.href,
+        })
+        .catch(() => {});
     } else {
       navigator.clipboard.writeText(window.location.href);
       toast.success(isHindi ? "लिंक कॉपी हो गया!" : "Link copied to clipboard!");
@@ -174,7 +181,8 @@ export function CoachingHubTiffinPage({ config }: { config: HubConfig }) {
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
                 <MapPin className="w-3.5 h-3.5 animate-bounce" />
                 <span>
-                  {config.distance} ({config.walkingTime}) {isHindi ? "काकादेव" : "from"} {config.coachingName}
+                  {config.distance} ({config.walkingTime}) {isHindi ? "काकादेव" : "from"}{" "}
+                  {config.coachingName}
                 </span>
               </div>
 
@@ -210,7 +218,9 @@ export function CoachingHubTiffinPage({ config }: { config: HubConfig }) {
                       {isHindi ? "100% माँ के हाथ का खाना" : "100% Verified PG Owner Mother Cooked"}
                     </div>
                     <div className="text-[11px] text-slate-400">
-                      {isHindi ? "शुद्ध देसी घी रोटी & 0 पाम ऑयल" : "Pure Desi Ghee & Zero Palm Oil"}
+                      {isHindi
+                        ? "शुद्ध देसी घी रोटी & 0 पाम ऑयल"
+                        : "Pure Desi Ghee & Zero Palm Oil"}
                     </div>
                   </div>
                 </div>
@@ -234,7 +244,9 @@ export function CoachingHubTiffinPage({ config }: { config: HubConfig }) {
                       {isHindi ? "कभी भी पॉज़ करें" : "Pause Meal Anytime"}
                     </div>
                     <div className="text-[11px] text-slate-400">
-                      {isHindi ? "एग्जाम या घर जाते समय 1-टैप पॉज़" : "1-Tap Pause for Test Series / Home"}
+                      {isHindi
+                        ? "एग्जाम या घर जाते समय 1-टैप पॉज़"
+                        : "1-Tap Pause for Test Series / Home"}
                     </div>
                   </div>
                 </div>
@@ -304,7 +316,9 @@ export function CoachingHubTiffinPage({ config }: { config: HubConfig }) {
                       <h3 className="font-bold text-white text-base">{config.chefName}</h3>
                       <p className="text-xs text-slate-400 flex items-center gap-1">
                         <MapPin className="w-3 h-3 text-emerald-400" />
-                        <span>{config.distance} {isHindi ? "काकादेव" : "from"} {config.coachingName}</span>
+                        <span>
+                          {config.distance} {isHindi ? "काकादेव" : "from"} {config.coachingName}
+                        </span>
                       </p>
                     </div>
                   </div>
@@ -314,7 +328,9 @@ export function CoachingHubTiffinPage({ config }: { config: HubConfig }) {
                       <Star className="w-3 h-3 fill-emerald-400 text-emerald-400" />
                       <span>{config.rating}</span>
                     </div>
-                    <div className="text-[10px] text-slate-400 mt-1">{config.totalOrders} {isHindi ? "ऑर्डर" : "orders"}</div>
+                    <div className="text-[10px] text-slate-400 mt-1">
+                      {config.totalOrders} {isHindi ? "ऑर्डर" : "orders"}
+                    </div>
                   </div>
                 </div>
 
@@ -330,7 +346,9 @@ export function CoachingHubTiffinPage({ config }: { config: HubConfig }) {
                       <Flame className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
                       {isHindi ? "आज का लंच टोकन स्टेटस" : "Today's Lunch Tokens"}
                     </span>
-                    <span className="text-amber-400 font-bold text-xs">78% {isHindi ? "बुक हुआ (14 बाकी)" : "Sold (14 Left)"}</span>
+                    <span className="text-amber-400 font-bold text-xs">
+                      78% {isHindi ? "बुक हुआ (14 बाकी)" : "Sold (14 Left)"}
+                    </span>
                   </div>
                   <div className="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
                     <div className="bg-gradient-to-r from-emerald-500 via-amber-500 to-rose-500 h-full w-[78%] transition-all duration-500" />
@@ -359,7 +377,9 @@ export function CoachingHubTiffinPage({ config }: { config: HubConfig }) {
                   <div className="flex items-center gap-2">
                     <Sparkles className="w-4 h-4 text-emerald-400 shrink-0" />
                     <span className="text-xs font-bold text-emerald-200">
-                      {isHindi ? "कोड TASTE50: 1st थाली पर ₹50 छूट" : "Code TASTE50: Flat ₹50 Off 1st Thali"}
+                      {isHindi
+                        ? "कोड TASTE50: 1st थाली पर ₹50 छूट"
+                        : "Code TASTE50: Flat ₹50 Off 1st Thali"}
                     </span>
                   </div>
                   <span className="text-[10px] bg-emerald-500 text-slate-950 font-extrabold px-2 py-0.5 rounded">
@@ -404,7 +424,10 @@ export function CoachingHubTiffinPage({ config }: { config: HubConfig }) {
                   </span>
                   <div className="text-right">
                     <span className="text-2xl font-extrabold text-white">₹50</span>
-                    <span className="text-xs text-slate-400"> / {isHindi ? "पिकअप" : "pickup"}</span>
+                    <span className="text-xs text-slate-400">
+                      {" "}
+                      / {isHindi ? "पिकअप" : "pickup"}
+                    </span>
                   </div>
                 </div>
 
@@ -424,11 +447,15 @@ export function CoachingHubTiffinPage({ config }: { config: HubConfig }) {
                   </li>
                   <li className="flex items-center gap-2">
                     <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                    <span>1 {isHindi ? "कटोरी अरहर/मूंग दाल तड़का" : "Katori Arhar/Moong Dal Tadka"}</span>
+                    <span>
+                      1 {isHindi ? "कटोरी अरहर/मूंग दाल तड़का" : "Katori Arhar/Moong Dal Tadka"}
+                    </span>
                   </li>
                   <li className="flex items-center gap-2">
                     <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                    <span>1 {isHindi ? "सीज़नल ताज़ी सब्ज़ी (आलू गोभी/भिंडी)" : "Fresh Seasonal Subzi"}</span>
+                    <span>
+                      1 {isHindi ? "सीज़नल ताज़ी सब्ज़ी (आलू गोभी/भिंडी)" : "Fresh Seasonal Subzi"}
+                    </span>
                   </li>
                   <li className="flex items-center gap-2">
                     <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
@@ -484,7 +511,9 @@ export function CoachingHubTiffinPage({ config }: { config: HubConfig }) {
                   </li>
                   <li className="flex items-center gap-2">
                     <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                    <span>1 {isHindi ? "शाही पनीर / मलाई कोफ़्ता" : "Shahi Paneer / Malai Kofta"}</span>
+                    <span>
+                      1 {isHindi ? "शाही पनीर / मलाई कोफ़्ता" : "Shahi Paneer / Malai Kofta"}
+                    </span>
                   </li>
                   <li className="flex items-center gap-2">
                     <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
@@ -492,11 +521,15 @@ export function CoachingHubTiffinPage({ config }: { config: HubConfig }) {
                   </li>
                   <li className="flex items-center gap-2">
                     <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                    <span>{isHindi ? "मटका खीर या गुलाब जामुन" : "Matka Kheer or Gulab Jamun"}</span>
+                    <span>
+                      {isHindi ? "मटका खीर या गुलाब जामुन" : "Matka Kheer or Gulab Jamun"}
+                    </span>
                   </li>
                   <li className="flex items-center gap-2">
                     <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                    <span>{isHindi ? "पापड़, बूंदी रायता & सलाद" : "Papad, Boondi Raita & Salad"}</span>
+                    <span>
+                      {isHindi ? "पापड़, बूंदी रायता & सलाद" : "Papad, Boondi Raita & Salad"}
+                    </span>
                   </li>
                 </ul>
               </div>
@@ -536,7 +569,9 @@ export function CoachingHubTiffinPage({ config }: { config: HubConfig }) {
                 <ul className="space-y-2 text-xs text-slate-300">
                   <li className="flex items-center gap-2">
                     <Check className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
-                    <span>60 {isHindi ? "मील टोकन (लंच + डिनर)" : "Meal Tokens (Lunch + Dinner)"}</span>
+                    <span>
+                      60 {isHindi ? "मील टोकन (लंच + डिनर)" : "Meal Tokens (Lunch + Dinner)"}
+                    </span>
                   </li>
                   <li className="flex items-center gap-2">
                     <Check className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
@@ -544,11 +579,15 @@ export function CoachingHubTiffinPage({ config }: { config: HubConfig }) {
                   </li>
                   <li className="flex items-center gap-2">
                     <Check className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
-                    <span>{isHindi ? "अनलिमिटेड मील पॉज़ & रोलओवर" : "Unlimited Meal Pause & Rollover"}</span>
+                    <span>
+                      {isHindi ? "अनलिमिटेड मील पॉज़ & रोलओवर" : "Unlimited Meal Pause & Rollover"}
+                    </span>
                   </li>
                   <li className="flex items-center gap-2">
                     <Check className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
-                    <span>{isHindi ? "रविवार स्पेशल थॉली फ्री" : "Sunday Special Feast Included"}</span>
+                    <span>
+                      {isHindi ? "रविवार स्पेशल थॉली फ्री" : "Sunday Special Feast Included"}
+                    </span>
                   </li>
                   <li className="flex items-center gap-2">
                     <Check className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
@@ -583,8 +622,12 @@ export function CoachingHubTiffinPage({ config }: { config: HubConfig }) {
             </p>
 
             <div className="pt-2">
-              <div className="font-bold text-white text-sm">{config.highlightReview.studentName}</div>
-              <div className="text-xs text-emerald-400 font-medium">{config.highlightReview.targetExam} • {config.coachingName} Kakadeo</div>
+              <div className="font-bold text-white text-sm">
+                {config.highlightReview.studentName}
+              </div>
+              <div className="text-xs text-emerald-400 font-medium">
+                {config.highlightReview.targetExam} • {config.coachingName} Kakadeo
+              </div>
             </div>
           </div>
         </section>
@@ -598,7 +641,9 @@ export function CoachingHubTiffinPage({ config }: { config: HubConfig }) {
           <div className="grid gap-4">
             <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-1.5">
               <h4 className="font-bold text-sm text-slate-200">
-                {isHindi ? `1. काकादेव ${config.coachingName} से टिफिन पिकअप पॉइंट कितना दूर है?` : `1. How far is the tiffin node from ${config.coachingName} Kakadeo?`}
+                {isHindi
+                  ? `1. काकादेव ${config.coachingName} से टिफिन पिकअप पॉइंट कितना दूर है?`
+                  : `1. How far is the tiffin node from ${config.coachingName} Kakadeo?`}
               </h4>
               <p className="text-xs text-slate-400">
                 {isHindi
@@ -609,7 +654,9 @@ export function CoachingHubTiffinPage({ config }: { config: HubConfig }) {
 
             <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-1.5">
               <h4 className="font-bold text-sm text-slate-200">
-                {isHindi ? "2. अगर मैं टेस्ट सीरीज या छुट्टी पर घर जाता हूँ तो क्या मेरे पैसे डूबेंगे?" : "2. What happens to my balance if I go home for tests or breaks?"}
+                {isHindi
+                  ? "2. अगर मैं टेस्ट सीरीज या छुट्टी पर घर जाता हूँ तो क्या मेरे पैसे डूबेंगे?"
+                  : "2. What happens to my balance if I go home for tests or breaks?"}
               </h4>
               <p className="text-xs text-slate-400">
                 {isHindi
@@ -620,7 +667,9 @@ export function CoachingHubTiffinPage({ config }: { config: HubConfig }) {
 
             <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-1.5">
               <h4 className="font-bold text-sm text-slate-200">
-                {isHindi ? "3. खाना कौन पकाता है और हाइजीन का क्या स्तर है?" : "3. Who prepares the food and what hygiene standards are followed?"}
+                {isHindi
+                  ? "3. खाना कौन पकाता है और हाइजीन का क्या स्तर है?"
+                  : "3. Who prepares the food and what hygiene standards are followed?"}
               </h4>
               <p className="text-xs text-slate-400">
                 {isHindi
@@ -635,11 +684,7 @@ export function CoachingHubTiffinPage({ config }: { config: HubConfig }) {
         <FooterSection />
 
         {/* Booking Modal */}
-        <BookingModal
-          open={isBookingOpen}
-          onOpenChange={setIsBookingOpen}
-          service="kitchen"
-        />
+        <BookingModal open={isBookingOpen} onOpenChange={setIsBookingOpen} service="kitchen" />
       </div>
     </ErrorBoundary>
   );

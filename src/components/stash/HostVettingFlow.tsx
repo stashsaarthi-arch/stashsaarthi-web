@@ -84,7 +84,8 @@ export const HostVettingFlow = memo(function HostVettingFlow() {
       titleHi: "12-बिंदु भौतिक सुरक्षा ऑडिट",
       badgeEn: "On-Ground Audit Passed",
       badgeHi: "ऑन-ग्राउंड ऑडिट पास",
-      descEn: "In-person physical inspection of room climate, structural integrity, and lock safety.",
+      descEn:
+        "In-person physical inspection of room climate, structural integrity, and lock safety.",
       descHi: "कमरे की जलवायु, संरचनात्मक अखंडता और लॉक सुरक्षा की व्यक्तिगत भौतिक जांच।",
       icon: Building2,
       accentColor: "#38BDF8",
@@ -127,7 +128,8 @@ export const HostVettingFlow = memo(function HostVettingFlow() {
         "प्रत्यक्ष डिजिटल बैंक एस्क्रो खाता लिंक (0% लिस्टिंग शुल्क)",
       ],
       securityGuaranteeEn: "Strict legal contracts enforce student safety and zero intrusion.",
-      securityGuaranteeHi: "सख्त कानूनी अनुबंध छात्र सुरक्षा और शून्य हस्तक्षेप सुनिश्चित करते हैं।",
+      securityGuaranteeHi:
+        "सख्त कानूनी अनुबंध छात्र सुरक्षा और शून्य हस्तक्षेप सुनिश्चित करते हैं।",
     },
     {
       id: 3,
@@ -136,7 +138,8 @@ export const HostVettingFlow = memo(function HostVettingFlow() {
       titleHi: "टैम्पर सील व 24/7 सतत निगरानी",
       badgeEn: "Node Verified & Active",
       badgeHi: "नोड सत्यापित व सक्रिय",
-      descEn: "Issuance of verified node QR pass, laser tamper barcode seals, and 24/7 SOS helpline.",
+      descEn:
+        "Issuance of verified node QR pass, laser tamper barcode seals, and 24/7 SOS helpline.",
       descHi: "सत्यापित नोड क्यूआर पास, लेजर टैम्पर बारकोड सील और 24/7 एसओएस सहायता जारी करना।",
       icon: ShieldCheck,
       accentColor: "#00F5A0",
@@ -152,7 +155,8 @@ export const HostVettingFlow = memo(function HostVettingFlow() {
         "24/7 बेडसाइड SOS हेल्पलाइन और 15-मिनट कानपुर ग्राउंड टीम सहायता SLA",
         "स्टैशसारथी ऑपरेशंस टीम द्वारा त्रैमासिक आकस्मिक ऑन-ग्राउंड निरीक्षण",
       ],
-      securityGuaranteeEn: "Unbroken chain of custody verified by digital barcode seals & 24/7 SOS.",
+      securityGuaranteeEn:
+        "Unbroken chain of custody verified by digital barcode seals & 24/7 SOS.",
       securityGuaranteeHi: "डिजिटल बारकोड सील और 24/7 SOS द्वारा अटूट कस्टडी श्रृंखला।",
     },
   ];
@@ -348,7 +352,9 @@ export const HostVettingFlow = memo(function HostVettingFlow() {
           </p>
         </div>
         <div className="glass rounded-2xl p-3 border border-white/10 bg-black/40 text-center">
-          <span className="text-lg sm:text-xl font-extrabold text-amber-400 font-mono">₹10,000</span>
+          <span className="text-lg sm:text-xl font-extrabold text-amber-400 font-mono">
+            ₹10,000
+          </span>
           <p className="text-[10px] text-muted-foreground mt-0.5">
             {isHi ? "सुरक्षा कवर गारंटी" : "Embedded Safety Cover"}
           </p>

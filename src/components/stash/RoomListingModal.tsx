@@ -373,24 +373,24 @@ export function RoomListingModal({
               <>
                 {isHost ? (
                   <>
-                    <Field
-                      label={
-                        isHi ? "घर के नियम व अनुशासन:" : "House Norms & Discipline:"
-                      }
-                    >
+                    <Field label={isHi ? "घर के नियम व अनुशासन:" : "House Norms & Discipline:"}>
                       <Textarea
                         value={pros}
                         onChange={(e) => setPros(e.target.value)}
                         rows={2}
                         placeholder={
-                          isHi ? "उदा. शाकाहारी भोजन, रात 10:30 बजे गेट बंद, शांत अध्ययन वातावरण…" : "e.g. Pure Veg preferred, quiet hours after 10 PM, main gate lock by 10:30 PM…"
+                          isHi
+                            ? "उदा. शाकाहारी भोजन, रात 10:30 बजे गेट बंद, शांत अध्ययन वातावरण…"
+                            : "e.g. Pure Veg preferred, quiet hours after 10 PM, main gate lock by 10:30 PM…"
                         }
                         className="border-white/10 bg-white/5"
                       />
                     </Field>
                     <Field
                       label={
-                        isHi ? "छात्र प्रोफाइल व सहभागिता प्राथमिकता:" : "Student Profile & Habit Preferences:"
+                        isHi
+                          ? "छात्र प्रोफाइल व सहभागिता प्राथमिकता:"
+                          : "Student Profile & Habit Preferences:"
                       }
                     >
                       <Textarea
@@ -398,7 +398,9 @@ export function RoomListingModal({
                         onChange={(e) => setCons(e.target.value)}
                         rows={2}
                         placeholder={
-                          isHi ? "उदा. गंभीर प्रतियोगी परीक्षा छात्र, टेक व स्मार्टफोन में सहयोग…" : "e.g. Serious exam aspirant, willing to help with tech/errands occasionally…"
+                          isHi
+                            ? "उदा. गंभीर प्रतियोगी परीक्षा छात्र, टेक व स्मार्टफोन में सहयोग…"
+                            : "e.g. Serious exam aspirant, willing to help with tech/errands occasionally…"
                         }
                         className="border-white/10 bg-white/5"
                       />
@@ -407,7 +409,9 @@ export function RoomListingModal({
                       <ShieldCheck className="h-5 w-5 text-amber-400 shrink-0" />
                       <div>
                         <div className="text-xs font-bold text-amber-300">
-                          {isHi ? "100% होस्ट सुरक्षा व पूर्ण नियंत्रण चार्टर" : "100% Host Safety & Total Control Charter"}
+                          {isHi
+                            ? "100% होस्ट सुरक्षा व पूर्ण नियंत्रण चार्टर"
+                            : "100% Host Safety & Total Control Charter"}
                         </div>
                         <p className="text-[11px] text-slate-300 mt-0.5">
                           {isHi
@@ -429,14 +433,18 @@ export function RoomListingModal({
                         onChange={(e) => setPros(e.target.value)}
                         rows={2}
                         placeholder={
-                          isHi ? "शांत गली, कॉलेज से 5 मिनट की दूरी…" : "Quiet street, 5 min to campus…"
+                          isHi
+                            ? "शांत गली, कॉलेज से 5 मिनट की दूरी…"
+                            : "Quiet street, 5 min to campus…"
                         }
                         className="border-white/10 bg-white/5"
                       />
                     </Field>
                     <Field
                       label={
-                        isHi ? "अगले छात्र को क्या जानना चाहिए?" : "What should the next student know?"
+                        isHi
+                          ? "अगले छात्र को क्या जानना चाहिए?"
+                          : "What should the next student know?"
                       }
                     >
                       <Textarea

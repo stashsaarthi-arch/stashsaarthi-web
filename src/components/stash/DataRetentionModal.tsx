@@ -84,7 +84,9 @@ Compliance Score: ${purgeResult.policyComplianceScore}% (PASSED)`;
             </div>
             <div>
               <h2 className="text-xl font-bold text-slate-50 flex items-center gap-2">
-                {isHi ? "18-माह डेटा रिटेंशन व ऑटो-पर्ज नीति" : "18-Month Data Retention & Auto-Purge Console"}
+                {isHi
+                  ? "18-माह डेटा रिटेंशन व ऑटो-पर्ज नीति"
+                  : "18-Month Data Retention & Auto-Purge Console"}
                 <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
                   DPDP Sec 12(3)
                 </span>
@@ -154,7 +156,9 @@ Compliance Score: ${purgeResult.policyComplianceScore}% (PASSED)`;
                 <div className="text-2xl">⏳</div>
                 <div className="space-y-1">
                   <h3 className="font-semibold text-emerald-300">
-                    {isHi ? "18-महीने की ऑटो-पर्ज वैधानिक गारंटी" : "18-Month Automated Purging Standard"}
+                    {isHi
+                      ? "18-महीने की ऑटो-पर्ज वैधानिक गारंटी"
+                      : "18-Month Automated Purging Standard"}
                   </h3>
                   <p className="text-xs text-slate-300 leading-relaxed">
                     {isHi
@@ -179,22 +183,42 @@ Compliance Score: ${purgeResult.policyComplianceScore}% (PASSED)`;
                               ? "7 वर्ष (कर आवश्यकता)"
                               : "7 Years (Tax Statutory)"
                             : cat.retentionPeriodMonths === 1
-                            ? isHi
-                              ? "30 दिन"
-                              : "30 Days"
-                            : isHi
-                            ? "18 महीने (547 दिन)"
-                            : "18 Months (547 Days)"}
+                              ? isHi
+                                ? "30 दिन"
+                                : "30 Days"
+                              : isHi
+                                ? "18 महीने (547 दिन)"
+                                : "18 Months (547 Days)"}
                         </span>
-                        <span className="text-[10px] text-slate-400 font-mono">{cat.statutoryBasis}</span>
+                        <span className="text-[10px] text-slate-400 font-mono">
+                          {cat.statutoryBasis}
+                        </span>
                       </div>
-                      <h4 className="font-semibold text-slate-200 text-sm">{isHi ? cat.nameHi : cat.nameEn}</h4>
-                      <p className="text-xs text-slate-400 mt-1 leading-relaxed">{isHi ? cat.descriptionHi : cat.descriptionEn}</p>
+                      <h4 className="font-semibold text-slate-200 text-sm">
+                        {isHi ? cat.nameHi : cat.nameEn}
+                      </h4>
+                      <p className="text-xs text-slate-400 mt-1 leading-relaxed">
+                        {isHi ? cat.descriptionHi : cat.descriptionEn}
+                      </p>
                     </div>
                     <div className="pt-2 border-t border-slate-700/40 flex items-center justify-between text-xs">
-                      <span className="text-slate-400">{isHi ? "स्वचालित पर्ज लागू:" : "Auto-Purge Enforced:"}</span>
-                      <span className={cat.autoPurgeEnabled ? "text-emerald-400 font-semibold" : "text-amber-400 font-semibold"}>
-                        {cat.autoPurgeEnabled ? (isHi ? "✓ हां (सक्रिय)" : "✓ Yes (Active)") : isHi ? "🔒 एस्क्रो नियम" : "🔒 Escrow Locked"}
+                      <span className="text-slate-400">
+                        {isHi ? "स्वचालित पर्ज लागू:" : "Auto-Purge Enforced:"}
+                      </span>
+                      <span
+                        className={
+                          cat.autoPurgeEnabled
+                            ? "text-emerald-400 font-semibold"
+                            : "text-amber-400 font-semibold"
+                        }
+                      >
+                        {cat.autoPurgeEnabled
+                          ? isHi
+                            ? "✓ हां (सक्रिय)"
+                            : "✓ Yes (Active)"
+                          : isHi
+                            ? "🔒 एस्क्रो नियम"
+                            : "🔒 Escrow Locked"}
                       </span>
                     </div>
                   </div>
@@ -209,20 +233,32 @@ Compliance Score: ${purgeResult.policyComplianceScore}% (PASSED)`;
               {/* Inspection Summary Stats */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="p-4 rounded-xl bg-slate-800/60 border border-slate-700 text-center">
-                  <div className="text-2xl font-bold text-slate-100">{auditData.totalInspected}</div>
-                  <div className="text-xs text-slate-400 mt-1">{isHi ? "कुल जांचे गए रिकॉर्ड" : "Inspected Records"}</div>
+                  <div className="text-2xl font-bold text-slate-100">
+                    {auditData.totalInspected}
+                  </div>
+                  <div className="text-xs text-slate-400 mt-1">
+                    {isHi ? "कुल जांचे गए रिकॉर्ड" : "Inspected Records"}
+                  </div>
                 </div>
                 <div className="p-4 rounded-xl bg-slate-800/60 border border-slate-700 text-center">
                   <div className="text-2xl font-bold text-amber-400">{auditData.flaggedCount}</div>
-                  <div className="text-xs text-slate-400 mt-1">{isHi ? "18-माह पर्ज के लिए चिह्नित" : "Flagged > 18M Inactive"}</div>
+                  <div className="text-xs text-slate-400 mt-1">
+                    {isHi ? "18-माह पर्ज के लिए चिह्नित" : "Flagged > 18M Inactive"}
+                  </div>
                 </div>
                 <div className="p-4 rounded-xl bg-slate-800/60 border border-slate-700 text-center">
-                  <div className="text-2xl font-bold text-cyan-400">{auditData.oldestRecordAgeDays}d</div>
-                  <div className="text-xs text-slate-400 mt-1">{isHi ? "सबसे पुराना डेटा उम्र" : "Oldest Record Age"}</div>
+                  <div className="text-2xl font-bold text-cyan-400">
+                    {auditData.oldestRecordAgeDays}d
+                  </div>
+                  <div className="text-xs text-slate-400 mt-1">
+                    {isHi ? "सबसे पुराना डेटा उम्र" : "Oldest Record Age"}
+                  </div>
                 </div>
                 <div className="p-4 rounded-xl bg-slate-800/60 border border-slate-700 text-center">
                   <div className="text-2xl font-bold text-emerald-400">100%</div>
-                  <div className="text-xs text-slate-400 mt-1">{isHi ? "DPDP अनुपालन स्कोर" : "DPDP Compliance"}</div>
+                  <div className="text-xs text-slate-400 mt-1">
+                    {isHi ? "DPDP अनुपालन स्कोर" : "DPDP Compliance"}
+                  </div>
                 </div>
               </div>
 
@@ -230,9 +266,14 @@ Compliance Score: ${purgeResult.policyComplianceScore}% (PASSED)`;
               <div className="p-4 rounded-xl bg-slate-950/60 border border-slate-800 space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-semibold text-slate-200">
-                    {isHi ? "पर्ज थ्रेसहोल्ड सिम्युलेटर (दिनों में):" : "Retention Purge Threshold Simulator (Days):"}
+                    {isHi
+                      ? "पर्ज थ्रेसहोल्ड सिम्युलेटर (दिनों में):"
+                      : "Retention Purge Threshold Simulator (Days):"}
                   </span>
-                  <span className="text-sm font-mono text-emerald-400 font-bold">{simulatedThresholdDays} {isHi ? "दिन" : "days"} ({Math.round(simulatedThresholdDays / 30)} {isHi ? "माह" : "months"})</span>
+                  <span className="text-sm font-mono text-emerald-400 font-bold">
+                    {simulatedThresholdDays} {isHi ? "दिन" : "days"} (
+                    {Math.round(simulatedThresholdDays / 30)} {isHi ? "माह" : "months"})
+                  </span>
                 </div>
                 <input
                   type="range"
@@ -247,7 +288,9 @@ Compliance Score: ${purgeResult.policyComplianceScore}% (PASSED)`;
                   <span>30d ({isHi ? "1 माह टेस्ट" : "1 Month Test"})</span>
                   <span>180d ({isHi ? "6 माह" : "6 Months"})</span>
                   <span>365d ({isHi ? "1 वर्ष" : "1 Year"})</span>
-                  <span className="text-emerald-400 font-bold">547d ({isHi ? "18 माह वैधानिक" : "18M Statutory"})</span>
+                  <span className="text-emerald-400 font-bold">
+                    547d ({isHi ? "18 माह वैधानिक" : "18M Statutory"})
+                  </span>
                 </div>
               </div>
 
@@ -255,7 +298,9 @@ Compliance Score: ${purgeResult.policyComplianceScore}% (PASSED)`;
               <div className="flex items-center justify-between p-4 rounded-xl bg-slate-800/40 border border-slate-700">
                 <div className="space-y-1">
                   <h4 className="text-sm font-semibold text-slate-200">
-                    {isHi ? "18-माह ऑटो-पर्ज निष्पादित करें" : "Execute 18-Month Statutory Purge Routine"}
+                    {isHi
+                      ? "18-माह ऑटो-पर्ज निष्पादित करें"
+                      : "Execute 18-Month Statutory Purge Routine"}
                   </h4>
                   <p className="text-xs text-slate-400">
                     {isHi
@@ -270,7 +315,8 @@ Compliance Score: ${purgeResult.policyComplianceScore}% (PASSED)`;
                 >
                   {isPurging ? (
                     <>
-                      <span className="animate-spin">⏳</span> {isHi ? "सफाई जारी..." : "Purging Stores..."}
+                      <span className="animate-spin">⏳</span>{" "}
+                      {isHi ? "सफाई जारी..." : "Purging Stores..."}
                     </>
                   ) : (
                     <>
@@ -299,7 +345,9 @@ Compliance Score: ${purgeResult.policyComplianceScore}% (PASSED)`;
                       {auditData.records.length === 0 ? (
                         <tr>
                           <td colSpan={4} className="p-4 text-center text-slate-500 italic">
-                            {isHi ? "कोई स्थानीय रिकॉर्ड नहीं मिला।" : "No local records currently logged."}
+                            {isHi
+                              ? "कोई स्थानीय रिकॉर्ड नहीं मिला।"
+                              : "No local records currently logged."}
                           </td>
                         </tr>
                       ) : (
@@ -310,9 +358,13 @@ Compliance Score: ${purgeResult.policyComplianceScore}% (PASSED)`;
                             <td className="p-3 font-mono">{rec.ageDays} days ago</td>
                             <td className="p-3 text-right font-bold">
                               {rec.status === "EXPIRED_18M_FLAGGED" ? (
-                                <span className="text-amber-400">⚠️ {isHi ? "पर्ज हेतु चिह्नित" : "Flagged >18M"}</span>
+                                <span className="text-amber-400">
+                                  ⚠️ {isHi ? "पर्ज हेतु चिह्नित" : "Flagged >18M"}
+                                </span>
                               ) : (
-                                <span className="text-emerald-400">✓ {isHi ? "सक्रिय" : "Active / Compliant"}</span>
+                                <span className="text-emerald-400">
+                                  ✓ {isHi ? "सक्रिय" : "Active / Compliant"}
+                                </span>
                               )}
                             </td>
                           </tr>
@@ -344,7 +396,8 @@ Compliance Score: ${purgeResult.policyComplianceScore}% (PASSED)`;
                       STASHSAARTHI DATA RETENTION COMPLIANCE PASS
                     </h3>
                     <p className="text-xs font-mono text-slate-400">
-                      Serial Number: <span className="text-emerald-400">{purgeResult.certificateSerial}</span>
+                      Serial Number:{" "}
+                      <span className="text-emerald-400">{purgeResult.certificateSerial}</span>
                     </p>
                   </div>
 
@@ -358,15 +411,21 @@ Compliance Score: ${purgeResult.policyComplianceScore}% (PASSED)`;
                     </div>
                     <div className="p-3 rounded-lg bg-slate-900 border border-slate-800 text-center">
                       <div className="text-xs text-slate-400 font-sans">PURGED RECORDS</div>
-                      <div className="text-lg font-bold text-emerald-400 mt-0.5">{purgeResult.recordsPurged}</div>
+                      <div className="text-lg font-bold text-emerald-400 mt-0.5">
+                        {purgeResult.recordsPurged}
+                      </div>
                     </div>
                     <div className="p-3 rounded-lg bg-slate-900 border border-slate-800 text-center">
                       <div className="text-xs text-slate-400 font-sans">SPACE RECLAIMED</div>
-                      <div className="text-lg font-bold text-cyan-400 mt-0.5">{purgeResult.bytesReclaimed} B</div>
+                      <div className="text-lg font-bold text-cyan-400 mt-0.5">
+                        {purgeResult.bytesReclaimed} B
+                      </div>
                     </div>
                     <div className="p-3 rounded-lg bg-slate-900 border border-slate-800 text-center">
                       <div className="text-xs text-slate-400 font-sans">SLA SCORE</div>
-                      <div className="text-lg font-bold text-emerald-400 mt-0.5">{purgeResult.policyComplianceScore}%</div>
+                      <div className="text-lg font-bold text-emerald-400 mt-0.5">
+                        {purgeResult.policyComplianceScore}%
+                      </div>
                     </div>
                   </div>
 
@@ -399,7 +458,9 @@ Compliance Score: ${purgeResult.policyComplianceScore}% (PASSED)`;
                 <div className="p-8 text-center bg-slate-950/40 rounded-2xl border border-slate-800 space-y-3">
                   <div className="text-4xl">🧹</div>
                   <h4 className="text-base font-semibold text-slate-300">
-                    {isHi ? "कोई पर्ज प्रमाणपत्र उपलब्ध नहीं" : "No Purge Certificate Generated Yet"}
+                    {isHi
+                      ? "कोई पर्ज प्रमाणपत्र उपलब्ध नहीं"
+                      : "No Purge Certificate Generated Yet"}
                   </h4>
                   <p className="text-xs text-slate-500 max-w-md mx-auto">
                     {isHi
@@ -415,7 +476,9 @@ Compliance Score: ${purgeResult.policyComplianceScore}% (PASSED)`;
         {/* Footer */}
         <div className="px-6 py-4 bg-slate-950/80 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
           <div>
-            {isHi ? "नोडल अधिकारी:" : "Data Officer:"} <span className="text-slate-200 font-semibold">Advik Omer</span> (stashsaarthi@gmail.com)
+            {isHi ? "नोडल अधिकारी:" : "Data Officer:"}{" "}
+            <span className="text-slate-200 font-semibold">Advik Omer</span>{" "}
+            (stashsaarthi@gmail.com)
           </div>
           <button
             onClick={onClose}

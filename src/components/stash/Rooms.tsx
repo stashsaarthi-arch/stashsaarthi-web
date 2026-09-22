@@ -1,6 +1,18 @@
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
-import { BadgeCheck, MessageCircle, Phone, MapPin, Star, Gift, Compass, Zap, Search, Home, Calendar } from "lucide-react";
+import {
+  BadgeCheck,
+  MessageCircle,
+  Phone,
+  MapPin,
+  Star,
+  Gift,
+  Compass,
+  Zap,
+  Search,
+  Home,
+  Calendar,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AnimatedContent from "@/components/ui/AnimatedContent";
 import { supabase } from "@/integrations/supabase/client";
@@ -193,7 +205,9 @@ export function Rooms({ onList, onBook }: { onList: () => void; onBook?: OpenBoo
       try {
         const { data } = await supabase
           .from("crowdsourced_room_listings")
-          .select("id, owner_name, owner_phone, rent_amount, address_location, student_review, ratings")
+          .select(
+            "id, owner_name, owner_phone, rent_amount, address_location, student_review, ratings",
+          )
           .eq("status", "verified")
           .order("created_at", { ascending: false })
           .limit(6);
@@ -246,20 +260,20 @@ export function Rooms({ onList, onBook }: { onList: () => void; onBook?: OpenBoo
         .replace(/Cons:/gi, "कमियां:")
         .replace(
           /Quiet lane, 24x7 water, owner never enters without asking./gi,
-          "शांत गली, 24x7 पानी, मकान मालिक बिना पूछे कभी कमरे में नहीं आते।"
+          "शांत गली, 24x7 पानी, मकान मालिक बिना पूछे कभी कमरे में नहीं आते।",
         )
         .replace(/Only one power backup point./gi, "केवल एक पावर बैकअप पॉइंट।")
         .replace(
           /Furnished, home-cooked tiffin available downstairs./gi,
-          "फर्निश्ड, नीचे घर का बना टिफिन उपलब्ध है।"
+          "फर्निश्ड, नीचे घर का बना टिफिन उपलब्ध है।",
         )
         .replace(
           /Street parking is tight in the evening./gi,
-          "शाम को सड़क पर पार्किंग तंग हो जाती है।"
+          "शाम को सड़क पर पार्किंग तंग हो जाती है।",
         )
         .replace(
           /Sunlit corner room, super-fast fibre./gi,
-          "धूप वाला कोना कमरा, सुपर-फास्ट इंटरनेट फाइबर।"
+          "धूप वाला कोना कमरा, सुपर-फास्ट इंटरनेट फाइबर।",
         )
         .replace(/Third floor, no lift./gi, "तीसरी मंजिल, लिफ्ट नहीं है।");
     }
@@ -400,7 +414,9 @@ export function Rooms({ onList, onBook }: { onList: () => void; onBook?: OpenBoo
                       <PrototypeBadge variant="text" />
                     </p>
 
-                    {(isHi && l.transit_estimate_hi ? l.transit_estimate_hi : l.transit_estimate) && (
+                    {(isHi && l.transit_estimate_hi
+                      ? l.transit_estimate_hi
+                      : l.transit_estimate) && (
                       <div className="mt-1.5 inline-flex items-center rounded-md border border-emerald-500/20 bg-emerald-500/5 px-2 py-0.5 text-[10px] font-medium text-emerald-300">
                         {isHi && l.transit_estimate_hi ? l.transit_estimate_hi : l.transit_estimate}
                       </div>
@@ -412,8 +428,8 @@ export function Rooms({ onList, onBook }: { onList: () => void; onBook?: OpenBoo
                           (l as any).capacity_badge.color === "emerald"
                             ? "border-emerald-500/20 bg-emerald-500/10 text-emerald-400"
                             : (l as any).capacity_badge.color === "amber"
-                            ? "border-amber-500/20 bg-amber-500/10 text-amber-400"
-                            : "border-cyan-500/20 bg-cyan-500/10 text-cyan-400"
+                              ? "border-amber-500/20 bg-amber-500/10 text-amber-400"
+                              : "border-cyan-500/20 bg-cyan-500/10 text-cyan-400"
                         }`}
                       >
                         {(l as any).capacity_badge.label}
@@ -435,7 +451,8 @@ export function Rooms({ onList, onBook }: { onList: () => void; onBook?: OpenBoo
                             className="flex-1 text-xs py-1.5 font-bold min-h-[36px]"
                             onClick={() => {
                               const roomRent = l.rent_amount || 6000;
-                              const roomTypePref = roomRent > 8000 ? "floor" : roomRent <= 4500 ? "shared" : "single";
+                              const roomTypePref =
+                                roomRent > 8000 ? "floor" : roomRent <= 4500 ? "shared" : "single";
                               onBook({
                                 service: "spaces",
                                 note: `Selected Room: ${l.address_location} (₹${roomRent.toLocaleString("en-IN")}/mo)`,
@@ -457,10 +474,19 @@ export function Rooms({ onList, onBook }: { onList: () => void; onBook?: OpenBoo
                                 note: `Schedule Verified Visit: ${l.address_location} (₹${(l.rent_amount || 6000).toLocaleString("en-IN")}/mo)`,
                                 amount: 0,
                                 address: l.address_location || undefined,
-                                roomType: (l.rent_amount || 6000) > 8000 ? "floor" : (l.rent_amount || 6000) <= 4500 ? "shared" : "single",
+                                roomType:
+                                  (l.rent_amount || 6000) > 8000
+                                    ? "floor"
+                                    : (l.rent_amount || 6000) <= 4500
+                                      ? "shared"
+                                      : "single",
                               });
                             }}
-                            title={isHi ? "15-मिनट ऑन-साइट रूम विजिट शेड्यूल करें" : "Schedule 15-min Room Visit"}
+                            title={
+                              isHi
+                                ? "15-मिनट ऑन-साइट रूम विजिट शेड्यूल करें"
+                                : "Schedule 15-min Room Visit"
+                            }
                           >
                             <Calendar className="h-3 w-3 sm:mr-1 text-emerald-400" />
                             <span className="hidden sm:inline">{isHi ? "विजिट" : "Visit"}</span>
@@ -473,7 +499,7 @@ export function Rooms({ onList, onBook }: { onList: () => void; onBook?: OpenBoo
                           className="flex-1 text-xs py-1.5 border-emerald-500/30 text-emerald-400"
                           onClick={() => {
                             const url = `https://wa.me/919369454350?text=${encodeURIComponent(
-                              `Hello StashSaarthi, I am interested in verified room: ${l.address_location} (₹${l.rent_amount}/mo)`
+                              `Hello StashSaarthi, I am interested in verified room: ${l.address_location} (₹${l.rent_amount}/mo)`,
                             )}`;
                             window.open(url, "_blank");
                           }}

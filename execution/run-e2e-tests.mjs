@@ -16,7 +16,9 @@ function runE2ETests() {
 
   try {
     const isStrict = process.argv.includes("--strict");
-    console.log(`📋 Mode: ${isStrict ? "Strict Mode (Full Browser Run)" : "Stub & Spec Verification"}`);
+    console.log(
+      `📋 Mode: ${isStrict ? "Strict Mode (Full Browser Run)" : "Stub & Spec Verification"}`,
+    );
 
     // Verify e2e spec files exist
     const bookingSpecPath = path.resolve("e2e/booking.spec.ts");
@@ -41,11 +43,23 @@ function runE2ETests() {
 
     console.log("✅ Playwright configuration file validated:", configPath);
     console.log("✅ Core booking flow E2E spec validated:", bookingSpecPath);
-    console.log("✅ Legacy Android emulation & WebGL safety spec validated:", legacyAndroidSpecPath);
+    console.log(
+      "✅ Legacy Android emulation & WebGL safety spec validated:",
+      legacyAndroidSpecPath,
+    );
     console.log("✅ Kitchen SW 2G performance stress spec validated:", kitchenSw2gSpecPath);
-    console.log("✅ Luggage Storage QR Code & Role Scanning E2E spec validated:", storageQrSpecPath);
-    console.log("✅ DPDP Act 2023 & GDPR Data Privacy Audit E2E spec validated:", dpdpAuditSpecPath);
-    console.log("✅ Android Go Ultra-Low-Spec Mobile Performance E2E spec validated:", androidGoPerfSpecPath);
+    console.log(
+      "✅ Luggage Storage QR Code & Role Scanning E2E spec validated:",
+      storageQrSpecPath,
+    );
+    console.log(
+      "✅ DPDP Act 2023 & GDPR Data Privacy Audit E2E spec validated:",
+      dpdpAuditSpecPath,
+    );
+    console.log(
+      "✅ Android Go Ultra-Low-Spec Mobile Performance E2E spec validated:",
+      androidGoPerfSpecPath,
+    );
 
     if (isStrict) {
       console.log("⚡ Executing Playwright E2E tests in headless mode...");

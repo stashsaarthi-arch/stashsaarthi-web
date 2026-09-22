@@ -47,7 +47,7 @@ export function ConnectAudioWidget() {
       latencyMs: NETWORK_PROFILES[detected].expectedLatencyMs,
       mosScore: calculateMOS(
         NETWORK_PROFILES[detected].bitrateKbps,
-        NETWORK_PROFILES[detected].expectedLatencyMs
+        NETWORK_PROFILES[detected].expectedLatencyMs,
       ),
       vadActive: NETWORK_PROFILES[detected].vadEnabled,
       timestamp: Date.now(),
@@ -62,9 +62,7 @@ export function ConnectAudioWidget() {
       return;
     }
     const interval = setInterval(() => {
-      setWaveHeight(
-        Array.from({ length: 12 }, () => Math.floor(Math.random() * 75) + 15)
-      );
+      setWaveHeight(Array.from({ length: 12 }, () => Math.floor(Math.random() * 75) + 15));
     }, 120);
     return () => clearInterval(interval);
   }, [isPlaying]);
@@ -94,7 +92,9 @@ export function ConnectAudioWidget() {
           <div>
             <div className="flex items-center gap-2">
               <h3 className="text-sm font-bold text-white">
-                {isHi ? "सारथी कनेक्ट: 2G/3G लो-लेटेन्सी वॉइस इंजन" : "Saarthi Connect: 2G/3G Low-Latency Voice Engine"}
+                {isHi
+                  ? "सारथी कनेक्ट: 2G/3G लो-लेटेन्सी वॉइस इंजन"
+                  : "Saarthi Connect: 2G/3G Low-Latency Voice Engine"}
               </h3>
               <span className="rounded-full bg-emerald-500/20 px-2 py-0.5 text-[10px] font-bold text-emerald-400 border border-emerald-500/30">
                 12 kbps Opus
@@ -125,7 +125,9 @@ export function ConnectAudioWidget() {
       {/* Network Tier Selector Pills */}
       <div className="mt-4">
         <label className="text-[11px] font-bold text-slate-300 block mb-2">
-          {isHi ? "नेटवर्क प्रोफाइल चुनें (Network Bandwidth Profile)" : "Select Network Bandwidth Profile"}
+          {isHi
+            ? "नेटवर्क प्रोफाइल चुनें (Network Bandwidth Profile)"
+            : "Select Network Bandwidth Profile"}
         </label>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
           {(Object.keys(NETWORK_PROFILES) as NetworkTier[]).map((tKey) => {
@@ -145,13 +147,17 @@ export function ConnectAudioWidget() {
               >
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold flex items-center gap-1.5">
-                    <Signal className={`h-3.5 w-3.5 ${isSelected ? "text-cyan-400" : "text-slate-500"}`} />
+                    <Signal
+                      className={`h-3.5 w-3.5 ${isSelected ? "text-cyan-400" : "text-slate-500"}`}
+                    />
                     {isHi ? p.labelHi : p.label}
                   </span>
                   {isSelected && <CheckCircle2 className="h-3.5 w-3.5 text-cyan-400" />}
                 </div>
                 <div className="mt-2 flex items-center justify-between text-[10px]">
-                  <span className="font-mono text-cyan-300 font-semibold">{p.bitrateKbps} kbps</span>
+                  <span className="font-mono text-cyan-300 font-semibold">
+                    {p.bitrateKbps} kbps
+                  </span>
                   <span className="text-slate-400 font-mono">~{p.expectedLatencyMs}ms lat</span>
                 </div>
               </button>
@@ -210,25 +216,33 @@ export function ConnectAudioWidget() {
       {telemetry && (
         <div className="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs">
           <div className="rounded-lg border border-white/10 bg-white/5 p-2">
-            <span className="text-[10px] text-slate-400 block">{isHi ? "डाटा बचत (Data Saved)" : "Data Saved"}</span>
+            <span className="text-[10px] text-slate-400 block">
+              {isHi ? "डाटा बचत (Data Saved)" : "Data Saved"}
+            </span>
             <span className="text-sm font-bold text-emerald-400 font-mono">
               {telemetry.compressionRatio}%
             </span>
           </div>
           <div className="rounded-lg border border-white/10 bg-white/5 p-2">
-            <span className="text-[10px] text-slate-400 block">{isHi ? "कॉल लेटेन्सी" : "Call Latency"}</span>
+            <span className="text-[10px] text-slate-400 block">
+              {isHi ? "कॉल लेटेन्सी" : "Call Latency"}
+            </span>
             <span className="text-sm font-bold text-cyan-400 font-mono">
               {telemetry.latencyMs} ms
             </span>
           </div>
           <div className="rounded-lg border border-white/10 bg-white/5 p-2">
-            <span className="text-[10px] text-slate-400 block">{isHi ? "ऑडियो कोडैक" : "Audio Codec"}</span>
+            <span className="text-[10px] text-slate-400 block">
+              {isHi ? "ऑडियो कोडैक" : "Audio Codec"}
+            </span>
             <span className="text-[11px] font-bold text-slate-200 truncate block">
               {profile.codec.split(" ")[0]}
             </span>
           </div>
           <div className="rounded-lg border border-white/10 bg-white/5 p-2">
-            <span className="text-[10px] text-slate-400 block">{isHi ? "VAD साइलेंस कट" : "VAD Silence Gate"}</span>
+            <span className="text-[10px] text-slate-400 block">
+              {isHi ? "VAD साइलेंस कट" : "VAD Silence Gate"}
+            </span>
             <span className="text-xs font-bold text-amber-400">
               {telemetry.vadActive ? (isHi ? "सक्रिय (Enabled)" : "Active") : "Off"}
             </span>

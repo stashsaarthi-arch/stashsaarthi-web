@@ -60,8 +60,10 @@ const COUNCIL_MEMBERS: CouncilMember[] = [
     issuesSolved: 14,
     avatar: "AS",
     badge: "Verified Student Leader",
-    quote: "Ensuring zero dead-rent loss for IITK students during summer breaks through verified micro-storage.",
-    quoteHi: "समर ब्रेक के दौरान सत्यापित माइक्रो-स्टोरेज के माध्यम से IITK छात्रों के लिए शून्य डेड-रेंट नुकसान सुनिश्चित करना।",
+    quote:
+      "Ensuring zero dead-rent loss for IITK students during summer breaks through verified micro-storage.",
+    quoteHi:
+      "समर ब्रेक के दौरान सत्यापित माइक्रो-स्टोरेज के माध्यम से IITK छात्रों के लिए शून्य डेड-रेंट नुकसान सुनिश्चित करना।",
   },
   {
     id: "rep-2",
@@ -74,8 +76,10 @@ const COUNCIL_MEMBERS: CouncilMember[] = [
     issuesSolved: 11,
     avatar: "RM",
     badge: "Verified PG Owner Host Liaison",
-    quote: "Connecting HBTI students directly with verified premium hosts in Swaroop Nagar without broker extortion.",
-    quoteHi: "बिना दलालों के शोषण के स्वरूप नगर में एचबीटीआई छात्रों को सीधे सत्यापित वरिष्ठ मेज़बानों से जोड़ना।",
+    quote:
+      "Connecting HBTI students directly with verified premium hosts in Swaroop Nagar without broker extortion.",
+    quoteHi:
+      "बिना दलालों के शोषण के स्वरूप नगर में एचबीटीआई छात्रों को सीधे सत्यापित वरिष्ठ मेज़बानों से जोड़ना।",
   },
   {
     id: "rep-3",
@@ -88,8 +92,10 @@ const COUNCIL_MEMBERS: CouncilMember[] = [
     issuesSolved: 19,
     avatar: "PP",
     badge: "Kakadeo Ground Lead",
-    quote: "Eliminating illegal PG security deposit forfeitures and ensuring transparent room rental terms.",
-    quoteHi: "अवैध पीजी सुरक्षा जमा जब्ती को समाप्त करना और पारदर्शी कमरा किराए की शर्तें सुनिश्चित करना।",
+    quote:
+      "Eliminating illegal PG security deposit forfeitures and ensuring transparent room rental terms.",
+    quoteHi:
+      "अवैध पीजी सुरक्षा जमा जब्ती को समाप्त करना और पारदर्शी कमरा किराए की शर्तें सुनिश्चित करना।",
   },
   {
     id: "rep-4",
@@ -102,8 +108,10 @@ const COUNCIL_MEMBERS: CouncilMember[] = [
     issuesSolved: 9,
     avatar: "SV",
     badge: "Ghar Ka Swaad Lead",
-    quote: "Strict quality audits for ₹50 daily tiffins so outstation hostelers get hygienic home-cooked meals.",
-    quoteHi: "₹50 दैनिक टिफिन के लिए सख्त गुणवत्ता ऑडिट ताकि बाहरी छात्रों को स्वच्छ घरेलू भोजन मिले।",
+    quote:
+      "Strict quality audits for ₹50 daily tiffins so outstation hostelers get hygienic home-cooked meals.",
+    quoteHi:
+      "₹50 दैनिक टिफिन के लिए सख्त गुणवत्ता ऑडिट ताकि बाहरी छात्रों को स्वच्छ घरेलू भोजन मिले।",
   },
   {
     id: "rep-5",
@@ -116,8 +124,10 @@ const COUNCIL_MEMBERS: CouncilMember[] = [
     issuesSolved: 8,
     avatar: "US",
     badge: "Emergency Response",
-    quote: "Coordinating 24/7 safe student transit routes between Swaroop Nagar, Medical Gate, and Kakadeo.",
-    quoteHi: "स्वरूप नगर, मेडिकल गेट और काकादेव के बीच 24/7 सुरक्षित छात्र पारगमन मार्गों का समन्वय करना।",
+    quote:
+      "Coordinating 24/7 safe student transit routes between Swaroop Nagar, Medical Gate, and Kakadeo.",
+    quoteHi:
+      "स्वरूप नगर, मेडिकल गेट और काकादेव के बीच 24/7 सुरक्षित छात्र पारगमन मार्गों का समन्वय करना।",
   },
   {
     id: "rep-6",
@@ -130,7 +140,8 @@ const COUNCIL_MEMBERS: CouncilMember[] = [
     issuesSolved: 12,
     avatar: "DS",
     badge: "Storage Safety Audit",
-    quote: "Guaranteeing laser tamper barcode seals and moisture-proof packaging for student luggage.",
+    quote:
+      "Guaranteeing laser tamper barcode seals and moisture-proof packaging for student luggage.",
     quoteHi: "छात्रों के सामान के लिए लेजर छेड़छाड़ बारकोड सील और नमी-रोधी पैकेजिंग की गारंटी।",
   },
 ];
@@ -147,8 +158,10 @@ const INITIAL_PROPOSALS: StudentProposal[] = [
     status: "enforced",
     statusText: "StashSaarthi Policy Enforced",
     statusTextHi: "स्टैशसारथी नीति लागू",
-    councilResponse: "All Saarthi Spaces listed in Kakadeo now operate on strict 0-brokerage and zero non-refundable deposit terms.",
-    councilResponseHi: "काकादेव में सूचीबद्ध सभी सारथी स्पेस अब सख्त 0-ब्रोकरेज और शून्य गैर-वापसी योग्य जमा शर्तों पर संचालित होते हैं।",
+    councilResponse:
+      "All Saarthi Spaces listed in Kakadeo now operate on strict 0-brokerage and zero non-refundable deposit terms.",
+    councilResponseHi:
+      "काकादेव में सूचीबद्ध सभी सारथी स्पेस अब सख्त 0-ब्रोकरेज और शून्य गैर-वापसी योग्य जमा शर्तों पर संचालित होते हैं।",
   },
   {
     id: "prop-2",
@@ -161,8 +174,10 @@ const INITIAL_PROPOSALS: StudentProposal[] = [
     status: "enforced",
     statusText: "StashSaarthi Policy Enforced",
     statusTextHi: "स्टैशसारथी नीति लागू",
-    councilResponse: "Verified verified PG owner home kitchens in Saarthi Kitchen hub now feature mandatory RO filtration audit Badges.",
-    councilResponseHi: "सारथी किचन हब में सत्यापित वरिष्ठ होम रसोई में अब अनिवार्य आरओ निस्पंदन ऑडिट बैज शामिल हैं।",
+    councilResponse:
+      "Verified verified PG owner home kitchens in Saarthi Kitchen hub now feature mandatory RO filtration audit Badges.",
+    councilResponseHi:
+      "सारथी किचन हब में सत्यापित वरिष्ठ होम रसोई में अब अनिवार्य आरओ निस्पंदन ऑडिट बैज शामिल हैं।",
   },
   {
     id: "prop-3",
@@ -175,8 +190,10 @@ const INITIAL_PROPOSALS: StudentProposal[] = [
     status: "under_review",
     statusText: "Under Council Review",
     statusTextHi: "परिषद समीक्षा के अधीन",
-    councilResponse: "Council is partnering with local auto associations & premium hosts to launch verified night route pick-ups.",
-    councilResponseHi: "परिषद सत्यापित नाइट रूट पिक-अप शुरू करने के लिए स्थानीय ऑटो संघों और वरिष्ठ मेज़बानों के साथ साझेदारी कर रही है।",
+    councilResponse:
+      "Council is partnering with local auto associations & premium hosts to launch verified night route pick-ups.",
+    councilResponseHi:
+      "परिषद सत्यापित नाइट रूट पिक-अप शुरू करने के लिए स्थानीय ऑटो संघों और वरिष्ठ मेज़बानों के साथ साझेदारी कर रही है।",
   },
   {
     id: "prop-4",
@@ -189,8 +206,10 @@ const INITIAL_PROPOSALS: StudentProposal[] = [
     status: "enforced",
     statusText: "StashSaarthi Policy Enforced",
     statusTextHi: "स्टैशसारथी नीति लागू",
-    councilResponse: "StashSaarthi platform introduced campus-gate direct doorstep pick-up for all ₹300/bag/mo stashes.",
-    councilResponseHi: "स्टैशसारथी प्लेटफॉर्म ने सभी ₹300/बैग/माह स्टैश के लिए कैंपस-गेट डायरेक्ट डोरस्टेप पिक-अप पेश किया।",
+    councilResponse:
+      "StashSaarthi platform introduced campus-gate direct doorstep pick-up for all ₹300/bag/mo stashes.",
+    councilResponseHi:
+      "स्टैशसारथी प्लेटफॉर्म ने सभी ₹300/बैग/माह स्टैश के लिए कैंपस-गेट डायरेक्ट डोरस्टेप पिक-अप पेश किया।",
   },
 ];
 
@@ -216,7 +235,7 @@ export function KanpurStudentCouncil() {
       const already = prev[id];
       const nextState = !already;
       setProposals((curr) =>
-        curr.map((p) => (p.id === id ? { ...p, upvotes: p.upvotes + (nextState ? 1 : -1) } : p))
+        curr.map((p) => (p.id === id ? { ...p, upvotes: p.upvotes + (nextState ? 1 : -1) } : p)),
       );
       if (nextState) {
         toast.success(isHi ? "प्रस्ताव को वोट दिया गया!" : "Upvote recorded!");
@@ -264,20 +283,22 @@ export function KanpurStudentCouncil() {
         status: "under_review",
         statusText: "Under Council Review",
         statusTextHi: "परिषद समीक्षा के अधीन",
-        councilResponse: "Your proposal has been logged and assigned to the campus student delegate.",
-        councilResponseHi: "आपका प्रस्ताव दर्ज कर लिया गया है और परिसर छात्र प्रतिनिधि को सौंपा गया है।",
+        councilResponse:
+          "Your proposal has been logged and assigned to the campus student delegate.",
+        councilResponseHi:
+          "आपका प्रस्ताव दर्ज कर लिया गया है और परिसर छात्र प्रतिनिधि को सौंपा गया है।",
       };
       setProposals([newProp, ...proposals]);
       toast.success(
         isHi
           ? "आपका प्रस्ताव कानपुर छात्र परिषद में प्रस्तुत किया गया!"
-          : "Your proposal was submitted to the Kanpur Student Council!"
+          : "Your proposal was submitted to the Kanpur Student Council!",
       );
     } else {
       toast.success(
         isHi
           ? "आपकी परिषद प्रतिनिधि आवेदन जमा हो गई! संस्था अध्यक्ष आपसे जल्द संपर्क करेंगे।"
-          : "Council seat application submitted! Campus chairs will contact you shortly."
+          : "Council seat application submitted! Campus chairs will contact you shortly.",
       );
     }
 
@@ -293,7 +314,10 @@ export function KanpurStudentCouncil() {
       : COUNCIL_MEMBERS.filter((m) => m.campusCode === activeCampus);
 
   return (
-    <section id="student-council" className="relative py-20 bg-background text-foreground overflow-hidden">
+    <section
+      id="student-council"
+      className="relative py-20 bg-background text-foreground overflow-hidden"
+    >
       {/* Background Neon Accent Glow */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-emerald-500/10 blur-[140px] pointer-events-none rounded-full" />
 
@@ -308,11 +332,17 @@ export function KanpurStudentCouncil() {
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground font-heading">
             {isHi ? (
               <>
-                कानपुर <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">छात्र परिषद</span>
+                कानपुर{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">
+                  छात्र परिषद
+                </span>
               </>
             ) : (
               <>
-                Kanpur <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">Student Council</span>
+                Kanpur{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">
+                  Student Council
+                </span>
               </>
             )}
           </h2>
@@ -327,19 +357,27 @@ export function KanpurStudentCouncil() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 bg-card/60 border border-border/60 backdrop-blur-md rounded-2xl p-4 shadow-xl">
             <div className="text-center p-2">
               <p className="text-2xl sm:text-3xl font-black text-emerald-400">12</p>
-              <p className="text-xs text-muted-foreground mt-0.5">{isHi ? "कैंपस प्रतिनिधि" : "Campus Reps"}</p>
+              <p className="text-xs text-muted-foreground mt-0.5">
+                {isHi ? "कैंपस प्रतिनिधि" : "Campus Reps"}
+              </p>
             </div>
             <div className="text-center p-2 border-l border-border/40">
               <p className="text-2xl sm:text-3xl font-black text-cyan-400">84+</p>
-              <p className="text-xs text-muted-foreground mt-0.5">{isHi ? "छात्र प्रस्ताव दर्ज" : "Proposals Logged"}</p>
+              <p className="text-xs text-muted-foreground mt-0.5">
+                {isHi ? "छात्र प्रस्ताव दर्ज" : "Proposals Logged"}
+              </p>
             </div>
             <div className="text-center p-2 border-l border-border/40">
               <p className="text-2xl sm:text-3xl font-black text-emerald-400">38</p>
-              <p className="text-xs text-muted-foreground mt-0.5">{isHi ? "नीति समाधान लागू" : "Policies Enforced"}</p>
+              <p className="text-xs text-muted-foreground mt-0.5">
+                {isHi ? "नीति समाधान लागू" : "Policies Enforced"}
+              </p>
             </div>
             <div className="text-center p-2 border-l border-border/40">
               <p className="text-2xl sm:text-3xl font-black text-amber-400">₹6,400</p>
-              <p className="text-xs text-muted-foreground mt-0.5">{isHi ? "औसत बचत/छात्र" : "Avg Dead-Rent Saved"}</p>
+              <p className="text-xs text-muted-foreground mt-0.5">
+                {isHi ? "औसत बचत/छात्र" : "Avg Dead-Rent Saved"}
+              </p>
             </div>
           </div>
         </div>
@@ -414,7 +452,8 @@ export function KanpurStudentCouncil() {
                   </div>
 
                   <p className="text-xs font-semibold text-cyan-400 mb-2">
-                    {isHi ? member.roleHi : member.role} • <span className="text-muted-foreground">{member.branchYear}</span>
+                    {isHi ? member.roleHi : member.role} •{" "}
+                    <span className="text-muted-foreground">{member.branchYear}</span>
                   </p>
 
                   <blockquote className="text-xs text-muted-foreground italic bg-muted/30 p-3 rounded-xl border border-border/40 mb-4">
@@ -425,7 +464,9 @@ export function KanpurStudentCouncil() {
                 <div className="flex items-center justify-between pt-3 border-t border-border/40">
                   <span className="text-xs font-medium text-muted-foreground flex items-center gap-1">
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                    <span>{member.issuesSolved} {isHi ? "मुद्दे हल किए" : "Issues Solved"}</span>
+                    <span>
+                      {member.issuesSolved} {isHi ? "मुद्दे हल किए" : "Issues Solved"}
+                    </span>
                   </span>
 
                   <button
@@ -447,7 +488,9 @@ export function KanpurStudentCouncil() {
             <div>
               <h3 className="text-2xl font-bold tracking-tight text-foreground flex items-center gap-2 font-heading">
                 <Vote className="w-6 h-6 text-cyan-400" />
-                <span>{isHi ? "छात्र प्रस्ताव एवं समस्या निवारण मंच" : "Student Issue & Proposal Forum"}</span>
+                <span>
+                  {isHi ? "छात्र प्रस्ताव एवं समस्या निवारण मंच" : "Student Issue & Proposal Forum"}
+                </span>
               </h3>
               <p className="text-sm text-muted-foreground mt-1">
                 {isHi
@@ -497,14 +540,17 @@ export function KanpurStudentCouncil() {
                       </h4>
 
                       <p className="text-xs text-muted-foreground mt-1">
-                        {isHi ? "प्रस्तावित द्वारा:" : "Submitted by:"} <span className="text-foreground font-semibold">{prop.submittedBy}</span>
+                        {isHi ? "प्रस्तावित द्वारा:" : "Submitted by:"}{" "}
+                        <span className="text-foreground font-semibold">{prop.submittedBy}</span>
                       </p>
 
                       <div className="mt-3 p-3 rounded-xl bg-emerald-500/5 border border-emerald-500/20 text-xs">
                         <span className="font-bold text-emerald-400 block mb-0.5">
                           💬 {isHi ? "परिषद कार्रवाई की स्थिति:" : "Council Resolution Note:"}
                         </span>
-                        <p className="text-muted-foreground">{isHi ? prop.councilResponseHi : prop.councilResponse}</p>
+                        <p className="text-muted-foreground">
+                          {isHi ? prop.councilResponseHi : prop.councilResponse}
+                        </p>
                       </div>
                     </div>
 
@@ -521,7 +567,9 @@ export function KanpurStudentCouncil() {
                       >
                         <Vote className="w-5 h-5" />
                       </button>
-                      <span className="text-xs font-black text-foreground mt-1">{prop.upvotes} Votes</span>
+                      <span className="text-xs font-black text-foreground mt-1">
+                        {prop.upvotes} Votes
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -540,7 +588,9 @@ export function KanpurStudentCouncil() {
               </div>
 
               <h3 className="text-2xl sm:text-3xl font-extrabold text-foreground font-heading">
-                {isHi ? "कानपुर छात्र परिषद व्हाट्सएप ग्रुप में शामिल हों" : "Join the Kanpur Student Council Community"}
+                {isHi
+                  ? "कानपुर छात्र परिषद व्हाट्सएप ग्रुप में शामिल हों"
+                  : "Join the Kanpur Student Council Community"}
               </h3>
 
               <p className="mt-2 text-sm text-slate-300 leading-relaxed">
@@ -588,8 +638,8 @@ export function KanpurStudentCouncil() {
                       ? "नया छात्र प्रस्ताव सबमिट करें"
                       : "Submit Campus Proposal / Issue"
                     : isHi
-                    ? "कानपुर छात्र परिषद प्रतिनिधि आवेदन"
-                    : "Apply for Kanpur Student Council Seat"}
+                      ? "कानपुर छात्र परिषद प्रतिनिधि आवेदन"
+                      : "Apply for Kanpur Student Council Seat"}
                 </span>
               </h3>
               <button
@@ -657,8 +707,9 @@ export function KanpurStudentCouncil() {
                       ? "प्रस्ताव या समस्या विवरण"
                       : "Proposal or Issue Details"
                     : isHi
-                    ? "आप परिषद में क्या योगदान देना चाहते हैं?"
-                    : "Why do you want to join the Council?"} *
+                      ? "आप परिषद में क्या योगदान देना चाहते हैं?"
+                      : "Why do you want to join the Council?"}{" "}
+                  *
                 </label>
                 <textarea
                   required
@@ -669,8 +720,8 @@ export function KanpurStudentCouncil() {
                         ? "समस्या का स्पष्ट विवरण लिखें..."
                         : "Describe the issue or proposal for StashSaarthi council action..."
                       : isHi
-                      ? "अपनी रुचि और छात्र मुद्दों के बारे में बताएं..."
-                      : "Tell us about your campus role and key student issues you want to address..."
+                        ? "अपनी रुचि और छात्र मुद्दों के बारे में बताएं..."
+                        : "Tell us about your campus role and key student issues you want to address..."
                   }
                   value={detailText}
                   onChange={(e) => setDetailText(e.target.value)}

@@ -1,6 +1,16 @@
 import { useState, useMemo } from "react";
 import { motion } from "motion/react";
-import { Coins, CheckCircle2, IndianRupee, ShieldCheck, Plus, Minus, Sparkles, Maximize2, MapPin } from "lucide-react";
+import {
+  Coins,
+  CheckCircle2,
+  IndianRupee,
+  ShieldCheck,
+  Plus,
+  Minus,
+  Sparkles,
+  Maximize2,
+  MapPin,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card3D } from "@/components/ui/Card3D";
 import AnimatedContent from "@/components/ui/AnimatedContent";
@@ -21,7 +31,9 @@ export function HostSimulator({ onBook }: { onBook: () => void }) {
 
   // Interactive Room Dimension & Location State (Task 117)
   const [roomDimension, setRoomDimension] = useState<number>(10);
-  const [roomLocality, setRoomLocality] = useState<"kakadeo" | "kalyanpur" | "swaroop" | "other">("kakadeo");
+  const [roomLocality, setRoomLocality] = useState<"kakadeo" | "kalyanpur" | "swaroop" | "other">(
+    "kakadeo",
+  );
 
   const toggleOption = (id: string) => {
     setSelectedOptions((prev) => ({
@@ -93,13 +105,35 @@ export function HostSimulator({ onBook }: { onBook: () => void }) {
               <h3 className="text-base sm:text-xl font-black tracking-tight text-white">
                 {isHi ? (
                   <>
-                    क्या काकादेव में आपके पास <span className="text-amber-400 font-mono font-black">{roomDimension}×{roomDimension} का खाली कमरा</span> है?{" "}
-                    <span className="text-emerald-400 font-mono font-black">{inr(roomMonthlyPayout)}/माह</span> निष्क्रिय कमाएं!
+                    क्या काकादेव में आपके पास{" "}
+                    <span className="text-amber-400 font-mono font-black">
+                      {roomDimension}×{roomDimension} का खाली कमरा
+                    </span>{" "}
+                    है?{" "}
+                    <span className="text-emerald-400 font-mono font-black">
+                      {inr(roomMonthlyPayout)}/माह
+                    </span>{" "}
+                    निष्क्रिय कमाएं!
                   </>
                 ) : (
                   <>
-                    Have a <span className="text-amber-400 font-mono font-black">{roomDimension}×{roomDimension} empty room</span> in {roomLocality === "kakadeo" ? "Kakadeo" : roomLocality === "kalyanpur" ? "Kalyanpur" : roomLocality === "swaroop" ? "Swaroop Nagar" : "Kanpur"}?{" "}
-                    Earn <span className="text-emerald-400 font-mono font-black">{inr(roomMonthlyPayout)}/month</span> passively!
+                    Have a{" "}
+                    <span className="text-amber-400 font-mono font-black">
+                      {roomDimension}×{roomDimension} empty room
+                    </span>{" "}
+                    in{" "}
+                    {roomLocality === "kakadeo"
+                      ? "Kakadeo"
+                      : roomLocality === "kalyanpur"
+                        ? "Kalyanpur"
+                        : roomLocality === "swaroop"
+                          ? "Swaroop Nagar"
+                          : "Kanpur"}
+                    ? Earn{" "}
+                    <span className="text-emerald-400 font-mono font-black">
+                      {inr(roomMonthlyPayout)}/month
+                    </span>{" "}
+                    passively!
                   </>
                 )}
               </h3>
@@ -117,7 +151,9 @@ export function HostSimulator({ onBook }: { onBook: () => void }) {
                 </div>
                 <div className="text-xl sm:text-2xl font-black text-amber-400 font-mono">
                   {inr(roomMonthlyPayout)}
-                  <span className="text-xs font-normal text-slate-400">{isHi ? "/माह" : "/mo"}</span>
+                  <span className="text-xs font-normal text-slate-400">
+                    {isHi ? "/माह" : "/mo"}
+                  </span>
                 </div>
               </div>
               <div className="h-8 w-px bg-white/10" />
@@ -191,7 +227,9 @@ export function HostSimulator({ onBook }: { onBook: () => void }) {
                     }`}
                   >
                     <span className="truncate">{loc.label}</span>
-                    <span className="text-[9px] font-mono opacity-80 shrink-0 ml-1">{loc.bonus}</span>
+                    <span className="text-[9px] font-mono opacity-80 shrink-0 ml-1">
+                      {loc.bonus}
+                    </span>
                   </button>
                 ))}
               </div>
@@ -228,7 +266,8 @@ export function HostSimulator({ onBook }: { onBook: () => void }) {
                     {opt.title}
                   </h3>
                   <div className="text-[11px] text-muted-foreground mb-3">
-                    {t.hostSimulator.space} {opt.id === "bedroom" ? `${roomDimension}x${roomDimension} sq ft` : opt.space}
+                    {t.hostSimulator.space}{" "}
+                    {opt.id === "bedroom" ? `${roomDimension}x${roomDimension} sq ft` : opt.space}
                   </div>
 
                   <div className="mt-auto space-y-2" style={{ transform: "translateZ(15px)" }}>
@@ -412,4 +451,3 @@ export function HostSimulator({ onBook }: { onBook: () => void }) {
     </div>
   );
 }
-

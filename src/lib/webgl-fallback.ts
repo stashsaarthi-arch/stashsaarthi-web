@@ -107,10 +107,12 @@ export function initWebGLSafetyGuard(): void {
     "webglcontextlost",
     (event) => {
       event.preventDefault();
-      console.warn("[WebGL Guard] WebGL context lost detected! Fallback to 2D CSS safe rendering mode.");
+      console.warn(
+        "[WebGL Guard] WebGL context lost detected! Fallback to 2D CSS safe rendering mode.",
+      );
       root.setAttribute("data-webgl-supported", "false");
       root.classList.add("legacy-android-fallback");
     },
-    false
+    false,
   );
 }

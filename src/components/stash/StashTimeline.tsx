@@ -316,7 +316,9 @@ export const StashTimeline = memo(function StashTimeline({ onBook }: StashTimeli
                   {s.step}
                 </div>
                 <span className="truncate text-left font-medium">
-                  {isHi ? s.titleHi.split(" ")[0] + " " + (s.titleHi.split(" ")[1] || "") : s.titleEn.split(" ")[0] + " " + (s.titleEn.split(" ")[1] || "")}
+                  {isHi
+                    ? s.titleHi.split(" ")[0] + " " + (s.titleHi.split(" ")[1] || "")
+                    : s.titleEn.split(" ")[0] + " " + (s.titleEn.split(" ")[1] || "")}
                 </span>
               </button>
             );
@@ -415,8 +417,12 @@ export const StashTimeline = memo(function StashTimeline({ onBook }: StashTimeli
 
                   <span className="text-[11px] text-muted-foreground hidden sm:inline">
                     {isPlaying
-                      ? isHi ? "(4 सेकंड में ऑटो-स्टेप)" : "(Auto-stepping 4s)"
-                      : isHi ? "(किसी भी चरण पर क्लिक करें)" : "(Click any step)"}
+                      ? isHi
+                        ? "(4 सेकंड में ऑटो-स्टेप)"
+                        : "(Auto-stepping 4s)"
+                      : isHi
+                        ? "(किसी भी चरण पर क्लिक करें)"
+                        : "(Click any step)"}
                   </span>
                 </div>
 

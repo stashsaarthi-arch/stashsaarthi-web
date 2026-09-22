@@ -115,7 +115,7 @@ export interface TokenRateLimitResult {
 export function checkTokenRateLimit(
   key: string,
   channel: TokenChannelKey = "sms_token",
-  customConfig?: Partial<TokenRateLimitConfig>
+  customConfig?: Partial<TokenRateLimitConfig>,
 ): TokenRateLimitResult {
   const baseConfig = TOKEN_LIMIT_CONFIGS[channel];
   const cfg: TokenRateLimitConfig = { ...baseConfig, ...customConfig };
@@ -170,7 +170,7 @@ export function checkTokenRateLimit(
 export function recordTokenRequest(
   key: string,
   channel: TokenChannelKey = "sms_token",
-  customConfig?: Partial<TokenRateLimitConfig>
+  customConfig?: Partial<TokenRateLimitConfig>,
 ): void {
   const baseConfig = TOKEN_LIMIT_CONFIGS[channel];
   const cfg: TokenRateLimitConfig = { ...baseConfig, ...customConfig };
@@ -188,7 +188,7 @@ export function recordTokenRequest(
 export function checkAndRecordTokenRateLimit(
   key: string,
   channel: TokenChannelKey = "sms_token",
-  customConfig?: Partial<TokenRateLimitConfig>
+  customConfig?: Partial<TokenRateLimitConfig>,
 ): TokenRateLimitResult {
   const result = checkTokenRateLimit(key, channel, customConfig);
   if (result.allowed) {
@@ -220,7 +220,7 @@ export function resetTokenRateLimit(key: string, channel: TokenChannelKey): void
 export function showTokenRateLimitToast(
   remainingSeconds: number,
   displayName: string = "Token Request",
-  customMessage?: string
+  customMessage?: string,
 ): void {
   try {
     playClick();

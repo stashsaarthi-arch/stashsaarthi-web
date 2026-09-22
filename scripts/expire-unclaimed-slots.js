@@ -12,14 +12,16 @@ async function runSlotCleanup() {
     const expirationThresholdMs = 15 * 60 * 1000;
     const cutoffTime = new Date(Date.now() - expirationThresholdMs).toISOString();
 
-    console.log(`[GSD Task] Scanned storage slot locking ledger for reservations prior to ${cutoffTime}.`);
+    console.log(
+      `[GSD Task] Scanned storage slot locking ledger for reservations prior to ${cutoffTime}.`,
+    );
 
     // In local simulation/testing, check and release unverified reservation slots
     const mockPendingCount = 0;
     console.log(`[GSD Task] Verified 0 expired reservations needing release.`);
     console.log(`[GSD Task] ✅ Storage node capacity ledger is synchronized and healthy.`);
   } catch (error) {
-    console.error('[GSD Task Failure]:', error);
+    console.error("[GSD Task Failure]:", error);
     process.exit(1);
   }
 }

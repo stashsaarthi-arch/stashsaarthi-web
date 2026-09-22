@@ -7,6 +7,7 @@
 ## 1. Executive Summary
 
 This release hardens **StashSaarthi** with resilient offline-first primitives, optical performance budgets, and friction-free conversion workflows across student and host personas:
+
 - **Zero Data Loss during Connectivity Drops**: Form submissions, storage bookings, and meal token orders are captured in a resilient FIFO local state queue (`localStorage` backed) and automatically dispatched upon the window `"online"` event.
 - **Kanpur Hyperlocal Cluster Directory**: Instant client-side filtering across Kanpur coaching and university clusters: Kakadeo, Kalyanpur, Rawatpur, Gumti No. 5, and Sharda Nagar.
 - **Dynamic Pre-Filled WhatsApp Action Links**: Direct deep links auto-formatting Order ID, selected service, and student timestamps for instant concierge coordination.
@@ -18,6 +19,7 @@ This release hardens **StashSaarthi** with resilient offline-first primitives, o
 ## 2. Updated Architecture & File Index
 
 ### A. Offline State Queue & Network Synchronization
+
 - **File**: `src/lib/offlineSubmissionQueue.ts`
   - Manages persistent queue `ss_offline_submissions_queue` for bookings, meal tokens, and inquiries.
   - Automatically hooks into `window.addEventListener("online")` to flush queued records to Supabase.
@@ -25,6 +27,7 @@ This release hardens **StashSaarthi** with resilient offline-first primitives, o
   - Dispatches `stashsaarthi:offline-synced` event for real-time UI notification.
 
 ### B. Dynamic WhatsApp Action & Offline Booking Flow
+
 - **File**: `src/components/stash/BookingModal.tsx`
   - Integrated `enqueueOfflineSubmission("booking", payload)` in both Supabase insert error handler and the network catch block.
   - Step 3 (StashPass Confirmation) renders a dynamic pre-filled WhatsApp link:
@@ -34,6 +37,7 @@ This release hardens **StashSaarthi** with resilient offline-first primitives, o
   - Mobile touch targets standardized with `min-h-[44px]` across buttons and input controls.
 
 ### C. Kitchen Meal Token Hub Offline Fallback & Mobile Swiping
+
 - **File**: `src/components/TokenMealHub.tsx`
   - Integrated `enqueueOfflineSubmission("meal", mealPayload)` for meal token redemptions.
   - Converted `KITCHEN_NODES` into a horizontal swipe carousel on mobile:
@@ -42,6 +46,7 @@ This release hardens **StashSaarthi** with resilient offline-first primitives, o
     `flex md:grid overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-3 no-scrollbar touch-pan-y`
 
 ### D. Hyperlocal Kanpur Cluster Filtering & Room Verification
+
 - **File**: `src/components/stash/Rooms.tsx`
   - Implemented 1-tap Kanpur cluster filter bar:
     - 📍 Kakadeo (PW & Allen coaching hub)
@@ -52,6 +57,7 @@ This release hardens **StashSaarthi** with resilient offline-first primitives, o
   - Instant client-side filtering across demo and live crowdsourced room listings.
 
 ### E. Optical Acceleration & Scroll Ergonomics
+
 - **File**: `src/styles.css`
   - `@utility content-visibility-auto`: `content-visibility: auto; contain-intrinsic-size: 1px 600px;`
   - `@utility touch-pan-y`: `touch-action: pan-y;`
@@ -64,11 +70,11 @@ This release hardens **StashSaarthi** with resilient offline-first primitives, o
 
 ## 3. Verification & Compliance Matrix
 
-| Criterion | Standard | Result |
-| :--- | :--- | :--- |
-| **TypeScript Compilation** | `npx tsc --noEmit` | ✅ 0 errors |
-| **Production Build** | `npm run build` | ✅ 0 errors (1.81s) |
-| **Meal Token Ledger Suite** | `test-meal-token-ledger.mjs` | ✅ 100% Passed |
-| **Luggage Estimator Suite** | `test-luggage-weight-estimator.mjs` | ✅ 100% Passed |
-| **Root Mount Safety** | `<div id="root"></div>` | ✅ Unaltered |
-| **Obsidian Theme Integrity**| `#0A0D0F` dark foundation | ✅ Maintained |
+| Criterion                    | Standard                            | Result              |
+| :--------------------------- | :---------------------------------- | :------------------ |
+| **TypeScript Compilation**   | `npx tsc --noEmit`                  | ✅ 0 errors         |
+| **Production Build**         | `npm run build`                     | ✅ 0 errors (1.81s) |
+| **Meal Token Ledger Suite**  | `test-meal-token-ledger.mjs`        | ✅ 100% Passed      |
+| **Luggage Estimator Suite**  | `test-luggage-weight-estimator.mjs` | ✅ 100% Passed      |
+| **Root Mount Safety**        | `<div id="root"></div>`             | ✅ Unaltered        |
+| **Obsidian Theme Integrity** | `#0A0D0F` dark foundation           | ✅ Maintained       |

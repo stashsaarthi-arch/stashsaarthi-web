@@ -51,7 +51,8 @@ export function BarcodeScanStressModal({ isOpen, onClose }: BarcodeScanStressMod
   const handleRunStressSuite = () => {
     setIsRunning(true);
     toast.info("Running 100-Sample Scan Stress Suite...", {
-      description: "Testing html5-qrcode decode rate across dim lighting (<30 lx) and crumpled tape.",
+      description:
+        "Testing html5-qrcode decode rate across dim lighting (<30 lx) and crumpled tape.",
     });
 
     setTimeout(() => {
@@ -87,11 +88,12 @@ export function BarcodeScanStressModal({ isOpen, onClose }: BarcodeScanStressMod
     }
   };
 
-  const activeProfile = STRESS_PROFILES.find((p) => p.id === selectedProfileId) || STRESS_PROFILES[0]!;
+  const activeProfile =
+    STRESS_PROFILES.find((p) => p.id === selectedProfileId) || STRESS_PROFILES[0]!;
   const preprocessedStats = applyScannerPreprocessing(
     activeProfile.contrastRatio,
     activeProfile.lightingLux,
-    activeProfile.crumpleDistortionLevel
+    activeProfile.crumpleDistortionLevel,
   );
 
   return (
@@ -105,7 +107,9 @@ export function BarcodeScanStressModal({ isOpen, onClose }: BarcodeScanStressMod
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-sm font-bold text-foreground">Barcode Scan Stress Test (html5-qrcode)</span>
+                <span className="text-sm font-bold text-foreground">
+                  Barcode Scan Stress Test (html5-qrcode)
+                </span>
                 <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-400">
                   🎯 95%+ SLA Target
                 </span>
@@ -287,16 +291,28 @@ export function BarcodeScanStressModal({ isOpen, onClose }: BarcodeScanStressMod
                 </span>
                 <div className="grid grid-cols-3 gap-2 text-xs font-mono">
                   <div className="bg-white/5 p-2.5 rounded-xl border border-white/5">
-                    <span className="text-[10px] text-muted-foreground block uppercase">Contrast Boost</span>
-                    <span className="text-foreground font-bold">{preprocessedStats.enhancedContrast}x</span>
+                    <span className="text-[10px] text-muted-foreground block uppercase">
+                      Contrast Boost
+                    </span>
+                    <span className="text-foreground font-bold">
+                      {preprocessedStats.enhancedContrast}x
+                    </span>
                   </div>
                   <div className="bg-white/5 p-2.5 rounded-xl border border-white/5">
-                    <span className="text-[10px] text-muted-foreground block uppercase">Normalized Gain</span>
-                    <span className="text-emerald-400 font-bold">{preprocessedStats.normalizedBrightness} lx</span>
+                    <span className="text-[10px] text-muted-foreground block uppercase">
+                      Normalized Gain
+                    </span>
+                    <span className="text-emerald-400 font-bold">
+                      {preprocessedStats.normalizedBrightness} lx
+                    </span>
                   </div>
                   <div className="bg-white/5 p-2.5 rounded-xl border border-white/5">
-                    <span className="text-[10px] text-muted-foreground block uppercase">Noise Filtering</span>
-                    <span className="text-amber-400 font-bold">{preprocessedStats.noiseReduction}</span>
+                    <span className="text-[10px] text-muted-foreground block uppercase">
+                      Noise Filtering
+                    </span>
+                    <span className="text-amber-400 font-bold">
+                      {preprocessedStats.noiseReduction}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -326,7 +342,9 @@ export function BarcodeScanStressModal({ isOpen, onClose }: BarcodeScanStressMod
                     </span>
                   </div>
                   <p className="text-xs text-muted-foreground">
-                    Preprocessed: Yes • Error Correction Applied: {liveScanResult.errorCorrectionApplied ? "Yes (Reed-Solomon)" : "No"} • Decode Time: {liveScanResult.scanTimeMs}ms
+                    Preprocessed: Yes • Error Correction Applied:{" "}
+                    {liveScanResult.errorCorrectionApplied ? "Yes (Reed-Solomon)" : "No"} • Decode
+                    Time: {liveScanResult.scanTimeMs}ms
                   </p>
                 </div>
               )}
@@ -344,16 +362,22 @@ export function BarcodeScanStressModal({ isOpen, onClose }: BarcodeScanStressMod
               </div>
               <ul className="text-xs text-muted-foreground space-y-2 list-disc pl-4">
                 <li>
-                  <strong className="text-foreground">Adaptive Contrast Enhancement:</strong> In low-light (&lt;30 lx), the camera frame triggers dynamic binarization to separate barcode bars from dark packaging backgrounds.
+                  <strong className="text-foreground">Adaptive Contrast Enhancement:</strong> In
+                  low-light (&lt;30 lx), the camera frame triggers dynamic binarization to separate
+                  barcode bars from dark packaging backgrounds.
                 </li>
                 <li>
-                  <strong className="text-foreground">Reed-Solomon Parity Recovery:</strong> Wrinkles and creases up to 30% distortion are reconstructed via parity check matrices.
+                  <strong className="text-foreground">Reed-Solomon Parity Recovery:</strong>{" "}
+                  Wrinkles and creases up to 30% distortion are reconstructed via parity check
+                  matrices.
                 </li>
                 <li>
-                  <strong className="text-foreground">Flashlight Exposure Compensation:</strong> Auto-boosts camera torch gain when ambient lux falls below 25.
+                  <strong className="text-foreground">Flashlight Exposure Compensation:</strong>{" "}
+                  Auto-boosts camera torch gain when ambient lux falls below 25.
                 </li>
                 <li>
-                  <strong className="text-foreground">SLA Requirement:</strong> Minimum 95.0% pass rate guaranteed across all doorstep fleet scans.
+                  <strong className="text-foreground">SLA Requirement:</strong> Minimum 95.0% pass
+                  rate guaranteed across all doorstep fleet scans.
                 </li>
               </ul>
             </div>

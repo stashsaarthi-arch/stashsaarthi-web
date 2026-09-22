@@ -1,6 +1,6 @@
 /**
  * StashSaarthi Autonomous System — TPA Sec 105 Digital Stamp Agreement Engine
- * 
+ *
  * CSO Compliance Directive (Task 119)
  * Automated dynamic digital stamp agreement generator under Transfer of Property Act (TPA) 1882, Section 105
  * Governs permissive Leave & License rights between Host Nodes and StashSaarthi Platform.
@@ -38,36 +38,46 @@ export const TPA_SEC_105_DEFAULT_CLAUSES: TpaAgreementClause[] = [
     clauseNumber: 1,
     titleEn: "Grant of Permissive Leave & License (TPA 1882, Sec 105)",
     titleHi: "अनुमेय लीव एंड लाइसेंस का अनुदान (TPA 1882, धारा 105)",
-    contentEn: "The Host grants purely permissive, non-exclusive, non-transferable Leave & License to StashSaarthi to utilize specified micro-storage space / student room. This agreement creates NO tenancy, leasehold, or property right in favor of StashSaarthi or students. Absolute property title remains with the Host.",
-    contentHi: "होस्ट स्टैशसारथी को निर्दिष्ट माइक्रो-स्टोरेज स्पेस/छात्र कमरे के उपयोग के लिए विशुद्ध रूप से अनुमेय, गैर-विशेष लीव एंड लाइसेंस प्रदान करता है। यह समझौता स्टैशसारथी या छात्रों के पक्ष में कोई किरायेदारी या पट्टा अधिकार नहीं बनाता है। पूर्ण संपत्ति मालिकाना हक होस्ट के पास रहेगा।",
+    contentEn:
+      "The Host grants purely permissive, non-exclusive, non-transferable Leave & License to StashSaarthi to utilize specified micro-storage space / student room. This agreement creates NO tenancy, leasehold, or property right in favor of StashSaarthi or students. Absolute property title remains with the Host.",
+    contentHi:
+      "होस्ट स्टैशसारथी को निर्दिष्ट माइक्रो-स्टोरेज स्पेस/छात्र कमरे के उपयोग के लिए विशुद्ध रूप से अनुमेय, गैर-विशेष लीव एंड लाइसेंस प्रदान करता है। यह समझौता स्टैशसारथी या छात्रों के पक्ष में कोई किरायेदारी या पट्टा अधिकार नहीं बनाता है। पूर्ण संपत्ति मालिकाना हक होस्ट के पास रहेगा।",
   },
   {
     clauseNumber: 2,
     titleEn: "Zero-Brokerage & Automated 24-Hour Payout SLA",
     titleHi: "शून्य दलाली व स्वचालित 24-घंटे भुगतान SLA",
-    contentEn: "Host receives 100% agreed net earnings (0% host commission fee). Payouts are automatically processed via Razorpay Route split payment gateway within 24 hours of booking completion directly into Host bank/UPI.",
-    contentHi: "होस्ट को 100% सहमत शुद्ध आय (0% होस्ट कमीशन) प्राप्त होती है। रेज़रपे रूट स्प्लिट पेमेंट गेटवे के माध्यम से बुकिंग पूरी होने के 24 घंटे के भीतर बैंक/UPI में स्वचालित भुगतान किया जाता है।",
+    contentEn:
+      "Host receives 100% agreed net earnings (0% host commission fee). Payouts are automatically processed via Razorpay Route split payment gateway within 24 hours of booking completion directly into Host bank/UPI.",
+    contentHi:
+      "होस्ट को 100% सहमत शुद्ध आय (0% होस्ट कमीशन) प्राप्त होती है। रेज़रपे रूट स्प्लिट पेमेंट गेटवे के माध्यम से बुकिंग पूरी होने के 24 घंटे के भीतर बैंक/UPI में स्वचालित भुगतान किया जाता है।",
   },
   {
     clauseNumber: 3,
     titleEn: "₹10,000 Micro-Insurance & Property Protection",
     titleHi: "₹10,000 माइक्रो-इंश्योरेंस व संपत्ति सुरक्षा",
-    contentEn: "StashSaarthi provides an embedded safety policy covering up to ₹10,000 for accidental property damage occurring during student custody or storage operations, subject to verification.",
-    contentHi: "स्टैशसारथी छात्र प्रवास या भंडारण संचालन के दौरान होने वाले आकस्मिक संपत्ति नुकसान के लिए ₹10,000 तक का सुरक्षा कवर प्रदान करता है।",
+    contentEn:
+      "StashSaarthi provides an embedded safety policy covering up to ₹10,000 for accidental property damage occurring during student custody or storage operations, subject to verification.",
+    contentHi:
+      "स्टैशसारथी छात्र प्रवास या भंडारण संचालन के दौरान होने वाले आकस्मिक संपत्ति नुकसान के लिए ₹10,000 तक का सुरक्षा कवर प्रदान करता है।",
   },
   {
     clauseNumber: 4,
     titleEn: "24/7 Bedside SOS & Student Conduct Rules",
     titleHi: "24/7 बेडसाइड SOS व छात्र आचरण नियम",
-    contentEn: "Students must adhere to strict quiet hours (10:00 PM to 6:00 AM) and campus norms. Host is backed by 24/7 Bedside SOS hotline (+91 9369454350) with 15-minute Kanpur ground ops emergency response SLA.",
-    contentHi: "छात्रों को शांत घंटों (रात 10:00 बजे से सुबह 6:00 बजे) और परिसर नियमों का पालन करना होगा। 15-मिनट कानपुर ग्राउंड सपोर्ट SLA के साथ 24/7 बेडसाइड SOS हॉटलाइन (+91 9369454350) उपलब्ध है।",
+    contentEn:
+      "Students must adhere to strict quiet hours (10:00 PM to 6:00 AM) and campus norms. Host is backed by 24/7 Bedside SOS hotline (+91 9369454350) with 15-minute Kanpur ground ops emergency response SLA.",
+    contentHi:
+      "छात्रों को शांत घंटों (रात 10:00 बजे से सुबह 6:00 बजे) और परिसर नियमों का पालन करना होगा। 15-मिनट कानपुर ग्राउंड सपोर्ट SLA के साथ 24/7 बेडसाइड SOS हॉटलाइन (+91 9369454350) उपलब्ध है।",
   },
   {
     clauseNumber: 5,
     titleEn: "Revocation at Will & 24-Hour Relocation Guarantee",
     titleHi: "इच्छानुसार निरस्तीकरण व 24-घंटे रीलोकेशन गारंटी",
-    contentEn: "Either party may terminate this license with a 24-hour notice. In case of student conduct breach, StashSaarthi guarantees immediate student relocation within 24 hours with zero financial loss to Host.",
-    contentHi: "कोई भी पक्ष 24 घंटे के नोटिस के साथ इस लाइसेंस को समाप्त कर सकता है। छात्र आचरण उल्लंघन के मामले में, स्टैशसारथी होस्ट को बिना वित्तीय नुकसान के 24 घंटे के भीतर छात्र रीलोकेशन की गारंटी देता है।",
+    contentEn:
+      "Either party may terminate this license with a 24-hour notice. In case of student conduct breach, StashSaarthi guarantees immediate student relocation within 24 hours with zero financial loss to Host.",
+    contentHi:
+      "कोई भी पक्ष 24 घंटे के नोटिस के साथ इस लाइसेंस को समाप्त कर सकता है। छात्र आचरण उल्लंघन के मामले में, स्टैशसारथी होस्ट को बिना वित्तीय नुकसान के 24 घंटे के भीतर छात्र रीलोकेशन की गारंटी देता है।",
   },
 ];
 
@@ -80,7 +90,7 @@ export function generateTpaVerificationHash(
   stampNo: string,
   hostName: string,
   hostPhone: string,
-  timestamp: string
+  timestamp: string,
 ): string {
   const payload = `${stampNo}:${hostName}:${hostPhone}:${timestamp}:TPA-105-UP-STAMP-2026`;
   let hash = 0;
@@ -90,9 +100,15 @@ export function generateTpaVerificationHash(
     hash |= 0;
   }
   const hex1 = Math.abs(hash).toString(16).padStart(8, "0");
-  const hex2 = Math.abs(hash * 31).toString(16).padStart(8, "0");
-  const hex3 = Math.abs(hash * 127).toString(16).padStart(8, "0");
-  const hex4 = Math.abs(hash * 8191).toString(16).padStart(8, "0");
+  const hex2 = Math.abs(hash * 31)
+    .toString(16)
+    .padStart(8, "0");
+  const hex3 = Math.abs(hash * 127)
+    .toString(16)
+    .padStart(8, "0");
+  const hex4 = Math.abs(hash * 8191)
+    .toString(16)
+    .padStart(8, "0");
   return `0x${hex1}${hex2}${hex3}${hex4}`.toUpperCase();
 }
 
@@ -103,7 +119,7 @@ export function generateTpaDigitalStampAgreement(
   secondPartyHostName: string,
   secondPartyHostPhone: string,
   nodeAddress: string,
-  campusNode: string = "Kakadeo Coaching Belt"
+  campusNode: string = "Kakadeo Coaching Belt",
 ): TpaDigitalAgreementRecord {
   const randNum = Math.floor(100000 + Math.random() * 900000);
   const grnRand = Math.floor(1000000 + Math.random() * 9000000);
@@ -117,7 +133,7 @@ export function generateTpaDigitalStampAgreement(
     stampCertificateNo,
     secondPartyHostName,
     secondPartyHostPhone,
-    timestamp
+    timestamp,
   );
 
   const record: TpaDigitalAgreementRecord = {
@@ -198,7 +214,7 @@ export function verifyTpaStampHash(record: TpaDigitalAgreementRecord): boolean {
     record.stampCertificateNo,
     record.secondPartyHostName,
     record.secondPartyHostPhone,
-    record.timestamp
+    record.timestamp,
   );
   return record.verificationHash === expectedHash;
 }

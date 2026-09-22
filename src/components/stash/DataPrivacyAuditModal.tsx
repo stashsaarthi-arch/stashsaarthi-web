@@ -1,8 +1,25 @@
 import React, { useState } from "react";
-import { ShieldCheck, Lock, CheckCircle2, FileText, Trash2, Download, X, AlertCircle, RefreshCw, MessageCircle } from "lucide-react";
+import {
+  ShieldCheck,
+  Lock,
+  CheckCircle2,
+  FileText,
+  Trash2,
+  Download,
+  X,
+  AlertCircle,
+  RefreshCw,
+  MessageCircle,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/context/LanguageContext";
-import { runDataPrivacyAudit, submitDsarRequest, getDsarRequests, auditUserDataLawfulness, DsarRequest } from "@/lib/dataPrivacyAudit";
+import {
+  runDataPrivacyAudit,
+  submitDsarRequest,
+  getDsarRequests,
+  auditUserDataLawfulness,
+  DsarRequest,
+} from "@/lib/dataPrivacyAudit";
 import { FOUNDER_WHATSAPP, FOUNDER_PHONE_DISPLAY } from "@/lib/constants";
 
 interface DataPrivacyAuditModalProps {
@@ -10,7 +27,10 @@ interface DataPrivacyAuditModalProps {
   onClose: () => void;
 }
 
-export const DataPrivacyAuditModal: React.FC<DataPrivacyAuditModalProps> = ({ isOpen, onClose }) => {
+export const DataPrivacyAuditModal: React.FC<DataPrivacyAuditModalProps> = ({
+  isOpen,
+  onClose,
+}) => {
   const { language } = useLanguage();
   const isHi = language === "hi";
 
@@ -20,7 +40,9 @@ export const DataPrivacyAuditModal: React.FC<DataPrivacyAuditModalProps> = ({ is
   const [isScanning, setIsScanning] = useState(false);
 
   // DSAR Form state
-  const [dsarType, setDsarType] = useState<"ERASURE" | "ACCESS_COPY" | "CORRECTION" | "NOMINATION">("ERASURE");
+  const [dsarType, setDsarType] = useState<"ERASURE" | "ACCESS_COPY" | "CORRECTION" | "NOMINATION">(
+    "ERASURE",
+  );
   const [fullName, setFullName] = useState("");
   const [contact, setContact] = useState("");
   const [details, setDetails] = useState("");
@@ -39,10 +61,15 @@ export const DataPrivacyAuditModal: React.FC<DataPrivacyAuditModalProps> = ({ is
   };
 
   const handleDownloadCertificate = () => {
-    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(lawfulnessReport, null, 2));
+    const dataStr =
+      "data:text/json;charset=utf-8," +
+      encodeURIComponent(JSON.stringify(lawfulnessReport, null, 2));
     const downloadAnchor = document.createElement("a");
     downloadAnchor.setAttribute("href", dataStr);
-    downloadAnchor.setAttribute("download", `StashSaarthi_DPDP_GDPR_Compliance_Certificate_${Date.now()}.json`);
+    downloadAnchor.setAttribute(
+      "download",
+      `StashSaarthi_DPDP_GDPR_Compliance_Certificate_${Date.now()}.json`,
+    );
     document.body.appendChild(downloadAnchor);
     downloadAnchor.click();
     downloadAnchor.remove();
@@ -173,15 +200,20 @@ export const DataPrivacyAuditModal: React.FC<DataPrivacyAuditModalProps> = ({ is
             {/* Statutory Compliance Matrix */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs">
               <div className="rounded-xl border border-white/10 bg-black/40 p-3 text-center">
-                <span className="text-[10px] text-muted-foreground block uppercase font-bold">DPDP 2023</span>
+                <span className="text-[10px] text-muted-foreground block uppercase font-bold">
+                  DPDP 2023
+                </span>
                 <span className="text-lg font-black text-emerald-400">
-                  {lawfulnessReport.categories.dpdp2023.passed}/{lawfulnessReport.categories.dpdp2023.total}
+                  {lawfulnessReport.categories.dpdp2023.passed}/
+                  {lawfulnessReport.categories.dpdp2023.total}
                 </span>
                 <span className="text-[10px] text-emerald-300 block">Passed</span>
               </div>
 
               <div className="rounded-xl border border-white/10 bg-black/40 p-3 text-center">
-                <span className="text-[10px] text-muted-foreground block uppercase font-bold">GDPR Standards</span>
+                <span className="text-[10px] text-muted-foreground block uppercase font-bold">
+                  GDPR Standards
+                </span>
                 <span className="text-lg font-black text-cyan-400">
                   {lawfulnessReport.categories.gdpr.passed}/{lawfulnessReport.categories.gdpr.total}
                 </span>
@@ -189,17 +221,23 @@ export const DataPrivacyAuditModal: React.FC<DataPrivacyAuditModalProps> = ({ is
               </div>
 
               <div className="rounded-xl border border-white/10 bg-black/40 p-3 text-center">
-                <span className="text-[10px] text-muted-foreground block uppercase font-bold">Security Controls</span>
+                <span className="text-[10px] text-muted-foreground block uppercase font-bold">
+                  Security Controls
+                </span>
                 <span className="text-lg font-black text-amber-400">
-                  {lawfulnessReport.categories.security.passed}/{lawfulnessReport.categories.security.total}
+                  {lawfulnessReport.categories.security.passed}/
+                  {lawfulnessReport.categories.security.total}
                 </span>
                 <span className="text-[10px] text-amber-300 block">Passed</span>
               </div>
 
               <div className="rounded-xl border border-white/10 bg-black/40 p-3 text-center">
-                <span className="text-[10px] text-muted-foreground block uppercase font-bold">Transparency</span>
+                <span className="text-[10px] text-muted-foreground block uppercase font-bold">
+                  Transparency
+                </span>
                 <span className="text-lg font-black text-purple-400">
-                  {lawfulnessReport.categories.transparency.passed}/{lawfulnessReport.categories.transparency.total}
+                  {lawfulnessReport.categories.transparency.passed}/
+                  {lawfulnessReport.categories.transparency.total}
                 </span>
                 <span className="text-[10px] text-purple-300 block">Passed</span>
               </div>
@@ -208,7 +246,9 @@ export const DataPrivacyAuditModal: React.FC<DataPrivacyAuditModalProps> = ({ is
             {/* Audit List */}
             <div className="space-y-3">
               <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                {isHi ? "सत्यापित कानून एवं वैधानिक सुरक्षा जांच" : "Verified Statutory & Legal Controls"}
+                {isHi
+                  ? "सत्यापित कानून एवं वैधानिक सुरक्षा जांच"
+                  : "Verified Statutory & Legal Controls"}
               </h3>
 
               <div className="grid grid-cols-1 gap-2.5 max-h-[300px] overflow-y-auto pr-1">
@@ -220,7 +260,9 @@ export const DataPrivacyAuditModal: React.FC<DataPrivacyAuditModalProps> = ({ is
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
                         <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
-                        <span className="font-bold text-white">{isHi ? check.titleHi : check.titleEn}</span>
+                        <span className="font-bold text-white">
+                          {isHi ? check.titleHi : check.titleEn}
+                        </span>
                         <span className="rounded-md bg-white/10 px-2 py-0.5 text-[10px] font-semibold text-cyan-300">
                           {check.clause}
                         </span>
@@ -243,12 +285,14 @@ export const DataPrivacyAuditModal: React.FC<DataPrivacyAuditModalProps> = ({ is
               <div className="flex items-center gap-2">
                 <Lock className="h-4 w-4 text-emerald-400" />
                 <span className="text-muted-foreground">
-                  {isHi ? "नामित नोडल अधिकारी: अद्विक ओमर (संस्थापक)" : "Designated Nodal Officer: Advik Omer (Founder)"}
+                  {isHi
+                    ? "नामित नोडल अधिकारी: अद्विक ओमर (संस्थापक)"
+                    : "Designated Nodal Officer: Advik Omer (Founder)"}
                 </span>
               </div>
               <a
                 href={`https://wa.me/${FOUNDER_WHATSAPP}?text=${encodeURIComponent(
-                  "Hello Advik Omer, I have a data privacy query regarding StashSaarthi."
+                  "Hello Advik Omer, I have a data privacy query regarding StashSaarthi.",
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -267,7 +311,11 @@ export const DataPrivacyAuditModal: React.FC<DataPrivacyAuditModalProps> = ({ is
             <div className="rounded-2xl border border-cyan/30 bg-cyan/10 p-4 text-xs space-y-2">
               <div className="flex items-center gap-2 font-bold text-cyan-300 text-sm">
                 <FileText className="h-4 w-4" />
-                <span>{isHi ? "डेटा विषय अधिकार अनुरोध (DSAR)" : "Data Subject Access & Erasure Request"}</span>
+                <span>
+                  {isHi
+                    ? "डेटा विषय अधिकार अनुरोध (DSAR)"
+                    : "Data Subject Access & Erasure Request"}
+                </span>
               </div>
               <p className="text-cyan-100/90">
                 {isHi
@@ -277,7 +325,10 @@ export const DataPrivacyAuditModal: React.FC<DataPrivacyAuditModalProps> = ({ is
             </div>
 
             {/* Submission Form */}
-            <form onSubmit={handleDsarSubmit} className="space-y-4 rounded-2xl border border-white/10 bg-white/5 p-5">
+            <form
+              onSubmit={handleDsarSubmit}
+              className="space-y-4 rounded-2xl border border-white/10 bg-white/5 p-5"
+            >
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <label className="block text-xs font-semibold text-muted-foreground">
                   {isHi ? "अनुरोध प्रकार" : "Request Type"}
@@ -286,10 +337,20 @@ export const DataPrivacyAuditModal: React.FC<DataPrivacyAuditModalProps> = ({ is
                     onChange={(e) => setDsarType(e.target.value as any)}
                     className="mt-1 block w-full rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white focus:border-emerald-500 focus:outline-none cursor-pointer"
                   >
-                    <option value="ERASURE">{isHi ? "स्थायी डेटा विलोपन (Right to Erasure)" : "Permanent Data Erasure"}</option>
-                    <option value="ACCESS_COPY">{isHi ? "डेटा कॉपी प्राप्त करें (Access Copy)" : "Export Data Summary"}</option>
-                    <option value="CORRECTION">{isHi ? "डेटा संशोधन (Profile Correction)" : "Update Profile Info"}</option>
-                    <option value="NOMINATION">{isHi ? "नामांकन अधिकार (Right to Nominate)" : "Nominate Legal Representative"}</option>
+                    <option value="ERASURE">
+                      {isHi ? "स्थायी डेटा विलोपन (Right to Erasure)" : "Permanent Data Erasure"}
+                    </option>
+                    <option value="ACCESS_COPY">
+                      {isHi ? "डेटा कॉपी प्राप्त करें (Access Copy)" : "Export Data Summary"}
+                    </option>
+                    <option value="CORRECTION">
+                      {isHi ? "डेटा संशोधन (Profile Correction)" : "Update Profile Info"}
+                    </option>
+                    <option value="NOMINATION">
+                      {isHi
+                        ? "नामांकन अधिकार (Right to Nominate)"
+                        : "Nominate Legal Representative"}
+                    </option>
                   </select>
                 </label>
 
@@ -312,7 +373,11 @@ export const DataPrivacyAuditModal: React.FC<DataPrivacyAuditModalProps> = ({ is
                     required
                     value={contact}
                     onChange={(e) => setContact(e.target.value)}
-                    placeholder={isHi ? "+91 9876543210 या email@domain.com" : "+91 9876543210 or student@iitk.ac.in"}
+                    placeholder={
+                      isHi
+                        ? "+91 9876543210 या email@domain.com"
+                        : "+91 9876543210 or student@iitk.ac.in"
+                    }
                     className="mt-1 block w-full rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </label>
@@ -324,13 +389,20 @@ export const DataPrivacyAuditModal: React.FC<DataPrivacyAuditModalProps> = ({ is
                   rows={2}
                   value={details}
                   onChange={(e) => setDetails(e.target.value)}
-                  placeholder={isHi ? "विशिष्ट डेटा या बुक किए गए स्टैश नंबर दर्ज करें..." : "Specify particular booking serials or notes..."}
+                  placeholder={
+                    isHi
+                      ? "विशिष्ट डेटा या बुक किए गए स्टैश नंबर दर्ज करें..."
+                      : "Specify particular booking serials or notes..."
+                  }
                   className="mt-1 block w-full rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white focus:border-emerald-500 focus:outline-none"
                 />
               </label>
 
               <div className="flex justify-end">
-                <Button type="submit" className="bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs gap-2 cursor-pointer">
+                <Button
+                  type="submit"
+                  className="bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs gap-2 cursor-pointer"
+                >
                   <Trash2 className="h-4 w-4" />
                   <span>{isHi ? "अनुरोध दर्ज करें" : "Submit Legal Request"}</span>
                 </Button>
@@ -343,7 +415,9 @@ export const DataPrivacyAuditModal: React.FC<DataPrivacyAuditModalProps> = ({ is
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2 text-emerald-300 font-bold">
                     <CheckCircle2 className="h-4 w-4 text-emerald-400" />
-                    <span>{isHi ? "अनुरोध सफलतापूर्वक दर्ज किया गया!" : "Legal DSAR Request Submitted!"}</span>
+                    <span>
+                      {isHi ? "अनुरोध सफलतापूर्वक दर्ज किया गया!" : "Legal DSAR Request Submitted!"}
+                    </span>
                   </div>
                   <span className="rounded-md bg-emerald-500/20 px-2 py-0.5 font-mono font-bold text-emerald-300">
                     {dsarSubmitted.ackTicket}
@@ -357,13 +431,17 @@ export const DataPrivacyAuditModal: React.FC<DataPrivacyAuditModalProps> = ({ is
                 <div className="pt-2 border-t border-emerald-500/20">
                   <a
                     href={`https://wa.me/${FOUNDER_WHATSAPP}?text=${encodeURIComponent(
-                      `Hello Nodal Officer, I submitted DSAR Ticket ${dsarSubmitted.ackTicket} for ${dsarSubmitted.requestType}. Please confirm processing.`
+                      `Hello Nodal Officer, I submitted DSAR Ticket ${dsarSubmitted.ackTicket} for ${dsarSubmitted.requestType}. Please confirm processing.`,
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 font-bold text-emerald-400 hover:underline"
                   >
-                    <span>{isHi ? "नोडल अधिकारी से व्हाट्सएप पर पुष्टि करें →" : "Verify Ticket via WhatsApp →"}</span>
+                    <span>
+                      {isHi
+                        ? "नोडल अधिकारी से व्हाट्सएप पर पुष्टि करें →"
+                        : "Verify Ticket via WhatsApp →"}
+                    </span>
                   </a>
                 </div>
               </div>
@@ -377,7 +455,10 @@ export const DataPrivacyAuditModal: React.FC<DataPrivacyAuditModalProps> = ({ is
                 </h4>
                 <div className="space-y-2 max-h-[180px] overflow-y-auto">
                   {storedDsars.map((req) => (
-                    <div key={req.id} className="flex items-center justify-between rounded-xl border border-white/10 bg-black/40 p-3 text-xs">
+                    <div
+                      key={req.id}
+                      className="flex items-center justify-between rounded-xl border border-white/10 bg-black/40 p-3 text-xs"
+                    >
                       <div>
                         <div className="flex items-center gap-2">
                           <span className="font-bold text-white">{req.fullName}</span>
@@ -403,4 +484,3 @@ export const DataPrivacyAuditModal: React.FC<DataPrivacyAuditModalProps> = ({ is
     </div>
   );
 };
-

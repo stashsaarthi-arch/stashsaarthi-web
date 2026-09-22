@@ -227,7 +227,11 @@ export function HostPushNotificationModal({
                       : "bg-zinc-800 text-amber-300 border border-zinc-700 hover:bg-zinc-700"
                   }`}
                 >
-                  {isPlayingAlert ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
+                  {isPlayingAlert ? (
+                    <VolumeX className="h-4 w-4" />
+                  ) : (
+                    <Volume2 className="h-4 w-4" />
+                  )}
                   {isPlayingAlert ? "Stop Sound Test" : "Test Alert Sound"}
                 </button>
               </div>
@@ -242,7 +246,8 @@ export function HostPushNotificationModal({
                   <Zap className="h-4 w-4 text-amber-400" /> Live Push Simulation Simulator
                 </h3>
                 <p className="text-xs text-zinc-400">
-                  Fires an instant push notification payload and triggers the persistent audio alarm.
+                  Fires an instant push notification payload and triggers the persistent audio
+                  alarm.
                 </p>
               </div>
               <button
@@ -257,14 +262,18 @@ export function HostPushNotificationModal({
             {lastReceived && (
               <div className="mt-3 rounded-lg border border-amber-500/40 bg-black/40 p-3 text-xs">
                 <div className="flex items-center justify-between font-bold text-amber-300 mb-1">
-                  <span>🚨 {lastReceived.bookingType.toUpperCase()} - {lastReceived.id}</span>
+                  <span>
+                    🚨 {lastReceived.bookingType.toUpperCase()} - {lastReceived.id}
+                  </span>
                   <span>₹{lastReceived.amount}</span>
                 </div>
                 <div className="text-zinc-300">
-                  <span className="font-semibold text-white">{lastReceived.studentName}</span> ({lastReceived.studentPhone}) — {lastReceived.details}
+                  <span className="font-semibold text-white">{lastReceived.studentName}</span> (
+                  {lastReceived.studentPhone}) — {lastReceived.details}
                 </div>
                 <div className="text-[11px] text-zinc-400 mt-1 flex items-center gap-1">
-                  <MapPin className="h-3 w-3 text-amber-400" /> {lastReceived.nodeName} • {new Date(lastReceived.timestamp).toLocaleTimeString()}
+                  <MapPin className="h-3 w-3 text-amber-400" /> {lastReceived.nodeName} •{" "}
+                  {new Date(lastReceived.timestamp).toLocaleTimeString()}
                 </div>
               </div>
             )}
@@ -274,7 +283,8 @@ export function HostPushNotificationModal({
           <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-4">
             <div className="flex items-center justify-between mb-3">
               <h3 className="text-xs font-bold text-zinc-300 uppercase tracking-wider flex items-center gap-1.5">
-                <Clock className="h-4 w-4 text-amber-400" /> Notification Audit History ({historyLogs.length})
+                <Clock className="h-4 w-4 text-amber-400" /> Notification Audit History (
+                {historyLogs.length})
               </h3>
               {historyLogs.length > 0 && (
                 <button
@@ -312,7 +322,11 @@ export function HostPushNotificationModal({
                     <div className="text-right">
                       <div className="font-bold text-emerald-400">₹{log.amount}</div>
                       <div className="text-[10px] text-zinc-500">
-                        {new Date(log.timestamp).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })}
+                        {new Date(log.timestamp).toLocaleTimeString([], {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                          second: "2-digit",
+                        })}
                       </div>
                     </div>
                   </div>

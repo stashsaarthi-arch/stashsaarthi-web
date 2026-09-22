@@ -236,9 +236,7 @@ export function EarlyAccessModal({
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder={
-                      isHi
-                        ? "ईमेल या फोन नंबर दर्ज करें *"
-                        : "Email (or WhatsApp Phone below) *"
+                      isHi ? "ईमेल या फोन नंबर दर्ज करें *" : "Email (or WhatsApp Phone below) *"
                     }
                     className="pl-10 h-11 rounded-xl border-neutral-800 bg-neutral-950 text-sm focus-visible:ring-emerald-500/50"
                   />

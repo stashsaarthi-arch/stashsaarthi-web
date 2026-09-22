@@ -5,17 +5,25 @@ test.describe("Data Privacy & DPDP Act 2023 Compliance Portal", () => {
     await page.goto("/privacy");
   });
 
-  test("opens Data Privacy Audit portal, verifies 100% compliance score, and submits DSAR erasure request", async ({ page }) => {
+  test("opens Data Privacy Audit portal, verifies 100% compliance score, and submits DSAR erasure request", async ({
+    page,
+  }) => {
     // 1. Verify title and launch button
     const pageHeading = page.locator("h1");
     await expect(pageHeading).toContainText("Privacy Policy");
 
-    const auditLaunchBtn = page.locator('button:has-text("Audit DPDP & GDPR Compliance Portal"), button:has-text("ऑटोनॉमस DPDP")').first();
+    const auditLaunchBtn = page
+      .locator(
+        'button:has-text("Audit DPDP & GDPR Compliance Portal"), button:has-text("ऑटोनॉमस DPDP")',
+      )
+      .first();
     await expect(auditLaunchBtn).toBeVisible();
     await auditLaunchBtn.click();
 
     // 2. Verify modal opened
-    const modalHeading = page.locator('h2:has-text("Data Sovereignty & DPDP Audit Portal"), h2:has-text("डेटा गोपनीयता")');
+    const modalHeading = page.locator(
+      'h2:has-text("Data Sovereignty & DPDP Audit Portal"), h2:has-text("डेटा गोपनीयता")',
+    );
     await expect(modalHeading).toBeVisible();
 
     // 3. Verify compliance score banner
@@ -23,7 +31,9 @@ test.describe("Data Privacy & DPDP Act 2023 Compliance Portal", () => {
     await expect(scoreBadge).toBeVisible();
 
     // 4. Switch to DSAR tab
-    const dsarTab = page.locator('button:has-text("Data Erasure / DSAR Portal"), button:has-text("डेटा विलोपन")').first();
+    const dsarTab = page
+      .locator('button:has-text("Data Erasure / DSAR Portal"), button:has-text("डेटा विलोपन")')
+      .first();
     await expect(dsarTab).toBeVisible();
     await dsarTab.click();
 
@@ -33,7 +43,9 @@ test.describe("Data Privacy & DPDP Act 2023 Compliance Portal", () => {
     await nameInput.fill("Ananya Roy");
     await contactInput.fill("ananya.roy@kanpur-univ.ac.in");
 
-    const submitBtn = page.locator('button:has-text("Submit Legal Request"), button:has-text("अनुरोध दर्ज करें")').first();
+    const submitBtn = page
+      .locator('button:has-text("Submit Legal Request"), button:has-text("अनुरोध दर्ज करें")')
+      .first();
     await expect(submitBtn).toBeVisible();
     await submitBtn.click();
 

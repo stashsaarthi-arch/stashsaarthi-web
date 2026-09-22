@@ -134,7 +134,8 @@ export function LowDataProvider({ children }: { children: React.ReactNode }) {
 
       if (enabled) {
         toast.success("Low-Data Mode Activated", {
-          description: "GSAP & WebGL animations disabled, lightweight static images enabled for maximum performance.",
+          description:
+            "GSAP & WebGL animations disabled, lightweight static images enabled for maximum performance.",
           duration: 3500,
         });
       } else {
@@ -144,7 +145,7 @@ export function LowDataProvider({ children }: { children: React.ReactNode }) {
         });
       }
     },
-    [applyLowDataDOM]
+    [applyLowDataDOM],
   );
 
   const toggleLowData = useCallback(() => {
@@ -159,7 +160,7 @@ export function LowDataProvider({ children }: { children: React.ReactNode }) {
       isAutoDetected,
       effectiveType,
     }),
-    [isLowData, toggleLowData, setLowData, isAutoDetected, effectiveType]
+    [isLowData, toggleLowData, setLowData, isAutoDetected, effectiveType],
   );
 
   return <LowDataContext.Provider value={contextValue}>{children}</LowDataContext.Provider>;

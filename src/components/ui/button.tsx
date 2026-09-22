@@ -19,9 +19,12 @@ const buttonVariants = cva(
           "hover:bg-white/[0.05] hover:text-foreground hover:translate-y-0 active:scale-[0.98]",
         link: "text-primary underline-offset-4 hover:underline hover:translate-y-0",
         hero: "relative overflow-hidden bg-[image:var(--gradient-cyan)] text-primary-foreground font-semibold shadow-[0_4px_16px_-2px_rgba(16,185,129,0.35)] hover:shadow-[0_6px_20px_-2px_rgba(16,185,129,0.45)] hover:brightness-105 btn-shimmer pulse-glow",
-        heroMint: "relative overflow-hidden bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 text-slate-950 font-bold shadow-[0_4px_16px_-2px_rgba(16,185,129,0.35)] hover:shadow-[0_6px_20px_-2px_rgba(16,185,129,0.45)] hover:brightness-105 btn-shimmer pulse-glow",
-        heroEmerald: "relative overflow-hidden bg-gradient-to-r from-emerald-500 via-emerald-400 to-green-500 text-slate-950 font-bold shadow-[0_4px_16px_-2px_rgba(16,185,129,0.4)] hover:shadow-[0_6px_20px_-2px_rgba(16,185,129,0.5)] hover:brightness-105 btn-shimmer pulse-glow-emerald",
-        heroCyan: "relative overflow-hidden bg-gradient-to-r from-cyan-400 via-sky-400 to-teal-400 text-slate-950 font-bold shadow-[0_4px_16px_-2px_rgba(6,182,212,0.35)] hover:shadow-[0_6px_20px_-2px_rgba(6,182,212,0.45)] hover:brightness-105 btn-shimmer pulse-glow",
+        heroMint:
+          "relative overflow-hidden bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 text-slate-950 font-bold shadow-[0_4px_16px_-2px_rgba(16,185,129,0.35)] hover:shadow-[0_6px_20px_-2px_rgba(16,185,129,0.45)] hover:brightness-105 btn-shimmer pulse-glow",
+        heroEmerald:
+          "relative overflow-hidden bg-gradient-to-r from-emerald-500 via-emerald-400 to-green-500 text-slate-950 font-bold shadow-[0_4px_16px_-2px_rgba(16,185,129,0.4)] hover:shadow-[0_6px_20px_-2px_rgba(16,185,129,0.5)] hover:brightness-105 btn-shimmer pulse-glow-emerald",
+        heroCyan:
+          "relative overflow-hidden bg-gradient-to-r from-cyan-400 via-sky-400 to-teal-400 text-slate-950 font-bold shadow-[0_4px_16px_-2px_rgba(6,182,212,0.35)] hover:shadow-[0_6px_20px_-2px_rgba(6,182,212,0.45)] hover:brightness-105 btn-shimmer pulse-glow",
         warm: "relative overflow-hidden bg-[image:var(--gradient-amber)] text-slate-950 font-bold shadow-[0_4px_16px_-2px_rgba(245,158,11,0.35)] hover:shadow-[0_6px_20px_-2px_rgba(245,158,11,0.45)] hover:brightness-105 btn-shimmer pulse-glow-amber",
         frost:
           "glass glass-hover text-foreground font-semibold backdrop-blur-xl hover:text-foreground",

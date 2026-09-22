@@ -115,7 +115,7 @@ export function getOptimalSEO(
   pathname: string,
   searchString: string = "",
   hash: string = "",
-  role: string = "student"
+  role: string = "student",
 ): SEOMetadata {
   if (pathname === "/admin") {
     return LONG_TAIL_SEO_CONFIG.admin;
@@ -144,5 +144,3 @@ export function getOptimalSEO(
 
   return LONG_TAIL_SEO_CONFIG.default;
 }
-
-

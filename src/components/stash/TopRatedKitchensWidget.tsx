@@ -125,16 +125,16 @@ interface TopRatedKitchensWidgetProps {
   onOrderMeal?: (kitchenId: string) => void;
 }
 
-export const TopRatedKitchensWidget: React.FC<TopRatedKitchensWidgetProps> = ({
-  onOrderMeal,
-}) => {
+export const TopRatedKitchensWidget: React.FC<TopRatedKitchensWidgetProps> = ({ onOrderMeal }) => {
   const { language } = useLanguage();
   const isHi = language === "hi";
   const [kitchens, setKitchens] = useState<TopKitchen[]>(INITIAL_KITCHENS);
   const [votedIds, setVotedIds] = useState<Record<string, boolean>>({});
   const [showNominateModal, setShowNominateModal] = useState(false);
   const [isRoommateShareOpen, setIsRoommateShareOpen] = useState(false);
-  const [roommateShareDetails, setRoommateShareDetails] = useState<MenuShareDetails | undefined>(undefined);
+  const [roommateShareDetails, setRoommateShareDetails] = useState<MenuShareDetails | undefined>(
+    undefined,
+  );
   const [nominateForm, setNominateForm] = useState({
     hostName: "",
     address: "",
@@ -146,12 +146,14 @@ export const TopRatedKitchensWidget: React.FC<TopRatedKitchensWidgetProps> = ({
     playPop();
 
     // Check rate limit (1 vote per 5s per kitchen)
-    const rateLimitCheck = checkAndRecordRateLimit(`kitchen_vote_${kitchenId}`, { minIntervalMs: 5000 });
+    const rateLimitCheck = checkAndRecordRateLimit(`kitchen_vote_${kitchenId}`, {
+      minIntervalMs: 5000,
+    });
     if (!rateLimitCheck.allowed) {
       toast.warning(
         isHi
           ? `कृपया वोट करने से पहले ${rateLimitCheck.remainingSeconds} सेकंड प्रतीक्षा करें।`
-          : `Please wait ${rateLimitCheck.remainingSeconds}s before voting again.`
+          : `Please wait ${rateLimitCheck.remainingSeconds}s before voting again.`,
       );
       return;
     }
@@ -160,20 +162,20 @@ export const TopRatedKitchensWidget: React.FC<TopRatedKitchensWidgetProps> = ({
       toast.info(
         isHi
           ? "आपने इस रसोई के लिए इस सप्ताह पहले ही वोट कर दिया है!"
-          : "You have already voted for this kitchen this week!"
+          : "You have already voted for this kitchen this week!",
       );
       return;
     }
 
     setKitchens((prev) =>
-      prev.map((k) => (k.id === kitchenId ? { ...k, voteCount: k.voteCount + 1 } : k))
+      prev.map((k) => (k.id === kitchenId ? { ...k, voteCount: k.voteCount + 1 } : k)),
     );
     setVotedIds((prev) => ({ ...prev, [kitchenId]: true }));
 
     toast.success(
       isHi
         ? "आपका वोट दर्ज हो गया है! कानपुर की वरिष्ठ माताओं के होम किचन का समर्थन करने के लिए धन्यवाद।"
-        : "Your student vote has been recorded! Thank you for supporting verified verified PG owner home kitchens."
+        : "Your student vote has been recorded! Thank you for supporting verified verified PG owner home kitchens.",
     );
   };
 
@@ -186,7 +188,7 @@ export const TopRatedKitchensWidget: React.FC<TopRatedKitchensWidgetProps> = ({
       toast.warning(
         isHi
           ? `कृपया ${rateLimitCheck.remainingSeconds} सेकंड प्रतीक्षा करें।`
-          : `Please wait ${rateLimitCheck.remainingSeconds}s before submitting again.`
+          : `Please wait ${rateLimitCheck.remainingSeconds}s before submitting again.`,
       );
       return;
     }
@@ -199,7 +201,7 @@ export const TopRatedKitchensWidget: React.FC<TopRatedKitchensWidgetProps> = ({
     toast.success(
       isHi
         ? "वरिष्ठ रसोई नामांकन प्राप्त हुआ! हमारी ऑडिट टीम 24 घंटे में भौतिक सत्यापन करेगी।"
-        : "Kitchen nomination submitted! Our safety team will perform 3-tier host audit within 24 hours."
+        : "Kitchen nomination submitted! Our safety team will perform 3-tier host audit within 24 hours.",
     );
     setNominateForm({ hostName: "", address: "", phone: "", specialty: "" });
     setShowNominateModal(false);
@@ -349,9 +351,7 @@ export const TopRatedKitchensWidget: React.FC<TopRatedKitchensWidgetProps> = ({
                     <span className="text-[11px] text-slate-400 block font-medium">
                       {isHi ? "प्रति थाली" : "Per Meal"}
                     </span>
-                    <span className="text-lg font-black text-white">
-                      ₹{kitchen.pricePerMeal}
-                    </span>
+                    <span className="text-lg font-black text-white">₹{kitchen.pricePerMeal}</span>
                   </div>
 
                   <div className="text-right">
@@ -379,8 +379,8 @@ export const TopRatedKitchensWidget: React.FC<TopRatedKitchensWidgetProps> = ({
                         ? "वोट दर्ज ✓"
                         : "Voted ✓"
                       : isHi
-                      ? `वोट (${kitchen.voteCount})`
-                      : `Vote (${kitchen.voteCount})`}
+                        ? `वोट (${kitchen.voteCount})`
+                        : `Vote (${kitchen.voteCount})`}
                   </button>
 
                   <button
@@ -391,10 +391,10 @@ export const TopRatedKitchensWidget: React.FC<TopRatedKitchensWidgetProps> = ({
                       } else {
                         window.open(
                           `https://wa.me/919369454350?text=${encodeURIComponent(
-                            `Hi StashSaarthi, I want to order tiffin pass from ${kitchen.name} (Rank #${kitchen.rank} Kitchen)`
+                            `Hi StashSaarthi, I want to order tiffin pass from ${kitchen.name} (Rank #${kitchen.rank} Kitchen)`,
                           )}`,
                           "_blank",
-                          "noopener,noreferrer"
+                          "noopener,noreferrer",
                         );
                       }
                     }}
@@ -421,7 +421,9 @@ export const TopRatedKitchensWidget: React.FC<TopRatedKitchensWidgetProps> = ({
                   className="w-full mt-2 py-2 rounded-xl bg-slate-950 border border-teal-500/30 hover:border-teal-400 text-teal-300 font-semibold text-xs transition-all flex items-center justify-center gap-1.5 hover:bg-slate-900"
                 >
                   <MessageCircle className="w-3.5 h-3.5 text-teal-400 fill-teal-400/20" />
-                  <span>{isHi ? "रूममेट के साथ मेनू शेयर करें 📱" : "Share Menu with Roommate 📱"}</span>
+                  <span>
+                    {isHi ? "रूममेट के साथ मेनू शेयर करें 📱" : "Share Menu with Roommate 📱"}
+                  </span>
                 </button>
               </div>
             </div>
@@ -437,7 +439,9 @@ export const TopRatedKitchensWidget: React.FC<TopRatedKitchensWidgetProps> = ({
           </div>
           <div>
             <div className="font-bold text-white text-sm">
-              {isHi ? "100% खाद्य सुरक्षा एवं वरिष्ठ सम्मान गारंटी" : "100% Food Safety & Verified PG Owner Dignity Assurance"}
+              {isHi
+                ? "100% खाद्य सुरक्षा एवं वरिष्ठ सम्मान गारंटी"
+                : "100% Food Safety & Verified PG Owner Dignity Assurance"}
             </div>
             <p className="text-slate-400 mt-0.5">
               {isHi
@@ -464,7 +468,9 @@ export const TopRatedKitchensWidget: React.FC<TopRatedKitchensWidgetProps> = ({
           <div className="bg-slate-900 border border-slate-700 rounded-3xl p-6 md:p-8 max-w-lg w-full relative shadow-2xl animate-in fade-in zoom-in-95">
             <h3 className="text-xl font-extrabold text-white mb-1 flex items-center gap-2">
               <ChefHat className="w-5 h-5 text-amber-400" />
-              {isHi ? "वरिष्ठ गृहणी रसोई नामांकित करें" : "Nominate a Verified PG Owner Home Kitchen"}
+              {isHi
+                ? "वरिष्ठ गृहणी रसोई नामांकित करें"
+                : "Nominate a Verified PG Owner Home Kitchen"}
             </h3>
             <p className="text-xs text-slate-400 mb-6">
               {isHi

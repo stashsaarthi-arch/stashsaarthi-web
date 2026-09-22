@@ -126,7 +126,10 @@ export const Navbar = memo(function Navbar({
         </div>
 
         {/* 2. Middle: Desktop Navigation Links */}
-        <nav aria-label="Main Navigation" className="hidden xl:flex flex-1 items-center justify-start gap-3 overflow-x-auto whitespace-nowrap scrollbar-hide px-4">
+        <nav
+          aria-label="Main Navigation"
+          className="hidden xl:flex flex-1 items-center justify-start gap-3 overflow-x-auto whitespace-nowrap scrollbar-hide px-4"
+        >
           {NAV_LINKS.map((l) => {
             const label = isHi ? l.labelHi : l.labelEn;
 
@@ -141,7 +144,9 @@ export const Navbar = memo(function Navbar({
                 }}
                 className="whitespace-nowrap rounded-lg px-2 min-[1650px]:px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition-all hover:bg-white/[0.05] hover:text-foreground shrink-0 flex items-center gap-1.5 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400/80 focus-visible:ring-offset-1 focus-visible:ring-offset-[#0A0D0F]"
               >
-                <span className="text-xs shrink-0" aria-hidden="true">{l.icon}</span>
+                <span className="text-xs shrink-0" aria-hidden="true">
+                  {l.icon}
+                </span>
                 <span>{label}</span>
               </a>
             );
@@ -151,7 +156,11 @@ export const Navbar = memo(function Navbar({
         {/* 3. Right: Action Controls (Responsive & Mobile Fitted) */}
         <div className="flex items-center gap-1 sm:gap-2 lg:gap-2.5 shrink-0 flex-nowrap">
           {/* Persona Toggle on Desktop */}
-          <div role="radiogroup" aria-label="User Persona Selector" className="hidden min-[1650px]:flex items-center p-0.5 bg-white/[0.03] border border-white/[0.08] rounded-full shrink-0 relative backdrop-blur-md shadow-inner">
+          <div
+            role="radiogroup"
+            aria-label="User Persona Selector"
+            className="hidden min-[1650px]:flex items-center p-0.5 bg-white/[0.03] border border-white/[0.08] rounded-full shrink-0 relative backdrop-blur-md shadow-inner"
+          >
             <motion.button
               type="button"
               role="radio"
@@ -162,9 +171,7 @@ export const Navbar = memo(function Navbar({
                 setRole("student");
               }}
               className={`relative px-2.5 py-1 rounded-full text-xs font-semibold transition-colors flex items-center gap-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400/80 focus-visible:ring-offset-1 focus-visible:ring-offset-[#0A0D0F] z-10 ${
-                role === "student"
-                  ? "text-black font-bold"
-                  : "text-slate-400 hover:text-white"
+                role === "student" ? "text-black font-bold" : "text-slate-400 hover:text-white"
               }`}
             >
               {role === "student" && (
@@ -188,9 +195,7 @@ export const Navbar = memo(function Navbar({
                 setRole("host");
               }}
               className={`relative px-2.5 py-1 rounded-full text-xs font-semibold transition-colors flex items-center gap-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-amber-400/80 focus-visible:ring-offset-1 focus-visible:ring-offset-[#0A0D0F] z-10 ${
-                role === "host"
-                  ? "text-black font-bold"
-                  : "text-slate-400 hover:text-white"
+                role === "host" ? "text-black font-bold" : "text-slate-400 hover:text-white"
               }`}
             >
               {role === "host" && (
@@ -208,7 +213,11 @@ export const Navbar = memo(function Navbar({
 
           {/* Compact Language Switcher, Theme Toggle & Sound Toggle */}
           <div className="hidden sm:flex items-center gap-1.5 shrink-0">
-            <div role="radiogroup" aria-label="Select Language" className="flex items-center rounded-full border border-white/[0.08] bg-white/[0.03] p-0.5 shrink-0 backdrop-blur-md">
+            <div
+              role="radiogroup"
+              aria-label="Select Language"
+              className="flex items-center rounded-full border border-white/[0.08] bg-white/[0.03] p-0.5 shrink-0 backdrop-blur-md"
+            >
               <button
                 type="button"
                 role="radio"
@@ -294,7 +303,6 @@ export const Navbar = memo(function Navbar({
             <span aria-hidden="true">🏠</span>
             <span>{isHi ? "प्रॉपर्टी लिस्ट करें" : "Become a Host"}</span>
           </Link>
-
 
           {/* Mobile Hamburger Toggle */}
           <Button
@@ -390,8 +398,14 @@ export const Navbar = memo(function Navbar({
               >
                 हिंदी
               </button>
-              <ThemeToggle compact className="shrink-0 min-h-[48px] min-w-[48px] flex items-center justify-center" />
-              <LowDataToggle compact className="shrink-0 min-h-[48px] min-w-[48px] flex items-center justify-center" />
+              <ThemeToggle
+                compact
+                className="shrink-0 min-h-[48px] min-w-[48px] flex items-center justify-center"
+              />
+              <LowDataToggle
+                compact
+                className="shrink-0 min-h-[48px] min-w-[48px] flex items-center justify-center"
+              />
             </div>
 
             {/* Structured Navigation Grid */}

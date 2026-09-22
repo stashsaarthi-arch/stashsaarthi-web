@@ -1,20 +1,20 @@
 import React, { useState } from "react";
-import { 
-  Check, 
-  X, 
-  ShieldCheck, 
-  Zap, 
-  Home, 
-  Lock, 
-  Wallet, 
-  Utensils, 
-  Sparkles, 
-  Building2, 
-  Clock, 
+import {
+  Check,
+  X,
+  ShieldCheck,
+  Zap,
+  Home,
+  Lock,
+  Wallet,
+  Utensils,
+  Sparkles,
+  Building2,
+  Clock,
   AlertTriangle,
   ArrowRight,
   TrendingUp,
-  Award
+  Award,
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { usePersona } from "@/context/PersonaContext";
@@ -253,9 +253,10 @@ export const PgComparisonTable: React.FC<PgComparisonTableProps> = ({ onBook }) 
 
   const isHindi = language === "hi";
 
-  const filteredRows = activeCategory === "all" 
-    ? COMPARISON_ROWS 
-    : COMPARISON_ROWS.filter(r => r.category === activeCategory);
+  const filteredRows =
+    activeCategory === "all"
+      ? COMPARISON_ROWS
+      : COMPARISON_ROWS.filter((r) => r.category === activeCategory);
 
   const categories: { id: CategoryFilter; labelEn: string; labelHi: string }[] = [
     { id: "all", labelEn: "All Comparisons", labelHi: "सभी तुलनाएं" },
@@ -266,7 +267,10 @@ export const PgComparisonTable: React.FC<PgComparisonTableProps> = ({ onBook }) 
   ];
 
   return (
-    <section id="comparison" className="relative py-8 sm:py-12 bg-background border-t border-b border-border/40 overflow-hidden">
+    <section
+      id="comparison"
+      className="relative py-8 sm:py-12 bg-background border-t border-b border-border/40 overflow-hidden"
+    >
       {/* Glow Effects */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-emerald-500/5 dark:bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 right-10 w-72 h-72 bg-cyan-500/5 dark:bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
@@ -327,7 +331,8 @@ export const PgComparisonTable: React.FC<PgComparisonTableProps> = ({ onBook }) 
               ⚡ {isHindi ? "रद्दीकरण नीति" : "Cancellation Fee"}
             </span>
             <span className="text-lg sm:text-2xl font-black text-emerald-400 mt-0.5">
-              ₹0 <span className="text-xs font-normal text-emerald-300/80">(Zero Fee Guarantee)</span>
+              ₹0{" "}
+              <span className="text-xs font-normal text-emerald-300/80">(Zero Fee Guarantee)</span>
             </span>
           </div>
           <div className="p-3 sm:p-4 rounded-[2rem] bg-card border border-border/80 shadow-sm flex flex-col justify-center items-center text-center">
@@ -335,7 +340,8 @@ export const PgComparisonTable: React.FC<PgComparisonTableProps> = ({ onBook }) 
               {isHindi ? "लॉक-इन पेनल्टी" : "Lock-in Penalty"}
             </span>
             <span className="text-lg sm:text-2xl font-black text-emerald-500 dark:text-emerald-400 mt-0.5">
-              0 Days <span className="text-xs font-normal text-muted-foreground">(Month-to-Month)</span>
+              0 Days{" "}
+              <span className="text-xs font-normal text-muted-foreground">(Month-to-Month)</span>
             </span>
           </div>
         </div>
@@ -362,17 +368,23 @@ export const PgComparisonTable: React.FC<PgComparisonTableProps> = ({ onBook }) 
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="border-b border-border bg-muted/40 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                <th className="py-4 px-6 w-1/3">{isHindi ? "फ़ीचर और विवरण" : "Feature & Evaluation"}</th>
+                <th className="py-4 px-6 w-1/3">
+                  {isHindi ? "फ़ीचर और विवरण" : "Feature & Evaluation"}
+                </th>
                 <th className="py-4 px-6 w-1/3 bg-rose-950/40 border border-white/10 text-rose-600 dark:text-rose-400">
                   <div className="flex items-center gap-2">
                     <Building2 className="w-4 h-4 text-rose-500" />
-                    <span>{isHindi ? "पारंपरिक PGs / कमर्शियल हॉस्टल" : "Traditional PGs / Hostels"}</span>
+                    <span>
+                      {isHindi ? "पारंपरिक PGs / कमर्शियल हॉस्टल" : "Traditional PGs / Hostels"}
+                    </span>
                   </div>
                 </th>
                 <th className="py-4 px-6 w-1/3 bg-emerald-950/40 border border-white/10 text-emerald-600 dark:text-emerald-400 font-bold">
                   <div className="flex items-center gap-2">
                     <ShieldCheck className="w-4.5 h-4.5 text-emerald-500" />
-                    <span>{isHindi ? "स्टैशसारथी नेटवर्क (StashSaarthi)" : "StashSaarthi Network"}</span>
+                    <span>
+                      {isHindi ? "स्टैशसारथी नेटवर्क (StashSaarthi)" : "StashSaarthi Network"}
+                    </span>
                     <span className="ml-auto text-[10px] px-2 py-0.5 rounded bg-emerald-500 text-slate-950 font-black">
                       {isHindi ? "विजेता" : "WINNER"}
                     </span>

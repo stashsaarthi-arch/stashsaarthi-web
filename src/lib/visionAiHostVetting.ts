@@ -36,7 +36,8 @@ export const SAMPLE_PROPERTY_PHOTOS: SamplePhotoPreset[] = [
     titleEn: "Swaroop Nagar Verified PG Owner Host Bedroom",
     titleHi: "स्वरूप नगर सीनियर होस्ट बेडरूम",
     category: "bedroom",
-    imageUrl: "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?q=80&w=800&auto=format&fit=crop",
+    imageUrl:
+      "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?q=80&w=800&auto=format&fit=crop",
     expectedPass: true,
     descriptionEn: "Sunlit room with wooden furniture, clean bed, and elevated storage space.",
     descriptionHi: "लकड़ी के फर्नीचर, साफ बिस्तर और ऊंचे स्टोरेज स्पेस वाला धूपदार कमरा।",
@@ -46,7 +47,8 @@ export const SAMPLE_PROPERTY_PHOTOS: SamplePhotoPreset[] = [
     titleEn: "Kakadeo Homestyle Living Space",
     titleHi: "काकादेव होमस्टाइल लिविंग स्पेस",
     category: "living",
-    imageUrl: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=800&auto=format&fit=crop",
+    imageUrl:
+      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=800&auto=format&fit=crop",
     expectedPass: true,
     descriptionEn: "Neat living room with warm lighting and tech-enabled homestyle ambiance.",
     descriptionHi: "गर्म रोशनी और गरिमापूर्ण घरेलू माहौल के साथ साफ-सुथरा बैठक कमरा।",
@@ -56,7 +58,8 @@ export const SAMPLE_PROPERTY_PHOTOS: SamplePhotoPreset[] = [
     titleEn: "Cluttered Dark Basement Storage",
     titleHi: "अव्यवस्थित अंधेरा बेसमेंट स्टोरेज",
     category: "cluttered",
-    imageUrl: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=800&auto=format&fit=crop",
+    imageUrl:
+      "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=800&auto=format&fit=crop",
     expectedPass: false,
     descriptionEn: "Low lighting and unorganized clutter fails 'Ghar Jaisa' safety audit.",
     descriptionHi: "कम रोशनी और अव्यवस्थित सामान 'घर जैसा' सुरक्षा ऑडिट में विफल रहता है।",
@@ -66,15 +69,15 @@ export const SAMPLE_PROPERTY_PHOTOS: SamplePhotoPreset[] = [
 /**
  * Executes Vision AI photo verification via Supabase Edge Function with Multi-Region Failover & Canvas Fallback
  */
-export async function verifyHostPropertyPhoto(
-  input: { imageUrl?: string; imageBase64?: string; hostId?: string }
-): Promise<HostPhotoVerificationResult> {
+export async function verifyHostPropertyPhoto(input: {
+  imageUrl?: string;
+  imageBase64?: string;
+  hostId?: string;
+}): Promise<HostPhotoVerificationResult> {
   try {
     // Attempt Supabase Edge Function execution across multi-region edge nodes
-    const { data, error, regionUsed } = await edgeRouter.invokeFunction<HostPhotoVerificationResult>(
-      "verify-host-photo",
-      input
-    );
+    const { data, error, regionUsed } =
+      await edgeRouter.invokeFunction<HostPhotoVerificationResult>("verify-host-photo", input);
 
     if (!error && data && data.overallScore !== undefined) {
       return {
@@ -118,7 +121,14 @@ function runClientHeuristicVisionAI(input: {
     homestyleAestheticScore: homestyleScore,
     detectedLabels: isCluttered
       ? ["Low Ambient Light", "Unorganized Storage", "Floor Obstruction", "Dampness Concern"]
-      : ["Sunlit Bedroom", "Clean Wooden Bed", "Elevated Storage Area", "Warm Lighting", "Homestyle Comfort", "Ventilated Room"],
+      : [
+          "Sunlit Bedroom",
+          "Clean Wooden Bed",
+          "Elevated Storage Area",
+          "Warm Lighting",
+          "Homestyle Comfort",
+          "Ventilated Room",
+        ],
     safetyAudit: {
       adult: "VERY_UNLIKELY",
       violence: "VERY_UNLIKELY",

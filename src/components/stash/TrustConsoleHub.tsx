@@ -23,7 +23,9 @@ export const TrustConsoleHub = memo(function TrustConsoleHub() {
     const handleTabChange = (e: Event) => {
       const detail = (e as CustomEvent).detail;
       if (["sandbox", "vetting", "process", "zerorisk", "privacy", "founder"].includes(detail)) {
-        setActiveTab(detail as "sandbox" | "vetting" | "process" | "zerorisk" | "privacy" | "founder");
+        setActiveTab(
+          detail as "sandbox" | "vetting" | "process" | "zerorisk" | "privacy" | "founder",
+        );
       }
     };
     window.addEventListener("stashsaarthi-trust-tab", handleTabChange);

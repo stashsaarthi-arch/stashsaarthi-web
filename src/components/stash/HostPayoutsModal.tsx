@@ -12,7 +12,17 @@ import {
 } from "../../lib/razorpayRouteEngine";
 import { toast } from "../../context/ToastContext";
 import { playClick, playPop } from "../../lib/audio";
-import { Shield, Building2, CheckCircle2, Clock, ArrowUpRight, Zap, RefreshCw, X, Download } from "lucide-react";
+import {
+  Shield,
+  Building2,
+  CheckCircle2,
+  Clock,
+  ArrowUpRight,
+  Zap,
+  RefreshCw,
+  X,
+  Download,
+} from "lucide-react";
 
 interface HostPayoutsModalProps {
   isOpen: boolean;
@@ -37,7 +47,9 @@ export const HostPayoutsModal: React.FC<HostPayoutsModalProps> = ({
   const [upiVpa, setUpiVpa] = useState("kamlaarora@icici");
 
   // Calculator State
-  const [calcService, setCalcService] = useState<"stash" | "spaces" | "kitchen" | "connect">("stash");
+  const [calcService, setCalcService] = useState<"stash" | "spaces" | "kitchen" | "connect">(
+    "stash",
+  );
   const [calcAmount, setCalcAmount] = useState<number>(300);
 
   useEffect(() => {
@@ -124,7 +136,6 @@ export const HostPayoutsModal: React.FC<HostPayoutsModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in">
       <div className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-[#0A0D0F] border border-amber-500/30 rounded-2xl shadow-2xl text-slate-100">
-        
         {/* Modal Header */}
         <div className="sticky top-0 z-20 flex items-center justify-between p-6 bg-[#0A0D0F]/95 border-b border-amber-500/20 backdrop-blur-md">
           <div className="flex items-center space-x-3">
@@ -206,7 +217,6 @@ export const HostPayoutsModal: React.FC<HostPayoutsModalProps> = ({
 
         {/* Tab Content */}
         <div className="p-6 space-y-6">
-
           {/* TAB 1: Scheduled Payouts */}
           {activeTab === "payouts" && (
             <div className="space-y-6">
@@ -270,7 +280,7 @@ export const HostPayoutsModal: React.FC<HostPayoutsModalProps> = ({
                           {payout.hostName} ({payout.upiVpa})
                         </div>
                         <p className="text-xs text-slate-400">
-                          Booking ID: <span className="text-slate-200">{payout.bookingId}</span> • 
+                          Booking ID: <span className="text-slate-200">{payout.bookingId}</span> •
                           Settlement: {payout.settlementNotes}
                         </p>
                       </div>
@@ -305,7 +315,10 @@ export const HostPayoutsModal: React.FC<HostPayoutsModalProps> = ({
           {/* TAB 2: Host Bank & UPI Setup */}
           {activeTab === "bank" && (
             <div className="space-y-6">
-              <form onSubmit={handleSaveBankDetails} className="space-y-4 bg-slate-900/50 p-5 border border-slate-800 rounded-xl">
+              <form
+                onSubmit={handleSaveBankDetails}
+                className="space-y-4 bg-slate-900/50 p-5 border border-slate-800 rounded-xl"
+              >
                 <h3 className="text-sm font-bold text-white uppercase tracking-wider flex items-center space-x-2">
                   <Building2 className="w-4 h-4 text-amber-400" />
                   <span>Verified Host Bank Account & UPI Configuration</span>
@@ -313,7 +326,9 @@ export const HostPayoutsModal: React.FC<HostPayoutsModalProps> = ({
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-400 mb-1">Host Full Name</label>
+                    <label className="block text-xs font-semibold text-slate-400 mb-1">
+                      Host Full Name
+                    </label>
                     <input
                       type="text"
                       value={hostName}
@@ -323,7 +338,9 @@ export const HostPayoutsModal: React.FC<HostPayoutsModalProps> = ({
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-400 mb-1">Host Phone Number</label>
+                    <label className="block text-xs font-semibold text-slate-400 mb-1">
+                      Host Phone Number
+                    </label>
                     <input
                       type="text"
                       value={hostPhone}
@@ -333,7 +350,9 @@ export const HostPayoutsModal: React.FC<HostPayoutsModalProps> = ({
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-400 mb-1">Bank Account Number</label>
+                    <label className="block text-xs font-semibold text-slate-400 mb-1">
+                      Bank Account Number
+                    </label>
                     <input
                       type="text"
                       value={bankAccountNumber}
@@ -343,7 +362,9 @@ export const HostPayoutsModal: React.FC<HostPayoutsModalProps> = ({
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-400 mb-1">Bank IFSC Code</label>
+                    <label className="block text-xs font-semibold text-slate-400 mb-1">
+                      Bank IFSC Code
+                    </label>
                     <input
                       type="text"
                       value={ifscCode}
@@ -353,7 +374,9 @@ export const HostPayoutsModal: React.FC<HostPayoutsModalProps> = ({
                   </div>
 
                   <div className="md:col-span-2">
-                    <label className="block text-xs font-semibold text-slate-400 mb-1">Verified UPI ID (VPA)</label>
+                    <label className="block text-xs font-semibold text-slate-400 mb-1">
+                      Verified UPI ID (VPA)
+                    </label>
                     <input
                       type="text"
                       value={upiVpa}
@@ -379,15 +402,22 @@ export const HostPayoutsModal: React.FC<HostPayoutsModalProps> = ({
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {accounts.map((acc) => (
-                    <div key={acc.razorpayAccountId} className="p-3.5 bg-slate-900 border border-slate-800 rounded-xl space-y-1">
+                    <div
+                      key={acc.razorpayAccountId}
+                      className="p-3.5 bg-slate-900 border border-slate-800 rounded-xl space-y-1"
+                    >
                       <div className="flex items-center justify-between">
                         <span className="font-bold text-sm text-white">{acc.hostName}</span>
                         <span className="text-[10px] px-2 py-0.5 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-full font-semibold">
                           VERIFIED
                         </span>
                       </div>
-                      <p className="text-xs font-mono text-amber-400">Account: {acc.razorpayAccountId}</p>
-                      <p className="text-xs text-slate-400">UPI VPA: {acc.upiVpa} • A/C: ****{acc.bankAccountNumber.slice(-4)}</p>
+                      <p className="text-xs font-mono text-amber-400">
+                        Account: {acc.razorpayAccountId}
+                      </p>
+                      <p className="text-xs text-slate-400">
+                        UPI VPA: {acc.upiVpa} • A/C: ****{acc.bankAccountNumber.slice(-4)}
+                      </p>
                     </div>
                   ))}
                 </div>
@@ -405,21 +435,33 @@ export const HostPayoutsModal: React.FC<HostPayoutsModalProps> = ({
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-400 mb-1">Service Type</label>
+                    <label className="block text-xs font-semibold text-slate-400 mb-1">
+                      Service Type
+                    </label>
                     <select
                       value={calcService}
                       onChange={(e) => setCalcService(e.target.value as any)}
                       className="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:border-amber-400 focus:outline-none"
                     >
-                      <option value="stash">Saarthi Stash (Luggage Micro-Storage @ 60% Host Share)</option>
-                      <option value="spaces">Saarthi Spaces (Zero-Brokerage Room @ 95% Host Share)</option>
-                      <option value="kitchen">Saarthi Kitchen (Home Tiffin @ ₹55/meal Host Share)</option>
-                      <option value="connect">Saarthi Connect (Verified PG Owner Mentorship @ 80% Host Share)</option>
+                      <option value="stash">
+                        Saarthi Stash (Luggage Micro-Storage @ 60% Host Share)
+                      </option>
+                      <option value="spaces">
+                        Saarthi Spaces (Zero-Brokerage Room @ 95% Host Share)
+                      </option>
+                      <option value="kitchen">
+                        Saarthi Kitchen (Home Tiffin @ ₹55/meal Host Share)
+                      </option>
+                      <option value="connect">
+                        Saarthi Connect (Verified PG Owner Mentorship @ 80% Host Share)
+                      </option>
                     </select>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-400 mb-1">Total Booking Value (₹)</label>
+                    <label className="block text-xs font-semibold text-slate-400 mb-1">
+                      Total Booking Value (₹)
+                    </label>
                     <input
                       type="number"
                       value={calcAmount}
@@ -453,9 +495,7 @@ export const HostPayoutsModal: React.FC<HostPayoutsModalProps> = ({
               </div>
             </div>
           )}
-
         </div>
-
       </div>
     </div>
   );

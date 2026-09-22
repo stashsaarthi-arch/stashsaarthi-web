@@ -3,58 +3,82 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 
 const ExecutiveAnalyticsDashboard = lazy(() =>
-  import("@/components/stash/ExecutiveAnalyticsDashboard").then((m) => ({ default: m.ExecutiveAnalyticsDashboard }))
+  import("@/components/stash/ExecutiveAnalyticsDashboard").then((m) => ({
+    default: m.ExecutiveAnalyticsDashboard,
+  })),
 );
 const ApiPenTestModal = lazy(() =>
-  import("@/components/stash/ApiPenTestModal").then((m) => ({ default: m.ApiPenTestModal }))
+  import("@/components/stash/ApiPenTestModal").then((m) => ({ default: m.ApiPenTestModal })),
 );
 const AndroidGoPerfModal = lazy(() =>
-  import("@/components/stash/AndroidGoPerfModal").then((m) => ({ default: m.AndroidGoPerfModal }))
+  import("@/components/stash/AndroidGoPerfModal").then((m) => ({ default: m.AndroidGoPerfModal })),
 );
 const EdgeRegionMonitorWidget = lazy(() =>
-  import("@/components/stash/EdgeRegionMonitorWidget").then((m) => ({ default: m.EdgeRegionMonitorWidget }))
+  import("@/components/stash/EdgeRegionMonitorWidget").then((m) => ({
+    default: m.EdgeRegionMonitorWidget,
+  })),
 );
 const HostPayoutsModal = lazy(() =>
-  import("@/components/stash/HostPayoutsModal").then((m) => ({ default: m.HostPayoutsModal }))
+  import("@/components/stash/HostPayoutsModal").then((m) => ({ default: m.HostPayoutsModal })),
 );
 const HostInventoryGridModal = lazy(() =>
-  import("@/components/stash/HostInventoryGrid").then((m) => ({ default: m.HostInventoryGridModal }))
+  import("@/components/stash/HostInventoryGrid").then((m) => ({
+    default: m.HostInventoryGridModal,
+  })),
 );
 const HostKycModal = lazy(() =>
-  import("@/components/stash/HostKycModal").then((m) => ({ default: m.HostKycModal }))
+  import("@/components/stash/HostKycModal").then((m) => ({ default: m.HostKycModal })),
 );
 const HostStashVerificationModal = lazy(() =>
-  import("@/components/stash/HostStashVerificationModal").then((m) => ({ default: m.HostStashVerificationModal }))
+  import("@/components/stash/HostStashVerificationModal").then((m) => ({
+    default: m.HostStashVerificationModal,
+  })),
 );
 const HostPushNotificationModal = lazy(() =>
-  import("@/components/stash/HostPushNotificationModal").then((m) => ({ default: m.HostPushNotificationModal }))
+  import("@/components/stash/HostPushNotificationModal").then((m) => ({
+    default: m.HostPushNotificationModal,
+  })),
 );
 const DeliveryFleetScannerModal = lazy(() =>
-  import("@/components/stash/DeliveryFleetScannerModal").then((m) => ({ default: m.DeliveryFleetScannerModal }))
+  import("@/components/stash/DeliveryFleetScannerModal").then((m) => ({
+    default: m.DeliveryFleetScannerModal,
+  })),
 );
 const TamperHologramProtocolModal = lazy(() =>
-  import("@/components/stash/TamperHologramProtocolModal").then((m) => ({ default: m.TamperHologramProtocolModal }))
+  import("@/components/stash/TamperHologramProtocolModal").then((m) => ({
+    default: m.TamperHologramProtocolModal,
+  })),
 );
 const BarcodeScanStressModal = lazy(() =>
-  import("@/components/stash/BarcodeScanStressModal").then((m) => ({ default: m.BarcodeScanStressModal }))
+  import("@/components/stash/BarcodeScanStressModal").then((m) => ({
+    default: m.BarcodeScanStressModal,
+  })),
 );
 const DamageClaimsModal = lazy(() =>
-  import("@/components/stash/DamageClaimsModal").then((m) => ({ default: m.DamageClaimsModal }))
+  import("@/components/stash/DamageClaimsModal").then((m) => ({ default: m.DamageClaimsModal })),
 );
 const SmsFallbackGatewayModal = lazy(() =>
-  import("@/components/stash/SmsFallbackGatewayModal").then((m) => ({ default: m.SmsFallbackGatewayModal }))
+  import("@/components/stash/SmsFallbackGatewayModal").then((m) => ({
+    default: m.SmsFallbackGatewayModal,
+  })),
 );
 const LuggageWeightEstimatorModal = lazy(() =>
-  import("@/components/stash/LuggageWeightEstimatorModal").then((m) => ({ default: m.LuggageWeightEstimatorModal }))
+  import("@/components/stash/LuggageWeightEstimatorModal").then((m) => ({
+    default: m.LuggageWeightEstimatorModal,
+  })),
 );
 const ReverseLogisticsModal = lazy(() =>
-  import("@/components/stash/ReverseLogisticsModal").then((m) => ({ default: m.ReverseLogisticsModal }))
+  import("@/components/stash/ReverseLogisticsModal").then((m) => ({
+    default: m.ReverseLogisticsModal,
+  })),
 );
 const ProxyHandoverModal = lazy(() =>
-  import("@/components/stash/ProxyHandoverModal").then((m) => ({ default: m.ProxyHandoverModal }))
+  import("@/components/stash/ProxyHandoverModal").then((m) => ({ default: m.ProxyHandoverModal })),
 );
 const MealTokenLedgerModal = lazy(() =>
-  import("@/components/stash/MealTokenLedgerModal").then((m) => ({ default: m.MealTokenLedgerModal }))
+  import("@/components/stash/MealTokenLedgerModal").then((m) => ({
+    default: m.MealTokenLedgerModal,
+  })),
 );
 import {
   getBookings,
@@ -156,51 +180,50 @@ const SERVICE_META: Record<
   meal: { label: "Meal Order", color: "amber", icon: Soup, badge: "Token" },
 };
 
-const COLOR_CLASSES: Record<string, { bg: string; border: string; text: string; badge: string }> =
-  {
-    emerald: {
-      bg: "bg-emerald-500/10",
-      border: "border-emerald-500/30",
-      text: "text-emerald-400",
-      badge: "bg-emerald-500/20 text-emerald-300",
-    },
-    cyan: {
-      bg: "bg-cyan-500/10",
-      border: "border-cyan-500/30",
-      text: "text-cyan-400",
-      badge: "bg-cyan-500/20 text-cyan-300",
-    },
-    amber: {
-      bg: "bg-amber-500/10",
-      border: "border-amber-500/30",
-      text: "text-amber-400",
-      badge: "bg-amber-500/20 text-amber-300",
-    },
-    violet: {
-      bg: "bg-violet-500/10",
-      border: "border-violet-500/30",
-      text: "text-violet-400",
-      badge: "bg-violet-500/20 text-violet-300",
-    },
-    rose: {
-      bg: "bg-rose-500/10",
-      border: "border-rose-500/30",
-      text: "text-rose-400",
-      badge: "bg-rose-500/20 text-rose-300",
-    },
-    orange: {
-      bg: "bg-orange-500/10",
-      border: "border-orange-500/30",
-      text: "text-orange-400",
-      badge: "bg-orange-500/20 text-orange-300",
-    },
-    sky: {
-      bg: "bg-sky-500/10",
-      border: "border-sky-500/30",
-      text: "text-sky-400",
-      badge: "bg-sky-500/20 text-sky-300",
-    },
-  };
+const COLOR_CLASSES: Record<string, { bg: string; border: string; text: string; badge: string }> = {
+  emerald: {
+    bg: "bg-emerald-500/10",
+    border: "border-emerald-500/30",
+    text: "text-emerald-400",
+    badge: "bg-emerald-500/20 text-emerald-300",
+  },
+  cyan: {
+    bg: "bg-cyan-500/10",
+    border: "border-cyan-500/30",
+    text: "text-cyan-400",
+    badge: "bg-cyan-500/20 text-cyan-300",
+  },
+  amber: {
+    bg: "bg-amber-500/10",
+    border: "border-amber-500/30",
+    text: "text-amber-400",
+    badge: "bg-amber-500/20 text-amber-300",
+  },
+  violet: {
+    bg: "bg-violet-500/10",
+    border: "border-violet-500/30",
+    text: "text-violet-400",
+    badge: "bg-violet-500/20 text-violet-300",
+  },
+  rose: {
+    bg: "bg-rose-500/10",
+    border: "border-rose-500/30",
+    text: "text-rose-400",
+    badge: "bg-rose-500/20 text-rose-300",
+  },
+  orange: {
+    bg: "bg-orange-500/10",
+    border: "border-orange-500/30",
+    text: "text-orange-400",
+    badge: "bg-orange-500/20 text-orange-300",
+  },
+  sky: {
+    bg: "bg-sky-500/10",
+    border: "border-sky-500/30",
+    text: "text-sky-400",
+    badge: "bg-sky-500/20 text-sky-300",
+  },
+};
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 function fmtDate(iso: string): string {
@@ -340,16 +363,19 @@ function BookingCard({
           <div className="flex flex-wrap gap-3 mt-1">
             {b.phone && b.phone !== "N/A" && (
               <span className="text-xs text-muted-foreground flex items-center gap-1">
-                <Phone className="h-3 w-3" />{b.phone}
+                <Phone className="h-3 w-3" />
+                {b.phone}
               </span>
             )}
             {b.city && (
               <span className="text-xs text-muted-foreground flex items-center gap-1">
-                <MapPin className="h-3 w-3" />{b.city}
+                <MapPin className="h-3 w-3" />
+                {b.city}
               </span>
             )}
             <span className="text-xs text-muted-foreground flex items-center gap-1">
-              <Clock className="h-3 w-3" />{fmtDate(b.submittedAt)}
+              <Clock className="h-3 w-3" />
+              {fmtDate(b.submittedAt)}
             </span>
           </div>
         </div>
@@ -378,24 +404,14 @@ function BookingCard({
             {b.months !== undefined && (
               <DetailChip icon={Calendar} label="Months" value={`${b.months} months`} />
             )}
-            {b.roomType && (
-              <DetailChip icon={Home} label="Room Type" value={b.roomType} />
-            )}
+            {b.roomType && <DetailChip icon={Home} label="Room Type" value={b.roomType} />}
             {b.moveInDate && (
               <DetailChip icon={Calendar} label="Move-in" value={b.moveInDate || "Immediate"} />
             )}
-            {b.mealPlan && (
-              <DetailChip icon={Soup} label="Meal Plan" value={b.mealPlan} />
-            )}
-            {b.dietType && (
-              <DetailChip icon={Tag} label="Diet" value={b.dietType} />
-            )}
+            {b.mealPlan && <DetailChip icon={Soup} label="Meal Plan" value={b.mealPlan} />}
+            {b.dietType && <DetailChip icon={Tag} label="Diet" value={b.dietType} />}
             {b.personalizations && b.personalizations.length > 0 && (
-              <DetailChip
-                icon={Star}
-                label="Preferences"
-                value={b.personalizations.join(", ")}
-              />
+              <DetailChip icon={Star} label="Preferences" value={b.personalizations.join(", ")} />
             )}
             {b.connectDomain && (
               <DetailChip icon={HandHeart} label="Domain" value={b.connectDomain} />
@@ -406,15 +422,11 @@ function BookingCard({
             {b.monetizeAsset && (
               <DetailChip icon={Briefcase} label="Asset" value={b.monetizeAsset} />
             )}
-            {b.pincode && (
-              <DetailChip icon={MapPin} label="PIN" value={b.pincode} />
-            )}
+            {b.pincode && <DetailChip icon={MapPin} label="PIN" value={b.pincode} />}
             {b.paymentMode && (
               <DetailChip icon={IndianRupee} label="Payment" value={b.paymentMode} />
             )}
-            {!isTempEmail && b.email && (
-              <DetailChip icon={Mail} label="Email" value={b.email} />
-            )}
+            {!isTempEmail && b.email && <DetailChip icon={Mail} label="Email" value={b.email} />}
           </div>
 
           {b.message && (
@@ -835,7 +847,12 @@ function AdminPage() {
         {/* Stats */}
         {stats && (
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-            <StatCard label="Total Bookings" value={stats.totalBookings} color="emerald" icon={Boxes} />
+            <StatCard
+              label="Total Bookings"
+              value={stats.totalBookings}
+              color="emerald"
+              icon={Boxes}
+            />
             <StatCard label="Waitlist Leads" value={stats.totalWaitlist} color="sky" icon={Users} />
             <StatCard label="Meal Orders" value={stats.totalMealOrders} color="amber" icon={Soup} />
             <StatCard label="Reviews" value={stats.totalReviews} color="violet" icon={Star} />
@@ -904,7 +921,9 @@ function AdminPage() {
                 {tab.count > 0 && (
                   <span
                     className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${
-                      isActive ? "bg-emerald-500/20 text-emerald-300" : "bg-white/10 text-muted-foreground"
+                      isActive
+                        ? "bg-emerald-500/20 text-emerald-300"
+                        : "bg-white/10 text-muted-foreground"
                     }`}
                   >
                     {tab.count}
@@ -916,9 +935,7 @@ function AdminPage() {
         </div>
 
         {/* ── Executive Analytics ── */}
-        {activeTab === "executive" && (
-          <ExecutiveAnalyticsDashboard />
-        )}
+        {activeTab === "executive" && <ExecutiveAnalyticsDashboard />}
 
         {/* ── Bookings ── */}
         {activeTab === "bookings" && (
@@ -1099,12 +1116,16 @@ function AdminPage() {
                         <div className="text-foreground font-medium">{m.deliverySlot}</div>
                       </div>
                       <div className="rounded-lg bg-white/5 border border-white/10 px-3 py-2 col-span-2">
-                        <div className="text-muted-foreground text-[10px] uppercase">Kitchen Node</div>
+                        <div className="text-muted-foreground text-[10px] uppercase">
+                          Kitchen Node
+                        </div>
                         <div className="text-foreground font-medium truncate">{m.kitchenNode}</div>
                       </div>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-[10px] text-muted-foreground">{fmtDate(m.submittedAt)}</span>
+                      <span className="text-[10px] text-muted-foreground">
+                        {fmtDate(m.submittedAt)}
+                      </span>
                       {m.phone && (
                         <a
                           href={waLink(m.phone, m.name)}
@@ -1166,7 +1187,9 @@ function AdminPage() {
                       </span>
                     )}
                     <p className="text-sm text-muted-foreground leading-relaxed">{r.comment}</p>
-                    <div className="text-[10px] text-muted-foreground/60">{fmtDate(r.createdAt)}</div>
+                    <div className="text-[10px] text-muted-foreground/60">
+                      {fmtDate(r.createdAt)}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -1202,7 +1225,9 @@ function AdminPage() {
                         <span className="text-xs text-amber-400 font-medium">
                           {s.upvotes || 0} upvotes
                         </span>
-                        <span className="text-[10px] text-muted-foreground">{fmtDate(s.createdAt)}</span>
+                        <span className="text-[10px] text-muted-foreground">
+                          {fmtDate(s.createdAt)}
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -1271,7 +1296,9 @@ function AdminPage() {
             {visitorsLoading ? (
               <div className="rounded-2xl border border-white/10 bg-white/[0.02] py-12 flex flex-col items-center justify-center gap-3">
                 <Activity className="h-6 w-6 text-sky-400 animate-pulse" />
-                <p className="text-sm text-muted-foreground">Loading visitor sessions from Supabase…</p>
+                <p className="text-sm text-muted-foreground">
+                  Loading visitor sessions from Supabase…
+                </p>
               </div>
             ) : visitors.length === 0 ? (
               <EmptyState
@@ -1450,21 +1477,60 @@ function AdminPage() {
         </div>
 
         <ApiPenTestModal isOpen={isPenTestOpen} onClose={() => setIsPenTestOpen(false)} />
-        <AndroidGoPerfModal isOpen={isAndroidGoPerfOpen} onClose={() => setIsAndroidGoPerfOpen(false)} />
+        <AndroidGoPerfModal
+          isOpen={isAndroidGoPerfOpen}
+          onClose={() => setIsAndroidGoPerfOpen(false)}
+        />
         <Suspense fallback={null}>
-          <HostPayoutsModal isOpen={isHostPayoutsOpen} onClose={() => setIsHostPayoutsOpen(false)} />
-          <HostInventoryGridModal isOpen={isHostGridOpen} onClose={() => setIsHostGridOpen(false)} />
+          <HostPayoutsModal
+            isOpen={isHostPayoutsOpen}
+            onClose={() => setIsHostPayoutsOpen(false)}
+          />
+          <HostInventoryGridModal
+            isOpen={isHostGridOpen}
+            onClose={() => setIsHostGridOpen(false)}
+          />
           <HostKycModal isOpen={isHostKycOpen} onClose={() => setIsHostKycOpen(false)} />
-          <HostStashVerificationModal isOpen={isHostVerificationOpen} onClose={() => setIsHostVerificationOpen(false)} />
-          <HostPushNotificationModal isOpen={isHostPushOpen} onClose={() => setIsHostPushOpen(false)} />
-          <DeliveryFleetScannerModal isOpen={isDeliveryFleetOpen} onClose={() => setIsDeliveryFleetOpen(false)} />
-          <TamperHologramProtocolModal isOpen={isHologramModalOpen} onClose={() => setIsHologramModalOpen(false)} />
-          <BarcodeScanStressModal isOpen={isBarcodeStressOpen} onClose={() => setIsBarcodeStressOpen(false)} />
-          <DamageClaimsModal isOpen={isDamageClaimsOpen} onClose={() => setIsDamageClaimsOpen(false)} />
-          <SmsFallbackGatewayModal isOpen={isSmsFallbackOpen} onClose={() => setIsSmsFallbackOpen(false)} />
-          <LuggageWeightEstimatorModal isOpen={isWeightEstimatorOpen} onClose={() => setIsWeightEstimatorOpen(false)} />
-          <ReverseLogisticsModal isOpen={isReverseLogisticsOpen} onClose={() => setIsReverseLogisticsOpen(false)} />
-          <MealTokenLedgerModal isOpen={isMealTokenLedgerOpen} onClose={() => setIsMealTokenLedgerOpen(false)} />
+          <HostStashVerificationModal
+            isOpen={isHostVerificationOpen}
+            onClose={() => setIsHostVerificationOpen(false)}
+          />
+          <HostPushNotificationModal
+            isOpen={isHostPushOpen}
+            onClose={() => setIsHostPushOpen(false)}
+          />
+          <DeliveryFleetScannerModal
+            isOpen={isDeliveryFleetOpen}
+            onClose={() => setIsDeliveryFleetOpen(false)}
+          />
+          <TamperHologramProtocolModal
+            isOpen={isHologramModalOpen}
+            onClose={() => setIsHologramModalOpen(false)}
+          />
+          <BarcodeScanStressModal
+            isOpen={isBarcodeStressOpen}
+            onClose={() => setIsBarcodeStressOpen(false)}
+          />
+          <DamageClaimsModal
+            isOpen={isDamageClaimsOpen}
+            onClose={() => setIsDamageClaimsOpen(false)}
+          />
+          <SmsFallbackGatewayModal
+            isOpen={isSmsFallbackOpen}
+            onClose={() => setIsSmsFallbackOpen(false)}
+          />
+          <LuggageWeightEstimatorModal
+            isOpen={isWeightEstimatorOpen}
+            onClose={() => setIsWeightEstimatorOpen(false)}
+          />
+          <ReverseLogisticsModal
+            isOpen={isReverseLogisticsOpen}
+            onClose={() => setIsReverseLogisticsOpen(false)}
+          />
+          <MealTokenLedgerModal
+            isOpen={isMealTokenLedgerOpen}
+            onClose={() => setIsMealTokenLedgerOpen(false)}
+          />
         </Suspense>
       </div>
     </div>

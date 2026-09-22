@@ -29,7 +29,10 @@ export function calculateFreePickupStatus(boxCount: number): FreePickupStatus {
   const safeBoxes = Math.max(0, boxCount);
   const unlocked = safeBoxes >= FREE_PICKUP_THRESHOLD_BOXES;
   const boxesNeeded = unlocked ? 0 : FREE_PICKUP_THRESHOLD_BOXES - safeBoxes;
-  const progressPercent = Math.min(100, Math.round((safeBoxes / FREE_PICKUP_THRESHOLD_BOXES) * 100));
+  const progressPercent = Math.min(
+    100,
+    Math.round((safeBoxes / FREE_PICKUP_THRESHOLD_BOXES) * 100),
+  );
 
   const pickupFee = unlocked ? 0 : STANDARD_PICKUP_FEE;
 

@@ -111,7 +111,11 @@ export const TIER_CONFIG: Record<
     bgColor: "bg-amber-950/30",
     borderColor: "border-amber-700/40",
     icon: Award,
-    perks: ["Verified Verified PG Owner Badge", "Standard Student Matching", "24/7 Bedside SOS Access"],
+    perks: [
+      "Verified Verified PG Owner Badge",
+      "Standard Student Matching",
+      "24/7 Bedside SOS Access",
+    ],
     perks_hi: ["सत्यापित वरिष्ठ बैज", "मानक छात्र मिलान", "24/7 बेडसाइड SOS सुविधा"],
   },
   Silver: {
@@ -264,7 +268,7 @@ export function KarmaPointsModal({
       tier: "Gold",
       badges: ["Community Anchor"],
       recentActivity: "+50 pts: Hosted Evening Tea",
-    }
+    },
   );
 
   const activeConfig = TIER_CONFIG[selectedHost.tier];
@@ -280,7 +284,10 @@ export function KarmaPointsModal({
   const currentMin = activeConfig.minPts;
   const progressPercent = Math.min(
     100,
-    Math.max(5, Math.round(((selectedHost.points - currentMin) / (nextTierPts - currentMin)) * 100))
+    Math.max(
+      5,
+      Math.round(((selectedHost.points - currentMin) / (nextTierPts - currentMin)) * 100),
+    ),
   );
 
   return (
@@ -335,7 +342,9 @@ export function KarmaPointsModal({
               {/* Verified PG Owner Selector Pills */}
               <div>
                 <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2">
-                  {isHi ? "वरिष्ठ होस्ट प्रोफ़ाइल चुनें (Inspect Verified PG Owner Host)" : "Inspect Verified PG Owner Host Profile"}
+                  {isHi
+                    ? "वरिष्ठ होस्ट प्रोफ़ाइल चुनें (Inspect Verified PG Owner Host)"
+                    : "Inspect Verified PG Owner Host Profile"}
                 </label>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                   {LEADERBOARD_HOSTS.map((h) => {
@@ -372,18 +381,27 @@ export function KarmaPointsModal({
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10 pb-3">
                   <div>
                     <div className="flex items-center gap-2">
-                      <h3 className="text-sm font-bold text-white">{selectedHost.name}, {selectedHost.age}</h3>
-                      <span className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-xs font-bold ${activeConfig.bgColor} ${activeConfig.borderColor} ${activeConfig.color}`}>
+                      <h3 className="text-sm font-bold text-white">
+                        {selectedHost.name}, {selectedHost.age}
+                      </h3>
+                      <span
+                        className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-xs font-bold ${activeConfig.bgColor} ${activeConfig.borderColor} ${activeConfig.color}`}
+                      >
                         {isHi ? activeConfig.name_hi : activeConfig.name}
                       </span>
                     </div>
                     <p className="text-xs text-slate-400 mt-0.5">
-                      📍 {isHi && selectedHost.location_hi ? selectedHost.location_hi : selectedHost.location}
+                      📍{" "}
+                      {isHi && selectedHost.location_hi
+                        ? selectedHost.location_hi
+                        : selectedHost.location}
                     </p>
                   </div>
 
                   <div className="text-left sm:text-right">
-                    <span className="text-2xl font-black text-amber-400 font-mono">{selectedHost.points}</span>
+                    <span className="text-2xl font-black text-amber-400 font-mono">
+                      {selectedHost.points}
+                    </span>
                     <span className="text-xs text-slate-400 block font-sans">
                       {isHi ? "कुल अर्जित कर्म अंक" : "Total Karma Points"}
                     </span>
@@ -393,7 +411,11 @@ export function KarmaPointsModal({
                 {/* Progress Bar */}
                 <div className="mt-3">
                   <div className="flex justify-between text-xs font-medium text-slate-300 mb-1">
-                    <span>{isHi ? `स्तर प्रगति (${selectedHost.tier})` : `Tier Progress (${selectedHost.tier})`}</span>
+                    <span>
+                      {isHi
+                        ? `स्तर प्रगति (${selectedHost.tier})`
+                        : `Tier Progress (${selectedHost.tier})`}
+                    </span>
                     <span>
                       {selectedHost.points} / {nextTierPts} XP ({progressPercent}%)
                     </span>
@@ -418,8 +440,14 @@ export function KarmaPointsModal({
                       {isHi ? "अर्जित विशेष बैज" : "Earned Badges"}
                     </span>
                     <div className="flex flex-wrap gap-1.5">
-                      {(isHi && selectedHost.badges_hi ? selectedHost.badges_hi : selectedHost.badges).map((b) => (
-                        <span key={b} className="inline-flex items-center gap-1 rounded-md border border-amber-500/30 bg-amber-500/10 px-2 py-0.5 text-[11px] font-medium text-amber-300">
+                      {(isHi && selectedHost.badges_hi
+                        ? selectedHost.badges_hi
+                        : selectedHost.badges
+                      ).map((b) => (
+                        <span
+                          key={b}
+                          className="inline-flex items-center gap-1 rounded-md border border-amber-500/30 bg-amber-500/10 px-2 py-0.5 text-[11px] font-medium text-amber-300"
+                        >
                           <Star className="h-3 w-3 text-amber-400 fill-amber-400/30" />
                           {b}
                         </span>
@@ -433,7 +461,11 @@ export function KarmaPointsModal({
                     </span>
                     <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-2 text-xs text-emerald-300 flex items-start gap-1.5">
                       <TrendingUp className="h-4 w-4 shrink-0 text-emerald-400 mt-0.5" />
-                      <span>{isHi && selectedHost.recentActivity_hi ? selectedHost.recentActivity_hi : selectedHost.recentActivity}</span>
+                      <span>
+                        {isHi && selectedHost.recentActivity_hi
+                          ? selectedHost.recentActivity_hi
+                          : selectedHost.recentActivity}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -472,26 +504,36 @@ export function KarmaPointsModal({
               <div className="rounded-xl border border-white/10 bg-slate-900/60 p-4">
                 <h3 className="text-xs font-bold text-slate-200 flex items-center gap-1.5 mb-2.5">
                   <Info className="h-4 w-4 text-cyan-400" />
-                  <span>{isHi ? "अंक कैसे अर्जित करें? (Karma Points Matrix)" : "How Premium Hosts Earn Karma Points"}</span>
+                  <span>
+                    {isHi
+                      ? "अंक कैसे अर्जित करें? (Karma Points Matrix)"
+                      : "How Premium Hosts Earn Karma Points"}
+                  </span>
                 </h3>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
                   <div className="rounded-lg border border-white/10 bg-black/30 p-2.5">
                     <span className="font-bold text-amber-400 block">+100 Pts / Month</span>
                     <p className="text-[11px] text-slate-300 mt-1">
-                      {isHi ? "छात्र को सह-आवास प्रदान करने पर" : "Providing warm room co-living to student"}
+                      {isHi
+                        ? "छात्र को सह-आवास प्रदान करने पर"
+                        : "Providing warm room co-living to student"}
                     </p>
                   </div>
                   <div className="rounded-lg border border-white/10 bg-black/30 p-2.5">
                     <span className="font-bold text-emerald-400 block">+30 Pts / Session</span>
                     <p className="text-[11px] text-slate-300 mt-1">
-                      {isHi ? "शाम का करियर/जीवन मार्गदर्शन व होम टी" : "Evening mentorship or home tea session"}
+                      {isHi
+                        ? "शाम का करियर/जीवन मार्गदर्शन व होम टी"
+                        : "Evening mentorship or home tea session"}
                     </p>
                   </div>
                   <div className="rounded-lg border border-white/10 bg-black/30 p-2.5">
                     <span className="font-bold text-cyan-400 block">+50 Pts / Review</span>
                     <p className="text-[11px] text-slate-300 mt-1">
-                      {isHi ? "छात्र से 5-स्टार रेटिंग व प्रशंसा प्राप्त होने पर" : "Receiving 5-star rating & review from student"}
+                      {isHi
+                        ? "छात्र से 5-स्टार रेटिंग व प्रशंसा प्राप्त होने पर"
+                        : "Receiving 5-star rating & review from student"}
                     </p>
                   </div>
                 </div>
@@ -506,13 +548,15 @@ export function KarmaPointsModal({
                     alert(
                       isHi
                         ? `वरिष्ठ होस्ट ${selectedHost.name} के कर्म अंक रिवॉर्ड की पुष्टि की गई!`
-                        : `Karma rewards claim voucher generated for ${selectedHost.name}!`
+                        : `Karma rewards claim voucher generated for ${selectedHost.name}!`,
                     );
                     onOpenChange(false);
                   }}
                 >
                   <Gift className="h-4 w-4 mr-1.5" />
-                  {isHi ? "होस्ट रिवॉर्ड वाउचर का दावा करें" : "Claim Verified PG Owner Host Reward Voucher"}
+                  {isHi
+                    ? "होस्ट रिवॉर्ड वाउचर का दावा करें"
+                    : "Claim Verified PG Owner Host Reward Voucher"}
                 </Button>
                 <Button
                   variant="outline"

@@ -21,7 +21,7 @@ export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: S
   const { role } = usePersona();
   const isStudent = role === "student";
   const [activeTab, setActiveTab] = useState<"stash" | "rooms" | "kitchen" | "connect">(
-    isStudent ? "stash" : "connect"
+    isStudent ? "stash" : "connect",
   );
   const { language } = useLanguage();
   const isHi = language === "hi";
@@ -46,7 +46,8 @@ export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: S
   useEffect(() => {
     let rafId: number;
     let isIntersecting = false;
-    const isMobile = typeof window !== "undefined" && (window.innerWidth < 768 || "ontouchstart" in window);
+    const isMobile =
+      typeof window !== "undefined" && (window.innerWidth < 768 || "ontouchstart" in window);
 
     const sectionEl = sectionRef.current;
     if (!sectionEl) return;
@@ -57,7 +58,7 @@ export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: S
           isIntersecting = entries[0].isIntersecting;
         }
       },
-      { threshold: 0.05 }
+      { threshold: 0.05 },
     );
     observer.observe(sectionEl);
 
@@ -208,7 +209,11 @@ export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: S
   const tabs = isStudent ? studentTabs : hostTabs;
 
   return (
-    <section id="solutions" ref={sectionRef} className="relative mx-auto max-w-6xl px-4 py-3.5 sm:py-5 scroll-mt-20 overflow-hidden">
+    <section
+      id="solutions"
+      ref={sectionRef}
+      className="relative mx-auto max-w-6xl px-4 py-3.5 sm:py-5 scroll-mt-20 overflow-hidden"
+    >
       {/* Background Ambient Parallax Elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden -z-10 select-none">
         {/* Ambient Gradient Orb Top Left */}
@@ -252,7 +257,7 @@ export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: S
           className="absolute inset-0 opacity-[0.04] transition-transform duration-100 ease-out will-change-transform"
           style={{
             backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.8) 1px, transparent 0)`,
-            backgroundSize: '24px 24px',
+            backgroundSize: "24px 24px",
           }}
         />
       </div>
@@ -403,4 +408,3 @@ export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: S
     </section>
   );
 });
-

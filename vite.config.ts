@@ -12,15 +12,15 @@ export default defineConfig({
     // @ts-ignore: externals is a valid nitro property but missing from the wrapper's type definition
     externals: {
       external: [
-        'firebase-admin',
-        'firebase-admin/app',
-        'firebase-admin/auth',
-        'firebase-admin/firestore',
-        'cloudinary',
-        '@google-cloud/firestore',
-        '@google-cloud/storage'
-      ]
-    }
+        "firebase-admin",
+        "firebase-admin/app",
+        "firebase-admin/auth",
+        "firebase-admin/firestore",
+        "cloudinary",
+        "@google-cloud/firestore",
+        "@google-cloud/storage",
+      ],
+    },
   },
   vite: {
     resolve: {
@@ -28,11 +28,11 @@ export default defineConfig({
     },
     ssr: {
       external: [
-        'firebase-admin',
-        'cloudinary',
-        '@google-cloud/firestore',
-        '@google-cloud/storage'
-      ]
+        "firebase-admin",
+        "cloudinary",
+        "@google-cloud/firestore",
+        "@google-cloud/storage",
+      ],
     },
     build: {
       modulePreload: false,
@@ -73,4 +73,3 @@ export default defineConfig({
     },
   },
 });
-

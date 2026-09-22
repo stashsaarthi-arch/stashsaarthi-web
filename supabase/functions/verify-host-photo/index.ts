@@ -74,15 +74,15 @@ serve(async (req: Request) => {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(visionPayload),
-        }
+        },
       );
 
       if (visionRes.ok) {
         const data = await visionRes.json();
         const responseData = data.responses?.[0] || {};
-        
+
         const labels: string[] = (responseData.labelAnnotations || []).map(
-          (l: { description: string }) => l.description
+          (l: { description: string }) => l.description,
         );
         const safeSearch = responseData.safeSearchAnnotation || {
           adult: "VERY_UNLIKELY",
@@ -93,19 +93,39 @@ serve(async (req: Request) => {
 
         // Homestyle labels matching "Ghar Jaisa" warmth
         const homestyleKeywords = [
-          "bedroom", "room", "living room", "furniture", "pillow", "bed",
-          "bedding", "interior design", "lighting", "cleanliness", "table",
-          "chair", "wood", "comfort", "house", "home", "floor", "window"
+          "bedroom",
+          "room",
+          "living room",
+          "furniture",
+          "pillow",
+          "bed",
+          "bedding",
+          "interior design",
+          "lighting",
+          "cleanliness",
+          "table",
+          "chair",
+          "wood",
+          "comfort",
+          "house",
+          "home",
+          "floor",
+          "window",
         ];
-        
+
         const matchingHomestyle = labels.filter((lbl) =>
-          homestyleKeywords.some((kw) => lbl.toLowerCase().includes(kw))
+          homestyleKeywords.some((kw) => lbl.toLowerCase().includes(kw)),
         );
 
         const homestyleScore = Math.min(100, Math.round((matchingHomestyle.length / 4) * 100));
-        const safetyScore = safeSearch.adult === "VERY_UNLIKELY" && safeSearch.violence === "VERY_UNLIKELY" ? 100 : 60;
+        const safetyScore =
+          safeSearch.adult === "VERY_UNLIKELY" && safeSearch.violence === "VERY_UNLIKELY"
+            ? 100
+            : 60;
         const qualityScore = responseData.imagePropertiesAnnotation ? 88 : 80;
-        const overallScore = Math.round(homestyleScore * 0.4 + safetyScore * 0.4 + qualityScore * 0.2);
+        const overallScore = Math.round(
+          homestyleScore * 0.4 + safetyScore * 0.4 + qualityScore * 0.2,
+        );
 
         result = {
           isApproved: overallScore >= 70 && safetyScore >= 90,
@@ -120,9 +140,16 @@ serve(async (req: Request) => {
             spoof: safeSearch.spoof || "VERY_UNLIKELY",
             racy: safeSearch.racy || "VERY_UNLIKELY",
           },
-          recommendations: overallScore >= 70
-            ? ["Photo meets 100% safety & homestyle comfort standards.", "Verified for senior host node listing."]
-            : ["Ensure natural daylight in room photo.", "Remove unnecessary clutter from storage corner."],
+          recommendations:
+            overallScore >= 70
+              ? [
+                  "Photo meets 100% safety & homestyle comfort standards.",
+                  "Verified for senior host node listing.",
+                ]
+              : [
+                  "Ensure natural daylight in room photo.",
+                  "Remove unnecessary clutter from storage corner.",
+                ],
           badgeId: `VAI-KNP-${Math.floor(1000 + Math.random() * 9000)}`,
           timestamp: new Date().toISOString(),
           engine: "Google Cloud Vision API",
@@ -149,7 +176,7 @@ serve(async (req: Request) => {
 
 function generateHeuristicVisionResult(body: VisionRequest): VerificationResult {
   const isSampleCluttered = body.imageUrl?.includes("cluttered") || body.imageUrl?.includes("dark");
-  
+
   const qualityScore = isSampleCluttered ? 52 : 92;
   const safetyScore = 100;
   const homestyleScore = isSampleCluttered ? 45 : 88;
@@ -163,7 +190,14 @@ function generateHeuristicVisionResult(body: VisionRequest): VerificationResult 
     homestyleAestheticScore: homestyleScore,
     detectedLabels: isSampleCluttered
       ? ["Low Lighting", "Storage Boxes", "Cluttered Floor", "Unorganized Items"]
-      : ["Cozy Bedroom", "Wooden Furniture", "Clean Linen", "Natural Lighting", "Homestyle Decor", "Elevated Pallet"],
+      : [
+          "Cozy Bedroom",
+          "Wooden Furniture",
+          "Clean Linen",
+          "Natural Lighting",
+          "Homestyle Decor",
+          "Elevated Pallet",
+        ],
     safetyAudit: {
       adult: "VERY_UNLIKELY",
       violence: "VERY_UNLIKELY",

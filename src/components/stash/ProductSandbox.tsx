@@ -203,7 +203,9 @@ export function ProductSandbox() {
                           {isHi ? "नोड स्थान" : "NODE LOCATION"}
                         </span>
                         <span className="text-foreground font-semibold">
-                          {isHi ? "कल्याणपुर सीनियर होम #04" : "Kalyanpur Verified PG Owner Home #04"}
+                          {isHi
+                            ? "कल्याणपुर सीनियर होम #04"
+                            : "Kalyanpur Verified PG Owner Home #04"}
                         </span>
                       </div>
                       <div className="p-2.5 rounded-lg bg-white/[0.03] border border-white/5">
@@ -574,7 +576,9 @@ export function ProductSandbox() {
                   <span className="text-muted-foreground">
                     {isHi ? "नोड हब:" : "Assigned Node:"}
                   </span>
-                  <span className="text-foreground font-semibold">Kalyanpur Verified PG Owner Home #04</span>
+                  <span className="text-foreground font-semibold">
+                    Kalyanpur Verified PG Owner Home #04
+                  </span>
                 </div>
                 <div className="flex justify-between p-2 rounded-lg bg-white/[0.02]">
                   <span className="text-muted-foreground">

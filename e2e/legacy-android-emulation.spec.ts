@@ -10,7 +10,9 @@ test.describe("Legacy Android Device Emulation & WebGL Crash Safety Suite", () =
     hasTouch: true,
   });
 
-  test("1. Renders landing page cleanly on emulated Android 6 device without WebGL crashes", async ({ page }) => {
+  test("1. Renders landing page cleanly on emulated Android 6 device without WebGL crashes", async ({
+    page,
+  }) => {
     // Collect console errors to verify zero unhandled WebGL exceptions
     const consoleErrors: string[] = [];
     page.on("console", (msg) => {
@@ -34,7 +36,7 @@ test.describe("Legacy Android Device Emulation & WebGL Crash Safety Suite", () =
 
     // Ensure no severe WebGL crashes were recorded in console
     const webglCrashErrors = consoleErrors.filter(
-      (err) => err.includes("WebGL") && err.includes("Uncaught")
+      (err) => err.includes("WebGL") && err.includes("Uncaught"),
     );
     expect(webglCrashErrors.length).toBe(0);
   });
@@ -43,7 +45,9 @@ test.describe("Legacy Android Device Emulation & WebGL Crash Safety Suite", () =
     await page.goto("/");
 
     // Open booking modal
-    const bookBtn = page.locator("button:has-text('Book Storage'), button:has-text('Explore')").first();
+    const bookBtn = page
+      .locator("button:has-text('Book Storage'), button:has-text('Explore')")
+      .first();
     await expect(bookBtn).toBeVisible();
     await bookBtn.click();
 
@@ -74,12 +78,14 @@ test.describe("Legacy Android Device Emulation & WebGL Crash Safety Suite", () =
 
     // Check if legacy android fallback class is applied
     const hasClass = await page.evaluate(() =>
-      document.documentElement.classList.contains("legacy-android-fallback")
+      document.documentElement.classList.contains("legacy-android-fallback"),
     );
     expect(hasClass).toBe(true);
 
     // Verify page elements remain interactive and unbroken
-    const heroBtn = page.locator("button:has-text('Book Storage'), button:has-text('Explore')").first();
+    const heroBtn = page
+      .locator("button:has-text('Book Storage'), button:has-text('Explore')")
+      .first();
     await expect(heroBtn).toBeVisible();
   });
 });

@@ -1,30 +1,30 @@
-import React, { useState, useMemo } from 'react';
-import { 
-  Weight, 
-  Package, 
-  Plus, 
-  Minus, 
-  RotateCcw, 
-  Sparkles, 
-  CheckCircle2, 
-  ArrowRight, 
-  Shirt, 
-  BookOpen, 
-  Utensils, 
-  Bed, 
-  Laptop, 
+import React, { useState, useMemo } from "react";
+import {
+  Weight,
+  Package,
+  Plus,
+  Minus,
+  RotateCcw,
+  Sparkles,
+  CheckCircle2,
+  ArrowRight,
+  Shirt,
+  BookOpen,
+  Utensils,
+  Bed,
+  Laptop,
   ShieldCheck,
   TrendingDown,
-  Zap
-} from 'lucide-react';
-import { 
-  LUGGAGE_CATEGORIES, 
-  LUGGAGE_ITEMS_DATABASE, 
-  ESTIMATOR_PRESETS, 
-  calculateLuggageEstimate, 
-  ItemQuantityMap 
-} from '../../lib/luggageWeightEstimatorEngine';
-import { useLanguage } from '../../context/LanguageContext';
+  Zap,
+} from "lucide-react";
+import {
+  LUGGAGE_CATEGORIES,
+  LUGGAGE_ITEMS_DATABASE,
+  ESTIMATOR_PRESETS,
+  calculateLuggageEstimate,
+  ItemQuantityMap,
+} from "../../lib/luggageWeightEstimatorEngine";
+import { useLanguage } from "../../context/LanguageContext";
 
 interface LuggageWeightEstimatorModalProps {
   isOpen: boolean;
@@ -35,17 +35,19 @@ interface LuggageWeightEstimatorModalProps {
 export const LuggageWeightEstimatorModal: React.FC<LuggageWeightEstimatorModalProps> = ({
   isOpen,
   onClose,
-  onSelectStorage
+  onSelectStorage,
 }) => {
   const { language } = useLanguage();
-  const isHi = language === 'hi';
+  const isHi = language === "hi";
 
-  const [activeCategory, setActiveCategory] = useState<'clothing' | 'study' | 'kitchen' | 'misc'>('clothing');
+  const [activeCategory, setActiveCategory] = useState<"clothing" | "study" | "kitchen" | "misc">(
+    "clothing",
+  );
   const [quantities, setQuantities] = useState<ItemQuantityMap>({
     jeans: 3,
     tshirt: 5,
     book_heavy: 4,
-    bedsheet: 1
+    bedsheet: 1,
   });
 
   const estimate = useMemo(() => calculateLuggageEstimate(quantities), [quantities]);
@@ -73,13 +75,13 @@ export const LuggageWeightEstimatorModal: React.FC<LuggageWeightEstimatorModalPr
       onSelectStorage(estimate.recommendedBoxCount, estimate.estimatedPriceMonthly);
     } else {
       window.dispatchEvent(
-        new CustomEvent('stashsaarthi:open-booking', {
+        new CustomEvent("stashsaarthi:open-booking", {
           detail: {
-            service: 'stash',
+            service: "stash",
             bags: estimate.recommendedBoxCount,
-            estimatedWeight: estimate.totalWeightKg
-          }
-        })
+            estimatedWeight: estimate.totalWeightKg,
+          },
+        }),
       );
     }
     onClose();
@@ -88,7 +90,6 @@ export const LuggageWeightEstimatorModal: React.FC<LuggageWeightEstimatorModalPr
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4 overflow-y-auto">
       <div className="relative w-full max-w-4xl bg-[#0A0D0F] border border-emerald-500/30 rounded-2xl shadow-2xl overflow-hidden text-slate-100 my-8">
-        
         {/* Modal Header */}
         <div className="px-6 py-5 bg-gradient-to-r from-emerald-950/50 via-[#0D1117] to-cyan-950/40 border-b border-slate-800 flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -98,21 +99,23 @@ export const LuggageWeightEstimatorModal: React.FC<LuggageWeightEstimatorModalPr
             <div>
               <div className="flex items-center gap-2">
                 <h3 className="font-bold text-lg text-white">
-                  {isHi ? 'स्मार्ट सामान वजन एवं बॉक्स कैलकुलेटर' : 'Smart Luggage Weight & Box Estimator'}
+                  {isHi
+                    ? "स्मार्ट सामान वजन एवं बॉक्स कैलकुलेटर"
+                    : "Smart Luggage Weight & Box Estimator"}
                 </h3>
                 <span className="px-2 py-0.5 text-xs font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 rounded-full">
                   AI WEIGHT MATRIX
                 </span>
               </div>
               <p className="text-xs text-slate-400 mt-0.5">
-                {isHi 
-                  ? 'सामान चुनें (जैसे 3 जींस + 5 बुक्स + 1 कंबल) और सटीक वजन एवं सही बॉक्स का आकार जानें' 
-                  : 'Select your items (e.g. 3 Jeans + 5 Books + 1 Blanket) to estimate weight & recommended box size'}
+                {isHi
+                  ? "सामान चुनें (जैसे 3 जींस + 5 बुक्स + 1 कंबल) और सटीक वजन एवं सही बॉक्स का आकार जानें"
+                  : "Select your items (e.g. 3 Jeans + 5 Books + 1 Blanket) to estimate weight & recommended box size"}
               </p>
             </div>
           </div>
 
-          <button 
+          <button
             onClick={onClose}
             className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
           >
@@ -123,7 +126,7 @@ export const LuggageWeightEstimatorModal: React.FC<LuggageWeightEstimatorModalPr
         {/* Quick Presets Bar */}
         <div className="px-6 py-3 bg-[#06080A] border-b border-slate-800 flex items-center justify-between overflow-x-auto gap-3">
           <span className="text-xs text-slate-400 font-semibold shrink-0">
-            ⚡ {isHi ? 'त्वरित पैक प्रीसेट:' : 'Quick Student Presets:'}
+            ⚡ {isHi ? "त्वरित पैक प्रीसेट:" : "Quick Student Presets:"}
           </span>
           <div className="flex items-center gap-2 overflow-x-auto">
             {ESTIMATOR_PRESETS.map((preset) => (
@@ -142,17 +145,15 @@ export const LuggageWeightEstimatorModal: React.FC<LuggageWeightEstimatorModalPr
               title="Clear all selected items"
             >
               <RotateCcw className="w-3 h-3" />
-              {isHi ? 'रीसेट' : 'Reset'}
+              {isHi ? "रीसेट" : "Reset"}
             </button>
           </div>
         </div>
 
         {/* Main Body Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 p-6">
-          
           {/* Left Column: Item Selector (7 cols) */}
           <div className="lg:col-span-7 space-y-4">
-            
             {/* Category Navigation Tabs */}
             <div className="flex border-b border-slate-800 gap-1 overflow-x-auto">
               {LUGGAGE_CATEGORIES.map((cat) => (
@@ -161,8 +162,8 @@ export const LuggageWeightEstimatorModal: React.FC<LuggageWeightEstimatorModalPr
                   onClick={() => setActiveCategory(cat.id)}
                   className={`py-2 px-3 text-xs font-semibold border-b-2 whitespace-nowrap transition-colors ${
                     activeCategory === cat.id
-                      ? 'border-emerald-400 text-emerald-300 bg-emerald-500/10'
-                      : 'border-transparent text-slate-400 hover:text-slate-200'
+                      ? "border-emerald-400 text-emerald-300 bg-emerald-500/10"
+                      : "border-transparent text-slate-400 hover:text-slate-200"
                   }`}
                 >
                   {isHi ? cat.labelHi : cat.label}
@@ -175,12 +176,12 @@ export const LuggageWeightEstimatorModal: React.FC<LuggageWeightEstimatorModalPr
               {LUGGAGE_ITEMS_DATABASE.filter((i) => i.category === activeCategory).map((item) => {
                 const qty = quantities[item.id] || 0;
                 return (
-                  <div 
+                  <div
                     key={item.id}
                     className={`p-3 rounded-xl border flex items-center justify-between transition-all ${
-                      qty > 0 
-                        ? 'bg-slate-900 border-emerald-500/40 shadow-sm' 
-                        : 'bg-slate-950/60 border-slate-800/80 hover:border-slate-700'
+                      qty > 0
+                        ? "bg-slate-900 border-emerald-500/40 shadow-sm"
+                        : "bg-slate-950/60 border-slate-800/80 hover:border-slate-700"
                     }`}
                   >
                     <div>
@@ -219,36 +220,41 @@ export const LuggageWeightEstimatorModal: React.FC<LuggageWeightEstimatorModalPr
 
             {/* Overall Count Summary Footer */}
             <div className="pt-2 flex items-center justify-between text-xs text-slate-400 border-t border-slate-800">
-              <span>{isHi ? 'कुल चयनित आइटम:' : 'Total Items Selected:'} <strong className="text-white">{estimate.itemCount} items</strong></span>
-              <span className="font-mono text-emerald-400">{estimate.totalWeightKg} kg calculated</span>
+              <span>
+                {isHi ? "कुल चयनित आइटम:" : "Total Items Selected:"}{" "}
+                <strong className="text-white">{estimate.itemCount} items</strong>
+              </span>
+              <span className="font-mono text-emerald-400">
+                {estimate.totalWeightKg} kg calculated
+              </span>
             </div>
           </div>
 
           {/* Right Column: Live Meter & Box Recommendation (5 cols) */}
           <div className="lg:col-span-5 space-y-4">
-            
             {/* Live Weight Gauge Meter */}
             <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-4 space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
                   <Weight className="w-4 h-4 text-emerald-400" />
-                  {isHi ? 'अनुमानित कुल वजन:' : 'Estimated Total Weight:'}
+                  {isHi ? "अनुमानित कुल वजन:" : "Estimated Total Weight:"}
                 </span>
                 <span className="text-lg font-mono font-bold text-emerald-400">
-                  {estimate.totalWeightKg} <span className="text-xs text-slate-400 font-sans">kg</span>
+                  {estimate.totalWeightKg}{" "}
+                  <span className="text-xs text-slate-400 font-sans">kg</span>
                 </span>
               </div>
 
               {/* Progress Bar */}
               <div className="space-y-1">
                 <div className="h-3 w-full bg-slate-950 rounded-full overflow-hidden border border-slate-800 p-0.5">
-                  <div 
+                  <div
                     className={`h-full rounded-full transition-all duration-300 ${
-                      estimate.recommendedBoxType === 'STANDARD'
-                        ? 'bg-gradient-to-r from-emerald-500 to-teal-400'
-                        : estimate.recommendedBoxType === 'JUMBO'
-                        ? 'bg-gradient-to-r from-teal-400 to-amber-400'
-                        : 'bg-gradient-to-r from-amber-400 to-cyan-400'
+                      estimate.recommendedBoxType === "STANDARD"
+                        ? "bg-gradient-to-r from-emerald-500 to-teal-400"
+                        : estimate.recommendedBoxType === "JUMBO"
+                          ? "bg-gradient-to-r from-teal-400 to-amber-400"
+                          : "bg-gradient-to-r from-amber-400 to-cyan-400"
                     }`}
                     style={{ width: `${Math.min(100, estimate.capacityUtilizationPct)}%` }}
                   />
@@ -284,7 +290,8 @@ export const LuggageWeightEstimatorModal: React.FC<LuggageWeightEstimatorModalPr
                 <div className="bg-black/40 p-2.5 rounded-lg border border-slate-800">
                   <span className="text-[10px] text-slate-400 uppercase block">Storage Cost</span>
                   <span className="text-sm font-bold text-emerald-400 font-mono">
-                    ₹{estimate.estimatedPriceMonthly}<span className="text-[10px] font-normal text-slate-400">/mo</span>
+                    ₹{estimate.estimatedPriceMonthly}
+                    <span className="text-[10px] font-normal text-slate-400">/mo</span>
                   </span>
                 </div>
                 <div className="bg-black/40 p-2.5 rounded-lg border border-slate-800">
@@ -293,7 +300,8 @@ export const LuggageWeightEstimatorModal: React.FC<LuggageWeightEstimatorModalPr
                     Dead-Rent Savings
                   </span>
                   <span className="text-sm font-bold text-amber-300 font-mono">
-                    ~₹{estimate.deadRentSavingsVsPg}<span className="text-[10px] font-normal text-slate-400">/mo</span>
+                    ~₹{estimate.deadRentSavingsVsPg}
+                    <span className="text-[10px] font-normal text-slate-400">/mo</span>
                   </span>
                 </div>
               </div>
@@ -316,13 +324,15 @@ export const LuggageWeightEstimatorModal: React.FC<LuggageWeightEstimatorModalPr
                 onClick={handleProceedToBooking}
                 className="w-full py-3 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-black font-extrabold text-xs rounded-xl shadow-lg flex items-center justify-center gap-2 transition-all mt-2"
               >
-                <span>{isHi ? 'अनुशंसित स्टोरेज बुक करें (₹' + estimate.estimatedPriceMonthly + '/महीना)' : 'Book Recommended Storage (₹' + estimate.estimatedPriceMonthly + '/mo)'}</span>
+                <span>
+                  {isHi
+                    ? "अनुशंसित स्टोरेज बुक करें (₹" + estimate.estimatedPriceMonthly + "/महीना)"
+                    : "Book Recommended Storage (₹" + estimate.estimatedPriceMonthly + "/mo)"}
+                </span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
-
           </div>
-
         </div>
 
         {/* Modal Footer */}
@@ -338,7 +348,6 @@ export const LuggageWeightEstimatorModal: React.FC<LuggageWeightEstimatorModalPr
             Close
           </button>
         </div>
-
       </div>
     </div>
   );

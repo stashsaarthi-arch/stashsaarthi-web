@@ -16,14 +16,7 @@ export const LS_KEYS = {
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 export type ServiceType =
-  | "stash"
-  | "spaces"
-  | "kitchen"
-  | "connect"
-  | "trust"
-  | "micro"
-  | "waitlist"
-  | "meal";
+  "stash" | "spaces" | "kitchen" | "connect" | "trust" | "micro" | "waitlist" | "meal";
 
 export interface BookingRecord {
   id: string;
@@ -133,7 +126,10 @@ export const getLocalBookings = getBookings;
 
 export function deleteBooking(id: string): void {
   const existing = readLS<BookingRecord>(LS_KEYS.BOOKINGS);
-  writeLS(LS_KEYS.BOOKINGS, existing.filter((r) => r.id !== id));
+  writeLS(
+    LS_KEYS.BOOKINGS,
+    existing.filter((r) => r.id !== id),
+  );
 }
 
 // ─── Waitlist ────────────────────────────────────────────────────────────────
@@ -153,7 +149,8 @@ export function getWaitlistEntries(): WaitlistRecord[] {
     full_name: (item.data?.["full_name"] as string) || "Offline Lead",
     email: (item.data?.["email"] as string) || "",
     phone_number: (item.data?.["phone_number"] as string) || "",
-    user_type: ((item.data?.["user_type"] as "student" | "host") || "student") as "student" | "host",
+    user_type: ((item.data?.["user_type"] as "student" | "host") || "student") as
+      "student" | "host",
     college_or_locality: (item.data?.["college_or_locality"] as string) || "",
     submittedAt: item.queuedAt || new Date().toISOString(),
     source: "Offline Queue",
@@ -191,9 +188,7 @@ export function getMealOrders(): MealOrderRecord[] {
   } catch {
     // ignore
   }
-  return main.sort(
-    (a, b) => new Date(b.submittedAt).getTime() - new Date(a.submittedAt).getTime(),
-  );
+  return main.sort((a, b) => new Date(b.submittedAt).getTime() - new Date(a.submittedAt).getTime());
 }
 
 // ─── Reviews ─────────────────────────────────────────────────────────────────

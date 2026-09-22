@@ -1,6 +1,24 @@
 import React, { useState } from "react";
-import { MessageCircle, Share2, Copy, Check, Sparkles, User, Home, Utensils, Clock, X, HeartHandshake } from "lucide-react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import {
+  MessageCircle,
+  Share2,
+  Copy,
+  Check,
+  Sparkles,
+  User,
+  Home,
+  Utensils,
+  Clock,
+  X,
+  HeartHandshake,
+} from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useLanguage } from "@/context/LanguageContext";
@@ -25,9 +43,24 @@ interface RoommateMenuShareModalProps {
 
 const MENU_OPTIONS = [
   { id: "standard", name: "Standard Thali", price: 50, desc: "4 Roti, Dal, Sabzi, Rice, Salad" },
-  { id: "special", name: "Special Thali", price: 70, desc: "Butter Roti, Special Curry, Dal, Rice, Sweet" },
-  { id: "paneer", name: "Paneer Thali", price: 80, desc: "Paneer Sabzi, Butter Roti, Dal Makhani, Jeera Rice" },
-  { id: "sunday", name: "Sunday Feast", price: 85, desc: "Chef's Special Weekend Feast + Matka Kheer" },
+  {
+    id: "special",
+    name: "Special Thali",
+    price: 70,
+    desc: "Butter Roti, Special Curry, Dal, Rice, Sweet",
+  },
+  {
+    id: "paneer",
+    name: "Paneer Thali",
+    price: 80,
+    desc: "Paneer Sabzi, Butter Roti, Dal Makhani, Jeera Rice",
+  },
+  {
+    id: "sunday",
+    name: "Sunday Feast",
+    price: 85,
+    desc: "Chef's Special Weekend Feast + Matka Kheer",
+  },
   { id: "monthly", name: "Monthly Pass", price: 2400, desc: "60 Meal Tokens + Free Delivery" },
 ];
 
@@ -55,12 +88,18 @@ export const RoommateMenuShareModal: React.FC<RoommateMenuShareModalProps> = ({
 
   const [roommateName, setRoommateName] = useState<string>("");
   const [hostelRoom, setHostelRoom] = useState<string>("");
-  const [selectedMenu, setSelectedMenu] = useState<string>(defaultDetails?.menuName || "Special Thali");
+  const [selectedMenu, setSelectedMenu] = useState<string>(
+    defaultDetails?.menuName || "Special Thali",
+  );
   const [menuPrice, setMenuPrice] = useState<number>(defaultDetails?.price || 70);
   const [slot, setSlot] = useState<"Lunch" | "Dinner">(defaultDetails?.slot || "Lunch");
-  const [kitchenNode, setKitchenNode] = useState<string>(defaultDetails?.kitchenNode || "Kakadeo Hub - Annapurna Kitchen");
+  const [kitchenNode, setKitchenNode] = useState<string>(
+    defaultDetails?.kitchenNode || "Kakadeo Hub - Annapurna Kitchen",
+  );
   const [customNote, setCustomNote] = useState<string>(
-    isHindi ? "भाई, आज का खाना साथ में आर्डर करते हैं! 🍲" : "Bro, let's order food together today! 🍲"
+    isHindi
+      ? "भाई, आज का खाना साथ में आर्डर करते हैं! 🍲"
+      : "Bro, let's order food together today! 🍲",
   );
   const [copied, setCopied] = useState<boolean>(false);
 
@@ -76,8 +115,8 @@ export const RoommateMenuShareModal: React.FC<RoommateMenuShareModalProps> = ({
         ? `अरे ${roommateName.trim()}! 👋`
         : `Hey ${roommateName.trim()}! 👋`
       : isHindi
-      ? `अरे रूममेट! 👋`
-      : `Hey Roommate! 👋`;
+        ? `अरे रूममेट! 👋`
+        : `Hey Roommate! 👋`;
 
     const locationText = hostelRoom.trim()
       ? isHindi
@@ -133,7 +172,9 @@ export const RoommateMenuShareModal: React.FC<RoommateMenuShareModalProps> = ({
     const text = constructShareMessage();
     navigator.clipboard.writeText(text);
     setCopied(true);
-    toast.success(isHindi ? "संदेश क्लिपबोर्ड पर कॉपी हो गया! 📋" : "Message copied to clipboard! 📋");
+    toast.success(
+      isHindi ? "संदेश क्लिपबोर्ड पर कॉपी हो गया! 📋" : "Message copied to clipboard! 📋",
+    );
     setTimeout(() => setCopied(false), 3000);
   };
 
@@ -160,11 +201,15 @@ export const RoommateMenuShareModal: React.FC<RoommateMenuShareModalProps> = ({
           <div className="flex items-center justify-between">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold">
               <MessageCircle className="w-3.5 h-3.5" />
-              <span>{isHindi ? "रूममेट डायरेक्ट व्हाट्सएप शेयर" : "Roommate Direct WhatsApp Share"}</span>
+              <span>
+                {isHindi ? "रूममेट डायरेक्ट व्हाट्सएप शेयर" : "Roommate Direct WhatsApp Share"}
+              </span>
             </div>
           </div>
           <DialogTitle className="text-xl font-extrabold text-white flex items-center gap-2">
-            <span>{isHindi ? "रूममेट के साथ मेनू शेयर करें 🍲" : "Share Menu with Roommate 🍲"}</span>
+            <span>
+              {isHindi ? "रूममेट के साथ मेनू शेयर करें 🍲" : "Share Menu with Roommate 🍲"}
+            </span>
           </DialogTitle>
           <DialogDescription className="text-xs text-slate-400">
             {isHindi

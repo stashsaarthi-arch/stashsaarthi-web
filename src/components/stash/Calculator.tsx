@@ -6,7 +6,16 @@ import { useLanguage } from "@/context/LanguageContext";
 import { PackingChecklistModal } from "./PackingChecklistModal";
 import { LuggageItemizerModal } from "./LuggageItemizerModal";
 import { LuggageWeightEstimatorModal } from "./LuggageWeightEstimatorModal";
-import { Package, FileText, Printer, ShieldCheck, ArrowRight, MapPin, Luggage, Weight } from "lucide-react";
+import {
+  Package,
+  FileText,
+  Printer,
+  ShieldCheck,
+  ArrowRight,
+  MapPin,
+  Luggage,
+  Weight,
+} from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import {
@@ -38,13 +47,23 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
 
   // Selected Zone Info
   const activeZone = useMemo(
-    () => (PRESET_PRICING_ZONES.find((z) => z.zone_code === selectedZoneCode) || PRESET_PRICING_ZONES[0])!,
-    [selectedZoneCode]
+    () =>
+      (PRESET_PRICING_ZONES.find((z) => z.zone_code === selectedZoneCode) ||
+        PRESET_PRICING_ZONES[0])!,
+    [selectedZoneCode],
   );
   const zoneBadge = useMemo(() => getZoneTierBadge(activeZone.tier_level), [activeZone]);
 
   // 2. Kanpur Dynamic Location-Based Math Engine (Memoized for 60fps interaction)
-  const { vacationMonths, deadRentCost, stashCost, netSavings, savingsPercent, dynamicQuote, breakQuote } = useMemo(() => {
+  const {
+    vacationMonths,
+    deadRentCost,
+    stashCost,
+    netSavings,
+    savingsPercent,
+    dynamicQuote,
+    breakQuote,
+  } = useMemo(() => {
     const vMonths = Math.max(0.5, Number((safeDays / 30).toFixed(1)) || 0.5);
     const quote = calculateLocationPricingQuote({
       campus: activeZone.zone_name,
@@ -85,10 +104,15 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                     className="text-xs font-medium text-slate-300 cursor-pointer flex items-center gap-1"
                   >
                     <MapPin className="h-3.5 w-3.5 text-cyan-400 shrink-0" />
-                    <span>{isHi ? "कैंपस / लोकेशन प्राइजिंग ज़ोन" : "Campus Location Pricing Zone"}</span>
+                    <span>
+                      {isHi ? "कैंपस / लोकेशन प्राइजिंग ज़ोन" : "Campus Location Pricing Zone"}
+                    </span>
                   </label>
-                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded border ${zoneBadge.badgeClass}`}>
-                    {zoneBadge.icon} {isHi ? zoneBadge.label_hi : zoneBadge.label} (₹{dynamicQuote.effective_rate_per_bag}/{isHi ? "बैग/माह" : "bag/mo"})
+                  <span
+                    className={`text-[10px] font-bold px-2 py-0.5 rounded border ${zoneBadge.badgeClass}`}
+                  >
+                    {zoneBadge.icon} {isHi ? zoneBadge.label_hi : zoneBadge.label} (₹
+                    {dynamicQuote.effective_rate_per_bag}/{isHi ? "बैग/माह" : "bag/mo"})
                   </span>
                 </div>
                 <select
@@ -102,7 +126,8 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                 >
                   {PRESET_PRICING_ZONES.map((zone) => (
                     <option key={zone.zone_code} value={zone.zone_code}>
-                      {isHi && zone.zone_name_hi ? zone.zone_name_hi : zone.zone_name} — ₹{zone.base_storage_rate_monthly}/bag/mo
+                      {isHi && zone.zone_name_hi ? zone.zone_name_hi : zone.zone_name} — ₹
+                      {zone.base_storage_rate_monthly}/bag/mo
                     </option>
                   ))}
                 </select>
@@ -234,7 +259,9 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                   >
                     <span>
                       🌴 <strong>{isHi ? "3 महीने की छुट्टी?" : "3-Month Summer Break?"}</strong>{" "}
-                      {isHi ? "90 दिन चुनें और 15% छूट पाएं!" : "Set 90 days to unlock 15% OFF storage!"}
+                      {isHi
+                        ? "90 दिन चुनें और 15% छूट पाएं!"
+                        : "Set 90 days to unlock 15% OFF storage!"}
                     </span>
                     <span className="shrink-0 bg-amber-500 hover:bg-amber-400 text-black px-2.5 py-1 rounded-lg font-bold font-mono text-[10px]">
                       {isHi ? "90 दिन चुनें" : "Set 90 Days"}
@@ -243,7 +270,10 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                 ) : (
                   <div className="min-h-[48px] p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-[11px] text-emerald-300 flex items-center justify-between font-medium">
                     <span className="flex items-center gap-1">
-                      🎉 {isHi ? "15% एक्सटेंडेड ब्रेक डिस्काउंट लागू हुआ!" : "15% Extended Break Discount Active!"}
+                      🎉{" "}
+                      {isHi
+                        ? "15% एक्सटेंडेड ब्रेक डिस्काउंट लागू हुआ!"
+                        : "15% Extended Break Discount Active!"}
                     </span>
                     <span className="font-mono text-[10px] font-bold text-emerald-400 bg-emerald-500/20 px-2 py-0.5 rounded border border-emerald-500/30 shrink-0">
                       -₹{breakQuote.discountAmount} (15% OFF)
@@ -266,7 +296,10 @@ export function StashCalculator({ onBook }: { onBook?: OpenBooking }) {
                   🎉 {t.calculator.saveCompare.replace("{percent}", String(savingsPercent))}
                 </div>
                 <div className="mt-2 inline-flex items-center gap-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-[11px] font-bold text-emerald-300">
-                  ⚡ {isHi ? "0 रद्दीकरण शुल्क (Zero Cancellation Fee)" : "Zero Cancellation Fee Guarantee"}
+                  ⚡{" "}
+                  {isHi
+                    ? "0 रद्दीकरण शुल्क (Zero Cancellation Fee)"
+                    : "Zero Cancellation Fee Guarantee"}
                 </div>
 
                 {/* Visual comparative bar breakdown */}

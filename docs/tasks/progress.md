@@ -1,6 +1,7 @@
 # Ralph Autonomous Workforce Sprint Progress
 
 ## Completed Base Infrastructure
+
 - [x] Dual Persona & Bilingual Sync (`en` / `hi`)
 - [x] Instant Upfront Render Architecture & 120 FPS kinetic scroll
 - [x] Interactive Product Sandbox & Live Custody Pass
@@ -15,6 +16,7 @@
 - [x] Mobile Viewport Overflow Protection (<400px) & Touch Manipulation Standards
 
 ## Active Sprint Queue
+
 - [x] [CTO] Refactor animations to Lenis / GSAP smooth scroll & GPU layers
 - [ ] [CMO] Optimize hero headline, messaging hooks & value proposition
 - [ ] [CPO] Polish component spacing, padding consistency & modern card styling
@@ -24,6 +26,7 @@
 - [ ] [CEO Summary] Auto-generate continuous tasks in `EXECUTIVE_DASHBOARD.md`
 
 ## Sprint 1: CTO (Performance & Backend)
+
 - [x] **[CTO] Task 12: Audit all Supabase RPC calls for latency optimizations** (2026-09-06)
   - Parallelized independent queries in `admin.tsx` fetchLeads via `Promise.all` (2 sequential → 1 concurrent)
   - Replaced SELECT+INSERT anti-pattern in `waitlistService.ts` upsertGoogleUser with single `.upsert(onConflict, ignoreDuplicates)` — eliminates 1 round trip
@@ -67,6 +70,7 @@
 # Ralph Autonomous Workforce Sprint Progress
 
 ## Completed Base Infrastructure
+
 - [x] Dual Persona & Bilingual Sync (`en` / `hi`)
 - [x] Instant Upfront Render Architecture & 120 FPS kinetic scroll
 - [x] Interactive Product Sandbox & Live Custody Pass
@@ -81,6 +85,7 @@
 - [x] Mobile Viewport Overflow Protection (<400px) & Touch Manipulation Standards
 
 ## Active Sprint Queue
+
 - [x] [CTO] Refactor animations to Lenis / GSAP smooth scroll & GPU layers
 - [ ] [CMO] Optimize hero headline, messaging hooks & value proposition
 - [ ] [CPO] Polish component spacing, padding consistency & modern card styling
@@ -90,6 +95,7 @@
 - [ ] [CEO Summary] Auto-generate continuous tasks in `EXECUTIVE_DASHBOARD.md`
 
 ## Sprint 1: CTO (Performance & Backend)
+
 - [x] **[CTO] Task 12: Audit all Supabase RPC calls for latency optimizations** (2026-09-06)
   - Parallelized independent queries in `admin.tsx` fetchLeads via `Promise.all` (2 sequential → 1 concurrent)
   - Replaced SELECT+INSERT anti-pattern in `waitlistService.ts` upsertGoogleUser with single `.upsert(onConflict, ignoreDuplicates)` — eliminates 1 round trip
@@ -302,7 +308,7 @@
   - Updated default meta keywords in `src/routes/__root.tsx` with hyper-targeted long-tail search phrases.
 - [x] **[CMO] Task 34: Add schema.org Structured Data for All "Co-living Spaces"** (2026-09-06)
   - Created schema.org structured data engine for co-living spaces (`src/lib/seo-coliving-schema.ts`) defining rich snippet schemas (`Accommodation`, `ItemList`, `ListItem`, `Offer`, `PostalAddress`, `GeoCoordinates`, `AggregateRating`, `LocationFeatureSpecification`):
-    • Kalyanpur, Kanpur Room (IIT Kanpur  - Integrated `coLivingItemListSchema` and `...coLivingSpacesSchema` into the root JSON-LD `@graph` in `src/routes/__root.tsx` for immediate SSR crawler discovery.
+    • Kalyanpur, Kanpur Room (IIT Kanpur - Integrated `coLivingItemListSchema` and `...coLivingSpacesSchema` into the root JSON-LD `@graph` in `src/routes/__root.tsx` for immediate SSR crawler discovery.
   - Upgraded `DynamicOGHead.tsx` (`src/components/seo/DynamicOGHead.tsx`) to dynamically inject and update JSON-LD `<script id="coliving-rooms-jsonld" type="application/ld+json">` during client-side route navigation.
   - Build & Type Check Verified: `npm run build` (**0 errors**).
 
@@ -549,9 +555,9 @@
     • **Last Order State & LocalStorage Persistence**: Implemented `LastMealOrder` interface and `localStorage` sync (`ss_last_meal_order`) reading past meal choices (e.g. Special Thali, Kakadeo Hub - Annapurna Kitchen, Room Delivery, 70 Tokens) or fallback defaults.
     • **Header Shortcut Banner**: Rendered high-contrast shortcut card at the top of the kitchen module with glowing pulse badge (`⚡ 2-Step Dashboard Shortcut`), display of saved meal details, and instant trigger button ("⚡ Re-Order in 2 Taps").
     • **2-Step Quick Re-Order Modal**:
-      - **Step 1 (Review & Customization)**: Interactive modal allowing 1-tap toggling of slot (Lunch ☀️ / Dinner 🌙), fulfillment mode (Room Delivery 🛵 / Fast Pickup 🏃 -10T discount), and pre-filled address/phone review with token balance prediction.
-      - **Step 2 (One-Tap Execution)**: Instant 1-tap confirmation card with green checkmark animation, token debit ledger visualizer, and Web Audio API haptic feedback (`playPop()`).
-    • **Backend Supabase Booking & Taste Shield Integration**: Submits order directly to `meal_bookings`, debits wallet tokens, updates session `lastMeal`, generates StashPass pickup code for pickup mode, triggers Sonner success toast, and links directly to 50% Taste Shield protection modal.
+    - **Step 1 (Review & Customization)**: Interactive modal allowing 1-tap toggling of slot (Lunch ☀️ / Dinner 🌙), fulfillment mode (Room Delivery 🛵 / Fast Pickup 🏃 -10T discount), and pre-filled address/phone review with token balance prediction.
+    - **Step 2 (One-Tap Execution)**: Instant 1-tap confirmation card with green checkmark animation, token debit ledger visualizer, and Web Audio API haptic feedback (`playPop()`).
+      • **Backend Supabase Booking & Taste Shield Integration**: Submits order directly to `meal_bookings`, debits wallet tokens, updates session `lastMeal`, generates StashPass pickup code for pickup mode, triggers Sonner success toast, and links directly to 50% Taste Shield protection modal.
   - Type-check & build verified: `npx tsc --noEmit` (**0 errors**) and `npm run build` compiled cleanly with **0 errors**.
 
 - [x] **[UI] Task 62: Integrate a lightweight 360° photo viewer for Saarthi Spaces room tours** (2026-09-06)
@@ -797,12 +803,12 @@
 - [x] **[CSO - Trust] Task 89: Implement a formalized, automated process for CSO to review and "seal" (using the simulated barcode) each new vetted kitchen node** (2026-09-07)
   - **CSO Kitchen Sealing Core Engine** (`src/lib/csoKitchenSealingService.ts`):
     • Engineered formal CSO audit certificate minting & barcode seal manager supporting 4 mandatory safety & hygiene checkpoints:
-      1. RO Filtered Water & Pure Desi Ghee / Zero Palm Oil Certification
-      2. FSSAI / Home Kitchen Hygiene Pass
-      3. Senior Chef Identity & Police Character Clearance
-      4. Tamper-Evident Laser Barcode Packaging Seal & Daily Thermal Pass
-    • Pre-populated default verified Kanpur kitchen nodes (Kakadeo Annapurna `#CSO-SEAL-KNP-8921`, CSJMU Dadi Maa `#CSO-SEAL-KNP-8922`, IITK Mess `#CSO-SEAL-KNP-8923`, HBTI Shanti Home Food `#CSO-SEAL-KNP-8924`).
-    • Built barcode authenticity verifier `verifyBarcodeSerial()` and `localStorage` persistence layer.
+    1. RO Filtered Water & Pure Desi Ghee / Zero Palm Oil Certification
+    2. FSSAI / Home Kitchen Hygiene Pass
+    3. Senior Chef Identity & Police Character Clearance
+    4. Tamper-Evident Laser Barcode Packaging Seal & Daily Thermal Pass
+       • Pre-populated default verified Kanpur kitchen nodes (Kakadeo Annapurna `#CSO-SEAL-KNP-8921`, CSJMU Dadi Maa `#CSO-SEAL-KNP-8922`, IITK Mess `#CSO-SEAL-KNP-8923`, HBTI Shanti Home Food `#CSO-SEAL-KNP-8924`).
+       • Built barcode authenticity verifier `verifyBarcodeSerial()` and `localStorage` persistence layer.
   - **Interactive CSO Kitchen Barcode Seal Console** (`src/components/stash/CsoKitchenSealModal.tsx`):
     • Multi-tab modal suite: "Vetted & Sealed Kitchens", "Audit & Seal New Kitchen Node", and "Verify Barcode Serial Authenticity".
     • Animated CSO audit runner showing real-time step-by-step verification progress with ambient audio haptics (`playPop()`).
@@ -815,13 +821,13 @@
 - [x] **[QA - Compliance] Task 90: Implement rate-limiting on all SMS and WhatsApp token requests to prevent spam** (2026-09-07)
   - **Specialized Token Rate Limiter Engine** (`src/lib/tokenRateLimiter.ts`):
     • Engineered rate limiter engine enforcing sliding-window quotas and cooldowns across SMS and WhatsApp token request channels:
-      1. `sms_token`: Min 60s cooldown between SMS OTP / token requests, max 3 requests per 15-min window.
-      2. `whatsapp_token`: Min 60s cooldown between WhatsApp token dispatches, max 3 requests per 15-min window.
-      3. `trial_token`: Min 60s cooldown for student Zero-Fee Trial Token claims, max 2 claims per 30-min window.
-      4. `nudge_token`: Min 120s cooldown between automated WhatsApp re-engagement tokens, max 2 nudges per 60-min window.
-      5. `referral_token`: Min 10s cooldown between referral token share attempts, max 5 shares per 5-min window.
-      6. `roommate_token`: Min 10s cooldown between roommate menu share tokens, max 5 shares per 5-min window.
-    • Features audio micro-haptic alerts (`playClick()`), Sonner toast warnings (`🛡️ Rate Limited`), `sessionStorage` persistence (`ss_token_ratelimit_*`), and in-memory fallback.
+    1. `sms_token`: Min 60s cooldown between SMS OTP / token requests, max 3 requests per 15-min window.
+    2. `whatsapp_token`: Min 60s cooldown between WhatsApp token dispatches, max 3 requests per 15-min window.
+    3. `trial_token`: Min 60s cooldown for student Zero-Fee Trial Token claims, max 2 claims per 30-min window.
+    4. `nudge_token`: Min 120s cooldown between automated WhatsApp re-engagement tokens, max 2 nudges per 60-min window.
+    5. `referral_token`: Min 10s cooldown between referral token share attempts, max 5 shares per 5-min window.
+    6. `roommate_token`: Min 10s cooldown between roommate menu share tokens, max 5 shares per 5-min window.
+       • Features audio micro-haptic alerts (`playClick()`), Sonner toast warnings (`🛡️ Rate Limited`), `sessionStorage` persistence (`ss_token_ratelimit_*`), and in-memory fallback.
   - **Re-exports & Standardized Rate Limiter DX** (`src/lib/rateLimiter.ts`):
     • Integrated and re-exported token rate-limiting helpers (`checkSmsTokenRateLimit`, `checkWhatsAppTokenRateLimit`, `checkAndRecordTokenRateLimit`) for single-source developer access.
   - **Workflow Integrations**:
@@ -889,8 +895,6 @@
     - `docs/tasks/PRD.md` — Marked Task 94 as `- [x]`.
     - `docs/tasks/progress.md` — Appended Task 94 log.
     - `progress.md` — Appended Task 94 log.
-
-
 
 - [x] **[QA - Security] Task 95: Perform a comprehensive pen-test on all public-facing API endpoints — 2026-09-07**:
   - **Build & Audit**: `node execution/run-api-pentest.mjs` — ✅ 5/5 Vectors Passed (100%). `npm run build` — ✅ 0 errors.
@@ -1218,7 +1222,3 @@
     - `npx tsc --noEmit`: ✅ **0 errors**.
     - `npm run build`: ✅ **0 errors** (Vite production bundle compiled cleanly in 1.93s).
     - Unit tests (`execution/test-luggage-weight-estimator.mjs`, `execution/test-meal-token-ledger.mjs`): ✅ **All tests passed**.
-
-
-
-

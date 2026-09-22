@@ -75,7 +75,7 @@ export interface StressTestSummary {
 export function applyScannerPreprocessing(
   contrastRatio: number,
   lightingLux: number,
-  crumpleLevel: number
+  crumpleLevel: number,
 ): { enhancedContrast: number; normalizedBrightness: number; noiseReduction: number } {
   // Gain control for low lighting
   const brightnessGain = lightingLux < 50 ? (50 - lightingLux) * 1.5 : 0;
@@ -98,7 +98,10 @@ export function applyScannerPreprocessing(
  * Reed-Solomon & Parity Error Correction Simulator
  * Recovers corrupted barcode bits caused by surface creases.
  */
-export function applyReedSolomonErrorCorrection(barcode: string, crumpleLevel: number): {
+export function applyReedSolomonErrorCorrection(
+  barcode: string,
+  crumpleLevel: number,
+): {
   recoveredBarcode: string;
   correctedBits: number;
 } {
@@ -115,19 +118,22 @@ export function applyReedSolomonErrorCorrection(barcode: string, crumpleLevel: n
  */
 export function decodeBarcodeWithHtml5Qrcode(
   rawBarcode: string,
-  profile: StressProfile
+  profile: StressProfile,
 ): ScanResult {
   const startTime = performance.now();
-  
+
   // Run preprocessing pipeline
   const { enhancedContrast, normalizedBrightness } = applyScannerPreprocessing(
     profile.contrastRatio,
     profile.lightingLux,
-    profile.crumpleDistortionLevel
+    profile.crumpleDistortionLevel,
   );
 
   // Error correction
-  const { correctedBits } = applyReedSolomonErrorCorrection(rawBarcode, profile.crumpleDistortionLevel);
+  const { correctedBits } = applyReedSolomonErrorCorrection(
+    rawBarcode,
+    profile.crumpleDistortionLevel,
+  );
 
   // Calculate decode probability based on enhanced signal
   let baseScore = 98.5;

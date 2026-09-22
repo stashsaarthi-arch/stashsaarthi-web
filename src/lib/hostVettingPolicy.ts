@@ -1,6 +1,6 @@
 /**
  * StashSaarthi Autonomous System — Formal Host Vetting Process & Safety Agreement Policy
- * 
+ *
  * CEO & CSO Compliance Directive (Task 92)
  * Compliant with:
  *  - Transfer of Property Act (TPA) 1882, Section 105 (Leave & License Protection)
@@ -37,8 +37,10 @@ export const OFFICIAL_HOST_VETTING_POLICY: HostVettingPolicyCharter = {
   effectiveDate: "September 1, 2026",
   titleEn: "StashSaarthi Official Host Vetting Process & Security Policy",
   titleHi: "स्टैशसारथी आधिकारिक होस्ट सत्यापन प्रक्रिया एवं सुरक्षा नीति",
-  summaryEn: "This formal company policy governs the mandatory 4-tier onboarding, legal verification, physical safety auditing, and legal protection of all premium host host nodes operating within the StashSaarthi network in Kanpur.",
-  summaryHi: "यह आधिकारिक कंपनी नीति कानपुर में स्टैशसारथी नेटवर्क के तहत संचालित सभी वरिष्ठ नागरिक होस्ट नोड्स के अनिवार्य 4-स्तरीय ऑनबोर्डिंग, कानूनी सत्यापन, भौतिक सुरक्षा ऑडिट और कानूनी सुरक्षा को नियंत्रित करती है।",
+  summaryEn:
+    "This formal company policy governs the mandatory 4-tier onboarding, legal verification, physical safety auditing, and legal protection of all premium host host nodes operating within the StashSaarthi network in Kanpur.",
+  summaryHi:
+    "यह आधिकारिक कंपनी नीति कानपुर में स्टैशसारथी नेटवर्क के तहत संचालित सभी वरिष्ठ नागरिक होस्ट नोड्स के अनिवार्य 4-स्तरीय ऑनबोर्डिंग, कानूनी सत्यापन, भौतिक सुरक्षा ऑडिट और कानूनी सुरक्षा को नियंत्रित करती है।",
   legalBasisEn: [
     "Transfer of Property Act (TPA) 1882 Section 105 — Permissive Leave & License model (Zero tenancy or leasehold right transfer)",
     "Digital Personal Data Protection (DPDP) Act 2023 — Encrypted e-KYC & biometric identity processing",
@@ -66,8 +68,10 @@ export const OFFICIAL_HOST_VETTING_POLICY: HostVettingPolicyCharter = {
         "आधार फोटो के विरुद्ध लाइव कैमरा फेशियल मैच (≥85% स्कोर अनिवार्य)",
         "संपत्ति के मालिकाना हक या पंजीकृत दीर्घावधि लीज दस्तावेज जांच",
       ],
-      rejectionCriteriaEn: "Mismatch in identity documents or facial similarity score below 85% results in permanent auto-rejection.",
-      rejectionCriteriaHi: "पहचान पत्रों में असंगति या चेहरे के मिलान में 85% से कम स्कोर पर स्थायी स्वचालित अस्वीकृति।",
+      rejectionCriteriaEn:
+        "Mismatch in identity documents or facial similarity score below 85% results in permanent auto-rejection.",
+      rejectionCriteriaHi:
+        "पहचान पत्रों में असंगति या चेहरे के मिलान में 85% से कम स्कोर पर स्थायी स्वचालित अस्वीकृति।",
     },
     {
       tierNumber: 2,
@@ -83,8 +87,10 @@ export const OFFICIAL_HOST_VETTING_POLICY: HostVettingPolicyCharter = {
         "शहर और राज्य अपराध डेटाबेस में शून्य सक्रिय एफआईआर या आपराधिक रिकॉर्ड घोषणा",
         "हस्ताक्षरित कानूनी क्षतिपूर्ति छूट जो होस्ट को अनधिकृत दावों से बचाती है",
       ],
-      rejectionCriteriaEn: "Any recorded criminal offense or pending litigation results in instant lifetime platform blacklisting.",
-      rejectionCriteriaHi: "कोई भी आपराधिक मामला या लंबित मुकदमा पाए जाने पर प्लेटफॉर्म से तत्काल आजीवन ब्लैकलिस्टिंग।",
+      rejectionCriteriaEn:
+        "Any recorded criminal offense or pending litigation results in instant lifetime platform blacklisting.",
+      rejectionCriteriaHi:
+        "कोई भी आपराधिक मामला या लंबित मुकदमा पाए जाने पर प्लेटफॉर्म से तत्काल आजीवन ब्लैकलिस्टिंग।",
     },
     {
       tierNumber: 3,
@@ -100,8 +106,10 @@ export const OFFICIAL_HOST_VETTING_POLICY: HostVettingPolicyCharter = {
         "स्थिर निवास का प्रमाण (वर्तमान कानपुर नोड स्थान पर न्यूनतम 2+ वर्ष का निवास)",
         "छात्र आतिथ्य और शांत अध्ययन नियमों के संबंध में वरिष्ठ होस्ट का साक्षात्कार",
       ],
-      rejectionCriteriaEn: "Unverifiable community references or unstable residency history (<2 years) triggers mandatory manual review hold.",
-      rejectionCriteriaHi: "असत्यापित सामुदायिक संदर्भ या अस्थिर निवास इतिहास (<2 वर्ष) पर मैन्युअल समीक्षा होल्ड।",
+      rejectionCriteriaEn:
+        "Unverifiable community references or unstable residency history (<2 years) triggers mandatory manual review hold.",
+      rejectionCriteriaHi:
+        "असत्यापित सामुदायिक संदर्भ या अस्थिर निवास इतिहास (<2 वर्ष) पर मैन्युअल समीक्षा होल्ड।",
     },
     {
       tierNumber: 4,
@@ -119,8 +127,10 @@ export const OFFICIAL_HOST_VETTING_POLICY: HostVettingPolicyCharter = {
         "सारथी रसोई होस्ट: शुद्ध देसी घी, शून्य पाम ऑयल, 100% स्वच्छता स्कोर (≥4.5/5)",
         "स्मार्ट मोशन सेंसर / आपातकालीन एसओएस बटन स्थापना व लाइव टेस्ट कॉल",
       ],
-      rejectionCriteriaEn: "Damp floors, compromised locks, or substandard kitchen hygiene results in immediate audit failure until remediated.",
-      rejectionCriteriaHi: "सीपेज वाली जमीन, खराब ताले, या खराब रसोई स्वच्छता पाए जाने पर सुधार होने तक तुरंत ऑडिट फेल।",
+      rejectionCriteriaEn:
+        "Damp floors, compromised locks, or substandard kitchen hygiene results in immediate audit failure until remediated.",
+      rejectionCriteriaHi:
+        "सीपेज वाली जमीन, खराब ताले, या खराब रसोई स्वच्छता पाए जाने पर सुधार होने तक तुरंत ऑडिट फेल।",
     },
   ],
   hostGuaranteesEn: [
@@ -186,4 +196,3 @@ export function clearHostAgreement(): void {
     console.warn("Failed to clear host agreement from localStorage:", err);
   }
 }
-

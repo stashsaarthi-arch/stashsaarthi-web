@@ -9,6 +9,7 @@
 In standard multi-service web portals, services are stacked vertically in a single towering column, forcing users through thousands of vertical pixels to compare options or reach a booking action.
 
 This architecture refactors **StashSaarthi** to achieve:
+
 1. **Zero Infinite Stacking**: The Integrated Solutions Hub presents only the active service workspace (`Stash`, `Spaces`, `Kitchen`, `Connect`), cutting page scroll height by over 65%.
 2. **Contextual Auto-Anchoring**: Selecting any service card or chip from the hero or quick-nav automatically scrolls with smooth easing directly to `#solutions`, framed with a calibrated `-90px` offset beneath the sticky navbar.
 3. **Persistent In-Page Quick-Jump Pill**: A floating segment control pill (`[🍱 Kitchen] [🧳 Stash] [🏠 Spaces] [🤝 Connect]`) appears past the hero threshold (scrollY > 420px), allowing 1-tap switching without manual dragging.
@@ -20,6 +21,7 @@ This architecture refactors **StashSaarthi** to achieve:
 ## 2. Updated Components & Implementations
 
 ### A. Persistent In-Page Quick-Jump Pill
+
 - **File**: `src/components/stash/ServiceQuickJumpPill.tsx`
   - Floating pill fixed at `top-16 sm:top-18 left-1/2 -translate-x-1/2 z-40` with `backdrop-blur-2xl` and Obsidian Dark background `#0A0D0F`.
   - Spring sliding active indicator (`layoutId="activeServiceQuickJumpPill"`, stiffness: 450, damping: 32).
@@ -31,11 +33,13 @@ This architecture refactors **StashSaarthi** to achieve:
   - Automatically synchronizes with global `stashsaarthi-solution-tab` event bus.
 
 ### B. Contextual Auto-Anchoring & Tab Synchronization
+
 - **File**: `src/components/stash/SolutionsHub.tsx`
   - Added listener to `stashsaarthi-solution-tab` that auto-scrolls to the `#solutions` workspace with standard `-90px` navbar offset compensation.
   - Tab button clicks feature Emil Kowalski fluid spring transitions (`layoutId="activeSolutionsHubTab"`) and auto-frame the workspace if outside viewing threshold.
 
 ### C. Compact Mobile Carousels & Touch Containment
+
 - **File**: `src/components/TokenMealHub.tsx`
   - **Kitchen Nodes**: Refactored from static vertical grid into a responsive horizontal swipe strip on mobile:
     `flex sm:grid overflow-x-auto sm:overflow-visible snap-x snap-mandatory gap-3.5 sm:grid-cols-2 lg:grid-cols-4 pb-3 no-scrollbar touch-pan-y`
@@ -47,6 +51,7 @@ This architecture refactors **StashSaarthi** to achieve:
   - 1-tap cluster pills for Kakadeo, Kalyanpur, Rawatpur, Gumti No. 5, and Sharda Nagar with horizontal touch pan containment.
 
 ### D. Calibrated Smooth Scroll Engine
+
 - **File**: `src/components/stash/legal.ts`
   - Re-calibrated default target offset from `-75` to `-90` pixels, accounting for the dynamic height of the sticky navbar and floating status bar.
 

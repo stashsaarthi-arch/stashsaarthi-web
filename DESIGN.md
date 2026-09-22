@@ -96,15 +96,18 @@ The typography is rendered using **Plus Jakarta Sans** and **Inter**, prioritizi
 The color palette is strictly governed in the OKLCH color space for uniform perceptual lightness across dark themes, light overlays, and persona switches.
 
 ### Primary Accents (Student Persona)
+
 - **Primary / Electric Mint:** `oklch(0.868 0.16 178)` — Active interactive states, key CTAs, badges, and focus rings.
 - **Neon Emerald:** `oklch(0.696 0.149 162)` — Secondary gradients, success telemetry, and live custody badges.
 - **Cyan:** `oklch(0.868 0.16 178)` — Interactive links, hero sweep animations, and radar beacons.
 
 ### Warm Accents (Elderly Host Persona)
+
 - **Warm Amber:** `oklch(0.809 0.165 76)` / `oklch(0.769 0.165 70)` — Host CTAs, payout calculators, and verified badges.
 - **Sunset Gold:** `oklch(0.837 0.164 84)` — Hero text glow and earnings progress highlights.
 
 ### Neutrals & Surfaces
+
 - **Dark Obsidian Background:** `oklch(0.145 0.011 232)` (`#0A0D0F` base).
 - **Elevated Card Surface:** `oklch(0.198 0.013 223)` with glass variant `oklch(0.198 0.013 223 / 72%)`.
 - **Foreground:** `oklch(0.97 0.008 220)` for high-contrast, crisp text rendering.
@@ -152,12 +155,14 @@ Primary typeface is **Plus Jakarta Sans** backed by **Inter** and native system-
 ## Do's and Don'ts
 
 ### Do's
+
 - Always maintain full visual and copy alignment between Student (`data-role="student"`) and Host (`data-role="host"`) personas.
 - Keep hairline borders translucent (`oklch(1 0 0 / 10%)`) over dark surfaces to maintain high-end glassmorphism.
 - Ensure all interactive touch targets meet mobile accessibility minimums (`min-h-[48px]`).
 - Preserve Lenis smooth-scroll compatibility with `overflow-x: hidden` on root containers.
 
 ### Don'ts
+
 - Never use generic, uncalibrated hex colors (e.g. plain `#ff0000` or `#0000ff`). Always reference OKLCH variables or theme tokens.
 - Never hardcode English strings without equivalent Hindi translation keys in the bilingual mapping matrix.
 - Never add heavy WebGL or unthrottled mousemove listeners on touch viewports (<768px).

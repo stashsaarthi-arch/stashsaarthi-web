@@ -51,7 +51,9 @@ export const LowDataToggle = React.memo(function LowDataToggle({
         ) : (
           <Zap className="h-3.5 w-3.5 text-emerald-400" />
         )}
-        <span className="whitespace-nowrap">{isLowData ? (isHi ? "लो-डेटा" : "Low-Data") : (isHi ? "डेटा" : "Data")}</span>
+        <span className="whitespace-nowrap">
+          {isLowData ? (isHi ? "लो-डेटा" : "Low-Data") : isHi ? "डेटा" : "Data"}
+        </span>
         {isAutoDetected && isLowData && (
           <span className="h-1.5 w-1.5 rounded-full bg-amber-400 animate-ping" />
         )}
@@ -96,7 +98,7 @@ export const LowDataToggle = React.memo(function LowDataToggle({
           isLowData ? "bg-amber-500/30 text-amber-200" : "bg-white/10 text-slate-400"
         }`}
       >
-        {isLowData ? (isHi ? "सक्रिय" : "ACTIVE") : (isHi ? "ऑफ" : "OFF")}
+        {isLowData ? (isHi ? "सक्रिय" : "ACTIVE") : isHi ? "ऑफ" : "OFF"}
       </div>
     </button>
   );

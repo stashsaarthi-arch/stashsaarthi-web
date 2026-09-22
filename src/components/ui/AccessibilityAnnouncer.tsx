@@ -23,22 +23,12 @@ export function AccessibilityAnnouncer() {
   return (
     <div className="sr-only" aria-hidden="false">
       {/* Polite live region for standard screen-reader updates */}
-      <div
-        role="status"
-        aria-live="polite"
-        aria-atomic="true"
-        className="sr-only"
-      >
+      <div role="status" aria-live="polite" aria-atomic="true" className="sr-only">
         {politeMessage}
       </div>
 
       {/* Assertive live region for immediate alert notifications */}
-      <div
-        role="alert"
-        aria-live="assertive"
-        aria-atomic="true"
-        className="sr-only"
-      >
+      <div role="alert" aria-live="assertive" aria-atomic="true" className="sr-only">
         {assertiveMessage}
       </div>
     </div>

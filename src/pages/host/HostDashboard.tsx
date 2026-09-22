@@ -1,12 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { LayoutDashboard, Home, CalendarCheck, IndianRupee, AlertCircle, Menu, X, ArrowRight } from 'lucide-react';
-import { Link } from '@tanstack/react-router';
-import { AadhaarKycModal } from '@/components/host/AadhaarKycModal';
+import React, { useState, useEffect } from "react";
+import {
+  LayoutDashboard,
+  Home,
+  CalendarCheck,
+  IndianRupee,
+  AlertCircle,
+  Menu,
+  X,
+  ArrowRight,
+} from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { AadhaarKycModal } from "@/components/host/AadhaarKycModal";
 
 export function HostDashboard() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isKycModalOpen, setIsKycModalOpen] = useState(false);
-  const [kycStatus, setKycStatus] = useState<'unverified' | 'pending'>('unverified');
+  const [kycStatus, setKycStatus] = useState<"unverified" | "pending">("unverified");
 
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
@@ -16,10 +25,10 @@ export function HostDashboard() {
   if (!mounted) return null;
 
   const navItems = [
-    { name: 'Overview', icon: LayoutDashboard, active: true },
-    { name: 'Properties', icon: Home, active: false },
-    { name: 'Bookings', icon: CalendarCheck, active: false },
-    { name: 'Earnings', icon: IndianRupee, active: false },
+    { name: "Overview", icon: LayoutDashboard, active: true },
+    { name: "Properties", icon: Home, active: false },
+    { name: "Bookings", icon: CalendarCheck, active: false },
+    { name: "Earnings", icon: IndianRupee, active: false },
   ];
 
   return (
@@ -27,43 +36,57 @@ export function HostDashboard() {
       {/* Mobile Header */}
       <div className="md:hidden flex items-center justify-between p-4 border-b border-white/5 bg-[#0A0D0F]/80 backdrop-blur-md sticky top-0 z-40">
         <div className="font-bold text-lg tracking-tight text-white flex items-center gap-2">
-          <span className="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-500 flex items-center justify-center">S</span>
+          <span className="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-500 flex items-center justify-center">
+            S
+          </span>
           Host Portal
         </div>
-        <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="p-2 -mr-2 text-slate-300 hover:text-white">
+        <button
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="p-2 -mr-2 text-slate-300 hover:text-white"
+        >
           {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </div>
 
       {/* Sidebar Navigation */}
-      <aside className={`fixed inset-y-0 left-0 z-30 w-64 bg-[#0B0E11] border-r border-white/5 transform transition-transform duration-300 ease-in-out md:relative md:translate-x-0 ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      <aside
+        className={`fixed inset-y-0 left-0 z-30 w-64 bg-[#0B0E11] border-r border-white/5 transform transition-transform duration-300 ease-in-out md:relative md:translate-x-0 ${mobileMenuOpen ? "translate-x-0" : "-translate-x-full"}`}
+      >
         <div className="hidden md:flex items-center gap-3 p-6 mb-4">
-          <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-500 flex items-center justify-center font-bold text-xl">S</div>
+          <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-500 flex items-center justify-center font-bold text-xl">
+            S
+          </div>
           <div>
             <div className="font-bold text-white tracking-tight leading-tight">Host Portal</div>
             <div className="text-xs text-amber-500/80 font-medium">StashSaarthi</div>
           </div>
         </div>
-        
+
         <nav className="px-4 py-6 md:py-0 space-y-1">
           {navItems.map((item) => (
             <a
               key={item.name}
               href="#"
               className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-sm ${
-                item.active 
-                  ? 'bg-amber-500/10 text-amber-500 border border-amber-500/20' 
-                  : 'text-slate-400 hover:text-white hover:bg-white/5'
+                item.active
+                  ? "bg-amber-500/10 text-amber-500 border border-amber-500/20"
+                  : "text-slate-400 hover:text-white hover:bg-white/5"
               }`}
             >
-              <item.icon className={`w-5 h-5 ${item.active ? 'text-amber-500' : 'text-slate-500'}`} />
+              <item.icon
+                className={`w-5 h-5 ${item.active ? "text-amber-500" : "text-slate-500"}`}
+              />
               {item.name}
             </a>
           ))}
         </nav>
-        
+
         <div className="absolute bottom-0 w-full p-4">
-          <Link to="/" className="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:text-slate-300 transition-colors text-sm font-medium hover:bg-white/5 w-full">
+          <Link
+            to="/"
+            className="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:text-slate-300 transition-colors text-sm font-medium hover:bg-white/5 w-full"
+          >
             <ArrowRight className="w-5 h-5" />
             Back to Website
           </Link>
@@ -73,45 +96,56 @@ export function HostDashboard() {
       {/* Main Content */}
       <main className="flex-1 overflow-y-auto p-4 md:p-8 max-w-7xl mx-auto w-full">
         <header className="mb-8 hidden md:block">
-          <h1 className="text-2xl md:text-3xl font-bold text-white tracking-tight">Dashboard Overview</h1>
-          <p className="text-muted-foreground text-sm mt-1 text-slate-400">Welcome back. Here's what's happening with your properties.</p>
+          <h1 className="text-2xl md:text-3xl font-bold text-white tracking-tight">
+            Dashboard Overview
+          </h1>
+          <p className="text-muted-foreground text-sm mt-1 text-slate-400">
+            Welcome back. Here's what's happening with your properties.
+          </p>
         </header>
 
         {/* KYC Action Banner */}
-        {kycStatus === 'unverified' ? (
+        {kycStatus === "unverified" ? (
           <div className="mb-8 bg-amber-500/10 border border-amber-500/30 rounded-2xl p-5 md:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-[0_0_30px_-10px_rgba(245,158,11,0.15)] relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
-            
+
             <div className="flex items-start gap-4 z-10">
               <div className="p-2 bg-amber-500/20 rounded-full shrink-0">
                 <AlertCircle className="w-6 h-6 text-amber-500" />
               </div>
               <div>
-                <h3 className="font-semibold text-amber-50 text-sm md:text-base">Action Required: Aadhaar KYC Pending</h3>
+                <h3 className="font-semibold text-amber-50 text-sm md:text-base">
+                  Action Required: Aadhaar KYC Pending
+                </h3>
                 <p className="text-amber-200/80 text-xs md:text-sm mt-1 max-w-xl">
-                  Complete your Aadhaar KYC to activate your listing for January. Unverified listings are hidden from students.
+                  Complete your Aadhaar KYC to activate your listing for January. Unverified
+                  listings are hidden from students.
                 </p>
               </div>
             </div>
-            
-            <button 
+
+            <button
               onClick={() => setIsKycModalOpen(true)}
-              className="z-10 shrink-0 w-full sm:w-auto px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-amber-950 font-bold rounded-xl text-sm transition-colors shadow-lg shadow-amber-500/20">
+              className="z-10 shrink-0 w-full sm:w-auto px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-amber-950 font-bold rounded-xl text-sm transition-colors shadow-lg shadow-amber-500/20"
+            >
               Verify Aadhaar
             </button>
           </div>
         ) : (
           <div className="mb-8 bg-blue-500/10 border border-blue-500/30 rounded-2xl p-5 md:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-[0_0_30px_-10px_rgba(59,130,246,0.15)] relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
-            
+
             <div className="flex items-start gap-4 z-10">
               <div className="p-2 bg-blue-500/20 rounded-full shrink-0">
                 <AlertCircle className="w-6 h-6 text-blue-400" />
               </div>
               <div>
-                <h3 className="font-semibold text-blue-50 text-sm md:text-base">KYC Under Review</h3>
+                <h3 className="font-semibold text-blue-50 text-sm md:text-base">
+                  KYC Under Review
+                </h3>
                 <p className="text-blue-200/80 text-xs md:text-sm mt-1 max-w-xl">
-                  Your documents have been submitted and are currently under verification. We will notify you once approved.
+                  Your documents have been submitted and are currently under verification. We will
+                  notify you once approved.
                 </p>
               </div>
             </div>
@@ -160,22 +194,22 @@ export function HostDashboard() {
           </div>
         </div>
       </main>
-      
+
       {/* Mobile Overlay */}
       {mobileMenuOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/60 backdrop-blur-sm z-20 md:hidden"
           onClick={() => setMobileMenuOpen(false)}
         />
       )}
-      
-      <AadhaarKycModal 
-        isOpen={isKycModalOpen} 
-        onClose={() => setIsKycModalOpen(false)} 
+
+      <AadhaarKycModal
+        isOpen={isKycModalOpen}
+        onClose={() => setIsKycModalOpen(false)}
         onSuccess={() => {
-          setKycStatus('pending');
+          setKycStatus("pending");
           setIsKycModalOpen(false);
-        }} 
+        }}
       />
     </div>
   );

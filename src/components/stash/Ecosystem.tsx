@@ -94,7 +94,9 @@ export function Ecosystem({ onBook }: { onBook: OpenBooking }) {
                         className="truncate text-xs font-medium mt-0.5 flex items-center gap-1.5 flex-wrap"
                         style={{ color: n.accent }}
                       >
-                        <span>{textData.badge} - {textData.price}</span>
+                        <span>
+                          {textData.badge} - {textData.price}
+                        </span>
                         <span className="inline-flex items-center gap-0.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-1.5 py-0.2 text-[9px] font-bold text-emerald-400">
                           ⚡ {isHi ? "0 रद्दीकरण शुल्क" : "Zero Cancellation Fee"}
                         </span>

@@ -474,7 +474,9 @@ export function CampusNodeChecker({ onBook }: { onBook: OpenBooking }) {
                                 onClick={() => openDirections(node.id)}
                               >
                                 <Footprints className="h-3 w-3 text-cyan-400" />
-                                <span>{isHi ? "📍 दिशाएं (Find Stash)" : "📍 Find Directions"}</span>
+                                <span>
+                                  {isHi ? "📍 दिशाएं (Find Stash)" : "📍 Find Directions"}
+                                </span>
                               </Button>
                             </div>
                           </div>
@@ -583,7 +585,10 @@ export function CampusNodeChecker({ onBook }: { onBook: OpenBooking }) {
                       size="sm"
                       variant="hero"
                       onClick={() =>
-                        onBook({ service: "stash", note: `Radar Booked: ${selectedRadarNode.name}` })
+                        onBook({
+                          service: "stash",
+                          note: `Radar Booked: ${selectedRadarNode.name}`,
+                        })
                       }
                       className="w-full sm:w-auto shrink-0 cursor-pointer text-xs"
                     >

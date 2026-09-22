@@ -17,15 +17,18 @@ const PRECACHE_URLS = [
 // ─── Install ──────────────────────────────────────────────────
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(STATIC_CACHE).then((cache) => {
-      return Promise.allSettled(
-        PRECACHE_URLS.map((url) =>
-          cache.add(url).catch((err) => {
-            console.warn(`[SW] Precache skipped for ${url}:`, err);
-          })
-        )
-      );
-    }).then(() => self.skipWaiting())
+    caches
+      .open(STATIC_CACHE)
+      .then((cache) => {
+        return Promise.allSettled(
+          PRECACHE_URLS.map((url) =>
+            cache.add(url).catch((err) => {
+              console.warn(`[SW] Precache skipped for ${url}:`, err);
+            }),
+          ),
+        );
+      })
+      .then(() => self.skipWaiting()),
   );
 });
 
@@ -37,9 +40,7 @@ self.addEventListener("activate", (event) => {
       .keys()
       .then((keys) =>
         Promise.all(
-          keys
-            .filter((key) => !currentCaches.includes(key))
-            .map((key) => caches.delete(key)),
+          keys.filter((key) => !currentCaches.includes(key)).map((key) => caches.delete(key)),
         ),
       )
       .then(() => self.clients.claim()),
@@ -98,10 +99,7 @@ self.addEventListener("fetch", (event) => {
   }
 
   // Strategy 2: Stale-while-revalidate for Google Fonts
-  if (
-    url.hostname === "fonts.googleapis.com" ||
-    url.hostname === "fonts.gstatic.com"
-  ) {
+  if (url.hostname === "fonts.googleapis.com" || url.hostname === "fonts.gstatic.com") {
     event.respondWith(staleWhileRevalidate(request, RUNTIME_CACHE));
     return;
   }
@@ -317,7 +315,6 @@ self.addEventListener("notificationclick", (event) => {
       if (clients.openWindow) {
         return clients.openWindow(urlToOpen);
       }
-    })
+    }),
   );
 });
-

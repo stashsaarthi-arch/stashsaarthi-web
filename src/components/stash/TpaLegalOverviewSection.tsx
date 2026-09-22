@@ -43,7 +43,7 @@ export const TpaLegalOverviewSection: React.FC = () => {
         "श्रीमती सरिता शर्मा (नमूना होस्ट)",
         "+91 9839012345",
         "117/N/89 काकादेव, कानपुर",
-        "Kakadeo Coaching Belt"
+        "Kakadeo Coaching Belt",
       );
     setTpaRecord(record);
     setTpaModalOpen(true);
@@ -59,8 +59,10 @@ export const TpaLegalOverviewSection: React.FC = () => {
       icon: Lock,
       titleHi: "100% मालिकाना हक सुरक्षित (शून्य कब्जा जोखिम)",
       titleEn: "100% Property Title Safety (Zero Tenancy Claim Risk)",
-      descHi: "संपत्ति अंतरण अधिनियम (TPA 1882) की धारा 105 के तहत, छात्र को केवल 'अस्थायी लाइसेंस' मिलता है। छात्र कभी भी किराएदार या कब्जे का कानूनी दावा नहीं कर सकता।",
-      descEn: "Under TPA Sec 105, students receive a temporary limited leave-and-license. They hold zero statutory tenancy rights over your premises.",
+      descHi:
+        "संपत्ति अंतरण अधिनियम (TPA 1882) की धारा 105 के तहत, छात्र को केवल 'अस्थायी लाइसेंस' मिलता है। छात्र कभी भी किराएदार या कब्जे का कानूनी दावा नहीं कर सकता।",
+      descEn:
+        "Under TPA Sec 105, students receive a temporary limited leave-and-license. They hold zero statutory tenancy rights over your premises.",
       badgeHi: "लीव एवं लाइसेंस धारा 105",
       badgeEn: "Sec 105 Protection",
     },
@@ -68,8 +70,10 @@ export const TpaLegalOverviewSection: React.FC = () => {
       icon: Scale,
       titleHi: "24 घंटे में खाली कराने का पूर्ण कानूनी अधिकार",
       titleEn: "Instant 24-Hour Eviction Right Upon Rule Breach",
-      descHi: "यदि छात्र गृह नियमों का उल्लंघन करता है या अवधि समाप्त होती है, तो होस्ट को बिना किसी कोर्ट-कचहरी के 24 घंटे में स्थान खाली कराने का पूर्ण अधिकार प्राप्त है।",
-      descEn: "If house rules are broken or subscription ends, hosts possess full legal right to vacate premises within 24 hours without legal disputes.",
+      descHi:
+        "यदि छात्र गृह नियमों का उल्लंघन करता है या अवधि समाप्त होती है, तो होस्ट को बिना किसी कोर्ट-कचहरी के 24 घंटे में स्थान खाली कराने का पूर्ण अधिकार प्राप्त है।",
+      descEn:
+        "If house rules are broken or subscription ends, hosts possess full legal right to vacate premises within 24 hours without legal disputes.",
       badgeHi: "त्वरित निष्कासन अधिकार",
       badgeEn: "24H Vacate Right",
     },
@@ -77,8 +81,10 @@ export const TpaLegalOverviewSection: React.FC = () => {
       icon: ShieldCheck,
       titleHi: "शून्य पुलिस व कानूनी झंझट (स्टैशसारथी की गारंटी)",
       titleEn: "Zero Police & Legal Liability (Fully Managed by Platform)",
-      descHi: "प्रत्येक छात्र का आधार + पुलिस बैकग्राउंड वेरिफिकेशन स्टैशसारथी द्वारा किया जाता है। किसी भी विवाद में कानूनी सहायता और कागजी कार्रवाई स्टैशसारथी संभालती है।",
-      descEn: "Full Aadhaar e-KYC and local police clearance are completed by StashSaarthi prior to check-in. Platform handles all legal paperwork.",
+      descHi:
+        "प्रत्येक छात्र का आधार + पुलिस बैकग्राउंड वेरिफिकेशन स्टैशसारथी द्वारा किया जाता है। किसी भी विवाद में कानूनी सहायता और कागजी कार्रवाई स्टैशसारथी संभालती है।",
+      descEn:
+        "Full Aadhaar e-KYC and local police clearance are completed by StashSaarthi prior to check-in. Platform handles all legal paperwork.",
       badgeHi: "100% सत्यापित छात्र",
       badgeEn: "Pre-Verified Tenants",
     },
@@ -86,8 +92,10 @@ export const TpaLegalOverviewSection: React.FC = () => {
       icon: FileText,
       titleHi: "डिजिटल एग्रीमेंट & ₹10,000 सुरक्षा कवर",
       titleEn: "Digital Legal Agreement & ₹10,000 Damage Guarantee",
-      descHi: "आपको कोई वकील या स्टाम्प पेपर खरीदने की जरूरत नहीं। 1-क्लिक में डिजिटल अनुबंध लागू होता है और कमरे व सामान को ₹10,000 तक का सुरक्षा कवर मिलता है।",
-      descEn: "Zero lawyer fees or physical stamp paperwork needed. Digital contracts auto-apply with embedded ₹10,000 host damage protection.",
+      descHi:
+        "आपको कोई वकील या स्टाम्प पेपर खरीदने की जरूरत नहीं। 1-क्लिक में डिजिटल अनुबंध लागू होता है और कमरे व सामान को ₹10,000 तक का सुरक्षा कवर मिलता है।",
+      descEn:
+        "Zero lawyer fees or physical stamp paperwork needed. Digital contracts auto-apply with embedded ₹10,000 host damage protection.",
       badgeHi: "रुपये 10,000 सुरक्षा कवर",
       badgeEn: "₹10,000 Insurance",
     },
@@ -127,11 +135,16 @@ export const TpaLegalOverviewSection: React.FC = () => {
           </Badge>
 
           <h2 className="text-2xl md:text-4xl font-extrabold text-white tracking-tight">
-            सीनियर होस्ट्स के लिए <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-200 to-yellow-400">100% कानूनी सुरक्षा</span> एवं अधिकार
+            सीनियर होस्ट्स के लिए{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-200 to-yellow-400">
+              100% कानूनी सुरक्षा
+            </span>{" "}
+            एवं अधिकार
           </h2>
 
           <p className="text-slate-300 text-xs md:text-sm leading-relaxed">
-            भारतीय संपत्ति अंतरण अधिनियम 1882 (Transfer of Property Act, Sec 105) की सरल एवं स्पष्ट व्याख्या। जानें कि स्टैशसारथी आपके मकान और अधिकारों की रक्षा कैसे करता है।
+            भारतीय संपत्ति अंतरण अधिनियम 1882 (Transfer of Property Act, Sec 105) की सरल एवं स्पष्ट
+            व्याख्या। जानें कि स्टैशसारथी आपके मकान और अधिकारों की रक्षा कैसे करता है।
           </p>
         </div>
 
@@ -158,9 +171,7 @@ export const TpaLegalOverviewSection: React.FC = () => {
                     {item.titleHi}
                   </h3>
 
-                  <p className="text-xs text-slate-300 leading-relaxed">
-                    {item.descHi}
-                  </p>
+                  <p className="text-xs text-slate-300 leading-relaxed">{item.descHi}</p>
                 </div>
 
                 <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center gap-1.5 text-[11px] text-emerald-400 font-semibold">
@@ -228,7 +239,8 @@ export const TpaLegalOverviewSection: React.FC = () => {
                 कानूनी सलाहकार या फाउंडर से सीधी बात करें
               </h4>
               <p className="text-xs text-slate-300">
-                यदि आपके पास TPA धारा 105 या सुरक्षा से संबंधित कोई भी प्रश्न है, तो सीधे हमारी विधिक टीम से संपर्क करें।
+                यदि आपके पास TPA धारा 105 या सुरक्षा से संबंधित कोई भी प्रश्न है, तो सीधे हमारी
+                विधिक टीम से संपर्क करें।
               </p>
             </div>
           </div>
@@ -258,10 +270,10 @@ export const TpaLegalOverviewSection: React.FC = () => {
                 playClick();
                 window.open(
                   `https://wa.me/919369454350?text=${encodeURIComponent(
-                    "नमस्ते स्टैशसारथी टीम, मुझे सीनियर होस्ट TPA धारा 105 कानूनी सुरक्षा के बारे में जानकारी चाहिए।"
+                    "नमस्ते स्टैशसारथी टीम, मुझे सीनियर होस्ट TPA धारा 105 कानूनी सुरक्षा के बारे में जानकारी चाहिए।",
                   )}`,
                   "_blank",
-                  "noopener,noreferrer"
+                  "noopener,noreferrer",
                 );
               }}
               className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs shadow-lg shadow-amber-500/20"

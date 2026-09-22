@@ -1,10 +1,10 @@
 /**
  * StashSaarthi Autonomous System — Razorpay Route Split-Payout Engine
- * 
+ *
  * CTO Directive (Task 112)
  * Automated split-payout scheduler for verified hosts transferring host earnings
  * to bank accounts/UPI IDs within 24 hours of booking completion.
- * 
+ *
  * Verified Kanpur Unit Economics:
  * - Saarthi Stash: ₹300/bag/mo (Host receives ₹180 / 60%, Platform Net Margin: ₹80 / 26.7%)
  * - Saarthi Spaces: Avg ₹5,500/mo (Host receives 95% / ₹5,225 after 5% host fee)
@@ -89,7 +89,7 @@ export const DEFAULT_HOST_BANK_ACCOUNTS: HostBankAccountDetails[] = [
  */
 export function calculateSplitPayout(
   serviceType: string,
-  totalAmount: number
+  totalAmount: number,
 ): { hostPayoutAmount: number; platformCommission: number } {
   let hostRatio = 0.6; // Default 60% for storage
 
@@ -141,11 +141,11 @@ export function getHostBankAccounts(): HostBankAccountDetails[] {
  * Registers or updates a host bank account details.
  */
 export function registerHostBankAccount(
-  data: Omit<HostBankAccountDetails, "verificationStatus" | "createdAt">
+  data: Omit<HostBankAccountDetails, "verificationStatus" | "createdAt">,
 ): HostBankAccountDetails {
   const accounts = getHostBankAccounts();
   const existingIdx = accounts.findIndex(
-    (a) => a.hostPhone === data.hostPhone || a.hostId === data.hostId
+    (a) => a.hostPhone === data.hostPhone || a.hostId === data.hostId,
   );
 
   const updated: HostBankAccountDetails = {
@@ -260,7 +260,7 @@ export function scheduleRazorpayRoutePayout(params: {
 
   const { hostPayoutAmount, platformCommission } = calculateSplitPayout(
     params.serviceType,
-    params.totalAmount
+    params.totalAmount,
   );
 
   const now = new Date();
@@ -280,7 +280,7 @@ export function scheduleRazorpayRoutePayout(params: {
     createdAt: now.toISOString(),
     scheduledAt: scheduledTime.toISOString(),
     status: "scheduled",
-    settlementNotes: `24-Hour Razorpay Route split payout scheduled for ${scheduledTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
+    settlementNotes: `24-Hour Razorpay Route split payout scheduled for ${scheduledTime.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}`,
   };
 
   const existing = getPayoutScheduleRecords();
@@ -289,9 +289,7 @@ export function scheduleRazorpayRoutePayout(params: {
   if (typeof window !== "undefined") {
     try {
       localStorage.setItem(STORAGE_PAYOUTS_KEY, JSON.stringify(updated));
-      window.dispatchEvent(
-        new CustomEvent("stashsaarthi:payout-scheduled", { detail: record })
-      );
+      window.dispatchEvent(new CustomEvent("stashsaarthi:payout-scheduled", { detail: record }));
     } catch (err) {
       console.warn("Failed to save scheduled payout:", err);
     }

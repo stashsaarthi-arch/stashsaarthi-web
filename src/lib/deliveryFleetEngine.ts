@@ -14,7 +14,7 @@ export interface RunnerTask {
   tamperSealBarcode: string; // e.g. "SS-SEAL-8921"
   estimatedWeightKg: number;
   actualWeightKg?: number;
-  status: 'assigned' | 'en_route' | 'scanned_intake' | 'delivered_to_host';
+  status: "assigned" | "en_route" | "scanned_intake" | "delivered_to_host";
   assignedTime: string;
   scannedTime?: string;
   deliveredTime?: string;
@@ -24,57 +24,57 @@ export interface RunnerTask {
   photoProofUrl?: string;
 }
 
-const TASKS_STORAGE_KEY = 'ss_delivery_runner_tasks';
+const TASKS_STORAGE_KEY = "ss_delivery_runner_tasks";
 
 export const PRESET_RUNNER_TASKS: RunnerTask[] = [
   {
-    id: 'TASK-KNP-8921',
-    bookingId: 'SS-KNP-9821',
-    studentName: 'Rahul Verma (PW Kakadeo)',
-    studentPhone: '+919876543210',
-    address: 'Gali #3, Near PW Vidyapeeth, Chhapeda Pulia, Kakadeo, Kanpur',
-    campusNode: 'Kakadeo PW Hub',
+    id: "TASK-KNP-8921",
+    bookingId: "SS-KNP-9821",
+    studentName: "Rahul Verma (PW Kakadeo)",
+    studentPhone: "+919876543210",
+    address: "Gali #3, Near PW Vidyapeeth, Chhapeda Pulia, Kakadeo, Kanpur",
+    campusNode: "Kakadeo PW Hub",
     boxCount: 2,
-    tamperSealBarcode: 'SS-SEAL-8921',
+    tamperSealBarcode: "SS-SEAL-8921",
     estimatedWeightKg: 18.5,
-    status: 'assigned',
+    status: "assigned",
     assignedTime: new Date(Date.now() - 30 * 60 * 1000).toISOString(),
-    runnerId: 'RUNNER-KNP-09',
+    runnerId: "RUNNER-KNP-09",
     distanceMeters: 120,
-    instructions: 'Ring doorbell at 2nd floor room #204. Handle with care - books inside.',
+    instructions: "Ring doorbell at 2nd floor room #204. Handle with care - books inside.",
   },
   {
-    id: 'TASK-KNP-4412',
-    bookingId: 'SS-KNP-4412',
-    studentName: 'Ananya Sharma (IIT Kanpur)',
-    studentPhone: '+919812345678',
-    address: 'Hall 4, Room C-102, IIT Kanpur Campus, Kalyanpur',
-    campusNode: 'IIT Kanpur Nankari Gate',
+    id: "TASK-KNP-4412",
+    bookingId: "SS-KNP-4412",
+    studentName: "Ananya Sharma (IIT Kanpur)",
+    studentPhone: "+919812345678",
+    address: "Hall 4, Room C-102, IIT Kanpur Campus, Kalyanpur",
+    campusNode: "IIT Kanpur Nankari Gate",
     boxCount: 3,
-    tamperSealBarcode: 'SS-SEAL-4412',
+    tamperSealBarcode: "SS-SEAL-4412",
     estimatedWeightKg: 24.0,
-    status: 'assigned',
+    status: "assigned",
     assignedTime: new Date(Date.now() - 45 * 60 * 1000).toISOString(),
-    runnerId: 'RUNNER-KNP-09',
+    runnerId: "RUNNER-KNP-09",
     distanceMeters: 450,
-    instructions: 'Meet at Nankari Gate security post for luggage verification.',
+    instructions: "Meet at Nankari Gate security post for luggage verification.",
   },
   {
-    id: 'TASK-KNP-6630',
-    bookingId: 'SS-KNP-6630',
-    studentName: 'Aman Deep (CSJMU)',
-    studentPhone: '+919988776655',
-    address: 'CSJMU Boys Hostel #2, Room 311, Kalyanpur, Kanpur',
-    campusNode: 'CSJMU Kalyanpur Hub',
+    id: "TASK-KNP-6630",
+    bookingId: "SS-KNP-6630",
+    studentName: "Aman Deep (CSJMU)",
+    studentPhone: "+919988776655",
+    address: "CSJMU Boys Hostel #2, Room 311, Kalyanpur, Kanpur",
+    campusNode: "CSJMU Kalyanpur Hub",
     boxCount: 1,
-    tamperSealBarcode: 'SS-SEAL-6630',
+    tamperSealBarcode: "SS-SEAL-6630",
     estimatedWeightKg: 12.0,
-    status: 'scanned_intake',
+    status: "scanned_intake",
     assignedTime: new Date(Date.now() - 90 * 60 * 1000).toISOString(),
     scannedTime: new Date(Date.now() - 15 * 60 * 1000).toISOString(),
-    runnerId: 'RUNNER-KNP-09',
+    runnerId: "RUNNER-KNP-09",
     distanceMeters: 800,
-    instructions: 'Intake scanned at doorstep. En route to Dadi Maa Verified PG Owner Host Node.',
+    instructions: "Intake scanned at doorstep. En route to Dadi Maa Verified PG Owner Host Node.",
   },
 ];
 
@@ -82,7 +82,7 @@ export const PRESET_RUNNER_TASKS: RunnerTask[] = [
  * Retrieves current runner tasks from localStorage or seeds preset tasks if empty.
  */
 export function getRunnerTasks(): RunnerTask[] {
-  if (typeof window === 'undefined') return PRESET_RUNNER_TASKS;
+  if (typeof window === "undefined") return PRESET_RUNNER_TASKS;
   try {
     const stored = localStorage.getItem(TASKS_STORAGE_KEY);
     if (stored) {
@@ -92,7 +92,7 @@ export function getRunnerTasks(): RunnerTask[] {
       }
     }
   } catch (err) {
-    console.warn('[DeliveryFleetEngine] Error reading tasks from storage:', err);
+    console.warn("[DeliveryFleetEngine] Error reading tasks from storage:", err);
   }
   // Default seed
   saveRunnerTasks(PRESET_RUNNER_TASKS);
@@ -103,12 +103,12 @@ export function getRunnerTasks(): RunnerTask[] {
  * Saves runner tasks array to localStorage.
  */
 export function saveRunnerTasks(tasks: RunnerTask[]): void {
-  if (typeof window === 'undefined') return;
+  if (typeof window === "undefined") return;
   try {
     localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
-    window.dispatchEvent(new CustomEvent('stashsaarthi:runner-task-updated'));
+    window.dispatchEvent(new CustomEvent("stashsaarthi:runner-task-updated"));
   } catch (err) {
-    console.warn('[DeliveryFleetEngine] Error saving tasks:', err);
+    console.warn("[DeliveryFleetEngine] Error saving tasks:", err);
   }
 }
 
@@ -118,7 +118,7 @@ export function saveRunnerTasks(tasks: RunnerTask[]): void {
 export function processDoorstepScan(
   scannedBarcode: string,
   actualWeightKg?: number,
-  photoProofUrl?: string
+  photoProofUrl?: string,
 ): { success: boolean; task?: RunnerTask; message: string } {
   const cleanBarcode = scannedBarcode.trim().toUpperCase();
   const tasks = getRunnerTasks();
@@ -127,7 +127,7 @@ export function processDoorstepScan(
     (t) =>
       t.tamperSealBarcode.toUpperCase() === cleanBarcode ||
       t.bookingId.toUpperCase() === cleanBarcode ||
-      t.id.toUpperCase() === cleanBarcode
+      t.id.toUpperCase() === cleanBarcode,
   );
 
   if (matchedIndex === -1) {
@@ -140,10 +140,12 @@ export function processDoorstepScan(
   const task = tasks[matchedIndex]!;
   const updatedTask: RunnerTask = {
     ...task,
-    status: 'scanned_intake',
+    status: "scanned_intake",
     scannedTime: new Date().toISOString(),
     actualWeightKg: actualWeightKg ?? task.estimatedWeightKg,
-    photoProofUrl: photoProofUrl || `https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=400&q=80`,
+    photoProofUrl:
+      photoProofUrl ||
+      `https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=400&q=80`,
   };
 
   tasks[matchedIndex] = updatedTask;
@@ -159,17 +161,21 @@ export function processDoorstepScan(
 /**
  * Confirms delivery of luggage box from doorstep runner to verified Verified PG Owner Host Locker node.
  */
-export function confirmDeliveryToHost(taskId: string): { success: boolean; task?: RunnerTask; message: string } {
+export function confirmDeliveryToHost(taskId: string): {
+  success: boolean;
+  task?: RunnerTask;
+  message: string;
+} {
   const tasks = getRunnerTasks();
   const index = tasks.findIndex((t) => t.id === taskId);
 
   if (index === -1) {
-    return { success: false, message: 'Task ID not found.' };
+    return { success: false, message: "Task ID not found." };
   }
 
   const updated: RunnerTask = {
     ...tasks[index]!,
-    status: 'delivered_to_host',
+    status: "delivered_to_host",
     deliveredTime: new Date().toISOString(),
   };
 
@@ -189,9 +195,9 @@ export function confirmDeliveryToHost(taskId: string): { success: boolean; task?
 export function getRunnerStats() {
   const tasks = getRunnerTasks();
   const total = tasks.length;
-  const pending = tasks.filter((t) => t.status === 'assigned' || t.status === 'en_route').length;
-  const scanned = tasks.filter((t) => t.status === 'scanned_intake').length;
-  const completed = tasks.filter((t) => t.status === 'delivered_to_host').length;
+  const pending = tasks.filter((t) => t.status === "assigned" || t.status === "en_route").length;
+  const scanned = tasks.filter((t) => t.status === "scanned_intake").length;
+  const completed = tasks.filter((t) => t.status === "delivered_to_host").length;
 
   return {
     totalTasks: total,
@@ -199,8 +205,8 @@ export function getRunnerStats() {
     scannedIntake: scanned,
     completedDelivered: completed,
     avgSlaMins: 14,
-    runnerId: 'RUNNER-KNP-09',
-    runnerName: 'Advik Omer (PW Kakadeo Agent)',
+    runnerId: "RUNNER-KNP-09",
+    runnerName: "Advik Omer (PW Kakadeo Agent)",
   };
 }
 

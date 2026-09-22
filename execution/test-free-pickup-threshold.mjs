@@ -24,7 +24,10 @@ if (!fs.existsSync(libPath)) {
 console.log("✅ PASSED: Core library src/lib/freePickupThreshold.ts found.");
 
 const libContent = fs.readFileSync(libPath, "utf-8");
-if (!libContent.includes("FREE_PICKUP_THRESHOLD_BOXES = 2") || !libContent.includes("STANDARD_PICKUP_FEE = 99")) {
+if (
+  !libContent.includes("FREE_PICKUP_THRESHOLD_BOXES = 2") ||
+  !libContent.includes("STANDARD_PICKUP_FEE = 99")
+) {
   console.error("❌ FAILED: Threshold values mismatch in src/lib/freePickupThreshold.ts!");
   process.exit(1);
 }
@@ -39,7 +42,10 @@ if (!fs.existsSync(componentPath)) {
 console.log("✅ PASSED: Banner component src/components/stash/FreePickupNudgeBanner.tsx found.");
 
 const compContent = fs.readFileSync(componentPath, "utf-8");
-if (!compContent.includes("calculateFreePickupStatus") || !compContent.includes("Add 1 box to unlock FREE pickup")) {
+if (
+  !compContent.includes("calculateFreePickupStatus") ||
+  !compContent.includes("Add 1 box to unlock FREE pickup")
+) {
   console.error("❌ FAILED: Banner component missing required dynamic nudge logic!");
   process.exit(1);
 }

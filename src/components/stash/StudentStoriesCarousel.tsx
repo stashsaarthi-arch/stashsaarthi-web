@@ -140,7 +140,9 @@ export const StudentStoriesCarousel = memo(function StudentStoriesCarousel({
   const { role } = usePersona();
   const isHindi = language === "hi";
 
-  const [activeCategory, setActiveCategory] = useState<"all" | "stash" | "rooms" | "kitchen" | "host">("all");
+  const [activeCategory, setActiveCategory] = useState<
+    "all" | "stash" | "rooms" | "kitchen" | "host"
+  >("all");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
@@ -201,11 +203,15 @@ export const StudentStoriesCarousel = memo(function StudentStoriesCarousel({
           <div className="text-center max-w-3xl mx-auto mb-6">
             <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1 text-xs font-semibold text-emerald-400 mb-2">
               <Sparkles className="h-3.5 w-3.5" />
-              <span>{isHindi ? "सत्यापित अनुभव और सफलता" : "Verified Student & Host Success Stories"}</span>
+              <span>
+                {isHindi ? "सत्यापित अनुभव और सफलता" : "Verified Student & Host Success Stories"}
+              </span>
             </div>
             <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
               <span className="text-gradient">
-                {isHindi ? "कानपुर छात्रों और होस्ट्स की जबानी" : "Real Stories from IITK, HBTI & Kakadeo"}
+                {isHindi
+                  ? "कानपुर छात्रों और होस्ट्स की जबानी"
+                  : "Real Stories from IITK, HBTI & Kakadeo"}
               </span>
             </h2>
             <p className="mt-2 text-xs sm:text-sm text-muted-foreground text-balance">
@@ -217,12 +223,31 @@ export const StudentStoriesCarousel = memo(function StudentStoriesCarousel({
         </AnimatedContent>
 
         {/* Category Filters */}
-        <div role="tablist" aria-label="Story categories" className="flex flex-wrap items-center justify-center gap-1.5 mb-6">
+        <div
+          role="tablist"
+          aria-label="Story categories"
+          className="flex flex-wrap items-center justify-center gap-1.5 mb-6"
+        >
           {[
             { id: "all", labelEn: "All Stories", labelHi: "सभी कहानियां", icon: Sparkles },
-            { id: "stash", labelEn: "Vacation Stash (₹300/mo)", labelHi: "वैकेशन स्टोरेज", icon: Package },
-            { id: "rooms", labelEn: "Co-Living Rooms", labelHi: "जीरो-ब्रोकरेज रूम्स", icon: Building2 },
-            { id: "kitchen", labelEn: "Ghar Ka Swaad", labelHi: "घर का खाना", icon: UtensilsCrossed },
+            {
+              id: "stash",
+              labelEn: "Vacation Stash (₹300/mo)",
+              labelHi: "वैकेशन स्टोरेज",
+              icon: Package,
+            },
+            {
+              id: "rooms",
+              labelEn: "Co-Living Rooms",
+              labelHi: "जीरो-ब्रोकरेज रूम्स",
+              icon: Building2,
+            },
+            {
+              id: "kitchen",
+              labelEn: "Ghar Ka Swaad",
+              labelHi: "घर का खाना",
+              icon: UtensilsCrossed,
+            },
             { id: "host", labelEn: "Premium Hosts", labelHi: "सीनियर होस्ट्स", icon: Home },
           ].map((tab) => {
             const Icon = tab.icon;

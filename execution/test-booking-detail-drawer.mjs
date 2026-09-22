@@ -1,35 +1,35 @@
 /**
  * Verification harness for Task 104: Booking Detail Slide-Over Drawer
  */
-import fs from 'fs';
-import path from 'path';
+import fs from "fs";
+import path from "path";
 
-const drawerPath = path.resolve('src/components/stash/BookingDetailDrawer.tsx');
-const dashboardPath = path.resolve('src/components/stash/MyBookingsDashboard.tsx');
+const drawerPath = path.resolve("src/components/stash/BookingDetailDrawer.tsx");
+const dashboardPath = path.resolve("src/components/stash/MyBookingsDashboard.tsx");
 
 if (!fs.existsSync(drawerPath)) {
-  console.error('❌ BookingDetailDrawer.tsx missing');
+  console.error("❌ BookingDetailDrawer.tsx missing");
   process.exit(1);
 }
 
 if (!fs.existsSync(dashboardPath)) {
-  console.error('❌ MyBookingsDashboard.tsx missing');
+  console.error("❌ MyBookingsDashboard.tsx missing");
   process.exit(1);
 }
 
-const drawerContent = fs.readFileSync(drawerPath, 'utf8');
-const dashboardContent = fs.readFileSync(dashboardPath, 'utf8');
+const drawerContent = fs.readFileSync(drawerPath, "utf8");
+const dashboardContent = fs.readFileSync(dashboardPath, "utf8");
 
 const requiredTokens = [
-  'BookingDetailDrawer',
-  'digital receipt',
-  'FOUNDER_WHATSAPP',
-  'handleCopyToken',
-  'handlePrintReceipt',
-  'handleShareWhatsApp',
-  'handleContactHost',
-  'Allocated Slot & Address',
-  'Emergency Host Contact',
+  "BookingDetailDrawer",
+  "digital receipt",
+  "FOUNDER_WHATSAPP",
+  "handleCopyToken",
+  "handlePrintReceipt",
+  "handleShareWhatsApp",
+  "handleContactHost",
+  "Allocated Slot & Address",
+  "Emergency Host Contact",
 ];
 
 for (const token of requiredTokens) {
@@ -39,4 +39,6 @@ for (const token of requiredTokens) {
   }
 }
 
-console.log('✅ Task 104 Verification Passed: BookingDetailDrawer and MyBookingsDashboard integration verified.');
+console.log(
+  "✅ Task 104 Verification Passed: BookingDetailDrawer and MyBookingsDashboard integration verified.",
+);

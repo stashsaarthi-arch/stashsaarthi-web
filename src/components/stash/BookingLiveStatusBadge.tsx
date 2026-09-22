@@ -56,7 +56,11 @@ export function BookingLiveStatusBadge({
         <button
           type="button"
           onClick={handleAdvanceState}
-          title={isHi ? "स्थिति बदलने के लिए क्लिक करें (Realtime Demo)" : "Click to simulate realtime status update"}
+          title={
+            isHi
+              ? "स्थिति बदलने के लिए क्लिक करें (Realtime Demo)"
+              : "Click to simulate realtime status update"
+          }
           className={`px-2.5 py-1 rounded-full text-[11px] font-bold border flex items-center gap-1.5 transition-all shadow-sm group cursor-pointer ${stepInfo.badgeStyle}`}
         >
           <span className="text-xs">{stepInfo.icon}</span>
@@ -109,8 +113,8 @@ export function BookingLiveStatusBadge({
                 lifecycleState === "in_secure_locker"
                   ? "bg-cyan-500/20 border-cyan-500/50 text-cyan-200 font-bold shadow-md shadow-cyan-500/10"
                   : lifecycleState === "ready_for_retrieval" || lifecycleState === "completed"
-                  ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-300 opacity-80"
-                  : "bg-black/40 border-white/5 text-slate-500"
+                    ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-300 opacity-80"
+                    : "bg-black/40 border-white/5 text-slate-500"
               }`}
             >
               <div className="text-xs">🔒</div>
@@ -125,8 +129,8 @@ export function BookingLiveStatusBadge({
                 lifecycleState === "ready_for_retrieval"
                   ? "bg-emerald-500/25 border-emerald-400 text-emerald-200 font-bold shadow-md shadow-emerald-500/20 animate-pulse"
                   : lifecycleState === "completed"
-                  ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-300"
-                  : "bg-black/40 border-white/5 text-slate-500"
+                    ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-300"
+                    : "bg-black/40 border-white/5 text-slate-500"
               }`}
             >
               <div className="text-xs">⚡</div>

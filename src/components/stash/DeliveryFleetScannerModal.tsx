@@ -59,7 +59,7 @@ export function DeliveryFleetScannerModal({ isOpen, onClose }: DeliveryFleetScan
   const [intakeWeight, setIntakeWeight] = useState<number>(18.5);
   const [isScanning, setIsScanning] = useState(false);
   const [stats, setStats] = useState(getRunnerStats());
-  
+
   // SMS Fallback Gateway State (Task 129)
   const [isCellularDataOff, setIsCellularDataOff] = useState(false);
   const [smsOtpInput, setSmsOtpInput] = useState("");
@@ -104,7 +104,9 @@ export function DeliveryFleetScannerModal({ isOpen, onClose }: DeliveryFleetScan
       const res = processDoorstepScan(barcodeToScan, intakeWeight);
       if (res.success && res.task) {
         setActiveScanTask(res.task);
-        toast.success(res.message, { description: `Tamper Seal ${res.task.tamperSealBarcode} verified.` });
+        toast.success(res.message, {
+          description: `Tamper Seal ${res.task.tamperSealBarcode} verified.`,
+        });
         refreshTasks();
       } else {
         toast.error("Barcode Not Found", { description: res.message });
@@ -143,9 +145,13 @@ export function DeliveryFleetScannerModal({ isOpen, onClose }: DeliveryFleetScan
                     setIsCellularDataOff(nextState);
                     if (nextState) {
                       setActiveTab("sms");
-                      toast.warning("Cellular Data Offline", { description: "Switched to encrypted SMS OTP fallback mode." });
+                      toast.warning("Cellular Data Offline", {
+                        description: "Switched to encrypted SMS OTP fallback mode.",
+                      });
                     } else {
-                      toast.success("Cellular Data Restored", { description: "Connected back to 5G / High-speed internet." });
+                      toast.success("Cellular Data Restored", {
+                        description: "Connected back to 5G / High-speed internet.",
+                      });
                     }
                   }}
                   className={`text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full border transition-all flex items-center gap-1 ${
@@ -168,7 +174,8 @@ export function DeliveryFleetScannerModal({ isOpen, onClose }: DeliveryFleetScan
                 </button>
               </div>
               <p className="text-xs text-muted-foreground">
-                Runner: <span className="text-emerald-400 font-medium">{stats.runnerName}</span> • SLA: <span className="text-amber-400 font-mono font-bold">14m Avg</span>
+                Runner: <span className="text-emerald-400 font-medium">{stats.runnerName}</span> •
+                SLA: <span className="text-amber-400 font-mono font-bold">14m Avg</span>
               </p>
             </div>
           </div>
@@ -347,12 +354,18 @@ export function DeliveryFleetScannerModal({ isOpen, onClose }: DeliveryFleetScan
 
                   <div className="grid grid-cols-2 gap-2 text-xs">
                     <div className="bg-black/40 p-2.5 rounded-xl border border-white/10">
-                      <span className="text-[10px] text-muted-foreground uppercase block">Hostel Address</span>
+                      <span className="text-[10px] text-muted-foreground uppercase block">
+                        Hostel Address
+                      </span>
                       <span className="font-medium text-foreground">{activeScanTask.address}</span>
                     </div>
                     <div className="bg-black/40 p-2.5 rounded-xl border border-white/10">
-                      <span className="text-[10px] text-muted-foreground uppercase block">Locker Node</span>
-                      <span className="font-medium text-emerald-400">{activeScanTask.campusNode}</span>
+                      <span className="text-[10px] text-muted-foreground uppercase block">
+                        Locker Node
+                      </span>
+                      <span className="font-medium text-emerald-400">
+                        {activeScanTask.campusNode}
+                      </span>
                     </div>
                   </div>
 
@@ -391,7 +404,9 @@ export function DeliveryFleetScannerModal({ isOpen, onClose }: DeliveryFleetScan
           {activeTab === "queue" && (
             <div className="space-y-3">
               {tasks.length === 0 ? (
-                <div className="py-12 text-center text-muted-foreground">No active runner tasks assigned.</div>
+                <div className="py-12 text-center text-muted-foreground">
+                  No active runner tasks assigned.
+                </div>
               ) : (
                 tasks.map((t) => (
                   <div
@@ -400,8 +415,8 @@ export function DeliveryFleetScannerModal({ isOpen, onClose }: DeliveryFleetScan
                       t.status === "delivered_to_host"
                         ? "border-white/10 bg-white/[0.02] opacity-75"
                         : t.status === "scanned_intake"
-                        ? "border-emerald-500/40 bg-emerald-950/20"
-                        : "border-amber-500/30 bg-amber-950/10"
+                          ? "border-emerald-500/40 bg-emerald-950/20"
+                          : "border-amber-500/30 bg-amber-950/10"
                     }`}
                   >
                     <div className="flex items-center justify-between gap-2 mb-2">
@@ -416,8 +431,8 @@ export function DeliveryFleetScannerModal({ isOpen, onClose }: DeliveryFleetScan
                           t.status === "delivered_to_host"
                             ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
                             : t.status === "scanned_intake"
-                            ? "bg-teal-500/20 text-teal-300 border border-teal-500/30"
-                            : "bg-amber-500/20 text-amber-300 border border-amber-500/30"
+                              ? "bg-teal-500/20 text-teal-300 border border-teal-500/30"
+                              : "bg-amber-500/20 text-amber-300 border border-amber-500/30"
                         }`}
                       >
                         {t.status.replace("_", " ")}
@@ -488,7 +503,9 @@ export function DeliveryFleetScannerModal({ isOpen, onClose }: DeliveryFleetScan
                   <span className="text-[10px] text-muted-foreground font-medium uppercase block mb-1">
                     Completed Pickups
                   </span>
-                  <span className="text-2xl font-bold text-emerald-400">{stats.completedDelivered}</span>
+                  <span className="text-2xl font-bold text-emerald-400">
+                    {stats.completedDelivered}
+                  </span>
                 </div>
                 <div className="p-3.5 rounded-2xl border border-amber-500/30 bg-amber-500/10">
                   <span className="text-[10px] text-muted-foreground font-medium uppercase block mb-1">
@@ -512,10 +529,16 @@ export function DeliveryFleetScannerModal({ isOpen, onClose }: DeliveryFleetScan
                   </span>
                 </div>
                 <ul className="text-xs text-muted-foreground space-y-2 list-disc pl-4">
-                  <li>Har physical box par unique alphanumeric laser tamper seal ID match hona mandatory hai.</li>
+                  <li>
+                    Har physical box par unique alphanumeric laser tamper seal ID match hona
+                    mandatory hai.
+                  </li>
                   <li>Max box weight limit: 25.0 kg per standard luggage box.</li>
                   <li>Doorstep photo proof upload automated server hash log me store hoti hai.</li>
-                  <li>Verified PG Owner host handover complete hone par instant WhatsApp audit receipt push hota hai.</li>
+                  <li>
+                    Verified PG Owner host handover complete hone par instant WhatsApp audit receipt
+                    push hota hai.
+                  </li>
                 </ul>
               </div>
             </div>

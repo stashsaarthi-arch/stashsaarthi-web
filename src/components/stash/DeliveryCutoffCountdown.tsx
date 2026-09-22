@@ -142,7 +142,8 @@ export const DeliveryCutoffCountdown: React.FC<DeliveryCutoffCountdownProps> = (
   const getThemeClasses = () => {
     if (timeLeft.isCritical) {
       return {
-        wrapper: "bg-gradient-to-r from-rose-950/90 via-red-900/90 to-amber-950/90 border-rose-500/60 shadow-[0_0_25px_-5px_rgba(244,63,94,0.4)]",
+        wrapper:
+          "bg-gradient-to-r from-rose-950/90 via-red-900/90 to-amber-950/90 border-rose-500/60 shadow-[0_0_25px_-5px_rgba(244,63,94,0.4)]",
         badge: "bg-rose-500 text-slate-950 animate-pulse font-extrabold",
         timerText: "text-rose-300 font-mono font-black",
         accentIcon: "text-rose-400 animate-bounce",
@@ -150,14 +151,16 @@ export const DeliveryCutoffCountdown: React.FC<DeliveryCutoffCountdownProps> = (
     }
     if (timeLeft.isUrgent) {
       return {
-        wrapper: "bg-gradient-to-r from-amber-950/90 via-slate-900 to-amber-950/90 border-amber-500/50 shadow-[0_0_20px_-5px_rgba(245,158,11,0.3)]",
+        wrapper:
+          "bg-gradient-to-r from-amber-950/90 via-slate-900 to-amber-950/90 border-amber-500/50 shadow-[0_0_20px_-5px_rgba(245,158,11,0.3)]",
         badge: "bg-amber-500 text-slate-950 font-bold",
         timerText: "text-amber-300 font-mono font-bold",
         accentIcon: "text-amber-400 animate-pulse",
       };
     }
     return {
-      wrapper: "bg-gradient-to-r from-slate-900 via-emerald-950/60 to-slate-900 border-emerald-500/30 shadow-lg",
+      wrapper:
+        "bg-gradient-to-r from-slate-900 via-emerald-950/60 to-slate-900 border-emerald-500/30 shadow-lg",
       badge: "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold",
       timerText: "text-emerald-400 font-mono font-bold",
       accentIcon: "text-emerald-400",
@@ -172,20 +175,22 @@ export const DeliveryCutoffCountdown: React.FC<DeliveryCutoffCountdownProps> = (
 
   if (variant === "compact") {
     return (
-      <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-xl border backdrop-blur-md ${theme.wrapper} ${className}`}>
+      <div
+        className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-xl border backdrop-blur-md ${theme.wrapper} ${className}`}
+      >
         <Clock className={`w-3.5 h-3.5 ${theme.accentIcon}`} />
         <span className="text-xs text-slate-300 font-medium">
           {activeSlot} {isHindi ? "कटऑफ:" : "Cutoff:"}
         </span>
-        <span className={`text-xs ${theme.timerText}`}>
-          {getFormattedTimeText()}
-        </span>
+        <span className={`text-xs ${theme.timerText}`}>{getFormattedTimeText()}</span>
       </div>
     );
   }
 
   return (
-    <div className={`relative overflow-hidden rounded-2xl border p-4 sm:p-5 backdrop-blur-xl transition-all duration-300 ${theme.wrapper} ${className}`}>
+    <div
+      className={`relative overflow-hidden rounded-2xl border p-4 sm:p-5 backdrop-blur-xl transition-all duration-300 ${theme.wrapper} ${className}`}
+    >
       {/* Animated subtle light sweep effect for critical state */}
       {timeLeft.isCritical && (
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-rose-500/10 to-transparent -translate-x-full animate-[shimmer_2s_infinite]" />
@@ -196,7 +201,9 @@ export const DeliveryCutoffCountdown: React.FC<DeliveryCutoffCountdownProps> = (
         <div className="space-y-2 flex-1">
           <div className="flex flex-wrap items-center gap-2.5">
             {/* Urgency Badge */}
-            <span className={`inline-flex items-center gap-1 text-[11px] px-2.5 py-0.5 rounded-full uppercase tracking-wider ${theme.badge}`}>
+            <span
+              className={`inline-flex items-center gap-1 text-[11px] px-2.5 py-0.5 rounded-full uppercase tracking-wider ${theme.badge}`}
+            >
               {timeLeft.isCritical ? (
                 <>
                   <Flame className="w-3 h-3 fill-slate-950" />

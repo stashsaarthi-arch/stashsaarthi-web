@@ -27,15 +27,35 @@ import { toast } from "sonner";
 import { useLanguage } from "@/context/LanguageContext";
 
 const MyBookingsDashboard = lazy(() =>
-  import("./MyBookingsDashboard").then((m) => ({ default: m.MyBookingsDashboard }))
+  import("./MyBookingsDashboard").then((m) => ({ default: m.MyBookingsDashboard })),
 );
 
 const AVATAR_PRESETS = [
-  { id: "saarthi", name: "Cyber Saarthi", url: "https://api.dicebear.com/7.x/bottts/svg?seed=Saarthi" },
-  { id: "student_boy", name: "Advik", url: "https://api.dicebear.com/7.x/avataaars/svg?seed=Advik" },
-  { id: "student_girl", name: "Ananya", url: "https://api.dicebear.com/7.x/avataaars/svg?seed=Ananya" },
-  { id: "host_senior", name: "Sudha Ji", url: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sudha" },
-  { id: "emerald", name: "Emerald", url: "https://api.dicebear.com/7.x/identicon/svg?seed=Emerald" },
+  {
+    id: "saarthi",
+    name: "Cyber Saarthi",
+    url: "https://api.dicebear.com/7.x/bottts/svg?seed=Saarthi",
+  },
+  {
+    id: "student_boy",
+    name: "Advik",
+    url: "https://api.dicebear.com/7.x/avataaars/svg?seed=Advik",
+  },
+  {
+    id: "student_girl",
+    name: "Ananya",
+    url: "https://api.dicebear.com/7.x/avataaars/svg?seed=Ananya",
+  },
+  {
+    id: "host_senior",
+    name: "Sudha Ji",
+    url: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sudha",
+  },
+  {
+    id: "emerald",
+    name: "Emerald",
+    url: "https://api.dicebear.com/7.x/identicon/svg?seed=Emerald",
+  },
 ];
 
 type ProfileTab = "settings" | "bookings";
@@ -109,7 +129,9 @@ export function ProfileModal({ open, onOpenChange, initialTab = "settings" }: Pr
         address: formData.address,
         emergency_contact: formData.emergency_contact,
       });
-      toast.success(isHi ? "प्रोफ़ाइल व अवतार अपडेट किया गया" : "Profile & Avatar updated successfully");
+      toast.success(
+        isHi ? "प्रोफ़ाइल व अवतार अपडेट किया गया" : "Profile & Avatar updated successfully",
+      );
       onOpenChange(false);
     } else {
       toast.error(isHi ? "प्रोफ़ाइल अपडेट विफल रहा" : "Failed to update profile", {
@@ -339,7 +361,9 @@ export function ProfileModal({ open, onOpenChange, initialTab = "settings" }: Pr
                 )}
                 <Input
                   value={formData.college_or_locality}
-                  onChange={(e) => setFormData({ ...formData, college_or_locality: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, college_or_locality: e.target.value })
+                  }
                   placeholder={
                     formData.user_type === "student" ? "e.g. IIT Kanpur" : "e.g. Kalyanpur"
                   }
@@ -434,4 +458,3 @@ export function ProfileModal({ open, onOpenChange, initialTab = "settings" }: Pr
     </Dialog>
   );
 }
-

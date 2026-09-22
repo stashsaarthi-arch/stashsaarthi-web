@@ -36,7 +36,7 @@ const writeQueue = (queue: OfflineSubmission[]) => {
     window.dispatchEvent(
       new CustomEvent("stashsaarthi:offline-queue-change", {
         detail: { count: queue.filter((q) => q.status === "pending").length },
-      })
+      }),
     );
   } catch (err) {
     console.error("Failed to write to offline submission queue", err);
@@ -48,7 +48,7 @@ const writeQueue = (queue: OfflineSubmission[]) => {
  */
 export const enqueueOfflineSubmission = (
   type: "booking" | "waitlist" | "meal",
-  payload: Record<string, any>
+  payload: Record<string, any>,
 ): OfflineSubmission => {
   const queue = readQueue();
   const submission: OfflineSubmission = {
@@ -113,7 +113,12 @@ export const flushOfflineSubmissions = async (): Promise<{
       item.lastError = err?.message || String(err);
       failed += 1;
       logSupabaseError({
-        table: item.type === "meal" ? "meal_bookings" : item.type === "waitlist" ? "waitlist_submissions" : "co_living_inquiries",
+        table:
+          item.type === "meal"
+            ? "meal_bookings"
+            : item.type === "waitlist"
+              ? "waitlist_submissions"
+              : "co_living_inquiries",
         operation: "insert",
         error: err,
         context: `offlineQueue_flush_${item.id}`,
@@ -136,7 +141,7 @@ if (typeof window !== "undefined") {
         window.dispatchEvent(
           new CustomEvent("stashsaarthi:offline-synced", {
             detail: { count: synced },
-          })
+          }),
         );
       }
     });

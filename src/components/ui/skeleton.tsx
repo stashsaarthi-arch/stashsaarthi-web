@@ -15,7 +15,7 @@ function CardSkeleton({ className }: { className?: string }) {
     <div
       className={cn(
         "rounded-2xl p-5 border border-white/[0.06] space-y-4 bg-[#0D1216]/80 backdrop-blur-xl",
-        className
+        className,
       )}
     >
       <Skeleton className="h-44 w-full rounded-xl" />
@@ -134,12 +134,12 @@ function TableRowSkeleton({ columns = 5 }: { columns?: number }) {
               i === 0
                 ? "w-36"
                 : i === 1
-                ? "w-24"
-                : i === 2
-                ? "w-40"
-                : i === 3
-                ? "w-20"
-                : "w-16 ml-auto"
+                  ? "w-24"
+                  : i === 2
+                    ? "w-40"
+                    : i === 3
+                      ? "w-20"
+                      : "w-16 ml-auto",
             )}
           />
         </td>
@@ -168,4 +168,3 @@ export {
   TableRowSkeleton,
   TableSkeleton,
 };
-

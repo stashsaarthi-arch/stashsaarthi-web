@@ -6,9 +6,15 @@ test.describe("Luggage Storage Booking Flow & Role-Based QR Code Verification", 
     await page.goto("/");
   });
 
-  test("completes luggage storage booking, verifies generated QR code matches unique booking ID, and tests cross-role QR scanning", async ({ page }) => {
+  test("completes luggage storage booking, verifies generated QR code matches unique booking ID, and tests cross-role QR scanning", async ({
+    page,
+  }) => {
     // 1. Open Booking Modal for Saarthi Stash (Luggage Storage)
-    const bookButton = page.locator('button:has-text("Book Storage"), button:has-text("Reserve Stash"), button:has-text("Book Now")').first();
+    const bookButton = page
+      .locator(
+        'button:has-text("Book Storage"), button:has-text("Reserve Stash"), button:has-text("Book Now")',
+      )
+      .first();
     await expect(bookButton).toBeVisible();
     await bookButton.click();
 
@@ -17,7 +23,9 @@ test.describe("Luggage Storage Booking Flow & Role-Based QR Code Verification", 
     await expect(dialogTitle).toBeVisible();
 
     // Select Saarthi Stash service if not already active
-    const stashServiceBtn = page.locator('button:has-text("Saarthi Stash"), button:has-text("सार्थी स्टैश")').first();
+    const stashServiceBtn = page
+      .locator('button:has-text("Saarthi Stash"), button:has-text("सार्थी स्टैश")')
+      .first();
     if (await stashServiceBtn.isVisible()) {
       await stashServiceBtn.click();
     }
@@ -34,7 +42,9 @@ test.describe("Luggage Storage Booking Flow & Role-Based QR Code Verification", 
     if (await pinInput.isVisible()) await pinInput.fill("208016");
 
     // 4. Proceed to Step 2 (Escrow Review)
-    const continueBtn = page.locator('button:has-text("Continue"), button:has-text("आगे बढ़ें")').first();
+    const continueBtn = page
+      .locator('button:has-text("Continue"), button:has-text("आगे बढ़ें")')
+      .first();
     await expect(continueBtn).toBeVisible();
     await continueBtn.click();
 
@@ -44,12 +54,18 @@ test.describe("Luggage Storage Booking Flow & Role-Based QR Code Verification", 
     await waiverCheckbox.check();
 
     // 6. Submit Checkout to Issue StashPass
-    const confirmBtn = page.locator('button:has-text("Confirm & Lock Reservation"), button:has-text("आरक्षण व एस्क्रो लॉक करें")').first();
+    const confirmBtn = page
+      .locator(
+        'button:has-text("Confirm & Lock Reservation"), button:has-text("आरक्षण व एस्क्रो लॉक करें")',
+      )
+      .first();
     await expect(confirmBtn).toBeVisible();
     await confirmBtn.click();
 
     // 7. Verify Transition to Step 3 (StashPass Issued)
-    const passHeader = page.locator('h3:has-text("StashPass is Ready"), h3:has-text("स्टैशपास तैयार है")');
+    const passHeader = page.locator(
+      'h3:has-text("StashPass is Ready"), h3:has-text("स्टैशपास तैयार है")',
+    );
     await expect(passHeader).toBeVisible({ timeout: 10000 });
 
     // 8. Extract Generated Unique Booking ID (tokenId)
@@ -73,22 +89,22 @@ test.describe("Luggage Storage Booking Flow & Role-Based QR Code Verification", 
     const studentRoleBtn = page.locator('[data-testid="qr-scan-student"]');
     await expect(studentRoleBtn).toBeVisible();
     await studentRoleBtn.click();
-    await expect(page.locator('text=Role: STUDENT')).toBeVisible();
-    await expect(page.locator('text=Student Aarav Sharma verified active storage')).toBeVisible();
+    await expect(page.locator("text=Role: STUDENT")).toBeVisible();
+    await expect(page.locator("text=Student Aarav Sharma verified active storage")).toBeVisible();
 
     // Role 2: Senior Host Role Scan
     const hostRoleBtn = page.locator('[data-testid="qr-scan-host"]');
     await expect(hostRoleBtn).toBeVisible();
     await hostRoleBtn.click();
-    await expect(page.locator('text=Role: HOST')).toBeVisible();
-    await expect(page.locator('text=Senior Host Node verified physical intake')).toBeVisible();
+    await expect(page.locator("text=Role: HOST")).toBeVisible();
+    await expect(page.locator("text=Senior Host Node verified physical intake")).toBeVisible();
 
     // Role 3: Admin Ops Role Scan
     const adminRoleBtn = page.locator('[data-testid="qr-scan-admin"]');
     await expect(adminRoleBtn).toBeVisible();
     await adminRoleBtn.click();
-    await expect(page.locator('text=Role: ADMIN')).toBeVisible();
-    await expect(page.locator('text=Admin Operations audited Escrow')).toBeVisible();
+    await expect(page.locator("text=Role: ADMIN")).toBeVisible();
+    await expect(page.locator("text=Admin Operations audited Escrow")).toBeVisible();
 
     // 11. Verify Booking Record Saved in Local Storage Store
     const savedBookingsRaw = await page.evaluate(() => localStorage.getItem("ss_local_bookings"));

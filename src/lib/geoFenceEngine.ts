@@ -1,6 +1,6 @@
 /**
  * Geo-Fenced Host Check-in Engine — StashSaarthi Autonomous System
- * 
+ *
  * Enforces strict 50-meter geo-fence radius lock on student pickup/drop-off verification
  * to prevent fake or remote drop-offs at host nodes across Kanpur campus locations.
  */
@@ -36,13 +36,13 @@ export const PRESET_CAMPUS_HOST_NODES: Record<string, CampusHostNode> = {
     id: "node-csjmu-kalyanpur",
     name: "CSJMU Kalyanpur Hub",
     area: "CSJM University Belt, Kanpur",
-    coords: { lat: 26.4950, lng: 80.2580 },
+    coords: { lat: 26.495, lng: 80.258 },
   },
   "HBTI Nawabganj Hub": {
     id: "node-hbti-nawabganj",
     name: "HBTI Nawabganj Hub",
     area: "Nawabganj, Kanpur",
-    coords: { lat: 26.4820, lng: 80.3150 },
+    coords: { lat: 26.482, lng: 80.315 },
   },
 };
 
@@ -66,7 +66,7 @@ export function calculateDistanceMeters(
   lat1: number,
   lon1: number,
   lat2: number,
-  lon2: number
+  lon2: number,
 ): number {
   const R = 6371000; // Earth radius in meters
   const dLat = ((lat2 - lat1) * Math.PI) / 180;
@@ -89,13 +89,13 @@ export function verifyGeoFenceLocation(
   targetCoords: Coordinates = PRESET_CAMPUS_HOST_NODES["Kakadeo PW Hub"]!.coords,
   nodeName: string = "Kakadeo PW Hub",
   allowedRadiusMeters: number = MAX_GEOFENCE_RADIUS_METERS,
-  overrideActive: boolean = false
+  overrideActive: boolean = false,
 ): GeoFenceResult {
   const distanceMeters = calculateDistanceMeters(
     deviceCoords.lat,
     deviceCoords.lng,
     targetCoords.lat,
-    targetCoords.lng
+    targetCoords.lng,
   );
 
   const inRange = overrideActive || distanceMeters <= allowedRadiusMeters;
@@ -129,11 +129,11 @@ export function verifyGeoFenceLocation(
  */
 export function getSimulatedDeviceLocation(
   nodeName: string = "Kakadeo PW Hub",
-  mode: "at_node" | "near_node" | "far_away" = "at_node"
+  mode: "at_node" | "near_node" | "far_away" = "at_node",
 ): Coordinates {
   const defaultNode = PRESET_CAMPUS_HOST_NODES["Kakadeo PW Hub"]!;
   const node = PRESET_CAMPUS_HOST_NODES[nodeName] ?? defaultNode;
-  
+
   if (mode === "at_node") {
     // ~12 meters away
     return {

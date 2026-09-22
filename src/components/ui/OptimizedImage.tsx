@@ -9,8 +9,10 @@ export interface SrcSetEntry {
   width: number;
 }
 
-export interface OptimizedImageProps
-  extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, "srcSet"> {
+export interface OptimizedImageProps extends Omit<
+  React.ImgHTMLAttributes<HTMLImageElement>,
+  "srcSet"
+> {
   /** Primary image source (must be provided). Used as the `<img>` src fallback. */
   src: string;
   /** Alt text — required for a11y. */
@@ -60,9 +62,7 @@ export const OptimizedImage = React.memo(function OptimizedImage({
   ...imgProps
 }: OptimizedImageProps) {
   const imgSrcSet = srcSetEntries?.length ? buildSrcSet(srcSetEntries) : undefined;
-  const webpSrcSet = webpSrcSetEntries?.length
-    ? buildSrcSet(webpSrcSetEntries)
-    : undefined;
+  const webpSrcSet = webpSrcSetEntries?.length ? buildSrcSet(webpSrcSetEntries) : undefined;
 
   const imgElement = (
     <img
@@ -80,11 +80,7 @@ export const OptimizedImage = React.memo(function OptimizedImage({
   if (webpSrc || webpSrcSet) {
     return (
       <picture>
-        <source
-          type="image/webp"
-          srcSet={webpSrcSet || webpSrc}
-          sizes={sizes}
-        />
+        <source type="image/webp" srcSet={webpSrcSet || webpSrc} sizes={sizes} />
         {imgElement}
       </picture>
     );

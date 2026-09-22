@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   X,
   Users,
@@ -13,8 +13,8 @@ import {
   Share2,
   Clock,
   Lock,
-} from 'lucide-react';
-import { toast } from 'sonner';
+} from "lucide-react";
+import { toast } from "sonner";
 import {
   ProxyHandoverRecord,
   ProxyDelegationPayload,
@@ -23,7 +23,7 @@ import {
   verifyAndCompleteProxyHandover,
   getProxyWhatsAppShareUrl,
   cancelProxyDelegation,
-} from '../../lib/proxyHandoverEngine';
+} from "../../lib/proxyHandoverEngine";
 
 interface ProxyHandoverModalProps {
   isOpen: boolean;
@@ -36,24 +36,26 @@ export const ProxyHandoverModal: React.FC<ProxyHandoverModalProps> = ({
   onClose,
   defaultBookingId,
 }) => {
-  const [activeTab, setActiveTab] = useState<'delegate' | 'verify' | 'charter'>('delegate');
+  const [activeTab, setActiveTab] = useState<"delegate" | "verify" | "charter">("delegate");
 
   // Delegation Form State
-  const [bookingId, setBookingId] = useState(defaultBookingId || 'ST-948201');
-  const [studentName, setStudentName] = useState('');
-  const [studentPhone, setStudentPhone] = useState('');
-  const [proxyName, setProxyName] = useState('');
-  const [proxyPhone, setProxyPhone] = useState('');
-  const [proxyIdType, setProxyIdType] = useState<'COLLEGE_ID' | 'AADHAAR' | 'DRIVING_LICENSE'>('COLLEGE_ID');
-  const [proxyIdLast4, setProxyIdLast4] = useState('');
-  const [relationship, setRelationship] = useState('Hostel Roommate');
-  const [notes, setNotes] = useState('');
+  const [bookingId, setBookingId] = useState(defaultBookingId || "ST-948201");
+  const [studentName, setStudentName] = useState("");
+  const [studentPhone, setStudentPhone] = useState("");
+  const [proxyName, setProxyName] = useState("");
+  const [proxyPhone, setProxyPhone] = useState("");
+  const [proxyIdType, setProxyIdType] = useState<"COLLEGE_ID" | "AADHAAR" | "DRIVING_LICENSE">(
+    "COLLEGE_ID",
+  );
+  const [proxyIdLast4, setProxyIdLast4] = useState("");
+  const [relationship, setRelationship] = useState("Hostel Roommate");
+  const [notes, setNotes] = useState("");
   const [createdPass, setCreatedPass] = useState<ProxyHandoverRecord | null>(null);
 
   // Verification Form State
-  const [verifySearchId, setVerifySearchId] = useState('');
-  const [inputOtp, setInputOtp] = useState('');
-  const [inputIdLast4, setInputIdLast4] = useState('');
+  const [verifySearchId, setVerifySearchId] = useState("");
+  const [inputOtp, setInputOtp] = useState("");
+  const [inputIdLast4, setInputIdLast4] = useState("");
   const [records, setRecords] = useState<ProxyHandoverRecord[]>([]);
 
   useEffect(() => {
@@ -72,28 +74,28 @@ export const ProxyHandoverModal: React.FC<ProxyHandoverModalProps> = ({
     e.preventDefault();
 
     if (!proxyName.trim() || !proxyPhone.trim() || proxyIdLast4.length !== 4) {
-      toast.error('Validation Error', {
-        description: 'Please enter proxy name, phone number, and exact 4-digit ID number.',
+      toast.error("Validation Error", {
+        description: "Please enter proxy name, phone number, and exact 4-digit ID number.",
       });
       return;
     }
 
     const payload: ProxyDelegationPayload = {
       bookingId: bookingId || `ST-${Math.floor(100000 + Math.random() * 900000)}`,
-      studentName: studentName.trim() || 'Aman Sharma',
-      studentPhone: studentPhone.trim() || '+91 9876543210',
+      studentName: studentName.trim() || "Aman Sharma",
+      studentPhone: studentPhone.trim() || "+91 9876543210",
       proxyName: proxyName.trim(),
       proxyPhone: proxyPhone.trim(),
       proxyIdType,
       proxyIdLast4: proxyIdLast4.trim(),
-      relationship: relationship.trim() || 'Friend',
+      relationship: relationship.trim() || "Friend",
       notes: notes.trim(),
     };
 
     const pass = createProxyDelegation(payload);
     setCreatedPass(pass);
     setRecords(getProxyHandoverRecords());
-    toast.success('Proxy Delegation Pass Created!', {
+    toast.success("Proxy Delegation Pass Created!", {
       description: `OTP Code: ${pass.verificationOtp}. Share this pass with ${pass.proxyName}.`,
     });
   };
@@ -101,8 +103,8 @@ export const ProxyHandoverModal: React.FC<ProxyHandoverModalProps> = ({
   const handleVerifyHandover = (e: React.FormEvent) => {
     e.preventDefault();
     if (!verifySearchId.trim() || !inputOtp.trim() || !inputIdLast4.trim()) {
-      toast.error('Missing Verification Fields', {
-        description: 'Please fill Pass/Booking ID, 6-digit OTP, and Proxy ID last 4 digits.',
+      toast.error("Missing Verification Fields", {
+        description: "Please fill Pass/Booking ID, 6-digit OTP, and Proxy ID last 4 digits.",
       });
       return;
     }
@@ -110,18 +112,18 @@ export const ProxyHandoverModal: React.FC<ProxyHandoverModalProps> = ({
     const res = verifyAndCompleteProxyHandover(
       verifySearchId.trim(),
       inputOtp.trim(),
-      inputIdLast4.trim()
+      inputIdLast4.trim(),
     );
 
     if (res.success) {
-      toast.success('Proxy Handover Verified!', {
+      toast.success("Proxy Handover Verified!", {
         description: res.message,
       });
       setRecords(getProxyHandoverRecords());
-      setInputOtp('');
-      setInputIdLast4('');
+      setInputOtp("");
+      setInputIdLast4("");
     } else {
-      toast.error('Handover Verification Failed', {
+      toast.error("Handover Verification Failed", {
         description: res.message,
       });
     }
@@ -130,8 +132,8 @@ export const ProxyHandoverModal: React.FC<ProxyHandoverModalProps> = ({
   const handleCancelPass = (id: string) => {
     if (cancelProxyDelegation(id)) {
       setRecords(getProxyHandoverRecords());
-      toast.info('Proxy Pass Cancelled', {
-        description: 'Luggage can now only be claimed by original student.',
+      toast.info("Proxy Pass Cancelled", {
+        description: "Luggage can now only be claimed by original student.",
       });
     }
   };
@@ -168,33 +170,33 @@ export const ProxyHandoverModal: React.FC<ProxyHandoverModalProps> = ({
         {/* Tab Strip */}
         <div className="flex border-b border-emerald-500/20 bg-gray-900/50 p-1">
           <button
-            onClick={() => setActiveTab('delegate')}
+            onClick={() => setActiveTab("delegate")}
             className={`flex-1 py-2.5 px-4 text-xs font-semibold rounded-lg flex items-center justify-center gap-2 transition ${
-              activeTab === 'delegate'
-                ? 'bg-emerald-500 text-black shadow-lg shadow-emerald-500/20'
-                : 'text-gray-400 hover:text-white'
+              activeTab === "delegate"
+                ? "bg-emerald-500 text-black shadow-lg shadow-emerald-500/20"
+                : "text-gray-400 hover:text-white"
             }`}
           >
             <UserCheck className="w-4 h-4" />
             1. Delegate to Friend
           </button>
           <button
-            onClick={() => setActiveTab('verify')}
+            onClick={() => setActiveTab("verify")}
             className={`flex-1 py-2.5 px-4 text-xs font-semibold rounded-lg flex items-center justify-center gap-2 transition ${
-              activeTab === 'verify'
-                ? 'bg-emerald-500 text-black shadow-lg shadow-emerald-500/20'
-                : 'text-gray-400 hover:text-white'
+              activeTab === "verify"
+                ? "bg-emerald-500 text-black shadow-lg shadow-emerald-500/20"
+                : "text-gray-400 hover:text-white"
             }`}
           >
             <KeyRound className="w-4 h-4" />
             2. Host/Runner OTP Verification
           </button>
           <button
-            onClick={() => setActiveTab('charter')}
+            onClick={() => setActiveTab("charter")}
             className={`flex-1 py-2.5 px-4 text-xs font-semibold rounded-lg flex items-center justify-center gap-2 transition ${
-              activeTab === 'charter'
-                ? 'bg-emerald-500 text-black shadow-lg shadow-emerald-500/20'
-                : 'text-gray-400 hover:text-white'
+              activeTab === "charter"
+                ? "bg-emerald-500 text-black shadow-lg shadow-emerald-500/20"
+                : "text-gray-400 hover:text-white"
             }`}
           >
             <ShieldCheck className="w-4 h-4" />
@@ -205,15 +207,16 @@ export const ProxyHandoverModal: React.FC<ProxyHandoverModalProps> = ({
         {/* Body Content */}
         <div className="p-6 overflow-y-auto flex-1 space-y-6">
           {/* TAB 1: DELEGATE TO FRIEND */}
-          {activeTab === 'delegate' && (
+          {activeTab === "delegate" && (
             <div className="space-y-6">
               {!createdPass ? (
                 <form onSubmit={handleCreateDelegation} className="space-y-4">
                   <div className="p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-xl text-xs text-emerald-300 flex items-start gap-3">
                     <AlertCircle className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
                     <div>
-                      <strong>Not returning to Kanpur city?</strong> Fill out your proxy friend's details below.
-                      We will generate a 6-digit retrieval OTP and encrypted pass for your friend to collect your box from the host node.
+                      <strong>Not returning to Kanpur city?</strong> Fill out your proxy friend's
+                      details below. We will generate a 6-digit retrieval OTP and encrypted pass for
+                      your friend to collect your box from the host node.
                     </div>
                   </div>
 
@@ -338,9 +341,12 @@ export const ProxyHandoverModal: React.FC<ProxyHandoverModalProps> = ({
                     <div className="w-12 h-12 rounded-full bg-emerald-500/20 border border-emerald-500 text-emerald-400 flex items-center justify-center mx-auto">
                       <CheckCircle2 className="w-6 h-6" />
                     </div>
-                    <h3 className="text-lg font-bold text-white">Proxy Retrieval Pass Generated!</h3>
+                    <h3 className="text-lg font-bold text-white">
+                      Proxy Retrieval Pass Generated!
+                    </h3>
                     <p className="text-xs text-gray-300">
-                      Share this verification pass & OTP with {createdPass.proxyName} to collect your luggage.
+                      Share this verification pass & OTP with {createdPass.proxyName} to collect
+                      your luggage.
                     </p>
 
                     <div className="p-3 bg-black/60 rounded-xl border border-emerald-500/30 flex items-center justify-around font-mono">
@@ -350,8 +356,12 @@ export const ProxyHandoverModal: React.FC<ProxyHandoverModalProps> = ({
                       </div>
                       <div className="h-8 w-px bg-gray-800" />
                       <div>
-                        <span className="text-[10px] text-gray-400 block uppercase">Verification OTP</span>
-                        <span className="text-xl font-extrabold text-white tracking-widest">{createdPass.verificationOtp}</span>
+                        <span className="text-[10px] text-gray-400 block uppercase">
+                          Verification OTP
+                        </span>
+                        <span className="text-xl font-extrabold text-white tracking-widest">
+                          {createdPass.verificationOtp}
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -395,23 +405,23 @@ export const ProxyHandoverModal: React.FC<ProxyHandoverModalProps> = ({
                           </span>
                           <span
                             className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${
-                              r.status === 'COMPLETED'
-                                ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
-                                : r.status === 'CANCELLED'
-                                ? 'bg-red-500/20 text-red-400 border border-red-500/30'
-                                : 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
+                              r.status === "COMPLETED"
+                                ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
+                                : r.status === "CANCELLED"
+                                  ? "bg-red-500/20 text-red-400 border border-red-500/30"
+                                  : "bg-amber-500/20 text-amber-400 border border-amber-500/30"
                             }`}
                           >
                             {r.status}
                           </span>
                         </div>
                         <p className="text-gray-400">
-                          Booking: <span className="text-emerald-400">{r.bookingId}</span> • OTP:{' '}
-                          <span className="text-white font-mono">{r.verificationOtp}</span> • ID Last 4:{' '}
-                          <span className="text-white font-mono">{r.proxyIdLast4}</span>
+                          Booking: <span className="text-emerald-400">{r.bookingId}</span> • OTP:{" "}
+                          <span className="text-white font-mono">{r.verificationOtp}</span> • ID
+                          Last 4: <span className="text-white font-mono">{r.proxyIdLast4}</span>
                         </p>
                       </div>
-                      {r.status === 'VERIFIED_READY' && (
+                      {r.status === "VERIFIED_READY" && (
                         <button
                           onClick={() => handleCancelPass(r.id)}
                           className="text-xs text-red-400 hover:text-red-300 font-medium underline"
@@ -427,16 +437,21 @@ export const ProxyHandoverModal: React.FC<ProxyHandoverModalProps> = ({
           )}
 
           {/* TAB 2: VERIFY RETRIEVAL (RUNNER/HOST MODE) */}
-          {activeTab === 'verify' && (
+          {activeTab === "verify" && (
             <div className="space-y-6">
               <div className="p-4 bg-amber-500/10 border border-amber-500/20 rounded-xl text-xs text-amber-300 flex items-start gap-3">
                 <ShieldCheck className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
                 <div>
-                  <strong>Runner & Host Handover Gatekeeper:</strong> Input the student's Pass/Booking ID along with the proxy friend's 6-digit OTP code and physical ID last 4 digits to release the box.
+                  <strong>Runner & Host Handover Gatekeeper:</strong> Input the student's
+                  Pass/Booking ID along with the proxy friend's 6-digit OTP code and physical ID
+                  last 4 digits to release the box.
                 </div>
               </div>
 
-              <form onSubmit={handleVerifyHandover} className="space-y-4 p-5 bg-gray-900/80 border border-gray-800 rounded-2xl">
+              <form
+                onSubmit={handleVerifyHandover}
+                className="space-y-4 p-5 bg-gray-900/80 border border-gray-800 rounded-2xl"
+              >
                 <div>
                   <label className="block text-xs font-medium text-gray-300 mb-1">
                     Pass ID or Booking ID *
@@ -494,7 +509,7 @@ export const ProxyHandoverModal: React.FC<ProxyHandoverModalProps> = ({
           )}
 
           {/* TAB 3: CHARTER & REVERSE LOGISTICS */}
-          {activeTab === 'charter' && (
+          {activeTab === "charter" && (
             <div className="space-y-4 text-xs text-gray-300 leading-relaxed">
               <div className="p-4 bg-gray-900 border border-gray-800 rounded-xl space-y-2">
                 <h3 className="font-bold text-emerald-400 flex items-center gap-2 text-sm">
@@ -502,15 +517,19 @@ export const ProxyHandoverModal: React.FC<ProxyHandoverModalProps> = ({
                   StashSaarthi Proxy Handover Protocol (Indian Contract Act Sec 182)
                 </h3>
                 <p>
-                  When a student delegates box retrieval to a proxy, StashSaarthi executes an agent-principal relationship validation.
-                  The 6-digit OTP code serves as legal authorization from the original owner.
+                  When a student delegates box retrieval to a proxy, StashSaarthi executes an
+                  agent-principal relationship validation. The 6-digit OTP code serves as legal
+                  authorization from the original owner.
                 </p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div className="p-3 bg-gray-900/60 border border-gray-800 rounded-lg">
-                  <span className="font-bold text-white block mb-1">1. Dual-Factor Verification</span>
-                  OTP code + Physical ID last 4 digits matching ensures unauthorized third parties cannot claim luggage boxes.
+                  <span className="font-bold text-white block mb-1">
+                    1. Dual-Factor Verification
+                  </span>
+                  OTP code + Physical ID last 4 digits matching ensures unauthorized third parties
+                  cannot claim luggage boxes.
                 </div>
                 <div className="p-3 bg-gray-900/60 border border-gray-800 rounded-lg">
                   <span className="font-bold text-white block mb-1">2. Tamper-Seal Integrity</span>
@@ -518,10 +537,13 @@ export const ProxyHandoverModal: React.FC<ProxyHandoverModalProps> = ({
                 </div>
                 <div className="p-3 bg-gray-900/60 border border-gray-800 rounded-lg">
                   <span className="font-bold text-white block mb-1">3. Immutable Audit Log</span>
-                  All proxy handovers post digital audit receipts to the student's registered WhatsApp number.
+                  All proxy handovers post digital audit receipts to the student's registered
+                  WhatsApp number.
                 </div>
                 <div className="p-3 bg-gray-900/60 border border-gray-800 rounded-lg">
-                  <span className="font-bold text-white block mb-1">4. Zero Brokerage Guarantee</span>
+                  <span className="font-bold text-white block mb-1">
+                    4. Zero Brokerage Guarantee
+                  </span>
                   Proxy pickup incurs ₹0 additional fee for the student or proxy.
                 </div>
               </div>

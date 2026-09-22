@@ -1,6 +1,16 @@
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, ShieldCheck, Lock, FileText, Printer, CheckCircle, Mail, Phone, MapPin } from "lucide-react";
+import {
+  ArrowLeft,
+  ShieldCheck,
+  Lock,
+  FileText,
+  Printer,
+  CheckCircle,
+  Mail,
+  Phone,
+  MapPin,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BrandLogo } from "@/components/ui/BrandLogo";
 import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
@@ -24,7 +34,10 @@ export const Route = createFileRoute("/privacy")({
         content:
           "Official Privacy Policy of StashSaarthi. Zero data resale, encrypted node logs, and DPDP Act 2023 compliance.",
       },
-      { property: "og:image", content: "https://stashsaarthi-web.vercel.app/images/og-student.png" },
+      {
+        property: "og:image",
+        content: "https://stashsaarthi-web.vercel.app/images/og-student.png",
+      },
     ],
   }),
   component: PrivacyPageWrapped,
@@ -114,7 +127,11 @@ function PrivacyPage() {
               className="bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs gap-2 shadow-lg shadow-emerald-500/20 cursor-pointer"
             >
               <ShieldCheck className="h-4 w-4" />
-              <span>{isHi ? "🛡️ ऑटोनॉमस DPDP व GDPR ऑडिट पोर्टल" : "🛡️ Audit DPDP & GDPR Compliance Portal"}</span>
+              <span>
+                {isHi
+                  ? "🛡️ ऑटोनॉमस DPDP व GDPR ऑडिट पोर्टल"
+                  : "🛡️ Audit DPDP & GDPR Compliance Portal"}
+              </span>
             </Button>
             <Button
               onClick={() => setIsRetentionModalOpen(true)}
@@ -122,11 +139,15 @@ function PrivacyPage() {
               className="border-amber-500/40 bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 font-bold text-xs gap-2 cursor-pointer"
             >
               <FileText className="h-4 w-4" />
-              <span>{isHi ? "⚖️ 18-माह डेटा रिटेंशन कंसोल" : "⚖️ 18-Month Data Retention Console"}</span>
+              <span>
+                {isHi ? "⚖️ 18-माह डेटा रिटेंशन कंसोल" : "⚖️ 18-Month Data Retention Console"}
+              </span>
             </Button>
             <div className="text-xs text-muted-foreground">
               <span>{isHi ? "अंतिम संशोधन:" : "Last Updated:"} September 7, 2026</span> •{" "}
-              <span>{isHi ? "संस्करण:" : "Version:"} v2.5 (Predictive AI & Data Governance Standard)</span>
+              <span>
+                {isHi ? "संस्करण:" : "Version:"} v2.5 (Predictive AI & Data Governance Standard)
+              </span>
             </div>
           </div>
         </div>
@@ -142,12 +163,27 @@ function PrivacyPage() {
               <nav className="space-y-1 text-xs">
                 {[
                   { id: "overview", label: isHi ? "1. मुख्य सिद्धांत" : "1. Core Governance" },
-                  { id: "collection", label: isHi ? "2. एकत्रित डेटा व AI" : "2. Information Collected" },
+                  {
+                    id: "collection",
+                    label: isHi ? "2. एकत्रित डेटा व AI" : "2. Information Collected",
+                  },
                   { id: "purpose", label: isHi ? "3. डेटा उपयोग" : "3. Purpose of Processing" },
-                  { id: "ai-governance", label: isHi ? "4. प्रेडिक्टिव AI व टेलीमेट्री" : "4. Predictive AI Governance" },
-                  { id: "sharing", label: isHi ? "5. शून्य बिक्री गारंटी" : "5. Zero-Resale Guarantee" },
-                  { id: "security", label: isHi ? "6. सुरक्षा व एन्क्रिप्शन" : "6. Encryption & Security" },
-                  { id: "retention", label: isHi ? "7. डेटा विलोपन अधिकार" : "7. Retention & Erasure" },
+                  {
+                    id: "ai-governance",
+                    label: isHi ? "4. प्रेडिक्टिव AI व टेलीमेट्री" : "4. Predictive AI Governance",
+                  },
+                  {
+                    id: "sharing",
+                    label: isHi ? "5. शून्य बिक्री गारंटी" : "5. Zero-Resale Guarantee",
+                  },
+                  {
+                    id: "security",
+                    label: isHi ? "6. सुरक्षा व एन्क्रिप्शन" : "6. Encryption & Security",
+                  },
+                  {
+                    id: "retention",
+                    label: isHi ? "7. डेटा विलोपन अधिकार" : "7. Retention & Erasure",
+                  },
                   { id: "dpdp", label: isHi ? "8. DPDP 2023 अधिकार" : "8. DPDP Act Rights" },
                   { id: "nodal", label: isHi ? "9. नोडल अधिकारी" : "9. Nodal Officer Contacts" },
                 ].map((item) => (
@@ -171,7 +207,10 @@ function PrivacyPage() {
           {/* Detailed Legal Content */}
           <div className="md:col-span-3 space-y-8 text-sm leading-relaxed text-slate-300">
             {/* 1. Core Governance */}
-            <section id="overview" className="rounded-2xl border border-white/10 bg-white/5 p-6 space-y-3">
+            <section
+              id="overview"
+              className="rounded-2xl border border-white/10 bg-white/5 p-6 space-y-3"
+            >
               <div className="flex items-center gap-2 text-emerald-400 font-bold text-base">
                 <Lock className="h-5 w-5" />
                 <h2>1. Core Governance & Privacy Principles</h2>
@@ -183,69 +222,127 @@ function PrivacyPage() {
               </p>
               <ul className="list-disc pl-5 space-y-1.5 text-xs text-muted-foreground">
                 <li>
-                  <strong className="text-white">Zero Resale Guarantee:</strong> We never monetize, sell, lease, or rent personal data to ad networks, lead aggregators, or third-party marketing companies.
+                  <strong className="text-white">Zero Resale Guarantee:</strong> We never monetize,
+                  sell, lease, or rent personal data to ad networks, lead aggregators, or
+                  third-party marketing companies.
                 </li>
                 <li>
-                  <strong className="text-white">Data Minimization:</strong> We collect strictly the minimum operational parameters required to verify node security, issue StashPasses, and clear bank escrow payouts.
+                  <strong className="text-white">Data Minimization:</strong> We collect strictly the
+                  minimum operational parameters required to verify node security, issue
+                  StashPasses, and clear bank escrow payouts.
                 </li>
                 <li>
-                  <strong className="text-white">User Sovereignty:</strong> You retain complete ownership over your identity, contact details, stored records, and client-side telemetry preferences at all times.
+                  <strong className="text-white">User Sovereignty:</strong> You retain complete
+                  ownership over your identity, contact details, stored records, and client-side
+                  telemetry preferences at all times.
                 </li>
               </ul>
             </section>
 
             {/* 2. Information Collected */}
-            <section id="collection" className="rounded-2xl border border-white/10 bg-white/5 p-6 space-y-3">
+            <section
+              id="collection"
+              className="rounded-2xl border border-white/10 bg-white/5 p-6 space-y-3"
+            >
               <div className="flex items-center gap-2 text-cyan font-bold text-base">
                 <FileText className="h-5 w-5" />
                 <h2>2. Information We Collect</h2>
               </div>
-              <p>To enable deterministic node custody, verified bookings, and zero-latency user experience, we collect the following categories of information:</p>
+              <p>
+                To enable deterministic node custody, verified bookings, and zero-latency user
+                experience, we collect the following categories of information:
+              </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                 <div className="rounded-xl border border-white/10 bg-black/40 p-3">
                   <h3 className="font-bold text-emerald-400 mb-1">A. Student Identity & Contact</h3>
-                  <p className="text-muted-foreground">Name, mobile phone number, official college email, college ID/hostel registration for student discount verification, and destination campus locality.</p>
+                  <p className="text-muted-foreground">
+                    Name, mobile phone number, official college email, college ID/hostel
+                    registration for student discount verification, and destination campus locality.
+                  </p>
                 </div>
                 <div className="rounded-xl border border-white/10 bg-black/40 p-3">
-                  <h3 className="font-bold text-amber-400 mb-1">B. Verified PG Owner Host & Node Details</h3>
-                  <p className="text-muted-foreground">Host name, address in Kanpur/Lucknow, Aadhaar biometric verification proof, bank account details for weekly escrow payouts, and property safety photos.</p>
+                  <h3 className="font-bold text-amber-400 mb-1">
+                    B. Verified PG Owner Host & Node Details
+                  </h3>
+                  <p className="text-muted-foreground">
+                    Host name, address in Kanpur/Lucknow, Aadhaar biometric verification proof, bank
+                    account details for weekly escrow payouts, and property safety photos.
+                  </p>
                 </div>
                 <div className="rounded-xl border border-white/10 bg-black/40 p-3">
                   <h3 className="font-bold text-cyan-400 mb-1">C. Custody & Booking Logs</h3>
-                  <p className="text-muted-foreground">Tamper-evident laser barcode numbers (#SS-KNP-XXXX), weight check records, item check-in photo proof, and UPI payment clearance reference IDs.</p>
+                  <p className="text-muted-foreground">
+                    Tamper-evident laser barcode numbers (#SS-KNP-XXXX), weight check records, item
+                    check-in photo proof, and UPI payment clearance reference IDs.
+                  </p>
                 </div>
                 <div className="rounded-xl border border-white/10 bg-black/40 p-3">
                   <h3 className="font-bold text-purple-400 mb-1">D. Technical Telemetry</h3>
-                  <p className="text-muted-foreground">Browser device user-agent, network error logs, and anonymized performance telemetry to optimize 60–120 FPS web application performance.</p>
+                  <p className="text-muted-foreground">
+                    Browser device user-agent, network error logs, and anonymized performance
+                    telemetry to optimize 60–120 FPS web application performance.
+                  </p>
                 </div>
                 <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-3 sm:col-span-2">
-                  <h3 className="font-bold text-emerald-300 mb-1">E. Client-Side Predictive AI & Scroll Behavior Telemetry</h3>
+                  <h3 className="font-bold text-emerald-300 mb-1">
+                    E. Client-Side Predictive AI & Scroll Behavior Telemetry
+                  </h3>
                   <p className="text-emerald-100/90">
-                    To deliver zero-lag persona auto-adaptation (Student vs Verified PG Owner Host mode), our client-side lightweight neural network analyzes scroll velocity, section dwell time ratios, hover frequencies, and direction reversals directly inside your browser memory. <strong>100% Local Execution:</strong> Zero biometric data, zero personal profile records, and zero behavioral logs are ever sent to remote servers or external AI model providers.
+                    To deliver zero-lag persona auto-adaptation (Student vs Verified PG Owner Host
+                    mode), our client-side lightweight neural network analyzes scroll velocity,
+                    section dwell time ratios, hover frequencies, and direction reversals directly
+                    inside your browser memory. <strong>100% Local Execution:</strong> Zero
+                    biometric data, zero personal profile records, and zero behavioral logs are ever
+                    sent to remote servers or external AI model providers.
                   </p>
                 </div>
               </div>
             </section>
 
             {/* 3. Purpose of Processing */}
-            <section id="purpose" className="rounded-2xl border border-white/10 bg-white/5 p-6 space-y-3">
+            <section
+              id="purpose"
+              className="rounded-2xl border border-white/10 bg-white/5 p-6 space-y-3"
+            >
               <div className="flex items-center gap-2 text-emerald-400 font-bold text-base">
                 <CheckCircle className="h-5 w-5" />
                 <h2>3. Purpose & Legal Basis of Processing</h2>
               </div>
-              <p>Your personal data is processed strictly for the following operational objectives:</p>
+              <p>
+                Your personal data is processed strictly for the following operational objectives:
+              </p>
               <ul className="list-disc pl-5 space-y-1.5 text-xs text-muted-foreground">
-                <li>Issuing digital custody certificates (StashPass) with embedded ₹10,000 micro-insurance coverage.</li>
-                <li>Executing 3-tier host background verification and legal leave-and-license agreements under Sec 105 Transfer of Property Act 1882.</li>
-                <li>Processing 100% digital escrow payouts to verified hosts on weekly schedules.</li>
-                <li>Executing client-side predictive AI persona classification (Student vs Host) and pre-loading relevant images/assets to ensure 60–120 FPS performance over cellular networks.</li>
-                <li>Sending essential transactional updates via SMS and WhatsApp (e.g., luggage arrival alerts, doorstep pickup confirmations).</li>
-                <li>Preventing platform abuse, fraudulent room listings, or illegal item storage.</li>
+                <li>
+                  Issuing digital custody certificates (StashPass) with embedded ₹10,000
+                  micro-insurance coverage.
+                </li>
+                <li>
+                  Executing 3-tier host background verification and legal leave-and-license
+                  agreements under Sec 105 Transfer of Property Act 1882.
+                </li>
+                <li>
+                  Processing 100% digital escrow payouts to verified hosts on weekly schedules.
+                </li>
+                <li>
+                  Executing client-side predictive AI persona classification (Student vs Host) and
+                  pre-loading relevant images/assets to ensure 60–120 FPS performance over cellular
+                  networks.
+                </li>
+                <li>
+                  Sending essential transactional updates via SMS and WhatsApp (e.g., luggage
+                  arrival alerts, doorstep pickup confirmations).
+                </li>
+                <li>
+                  Preventing platform abuse, fraudulent room listings, or illegal item storage.
+                </li>
               </ul>
             </section>
 
             {/* 4. Predictive AI Governance */}
-            <section id="ai-governance" className="rounded-2xl border border-cyan-500/30 bg-cyan-500/10 p-6 space-y-3">
+            <section
+              id="ai-governance"
+              className="rounded-2xl border border-cyan-500/30 bg-cyan-500/10 p-6 space-y-3"
+            >
               <div className="flex items-center gap-2 text-cyan-400 font-bold text-base">
                 <ShieldCheck className="h-5 w-5" />
                 <h2>4. Predictive AI Governance & Low-Data Mode Control</h2>
@@ -258,14 +355,26 @@ function PrivacyPage() {
               <div className="rounded-xl border border-cyan-500/20 bg-black/40 p-4 space-y-2 text-xs">
                 <p className="font-semibold text-white">Your Control & Opt-Out Guarantee:</p>
                 <ul className="list-disc pl-5 space-y-1 text-slate-300">
-                  <li><strong className="text-cyan-300">Zero Server-Side Storage:</strong> Scroll dynamics and hover timing vectors are processed transiently in RAM and discarded immediately upon session closure.</li>
-                  <li><strong className="text-cyan-300">Low-Data Mode Opt-Out:</strong> Toggling "Low-Data Mode" from the top navigation bar instantly disables all client-side predictive AI inference cycles, GSAP canvas animations, and dynamic asset pre-fetching.</li>
+                  <li>
+                    <strong className="text-cyan-300">Zero Server-Side Storage:</strong> Scroll
+                    dynamics and hover timing vectors are processed transiently in RAM and discarded
+                    immediately upon session closure.
+                  </li>
+                  <li>
+                    <strong className="text-cyan-300">Low-Data Mode Opt-Out:</strong> Toggling
+                    "Low-Data Mode" from the top navigation bar instantly disables all client-side
+                    predictive AI inference cycles, GSAP canvas animations, and dynamic asset
+                    pre-fetching.
+                  </li>
                 </ul>
               </div>
             </section>
 
             {/* 5. Zero-Resale Guarantee */}
-            <section id="sharing" className="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-6 space-y-3">
+            <section
+              id="sharing"
+              className="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-6 space-y-3"
+            >
               <div className="flex items-center gap-2 text-emerald-400 font-bold text-base">
                 <ShieldCheck className="h-5 w-5" />
                 <h2>5. Zero Data Resale & Strict Non-Disclosure</h2>
@@ -276,80 +385,129 @@ function PrivacyPage() {
                   : "StashSaarthi maintains an uncompromised zero-data-resale policy. We do not sell, trade, monetize, or disclose your personal data to any external advertising agencies, data brokers, or telemarketing firms under any circumstances."}
               </p>
               <p className="text-xs text-emerald-200/80">
-                Data is shared strictly on a need-to-know basis with verified node keepers during active custody (e.g. host receiving student contact for doorstep pickup coordination) or when mandated by law enforcement under legal judicial warrants.
+                Data is shared strictly on a need-to-know basis with verified node keepers during
+                active custody (e.g. host receiving student contact for doorstep pickup
+                coordination) or when mandated by law enforcement under legal judicial warrants.
               </p>
             </section>
 
             {/* 5. Encryption & Security */}
-            <section id="security" className="rounded-2xl border border-white/10 bg-white/5 p-6 space-y-3">
+            <section
+              id="security"
+              className="rounded-2xl border border-white/10 bg-white/5 p-6 space-y-3"
+            >
               <div className="flex items-center gap-2 text-cyan font-bold text-base">
                 <Lock className="h-5 w-5" />
                 <h2>5. Data Storage & Encryption Standards</h2>
               </div>
               <p>We employ military-grade technical & organizational safety standards:</p>
               <ul className="list-disc pl-5 space-y-1.5 text-xs text-muted-foreground">
-                <li><strong className="text-white">Encryption at Rest & Transit:</strong> All database tables and telemetry logs are encrypted using AES-256 at rest and TLS 1.3 in transit.</li>
-                <li><strong className="text-white">Offline Resilience:</strong> Form submissions queue securely in encrypted browser IndexedDB storage during network drops and sync automatically upon reconnection.</li>
-                <li><strong className="text-white">Row-Level Security (RLS):</strong> Supabase database schemas enforce strict Row-Level Security policies preventing unauthorized cross-tenant data access.</li>
+                <li>
+                  <strong className="text-white">Encryption at Rest & Transit:</strong> All database
+                  tables and telemetry logs are encrypted using AES-256 at rest and TLS 1.3 in
+                  transit.
+                </li>
+                <li>
+                  <strong className="text-white">Offline Resilience:</strong> Form submissions queue
+                  securely in encrypted browser IndexedDB storage during network drops and sync
+                  automatically upon reconnection.
+                </li>
+                <li>
+                  <strong className="text-white">Row-Level Security (RLS):</strong> Supabase
+                  database schemas enforce strict Row-Level Security policies preventing
+                  unauthorized cross-tenant data access.
+                </li>
               </ul>
             </section>
 
             {/* 6. Retention & Erasure */}
-            <section id="retention" className="rounded-2xl border border-white/10 bg-white/5 p-6 space-y-3">
+            <section
+              id="retention"
+              className="rounded-2xl border border-white/10 bg-white/5 p-6 space-y-3"
+            >
               <div className="flex items-center gap-2 text-amber-400 font-bold text-base">
                 <FileText className="h-5 w-5" />
                 <h2>6. Data Retention & Right to Permanent Erasure</h2>
               </div>
               <p>
-                We retain personal records only for as long as necessary to fulfill active custody bookings and comply with financial auditing regulations.
+                We retain personal records only for as long as necessary to fulfill active custody
+                bookings and comply with financial auditing regulations.
               </p>
               <div className="rounded-xl border border-white/10 bg-black/40 p-4 space-y-2 text-xs">
                 <p className="text-white font-semibold">Automatic 18-Month Purge SLA:</p>
                 <p className="text-muted-foreground">
-                  Inactive student account records, check-in photo logs, and expired waitlist entries are automatically purged from our primary database 18 months after your last transaction.
+                  Inactive student account records, check-in photo logs, and expired waitlist
+                  entries are automatically purged from our primary database 18 months after your
+                  last transaction.
                 </p>
-                <p className="text-emerald-400 font-semibold pt-1">Request Immediate Manual Erasure:</p>
+                <p className="text-emerald-400 font-semibold pt-1">
+                  Request Immediate Manual Erasure:
+                </p>
                 <p className="text-muted-foreground">
-                  You may request immediate permanent deletion of your profile, verification documents, and contact details at any time by emailing <a href="mailto:stashsaarthi@gmail.com" className="text-emerald-400 underline">stashsaarthi@gmail.com</a>. Requests are processed within 24 hours.
+                  You may request immediate permanent deletion of your profile, verification
+                  documents, and contact details at any time by emailing{" "}
+                  <a href="mailto:stashsaarthi@gmail.com" className="text-emerald-400 underline">
+                    stashsaarthi@gmail.com
+                  </a>
+                  . Requests are processed within 24 hours.
                 </p>
               </div>
             </section>
 
             {/* 7. DPDP Act Rights */}
-            <section id="dpdp" className="rounded-2xl border border-white/10 bg-white/5 p-6 space-y-3">
+            <section
+              id="dpdp"
+              className="rounded-2xl border border-white/10 bg-white/5 p-6 space-y-3"
+            >
               <div className="flex items-center gap-2 text-purple-400 font-bold text-base">
                 <ShieldCheck className="h-5 w-5" />
                 <h2>7. Your Rights Under India's DPDP Act 2023</h2>
               </div>
-              <p>Under the Digital Personal Data Protection Act 2023, Indian citizens have the following statutory rights:</p>
+              <p>
+                Under the Digital Personal Data Protection Act 2023, Indian citizens have the
+                following statutory rights:
+              </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
                 <div className="rounded-lg border border-white/10 p-3 bg-black/20">
                   <span className="font-bold text-white block">Right to Access Summary</span>
-                  <span className="text-muted-foreground">Request a comprehensive copy of all personal data held in our systems.</span>
+                  <span className="text-muted-foreground">
+                    Request a comprehensive copy of all personal data held in our systems.
+                  </span>
                 </div>
                 <div className="rounded-lg border border-white/10 p-3 bg-black/20">
                   <span className="font-bold text-white block">Right to Correction</span>
-                  <span className="text-muted-foreground">Update outdated mobile numbers, college affiliations, or host addresses.</span>
+                  <span className="text-muted-foreground">
+                    Update outdated mobile numbers, college affiliations, or host addresses.
+                  </span>
                 </div>
                 <div className="rounded-lg border border-white/10 p-3 bg-black/20">
                   <span className="font-bold text-white block">Right to Erasure</span>
-                  <span className="text-muted-foreground">Withdraw consent and mandate permanent removal of stored profile logs.</span>
+                  <span className="text-muted-foreground">
+                    Withdraw consent and mandate permanent removal of stored profile logs.
+                  </span>
                 </div>
                 <div className="rounded-lg border border-white/10 p-3 bg-black/20">
                   <span className="font-bold text-white block">Right to Nomination</span>
-                  <span className="text-muted-foreground">Nominate an authorized representative in the event of medical incapacity.</span>
+                  <span className="text-muted-foreground">
+                    Nominate an authorized representative in the event of medical incapacity.
+                  </span>
                 </div>
               </div>
             </section>
 
             {/* 8. Nodal Grievance Officer */}
-            <section id="nodal" className="rounded-2xl border border-white/10 bg-white/5 p-6 space-y-4">
+            <section
+              id="nodal"
+              className="rounded-2xl border border-white/10 bg-white/5 p-6 space-y-4"
+            >
               <div className="flex items-center gap-2 text-emerald-400 font-bold text-base">
                 <Mail className="h-5 w-5" />
                 <h2>8. Nodal Grievance Officer & Contact Information</h2>
               </div>
               <p className="text-xs text-muted-foreground">
-                In compliance with Rule 3(11) of Information Technology Guidelines and DPDP Rules, for any privacy concerns, data erasure requests, or security grievances, please contact our designated Nodal Officer:
+                In compliance with Rule 3(11) of Information Technology Guidelines and DPDP Rules,
+                for any privacy concerns, data erasure requests, or security grievances, please
+                contact our designated Nodal Officer:
               </p>
 
               <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4 text-xs space-y-2">
@@ -362,19 +520,41 @@ function PrivacyPage() {
                 <div className="space-y-1 text-slate-300 pt-1">
                   <p className="flex items-center gap-2">
                     <MapPin className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
-                    <span>StashSaarthi Hub: 117/K-Block, Kalyanpur, Kanpur, Uttar Pradesh — 208016, India</span>
+                    <span>
+                      StashSaarthi Hub: 117/K-Block, Kalyanpur, Kanpur, Uttar Pradesh — 208016,
+                      India
+                    </span>
                   </p>
                   <p className="flex items-center gap-2">
                     <Mail className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
-                    <span>Direct Email: <a href="mailto:stashsaarthi@gmail.com" className="text-emerald-400 underline">stashsaarthi@gmail.com</a></span>
+                    <span>
+                      Direct Email:{" "}
+                      <a
+                        href="mailto:stashsaarthi@gmail.com"
+                        className="text-emerald-400 underline"
+                      >
+                        stashsaarthi@gmail.com
+                      </a>
+                    </span>
                   </p>
                   <p className="flex items-center gap-2">
                     <Phone className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
-                    <span>Founder Phone Line: <a href={`https://wa.me/${FOUNDER_WHATSAPP}`} target="_blank" rel="noopener noreferrer" className="text-emerald-400 underline">{FOUNDER_PHONE_DISPLAY}</a></span>
+                    <span>
+                      Founder Phone Line:{" "}
+                      <a
+                        href={`https://wa.me/${FOUNDER_WHATSAPP}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-emerald-400 underline"
+                      >
+                        {FOUNDER_PHONE_DISPLAY}
+                      </a>
+                    </span>
                   </p>
                 </div>
                 <p className="text-[11px] text-emerald-200/80 pt-2 border-t border-emerald-500/20">
-                  ⚡ <strong>SLA Commitment:</strong> Official privacy grievances acknowledged within 4 hours; full resolution guaranteed within 24 hours.
+                  ⚡ <strong>SLA Commitment:</strong> Official privacy grievances acknowledged
+                  within 4 hours; full resolution guaranteed within 24 hours.
                 </p>
               </div>
             </section>
@@ -385,7 +565,10 @@ function PrivacyPage() {
       {/* DPDP & GDPR Audit Modal */}
       <DataPrivacyAuditModal isOpen={isAuditModalOpen} onClose={() => setIsAuditModalOpen(false)} />
       {/* 18-Month Data Retention & Auto-Purge Modal */}
-      <DataRetentionModal isOpen={isRetentionModalOpen} onClose={() => setIsRetentionModalOpen(false)} />
+      <DataRetentionModal
+        isOpen={isRetentionModalOpen}
+        onClose={() => setIsRetentionModalOpen(false)}
+      />
     </div>
   );
 }

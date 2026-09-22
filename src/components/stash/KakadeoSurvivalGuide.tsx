@@ -19,7 +19,7 @@ import {
   Clock,
   Building,
   Heart,
-  ChevronRight
+  ChevronRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -230,12 +230,16 @@ export function KakadeoSurvivalGuide() {
           </div>
           <div className="p-4 rounded-xl bg-slate-950/50 border border-slate-800 text-center">
             <Building className="w-5 h-5 text-cyan-400 mx-auto mb-1" />
-            <div className="text-xs text-slate-400">{isHi ? "ज़ीरो-ब्रोकरेज रूम" : "Zero Brokerage"}</div>
+            <div className="text-xs text-slate-400">
+              {isHi ? "ज़ीरो-ब्रोकरेज रूम" : "Zero Brokerage"}
+            </div>
             <div className="font-bold text-white text-sm">Avg ₹5,500/mo</div>
           </div>
           <div className="p-4 rounded-xl bg-slate-950/50 border border-slate-800 text-center">
             <PackageCheck className="w-5 h-5 text-emerald-400 mx-auto mb-1" />
-            <div className="text-xs text-slate-400">{isHi ? "छुट्टियों में स्टोरेज" : "Vacation Storage"}</div>
+            <div className="text-xs text-slate-400">
+              {isHi ? "छुट्टियों में स्टोरेज" : "Vacation Storage"}
+            </div>
             <div className="font-bold text-white text-sm">₹300 / bag / mo</div>
           </div>
         </div>
@@ -298,7 +302,9 @@ export function KakadeoSurvivalGuide() {
               2
             </div>
             <h3 className="text-xl font-bold text-white">
-              {isHi ? "भोजन एवं मेस सर्वाइवल (पेट की बीमारियों से बचाव)" : "Food & Mess Survival Guide"}
+              {isHi
+                ? "भोजन एवं मेस सर्वाइवल (पेट की बीमारियों से बचाव)"
+                : "Food & Mess Survival Guide"}
             </h3>
           </div>
 
@@ -311,7 +317,9 @@ export function KakadeoSurvivalGuide() {
           <div className="p-5 rounded-2xl bg-amber-950/20 border border-amber-500/20 space-y-3">
             <div className="flex items-center justify-between">
               <h4 className="font-bold text-amber-300 text-sm">
-                {isHi ? "सारथी किचन - होमस्टाइल टिफिन विकल्प" : "Saarthi Kitchen - Homestyle Meal Options"}
+                {isHi
+                  ? "सारथी किचन - होमस्टाइल टिफिन विकल्प"
+                  : "Saarthi Kitchen - Homestyle Meal Options"}
               </h4>
               <span className="text-xs bg-amber-500/20 text-amber-300 px-2.5 py-0.5 rounded-full font-mono">
                 1-TAP PAUSE FEATURE
@@ -320,15 +328,24 @@ export function KakadeoSurvivalGuide() {
             <ul className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs text-slate-300">
               <li className="flex items-start gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                <span><strong>Standard Thali (₹50):</strong> 4 Desi Ghee Phulkas, Arhar Dal, Seasonal Sabzi, Salad.</span>
+                <span>
+                  <strong>Standard Thali (₹50):</strong> 4 Desi Ghee Phulkas, Arhar Dal, Seasonal
+                  Sabzi, Salad.
+                </span>
               </li>
               <li className="flex items-start gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                <span><strong>Verified PG Owner Feast (₹90):</strong> 5 Phulkas, Paneer/Special Sabzi, Curd, Rice, Sweet.</span>
+                <span>
+                  <strong>Verified PG Owner Feast (₹90):</strong> 5 Phulkas, Paneer/Special Sabzi,
+                  Curd, Rice, Sweet.
+                </span>
               </li>
               <li className="flex items-start gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                <span><strong>Monthly Pass (₹2,400):</strong> Unlimited pause tokens during JEE/NEET test series breaks.</span>
+                <span>
+                  <strong>Monthly Pass (₹2,400):</strong> Unlimited pause tokens during JEE/NEET
+                  test series breaks.
+                </span>
               </li>
             </ul>
           </div>
@@ -353,7 +370,9 @@ export function KakadeoSurvivalGuide() {
               </div>
               <ul className="text-xs text-slate-400 space-y-1.5 list-disc pl-4">
                 <li>Never pay 1-month rent as brokerage to unauthorized local middlemen.</li>
-                <li>Verify sub-meter electric tariff is under ₹9/unit (standard Kanpur domestic rate).</li>
+                <li>
+                  Verify sub-meter electric tariff is under ₹9/unit (standard Kanpur domestic rate).
+                </li>
                 <li>Check water pressure between 6:00 AM - 8:30 AM before signing agreement.</li>
               </ul>
             </div>
@@ -364,7 +383,10 @@ export function KakadeoSurvivalGuide() {
                 {isHi ? "सारथी स्पेस गारंटी" : "Saarthi Spaces Advantage"}
               </div>
               <ul className="text-xs text-slate-400 space-y-1.5 list-disc pl-4">
-                <li>Direct connection with verified verified PG owner host families (Average ₹5,500/mo).</li>
+                <li>
+                  Direct connection with verified verified PG owner host families (Average
+                  ₹5,500/mo).
+                </li>
                 <li>Zero brokerage fee, zero security deposit forfeiture traps.</li>
                 <li>Quiet study environment with premium host house guardians.</li>
               </ul>
@@ -379,7 +401,9 @@ export function KakadeoSurvivalGuide() {
               4
             </div>
             <h3 className="text-xl font-bold text-white">
-              {isHi ? "छुट्टियों में डेड-रेंट बचत एवं स्टोरेज हैक्स" : "Vacation Dead-Rent Savings & Micro-Storage"}
+              {isHi
+                ? "छुट्टियों में डेड-रेंट बचत एवं स्टोरेज हैक्स"
+                : "Vacation Dead-Rent Savings & Micro-Storage"}
             </h3>
           </div>
 
@@ -410,32 +434,50 @@ export function KakadeoSurvivalGuide() {
               5
             </div>
             <h3 className="text-xl font-bold text-white">
-              {isHi ? "महत्वपूर्ण काकादेव हेल्पलाइन एवं इमरजेंसी संपर्क" : "Essential Kakadeo Emergency Helplines"}
+              {isHi
+                ? "महत्वपूर्ण काकादेव हेल्पलाइन एवं इमरजेंसी संपर्क"
+                : "Essential Kakadeo Emergency Helplines"}
             </h3>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs">
             <div className="p-3.5 rounded-xl bg-slate-950/80 border border-slate-800">
-              <span className="text-slate-400 block mb-1 font-bold">StashSaarthi Founder Hotline</span>
-              <a href="tel:+919369454350" className="text-emerald-400 font-mono font-bold text-sm hover:underline">
+              <span className="text-slate-400 block mb-1 font-bold">
+                StashSaarthi Founder Hotline
+              </span>
+              <a
+                href="tel:+919369454350"
+                className="text-emerald-400 font-mono font-bold text-sm hover:underline"
+              >
                 +91 9369454350
               </a>
             </div>
             <div className="p-3.5 rounded-xl bg-slate-950/80 border border-slate-800">
               <span className="text-slate-400 block mb-1 font-bold">Kakadeo Police Station</span>
-              <a href="tel:05122500100" className="text-cyan-400 font-mono font-bold text-sm hover:underline">
+              <a
+                href="tel:05122500100"
+                className="text-cyan-400 font-mono font-bold text-sm hover:underline"
+              >
                 0512-2500100
               </a>
             </div>
             <div className="p-3.5 rounded-xl bg-slate-950/80 border border-slate-800">
               <span className="text-slate-400 block mb-1 font-bold">Regency Hospital Kakadeo</span>
-              <a href="tel:05123081111" className="text-rose-400 font-mono font-bold text-sm hover:underline">
+              <a
+                href="tel:05123081111"
+                className="text-rose-400 font-mono font-bold text-sm hover:underline"
+              >
                 0512-3081111
               </a>
             </div>
             <div className="p-3.5 rounded-xl bg-slate-950/80 border border-slate-800">
-              <span className="text-slate-400 block mb-1 font-bold">CSJMU Student Support Cell</span>
-              <a href="tel:05122580044" className="text-amber-400 font-mono font-bold text-sm hover:underline">
+              <span className="text-slate-400 block mb-1 font-bold">
+                CSJMU Student Support Cell
+              </span>
+              <a
+                href="tel:05122580044"
+                className="text-amber-400 font-mono font-bold text-sm hover:underline"
+              >
                 0512-2580044
               </a>
             </div>

@@ -12,4 +12,3 @@ export type BookingPrefill = {
 };
 
 export type OpenBooking = (prefill?: BookingPrefill) => void;
-

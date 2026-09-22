@@ -40,17 +40,12 @@ export function registerServiceWorker(): () => void {
         if (!newWorker) return;
 
         newWorker.addEventListener("statechange", () => {
-          if (
-            newWorker.state === "activated" &&
-            navigator.serviceWorker.controller
-          ) {
+          if (newWorker.state === "activated" && navigator.serviceWorker.controller) {
             // A new SW is active and the old one is gone — the user should
             // reload to get the latest assets.  We don't force-reload; a
             // non-intrusive console log suffices for now.  A Sonner toast
             // can be wired here later.
-            console.info(
-              "[SW] New content available — reload for the latest version.",
-            );
+            console.info("[SW] New content available — reload for the latest version.");
           }
         });
       });

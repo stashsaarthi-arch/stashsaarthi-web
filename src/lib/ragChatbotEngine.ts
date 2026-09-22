@@ -56,7 +56,17 @@ export const FAQ_KNOWLEDGE_BASE: KnowledgeChunk[] = [
       "Perishable food, open liquids, unsealed cosmetics, weapons, inflammable liquids, cash, jewelry, and illegal contraband are strictly prohibited from vacation micro-storage. All bags are inspected and laser-sealed in student presence.",
     content_hi:
       "खराब होने वाला भोजन, खुली तरल वस्तुएं, हथियार, नकदी, सोना, ज्वलनशील पदार्थ और अवैध वस्तुएं वेकेशन स्टोरेज में सख्त वर्जित हैं।",
-    keywords: ["prohibited", "allowed", "rules", "banned", "cash", "gold", "food", "safety", "items"],
+    keywords: [
+      "prohibited",
+      "allowed",
+      "rules",
+      "banned",
+      "cash",
+      "gold",
+      "food",
+      "safety",
+      "items",
+    ],
     citation: "Stash Safety Charter #3 - Prohibited Items Policy",
   },
   {
@@ -194,7 +204,7 @@ const DEFAULT_CHUNK: KnowledgeChunk = FAQ_KNOWLEDGE_BASE[0]!;
 // TF-IDF & Cosine Similarity Matcher for RAG Retrieval
 export function retrieveRagContext(
   query: string,
-  topK: number = 3
+  topK: number = 3,
 ): { chunks: KnowledgeChunk[]; topScore: number } {
   const normalizedQuery = query.toLowerCase().trim();
   const queryTokens = normalizedQuery.split(/\W+/).filter((t) => t.length > 2);
@@ -268,7 +278,7 @@ export function retrieveRagContext(
 // Generate structured AI answer using RAG context
 export function generateRagResponse(
   userQuery: string,
-  language: "en" | "hi" = "en"
+  language: "en" | "hi" = "en",
 ): {
   text: string;
   confidenceScore: number;

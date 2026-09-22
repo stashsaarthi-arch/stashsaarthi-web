@@ -21,7 +21,7 @@ export interface ExtendedBreakQuote {
 export function calculateExtendedBreakDiscount(
   bags: number = 1,
   months: number = 1,
-  baseRatePerBag: number = 300
+  baseRatePerBag: number = 300,
 ): ExtendedBreakQuote {
   const safeBags = Math.max(1, bags);
   const safeMonths = Math.max(0.5, months);
@@ -52,11 +52,15 @@ export function calculateExtendedBreakDiscount(
 export function getExtendedBreakUpsellMessage(language: "en" | "hi" = "en") {
   const isHi = language === "hi";
   return {
-    title: isHi ? "🌴 एक्सटेंडेड ब्रेक ऑफर: 15% की विशेष छूट!" : "🌴 Extended Break Discount: Save 15%!",
+    title: isHi
+      ? "🌴 एक्सटेंडेड ब्रेक ऑफर: 15% की विशेष छूट!"
+      : "🌴 Extended Break Discount: Save 15%!",
     subtitle: isHi
       ? "3 या उससे अधिक महीनों के लिए स्टैश बुक करने पर कुल बिल पर 15% की इंस्टेंट बचत पाएं।"
       : "Book for 3+ months (semester & summer breaks) to unlock 15% OFF total storage fees.",
     upgradeCta: isHi ? "3 महीने चुनें (15% बचत)" : "Select 3 Months (Save 15%)",
-    activeBadge: isHi ? "🎉 एक्सटेंडेड ब्रेक डिस्काउंट लागू (-15%)" : "🎉 Extended Break 15% Discount Applied!",
+    activeBadge: isHi
+      ? "🎉 एक्सटेंडेड ब्रेक डिस्काउंट लागू (-15%)"
+      : "🎉 Extended Break 15% Discount Applied!",
   };
 }

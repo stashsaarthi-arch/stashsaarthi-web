@@ -1,4 +1,11 @@
-import React, { createContext, useContext, useState, useEffect, useCallback, ReactNode } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+  ReactNode,
+} from "react";
 import { CheckCircle2, AlertTriangle, Info, ShieldAlert, Loader2, X } from "lucide-react";
 
 export type ToastType = "success" | "error" | "info" | "warning" | "loading";
@@ -42,7 +49,9 @@ const notifyListeners = () => {
 const playToastChime = (type: ToastType) => {
   if (typeof window === "undefined") return;
   try {
-    const AudioContext = window.AudioContext || (window as unknown as { webkitAudioContext: typeof window.AudioContext }).webkitAudioContext;
+    const AudioContext =
+      window.AudioContext ||
+      (window as unknown as { webkitAudioContext: typeof window.AudioContext }).webkitAudioContext;
     if (!AudioContext) return;
     const ctx = new AudioContext();
 
@@ -133,7 +142,11 @@ export const toast = {
   },
   promise: async <T,>(
     promise: Promise<T>,
-    msgs: { loading: ReactNode; success: ReactNode | ((data: T) => ReactNode); error: ReactNode | ((err: unknown) => ReactNode) }
+    msgs: {
+      loading: ReactNode;
+      success: ReactNode | ((data: T) => ReactNode);
+      error: ReactNode | ((err: unknown) => ReactNode);
+    },
   ): Promise<T> => {
     const id = toast.loading(msgs.loading);
     try {
@@ -186,7 +199,10 @@ export const ToastProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   );
 };
 
-const ToastContainer: React.FC<{ toasts: ToastItem[]; onDismiss: (id: string) => void }> = ({ toasts, onDismiss }) => {
+const ToastContainer: React.FC<{ toasts: ToastItem[]; onDismiss: (id: string) => void }> = ({
+  toasts,
+  onDismiss,
+}) => {
   if (toasts.length === 0) return null;
 
   return (
@@ -202,7 +218,10 @@ const ToastContainer: React.FC<{ toasts: ToastItem[]; onDismiss: (id: string) =>
   );
 };
 
-const ToastCard: React.FC<{ toast: ToastItem; onDismiss: () => void }> = ({ toast: t, onDismiss }) => {
+const ToastCard: React.FC<{ toast: ToastItem; onDismiss: () => void }> = ({
+  toast: t,
+  onDismiss,
+}) => {
   const [progress, setProgress] = useState(100);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -286,7 +305,9 @@ const ToastCard: React.FC<{ toast: ToastItem; onDismiss: () => void }> = ({ toas
         <div className="pt-0.5">{renderIcon()}</div>
         <div className="flex-1 min-w-0">
           <div className="text-sm font-semibold text-white leading-snug">{t.title}</div>
-          {t.description && <div className="text-xs text-slate-300 mt-0.5 leading-normal">{t.description}</div>}
+          {t.description && (
+            <div className="text-xs text-slate-300 mt-0.5 leading-normal">{t.description}</div>
+          )}
 
           {t.action && (
             <div className="mt-2.5 flex items-center gap-2">

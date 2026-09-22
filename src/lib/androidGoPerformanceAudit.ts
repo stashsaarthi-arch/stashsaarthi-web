@@ -26,7 +26,11 @@ export interface AndroidGoPerformanceAuditReport {
   passedCount: number;
   totalCount: number;
   assertions: ComponentPerfAssertion[];
-  deviceClassification: "Android Go (Ultra Budget)" | "Low-Tier Android (2GB RAM)" | "Mid-Range / Modern" | "Desktop / High Spec";
+  deviceClassification:
+    | "Android Go (Ultra Budget)"
+    | "Low-Tier Android (2GB RAM)"
+    | "Mid-Range / Modern"
+    | "Desktop / High Spec";
 }
 
 /**
@@ -35,7 +39,8 @@ export interface AndroidGoPerformanceAuditReport {
 export function runAndroidGoPerformanceAudit(): AndroidGoPerformanceAuditReport {
   const diag = diagnoseAndroidGo();
   const lowData = isLowDataModeEnabled();
-  const isTouch = typeof window !== "undefined" && ("ontouchstart" in window || navigator.maxTouchPoints > 0);
+  const isTouch =
+    typeof window !== "undefined" && ("ontouchstart" in window || navigator.maxTouchPoints > 0);
   const root = typeof document !== "undefined" ? document.documentElement : null;
 
   const assertions: ComponentPerfAssertion[] = [];
@@ -68,7 +73,10 @@ export function runAndroidGoPerformanceAudit(): AndroidGoPerformanceAuditReport 
   });
 
   // 3. WebGL Canvas 2D Fallback & Context Loss Recovery
-  const isWebGLDisabled = lowData || root?.getAttribute("data-webgl-supported") === "false" || root?.classList.contains("legacy-android-fallback");
+  const isWebGLDisabled =
+    lowData ||
+    root?.getAttribute("data-webgl-supported") === "false" ||
+    root?.classList.contains("legacy-android-fallback");
   assertions.push({
     id: "webgl-2d-fallback-guard",
     name: "WebGL Canvas 2D CSS Fallback",
@@ -81,7 +89,8 @@ export function runAndroidGoPerformanceAudit(): AndroidGoPerformanceAuditReport 
   });
 
   // 4. GSAP & Scroll Physics Concurrency Throttle
-  const isScrollThrottled = diag.shouldThrottleAnimations || lowData || root?.classList.contains("android-go-mode");
+  const isScrollThrottled =
+    diag.shouldThrottleAnimations || lowData || root?.classList.contains("android-go-mode");
   assertions.push({
     id: "gsap-scroll-throttle-guard",
     name: "GSAP / ScrollTrigger Physics Throttle",
@@ -94,9 +103,10 @@ export function runAndroidGoPerformanceAudit(): AndroidGoPerformanceAuditReport 
   });
 
   // 5. Responsive Viewport Horizontal Overflow Protection
-  const hasHorizontalScroll = typeof document !== "undefined"
-    ? document.documentElement.scrollWidth > document.documentElement.clientWidth
-    : false;
+  const hasHorizontalScroll =
+    typeof document !== "undefined"
+      ? document.documentElement.scrollWidth > document.documentElement.clientWidth
+      : false;
   assertions.push({
     id: "viewport-overflow-guard",
     name: "Mobile Viewport (<360px) Overflow Guard",
@@ -109,9 +119,12 @@ export function runAndroidGoPerformanceAudit(): AndroidGoPerformanceAuditReport 
   });
 
   const passedCount = assertions.filter((a) => a.passed).length;
-  const overallScore = Math.round(assertions.reduce((acc, curr) => acc + curr.score, 0) / assertions.length);
+  const overallScore = Math.round(
+    assertions.reduce((acc, curr) => acc + curr.score, 0) / assertions.length,
+  );
 
-  let deviceClassification: AndroidGoPerformanceAuditReport["deviceClassification"] = "Desktop / High Spec";
+  let deviceClassification: AndroidGoPerformanceAuditReport["deviceClassification"] =
+    "Desktop / High Spec";
   if (diag.isAndroidGo) {
     deviceClassification = "Android Go (Ultra Budget)";
   } else if (memoryGb && memoryGb <= 2) {
@@ -135,7 +148,9 @@ export function runAndroidGoPerformanceAudit(): AndroidGoPerformanceAuditReport 
 /**
  * Simulates a frame rate benchmark test over a given duration (default 1000ms).
  */
-export async function measureAndroidGoFpsBenchmark(durationMs: number = 1000): Promise<{ avgFps: number; minFps: number; frameTimeJitterMs: number }> {
+export async function measureAndroidGoFpsBenchmark(
+  durationMs: number = 1000,
+): Promise<{ avgFps: number; minFps: number; frameTimeJitterMs: number }> {
   if (typeof window === "undefined" || !("requestAnimationFrame" in window)) {
     return { avgFps: 60, minFps: 60, frameTimeJitterMs: 0 };
   }

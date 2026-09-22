@@ -1,6 +1,6 @@
 /**
  * StashSaarthi Hyperlocal Campus Navigation & Back-Alley Entrance Guide Engine
- * 
+ *
  * Provides verified GPS coordinates, native Google/Apple Maps walking direction URLs,
  * and step-by-step back-alley entrance instructions for Kakadeo, Kalyanpur, and IITK nodes.
  */
@@ -53,8 +53,10 @@ export const KANPUR_GROUND_NODES: GroundStashNode[] = [
     lng: 80.3061,
     mainRoadLandmark: "Opposite Sharma Tea Stall, Chhapeda Pulia Main Road",
     mainRoadLandmark_hi: "शर्मा चाय स्टॉल के सामने, छापेड़ा पुलिया मुख्य मार्ग",
-    backAlleyGuide: "📍 Back-Alley Entrance: Google Maps stops at Chhapeda Pulia main road. Take narrow Gali #3 behind Sharma Tea Stall, walk 40 meters straight. Entrance is at the green double-gate on left with StashSaarthi Seal Board #KNP-892.",
-    backAlleyGuide_hi: "📍 संकरी गली मार्ग: गूगल मैप्स मुख्य सड़क छापेड़ा पुलिया पर रुकता है। शर्मा चाय स्टॉल के पीछे गली नं. 3 में प्रवेश करें, 40 मीटर सीधे चलें। बाईं ओर हरे रंग के डबल गेट पर सार्थी स्टैश बोर्ड #KNP-892 लगा है।",
+    backAlleyGuide:
+      "📍 Back-Alley Entrance: Google Maps stops at Chhapeda Pulia main road. Take narrow Gali #3 behind Sharma Tea Stall, walk 40 meters straight. Entrance is at the green double-gate on left with StashSaarthi Seal Board #KNP-892.",
+    backAlleyGuide_hi:
+      "📍 संकरी गली मार्ग: गूगल मैप्स मुख्य सड़क छापेड़ा पुलिया पर रुकता है। शर्मा चाय स्टॉल के पीछे गली नं. 3 में प्रवेश करें, 40 मीटर सीधे चलें। बाईं ओर हरे रंग के डबल गेट पर सार्थी स्टैश बोर्ड #KNP-892 लगा है।",
     stepByStepDirections: [
       {
         step: 1,
@@ -73,8 +75,10 @@ export const KANPUR_GROUND_NODES: GroundStashNode[] = [
       },
       {
         step: 4,
-        instruction: "Look for Green Double Gate with 'StashSaarthi Verified Host #KNP-892' Laser QR Badge.",
-        instruction_hi: "'सार्थी स्टैश वेरीफाइड होस्ट #KNP-892' लेजर क्यूआर बैज वाला हरा डबल गेट देखें।",
+        instruction:
+          "Look for Green Double Gate with 'StashSaarthi Verified Host #KNP-892' Laser QR Badge.",
+        instruction_hi:
+          "'सार्थी स्टैश वेरीफाइड होस्ट #KNP-892' लेजर क्यूआर बैज वाला हरा डबल गेट देखें।",
       },
     ],
     contactPhone: "+919369454350",
@@ -98,8 +102,10 @@ export const KANPUR_GROUND_NODES: GroundStashNode[] = [
     lng: 80.2325,
     mainRoadLandmark: "Nankari Handpump & Juice Corner near Gate 1",
     mainRoadLandmark_hi: "गेट 1 के पास नानकारी हैंडपंप व जूस कॉर्नर",
-    backAlleyGuide: "📍 Campus Back-Gate Navigation: From Gate 1 Nankari side exit, walk past the Handpump, take the left dirt lane behind Saini Grocery. Storage facility is Verified PG Owner Host Residence #NK-42 (2-storey brick house with ramp).",
-    backAlleyGuide_hi: "📍 कैंपस बैक-गेट नेविगेशन: गेट 1 नानकारी साइड से हैंडपंप के आगे चलें, सैनी किराना के पीछे बाईं ओर मुड़ें। होस्ट निवास #NK-42 (रैंप वाला 2-मंजिला लाल ईंट का मकान) है।",
+    backAlleyGuide:
+      "📍 Campus Back-Gate Navigation: From Gate 1 Nankari side exit, walk past the Handpump, take the left dirt lane behind Saini Grocery. Storage facility is Verified PG Owner Host Residence #NK-42 (2-storey brick house with ramp).",
+    backAlleyGuide_hi:
+      "📍 कैंपस बैक-गेट नेविगेशन: गेट 1 नानकारी साइड से हैंडपंप के आगे चलें, सैनी किराना के पीछे बाईं ओर मुड़ें। होस्ट निवास #NK-42 (रैंप वाला 2-मंजिला लाल ईंट का मकान) है।",
     stepByStepDirections: [
       {
         step: 1,
@@ -138,8 +144,10 @@ export const KANPUR_GROUND_NODES: GroundStashNode[] = [
     lng: 80.2588,
     mainRoadLandmark: "Near Indian Oil Petrol Pump, Kalyanpur GT Road",
     mainRoadLandmark_hi: "इंडियन ऑयल पेट्रोल पंप के पास, कल्याणपुर जीटी रोड",
-    backAlleyGuide: "📍 Residential Alley Guide: Turn into Awas Vikas Sector-A lane behind Petrol Pump. Take 1st right curve. Look for White Villa with Neem tree and StashPass scan sign.",
-    backAlleyGuide_hi: "📍 आवासीय गली गाइड: पेट्रोल पंप के पीछे आवास विकास सेक्टर-ए लेन में मुड़ें। पहली दाईं मोड़ लें। नीम के पेड़ वाला सफेद विला देखें।",
+    backAlleyGuide:
+      "📍 Residential Alley Guide: Turn into Awas Vikas Sector-A lane behind Petrol Pump. Take 1st right curve. Look for White Villa with Neem tree and StashPass scan sign.",
+    backAlleyGuide_hi:
+      "📍 आवासीय गली गाइड: पेट्रोल पंप के पीछे आवास विकास सेक्टर-ए लेन में मुड़ें। पहली दाईं मोड़ लें। नीम के पेड़ वाला सफेद विला देखें।",
     stepByStepDirections: [
       {
         step: 1,
@@ -178,8 +186,10 @@ export const KANPUR_GROUND_NODES: GroundStashNode[] = [
     lng: 80.3152,
     mainRoadLandmark: "Near Durga Temple, Nawabganj Market",
     mainRoadLandmark_hi: "दुर्गा मंदिर के पास, नवाबगंज बाजार",
-    backAlleyGuide: "📍 Entrance Guide: Pass Durga Temple main gate, enter Temple lane, house is second on right (Brown Gate #NG-5).",
-    backAlleyGuide_hi: "📍 प्रवेश गाइड: दुर्गा मंदिर मुख्य द्वार पार करें, मंदिर लेन में प्रवेश करें, दूसरा मकान दाईं ओर (भूरा गेट #NG-5) है।",
+    backAlleyGuide:
+      "📍 Entrance Guide: Pass Durga Temple main gate, enter Temple lane, house is second on right (Brown Gate #NG-5).",
+    backAlleyGuide_hi:
+      "📍 प्रवेश गाइड: दुर्गा मंदिर मुख्य द्वार पार करें, मंदिर लेन में प्रवेश करें, दूसरा मकान दाईं ओर (भूरा गेट #NG-5) है।",
     stepByStepDirections: [
       {
         step: 1,

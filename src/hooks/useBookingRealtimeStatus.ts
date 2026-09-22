@@ -8,10 +8,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 
 export type BookingLifecycleState =
-  | "item_received"
-  | "in_secure_locker"
-  | "ready_for_retrieval"
-  | "completed";
+  "item_received" | "in_secure_locker" | "ready_for_retrieval" | "completed";
 
 export interface LifecycleStepInfo {
   state: BookingLifecycleState;
@@ -46,7 +43,8 @@ export const LIFECYCLE_STEPS: Record<BookingLifecycleState, LifecycleStepInfo> =
     state: "ready_for_retrieval",
     labelEn: "Ready for Retrieval",
     labelHi: "पिकअप हेतु तैयार",
-    badgeStyle: "bg-emerald-500/25 text-emerald-300 border-emerald-400/50 shadow-emerald-500/20 animate-pulse",
+    badgeStyle:
+      "bg-emerald-500/25 text-emerald-300 border-emerald-400/50 shadow-emerald-500/20 animate-pulse",
     icon: "⚡",
     descriptionEn: "Prepped at exit bay — Present QR pass for instant pickup",
     descriptionHi: "पिकअप बे पर तैयार — त्वरित पिकअप हेतु QR पास दिखाएं",
@@ -62,7 +60,10 @@ export const LIFECYCLE_STEPS: Record<BookingLifecycleState, LifecycleStepInfo> =
   },
 };
 
-export function getInitialLifecycleState(submittedAt: string, status?: string): BookingLifecycleState {
+export function getInitialLifecycleState(
+  submittedAt: string,
+  status?: string,
+): BookingLifecycleState {
   if (status === "completed") return "completed";
   const diffMs = Date.now() - new Date(submittedAt).getTime();
   const mins = diffMs / (1000 * 60);
@@ -72,9 +73,13 @@ export function getInitialLifecycleState(submittedAt: string, status?: string): 
   return "ready_for_retrieval";
 }
 
-export function useBookingRealtimeStatus(bookingId: string, initialSubmittedAt: string, currentStatus?: string) {
+export function useBookingRealtimeStatus(
+  bookingId: string,
+  initialSubmittedAt: string,
+  currentStatus?: string,
+) {
   const [lifecycleState, setLifecycleState] = useState<BookingLifecycleState>(() =>
-    getInitialLifecycleState(initialSubmittedAt, currentStatus)
+    getInitialLifecycleState(initialSubmittedAt, currentStatus),
   );
   const [isRealtimeActive, setIsRealtimeActive] = useState<boolean>(false);
 
@@ -96,7 +101,7 @@ export function useBookingRealtimeStatus(bookingId: string, initialSubmittedAt: 
           if (payload.new && payload.new["lifecycle_state"]) {
             setLifecycleState(payload.new["lifecycle_state"] as BookingLifecycleState);
           }
-        }
+        },
       )
       .subscribe((status) => {
         if (status === "SUBSCRIBED") {
@@ -135,6 +140,6 @@ export function dispatchBookingStatusUpdate(bookingId: string, state: BookingLif
   window.dispatchEvent(
     new CustomEvent("stashsaarthi:status-update", {
       detail: { bookingId, state },
-    })
+    }),
   );
 }

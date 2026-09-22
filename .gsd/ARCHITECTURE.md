@@ -19,25 +19,30 @@ StashSaarthi is a zero-brokerage intergenerational living and micro-storage plat
 ## Components
 
 ### Auth
+
 - **Purpose:** Handles user authentication (Google OAuth, custom email/password).
 - **Location:** `src/components/auth`
 - **Dependencies:** `@supabase/supabase-js`, `@react-oauth/google`
 
 ### Stash (Micro-Storage & Rooms)
+
 - **Purpose:** Components related to the core offering, inventory display, booking, and onboarding.
 - **Location:** `src/components/stash`
 - **Dependencies:** `lucide-react`, `framer-motion` (implied by motion/gsap), internal UI components.
 
 ### Host
+
 - **Purpose:** Host-facing components (revenue dashboard, verification, etc).
 - **Location:** `src/components/host` and `src/pages/host`
 
 ### Core UI
+
 - **Purpose:** Reusable atomic UI components (buttons, dialogs, form elements).
 - **Location:** `src/components/ui`
 - **Dependencies:** Radix UI primitives, Tailwind CSS.
 
 ### Backend / Supabase
+
 - **Purpose:** Edge functions for specific backend logic.
 - **Location:** `supabase/functions/` (generate-invoice, verify-host-photo)
 - **Dependencies:** Deno / Supabase runtime.
@@ -51,12 +56,12 @@ StashSaarthi is a zero-brokerage intergenerational living and micro-storage plat
 
 ## Integration Points
 
-| Service | Type | Purpose |
-|---------|------|---------|
-| Supabase | Database/Auth | Core backend, user management, relational data |
-| Firebase | Cloud Service | Potentially used for notifications or alternate services |
-| Cloudinary | Media Storage | Image optimization and delivery |
-| Google OAuth | Auth | Single Sign-On |
+| Service      | Type          | Purpose                                                  |
+| ------------ | ------------- | -------------------------------------------------------- |
+| Supabase     | Database/Auth | Core backend, user management, relational data           |
+| Firebase     | Cloud Service | Potentially used for notifications or alternate services |
+| Cloudinary   | Media Storage | Image optimization and delivery                          |
+| Google OAuth | Auth          | Single Sign-On                                           |
 
 ## Technical Debt
 

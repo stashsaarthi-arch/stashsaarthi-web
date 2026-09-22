@@ -33,7 +33,7 @@ function computeSignature(payloadStr: string): string {
     hash = (hash << 5) - hash + char;
     hash |= 0;
   }
-  const hex = Math.abs(hash).toString(16).padStart(8, '0');
+  const hex = Math.abs(hash).toString(16).padStart(8, "0");
   return `SIG${hex.toUpperCase()}`;
 }
 
@@ -45,7 +45,7 @@ export function generateRunnerOtp(taskId: string): string {
   for (let i = 0; i < taskId.length; i++) {
     hash = (hash * 33) ^ taskId.charCodeAt(i);
   }
-  const num = Math.abs(hash) % 900000 + 100000;
+  const num = (Math.abs(hash) % 900000) + 100000;
   return num.toString();
 }
 
@@ -56,14 +56,13 @@ export function generateEncryptedSmsPayload(
   taskId: string,
   runnerId: string,
   otp: string,
-  tamperSeal: string
+  tamperSeal: string,
 ): string {
   const timestamp = Date.now();
   const rawPayload = `${taskId}|${runnerId}|${otp}|${tamperSeal}|${timestamp}`;
-  const base64Data = typeof btoa !== 'undefined'
-    ? btoa(rawPayload)
-    : Buffer.from(rawPayload).toString('base64');
-  
+  const base64Data =
+    typeof btoa !== "undefined" ? btoa(rawPayload) : Buffer.from(rawPayload).toString("base64");
+
   const sig = computeSignature(base64Data);
   return `STASH-SMS-OTP:v1:${base64Data}:${sig}`;
 }
@@ -72,28 +71,28 @@ export function generateEncryptedSmsPayload(
  * Parse and verify an incoming raw encrypted SMS payload packet
  */
 export function parseAndVerifySmsPayload(rawSmsBody: string): SmsVerificationResult {
-  if (!rawSmsBody || !rawSmsBody.startsWith('STASH-SMS-OTP:v1:')) {
+  if (!rawSmsBody || !rawSmsBody.startsWith("STASH-SMS-OTP:v1:")) {
     return {
       valid: false,
-      message: 'Invalid SMS payload format. Must start with STASH-SMS-OTP:v1:',
+      message: "Invalid SMS payload format. Must start with STASH-SMS-OTP:v1:",
     };
   }
 
-  const parts = rawSmsBody.split(':');
+  const parts = rawSmsBody.split(":");
   if (parts.length !== 4) {
     return {
       valid: false,
-      message: 'Malformed SMS packet structure.',
+      message: "Malformed SMS packet structure.",
     };
   }
 
-  const base64Data = parts[2] || '';
-  const signature = parts[3] || '';
+  const base64Data = parts[2] || "";
+  const signature = parts[3] || "";
 
   if (!base64Data || !signature) {
     return {
       valid: false,
-      message: 'Invalid SMS packet fields.',
+      message: "Invalid SMS packet fields.",
     };
   }
 
@@ -102,24 +101,25 @@ export function parseAndVerifySmsPayload(rawSmsBody: string): SmsVerificationRes
   if (signature !== expectedSig) {
     return {
       valid: false,
-      message: 'Cryptographic signature mismatch! Packet may be tampered with.',
+      message: "Cryptographic signature mismatch! Packet may be tampered with.",
     };
   }
 
   // 2. Decode Base64 payload
   try {
-    const decoded = typeof atob !== 'undefined'
-      ? atob(base64Data)
-      : Buffer.from(base64Data, 'base64').toString('utf8');
-    
-    const [taskId = '', runnerId = '', otp = '', tamperSeal = '', tsStr = '0'] = decoded.split('|');
+    const decoded =
+      typeof atob !== "undefined"
+        ? atob(base64Data)
+        : Buffer.from(base64Data, "base64").toString("utf8");
+
+    const [taskId = "", runnerId = "", otp = "", tamperSeal = "", tsStr = "0"] = decoded.split("|");
     const timestamp = parseInt(tsStr, 10);
 
     // 3. Expiration Check
     if (Date.now() - timestamp > OTP_EXPIRY_MS) {
       return {
         valid: false,
-        message: 'SMS OTP packet has expired (>30 mins).',
+        message: "SMS OTP packet has expired (>30 mins).",
       };
     }
 
@@ -134,13 +134,13 @@ export function parseAndVerifySmsPayload(rawSmsBody: string): SmsVerificationRes
 
     return {
       valid: true,
-      message: 'SMS OTP packet verified successfully!',
+      message: "SMS OTP packet verified successfully!",
       packet,
     };
   } catch (err) {
     return {
       valid: false,
-      message: 'Failed to decode base64 SMS payload.',
+      message: "Failed to decode base64 SMS payload.",
     };
   }
 }
@@ -150,7 +150,7 @@ export function parseAndVerifySmsPayload(rawSmsBody: string): SmsVerificationRes
  */
 export function verifyRunnerOtpSms(
   taskId: string,
-  inputOtp: string
+  inputOtp: string,
 ): { success: boolean; message: string } {
   const expectedOtp = generateRunnerOtp(taskId);
   if (inputOtp.trim() === expectedOtp) {
@@ -169,7 +169,7 @@ export function verifyRunnerOtpSms(
  * Format SMS link URI for native device trigger
  */
 export function getNativeSmsUri(phone: string, smsBody: string): string {
-  const cleanPhone = phone.replace(/\D/g, '');
-  const formattedPhone = cleanPhone.startsWith('91') ? `+${cleanPhone}` : `+91${cleanPhone}`;
+  const cleanPhone = phone.replace(/\D/g, "");
+  const formattedPhone = cleanPhone.startsWith("91") ? `+${cleanPhone}` : `+91${cleanPhone}`;
   return `sms:${formattedPhone}?body=${encodeURIComponent(smsBody)}`;
 }

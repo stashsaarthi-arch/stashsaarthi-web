@@ -10,7 +10,7 @@ const firebaseConfig = {
   storageBucket: import.meta.env["VITE_FIREBASE_STORAGE_BUCKET"] as string,
   messagingSenderId: import.meta.env["VITE_FIREBASE_MESSAGING_SENDER_ID"] as string,
   appId: import.meta.env["VITE_FIREBASE_APP_ID"] as string,
-  measurementId: import.meta.env["VITE_FIREBASE_MEASUREMENT_ID"] as string
+  measurementId: import.meta.env["VITE_FIREBASE_MEASUREMENT_ID"] as string,
 };
 
 // Initialize Firebase only if it hasn't been initialized already
@@ -21,7 +21,7 @@ const auth = getAuth(app);
 let db: ReturnType<typeof getFirestore>;
 try {
   db = initializeFirestore(app, {
-    experimentalForceLongPolling: true
+    experimentalForceLongPolling: true,
   });
 } catch {
   db = getFirestore(app);

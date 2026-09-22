@@ -8,7 +8,13 @@
  * of inactivity, unless retained under statutory tax laws (7-year escrow requirement).
  */
 
-import { getLocalBookings, getWaitlistEntries, getMealOrders, getReviews, getSuggestions } from "./localSubmissions";
+import {
+  getLocalBookings,
+  getWaitlistEntries,
+  getMealOrders,
+  getReviews,
+  getSuggestions,
+} from "./localSubmissions";
 
 export interface DataRetentionCategory {
   id: string;
@@ -50,8 +56,10 @@ export const DATA_RETENTION_CATEGORIES: DataRetentionCategory[] = [
     retentionPeriodMonths: 18,
     statutoryBasis: "DPDP Act 2023 — Sec 12(3) & GDPR Art 5(1)(e)",
     autoPurgeEnabled: true,
-    descriptionEn: "Automatically purges student accounts and search logs with zero activity for 18 months (547 days).",
-    descriptionHi: "18 महीने (547 दिन) से निष्क्रिय छात्र खातों और खोज लॉग को स्वचालित रूप से हटाता है।",
+    descriptionEn:
+      "Automatically purges student accounts and search logs with zero activity for 18 months (547 days).",
+    descriptionHi:
+      "18 महीने (547 दिन) से निष्क्रिय छात्र खातों और खोज लॉग को स्वचालित रूप से हटाता है।",
   },
   {
     id: "waitlist_leads",
@@ -60,7 +68,8 @@ export const DATA_RETENTION_CATEGORIES: DataRetentionCategory[] = [
     retentionPeriodMonths: 18,
     statutoryBasis: "DPDP Act 2023 — Sec 6(1) Purpose Limitation",
     autoPurgeEnabled: true,
-    descriptionEn: "Deletes old phone numbers and email leads when no active booking occurs within 18 months.",
+    descriptionEn:
+      "Deletes old phone numbers and email leads when no active booking occurs within 18 months.",
     descriptionHi: "18 महीने में बुकिंग न होने पर पुराने फ़ोन नंबर और ईमेल लीड हटा देता है।",
   },
   {
@@ -70,8 +79,10 @@ export const DATA_RETENTION_CATEGORIES: DataRetentionCategory[] = [
     retentionPeriodMonths: 84, // 7 Years tax statutory requirement
     statutoryBasis: "Income Tax Act 1961 — Sec 44AA & GST Rules",
     autoPurgeEnabled: false,
-    descriptionEn: "Retained for 7 years as required by Indian tax statutes, anonymizing personal PII after 18 months.",
-    descriptionHi: "भारतीय कर कानूनों के तहत 7 साल तक सुरक्षित रखा जाता है, 18 महीने बाद PII को नामहीन किया जाता है।",
+    descriptionEn:
+      "Retained for 7 years as required by Indian tax statutes, anonymizing personal PII after 18 months.",
+    descriptionHi:
+      "भारतीय कर कानूनों के तहत 7 साल तक सुरक्षित रखा जाता है, 18 महीने बाद PII को नामहीन किया जाता है।",
   },
   {
     id: "telemetry_analytics",
@@ -80,8 +91,10 @@ export const DATA_RETENTION_CATEGORIES: DataRetentionCategory[] = [
     retentionPeriodMonths: 1, // 30 Days
     statutoryBasis: "StashSaarthi Privacy Charter 2026",
     autoPurgeEnabled: true,
-    descriptionEn: "Behavioral click and scroll timing telemetry is permanently flushed after 30 days.",
-    descriptionHi: "व्यवहार्य क्लिक और स्क्रॉल टाइमिंग टेलीमेट्री को 30 दिनों के बाद स्थायी रूप से साफ़ किया जाता है।",
+    descriptionEn:
+      "Behavioral click and scroll timing telemetry is permanently flushed after 30 days.",
+    descriptionHi:
+      "व्यवहार्य क्लिक और स्क्रॉल टाइमिंग टेलीमेट्री को 30 दिनों के बाद स्थायी रूप से साफ़ किया जाता है।",
   },
 ];
 
@@ -190,7 +203,9 @@ export function auditInactiveStudentData(): {
 /**
  * Execute automatic 18-month data retention purge across local stores
  */
-export function executeAutoPurge18Months(simulatedDaysThreshold: number = INACTIVE_DAYS_THRESHOLD): RetentionPurgeResult {
+export function executeAutoPurge18Months(
+  simulatedDaysThreshold: number = INACTIVE_DAYS_THRESHOLD,
+): RetentionPurgeResult {
   const audit = auditInactiveStudentData();
   const now = Date.now();
   const purgedDetails: Array<{ id: string; source: string; ageDays: number }> = [];
@@ -206,7 +221,9 @@ export function executeAutoPurge18Months(simulatedDaysThreshold: number = INACTI
       if (rawBookings) {
         const bookings = JSON.parse(rawBookings);
         const filtered = bookings.filter((b: any) => {
-          const ageDays = Math.floor((now - new Date(b.created_at || now).getTime()) / (1000 * 60 * 60 * 24));
+          const ageDays = Math.floor(
+            (now - new Date(b.created_at || now).getTime()) / (1000 * 60 * 60 * 24),
+          );
           if (ageDays >= simulatedDaysThreshold) {
             purgedDetails.push({ id: b.id, source: "ss_local_bookings", ageDays });
             bytesReclaimed += JSON.stringify(b).length;
@@ -222,7 +239,9 @@ export function executeAutoPurge18Months(simulatedDaysThreshold: number = INACTI
       if (rawWaitlist) {
         const waitlist = JSON.parse(rawWaitlist);
         const filtered = waitlist.filter((w: any) => {
-          const ageDays = Math.floor((now - new Date(w.created_at || now).getTime()) / (1000 * 60 * 60 * 24));
+          const ageDays = Math.floor(
+            (now - new Date(w.created_at || now).getTime()) / (1000 * 60 * 60 * 24),
+          );
           if (ageDays >= simulatedDaysThreshold) {
             purgedDetails.push({ id: w.id, source: "ss_local_waitlist", ageDays });
             bytesReclaimed += JSON.stringify(w).length;
@@ -238,7 +257,9 @@ export function executeAutoPurge18Months(simulatedDaysThreshold: number = INACTI
       if (rawMeals) {
         const meals = JSON.parse(rawMeals);
         const filtered = meals.filter((m: any) => {
-          const ageDays = Math.floor((now - new Date(m.created_at || now).getTime()) / (1000 * 60 * 60 * 24));
+          const ageDays = Math.floor(
+            (now - new Date(m.created_at || now).getTime()) / (1000 * 60 * 60 * 24),
+          );
           if (ageDays >= simulatedDaysThreshold) {
             purgedDetails.push({ id: m.id, source: "ss_local_meal_orders", ageDays });
             bytesReclaimed += JSON.stringify(m).length;
@@ -318,4 +339,3 @@ export function initAutoDataRetentionPurge(): RetentionPurgeResult | null {
     return null;
   }
 }
-

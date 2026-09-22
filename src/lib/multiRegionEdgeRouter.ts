@@ -85,7 +85,8 @@ class MultiRegionEdgeRouter {
     const active = this.regions.find((r) => r.id === this.activeRegionId) || this.regions[0];
     const activeName = active ? active.name : "South Asia (Mumbai)";
     const primaryNode = this.regions[0];
-    const isPrimaryHealthy = !this.simulatedPrimaryOutage && (primaryNode ? primaryNode.status === "HEALTHY" : true);
+    const isPrimaryHealthy =
+      !this.simulatedPrimaryOutage && (primaryNode ? primaryNode.status === "HEALTHY" : true);
 
     const totalLatency = this.regions.reduce((sum, r) => sum + r.latencyMs, 0);
     const avgLatency = Math.round(totalLatency / (this.regions.length || 1));
@@ -114,7 +115,11 @@ class MultiRegionEdgeRouter {
     if (outage) {
       this.totalFailovers += 1;
       this.activeRegionId = "ap-southeast-1";
-      this.emitFailoverEvent("ap-south-1", "ap-southeast-1", "Primary region outage simulated (503 Service Unavailable)");
+      this.emitFailoverEvent(
+        "ap-south-1",
+        "ap-southeast-1",
+        "Primary region outage simulated (503 Service Unavailable)",
+      );
     } else {
       this.activeRegionId = "ap-south-1";
       this.emitHealthEvent("ap-south-1", "Primary region restored to HEALTHY");
@@ -126,7 +131,7 @@ class MultiRegionEdgeRouter {
       window.dispatchEvent(
         new CustomEvent("stashsaarthi:edge-region-failover", {
           detail: { fromRegion, toRegion, reason, timestamp: new Date().toISOString() },
-        })
+        }),
       );
     }
   }
@@ -136,7 +141,7 @@ class MultiRegionEdgeRouter {
       window.dispatchEvent(
         new CustomEvent("stashsaarthi:edge-region-health", {
           detail: { regionId, message, timestamp: new Date().toISOString() },
-        })
+        }),
       );
     }
   }
@@ -147,7 +152,7 @@ class MultiRegionEdgeRouter {
   public async invokeFunction<T = Record<string, unknown>>(
     functionName: string,
     body: Record<string, unknown>,
-    options: { timeoutMs?: number } = {}
+    options: { timeoutMs?: number } = {},
   ): Promise<{
     data: T | null;
     error: Error | null;
@@ -192,7 +197,7 @@ class MultiRegionEdgeRouter {
         if (!error && data) {
           const endTime = performance.now();
           const latencyMs = Math.round(endTime - startTime);
-          
+
           this.activeRegionId = region.id;
           region.lastChecked = new Date().toISOString();
           region.latencyMs = latencyMs;
@@ -214,7 +219,7 @@ class MultiRegionEdgeRouter {
         const error = err instanceof Error ? err : new Error(String(err));
         lastError = error;
         region.status = "DEGRADED";
-        
+
         // Log failover attempt and continue to next candidate region
         if (i < candidateRegions.length - 1) {
           const nextRegion = candidateRegions[i + 1];
@@ -224,7 +229,7 @@ class MultiRegionEdgeRouter {
           this.emitFailoverEvent(
             region.id,
             nextId,
-            `Region ${region.name} failed (${error.message}). Auto-failing over to ${nextName}.`
+            `Region ${region.name} failed (${error.message}). Auto-failing over to ${nextName}.`,
           );
         }
       }

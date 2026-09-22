@@ -51,7 +51,8 @@ export const PRESET_PRICING_ZONES: PricingZone[] = [
     host_payout_rate_monthly: 210,
     peak_season_multiplier: 1.15,
     tiffin_base_rate: 95,
-    description: "High-demand proximity node adjacent to Hall 1-13 & GH-1 with expedited 10-min pickup SLA.",
+    description:
+      "High-demand proximity node adjacent to Hall 1-13 & GH-1 with expedited 10-min pickup SLA.",
   },
   {
     zone_code: "KAKADEO_COACHING",
@@ -87,7 +88,8 @@ export const PRESET_PRICING_ZONES: PricingZone[] = [
     host_payout_rate_monthly: 160,
     peak_season_multiplier: 1.0,
     tiffin_base_rate: 85,
-    description: "Budget-friendly residential cluster with spacious verified PG owner host storage capacity.",
+    description:
+      "Budget-friendly residential cluster with spacious verified PG owner host storage capacity.",
   },
   {
     zone_code: "SWAROOP_NAGAR",
@@ -142,7 +144,8 @@ export function calculateLocationPricingQuote({
 
   // Calculate rate per bag rounded to nearest ₹5
   const surge = campus.toLowerCase().includes("iit") ? 1.15 : 1.0;
-  const rawRate = matchedZone.base_storage_rate_monthly * matchedZone.peak_season_multiplier * surge;
+  const rawRate =
+    matchedZone.base_storage_rate_monthly * matchedZone.peak_season_multiplier * surge;
   const effectiveRate = Math.round(rawRate / 5) * 5;
 
   const totalStashCost = Math.round(safeBags * effectiveRate * safeMonths);
@@ -172,7 +175,7 @@ export function calculateLocationPricingQuote({
  * Async fetch for dynamic location pricing tier from Supabase RPC, falling back to local engine.
  */
 export async function fetchLocationPricingQuoteFromSupabase(
-  params: LocationQuoteParams
+  params: LocationQuoteParams,
 ): Promise<DynamicPricingQuote> {
   try {
     const { data, error } = await supabase.rpc("get_location_pricing_tier", {
@@ -211,7 +214,10 @@ export async function fetchLocationPricingQuoteFromSupabase(
       };
     }
   } catch (err) {
-    console.warn("Supabase location pricing RPC query failed, using local calculation fallback:", err);
+    console.warn(
+      "Supabase location pricing RPC query failed, using local calculation fallback:",
+      err,
+    );
   }
 
   // Fallback

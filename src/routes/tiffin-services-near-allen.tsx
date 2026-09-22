@@ -23,7 +23,8 @@ const ALLEN_CONFIG: HubConfig = {
   metaKeywords:
     "tiffin service near Allen coaching Kakadeo, Allen coaching Kanpur mess, home cooked thali near Allen Kakadeo, ghar ka swaad tiffin Allen Kanpur, cheap tiffin Kakadeo ₹50, Allen student thali Kanpur",
   chefName: "Dadi Maa Verified PG Owner Home Kitchen (Allen Lane)",
-  chefBio: "Managed by Verified PG Owner Host Kamla Arora Ji. Cooking light, nutritious, digestive home meals for Allen JEE & NEET aspirants in Kakadeo for over 12 years.",
+  chefBio:
+    "Managed by Verified PG Owner Host Kamla Arora Ji. Cooking light, nutritious, digestive home meals for Allen JEE & NEET aspirants in Kakadeo for over 12 years.",
   rating: 4.9,
   totalOrders: "14,200+",
   activeStudents: 380,
@@ -44,12 +45,18 @@ export const Route = createFileRoute("/tiffin-services-near-allen")({
       { name: "keywords", content: ALLEN_CONFIG.metaKeywords },
       { property: "og:title", content: ALLEN_CONFIG.metaTitle },
       { property: "og:description", content: ALLEN_CONFIG.metaDescription },
-      { property: "og:image", content: "https://stashsaarthi-web.vercel.app/images/og-student.png" },
+      {
+        property: "og:image",
+        content: "https://stashsaarthi-web.vercel.app/images/og-student.png",
+      },
       { property: "og:url", content: ALLEN_CONFIG.canonicalUrl },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: ALLEN_CONFIG.metaTitle },
       { name: "twitter:description", content: ALLEN_CONFIG.metaDescription },
-      { name: "twitter:image", content: "https://stashsaarthi-web.vercel.app/images/og-student.png" },
+      {
+        name: "twitter:image",
+        content: "https://stashsaarthi-web.vercel.app/images/og-student.png",
+      },
     ],
     links: [{ rel: "canonical", href: ALLEN_CONFIG.canonicalUrl }],
   }),

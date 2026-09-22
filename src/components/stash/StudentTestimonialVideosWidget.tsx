@@ -63,12 +63,15 @@ const TESTIMONIAL_VIDEOS: TestimonialVideo[] = [
     views: "14.2k",
     likes: 1240,
     rating: 5,
-    highlightQuoteHi: "काकादेव में ब्रोकर ने ₹6,000 ब्रोकरेज मांगा, स्टैशसारथी से ₹0 ब्रोकरेज में सीधा कमरा मिला!",
-    highlightQuoteEn: "Brokers in Kakadeo demanded ₹6,000 brokerage! StashSaarthi got me a room with ₹0 broker fee.",
+    highlightQuoteHi:
+      "काकादेव में ब्रोकर ने ₹6,000 ब्रोकरेज मांगा, स्टैशसारथी से ₹0 ब्रोकरेज में सीधा कमरा मिला!",
+    highlightQuoteEn:
+      "Brokers in Kakadeo demanded ₹6,000 brokerage! StashSaarthi got me a room with ₹0 broker fee.",
     scriptHi: {
       hook: "क्या आप भी कानपुर काकादेव आकर ब्रोकर को ₹6,000 फालतू देने वाले थे?",
       body: "मैंने एलन के पास कमरा ढूंढने के लिए 3 दिन चक्कर काटे। ब्रोकर 1 महीने का किराया मांग रहे थे। फिर मुझे स्टैशसारथी मिला। 100% डायरेक्ट ओनर कमरा, 0% ब्रोकरेज और 5,500 में फर्निश्ड कमरा!",
-      broll: "[दृश्य: काकादेव छपेड़ा पुलिया सड़क का क्लिप -> फोन पर स्टैशसारथी ऐप में रूम देखना -> कमरे की चाबी मिलना]",
+      broll:
+        "[दृश्य: काकादेव छपेड़ा पुलिया सड़क का क्लिप -> फोन पर स्टैशसारथी ऐप में रूम देखना -> कमरे की चाबी मिलना]",
       cta: "अभी bio लिंक पर क्लिक करें और बिना ब्रोकर के अपना छात्र कमरा बुक करें!",
     },
     scriptEn: {
@@ -90,12 +93,15 @@ const TESTIMONIAL_VIDEOS: TestimonialVideo[] = [
     views: "18.9k",
     likes: 1890,
     rating: 5,
-    highlightQuoteHi: "महीने का केवल ₹3,200 किराया + सुधा आंटी के हाथ का शाम का गरम खाना और परीक्षा मार्गदर्शन!",
-    highlightQuoteEn: "Only ₹3,200/mo rent + evening homestyle meals and exam mentoring from Principal Aunty!",
+    highlightQuoteHi:
+      "महीने का केवल ₹3,200 किराया + सुधा आंटी के हाथ का शाम का गरम खाना और परीक्षा मार्गदर्शन!",
+    highlightQuoteEn:
+      "Only ₹3,200/mo rent + evening homestyle meals and exam mentoring from Principal Aunty!",
     scriptHi: {
       hook: "हॉस्टल के बेकार खाने और अकेलेपन से परेशान? देखिए स्टैशसारथी कनेक्ट!",
       body: "मैं स्वरूप नगर में सुधा आंटी के घर रहता हूँ। मैं दिन में 1 घंटा उनके स्मार्ट फोन का काम देखता हूँ और बदले में मुझे ₹3,200 में निजी कमरा और घर जैसा खाना मिलता है!",
-      broll: "[दृश्य: शाम की चाय पर बातचीत -> विद्यार्थी लैपटॉप पर काम करते हुए -> आंटी द्वारा परोसा गया खाना]",
+      broll:
+        "[दृश्य: शाम की चाय पर बातचीत -> विद्यार्थी लैपटॉप पर काम करते हुए -> आंटी द्वारा परोसा गया खाना]",
       cta: "सारथी कनेक्ट पर अपनी अनुकूल वरिष्ठ जोड़ी खोजें!",
     },
     scriptEn: {
@@ -117,18 +123,22 @@ const TESTIMONIAL_VIDEOS: TestimonialVideo[] = [
     views: "11.5k",
     likes: 980,
     rating: 5,
-    highlightQuoteHi: "2 महीने की गर्मी की छुट्टियों में ₹12,000 कमरे का किराया देने की जगह केवल ₹600 में सामान स्टोर किया!",
-    highlightQuoteEn: "Instead of paying ₹12,000 dead rent during 2-month summer break, I stashed luggage for just ₹600!",
+    highlightQuoteHi:
+      "2 महीने की गर्मी की छुट्टियों में ₹12,000 कमरे का किराया देने की जगह केवल ₹600 में सामान स्टोर किया!",
+    highlightQuoteEn:
+      "Instead of paying ₹12,000 dead rent during 2-month summer break, I stashed luggage for just ₹600!",
     scriptHi: {
       hook: "छुट्टियों में खाली कमरे का किराया (Dead-Rent) बचाना चाहते हैं?",
       body: "हर साल मई-जून में सब बच्चे घर जाते समय 2 महीने का पूरा किराया भरते थे। स्टैशसारथी नोड पर मैंने अपना ट्रंक और बैग ₹300/माह में सील कराया और ₹11,400 सीधे बचाए!",
-      broll: "[दृश्य: बैग पर लेज़र बारकोड सील लगाना -> सीलबंद कस्टडी रसीद -> घर जाते हुए छात्र का स्माइल]",
+      broll:
+        "[दृश्य: बैग पर लेज़र बारकोड सील लगाना -> सीलबंद कस्टडी रसीद -> घर जाते हुए छात्र का स्माइल]",
       cta: "अपने हॉस्टल/कमरे का डेड-रेंट आज ही जीरो करें!",
     },
     scriptEn: {
       hook: "Want to eliminate dead vacation rent during summer break?",
       body: "Every year students wasted 2 full months rent while home for break. With StashSaarthi, I stashed my bags at ₹300/mo with tamper-proof seals and saved ₹11,400 cash!",
-      broll: "[Visual: Barcode seal application -> Digital custody pass -> Happy student traveling home]",
+      broll:
+        "[Visual: Barcode seal application -> Digital custody pass -> Happy student traveling home]",
       cta: "Zero your dead rent with StashSaarthi micro-storage!",
     },
   },
@@ -166,11 +176,17 @@ export const StudentTestimonialVideosWidget: React.FC = () => {
         <h2 className="text-2xl md:text-4xl font-extrabold text-white tracking-tight">
           {isHi ? (
             <>
-              सारथी स्पेस एवं कनेक्ट <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">छात्र टेस्टिमोनियल</span>
+              सारथी स्पेस एवं कनेक्ट{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">
+                छात्र टेस्टिमोनियल
+              </span>
             </>
           ) : (
             <>
-              Real Student Stories: <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">Saarthi Spaces & Connect</span>
+              Real Student Stories:{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">
+                Saarthi Spaces & Connect
+              </span>
             </>
           )}
         </h2>
@@ -240,10 +256,14 @@ export const StudentTestimonialVideosWidget: React.FC = () => {
                     variant="outline"
                     onClick={() => handleLike(video.id)}
                     className={`text-xs border-slate-700 font-semibold ${
-                      isLiked ? "bg-rose-500/20 text-rose-300 border-rose-500/40" : "bg-slate-800 text-slate-300"
+                      isLiked
+                        ? "bg-rose-500/20 text-rose-300 border-rose-500/40"
+                        : "bg-slate-800 text-slate-300"
                     }`}
                   >
-                    <Heart className={`w-3.5 h-3.5 mr-1 ${isLiked ? "fill-rose-400 text-rose-400" : ""}`} />
+                    <Heart
+                      className={`w-3.5 h-3.5 mr-1 ${isLiked ? "fill-rose-400 text-rose-400" : ""}`}
+                    />
                     {video.likes + (isLiked ? 1 : 0)}
                   </Button>
 
@@ -285,7 +305,9 @@ export const StudentTestimonialVideosWidget: React.FC = () => {
             </div>
 
             {/* Video Player Display */}
-            <div className={`relative aspect-[9/16] bg-gradient-to-br ${activeVideo.thumbnailGradient} p-4 flex flex-col justify-between`}>
+            <div
+              className={`relative aspect-[9/16] bg-gradient-to-br ${activeVideo.thumbnailGradient} p-4 flex flex-col justify-between`}
+            >
               <div className="flex items-center justify-between z-10">
                 <Badge className="bg-black/60 text-white text-[10px]">
                   {activeVideo.studentName} • {activeVideo.location}
@@ -322,7 +344,11 @@ export const StudentTestimonialVideosWidget: React.FC = () => {
                     size="sm"
                     onClick={() => {
                       setActiveVideo(null);
-                      toast.success(isHi ? "स्टैशसारथी रूम्स पेज पर निर्देशित!" : "Navigating to zero-brokerage rooms!");
+                      toast.success(
+                        isHi
+                          ? "स्टैशसारथी रूम्स पेज पर निर्देशित!"
+                          : "Navigating to zero-brokerage rooms!",
+                      );
                       const el = document.getElementById("solutions");
                       if (el) el.scrollIntoView({ behavior: "smooth" });
                     }}
@@ -356,23 +382,35 @@ export const StudentTestimonialVideosWidget: React.FC = () => {
 
             <div className="space-y-3 text-xs text-slate-300 max-h-[60vh] overflow-y-auto pr-1">
               <div className="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-1">
-                <span className="font-bold text-emerald-400 block">1. Video Hook (0:00 - 0:05)</span>
-                <p className="text-white italic">"{isHi ? showScriptModal.scriptHi.hook : showScriptModal.scriptEn.hook}"</p>
+                <span className="font-bold text-emerald-400 block">
+                  1. Video Hook (0:00 - 0:05)
+                </span>
+                <p className="text-white italic">
+                  "{isHi ? showScriptModal.scriptHi.hook : showScriptModal.scriptEn.hook}"
+                </p>
               </div>
 
               <div className="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-1">
-                <span className="font-bold text-cyan-400 block">2. Core Body & Value Prop (0:05 - 0:30)</span>
-                <p className="text-white">"{isHi ? showScriptModal.scriptHi.body : showScriptModal.scriptEn.body}"</p>
+                <span className="font-bold text-cyan-400 block">
+                  2. Core Body & Value Prop (0:05 - 0:30)
+                </span>
+                <p className="text-white">
+                  "{isHi ? showScriptModal.scriptHi.body : showScriptModal.scriptEn.body}"
+                </p>
               </div>
 
               <div className="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-1">
                 <span className="font-bold text-amber-400 block">3. B-Roll Camera Cues</span>
-                <p className="text-amber-200">{isHi ? showScriptModal.scriptHi.broll : showScriptModal.scriptEn.broll}</p>
+                <p className="text-amber-200">
+                  {isHi ? showScriptModal.scriptHi.broll : showScriptModal.scriptEn.broll}
+                </p>
               </div>
 
               <div className="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-1">
                 <span className="font-bold text-emerald-400 block">4. Call to Action (CTA)</span>
-                <p className="text-emerald-200 font-bold">{isHi ? showScriptModal.scriptHi.cta : showScriptModal.scriptEn.cta}</p>
+                <p className="text-emerald-200 font-bold">
+                  {isHi ? showScriptModal.scriptHi.cta : showScriptModal.scriptEn.cta}
+                </p>
               </div>
             </div>
 
@@ -381,9 +419,11 @@ export const StudentTestimonialVideosWidget: React.FC = () => {
                 size="sm"
                 onClick={() => {
                   navigator.clipboard.writeText(
-                    `HOOK: ${showScriptModal.scriptHi.hook}\nBODY: ${showScriptModal.scriptHi.body}\nCTA: ${showScriptModal.scriptHi.cta}`
+                    `HOOK: ${showScriptModal.scriptHi.hook}\nBODY: ${showScriptModal.scriptHi.body}\nCTA: ${showScriptModal.scriptHi.cta}`,
                   );
-                  toast.success(isHi ? "स्क्रिप्ट टेक्स्ट कॉपी हो गया!" : "Script copied to clipboard!");
+                  toast.success(
+                    isHi ? "स्क्रिप्ट टेक्स्ट कॉपी हो गया!" : "Script copied to clipboard!",
+                  );
                 }}
                 className="bg-slate-800 hover:bg-slate-700 text-emerald-300 font-bold text-xs"
               >

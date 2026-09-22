@@ -22,7 +22,7 @@ const record = generateTpaDigitalStampAgreement(
   sampleHost.name,
   sampleHost.phone,
   sampleHost.address,
-  sampleHost.campus
+  sampleHost.campus,
 );
 
 console.log("✔ Agreement Generated:");
@@ -31,7 +31,9 @@ console.log(`  - Stamp Certificate No: ${record.stampCertificateNo}`);
 console.log(`  - GRN No: ${record.grnNo}`);
 console.log(`  - Issued State: ${record.issuedState}`);
 console.log(`  - Stamp Duty Paid: ₹${record.stampDutyAmount}`);
-console.log(`  - Second Party (Host): ${record.secondPartyHostName} (${record.secondPartyHostPhone})`);
+console.log(
+  `  - Second Party (Host): ${record.secondPartyHostName} (${record.secondPartyHostPhone})`,
+);
 console.log(`  - SHA-256 Verification Hash: ${record.verificationHash}`);
 console.log(`  - Total Clauses: ${record.clauses.length}`);
 

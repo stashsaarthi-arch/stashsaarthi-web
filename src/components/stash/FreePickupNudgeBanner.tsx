@@ -30,15 +30,17 @@ export const FreePickupNudgeBanner: React.FC<FreePickupNudgeBannerProps> = ({
             : "bg-amber-500/10 border-amber-500/30 text-amber-400"
         } ${className}`}
       >
-        <Truck className={`w-3.5 h-3.5 ${status.unlocked ? "text-emerald-400" : "text-amber-400 animate-pulse"}`} />
+        <Truck
+          className={`w-3.5 h-3.5 ${status.unlocked ? "text-emerald-400" : "text-amber-400 animate-pulse"}`}
+        />
         <span>
           {status.unlocked
             ? isHi
               ? "100% मुफ़्त डोरस्टेप पिकअप"
               : "100% Free Doorstep Pickup"
             : isHi
-            ? `1 और बॉक्स जोड़ें = मुफ़्त पिकअप (₹${STANDARD_PICKUP_FEE} बचाएं)`
-            : `Add 1 box to unlock FREE pickup (Save ₹${STANDARD_PICKUP_FEE})`}
+              ? `1 और बॉक्स जोड़ें = मुफ़्त पिकअप (₹${STANDARD_PICKUP_FEE} बचाएं)`
+              : `Add 1 box to unlock FREE pickup (Save ₹${STANDARD_PICKUP_FEE})`}
         </span>
       </div>
     );
@@ -101,8 +103,8 @@ export const FreePickupNudgeBanner: React.FC<FreePickupNudgeBannerProps> = ({
                   ? status.unlockedMessageHi
                   : status.unlockedMessageEn
                 : isHi
-                ? status.nudgeMessageHi
-                : status.nudgeMessageEn}
+                  ? status.nudgeMessageHi
+                  : status.nudgeMessageEn}
             </p>
 
             {/* Progress Bar */}
@@ -120,15 +122,19 @@ export const FreePickupNudgeBanner: React.FC<FreePickupNudgeBannerProps> = ({
                 />
               </div>
               <p className="text-[10px] text-slate-400 flex justify-between">
-                <span>{isHi ? `${status.boxCount}/2 बॉक्स कार्ट में` : `${status.boxCount}/2 Boxes in Cart`}</span>
+                <span>
+                  {isHi
+                    ? `${status.boxCount}/2 बॉक्स कार्ट में`
+                    : `${status.boxCount}/2 Boxes in Cart`}
+                </span>
                 <span>
                   {status.unlocked
                     ? isHi
                       ? "डोरस्टेप शुल्क: ₹0 (माफ़)"
                       : "Doorstep Fee: ₹0 (Waived)"
                     : isHi
-                    ? `डोरस्टेप शुल्क: ₹${STANDARD_PICKUP_FEE}`
-                    : `Doorstep Fee: ₹${STANDARD_PICKUP_FEE}`}
+                      ? `डोरस्टेप शुल्क: ₹${STANDARD_PICKUP_FEE}`
+                      : `Doorstep Fee: ₹${STANDARD_PICKUP_FEE}`}
                 </span>
               </p>
             </div>

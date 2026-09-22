@@ -50,7 +50,7 @@ export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
       const url = new URL(request.url);
-      if (url.pathname === '/api/updateKyc') {
+      if (url.pathname === "/api/updateKyc") {
         return await handleUpdateKyc(request);
       }
 

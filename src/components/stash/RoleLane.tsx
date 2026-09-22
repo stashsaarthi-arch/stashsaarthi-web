@@ -20,7 +20,13 @@ import type { OpenBooking, Role } from "./types";
 import { AnimatedStat } from "./AnimatedStat";
 import { useLanguage } from "@/context/LanguageContext";
 
-export const RoleLane = memo(function RoleLane({ role, onBook }: { role: Role; onBook: OpenBooking }) {
+export const RoleLane = memo(function RoleLane({
+  role,
+  onBook,
+}: {
+  role: Role;
+  onBook: OpenBooking;
+}) {
   const { language, t } = useLanguage();
   const [hostSpace, setHostSpace] = useState<number>(33); // 0-100%
 

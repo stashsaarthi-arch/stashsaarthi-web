@@ -21,7 +21,11 @@ test.describe("StashSaarthi Core Booking Flow E2E Suite", () => {
 
   test("2. Opens 6-service booking modal and calculates pricing dynamically", async ({ page }) => {
     // Trigger booking modal via any primary action button
-    const bookButton = page.locator("button:has-text('Book Storage'), button:has-text('Explore'), button:has-text('Get Priority Access')").first();
+    const bookButton = page
+      .locator(
+        "button:has-text('Book Storage'), button:has-text('Explore'), button:has-text('Get Priority Access')",
+      )
+      .first();
     await expect(bookButton).toBeVisible();
     await bookButton.click();
 
@@ -44,9 +48,13 @@ test.describe("StashSaarthi Core Booking Flow E2E Suite", () => {
     }
   });
 
-  test("3. Form validation blocks invalid submissions and proceeds on valid input", async ({ page }) => {
+  test("3. Form validation blocks invalid submissions and proceeds on valid input", async ({
+    page,
+  }) => {
     // Open modal
-    const bookButton = page.locator("button:has-text('Book Storage'), button:has-text('Explore')").first();
+    const bookButton = page
+      .locator("button:has-text('Book Storage'), button:has-text('Explore')")
+      .first();
     await bookButton.click();
 
     // Fill contact details
@@ -66,9 +74,13 @@ test.describe("StashSaarthi Core Booking Flow E2E Suite", () => {
     }
   });
 
-  test("4. Escrow payment step displays QR code, terms waiver, and copy UPI trigger", async ({ page }) => {
+  test("4. Escrow payment step displays QR code, terms waiver, and copy UPI trigger", async ({
+    page,
+  }) => {
     // Open modal and navigate to Step 2
-    const bookButton = page.locator("button:has-text('Book Storage'), button:has-text('Explore')").first();
+    const bookButton = page
+      .locator("button:has-text('Book Storage'), button:has-text('Explore')")
+      .first();
     await bookButton.click();
 
     const nameInput = page.locator("#bk-name");
@@ -96,7 +108,11 @@ test.describe("StashSaarthi Core Booking Flow E2E Suite", () => {
   test("5. Mobile viewport responsive booking check", async ({ page, viewport }) => {
     if (viewport && viewport.width < 600) {
       // Check sticky mobile CTA
-      const mobileSticky = page.locator("[data-testid='mobile-sticky-cta'], button:has-text('Book'), button:has-text('Stash')").first();
+      const mobileSticky = page
+        .locator(
+          "[data-testid='mobile-sticky-cta'], button:has-text('Book'), button:has-text('Stash')",
+        )
+        .first();
       await expect(mobileSticky).toBeVisible();
     }
   });

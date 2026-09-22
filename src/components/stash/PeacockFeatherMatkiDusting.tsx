@@ -54,18 +54,40 @@ export const PeacockFeatherMatkiDusting: React.FC<PeacockFeatherMatkiDustingProp
         title="Click to dust fresh white butter on thali"
       >
         {/* Animated Feather Icon */}
-        <div className={`relative transition-transform duration-700 pointer-events-none ${isDusting ? "animate-bounce scale-110" : "group-hover:scale-110"}`}>
-          <svg className="w-5 h-5 text-emerald-400 pointer-events-none" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div
+          className={`relative transition-transform duration-700 pointer-events-none ${isDusting ? "animate-bounce scale-110" : "group-hover:scale-110"}`}
+        >
+          <svg
+            className="w-5 h-5 text-emerald-400 pointer-events-none"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <path
               d="M12 2C12 2 17 6 17 11C17 14 15 16 12 22C9 16 7 14 7 11C7 6 12 2 12 2Z"
               fill="url(#peacockGradientCompact)"
               stroke="#10B981"
               strokeWidth="1.5"
             />
-            <ellipse cx="12" cy="10" rx="2.5" ry="3.5" fill="#1E3A8A" stroke="#06B6D4" strokeWidth="1" />
+            <ellipse
+              cx="12"
+              cy="10"
+              rx="2.5"
+              ry="3.5"
+              fill="#1E3A8A"
+              stroke="#06B6D4"
+              strokeWidth="1"
+            />
             <circle cx="12" cy="10" r="1.2" fill="#F59E0B" />
             <defs>
-              <linearGradient id="peacockGradientCompact" x1="12" y1="2" x2="12" y2="22" gradientUnits="userSpaceOnUse">
+              <linearGradient
+                id="peacockGradientCompact"
+                x1="12"
+                y1="2"
+                x2="12"
+                y2="22"
+                gradientUnits="userSpaceOnUse"
+              >
                 <stop stopColor="#059669" />
                 <stop offset="0.5" stopColor="#0D9488" />
                 <stop offset="1" stopColor="#1E3A8A" />
@@ -100,7 +122,12 @@ export const PeacockFeatherMatkiDusting: React.FC<PeacockFeatherMatkiDustingProp
         <div className="flex items-center gap-4">
           <div className="relative w-16 h-16 flex items-center justify-center bg-slate-900/90 rounded-2xl border border-amber-500/40 p-2 shadow-inner">
             {/* Matki Pot SVG */}
-            <svg className="w-12 h-12 text-amber-600" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg
+              className="w-12 h-12 text-amber-600"
+              viewBox="0 0 64 64"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
               {/* Pot Body */}
               <path
                 d="M16 28C16 18 20 14 32 14C44 14 48 18 48 28C48 42 44 54 32 54C20 54 16 42 16 28Z"
@@ -109,7 +136,15 @@ export const PeacockFeatherMatkiDusting: React.FC<PeacockFeatherMatkiDustingProp
                 strokeWidth="2"
               />
               {/* Pot Rim */}
-              <ellipse cx="32" cy="16" rx="14" ry="4" fill="#D97706" stroke="#92400E" strokeWidth="1.5" />
+              <ellipse
+                cx="32"
+                cy="16"
+                rx="14"
+                ry="4"
+                fill="#D97706"
+                stroke="#92400E"
+                strokeWidth="1.5"
+              />
               {/* White Butter / Makhan Mound */}
               <path
                 d="M20 16C20 12 24 10 32 10C40 10 44 12 44 16C44 18 38 21 32 21C26 21 20 18 20 16Z"
@@ -121,7 +156,14 @@ export const PeacockFeatherMatkiDusting: React.FC<PeacockFeatherMatkiDustingProp
               <circle cx="34" cy="13" r="1.5" fill="#FEF08A" />
 
               <defs>
-                <linearGradient id="matkiClay" x1="32" y1="14" x2="32" y2="54" gradientUnits="userSpaceOnUse">
+                <linearGradient
+                  id="matkiClay"
+                  x1="32"
+                  y1="14"
+                  x2="32"
+                  y2="54"
+                  gradientUnits="userSpaceOnUse"
+                >
                   <stop stopColor="#D97706" />
                   <stop offset="0.7" stopColor="#B45309" />
                   <stop offset="1" stopColor="#78350F" />
@@ -137,18 +179,37 @@ export const PeacockFeatherMatkiDusting: React.FC<PeacockFeatherMatkiDustingProp
                   : "rotate-[-10deg] translate-x-2 -translate-y-1 hover:rotate-[5deg]"
               }`}
             >
-              <svg className="w-10 h-10 drop-shadow-[0_0_8px_rgba(16,185,129,0.5)] pointer-events-none" viewBox="0 0 32 32" fill="none">
+              <svg
+                className="w-10 h-10 drop-shadow-[0_0_8px_rgba(16,185,129,0.5)] pointer-events-none"
+                viewBox="0 0 32 32"
+                fill="none"
+              >
                 <path
                   d="M16 2C16 2 24 8 24 16C24 21 21 24 16 30C11 24 8 21 8 16C8 8 16 2 16 2Z"
                   fill="url(#featherGradient)"
                   stroke="#10B981"
                   strokeWidth="1"
                 />
-                <ellipse cx="16" cy="14" rx="4" ry="5" fill="#1E3A8A" stroke="#06B6D4" strokeWidth="1" />
+                <ellipse
+                  cx="16"
+                  cy="14"
+                  rx="4"
+                  ry="5"
+                  fill="#1E3A8A"
+                  stroke="#06B6D4"
+                  strokeWidth="1"
+                />
                 <circle cx="16" cy="14" r="2" fill="#F59E0B" />
                 <path d="M16 22V30" stroke="#F59E0B" strokeWidth="1.5" strokeLinecap="round" />
                 <defs>
-                  <linearGradient id="featherGradient" x1="16" y1="2" x2="16" y2="30" gradientUnits="userSpaceOnUse">
+                  <linearGradient
+                    id="featherGradient"
+                    x1="16"
+                    y1="2"
+                    x2="16"
+                    y2="30"
+                    gradientUnits="userSpaceOnUse"
+                  >
                     <stop stopColor="#10B981" />
                     <stop offset="0.5" stopColor="#06B6D4" />
                     <stop offset="1" stopColor="#1E3A8A" />
@@ -160,9 +221,15 @@ export const PeacockFeatherMatkiDusting: React.FC<PeacockFeatherMatkiDustingProp
             {/* Floating Sparkle Particles */}
             {showSparkles && (
               <>
-                <span className="absolute -top-2 left-2 text-xs animate-ping pointer-events-none">✨</span>
-                <span className="absolute top-1 -right-2 text-xs animate-bounce pointer-events-none">🧈</span>
-                <span className="absolute -bottom-1 left-4 text-xs animate-pulse pointer-events-none">💛</span>
+                <span className="absolute -top-2 left-2 text-xs animate-ping pointer-events-none">
+                  ✨
+                </span>
+                <span className="absolute top-1 -right-2 text-xs animate-bounce pointer-events-none">
+                  🧈
+                </span>
+                <span className="absolute -bottom-1 left-4 text-xs animate-pulse pointer-events-none">
+                  💛
+                </span>
               </>
             )}
           </div>
@@ -180,7 +247,9 @@ export const PeacockFeatherMatkiDusting: React.FC<PeacockFeatherMatkiDustingProp
               Peacock Feather <span className="text-amber-300">Desi Makhan Dusting</span>
             </h4>
             <p className="text-xs text-slate-400 mt-1 max-w-sm">
-              Selecting <strong className="text-emerald-400">Standard Thali</strong> triggers our signature Mor-Pankh dusting, topping your phulke with authentic home-crafted white butter.
+              Selecting <strong className="text-emerald-400">Standard Thali</strong> triggers our
+              signature Mor-Pankh dusting, topping your phulke with authentic home-crafted white
+              butter.
             </p>
           </div>
         </div>

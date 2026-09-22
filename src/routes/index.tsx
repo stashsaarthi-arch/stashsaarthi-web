@@ -18,33 +18,95 @@ import { WhatsAppButton } from "@/components/stash/WhatsAppButton";
 import { ServiceQuickJumpPill } from "@/components/stash/ServiceQuickJumpPill";
 
 const MobileSecondaryAccordions = lazy(() =>
-  import("@/components/stash/MobileSecondaryAccordions").then((m) => ({ default: m.MobileSecondaryAccordions }))
+  import("@/components/stash/MobileSecondaryAccordions").then((m) => ({
+    default: m.MobileSecondaryAccordions,
+  })),
 );
-const RoleLane = lazy(() => import("@/components/stash/RoleLane").then((m) => ({ default: m.RoleLane })));
-const CalculatorHub = lazy(() => import("@/components/stash/CalculatorHub").then((m) => ({ default: m.CalculatorHub })));
-const DualCrisis = lazy(() => import("@/components/stash/DualCrisis").then((m) => ({ default: m.DualCrisis })));
-const PgComparisonTable = lazy(() => import("@/components/stash/PgComparisonTable").then((m) => ({ default: m.PgComparisonTable })));
-const StashTimeline = lazy(() => import("@/components/stash/StashTimeline").then((m) => ({ default: m.StashTimeline })));
-const TrustConsoleHub = lazy(() => import("@/components/stash/TrustConsoleHub").then((m) => ({ default: m.TrustConsoleHub })));
-const StudentStoriesCarousel = lazy(() => import("@/components/stash/StudentStoriesCarousel").then((m) => ({ default: m.StudentStoriesCarousel })));
-const ReferralLeaderboard = lazy(() => import("@/components/stash/ReferralLeaderboard").then((m) => ({ default: m.ReferralLeaderboard })));
-const TopRatedKitchensWidget = lazy(() => import("@/components/stash/TopRatedKitchensWidget").then((m) => ({ default: m.TopRatedKitchensWidget })));
-const KanpurStudentCouncil = lazy(() => import("@/components/stash/KanpurStudentCouncil").then((m) => ({ default: m.KanpurStudentCouncil })));
-const HostRules = lazy(() => import("@/components/stash/HostRules").then((m) => ({ default: m.HostRules })));
-const FamilyDashboard = lazy(() => import("@/components/stash/FamilyDashboard").then((m) => ({ default: m.FamilyDashboard })));
-const FeedbackSuggestions = lazy(() => import("@/components/stash/FeedbackSuggestions").then((m) => ({ default: m.FeedbackSuggestions })));
+const RoleLane = lazy(() =>
+  import("@/components/stash/RoleLane").then((m) => ({ default: m.RoleLane })),
+);
+const CalculatorHub = lazy(() =>
+  import("@/components/stash/CalculatorHub").then((m) => ({ default: m.CalculatorHub })),
+);
+const DualCrisis = lazy(() =>
+  import("@/components/stash/DualCrisis").then((m) => ({ default: m.DualCrisis })),
+);
+const PgComparisonTable = lazy(() =>
+  import("@/components/stash/PgComparisonTable").then((m) => ({ default: m.PgComparisonTable })),
+);
+const StashTimeline = lazy(() =>
+  import("@/components/stash/StashTimeline").then((m) => ({ default: m.StashTimeline })),
+);
+const TrustConsoleHub = lazy(() =>
+  import("@/components/stash/TrustConsoleHub").then((m) => ({ default: m.TrustConsoleHub })),
+);
+const StudentStoriesCarousel = lazy(() =>
+  import("@/components/stash/StudentStoriesCarousel").then((m) => ({
+    default: m.StudentStoriesCarousel,
+  })),
+);
+const ReferralLeaderboard = lazy(() =>
+  import("@/components/stash/ReferralLeaderboard").then((m) => ({
+    default: m.ReferralLeaderboard,
+  })),
+);
+const TopRatedKitchensWidget = lazy(() =>
+  import("@/components/stash/TopRatedKitchensWidget").then((m) => ({
+    default: m.TopRatedKitchensWidget,
+  })),
+);
+const KanpurStudentCouncil = lazy(() =>
+  import("@/components/stash/KanpurStudentCouncil").then((m) => ({
+    default: m.KanpurStudentCouncil,
+  })),
+);
+const HostRules = lazy(() =>
+  import("@/components/stash/HostRules").then((m) => ({ default: m.HostRules })),
+);
+const FamilyDashboard = lazy(() =>
+  import("@/components/stash/FamilyDashboard").then((m) => ({ default: m.FamilyDashboard })),
+);
+const FeedbackSuggestions = lazy(() =>
+  import("@/components/stash/FeedbackSuggestions").then((m) => ({
+    default: m.FeedbackSuggestions,
+  })),
+);
 const FAQ = lazy(() => import("@/components/stash/FAQ").then((m) => ({ default: m.FAQ })));
-const FooterSection = lazy(() => import("@/components/stash/FooterSection").then((m) => ({ default: m.FooterSection })));
-const FounderEscalationWidget = lazy(() => import("@/components/stash/FounderEscalationWidget").then((m) => ({ default: m.FounderEscalationWidget })));
+const FooterSection = lazy(() =>
+  import("@/components/stash/FooterSection").then((m) => ({ default: m.FooterSection })),
+);
+const FounderEscalationWidget = lazy(() =>
+  import("@/components/stash/FounderEscalationWidget").then((m) => ({
+    default: m.FounderEscalationWidget,
+  })),
+);
 
 // ─── Modals & overlays (lazy — only loaded on user interaction) ──────────────
-const BookingModal = lazy(() => import("@/components/stash/BookingModal").then((m) => ({ default: m.BookingModal })));
-const RoomListingModal = lazy(() => import("@/components/stash/RoomListingModal").then((m) => ({ default: m.RoomListingModal })));
-const EarlyAccessModal = lazy(() => import("@/components/stash/EarlyAccessModal").then((m) => ({ default: m.EarlyAccessModal })));
-const WhatsAppReferralModal = lazy(() => import("@/components/stash/WhatsAppReferralModal").then((m) => ({ default: m.WhatsAppReferralModal })));
-const OfferPopup = lazy(() => import("@/components/OfferPopup").then((m) => ({ default: m.OfferPopup })));
-const RagChatbotWidget = lazy(() => import("@/components/stash/RagChatbotWidget").then((m) => ({ default: m.RagChatbotWidget })));
-const PredictivePersonaWidget = lazy(() => import("@/components/stash/PredictivePersonaWidget").then((m) => ({ default: m.PredictivePersonaWidget })));
+const BookingModal = lazy(() =>
+  import("@/components/stash/BookingModal").then((m) => ({ default: m.BookingModal })),
+);
+const RoomListingModal = lazy(() =>
+  import("@/components/stash/RoomListingModal").then((m) => ({ default: m.RoomListingModal })),
+);
+const EarlyAccessModal = lazy(() =>
+  import("@/components/stash/EarlyAccessModal").then((m) => ({ default: m.EarlyAccessModal })),
+);
+const WhatsAppReferralModal = lazy(() =>
+  import("@/components/stash/WhatsAppReferralModal").then((m) => ({
+    default: m.WhatsAppReferralModal,
+  })),
+);
+const OfferPopup = lazy(() =>
+  import("@/components/OfferPopup").then((m) => ({ default: m.OfferPopup })),
+);
+const RagChatbotWidget = lazy(() =>
+  import("@/components/stash/RagChatbotWidget").then((m) => ({ default: m.RagChatbotWidget })),
+);
+const PredictivePersonaWidget = lazy(() =>
+  import("@/components/stash/PredictivePersonaWidget").then((m) => ({
+    default: m.PredictivePersonaWidget,
+  })),
+);
 
 const TITLE = "StashSaarthi - Campus Micro-Storage & Zero-Brokerage Co-Living";
 const DESC =
@@ -115,7 +177,11 @@ function Index() {
   }, [open]);
 
   return (
-    <main id="main-content" tabIndex={-1} className="relative min-h-screen bg-[#0a0a0a] text-white transition-colors duration-500 focus:outline-none pt-16 md:pt-20 pb-[90px] md:pb-0">
+    <main
+      id="main-content"
+      tabIndex={-1}
+      className="relative min-h-screen bg-[#0a0a0a] text-white transition-colors duration-500 focus:outline-none pt-16 md:pt-20 pb-[90px] md:pb-0"
+    >
       <a href="#main-content" className="skip-to-content">
         Skip to main content
       </a>
@@ -333,4 +399,3 @@ function Index() {
     </main>
   );
 }
-

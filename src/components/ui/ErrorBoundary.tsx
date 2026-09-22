@@ -28,7 +28,11 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 
   public override componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error(`Uncaught error in boundary [${this.props.sectionName || "unnamed"}]:`, error, errorInfo);
+    console.error(
+      `Uncaught error in boundary [${this.props.sectionName || "unnamed"}]:`,
+      error,
+      errorInfo,
+    );
     reportError(error, {
       section: this.props.sectionName || "unnamed_section",
       componentStack: errorInfo.componentStack,
@@ -53,11 +57,10 @@ export class ErrorBoundary extends Component<Props, State> {
             <div className="mx-auto mb-3 grid h-10 w-10 place-items-center rounded-full bg-red-500/10">
               <AlertTriangle className="h-5 w-5 text-red-400" />
             </div>
-            <h3 className="text-base font-bold text-foreground mb-1">
-              {sectionTitle} Unavailable
-            </h3>
+            <h3 className="text-base font-bold text-foreground mb-1">{sectionTitle} Unavailable</h3>
             <p className="text-xs text-muted-foreground mb-4">
-              A rendering issue occurred in this section. Other parts of the platform remain functional.
+              A rendering issue occurred in this section. Other parts of the platform remain
+              functional.
             </p>
 
             {this.state.error && (
@@ -101,4 +104,3 @@ export class ErrorBoundary extends Component<Props, State> {
     return this.props.children;
   }
 }
-

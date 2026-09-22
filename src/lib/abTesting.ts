@@ -136,7 +136,7 @@ export function trackPersonaLayoutRecording(role: string, moduleName: string, sc
         module_name: moduleName,
         scroll_depth: scrollDepth,
         timestamp: new Date().toISOString(),
-      })
+      }),
     )
       .then(({ error }: any) => {
         // Fail silently if table does not exist or RLS is pending (no unhandled console error)
@@ -240,5 +240,3 @@ export function trackThaliPriceClick(variant: ThaliPriceLabelVariant, action: st
     // Silent fallback
   }
 }
-
-

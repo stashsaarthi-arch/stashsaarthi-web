@@ -32,7 +32,7 @@ const sqlPath = path.join(
   rootDir,
   "supabase",
   "migrations",
-  "20260911_unified_user_master_bookings_view.sql"
+  "20260911_unified_user_master_bookings_view.sql",
 );
 
 assert(fs.existsSync(sqlPath), "SQL migration file for user_master_bookings view exists");
@@ -41,17 +41,17 @@ if (fs.existsSync(sqlPath)) {
   const sqlContent = fs.readFileSync(sqlPath, "utf-8");
   assert(
     sqlContent.includes("CREATE OR REPLACE VIEW public.user_master_bookings"),
-    "SQL migration defines VIEW public.user_master_bookings"
+    "SQL migration defines VIEW public.user_master_bookings",
   );
   assert(
     sqlContent.includes("FROM public.stash_bookings") &&
       sqlContent.includes("FROM public.meal_bookings") &&
       sqlContent.includes("FROM public.co_living_inquiries"),
-    "View unifies stash_bookings, meal_bookings, and co_living_inquiries"
+    "View unifies stash_bookings, meal_bookings, and co_living_inquiries",
   );
   assert(
     sqlContent.includes("GRANT SELECT ON public.user_master_bookings TO authenticated, anon"),
-    "View grants SELECT permissions to authenticated and anon roles"
+    "View grants SELECT permissions to authenticated and anon roles",
   );
 }
 
@@ -63,19 +63,19 @@ if (fs.existsSync(tsPath)) {
   const tsContent = fs.readFileSync(tsPath, "utf-8");
   assert(
     tsContent.includes("export function getLocalMasterBookings"),
-    "Exports getLocalMasterBookings function"
+    "Exports getLocalMasterBookings function",
   );
   assert(
     tsContent.includes("export function compileUnifiedUserMasterBookings"),
-    "Exports compileUnifiedUserMasterBookings helper"
+    "Exports compileUnifiedUserMasterBookings helper",
   );
   assert(
     tsContent.includes("export async function getUserMasterBookings"),
-    "Exports getUserMasterBookings async pagination engine"
+    "Exports getUserMasterBookings async pagination engine",
   );
   assert(
     tsContent.includes("PaginationOptions") && tsContent.includes("PaginatedMasterBookings"),
-    "Defines PaginationOptions and PaginatedMasterBookings interfaces"
+    "Defines PaginationOptions and PaginatedMasterBookings interfaces",
   );
 }
 
@@ -85,7 +85,7 @@ if (fs.existsSync(typesPath)) {
   const typesContent = fs.readFileSync(typesPath, "utf-8");
   assert(
     typesContent.includes("user_master_bookings"),
-    "user_master_bookings view registered in Supabase type definitions"
+    "user_master_bookings view registered in Supabase type definitions",
   );
 }
 

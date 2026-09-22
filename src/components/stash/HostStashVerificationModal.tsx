@@ -67,15 +67,19 @@ export function HostStashVerificationModal({
   const [activeTab, setActiveTab] = useState<"new" | "history">("new");
 
   // Geo-Fence State
-  const [geoProximityMode, setGeoProximityMode] = useState<"at_node" | "near_node" | "far_away">("at_node");
+  const [geoProximityMode, setGeoProximityMode] = useState<"at_node" | "near_node" | "far_away">(
+    "at_node",
+  );
   const [overrideGeoFence, setOverrideGeoFence] = useState<boolean>(false);
   const [deviceCoords, setDeviceCoords] = useState<Coordinates>(
-    getSimulatedDeviceLocation(campusNode, "at_node")
+    getSimulatedDeviceLocation(campusNode, "at_node"),
   );
 
   // Checklist form state
   const [sealIntact, setSealIntact] = useState<boolean>(true);
-  const [barcodeSerial, setBarcodeSerial] = useState<string>(`SS-KNP-BAR-${Math.floor(1000 + Math.random() * 9000)}`);
+  const [barcodeSerial, setBarcodeSerial] = useState<string>(
+    `SS-KNP-BAR-${Math.floor(1000 + Math.random() * 9000)}`,
+  );
   const [measuredWeightKg, setMeasuredWeightKg] = useState<number>(18.5);
   const [photoProofUrl, setPhotoProofUrl] = useState<string>("");
   const [notes, setNotes] = useState<string>("");
@@ -95,7 +99,7 @@ export function HostStashVerificationModal({
     setDeviceCoords(getSimulatedDeviceLocation(campusNode, geoProximityMode));
   }, [geoProximityMode, campusNode]);
 
-  if (!isOpen || typeof document === 'undefined') return null;
+  if (!isOpen || typeof document === "undefined") return null;
 
   const defaultNode = PRESET_CAMPUS_HOST_NODES["Kakadeo PW Hub"]!;
   const targetNodeConfig = PRESET_CAMPUS_HOST_NODES[campusNode] ?? defaultNode;
@@ -104,7 +108,7 @@ export function HostStashVerificationModal({
     targetNodeConfig.coords,
     campusNode,
     MAX_GEOFENCE_RADIUS_METERS,
-    overrideGeoFence
+    overrideGeoFence,
   );
 
   // Handle camera photo capture simulation
@@ -142,7 +146,7 @@ export function HostStashVerificationModal({
       toast.error(
         isHi
           ? `जिओ-फेंस लॉक: आप नोड से ${geoResult.distanceMeters}m दूर हैं! चेक-इन के लिए 50m दायरे में आएं।`
-          : `Geo-Fence Locked! You are ${geoResult.distanceMeters}m from node. Must be within 50m to check in.`
+          : `Geo-Fence Locked! You are ${geoResult.distanceMeters}m from node. Must be within 50m to check in.`,
       );
       return;
     }
@@ -166,23 +170,35 @@ export function HostStashVerificationModal({
     const validation = validateIntakeChecklist(state, hostName, campusNode);
 
     if (!validation.geoFencePassed) {
-      toast.error(validation.errors[0] || (isHi ? "जिओ-फेंस सत्यापन विफल।" : "Geo-fence check-in verification locked."));
+      toast.error(
+        validation.errors[0] ||
+          (isHi ? "जिओ-फेंस सत्यापन विफल।" : "Geo-fence check-in verification locked."),
+      );
       return;
     }
 
     if (!validation.sealPassed || !validation.barcodePassed) {
-      toast.error(validation.errors[0] || (isHi ? "सत्यापन में त्रुटि है।" : "Intake verification failed. Check seal and barcode."));
+      toast.error(
+        validation.errors[0] ||
+          (isHi ? "सत्यापन में त्रुटि है।" : "Intake verification failed. Check seal and barcode."),
+      );
       return;
     }
 
     if (measuredWeightKg > MAX_ALLOWED_WEIGHT_KG) {
-      toast.warning(isHi ? "वजन 25kg से अधिक है! स्टैश फ्लैग किया गया।" : "Weight exceeds 25kg limit! Stash flagged for surcharge.");
+      toast.warning(
+        isHi
+          ? "वजन 25kg से अधिक है! स्टैश फ्लैग किया गया।"
+          : "Weight exceeds 25kg limit! Stash flagged for surcharge.",
+      );
     }
 
     const record = createAndSaveVerification(state, bookingId, hostName, campusNode);
     setCompletedRecord(record);
     setSavedRecords(getSavedVerifications());
-    toast.success(isHi ? "50m जिओ-फेंस व 3-पॉइंट इनटेक पूर्ण!" : "50m Geo-Fenced 3-Point Intake Completed!");
+    toast.success(
+      isHi ? "50m जिओ-फेंस व 3-पॉइंट इनटेक पूर्ण!" : "50m Geo-Fenced 3-Point Intake Completed!",
+    );
   };
 
   const isOverweight = measuredWeightKg > MAX_ALLOWED_WEIGHT_KG;
@@ -190,14 +206,10 @@ export function HostStashVerificationModal({
   return createPortal(
     <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
       {/* 1. Dark Backdrop (Separate from content to avoid opacity inheritance) */}
-      <div 
-        className="absolute inset-0 bg-black/80 backdrop-blur-md"
-        onClick={onClose}
-      ></div>
+      <div className="absolute inset-0 bg-black/80 backdrop-blur-md" onClick={onClose}></div>
 
       {/* 2. Actual Modal Box */}
       <div className="relative z-[100000] w-full max-w-2xl bg-[#0A0D0F] border border-amber-500/30 rounded-3xl shadow-2xl overflow-hidden my-8">
-        
         {/* Header bar */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-gradient-to-r from-amber-500/10 via-emerald-500/5 to-transparent">
           <div className="flex items-center gap-3">
@@ -212,7 +224,9 @@ export function HostStashVerificationModal({
                 </span>
               </h2>
               <p className="text-xs text-muted-foreground">
-                {isHi ? "1. सील जांच • 2. बारकोड स्कैन • 3. वजन (<25kg)" : "1. Seal Intact • 2. Barcode Scanned • 3. Weight (<25kg)"}
+                {isHi
+                  ? "1. सील जांच • 2. बारकोड स्कैन • 3. वजन (<25kg)"
+                  : "1. Seal Intact • 2. Barcode Scanned • 3. Weight (<25kg)"}
               </p>
             </div>
           </div>
@@ -259,7 +273,9 @@ export function HostStashVerificationModal({
             <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-1">
               {savedRecords.length === 0 ? (
                 <div className="text-center py-12 text-muted-foreground text-sm">
-                  {isHi ? "कोई सहेजा गया इनटेक रिकॉर्ड नहीं मिला।" : "No verified intake records found."}
+                  {isHi
+                    ? "कोई सहेजा गया इनटेक रिकॉर्ड नहीं मिला।"
+                    : "No verified intake records found."}
                 </div>
               ) : (
                 savedRecords.map((rec) => (
@@ -330,7 +346,9 @@ export function HostStashVerificationModal({
                     {completedRecord.certificateId}
                   </h3>
                   <p className="text-xs text-muted-foreground mt-1">
-                    {isHi ? "डिजिटल इनटेक ऑडिट रसीद सफलतापूर्वक जनरेट हो गई।" : "Digital Intake Audit Pass successfully generated and saved."}
+                    {isHi
+                      ? "डिजिटल इनटेक ऑडिट रसीद सफलतापूर्वक जनरेट हो गई।"
+                      : "Digital Intake Audit Pass successfully generated and saved."}
                   </p>
                 </div>
 
@@ -359,8 +377,11 @@ export function HostStashVerificationModal({
                       <Scale className="h-3.5 w-3.5 text-amber-400" />
                       3. Weight
                     </div>
-                    <p className={`text-sm font-bold ${completedRecord.measuredWeightKg <= 25 ? "text-amber-300" : "text-rose-400"}`}>
-                      {completedRecord.measuredWeightKg.toFixed(1)} kg {completedRecord.measuredWeightKg <= 25 ? "(≤25kg)" : "(OVERWEIGHT)"}
+                    <p
+                      className={`text-sm font-bold ${completedRecord.measuredWeightKg <= 25 ? "text-amber-300" : "text-rose-400"}`}
+                    >
+                      {completedRecord.measuredWeightKg.toFixed(1)} kg{" "}
+                      {completedRecord.measuredWeightKg <= 25 ? "(≤25kg)" : "(OVERWEIGHT)"}
                     </p>
                   </div>
                 </div>
@@ -368,7 +389,9 @@ export function HostStashVerificationModal({
                 {/* Photo proof preview */}
                 {completedRecord.photoProofUrl && (
                   <div className="pt-2">
-                    <p className="text-xs text-muted-foreground mb-2 text-left">Verified Photo Proof:</p>
+                    <p className="text-xs text-muted-foreground mb-2 text-left">
+                      Verified Photo Proof:
+                    </p>
                     <img
                       src={completedRecord.photoProofUrl}
                       alt="Verified Box Proof"
@@ -386,7 +409,7 @@ export function HostStashVerificationModal({
                   <button
                     onClick={() => {
                       navigator.clipboard.writeText(
-                        `StashSaarthi Host Intake Certificate: ${completedRecord.certificateId}\nBarcode: ${completedRecord.barcodeSerial}\nWeight: ${completedRecord.measuredWeightKg}kg\nHost: ${completedRecord.hostName}`
+                        `StashSaarthi Host Intake Certificate: ${completedRecord.certificateId}\nBarcode: ${completedRecord.barcodeSerial}\nWeight: ${completedRecord.measuredWeightKg}kg\nHost: ${completedRecord.hostName}`,
                       );
                       toast.success(isHi ? "सत्यापन विवरण कॉपी हो गया!" : "Intake details copied!");
                     }}
@@ -411,21 +434,28 @@ export function HostStashVerificationModal({
           ) : (
             /* Form View */
             <form onSubmit={handleSubmitVerification} className="space-y-6">
-              
               {/* Mandatory Geo-Fence 50-Meter Radius Lock */}
-              <div className={`p-4 rounded-2xl border space-y-3 transition-colors ${
-                geoResult.inRange
-                  ? "bg-emerald-500/10 border-emerald-500/30"
-                  : "bg-rose-500/10 border-rose-500/40"
-              }`}>
+              <div
+                className={`p-4 rounded-2xl border space-y-3 transition-colors ${
+                  geoResult.inRange
+                    ? "bg-emerald-500/10 border-emerald-500/30"
+                    : "bg-rose-500/10 border-rose-500/40"
+                }`}
+              >
                 <div className="flex items-center justify-between flex-wrap gap-2">
                   <div className="flex items-center gap-3">
-                    <div className={`h-9 w-9 rounded-xl flex items-center justify-center border ${
-                      geoResult.inRange
-                        ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/40"
-                        : "bg-rose-500/20 text-rose-400 border-rose-500/40"
-                    }`}>
-                      {geoResult.inRange ? <Unlock className="h-5 w-5" /> : <Lock className="h-5 w-5" />}
+                    <div
+                      className={`h-9 w-9 rounded-xl flex items-center justify-center border ${
+                        geoResult.inRange
+                          ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/40"
+                          : "bg-rose-500/20 text-rose-400 border-rose-500/40"
+                      }`}
+                    >
+                      {geoResult.inRange ? (
+                        <Unlock className="h-5 w-5" />
+                      ) : (
+                        <Lock className="h-5 w-5" />
+                      )}
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
@@ -433,11 +463,13 @@ export function HostStashVerificationModal({
                           <LocateFixed className="h-4 w-4 text-cyan-400" />
                           {isHi ? "जिओ-फेंस चेक-इन सत्यापन" : "Geo-Fenced Host Check-in Lock"}
                         </h4>
-                        <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase border ${
-                          geoResult.inRange
-                            ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/30"
-                            : "bg-rose-500/20 text-rose-300 border-rose-500/30"
-                        }`}>
+                        <span
+                          className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase border ${
+                            geoResult.inRange
+                              ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/30"
+                              : "bg-rose-500/20 text-rose-300 border-rose-500/30"
+                          }`}
+                        >
                           {geoResult.inRange ? "UNLOCKED (≤ 50M)" : "LOCKED (> 50M)"}
                         </span>
                       </div>
@@ -450,7 +482,9 @@ export function HostStashVerificationModal({
                   </div>
 
                   <div className="text-right font-mono">
-                    <span className={`text-sm font-bold ${geoResult.inRange ? "text-emerald-300" : "text-rose-300"}`}>
+                    <span
+                      className={`text-sm font-bold ${geoResult.inRange ? "text-emerald-300" : "text-rose-300"}`}
+                    >
                       {geoResult.distanceMeters}m {isHi ? "दूरी" : "away"}
                     </span>
                     <span className="text-[10px] block text-muted-foreground">Max 50.0m</span>
@@ -460,7 +494,9 @@ export function HostStashVerificationModal({
                 {/* Geo-Fence Proximity Simulator Buttons */}
                 <div className="pt-1 space-y-2 border-t border-white/10">
                   <div className="flex items-center justify-between text-[11px] text-muted-foreground">
-                    <span>{isHi ? "जीपीएस स्थान सिम्युलेटर (Demo):" : "GPS Location Proximity:"}</span>
+                    <span>
+                      {isHi ? "जीपीएस स्थान सिम्युलेटर (Demo):" : "GPS Location Proximity:"}
+                    </span>
                     <button
                       type="button"
                       onClick={() => setOverrideGeoFence(!overrideGeoFence)}
@@ -536,7 +572,9 @@ export function HostStashVerificationModal({
                           1. {isHi ? "लेजर बारकोड सील अटूट है?" : "Box Seal Intact (Unbroken)"}
                         </h4>
                         <p className="text-xs text-muted-foreground">
-                          {isHi ? "जांचें कि स्टैश बॉक्स की लेजर टैम्पर सील कटी या फटी तो नहीं है।" : "Verify laser tamper seal on box is 100% intact and undamaged."}
+                          {isHi
+                            ? "जांचें कि स्टैश बॉक्स की लेजर टैम्पर सील कटी या फटी तो नहीं है।"
+                            : "Verify laser tamper seal on box is 100% intact and undamaged."}
                         </p>
                       </div>
                     </div>
@@ -566,13 +604,17 @@ export function HostStashVerificationModal({
                           2. {isHi ? "बारकोड सीरियल स्कैन" : "Barcode Serial Scanned"}
                         </h4>
                         <p className="text-xs text-muted-foreground">
-                          {isHi ? "भौतिक टैम्पर टेप पर लिखा बारकोड सीरियल कोड" : "Pre-printed alphanumeric tag ID on physical box tape."}
+                          {isHi
+                            ? "भौतिक टैम्पर टेप पर लिखा बारकोड सीरियल कोड"
+                            : "Pre-printed alphanumeric tag ID on physical box tape."}
                         </p>
                       </div>
                     </div>
                     <button
                       type="button"
-                      onClick={() => setBarcodeSerial(`SS-KNP-BAR-${Math.floor(1000 + Math.random() * 9000)}`)}
+                      onClick={() =>
+                        setBarcodeSerial(`SS-KNP-BAR-${Math.floor(1000 + Math.random() * 9000)}`)
+                      }
                       className="text-xs text-cyan-400 hover:underline flex items-center gap-1"
                     >
                       <RefreshCw className="h-3 w-3" />
@@ -589,16 +631,20 @@ export function HostStashVerificationModal({
                 </div>
 
                 {/* Point 3: Weight Under 25kg */}
-                <div className={`p-4 rounded-2xl bg-white/[0.03] border space-y-3 transition-colors ${
-                  isOverweight ? "border-rose-500/50 bg-rose-500/5" : "border-white/10"
-                }`}>
+                <div
+                  className={`p-4 rounded-2xl bg-white/[0.03] border space-y-3 transition-colors ${
+                    isOverweight ? "border-rose-500/50 bg-rose-500/5" : "border-white/10"
+                  }`}
+                >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className={`h-8 w-8 rounded-xl flex items-center justify-center border ${
-                        isOverweight
-                          ? "bg-rose-500/10 border-rose-500/30 text-rose-400"
-                          : "bg-amber-500/10 border-amber-500/30 text-amber-400"
-                      }`}>
+                      <div
+                        className={`h-8 w-8 rounded-xl flex items-center justify-center border ${
+                          isOverweight
+                            ? "bg-rose-500/10 border-rose-500/30 text-rose-400"
+                            : "bg-amber-500/10 border-amber-500/30 text-amber-400"
+                        }`}
+                      >
                         <Scale className="h-4 w-4" />
                       </div>
                       <div>
@@ -606,15 +652,19 @@ export function HostStashVerificationModal({
                           3. {isHi ? "वजन 25kg के अंदर है?" : "Weight Verification (Max 25.0 kg)"}
                         </h4>
                         <p className="text-xs text-muted-foreground">
-                          {isHi ? "डिजिटल वजन मशीन से मापा गया वजन" : "Digital scale reading on box intake."}
+                          {isHi
+                            ? "डिजिटल वजन मशीन से मापा गया वजन"
+                            : "Digital scale reading on box intake."}
                         </p>
                       </div>
                     </div>
-                    <span className={`text-sm font-bold font-mono px-3 py-1 rounded-xl border ${
-                      isOverweight
-                        ? "bg-rose-500/20 text-rose-300 border-rose-500/40"
-                        : "bg-emerald-500/20 text-emerald-300 border-emerald-500/40"
-                    }`}>
+                    <span
+                      className={`text-sm font-bold font-mono px-3 py-1 rounded-xl border ${
+                        isOverweight
+                          ? "bg-rose-500/20 text-rose-300 border-rose-500/40"
+                          : "bg-emerald-500/20 text-emerald-300 border-emerald-500/40"
+                      }`}
+                    >
                       {measuredWeightKg.toFixed(1)} kg
                     </span>
                   </div>
@@ -684,16 +734,29 @@ export function HostStashVerificationModal({
                           className="h-10 px-4 rounded-xl bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 hover:bg-emerald-500/30 text-xs font-semibold flex items-center gap-2 transition-colors"
                         >
                           <Camera className="h-4 w-4" />
-                          {isCapturingPhoto ? (isHi ? "कैप्चर हो रहा है..." : "Capturing...") : (isHi ? "कैमरा स्नैपशॉट लें" : "Take Camera Photo")}
+                          {isCapturingPhoto
+                            ? isHi
+                              ? "कैप्चर हो रहा है..."
+                              : "Capturing..."
+                            : isHi
+                              ? "कैमरा स्नैपशॉट लें"
+                              : "Take Camera Photo"}
                         </button>
                         <label className="h-10 px-4 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 text-xs font-semibold flex items-center gap-2 cursor-pointer transition-colors">
                           <Upload className="h-4 w-4" />
                           {isHi ? "फाइल चुनें" : "Upload File"}
-                          <input type="file" accept="image/*" onChange={handleFileUpload} className="hidden" />
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={handleFileUpload}
+                            className="hidden"
+                          />
                         </label>
                       </div>
                       <p className="text-[11px] text-muted-foreground">
-                        {isHi ? "बॉक्स सील और वजन स्केल की साफ फोटो अपलोड करें" : "Upload or capture a clear photo showing intact seal and weight scale."}
+                        {isHi
+                          ? "बॉक्स सील और वजन स्केल की साफ फोटो अपलोड करें"
+                          : "Upload or capture a clear photo showing intact seal and weight scale."}
                       </p>
                     </div>
                   )}
@@ -709,7 +772,11 @@ export function HostStashVerificationModal({
                   type="text"
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
-                  placeholder={isHi ? "जैसे: बॉक्स अच्छा स्थिति में है..." : "e.g. Box received in good condition at Kakadeo node."}
+                  placeholder={
+                    isHi
+                      ? "जैसे: बॉक्स अच्छा स्थिति में है..."
+                      : "e.g. Box received in good condition at Kakadeo node."
+                  }
                   className="w-full h-10 px-3 rounded-xl bg-white/5 border border-white/10 text-white text-xs focus:outline-none focus:border-amber-500/50"
                 />
               </div>
@@ -727,6 +794,6 @@ export function HostStashVerificationModal({
         </div>
       </div>
     </div>,
-    document.body
+    document.body,
   );
 }

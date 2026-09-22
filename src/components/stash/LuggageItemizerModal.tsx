@@ -101,12 +101,42 @@ const CATEGORY_PRESETS = [
 ] as const;
 
 const POPULAR_ITEM_PRESETS = [
-  { cat: "Carton Box" as const, label: "Carton #1: Books & Semester Notes", weight: 15, fragile: false },
-  { cat: "Suitcase" as const, label: "Suitcase: Winter Clothes & Jackets", weight: 18, fragile: false },
-  { cat: "Carton Box" as const, label: "Box #2: Bedding, Pillows & Blanket", weight: 8, fragile: false },
-  { cat: "Duffle Bag" as const, label: "Duffle: Shoes, Boots & Gym Gear", weight: 7, fragile: false },
-  { cat: "Electronics" as const, label: "Electronics Box: Electric Kettle & Charger", weight: 5, fragile: true },
-  { cat: "Carton Box" as const, label: "Box #3: Kitchen Utensils & Induction", weight: 10, fragile: true },
+  {
+    cat: "Carton Box" as const,
+    label: "Carton #1: Books & Semester Notes",
+    weight: 15,
+    fragile: false,
+  },
+  {
+    cat: "Suitcase" as const,
+    label: "Suitcase: Winter Clothes & Jackets",
+    weight: 18,
+    fragile: false,
+  },
+  {
+    cat: "Carton Box" as const,
+    label: "Box #2: Bedding, Pillows & Blanket",
+    weight: 8,
+    fragile: false,
+  },
+  {
+    cat: "Duffle Bag" as const,
+    label: "Duffle: Shoes, Boots & Gym Gear",
+    weight: 7,
+    fragile: false,
+  },
+  {
+    cat: "Electronics" as const,
+    label: "Electronics Box: Electric Kettle & Charger",
+    weight: 5,
+    fragile: true,
+  },
+  {
+    cat: "Carton Box" as const,
+    label: "Box #3: Kitchen Utensils & Induction",
+    weight: 10,
+    fragile: true,
+  },
 ];
 
 export function LuggageItemizerModal({
@@ -153,18 +183,16 @@ export function LuggageItemizerModal({
   const updateItem = (
     index: number,
     field: keyof LuggageStorageItem,
-    value: string | boolean | number
+    value: string | boolean | number,
   ) => {
-    setItems((prev) =>
-      prev.map((item, i) => (i === index ? { ...item, [field]: value } : item))
-    );
+    setItems((prev) => prev.map((item, i) => (i === index ? { ...item, [field]: value } : item)));
   };
 
   const addItemWithPreset = (
     category: LuggageStorageItem["category"],
     label: string,
     weight = 10,
-    fragile = false
+    fragile = false,
   ) => {
     const nextNum = items.length + 1;
     const newItem: LuggageStorageItem = {
@@ -176,18 +204,15 @@ export function LuggageItemizerModal({
       weightEstKg: weight,
     };
     setItems((prev) => [...prev, newItem]);
-    toast.success(
-      isHi ? `आईटम #${nextNum} जोड़ा गया!` : `Item #${nextNum} added!`,
-      { description: label }
-    );
+    toast.success(isHi ? `आईटम #${nextNum} जोड़ा गया!` : `Item #${nextNum} added!`, {
+      description: label,
+    });
   };
 
   const removeItem = (index: number) => {
     if (items.length <= 1) {
       toast.error(
-        isHi
-          ? "कम से कम 1 सामान होना आवश्यक है।"
-          : "At least 1 item is required for storage."
+        isHi ? "कम से कम 1 सामान होना आवश्यक है।" : "At least 1 item is required for storage.",
       );
       return;
     }
@@ -201,7 +226,7 @@ export function LuggageItemizerModal({
         (it, idx) =>
           `Item #${idx + 1} (${it.barcode}): [${it.category}] ${it.customLabel} ${
             it.isFragile ? "⚠️ FRAGILE" : ""
-          } (${it.weightEstKg}kg est)`
+          } (${it.weightEstKg}kg est)`,
       )
       .join("\n");
     navigator.clipboard.writeText(`STASHSAARTHI STORAGE MANIFEST:\n${summary}`);
@@ -224,9 +249,7 @@ export function LuggageItemizerModal({
   };
 
   const filteredItems =
-    filterCategory === "ALL"
-      ? items
-      : items.filter((it) => it.category === filterCategory);
+    filterCategory === "ALL" ? items : items.filter((it) => it.category === filterCategory);
 
   const totalEstWeight = items.reduce((acc, it) => acc + (it.weightEstKg || 0), 0);
   const fragileCount = items.filter((it) => it.isFragile).length;
@@ -251,8 +274,8 @@ export function LuggageItemizerModal({
                   ? "संपादक पर वापस जाएं"
                   : "Back to Editor"
                 : isHi
-                ? "बारकोड टैग शीट देखें"
-                : "View Print Tag Sheet"}
+                  ? "बारकोड टैग शीट देखें"
+                  : "View Print Tag Sheet"}
             </button>
           </div>
 
@@ -335,7 +358,9 @@ export function LuggageItemizerModal({
               <div className="flex items-center justify-between text-xs font-bold text-slate-200">
                 <span className="flex items-center gap-1.5">
                   <Sparkles className="h-3.5 w-3.5 text-emerald-400" />
-                  <span>{isHi ? "त्वरित आईटम जोड़ें (1-टैप प्रेसेट):" : "1-Tap Quick Item Presets:"}</span>
+                  <span>
+                    {isHi ? "त्वरित आईटम जोड़ें (1-टैप प्रेसेट):" : "1-Tap Quick Item Presets:"}
+                  </span>
                 </span>
                 <span className="font-mono text-emerald-400 text-[11px]">
                   {items.length} {isHi ? "सामान टैग किए गए" : "Items Itemized"}
@@ -347,9 +372,7 @@ export function LuggageItemizerModal({
                   <button
                     key={idx}
                     type="button"
-                    onClick={() =>
-                      addItemWithPreset(p.cat, p.label, p.weight, p.fragile)
-                    }
+                    onClick={() => addItemWithPreset(p.cat, p.label, p.weight, p.fragile)}
                     className="px-2.5 py-1 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 hover:border-emerald-500/40 text-slate-200 text-xs font-medium transition cursor-pointer flex items-center gap-1.5"
                   >
                     <Plus className="w-3 h-3 text-emerald-400" />
@@ -408,8 +431,7 @@ export function LuggageItemizerModal({
               {filteredItems.map((item) => {
                 const globalIndex = items.findIndex((i) => i.id === item.id);
                 const catInfo =
-                  CATEGORY_PRESETS.find((c) => c.id === item.category) ||
-                  CATEGORY_PRESETS[0]!;
+                  CATEGORY_PRESETS.find((c) => c.id === item.category) || CATEGORY_PRESETS[0]!;
                 const IconComponent = catInfo.icon;
 
                 return (
@@ -420,9 +442,7 @@ export function LuggageItemizerModal({
                     {/* Top Item Header */}
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <div
-                          className={`p-1.5 rounded-lg border ${catInfo.color}`}
-                        >
+                        <div className={`p-1.5 rounded-lg border ${catInfo.color}`}>
                           <IconComponent className="w-4 h-4" />
                         </div>
                         <div>
@@ -443,9 +463,7 @@ export function LuggageItemizerModal({
                         {/* Fragile Toggle Button */}
                         <button
                           type="button"
-                          onClick={() =>
-                            updateItem(globalIndex, "isFragile", !item.isFragile)
-                          }
+                          onClick={() => updateItem(globalIndex, "isFragile", !item.isFragile)}
                           className={`px-2 py-1 rounded-lg text-[10px] font-bold border transition cursor-pointer flex items-center gap-1 ${
                             item.isFragile
                               ? "bg-rose-500/20 text-rose-300 border-rose-500/40"
@@ -453,7 +471,13 @@ export function LuggageItemizerModal({
                           }`}
                         >
                           <AlertTriangle className="w-3 h-3" />
-                          {item.isFragile ? (isHi ? "नाजुक/ग्लास ⚠️" : "Fragile ⚠️") : (isHi ? "+ नाजुक टैग" : "+ Tag Fragile")}
+                          {item.isFragile
+                            ? isHi
+                              ? "नाजुक/ग्लास ⚠️"
+                              : "Fragile ⚠️"
+                            : isHi
+                              ? "+ नाजुक टैग"
+                              : "+ Tag Fragile"}
                         </button>
 
                         {/* Remove Button */}
@@ -483,7 +507,7 @@ export function LuggageItemizerModal({
                             updateItem(
                               globalIndex,
                               "category",
-                              e.target.value as LuggageStorageItem["category"]
+                              e.target.value as LuggageStorageItem["category"],
                             )
                           }
                           className="w-full rounded-xl border border-white/15 bg-black/90 px-2.5 py-1.5 text-xs text-white cursor-pointer font-medium"
@@ -499,15 +523,19 @@ export function LuggageItemizerModal({
                       {/* Custom Label Text */}
                       <div className="sm:col-span-7">
                         <Label className="text-[10px] text-muted-foreground mb-1 block">
-                          {isHi ? "कस्टम लेबल विवरण (उदा. पुस्तकें, जैकेट):" : "Custom Item Label (e.g. Books, Winter Wear):"}
+                          {isHi
+                            ? "कस्टम लेबल विवरण (उदा. पुस्तकें, जैकेट):"
+                            : "Custom Item Label (e.g. Books, Winter Wear):"}
                         </Label>
                         <Input
                           type="text"
                           value={item.customLabel}
-                          onChange={(e) =>
-                            updateItem(globalIndex, "customLabel", e.target.value)
+                          onChange={(e) => updateItem(globalIndex, "customLabel", e.target.value)}
+                          placeholder={
+                            isHi
+                              ? "उदा. कार्टन #1: ऑर्गेनिक केमिस्ट्री नोट्स"
+                              : "e.g., Carton #1: Books & Notes"
                           }
-                          placeholder={isHi ? "उदा. कार्टन #1: ऑर्गेनिक केमिस्ट्री नोट्स" : "e.g., Carton #1: Books & Notes"}
                           className="border-white/15 bg-black/90 text-xs text-white h-9 px-3 font-medium"
                         />
                       </div>
@@ -537,7 +565,7 @@ export function LuggageItemizerModal({
                     addItemWithPreset(
                       "Carton Box",
                       `Carton #${items.length + 1}: Miscellaneous Items`,
-                      10
+                      10,
                     )
                   }
                   className="text-xs border-emerald-500/30 text-emerald-300 hover:bg-emerald-500/20 cursor-pointer"

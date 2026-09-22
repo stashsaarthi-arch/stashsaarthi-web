@@ -21,17 +21,35 @@ import { playTab } from "@/lib/audio";
 import type { BookingPrefill, OpenBooking } from "./types";
 
 // Lazy-load the secondary modules inside accordions so unexpanded accordions consume zero DOM/render overhead
-const PgComparisonTable = lazy(() => import("./PgComparisonTable").then((m) => ({ default: m.PgComparisonTable })));
+const PgComparisonTable = lazy(() =>
+  import("./PgComparisonTable").then((m) => ({ default: m.PgComparisonTable })),
+);
 const DualCrisis = lazy(() => import("./DualCrisis").then((m) => ({ default: m.DualCrisis })));
-const StashTimeline = lazy(() => import("./StashTimeline").then((m) => ({ default: m.StashTimeline })));
-const TrustConsoleHub = lazy(() => import("./TrustConsoleHub").then((m) => ({ default: m.TrustConsoleHub })));
-const StudentStoriesCarousel = lazy(() => import("./StudentStoriesCarousel").then((m) => ({ default: m.StudentStoriesCarousel })));
-const ReferralLeaderboard = lazy(() => import("./ReferralLeaderboard").then((m) => ({ default: m.ReferralLeaderboard })));
-const TopRatedKitchensWidget = lazy(() => import("./TopRatedKitchensWidget").then((m) => ({ default: m.TopRatedKitchensWidget })));
-const KanpurStudentCouncil = lazy(() => import("./KanpurStudentCouncil").then((m) => ({ default: m.KanpurStudentCouncil })));
+const StashTimeline = lazy(() =>
+  import("./StashTimeline").then((m) => ({ default: m.StashTimeline })),
+);
+const TrustConsoleHub = lazy(() =>
+  import("./TrustConsoleHub").then((m) => ({ default: m.TrustConsoleHub })),
+);
+const StudentStoriesCarousel = lazy(() =>
+  import("./StudentStoriesCarousel").then((m) => ({ default: m.StudentStoriesCarousel })),
+);
+const ReferralLeaderboard = lazy(() =>
+  import("./ReferralLeaderboard").then((m) => ({ default: m.ReferralLeaderboard })),
+);
+const TopRatedKitchensWidget = lazy(() =>
+  import("./TopRatedKitchensWidget").then((m) => ({ default: m.TopRatedKitchensWidget })),
+);
+const KanpurStudentCouncil = lazy(() =>
+  import("./KanpurStudentCouncil").then((m) => ({ default: m.KanpurStudentCouncil })),
+);
 const HostRules = lazy(() => import("./HostRules").then((m) => ({ default: m.HostRules })));
-const FamilyDashboard = lazy(() => import("./FamilyDashboard").then((m) => ({ default: m.FamilyDashboard })));
-const FeedbackSuggestions = lazy(() => import("./FeedbackSuggestions").then((m) => ({ default: m.FeedbackSuggestions })));
+const FamilyDashboard = lazy(() =>
+  import("./FamilyDashboard").then((m) => ({ default: m.FamilyDashboard })),
+);
+const FeedbackSuggestions = lazy(() =>
+  import("./FeedbackSuggestions").then((m) => ({ default: m.FeedbackSuggestions })),
+);
 const FAQ = lazy(() => import("./FAQ").then((m) => ({ default: m.FAQ })));
 
 interface MobileSecondaryAccordionsProps {

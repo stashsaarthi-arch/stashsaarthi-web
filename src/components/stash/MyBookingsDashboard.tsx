@@ -73,13 +73,14 @@ function formatDate(iso: string): string {
 type StatusFilter = "all" | "active" | "completed" | "cancelled";
 type VerticalFilter = "all" | "stash" | "kitchen" | "spaces" | "connect";
 
-const VERTICAL_FILTERS: { key: VerticalFilter; labelEn: string; labelHi: string; icon: string }[] = [
-  { key: "all", labelEn: "All Services", labelHi: "सभी सेवाएं", icon: "✨" },
-  { key: "stash", labelEn: "Luggage Stash", labelHi: "लगेज स्टैश", icon: "🎒" },
-  { key: "kitchen", labelEn: "Kitchen Subscriptions", labelHi: "किचन सब्सक्रिप्शन", icon: "🍲" },
-  { key: "spaces", labelEn: "Spaces Lease", labelHi: "स्पेस लीज", icon: "🏠" },
-  { key: "connect", labelEn: "Connect Sessions", labelHi: "कनेक्ट सेशंस", icon: "🤝" },
-];
+const VERTICAL_FILTERS: { key: VerticalFilter; labelEn: string; labelHi: string; icon: string }[] =
+  [
+    { key: "all", labelEn: "All Services", labelHi: "सभी सेवाएं", icon: "✨" },
+    { key: "stash", labelEn: "Luggage Stash", labelHi: "लगेज स्टैश", icon: "🎒" },
+    { key: "kitchen", labelEn: "Kitchen Subscriptions", labelHi: "किचन सब्सक्रिप्शन", icon: "🍲" },
+    { key: "spaces", labelEn: "Spaces Lease", labelHi: "स्पेस लीज", icon: "🏠" },
+    { key: "connect", labelEn: "Connect Sessions", labelHi: "कनेक्ट सेशंस", icon: "🤝" },
+  ];
 
 export function MyBookingsDashboard() {
   const { language } = useLanguage();
@@ -108,9 +109,7 @@ export function MyBookingsDashboard() {
   const rawUserBookings = useMemo(() => {
     if (!isMounted) return [];
     if (!user?.email) return [];
-    return getBookings().filter(
-      (b) => b.email.toLowerCase() === user.email.toLowerCase(),
-    );
+    return getBookings().filter((b) => b.email.toLowerCase() === user.email.toLowerCase());
   }, [user?.email, isMounted]);
 
   const verticalCounts = useMemo(() => {
@@ -149,8 +148,6 @@ export function MyBookingsDashboard() {
     return list;
   }, [rawUserBookings, statusFilter, verticalFilter]);
 
-
-
   const userMeals = useMemo(() => {
     if (!isMounted) return [];
     if (!user?.email) return [];
@@ -161,12 +158,16 @@ export function MyBookingsDashboard() {
   const userWaitlist = useMemo(() => {
     if (!isMounted) return [];
     if (!user?.email) return [];
-    return getWaitlistEntries().filter(
-      (w) => w.email.toLowerCase() === user.email.toLowerCase(),
-    );
+    return getWaitlistEntries().filter((w) => w.email.toLowerCase() === user.email.toLowerCase());
   }, [user?.email, isMounted]);
 
-  const tabs: { key: Tab; labelEn: string; labelHi: string; icon: React.ReactNode; count: number }[] = [
+  const tabs: {
+    key: Tab;
+    labelEn: string;
+    labelHi: string;
+    icon: React.ReactNode;
+    count: number;
+  }[] = [
     {
       key: "bookings",
       labelEn: "Bookings",
@@ -206,18 +207,16 @@ export function MyBookingsDashboard() {
           service: serviceName,
           note: eventNote,
         },
-      })
+      }),
     );
 
     toast.success(
-      isHi
-        ? `नवीनीकरण फॉर्म खोला गया: ${b.token}`
-        : `Opening renewal booking for ${b.token}...`,
+      isHi ? `नवीनीकरण फॉर्म खोला गया: ${b.token}` : `Opening renewal booking for ${b.token}...`,
       {
         description: isHi
           ? "विवरण स्वचालित रूप से लोड हो गए हैं।"
           : "Previous booking specs loaded into 1-tap checkout.",
-      }
+      },
     );
   };
 
@@ -228,18 +227,16 @@ export function MyBookingsDashboard() {
           service: "kitchen",
           note: `Reordering meal pack: ${m.mealType || "Standard Thali"} at ${m.kitchenNode || "Kakadeo Hub"}`,
         },
-      })
+      }),
     );
 
     toast.success(
-      isHi
-        ? `भोजन पुनः ऑर्डर फॉर्म खोला गया...`
-        : `Opening meal pack reorder form...`,
+      isHi ? `भोजन पुनः ऑर्डर फॉर्म खोला गया...` : `Opening meal pack reorder form...`,
       {
         description: isHi
           ? "आपका पसंदीदा किचन और विवरण लोड किया गया।"
           : "Your preferred kitchen node has been pre-selected.",
-      }
+      },
     );
   };
 
@@ -250,9 +247,21 @@ export function MyBookingsDashboard() {
     const isExpanded = expandedId === b.id;
     const status = getBookingStatus(b);
     const statusConfig = {
-      active: { labelEn: "Active", labelHi: "सक्रिय", style: "bg-emerald-500/10 text-emerald-400 border-emerald-500/30" },
-      completed: { labelEn: "Completed", labelHi: "पूर्ण", style: "bg-cyan-500/10 text-cyan-400 border-cyan-500/30" },
-      cancelled: { labelEn: "Cancelled", labelHi: "रद्द", style: "bg-rose-500/10 text-rose-400 border-rose-500/30" },
+      active: {
+        labelEn: "Active",
+        labelHi: "सक्रिय",
+        style: "bg-emerald-500/10 text-emerald-400 border-emerald-500/30",
+      },
+      completed: {
+        labelEn: "Completed",
+        labelHi: "पूर्ण",
+        style: "bg-cyan-500/10 text-cyan-400 border-cyan-500/30",
+      },
+      cancelled: {
+        labelEn: "Cancelled",
+        labelHi: "रद्द",
+        style: "bg-rose-500/10 text-rose-400 border-rose-500/30",
+      },
     }[status];
 
     return (
@@ -271,7 +280,9 @@ export function MyBookingsDashboard() {
                 <p className="text-sm font-semibold text-white truncate">
                   {isHi ? svc.hi : svc.en}
                 </p>
-                <span className={`text-[9px] px-1.5 py-0.5 rounded-full border font-bold ${statusConfig.style}`}>
+                <span
+                  className={`text-[9px] px-1.5 py-0.5 rounded-full border font-bold ${statusConfig.style}`}
+                >
                   {isHi ? statusConfig.labelHi : statusConfig.labelEn}
                 </span>
               </div>
@@ -359,7 +370,9 @@ export function MyBookingsDashboard() {
             {b.bags && (
               <div className="flex items-center gap-1.5">
                 <ShoppingBag className="h-3 w-3 text-slate-400" />
-                <span>{b.bags} {isHi ? "बैग" : "bags"} × {b.months || 1} {isHi ? "महीने" : "months"}</span>
+                <span>
+                  {b.bags} {isHi ? "बैग" : "bags"} × {b.months || 1} {isHi ? "महीने" : "months"}
+                </span>
               </div>
             )}
             {b.message && (
@@ -395,7 +408,9 @@ export function MyBookingsDashboard() {
                 onClick={async () => {
                   try {
                     await downloadInvoicePdf(b);
-                    toast.success(isHi ? "GST चालान PDF डाउनलोड हुआ!" : "GST Invoice PDF downloaded!");
+                    toast.success(
+                      isHi ? "GST चालान PDF डाउनलोड हुआ!" : "GST Invoice PDF downloaded!",
+                    );
                   } catch (e) {
                     toast.error(isHi ? "PDF जनरेट नहीं हो सका" : "Failed to generate PDF invoice");
                   }
@@ -415,12 +430,20 @@ export function MyBookingsDashboard() {
               <RefreshCw className="h-3.5 w-3.5 text-emerald-400 group-hover:rotate-180 transition-transform duration-500" />
               <span>
                 {b.service === "stash" || b.service === "micro"
-                  ? (isHi ? "स्लॉट नवीनीकृत करें (Renew Storage Slot)" : "Renew Storage Slot")
+                  ? isHi
+                    ? "स्लॉट नवीनीकृत करें (Renew Storage Slot)"
+                    : "Renew Storage Slot"
                   : b.service === "kitchen" || b.service === "meal"
-                    ? (isHi ? "टिफिन कूपन पुनः ऑर्डर करें (Reorder Meal Pack)" : "Reorder Meal Pack")
+                    ? isHi
+                      ? "टिफिन कूपन पुनः ऑर्डर करें (Reorder Meal Pack)"
+                      : "Reorder Meal Pack"
                     : b.service === "spaces"
-                      ? (isHi ? "स्टे नवीनीकृत करें (Renew Room Stay)" : "Renew Room Stay")
-                      : (isHi ? "सेक्शन पुनः बुक करें (Rebook Session)" : "Rebook Session")}
+                      ? isHi
+                        ? "स्टे नवीनीकृत करें (Renew Room Stay)"
+                        : "Renew Room Stay"
+                      : isHi
+                        ? "सेक्शन पुनः बुक करें (Rebook Session)"
+                        : "Rebook Session"}
               </span>
             </button>
           </div>
@@ -513,15 +536,10 @@ export function MyBookingsDashboard() {
   };
 
   const renderWaitlistCard = (w: WaitlistRecord) => (
-    <div
-      key={w.id}
-      className="bg-black/40 border border-white/8 rounded-xl p-3.5"
-    >
+    <div key={w.id} className="bg-black/40 border border-white/8 rounded-xl p-3.5">
       <div className="flex items-center justify-between gap-2">
         <div className="flex items-center gap-2.5 min-w-0">
-          <span className="text-lg shrink-0">
-            {w.user_type === "host" ? "🏠" : "🎓"}
-          </span>
+          <span className="text-lg shrink-0">{w.user_type === "host" ? "🏠" : "🎓"}</span>
           <div className="min-w-0">
             <p className="text-sm font-semibold text-white truncate">{w.full_name}</p>
             <p className="text-[10px] text-slate-400">
@@ -529,9 +547,7 @@ export function MyBookingsDashboard() {
             </p>
           </div>
         </div>
-        <p className="text-[10px] text-slate-500 shrink-0">
-          {formatDate(w.submittedAt)}
-        </p>
+        <p className="text-[10px] text-slate-500 shrink-0">{formatDate(w.submittedAt)}</p>
       </div>
     </div>
   );
@@ -580,13 +596,16 @@ export function MyBookingsDashboard() {
                 height={40}
                 className="h-10 w-10 rounded-full border-2 border-cyan-400 bg-black/80 object-cover shadow"
               />
-              <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-emerald-400 border-2 border-black" title="Verified Session" />
+              <span
+                className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-emerald-400 border-2 border-black"
+                title="Verified Session"
+              />
             </div>
             <div className="min-w-0">
               <div className="flex items-center gap-2">
                 <h4 className="text-sm font-bold text-white truncate">{user.name}</h4>
                 <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-semibold uppercase">
-                  {user.role === "host" ? (isHi ? "होस्ट" : "Host") : (isHi ? "छात्र" : "Student")}
+                  {user.role === "host" ? (isHi ? "होस्ट" : "Host") : isHi ? "छात्र" : "Student"}
                 </span>
               </div>
               <p className="text-[11px] text-slate-400 font-mono truncate">{user.email}</p>
@@ -604,19 +623,21 @@ export function MyBookingsDashboard() {
           <button
             key={tab.key}
             onClick={() => setActiveTab(tab.key)}
-            className={`flex-1 py-2 px-2 text-[11px] font-semibold rounded-md transition-colors flex items-center justify-center gap-1.5 ${activeTab === tab.key
+            className={`flex-1 py-2 px-2 text-[11px] font-semibold rounded-md transition-colors flex items-center justify-center gap-1.5 ${
+              activeTab === tab.key
                 ? "bg-cyan-500/20 text-cyan-300 shadow-sm"
                 : "text-slate-400 hover:bg-white/5"
-              }`}
+            }`}
           >
             {tab.icon}
             <span>{isHi ? tab.labelHi : tab.labelEn}</span>
             {tab.count > 0 && (
               <span
-                className={`ml-0.5 text-[9px] font-bold px-1.5 py-0.5 rounded-full ${activeTab === tab.key
+                className={`ml-0.5 text-[9px] font-bold px-1.5 py-0.5 rounded-full ${
+                  activeTab === tab.key
                     ? "bg-cyan-500/30 text-cyan-200"
                     : "bg-white/10 text-slate-400"
-                  }`}
+                }`}
               >
                 {tab.count}
               </span>
@@ -639,21 +660,26 @@ export function MyBookingsDashboard() {
                 key={vf.key}
                 onClick={() => {
                   setVerticalFilter(vf.key);
-                  if (activeTab !== "bookings" && (vf.key === "stash" || vf.key === "spaces" || vf.key === "connect")) {
+                  if (
+                    activeTab !== "bookings" &&
+                    (vf.key === "stash" || vf.key === "spaces" || vf.key === "connect")
+                  ) {
                     setActiveTab("bookings");
                   }
                 }}
-                className={`px-2.5 py-1 rounded-lg border flex items-center gap-1.5 shrink-0 transition-all font-medium ${isActive
+                className={`px-2.5 py-1 rounded-lg border flex items-center gap-1.5 shrink-0 transition-all font-medium ${
+                  isActive
                     ? "bg-cyan-500/20 text-cyan-300 border-cyan-500/40 shadow-sm font-semibold"
                     : "bg-black/40 text-slate-400 border-white/5 hover:border-white/20 hover:text-slate-200"
-                  }`}
+                }`}
               >
                 <span>{vf.icon}</span>
                 <span>{isHi ? vf.labelHi : vf.labelEn}</span>
                 {count > 0 && (
                   <span
-                    className={`text-[9px] px-1.5 py-0.2 rounded-full font-bold ${isActive ? "bg-cyan-500/30 text-cyan-200" : "bg-white/10 text-slate-400"
-                      }`}
+                    className={`text-[9px] px-1.5 py-0.2 rounded-full font-bold ${
+                      isActive ? "bg-cyan-500/30 text-cyan-200" : "bg-white/10 text-slate-400"
+                    }`}
                   >
                     {count}
                   </span>
@@ -678,10 +704,11 @@ export function MyBookingsDashboard() {
             <button
               key={f.key}
               onClick={() => setStatusFilter(f.key)}
-              className={`px-2.5 py-1 rounded-full border transition-all ${statusFilter === f.key
+              className={`px-2.5 py-1 rounded-full border transition-all ${
+                statusFilter === f.key
                   ? "bg-cyan-500/20 text-cyan-300 border-cyan-500/40 font-semibold"
                   : "bg-black/30 text-slate-400 border-white/5 hover:border-white/20"
-                }`}
+              }`}
             >
               {isHi ? f.labelHi : f.labelEn}
             </button>
@@ -692,19 +719,13 @@ export function MyBookingsDashboard() {
       {/* Content */}
       <div className="max-h-[40vh] overflow-y-auto space-y-2 pr-1 scrollbar-thin scrollbar-thumb-white/10">
         {activeTab === "bookings" &&
-          (userBookings.length > 0
-            ? userBookings.map(renderBookingCard)
-            : renderEmpty())}
+          (userBookings.length > 0 ? userBookings.map(renderBookingCard) : renderEmpty())}
 
         {activeTab === "meals" &&
-          (userMeals.length > 0
-            ? userMeals.map(renderMealCard)
-            : renderEmpty())}
+          (userMeals.length > 0 ? userMeals.map(renderMealCard) : renderEmpty())}
 
         {activeTab === "waitlist" &&
-          (userWaitlist.length > 0
-            ? userWaitlist.map(renderWaitlistCard)
-            : renderEmpty())}
+          (userWaitlist.length > 0 ? userWaitlist.map(renderWaitlistCard) : renderEmpty())}
       </div>
 
       <BookingDetailDrawer

@@ -26,7 +26,11 @@ const CHIPS: QuickChip[] = [
   { id: "connect", emoji: "🤝", labelEn: "Connect", labelHi: "कनेक्ट" },
 ];
 
-export const MobileStickyCTA = React.memo(function MobileStickyCTA({ onBook }: { onBook: OpenBooking }) {
+export const MobileStickyCTA = React.memo(function MobileStickyCTA({
+  onBook,
+}: {
+  onBook: OpenBooking;
+}) {
   const [isVisible, setIsVisible] = useState(false);
   const [activeService, setActiveService] = useState<ServiceId>("stash");
   const { role } = usePersona();

@@ -27,13 +27,7 @@ import {
 } from "@/lib/hostKycEngine";
 import { playClick, playPop } from "@/lib/audio";
 
-export function HostKycModal({
-  isOpen,
-  onClose,
-}: {
-  isOpen: boolean;
-  onClose: () => void;
-}) {
+export function HostKycModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const [activeStep, setActiveStep] = useState<1 | 2 | 3>(1);
   const [hostName, setHostName] = useState("Sudha Tripathi Ji");
   const [hostPhone, setHostPhone] = useState("+91 9839123456");
@@ -100,15 +94,12 @@ export function HostKycModal({
     setTimeout(() => setCopiedSerial(false), 2000);
   };
 
-  if (!isOpen || typeof document === 'undefined') return null;
+  if (!isOpen || typeof document === "undefined") return null;
 
   return createPortal(
     <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 sm:p-6">
       {/* 1. Dark Backdrop (Separate from content to avoid opacity inheritance) */}
-      <div 
-        className="absolute inset-0 bg-black/80 backdrop-blur-md"
-        onClick={onClose}
-      ></div>
+      <div className="absolute inset-0 bg-black/80 backdrop-blur-md" onClick={onClose}></div>
 
       {/* 2. Actual Modal Box */}
       <div className="relative z-[100000] w-full max-w-3xl bg-[#0A0D0F] border border-white/10 rounded-3xl overflow-hidden shadow-2xl text-foreground">
@@ -196,7 +187,8 @@ export function HostKycModal({
                 <div>
                   <div className="font-bold">DPDP Act 2023 Encrypted Vault Protocol</div>
                   <div className="text-[11px] text-amber-300/80 mt-0.5">
-                    Aadhaar numbers are automatically masked (XXXX-XXXX-8921) and zero plain-text identity numbers are stored in database tables.
+                    Aadhaar numbers are automatically masked (XXXX-XXXX-8921) and zero plain-text
+                    identity numbers are stored in database tables.
                   </div>
                 </div>
               </div>
@@ -259,7 +251,10 @@ export function HostKycModal({
                   </button>
                 </div>
                 <div className="text-[10px] text-muted-foreground mt-1">
-                  Preview Masked Output: <span className="font-mono text-amber-300">{maskAadhaarNumber(aadhaarInput)}</span>
+                  Preview Masked Output:{" "}
+                  <span className="font-mono text-amber-300">
+                    {maskAadhaarNumber(aadhaarInput)}
+                  </span>
                 </div>
               </div>
 
@@ -270,8 +265,12 @@ export function HostKycModal({
                     <ExternalLink className="h-4 w-4 text-cyan-400" />
                   </div>
                   <div>
-                    <div className="text-xs font-bold text-foreground">DigiLocker Government Gateway</div>
-                    <div className="text-[10px] text-muted-foreground">Direct API integration for UIDAI & Police Certificates</div>
+                    <div className="text-xs font-bold text-foreground">
+                      DigiLocker Government Gateway
+                    </div>
+                    <div className="text-[10px] text-muted-foreground">
+                      Direct API integration for UIDAI & Police Certificates
+                    </div>
                   </div>
                 </div>
                 <span className="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded-lg border border-emerald-500/30">
@@ -288,9 +287,12 @@ export function HostKycModal({
                 <div className="h-16 w-16 mx-auto rounded-3xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center">
                   <Camera className="h-8 w-8 text-amber-400" />
                 </div>
-                <h3 className="text-base font-bold text-foreground">AI Facial Liveness & Photo Match</h3>
+                <h3 className="text-base font-bold text-foreground">
+                  AI Facial Liveness & Photo Match
+                </h3>
                 <p className="text-xs text-muted-foreground">
-                  Matches live webcam snapshot against DigiLocker Aadhaar photo. Mandates ≥85% score for instant automated pass.
+                  Matches live webcam snapshot against DigiLocker Aadhaar photo. Mandates ≥85% score
+                  for instant automated pass.
                 </p>
               </div>
 
@@ -339,7 +341,9 @@ export function HostKycModal({
                 <div className="flex items-center gap-3">
                   <Award className="h-8 w-8 text-emerald-400 shrink-0" />
                   <div>
-                    <div className="text-sm font-bold">Verified Verified PG Owner Host e-KYC Certificate Issued</div>
+                    <div className="text-sm font-bold">
+                      Verified Verified PG Owner Host e-KYC Certificate Issued
+                    </div>
                     <div className="text-xs text-emerald-300/80">
                       Fully approved under Kanpur Police clearance & DPDP Act 2023 standards
                     </div>
@@ -356,18 +360,27 @@ export function HostKycModal({
               {/* Document Summary Matrix */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                 <div className="bg-white/[0.02] border border-white/10 rounded-2xl p-3.5 space-y-1">
-                  <div className="text-[10px] font-bold text-muted-foreground uppercase">Host Identity Details</div>
+                  <div className="text-[10px] font-bold text-muted-foreground uppercase">
+                    Host Identity Details
+                  </div>
                   <div className="font-bold text-foreground">{kycResult.hostName}</div>
-                  <div className="font-mono text-amber-300 text-[11px]">{kycResult.maskedAadhaar}</div>
+                  <div className="font-mono text-amber-300 text-[11px]">
+                    {kycResult.maskedAadhaar}
+                  </div>
                   <div className="text-[10px] text-muted-foreground">ID: {kycResult.hostId}</div>
                 </div>
 
                 <div className="bg-white/[0.02] border border-white/10 rounded-2xl p-3.5 space-y-1">
-                  <div className="text-[10px] font-bold text-muted-foreground uppercase">Verification Scores</div>
-                  <div className="text-emerald-400 font-bold">
-                    Facial Liveness: {kycResult.facialLivenessScore}% ({kycResult.facialMatchStatus})
+                  <div className="text-[10px] font-bold text-muted-foreground uppercase">
+                    Verification Scores
                   </div>
-                  <div className="text-cyan-400">Police Status: {kycResult.policeClearanceStatus}</div>
+                  <div className="text-emerald-400 font-bold">
+                    Facial Liveness: {kycResult.facialLivenessScore}% ({kycResult.facialMatchStatus}
+                    )
+                  </div>
+                  <div className="text-cyan-400">
+                    Police Status: {kycResult.policeClearanceStatus}
+                  </div>
                   <div className="text-[10px] text-muted-foreground font-mono truncate">
                     Hash: {kycResult.certificateHash}
                   </div>
@@ -376,14 +389,18 @@ export function HostKycModal({
 
               {/* Verified Documents List */}
               <div className="space-y-2">
-                <div className="text-xs font-bold text-muted-foreground">Verified DigiLocker Documents</div>
+                <div className="text-xs font-bold text-muted-foreground">
+                  Verified DigiLocker Documents
+                </div>
                 <div className="divide-y divide-white/5 border border-white/10 rounded-2xl bg-black/40 overflow-hidden">
                   {kycResult.documents.map((doc, idx) => (
                     <div key={idx} className="p-3 text-xs flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <CheckCircle2 className="h-4 w-4 text-emerald-400" />
                         <div>
-                          <div className="font-bold text-foreground capitalize">{doc.docType.replace("_", " ")}</div>
+                          <div className="font-bold text-foreground capitalize">
+                            {doc.docType.replace("_", " ")}
+                          </div>
                           <div className="text-[10px] text-muted-foreground">{doc.issuer}</div>
                         </div>
                       </div>
@@ -401,7 +418,11 @@ export function HostKycModal({
                   onClick={() => handleCopyHash(kycResult.certificateHash)}
                   className="px-3.5 py-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-xs text-foreground flex items-center gap-2 transition-colors"
                 >
-                  {copiedSerial ? <Check className="h-3.5 w-3.5 text-emerald-400" /> : <Copy className="h-3.5 w-3.5" />}
+                  {copiedSerial ? (
+                    <Check className="h-3.5 w-3.5 text-emerald-400" />
+                  ) : (
+                    <Copy className="h-3.5 w-3.5" />
+                  )}
                   <span>{copiedSerial ? "Certificate Hash Copied" : "Copy Certificate Hash"}</span>
                 </button>
 
@@ -417,6 +438,6 @@ export function HostKycModal({
         </div>
       </div>
     </div>,
-    document.body
+    document.body,
   );
 }

@@ -1,6 +1,7 @@
 # 📋 MASTER CONTINUOUS TASK QUEUE (50-TASK SPRINT ROADMAP)
 
 ## Sprint 0: Foundation & Polish (Completed)
+
 - [x] 1. **[CTO - Database]**: Audit Supabase telemetry and offline persistence queues for zero data drops.
 - [x] 2. **[CPO - Navigation Polish]**: Reorganize website navigation, deep tab synchronization, and smart explore search directory.
 - [x] 3. **[QA - Viewport Audit]**: Eliminate mobile overflow (<400px width) and enforce touch target safety.
@@ -14,6 +15,7 @@
 - [x] 11. **[QA - Performance]**: Run lighthouse audits and optimize any remaining LCP/CLS metrics to achieve 95+ score across mobile and desktop.
 
 ## Sprint 1: CTO (Performance & Backend)
+
 - [x] 12. **[CTO]**: Audit all Supabase RPC calls for latency optimizations.
 - [x] 13. **[CTO]**: Implement a Service Worker for offline-first capabilities and aggressive caching of static assets.
 - [x] 14. **[CTO]**: Refactor any remaining large image assets to WEBP with automatic `srcset` generation.
@@ -24,6 +26,7 @@
 - [x] 19. **[CTO]**: Setup end-to-end (E2E) testing stub with Playwright or Cypress for the core booking flow.
 
 ## Sprint 2: CPO (Product & UI Excellence)
+
 - [x] 20. **[CPO]**: Implement dark mode toggle with smooth color-palette transition (if not strictly locked to current theme).
 - [x] 21. **[CPO]**: Design and implement skeleton loaders for all data-fetching components.
 - [x] 22. **[CPO]**: Polish the "Host" persona dashboard with charts for projected passive income.
@@ -34,6 +37,7 @@
 - [x] 27. **[CPO]**: Audit and fix any low-contrast text ratios for WCAG AA compliance.
 
 ## Sprint 3: CMO (Marketing & Storytelling)
+
 - [x] 28. **[CMO]**: Create a dedicated "Student Success Stories" carousel component.
 - [x] 29. **[CMO]**: Implement dynamic OpenGraph images that render based on the specific route/persona.
 - [x] 30. **[CMO]**: Draft and integrate localized Hindi copy for the pricing calculator tool.
@@ -44,6 +48,7 @@
 - [x] 35. **[CMO]**: Create a "Why StashSaarthi vs. Traditional PGs" comparison table.
 
 ## Sprint 4: CRO (Conversion Rate Optimization)
+
 - [x] 36. **[CRO]**: Implement exit-intent popups offering a slight discount or priority support on the booking page.
 - [x] 37. **[CRO]**: A/B test the primary Hero CTA button color (e.g., Mint vs. Emerald).
 - [x] 38. **[CRO]**: Reduce the number of mandatory fields in the initial lead capture form.
@@ -54,6 +59,7 @@
 - [x] 43. **[CRO]**: Analyze scroll-depth and move the highest-converting module higher up the page.
 
 ## Sprint 5: QA & CSO (Quality, Safety, Compliance)
+
 - [x] 44. **[QA]**: Conduct a full security audit of the Supabase Row Level Security (RLS) policies.
 - [x] 45. **[QA]**: Test the UI on specific older Android devices (via emulation) to ensure no WebGL crashes.
 - [x] 46. **[CSO]**: Draft a clear "Host Vetting Process" flow diagram and integrate it into the Trust section.
@@ -61,7 +67,9 @@
 - [x] 48. **[QA]**: Verify all external links open in a new tab with `rel="noopener noreferrer"`.
 - [x] 49. **[CSO]**: Draft the formal Privacy Policy & Terms of Service page content and link it in the footer.
 - [x] 50. **[CEO]**: Compile all Sprint Reports into a single Master Release Note (v2.0) and push to production.
+
 ## Sprint 6
+
 - [x] 51. [CAO - Predictive AI]: Implement a light ML model (e.g., using TensorFlow.js) on the client side to predict user persona (Student/Host) based on scroll behavior and pre-load relevant assets.
 - [x] 52. [CTO - Database]: Design Supabase schema for dynamic, location-based pricing tiers (e.g., higher storage rates near premium hostels).
 - [x] 53. [CAO - Vision AI]: Set up a serverless edge function for Host Vetting: Auto-verify property photos for quality, safety, and "ghar jaisa" aesthetics using Google Cloud Vision API.
@@ -73,6 +81,7 @@
 - [x] 59. [CTO - Infrastructure]: Set up redundant Supabase edge function deployments across different geographical regions for maximum uptime.
 
 ## Sprint 7: CPO & UI/UX (Hyperlocal Mobile Dominance)
+
 - [x] 60. [CPO - Kitchen UI]: Add real-time "availability percentage" bars to each kitchen node (e.g., "75% of lunch tokens sold").
 - [x] 61. [UX - Kitchen Flow]: Design and implement a 2-step "Re-order My Last Meal" shortcut on the dashboard.
 - [x] 62. [UI - Spaces]: Integrate a lightweight, open-source 360° photo viewer for Saarthi Spaces room tours (using Pannellum or similar).
@@ -82,7 +91,9 @@
 - [x] 66. [UI - Gamification]: Design a "Karma Points" UI badge for Saarthi Connect, rewarding active seniors for their participation.
 - [x] 67. [CPO - Accessibility]: Conduct a full screen-reader audit and ensure all interactive components have appropriate ARIA labels and roles.
 - [x] 68. [UX - Payment Flow]: Implement a "Partial UPI Payment" option allowing students to pay 50% in cash at pickup, reducing upfront friction.
+
 ## Sprint 8: CMO & CLO (Hyperlocal Growth & Community Engagement)
+
 - [x] 69. [CMO - SEO]: Create dedicated, crawlable pages for every distinct coaching hub: /tiffin-services-near-motion, /tiffin-services-near-physics-wallah.
 - [x] 70. [CMO - Content]: Design a downloadable PDF guide: "The Complete Guide to Surviving Kakadeo as a New Student (powered by StashSaarthi)".
 - [x] 71. [CMO - Community]: Launch an official "Kanpur Student Council" section, inviting student leaders to discuss platform features and local issues.
@@ -93,6 +104,7 @@
 - [x] 76. [CMO - Content]: Script and coordinate a series of "Student Testimonial" short-form videos focusing on Saarthi Spaces and Connect.
 
 ## Sprint 9: CRO & CAO (Intelligent Conversion & Retention)
+
 - [x] 77. [CAO - Intelligent Nudges]: Implement a backend system to trigger personalized WhatsApp messages to students who haven't ordered in 3 days, offering a 1-day free delivery token.
 - [x] 78. [CRO - Tiffin Flow]: Implement "Meal Personalization" (e.g., "Skip Rice, Extra Roti" for ₹5 more) during the booking process.
 - [x] 79. [CRO - Spaces Flow]: Add a high-contrast "Instant Booking" button alongside the existing "Find Broker-Free Rooms" button.
@@ -103,6 +115,7 @@
 - [x] 84. [CRO - Tiffin Flow]: A/B test changing the Standard Thali price label from "₹50 (pickup) / ₹60 (delivery)" to "From ₹50, save more on pickup".
 
 ## Sprint 10: QA, CSO & CEO (Total Assurance, Compliance & Strategic Direction)
+
 - [x] 85. [QA - Kitchen Performance]: Stress-test the Service Worker's handling of multiple kitchen images loading simultaneously on a 2G connection emulator.
 - [x] 86. [QA - Storage Logic]: E2E test the luggage storage booking flow, specifically verifying that QR codes generated match the unique booking ID and can be scanned across different user roles.
 - [x] 87. [CSO - Data Privacy]: Conduct a comprehensive audit of all GDPR and India's DPDP Act compliance, ensuring all user data is stored and processed lawfully.
@@ -122,6 +135,7 @@
 - [x] 101. [CEO]: Compile all Sprint Reports into a single Master Release Note (v3.0) and push to production.
 
 ## Sprint 11: User Profile, Booking Telemetry & Real-Time Lifecycle (Tasks 102–111)
+
 - [x] 102. [CTO / CPO - Direct Request]: Profile icon click par responsive flyout menu / dropdown render karna jisme direct "My Bookings" action button ho; click karne par complete historical booking logs (Active, Completed, Cancelled) display hon.
 
 - [x] 103. [CTO - Bookings Engine]: Supabase me unified user_master_bookings view compile karna jo Storage, Kitchen tokens aur Spaces lease agreements ko single query me merge kare with instant pagination.
@@ -143,6 +157,7 @@
 - [x] 111. [CTO - Live Status Badges]: Supabase realtime channels se booking card par dynamic state update karna (Item Received ➔ In Secure Locker ➔ Ready for Retrieval).
 
 ## Sprint 12: Host Engine, Payouts & Micro-Warehousing (Tasks 112–121)
+
 - [x] 112. [CTO - Razorpay Route Integration]: Verified hosts ke bank accounts/UPI IDs me automated split-payouts schedule karna booking complete hone ke 24 ghante ke andar.
 
 - [x] 113. [CPO - Host Inventory Grid]: Hosts ke dashboard me visual isometric room capacity grid banana, jisse host manually mark kar sake ki kitne standard boxes ki space bachi hai.
@@ -164,6 +179,7 @@
 - [x] 121. [CPO - Host Rating & Tiering]: Hosts ke liye "SuperHost" badge logic build karna based on 99% check-in accuracy and zero dispute record.
 
 ## Sprint 13: Logistics, Pickup Fleet & Barcode Security (Tasks 122–131)
+
 - [x] 122. [CTO - Delivery Fleet Mini-PWA]: Local delivery agents / campus runners ke liye fast, lightweight scanner view banana for doorstep box pickups.
 
 - [x] 123. [CSO - Tamper-Proof Hologram Protocol]: Har physical StashSaarthi tamper tape par pre-printed alphanumeric code ko camera scanner se link karke record lock karna.
@@ -185,6 +201,7 @@
 - [x] 131. [QA - Reverse Logistics Flow]: Student agar end-of-break par city wapas na aaye aur box kisi friend ko handover karwana chahe, toh secure proxy-handover verification test karna.
 
 ## Sprint 14: Saarthi Kitchens — Meal Token Architecture (Tasks 132–141)
+
 - [x] 132. [CTO - Meal Token Ledger]: Kitchen subscription coupons ko cryptographic micro-tokens ke format me store karna jisse daily meal par 1 token burn ho sake.
 
 [ ] 133. [UX - Today's Live Menu Card]: Har partner kitchen ke liye automated daily menu banner jo subah 9:00 AM par auto-refresh ho with verified thali photo.
@@ -206,6 +223,7 @@
 [ ] 141. [CSO - FSSAI Compliance Vault]: Saare onboarding home kitchens ka FSSAI registration certificate upload aur expiry notification cron-job setup karna.
 
 ## Sprint 15: Saarthi Spaces — Co-Living & Roommate Matchmaking (Tasks 142–151)
+
 [ ] 142. [CPO - Roommate Compatibility Engine]: 7-question lifestyle questionnaire banana (Sleep schedule, Study hours, AC habits, Non-smoker) with compatibility percentage score.
 
 [ ] 143. [UX - Zero-Brokerage Verified Badge]: Har listing card par prominent neon badge: "100% Broker-Free • Direct Owner Contact".
@@ -227,6 +245,7 @@
 [ ] 151. [CTO - WhatsApp Landlord Connect]: Verified students ko direct landlord WhatsApp chat redirect trigger dena with pre-filled profile bio.
 
 ## Sprint 16: Saarthi Connect — Intergenerational Community & Audio (Tasks 152–161)
+
 [ ] 152. [CTO - WebRTC Audio Rooms]: Senior citizens aur competitive exam students ke beech low-bandwidth peer-to-peer 1-on-1 audio calling connect setup karna.
 
 [ ] 153. [UX - Senior Citizen Large-Type Mode]: Saarthi Connect host portal par high-contrast 20px+ font toggle aur high-legibility icons provide karna.
@@ -248,6 +267,7 @@
 [ ] 161. [UX - Emotional Gratitude Card]: Session end hone par student ko custom "Thank You Note" send karne ka visual option dena.
 
 ## Sprint 17: Hyperlocal Growth, SEO & Campus Viral Loops (Tasks 162–171)
+
 [ ] 162. [CMO - Campus Ambassador Portal]: College representatives ke liye custom dashboard banana with live invite tracking aur leaderboard payouts.
 
 [ ] 163. [CTO - Dynamic Referral Deep-Links]: Unique referral links generate karna (stashsaarthi.in/r/advik-iitk) jo app launch hone par direct referee wallet balance credit kare.
@@ -269,6 +289,7 @@
 [ ] 171. [CRO - Stash Wallet Gamification]: Har successful referral par "Scratch Card" interaction visually draw karwana (Canvas confetti effect).
 
 ## Sprint 18: Payments, Edge Telemetry & Offline Resilience (Tasks 172–181)
+
 [ ] 172. [CTO - UPI Deep Linking]: Desktop/Mobile browser se direct Google Pay, PhonePe, Paytm intent launch trigger karna without manual VPA entry.
 
 [ ] 173. [QA - Failed Payment Reconciliation Webhook]: Agar payment gateway se deduct ho jaye par internet drop hone par status na badle, toh background webhook se auto-heal booking state setup karna.
@@ -290,6 +311,7 @@
 [ ] 181. [CTO - Database Replica Health Check]: Supabase read-replicas configure karna for heavy read traffic during semester peak dates.
 
 ## Sprint 19: Accessibility, Native PWA & Device Polish (Tasks 182–191)
+
 [ ] 182. [UX - PWA Add to Home Screen Prompt]: 2nd visit par subtle, custom native banner dikhana: "Install StashSaarthi App for 1-Tap Booking Access".
 
 [ ] 183. [QA - Screen Reader WCAG 2.1 AAA Audit]: NVDA aur TalkBack screen readers par saare modal focus traps aur aria-live alerts ko rigorously verify karna.
@@ -311,6 +333,7 @@
 [ ] 191. [CPO - Print-Ready Luggage Label Generator]: Student ke laptop se direct printable A4 sheet generate karna jisme luggage tags with bar-code print ho sakein.
 
 ## Sprint 20: Governance, Strategic Hardening & v4.0 Release (Tasks 192–201)
+
 [ ] 192. [CSO - Government Identity Sandbox Verification]: Government startup portals (Startup India / UP IT & Startup Policy) compliance credentials website footer me formalize karna.
 
 [ ] 193. [CEO - Executive CAC vs LTV Cohort Analytics]: Har individual vertical (Storage vs Tiffin vs Space) ka exact CAC, Payback Period aur Gross Margin monitor karne ke liye executive table code karna.
