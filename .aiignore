@@ -1,0 +1,12 @@
+# AI Context Boundaries (Do Not Parse)
+node_modules/
+dist/
+build/
+.next/
+public/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+*.log
+*.env*
+.vercel/
