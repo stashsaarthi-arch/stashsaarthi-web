@@ -31,7 +31,7 @@ export const FloatingPersonaToggle = memo(function FloatingPersonaToggle() {
           transition={{ duration: 0.2 }}
           role="radiogroup"
           aria-label={isHi ? "यूज़र पर्सोना चुनें" : "Select User Persona"}
-          className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 hidden sm:flex items-center gap-1 rounded-full border border-white/[0.08] bg-[#0A0D0F]/85 p-1 shadow-[0_12px_36px_-6px_rgba(0,0,0,0.8),inset_0_1px_0_0_rgba(255,255,255,0.08)] backdrop-blur-2xl pointer-events-auto"
+          className="sticky top-[64px] sm:top-[80px] z-[150] w-full hidden sm:flex items-center justify-center gap-2 bg-[#0A0D0F]/95 backdrop-blur-md p-2 border-b border-white/[0.08] shadow-[0_12px_36px_-6px_rgba(0,0,0,0.8)] pointer-events-auto"
         >
           <motion.button
             type="button"

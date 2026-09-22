@@ -115,7 +115,7 @@ function Index() {
   }, [open]);
 
   return (
-    <main id="main-content" tabIndex={-1} className="relative min-h-screen overflow-x-hidden bg-[#0a0a0a] text-white transition-colors duration-500 focus:outline-none pt-16 md:pt-20 pb-[90px] md:pb-0">
+    <main id="main-content" tabIndex={-1} className="relative min-h-screen bg-[#0a0a0a] text-white transition-colors duration-500 focus:outline-none pt-16 md:pt-20 pb-[90px] md:pb-0">
       <a href="#main-content" className="skip-to-content">
         Skip to main content
       </a>
@@ -129,6 +129,10 @@ function Index() {
           onEarlyAccess={handleEarlyAccess}
           onRefer={handleRefer}
         />
+      </ErrorBoundary>
+
+      <ErrorBoundary sectionName="Floating Persona Toggle Widget" compact>
+        <FloatingPersonaToggle />
       </ErrorBoundary>
 
       {/* Floating in-page quick jump sub-nav pill */}
@@ -309,9 +313,6 @@ function Index() {
       </Suspense>
       <ErrorBoundary sectionName="Scroll Progress Indicator" compact>
         <ScrollProgress />
-      </ErrorBoundary>
-      <ErrorBoundary sectionName="Floating Persona Toggle Widget" compact>
-        <FloatingPersonaToggle />
       </ErrorBoundary>
       <Suspense fallback={null}>
         <ErrorBoundary sectionName="Founder Escalation Widget" compact>
