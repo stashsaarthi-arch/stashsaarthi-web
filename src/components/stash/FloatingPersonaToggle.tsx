@@ -1,4 +1,4 @@
-import { useState, useEffect, memo } from "react";
+import { useState, useEffect, useRef, memo } from "react";
 import { usePersona } from "@/context/PersonaContext";
 import { useLanguage } from "@/context/LanguageContext";
 import { GraduationCap, HeartHandshake } from "lucide-react";
@@ -10,11 +10,15 @@ export const FloatingPersonaToggle = memo(function FloatingPersonaToggle() {
   const { language } = useLanguage();
   const isHi = language === "hi";
   const [visible, setVisible] = useState(false);
+  const visibleRef = useRef(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      // Only show when scrolled past the Hero section (350px) to keep search input uncluttered
-      setVisible(window.scrollY > 350);
+      const shouldShow = window.scrollY > 350;
+      if (shouldShow !== visibleRef.current) {
+        visibleRef.current = shouldShow;
+        setVisible(shouldShow);
+      }
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();

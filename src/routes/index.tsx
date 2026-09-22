@@ -278,7 +278,7 @@ function Index() {
       </div>
 
       {/* Desktop Inline Deep Modules (>= md) */}
-      <div className="hidden md:block content-visibility-auto">
+      <div className="hidden md:block content-visibility-auto optimize-render">
         <ErrorBoundary sectionName="Why StashSaarthi vs Traditional PGs">
           <Suspense fallback={null}>
             <PgComparisonTable onBook={open} />

@@ -1,0 +1,5 @@
+
+.optimize-render {
+  content-visibility: auto;
+  contain-intrinsic-size: 1000px;
+}

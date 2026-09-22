@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo } from "react";
+import React, { useState, useEffect, useRef, memo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Soup, Boxes, Home, HandHeart } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
@@ -25,6 +25,7 @@ const SERVICE_CHIPS: ServiceChip[] = [
 
 export const ServiceQuickJumpPill = memo(function ServiceQuickJumpPill() {
   const [visible, setVisible] = useState(false);
+  const visibleRef = useRef(false);
   const [activeTab, setActiveTab] = useState<ServiceId>("stash");
   const { language } = useLanguage();
   const { role } = usePersona();
@@ -33,9 +34,11 @@ export const ServiceQuickJumpPill = memo(function ServiceQuickJumpPill() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Becomes visible once scrolled past the hero section (~450px)
       const shouldShow = window.scrollY > 420;
-      setVisible(shouldShow);
+      if (shouldShow !== visibleRef.current) {
+        visibleRef.current = shouldShow;
+        setVisible(shouldShow);
+      }
     };
 
     const handleTabEvent = (e: Event) => {

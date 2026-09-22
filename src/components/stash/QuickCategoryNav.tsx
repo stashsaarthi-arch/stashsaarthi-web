@@ -1,4 +1,4 @@
-import { useState, useEffect, memo } from "react";
+import { useState, useEffect, useRef, memo } from "react";
 import {
   Boxes,
   Calculator,
@@ -122,7 +122,9 @@ const QUICK_CHIPS: QuickChip[] = [
 
 export const QuickCategoryNav = memo(function QuickCategoryNav() {
   const [active, setActive] = useState("solutions");
+  const activeRef = useRef("solutions");
   const [isSticky, setIsSticky] = useState(false);
+  const stickyRef = useRef(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [showSearch, setShowSearch] = useState(false);
   const { language } = useLanguage();
@@ -135,7 +137,11 @@ export const QuickCategoryNav = memo(function QuickCategoryNav() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      setIsSticky(scrollY > 480);
+      const shouldBeSticky = scrollY > 480;
+      if (shouldBeSticky !== stickyRef.current) {
+        stickyRef.current = shouldBeSticky;
+        setIsSticky(shouldBeSticky);
+      }
 
       // Track active section
       for (let i = CATEGORIES.length - 1; i >= 0; i--) {
@@ -145,7 +151,10 @@ export const QuickCategoryNav = memo(function QuickCategoryNav() {
           if (el) {
             const rect = el.getBoundingClientRect();
             if (rect.top <= 200) {
-              setActive(cat.id);
+              if (cat.id !== activeRef.current) {
+                activeRef.current = cat.id;
+                setActive(cat.id);
+              }
               break;
             }
           }

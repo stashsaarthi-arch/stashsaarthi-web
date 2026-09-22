@@ -1,4 +1,4 @@
-import { useEffect, useState, memo } from "react";
+import { useState, useEffect, memo, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X, GraduationCap, HeartHandshake } from "lucide-react";
 import { Link } from "@tanstack/react-router";
@@ -85,14 +85,39 @@ export const Navbar = memo(function Navbar({
   onEarlyAccess?: () => void;
   onRefer?: () => void;
 }) {
-  const [scrolled, setScrolled] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
+  const innerNavRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
   const [showTrialModal, setShowTrialModal] = useState(false);
   const { language, setLanguage, t } = useLanguage();
   const isHi = language === "hi";
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 30);
+    let isScrolled = false;
+    const onScroll = () => {
+      const shouldScroll = window.scrollY > 30;
+      if (shouldScroll !== isScrolled) {
+        isScrolled = shouldScroll;
+        if (navRef.current) {
+          if (isScrolled) {
+            navRef.current.classList.add("!bg-[#0A0D0F]/40", "!backdrop-blur-[24px]", "!backdrop-saturate-[180%]", "!border-b", "!border-white/10", "!shadow-2xl");
+            navRef.current.classList.remove("!bg-[#0A0D0F]/10", "!backdrop-blur-[12px]", "!border-white/5");
+          } else {
+            navRef.current.classList.remove("!bg-[#0A0D0F]/40", "!backdrop-blur-[24px]", "!backdrop-saturate-[180%]", "!shadow-2xl");
+            navRef.current.classList.add("!bg-[#0A0D0F]/10", "!backdrop-blur-[12px]", "!border-white/5");
+          }
+        }
+        if (innerNavRef.current) {
+          if (isScrolled) {
+            innerNavRef.current.classList.add("!h-14", "sm:!h-16");
+            innerNavRef.current.classList.remove("!h-15", "sm:!h-20");
+          } else {
+            innerNavRef.current.classList.remove("!h-14", "sm:!h-16");
+            innerNavRef.current.classList.add("!h-15", "sm:!h-20");
+          }
+        }
+      }
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -100,17 +125,13 @@ export const Navbar = memo(function Navbar({
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 !z-[999] w-full transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] ${
-        scrolled
-          ? "!bg-[#0A0D0F]/40 !backdrop-blur-[24px] !backdrop-saturate-[180%] !border-b !border-white/10 !shadow-2xl"
-          : "!bg-[#0A0D0F]/10 !backdrop-blur-[12px] !border-b !border-white/5"
-      }`}
+      ref={navRef}
+      className="fixed top-0 left-0 right-0 !z-[999] w-full transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] !bg-[#0A0D0F]/10 !backdrop-blur-[12px] !border-b !border-white/5"
     >
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-24 bg-emerald-500/20 blur-[60px] -z-10 rounded-full pointer-events-none"></div>
       <div
-        className={`max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-4 xl:px-6 w-full max-w-full overflow-hidden flex items-center justify-between gap-1 sm:gap-2 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] ${
-          scrolled ? "h-14 sm:h-16" : "h-15 sm:h-20"
-        }`}
+        ref={innerNavRef}
+        className="max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-4 xl:px-6 w-full max-w-full overflow-hidden flex items-center justify-between gap-1 sm:gap-2 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] !h-15 sm:!h-20"
       >
         {/* 1. Left: Brand Logo */}
         <div className="flex items-center shrink-0">

@@ -5,7 +5,7 @@ import { dispatchNavTab, smoothScrollTo } from "./legal";
 import { playTab, playPop } from "@/lib/audio";
 import { ArrowRight, Zap } from "lucide-react";
 import type { OpenBooking } from "./types";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { usePersona } from "@/context/PersonaContext";
 import { AnimatePresence, motion } from "motion/react";
 import { Button } from "@/components/ui/button";
@@ -32,6 +32,7 @@ export const MobileStickyCTA = React.memo(function MobileStickyCTA({
   onBook: OpenBooking;
 }) {
   const [isVisible, setIsVisible] = useState(false);
+  const visibleRef = useRef(false);
   const [activeService, setActiveService] = useState<ServiceId>("stash");
   const { role } = usePersona();
   const { language } = useLanguage();
@@ -40,8 +41,11 @@ export const MobileStickyCTA = React.memo(function MobileStickyCTA({
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show dock when scrolled past 250px
-      setIsVisible(window.scrollY > 250);
+      const shouldBeVisible = window.scrollY > 250;
+      if (shouldBeVisible !== visibleRef.current) {
+        visibleRef.current = shouldBeVisible;
+        setIsVisible(shouldBeVisible);
+      }
     };
 
     const handleTabEvent = (e: Event) => {
