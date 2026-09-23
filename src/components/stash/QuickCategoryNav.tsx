@@ -188,9 +188,9 @@ export const QuickCategoryNav = memo(function QuickCategoryNav() {
     <div
       role="region"
       aria-label={isHi ? "त्वरित श्रेणी नेविगेशन" : "Quick Category Jump Navigation"}
-      className={`z-30 transition-all duration-300 ${
+      className={`z-[150] transition-all duration-300 ${
         isSticky
-          ? "sticky top-16 mx-auto max-w-5xl px-3 py-1.5"
+          ? "sticky top-[64px] sm:top-[80px] mx-auto max-w-5xl px-3 py-1.5"
           : "relative mx-auto max-w-5xl px-3 py-2"
       }`}
     >

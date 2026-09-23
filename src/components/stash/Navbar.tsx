@@ -131,7 +131,7 @@ export const Navbar = memo(function Navbar({
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-24 bg-emerald-500/20 blur-[60px] -z-10 rounded-full pointer-events-none"></div>
       <div
         ref={innerNavRef}
-        className="max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-4 xl:px-6 w-full max-w-full overflow-hidden flex items-center justify-between gap-1 sm:gap-2 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] !h-15 sm:!h-20"
+        className="max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-4 xl:px-6 w-full max-w-full overflow-visible flex items-center justify-between gap-1 sm:gap-2 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] !h-15 sm:!h-20"
       >
         {/* 1. Left: Brand Logo */}
         <div className="flex items-center shrink-0">
@@ -149,7 +149,7 @@ export const Navbar = memo(function Navbar({
         {/* 2. Middle: Desktop Navigation Links */}
         <nav
           aria-label="Main Navigation"
-          className="hidden xl:flex flex-1 items-center justify-start gap-3 overflow-x-auto whitespace-nowrap scrollbar-hide px-4"
+          className="hidden md:flex flex-1 items-center justify-start gap-2 lg:gap-3 overflow-x-auto whitespace-nowrap scrollbar-hide px-2 lg:px-4"
         >
           {NAV_LINKS.map((l) => {
             const label = isHi ? l.labelHi : l.labelEn;

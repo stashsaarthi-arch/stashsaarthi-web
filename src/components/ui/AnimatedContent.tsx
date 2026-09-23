@@ -1,5 +1,5 @@
-import React, { useRef, useEffect } from "react";
-import gsap from "gsap";
+import React from "react";
+import { motion } from "framer-motion";
 
 export interface AnimatedContentProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -7,13 +7,13 @@ export interface AnimatedContentProps extends React.HTMLAttributes<HTMLDivElemen
   direction?: "vertical" | "horizontal";
   reverse?: boolean;
   duration?: number;
-  ease?: string;
+  ease?: any;
   delay?: number;
   scale?: number;
   threshold?: number;
   initialOpacity?: number;
   animateOpacity?: boolean;
-  parallax?: boolean;
+  parallax?: boolean; // Parallax is unsupported under performance rules, will fallback to entrance
   yPercent?: number;
   scrub?: boolean | number;
   staggerChildren?: boolean;
@@ -28,8 +28,8 @@ export const AnimatedContent = React.memo(function AnimatedContent({
   distance = 30,
   direction = "vertical",
   reverse = false,
-  duration = 0.8,
-  ease = "power3.out",
+  duration = 0.5, // slightly faster to feel snappier without GSAP
+  ease = [0.16, 1, 0.3, 1], // approximate cubic-bezier
   delay = 0,
   scale = 1,
   threshold = 0.12,
@@ -45,93 +45,41 @@ export const AnimatedContent = React.memo(function AnimatedContent({
   viewportOnce = true,
   ...rest
 }: AnimatedContentProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const xOffset = direction === "horizontal" ? (reverse ? -distance : distance) : 0;
+  const yOffset = direction === "vertical" ? (reverse ? -distance : distance) : 0;
 
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
+  const initial = {
+    x: xOffset,
+    y: yOffset,
+    opacity: animateOpacity ? initialOpacity : 1,
+    scale: scale,
+  };
 
-    // Use GSAP context for clean cleanup
-    const ctx = gsap.context(() => {
-      if (parallax && yPercent) {
-        gsap.to(el, {
-          yPercent: yPercent,
-          ease: "none",
-          scrollTrigger: {
-            trigger: el,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: scrub === true ? 1 : scrub,
-          },
-        });
-      } else {
-        const xOffset = direction === "horizontal" ? (reverse ? -distance : distance) : 0;
-        const yOffset = direction === "vertical" ? (reverse ? -distance : distance) : 0;
+  const animate = {
+    x: 0,
+    y: 0,
+    opacity: 1,
+    scale: 1,
+  };
 
-        const targets = staggerChildren ? gsap.utils.toArray(el.children) : el;
-
-        // Apply initial state immediately
-        gsap.set(targets, {
-          x: xOffset,
-          y: yOffset,
-          opacity: animateOpacity ? initialOpacity : 1,
-          scale: scale,
-          willChange: "transform, opacity",
-        });
-
-        // Animate on scroll trigger
-        gsap.to(targets, {
-          x: 0,
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: duration,
-          ease: ease,
-          delay: delay,
-          stagger: staggerChildren ? staggerDelay : 0,
-          clearProps: "willChange", // Hardware acceleration cleanup
-          scrollTrigger: {
-            trigger: el,
-            start: `top ${100 - threshold * 100}%`,
-            once: viewportOnce,
-          },
-        });
-      }
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, [
-    distance,
-    direction,
-    reverse,
+  const transition = {
     duration,
     ease,
     delay,
-    scale,
-    threshold,
-    initialOpacity,
-    animateOpacity,
-    parallax,
-    yPercent,
-    scrub,
-    staggerChildren,
-    staggerDelay,
-    viewportOnce,
-  ]);
+  };
 
   return (
-    <div
-      ref={containerRef}
-      className={`gpu-accelerated ${className}`}
-      style={{
-        ...style,
-        transform: "translate3d(0, 0, 0)", // Ensure 3D composite layer
-        backfaceVisibility: "hidden",
-      }}
-      {...rest}
+    <motion.div
+      initial={initial}
+      whileInView={animate}
+      viewport={{ once: viewportOnce, amount: threshold }}
+      transition={transition}
+      className={`gpu-layer ${className}`}
+      style={style}
+      {...rest as any}
     >
       {children}
-    </div>
+    </motion.div>
   );
 });
 

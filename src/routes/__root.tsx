@@ -29,17 +29,12 @@ import { NetworkStatus } from "@/components/stash/NetworkStatus";
 import { coLivingSpacesSchema, coLivingItemListSchema } from "@/lib/seo-coliving-schema";
 import { ReactLenis, useLenis } from "lenis/react";
 import "lenis/dist/lenis.css";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import "lenis/dist/lenis.css";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-  gsap.ticker.lagSmoothing(500, 33);
-}
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+    <div className="flex min-h-screen items-center justify-center bg-transparent px-4">
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-bold text-foreground">404</h1>
         <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
@@ -67,7 +62,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   }, [error]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+    <div className="flex min-h-screen items-center justify-center bg-transparent px-4">
       <div className="max-w-md text-center">
         <h1 className="text-xl font-semibold tracking-tight text-foreground">
           This page didn't load
@@ -460,7 +455,15 @@ function RootShell({ children }: { children: ReactNode }) {
         />
       </head>
       <body className="pb-24 sm:pb-0" suppressHydrationWarning={true}>
-        {children}
+        {/* Background Layers (Locked in space) */}
+        <div className="spatial-noise"></div>
+        <div className="ambient-glow-1"></div>
+        <div className="ambient-glow-2"></div>
+        
+        {/* Foreground Content Wrapper */}
+        <main className="relative z-10 w-full min-h-screen overflow-hidden">
+          {children}
+        </main>
         <Scripts />
       </body>
     </html>
@@ -483,23 +486,13 @@ function LenisHandler() {
       isScrollingTimeout = setTimeout(() => {
         document.body.classList.remove("is-scrolling");
       }, 100);
-      ScrollTrigger.update();
     };
 
     lenis.on("scroll", handleScroll);
 
-    // Force ultra-smooth 120 FPS scrolling in normal data mode
-    if (!isLowData) {
-      gsap.ticker.fps(120);
-    } else {
-      gsap.ticker.fps(30); // Throttle in low data mode to save battery/CPU
-    }
-
-    const updateGsap = (time: number) => {
-      lenis.raf(time * 1000);
-    };
-    gsap.ticker.add(updateGsap);
-    gsap.ticker.lagSmoothing(0);
+    // Force ultra-smooth 120 FPS scrolling via Lenis native mechanism if needed, 
+    // but by default Lenis ties to browser refresh rate (which is usually ideal).
+    // Native requestAnimationFrame handles it.
 
     let resizeTimer: NodeJS.Timeout;
     const handleResize = () => {
@@ -512,7 +505,6 @@ function LenisHandler() {
     window.addEventListener("resize", handleResize, { passive: true });
     return () => {
       lenis.off("scroll", handleScroll);
-      gsap.ticker.remove(updateGsap);
       clearTimeout(resizeTimer);
       clearTimeout(isScrollingTimeout);
       if (typeof document !== "undefined") {
@@ -522,7 +514,6 @@ function LenisHandler() {
       if (typeof window !== "undefined") {
         delete (window as any).__lenis;
       }
-      ScrollTrigger.refresh();
     };
   }, [lenis, isLowData]);
 
@@ -628,7 +619,7 @@ function RootComponent() {
                           syncTouch: false, // CRITICAL: Disable Lenis synthetic touch hijacking
                           touchMultiplier: 1.0,
                           infinite: false,
-                          autoRaf: false, // GSAP is driving the raf now
+                          autoRaf: true, // Native rAF baseline
                         }}
                       >
                         <LenisHandler />

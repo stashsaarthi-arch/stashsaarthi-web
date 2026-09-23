@@ -7,7 +7,7 @@ import type { BookingPrefill } from "@/components/stash/types";
 
 // ─── Above-the-fold (eagerly loaded for instant first paint) ─────────────────
 import { Navbar } from "@/components/stash/Navbar";
-import { Hero } from "@/components/stash/Hero";
+import { PremiumHero } from "@/components/stash/PremiumHero";
 import { QuickCategoryNav } from "@/components/stash/QuickCategoryNav";
 import { SolutionsHub } from "@/components/stash/SolutionsHub";
 
@@ -180,7 +180,7 @@ function Index() {
     <main
       id="main-content"
       tabIndex={-1}
-      className="relative min-h-screen w-full overflow-x-hidden bg-[#0a0a0a] text-white transition-colors duration-500 focus:outline-none pt-16 md:pt-20 pb-[90px] md:pb-0"
+      className="relative min-h-screen w-full overflow-x-clip bg-transparent text-white transition-colors duration-500 focus:outline-none pt-16 sm:pt-20 pb-24 sm:pb-0"
       style={{
         transform: "translate3d(0, 0, 0)",
         willChange: "transform",
@@ -210,7 +210,7 @@ function Index() {
       <ServiceQuickJumpPill />
 
       <ErrorBoundary sectionName="Hero Section">
-        <Hero role={role} onBook={open} onRefer={handleRefer} />
+        <PremiumHero role={role} onBook={open} onRefer={handleRefer} />
       </ErrorBoundary>
 
       {/* TI.com-inspired Quick Jump Sticky Category Bar (Desktop only — mobile uses sticky bottom dock) */}
