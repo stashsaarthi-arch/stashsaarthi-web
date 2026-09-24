@@ -118,42 +118,14 @@ const FeatureCard = ({ title, desc, icon }: { title: string, desc: string, icon:
 
 export const PremiumHero = ({ role, onBook, onRefer }: any) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"]
-  });
-
-  // Extreme Cinematic scroll physics
-  const yBg = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const yText = useTransform(scrollYProgress, [0, 1], ["0%", "120%"]);
-  const scaleText = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
-  const rotateXText = useTransform(scrollYProgress, [0, 1], [0, 15]);
-  const yCards = useTransform(scrollYProgress, [0, 1], ["0%", "-40%"]);
-  const opacityContent = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
-
-  // Spring physics wrapper for scroll
-  const smoothYText = useSpring(yText, ELITE_SPRING);
-  const smoothScaleText = useSpring(scaleText, ELITE_SPRING);
-  const smoothRotateXText = useSpring(rotateXText, ELITE_SPRING);
-
-  const heroRef = useRef(null);
-  const { scrollYProgress: heroProgress } = useScroll({
-    target: heroRef,
-    offset: ["start end", "end start"]
-  });
-  const heroY = useTransform(heroProgress, [0, 0.5], [100, 0]);
-  const heroOpacity = useTransform(heroProgress, [0, 0.3], [0, 1]);
 
   return (
     <div ref={containerRef} className="group relative min-h-screen w-full bg-transparent overflow-hidden flex flex-col items-center justify-center px-4 md:px-6 gpu-accelerated py-24 md:py-40 perspective-[1000px]">
       
       <motion.div 
-        ref={heroRef}
-        style={{ 
-          y: heroY, 
-          opacity: heroOpacity 
-        }}
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
         className="z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 flex flex-col items-center text-center transform-style-3d will-change-transform [transform:translateZ(0)]"
       >
         <motion.div

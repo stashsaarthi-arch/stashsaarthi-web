@@ -4,7 +4,7 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "dev": "vite dev",
+    "dev": "cross-env NODE_OPTIONS=\"--localstorage-file=localstorage.json\" vite dev",
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "preview": "node --localstorage-file=localstorage.json .output/server/index.mjs",
@@ -74,6 +74,7 @@
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^5.2.0",
+    "cross-env": "^10.1.0",
     "esbuild": "^0.28.2",
     "eslint": "^9.32.0",
     "eslint-config-prettier": "^10.1.1",

@@ -120,11 +120,11 @@ const OG_IMAGE = "https://stashsaarthi-web.vercel.app/images/og-banner-new.png";
 // Ye hamara custom bulletproof animation engine hai
 const FadeUp = ({ children }: { children: React.ReactNode }) => (
   <motion.div
-    initial={{ opacity: 0, y: 60 }}
+    initial={{ opacity: 0, y: 40 }}
     whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-100px" }}
+    viewport={{ once: true, margin: "-50px" }}
     transition={{ duration: 0.7, type: "spring", stiffness: 100, damping: 20 }}
-    className="will-change-transform relative z-10 py-24 md:py-40 max-w-7xl mx-auto px-6 lg:px-12"
+    className="will-change-transform relative z-10 w-full flex flex-col py-24 md:py-40 max-w-7xl mx-auto px-6 lg:px-12"
   >
     {children}
   </motion.div>

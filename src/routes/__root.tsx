@@ -25,6 +25,7 @@ import { LowDataProvider, useLowData } from "@/context/LowDataContext";
 import { ToastProvider } from "@/context/ToastContext";
 import { AccessibilityAnnouncer } from "@/components/ui/AccessibilityAnnouncer";
 import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
+import SpatialBackground from "@/components/ui/SpatialBackground";
 import { NetworkStatus } from "@/components/stash/NetworkStatus";
 import { coLivingSpacesSchema, coLivingItemListSchema } from "@/lib/seo-coliving-schema";
 import { ReactLenis, useLenis } from "lenis/react";
@@ -190,23 +191,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   errorComponent: ErrorComponent,
 });
 
-function ScrollBackground() {
-  const { scrollYProgress } = useScroll();
-  const yBg = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const opacityBg = useTransform(scrollYProgress, [0, 0.5, 1], [0.4, 1, 0.2]);
 
-  return (
-    <motion.div 
-      style={{ y: yBg, opacity: opacityBg }}
-      className="fixed inset-0 z-0 pointer-events-none"
-    >
-      <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-orange-900/20 blur-[120px] rounded-full mix-blend-screen" />
-      <div className="absolute bottom-[-20%] right-[-10%] w-[60vw] h-[60vw] bg-amber-800/10 blur-[150px] rounded-full mix-blend-screen" />
-      <div className="absolute top-[40%] left-[-10%] w-[120vw] h-[2px] bg-gradient-to-r from-transparent via-orange-500/30 to-transparent blur-[3px] rotate-[-12deg]" />
-      <div className="absolute inset-0 opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
-    </motion.div>
-  );
-}
 
 function RootShell({ children }: { children: ReactNode }) {
   const jsonLd = {
@@ -473,27 +458,12 @@ function RootShell({ children }: { children: ReactNode }) {
         />
       </head>
       <body className="pb-24 sm:pb-0 bg-transparent text-white selection:bg-emerald-500/30" suppressHydrationWarning={true}>
-        <div className="relative min-h-screen bg-[#030303] overflow-hidden selection:bg-emerald-500/30">
+        <div className="relative min-h-screen bg-transparent overflow-hidden selection:bg-emerald-500/30">
           {/* THE E-SUMMIT SPATIAL VOID (FIXED BACKGROUND) */}
-          <div className="fixed inset-0 z-[-1] pointer-events-none">
-             {/* Deep Emerald Plasma Glow */}
-             <motion.div 
-               animate={{ scale: [1, 1.1, 1], opacity: [0.15, 0.3, 0.15] }} 
-               transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-               className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-emerald-900/20 blur-[120px] rounded-full mix-blend-screen"
-             />
-             {/* Deep Teal Plasma Glow */}
-             <motion.div 
-               animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.25, 0.1] }} 
-               transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-               className="absolute bottom-[-10%] right-[-10%] w-[60vw] h-[60vw] bg-teal-800/10 blur-[150px] rounded-full mix-blend-screen"
-             />
-             {/* CSS Noise Texture */}
-             <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
-          </div>
+          <SpatialBackground />
 
           {/* FOREGROUND CONTENT (Z-10) */}
-          <main className="relative z-10">
+          <main className="relative z-10 w-full flex flex-col min-h-screen">
             {/* Ensure existing components render here */}
             {children} 
           </main>
