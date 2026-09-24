@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+html, body, #root { 
+  background-color: transparent !important; 
+  background: transparent !important; 
+}
+
 @layer utilities {
   .glass-spotlight {
     @apply border border-white/5 bg-white/[0.02] backdrop-blur-xl shadow-2xl;
@@ -29,7 +34,7 @@
   }
 
   .top-glow-card {
-    @apply relative bg-[#030303] border border-white/5 overflow-hidden transition-all duration-500;
+    @apply relative bg-transparent border border-white/5 overflow-hidden transition-all duration-500;
   }
   
   .top-glow-card::before {

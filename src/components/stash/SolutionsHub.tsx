@@ -212,7 +212,7 @@ export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: S
     <section
       id="solutions"
       ref={sectionRef}
-      className="relative mx-auto max-w-6xl px-4 py-3.5 sm:py-5 scroll-mt-20 overflow-hidden"
+      className="relative mx-auto max-w-6xl px-4 py-3.5 sm:py-5 scroll-mt-20 overflow-hidden bg-transparent"
     >
       {/* Background Ambient Parallax Elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden -z-10 select-none">

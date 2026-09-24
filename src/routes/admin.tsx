@@ -582,7 +582,7 @@ function AdminPage() {
   // ── Login screen ─────────────────────────────────────────────────────────
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background px-4">
+      <div className="min-h-screen flex items-center justify-center bg-transparent px-4">
         <form
           onSubmit={handleLogin}
           className="w-full max-w-sm rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-xl p-8 text-center"
@@ -677,7 +677,7 @@ function AdminPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-transparent text-foreground">
       {/* Sticky top bar */}
       <div className="sticky top-0 z-30 border-b border-white/10 bg-background/80 backdrop-blur-xl px-4 py-3">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-3 flex-wrap">

@@ -25,7 +25,6 @@ import { LowDataProvider, useLowData } from "@/context/LowDataContext";
 import { ToastProvider } from "@/context/ToastContext";
 import { AccessibilityAnnouncer } from "@/components/ui/AccessibilityAnnouncer";
 import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
-import SpatialBackground from "@/components/ui/SpatialBackground";
 import { NetworkStatus } from "@/components/stash/NetworkStatus";
 import { coLivingSpacesSchema, coLivingItemListSchema } from "@/lib/seo-coliving-schema";
 import { ReactLenis, useLenis } from "lenis/react";
@@ -447,7 +446,7 @@ function RootShell({ children }: { children: ReactNode }) {
   };
 
   return (
-    <html lang="en" suppressHydrationWarning={true}>
+    <html lang="en" suppressHydrationWarning={true} className="bg-transparent">
       <head>
         <HeadContent />
         <script
@@ -458,15 +457,28 @@ function RootShell({ children }: { children: ReactNode }) {
         />
       </head>
       <body className="pb-24 sm:pb-0 bg-transparent text-white selection:bg-emerald-500/30" suppressHydrationWarning={true}>
-        <div className="relative min-h-screen bg-transparent overflow-hidden selection:bg-emerald-500/30">
-          {/* THE E-SUMMIT SPATIAL VOID (FIXED BACKGROUND) */}
-          <SpatialBackground />
+        <div className="relative min-h-screen bg-transparent text-white overflow-hidden selection:bg-emerald-500/30">
+          
+          {/* THE SPATIAL VOID (STRICTLY z-0, NEVER NEGATIVE) */}
+          <div className="fixed inset-0 z-0 pointer-events-none">
+            <motion.div 
+              animate={{ scale: [1, 1.1, 1], opacity: [0.15, 0.3, 0.15] }} 
+              transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-emerald-500/30 blur-[120px] rounded-full mix-blend-screen"
+            />
+            <motion.div 
+              animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.25, 0.1] }} 
+              transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              className="absolute bottom-[-10%] right-[-10%] w-[60vw] h-[60vw] bg-teal-500/20 blur-[150px] rounded-full mix-blend-screen"
+            />
+            <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+          </div>
 
-          {/* FOREGROUND CONTENT (Z-10) */}
+          {/* THE FOREGROUND CONTENT (STRICTLY z-10) */}
           <main className="relative z-10 w-full flex flex-col min-h-screen">
-            {/* Ensure existing components render here */}
             {children} 
           </main>
+
         </div>
         <Scripts />
       </body>

@@ -317,7 +317,7 @@ export function KanpurStudentCouncil() {
   return (
     <section
       id="student-council"
-      className="relative py-20 bg-background text-foreground overflow-hidden"
+      className="relative py-20 bg-transparent text-foreground overflow-hidden"
     >
       {/* Background Neon Accent Glow */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-emerald-500/10 blur-[140px] pointer-events-none rounded-full" />

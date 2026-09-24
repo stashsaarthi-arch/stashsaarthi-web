@@ -201,6 +201,7 @@ function Index() {
         transform: "translate3d(0, 0, 0)",
         willChange: "transform",
         contain: "paint layout",
+        backgroundColor: "transparent",
       }}
     >
       <a href="#main-content" className="skip-to-content">

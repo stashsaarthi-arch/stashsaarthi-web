@@ -239,8 +239,9 @@ html.light {
     border-color: var(--color-border);
   }
 
-  body {
-    background-color: transparent;
+  html, body {
+    background-color: transparent !important;
+    background: transparent !important;
     color: var(--color-foreground);
   }
 }

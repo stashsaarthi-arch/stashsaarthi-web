@@ -55,7 +55,7 @@ export const Hero = memo(function Hero({
   };
 
   return (
-    <section id="top" className="relative overflow-hidden pb-3 pt-11 sm:pb-6 md:pt-20">
+    <section id="top" className="relative overflow-hidden pb-3 pt-11 sm:pb-6 md:pt-20 bg-transparent">
       {/* 2D Clean Background (Phone-view parity across all screens) */}
       <div className="absolute inset-0 grid-noise opacity-50 pointer-events-none" />
       <div
