@@ -460,7 +460,7 @@ function RootShell({ children }: { children: ReactNode }) {
         <div className="relative min-h-screen bg-transparent text-white overflow-hidden selection:bg-emerald-500/30">
           
           {/* THE SPATIAL VOID (STRICTLY z-0, NEVER NEGATIVE) */}
-          <div className="fixed inset-0 z-0 pointer-events-none">
+          <div className="fixed inset-0 z-0 pointer-events-none bg-[#030303]">
             <motion.div 
               animate={{ scale: [1, 1.1, 1], opacity: [0.15, 0.3, 0.15] }} 
               transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}

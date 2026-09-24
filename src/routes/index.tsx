@@ -197,12 +197,6 @@ function Index() {
       id="main-content"
       tabIndex={-1}
       className="relative min-h-screen w-full overflow-x-clip bg-transparent text-white transition-colors duration-500 focus:outline-none pt-16 sm:pt-20 pb-24 sm:pb-0"
-      style={{
-        transform: "translate3d(0, 0, 0)",
-        willChange: "transform",
-        contain: "paint layout",
-        backgroundColor: "transparent",
-      }}
     >
       <a href="#main-content" className="skip-to-content">
         Skip to main content
