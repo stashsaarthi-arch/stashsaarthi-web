@@ -310,7 +310,7 @@ export const StudentStoriesCarousel = memo(function StudentStoriesCarousel({
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-white/10 pb-4 mb-5">
                 <div className="flex items-center gap-3">
                   <div
-                    className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full border text-base font-bold shadow-md ${activeStory.avatarBg}`}
+                    className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full border text-base font-bold shadow-md filter grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-700 ease-out cursor-pointer ${activeStory.avatarBg}`}
                   >
                     {activeStory.name.slice(0, 2).toUpperCase()}
                   </div>

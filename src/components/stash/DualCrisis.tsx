@@ -146,14 +146,16 @@ const CrisisCard = memo(function CrisisCard({
   items: string[];
 }) {
   return (
-    <Tilt3D max={4} lift={6} className="rounded-xl">
+    <Tilt3D max={4} lift={6} className="rounded-3xl">
       <div
-        className="glass relative overflow-hidden rounded-xl p-3 sm:p-4"
+        className="relative overflow-hidden bg-[#0a0a0a]/40 backdrop-blur-md border border-white/10 rounded-3xl group transition-colors duration-300 hover:bg-[#0a0a0a]/60 p-3 sm:p-4"
         style={{
           backgroundImage: `radial-gradient(120% 90% at 0% 0%, color-mix(in oklab, ${accent} 12%, transparent), transparent 70%)`,
         }}
       >
-        <div className="flex min-w-0 items-center gap-2">
+        <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-16 bg-emerald-500/10 blur-[30px] rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
+        <div className="relative z-10 flex min-w-0 items-center gap-2">
           <span
             className="grid h-7 w-7 shrink-0 place-items-center rounded-lg border border-white/10"
             style={{ background: `color-mix(in oklab, ${accent} 18%, transparent)` }}
@@ -162,7 +164,7 @@ const CrisisCard = memo(function CrisisCard({
           </span>
           <h3 className="truncate text-sm font-bold sm:text-base">{title}</h3>
         </div>
-        <ul className="mt-2.5 space-y-1.5">
+        <ul className="relative z-10 mt-2.5 space-y-1.5">
           {items.map((t) => (
             <li
               key={t}

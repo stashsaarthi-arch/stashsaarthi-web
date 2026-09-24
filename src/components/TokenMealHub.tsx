@@ -279,15 +279,17 @@ const MealTierCard: React.FC<MealTierCardProps> = ({ tier, isSelected, tierCost,
         trackClick({ action: "select_thali_tier" });
         onSelect(tier);
       }}
-      className={`relative cursor-pointer rounded-2xl p-5 border transition-colors duration-200 ${
+      className={`relative overflow-hidden backdrop-blur-md rounded-3xl group p-5 border transition-colors duration-300 ${
         isSelected
-          ? "bg-slate-900 border-emerald-500/80 shadow-[0_8px_25px_-5px_rgba(16,185,129,0.35)]"
-          : "bg-slate-950/80 border-white/[0.08] hover:border-emerald-500/40 hover:bg-slate-900/90"
+          ? "bg-[#0a0a0a]/80 border-emerald-500/80 shadow-[0_8px_25px_-5px_rgba(16,185,129,0.35)]"
+          : "bg-[#0a0a0a]/40 border-white/10 hover:border-emerald-500/40 hover:bg-[#0a0a0a]/60 cursor-pointer"
       }`}
     >
+      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-16 bg-emerald-500/10 blur-[30px] rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
       {tier.badge && (
         <span
-          className={`absolute top-3 right-3 text-[10px] sm:text-xs font-bold px-2 py-0.5 rounded-full uppercase tracking-wider pointer-events-none z-10 ${
+          className={`absolute top-3 right-3 text-[10px] sm:text-xs font-bold px-2 py-0.5 rounded-full uppercase tracking-wider pointer-events-none z-20 ${
             tier.popular ? "bg-emerald-500 text-slate-950" : "bg-slate-800 text-slate-300"
           }`}
         >
@@ -295,7 +297,7 @@ const MealTierCard: React.FC<MealTierCardProps> = ({ tier, isSelected, tierCost,
         </span>
       )}
 
-      <div className="flex items-center justify-between gap-2 mb-1 mt-4">
+      <div className="relative z-10 flex items-center justify-between gap-2 mb-1 mt-4">
         <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
           {tier.name}
         </div>
@@ -303,7 +305,7 @@ const MealTierCard: React.FC<MealTierCardProps> = ({ tier, isSelected, tierCost,
           <PeacockFeatherMatkiDusting compact isAutoTriggered={isSelected} />
         )}
       </div>
-      <div className="text-3xl font-black text-white mb-2">
+      <div className="relative z-10 text-3xl font-black text-white mb-2">
         {tierCost} <span className="text-xs font-bold text-emerald-400">Tokens</span>
       </div>
 
@@ -316,7 +318,7 @@ const MealTierCard: React.FC<MealTierCardProps> = ({ tier, isSelected, tierCost,
         </div>
       )}
 
-      <p className="text-xs text-slate-400 leading-relaxed font-medium">{tier.description}</p>
+      <p className="relative z-10 text-xs text-slate-400 leading-relaxed font-medium">{tier.description}</p>
     </motion.div>
   );
 };

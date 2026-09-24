@@ -16,6 +16,7 @@ import {
   TrendingUp,
   Award,
 } from "lucide-react";
+import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import { usePersona } from "@/context/PersonaContext";
 import type { BookingPrefill } from "./types";
@@ -269,7 +270,7 @@ export const PgComparisonTable: React.FC<PgComparisonTableProps> = ({ onBook }) 
   return (
     <section
       id="comparison"
-      className="relative py-8 sm:py-12 bg-background border-t border-b border-border/40 overflow-hidden"
+      className="relative py-8 sm:py-12 bg-transparent border-t border-b border-border/40 overflow-hidden"
     >
       {/* Glow Effects */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-emerald-500/5 dark:bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
@@ -460,10 +461,17 @@ export const PgComparisonTable: React.FC<PgComparisonTableProps> = ({ onBook }) 
           {filteredRows.map((row) => {
             const IconComponent = row.icon;
             return (
-              <div
+              <motion.div
                 key={row.id}
-                className="w-80 min-w-[85vw] snap-center shrink-0 rounded-[2rem] border border-border/80 bg-card p-4 shadow-sm hover:shadow-md transition-shadow"
+                initial={{ opacity: 0, y: 50, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ type: "spring", stiffness: 100, damping: 20 }}
+                whileHover={{ y: -5 }}
+                className="relative overflow-hidden bg-[#0a0a0a]/40 backdrop-blur-md border border-white/10 rounded-3xl group transition-colors duration-300 hover:bg-[#0a0a0a]/60 w-80 min-w-[85vw] snap-center shrink-0 p-4 shadow-sm"
               >
+                <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-16 bg-emerald-500/10 blur-[30px] rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 {/* Header Feature Title */}
                 <div className="flex items-center justify-between gap-2 border-b border-border/60 pb-3 mb-3">
                   <div className="flex items-center gap-2.5">
@@ -507,7 +515,7 @@ export const PgComparisonTable: React.FC<PgComparisonTableProps> = ({ onBook }) 
                     </p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>

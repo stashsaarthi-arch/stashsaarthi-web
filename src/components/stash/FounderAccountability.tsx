@@ -54,7 +54,7 @@ export function FounderAccountability() {
                       { src: "/images/founder_advik-400w.webp", width: 400 },
                     ]}
                     sizes="(max-width: 640px) 100vw, 400px"
-                    className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                    className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105 filter grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-700 ease-out cursor-pointer"
                   />
                   <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between rounded-lg bg-black/70 px-2.5 py-1.5 backdrop-blur-md border border-white/10">
                     <div className="flex items-center gap-1.5">

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import {
   Users,
   ShieldCheck,
@@ -435,7 +436,7 @@ export function KanpurStudentCouncil() {
                 <div>
                   <div className="flex items-start justify-between gap-4 mb-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-400 to-cyan-500 text-slate-950 font-black text-lg flex items-center justify-center shadow-md">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-400 to-cyan-500 text-slate-950 font-black text-lg flex items-center justify-center shadow-md filter grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-700 ease-out cursor-pointer">
                         {member.avatar}
                       </div>
                       <div>
@@ -601,25 +602,31 @@ export function KanpurStudentCouncil() {
             </div>
 
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-              <a
+              <motion.a
                 href="https://wa.me/919369454350?text=Hi%20StashSaarthi!%20I%20want%20to%20join%20the%20Kanpur%20Student%20Council%20WhatsApp%20Group."
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => playClick()}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-sm transition-all shadow-lg shadow-emerald-500/30"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm relative overflow-hidden bg-emerald-600 text-white font-bold border border-emerald-400/50 hover:shadow-[0_0_40px_rgba(16,185,129,0.5)] transition-shadow duration-300"
               >
                 <Phone className="w-4 h-4 fill-current" />
                 <span>{isHi ? "व्हाट्सएप ग्रुप ज्वाइन करें" : "Join WhatsApp Group"}</span>
                 <ExternalLink className="w-4 h-4" />
-              </a>
+              </motion.a>
 
-              <button
+              <motion.button
                 onClick={() => handleOpenModal("apply")}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-foreground font-bold text-sm border border-slate-700 transition-all"
               >
                 <Award className="w-4 h-4 text-emerald-400" />
                 <span>{isHi ? "परिषद लीडर बनें" : "Apply for Seat"}</span>
-              </button>
+              </motion.button>
             </div>
           </div>
         </div>
@@ -737,12 +744,15 @@ export function KanpurStudentCouncil() {
                 >
                   {isHi ? "रद्द करें" : "Cancel"}
                 </button>
-                <button
+                <motion.button
                   type="submit"
-                  className="px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs shadow-md shadow-emerald-500/20"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  className="px-5 py-2.5 rounded-xl relative overflow-hidden bg-emerald-600 text-white font-bold border border-emerald-400/50 hover:shadow-[0_0_40px_rgba(16,185,129,0.5)] transition-shadow duration-300 text-xs"
                 >
                   {isHi ? "सबमिट करें" : "Submit Proposal"}
-                </button>
+                </motion.button>
               </div>
             </form>
           </div>

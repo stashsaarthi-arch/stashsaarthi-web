@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import {
   Play,
   Pause,
@@ -209,7 +210,7 @@ export const StudentTestimonialVideosWidget: React.FC = () => {
             >
               {/* Thumbnail Simulated Video Frame */}
               <div
-                className={`relative aspect-[9/14] rounded-2xl bg-gradient-to-br ${video.thumbnailGradient} p-4 flex flex-col justify-between overflow-hidden shadow-inner cursor-pointer`}
+                className={`relative aspect-[9/14] rounded-2xl bg-gradient-to-br ${video.thumbnailGradient} p-4 flex flex-col justify-between overflow-hidden shadow-inner cursor-pointer filter grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-700 ease-out`}
                 onClick={() => openPlayer(video)}
               >
                 {/* Top Badge */}
@@ -340,8 +341,7 @@ export const StudentTestimonialVideosWidget: React.FC = () => {
                   "{isHi ? activeVideo.scriptHi.body : activeVideo.scriptEn.body}"
                 </p>
                 <div className="pt-2">
-                  <Button
-                    size="sm"
+                  <motion.button
                     onClick={() => {
                       setActiveVideo(null);
                       toast.success(
@@ -352,10 +352,13 @@ export const StudentTestimonialVideosWidget: React.FC = () => {
                       const el = document.getElementById("solutions");
                       if (el) el.scrollIntoView({ behavior: "smooth" });
                     }}
-                    className="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs shadow-lg"
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                    className="w-full relative overflow-hidden bg-emerald-600 text-white font-bold border border-emerald-400/50 hover:shadow-[0_0_40px_rgba(16,185,129,0.5)] transition-shadow duration-300 rounded-xl py-2 text-xs"
                   >
                     {isHi ? "ज़ीरो-ब्रोकरेज कमरा बुक करें" : "Book Zero Brokerage Room"}
-                  </Button>
+                  </motion.button>
                 </div>
               </div>
             </div>

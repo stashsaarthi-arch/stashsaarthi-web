@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
@@ -70,18 +71,20 @@ export function Ecosystem({ onBook }: { onBook: OpenBooking }) {
           const Icon = n.icon;
           const textData = t.ecosystem[n.id];
           return (
-            <AnimatedContent
+            <motion.div
               key={n.id}
-              distance={30}
-              direction="vertical"
-              duration={0.6}
-              threshold={0.15}
-              delay={Math.min(i * 0.05, 0.3)}
+              initial={{ opacity: 0, y: 50, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ type: "spring", stiffness: 100, damping: 20 }}
+              whileHover={{ y: -5 }}
               className="snap-center min-w-[85vw] max-w-[88vw] sm:min-w-0 sm:max-w-none shrink-0 sm:shrink"
             >
-              <Tilt3D max={3} lift={6} className="rounded-2xl h-full">
-                <div className="glass h-full flex flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.025] hover:border-white/[0.15] shadow-2xl transition-all">
-                  <div className="flex items-center gap-3 p-4 sm:p-5 border-b border-white/[0.08]">
+              <Tilt3D max={3} lift={6} className="rounded-3xl h-full">
+                <div className="relative overflow-hidden bg-[#0a0a0a]/40 backdrop-blur-md border border-white/10 rounded-3xl group transition-colors duration-300 hover:bg-[#0a0a0a]/60 h-full flex flex-col">
+                  <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-16 bg-emerald-500/10 blur-[30px] rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="relative z-10 flex items-center gap-3 p-4 sm:p-5 border-b border-white/[0.08]">
                     <span
                       className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-white/[0.08]"
                       style={{ background: `color-mix(in oklab, ${n.accent} 18%, transparent)` }}
@@ -104,7 +107,7 @@ export function Ecosystem({ onBook }: { onBook: OpenBooking }) {
                     </div>
                   </div>
 
-                  <div className="flex-1 p-4 sm:p-5 flex flex-col">
+                  <div className="relative z-10 flex-1 p-4 sm:p-5 flex flex-col">
                     <p className="text-xs leading-relaxed text-muted-foreground sm:text-sm">
                       {textData.subtitle}
                     </p>
@@ -142,7 +145,7 @@ export function Ecosystem({ onBook }: { onBook: OpenBooking }) {
                   </div>
                 </div>
               </Tilt3D>
-            </AnimatedContent>
+            </motion.div>
           );
         })}
       </div>

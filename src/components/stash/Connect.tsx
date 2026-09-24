@@ -491,11 +491,15 @@ function ProfileCard({
   onKarmaClick?: (() => void) | undefined;
 }) {
   return (
-    <div
-      className="min-w-0 rounded-2xl border border-white/10 p-4 text-left"
-      style={{ background: `color-mix(in oklab, ${accent} 8%, transparent)` }}
+    <motion.div
+      whileHover={{ y: -5 }}
+      className="relative overflow-hidden bg-[#0a0a0a]/40 backdrop-blur-md border border-white/10 rounded-3xl group transition-colors duration-300 hover:bg-[#0a0a0a]/60 min-w-0 p-4 text-left"
+      style={{ backgroundImage: `radial-gradient(120% 90% at 0% 0%, color-mix(in oklab, ${accent} 12%, transparent), transparent 70%)` }}
     >
-      <div className="flex min-w-0 items-center justify-between gap-2">
+      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-16 bg-emerald-500/10 blur-[30px] rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
+      
+      <div className="relative z-10 flex min-w-0 items-center justify-between gap-2">
         <div className="flex min-w-0 items-center gap-2">
           <span className="shrink-0">{icon}</span>
           <span className="truncate text-sm font-bold">{name}</span>
@@ -504,17 +508,17 @@ function ProfileCard({
           <KarmaPointsBadge points={karmaPoints} tier={karmaTier} compact onClick={onKarmaClick} />
         )}
       </div>
-      <p className="mt-1 text-xs text-muted-foreground">{detail}</p>
-      <p className="mt-3 text-[10px] uppercase tracking-widest font-bold" style={{ color: accent }}>
+      <p className="relative z-10 mt-1 text-xs text-muted-foreground">{detail}</p>
+      <p className="relative z-10 mt-3 text-[10px] uppercase tracking-widest font-bold" style={{ color: accent }}>
         {label}
       </p>
-      <ul className="mt-2 space-y-1.5">
+      <ul className="relative z-10 mt-2 space-y-1.5">
         {items.map((i) => (
           <li key={i} className="text-xs text-muted-foreground">
             • {i}
           </li>
         ))}
       </ul>
-    </div>
+    </motion.div>
   );
 }

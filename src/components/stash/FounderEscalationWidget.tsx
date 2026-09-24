@@ -48,7 +48,7 @@ export const FounderEscalationWidget = memo(function FounderEscalationWidget() {
                   height={40}
                   webpSrc="/images/founder_advik-200w.webp"
                   sizes="40px"
-                  className="h-10 w-10 rounded-xl object-cover border border-neutral-700 aspect-square"
+                  className="h-10 w-10 rounded-xl object-cover border border-neutral-700 aspect-square filter grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-700 ease-out cursor-pointer"
                 />
                 <div>
                   <div className="flex items-center gap-1.5">

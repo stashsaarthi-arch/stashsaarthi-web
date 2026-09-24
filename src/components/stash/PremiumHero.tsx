@@ -1,8 +1,14 @@
+"use client";
+
 import React from 'react';
-import { motion, useScroll, useTransform, useMotionValue, useSpring, useMotionTemplate } from 'framer-motion';
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
 
-export const HoverButton = ({ 
+// Elite Spring Physics configuration (NO linear easing)
+const ELITE_SPRING = { stiffness: 300, damping: 20, mass: 0.8 };
+
+// Cinematic Magnetic Button
+export const MagneticButton = ({ 
   children, 
   className = '', 
   onClick 
@@ -15,18 +21,16 @@ export const HoverButton = ({
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   
-  // Brutalist spring physics - stiff and explosive
-  const springConfig = { stiffness: 400, damping: 20, mass: 0.5 };
-  const springX = useSpring(x, springConfig);
-  const springY = useSpring(y, springConfig);
+  const springX = useSpring(x, ELITE_SPRING);
+  const springY = useSpring(y, ELITE_SPRING);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
     const rect = ref.current?.getBoundingClientRect();
     if (rect) {
       const centerX = rect.left + rect.width / 2;
       const centerY = rect.top + rect.height / 2;
-      x.set((e.clientX - centerX) * 0.4); 
-      y.set((e.clientY - centerY) * 0.4);
+      x.set((e.clientX - centerX) * 0.3);
+      y.set((e.clientY - centerY) * 0.3);
     }
   };
 
@@ -41,32 +45,47 @@ export const HoverButton = ({
       onClick={onClick}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      style={{ x: springX, y: springY }}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      className={`gpu-layer relative inline-flex items-center justify-center transition-all duration-300 ${className}`}
+      style={{ x: springX, y: springY, transformStyle: "preserve-3d" }}
+      whileHover={{ scale: 1.03 }}
+      whileTap={{ scale: 0.97 }}
+      transition={{ type: "spring", stiffness: 400, damping: 10 }}
+      className={`gpu-accelerated relative inline-flex items-center justify-center transition-colors duration-500 ${className}`}
     >
       {children}
     </motion.button>
   );
 };
 
-const Particles = () => {
+const PlasmaStreaks = () => {
   const [isClient, setIsClient] = useState(false);
   useEffect(() => setIsClient(true), []);
   if (!isClient) return null;
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-      {[...Array(25)].map((_, i) => (
+      <div className="perspective-grid" />
+      <div className="cinematic-noise" />
+      {[...Array(15)].map((_, i) => (
         <div 
-          key={i}
+          key={`streak-${i}`}
+          className="plasma-streak"
+          style={{
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * -50}%`,
+            animationDuration: `${Math.random() * 10 + 5}s`,
+            animationDelay: `${Math.random() * 8}s`,
+          }}
+        />
+      ))}
+      {[...Array(20)].map((_, i) => (
+        <div 
+          key={`ember-${i}`}
           className="ember"
           style={{
             left: `${Math.random() * 100}%`,
             width: `${Math.random() * 6 + 2}px`,
             height: `${Math.random() * 6 + 2}px`,
-            animationDuration: `${Math.random() * 10 + 8}s`,
+            animationDuration: `${Math.random() * 15 + 10}s`,
             animationDelay: `${Math.random() * 5}s`,
             opacity: Math.random() * 0.6 + 0.2
           }}
@@ -76,128 +95,142 @@ const Particles = () => {
   );
 };
 
+const FeatureCard = ({ title, desc, icon }: { title: string, desc: string, icon: string }) => {
+  return (
+    <motion.div 
+      initial={{ opacity: 0, y: 60, scale: 0.95 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ type: "spring", stiffness: 120, damping: 20 }}
+      whileHover={{ y: -5 }}
+      className="relative overflow-hidden bg-neutral-950/40 backdrop-blur-md border border-white/5 rounded-3xl group p-8 flex flex-col gap-4 cursor-pointer"
+    >
+      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-16 bg-emerald-500/10 blur-[30px] rounded-full pointer-events-none" />
+      <div className="relative z-10 text-4xl filter grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 will-change-transform [transform:translateZ(0)]">
+        {icon}
+      </div>
+      <h3 className="relative z-10 text-2xl font-bold text-white tracking-tight will-change-transform [transform:translateZ(0)]">{title}</h3>
+      <p className="relative z-10 text-zinc-500 font-medium leading-relaxed will-change-transform [transform:translateZ(0)]">{desc}</p>
+    </motion.div>
+  );
+};
+
 export const PremiumHero = ({ role, onBook, onRefer }: any) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const smoothX = useSpring(mouseX, { stiffness: 50, damping: 20 });
-  const smoothY = useSpring(mouseY, { stiffness: 50, damping: 20 });
-
-  const handleMouseMove = ({ currentTarget, clientX, clientY }: React.MouseEvent) => {
-    const { left, top } = currentTarget.getBoundingClientRect();
-    mouseX.set(clientX - left);
-    mouseY.set(clientY - top);
-  };
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]
   });
 
-  // Deep Parallax transforms for brutalist spatial depth
-  const yBg = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
-  const yText = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-  const scaleText = useTransform(scrollYProgress, [0, 1], [1, 0.85]);
-  const opacityContent = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  // Extreme Cinematic scroll physics
+  const yBg = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const yText = useTransform(scrollYProgress, [0, 1], ["0%", "120%"]);
+  const scaleText = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
+  const rotateXText = useTransform(scrollYProgress, [0, 1], [0, 15]);
+  const yCards = useTransform(scrollYProgress, [0, 1], ["0%", "-40%"]);
+  const opacityContent = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+
+  // Spring physics wrapper for scroll
+  const smoothYText = useSpring(yText, ELITE_SPRING);
+  const smoothScaleText = useSpring(scaleText, ELITE_SPRING);
+  const smoothRotateXText = useSpring(rotateXText, ELITE_SPRING);
+
+  const heroRef = useRef(null);
+  const { scrollYProgress: heroProgress } = useScroll({
+    target: heroRef,
+    offset: ["start end", "end start"]
+  });
+  const heroY = useTransform(heroProgress, [0, 0.5], [100, 0]);
+  const heroOpacity = useTransform(heroProgress, [0, 0.3], [0, 1]);
 
   return (
-    <div ref={containerRef} onMouseMove={handleMouseMove} className="group relative min-h-[90vh] w-full bg-[#0A0D0F] overflow-hidden flex flex-col items-center justify-center px-6 selection:bg-[#10B981]/30 selection:text-[#00F5A0] gpu-layer">
+    <div ref={containerRef} className="group relative min-h-screen w-full bg-transparent overflow-hidden flex flex-col items-center justify-center px-4 md:px-6 gpu-accelerated py-24 md:py-40 perspective-[1000px]">
       
-      {/* Brutalist spatial grid background */}
       <motion.div 
-        style={{ y: yBg }}
-        className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none z-0" 
-      />
-
-      <Particles />
-
-      {/* Dynamic Mouse Tracking Spotlight */}
-      <motion.div 
+        ref={heroRef}
         style={{ 
-          background: useMotionTemplate`radial-gradient(1200px circle at ${smoothX}px ${smoothY}px, rgba(16,185,129,0.12), transparent 50%)`
+          y: heroY, 
+          opacity: heroOpacity 
         }}
-        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100 z-0 mix-blend-screen" 
-      />
-
-      <motion.div 
-        style={{ y: yText, scale: scaleText, opacity: opacityContent }}
-        className="z-10 w-full max-w-7xl mx-auto flex flex-col items-center text-center pt-24"
+        className="z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 flex flex-col items-center text-center transform-style-3d will-change-transform [transform:translateZ(0)]"
       >
         <motion.div
           initial={{ opacity: 0, y: 50, scale: 0.9 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.1 }}
-          className="inline-flex items-center gap-3 px-5 py-2.5 rounded-none border-l-4 border-l-[#10B981] bg-[#10B981]/5 backdrop-blur-md shadow-[0_0_30px_rgba(16,185,129,0.1)] gpu-layer mb-10"
+          transition={{ type: "spring", ...ELITE_SPRING, delay: 0.1 }}
+          className="inline-flex items-center gap-3 px-6 py-2 border border-[#10B981]/20 bg-[#10B981]/10 backdrop-blur-xl mb-8 rounded-full gpu-accelerated shadow-[0_0_20px_rgba(16,185,129,0.2)]"
         >
-          <span className="w-2.5 h-2.5 bg-[#00F5A0] shadow-[0_0_15px_#00F5A0] animate-pulse" />
-          <span className="text-sm font-bold text-[#00F5A0] uppercase tracking-[0.2em]">
-            {role === 'student' ? 'Next-Gen Micro-Storage' : 'Premium Host Program'}
+          <span className="w-2.5 h-2.5 rounded-full bg-[#10B981] shadow-[0_0_15px_#10B981] animate-pulse" />
+          <span className="text-xs md:text-sm font-bold text-[#00F5A0] tracking-[0.3em] uppercase">
+            {role === 'student' ? 'StashSaarthi Engine v2' : 'Host Matrix v2'}
           </span>
         </motion.div>
 
         <motion.h1
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ type: "spring", stiffness: 150, damping: 20, delay: 0.2 }}
-          className="text-5xl md:text-8xl lg:text-[10rem] font-black uppercase tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-200 to-[#10B981]/40 leading-[0.85] pb-4 gpu-layer"
+          initial={{ opacity: 0, y: 50, filter: "blur(12px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          transition={{ duration: 1, type: "spring", stiffness: 100, damping: 20 }}
+          className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white drop-shadow-[0_0_35px_rgba(16,185,129,0.4)] uppercase pb-6"
         >
-          {role === 'student' ? 'Secure Your' : 'Unlock Passive'} <br />
-          <motion.span 
-            animate={{ backgroundPosition: ["0% center", "200% center"] }}
-            transition={{ repeat: Infinity, duration: 6, ease: "linear" }}
-            className="bg-clip-text text-transparent bg-[linear-gradient(to_right,#10B981,#00F5A0,#ffffff,#10B981)] bg-[length:200%_auto] block mt-4"
-          >
-            {role === 'student' ? 'Space.' : 'Income.'}
-          </motion.span>
+          {role === 'student' ? 'STASH' : 'SPACE'} <br />
+          <span className="inline-block mt-4 md:mt-0 will-change-transform [transform:translateZ(0)]">
+            {role === 'student' ? 'SAARTHI' : 'HOSTING'}
+          </span>
         </motion.h1>
 
         <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.3 }}
-          className="max-w-3xl mt-12 text-xl md:text-2xl text-zinc-400 font-medium tracking-wide leading-relaxed gpu-layer"
+          initial={{ opacity: 0, y: 50, filter: "blur(12px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          transition={{ duration: 1, type: "spring", stiffness: 100, damping: 20, delay: 0.2 }}
+          className="max-w-2xl mt-8 md:mt-12 text-base sm:text-lg md:text-xl text-zinc-300 font-medium tracking-widest leading-relaxed gpu-accelerated px-4 drop-shadow-md will-change-transform [transform:translateZ(0)]"
         >
           {role === 'student' 
-            ? 'Experience zero-brokerage rooms and verified community living. The ultimate intergenerational platform engineered for zero-friction.'
-            : 'Turn your spare rooms into a secure, verified income stream. Fully insured and tailored for intergenerational harmony.'}
+            ? 'Zero-brokerage inventory engineered for intergenerational friction-less living.'
+            : 'Secure, zero-hassle passive income engineered for premium hosts.'}
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ type: "spring", stiffness: 150, damping: 20, delay: 0.4 }}
-          className="flex flex-col sm:flex-row items-center gap-6 mt-16 gpu-layer"
+          initial={{ opacity: 0, y: 50, filter: "blur(12px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          transition={{ duration: 1, type: "spring", stiffness: 100, damping: 20, delay: 0.4 }}
+          className="flex flex-col sm:flex-row items-center justify-center w-full sm:w-auto gap-4 sm:gap-6 mt-12 md:mt-16 px-4 gpu-accelerated will-change-transform [transform:translateZ(0)]"
         >
-          <HoverButton 
+          <MagneticButton 
             onClick={() => onBook({ service: role === 'student' ? 'stash' : 'spaces' })}
-            className="px-10 py-5 rounded-none bg-[#10B981] text-black font-black text-xl uppercase tracking-widest shadow-[8px_8px_0px_rgba(0,245,160,0.4)] border-2 border-[#00F5A0] hover:shadow-[12px_12px_0px_rgba(0,245,160,0.6)] hover:-translate-y-1 transition-all duration-300"
+            className="w-full sm:w-auto px-10 sm:px-14 py-4 sm:py-6 rounded-xl text-lg sm:text-xl uppercase tracking-[0.2em] relative overflow-hidden bg-emerald-600 text-white font-bold border border-emerald-400/50 hover:shadow-[0_0_40px_rgba(16,185,129,0.5)] transition-shadow duration-300"
           >
-            <span className="relative z-10 flex items-center gap-3">
-              {role === 'student' ? 'Explore Inventory' : 'List Your Space'}
-              <motion.span
-                className="inline-block font-black"
-                initial={{ x: 0 }}
-                whileHover={{ x: 6 }}
-                transition={{ type: "spring", stiffness: 300, damping: 10 }}
-              >
-                →
-              </motion.span>
-            </span>
-          </HoverButton>
+            {role === 'student' ? 'ACCESS VAULT' : 'INITIATE LISTING'}
+          </MagneticButton>
           
-          <HoverButton 
+          <MagneticButton 
             onClick={onRefer}
-            className="px-10 py-5 rounded-none bg-transparent border-2 border-zinc-700 text-zinc-300 font-bold text-xl uppercase tracking-widest hover:border-white hover:text-white hover:bg-white/5 transition-all duration-300 shadow-[8px_8px_0px_rgba(255,255,255,0.05)]"
+            className="w-full sm:w-auto px-10 sm:px-14 py-4 sm:py-6 rounded-none bg-black border border-white/20 text-white font-bold text-lg sm:text-xl uppercase tracking-[0.2em] hover:bg-white/10 hover:border-white/50 shadow-[0_0_20px_rgba(255,255,255,0.05)]"
           >
-            {role === 'student' ? 'Refer & Share' : 'View Pricing Model'}
-          </HoverButton>
+            {role === 'student' ? 'REFERRAL' : 'PRICING'}
+          </MagneticButton>
         </motion.div>
       </motion.div>
 
-      {/* Extreme ambient glows for depth */}
-      <motion.div style={{ y: yBg }} className="absolute top-[0%] -left-64 w-[600px] h-[600px] bg-[#10B981] opacity-[0.15] blur-[160px] rounded-full pointer-events-none mix-blend-screen z-0 gpu-layer" />
-      <motion.div style={{ y: yBg }} className="absolute bottom-[-10%] -right-32 w-[700px] h-[700px] bg-[#00F5A0] opacity-[0.1] blur-[180px] rounded-full pointer-events-none mix-blend-screen z-0 gpu-layer" />
+      {/* Top-Glow Cards Matrix with strict E-Summit grid architecture */}
+      <div className="z-20 w-full max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-14 mt-32 py-24 md:py-40">
+        <FeatureCard 
+          icon="🔒"
+          title="Zero Friction"
+          desc="Military-grade inventory management with absolute zero brokerage fees."
+        />
+        <FeatureCard 
+          icon="⚡"
+          title="Spatial Control"
+          desc="Manage your dead-rent or empty spaces with pure geometric precision."
+        />
+        <FeatureCard 
+          icon="💎"
+          title="Premium Matrix"
+          desc="Enter the exclusive host network. High yield, zero operational drag."
+        />
+      </div>
     </div>
   );
 };

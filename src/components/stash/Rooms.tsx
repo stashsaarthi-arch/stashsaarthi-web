@@ -369,8 +369,14 @@ export function Rooms({ onList, onBook }: { onList: () => void; onBook?: OpenBoo
                 delay={i * 0.05}
                 className="snap-center min-w-[85vw] max-w-[88vw] sm:min-w-0 sm:max-w-none shrink-0 sm:shrink"
               >
-                <article className="glass flex flex-col rounded-2xl p-3 group w-full h-full border border-white/[0.08]">
-                  <div className="relative w-full h-36 rounded-xl overflow-hidden mb-2.5 border border-white/10 bg-slate-900">
+                <motion.article 
+                  whileHover={{ y: -5 }}
+                  className="relative overflow-hidden bg-[#0a0a0a]/40 backdrop-blur-md border border-white/10 rounded-3xl group transition-colors duration-300 hover:bg-[#0a0a0a]/60 flex flex-col p-3 w-full h-full"
+                >
+                  <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-16 bg-emerald-500/10 blur-[30px] rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
+                  
+                  <div className="relative z-10 w-full h-36 rounded-xl overflow-hidden mb-2.5 border border-white/10 bg-slate-900">
                     <RoomImage
                       src={l.image || FALLBACK_IMAGES[i % 3] || DEFAULT_ROOM_SVG}
                       alt={l.address_location || "Student Room"}
@@ -522,7 +528,7 @@ export function Rooms({ onList, onBook }: { onList: () => void; onBook?: OpenBoo
                       </Button>
                     </div>
                   </div>
-                </article>
+                </motion.article>
               </AnimatedContent>
             ))
           )}

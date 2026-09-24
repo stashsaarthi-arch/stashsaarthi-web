@@ -1,5 +1,8 @@
-import { useState, useCallback, useEffect, lazy, Suspense } from "react";
+"use client";
+
+import { useState, useCallback, useEffect, lazy, Suspense, useRef } from "react";
 import { createFileRoute } from "@tanstack/react-router";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { AmbientNodes } from "@/components/ui/AmbientNodes";
 import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 import { usePersona } from "@/context/PersonaContext";
@@ -113,6 +116,19 @@ const DESC =
   "Official website of StashSaarthi. India's Zero-CapEx Intergenerational Living & Campus Micro-Storage Platform. Vacation luggage storage at ₹300/bag/mo, verified verified PG owner-hosted rooms, and homemade tiffins.";
 const URL = "https://stashsaarthi-web.vercel.app/";
 const OG_IMAGE = "https://stashsaarthi-web.vercel.app/images/og-banner-new.png";
+
+// Ye hamara custom bulletproof animation engine hai
+const FadeUp = ({ children }: { children: React.ReactNode }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 60 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: "-100px" }}
+    transition={{ duration: 0.7, type: "spring", stiffness: 100, damping: 20 }}
+    className="will-change-transform relative z-10 py-24 md:py-40 max-w-7xl mx-auto px-6 lg:px-12"
+  >
+    {children}
+  </motion.div>
+);
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -229,37 +245,47 @@ function Index() {
       </div>
 
       {/* High-Converting Savings Calculator Module placed high up for optimal scroll-depth conversion */}
-      <ErrorBoundary sectionName="Calculator Hub">
-        <Suspense fallback={null}>
-          <CalculatorHub onBook={open} />
-        </Suspense>
-      </ErrorBoundary>
+      <FadeUp>
+        <ErrorBoundary sectionName="Calculator Hub">
+          <Suspense fallback={null}>
+            <CalculatorHub onBook={open} />
+          </Suspense>
+        </ErrorBoundary>
+      </FadeUp>
 
       {/* Core Solutions Hub (Stash / Rooms / Kitchen / Connect) */}
-      <ErrorBoundary sectionName="Solutions Hub">
-        <SolutionsHub onBook={open} onListRoom={handleListRoom} />
-      </ErrorBoundary>
+      <FadeUp>
+        <ErrorBoundary sectionName="Solutions Hub">
+          <SolutionsHub onBook={open} onListRoom={handleListRoom} />
+        </ErrorBoundary>
+      </FadeUp>
 
       {/* Interactive Timeline of a Stash (Pickup -> Custody -> Return) */}
-      <ErrorBoundary sectionName="Timeline of a Stash">
-        <Suspense fallback={null}>
-          <StashTimeline onBook={open} />
-        </Suspense>
-      </ErrorBoundary>
+      <FadeUp>
+        <ErrorBoundary sectionName="Timeline of a Stash">
+          <Suspense fallback={null}>
+            <StashTimeline onBook={open} />
+          </Suspense>
+        </ErrorBoundary>
+      </FadeUp>
 
       {/* 3. 100% Radical Transparency & Custody Console Hub */}
-      <ErrorBoundary sectionName="Trust & Custody Console">
-        <Suspense fallback={null}>
-          <TrustConsoleHub />
-        </Suspense>
-      </ErrorBoundary>
+      <FadeUp>
+        <ErrorBoundary sectionName="Trust & Custody Console">
+          <Suspense fallback={null}>
+            <TrustConsoleHub />
+          </Suspense>
+        </ErrorBoundary>
+      </FadeUp>
 
       {/* Dedicated Student & Host Success Stories Carousel */}
-      <ErrorBoundary sectionName="Student Success Stories">
-        <Suspense fallback={null}>
-          <StudentStoriesCarousel onBook={open} />
-        </Suspense>
-      </ErrorBoundary>
+      <FadeUp>
+        <ErrorBoundary sectionName="Student Success Stories">
+          <Suspense fallback={null}>
+            <StudentStoriesCarousel onBook={open} />
+          </Suspense>
+        </ErrorBoundary>
+      </FadeUp>
 
       {/* FAQ Section */}
       <ErrorBoundary sectionName="FAQ Section">
@@ -279,17 +305,21 @@ function Index() {
 
       {/* Desktop Inline Deep Modules (>= md) */}
       <div className="hidden md:block content-visibility-auto optimize-render">
-        <ErrorBoundary sectionName="Why StashSaarthi vs Traditional PGs">
-          <Suspense fallback={null}>
-            <PgComparisonTable onBook={open} />
-          </Suspense>
-        </ErrorBoundary>
+        <FadeUp>
+          <ErrorBoundary sectionName="Why StashSaarthi vs Traditional PGs">
+            <Suspense fallback={null}>
+              <PgComparisonTable onBook={open} />
+            </Suspense>
+          </ErrorBoundary>
+        </FadeUp>
 
-        <ErrorBoundary sectionName="Dual Crisis Overview">
-          <Suspense fallback={null}>
-            <DualCrisis />
-          </Suspense>
-        </ErrorBoundary>
+        <FadeUp>
+          <ErrorBoundary sectionName="Dual Crisis Overview">
+            <Suspense fallback={null}>
+              <DualCrisis />
+            </Suspense>
+          </ErrorBoundary>
+        </FadeUp>
 
         <ErrorBoundary sectionName="Top Rated Kitchens">
           <Suspense fallback={null}>
@@ -304,17 +334,21 @@ function Index() {
           </Suspense>
         </ErrorBoundary>
 
-        <ErrorBoundary sectionName="Kanpur Student Council">
-          <Suspense fallback={null}>
-            <KanpurStudentCouncil />
-          </Suspense>
-        </ErrorBoundary>
+        <FadeUp>
+          <ErrorBoundary sectionName="Kanpur Student Council">
+            <Suspense fallback={null}>
+              <KanpurStudentCouncil />
+            </Suspense>
+          </ErrorBoundary>
+        </FadeUp>
 
-        <ErrorBoundary sectionName="Referral Leaderboard">
-          <Suspense fallback={null}>
-            <ReferralLeaderboard onRefer={handleRefer} />
-          </Suspense>
-        </ErrorBoundary>
+        <FadeUp>
+          <ErrorBoundary sectionName="Referral Leaderboard">
+            <Suspense fallback={null}>
+              <ReferralLeaderboard onRefer={handleRefer} />
+            </Suspense>
+          </ErrorBoundary>
+        </FadeUp>
 
         {/* Host Specific Dashboard Norms */}
         {role === "host" && (
