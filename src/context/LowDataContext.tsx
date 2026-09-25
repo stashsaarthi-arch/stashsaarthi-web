@@ -40,9 +40,29 @@ export function detectLowDataConnection(): { isSlow: boolean; type: string; save
  * and updates DOM attributes on `document.documentElement` to disable GSAP/WebGL animations.
  */
 export function LowDataProvider({ children }: { children: React.ReactNode }) {
-  const [isLowData, setIsLowDataState] = useState<boolean>(false);
-  const [isAutoDetected, setIsAutoDetected] = useState<boolean>(false);
-  const [effectiveType, setEffectiveType] = useState<string>("unknown");
+  const [isLowData, setIsLowDataState] = useState<boolean>(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const saved = localStorage.getItem("ss_low_data_mode");
+        if (saved !== null) return saved === "true";
+        return detectLowDataConnection().isSlow;
+      } catch {}
+    }
+    return false;
+  });
+  const [isAutoDetected, setIsAutoDetected] = useState<boolean>(() => {
+    if (typeof window !== "undefined") {
+      try {
+        if (localStorage.getItem("ss_low_data_mode") === null) {
+          return detectLowDataConnection().isSlow;
+        }
+      } catch {}
+    }
+    return false;
+  });
+  const [effectiveType, setEffectiveType] = useState<string>(() => {
+    return detectLowDataConnection().type;
+  });
 
   const applyLowDataDOM = useCallback((enabled: boolean) => {
     if (typeof document === "undefined") return;

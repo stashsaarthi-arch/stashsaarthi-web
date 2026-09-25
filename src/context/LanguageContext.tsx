@@ -1015,7 +1015,15 @@ type LanguageContextType = {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguageState] = useState<Language>("en");
+  const [language, setLanguageState] = useState<Language>(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const saved = sessionStorage.getItem("ss-language") as Language;
+        if (saved === "en" || saved === "hi") return saved;
+      } catch {}
+    }
+    return "en";
+  });
 
   // Ensure fresh page loads always start in English
   useEffect(() => {

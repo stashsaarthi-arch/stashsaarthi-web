@@ -17,7 +17,15 @@ const PersonaContext = createContext<PersonaContextType | undefined>(undefined);
  * and to `localStorage` for persistence across refreshes.
  */
 export function PersonaProvider({ children }: { children: React.ReactNode }) {
-  const [role, setRoleState] = useState<Role>("student");
+  const [role, setRoleState] = useState<Role>(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const saved = sessionStorage.getItem("ss-role") as Role;
+        if (saved === "student" || saved === "host") return saved;
+      } catch {}
+    }
+    return "student";
+  });
 
   // Ensure fresh page loads always start in Student mode
   useEffect(() => {
