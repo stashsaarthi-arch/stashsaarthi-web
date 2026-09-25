@@ -460,19 +460,7 @@ function RootShell({ children }: { children: ReactNode }) {
         <div className="relative min-h-screen bg-transparent text-white overflow-hidden selection:bg-emerald-500/30">
           
           {/* THE SPATIAL VOID (STRICTLY z-0, NEVER NEGATIVE) */}
-          <div className="fixed inset-0 z-0 pointer-events-none bg-[#030303]">
-            <motion.div 
-              animate={{ scale: [1, 1.1, 1], opacity: [0.15, 0.3, 0.15] }} 
-              transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-emerald-500/30 blur-[120px] rounded-full mix-blend-screen"
-            />
-            <motion.div 
-              animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.25, 0.1] }} 
-              transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-              className="absolute bottom-[-10%] right-[-10%] w-[60vw] h-[60vw] bg-teal-500/20 blur-[150px] rounded-full mix-blend-screen"
-            />
-            <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
-          </div>
+          <SpatialVoid />
 
           {/* THE FOREGROUND CONTENT (STRICTLY z-10) */}
           <main className="relative z-10 w-full flex flex-col min-h-screen">
@@ -483,6 +471,32 @@ function RootShell({ children }: { children: ReactNode }) {
         <Scripts />
       </body>
     </html>
+  );
+}
+
+function SpatialVoid() {
+  const { scrollY } = useScroll();
+  const y1 = useTransform(scrollY, [0, 1000], [0, 150]);
+  const y2 = useTransform(scrollY, [0, 1000], [0, -150]);
+
+  return (
+    <div className="fixed inset-0 z-0 pointer-events-none bg-[#030303]">
+      <motion.div 
+        initial={{ scale: 1, opacity: 0.15, y: 0 }}
+        animate={{ scale: [1, 1.1, 1], opacity: [0.15, 0.3, 0.15] }} 
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        style={{ y: y1 }}
+        className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-emerald-500/30 blur-[120px] rounded-full mix-blend-screen"
+      />
+      <motion.div 
+        initial={{ scale: 1, opacity: 0.1, y: 0 }}
+        animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.25, 0.1] }} 
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        style={{ y: y2 }}
+        className="absolute bottom-[-10%] right-[-10%] w-[60vw] h-[60vw] bg-teal-500/20 blur-[150px] rounded-full mix-blend-screen"
+      />
+      <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+    </div>
   );
 }
 
