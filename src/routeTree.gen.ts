@@ -11,8 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteImport } from './routes/admin'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as KakadeoSurvivalGuideRouteImport } from './routes/kakadeo-survival-guide'
 import { Route as KanpurStudentCouncilRouteImport } from './routes/kanpur-student-council'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as TiffinServicesNearAllenRouteImport } from './routes/tiffin-services-near-allen'
@@ -32,6 +34,11 @@ const AdminRoute = AdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const KakadeoSurvivalGuideRoute = KakadeoSurvivalGuideRouteImport.update({
   id: '/kakadeo-survival-guide',
   path: '/kakadeo-survival-guide',
@@ -40,6 +47,11 @@ const KakadeoSurvivalGuideRoute = KakadeoSurvivalGuideRouteImport.update({
 const KanpurStudentCouncilRoute = KanpurStudentCouncilRouteImport.update({
   id: '/kanpur-student-council',
   path: '/kanpur-student-council',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacyRoute = PrivacyRouteImport.update({
@@ -88,8 +100,10 @@ const HostLoginRoute = HostLoginRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
+  '/dashboard': typeof DashboardRoute
   '/kakadeo-survival-guide': typeof KakadeoSurvivalGuideRoute
   '/kanpur-student-council': typeof KanpurStudentCouncilRoute
+  '/login': typeof LoginRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
   '/tiffin-services-near-allen': typeof TiffinServicesNearAllenRoute
@@ -102,8 +116,10 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
+  '/dashboard': typeof DashboardRoute
   '/kakadeo-survival-guide': typeof KakadeoSurvivalGuideRoute
   '/kanpur-student-council': typeof KanpurStudentCouncilRoute
+  '/login': typeof LoginRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
   '/tiffin-services-near-allen': typeof TiffinServicesNearAllenRoute
@@ -117,8 +133,10 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
+  '/dashboard': typeof DashboardRoute
   '/kakadeo-survival-guide': typeof KakadeoSurvivalGuideRoute
   '/kanpur-student-council': typeof KanpurStudentCouncilRoute
+  '/login': typeof LoginRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
   '/tiffin-services-near-allen': typeof TiffinServicesNearAllenRoute
@@ -133,8 +151,10 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/admin'
+    | '/dashboard'
     | '/kakadeo-survival-guide'
     | '/kanpur-student-council'
+    | '/login'
     | '/privacy'
     | '/terms'
     | '/tiffin-services-near-allen'
@@ -147,8 +167,10 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/admin'
+    | '/dashboard'
     | '/kakadeo-survival-guide'
     | '/kanpur-student-council'
+    | '/login'
     | '/privacy'
     | '/terms'
     | '/tiffin-services-near-allen'
@@ -161,8 +183,10 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/admin'
+    | '/dashboard'
     | '/kakadeo-survival-guide'
     | '/kanpur-student-council'
+    | '/login'
     | '/privacy'
     | '/terms'
     | '/tiffin-services-near-allen'
@@ -176,8 +200,10 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRoute
+  DashboardRoute: typeof DashboardRoute
   KakadeoSurvivalGuideRoute: typeof KakadeoSurvivalGuideRoute
   KanpurStudentCouncilRoute: typeof KanpurStudentCouncilRoute
+  LoginRoute: typeof LoginRoute
   PrivacyRoute: typeof PrivacyRoute
   TermsRoute: typeof TermsRoute
   TiffinServicesNearAllenRoute: typeof TiffinServicesNearAllenRoute
@@ -204,6 +230,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/kakadeo-survival-guide': {
       id: '/kakadeo-survival-guide'
       path: '/kakadeo-survival-guide'
@@ -216,6 +249,13 @@ declare module '@tanstack/react-router' {
       path: '/kanpur-student-council'
       fullPath: '/kanpur-student-council'
       preLoaderRoute: typeof KanpurStudentCouncilRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy': {
@@ -280,8 +320,10 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
+  DashboardRoute: DashboardRoute,
   KakadeoSurvivalGuideRoute: KakadeoSurvivalGuideRoute,
   KanpurStudentCouncilRoute: KanpurStudentCouncilRoute,
+  LoginRoute: LoginRoute,
   PrivacyRoute: PrivacyRoute,
   TermsRoute: TermsRoute,
   TiffinServicesNearAllenRoute: TiffinServicesNearAllenRoute,
