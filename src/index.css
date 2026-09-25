@@ -18,7 +18,11 @@
   --color-amber: oklch(0.769 0.165 70);
   --color-host-background: oklch(0.16 0.014 60);
   --color-host-card: oklch(0.21 0.017 62);
-  --color-host-primary: oklch(0.809 0.165 76);
+  /* Extracted from SkillUI DESIGN.md */
+  --color-host-primary: #ffd740;
+  --color-host-secondary: #ff7a1a;
+  --color-student-primary: #0068ff;
+  --color-student-secondary: #198754;
 
   --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-headline: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;

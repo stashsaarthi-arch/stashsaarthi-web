@@ -5,14 +5,14 @@ export function PageTransition({ children, routeKey }: { children: ReactNode; ro
   return (
     <motion.div
       key={routeKey}
-      initial={{ opacity: 0, y: 15 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -15 }}
+      exit={{ opacity: 0, y: -20 }}
       transition={{
         duration: 0.4,
         ease: [0.22, 1, 0.36, 1],
       }}
-      className="w-full min-h-screen"
+      className="w-full min-h-screen bg-transparent"
     >
       {children}
     </motion.div>

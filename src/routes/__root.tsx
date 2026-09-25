@@ -11,6 +11,8 @@ import {
 import { useEffect, useState, type ReactNode } from "react";
 import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import { PageTransition } from "@/components/ui/PageTransition";
+import { CustomCursor } from "@/components/ui/CustomCursor";
+import { CinematicPreLoader } from "@/components/ui/CinematicPreLoader";
 
 import appCss from "../styles.css?url";
 import { reportError } from "../lib/error-reporting";
@@ -456,8 +458,10 @@ function RootShell({ children }: { children: ReactNode }) {
           }}
         />
       </head>
-      <body className="pb-24 sm:pb-0 bg-transparent text-white selection:bg-emerald-500/30" suppressHydrationWarning={true}>
-        <div className="relative min-h-screen bg-transparent text-white overflow-hidden selection:bg-emerald-500/30">
+      <body className="pb-24 sm:pb-0 bg-transparent text-white selection:bg-emerald-500/30 cursor-none" suppressHydrationWarning={true}>
+        <div className="relative min-h-screen bg-transparent text-white overflow-hidden selection:bg-emerald-500/30 cursor-none">
+          <CinematicPreLoader />
+          <CustomCursor />
           
           {/* THE SPATIAL VOID (STRICTLY z-0, NEVER NEGATIVE) */}
           <SpatialVoid />
@@ -512,16 +516,16 @@ function SpatialVoid() {
       
       {/* Dynamic Scrolling Glow Orbs */}
       <div 
-        className="absolute top-0 left-[-10%] w-[60vw] h-[60vw] bg-emerald-500/30 blur-[120px] rounded-full mix-blend-screen"
+        className="absolute top-0 left-[-10%] w-[100vw] h-[100vw] md:w-[60vw] md:h-[60vw] bg-emerald-500/15 md:bg-emerald-500/30 blur-[60px] md:blur-[120px] rounded-full mix-blend-screen transform-gpu"
         style={{
-          transform: `translateY(${scrollY * 0.2}px)`,
+          transform: `translateY(${scrollY * 0.2}px) translateZ(0)`,
           willChange: 'transform'
         }}
       />
       <div 
-        className="absolute bottom-0 right-[-10%] w-[70vw] h-[70vw] bg-teal-500/20 blur-[150px] rounded-full mix-blend-screen"
+        className="absolute bottom-0 right-[-10%] w-[120vw] h-[120vw] md:w-[70vw] md:h-[70vw] bg-teal-500/10 md:bg-teal-500/20 blur-[60px] md:blur-[150px] rounded-full mix-blend-screen transform-gpu"
         style={{
-          transform: `translateY(${-(scrollY * 0.1)}px)`,
+          transform: `translateY(${-(scrollY * 0.1)}px) translateZ(0)`,
           willChange: 'transform'
         }}
       />
