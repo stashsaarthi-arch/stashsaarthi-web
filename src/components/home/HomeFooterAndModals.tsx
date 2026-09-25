@@ -1,4 +1,5 @@
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 import { ScrollProgress } from "@/components/stash/ScrollProgress";
 import { MobileStickyCTA } from "@/components/stash/MobileStickyCTA";
@@ -69,6 +70,38 @@ export function HomeFooterAndModals({
   onBook,
   onRefer,
 }: HomeFooterAndModalsProps) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  const floatingWidgets = mounted ? createPortal(
+    <>
+      <ErrorBoundary sectionName="Scroll Progress Indicator" compact>
+        <ScrollProgress />
+      </ErrorBoundary>
+      
+      <Suspense fallback={null}>
+        <ErrorBoundary sectionName="Founder Escalation Widget" compact>
+          <FounderEscalationWidget />
+        </ErrorBoundary>
+      </Suspense>
+      
+      <ErrorBoundary sectionName="Mobile Sticky CTA Widget" compact>
+        <MobileStickyCTA onBook={onBook} />
+      </ErrorBoundary>
+      
+      <ErrorBoundary sectionName="WhatsApp Floating Action Button" compact>
+        <WhatsAppButton onBook={onBook} />
+      </ErrorBoundary>
+      
+      <Suspense fallback={null}>
+        <ErrorBoundary sectionName="RAG Chatbot Widget" compact>
+          <RagChatbotWidget />
+        </ErrorBoundary>
+      </Suspense>
+    </>,
+    document.body
+  ) : null;
+
   return (
     <>
       {/* FAQ Section */}
@@ -130,30 +163,7 @@ export function HomeFooterAndModals({
           />
         </ErrorBoundary>
       </Suspense>
-      
-      <ErrorBoundary sectionName="Scroll Progress Indicator" compact>
-        <ScrollProgress />
-      </ErrorBoundary>
-      
-      <Suspense fallback={null}>
-        <ErrorBoundary sectionName="Founder Escalation Widget" compact>
-          <FounderEscalationWidget />
-        </ErrorBoundary>
-      </Suspense>
-      
-      <ErrorBoundary sectionName="Mobile Sticky CTA Widget" compact>
-        <MobileStickyCTA onBook={onBook} />
-      </ErrorBoundary>
-      
-      <ErrorBoundary sectionName="WhatsApp Floating Action Button" compact>
-        <WhatsAppButton onBook={onBook} />
-      </ErrorBoundary>
-      
-      <Suspense fallback={null}>
-        <ErrorBoundary sectionName="RAG Chatbot Widget" compact>
-          <RagChatbotWidget />
-        </ErrorBoundary>
-      </Suspense>
+      {floatingWidgets}
     </>
   );
 }
