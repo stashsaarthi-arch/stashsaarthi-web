@@ -41,6 +41,7 @@ const DialogContent = React.forwardRef<
         "fixed left-[50%] top-[50%] z-50 grid w-[calc(100vw-2rem)] sm:w-full max-w-lg max-h-[85vh] overflow-y-auto translate-x-[-50%] translate-y-[-50%] gap-4 border border-white/10 bg-black/30 p-6 shadow-[0_-10px_40px_rgba(0,0,0,0.5)] backdrop-blur-2xl duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 rounded-[2rem]",
         className,
       )}
+      data-lenis-prevent="true"
       {...props}
     >
       <div className="absolute inset-0 bg-emerald-500/10 blur-[80px] -z-10 pointer-events-none rounded-[2rem]" />

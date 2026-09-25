@@ -691,8 +691,8 @@ function RootComponent() {
                           gestureOrientation: "vertical",
                           smoothWheel: true,
                           wheelMultiplier: 0.9,
-                          syncTouch: false, // CRITICAL: Disable Lenis synthetic touch hijacking
-                          touchMultiplier: 1.0,
+                          syncTouch: true, // FIX: Enable Lenis synthetic touch to fix mobile scrolling
+                          touchMultiplier: 2.0,
                           infinite: false,
                           autoRaf: true, // Native rAF baseline
                         }}
