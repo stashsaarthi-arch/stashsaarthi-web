@@ -8,7 +8,7 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import { PageTransition } from "@/components/ui/PageTransition";
 
@@ -475,27 +475,59 @@ function RootShell({ children }: { children: ReactNode }) {
 }
 
 function SpatialVoid() {
-  const { scrollY } = useScroll();
-  const y1 = useTransform(scrollY, [0, 1000], [0, 150]);
-  const y2 = useTransform(scrollY, [0, 1000], [0, -150]);
+  const [scrollY, setScrollY] = useState(0);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    let rafId: number;
+    
+    // Create a unified scroll updater that works with both native scroll and Lenis
+    const updateScroll = () => {
+      // Prioritize Lenis scroll if available, fallback to window.scrollY
+      const currentScroll = (window as any).__lenis?.scroll || window.scrollY;
+      setScrollY(currentScroll);
+      rafId = requestAnimationFrame(updateScroll);
+    };
+    
+    rafId = requestAnimationFrame(updateScroll);
+    return () => cancelAnimationFrame(rafId);
+  }, []);
+
+  if (!mounted) return <div className="fixed inset-0 z-0 pointer-events-none bg-[#030303]" />;
 
   return (
-    <div className="fixed inset-0 z-0 pointer-events-none bg-[#030303]">
-      <motion.div 
-        initial={{ scale: 1, opacity: 0.15, y: 0 }}
-        animate={{ scale: [1, 1.1, 1], opacity: [0.15, 0.3, 0.15] }} 
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        style={{ y: y1 }}
-        className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-emerald-500/30 blur-[120px] rounded-full mix-blend-screen"
+    <div className="fixed inset-0 z-0 pointer-events-none bg-[#030303] overflow-hidden">
+      {/* 3D Scrolling Grid Layer (E-Summit Style) */}
+      <div 
+        className="absolute w-[200vw] h-[200vh] left-[-50vw] top-[-50vh] opacity-20"
+        style={{
+          backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px)',
+          backgroundSize: '50px 50px',
+          transform: `translateY(${-(scrollY * 0.15) % 50}px) perspective(1000px) rotateX(45deg)`,
+          transformOrigin: 'top center',
+          willChange: 'transform'
+        }}
       />
-      <motion.div 
-        initial={{ scale: 1, opacity: 0.1, y: 0 }}
-        animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.25, 0.1] }} 
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-        style={{ y: y2 }}
-        className="absolute bottom-[-10%] right-[-10%] w-[60vw] h-[60vw] bg-teal-500/20 blur-[150px] rounded-full mix-blend-screen"
+      
+      {/* Dynamic Scrolling Glow Orbs */}
+      <div 
+        className="absolute top-0 left-[-10%] w-[60vw] h-[60vw] bg-emerald-500/30 blur-[120px] rounded-full mix-blend-screen"
+        style={{
+          transform: `translateY(${scrollY * 0.2}px)`,
+          willChange: 'transform'
+        }}
       />
-      <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+      <div 
+        className="absolute bottom-0 right-[-10%] w-[70vw] h-[70vw] bg-teal-500/20 blur-[150px] rounded-full mix-blend-screen"
+        style={{
+          transform: `translateY(${-(scrollY * 0.1)}px)`,
+          willChange: 'transform'
+        }}
+      />
+      
+      {/* Film Grain Noise Overlay */}
+      <div className="absolute inset-0 opacity-[0.04] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
     </div>
   );
 }
