@@ -1,6 +1,19 @@
-export async function getAdminAuth() {
-  const { getApps, initializeApp, cert } = await import("firebase-admin/app");
-  const { getAuth } = await import("firebase-admin/auth");
+import { createRequire } from "node:module";
+
+// Use dynamic require so that Rollup does not hoist the CJS library
+// and evaluate it BEFORE our __dirname polyfill in src/polyfill.ts runs.
+const require = createRequire(import.meta.url);
+
+// Dummy trace for Vercel NFT to ensure the package is included in the serverless deployment
+if (process.env["NEVER_TRUE"]) {
+  require("firebase-admin/app");
+  require("firebase-admin/auth");
+  require("firebase-admin/firestore");
+}
+
+export function getAdminAuth() {
+  const { getApps, initializeApp, cert } = require("firebase-admin/app");
+  const { getAuth } = require("firebase-admin/auth");
 
   if (!getApps().length) {
     const projectId = process.env["FIREBASE_ADMIN_PROJECT_ID"];
@@ -25,12 +38,12 @@ export async function getAdminAuth() {
   return app ? getAuth(app) : null;
 }
 
-export async function getAdminDb() {
-  const { getApps } = await import("firebase-admin/app");
-  const { getFirestore } = await import("firebase-admin/firestore");
+export function getAdminDb() {
+  const { getApps } = require("firebase-admin/app");
+  const { getFirestore } = require("firebase-admin/firestore");
 
   if (!getApps().length) {
-    await getAdminAuth();
+    getAdminAuth();
   }
   const app = getApps()[0];
   return app ? getFirestore(app) : null;

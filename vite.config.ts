@@ -33,9 +33,10 @@ export default defineConfig({
         "firebase-admin/app",
         "firebase-admin/auth",
         "firebase-admin/firestore",
-        "cloudinary",
         "@google-cloud/firestore",
         "@google-cloud/storage",
+        "cloudinary",
+        "google-gax",
       ],
     },
     build: {
