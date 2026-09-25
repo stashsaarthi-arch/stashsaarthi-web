@@ -131,7 +131,6 @@ body, html {
   filter: blur(140px);
   z-index: -2;
   pointer-events: none;
-  will-change: transform;
   transform: translate3d(0,0,0);
 }
 .ambient-glow-1 {
@@ -171,7 +170,6 @@ body, html {
   animation: plasmaStreak linear infinite;
   pointer-events: none;
   z-index: 0;
-  will-change: transform, opacity;
   box-shadow: 0 0 20px #00F5A0;
 }
 
@@ -183,6 +181,5 @@ body, html {
   animation: plasmaFloat linear infinite;
   pointer-events: none;
   z-index: 0;
-  will-change: transform, opacity;
   box-shadow: 0 0 20px #00F5A0, 0 0 40px #10B981;
 }
