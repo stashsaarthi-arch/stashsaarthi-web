@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
+import { supabase } from "@/lib/supabase";
 import { StudentLogin } from "@/components/auth/StudentLogin";
 import { HostLogin } from "@/components/auth/HostLogin";
 import { ModeToggle } from "@/components/home/ModeToggle";
@@ -16,6 +17,12 @@ export const Route = createFileRoute('/login')({
       redirect: search['redirect'] as string | undefined,
       error: search['error'] as string | undefined,
     };
+  },
+  beforeLoad: async ({ search }) => {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (session) {
+      throw redirect({ to: search.redirect || '/dashboard' });
+    }
   },
   component: LoginPage,
 });
