@@ -197,7 +197,7 @@ export function BookingDetailDrawer({ booking, open, onClose }: BookingDetailDra
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 32, stiffness: 350 }}
-              className="w-screen max-w-md bg-[#0D1117] border-l border-white/10 shadow-2xl text-white flex flex-col justify-between overflow-y-auto scrollbar-thin scrollbar-thumb-white/10 pointer-events-auto"
+              className="w-full max-w-md bg-[#0D1117] border-l border-white/10 shadow-2xl text-white flex flex-col justify-between overflow-y-auto scrollbar-thin scrollbar-thumb-white/10 pointer-events-auto"
             >
               {/* Header */}
               <div className="p-6 border-b border-white/10 bg-black/40 relative">

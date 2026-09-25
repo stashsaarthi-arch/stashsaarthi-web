@@ -42,7 +42,26 @@ export function SpaceListingForm() {
   
   // Storage State
   const [file, setFile] = useState<File | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(false);
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(false);
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      setFile(e.dataTransfer.files[0]);
+    }
+  };
 
   const nextStep = () => { setDirection(1); setStep(s => s + 1); };
   const prevStep = () => { setDirection(-1); setStep(s => s - 1); };
@@ -236,20 +255,25 @@ export function SpaceListingForm() {
                   {/* Drag and Drop Zone */}
                   <div 
                     onClick={() => fileInputRef.current?.click()}
-                    className={`w-full h-48 border-2 border-dashed rounded-2xl flex flex-col items-center justify-center cursor-pointer transition-all ${file ? 'border-host-primary bg-host-primary/5' : 'border-white/20 bg-black/20 hover:border-host-primary/50 hover:bg-white/5'}`}
+                    onDragOver={handleDragOver}
+                    onDragLeave={handleDragLeave}
+                    onDrop={handleDrop}
+                    className={`w-full h-48 border-2 border-dashed rounded-2xl flex flex-col items-center justify-center cursor-pointer transition-all ${isDragging ? 'border-host-primary bg-host-primary/20 scale-105' : file ? 'border-host-primary bg-host-primary/5' : 'border-white/20 bg-black/20 hover:border-host-primary/50 hover:bg-white/5'}`}
                   >
                     {file ? (
                       <div className="text-center">
                         <div className="text-host-primary mb-2">
                           <svg className="w-8 h-8 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
                         </div>
-                        <p className="text-white font-medium">{file.name}</p>
-                        <p className="text-white/50 text-xs mt-1">Click to replace</p>
+                        <p className="text-white font-medium truncate max-w-[200px] mx-auto">{file.name}</p>
+                        <p className="text-white/50 text-xs mt-1">Click or drag to replace</p>
                       </div>
                     ) : (
                       <div className="text-center">
-                        <svg className="w-10 h-10 text-white/30 mx-auto mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-                        <p className="text-white/70 font-medium">Drag & Drop or Click to Upload</p>
+                        <svg className={`w-10 h-10 mx-auto mb-3 transition-colors ${isDragging ? 'text-host-primary' : 'text-white/30'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                        <p className={`font-medium transition-colors ${isDragging ? 'text-host-primary' : 'text-white/70'}`}>
+                          {isDragging ? 'Drop image here' : 'Drag & Drop or Click to Upload'}
+                        </p>
                         <p className="text-white/40 text-xs mt-2">Required for safety protocol</p>
                       </div>
                     )}

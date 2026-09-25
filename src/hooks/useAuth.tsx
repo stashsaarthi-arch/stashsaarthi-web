@@ -3,6 +3,8 @@ import { jwtDecode } from "jwt-decode";
 import { toast } from "sonner";
 import type { CredentialResponse } from "@react-oauth/google";
 import { upsertGoogleUser } from "@/lib/waitlistService";
+import { supabase } from "@/lib/supabase";
+import { useAuthStore } from "@/store/useAuthStore";
 
 export type AuthUser = {
   id: string;
@@ -23,7 +25,7 @@ type AuthValue = {
   user: AuthUser | null;
   loading: boolean;
   authenticating: boolean;
-  loginWithGoogle: (response: CredentialResponse, defaultRole?: "student" | "host") => void;
+  loginWithGoogle: (response: CredentialResponse, defaultRole?: "student" | "host") => Promise<void>;
   loginWithProfile: (profile: AuthUser) => void;
   updateUser: (updates: Partial<AuthUser>) => void;
   logout: () => void;
@@ -33,30 +35,63 @@ type AuthValue = {
 const AuthContext = createContext<AuthValue | null>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<AuthUser | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [userLocal, setUserLocal] = useState<AuthUser | null>(null);
+  const [loadingLocal, setLoadingLocal] = useState(true);
   const [authenticating, setAuthenticating] = useState(false);
+  
+  // Single source of truth from Supabase
+  const supabaseUser = useAuthStore(state => state.user);
+  const isLoadingSupabase = useAuthStore(state => state.isLoading);
 
   useEffect(() => {
-    // Load session from localStorage on mount
+    // Load local override for mock users from localStorage
     const storedUser = localStorage.getItem("stash_user_session");
     if (storedUser) {
       try {
-        setUser(JSON.parse(storedUser));
+        setUserLocal(JSON.parse(storedUser));
       } catch (e) {
         localStorage.removeItem("stash_user_session");
       }
     }
-    setLoading(false);
+    setLoadingLocal(false);
   }, []);
 
+  // Compute derived user state: Supabase takes precedence over local mock
+  const user = useMemo<AuthUser | null>(() => {
+    if (supabaseUser) {
+      return {
+        id: supabaseUser.id,
+        email: supabaseUser.email || "",
+        name: supabaseUser.user_metadata?.['full_name'] || supabaseUser.email?.split("@")[0] || "User",
+        avatar: supabaseUser.user_metadata?.['avatar_url'] || "",
+        role: supabaseUser.user_metadata?.['role'] || "student",
+        verified: !!supabaseUser.email_confirmed_at,
+        provider: supabaseUser.app_metadata?.provider === 'google' ? 'google' : 'local'
+      };
+    }
+    return userLocal;
+  }, [supabaseUser, userLocal]);
+
+  const loading = loadingLocal || isLoadingSupabase;
+
   const loginWithGoogle = useCallback(
-    (response: CredentialResponse, defaultRole: "student" | "host" = "student") => {
+    async (response: CredentialResponse, defaultRole: "student" | "host" = "student") => {
       setAuthenticating(true);
       try {
         if (!response.credential) {
           throw new Error("No credential received from Google");
         }
+
+        // Establish real Supabase session using the Google ID Token
+        const { data, error } = await supabase.auth.signInWithIdToken({
+          provider: 'google',
+          token: response.credential,
+        });
+
+        if (error) throw error;
+
+        // Optionally update metadata if newly created
+        await supabase.auth.updateUser({ data: { role: defaultRole } });
 
         const decoded = jwtDecode<{
           sub?: string;
@@ -66,33 +101,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           email_verified?: boolean;
         }>(response.credential);
 
-        if (!decoded.email) {
+        const userEmail = decoded.email;
+        if (!userEmail) {
           throw new Error("Email not found in Google credential");
         }
 
-        const newUser: AuthUser = {
-          id: decoded.sub || decoded.email || "guest",
-          name: decoded.name || decoded.email?.split("@")[0] || "Saarthi",
-          email: decoded.email,
-          avatar: decoded.picture || "",
-          role: defaultRole,
-          verified: !!decoded.email_verified,
-          provider: "google",
-        };
-
-        setUser(newUser);
-        localStorage.setItem("stash_user_session", JSON.stringify(newUser));
-
         // Persist to Supabase users_waitlist (fire-and-forget)
         upsertGoogleUser({
-          email: newUser.email,
-          name: newUser.name,
-          picture: newUser.avatar,
+          email: userEmail,
+          name: decoded.name || userEmail.split("@")[0] || "User",
+          picture: decoded.picture || "",
         });
 
-        const firstName = newUser.name.split(" ")[0];
+        const firstName = (decoded.name || userEmail.split("@")[0] || "User").split(" ")[0] || "User";
         toast.success(`Welcome back, ${firstName}!`, {
-          description: `Logged in as ${newUser.role === "student" ? "Student" : "High-Margin ROI Host"}`,
+          description: `Logged in as ${defaultRole === "student" ? "Student" : "High-Margin ROI Host"}`,
         });
       } catch (err) {
         console.error("Google Auth Error:", err);
@@ -105,10 +128,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   );
 
   const loginWithProfile = useCallback((newUser: AuthUser) => {
-    setUser(newUser);
+    // Local mock fallback for profile login
+    setUserLocal(newUser);
     localStorage.setItem("stash_user_session", JSON.stringify(newUser));
 
-    // Persist to Supabase users_waitlist (fire-and-forget)
     upsertGoogleUser({
       email: newUser.email,
       name: newUser.name,
@@ -121,24 +144,29 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     });
   }, []);
 
-  const logout = useCallback(() => {
-    setUser(null);
+  const logout = useCallback(async () => {
+    setUserLocal(null);
     localStorage.removeItem("stash_user_session");
+    await supabase.auth.signOut();
     toast.success("Signed out. See you soon!");
   }, []);
 
-  const updateUser = useCallback((updates: Partial<AuthUser>) => {
-    setUser((prev) => {
+  const updateUser = useCallback(async (updates: Partial<AuthUser>) => {
+    setUserLocal((prev) => {
       if (!prev) return null;
       const updatedUser = { ...prev, ...updates };
       localStorage.setItem("stash_user_session", JSON.stringify(updatedUser));
-      // Broadcast profile update event for zero-refresh real-time propagation across UI
       window.dispatchEvent(
         new CustomEvent("stashsaarthi:profile-updated", { detail: updatedUser }),
       );
       return updatedUser;
     });
-  }, []);
+    
+    // Also update Supabase metadata if logged in via Supabase
+    if (supabaseUser) {
+       await supabase.auth.updateUser({ data: updates });
+    }
+  }, [supabaseUser]);
 
   const value = useMemo(
     () => ({

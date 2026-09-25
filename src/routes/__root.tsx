@@ -460,7 +460,7 @@ function RootShell({ children }: { children: ReactNode }) {
         />
       </head>
       <body className="pb-24 sm:pb-0 bg-transparent text-white selection:bg-emerald-500/30 cursor-none" suppressHydrationWarning={true}>
-        <div className="relative min-h-screen bg-transparent text-white overflow-hidden selection:bg-emerald-500/30 cursor-none">
+        <div className="relative min-h-screen w-full overflow-x-hidden bg-transparent text-white selection:bg-emerald-500/30 cursor-none">
           <CinematicPreLoader />
           <CustomCursor />
           
