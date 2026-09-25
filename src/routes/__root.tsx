@@ -24,6 +24,7 @@ import { LanguageProvider } from "@/context/LanguageContext";
 import { PersonaProvider } from "@/context/PersonaContext";
 import { ThemeProvider, useTheme } from "@/context/ThemeContext";
 import { LowDataProvider, useLowData } from "@/context/LowDataContext";
+import { useAuthStore } from "@/store/useAuthStore";
 import { ToastProvider } from "@/context/ToastContext";
 import { AccessibilityAnnouncer } from "@/components/ui/AccessibilityAnnouncer";
 import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
@@ -618,9 +619,11 @@ function RootComponent() {
     initAutoDataRetentionPurge();
     const { unsubscribe } = initSessionSecurityListener();
     const stopTracking = initVisitorTracking();
+    const unsubscribeAuthStore = useAuthStore.getState().initialize();
     return () => {
       unsubscribe();
       stopTracking();
+      unsubscribeAuthStore();
     };
   }, []);
 

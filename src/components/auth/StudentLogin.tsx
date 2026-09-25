@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "@tanstack/react-router";
 import * as z from "zod";
 import { supabase } from "@/lib/supabase";
 import { useState } from "react";
@@ -15,6 +16,7 @@ type StudentLoginFormValues = z.infer<typeof studentLoginSchema>;
 export function StudentLogin() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const {
     register,
@@ -33,8 +35,10 @@ export function StudentLogin() {
     });
     if (error) {
       setError(error.message);
+      setLoading(false);
+    } else {
+      router.navigate({ to: '/dashboard' });
     }
-    setLoading(false);
   };
 
   return (
