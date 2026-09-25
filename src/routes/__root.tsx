@@ -515,27 +515,30 @@ function SpatialVoid() {
         }}
       />
       
-      {/* Dynamic Scrolling Glow Orbs */}
+      {/* Dynamic Scrolling Glow Orbs (DESKTOP ONLY) */}
       <div 
-        className="absolute top-0 left-[-10%] w-[100vw] h-[100vw] md:w-[60vw] md:h-[60vw] bg-emerald-500/15 md:bg-emerald-500/30 blur-[60px] md:blur-[120px] rounded-full mix-blend-screen transform-gpu"
+        className="hidden md:block absolute top-0 left-[-10%] w-[60vw] h-[60vw] bg-emerald-500/30 blur-[120px] rounded-full mix-blend-screen transform-gpu"
         style={{
           transform: `translateY(${scrollY * 0.2}px) translateZ(0)`,
           willChange: 'transform'
         }}
       />
       <div 
-        className="absolute bottom-0 right-[-10%] w-[120vw] h-[120vw] md:w-[70vw] md:h-[70vw] bg-teal-500/10 md:bg-teal-500/20 blur-[60px] md:blur-[150px] rounded-full mix-blend-screen transform-gpu"
+        className="hidden md:block absolute bottom-0 right-[-10%] w-[70vw] h-[70vw] bg-teal-500/20 blur-[150px] rounded-full mix-blend-screen transform-gpu"
         style={{
           transform: `translateY(${-(scrollY * 0.1)}px) translateZ(0)`,
           willChange: 'transform'
         }}
       />
       
-      {/* Film Grain Noise Overlay */}
+      {/* Film Grain Noise Overlay (DESKTOP ONLY) */}
       <div 
-        className="absolute inset-0 opacity-[0.04] mix-blend-overlay" 
+        className="hidden md:block absolute inset-0 opacity-[0.04] mix-blend-overlay" 
         style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}
       />
+
+      {/* Static Rasterized Background (MOBILE ONLY) - Zero GPU Thrashing */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-emerald-900/20 via-[#0A0D0F] to-[#0A0D0F] md:hidden pointer-events-none" />
     </div>
   );
 }

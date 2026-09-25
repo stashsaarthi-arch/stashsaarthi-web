@@ -32,6 +32,7 @@ export function SpaceListingForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   // Core Form State
   const [formData, setFormData] = useState({
@@ -63,8 +64,8 @@ export function SpaceListingForm() {
     }
   };
 
-  const nextStep = () => { setDirection(1); setStep(s => s + 1); };
-  const prevStep = () => { setDirection(-1); setStep(s => s - 1); };
+  const nextStep = () => { if(isAnimating) return; setDirection(1); setStep(s => s + 1); };
+  const prevStep = () => { if(isAnimating) return; setDirection(-1); setStep(s => s - 1); };
 
   const handleUploadAndSubmit = async () => {
     if (!user) return setError("Authentication required");
@@ -157,7 +158,7 @@ export function SpaceListingForm() {
         </div>
 
         {/* Dynamic Step Container with PopLayout */}
-        <div className="relative w-full overflow-hidden bg-white/5 backdrop-blur-2xl border border-white/10 rounded-3xl min-h-[400px]">
+        <div className={`relative w-full overflow-hidden bg-white/5 backdrop-blur-2xl border border-white/10 rounded-3xl min-h-[400px] ${isAnimating ? 'pointer-events-none' : ''}`}>
           <AnimatePresence mode="popLayout" initial={false} custom={direction}>
             {step === 1 && (
               <motion.div
@@ -167,6 +168,8 @@ export function SpaceListingForm() {
                 initial="enter"
                 animate="center"
                 exit="exit"
+                onAnimationStart={() => setIsAnimating(true)}
+                onAnimationComplete={() => setIsAnimating(false)}
                 className="w-full p-8 flex flex-col h-full justify-between"
               >
                 <div>
@@ -214,6 +217,8 @@ export function SpaceListingForm() {
                 initial="enter"
                 animate="center"
                 exit="exit"
+                onAnimationStart={() => setIsAnimating(true)}
+                onAnimationComplete={() => setIsAnimating(false)}
                 className="w-full p-8 flex flex-col h-full justify-between"
               >
                 <div>
@@ -247,6 +252,8 @@ export function SpaceListingForm() {
                 initial="enter"
                 animate="center"
                 exit="exit"
+                onAnimationStart={() => setIsAnimating(true)}
+                onAnimationComplete={() => setIsAnimating(false)}
                 className="w-full p-8 flex flex-col h-full justify-between"
               >
                 <div>

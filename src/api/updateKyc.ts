@@ -15,8 +15,8 @@ export async function handleUpdateKyc(request: Request): Promise<Response> {
   }
 
   try {
-    const auth = getAdminAuth();
-    const db = getAdminDb();
+    const auth = await getAdminAuth();
+    const db = await getAdminDb();
     if (!auth || !db) {
       return new Response(
         JSON.stringify({
