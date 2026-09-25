@@ -2,9 +2,9 @@
 
 > Auto-generated design system — reverse-engineered via static analysis by skillui.
 > Frameworks: None detected
-> Colors: 1 · Fonts: 2 · Components: 0
+> Colors: 20 · Fonts: 2 · Components: 0
 > Icon library: not detected · State: not detected
-> Primary theme: light · Dark mode toggle: no · Motion: expressive
+> Primary theme: dark · Dark mode toggle: no · Motion: expressive
 
 ## Visual Reference
 
@@ -16,7 +16,7 @@
 
 ## 1. Visual Theme & Atmosphere
 
-This is a **light-themed** interface with a neutral, approachable feel. The light background emphasizes content clarity. Typography pairs **Clash Display** for display/headings with **New Rocker** for body text, creating clear visual hierarchy through type contrast. Spacing follows a **4px base grid** (compact density), with scale: 4, 8, 12, 16, 20, 24, 28, 32px. Motion is expressive — spring physics, layout animations, and staggered reveals are part of the visual language.
+This is a **dark-themed** interface with a warm tone. Depth is expressed through layered shadows and subtle surface color variation. Typography pairs **bootstrap-icons** for display/headings with **GTA6-Heading** for body text, creating clear visual hierarchy through type contrast. Spacing follows a **4px base grid** (compact density), with scale: 2, 4, 6, 8, 10, 12, 14, 16px. The accent color **#ffd740** anchors interactive elements (buttons, links, focus rings). Motion is expressive — spring physics, layout animations, and staggered reveals are part of the visual language.
 
 ---
 
@@ -24,7 +24,51 @@ This is a **light-themed** interface with a neutral, approachable feel. The ligh
 
 | Token | Hex | Role | Use |
 |---|---|---|---|
-| background | `#ffffff` | background | Page background, darkest surface |
+| mdc-chip-disabled-label-text-color | `#1f1f1f` | background | Page background, darkest surface |
+| mat-ripple-color | `#000000` | surface | Card and panel backgrounds |
+| mdc-plain-tooltip-supporting-text-color | `#ffffff` | text-primary | Headings and body text |
+| mat-sort-arrow-color | `#757575` | text-muted | Captions, placeholders, secondary info |
+| mdc-switch-disabled-selected-handle-color | `#424242` | border | Dividers, card borders, outlines |
+| mat-option-selected-state-label-text-color | `#ffd740` | accent | CTAs, links, focus rings, active states |
+| mat-option-selected-state-label-text-color | `#f44336` | danger | Error states, destructive actions |
+| bs-success | `#198754` | success | Success states, positive indicators |
+| warning | `#bd9f67` | warning | Warning states, caution indicators |
+| bs-primary | `#0068ff` | info | Informational highlights |
+| mat-option-selected-state-label-text-color | `#673ab7` | unknown | Palette color |
+| unknown | `#d1d5db` | unknown | Palette color |
+| unknown | `#ff7a1a` | unknown | Palette color |
+| unknown | `#243137` | unknown | Palette color |
+| bs-warning | `#ffc300` | unknown | Palette color |
+| primary-blue | `#ffe100` | unknown | Palette color |
+| mdc-chip-elevated-container-color | `#e0e0e0` | unknown | Palette color |
+| webgl-page-background | `#0a0a0a` | unknown | Palette color |
+| bs-danger | `#dc3545` | unknown | Palette color |
+| bs-dark-border-subtle | `#b0b0b0` | unknown | Palette color |
+
+### CSS Variable Tokens
+
+```css
+--primary-blue: #FFE100;
+--webgl-page-background: #0a0a0a;
+--mdc-elevated-card-container-shape: 4px;
+--mdc-outlined-card-container-shape: 4px;
+--mdc-outlined-card-outline-width: 1px;
+--mdc-elevated-card-container-color: white;
+--mdc-outlined-card-container-color: white;
+--mdc-outlined-card-outline-color: rgba(0,0,0,.12);
+--mat-card-subtitle-text-color: rgba(0,0,0,.54);
+--mat-card-title-text-font: Roboto,sans-serif;
+--mat-card-title-text-line-height: 32px;
+--mat-card-title-text-size: 20px;
+--mat-card-title-text-tracking: .0125em;
+--mat-card-title-text-weight: 500;
+--mat-card-subtitle-text-font: Roboto,sans-serif;
+--mat-card-subtitle-text-line-height: 22px;
+--mat-card-subtitle-text-size: 14px;
+--mat-card-subtitle-text-tracking: .0071428571em;
+--mat-card-subtitle-text-weight: 500;
+--mat-select-panel-background-color: white;
+```
 
 
 ---
@@ -32,45 +76,70 @@ This is a **light-themed** interface with a neutral, approachable feel. The ligh
 ## 3. Typography Rules
 
 **Font Stack:**
-- **New Rocker** — Heading 1, Heading 2, Heading 3
-- **Clash Display** — Body, Caption
+- **GTA6-Heading** — Heading 1, Heading 2, Heading 3
+- **bootstrap-icons** — Body, Caption
 
 **Font Sources:**
 
 ```css
 @font-face {
-  font-family: "New Rocker";
-  src: url("fonts/NewRocker-Regular.ttf") format("truetype");
+  font-family: "bootstrap-icons";
+  src: url("fonts/bootstrap-icons-Regular.woff2") format("woff2");
   font-weight: 400;
 }
 @font-face {
-  font-family: "Piazzolla";
-  src: url("fonts/Piazzolla-Bold.ttf") format("truetype");
+  font-family: "GTA6-Heading";
+  src: url("fonts/GTA6-Heading-Regular.woff") format("woff");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "GTA6-Bold";
+  src: url("fonts/GTA6-Bold-Regular.woff") format("woff");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "GTA6-Medium";
+  src: url("fonts/GTA6-Medium-Regular.woff") format("woff");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "GTA6-Thin";
+  src: url("fonts/GTA6-Thin-Regular.woff") format("woff");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "primeicons";
+  src: url("fonts/primeicons-Regular.woff2") format("woff2");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Satoshi";
+  src: url("fonts/Satoshi-Regular.woff2") format("woff2");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Satoshi";
+  src: url("fonts/Satoshi-700.woff2") format("woff2");
   font-weight: 700;
 }
 @font-face {
-  font-family: "Piazzolla";
-  src: url("fonts/Piazzolla-Regular.ttf") format("truetype");
+  font-family: "Bebas Neue";
+  src: url("fonts/BebasNeue-Regular.ttf") format("truetype");
   font-weight: 400;
-}
-@font-face {
-  font-family: "Clash Display";
-  src: url("https://ecell.in/assets/Fonts/TTF/ClashDisplay-Variable.ttf") format("truetype");
-  font-weight: 200;
 }
 ```
 
 | Role | Font | Size | Weight |
 |---|---|---|---|
-| Heading 1 | New Rocker | 1em | 700 |
-| Heading 2 | New Rocker | 2em | 700 |
-| Heading 3 | New Rocker | 3em | 700 |
-| Body | Clash Display | 4em | 400 |
-| Caption | Clash Display | 5em | 400 |
+| Heading 1 | GTA6-Heading | 90px | 700 |
+| Heading 2 | GTA6-Heading | 5rem | 700 |
+| Heading 3 | GTA6-Heading | 4.5rem | 700 |
+| Body | bootstrap-icons | 16px | 400 |
+| Caption | bootstrap-icons | 1.25rem | 400 |
 
 **Typographic Rules:**
 - Limit to 2 font families max per screen
-- Use **New Rocker** for body/UI text, **Clash Display** for display/headings
+- Use **GTA6-Heading** for body/UI text, **bootstrap-icons** for display/headings
 - Maintain consistent hierarchy: no more than 3-4 font sizes per screen
 - Headings use bold (600-700), body uses regular (400)
 - Line height: 1.5 for body text, 1.2 for headings
@@ -88,8 +157,9 @@ No components detected. Scan `src/components/` or `components/` to populate this
 ## 5. Layout Principles
 
 - **Base spacing unit:** 4px
-- **Spacing scale:** 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48
-- **Border radius:** 8px
+- **Spacing scale:** 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24
+- **Border radius:** .25rem, .25em, .375rem, 1rem, 2em, 2px, 3px, 4px, 5%, 5px, 6px, 8px, 10px, 10px 0px 0px 10px, 12px, 15px, 16px, 18px, 20px, 25px, 30px, 100%, inherit
+- **Max content width:** 1399.98px
 
 **Spacing as Meaning:**
 | Spacing | Use |
@@ -104,7 +174,32 @@ No components detected. Scan `src/components/` or `components/` to populate this
 
 ## 6. Depth & Elevation
 
-No box-shadow values detected. The design appears to use a flat visual style.
+### Flat — subtle depth hints
+
+- `0 0 0 1px #fff,0 0 0 .25rem rgba(13,110,253,.25)`
+
+### Raised — cards, buttons, interactive elements
+
+- `0 4px 8px #0003`
+- `0 0 0 3px #b586ef`
+- `0 0#0003,0 0#00000024,0 0#0000001f`
+
+### Floating — dropdowns, popovers, modals
+
+- `0 4px 15px #ff7a1a33`
+- `0 7px 13px -3px #000000bf`
+- `0 10px 10px 1px #000000bf`
+
+### Overlay — full-screen overlays, top-level dialogs
+
+- `0 10px 30px #ff7a1a26`
+- `0 8px 25px #ff7a1a66`
+- `0 7px 8px -4px #0003,0 12px 17px 2px #00000024,0 5px 22px 4px #0000001f`
+
+### Z-Index Scale
+
+`0, 1, 2, 3, 4, 5, 999, 1000, 1020, 1030, 1040, 199999999`
+
 
 
 ---
@@ -122,6 +217,7 @@ This project uses **expressive motion**. Animations are an integral part of the 
 - `@keyframes fa-flip`
 - `@keyframes fa-shake`
 - `@keyframes fa-spin`
+- `@keyframes fadeOut`
 
 ### Motion Guidelines
 
@@ -136,26 +232,24 @@ This project uses **expressive motion**. Animations are an integral part of the 
 
 ### Do's
 
-- Use `#ffffff` as the primary page background
-- Pair **New Rocker** (body) with **Clash Display** (display) — these are the only allowed fonts
+- Use `#ffd740` for interactive elements (buttons, links, focus rings)
+- Use `#1f1f1f` as the primary page background
+- Pair **GTA6-Heading** (body) with **bootstrap-icons** (display) — these are the only allowed fonts
 - Follow the **4px** spacing grid for all margins, padding, and gaps
-- Use border and background shifts for elevation — not shadows
-- Use border-radius from the scale: 8px
+- Use the defined shadow tokens for elevation — see Section 6
+- Use border-radius from the scale: .25rem, .25em, .375rem, 1rem, 2em
 
 ### Don'ts
 
 - Don't introduce colors outside this palette — extend the design tokens first
-- Don't introduce additional font families beyond New Rocker and Clash Display
+- Don't introduce additional font families beyond GTA6-Heading and bootstrap-icons
 - Don't use arbitrary spacing values — stick to multiples of 4px
-- Don't add box-shadow — this design system uses flat elevation
-- Don't use gradients — the design uses solid colors only
+- Don't create custom box-shadow values outside the system tokens
 - Don't use arbitrary border-radius values — pick from the defined scale
 - Don't use backdrop-blur or blur effects
 
 ### Anti-Patterns (detected from codebase)
 
-- No box-shadow on any element
-- No gradient backgrounds
 - No blur or backdrop-blur effects
 - No zebra striping on tables/lists
 
@@ -164,7 +258,30 @@ This project uses **expressive motion**. Animations are an integral part of the 
 
 ## 9. Responsive Behavior
 
-No breakpoints detected. Consider adding responsive breakpoints to the design system.
+| Name | Value | Source |
+|---|---|---|
+| xs | 480px | css |
+| sm | 500px | css |
+| sm | 575.98px | css |
+| sm | 576px | css |
+| md | 676px | css |
+| md | 767px | css |
+| md | 767.98px | css |
+| md | 768px | css |
+| lg | 786px | css |
+| lg | 900px | css |
+| lg | 991.98px | css |
+| lg | 992px | css |
+| lg | 1000px | css |
+| xl | 1060px | css |
+| xl | 1100px | css |
+| xl | 1199.98px | css |
+| xl | 1200px | css |
+| 2xl | 1399.98px | css |
+| 2xl | 1400px | css |
+
+**Approach:** Use `@media (min-width: ...)` queries matching the breakpoints above.
+
 
 ---
 
@@ -175,30 +292,30 @@ Use these as starting points when building new UI:
 ### Build a Card
 
 ```
-Background: #ffffff
-Border: 1px solid var(--border)
+Background: #000000
+Border: 1px solid #424242
 Radius: 8px
 Padding: 16px
-Font: New Rocker
-No shadows — use borders and surface colors for depth.
+Font: GTA6-Heading
+Use shadow tokens from Section 6.
 ```
 
 ### Build a Button
 
 ```
-Primary: bg var(--accent), text white
-Ghost: bg transparent, border var(--border)
+Primary: bg #ffd740, text white
+Ghost: bg transparent, border #424242
 Padding: 8px 16px
 Radius: 8px
 Hover: opacity 0.9 or lighter shade
-Focus: ring with var(--accent)
+Focus: ring with #ffd740
 ```
 
 ### Build a Page Layout
 
 ```
-Background: #ffffff
-Max-width: 1280px, centered
+Background: #1f1f1f
+Max-width: 1399.98px, centered
 Grid: 4px base
 Responsive: mobile-first, breakpoints from Section 9
 ```
@@ -206,19 +323,19 @@ Responsive: mobile-first, breakpoints from Section 9
 ### Build a Stats Card
 
 ```
-Surface: #ffffff
-Label: var(--text-muted) (muted, 12px, uppercase)
-Value: var(--text-primary) (primary, 24-32px, bold)
+Surface: #000000
+Label: #757575 (muted, 12px, uppercase)
+Value: #ffffff (primary, 24-32px, bold)
 Status: use success/warning/danger from Section 2
 ```
 
 ### Build a Form
 
 ```
-Input bg: #ffffff
-Input border: 1px solid var(--border)
-Focus: border-color var(--accent)
-Label: var(--text-muted) 12px
+Input bg: #1f1f1f
+Input border: 1px solid #424242
+Focus: border-color #ffd740
+Label: #757575 12px
 Spacing: 16px between fields
 Radius: 8px
 ```
@@ -228,8 +345,8 @@ Radius: 8px
 ```
 1. Read DESIGN.md Sections 2-6 for tokens
 2. Colors: only from palette
-3. Font: New Rocker, type scale from Section 3
+3. Font: GTA6-Heading, type scale from Section 3
 4. Spacing: 4px grid
 5. Components: match patterns from Section 4
-6. Elevation: flat, surface shifts
+6. Elevation: shadow tokens
 ```

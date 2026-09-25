@@ -1,0 +1,109 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "core": {
+    "background": {
+      "value": "#1f1f1f",
+      "role": "background",
+      "name": "mdc-chip-disabled-label-text-color"
+    },
+    "text-primary": {
+      "value": "#ffffff",
+      "role": "text-primary",
+      "name": "mdc-plain-tooltip-supporting-text-color"
+    },
+    "surface": {
+      "value": "#000000",
+      "role": "surface",
+      "name": "mat-ripple-color"
+    },
+    "accent": {
+      "value": "#ffd740",
+      "role": "accent",
+      "name": "mat-option-selected-state-label-text-color"
+    },
+    "text-muted": {
+      "value": "#757575",
+      "role": "text-muted",
+      "name": "mat-sort-arrow-color"
+    },
+    "border": {
+      "value": "#424242",
+      "role": "border",
+      "name": "mdc-switch-disabled-selected-handle-color"
+    }
+  },
+  "status": {
+    "warning": {
+      "value": "#bd9f67",
+      "role": "warning"
+    },
+    "danger": {
+      "value": "#f44336",
+      "role": "danger",
+      "name": "mat-option-selected-state-label-text-color"
+    },
+    "success": {
+      "value": "#198754",
+      "role": "success",
+      "name": "bs-success"
+    }
+  },
+  "extended": {
+    "mat-option-selected-state-label-text-color": {
+      "value": "#673ab7",
+      "role": "unknown",
+      "name": "mat-option-selected-state-label-text-color"
+    },
+    "color-d1d5db": {
+      "value": "#d1d5db",
+      "role": "unknown"
+    },
+    "bs-primary": {
+      "value": "#0068ff",
+      "role": "info",
+      "name": "bs-primary"
+    },
+    "color-ff7a1a": {
+      "value": "#ff7a1a",
+      "role": "unknown"
+    },
+    "color-243137": {
+      "value": "#243137",
+      "role": "unknown"
+    },
+    "bs-warning": {
+      "value": "#ffc300",
+      "role": "unknown",
+      "name": "bs-warning"
+    },
+    "primary-blue": {
+      "value": "#ffe100",
+      "role": "unknown",
+      "name": "primary-blue"
+    },
+    "mdc-chip-elevated-container-color": {
+      "value": "#e0e0e0",
+      "role": "unknown",
+      "name": "mdc-chip-elevated-container-color"
+    },
+    "webgl-page-background": {
+      "value": "#0a0a0a",
+      "role": "unknown",
+      "name": "webgl-page-background"
+    },
+    "bs-danger": {
+      "value": "#dc3545",
+      "role": "unknown",
+      "name": "bs-danger"
+    },
+    "bs-dark-border-subtle": {
+      "value": "#b0b0b0",
+      "role": "unknown",
+      "name": "bs-dark-border-subtle"
+    }
+  },
+  "meta": {
+    "theme": "dark",
+    "extracted": "2026-09-25"
+  }
+}

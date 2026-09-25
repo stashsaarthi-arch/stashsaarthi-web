@@ -1,0 +1,226 @@
+{
+  "families": [
+    "GTA6-Heading",
+    "bootstrap-icons"
+  ],
+  "scale": {
+    "heading-1": {
+      "fontFamily": "GTA6-Heading",
+      "fontSize": "90px",
+      "fontWeight": "700",
+      "lineHeight": null,
+      "source": "css"
+    },
+    "heading-2": {
+      "fontFamily": "GTA6-Heading",
+      "fontSize": "5rem",
+      "fontWeight": "700",
+      "lineHeight": null,
+      "source": "css"
+    },
+    "heading-3": {
+      "fontFamily": "GTA6-Heading",
+      "fontSize": "4.5rem",
+      "fontWeight": "700",
+      "lineHeight": null,
+      "source": "css"
+    },
+    "body": {
+      "fontFamily": "bootstrap-icons",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": null,
+      "source": "css"
+    },
+    "caption": {
+      "fontFamily": "bootstrap-icons",
+      "fontSize": "1.25rem",
+      "fontWeight": "400",
+      "lineHeight": null,
+      "source": "css"
+    }
+  },
+  "fontFaces": [
+    {
+      "family": "bootstrap-icons",
+      "src": "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/fonts/bootstrap-icons.woff2?dd67030699838ea613ee6dbda90effa6",
+      "format": "truetype",
+      "weight": "400"
+    },
+    {
+      "family": "bootstrap-icons",
+      "src": "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/fonts/bootstrap-icons.woff?dd67030699838ea613ee6dbda90effa6",
+      "format": "truetype",
+      "weight": "400"
+    },
+    {
+      "family": "GTA6-Heading",
+      "src": "https://www.ecell.in/esummit/media/gta6_heading-PRD7Q4YL.woff",
+      "format": "woff",
+      "weight": "400"
+    },
+    {
+      "family": "GTA6-Bold",
+      "src": "https://www.ecell.in/esummit/media/gta6_bold-M7GZMDT7.woff",
+      "format": "woff",
+      "weight": "400"
+    },
+    {
+      "family": "GTA6-Medium",
+      "src": "https://www.ecell.in/esummit/media/gta6_med-DET7NBQJ.woff",
+      "format": "woff",
+      "weight": "400"
+    },
+    {
+      "family": "GTA6-Thin",
+      "src": "https://www.ecell.in/esummit/media/gta6_thin-CROX2FPE.woff",
+      "format": "woff",
+      "weight": "400"
+    },
+    {
+      "family": "primeicons",
+      "src": "https://www.ecell.in/esummit/media/primeicons-RSSEDYLY.eot",
+      "format": "embedded-opentype",
+      "weight": "400"
+    },
+    {
+      "family": "primeicons",
+      "src": "https://www.ecell.in/esummit/media/primeicons-RSSEDYLY.eot?#iefix",
+      "format": "truetype",
+      "weight": "400"
+    },
+    {
+      "family": "primeicons",
+      "src": "https://www.ecell.in/esummit/media/primeicons-4GST5W3O.woff2",
+      "format": "woff2",
+      "weight": "400"
+    },
+    {
+      "family": "primeicons",
+      "src": "https://www.ecell.in/esummit/media/primeicons-P53SE5CV.woff",
+      "format": "woff",
+      "weight": "400"
+    },
+    {
+      "family": "primeicons",
+      "src": "https://www.ecell.in/esummit/media/primeicons-GEFHGEHP.ttf",
+      "format": "truetype",
+      "weight": "400"
+    },
+    {
+      "family": "primeicons",
+      "src": "https://www.ecell.in/esummit/media/primeicons-DHQU4SEP.svg?#primeicons",
+      "format": "truetype",
+      "weight": "400"
+    },
+    {
+      "family": "Satoshi",
+      "src": "https://cdn.fontshare.com/wf/D7WD5OXZFWQ5T76HSPWAC7MNKAJXE2YG/LUGNSPO5YC34ABNB2O6K7AFDSOJZT56V/WNDVG7O66ENLOD43GS7FBUCC4KMT5OM2.woff2",
+      "format": "woff2",
+      "weight": "300"
+    },
+    {
+      "family": "Satoshi",
+      "src": "https://cdn.fontshare.com/wf/D7WD5OXZFWQ5T76HSPWAC7MNKAJXE2YG/LUGNSPO5YC34ABNB2O6K7AFDSOJZT56V/WNDVG7O66ENLOD43GS7FBUCC4KMT5OM2.woff",
+      "format": "woff",
+      "weight": "300"
+    },
+    {
+      "family": "Satoshi",
+      "src": "https://cdn.fontshare.com/wf/D7WD5OXZFWQ5T76HSPWAC7MNKAJXE2YG/LUGNSPO5YC34ABNB2O6K7AFDSOJZT56V/WNDVG7O66ENLOD43GS7FBUCC4KMT5OM2.ttf",
+      "format": "truetype",
+      "weight": "300"
+    },
+    {
+      "family": "Satoshi",
+      "src": "https://cdn.fontshare.com/wf/TTX2Z3BF3P6Y5BQT3IV2VNOK6FL22KUT/7QYRJOI3JIMYHGY6CH7SOIFRQLZOLNJ6/KFIAZD4RUMEZIYV6FQ3T3GP5PDBDB6JY.woff2",
+      "format": "woff2",
+      "weight": "400"
+    },
+    {
+      "family": "Satoshi",
+      "src": "https://cdn.fontshare.com/wf/TTX2Z3BF3P6Y5BQT3IV2VNOK6FL22KUT/7QYRJOI3JIMYHGY6CH7SOIFRQLZOLNJ6/KFIAZD4RUMEZIYV6FQ3T3GP5PDBDB6JY.woff",
+      "format": "woff",
+      "weight": "400"
+    },
+    {
+      "family": "Satoshi",
+      "src": "https://cdn.fontshare.com/wf/TTX2Z3BF3P6Y5BQT3IV2VNOK6FL22KUT/7QYRJOI3JIMYHGY6CH7SOIFRQLZOLNJ6/KFIAZD4RUMEZIYV6FQ3T3GP5PDBDB6JY.ttf",
+      "format": "truetype",
+      "weight": "400"
+    },
+    {
+      "family": "Satoshi",
+      "src": "https://cdn.fontshare.com/wf/P2LQKHE6KA6ZP4AAGN72KDWMHH6ZH3TA/ZC32TK2P7FPS5GFTL46EU6KQJA24ZYDB/7AHDUZ4A7LFLVFUIFSARGIWCRQJHISQP.woff2",
+      "format": "woff2",
+      "weight": "500"
+    },
+    {
+      "family": "Satoshi",
+      "src": "https://cdn.fontshare.com/wf/P2LQKHE6KA6ZP4AAGN72KDWMHH6ZH3TA/ZC32TK2P7FPS5GFTL46EU6KQJA24ZYDB/7AHDUZ4A7LFLVFUIFSARGIWCRQJHISQP.woff",
+      "format": "woff",
+      "weight": "500"
+    },
+    {
+      "family": "Satoshi",
+      "src": "https://cdn.fontshare.com/wf/P2LQKHE6KA6ZP4AAGN72KDWMHH6ZH3TA/ZC32TK2P7FPS5GFTL46EU6KQJA24ZYDB/7AHDUZ4A7LFLVFUIFSARGIWCRQJHISQP.ttf",
+      "format": "truetype",
+      "weight": "500"
+    },
+    {
+      "family": "Satoshi",
+      "src": "https://cdn.fontshare.com/wf/LAFFD4SDUCDVQEXFPDC7C53EQ4ZELWQI/PXCT3G6LO6ICM5I3NTYENYPWJAECAWDD/GHM6WVH6MILNYOOCXHXB5GTSGNTMGXZR.woff2",
+      "format": "woff2",
+      "weight": "700"
+    },
+    {
+      "family": "Satoshi",
+      "src": "https://cdn.fontshare.com/wf/LAFFD4SDUCDVQEXFPDC7C53EQ4ZELWQI/PXCT3G6LO6ICM5I3NTYENYPWJAECAWDD/GHM6WVH6MILNYOOCXHXB5GTSGNTMGXZR.woff",
+      "format": "woff",
+      "weight": "700"
+    },
+    {
+      "family": "Satoshi",
+      "src": "https://cdn.fontshare.com/wf/LAFFD4SDUCDVQEXFPDC7C53EQ4ZELWQI/PXCT3G6LO6ICM5I3NTYENYPWJAECAWDD/GHM6WVH6MILNYOOCXHXB5GTSGNTMGXZR.ttf",
+      "format": "truetype",
+      "weight": "700"
+    },
+    {
+      "family": "Satoshi",
+      "src": "https://cdn.fontshare.com/wf/NHPGVFYUXYXE33DZ75OIT4JFGHITX5PE/PSUTMASCDJTVPERDYJZPN23BVUFUCQIF/J64QX5IPOHK56I2KYUNBQ5M2XWZEYKYX.woff2",
+      "format": "woff2",
+      "weight": "900"
+    },
+    {
+      "family": "Satoshi",
+      "src": "https://cdn.fontshare.com/wf/NHPGVFYUXYXE33DZ75OIT4JFGHITX5PE/PSUTMASCDJTVPERDYJZPN23BVUFUCQIF/J64QX5IPOHK56I2KYUNBQ5M2XWZEYKYX.woff",
+      "format": "woff",
+      "weight": "900"
+    },
+    {
+      "family": "Satoshi",
+      "src": "https://cdn.fontshare.com/wf/NHPGVFYUXYXE33DZ75OIT4JFGHITX5PE/PSUTMASCDJTVPERDYJZPN23BVUFUCQIF/J64QX5IPOHK56I2KYUNBQ5M2XWZEYKYX.ttf",
+      "format": "truetype",
+      "weight": "900"
+    },
+    {
+      "family": "Bebas Neue",
+      "src": "https://fonts.gstatic.com/s/bebasneue/v16/JTUSjIg69CK48gW7PXoo9Wdhyzbi.woff2",
+      "format": "woff2",
+      "weight": "400"
+    },
+    {
+      "family": "Bebas Neue",
+      "src": "https://fonts.gstatic.com/s/bebasneue/v16/JTUSjIg69CK48gW7PXoo9Wlhyw.woff2",
+      "format": "woff2",
+      "weight": "400"
+    }
+  ],
+  "rules": {
+    "maxSizesPerScreen": 4,
+    "headingWeightRange": "600-700",
+    "bodyWeight": 400,
+    "lineHeightBody": 1.5,
+    "lineHeightHeading": 1.2
+  }
+}

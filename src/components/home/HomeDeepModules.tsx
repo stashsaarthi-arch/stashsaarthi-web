@@ -45,50 +45,54 @@ interface HomeDeepModulesProps {
 export function HomeDeepModules({ role, onBook, onRefer }: HomeDeepModulesProps) {
   return (
     <div className="hidden md:block content-visibility-auto optimize-render">
-      <FadeUp>
-        <ErrorBoundary sectionName="Why StashSaarthi vs Traditional PGs">
-          <Suspense fallback={null}>
-            <PgComparisonTable onBook={onBook} />
-          </Suspense>
-        </ErrorBoundary>
-      </FadeUp>
+      {role === 'student' && (
+        <>
+          <FadeUp>
+            <ErrorBoundary sectionName="Why StashSaarthi vs Traditional PGs">
+              <Suspense fallback={null}>
+                <PgComparisonTable onBook={onBook} />
+              </Suspense>
+            </ErrorBoundary>
+          </FadeUp>
 
-      <FadeUp>
-        <ErrorBoundary sectionName="Dual Crisis Overview">
-          <Suspense fallback={null}>
-            <DualCrisis />
-          </Suspense>
-        </ErrorBoundary>
-      </FadeUp>
+          <FadeUp>
+            <ErrorBoundary sectionName="Dual Crisis Overview">
+              <Suspense fallback={null}>
+                <DualCrisis />
+              </Suspense>
+            </ErrorBoundary>
+          </FadeUp>
 
-      <ErrorBoundary sectionName="Top Rated Kitchens">
-        <Suspense fallback={null}>
-          <TopRatedKitchensWidget
-            onOrderMeal={(kId) =>
-              onBook({
-                service: "kitchen",
-                note: `Selected Top Rated Kitchen of the Week: ${kId}`,
-              })
-            }
-          />
-        </Suspense>
-      </ErrorBoundary>
+          <ErrorBoundary sectionName="Top Rated Kitchens">
+            <Suspense fallback={null}>
+              <TopRatedKitchensWidget
+                onOrderMeal={(kId) =>
+                  onBook({
+                    service: "kitchen",
+                    note: `Selected Top Rated Kitchen of the Week: ${kId}`,
+                  })
+                }
+              />
+            </Suspense>
+          </ErrorBoundary>
 
-      <FadeUp>
-        <ErrorBoundary sectionName="Kanpur Student Council">
-          <Suspense fallback={null}>
-            <KanpurStudentCouncil />
-          </Suspense>
-        </ErrorBoundary>
-      </FadeUp>
+          <FadeUp>
+            <ErrorBoundary sectionName="Kanpur Student Council">
+              <Suspense fallback={null}>
+                <KanpurStudentCouncil />
+              </Suspense>
+            </ErrorBoundary>
+          </FadeUp>
 
-      <FadeUp>
-        <ErrorBoundary sectionName="Referral Leaderboard">
-          <Suspense fallback={null}>
-            <ReferralLeaderboard onRefer={onRefer} />
-          </Suspense>
-        </ErrorBoundary>
-      </FadeUp>
+          <FadeUp>
+            <ErrorBoundary sectionName="Referral Leaderboard">
+              <Suspense fallback={null}>
+                <ReferralLeaderboard onRefer={onRefer} />
+              </Suspense>
+            </ErrorBoundary>
+          </FadeUp>
+        </>
+      )}
 
       {/* Host Specific Dashboard Norms */}
       {role === "host" && (

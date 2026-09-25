@@ -188,19 +188,19 @@ export const PremiumHero = ({ role, onBook, onRefer }: any) => {
       {/* Top-Glow Cards Matrix with strict E-Summit grid architecture */}
       <div className="z-20 w-full max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-14 mt-32 py-24 md:py-40">
         <FeatureCard 
-          icon="🔒"
-          title="Zero Friction"
-          desc="Military-grade inventory management with absolute zero brokerage fees."
+          icon={role === 'student' ? "🔒" : "💰"}
+          title={role === 'student' ? "Zero Friction" : "High Yield"}
+          desc={role === 'student' ? "Military-grade inventory management with absolute zero brokerage fees." : "Earn ₹3,000–₹12,000 monthly passive income with zero capital expenditure."}
         />
         <FeatureCard 
-          icon="⚡"
-          title="Spatial Control"
-          desc="Manage your dead-rent or empty spaces with pure geometric precision."
+          icon={role === 'student' ? "⚡" : "🛡️"}
+          title={role === 'student' ? "Spatial Control" : "Zero Intrusion"}
+          desc={role === 'student' ? "Manage your dead-rent or empty spaces with pure geometric precision." : "100% control over house norms with guaranteed 24-hour SLA relocation if violated."}
         />
         <FeatureCard 
-          icon="💎"
-          title="Premium Matrix"
-          desc="Enter the exclusive host network. High yield, zero operational drag."
+          icon={role === 'student' ? "💎" : "🤝"}
+          title={role === 'student' ? "Premium Matrix" : "Verified Tenants"}
+          desc={role === 'student' ? "Enter the exclusive host network. High yield, zero operational drag." : "3-tier background verification. We only place respectful, disciplined students."}
         />
       </div>
     </div>
