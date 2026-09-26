@@ -43,32 +43,36 @@ export function runAndroidGoPerformanceAudit(): AndroidGoPerformanceAuditReport 
     typeof window !== "undefined" && ("ontouchstart" in window || navigator.maxTouchPoints > 0);
   const root = typeof document !== "undefined" ? document.documentElement : null;
 
+  const isGoModeActive = root?.classList.contains("android-go-mode") || root?.getAttribute("data-android-go") === "true";
+
   const assertions: ComponentPerfAssertion[] = [];
 
   // 1. RAM & Hardware Memory Budget Guard
   const memoryGb = diag.deviceMemoryGb;
   const isMemoryConstrained = memoryGb !== undefined && memoryGb <= 2;
+  const memPassed = isMemoryConstrained ? isGoModeActive : true;
   assertions.push({
     id: "mem-budget-guard",
     name: "2GB RAM Budget & Heap Protection",
     category: "Memory",
-    passed: true,
-    score: isMemoryConstrained ? 95 : 100,
+    passed: memPassed,
+    score: memPassed ? (isMemoryConstrained ? 95 : 100) : 40,
     details: memoryGb
-      ? `Device RAM: ${memoryGb} GB. Memory safeguards active to prevent out-of-memory webview crashes.`
+      ? `Device RAM: ${memoryGb} GB. ${isGoModeActive ? 'Memory safeguards active to prevent out-of-memory webview crashes.' : 'Memory safeguards inactive (sufficient RAM detected).'}`
       : "Standard memory API query completed. Browser memory allocation within safe limits.",
   });
 
   // 2. 3D Mouse / Touch Tilt Transform Guard (Card3D)
-  const isTiltThrottledOnTouch = isTouch || diag.shouldThrottleAnimations || lowData;
+  const isTiltThrottled = isTouch || isGoModeActive || lowData;
+  const tiltPassed = !diag.isAndroidGo || isTiltThrottled;
   assertions.push({
     id: "card3d-tilt-guard",
     name: "Card3D Tilt Transform Mobile Throttle",
     category: "Animation",
-    passed: true,
-    score: isTiltThrottledOnTouch ? 100 : 90,
-    details: isTiltThrottledOnTouch
-      ? "3D perspective tilt transforms auto-disabled on touch/low-end viewports to prevent layout reflow jank."
+    passed: tiltPassed,
+    score: tiltPassed ? (isTiltThrottled ? 100 : 90) : 50,
+    details: isTiltThrottled
+      ? "3D perspective tilt transforms auto-disabled on low-end/data-save viewports to prevent layout reflow jank."
       : "Hardware accelerated 3D tilt enabled for high-DPI desktop viewports.",
   });
 
@@ -76,27 +80,30 @@ export function runAndroidGoPerformanceAudit(): AndroidGoPerformanceAuditReport 
   const isWebGLDisabled =
     lowData ||
     root?.getAttribute("data-webgl-supported") === "false" ||
-    root?.classList.contains("legacy-android-fallback");
+    root?.classList.contains("legacy-android-fallback") ||
+    isGoModeActive;
+    
+  const graphicsPassed = diag.isAndroidGo ? isWebGLDisabled : true;
   assertions.push({
     id: "webgl-2d-fallback-guard",
     name: "WebGL Canvas 2D CSS Fallback",
     category: "Graphics",
-    passed: true,
-    score: 100,
+    passed: graphicsPassed,
+    score: graphicsPassed ? 100 : 30,
     details: isWebGLDisabled
       ? "Canvas rendering routed to zero-cost static 2D CSS gradient fallbacks."
       : "WebGL canvas active with context-loss listeners attached.",
   });
 
   // 4. GSAP & Scroll Physics Concurrency Throttle
-  const isScrollThrottled =
-    diag.shouldThrottleAnimations || lowData || root?.classList.contains("android-go-mode");
+  const isScrollThrottled = isGoModeActive || lowData;
+  const scrollPassed = diag.isAndroidGo ? isScrollThrottled : true;
   assertions.push({
     id: "gsap-scroll-throttle-guard",
     name: "GSAP / ScrollTrigger Physics Throttle",
     category: "Scroll",
-    passed: true,
-    score: isScrollThrottled ? 98 : 95,
+    passed: scrollPassed,
+    score: scrollPassed ? 98 : 40,
     details: isScrollThrottled
       ? "Heavy scroll physics triggers paused. Native GPU smooth scrolling active."
       : "GSAP scroll triggers running with unmount cleanup handlers.",
@@ -160,14 +167,35 @@ export async function measureAndroidGoFpsBenchmark(
     const startTime = performance.now();
     let lastTime = startTime;
 
+    // Create a temporary hidden container for layout thrashing stress test
+    const container = document.createElement("div");
+    container.style.position = "absolute";
+    container.style.opacity = "0.01";
+    container.style.pointerEvents = "none";
+    document.body.appendChild(container);
+
     const onFrame = (now: number) => {
       const delta = now - lastTime;
       lastTime = now;
       if (delta > 0) frameTimes.push(delta);
 
+      // --- GENUINE STRESS TEST WORKLOAD ---
+      // 1. Math/CPU Stress
+      let calc = 0;
+      for (let i = 0; i < 25000; i++) {
+        calc += Math.sin(i) * Math.cos(i);
+      }
+      
+      // 2. DOM/Layout Thrashing Stress (triggers forced reflow)
+      container.innerHTML = `<div style="width:${(Math.random() * 100).toFixed(2)}px">Stress ${calc.toFixed(2)}</div>`;
+      const dummyRead = container.offsetWidth; // Force layout calculation
+
       if (now - startTime < durationMs) {
         requestAnimationFrame(onFrame);
       } else {
+        // Cleanup
+        document.body.removeChild(container);
+        
         const totalFrames = frameTimes.length;
         const avgFps = Math.round((totalFrames * 1000) / (now - startTime));
         const maxDelta = Math.max(...frameTimes, 16.6);

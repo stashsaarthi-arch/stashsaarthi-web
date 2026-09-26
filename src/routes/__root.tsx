@@ -685,14 +685,13 @@ function RootComponent() {
                       <ReactLenis
                         root
                         options={{
-                          duration: 1.1,
-                          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                          lerp: 0.07, // Apple-like momentum inertia
                           orientation: "vertical",
                           gestureOrientation: "vertical",
                           smoothWheel: true,
-                          wheelMultiplier: 0.9,
-                          syncTouch: true, // FIX: Enable Lenis synthetic touch to fix mobile scrolling
-                          touchMultiplier: 2.0,
+                          wheelMultiplier: 1.0,
+                          syncTouch: true, // Force synthetic touch for consistent iPhone feel on Android
+                          touchMultiplier: 2.5, // Mimic iOS flick velocity
                           infinite: false,
                           autoRaf: true, // Native rAF baseline
                         }}

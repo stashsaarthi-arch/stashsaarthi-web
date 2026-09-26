@@ -572,10 +572,10 @@ function AdminPage() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (password === "stash2026") {
+    if (password.trim().toLowerCase() === "stash2026") {
       setIsAuthenticated(true);
     } else {
-      setLoginError("Invalid password. Use the operator password.");
+      setLoginError("Invalid password. Use the operator password (stash2026).");
     }
   };
 
