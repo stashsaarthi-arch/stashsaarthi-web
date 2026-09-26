@@ -503,9 +503,9 @@ function SpatialVoid() {
 
   return (
     <div className="fixed inset-0 z-0 pointer-events-none bg-[#030303] overflow-hidden">
-      {/* 3D Scrolling Grid Layer (E-Summit Style) */}
+      {/* 3D Scrolling Grid Layer (E-Summit Style) - DESKTOP ONLY */}
       <div 
-        className="absolute w-[200vw] h-[200vh] left-[-50vw] top-[-50vh] opacity-20"
+        className="hidden md:block absolute w-[200vw] h-[200vh] left-[-50vw] top-[-50vh] opacity-20"
         style={{
           backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px)',
           backgroundSize: '50px 50px',

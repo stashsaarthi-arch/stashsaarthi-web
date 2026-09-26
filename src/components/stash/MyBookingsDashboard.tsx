@@ -79,7 +79,6 @@ const VERTICAL_FILTERS: { key: VerticalFilter; labelEn: string; labelHi: string;
     { key: "stash", labelEn: "Luggage Stash", labelHi: "लगेज स्टैश", icon: "🎒" },
     { key: "kitchen", labelEn: "Kitchen Subscriptions", labelHi: "किचन सब्सक्रिप्शन", icon: "🍲" },
     { key: "spaces", labelEn: "Spaces Lease", labelHi: "स्पेस लीज", icon: "🏠" },
-    { key: "connect", labelEn: "Connect Sessions", labelHi: "कनेक्ट सेशंस", icon: "🤝" },
   ];
 
 export function MyBookingsDashboard() {

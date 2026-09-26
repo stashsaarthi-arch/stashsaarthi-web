@@ -1,3 +1,10 @@
+- [x] **[Core Vision & Security] Task 154: Titan Patch Hardening & Surgical Extraction of Saarthi Connect — 2026-09-26**:
+  - **Surgical Extraction of Saarthi Connect**: Permanently deleted `src/components/stash/Connect.tsx`, `ConnectAudioWidget.tsx`, and `src/lib/connectAudioEngine.ts`. Excised all navigational links, quick dock chips, tabs, testimonials, terms, and modal selection options across `SolutionsHub.tsx`, `FooterSection.tsx`, `ServiceQuickJumpPill.tsx`, `MobileStickyCTA.tsx`, `BookingModal.tsx`, `HostPayoutsModal.tsx`, `StudentTestimonialVideosWidget.tsx`, `KarmaPointsModal.tsx`, and `terms.tsx`.
+  - **Mobile GPU Rasterization & Thermal Optimization**: Stripped heavy 3D scrolling grid matrices, blur filters (`blur-[120px]`, `blur-[150px]`), and screen blend-modes on mobile viewports (`< md`), replacing them with a static, highly optimized dark CSS radial gradient in `src/routes/__root.tsx`.
+  - **Zombie Node Killer (Anti-Spam Transition Locks)**: Implemented Framer Motion animation lifecycle locks (`isAnimating`, `onAnimationStart`, `onAnimationComplete`, `pointer-events-none`) in `SpaceListingForm.tsx` and `login.tsx` to prevent spam-click OOM crashes during `<AnimatePresence>` unmounting.
+  - **Admin Security & Restoration**: Restored the zero-dependency, local-first offline operator console at `/admin` with `stash2026` operator password. Formulated zero-trust Supabase RLS isolation policies on `stash_leads` and `host_listings`.
+  - **Verification**: Verified `npx tsc --noEmit` exits with Code 0; `npm run build` completes cleanly in 1.04s.
+
 - [x] **[Performance & Diagnostics] Task 153: GPU Layer Promotion & 120 FPS Momentum Scroll Audit — 2026-09-22**:
   - Executed a comprehensive CSS architecture audit to optimize scrolling performance at the browser compositor layer without altering visual layouts or Tailwind structures.
   - Implemented exact inertial easing curves (`duration: 1.1`, `touchMultiplier: 1.2`) in the global `ReactLenis` wrapper and synced GSAP's RAF ticker (`gsap.ticker.lagSmoothing(0)`) to lock natively into 120 FPS displays.

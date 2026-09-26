@@ -10,7 +10,7 @@ import { usePersona } from "@/context/PersonaContext";
 import { AnimatePresence, motion } from "motion/react";
 import { Button } from "@/components/ui/button";
 
-type ServiceId = "kitchen" | "stash" | "rooms" | "connect";
+type ServiceId = "kitchen" | "stash" | "rooms";
 
 interface QuickChip {
   id: ServiceId;
@@ -23,7 +23,6 @@ const CHIPS: QuickChip[] = [
   { id: "kitchen", emoji: "🍱", labelEn: "Food", labelHi: "किचन" },
   { id: "stash", emoji: "🧳", labelEn: "Stash", labelHi: "स्टैश" },
   { id: "rooms", emoji: "🏠", labelEn: "Rooms", labelHi: "कमरे" },
-  { id: "connect", emoji: "🤝", labelEn: "Connect", labelHi: "कनेक्ट" },
 ];
 
 export const MobileStickyCTA = React.memo(function MobileStickyCTA({
@@ -50,7 +49,7 @@ export const MobileStickyCTA = React.memo(function MobileStickyCTA({
 
     const handleTabEvent = (e: Event) => {
       const detail = (e as CustomEvent).detail;
-      if (["stash", "rooms", "kitchen", "connect"].includes(detail)) {
+      if (["stash", "rooms", "kitchen"].includes(detail)) {
         setActiveService(detail as ServiceId);
       }
     };

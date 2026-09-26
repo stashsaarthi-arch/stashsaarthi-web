@@ -140,7 +140,6 @@ export const FooterSection = memo(function FooterSection() {
     { label: isHi ? "सार्थी स्पेसेस (कमरे)" : "Saarthi Spaces", target: "ecosystem" },
     { label: isHi ? "सार्थी किचन (भोजन)" : "Saarthi Kitchen", target: "ecosystem" },
     { label: isHi ? "सार्थी स्टैश (स्टोरेज)" : "Saarthi Stash", target: "calculator" },
-    { label: isHi ? "सार्थी कनेक्ट (मैचिंग)" : "Saarthi Connect", target: "connect" },
   ];
 
   const COMPANY = [

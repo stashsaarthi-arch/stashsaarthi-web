@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef, memo } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Soup, Boxes, Home, HandHeart } from "lucide-react";
+import { Soup, Boxes, Home } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { usePersona } from "@/context/PersonaContext";
 import { dispatchNavTab, smoothScrollTo } from "./legal";
 import { playTab } from "@/lib/audio";
 
-type ServiceId = "kitchen" | "stash" | "rooms" | "connect";
+type ServiceId = "kitchen" | "stash" | "rooms";
 
 interface ServiceChip {
   id: ServiceId;
@@ -20,7 +20,6 @@ const SERVICE_CHIPS: ServiceChip[] = [
   { id: "kitchen", labelEn: "Kitchen", labelHi: "किचन", icon: Soup, emoji: "🍱" },
   { id: "stash", labelEn: "Stash", labelHi: "स्टैश", icon: Boxes, emoji: "🧳" },
   { id: "rooms", labelEn: "Spaces", labelHi: "स्पेसेस", icon: Home, emoji: "🏠" },
-  { id: "connect", labelEn: "Connect", labelHi: "कनेक्ट", icon: HandHeart, emoji: "🤝" },
 ];
 
 export const ServiceQuickJumpPill = memo(function ServiceQuickJumpPill() {
@@ -43,7 +42,7 @@ export const ServiceQuickJumpPill = memo(function ServiceQuickJumpPill() {
 
     const handleTabEvent = (e: Event) => {
       const detail = (e as CustomEvent).detail;
-      if (["stash", "rooms", "kitchen", "connect"].includes(detail)) {
+      if (["stash", "rooms", "kitchen"].includes(detail)) {
         setActiveTab(detail as ServiceId);
       }
     };

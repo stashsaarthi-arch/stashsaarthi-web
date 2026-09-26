@@ -203,7 +203,7 @@ export function KarmaPointsBadge({
         type="button"
         onClick={onClick}
         className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-[11px] font-bold transition hover:scale-105 cursor-pointer ${config.bgColor} ${config.borderColor} ${config.color}`}
-        title="View Saarthi Connect Karma Points & Perks"
+        title="View Saarthi Host Karma Points & Perks"
       >
         <Icon className="h-3 w-3" />
         <span>{points} Pts</span>
@@ -322,8 +322,8 @@ export function KarmaPointsModal({
                 <div className="flex items-center gap-2">
                   <h2 id="karma-modal-title" className="text-base sm:text-lg font-bold text-white">
                     {isHi
-                      ? "सार्थी कनेक्ट: वरिष्ठ कर्म अंक एवं सम्मान प्रणाली"
-                      : "Saarthi Connect: Verified PG Owner Karma Rewards System"}
+                      ? "सारथी होस्ट: वरिष्ठ कर्म अंक एवं सम्मान प्रणाली"
+                      : "Saarthi Host: Verified Host Karma Rewards System"}
                   </h2>
                   <span className="rounded-full bg-amber-500/20 px-2 py-0.5 text-[10px] font-bold text-amber-400 border border-amber-500/30">
                     Gamified Badging

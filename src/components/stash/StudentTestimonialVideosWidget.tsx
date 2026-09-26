@@ -25,7 +25,7 @@ import { playClick, playPop } from "@/lib/audio";
 
 export interface TestimonialVideo {
   id: string;
-  category: "spaces" | "connect";
+  category: "spaces" | "stash";
   studentName: string;
   examOrCollege: string;
   location: string;
@@ -83,33 +83,33 @@ const TESTIMONIAL_VIDEOS: TestimonialVideo[] = [
     },
   },
   {
-    id: "v2-connect",
-    category: "connect",
+    id: "v2-stash",
+    category: "stash",
     studentName: "Aarav Mishra",
     examOrCollege: "IIT Kanpur B.Tech 2nd Year",
     location: "Swaroop Nagar, Kanpur",
-    hostOrRoomName: "Stayed with Sudha Tripathi Ji (Verified PG Owner Principal)",
-    thumbnailGradient: "from-amber-600 via-yellow-700 to-slate-900",
+    hostOrRoomName: "Stored with Sudha Tripathi Ji (Verified Host Node)",
+    thumbnailGradient: "from-emerald-600 via-teal-700 to-slate-900",
     duration: "0:58",
     views: "18.9k",
     likes: 1890,
     rating: 5,
     highlightQuoteHi:
-      "महीने का केवल ₹3,200 किराया + सुधा आंटी के हाथ का शाम का गरम खाना और परीक्षा मार्गदर्शन!",
+      "महीने का केवल ₹300/बैग में सारा सामान सुरक्षित स्टोर हो गया, डेड रेंट की पूरी बचत!",
     highlightQuoteEn:
-      "Only ₹3,200/mo rent + evening homestyle meals and exam mentoring from Principal Aunty!",
+      "Stored all luggage at just ₹300/bag/mo with 100% security, saved 80% on dead rent!",
     scriptHi: {
-      hook: "हॉस्टल के बेकार खाने और अकेलेपन से परेशान? देखिए स्टैशसारथी कनेक्ट!",
-      body: "मैं स्वरूप नगर में सुधा आंटी के घर रहता हूँ। मैं दिन में 1 घंटा उनके स्मार्ट फोन का काम देखता हूँ और बदले में मुझे ₹3,200 में निजी कमरा और घर जैसा खाना मिलता है!",
+      hook: "छुट्टियों में कमरे का पूरा किराया भरने से परेशान? देखिए सारथी स्टैश!",
+      body: "मैं स्वरूप नगर में सुधा जी के सत्यापित होस्ट नोड पर अपना सामान रख कर गया। 2 महीने की छुट्टियों में कमरे का किराया देने की जगह केवल ₹600 में 2 बैग्स सुरक्षित रहे!",
       broll:
-        "[दृश्य: शाम की चाय पर बातचीत -> विद्यार्थी लैपटॉप पर काम करते हुए -> आंटी द्वारा परोसा गया खाना]",
-      cta: "सारथी कनेक्ट पर अपनी अनुकूल वरिष्ठ जोड़ी खोजें!",
+        "[दृश्य: बैग्स पर बारकोड लगाना -> सत्यापित होस्ट नोड में सुरक्षित स्टोरेज -> डिजिटल रसीद मिलना]",
+      cta: "सारथी स्टैश पर अपना सामान आज ही सुरक्षित स्टोर करें!",
     },
     scriptEn: {
-      hook: "Tired of mess food and hostel isolation? Check out Saarthi Connect!",
-      body: "I live with Sudha Aunty in Swaroop Nagar. I assist her 1 hr/day with digital smartphone tasks, and in return get a cozy private room at just ₹3,200/mo + hot meals!",
-      broll: "[Visual: Evening tea chat -> Student helping with smartphone -> Homestyle thali]",
-      cta: "Find your intergenerational host match on Saarthi Connect!",
+      hook: "Tired of paying dead room rent during vacations? Check out Saarthi Stash!",
+      body: "I stashed my bags at Sudha Ji's verified host node in Swaroop Nagar. Instead of paying 2 months of empty room rent, I kept 2 bags safe for just ₹600!",
+      broll: "[Visual: Luggage barcoding -> Safe storage room -> Digital receipt on app]",
+      cta: "Book your verified campus micro-storage on Saarthi Stash!",
     },
   },
   {
@@ -216,7 +216,7 @@ export const StudentTestimonialVideosWidget: React.FC = () => {
                 {/* Top Badge */}
                 <div className="flex items-center justify-between z-10">
                   <span className="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-[11px] font-bold text-white border border-white/20 uppercase tracking-wider">
-                    {video.category === "spaces" ? "🏠 Saarthi Spaces" : "🤝 Saarthi Connect"}
+                    {video.category === "spaces" ? "🏠 Saarthi Spaces" : "🧳 Saarthi Stash"}
                   </span>
                   <span className="px-2 py-0.5 rounded bg-emerald-500 text-slate-950 font-black text-[10px]">
                     VERIFIED

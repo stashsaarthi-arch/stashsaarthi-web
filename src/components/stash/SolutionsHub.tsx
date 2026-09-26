@@ -1,10 +1,9 @@
 import { useState, useEffect, useRef, memo } from "react";
-import { Boxes, Home, Soup, HandHeart } from "lucide-react";
+import { Boxes, Home, Soup } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Ecosystem } from "./Ecosystem";
 import { Rooms } from "./Rooms";
 import { TokenMealHub } from "../TokenMealHub";
-import { Connect } from "./Connect";
 import { useLanguage } from "@/context/LanguageContext";
 import { usePersona } from "@/context/PersonaContext";
 import { trackPersonaLayoutRecording } from "@/lib/abTesting";
@@ -20,8 +19,8 @@ interface SolutionsHubProps {
 export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: SolutionsHubProps) {
   const { role } = usePersona();
   const isStudent = role === "student";
-  const [activeTab, setActiveTab] = useState<"stash" | "rooms" | "kitchen" | "connect">(
-    isStudent ? "stash" : "connect",
+  const [activeTab, setActiveTab] = useState<"stash" | "rooms" | "kitchen">(
+    isStudent ? "stash" : "rooms",
   );
   const { language } = useLanguage();
   const isHi = language === "hi";
@@ -35,8 +34,8 @@ export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: S
   // Auto-switch tab and log heatmap recording telemetry when persona changes
   useEffect(() => {
     if (role === "host") {
-      setActiveTab("connect");
-      trackPersonaLayoutRecording("host", "SaarthiConnect", 15);
+      setActiveTab("rooms");
+      trackPersonaLayoutRecording("host", "SaarthiSpaces", 15);
     } else {
       setActiveTab("stash");
       trackPersonaLayoutRecording("student", "SaarthiStash", 25);
@@ -123,8 +122,8 @@ export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: S
   useEffect(() => {
     const handleTabChange = (e: Event) => {
       const detail = (e as CustomEvent).detail;
-      if (["stash", "rooms", "kitchen", "connect"].includes(detail)) {
-        setActiveTab(detail as "stash" | "rooms" | "kitchen" | "connect");
+      if (["stash", "rooms", "kitchen"].includes(detail)) {
+        setActiveTab(detail as "stash" | "rooms" | "kitchen");
         const el = document.getElementById("solutions");
         if (el) {
           const y = el.getBoundingClientRect().top + window.scrollY - 90;
@@ -161,25 +160,9 @@ export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: S
       badgeEn: "From ₹90/meal",
       badgeHi: "₹90/भोजन",
     },
-    {
-      id: "connect" as const,
-      nameEn: "Saarthi Connect",
-      nameHi: "सारथी कनेक्ट",
-      icon: HandHeart,
-      badgeEn: "100% Safe",
-      badgeHi: "100% सुरक्षित",
-    },
   ];
 
   const hostTabs = [
-    {
-      id: "connect" as const,
-      nameEn: "Saarthi Connect",
-      nameHi: "सारथी कनेक्ट",
-      icon: HandHeart,
-      badgeEn: "Verified Seniors",
-      badgeHi: "सत्यापित वरिष्ठ",
-    },
     {
       id: "rooms" as const,
       nameEn: "Saarthi Spaces",
@@ -402,7 +385,6 @@ export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: S
           {activeTab === "stash" && <Ecosystem onBook={onBook} />}
           {activeTab === "rooms" && <Rooms onList={onListRoom} onBook={onBook} />}
           {activeTab === "kitchen" && <TokenMealHub onBook={onBook} />}
-          {activeTab === "connect" && <Connect onBook={onBook} />}
         </motion.div>
       </AnimatePresence>
     </section>

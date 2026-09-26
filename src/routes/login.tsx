@@ -29,6 +29,7 @@ export const Route = createFileRoute('/login')({
 
 function LoginPage() {
   const [role, setRole] = useState<"student" | "host">("student");
+  const [isAnimating, setIsAnimating] = useState(false);
   const { error } = Route.useSearch();
 
   return (
@@ -57,35 +58,43 @@ function LoginPage() {
         )}
       </AnimatePresence>
 
-      <div className="w-full max-w-md mb-8 flex flex-col items-center">
-        <ModeToggle mode={role} setMode={setRole} />
+      <div className={`w-full max-w-md mb-8 flex flex-col items-center transition-opacity ${isAnimating ? 'pointer-events-none opacity-80' : ''}`}>
+        <ModeToggle mode={role} setMode={(newRole) => {
+          if (!isAnimating) setRole(newRole);
+        }} />
       </div>
 
-      <AnimatePresence mode="wait">
-        {role === "student" ? (
-          <motion.div
-            key="student"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 20 }}
-            transition={{ duration: 0.3 }}
-            className="w-full w-full max-w-md"
-          >
-            <StudentLogin />
-          </motion.div>
-        ) : (
-          <motion.div
-            key="host"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            transition={{ duration: 0.3 }}
-            className="w-full w-full max-w-md"
-          >
-            <HostLogin />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <div className={`w-full max-w-md ${isAnimating ? 'pointer-events-none' : ''}`}>
+        <AnimatePresence mode="wait">
+          {role === "student" ? (
+            <motion.div
+              key="student"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 20 }}
+              transition={{ duration: 0.3 }}
+              onAnimationStart={() => setIsAnimating(true)}
+              onAnimationComplete={() => setIsAnimating(false)}
+              className="w-full"
+            >
+              <StudentLogin />
+            </motion.div>
+          ) : (
+            <motion.div
+              key="host"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.3 }}
+              onAnimationStart={() => setIsAnimating(true)}
+              onAnimationComplete={() => setIsAnimating(false)}
+              className="w-full"
+            >
+              <HostLogin />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </div>
   );
 }

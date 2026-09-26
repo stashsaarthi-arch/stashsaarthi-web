@@ -223,16 +223,9 @@ function TermsPage() {
                     owner home-chefs @ ₹90/meal with 1-tap pause flexibility.
                   </p>
                 </div>
-                <div className="rounded-xl border border-white/10 bg-black/40 p-3">
-                  <h3 className="font-bold text-purple-400 mb-1">D. Saarthi Connect</h3>
-                  <p className="text-muted-foreground">
-                    Intergenerational compatibility matching connecting verified students with
-                    tech-enabled verified PG owner host household mentorship.
-                  </p>
-                </div>
                 <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-3 sm:col-span-2">
                   <h3 className="font-bold text-amber-300 mb-1">
-                    E. Predictive AI & Client-Side UX Personalization
+                    D. Predictive AI & Client-Side UX Personalization
                   </h3>
                   <p className="text-amber-100/90">
                     StashSaarthi utilizes a 100% client-side neural network classifier to adapt the

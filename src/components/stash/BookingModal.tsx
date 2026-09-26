@@ -257,12 +257,6 @@ export function BookingModal({
       icon: Soup,
     },
     {
-      id: "connect",
-      label: isHi ? "सार्थी कनेक्ट (साथी)" : "Saarthi Connect",
-      tag: "Mentorship",
-      icon: HandHeart,
-    },
-    {
       id: "trust",
       label: isHi ? "ट्रस्ट व नोड ऑडिट" : "Trust & Audit",
       tag: "100% Escrow",
