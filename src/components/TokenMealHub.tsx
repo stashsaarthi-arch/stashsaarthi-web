@@ -1007,7 +1007,7 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
       </div>
 
       {/* Main Interactive Booking Flow */}
-      <div className="bg-slate-900/40 border border-slate-800 rounded-3xl p-6 shadow-2xl backdrop-blur-sm">
+      <div className="bg-slate-900/40 border border-slate-800 rounded-3xl p-3.5 sm:p-6 shadow-2xl backdrop-blur-sm w-full max-w-full overflow-hidden">
         {/* Fulfillment Segmented Control */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 pb-6 border-b border-slate-800/50">
           <div>
@@ -1070,7 +1070,7 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
         </div>
 
         {/* Real-Time Kitchen Node Availability Percentage Bars (Task 60) */}
-        <div className="mb-8 bg-slate-950/90 border border-slate-800 rounded-2xl p-5 shadow-lg">
+        <div className="mb-8 bg-slate-950/90 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-lg w-full max-w-full overflow-hidden">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-slate-800/80">
             <div>
               <h3 className="text-sm font-extrabold text-white flex items-center gap-2">
@@ -1202,7 +1202,7 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
         </div>
 
         {/* Step 2: Meal Tier Selection */}
-        <div className="mb-8">
+        <div className="mb-8 w-full max-w-full overflow-hidden">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
             <h3 className="text-lg font-bold text-white flex items-center gap-2">
               <span className="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-xs flex items-center justify-center font-black">

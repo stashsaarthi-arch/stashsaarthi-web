@@ -65,7 +65,7 @@ export function Ecosystem({ onBook }: { onBook: OpenBooking }) {
   const isHi = language === "hi";
 
   return (
-    <div id="ecosystem" className="relative mx-auto max-w-4xl px-2 py-2 scroll-mt-20">
+    <div id="ecosystem" className="relative mx-auto max-w-4xl px-2 py-2 scroll-mt-20 w-full max-w-full overflow-hidden">
       <div className="flex sm:grid overflow-x-auto sm:overflow-visible snap-x snap-mandatory gap-3 sm:gap-4 pb-2 no-scrollbar touch-pan-x overscroll-x-contain sm:grid-cols-2">
         {NODES_BASE.map((n, i) => {
           const Icon = n.icon;

@@ -94,12 +94,10 @@
   --gradient-cyan: linear-gradient(135deg, oklch(0.868 0.16 178), oklch(0.696 0.149 162));
   --gradient-amber: linear-gradient(135deg, oklch(0.837 0.164 84), oklch(0.769 0.165 70));
   --gradient-hero: linear-gradient(
-    100deg,
-    oklch(0.98 0.01 220) 0%,
-    oklch(0.868 0.16 178) 38%,
-    oklch(0.696 0.149 162) 58%,
-    oklch(0.769 0.165 70) 78%,
-    oklch(0.98 0.01 220) 100%
+    110deg,
+    oklch(0.88 0.15 168) 0%,
+    oklch(0.82 0.17 162) 50%,
+    oklch(0.84 0.14 195) 100%
   );
   --shadow-glass:
     0 1px 3px 0 oklch(0 0 0 / 35%), 0 12px 32px -4px oklch(0 0 0 / 60%),
@@ -130,12 +128,10 @@
   --emerald: oklch(0.837 0.13 90);
   --gradient-cyan: var(--gradient-amber);
   --gradient-hero: linear-gradient(
-    100deg,
-    oklch(0.99 0.01 90) 0%,
-    oklch(0.837 0.164 84) 38%,
-    oklch(0.769 0.165 70) 62%,
-    oklch(0.72 0.12 40) 80%,
-    oklch(0.99 0.01 90) 100%
+    110deg,
+    oklch(0.88 0.16 85) 0%,
+    oklch(0.837 0.164 84) 50%,
+    oklch(0.769 0.165 70) 100%
   );
   --shadow-glass:
     0 1px 3px 0 oklch(0 0 0 / 35%), 0 12px 32px -4px oklch(0 0 0 / 60%),
@@ -1051,9 +1047,56 @@ body.is-scrolling * {
   transition: none !important;
 }
 
-/* Essential native overrides */
-html, body {
+/* Essential native overrides with strict Mobile Viewport Containment */
+html,
+body {
+  overflow-x: clip !important;
+  max-width: 100vw !important;
+  width: 100% !important;
   overscroll-behavior: none;
   -webkit-overflow-scrolling: touch;
   scroll-behavior: auto !important;
 }
+
+#root,
+main,
+section,
+[data-router-root] {
+  overflow-x: clip !important;
+  max-width: 100vw !important;
+  width: 100% !important;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* 3D Spatial Photon Glide Animation (Contained to prevent mobile viewport stretching) */
+@keyframes photonGlide {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100vw);
+    opacity: 0;
+  }
+}
+
+.photon-streak {
+  position: absolute;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0, 245, 160, 0.9), transparent);
+  animation: photonGlide 7s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  filter: drop-shadow(0 0 10px rgba(0, 245, 160, 0.8));
+  pointer-events: none;
+}
+

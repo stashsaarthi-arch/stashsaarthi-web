@@ -89,7 +89,7 @@ function Index() {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-      className="relative min-h-screen w-full overflow-x-clip bg-transparent text-white transition-colors duration-500 focus:outline-none pt-16 sm:pt-20 pb-24 sm:pb-0"
+      className="relative min-h-screen w-full max-w-full overflow-x-clip bg-transparent text-white transition-colors duration-500 focus:outline-none pt-16 sm:pt-20 pb-24 sm:pb-0"
     >
       <a href="#main-content" className="skip-to-content">
         Skip to main content

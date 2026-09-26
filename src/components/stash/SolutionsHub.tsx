@@ -195,7 +195,7 @@ export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: S
     <section
       id="solutions"
       ref={sectionRef}
-      className="relative mx-auto max-w-6xl px-4 py-3.5 sm:py-5 scroll-mt-20 overflow-hidden bg-transparent"
+      className="relative mx-auto w-full max-w-6xl px-4 py-3.5 sm:py-5 scroll-mt-20 overflow-hidden bg-transparent"
     >
       {/* Background Ambient Parallax Elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden -z-10 select-none">
@@ -276,7 +276,7 @@ export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: S
         <div
           role="tablist"
           aria-label={isHi ? "समाधान सेवा टैब" : "StashSaarthi Solutions Tabs"}
-          className="glass grid w-full max-w-4xl grid-cols-2 gap-1 rounded-2xl border border-white/[0.08] p-1.5 sm:grid-cols-4 sm:gap-2 shadow-2xl"
+          className="glass grid w-full max-w-2xl grid-cols-3 gap-1 rounded-2xl border border-white/[0.08] p-1.5 sm:gap-2 shadow-2xl"
         >
           {tabs.map((tab, idx) => {
             const Icon = tab.icon;

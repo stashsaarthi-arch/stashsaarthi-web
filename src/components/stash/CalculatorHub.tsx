@@ -139,7 +139,7 @@ export const CalculatorHub = memo(function CalculatorHub({ onBook }: { onBook: O
   );
 
   return (
-    <section id="calculator" className="relative mx-auto max-w-6xl px-4 py-2 sm:py-5 scroll-mt-20">
+    <section id="calculator" className="relative mx-auto w-full max-w-6xl px-4 py-2 sm:py-5 scroll-mt-20">
       {/* Inline Interactive Display */}
       <div>
         {/* Header */}

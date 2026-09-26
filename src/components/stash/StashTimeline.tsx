@@ -252,7 +252,7 @@ export const StashTimeline = memo(function StashTimeline({ onBook }: StashTimeli
   const IconComponent = currentStep.icon;
 
   return (
-    <section id="timeline" className="relative mx-auto max-w-6xl px-4 py-6 sm:py-10 scroll-mt-20">
+    <section id="timeline" className="relative mx-auto w-full max-w-6xl px-4 py-6 sm:py-10 scroll-mt-20">
       {/* Header */}
       <AnimatedContent distance={30} direction="vertical" duration={0.6}>
         <div className="mx-auto max-w-3xl text-center">

@@ -281,7 +281,7 @@ export function Rooms({ onList, onBook }: { onList: () => void; onBook?: OpenBoo
   };
 
   return (
-    <div id="rooms" className="relative mx-auto max-w-6xl px-2 py-2 scroll-mt-20">
+    <div id="rooms" className="relative mx-auto max-w-6xl px-2 py-2 scroll-mt-20 w-full max-w-full overflow-hidden">
       {/* ── High-Contrast Action Banner: Find Broker-Free Rooms & Instant Booking ── */}
       <div className="flex flex-wrap items-center justify-between gap-3 mb-3.5 p-3 rounded-2xl bg-slate-900/90 border border-emerald-500/30 backdrop-blur-md shadow-xl">
         <div className="flex items-center gap-2.5">
