@@ -22,60 +22,60 @@ This is a **dark-themed** interface with a warm tone. Depth is expressed through
 
 ## 2. Color Palette & Roles
 
-| Token | Hex | Role | Use |
-|---|---|---|---|
-| mdc-chip-disabled-label-text-color | `#1f1f1f` | background | Page background, darkest surface |
-| mat-ripple-color | `#000000` | surface | Card and panel backgrounds |
-| mdc-plain-tooltip-supporting-text-color | `#ffffff` | text-primary | Headings and body text |
-| mat-sort-arrow-color | `#757575` | text-muted | Captions, placeholders, secondary info |
-| mdc-switch-disabled-selected-handle-color | `#424242` | border | Dividers, card borders, outlines |
-| mat-option-selected-state-label-text-color | `#ffd740` | accent | CTAs, links, focus rings, active states |
-| mat-option-selected-state-label-text-color | `#f44336` | danger | Error states, destructive actions |
-| bs-success | `#198754` | success | Success states, positive indicators |
-| warning | `#bd9f67` | warning | Warning states, caution indicators |
-| bs-primary | `#0068ff` | info | Informational highlights |
-| mat-option-selected-state-label-text-color | `#673ab7` | unknown | Palette color |
-| unknown | `#d1d5db` | unknown | Palette color |
-| unknown | `#ff7a1a` | unknown | Palette color |
-| unknown | `#243137` | unknown | Palette color |
-| bs-warning | `#ffc300` | unknown | Palette color |
-| primary-blue | `#ffe100` | unknown | Palette color |
-| mdc-chip-elevated-container-color | `#e0e0e0` | unknown | Palette color |
-| webgl-page-background | `#0a0a0a` | unknown | Palette color |
-| bs-danger | `#dc3545` | unknown | Palette color |
-| bs-dark-border-subtle | `#b0b0b0` | unknown | Palette color |
+| Token                                      | Hex       | Role         | Use                                     |
+| ------------------------------------------ | --------- | ------------ | --------------------------------------- |
+| mdc-chip-disabled-label-text-color         | `#1f1f1f` | background   | Page background, darkest surface        |
+| mat-ripple-color                           | `#000000` | surface      | Card and panel backgrounds              |
+| mdc-plain-tooltip-supporting-text-color    | `#ffffff` | text-primary | Headings and body text                  |
+| mat-sort-arrow-color                       | `#757575` | text-muted   | Captions, placeholders, secondary info  |
+| mdc-switch-disabled-selected-handle-color  | `#424242` | border       | Dividers, card borders, outlines        |
+| mat-option-selected-state-label-text-color | `#ffd740` | accent       | CTAs, links, focus rings, active states |
+| mat-option-selected-state-label-text-color | `#f44336` | danger       | Error states, destructive actions       |
+| bs-success                                 | `#198754` | success      | Success states, positive indicators     |
+| warning                                    | `#bd9f67` | warning      | Warning states, caution indicators      |
+| bs-primary                                 | `#0068ff` | info         | Informational highlights                |
+| mat-option-selected-state-label-text-color | `#673ab7` | unknown      | Palette color                           |
+| unknown                                    | `#d1d5db` | unknown      | Palette color                           |
+| unknown                                    | `#ff7a1a` | unknown      | Palette color                           |
+| unknown                                    | `#243137` | unknown      | Palette color                           |
+| bs-warning                                 | `#ffc300` | unknown      | Palette color                           |
+| primary-blue                               | `#ffe100` | unknown      | Palette color                           |
+| mdc-chip-elevated-container-color          | `#e0e0e0` | unknown      | Palette color                           |
+| webgl-page-background                      | `#0a0a0a` | unknown      | Palette color                           |
+| bs-danger                                  | `#dc3545` | unknown      | Palette color                           |
+| bs-dark-border-subtle                      | `#b0b0b0` | unknown      | Palette color                           |
 
 ### CSS Variable Tokens
 
 ```css
---primary-blue: #FFE100;
+--primary-blue: #ffe100;
 --webgl-page-background: #0a0a0a;
 --mdc-elevated-card-container-shape: 4px;
 --mdc-outlined-card-container-shape: 4px;
 --mdc-outlined-card-outline-width: 1px;
 --mdc-elevated-card-container-color: white;
 --mdc-outlined-card-container-color: white;
---mdc-outlined-card-outline-color: rgba(0,0,0,.12);
---mat-card-subtitle-text-color: rgba(0,0,0,.54);
---mat-card-title-text-font: Roboto,sans-serif;
+--mdc-outlined-card-outline-color: rgba(0, 0, 0, 0.12);
+--mat-card-subtitle-text-color: rgba(0, 0, 0, 0.54);
+--mat-card-title-text-font: Roboto, sans-serif;
 --mat-card-title-text-line-height: 32px;
 --mat-card-title-text-size: 20px;
---mat-card-title-text-tracking: .0125em;
+--mat-card-title-text-tracking: 0.0125em;
 --mat-card-title-text-weight: 500;
---mat-card-subtitle-text-font: Roboto,sans-serif;
+--mat-card-subtitle-text-font: Roboto, sans-serif;
 --mat-card-subtitle-text-line-height: 22px;
 --mat-card-subtitle-text-size: 14px;
---mat-card-subtitle-text-tracking: .0071428571em;
+--mat-card-subtitle-text-tracking: 0.0071428571em;
 --mat-card-subtitle-text-weight: 500;
 --mat-select-panel-background-color: white;
 ```
-
 
 ---
 
 ## 3. Typography Rules
 
 **Font Stack:**
+
 - **GTA6-Heading** — Heading 1, Heading 2, Heading 3
 - **bootstrap-icons** — Body, Caption
 
@@ -129,22 +129,22 @@ This is a **dark-themed** interface with a warm tone. Depth is expressed through
 }
 ```
 
-| Role | Font | Size | Weight |
-|---|---|---|---|
-| Heading 1 | GTA6-Heading | 90px | 700 |
-| Heading 2 | GTA6-Heading | 5rem | 700 |
-| Heading 3 | GTA6-Heading | 4.5rem | 700 |
-| Body | bootstrap-icons | 16px | 400 |
-| Caption | bootstrap-icons | 1.25rem | 400 |
+| Role      | Font            | Size    | Weight |
+| --------- | --------------- | ------- | ------ |
+| Heading 1 | GTA6-Heading    | 90px    | 700    |
+| Heading 2 | GTA6-Heading    | 5rem    | 700    |
+| Heading 3 | GTA6-Heading    | 4.5rem  | 700    |
+| Body      | bootstrap-icons | 16px    | 400    |
+| Caption   | bootstrap-icons | 1.25rem | 400    |
 
 **Typographic Rules:**
+
 - Limit to 2 font families max per screen
 - Use **GTA6-Heading** for body/UI text, **bootstrap-icons** for display/headings
 - Maintain consistent hierarchy: no more than 3-4 font sizes per screen
 - Headings use bold (600-700), body uses regular (400)
 - Line height: 1.5 for body text, 1.2 for headings
 - Use color and opacity for secondary hierarchy, not additional font sizes
-
 
 ---
 
@@ -162,13 +162,13 @@ No components detected. Scan `src/components/` or `components/` to populate this
 - **Max content width:** 1399.98px
 
 **Spacing as Meaning:**
-| Spacing | Use |
-|---|---|
-| 4-8px | Tight: related items within a group |
-| 12-16px | Medium: between groups |
-| 24-32px | Wide: between sections |
-| 48px+ | Vast: major section breaks |
 
+| Spacing | Use                                 |
+| ------- | ----------------------------------- |
+| 4-8px   | Tight: related items within a group |
+| 12-16px | Medium: between groups              |
+| 24-32px | Wide: between sections              |
+| 48px+   | Vast: major section breaks          |
 
 ---
 
@@ -200,8 +200,6 @@ No components detected. Scan `src/components/` or `components/` to populate this
 
 `0, 1, 2, 3, 4, 5, 999, 1000, 1020, 1030, 1040, 199999999`
 
-
-
 ---
 
 ## 7. Animation & Motion
@@ -224,7 +222,6 @@ This project uses **expressive motion**. Animations are an integral part of the 
 - Duration: 150-300ms for micro-interactions, 300-500ms for page transitions
 - Easing: `ease-out` for enters, `ease-in` for exits
 - Always respect `prefers-reduced-motion`
-
 
 ---
 
@@ -253,35 +250,33 @@ This project uses **expressive motion**. Animations are an integral part of the 
 - No blur or backdrop-blur effects
 - No zebra striping on tables/lists
 
-
 ---
 
 ## 9. Responsive Behavior
 
-| Name | Value | Source |
-|---|---|---|
-| xs | 480px | css |
-| sm | 500px | css |
-| sm | 575.98px | css |
-| sm | 576px | css |
-| md | 676px | css |
-| md | 767px | css |
-| md | 767.98px | css |
-| md | 768px | css |
-| lg | 786px | css |
-| lg | 900px | css |
-| lg | 991.98px | css |
-| lg | 992px | css |
-| lg | 1000px | css |
-| xl | 1060px | css |
-| xl | 1100px | css |
-| xl | 1199.98px | css |
-| xl | 1200px | css |
-| 2xl | 1399.98px | css |
-| 2xl | 1400px | css |
+| Name | Value     | Source |
+| ---- | --------- | ------ |
+| xs   | 480px     | css    |
+| sm   | 500px     | css    |
+| sm   | 575.98px  | css    |
+| sm   | 576px     | css    |
+| md   | 676px     | css    |
+| md   | 767px     | css    |
+| md   | 767.98px  | css    |
+| md   | 768px     | css    |
+| lg   | 786px     | css    |
+| lg   | 900px     | css    |
+| lg   | 991.98px  | css    |
+| lg   | 992px     | css    |
+| lg   | 1000px    | css    |
+| xl   | 1060px    | css    |
+| xl   | 1100px    | css    |
+| xl   | 1199.98px | css    |
+| xl   | 1200px    | css    |
+| 2xl  | 1399.98px | css    |
+| 2xl  | 1400px    | css    |
 
 **Approach:** Use `@media (min-width: ...)` queries matching the breakpoints above.
-
 
 ---
 

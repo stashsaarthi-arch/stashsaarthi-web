@@ -4,10 +4,10 @@
 
 ## Motion Technology Stack
 
-| Library | Type | Notes |
-|---------|------|-------|
-| **Web Animations API (149 active)** | animation |  |
-| Canvas (4 elements) | WebGL/3D | WebGL context detected — likely Three.js or custom shader |
+| Library                             | Type      | Notes                                                     |
+| ----------------------------------- | --------- | --------------------------------------------------------- |
+| **Web Animations API (149 active)** | animation |                                                           |
+| Canvas (4 elements)                 | WebGL/3D  | WebGL context detected — likely Three.js or custom shader |
 
 ## Scroll Journey
 
@@ -16,36 +16,43 @@ The page is **900px** tall. Each frame below shows what the user sees at that sc
 > **Use these screenshots to understand WHAT animates, WHEN it animates, and HOW it moves.**
 
 ### 0% — Top / Hero
+
 Scroll position: 0px
 
 ![Scroll 0%](../screens/scroll/scroll-000.png)
 
 ### 17% — Opening Section
+
 Scroll position: 0px
 
 ![Scroll 17%](../screens/scroll/scroll-017.png)
 
 ### 33% — First Feature Section
+
 Scroll position: 0px
 
 ![Scroll 33%](../screens/scroll/scroll-033.png)
 
 ### 50% — Mid-Page
+
 Scroll position: 0px
 
 ![Scroll 50%](../screens/scroll/scroll-050.png)
 
 ### 67% — Lower Content
+
 Scroll position: 0px
 
 ![Scroll 67%](../screens/scroll/scroll-067.png)
 
 ### 83% — Near Footer
+
 Scroll position: 0px
 
 ![Scroll 83%](../screens/scroll/scroll-083.png)
 
 ### 100% — Bottom / Footer
+
 Scroll position: 0px
 
 ![Scroll 100%](../screens/scroll/scroll-100.png)
@@ -53,19 +60,21 @@ Scroll position: 0px
 ## Scroll Animation Patterns
 
 | Pattern | Library | Element Count | Duration | Delay | Easing |
-|---------|---------|---------------|----------|-------|--------|
-| sunrise | AOS | 1 | 2000 | 0 | — |
-| fade-up | AOS | 2 | 1200 | 300 | — |
+| ------- | ------- | ------------- | -------- | ----- | ------ |
+| sunrise | AOS     | 1             | 2000     | 0     | —      |
+| fade-up | AOS     | 2             | 1200     | 300   | —      |
 
 ### AOS Implementation
 
 ```html
 <!-- Add to <head> -->
-<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
 
 <!-- Add before </body> -->
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>AOS.init({ once: true, offset: 80 });</script>
+<script>
+  AOS.init({ once: true, offset: 80 });
+</script>
 ```
 
 ```html
@@ -223,7 +232,8 @@ Used by: `.shutter-pulse-0[_ngcontent-ng-c556426719]`, `.shutter-pulse-1[_ngcont
 
 ```css
 @keyframes _ngcontent-ng-c556426719_shutterTravel {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.3;
     filter: brightness(1);
   }
@@ -455,11 +465,12 @@ Used by: `.fa-beat`
 
 ```css
 @keyframes fa-beat {
-  0%, 90% {
+  0%,
+  90% {
     transform: scale(1);
   }
   45% {
-    transform: scale(var(--fa-beat-scale,1.25));
+    transform: scale(var(--fa-beat-scale, 1.25));
   }
 }
 ```
@@ -474,11 +485,12 @@ Used by: `.fa-beat`
 
 ```css
 @keyframes fa-beat {
-  0%, 90% {
+  0%,
+  90% {
     transform: scale(1);
   }
   45% {
-    transform: scale(var(--fa-beat-scale,1.25));
+    transform: scale(var(--fa-beat-scale, 1.25));
   }
 }
 ```
@@ -497,16 +509,19 @@ Used by: `.fa-bounce`
     transform: scale(1) translateY(0px);
   }
   10% {
-    transform: scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0);
+    transform: scale(var(--fa-bounce-start-scale-x, 1.1), var(--fa-bounce-start-scale-y, 0.9))
+      translateY(0);
   }
   30% {
-    transform: scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em));
+    transform: scale(var(--fa-bounce-jump-scale-x, 0.9), var(--fa-bounce-jump-scale-y, 1.1))
+      translateY(var(--fa-bounce-height, -0.5em));
   }
   50% {
-    transform: scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0);
+    transform: scale(var(--fa-bounce-land-scale-x, 1.05), var(--fa-bounce-land-scale-y, 0.95))
+      translateY(0);
   }
   57% {
-    transform: scale(1) translateY(var(--fa-bounce-rebound,-.125em));
+    transform: scale(1) translateY(var(--fa-bounce-rebound, -0.125em));
   }
   64% {
     transform: scale(1) translateY(0px);
@@ -531,16 +546,19 @@ Used by: `.fa-bounce`
     transform: scale(1) translateY(0px);
   }
   10% {
-    transform: scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0);
+    transform: scale(var(--fa-bounce-start-scale-x, 1.1), var(--fa-bounce-start-scale-y, 0.9))
+      translateY(0);
   }
   30% {
-    transform: scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em));
+    transform: scale(var(--fa-bounce-jump-scale-x, 0.9), var(--fa-bounce-jump-scale-y, 1.1))
+      translateY(var(--fa-bounce-height, -0.5em));
   }
   50% {
-    transform: scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0);
+    transform: scale(var(--fa-bounce-land-scale-x, 1.05), var(--fa-bounce-land-scale-y, 0.95))
+      translateY(0);
   }
   57% {
-    transform: scale(1) translateY(var(--fa-bounce-rebound,-.125em));
+    transform: scale(1) translateY(var(--fa-bounce-rebound, -0.125em));
   }
   64% {
     transform: scale(1) translateY(0px);
@@ -562,7 +580,7 @@ Used by: `.fa-fade`
 ```css
 @keyframes fa-fade {
   50% {
-    opacity: var(--fa-fade-opacity,.4);
+    opacity: var(--fa-fade-opacity, 0.4);
   }
 }
 ```
@@ -578,7 +596,7 @@ Used by: `.fa-fade`
 ```css
 @keyframes fa-fade {
   50% {
-    opacity: var(--fa-fade-opacity,.4);
+    opacity: var(--fa-fade-opacity, 0.4);
   }
 }
 ```
@@ -593,13 +611,14 @@ Used by: `.fa-beat-fade`
 
 ```css
 @keyframes fa-beat-fade {
-  0%, 100% {
-    opacity: var(--fa-beat-fade-opacity,.4);
+  0%,
+  100% {
+    opacity: var(--fa-beat-fade-opacity, 0.4);
     transform: scale(1);
   }
   50% {
     opacity: 1;
-    transform: scale(var(--fa-beat-fade-scale,1.125));
+    transform: scale(var(--fa-beat-fade-scale, 1.125));
   }
 }
 ```
@@ -614,13 +633,14 @@ Used by: `.fa-beat-fade`
 
 ```css
 @keyframes fa-beat-fade {
-  0%, 100% {
-    opacity: var(--fa-beat-fade-opacity,.4);
+  0%,
+  100% {
+    opacity: var(--fa-beat-fade-opacity, 0.4);
     transform: scale(1);
   }
   50% {
     opacity: 1;
-    transform: scale(var(--fa-beat-fade-scale,1.125));
+    transform: scale(var(--fa-beat-fade-scale, 1.125));
   }
 }
 ```
@@ -636,7 +656,12 @@ Used by: `.fa-flip`
 ```css
 @keyframes fa-flip {
   50% {
-    transform: rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg));
+    transform: rotate3d(
+      var(--fa-flip-x, 0),
+      var(--fa-flip-y, 1),
+      var(--fa-flip-z, 0),
+      var(--fa-flip-angle, -180deg)
+    );
   }
 }
 ```
@@ -652,7 +677,12 @@ Used by: `.fa-flip`
 ```css
 @keyframes fa-flip {
   50% {
-    transform: rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg));
+    transform: rotate3d(
+      var(--fa-flip-x, 0),
+      var(--fa-flip-y, 1),
+      var(--fa-flip-z, 0),
+      var(--fa-flip-angle, -180deg)
+    );
   }
 }
 ```
@@ -673,10 +703,12 @@ Used by: `.fa-shake`
   4% {
     transform: rotate(15deg);
   }
-  8%, 24% {
+  8%,
+  24% {
     transform: rotate(-18deg);
   }
-  12%, 28% {
+  12%,
+  28% {
     transform: rotate(18deg);
   }
   16% {
@@ -691,7 +723,8 @@ Used by: `.fa-shake`
   36% {
     transform: rotate(12deg);
   }
-  40%, 100% {
+  40%,
+  100% {
     transform: rotate(0deg);
   }
 }
@@ -713,10 +746,12 @@ Used by: `.fa-shake`
   4% {
     transform: rotate(15deg);
   }
-  8%, 24% {
+  8%,
+  24% {
     transform: rotate(-18deg);
   }
-  12%, 28% {
+  12%,
+  28% {
     transform: rotate(18deg);
   }
   16% {
@@ -731,7 +766,8 @@ Used by: `.fa-shake`
   36% {
     transform: rotate(12deg);
   }
-  40%, 100% {
+  40%,
+  100% {
     transform: rotate(0deg);
   }
 }
@@ -1606,7 +1642,8 @@ Used by: `.nucleus-assembly[_ngcontent-ng-c556426719]`
 
 ```css
 @keyframes _ngcontent-ng-c556426719_nucleusJitter {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(0px);
   }
   25% {
@@ -1700,7 +1737,8 @@ Used by: `.sat-pulse[_ngcontent-ng-c556426719]`
 
 ```css
 @keyframes _ngcontent-ng-c556426719_satPulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.4;
     transform: scale(1);
   }
@@ -2065,7 +2103,8 @@ Used by: `.flame-3[_ngcontent-ng-c3559033405]`
 
 ```css
 @keyframes _ngcontent-ng-c1601828135_parallaxMove {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1) translateY(0px);
   }
   50% {
@@ -2186,15 +2225,29 @@ Used by: `.flame-3[_ngcontent-ng-c3559033405]`
 These `transition` values were extracted from CSS rules across the site:
 
 ```css
-transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+transition:
+  border-color 0.15s ease-in-out,
+  box-shadow 0.15s ease-in-out;
+transition:
+  color 0.15s ease-in-out,
+  background-color 0.15s ease-in-out,
+  border-color 0.15s ease-in-out,
+  box-shadow 0.15s ease-in-out;
 transition: background-position 0.15s ease-in-out;
-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
+transition:
+  background-color 0.15s ease-in-out,
+  border-color 0.15s ease-in-out,
+  box-shadow 0.15s ease-in-out;
+transition:
+  opacity 0.1s ease-in-out,
+  transform 0.1s ease-in-out;
 transition: opacity 0.15s linear;
 transition: height 0.35s;
 transition: width 0.35s;
-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+transition:
+  color 0.15s ease-in-out,
+  background-color 0.15s ease-in-out,
+  border-color 0.15s ease-in-out;
 transition: var(--bs-navbar-toggler-transition);
 transition: var(--bs-accordion-transition);
 transition: var(--bs-accordion-btn-icon-transition);
@@ -2205,6 +2258,7 @@ transition: var(--bs-accordion-btn-icon-transition);
 ### Step 1 — Install Dependencies
 
 ```bash
+
 ```
 
 ### Step 2 — Scroll-Reveal Pattern
@@ -2216,8 +2270,9 @@ Elements that animate into view follow this pattern:
 .reveal {
   opacity: 0;
   transform: translateY(40px);
-  transition: opacity 0.15s cubic-bezier(0.4, 0, 0.2, 1),
-              transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    opacity 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .reveal.visible {
   opacity: 1;
@@ -2243,4 +2298,3 @@ Match what happens at each scroll position:
 - **67%** (`0px`) → `screens/scroll/scroll-067.png`
 - **83%** (`0px`) → `screens/scroll/scroll-083.png`
 - **100%** (`0px`) → `screens/scroll/scroll-100.png`
-

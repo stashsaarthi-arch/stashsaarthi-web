@@ -31,21 +31,21 @@ You are building UI for **notion**. Light-themed, warm palette, sans-serif typog
 
 ### Core Palette
 
-| Role | Token | Hex | Use |
-|------|-------|-----|-----|
-| Background | `--background` | `#f9f9f8` | Page/app background |
-| Text Primary | `--text-primary` | `#31302e` | Headings, body text |
-| Text Muted | `--text-muted` | `#78736f` | Captions, placeholders |
-| Accent | `--accent` | `#ffb110` | CTAs, links, focus rings |
-| Border | `--border` | `#615d59` | Dividers, card borders |
+| Role         | Token            | Hex       | Use                      |
+| ------------ | ---------------- | --------- | ------------------------ |
+| Background   | `--background`   | `#f9f9f8` | Page/app background      |
+| Text Primary | `--text-primary` | `#31302e` | Headings, body text      |
+| Text Muted   | `--text-muted`   | `#78736f` | Captions, placeholders   |
+| Accent       | `--accent`       | `#ffb110` | CTAs, links, focus rings |
+| Border       | `--border`       | `#615d59` | Dividers, card borders   |
 
 ### Status Colors
 
-| Status | Hex | Use |
-|--------|-----|-----|
+| Status  | Hex       | Use                            |
+| ------- | --------- | ------------------------------ |
 | Success | `#1aae39` | Confirmations, positive trends |
-| Warning | `#fff5e0` | Caution states, pending items |
-| Danger | `#fdd3cd` | Errors, destructive actions |
+| Warning | `#fff5e0` | Caution states, pending items  |
+| Danger  | `#fdd3cd` | Errors, destructive actions    |
 
 ### Extended Palette
 
@@ -62,13 +62,13 @@ You are building UI for **notion**. Light-themed, warm palette, sans-serif typog
 
 ```css
 --tatami-border-radius-0: 0;
---tatami-border-radius-200: .25rem;
---tatami-border-radius-300: .3125rem;
---tatami-border-radius-400: .375rem;
---tatami-border-radius-500: .5rem;
---tatami-border-radius-600: .625rem;
---tatami-border-radius-700: .75rem;
---tatami-border-radius-800: .875rem;
+--tatami-border-radius-200: 0.25rem;
+--tatami-border-radius-300: 0.3125rem;
+--tatami-border-radius-400: 0.375rem;
+--tatami-border-radius-500: 0.5rem;
+--tatami-border-radius-600: 0.625rem;
+--tatami-border-radius-700: 0.75rem;
+--tatami-border-radius-800: 0.875rem;
 --tatami-border-radius-900: 1rem;
 --tatami-border-radius-round: 624.938rem;
 --tatami-border-width-1: var(--tatami-dimension-thickness-1);
@@ -143,14 +143,14 @@ You are building UI for **notion**. Light-themed, warm palette, sans-serif typog
 
 ### Type Scale
 
-| Role | Family | Size | Weight |
-|------|--------|------|--------|
-| Heading 1 | Noto Sans Arabic | 85px | 700 |
-| Heading 2 | Noto Sans Arabic | 78px | 700 |
-| Heading 3 | Noto Sans Arabic | 68px | 700 |
-| Body | NotionInter | 14px | 400 |
-| Caption | NotionInter | 16px | 400 |
-| Code | iA Writer Mono | 14px | 400 |
+| Role      | Family           | Size | Weight |
+| --------- | ---------------- | ---- | ------ |
+| Heading 1 | Noto Sans Arabic | 85px | 700    |
+| Heading 2 | Noto Sans Arabic | 78px | 700    |
+| Heading 3 | Noto Sans Arabic | 68px | 700    |
+| Body      | NotionInter      | 14px | 400    |
+| Caption   | NotionInter      | 16px | 400    |
+| Code      | iA Writer Mono   | 14px | 400    |
 
 ### Typography Rules
 
@@ -172,12 +172,12 @@ Every dimension (margin, padding, gap, width, height) must be a multiple of **4p
 
 ### Spacing as Meaning
 
-| Spacing | Use |
-|---------|-----|
-| 4-8px | Tight: related items (icon + label, avatar + name) |
-| 12-16px | Medium: between groups within a section |
-| 24-32px | Wide: between distinct sections |
-| 48px+ | Vast: major page section breaks |
+| Spacing | Use                                                |
+| ------- | -------------------------------------------------- |
+| 4-8px   | Tight: related items (icon + label, avatar + name) |
+| 12-16px | Medium: between groups within a section            |
+| 24-32px | Wide: between distinct sections                    |
+| 48px+   | Vast: major page section breaks                    |
 
 ### Border Radius
 
@@ -190,36 +190,36 @@ Max-width: `1392px`, centered with auto margins.
 
 ### Breakpoints
 
-| Name | Value |
-|------|-------|
-| xs | 374px |
-| xs | 375px |
-| xs | 400px |
-| xs | 440px |
-| xs | 480px |
-| sm | 599px |
-| sm | 600px |
-| md | 668px |
-| md | 700px |
-| md | 712px |
-| md | 740px |
-| md | 768px |
-| lg | 799px |
-| lg | 839px |
-| lg | 840px |
-| lg | 908px |
-| lg | 919px |
-| lg | 942px |
-| lg | 960px |
-| xl | 1032px |
-| xl | 1080px |
-| xl | 1120px |
-| xl | 1156px |
-| xl | 1200px |
-| xl | 1280px |
-| 2xl | 1300px |
-| 2xl | 1440px |
-| 2xl | 1600px |
+| Name | Value  |
+| ---- | ------ |
+| xs   | 374px  |
+| xs   | 375px  |
+| xs   | 400px  |
+| xs   | 440px  |
+| xs   | 480px  |
+| sm   | 599px  |
+| sm   | 600px  |
+| md   | 668px  |
+| md   | 700px  |
+| md   | 712px  |
+| md   | 740px  |
+| md   | 768px  |
+| lg   | 799px  |
+| lg   | 839px  |
+| lg   | 840px  |
+| lg   | 908px  |
+| lg   | 919px  |
+| lg   | 942px  |
+| lg   | 960px  |
+| xl   | 1032px |
+| xl   | 1080px |
+| xl   | 1120px |
+| xl   | 1156px |
+| xl   | 1200px |
+| xl   | 1280px |
+| 2xl  | 1300px |
+| 2xl  | 1440px |
+| 2xl  | 1600px |
 
 Mobile-first: design for small screens, layer on responsive overrides.
 
@@ -256,7 +256,9 @@ Mobile-first: design for small screens, layer on responsive overrides.
   font-weight: 500;
   transition: opacity 150ms ease;
 }
-.btn-primary:hover { opacity: 0.9; }
+.btn-primary:hover {
+  opacity: 0.9;
+}
 
 /* Ghost */
 .btn-ghost {
@@ -269,8 +271,7 @@ Mobile-first: design for small screens, layer on responsive overrides.
 ```
 
 ```html
-<button class="btn-primary">Get Started</button>
-<button class="btn-ghost">Learn More</button>
+<button class="btn-primary">Get Started</button> <button class="btn-ghost">Learn More</button>
 ```
 
 ### Input
@@ -284,7 +285,10 @@ Mobile-first: design for small screens, layer on responsive overrides.
   color: #31302e;
   font-size: 14px;
 }
-.input:focus { border-color: #ffb110; outline: none; }
+.input:focus {
+  border-color: #ffb110;
+  outline: none;
+}
 ```
 
 ```html
@@ -307,14 +311,15 @@ Mobile-first: design for small screens, layer on responsive overrides.
 ```
 
 ```html
-<span class="badge">New</span>
-<span class="badge">Beta</span>
+<span class="badge">New</span> <span class="badge">Beta</span>
 ```
 
 ### Modal / Dialog
 
 ```css
-.modal-backdrop { background: rgba(0, 0, 0, 0.6); }
+.modal-backdrop {
+  background: rgba(0, 0, 0, 0.6);
+}
 .modal {
   background: #f9f9f8;
   border: 1px solid #615d59;
@@ -340,7 +345,10 @@ Mobile-first: design for small screens, layer on responsive overrides.
 ### Table
 
 ```css
-.table { width: 100%; border-collapse: collapse; }
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
 .table th {
   text-align: left;
   padding: 8px 12px;
@@ -359,10 +367,24 @@ Mobile-first: design for small screens, layer on responsive overrides.
 
 ```html
 <table class="table">
-  <thead><tr><th>Name</th><th>Status</th><th>Date</th></tr></thead>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Date</th>
+    </tr>
+  </thead>
   <tbody>
-    <tr><td>Item One</td><td>Active</td><td>Jan 1</td></tr>
-    <tr><td>Item Two</td><td>Pending</td><td>Jan 2</td></tr>
+    <tr>
+      <td>Item One</td>
+      <td>Active</td>
+      <td>Jan 1</td>
+    </tr>
+    <tr>
+      <td>Item Two</td>
+      <td>Pending</td>
+      <td>Jan 2</td>
+    </tr>
   </tbody>
 </table>
 ```
@@ -383,8 +405,12 @@ Mobile-first: design for small screens, layer on responsive overrides.
   border-radius: 12px;
   transition: color 150ms;
 }
-.nav-link:hover { color: #31302e; }
-.nav-link.active { color: #ffb110; }
+.nav-link:hover {
+  color: #31302e;
+}
+.nav-link.active {
+  color: #ffb110;
+}
 ```
 
 ```html
@@ -503,6 +529,7 @@ Components:     7 detected
 ## When to Trigger
 
 Activate this skill when:
+
 - Creating new components, pages, or visual elements for notion
 - Writing CSS, Tailwind classes, styled-components, or inline styles
 - Building page layouts, templates, or responsive designs
@@ -542,40 +569,40 @@ This is a **light-themed** interface with a warm, approachable feel. The light b
 
 ## 2. Color Palette & Roles
 
-| Token | Hex | Role | Use |
-|---|---|---|---|
-| tatami-color-gray-100 | `#f9f9f8` | background | Page background, darkest surface |
-| tatami-color-gray-800 | `#31302e` | text-primary | Headings and body text |
-| tatami-color-gray-500 | `#78736f` | text-muted | Captions, placeholders, secondary info |
-| tatami-color-gray-600 | `#615d59` | border | Dividers, card borders, outlines |
-| tatami-color-yellow-500 | `#ffb110` | accent | CTAs, links, focus rings, active states |
-| tatami-color-red-200 | `#fdd3cd` | danger | Error states, destructive actions |
-| tatami-color-green-500 | `#1aae39` | success | Success states, positive indicators |
-| tatami-color-yellow-100 | `#fff5e0` | warning | Warning states, caution indicators |
-| collection-block-background-color | `#2383e2` | info | Informational highlights |
-| tatami-color-black | `#000000` | unknown | Palette color |
-| tatami-color-gray-900 | `#191918` | unknown | Palette color |
-| tatami-color-gray-300 | `#dfdcd9` | unknown | Palette color |
-| tatami-color-campaigns-dev-platform-dos-blue | `#1313ba` | unknown | Palette color |
-| tatami-color-campaigns-dev-platform-dos-lavender | `#cbcbef` | unknown | Palette color |
-| tatami-color-blue-200 | `#e6f3fe` | unknown | Palette color |
-| tatami-color-blue-500 | `#097fe8` | unknown | Palette color |
-| tatami-color-red-500 | `#f64932` | unknown | Palette color |
-| tatami-color-gray-400 | `#a39e98` | unknown | Palette color |
-| tatami-color-gray-700 | `#494744` | unknown | Palette color |
-| tatami-color-red-300 | `#ff8b7c` | unknown | Palette color |
+| Token                                            | Hex       | Role         | Use                                     |
+| ------------------------------------------------ | --------- | ------------ | --------------------------------------- |
+| tatami-color-gray-100                            | `#f9f9f8` | background   | Page background, darkest surface        |
+| tatami-color-gray-800                            | `#31302e` | text-primary | Headings and body text                  |
+| tatami-color-gray-500                            | `#78736f` | text-muted   | Captions, placeholders, secondary info  |
+| tatami-color-gray-600                            | `#615d59` | border       | Dividers, card borders, outlines        |
+| tatami-color-yellow-500                          | `#ffb110` | accent       | CTAs, links, focus rings, active states |
+| tatami-color-red-200                             | `#fdd3cd` | danger       | Error states, destructive actions       |
+| tatami-color-green-500                           | `#1aae39` | success      | Success states, positive indicators     |
+| tatami-color-yellow-100                          | `#fff5e0` | warning      | Warning states, caution indicators      |
+| collection-block-background-color                | `#2383e2` | info         | Informational highlights                |
+| tatami-color-black                               | `#000000` | unknown      | Palette color                           |
+| tatami-color-gray-900                            | `#191918` | unknown      | Palette color                           |
+| tatami-color-gray-300                            | `#dfdcd9` | unknown      | Palette color                           |
+| tatami-color-campaigns-dev-platform-dos-blue     | `#1313ba` | unknown      | Palette color                           |
+| tatami-color-campaigns-dev-platform-dos-lavender | `#cbcbef` | unknown      | Palette color                           |
+| tatami-color-blue-200                            | `#e6f3fe` | unknown      | Palette color                           |
+| tatami-color-blue-500                            | `#097fe8` | unknown      | Palette color                           |
+| tatami-color-red-500                             | `#f64932` | unknown      | Palette color                           |
+| tatami-color-gray-400                            | `#a39e98` | unknown      | Palette color                           |
+| tatami-color-gray-700                            | `#494744` | unknown      | Palette color                           |
+| tatami-color-red-300                             | `#ff8b7c` | unknown      | Palette color                           |
 
 ### CSS Variable Tokens
 
 ```css
 --tatami-border-radius-0: 0;
---tatami-border-radius-200: .25rem;
---tatami-border-radius-300: .3125rem;
---tatami-border-radius-400: .375rem;
---tatami-border-radius-500: .5rem;
---tatami-border-radius-600: .625rem;
---tatami-border-radius-700: .75rem;
---tatami-border-radius-800: .875rem;
+--tatami-border-radius-200: 0.25rem;
+--tatami-border-radius-300: 0.3125rem;
+--tatami-border-radius-400: 0.375rem;
+--tatami-border-radius-500: 0.5rem;
+--tatami-border-radius-600: 0.625rem;
+--tatami-border-radius-700: 0.75rem;
+--tatami-border-radius-800: 0.875rem;
 --tatami-border-radius-900: 1rem;
 --tatami-border-radius-round: 624.938rem;
 --tatami-border-width-1: var(--tatami-dimension-thickness-1);
@@ -590,12 +617,12 @@ This is a **light-themed** interface with a warm, approachable feel. The light b
 --tatami-font-family-primary-serif-vietnamese: ui-serif;
 ```
 
-
 ---
 
 ## 3. Typography Rules
 
 **Font Stack:**
+
 - **Noto Sans Arabic** — Heading 1, Heading 2, Heading 3
 - **NotionInter** — Body, Caption
 - **iA Writer Mono** — Code
@@ -650,23 +677,23 @@ This is a **light-themed** interface with a warm, approachable feel. The light b
 }
 ```
 
-| Role | Font | Size | Weight |
-|---|---|---|---|
-| Heading 1 | Noto Sans Arabic | 85px | 700 |
-| Heading 2 | Noto Sans Arabic | 78px | 700 |
-| Heading 3 | Noto Sans Arabic | 68px | 700 |
-| Body | NotionInter | 14px | 400 |
-| Caption | NotionInter | 16px | 400 |
-| Code | iA Writer Mono | 14px | 400 |
+| Role      | Font             | Size | Weight |
+| --------- | ---------------- | ---- | ------ |
+| Heading 1 | Noto Sans Arabic | 85px | 700    |
+| Heading 2 | Noto Sans Arabic | 78px | 700    |
+| Heading 3 | Noto Sans Arabic | 68px | 700    |
+| Body      | NotionInter      | 14px | 400    |
+| Caption   | NotionInter      | 16px | 400    |
+| Code      | iA Writer Mono   | 14px | 400    |
 
 **Typographic Rules:**
+
 - Limit to 3 font families max per screen
 - Use **Noto Sans Arabic** for body/UI text, **NotionInter** for display/headings
 - Maintain consistent hierarchy: no more than 3-4 font sizes per screen
 - Headings use bold (600-700), body uses regular (400)
 - Line height: 1.5 for body text, 1.2 for headings
 - Use color and opacity for secondary hierarchy, not additional font sizes
-
 
 ---
 
@@ -687,9 +714,11 @@ This is a **light-themed** interface with a warm, approachable feel. The light b
 ### Data Input (2)
 
 **Button** — `html`
-- Animation: 
+
+- Animation:
 
 **Input** — `html`
+
 - State: :focus, :placeholder
 
 ### Media (2)
@@ -697,8 +726,6 @@ This is a **light-themed** interface with a warm, approachable feel. The light b
 **Image** — `html`
 
 **Icon** — `html`
-
-
 
 ---
 
@@ -710,13 +737,13 @@ This is a **light-themed** interface with a warm, approachable feel. The light b
 - **Max content width:** 1392px
 
 **Spacing as Meaning:**
-| Spacing | Use |
-|---|---|
-| 4-8px | Tight: related items within a group |
-| 12-16px | Medium: between groups |
-| 24-32px | Wide: between sections |
-| 48px+ | Vast: major section breaks |
 
+| Spacing | Use                                 |
+| ------- | ----------------------------------- |
+| 4-8px   | Tight: related items within a group |
+| 12-16px | Medium: between groups              |
+| 24-32px | Wide: between sections              |
+| 48px+   | Vast: major section breaks          |
 
 ---
 
@@ -750,8 +777,6 @@ This is a **light-themed** interface with a warm, approachable feel. The light b
 
 `0, 1, 2, 3, 4, 5, 6, 7, 10, 50, 99, 100, 500, 1000, 10001, 99999`
 
-
-
 ---
 
 ## 7. Animation & Motion
@@ -771,14 +796,13 @@ This project uses **expressive motion**. Animations are an integral part of the 
 
 ### Animated Components
 
-- **Button**: 
+- **Button**:
 
 ### Motion Guidelines
 
 - Duration: 150-300ms for micro-interactions, 300-500ms for page transitions
 - Easing: `ease-out` for enters, `ease-in` for exits
 - Always respect `prefers-reduced-motion`
-
 
 ---
 
@@ -809,44 +833,42 @@ This project uses **expressive motion**. Animations are an integral part of the 
 - No blur or backdrop-blur effects
 - No zebra striping on tables/lists
 
-
 ---
 
 ## 9. Responsive Behavior
 
-| Name | Value | Source |
-|---|---|---|
-| xs | 374px | css |
-| xs | 375px | css |
-| xs | 400px | css |
-| xs | 440px | css |
-| xs | 480px | css |
-| sm | 599px | css |
-| sm | 600px | css |
-| md | 668px | css |
-| md | 700px | css |
-| md | 712px | css |
-| md | 740px | css |
-| md | 768px | css |
-| lg | 799px | css |
-| lg | 839px | css |
-| lg | 840px | css |
-| lg | 908px | css |
-| lg | 919px | css |
-| lg | 942px | css |
-| lg | 960px | css |
-| xl | 1032px | css |
-| xl | 1080px | css |
-| xl | 1120px | css |
-| xl | 1156px | css |
-| xl | 1200px | css |
-| xl | 1280px | css |
-| 2xl | 1300px | css |
-| 2xl | 1440px | css |
-| 2xl | 1600px | css |
+| Name | Value  | Source |
+| ---- | ------ | ------ |
+| xs   | 374px  | css    |
+| xs   | 375px  | css    |
+| xs   | 400px  | css    |
+| xs   | 440px  | css    |
+| xs   | 480px  | css    |
+| sm   | 599px  | css    |
+| sm   | 600px  | css    |
+| md   | 668px  | css    |
+| md   | 700px  | css    |
+| md   | 712px  | css    |
+| md   | 740px  | css    |
+| md   | 768px  | css    |
+| lg   | 799px  | css    |
+| lg   | 839px  | css    |
+| lg   | 840px  | css    |
+| lg   | 908px  | css    |
+| lg   | 919px  | css    |
+| lg   | 942px  | css    |
+| lg   | 960px  | css    |
+| xl   | 1032px | css    |
+| xl   | 1080px | css    |
+| xl   | 1120px | css    |
+| xl   | 1156px | css    |
+| xl   | 1200px | css    |
+| xl   | 1280px | css    |
+| 2xl  | 1300px | css    |
+| 2xl  | 1440px | css    |
+| 2xl  | 1600px | css    |
 
 **Approach:** Use `@media (min-width: ...)` queries matching the breakpoints above.
-
 
 ---
 
@@ -961,4 +983,3 @@ Use these local font files in `@font-face` declarations instead of fetching from
 ## Homepage Screenshots (screenshots/)
 
 ![homepage.png](screenshots/homepage.png)
-

@@ -46,7 +46,9 @@ export function LowDataProvider({ children }: { children: React.ReactNode }) {
         const saved = localStorage.getItem("ss_low_data_mode");
         if (saved !== null) return saved === "true";
         return detectLowDataConnection().isSlow;
-      } catch {}
+      } catch (e) {
+        console.debug("Failed to read ss_low_data_mode from localStorage", e);
+      }
     }
     return false;
   });
@@ -56,7 +58,9 @@ export function LowDataProvider({ children }: { children: React.ReactNode }) {
         if (localStorage.getItem("ss_low_data_mode") === null) {
           return detectLowDataConnection().isSlow;
         }
-      } catch {}
+      } catch (e) {
+        console.debug("Failed to read ss_low_data_mode from localStorage", e);
+      }
     }
     return false;
   });

@@ -1,6 +1,7 @@
 # StashSaarthi // Founder & Engineering Dashboard
 
 ## 1. SYSTEM STATUS
+
 - **Deployment Status:** Production Ready & Live on Vercel
 - **Production URL:** `https://stashsaarthi-web.vercel.app/`
 - **Compiler Health:** TypeScript `5.x` Clean (`npx tsc --noEmit` -> Code 0)
@@ -10,6 +11,7 @@
 ---
 
 ## 2. CORE ARCHITECTURE RULES (The Unbreakable Standards)
+
 1. **Zero-Error Type Safety:** Every PR / commit must pass `npx tsc --noEmit` with zero errors.
 2. **Transparent Shell Integrity:** Root `html`, `body`, and container wrappers must remain `bg-transparent` to preserve the unified 3D spatial void depth.
 3. **Mobile GPU Thermal Guard:** Zero expensive Gaussian blur passes (`blur-[100px+]`) on full-screen scroll elements; use lightweight CSS radial gradients and hardware-accelerated transforms (`translateZ(0)`).
@@ -19,6 +21,7 @@
 ---
 
 ## 3. THE MASTER SUMMARY (Engineering Milestones 1–156)
+
 1. **Routing & SSR Architecture:** TanStack Router code-splitting with Nitro server engine; eradicated React SSR hydration mismatches (#418) via client mounting guards.
 2. **Dual-Persona & Multilingual Engine:** Instantaneous state sync between Student Mode (Obsidian & Electric Mint) and Elderly Host Mode (Dark Obsidian & Warm Amber) across EN/HI.
 3. **High-Performance Spatial Void & Attached 3D Motion (E-Summit DNA):** Continuous 3D camera parallax with planetary horizon dome & photon streaks; hero fly-through zoom departure (`PremiumHero`); continuous 3D spatial arrival/departure (`FadeUp`); mobile layout hardened with `w-full` section containment and `items-stretch overflow-hidden` flex guards to eliminate right-side viewport truncation on phones.
@@ -33,6 +36,7 @@
 ---
 
 ## 4. ACTIVE DIRECTIVE
+
 - **Primary Focus:** Kanpur Campus Market Testing & Pilot Onboarding
 - **Top 3 Pending Tasks:**
   1. **Field Testing & QR Flyer Deployments:** Real student test bookings across Allen/Motion coaching hubs in Kakadeo and CSJMU hostels.

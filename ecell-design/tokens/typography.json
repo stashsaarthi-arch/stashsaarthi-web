@@ -1,8 +1,5 @@
 {
-  "families": [
-    "GTA6-Heading",
-    "bootstrap-icons"
-  ],
+  "families": ["GTA6-Heading", "bootstrap-icons"],
   "scale": {
     "heading-1": {
       "fontFamily": "GTA6-Heading",

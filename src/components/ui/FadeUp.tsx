@@ -4,12 +4,12 @@ import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import React, { useRef, useState, useEffect } from "react";
 import { isLowDataModeEnabled } from "@/context/LowDataContext";
 
-export const FadeUp = ({ 
-  children, 
+export const FadeUp = ({
+  children,
   stagger = 0.15,
-  className = "" 
-}: { 
-  children: React.ReactNode; 
+  className = "",
+}: {
+  children: React.ReactNode;
   stagger?: number;
   className?: string;
 }) => {
@@ -58,24 +58,24 @@ export const FadeUp = ({
       className={`relative z-10 w-full max-w-full overflow-x-clip flex flex-col py-10 sm:py-16 md:py-32 max-w-7xl mx-auto px-3 sm:px-6 lg:px-12 md:[perspective:1200px] ${className}`}
     >
       {/* ── SPATIAL CYBER ANCHOR CONDUITS (Binds foreground visually to 3D background grid) ── */}
-      <div 
-        className="absolute inset-y-8 left-2 sm:left-4 w-[1px] bg-gradient-to-b from-transparent via-emerald-400/35 to-transparent pointer-events-none hidden md:block" 
-        aria-hidden 
+      <div
+        className="absolute inset-y-8 left-2 sm:left-4 w-[1px] bg-gradient-to-b from-transparent via-emerald-400/35 to-transparent pointer-events-none hidden md:block"
+        aria-hidden
       />
-      <div 
-        className="absolute inset-y-8 right-2 sm:right-4 w-[1px] bg-gradient-to-b from-transparent via-teal-400/35 to-transparent pointer-events-none hidden md:block" 
-        aria-hidden 
+      <div
+        className="absolute inset-y-8 right-2 sm:right-4 w-[1px] bg-gradient-to-b from-transparent via-teal-400/35 to-transparent pointer-events-none hidden md:block"
+        aria-hidden
       />
 
       {/* Floating Spatial Depth Nodes on flanks */}
-      <div 
+      <div
         className="absolute top-6 left-1 hidden xl:flex items-center gap-2 font-mono text-[9px] tracking-widest text-emerald-400/50 select-none pointer-events-none"
         aria-hidden
       >
         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
         <span>┌─ [NODE // SPATIAL_DOCK]</span>
       </div>
-      <div 
+      <div
         className="absolute bottom-6 right-1 hidden xl:flex items-center gap-2 font-mono text-[9px] tracking-widest text-teal-400/50 select-none pointer-events-none"
         aria-hidden
       >
@@ -103,4 +103,3 @@ export const FadeUp = ({
     </div>
   );
 };
-

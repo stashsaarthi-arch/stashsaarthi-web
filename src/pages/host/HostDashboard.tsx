@@ -12,7 +12,13 @@ import {
 import { Link } from "@tanstack/react-router";
 import { AadhaarKycModal } from "@/components/host/AadhaarKycModal";
 import { SpaceListingForm } from "@/components/host/SpaceListingForm";
-import { Dialog, DialogContent, DialogTrigger, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import { Plus } from "lucide-react";
 
 export function HostDashboard() {
@@ -109,14 +115,19 @@ export function HostDashboard() {
           </div>
           <Dialog>
             <DialogTrigger asChild>
-              <button disabled={kycStatus === "unverified"} className="px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-amber-950 font-bold rounded-xl text-sm transition-colors shadow-lg shadow-amber-500/20 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+              <button
+                disabled={kycStatus === "unverified"}
+                className="px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-amber-950 font-bold rounded-xl text-sm transition-colors shadow-lg shadow-amber-500/20 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
                 <Plus className="w-4 h-4" />
                 Add New Space
               </button>
             </DialogTrigger>
             <DialogContent className="max-w-2xl bg-[#0A0D0F] border-amber-500/20 p-0 overflow-hidden">
               <DialogTitle className="sr-only">List a New Space</DialogTitle>
-              <DialogDescription className="sr-only">Fill out this 3-step form to list your micro-storage space.</DialogDescription>
+              <DialogDescription className="sr-only">
+                Fill out this 3-step form to list your micro-storage space.
+              </DialogDescription>
               <SpaceListingForm />
             </DialogContent>
           </Dialog>

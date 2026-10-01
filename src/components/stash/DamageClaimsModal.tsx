@@ -68,6 +68,7 @@ export const DamageClaimsModal: React.FC<DamageClaimsModalProps> = ({
     if (isOpen) {
       refreshClaims();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
   const refreshClaims = () => {

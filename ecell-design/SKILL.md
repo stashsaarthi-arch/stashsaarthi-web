@@ -53,15 +53,15 @@ You are building UI for **ecell**. Dark-themed, warm palette, sans-serif typogra
 
 This package includes extended documentation. **Read these files before implementing:**
 
-| File | Contents |
-|------|----------|
-| `references/DESIGN.md` | Full design system tokens, colors, typography, spacing |
+| File                         | Contents                                                           |
+| ---------------------------- | ------------------------------------------------------------------ |
+| `references/DESIGN.md`       | Full design system tokens, colors, typography, spacing             |
 | `references/VISUAL_GUIDE.md` | **START HERE** — Master visual guide with all screenshots embedded |
-| `references/ANIMATIONS.md` | CSS keyframes, scroll triggers, motion library stack, video specs |
-| `references/LAYOUT.md` | Flex/grid containers, page structure, spacing relationships |
-| `references/COMPONENTS.md` | DOM component patterns, HTML structure, class fingerprints |
-| `references/INTERACTIONS.md` | Hover/focus states with before/after style diffs |
-| `screens/scroll/` | 7 scroll journey screenshots showing cinematic states |
+| `references/ANIMATIONS.md`   | CSS keyframes, scroll triggers, motion library stack, video specs  |
+| `references/LAYOUT.md`       | Flex/grid containers, page structure, spacing relationships        |
+| `references/COMPONENTS.md`   | DOM component patterns, HTML structure, class fingerprints         |
+| `references/INTERACTIONS.md` | Hover/focus states with before/after style diffs                   |
+| `screens/scroll/`            | 7 scroll journey screenshots showing cinematic states              |
 
 ### Animation Stack Detected
 
@@ -81,22 +81,22 @@ This package includes extended documentation. **Read these files before implemen
 
 ### Core Palette
 
-| Role | Token | Hex | Use |
-|------|-------|-----|-----|
-| Background | `--background` | `#1f1f1f` | Page/app background |
-| Surface | `--surface` | `#000000` | Cards, panels, modals |
-| Text Primary | `--text-primary` | `#ffffff` | Headings, body text |
-| Text Muted | `--text-muted` | `#757575` | Captions, placeholders |
-| Accent | `--accent` | `#ffd740` | CTAs, links, focus rings |
-| Border | `--border` | `#424242` | Dividers, card borders |
+| Role         | Token            | Hex       | Use                      |
+| ------------ | ---------------- | --------- | ------------------------ |
+| Background   | `--background`   | `#1f1f1f` | Page/app background      |
+| Surface      | `--surface`      | `#000000` | Cards, panels, modals    |
+| Text Primary | `--text-primary` | `#ffffff` | Headings, body text      |
+| Text Muted   | `--text-muted`   | `#757575` | Captions, placeholders   |
+| Accent       | `--accent`       | `#ffd740` | CTAs, links, focus rings |
+| Border       | `--border`       | `#424242` | Dividers, card borders   |
 
 ### Status Colors
 
-| Status | Hex | Use |
-|--------|-----|-----|
+| Status  | Hex       | Use                            |
+| ------- | --------- | ------------------------------ |
 | Success | `#198754` | Confirmations, positive trends |
-| Warning | `#bd9f67` | Caution states, pending items |
-| Danger | `#f44336` | Errors, destructive actions |
+| Warning | `#bd9f67` | Caution states, pending items  |
+| Danger  | `#f44336` | Errors, destructive actions    |
 
 ### Extended Palette
 
@@ -112,24 +112,24 @@ This package includes extended documentation. **Read these files before implemen
 ### CSS Variable Tokens
 
 ```css
---primary-blue: #FFE100;
+--primary-blue: #ffe100;
 --webgl-page-background: #0a0a0a;
 --mdc-elevated-card-container-shape: 4px;
 --mdc-outlined-card-container-shape: 4px;
 --mdc-outlined-card-outline-width: 1px;
 --mdc-elevated-card-container-color: white;
 --mdc-outlined-card-container-color: white;
---mdc-outlined-card-outline-color: rgba(0,0,0,.12);
---mat-card-subtitle-text-color: rgba(0,0,0,.54);
---mat-card-title-text-font: Roboto,sans-serif;
+--mdc-outlined-card-outline-color: rgba(0, 0, 0, 0.12);
+--mat-card-subtitle-text-color: rgba(0, 0, 0, 0.54);
+--mat-card-title-text-font: Roboto, sans-serif;
 --mat-card-title-text-line-height: 32px;
 --mat-card-title-text-size: 20px;
---mat-card-title-text-tracking: .0125em;
+--mat-card-title-text-tracking: 0.0125em;
 --mat-card-title-text-weight: 500;
---mat-card-subtitle-text-font: Roboto,sans-serif;
+--mat-card-subtitle-text-font: Roboto, sans-serif;
 --mat-card-subtitle-text-line-height: 22px;
 --mat-card-subtitle-text-size: 14px;
---mat-card-subtitle-text-tracking: .0071428571em;
+--mat-card-subtitle-text-tracking: 0.0071428571em;
 --mat-card-subtitle-text-weight: 500;
 --mat-select-panel-background-color: white;
 ```
@@ -193,13 +193,13 @@ This package includes extended documentation. **Read these files before implemen
 
 ### Type Scale
 
-| Role | Family | Size | Weight |
-|------|--------|------|--------|
-| Heading 1 | GTA6-Heading | 90px | 700 |
-| Heading 2 | GTA6-Heading | 5rem | 700 |
-| Heading 3 | GTA6-Heading | 4.5rem | 700 |
-| Body | bootstrap-icons | 16px | 400 |
-| Caption | bootstrap-icons | 1.25rem | 400 |
+| Role      | Family          | Size    | Weight |
+| --------- | --------------- | ------- | ------ |
+| Heading 1 | GTA6-Heading    | 90px    | 700    |
+| Heading 2 | GTA6-Heading    | 5rem    | 700    |
+| Heading 3 | GTA6-Heading    | 4.5rem  | 700    |
+| Body      | bootstrap-icons | 16px    | 400    |
+| Caption   | bootstrap-icons | 1.25rem | 400    |
 
 ### Typography Rules
 
@@ -221,12 +221,12 @@ Every dimension (margin, padding, gap, width, height) must be a multiple of **4p
 
 ### Spacing as Meaning
 
-| Spacing | Use |
-|---------|-----|
-| 4-8px | Tight: related items (icon + label, avatar + name) |
-| 12-16px | Medium: between groups within a section |
-| 24-32px | Wide: between distinct sections |
-| 48px+ | Vast: major page section breaks |
+| Spacing | Use                                                |
+| ------- | -------------------------------------------------- |
+| 4-8px   | Tight: related items (icon + label, avatar + name) |
+| 12-16px | Medium: between groups within a section            |
+| 24-32px | Wide: between distinct sections                    |
+| 48px+   | Vast: major page section breaks                    |
 
 ### Border Radius
 
@@ -239,27 +239,27 @@ Max-width: `1399.98px`, centered with auto margins.
 
 ### Breakpoints
 
-| Name | Value |
-|------|-------|
-| xs | 480px |
-| sm | 500px |
-| sm | 575.98px |
-| sm | 576px |
-| md | 676px |
-| md | 767px |
-| md | 767.98px |
-| md | 768px |
-| lg | 786px |
-| lg | 900px |
-| lg | 991.98px |
-| lg | 992px |
-| lg | 1000px |
-| xl | 1060px |
-| xl | 1100px |
-| xl | 1199.98px |
-| xl | 1200px |
-| 2xl | 1399.98px |
-| 2xl | 1400px |
+| Name | Value     |
+| ---- | --------- |
+| xs   | 480px     |
+| sm   | 500px     |
+| sm   | 575.98px  |
+| sm   | 576px     |
+| md   | 676px     |
+| md   | 767px     |
+| md   | 767.98px  |
+| md   | 768px     |
+| lg   | 786px     |
+| lg   | 900px     |
+| lg   | 991.98px  |
+| lg   | 992px     |
+| lg   | 1000px    |
+| xl   | 1060px    |
+| xl   | 1100px    |
+| xl   | 1199.98px |
+| xl   | 1200px    |
+| 2xl  | 1399.98px |
+| 2xl  | 1400px    |
 
 Mobile-first: design for small screens, layer on responsive overrides.
 
@@ -296,7 +296,9 @@ Mobile-first: design for small screens, layer on responsive overrides.
   font-weight: 500;
   transition: opacity 150ms ease;
 }
-.btn-primary:hover { opacity: 0.9; }
+.btn-primary:hover {
+  opacity: 0.9;
+}
 
 /* Ghost */
 .btn-ghost {
@@ -309,8 +311,7 @@ Mobile-first: design for small screens, layer on responsive overrides.
 ```
 
 ```html
-<button class="btn-primary">Get Started</button>
-<button class="btn-ghost">Learn More</button>
+<button class="btn-primary">Get Started</button> <button class="btn-ghost">Learn More</button>
 ```
 
 ### Input
@@ -324,7 +325,10 @@ Mobile-first: design for small screens, layer on responsive overrides.
   color: #ffffff;
   font-size: 14px;
 }
-.input:focus { border-color: #ffd740; outline: none; }
+.input:focus {
+  border-color: #ffd740;
+  outline: none;
+}
 ```
 
 ```html
@@ -347,14 +351,15 @@ Mobile-first: design for small screens, layer on responsive overrides.
 ```
 
 ```html
-<span class="badge">New</span>
-<span class="badge">Beta</span>
+<span class="badge">New</span> <span class="badge">Beta</span>
 ```
 
 ### Modal / Dialog
 
 ```css
-.modal-backdrop { background: rgba(0, 0, 0, 0.6); }
+.modal-backdrop {
+  background: rgba(0, 0, 0, 0.6);
+}
 .modal {
   background: #000000;
   border: 1px solid #424242;
@@ -380,7 +385,10 @@ Mobile-first: design for small screens, layer on responsive overrides.
 ### Table
 
 ```css
-.table { width: 100%; border-collapse: collapse; }
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
 .table th {
   text-align: left;
   padding: 8px 12px;
@@ -399,10 +407,24 @@ Mobile-first: design for small screens, layer on responsive overrides.
 
 ```html
 <table class="table">
-  <thead><tr><th>Name</th><th>Status</th><th>Date</th></tr></thead>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Date</th>
+    </tr>
+  </thead>
   <tbody>
-    <tr><td>Item One</td><td>Active</td><td>Jan 1</td></tr>
-    <tr><td>Item Two</td><td>Pending</td><td>Jan 2</td></tr>
+    <tr>
+      <td>Item One</td>
+      <td>Active</td>
+      <td>Jan 1</td>
+    </tr>
+    <tr>
+      <td>Item Two</td>
+      <td>Pending</td>
+      <td>Jan 2</td>
+    </tr>
   </tbody>
 </table>
 ```
@@ -423,8 +445,12 @@ Mobile-first: design for small screens, layer on responsive overrides.
   border-radius: 8px;
   transition: color 150ms;
 }
-.nav-link:hover { color: #ffffff; }
-.nav-link.active { color: #ffd740; }
+.nav-link:hover {
+  color: #ffffff;
+}
+.nav-link.active {
+  color: #ffd740;
+}
 ```
 
 ```html
@@ -522,6 +548,7 @@ Components:     0 detected
 ## When to Trigger
 
 Activate this skill when:
+
 - Creating new components, pages, or visual elements for ecell
 - Writing CSS, Tailwind classes, styled-components, or inline styles
 - Building page layouts, templates, or responsive designs
@@ -561,60 +588,60 @@ This is a **dark-themed** interface with a warm tone. Depth is expressed through
 
 ## 2. Color Palette & Roles
 
-| Token | Hex | Role | Use |
-|---|---|---|---|
-| mdc-chip-disabled-label-text-color | `#1f1f1f` | background | Page background, darkest surface |
-| mat-ripple-color | `#000000` | surface | Card and panel backgrounds |
-| mdc-plain-tooltip-supporting-text-color | `#ffffff` | text-primary | Headings and body text |
-| mat-sort-arrow-color | `#757575` | text-muted | Captions, placeholders, secondary info |
-| mdc-switch-disabled-selected-handle-color | `#424242` | border | Dividers, card borders, outlines |
-| mat-option-selected-state-label-text-color | `#ffd740` | accent | CTAs, links, focus rings, active states |
-| mat-option-selected-state-label-text-color | `#f44336` | danger | Error states, destructive actions |
-| bs-success | `#198754` | success | Success states, positive indicators |
-| warning | `#bd9f67` | warning | Warning states, caution indicators |
-| bs-primary | `#0068ff` | info | Informational highlights |
-| mat-option-selected-state-label-text-color | `#673ab7` | unknown | Palette color |
-| unknown | `#d1d5db` | unknown | Palette color |
-| unknown | `#ff7a1a` | unknown | Palette color |
-| unknown | `#243137` | unknown | Palette color |
-| bs-warning | `#ffc300` | unknown | Palette color |
-| primary-blue | `#ffe100` | unknown | Palette color |
-| mdc-chip-elevated-container-color | `#e0e0e0` | unknown | Palette color |
-| webgl-page-background | `#0a0a0a` | unknown | Palette color |
-| bs-danger | `#dc3545` | unknown | Palette color |
-| bs-dark-border-subtle | `#b0b0b0` | unknown | Palette color |
+| Token                                      | Hex       | Role         | Use                                     |
+| ------------------------------------------ | --------- | ------------ | --------------------------------------- |
+| mdc-chip-disabled-label-text-color         | `#1f1f1f` | background   | Page background, darkest surface        |
+| mat-ripple-color                           | `#000000` | surface      | Card and panel backgrounds              |
+| mdc-plain-tooltip-supporting-text-color    | `#ffffff` | text-primary | Headings and body text                  |
+| mat-sort-arrow-color                       | `#757575` | text-muted   | Captions, placeholders, secondary info  |
+| mdc-switch-disabled-selected-handle-color  | `#424242` | border       | Dividers, card borders, outlines        |
+| mat-option-selected-state-label-text-color | `#ffd740` | accent       | CTAs, links, focus rings, active states |
+| mat-option-selected-state-label-text-color | `#f44336` | danger       | Error states, destructive actions       |
+| bs-success                                 | `#198754` | success      | Success states, positive indicators     |
+| warning                                    | `#bd9f67` | warning      | Warning states, caution indicators      |
+| bs-primary                                 | `#0068ff` | info         | Informational highlights                |
+| mat-option-selected-state-label-text-color | `#673ab7` | unknown      | Palette color                           |
+| unknown                                    | `#d1d5db` | unknown      | Palette color                           |
+| unknown                                    | `#ff7a1a` | unknown      | Palette color                           |
+| unknown                                    | `#243137` | unknown      | Palette color                           |
+| bs-warning                                 | `#ffc300` | unknown      | Palette color                           |
+| primary-blue                               | `#ffe100` | unknown      | Palette color                           |
+| mdc-chip-elevated-container-color          | `#e0e0e0` | unknown      | Palette color                           |
+| webgl-page-background                      | `#0a0a0a` | unknown      | Palette color                           |
+| bs-danger                                  | `#dc3545` | unknown      | Palette color                           |
+| bs-dark-border-subtle                      | `#b0b0b0` | unknown      | Palette color                           |
 
 ### CSS Variable Tokens
 
 ```css
---primary-blue: #FFE100;
+--primary-blue: #ffe100;
 --webgl-page-background: #0a0a0a;
 --mdc-elevated-card-container-shape: 4px;
 --mdc-outlined-card-container-shape: 4px;
 --mdc-outlined-card-outline-width: 1px;
 --mdc-elevated-card-container-color: white;
 --mdc-outlined-card-container-color: white;
---mdc-outlined-card-outline-color: rgba(0,0,0,.12);
---mat-card-subtitle-text-color: rgba(0,0,0,.54);
---mat-card-title-text-font: Roboto,sans-serif;
+--mdc-outlined-card-outline-color: rgba(0, 0, 0, 0.12);
+--mat-card-subtitle-text-color: rgba(0, 0, 0, 0.54);
+--mat-card-title-text-font: Roboto, sans-serif;
 --mat-card-title-text-line-height: 32px;
 --mat-card-title-text-size: 20px;
---mat-card-title-text-tracking: .0125em;
+--mat-card-title-text-tracking: 0.0125em;
 --mat-card-title-text-weight: 500;
---mat-card-subtitle-text-font: Roboto,sans-serif;
+--mat-card-subtitle-text-font: Roboto, sans-serif;
 --mat-card-subtitle-text-line-height: 22px;
 --mat-card-subtitle-text-size: 14px;
---mat-card-subtitle-text-tracking: .0071428571em;
+--mat-card-subtitle-text-tracking: 0.0071428571em;
 --mat-card-subtitle-text-weight: 500;
 --mat-select-panel-background-color: white;
 ```
-
 
 ---
 
 ## 3. Typography Rules
 
 **Font Stack:**
+
 - **GTA6-Heading** — Heading 1, Heading 2, Heading 3
 - **bootstrap-icons** — Body, Caption
 
@@ -668,22 +695,22 @@ This is a **dark-themed** interface with a warm tone. Depth is expressed through
 }
 ```
 
-| Role | Font | Size | Weight |
-|---|---|---|---|
-| Heading 1 | GTA6-Heading | 90px | 700 |
-| Heading 2 | GTA6-Heading | 5rem | 700 |
-| Heading 3 | GTA6-Heading | 4.5rem | 700 |
-| Body | bootstrap-icons | 16px | 400 |
-| Caption | bootstrap-icons | 1.25rem | 400 |
+| Role      | Font            | Size    | Weight |
+| --------- | --------------- | ------- | ------ |
+| Heading 1 | GTA6-Heading    | 90px    | 700    |
+| Heading 2 | GTA6-Heading    | 5rem    | 700    |
+| Heading 3 | GTA6-Heading    | 4.5rem  | 700    |
+| Body      | bootstrap-icons | 16px    | 400    |
+| Caption   | bootstrap-icons | 1.25rem | 400    |
 
 **Typographic Rules:**
+
 - Limit to 2 font families max per screen
 - Use **GTA6-Heading** for body/UI text, **bootstrap-icons** for display/headings
 - Maintain consistent hierarchy: no more than 3-4 font sizes per screen
 - Headings use bold (600-700), body uses regular (400)
 - Line height: 1.5 for body text, 1.2 for headings
 - Use color and opacity for secondary hierarchy, not additional font sizes
-
 
 ---
 
@@ -701,13 +728,13 @@ No components detected. Scan `src/components/` or `components/` to populate this
 - **Max content width:** 1399.98px
 
 **Spacing as Meaning:**
-| Spacing | Use |
-|---|---|
-| 4-8px | Tight: related items within a group |
-| 12-16px | Medium: between groups |
-| 24-32px | Wide: between sections |
-| 48px+ | Vast: major section breaks |
 
+| Spacing | Use                                 |
+| ------- | ----------------------------------- |
+| 4-8px   | Tight: related items within a group |
+| 12-16px | Medium: between groups              |
+| 24-32px | Wide: between sections              |
+| 48px+   | Vast: major section breaks          |
 
 ---
 
@@ -739,8 +766,6 @@ No components detected. Scan `src/components/` or `components/` to populate this
 
 `0, 1, 2, 3, 4, 5, 999, 1000, 1020, 1030, 1040, 199999999`
 
-
-
 ---
 
 ## 7. Animation & Motion
@@ -763,7 +788,6 @@ This project uses **expressive motion**. Animations are an integral part of the 
 - Duration: 150-300ms for micro-interactions, 300-500ms for page transitions
 - Easing: `ease-out` for enters, `ease-in` for exits
 - Always respect `prefers-reduced-motion`
-
 
 ---
 
@@ -792,35 +816,33 @@ This project uses **expressive motion**. Animations are an integral part of the 
 - No blur or backdrop-blur effects
 - No zebra striping on tables/lists
 
-
 ---
 
 ## 9. Responsive Behavior
 
-| Name | Value | Source |
-|---|---|---|
-| xs | 480px | css |
-| sm | 500px | css |
-| sm | 575.98px | css |
-| sm | 576px | css |
-| md | 676px | css |
-| md | 767px | css |
-| md | 767.98px | css |
-| md | 768px | css |
-| lg | 786px | css |
-| lg | 900px | css |
-| lg | 991.98px | css |
-| lg | 992px | css |
-| lg | 1000px | css |
-| xl | 1060px | css |
-| xl | 1100px | css |
-| xl | 1199.98px | css |
-| xl | 1200px | css |
-| 2xl | 1399.98px | css |
-| 2xl | 1400px | css |
+| Name | Value     | Source |
+| ---- | --------- | ------ |
+| xs   | 480px     | css    |
+| sm   | 500px     | css    |
+| sm   | 575.98px  | css    |
+| sm   | 576px     | css    |
+| md   | 676px     | css    |
+| md   | 767px     | css    |
+| md   | 767.98px  | css    |
+| md   | 768px     | css    |
+| lg   | 786px     | css    |
+| lg   | 900px     | css    |
+| lg   | 991.98px  | css    |
+| lg   | 992px     | css    |
+| lg   | 1000px    | css    |
+| xl   | 1060px    | css    |
+| xl   | 1100px    | css    |
+| xl   | 1199.98px | css    |
+| xl   | 1200px    | css    |
+| 2xl  | 1399.98px | css    |
+| 2xl  | 1400px    | css    |
 
 **Approach:** Use `@media (min-width: ...)` queries matching the breakpoints above.
-
 
 ---
 
@@ -908,43 +930,43 @@ The page has cinematic scroll animations. Each screenshot below shows the exact 
 
 ### Hero — Above the fold
 
-*Scroll position: 0px of 900px total*
+_Scroll position: 0px of 900px total_
 
 ![Hero — Above the fold](../screens/scroll/scroll-000.png)
 
 ### 17% scroll depth
 
-*Scroll position: 0px of 900px total*
+_Scroll position: 0px of 900px total_
 
 ![17% scroll depth](../screens/scroll/scroll-017.png)
 
 ### 33% scroll depth
 
-*Scroll position: 0px of 900px total*
+_Scroll position: 0px of 900px total_
 
 ![33% scroll depth](../screens/scroll/scroll-033.png)
 
 ### 50% scroll depth
 
-*Scroll position: 0px of 900px total*
+_Scroll position: 0px of 900px total_
 
 ![50% scroll depth](../screens/scroll/scroll-050.png)
 
 ### 67% scroll depth
 
-*Scroll position: 0px of 900px total*
+_Scroll position: 0px of 900px total_
 
 ![67% scroll depth](../screens/scroll/scroll-067.png)
 
 ### 83% scroll depth
 
-*Scroll position: 0px of 900px total*
+_Scroll position: 0px of 900px total_
 
 ![83% scroll depth](../screens/scroll/scroll-083.png)
 
 ### Footer — End of page
 
-*Scroll position: 0px of 900px total*
+_Scroll position: 0px of 900px total_
 
 ![Footer — End of page](../screens/scroll/scroll-100.png)
 
@@ -952,31 +974,31 @@ The page has cinematic scroll animations. Each screenshot below shows the exact 
 
 ### E-Summit 2026 | E-Cell IIT Bombay
 
-*URL: `https://www.ecell.in/esummit/`*
+_URL: `https://www.ecell.in/esummit/`_
 
 ![E-Summit 2026 | E-Cell IIT Bombay](../screens/pages/esummit.png)
 
 ### E-Cell - Creating Job Creators
 
-*URL: `https://www.ecell.in/`*
+_URL: `https://www.ecell.in/`_
 
 ![E-Cell - Creating Job Creators](../screens/pages/home.png)
 
 ### Events | E-Summit 2026 | E-Cell IIT Bombay
 
-*URL: `https://www.ecell.in/esummit/events`*
+_URL: `https://www.ecell.in/esummit/events`_
 
 ![Events | E-Summit 2026 | E-Cell IIT Bombay](../screens/pages/esummit-events.png)
 
 ### Accommodation | E-Summit 2026 | E-Cell IIT Bombay
 
-*URL: `https://www.ecell.in/esummit/acco`*
+_URL: `https://www.ecell.in/esummit/acco`_
 
 ![Accommodation | E-Summit 2026 | E-Cell IIT Bombay](../screens/pages/esummit-acco.png)
 
 ### Sponsors | E-Summit 2026 | E-Cell IIT Bombay
 
-*URL: `https://www.ecell.in/esummit/sponsors`*
+_URL: `https://www.ecell.in/esummit/sponsors`_
 
 ![Sponsors | E-Summit 2026 | E-Cell IIT Bombay](../screens/pages/esummit-sponsors.png)
 
@@ -986,31 +1008,31 @@ Clipped sections showing individual components in context.
 
 ### Section 2 — `header`
 
-*1440×900px*
+_1440×900px_
 
 ![Section 2](../screens/sections/esummit-section-2.png)
 
 ### Section 3 — `[class*="hero"]`
 
-*1440×900px*
+_1440×900px_
 
 ![Section 3](../screens/sections/home-section-3.png)
 
 ### Section 1 — `section`
 
-*1400×1200px*
+_1400×1200px_
 
 ![Section 1](../screens/sections/esummit-events-section-1.png)
 
 ### Section 1 — `section`
 
-*1440×1200px*
+_1440×1200px_
 
 ![Section 1](../screens/sections/esummit-acco-section-1.png)
 
 ### Section 5 — `[class*="hero"]`
 
-*1365×940px*
+_1365×940px_
 
 ![Section 5](../screens/sections/esummit-acco-section-5.png)
 
@@ -1022,10 +1044,10 @@ Clipped sections showing individual components in context.
 
 ## Motion Technology Stack
 
-| Library | Type | Notes |
-|---------|------|-------|
-| **Web Animations API (149 active)** | animation |  |
-| Canvas (4 elements) | WebGL/3D | WebGL context detected — likely Three.js or custom shader |
+| Library                             | Type      | Notes                                                     |
+| ----------------------------------- | --------- | --------------------------------------------------------- |
+| **Web Animations API (149 active)** | animation |                                                           |
+| Canvas (4 elements)                 | WebGL/3D  | WebGL context detected — likely Three.js or custom shader |
 
 ## Scroll Journey
 
@@ -1034,36 +1056,43 @@ The page is **900px** tall. Each frame below shows what the user sees at that sc
 > **Use these screenshots to understand WHAT animates, WHEN it animates, and HOW it moves.**
 
 ### 0% — Top / Hero
+
 Scroll position: 0px
 
 ![Scroll 0%](../screens/scroll/scroll-000.png)
 
 ### 17% — Opening Section
+
 Scroll position: 0px
 
 ![Scroll 17%](../screens/scroll/scroll-017.png)
 
 ### 33% — First Feature Section
+
 Scroll position: 0px
 
 ![Scroll 33%](../screens/scroll/scroll-033.png)
 
 ### 50% — Mid-Page
+
 Scroll position: 0px
 
 ![Scroll 50%](../screens/scroll/scroll-050.png)
 
 ### 67% — Lower Content
+
 Scroll position: 0px
 
 ![Scroll 67%](../screens/scroll/scroll-067.png)
 
 ### 83% — Near Footer
+
 Scroll position: 0px
 
 ![Scroll 83%](../screens/scroll/scroll-083.png)
 
 ### 100% — Bottom / Footer
+
 Scroll position: 0px
 
 ![Scroll 100%](../screens/scroll/scroll-100.png)
@@ -1071,19 +1100,21 @@ Scroll position: 0px
 ## Scroll Animation Patterns
 
 | Pattern | Library | Element Count | Duration | Delay | Easing |
-|---------|---------|---------------|----------|-------|--------|
-| sunrise | AOS | 1 | 2000 | 0 | — |
-| fade-up | AOS | 2 | 1200 | 300 | — |
+| ------- | ------- | ------------- | -------- | ----- | ------ |
+| sunrise | AOS     | 1             | 2000     | 0     | —      |
+| fade-up | AOS     | 2             | 1200     | 300   | —      |
 
 ### AOS Implementation
 
 ```html
 <!-- Add to <head> -->
-<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
 
 <!-- Add before </body> -->
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>AOS.init({ once: true, offset: 80 });</script>
+<script>
+  AOS.init({ once: true, offset: 80 });
+</script>
 ```
 
 ```html
@@ -1241,7 +1272,8 @@ Used by: `.shutter-pulse-0[_ngcontent-ng-c556426719]`, `.shutter-pulse-1[_ngcont
 
 ```css
 @keyframes _ngcontent-ng-c556426719_shutterTravel {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.3;
     filter: brightness(1);
   }
@@ -1473,11 +1505,12 @@ Used by: `.fa-beat`
 
 ```css
 @keyframes fa-beat {
-  0%, 90% {
+  0%,
+  90% {
     transform: scale(1);
   }
   45% {
-    transform: scale(var(--fa-beat-scale,1.25));
+    transform: scale(var(--fa-beat-scale, 1.25));
   }
 }
 ```
@@ -1492,11 +1525,12 @@ Used by: `.fa-beat`
 
 ```css
 @keyframes fa-beat {
-  0%, 90% {
+  0%,
+  90% {
     transform: scale(1);
   }
   45% {
-    transform: scale(var(--fa-beat-scale,1.25));
+    transform: scale(var(--fa-beat-scale, 1.25));
   }
 }
 ```
@@ -1515,16 +1549,19 @@ Used by: `.fa-bounce`
     transform: scale(1) translateY(0px);
   }
   10% {
-    transform: scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0);
+    transform: scale(var(--fa-bounce-start-scale-x, 1.1), var(--fa-bounce-start-scale-y, 0.9))
+      translateY(0);
   }
   30% {
-    transform: scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em));
+    transform: scale(var(--fa-bounce-jump-scale-x, 0.9), var(--fa-bounce-jump-scale-y, 1.1))
+      translateY(var(--fa-bounce-height, -0.5em));
   }
   50% {
-    transform: scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0);
+    transform: scale(var(--fa-bounce-land-scale-x, 1.05), var(--fa-bounce-land-scale-y, 0.95))
+      translateY(0);
   }
   57% {
-    transform: scale(1) translateY(var(--fa-bounce-rebound,-.125em));
+    transform: scale(1) translateY(var(--fa-bounce-rebound, -0.125em));
   }
   64% {
     transform: scale(1) translateY(0px);
@@ -1549,16 +1586,19 @@ Used by: `.fa-bounce`
     transform: scale(1) translateY(0px);
   }
   10% {
-    transform: scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0);
+    transform: scale(var(--fa-bounce-start-scale-x, 1.1), var(--fa-bounce-start-scale-y, 0.9))
+      translateY(0);
   }
   30% {
-    transform: scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em));
+    transform: scale(var(--fa-bounce-jump-scale-x, 0.9), var(--fa-bounce-jump-scale-y, 1.1))
+      translateY(var(--fa-bounce-height, -0.5em));
   }
   50% {
-    transform: scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0);
+    transform: scale(var(--fa-bounce-land-scale-x, 1.05), var(--fa-bounce-land-scale-y, 0.95))
+      translateY(0);
   }
   57% {
-    transform: scale(1) translateY(var(--fa-bounce-rebound,-.125em));
+    transform: scale(1) translateY(var(--fa-bounce-rebound, -0.125em));
   }
   64% {
     transform: scale(1) translateY(0px);
@@ -1580,7 +1620,7 @@ Used by: `.fa-fade`
 ```css
 @keyframes fa-fade {
   50% {
-    opacity: var(--fa-fade-opacity,.4);
+    opacity: var(--fa-fade-opacity, 0.4);
   }
 }
 ```
@@ -1596,7 +1636,7 @@ Used by: `.fa-fade`
 ```css
 @keyframes fa-fade {
   50% {
-    opacity: var(--fa-fade-opacity,.4);
+    opacity: var(--fa-fade-opacity, 0.4);
   }
 }
 ```
@@ -1611,13 +1651,14 @@ Used by: `.fa-beat-fade`
 
 ```css
 @keyframes fa-beat-fade {
-  0%, 100% {
-    opacity: var(--fa-beat-fade-opacity,.4);
+  0%,
+  100% {
+    opacity: var(--fa-beat-fade-opacity, 0.4);
     transform: scale(1);
   }
   50% {
     opacity: 1;
-    transform: scale(var(--fa-beat-fade-scale,1.125));
+    transform: scale(var(--fa-beat-fade-scale, 1.125));
   }
 }
 ```
@@ -1632,13 +1673,14 @@ Used by: `.fa-beat-fade`
 
 ```css
 @keyframes fa-beat-fade {
-  0%, 100% {
-    opacity: var(--fa-beat-fade-opacity,.4);
+  0%,
+  100% {
+    opacity: var(--fa-beat-fade-opacity, 0.4);
     transform: scale(1);
   }
   50% {
     opacity: 1;
-    transform: scale(var(--fa-beat-fade-scale,1.125));
+    transform: scale(var(--fa-beat-fade-scale, 1.125));
   }
 }
 ```
@@ -1654,7 +1696,12 @@ Used by: `.fa-flip`
 ```css
 @keyframes fa-flip {
   50% {
-    transform: rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg));
+    transform: rotate3d(
+      var(--fa-flip-x, 0),
+      var(--fa-flip-y, 1),
+      var(--fa-flip-z, 0),
+      var(--fa-flip-angle, -180deg)
+    );
   }
 }
 ```
@@ -1670,7 +1717,12 @@ Used by: `.fa-flip`
 ```css
 @keyframes fa-flip {
   50% {
-    transform: rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg));
+    transform: rotate3d(
+      var(--fa-flip-x, 0),
+      var(--fa-flip-y, 1),
+      var(--fa-flip-z, 0),
+      var(--fa-flip-angle, -180deg)
+    );
   }
 }
 ```
@@ -1691,10 +1743,12 @@ Used by: `.fa-shake`
   4% {
     transform: rotate(15deg);
   }
-  8%, 24% {
+  8%,
+  24% {
     transform: rotate(-18deg);
   }
-  12%, 28% {
+  12%,
+  28% {
     transform: rotate(18deg);
   }
   16% {
@@ -1709,7 +1763,8 @@ Used by: `.fa-shake`
   36% {
     transform: rotate(12deg);
   }
-  40%, 100% {
+  40%,
+  100% {
     transform: rotate(0deg);
   }
 }
@@ -1731,10 +1786,12 @@ Used by: `.fa-shake`
   4% {
     transform: rotate(15deg);
   }
-  8%, 24% {
+  8%,
+  24% {
     transform: rotate(-18deg);
   }
-  12%, 28% {
+  12%,
+  28% {
     transform: rotate(18deg);
   }
   16% {
@@ -1749,7 +1806,8 @@ Used by: `.fa-shake`
   36% {
     transform: rotate(12deg);
   }
-  40%, 100% {
+  40%,
+  100% {
     transform: rotate(0deg);
   }
 }
@@ -2624,7 +2682,8 @@ Used by: `.nucleus-assembly[_ngcontent-ng-c556426719]`
 
 ```css
 @keyframes _ngcontent-ng-c556426719_nucleusJitter {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(0px);
   }
   25% {
@@ -2718,7 +2777,8 @@ Used by: `.sat-pulse[_ngcontent-ng-c556426719]`
 
 ```css
 @keyframes _ngcontent-ng-c556426719_satPulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.4;
     transform: scale(1);
   }
@@ -3083,7 +3143,8 @@ Used by: `.flame-3[_ngcontent-ng-c3559033405]`
 
 ```css
 @keyframes _ngcontent-ng-c1601828135_parallaxMove {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1) translateY(0px);
   }
   50% {
@@ -3204,15 +3265,29 @@ Used by: `.flame-3[_ngcontent-ng-c3559033405]`
 These `transition` values were extracted from CSS rules across the site:
 
 ```css
-transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+transition:
+  border-color 0.15s ease-in-out,
+  box-shadow 0.15s ease-in-out;
+transition:
+  color 0.15s ease-in-out,
+  background-color 0.15s ease-in-out,
+  border-color 0.15s ease-in-out,
+  box-shadow 0.15s ease-in-out;
 transition: background-position 0.15s ease-in-out;
-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
+transition:
+  background-color 0.15s ease-in-out,
+  border-color 0.15s ease-in-out,
+  box-shadow 0.15s ease-in-out;
+transition:
+  opacity 0.1s ease-in-out,
+  transform 0.1s ease-in-out;
 transition: opacity 0.15s linear;
 transition: height 0.35s;
 transition: width 0.35s;
-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+transition:
+  color 0.15s ease-in-out,
+  background-color 0.15s ease-in-out,
+  border-color 0.15s ease-in-out;
 transition: var(--bs-navbar-toggler-transition);
 transition: var(--bs-accordion-transition);
 transition: var(--bs-accordion-btn-icon-transition);
@@ -3223,6 +3298,7 @@ transition: var(--bs-accordion-btn-icon-transition);
 ### Step 1 — Install Dependencies
 
 ```bash
+
 ```
 
 ### Step 2 — Scroll-Reveal Pattern
@@ -3234,8 +3310,9 @@ Elements that animate into view follow this pattern:
 .reveal {
   opacity: 0;
   transform: translateY(40px);
-  transition: opacity 0.15s cubic-bezier(0.4, 0, 0.2, 1),
-              transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    opacity 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .reveal.visible {
   opacity: 1;
@@ -3274,38 +3351,38 @@ Match what happens at each scroll position:
 
 **Scale:** `2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30` px
 
-| Spacing | Semantic Use |
-|---------|-------------|
-| 4px | Tight — within a component |
-| 8px | Medium — between sibling items |
-| 16px | Wide — between sections |
-| 32px | Vast — major section breaks |
+| Spacing | Semantic Use                   |
+| ------- | ------------------------------ |
+| 4px     | Tight — within a component     |
+| 8px     | Medium — between sibling items |
+| 16px    | Wide — between sections        |
+| 32px    | Vast — major section breaks    |
 
 ## Flex Layouts
 
-| Element | Direction | Justify | Align | Gap | Children |
-|---------|-----------|---------|-------|-----|----------|
-| `nav.fullscreen-navbar` | row | space-between | center | — | 3 |
-| `header.header` | column | center | center | — | 4 |
-| `div.sponsors-3d-container` | row | center | center | — | 2 |
-| `div.investors-container` | column | — | — | 32px | 2 |
-| `section.events-section` | column | — | — | — | 2 |
-| `div.reactor-container` | row | center | center | — | 1 |
-| `div.animated-header-container.card-heading` | row | center | center | — | 1 |
-| `div.curtain-container` | row | — | — | — | 2 |
-| `div.hero-content` | column | center | center | — | 2 |
-| `div.perspective-card.perspective-1` | column | — | center | — | 2 |
-| `div.perspective-card.perspective-2` | column | — | center | — | 2 |
-| `div.card-container` | row | center | stretch | 20px | 14 |
-| `div.hero-cta.standard` | row | center | — | 24px | 2 |
-| `div.card.active` | column | end | — | — | 3 |
-| `div.card.next-1` | column | end | — | — | 3 |
+| Element                                      | Direction | Justify       | Align   | Gap  | Children |
+| -------------------------------------------- | --------- | ------------- | ------- | ---- | -------- |
+| `nav.fullscreen-navbar`                      | row       | space-between | center  | —    | 3        |
+| `header.header`                              | column    | center        | center  | —    | 4        |
+| `div.sponsors-3d-container`                  | row       | center        | center  | —    | 2        |
+| `div.investors-container`                    | column    | —             | —       | 32px | 2        |
+| `section.events-section`                     | column    | —             | —       | —    | 2        |
+| `div.reactor-container`                      | row       | center        | center  | —    | 1        |
+| `div.animated-header-container.card-heading` | row       | center        | center  | —    | 1        |
+| `div.curtain-container`                      | row       | —             | —       | —    | 2        |
+| `div.hero-content`                           | column    | center        | center  | —    | 2        |
+| `div.perspective-card.perspective-1`         | column    | —             | center  | —    | 2        |
+| `div.perspective-card.perspective-2`         | column    | —             | center  | —    | 2        |
+| `div.card-container`                         | row       | center        | stretch | 20px | 14       |
+| `div.hero-cta.standard`                      | row       | center        | —       | 24px | 2        |
+| `div.card.active`                            | column    | end           | —       | —    | 3        |
+| `div.card.next-1`                            | column    | end           | —       | —    | 3        |
 
 ## Grid Layouts
 
-| Element | Template Columns | Gap | Children |
-|---------|-----------------|-----|----------|
-| `div.footer-grid` | `336.578px 240.422px 276.484px 288.516px` | 48px | 4 |
+| Element           | Template Columns                          | Gap  | Children |
+| ----------------- | ----------------------------------------- | ---- | -------- |
+| `div.footer-grid` | `336.578px 240.422px 276.484px 288.516px` | 48px | 4        |
 
 ## Structural Containers
 
@@ -3378,28 +3455,28 @@ children:         11
 
 ## Detected Components
 
-| Component | Category | Instances | Key Classes |
-|-----------|----------|-----------|-------------|
-| **Img Box** | unknown | 42× | `.img-box`, `.ng-star-inserted` |
-| **Char Drop Item** | card | 31× | `.char-drop-item` |
-| **Ng Star Inserted** | unknown | 14× | `.ng-star-inserted` |
-| **Card** | card | 14× | `.card` |
-| **Card Banner** | card | 14× | `.card-banner` |
-| **Solar Flare Container** | unknown | 14× | `.solar-flare-container` |
-| **Flare Glow** | unknown | 14× | `.flare-glow` |
-| **Flame 1** | unknown | 14× | `.flame-1`, `.flare-flame` |
-| **Flame 2** | unknown | 14× | `.flame-2`, `.flare-flame` |
-| **Flame 3** | unknown | 14× | `.flame-3`, `.flare-flame` |
-| **Banner Img Wrapper** | unknown | 13× | `.banner-img-wrapper`, `.ng-star-inserted` |
-| **Bg Drift 0** | unknown | 5× | `.bg-drift-0` |
-| **Bg Drift 1** | unknown | 5× | `.bg-drift-1` |
-| **Bg Drift 2** | unknown | 4× | `.bg-drift-2` |
-| **Bg Drift 3** | unknown | 4× | `.bg-drift-3` |
-| **Heading** | unknown | 4× | `.heading` |
-| **Bg Drift 0** | unknown | 3× | `.bg-drift-0` |
-| **Bg Drift 1** | unknown | 3× | `.bg-drift-1` |
-| **Bg Drift 2** | unknown | 3× | `.bg-drift-2` |
-| **Bg Drift 3** | unknown | 3× | `.bg-drift-3` |
+| Component                 | Category | Instances | Key Classes                                |
+| ------------------------- | -------- | --------- | ------------------------------------------ |
+| **Img Box**               | unknown  | 42×       | `.img-box`, `.ng-star-inserted`            |
+| **Char Drop Item**        | card     | 31×       | `.char-drop-item`                          |
+| **Ng Star Inserted**      | unknown  | 14×       | `.ng-star-inserted`                        |
+| **Card**                  | card     | 14×       | `.card`                                    |
+| **Card Banner**           | card     | 14×       | `.card-banner`                             |
+| **Solar Flare Container** | unknown  | 14×       | `.solar-flare-container`                   |
+| **Flare Glow**            | unknown  | 14×       | `.flare-glow`                              |
+| **Flame 1**               | unknown  | 14×       | `.flame-1`, `.flare-flame`                 |
+| **Flame 2**               | unknown  | 14×       | `.flame-2`, `.flare-flame`                 |
+| **Flame 3**               | unknown  | 14×       | `.flame-3`, `.flare-flame`                 |
+| **Banner Img Wrapper**    | unknown  | 13×       | `.banner-img-wrapper`, `.ng-star-inserted` |
+| **Bg Drift 0**            | unknown  | 5×        | `.bg-drift-0`                              |
+| **Bg Drift 1**            | unknown  | 5×        | `.bg-drift-1`                              |
+| **Bg Drift 2**            | unknown  | 4×        | `.bg-drift-2`                              |
+| **Bg Drift 3**            | unknown  | 4×        | `.bg-drift-3`                              |
+| **Heading**               | unknown  | 4×        | `.heading`                                 |
+| **Bg Drift 0**            | unknown  | 3×        | `.bg-drift-0`                              |
+| **Bg Drift 1**            | unknown  | 3×        | `.bg-drift-1`                              |
+| **Bg Drift 2**            | unknown  | 3×        | `.bg-drift-2`                              |
+| **Bg Drift 3**            | unknown  | 3×        | `.bg-drift-3`                              |
 
 ## Cards
 
@@ -3412,12 +3489,17 @@ children:         11
 **HTML structure:**
 
 ```html
-<span data-char-idx="0" class="char-drop-item" style="display: inline-block; opacity: 0; background: linear-gradient(rgb(255, 122, 26) 45.48%, rgb(255, 255, 255) 81.9%) text; -webkit-text-fill-color: transparent; color: transparent;">E</span>
+<span
+  data-char-idx="0"
+  class="char-drop-item"
+  style="display: inline-block; opacity: 0; background: linear-gradient(rgb(255, 122, 26) 45.48%, rgb(255, 255, 255) 81.9%) text; -webkit-text-fill-color: transparent; color: transparent;"
+  >E</span
+>
 ```
 
 **Base styles (from design tokens):**
 
-```css
+````css
 .char-drop-item {
   background: #000000;
   border: 1px solid #424242;
@@ -3435,11 +3517,11 @@ children:         11
 
 ```html
 <div _ngcontent-ng-c3559033405="" class="card"><div _ngcontent-ng-c3559033405="" class="card-banner"><div _ngcontent-ng-c3559033405="" class="solar-flare-container"><div _ngcontent-ng-c3559033405="" class="flare-glow"></div><div _ngcontent-ng-c3559033405="" class="flare-flame flame-1" style="animation-delay: -4.83606s; animation-duration: 7.76754s;"></div><div _ngcontent-ng-c3559033405="" class="flare-flame flame-2" style="animation-delay: -2.34796s; animation-duration: 10.0441s;"></div><div _ngcontent-ng-c3559033405="" class="flare-flame flame-3" style="animation-delay: -1.09575s; animation-d
-```
+````
 
 **Base styles (from design tokens):**
 
-```css
+````css
 .card {
   background: #000000;
   border: 1px solid #424242;
@@ -3457,11 +3539,11 @@ children:         11
 
 ```html
 <div _ngcontent-ng-c3559033405="" class="card-banner"><div _ngcontent-ng-c3559033405="" class="solar-flare-container"><div _ngcontent-ng-c3559033405="" class="flare-glow"></div><div _ngcontent-ng-c3559033405="" class="flare-flame flame-1" style="animation-delay: -4.83606s; animation-duration: 7.76754s;"></div><div _ngcontent-ng-c3559033405="" class="flare-flame flame-2" style="animation-delay: -2.34796s; animation-duration: 10.0441s;"></div><div _ngcontent-ng-c3559033405="" class="flare-flame flame-3" style="animation-delay: -1.09575s; animation-duration: 5.86767s;"></div></div><div _ngcontent
-```
+````
 
 **Base styles (from design tokens):**
 
-```css
+````css
 .card-banner {
   background: #000000;
   border: 1px solid #424242;
@@ -3481,11 +3563,11 @@ children:         11
 
 ```html
 <div _ngcontent-ng-c3300627814="" class="img-box ng-star-inserted" style="background-image: url(&quot;https://2k21.s3.amazonaws.com/images/eurekawinner2.jpg&quot;);"></div>
-```
+````
 
 **Base styles (from design tokens):**
 
-```css
+````css
 .img-box {
   background: #000000;
   padding: 4px;
@@ -3501,11 +3583,11 @@ children:         11
 
 ```html
 <app-event-card _ngcontent-ng-c2631132637="" appscrollstack="" _nghost-ng-c3559033405="" class="ng-star-inserted" style="will-change: transform, opacity, filter; transform-origin: 50% 100%; transform: perspective(1500px) translateY(150px) scale(0.95) rotateX(0deg); opacity: 0; filter: none;"><div _ngcontent-ng-c3559033405="" class="card"><div _ngcontent-ng-c3559033405="" class="card-banner"><div _ngcontent-ng-c3559033405="" class="solar-flare-container"><div _ngcontent-ng-c3559033405="" class="flare-glow"></div><div _ngcontent-ng-c3559033405="" class="flare-flame flame-1" style="animation-dela
-```
+````
 
 **Base styles (from design tokens):**
 
-```css
+````css
 .ng-star-inserted {
   background: #000000;
   padding: 4px;
@@ -3521,11 +3603,11 @@ children:         11
 
 ```html
 <div _ngcontent-ng-c3559033405="" class="solar-flare-container"><div _ngcontent-ng-c3559033405="" class="flare-glow"></div><div _ngcontent-ng-c3559033405="" class="flare-flame flame-1" style="animation-delay: -4.83606s; animation-duration: 7.76754s;"></div><div _ngcontent-ng-c3559033405="" class="flare-flame flame-2" style="animation-delay: -2.34796s; animation-duration: 10.0441s;"></div><div _ngcontent-ng-c3559033405="" class="flare-flame flame-3" style="animation-delay: -1.09575s; animation-duration: 5.86767s;"></div></div>
-```
+````
 
 **Base styles (from design tokens):**
 
-```css
+````css
 .solar-flare-container {
   background: #000000;
   padding: 4px;
@@ -3541,11 +3623,11 @@ children:         11
 
 ```html
 <div _ngcontent-ng-c3559033405="" class="flare-glow"></div>
-```
+````
 
 **Base styles (from design tokens):**
 
-```css
+````css
 .flare-glow {
   background: #000000;
   padding: 4px;
@@ -3561,11 +3643,11 @@ children:         11
 
 ```html
 <div _ngcontent-ng-c3559033405="" class="flare-flame flame-1" style="animation-delay: -4.83606s; animation-duration: 7.76754s;"></div>
-```
+````
 
 **Base styles (from design tokens):**
 
-```css
+````css
 .flame-1 {
   background: #000000;
   padding: 4px;
@@ -3581,11 +3663,11 @@ children:         11
 
 ```html
 <div _ngcontent-ng-c3559033405="" class="flare-flame flame-2" style="animation-delay: -2.34796s; animation-duration: 10.0441s;"></div>
-```
+````
 
 **Base styles (from design tokens):**
 
-```css
+````css
 .flame-2 {
   background: #000000;
   padding: 4px;
@@ -3601,11 +3683,11 @@ children:         11
 
 ```html
 <div _ngcontent-ng-c3559033405="" class="flare-flame flame-3" style="animation-delay: -1.09575s; animation-duration: 5.86767s;"></div>
-```
+````
 
 **Base styles (from design tokens):**
 
-```css
+````css
 .flame-3 {
   background: #000000;
   padding: 4px;
@@ -3621,11 +3703,11 @@ children:         11
 
 ```html
 <div _ngcontent-ng-c3559033405="" class="banner-img-wrapper ng-star-inserted" style="mix-blend-mode: normal; background: transparent;"><img _ngcontent-ng-c3559033405="" class="banner-img-source" style="filter: none;" src="https://2k21.s3.amazonaws.com/esummit26/events/big_images/TTMM_Logo-removebg-preview.png" alt="The Ten Minute Million"></div>
-```
+````
 
 **Base styles (from design tokens):**
 
-```css
+````css
 .banner-img-wrapper {
   background: #000000;
   padding: 4px;
@@ -3641,11 +3723,11 @@ children:         11
 
 ```html
 <ellipse _ngcontent-ng-c556426719="" cx="500" cy="500" fill="none" rx="292.98195666396157" ry="113.0709340077639" stroke="#993300" stroke-width="0.8" stroke-dasharray="232.7830714511572 389.1520229274122" opacity="0.18457471770834627" transform="rotate(247.73934383934102 500 500)" class="bg-drift-0"></ellipse>
-```
+````
 
 **Base styles (from design tokens):**
 
-```css
+````css
 .bg-drift-0 {
   background: #000000;
   padding: 4px;
@@ -3661,11 +3743,11 @@ children:         11
 
 ```html
 <ellipse _ngcontent-ng-c556426719="" cx="500" cy="500" fill="none" rx="299.3662459726747" ry="129.14603673610983" stroke="#1A0000" stroke-width="0.8" stroke-dasharray="104.4268769702165 170.48562789636853" opacity="0.19211099033459517" transform="rotate(3.5107547052301236 500 500)" class="bg-drift-1"></ellipse>
-```
+````
 
 **Base styles (from design tokens):**
 
-```css
+````css
 .bg-drift-1 {
   background: #000000;
   padding: 4px;
@@ -3681,11 +3763,11 @@ children:         11
 
 ```html
 <ellipse _ngcontent-ng-c556426719="" cx="500" cy="500" fill="none" rx="277.1093984512377" ry="112.84314019569862" stroke="#993300" stroke-width="0.8" stroke-dasharray="181.28059221962351 243.03427157392105" opacity="0.14949843825574705" transform="rotate(210.8377286909632 500 500)" class="bg-drift-2"></ellipse>
-```
+````
 
 **Base styles (from design tokens):**
 
-```css
+````css
 .bg-drift-2 {
   background: #000000;
   padding: 4px;
@@ -3701,11 +3783,11 @@ children:         11
 
 ```html
 <ellipse _ngcontent-ng-c556426719="" cx="500" cy="500" fill="none" rx="294.4149677384673" ry="134.24244158905967" stroke="#1A0000" stroke-width="0.8" stroke-dasharray="119.05267494534287 129.07010631041427" opacity="0.1064460462997923" transform="rotate(2.1775436364996503 500 500)" class="bg-drift-3"></ellipse>
-```
+````
 
 **Base styles (from design tokens):**
 
-```css
+````css
 .bg-drift-3 {
   background: #000000;
   padding: 4px;
@@ -3721,11 +3803,11 @@ children:         11
 
 ```html
 <div _ngcontent-ng-c2631132637="" appworddrop="" class="heading" style="margin-bottom: 2rem; position: relative; z-index: 20; background-image: none; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: unset; background-color: initial; -webkit-text-fill-color: unset;"><span data-char-idx="0" class="char-drop-item" style="display: inline-block; opacity: 0; background: linear-gradient(rgb(255, 122, 26) 45.48%, rgb(255, 255, 255) 81.9%) text; -webkit-text-fill-color: transparent; color: tr
-```
+````
 
 **Base styles (from design tokens):**
 
-```css
+````css
 .heading {
   background: #000000;
   padding: 4px;
@@ -3741,11 +3823,11 @@ children:         11
 
 ```html
 <path _ngcontent-ng-c556426719="" fill="none" d="M 321.76490054232215 570.2125181346157 A 191.56604182759548 191.56604182759548 0 1 1 567.7494583937472 679.1858232920395" stroke="#993300" stroke-width="1.774187793076488" opacity="0.12840459894471787" class="bg-drift-0"></path>
-```
+````
 
 **Base styles (from design tokens):**
 
-```css
+````css
 .bg-drift-0 {
   background: #000000;
   padding: 4px;
@@ -3761,11 +3843,11 @@ children:         11
 
 ```html
 <path _ngcontent-ng-c556426719="" fill="none" d="M 892.6341624589488 386.46187904272995 A 408.72055299476676 408.72055299476676 0 1 1 98.1580825124334 425.3303020612535" stroke="#1A0000" stroke-width="1.7992127198607746" opacity="0.17229571801112986" class="bg-drift-1"></path>
-```
+````
 
 **Base styles (from design tokens):**
 
-```css
+````css
 .bg-drift-1 {
   background: #000000;
   padding: 4px;
@@ -3781,11 +3863,11 @@ children:         11
 
 ```html
 <path _ngcontent-ng-c556426719="" fill="none" d="M 538.2007267079667 256.1126886741972 A 246.86092470608997 246.86092470608997 0 1 1 369.7593863043996 709.7086042367819" stroke="#1A0000" stroke-width="1.5447088827395354" opacity="0.09634959023829678" class="bg-drift-2"></path>
-```
+````
 
 **Base styles (from design tokens):**
 
-```css
+````css
 .bg-drift-2 {
   background: #000000;
   padding: 4px;
@@ -3801,11 +3883,11 @@ children:         11
 
 ```html
 <path _ngcontent-ng-c556426719="" fill="none" d="M 654.5726826649902 395.86613656460787 A 186.3775086758933 186.3775086758933 0 1 1 443.5130778187518 322.38861702378904" stroke="#993300" stroke-width="1.816244897965408" opacity="0.09625482015108049" class="bg-drift-3"></path>
-```
+````
 
 **Base styles (from design tokens):**
 
-```css
+````css
 .bg-drift-3 {
   background: #000000;
   padding: 4px;
@@ -3841,7 +3923,7 @@ transition: all;
 transition: 0.3s;
 transition: color 0.35s, border-color 0.35s, box-shadow 0.35s, transform 0.25s;
 transition: color 0.3s;
-```
+````
 
 Apply these to all interactive elements. Never invent new durations or easings.
 
@@ -3858,8 +3940,10 @@ Apply these to all interactive elements. Never invent new durations or easings.
 **On focus:**
 
 ```css
-/* outline: rgb(0, 0, 0) none 3px → */ outline: rgb(16, 16, 16) auto 1px;
-/* outline-color: rgb(0, 0, 0) → */ outline-color: rgb(16, 16, 16);
+/* outline: rgb(0, 0, 0) none 3px → */
+outline: rgb(16, 16, 16) auto 1px;
+/* outline-color: rgb(0, 0, 0) → */
+outline-color: rgb(16, 16, 16);
 ```
 
 **Transition:** `all`
@@ -3875,14 +3959,17 @@ Apply these to all interactive elements. Never invent new durations or easings.
 **On hover:**
 
 ```css
-/* background-color: rgba(0, 0, 0, 0) → */ background-color: rgb(31, 31, 31);
+/* background-color: rgba(0, 0, 0, 0) → */
+background-color: rgb(31, 31, 31);
 ```
 
 **On focus:**
 
 ```css
-/* outline: rgb(255, 255, 255) none 3px → */ outline: rgb(16, 16, 16) auto 1px;
-/* outline-color: rgb(255, 255, 255) → */ outline-color: rgb(16, 16, 16);
+/* outline: rgb(255, 255, 255) none 3px → */
+outline: rgb(16, 16, 16) auto 1px;
+/* outline-color: rgb(255, 255, 255) → */
+outline-color: rgb(16, 16, 16);
 ```
 
 **Transition:** `0.3s`
@@ -3898,18 +3985,27 @@ Apply these to all interactive elements. Never invent new durations or easings.
 **On hover:**
 
 ```css
-/* color: rgb(255, 122, 26) → */ color: rgb(255, 255, 255);
-/* box-shadow: rgba(0, 0, 0, 0.5) 0px 4px 20px 0px → */ box-shadow: rgba(255, 122, 26, 0.65) 0px 0px 25px 0px, rgba(255, 122, 26, 0.3) 0px 8px 30px 0px;
-/* transform: none → */ transform: matrix(1, 0, 0, 1, 0, -2);
-/* outline: rgb(255, 122, 26) none 3px → */ outline: rgb(255, 255, 255) none 3px;
-/* outline-color: rgb(255, 122, 26) → */ outline-color: rgb(255, 255, 255);
+/* color: rgb(255, 122, 26) → */
+color: rgb(255, 255, 255);
+/* box-shadow: rgba(0, 0, 0, 0.5) 0px 4px 20px 0px → */
+box-shadow:
+  rgba(255, 122, 26, 0.65) 0px 0px 25px 0px,
+  rgba(255, 122, 26, 0.3) 0px 8px 30px 0px;
+/* transform: none → */
+transform: matrix(1, 0, 0, 1, 0, -2);
+/* outline: rgb(255, 122, 26) none 3px → */
+outline: rgb(255, 255, 255) none 3px;
+/* outline-color: rgb(255, 122, 26) → */
+outline-color: rgb(255, 255, 255);
 ```
 
 **On focus:**
 
 ```css
-/* outline: rgb(255, 122, 26) none 3px → */ outline: rgb(16, 16, 16) auto 1px;
-/* outline-color: rgb(255, 122, 26) → */ outline-color: rgb(16, 16, 16);
+/* outline: rgb(255, 122, 26) none 3px → */
+outline: rgb(16, 16, 16) auto 1px;
+/* outline-color: rgb(255, 122, 26) → */
+outline-color: rgb(16, 16, 16);
 ```
 
 **Transition:** `color 0.35s, border-color 0.35s, box-shadow 0.35s, transform 0.25s`
@@ -3927,17 +4023,23 @@ Apply these to all interactive elements. Never invent new durations or easings.
 **On hover:**
 
 ```css
-/* color: rgb(13, 110, 253) → */ color: rgb(10, 88, 202);
-/* border-color: rgb(13, 110, 253) → */ border-color: rgb(10, 88, 202);
-/* outline: rgb(13, 110, 253) none 3px → */ outline: rgb(10, 88, 202) none 3px;
-/* outline-color: rgb(13, 110, 253) → */ outline-color: rgb(10, 88, 202);
+/* color: rgb(13, 110, 253) → */
+color: rgb(10, 88, 202);
+/* border-color: rgb(13, 110, 253) → */
+border-color: rgb(10, 88, 202);
+/* outline: rgb(13, 110, 253) none 3px → */
+outline: rgb(10, 88, 202) none 3px;
+/* outline-color: rgb(13, 110, 253) → */
+outline-color: rgb(10, 88, 202);
 ```
 
 **On focus:**
 
 ```css
-/* outline: rgb(13, 110, 253) none 3px → */ outline: rgb(16, 16, 16) auto 1px;
-/* outline-color: rgb(13, 110, 253) → */ outline-color: rgb(16, 16, 16);
+/* outline: rgb(13, 110, 253) none 3px → */
+outline: rgb(16, 16, 16) auto 1px;
+/* outline-color: rgb(13, 110, 253) → */
+outline-color: rgb(16, 16, 16);
 ```
 
 **Transition:** `all`
@@ -3975,6 +4077,7 @@ _No visible style changes detected for this element._
 ## Design Tokens — JSON Files
 
 ### tokens/colors.json
+
 ```json
 {
   "$schema": "https://design-tokens.github.io/community-group/format/",
@@ -4088,6 +4191,7 @@ _No visible style changes detected for this element._
 ```
 
 ### tokens/spacing.json
+
 ```json
 {
   "base": {
@@ -4212,12 +4316,10 @@ _No visible style changes detected for this element._
 ```
 
 ### tokens/typography.json
+
 ```json
 {
-  "families": [
-    "GTA6-Heading",
-    "bootstrap-icons"
-  ],
+  "families": ["GTA6-Heading", "bootstrap-icons"],
   "scale": {
     "heading-1": {
       "fontFamily": "GTA6-Heading",
@@ -4489,7 +4591,7 @@ Use these local font files in `@font-face` declarations instead of fetching from
 
 ### Scroll Journey (screens/scroll/)
 
-*Cinematic scroll states — page visual at each scroll depth*
+_Cinematic scroll states — page visual at each scroll depth_
 
 ![scroll-000.png](screens/scroll/scroll-000.png)
 
@@ -4507,7 +4609,7 @@ Use these local font files in `@font-face` declarations instead of fetching from
 
 ### Full Page Screenshots (screens/pages/)
 
-*Full-page screenshots of each crawled URL*
+_Full-page screenshots of each crawled URL_
 
 ![esummit-acco.png](screens/pages/esummit-acco.png)
 
@@ -4521,7 +4623,7 @@ Use these local font files in `@font-face` declarations instead of fetching from
 
 ### Section Clips (screens/sections/)
 
-*Clipped individual sections and components*
+_Clipped individual sections and components_
 
 ![esummit-acco-section-1.png](screens/sections/esummit-acco-section-1.png)
 
@@ -4535,7 +4637,7 @@ Use these local font files in `@font-face` declarations instead of fetching from
 
 ### Interaction States (screens/states/)
 
-*Hover, focus, and active state captures*
+_Hover, focus, and active state captures_
 
 ![button-1-default.png](screens/states/button-1-default.png)
 
@@ -4569,37 +4671,36 @@ Use these local font files in `@font-face` declarations instead of fetching from
 
 > Shows the cinematic state at each point of the page
 
-| Scroll | Y Position | File |
-|--------|-----------|------|
-| 0% | 0px | `screens/scroll/scroll-000.png` |
-| 17% | 0px | `screens/scroll/scroll-017.png` |
-| 33% | 0px | `screens/scroll/scroll-033.png` |
-| 50% | 0px | `screens/scroll/scroll-050.png` |
-| 67% | 0px | `screens/scroll/scroll-067.png` |
-| 83% | 0px | `screens/scroll/scroll-083.png` |
-| 100% | 0px | `screens/scroll/scroll-100.png` |
+| Scroll | Y Position | File                            |
+| ------ | ---------- | ------------------------------- |
+| 0%     | 0px        | `screens/scroll/scroll-000.png` |
+| 17%    | 0px        | `screens/scroll/scroll-017.png` |
+| 33%    | 0px        | `screens/scroll/scroll-033.png` |
+| 50%    | 0px        | `screens/scroll/scroll-050.png` |
+| 67%    | 0px        | `screens/scroll/scroll-067.png` |
+| 83%    | 0px        | `screens/scroll/scroll-083.png` |
+| 100%   | 0px        | `screens/scroll/scroll-100.png` |
 
 ## Pages
 
-| Page | URL | File |
-|------|-----|------|
-| E-Summit 2026 | E-Cell IIT Bombay | `https://www.ecell.in/esummit/` | `screens/pages/esummit.png` |
-| E-Cell - Creating Job Creators | `https://www.ecell.in/` | `screens/pages/home.png` |
-| Events | E-Summit 2026 | E-Cell IIT Bombay | `https://www.ecell.in/esummit/events` | `screens/pages/esummit-events.png` |
-| Accommodation | E-Summit 2026 | E-Cell IIT Bombay | `https://www.ecell.in/esummit/acco` | `screens/pages/esummit-acco.png` |
-| Sponsors | E-Summit 2026 | E-Cell IIT Bombay | `https://www.ecell.in/esummit/sponsors` | `screens/pages/esummit-sponsors.png` |
+| Page                           | URL                     | File                            |
+| ------------------------------ | ----------------------- | ------------------------------- |
+| E-Summit 2026                  | E-Cell IIT Bombay       | `https://www.ecell.in/esummit/` | `screens/pages/esummit.png`             |
+| E-Cell - Creating Job Creators | `https://www.ecell.in/` | `screens/pages/home.png`        |
+| Events                         | E-Summit 2026           | E-Cell IIT Bombay               | `https://www.ecell.in/esummit/events`   | `screens/pages/esummit-events.png`   |
+| Accommodation                  | E-Summit 2026           | E-Cell IIT Bombay               | `https://www.ecell.in/esummit/acco`     | `screens/pages/esummit-acco.png`     |
+| Sponsors                       | E-Summit 2026           | E-Cell IIT Bombay               | `https://www.ecell.in/esummit/sponsors` | `screens/pages/esummit-sponsors.png` |
 
 ## Sections
 
-| Page | Section | File |
-|------|---------|------|
-| esummit | #2 (header) | `screens/sections/esummit-section-2.png` |
-| home | #3 ([class*="hero"]) | `screens/sections/home-section-3.png` |
-| esummit-events | #1 (section) | `screens/sections/esummit-events-section-1.png` |
-| esummit-acco | #1 (section) | `screens/sections/esummit-acco-section-1.png` |
-| esummit-acco | #5 ([class*="hero"]) | `screens/sections/esummit-acco-section-5.png` |
+| Page           | Section              | File                                            |
+| -------------- | -------------------- | ----------------------------------------------- |
+| esummit        | #2 (header)          | `screens/sections/esummit-section-2.png`        |
+| home           | #3 ([class*="hero"]) | `screens/sections/home-section-3.png`           |
+| esummit-events | #1 (section)         | `screens/sections/esummit-events-section-1.png` |
+| esummit-acco   | #1 (section)         | `screens/sections/esummit-acco-section-1.png`   |
+| esummit-acco   | #5 ([class*="hero"]) | `screens/sections/esummit-acco-section-5.png`   |
 
 ## Homepage Screenshots (screenshots/)
 
 ![homepage.png](screenshots/homepage.png)
-

@@ -56,6 +56,7 @@ export const HostPayoutsModal: React.FC<HostPayoutsModalProps> = ({
     if (isOpen) {
       loadData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
   const loadData = () => {

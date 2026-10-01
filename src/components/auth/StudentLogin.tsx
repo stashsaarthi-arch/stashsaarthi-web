@@ -37,18 +37,23 @@ export function StudentLogin() {
       setError(error.message);
       setLoading(false);
     } else {
-      router.navigate({ to: '/dashboard' });
+      router.navigate({ to: "/dashboard" });
     }
   };
 
   return (
     <div className="w-full h-full flex items-center justify-center bg-transparent relative z-10 p-4">
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-md bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl"
       >
-        <h2 className="text-3xl font-bold text-student-primary mb-6 text-center" style={{ fontFamily: 'GTA6-Heading' }}>Student Portal</h2>
+        <h2
+          className="text-3xl font-bold text-student-primary mb-6 text-center"
+          style={{ fontFamily: "GTA6-Heading" }}
+        >
+          Student Portal
+        </h2>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div>
             <label className="block text-sm font-medium text-white/80 mb-2">Email</label>
@@ -74,7 +79,11 @@ export function StudentLogin() {
             )}
           </div>
 
-          {error && <div className="text-red-400 text-sm text-center bg-red-400/10 p-3 rounded-lg">{error}</div>}
+          {error && (
+            <div className="text-red-400 text-sm text-center bg-red-400/10 p-3 rounded-lg">
+              {error}
+            </div>
+          )}
 
           <button
             type="submit"

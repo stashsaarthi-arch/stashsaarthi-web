@@ -1,26 +1,26 @@
 "use client";
 
-import React from 'react';
-import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
-import { useRef, useEffect, useState } from 'react';
+import React from "react";
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
+import { useRef, useEffect, useState } from "react";
 
 // Elite Spring Physics configuration (NO linear easing)
 const ELITE_SPRING = { stiffness: 300, damping: 20, mass: 0.8 };
 
 // Cinematic Magnetic Button
-export const MagneticButton = ({ 
-  children, 
-  className = '', 
-  onClick 
-}: { 
-  children: React.ReactNode; 
-  className?: string; 
-  onClick?: () => void; 
+export const MagneticButton = ({
+  children,
+  className = "",
+  onClick,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  onClick?: () => void;
 }) => {
   const ref = useRef<HTMLButtonElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-  
+
   const springX = useSpring(x, ELITE_SPRING);
   const springY = useSpring(y, ELITE_SPRING);
 
@@ -66,7 +66,7 @@ const PlasmaStreaks = () => {
       <div className="perspective-grid" />
       <div className="cinematic-noise" />
       {[...Array(15)].map((_, i) => (
-        <div 
+        <div
           key={`streak-${i}`}
           className="plasma-streak"
           style={{
@@ -78,7 +78,7 @@ const PlasmaStreaks = () => {
         />
       ))}
       {[...Array(20)].map((_, i) => (
-        <div 
+        <div
           key={`ember-${i}`}
           className="ember"
           style={{
@@ -87,7 +87,7 @@ const PlasmaStreaks = () => {
             height: `${Math.random() * 6 + 2}px`,
             animationDuration: `${Math.random() * 15 + 10}s`,
             animationDelay: `${Math.random() * 5}s`,
-            opacity: Math.random() * 0.6 + 0.2
+            opacity: Math.random() * 0.6 + 0.2,
           }}
         />
       ))}
@@ -95,9 +95,9 @@ const PlasmaStreaks = () => {
   );
 };
 
-const FeatureCard = ({ title, desc, icon }: { title: string, desc: string, icon: string }) => {
+const FeatureCard = ({ title, desc, icon }: { title: string; desc: string; icon: string }) => {
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, y: 60, scale: 0.95 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true, margin: "-50px" }}
@@ -110,8 +110,12 @@ const FeatureCard = ({ title, desc, icon }: { title: string, desc: string, icon:
       <div className="relative z-10 text-4xl filter grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 will-change-transform [transform:translateZ(0)]">
         {icon}
       </div>
-      <h3 className="relative z-10 text-2xl font-bold text-white tracking-tight will-change-transform [transform:translateZ(0)]">{title}</h3>
-      <p className="relative z-10 text-zinc-500 font-medium leading-relaxed will-change-transform [transform:translateZ(0)]">{desc}</p>
+      <h3 className="relative z-10 text-2xl font-bold text-white tracking-tight will-change-transform [transform:translateZ(0)]">
+        {title}
+      </h3>
+      <p className="relative z-10 text-zinc-500 font-medium leading-relaxed will-change-transform [transform:translateZ(0)]">
+        {desc}
+      </p>
     </motion.div>
   );
 };
@@ -131,9 +135,11 @@ export const PremiumHero = ({ role, onBook, onRefer }: any) => {
   const heroRotateX = useTransform(scrollYProgress, [0, 0.7], [0, -10]);
 
   return (
-    <div ref={containerRef} className="group relative min-h-screen w-full max-w-full bg-transparent overflow-hidden flex flex-col items-center justify-center px-3 sm:px-6 gpu-accelerated py-20 md:py-40 md:[perspective:1200px]">
-      
-      <motion.div 
+    <div
+      ref={containerRef}
+      className="group relative min-h-screen w-full max-w-full bg-transparent overflow-hidden flex flex-col items-center justify-center px-3 sm:px-6 gpu-accelerated py-20 md:py-40 md:[perspective:1200px]"
+    >
+      <motion.div
         style={{
           scale: heroScale,
           opacity: heroOpacity,
@@ -151,7 +157,7 @@ export const PremiumHero = ({ role, onBook, onRefer }: any) => {
         >
           <span className="w-2.5 h-2.5 rounded-full bg-[#10B981] shadow-[0_0_15px_#10B981] animate-pulse" />
           <span className="text-xs md:text-sm font-bold text-[#00F5A0] tracking-wider sm:tracking-[0.3em] uppercase">
-            {role === 'student' ? 'StashSaarthi Engine v2' : 'Host Matrix v2'}
+            {role === "student" ? "StashSaarthi Engine v2" : "Host Matrix v2"}
           </span>
         </motion.div>
 
@@ -161,9 +167,9 @@ export const PremiumHero = ({ role, onBook, onRefer }: any) => {
           transition={{ duration: 1, type: "spring", stiffness: 100, damping: 20 }}
           className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white drop-shadow-[0_0_35px_rgba(16,185,129,0.4)] uppercase pb-4 sm:pb-6"
         >
-          {role === 'student' ? 'STASH' : 'SPACE'} <br />
+          {role === "student" ? "STASH" : "SPACE"} <br />
           <span className="inline-block mt-2 sm:mt-4 md:mt-0 will-change-transform [transform:translateZ(0)]">
-            {role === 'student' ? 'SAARTHI' : 'HOSTING'}
+            {role === "student" ? "SAARTHI" : "HOSTING"}
           </span>
         </motion.h1>
 
@@ -173,9 +179,9 @@ export const PremiumHero = ({ role, onBook, onRefer }: any) => {
           transition={{ duration: 1, type: "spring", stiffness: 100, damping: 20, delay: 0.2 }}
           className="max-w-2xl mt-6 sm:mt-12 text-sm sm:text-lg md:text-xl text-zinc-300 font-medium tracking-normal sm:tracking-widest leading-relaxed gpu-accelerated px-2 sm:px-4 drop-shadow-md will-change-transform [transform:translateZ(0)]"
         >
-          {role === 'student' 
-            ? 'Zero-brokerage inventory engineered for intergenerational friction-less living.'
-            : 'Secure, zero-hassle passive income engineered for premium hosts.'}
+          {role === "student"
+            ? "Zero-brokerage inventory engineered for intergenerational friction-less living."
+            : "Secure, zero-hassle passive income engineered for premium hosts."}
         </motion.p>
 
         <motion.div
@@ -184,38 +190,50 @@ export const PremiumHero = ({ role, onBook, onRefer }: any) => {
           transition={{ duration: 1, type: "spring", stiffness: 100, damping: 20, delay: 0.4 }}
           className="flex flex-col sm:flex-row items-center justify-center w-full max-w-md sm:max-w-none gap-3 sm:gap-6 mt-8 sm:mt-16 px-2 sm:px-4 gpu-accelerated will-change-transform [transform:translateZ(0)]"
         >
-          <MagneticButton 
-            onClick={() => onBook({ service: role === 'student' ? 'stash' : 'spaces' })}
+          <MagneticButton
+            onClick={() => onBook({ service: role === "student" ? "stash" : "spaces" })}
             className="w-full sm:w-auto px-6 sm:px-14 py-3.5 sm:py-6 rounded-xl text-sm sm:text-xl uppercase tracking-wider sm:tracking-[0.2em] relative overflow-hidden bg-emerald-600 text-white font-bold border border-emerald-400/50 hover:shadow-[0_0_40px_rgba(16,185,129,0.5)] transition-shadow duration-300"
           >
-            {role === 'student' ? 'ACCESS VAULT' : 'INITIATE LISTING'}
+            {role === "student" ? "ACCESS VAULT" : "INITIATE LISTING"}
           </MagneticButton>
-          
-          <MagneticButton 
+
+          <MagneticButton
             onClick={onRefer}
             className="w-full sm:w-auto px-6 sm:px-14 py-3.5 sm:py-6 rounded-xl sm:rounded-none bg-black border border-white/20 text-white font-bold text-sm sm:text-xl uppercase tracking-wider sm:tracking-[0.2em] hover:bg-white/10 hover:border-white/50 shadow-[0_0_20px_rgba(255,255,255,0.05)]"
           >
-            {role === 'student' ? 'REFERRAL' : 'PRICING'}
+            {role === "student" ? "REFERRAL" : "PRICING"}
           </MagneticButton>
         </motion.div>
       </motion.div>
 
       {/* Top-Glow Cards Matrix with strict E-Summit grid architecture */}
       <div className="z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-14 mt-20 sm:mt-32 py-16 md:py-40">
-        <FeatureCard 
-          icon={role === 'student' ? "🔒" : "💰"}
-          title={role === 'student' ? "Zero Friction" : "High Yield"}
-          desc={role === 'student' ? "Military-grade inventory management with absolute zero brokerage fees." : "Earn ₹3,000–₹12,000 monthly passive income with zero capital expenditure."}
+        <FeatureCard
+          icon={role === "student" ? "🔒" : "💰"}
+          title={role === "student" ? "Zero Friction" : "High Yield"}
+          desc={
+            role === "student"
+              ? "Military-grade inventory management with absolute zero brokerage fees."
+              : "Earn ₹3,000–₹12,000 monthly passive income with zero capital expenditure."
+          }
         />
-        <FeatureCard 
-          icon={role === 'student' ? "⚡" : "🛡️"}
-          title={role === 'student' ? "Spatial Control" : "Zero Intrusion"}
-          desc={role === 'student' ? "Manage your dead-rent or empty spaces with pure geometric precision." : "100% control over house norms with guaranteed 24-hour SLA relocation if violated."}
+        <FeatureCard
+          icon={role === "student" ? "⚡" : "🛡️"}
+          title={role === "student" ? "Spatial Control" : "Zero Intrusion"}
+          desc={
+            role === "student"
+              ? "Manage your dead-rent or empty spaces with pure geometric precision."
+              : "100% control over house norms with guaranteed 24-hour SLA relocation if violated."
+          }
         />
-        <FeatureCard 
-          icon={role === 'student' ? "💎" : "🤝"}
-          title={role === 'student' ? "Premium Matrix" : "Verified Tenants"}
-          desc={role === 'student' ? "Enter the exclusive host network. High yield, zero operational drag." : "3-tier background verification. We only place respectful, disciplined students."}
+        <FeatureCard
+          icon={role === "student" ? "💎" : "🤝"}
+          title={role === "student" ? "Premium Matrix" : "Verified Tenants"}
+          desc={
+            role === "student"
+              ? "Enter the exclusive host network. High yield, zero operational drag."
+              : "3-tier background verification. We only place respectful, disciplined students."
+          }
         />
       </div>
     </div>

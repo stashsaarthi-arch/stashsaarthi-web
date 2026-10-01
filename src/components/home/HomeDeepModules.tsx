@@ -45,7 +45,7 @@ interface HomeDeepModulesProps {
 export function HomeDeepModules({ role, onBook, onRefer }: HomeDeepModulesProps) {
   return (
     <div className="hidden md:block content-visibility-auto optimize-render">
-      {role === 'student' && (
+      {role === "student" && (
         <>
           <FadeUp>
             <ErrorBoundary sectionName="Why StashSaarthi vs Traditional PGs">

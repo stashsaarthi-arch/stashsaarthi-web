@@ -235,7 +235,8 @@ html.light {
     border-color: var(--color-border);
   }
 
-  html, body {
+  html,
+  body {
     background-color: transparent !important;
     background: transparent !important;
     color: var(--color-foreground);
@@ -1099,4 +1100,3 @@ section,
   filter: drop-shadow(0 0 10px rgba(0, 245, 160, 0.8));
   pointer-events: none;
 }
-

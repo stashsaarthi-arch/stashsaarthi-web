@@ -281,7 +281,10 @@ export function Rooms({ onList, onBook }: { onList: () => void; onBook?: OpenBoo
   };
 
   return (
-    <div id="rooms" className="relative mx-auto max-w-6xl px-2 py-2 scroll-mt-20 w-full max-w-full overflow-hidden">
+    <div
+      id="rooms"
+      className="relative mx-auto max-w-6xl px-2 py-2 scroll-mt-20 w-full max-w-full overflow-hidden"
+    >
       {/* ── High-Contrast Action Banner: Find Broker-Free Rooms & Instant Booking ── */}
       <div className="flex flex-wrap items-center justify-between gap-3 mb-3.5 p-3 rounded-2xl bg-slate-900/90 border border-emerald-500/30 backdrop-blur-md shadow-xl">
         <div className="flex items-center gap-2.5">
@@ -369,13 +372,13 @@ export function Rooms({ onList, onBook }: { onList: () => void; onBook?: OpenBoo
                 delay={i * 0.05}
                 className="snap-center min-w-[85vw] max-w-[88vw] sm:min-w-0 sm:max-w-none shrink-0 sm:shrink"
               >
-                <motion.article 
+                <motion.article
                   whileHover={{ y: -5 }}
                   className="relative overflow-hidden bg-[#0a0a0a]/40 backdrop-blur-md border border-white/10 rounded-3xl group transition-colors duration-300 hover:bg-[#0a0a0a]/60 flex flex-col p-3 w-full h-full"
                 >
                   <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-16 bg-emerald-500/10 blur-[30px] rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
-                  
+
                   <div className="relative z-10 w-full h-36 rounded-xl overflow-hidden mb-2.5 border border-white/10 bg-slate-900">
                     <RoomImage
                       src={l.image || FALLBACK_IMAGES[i % 3] || DEFAULT_ROOM_SVG}

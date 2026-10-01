@@ -43,7 +43,8 @@ export function runAndroidGoPerformanceAudit(): AndroidGoPerformanceAuditReport 
     typeof window !== "undefined" && ("ontouchstart" in window || navigator.maxTouchPoints > 0);
   const root = typeof document !== "undefined" ? document.documentElement : null;
 
-  const isGoModeActive = root?.classList.contains("android-go-mode") || root?.getAttribute("data-android-go") === "true";
+  const isGoModeActive =
+    root?.classList.contains("android-go-mode") || root?.getAttribute("data-android-go") === "true";
 
   const assertions: ComponentPerfAssertion[] = [];
 
@@ -58,7 +59,7 @@ export function runAndroidGoPerformanceAudit(): AndroidGoPerformanceAuditReport 
     passed: memPassed,
     score: memPassed ? (isMemoryConstrained ? 95 : 100) : 40,
     details: memoryGb
-      ? `Device RAM: ${memoryGb} GB. ${isGoModeActive ? 'Memory safeguards active to prevent out-of-memory webview crashes.' : 'Memory safeguards inactive (sufficient RAM detected).'}`
+      ? `Device RAM: ${memoryGb} GB. ${isGoModeActive ? "Memory safeguards active to prevent out-of-memory webview crashes." : "Memory safeguards inactive (sufficient RAM detected)."}`
       : "Standard memory API query completed. Browser memory allocation within safe limits.",
   });
 
@@ -82,7 +83,7 @@ export function runAndroidGoPerformanceAudit(): AndroidGoPerformanceAuditReport 
     root?.getAttribute("data-webgl-supported") === "false" ||
     root?.classList.contains("legacy-android-fallback") ||
     isGoModeActive;
-    
+
   const graphicsPassed = diag.isAndroidGo ? isWebGLDisabled : true;
   assertions.push({
     id: "webgl-2d-fallback-guard",
@@ -185,7 +186,7 @@ export async function measureAndroidGoFpsBenchmark(
       for (let i = 0; i < 25000; i++) {
         calc += Math.sin(i) * Math.cos(i);
       }
-      
+
       // 2. DOM/Layout Thrashing Stress (triggers forced reflow)
       container.innerHTML = `<div style="width:${(Math.random() * 100).toFixed(2)}px">Stress ${calc.toFixed(2)}</div>`;
       const dummyRead = container.offsetWidth; // Force layout calculation
@@ -195,7 +196,7 @@ export async function measureAndroidGoFpsBenchmark(
       } else {
         // Cleanup
         document.body.removeChild(container);
-        
+
         const totalFrames = frameTimes.length;
         const avgFps = Math.round((totalFrames * 1000) / (now - startTime));
         const maxDelta = Math.max(...frameTimes, 16.6);

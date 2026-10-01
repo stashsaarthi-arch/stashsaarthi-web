@@ -318,7 +318,9 @@ const MealTierCard: React.FC<MealTierCardProps> = ({ tier, isSelected, tierCost,
         </div>
       )}
 
-      <p className="relative z-10 text-xs text-slate-400 leading-relaxed font-medium">{tier.description}</p>
+      <p className="relative z-10 text-xs text-slate-400 leading-relaxed font-medium">
+        {tier.description}
+      </p>
     </motion.div>
   );
 };

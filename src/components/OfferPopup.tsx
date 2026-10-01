@@ -42,16 +42,16 @@ export function OfferPopup({ onClaimDiscount }: OfferPopupProps) {
 
     // Attach exit intent
     window.addEventListener("mouseout", handleMouseLeave);
-    
+
     // Attach activity listeners for idle timeout
     const events = ["touchstart", "scroll", "mousemove", "keydown"];
-    events.forEach(evt => window.addEventListener(evt, resetIdle, { passive: true }));
-    
+    events.forEach((evt) => window.addEventListener(evt, resetIdle, { passive: true }));
+
     resetIdle(); // Initialize the timer
 
     return () => {
       window.removeEventListener("mouseout", handleMouseLeave);
-      events.forEach(evt => window.removeEventListener(evt, resetIdle));
+      events.forEach((evt) => window.removeEventListener(evt, resetIdle));
       clearTimeout(idleTimer);
     };
   }, []);
@@ -86,22 +86,22 @@ export function OfferPopup({ onClaimDiscount }: OfferPopupProps) {
   return createPortal(
     <AnimatePresence>
       {isOpen && (
-        <motion.div 
+        <motion.div
           key="offer-popup"
           className="fixed inset-0 z-[99999] flex items-center justify-center p-4 sm:p-6"
         >
           {/* Glass Backdrop */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="absolute inset-0 bg-black/50 backdrop-blur-md" 
-            onClick={handleClose} 
+            className="absolute inset-0 bg-black/50 backdrop-blur-md"
+            onClick={handleClose}
           />
 
           {/* iOS Liquid Glass Modal Box */}
-          <motion.div 
+          <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
@@ -134,21 +134,30 @@ export function OfferPopup({ onClaimDiscount }: OfferPopupProps) {
                 Wait! Save ₹50 on Your Vacation Stash 🧳
               </h2>
               <p className="text-sm text-white/80 font-medium">
-                Why pay thousands in dead-rent? Lock in micro-storage or zero-brokerage rooms today with an instant discount.
+                Why pay thousands in dead-rent? Lock in micro-storage or zero-brokerage rooms today
+                with an instant discount.
               </p>
             </div>
 
             {/* Coupon Box */}
             <div className="flex items-center justify-between bg-black/30 border border-white/10 rounded-2xl p-4 mb-7 shadow-inner backdrop-blur-lg">
               <div>
-                <div className="text-xs text-white/60 mb-1 font-semibold tracking-widest uppercase">Coupon Code</div>
-                <div className="text-xl sm:text-2xl font-black text-emerald-400 tracking-wider font-mono drop-shadow-[0_0_10px_rgba(52,211,153,0.3)]">STASH50</div>
+                <div className="text-xs text-white/60 mb-1 font-semibold tracking-widest uppercase">
+                  Coupon Code
+                </div>
+                <div className="text-xl sm:text-2xl font-black text-emerald-400 tracking-wider font-mono drop-shadow-[0_0_10px_rgba(52,211,153,0.3)]">
+                  STASH50
+                </div>
               </div>
               <button
                 onClick={handleCopy}
                 className="px-5 py-3 rounded-xl bg-white/10 border border-white/20 text-white hover:bg-white/20 active:scale-95 transition-all text-sm font-bold flex items-center gap-2"
               >
-                {copied ? <CheckCircle2 className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+                {copied ? (
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                ) : (
+                  <Copy className="w-4 h-4" />
+                )}
                 {copied ? "Copied!" : "Copy"}
               </button>
             </div>
@@ -198,6 +207,6 @@ export function OfferPopup({ onClaimDiscount }: OfferPopupProps) {
         </motion.div>
       )}
     </AnimatePresence>,
-    document.body
+    document.body,
   );
 }

@@ -76,7 +76,10 @@ export async function handleUpdateKyc(request: Request): Promise<Response> {
       !(backImageFile instanceof Blob)
     ) {
       return new Response(
-        JSON.stringify({ success: false, error: "Missing or invalid required fields (must be files)" }),
+        JSON.stringify({
+          success: false,
+          error: "Missing or invalid required fields (must be files)",
+        }),
         { status: 400, headers: { "Content-Type": "application/json" } },
       );
     }

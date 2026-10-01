@@ -76,7 +76,7 @@ export const AnimatedContent = React.memo(function AnimatedContent({
       transition={transition}
       className={`gpu-layer ${className}`}
       style={style}
-      {...rest as any}
+      {...(rest as any)}
     >
       {children}
     </motion.div>

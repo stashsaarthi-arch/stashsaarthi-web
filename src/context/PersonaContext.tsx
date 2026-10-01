@@ -22,7 +22,9 @@ export function PersonaProvider({ children }: { children: React.ReactNode }) {
       try {
         const saved = sessionStorage.getItem("ss-role") as Role;
         if (saved === "student" || saved === "host") return saved;
-      } catch {}
+      } catch (e) {
+        console.debug("Failed to read ss-role from sessionStorage", e);
+      }
     }
     return "student";
   });

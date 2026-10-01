@@ -24,22 +24,26 @@ export function EsummitPremiumCard() {
         </div>
 
         <div className="relative z-10 flex flex-col md:flex-row gap-12 items-center">
-          
           {/* Content Left */}
           <div className="flex-1 space-y-6">
             <div className="inline-flex items-center rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
               <span className="flex h-2 w-2 rounded-full bg-primary mr-2 animate-pulse" />
               E-Summit Premium Feature
             </div>
-            
+
             <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight text-foreground leading-tight">
-              Unlock the True Potential of <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan to-emerald">Micro-Storage</span>
+              Unlock the True Potential of{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan to-emerald">
+                Micro-Storage
+              </span>
             </h2>
-            
+
             <p className="font-body text-lg text-foreground/80 leading-relaxed">
-              Experience the pinnacle of intergenerational living and seamless luggage management. Engineered with radical transparency, real-time custody tracking, and a zero-brokerage philosophy.
+              Experience the pinnacle of intergenerational living and seamless luggage management.
+              Engineered with radical transparency, real-time custody tracking, and a zero-brokerage
+              philosophy.
             </p>
-            
+
             <div className="pt-4 flex flex-col sm:flex-row gap-4">
               <button className="rounded-md bg-primary px-6 py-3 font-body font-semibold text-primary-foreground shadow-lg hover:bg-primary/90 transition-all active:scale-95">
                 Explore Premium
@@ -54,14 +58,15 @@ export function EsummitPremiumCard() {
           <div className="flex-1 w-full relative">
             <div className="aspect-square md:aspect-[4/3] rounded-xl bg-card border border-border flex items-center justify-center p-6 shadow-inner overflow-hidden relative">
               {/* Grid Background inside the card */}
-              <div 
+              <div
                 className="absolute inset-0 opacity-10"
                 style={{
-                  backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 1px, transparent 1px)',
-                  backgroundSize: '20px 20px',
+                  backgroundImage:
+                    "linear-gradient(rgba(255, 255, 255, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 1px, transparent 1px)",
+                  backgroundSize: "20px 20px",
                 }}
               />
-              
+
               <div className="relative z-10 text-center space-y-4">
                 <div className="text-5xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-br from-cyan to-amber">
                   ₹0
@@ -70,16 +75,13 @@ export function EsummitPremiumCard() {
                   Hidden Fees
                 </div>
                 <div className="h-px w-12 bg-border mx-auto my-4" />
-                <div className="text-3xl font-display font-bold text-foreground">
-                  100%
-                </div>
+                <div className="text-3xl font-display font-bold text-foreground">100%</div>
                 <div className="font-body text-sm font-medium text-foreground/70 uppercase tracking-widest">
                   Transparency
                 </div>
               </div>
             </div>
           </div>
-          
         </div>
       </motion.div>
     </section>

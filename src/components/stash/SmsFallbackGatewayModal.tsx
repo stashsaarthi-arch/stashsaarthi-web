@@ -58,6 +58,7 @@ export const SmsFallbackGatewayModal: React.FC<SmsFallbackGatewayModalProps> = (
       handleGenerate();
       setLogs(getSmsFallbackLogs());
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
   const handleGenerate = () => {

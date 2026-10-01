@@ -25,7 +25,10 @@ type AuthValue = {
   user: AuthUser | null;
   loading: boolean;
   authenticating: boolean;
-  loginWithGoogle: (response: CredentialResponse, defaultRole?: "student" | "host") => Promise<void>;
+  loginWithGoogle: (
+    response: CredentialResponse,
+    defaultRole?: "student" | "host",
+  ) => Promise<void>;
   loginWithProfile: (profile: AuthUser) => void;
   updateUser: (updates: Partial<AuthUser>) => void;
   logout: () => void;
@@ -38,10 +41,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [userLocal, setUserLocal] = useState<AuthUser | null>(null);
   const [loadingLocal, setLoadingLocal] = useState(true);
   const [authenticating, setAuthenticating] = useState(false);
-  
+
   // Single source of truth from Supabase
-  const supabaseUser = useAuthStore(state => state.user);
-  const isLoadingSupabase = useAuthStore(state => state.isLoading);
+  const supabaseUser = useAuthStore((state) => state.user);
+  const isLoadingSupabase = useAuthStore((state) => state.isLoading);
 
   useEffect(() => {
     // Load local override for mock users from localStorage
@@ -62,11 +65,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       return {
         id: supabaseUser.id,
         email: supabaseUser.email || "",
-        name: supabaseUser.user_metadata?.['full_name'] || supabaseUser.email?.split("@")[0] || "User",
-        avatar: supabaseUser.user_metadata?.['avatar_url'] || "",
-        role: supabaseUser.user_metadata?.['role'] || "student",
+        name:
+          supabaseUser.user_metadata?.["full_name"] || supabaseUser.email?.split("@")[0] || "User",
+        avatar: supabaseUser.user_metadata?.["avatar_url"] || "",
+        role: supabaseUser.user_metadata?.["role"] || "student",
         verified: !!supabaseUser.email_confirmed_at,
-        provider: supabaseUser.app_metadata?.provider === 'google' ? 'google' : 'local'
+        provider: supabaseUser.app_metadata?.provider === "google" ? "google" : "local",
       };
     }
     return userLocal;
@@ -84,7 +88,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
         // Establish real Supabase session using the Google ID Token
         const { data, error } = await supabase.auth.signInWithIdToken({
-          provider: 'google',
+          provider: "google",
           token: response.credential,
         });
 
@@ -113,7 +117,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           picture: decoded.picture || "",
         });
 
-        const firstName = (decoded.name || userEmail.split("@")[0] || "User").split(" ")[0] || "User";
+        const firstName =
+          (decoded.name || userEmail.split("@")[0] || "User").split(" ")[0] || "User";
         toast.success(`Welcome back, ${firstName}!`, {
           description: `Logged in as ${defaultRole === "student" ? "Student" : "High-Margin ROI Host"}`,
         });
@@ -151,22 +156,25 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     toast.success("Signed out. See you soon!");
   }, []);
 
-  const updateUser = useCallback(async (updates: Partial<AuthUser>) => {
-    setUserLocal((prev) => {
-      if (!prev) return null;
-      const updatedUser = { ...prev, ...updates };
-      localStorage.setItem("stash_user_session", JSON.stringify(updatedUser));
-      window.dispatchEvent(
-        new CustomEvent("stashsaarthi:profile-updated", { detail: updatedUser }),
-      );
-      return updatedUser;
-    });
-    
-    // Also update Supabase metadata if logged in via Supabase
-    if (supabaseUser) {
-       await supabase.auth.updateUser({ data: updates });
-    }
-  }, [supabaseUser]);
+  const updateUser = useCallback(
+    async (updates: Partial<AuthUser>) => {
+      setUserLocal((prev) => {
+        if (!prev) return null;
+        const updatedUser = { ...prev, ...updates };
+        localStorage.setItem("stash_user_session", JSON.stringify(updatedUser));
+        window.dispatchEvent(
+          new CustomEvent("stashsaarthi:profile-updated", { detail: updatedUser }),
+        );
+        return updatedUser;
+      });
+
+      // Also update Supabase metadata if logged in via Supabase
+      if (supabaseUser) {
+        await supabase.auth.updateUser({ data: updates });
+      }
+    },
+    [supabaseUser],
+  );
 
   const value = useMemo(
     () => ({

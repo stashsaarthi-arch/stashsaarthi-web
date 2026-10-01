@@ -4,10 +4,10 @@
 
 ## Coverage
 
-| Component Type | Count | States Captured |
-|----------------|-------|----------------|
-| Button | 3 | default, hover, focus |
-| Link | 3 | default, hover, focus |
+| Component Type | Count | States Captured       |
+| -------------- | ----- | --------------------- |
+| Button         | 3     | default, hover, focus |
+| Link           | 3     | default, hover, focus |
 
 ## Transition System
 
@@ -16,7 +16,11 @@ These transition declarations were extracted from interactive elements:
 ```css
 transition: all;
 transition: 0.3s;
-transition: color 0.35s, border-color 0.35s, box-shadow 0.35s, transform 0.25s;
+transition:
+  color 0.35s,
+  border-color 0.35s,
+  box-shadow 0.35s,
+  transform 0.25s;
 transition: color 0.3s;
 ```
 
@@ -35,8 +39,10 @@ Apply these to all interactive elements. Never invent new durations or easings.
 **On focus:**
 
 ```css
-/* outline: rgb(0, 0, 0) none 3px → */ outline: rgb(16, 16, 16) auto 1px;
-/* outline-color: rgb(0, 0, 0) → */ outline-color: rgb(16, 16, 16);
+/* outline: rgb(0, 0, 0) none 3px → */
+outline: rgb(16, 16, 16) auto 1px;
+/* outline-color: rgb(0, 0, 0) → */
+outline-color: rgb(16, 16, 16);
 ```
 
 **Transition:** `all`
@@ -52,14 +58,17 @@ Apply these to all interactive elements. Never invent new durations or easings.
 **On hover:**
 
 ```css
-/* background-color: rgba(0, 0, 0, 0) → */ background-color: rgb(31, 31, 31);
+/* background-color: rgba(0, 0, 0, 0) → */
+background-color: rgb(31, 31, 31);
 ```
 
 **On focus:**
 
 ```css
-/* outline: rgb(255, 255, 255) none 3px → */ outline: rgb(16, 16, 16) auto 1px;
-/* outline-color: rgb(255, 255, 255) → */ outline-color: rgb(16, 16, 16);
+/* outline: rgb(255, 255, 255) none 3px → */
+outline: rgb(16, 16, 16) auto 1px;
+/* outline-color: rgb(255, 255, 255) → */
+outline-color: rgb(16, 16, 16);
 ```
 
 **Transition:** `0.3s`
@@ -75,18 +84,27 @@ Apply these to all interactive elements. Never invent new durations or easings.
 **On hover:**
 
 ```css
-/* color: rgb(255, 122, 26) → */ color: rgb(255, 255, 255);
-/* box-shadow: rgba(0, 0, 0, 0.5) 0px 4px 20px 0px → */ box-shadow: rgba(255, 122, 26, 0.65) 0px 0px 25px 0px, rgba(255, 122, 26, 0.3) 0px 8px 30px 0px;
-/* transform: none → */ transform: matrix(1, 0, 0, 1, 0, -2);
-/* outline: rgb(255, 122, 26) none 3px → */ outline: rgb(255, 255, 255) none 3px;
-/* outline-color: rgb(255, 122, 26) → */ outline-color: rgb(255, 255, 255);
+/* color: rgb(255, 122, 26) → */
+color: rgb(255, 255, 255);
+/* box-shadow: rgba(0, 0, 0, 0.5) 0px 4px 20px 0px → */
+box-shadow:
+  rgba(255, 122, 26, 0.65) 0px 0px 25px 0px,
+  rgba(255, 122, 26, 0.3) 0px 8px 30px 0px;
+/* transform: none → */
+transform: matrix(1, 0, 0, 1, 0, -2);
+/* outline: rgb(255, 122, 26) none 3px → */
+outline: rgb(255, 255, 255) none 3px;
+/* outline-color: rgb(255, 122, 26) → */
+outline-color: rgb(255, 255, 255);
 ```
 
 **On focus:**
 
 ```css
-/* outline: rgb(255, 122, 26) none 3px → */ outline: rgb(16, 16, 16) auto 1px;
-/* outline-color: rgb(255, 122, 26) → */ outline-color: rgb(16, 16, 16);
+/* outline: rgb(255, 122, 26) none 3px → */
+outline: rgb(16, 16, 16) auto 1px;
+/* outline-color: rgb(255, 122, 26) → */
+outline-color: rgb(16, 16, 16);
 ```
 
 **Transition:** `color 0.35s, border-color 0.35s, box-shadow 0.35s, transform 0.25s`
@@ -104,17 +122,23 @@ Apply these to all interactive elements. Never invent new durations or easings.
 **On hover:**
 
 ```css
-/* color: rgb(13, 110, 253) → */ color: rgb(10, 88, 202);
-/* border-color: rgb(13, 110, 253) → */ border-color: rgb(10, 88, 202);
-/* outline: rgb(13, 110, 253) none 3px → */ outline: rgb(10, 88, 202) none 3px;
-/* outline-color: rgb(13, 110, 253) → */ outline-color: rgb(10, 88, 202);
+/* color: rgb(13, 110, 253) → */
+color: rgb(10, 88, 202);
+/* border-color: rgb(13, 110, 253) → */
+border-color: rgb(10, 88, 202);
+/* outline: rgb(13, 110, 253) none 3px → */
+outline: rgb(10, 88, 202) none 3px;
+/* outline-color: rgb(13, 110, 253) → */
+outline-color: rgb(10, 88, 202);
 ```
 
 **On focus:**
 
 ```css
-/* outline: rgb(13, 110, 253) none 3px → */ outline: rgb(16, 16, 16) auto 1px;
-/* outline-color: rgb(13, 110, 253) → */ outline-color: rgb(16, 16, 16);
+/* outline: rgb(13, 110, 253) none 3px → */
+outline: rgb(16, 16, 16) auto 1px;
+/* outline-color: rgb(13, 110, 253) → */
+outline-color: rgb(16, 16, 16);
 ```
 
 **Transition:** `all`
@@ -148,4 +172,3 @@ _No visible style changes detected for this element._
 - Focus states use **outline** (not box-shadow) — always match the extracted focus ring
 - Transition durations in use: `0.3s`, `0.35s`, `0.25s`
 - Always respect `prefers-reduced-motion` — set all transitions to `0s` when enabled
-

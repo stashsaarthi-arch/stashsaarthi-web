@@ -34,7 +34,6 @@ import { ReactLenis, useLenis } from "lenis/react";
 import "lenis/dist/lenis.css";
 import "lenis/dist/lenis.css";
 
-
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-transparent px-4">
@@ -101,7 +100,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       {
         name: "viewport",
-        content: "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover",
+        content:
+          "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover",
       },
       { name: "theme-color", content: "#0A0D0F" },
       { name: "color-scheme", content: "dark" },
@@ -192,8 +192,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
-
-
 
 function RootShell({ children }: { children: ReactNode }) {
   const jsonLd = {
@@ -449,7 +447,11 @@ function RootShell({ children }: { children: ReactNode }) {
   };
 
   return (
-    <html lang="en" suppressHydrationWarning={true} className="bg-transparent overflow-x-hidden w-full max-w-full">
+    <html
+      lang="en"
+      suppressHydrationWarning={true}
+      className="bg-transparent overflow-x-hidden w-full max-w-full"
+    >
       <head>
         <HeadContent />
         <script
@@ -459,19 +461,21 @@ function RootShell({ children }: { children: ReactNode }) {
           }}
         />
       </head>
-      <body className="pb-24 sm:pb-0 bg-transparent text-white selection:bg-emerald-500/30 overflow-x-hidden w-full max-w-full md:cursor-none" suppressHydrationWarning={true}>
+      <body
+        className="pb-24 sm:pb-0 bg-transparent text-white selection:bg-emerald-500/30 overflow-x-hidden w-full max-w-full md:cursor-none"
+        suppressHydrationWarning={true}
+      >
         <div className="relative min-h-screen w-full overflow-x-hidden max-w-full bg-transparent text-white selection:bg-emerald-500/30">
           <CinematicPreLoader />
           <CustomCursor />
-          
+
           {/* THE SPATIAL VOID (STRICTLY z-0, NEVER NEGATIVE) */}
           <SpatialVoid />
 
           {/* THE FOREGROUND CONTENT (STRICTLY z-10) */}
           <main className="relative z-10 w-full max-w-full overflow-x-hidden flex flex-col min-h-screen">
-            {children} 
+            {children}
           </main>
-
         </div>
         <Scripts />
       </body>
@@ -489,7 +493,11 @@ function SpatialVoid() {
     let rafId: number;
 
     const onScroll = () => {
-      const currentScroll = (window as any).__lenis?.scroll ?? window.scrollY ?? document.documentElement.scrollTop ?? 0;
+      const currentScroll =
+        (window as any).__lenis?.scroll ??
+        window.scrollY ??
+        document.documentElement.scrollTop ??
+        0;
       setScrollY(currentScroll);
     };
 
@@ -522,18 +530,19 @@ function SpatialVoid() {
   const dynamicPitch = 64 + Math.sin(scrollY * 0.0012) * 2.5;
 
   return (
-    <div className="fixed inset-0 z-0 pointer-events-none bg-[#030608] overflow-hidden max-w-full select-none" style={{ contain: "strict" }}>
-      
+    <div
+      className="fixed inset-0 z-0 pointer-events-none bg-[#030608] overflow-hidden max-w-full select-none"
+      style={{ contain: "strict" }}
+    >
       {/* ── UNIFIED 3D SPATIAL PARALLAX ENVIRONMENT (E-Summit 3D Cosmos DNA) ── */}
-      <div 
+      <div
         className="absolute inset-0 overflow-hidden pointer-events-none transition-transform duration-700 ease-out"
         style={{
-          transform: `translate3d(${mouseOffset.x * 0.4}px, ${mouseOffset.y * 0.4}px, 0)`
+          transform: `translate3d(${mouseOffset.x * 0.4}px, ${mouseOffset.y * 0.4}px, 0)`,
         }}
       >
-        
         {/* 1. DEEP COSMIC STARFIELD LAYER (Parallax Depth 1) */}
-        <div 
+        <div
           className="absolute inset-0 opacity-40 transform-gpu"
           style={{
             backgroundImage: `
@@ -548,50 +557,52 @@ function SpatialVoid() {
             `,
             backgroundSize: "950px 450px",
             transform: `translateY(${-(scrollY * 0.08)}px) translateZ(0)`,
-            willChange: "transform"
+            willChange: "transform",
           }}
         />
 
         {/* 2. THE ICONIC E-SUMMIT CURVED PLANETARY HORIZON DOME & CORONA AURORA */}
-        <div 
+        <div
           className="absolute top-[18%] sm:top-[20%] left-1/2 w-full sm:w-[120vw] h-[480px] sm:h-[580px] rounded-[100%] pointer-events-none transform-gpu"
           style={{
-            background: "radial-gradient(ellipse at 50% 100%, rgba(16, 185, 129, 0.28) 0%, rgba(20, 184, 166, 0.16) 32%, rgba(6, 182, 212, 0.08) 58%, transparent 78%)",
+            background:
+              "radial-gradient(ellipse at 50% 100%, rgba(16, 185, 129, 0.28) 0%, rgba(20, 184, 166, 0.16) 32%, rgba(6, 182, 212, 0.08) 58%, transparent 78%)",
             borderBottom: "1.5px solid rgba(0, 245, 160, 0.5)",
-            boxShadow: "0 14px 70px -10px rgba(0, 245, 160, 0.4), inset 0 -20px 50px -10px rgba(16, 185, 129, 0.3)",
+            boxShadow:
+              "0 14px 70px -10px rgba(0, 245, 160, 0.4), inset 0 -20px 50px -10px rgba(16, 185, 129, 0.3)",
             transform: `translateX(-50%) translateY(${-(scrollY * 0.18)}px) scale(${1 + Math.min(scrollY * 0.00025, 0.12)}) translateZ(0)`,
-            willChange: "transform"
+            willChange: "transform",
           }}
         />
 
         {/* 3. HORIZONTAL HIGH-SPEED LASER PHOTONS & LIGHT STREAKS (E-Summit Light Streaks) */}
         <div className="absolute top-[28%] sm:top-[32%] inset-x-0 h-[3px] overflow-hidden pointer-events-none">
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-emerald-400/40 to-transparent" />
-          <div 
+          <div
             className="photon-streak w-48 sm:w-96"
-            style={{ 
-              top: 0, 
-              animationDuration: "5.5s", 
-              transform: `translateY(${-(scrollY * 0.12) % 30}px)` 
-            }} 
+            style={{
+              top: 0,
+              animationDuration: "5.5s",
+              transform: `translateY(${-(scrollY * 0.12) % 30}px)`,
+            }}
           />
-          <div 
-            className="photon-streak w-36 sm:w-72" 
-            style={{ 
-              top: 0, 
-              animationDuration: "8s", 
-              animationDelay: "2.8s", 
-              transform: `translateY(${-(scrollY * 0.12) % 30}px)` 
-            }} 
+          <div
+            className="photon-streak w-36 sm:w-72"
+            style={{
+              top: 0,
+              animationDuration: "8s",
+              animationDelay: "2.8s",
+              transform: `translateY(${-(scrollY * 0.12) % 30}px)`,
+            }}
           />
         </div>
 
         {/* 4. 3D INFINITE PERSPECTIVE FLOOR GRID WITH DYNAMIC PITCH & GLIDE */}
-        <div 
+        <div
           className="absolute inset-0 flex items-center justify-center overflow-hidden"
           style={{ perspective: "680px", perspectiveOrigin: "50% 27%" }}
         >
-          <div 
+          <div
             className="w-[140vw] sm:w-[160vw] h-[170vh] absolute top-[22%] sm:top-[26%] left-[-20vw] sm:left-[-30vw]"
             style={{
               backgroundImage: `
@@ -602,41 +613,43 @@ function SpatialVoid() {
               backgroundSize: "48px 48px, 48px 48px, 48px 48px",
               transform: `rotateX(${dynamicPitch}deg) translateY(${-(scrollY * 0.42) % 48}px) translateZ(0)`,
               transformOrigin: "50% 0%",
-              maskImage: "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.95) 10%, rgba(0,0,0,1) 50%, rgba(0,0,0,0.2) 85%, transparent 100%)",
-              WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.95) 10%, rgba(0,0,0,1) 50%, rgba(0,0,0,0.2) 85%, transparent 100%)",
-              willChange: "transform"
+              maskImage:
+                "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.95) 10%, rgba(0,0,0,1) 50%, rgba(0,0,0,0.2) 85%, transparent 100%)",
+              WebkitMaskImage:
+                "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.95) 10%, rgba(0,0,0,1) 50%, rgba(0,0,0,0.2) 85%, transparent 100%)",
+              willChange: "transform",
             }}
           />
         </div>
 
         {/* 5. FLOATING TELEMETRY RADAR NODES (Mobile + Desktop Parallax Anchors) */}
-        <div 
+        <div
           className="hidden sm:flex absolute top-[32%] sm:top-[36%] left-[3%] sm:left-[8%] font-mono text-[9px] sm:text-[10px] tracking-wider sm:tracking-widest text-emerald-400/70 border border-emerald-500/30 bg-emerald-950/50 backdrop-blur-md px-2.5 py-1.5 rounded-lg items-center gap-2 transform-gpu shadow-[0_0_15px_rgba(16,185,129,0.2)]"
           style={{
             transform: `translateY(${-(scrollY * 0.15)}px) translateZ(0)`,
-            willChange: "transform"
+            willChange: "transform",
           }}
         >
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
           <span>NODE 01 // KANPUR [26.4°N]</span>
         </div>
 
-        <div 
+        <div
           className="hidden sm:flex absolute top-[46%] sm:top-[50%] right-[3%] sm:right-[10%] font-mono text-[9px] sm:text-[10px] tracking-wider sm:tracking-widest text-teal-400/60 border border-teal-500/30 bg-teal-950/40 backdrop-blur-md px-2.5 py-1.5 rounded-lg items-center gap-2 transform-gpu shadow-[0_0_15px_rgba(20,184,166,0.2)]"
           style={{
             transform: `translateY(${-(scrollY * 0.24)}px) translateZ(0)`,
-            willChange: "transform"
+            willChange: "transform",
           }}
         >
           <span className="w-1.5 h-1.5 rounded-full bg-teal-400" />
           <span>VAULT ALPHA // ESCROW VERIFIED</span>
         </div>
 
-        <div 
+        <div
           className="hidden md:flex absolute top-[20%] right-[22%] font-mono text-[9px] tracking-widest text-cyan-400/40 border border-cyan-500/20 bg-cyan-950/20 px-2.5 py-1 rounded-md items-center gap-1.5 transform-gpu"
           style={{
             transform: `translateY(${-(scrollY * 0.09)}px) translateZ(0)`,
-            willChange: "transform"
+            willChange: "transform",
           }}
         >
           <span className="w-1.5 h-1.5 rounded-full bg-cyan-400/60" />
@@ -644,25 +657,27 @@ function SpatialVoid() {
         </div>
 
         {/* 6. AMBIENT COMPOSITING RADIAL LIGHTS (Zero-Lag Composite Pass) */}
-        <div 
+        <div
           className="absolute top-[-10%] left-[-15%] sm:left-[-10%] w-[90vw] sm:w-[60vw] h-[90vw] sm:h-[60vw] bg-[radial-gradient(circle,rgba(16,185,129,0.16)_0%,transparent_70%)] transform-gpu pointer-events-none"
           style={{
             transform: `translateY(${scrollY * 0.16}px) translateZ(0)`,
-            willChange: "transform"
+            willChange: "transform",
           }}
         />
-        <div 
+        <div
           className="absolute bottom-[-15%] right-[-15%] sm:right-[-10%] w-[90vw] sm:w-[70vw] h-[90vw] sm:h-[70vw] bg-[radial-gradient(circle,rgba(20,184,166,0.14)_0%,transparent_70%)] transform-gpu pointer-events-none"
           style={{
             transform: `translateY(${-(scrollY * 0.12)}px) translateZ(0)`,
-            willChange: "transform"
+            willChange: "transform",
           }}
         />
 
         {/* 7. ULTRA-SUBTLE FILM NOISE (Desktop only for pure clarity) */}
-        <div 
-          className="hidden md:block absolute inset-0 opacity-[0.035] mix-blend-overlay pointer-events-none" 
-          style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}
+        <div
+          className="hidden md:block absolute inset-0 opacity-[0.035] mix-blend-overlay pointer-events-none"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+          }}
         />
       </div>
     </div>
@@ -689,7 +704,7 @@ function LenisHandler() {
 
     lenis.on("scroll", handleScroll);
 
-    // Force ultra-smooth 120 FPS scrolling via Lenis native mechanism if needed, 
+    // Force ultra-smooth 120 FPS scrolling via Lenis native mechanism if needed,
     // but by default Lenis ties to browser refresh rate (which is usually ideal).
     // Native requestAnimationFrame handles it.
 

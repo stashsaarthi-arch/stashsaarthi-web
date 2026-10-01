@@ -20,9 +20,9 @@ export const CinematicPreLoader = () => {
         <motion.div
           key="preloader"
           initial={{ y: 0 }}
-          exit={{ 
-            y: "-100%", 
-            transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] } 
+          exit={{
+            y: "-100%",
+            transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] },
           }}
           className="fixed inset-0 bg-[#030303] z-[99999] flex flex-col items-center justify-center pointer-events-auto"
         >
@@ -33,31 +33,31 @@ export const CinematicPreLoader = () => {
               textAnchor="middle"
               dominantBaseline="middle"
               className="font-bold tracking-[0.2em]"
-              style={{ fontSize: "40px", fontFamily: 'GTA6-Heading' }}
-              initial={{ 
+              style={{ fontSize: "40px", fontFamily: "GTA6-Heading" }}
+              initial={{
                 strokeDasharray: "0 1000",
-                stroke: "rgba(16, 185, 129, 1)", 
+                stroke: "rgba(16, 185, 129, 1)",
                 strokeWidth: 1,
-                fill: "rgba(16, 185, 129, 0)" 
+                fill: "rgba(16, 185, 129, 0)",
               }}
-              animate={{ 
+              animate={{
                 strokeDasharray: "1000 0",
-                fill: "rgba(16, 185, 129, 1)" 
+                fill: "rgba(16, 185, 129, 1)",
               }}
               transition={{
                 strokeDasharray: { duration: 1.5, ease: "easeInOut" },
-                fill: { duration: 0.8, ease: "easeIn", delay: 1.2 }
+                fill: { duration: 0.8, ease: "easeIn", delay: 1.2 },
               }}
             >
               STASH SAARTHI
             </motion.text>
           </svg>
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 1.5, duration: 0.5 }}
             className="mt-8 text-emerald-500/50 tracking-[0.4em] text-sm font-medium"
-            style={{ fontFamily: 'GTA6-Heading' }}
+            style={{ fontFamily: "GTA6-Heading" }}
           >
             INITIALIZING ENGINE
           </motion.div>

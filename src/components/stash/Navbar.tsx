@@ -100,11 +100,31 @@ export const Navbar = memo(function Navbar({
         isScrolled = shouldScroll;
         if (navRef.current) {
           if (isScrolled) {
-            navRef.current.classList.add("!bg-[#0A0D0F]/40", "!backdrop-blur-[24px]", "!backdrop-saturate-[180%]", "!border-b", "!border-white/10", "!shadow-2xl");
-            navRef.current.classList.remove("!bg-[#0A0D0F]/10", "!backdrop-blur-[12px]", "!border-white/5");
+            navRef.current.classList.add(
+              "!bg-[#0A0D0F]/40",
+              "!backdrop-blur-[24px]",
+              "!backdrop-saturate-[180%]",
+              "!border-b",
+              "!border-white/10",
+              "!shadow-2xl",
+            );
+            navRef.current.classList.remove(
+              "!bg-[#0A0D0F]/10",
+              "!backdrop-blur-[12px]",
+              "!border-white/5",
+            );
           } else {
-            navRef.current.classList.remove("!bg-[#0A0D0F]/40", "!backdrop-blur-[24px]", "!backdrop-saturate-[180%]", "!shadow-2xl");
-            navRef.current.classList.add("!bg-[#0A0D0F]/10", "!backdrop-blur-[12px]", "!border-white/5");
+            navRef.current.classList.remove(
+              "!bg-[#0A0D0F]/40",
+              "!backdrop-blur-[24px]",
+              "!backdrop-saturate-[180%]",
+              "!shadow-2xl",
+            );
+            navRef.current.classList.add(
+              "!bg-[#0A0D0F]/10",
+              "!backdrop-blur-[12px]",
+              "!border-white/5",
+            );
           }
         }
         if (innerNavRef.current) {

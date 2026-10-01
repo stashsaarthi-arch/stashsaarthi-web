@@ -1020,7 +1020,9 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
       try {
         const saved = sessionStorage.getItem("ss-language") as Language;
         if (saved === "en" || saved === "hi") return saved;
-      } catch {}
+      } catch (e) {
+        console.debug("Failed to read ss-language from sessionStorage", e);
+      }
     }
     return "en";
   });

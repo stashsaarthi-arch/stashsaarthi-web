@@ -98,6 +98,7 @@ export function ScheduledPickupSelector({
       timeSlot: selectedSlot,
       formattedString: formatted,
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedDay, selectedSlot, language]);
 
   return (
