@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   getHostBankAccounts,
   registerHostBankAccount,
@@ -56,18 +56,11 @@ export const HostPayoutsModal: React.FC<HostPayoutsModalProps> = ({
   );
   const [calcAmount, setCalcAmount] = useState<number>(300);
 
-  useEffect(() => {
-    if (isOpen) {
-      loadData();
-    }
-  }, [isOpen, loadData]);
-
   const loadData = useCallback(() => {
     const loadedAccounts = getHostBankAccounts();
     const loadedPayouts = processPendingPayouts();
     setAccounts(loadedAccounts);
     setPayouts(loadedPayouts);
-  }, []);
 
     // Pre-fill active host details if found
     const currentHost = loadedAccounts.find((a) => a.hostPhone === hostPhone) || loadedAccounts[0];
@@ -77,7 +70,13 @@ export const HostPayoutsModal: React.FC<HostPayoutsModalProps> = ({
       setIfscCode(currentHost.ifscCode);
       setUpiVpa(currentHost.upiVpa);
     }
-  };
+  }, [hostPhone]);
+
+  useEffect(() => {
+    if (isOpen) {
+      loadData();
+    }
+  }, [isOpen, loadData]);
 
   if (!isOpen) return null;
 

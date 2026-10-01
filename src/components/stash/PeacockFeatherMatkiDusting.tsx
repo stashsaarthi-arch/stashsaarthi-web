@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { playPop } from "@/lib/audio";
 import { Sparkles, Check, RefreshCw } from "lucide-react";
 
@@ -19,7 +19,7 @@ export const PeacockFeatherMatkiDusting: React.FC<PeacockFeatherMatkiDustingProp
   const [dustCount, setDustCount] = useState<number>(1);
   const [showSparkles, setShowSparkles] = useState<boolean>(false);
 
-  const triggerDusting = () => {
+  const triggerDusting = useCallback(() => {
     if (isDusting) return;
     setIsDusting(true);
     setShowSparkles(true);
@@ -35,7 +35,7 @@ export const PeacockFeatherMatkiDusting: React.FC<PeacockFeatherMatkiDustingProp
     setTimeout(() => {
       setShowSparkles(false);
     }, 2000);
-  };
+  }, [isDusting, onDustComplete]);
 
   useEffect(() => {
     if (isAutoTriggered) {

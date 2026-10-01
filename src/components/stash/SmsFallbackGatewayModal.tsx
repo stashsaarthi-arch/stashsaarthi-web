@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   Signal,
   WifiOff,
@@ -55,17 +55,17 @@ export const SmsFallbackGatewayModal: React.FC<SmsFallbackGatewayModalProps> = (
   // Logs State
   const [logs, setLogs] = useState<SmsFallbackLog[]>([]);
 
+  const handleGenerate = useCallback(() => {
+    const newPayload = generateEncryptedSmsOtpPayload(bookingId, otp, runnerId);
+    setPayload(newPayload);
+  }, [bookingId, otp, runnerId]);
+
   useEffect(() => {
     if (isOpen) {
       handleGenerate();
       setLogs(getSmsFallbackLogs());
     }
   }, [isOpen, handleGenerate]);
-
-  const handleGenerate = useCallback(() => {
-    const newPayload = generateEncryptedSmsOtpPayload(bookingId, otp, runnerId);
-    setPayload(newPayload);
-  }, [bookingId, otp, runnerId]);
 
   const handleCopyPayload = () => {
     if (!payload) return;

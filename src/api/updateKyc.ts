@@ -7,8 +7,7 @@ export async function handleUpdateKyc(request: Request): Promise<Response> {
     cloud_name: process.env["CLOUDINARY_CLOUD_NAME"] || "",
     api_key: process.env["CLOUDINARY_API_KEY"] || "",
     api_secret: process.env["CLOUDINARY_API_SECRET"] || "",
-  });
-  if (request.method !== "POST") {
+  });  if (request.method !== "POST") {
     return new Response(JSON.stringify({ success: false, error: "Method Not Allowed" }), {
       status: 405,
       headers: { "Content-Type": "application/json" },

@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef } from "react";
 import { Clock, Calendar, Truck, Sparkles, CheckCircle2 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -43,13 +43,16 @@ export function ScheduledPickupSelector({
     return d;
   };
 
-  const formatDateLabel = (d: Date) => {
-    return d.toLocaleDateString(isHi ? "hi-IN" : "en-US", {
-      weekday: "short",
-      month: "short",
-      day: "numeric",
-    });
-  };
+  const formatDateLabel = useCallback(
+    (d: Date) => {
+      return d.toLocaleDateString(isHi ? "hi-IN" : "en-US", {
+        weekday: "short",
+        month: "short",
+        day: "numeric",
+      });
+    },
+    [isHi],
+  );
 
   const todayObj = getDateObj(0);
   const tomorrowObj = getDateObj(1);
@@ -73,6 +76,11 @@ export function ScheduledPickupSelector({
     },
   ];
 
+  const onPickupSelectRef = useRef(onPickupSelect);
+  useEffect(() => {
+    onPickupSelectRef.current = onPickupSelect;
+  }, [onPickupSelect]);
+
   useEffect(() => {
     const currentDayObj =
       selectedDay === "today" ? todayObj : selectedDay === "tomorrow" ? tomorrowObj : dayAfterObj;
@@ -92,13 +100,22 @@ export function ScheduledPickupSelector({
 
     const formatted = `${currentDayLabel} (${formatDateLabel(currentDayObj)}): ${selectedSlot}`;
 
-    onPickupSelect?.({
+    onPickupSelectRef.current?.({
       day: selectedDay,
       dateLabel: formatDateLabel(currentDayObj),
       timeSlot: selectedSlot,
       formattedString: formatted,
     });
-  }, [selectedDay, selectedSlot, language, onPickupSelect]);
+  }, [
+    selectedDay,
+    selectedSlot,
+    language,
+    isHi,
+    todayObj,
+    tomorrowObj,
+    dayAfterObj,
+    formatDateLabel,
+  ]);
 
   return (
     <div

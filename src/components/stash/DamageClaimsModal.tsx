@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   X,
   ShieldAlert,
@@ -71,17 +71,17 @@ export const DamageClaimsModal: React.FC<DamageClaimsModalProps> = ({
     claimedAmount,
   );
 
-  useEffect(() => {
-    if (isOpen) {
-      refreshClaims();
-    }
-  }, [isOpen, refreshClaims]);
-
   const refreshClaims = useCallback(() => {
     const data = getDamageClaims();
     setClaims(data);
     setSelectedClaim(prev => prev ? prev : (data[0] || null));
   }, []);
+
+  useEffect(() => {
+    if (isOpen) {
+      refreshClaims();
+    }
+  }, [isOpen, refreshClaims]);
 
   if (!isOpen) return null;
 
