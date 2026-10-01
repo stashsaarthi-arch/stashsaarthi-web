@@ -1,29 +1,29 @@
+import { Buffer } from "node:buffer";
 import { getAdminAuth, getAdminDb } from "@/lib/firebaseAdmin";
-import { v2 as cloudinary } from "cloudinary";
-
-cloudinary.config({
-  cloud_name: process.env["CLOUDINARY_CLOUD_NAME"] || "",
-  api_key: process.env["CLOUDINARY_API_KEY"] || "",
-  api_secret: process.env["CLOUDINARY_API_SECRET"] || "",
-});
-
 export async function handleUpdateKyc(request: Request): Promise<Response> {
+  const { v2: cloudinary } = await import("cloudinary");
+  cloudinary.config({
+    cloud_name: process.env["CLOUDINARY_CLOUD_NAME"] || "",
+    api_key: process.env["CLOUDINARY_API_KEY"] || "",
+    api_secret: process.env["CLOUDINARY_API_SECRET"] || "",
+  });
   if (request.method !== "POST") {
     return new Response(JSON.stringify({ success: false, error: "Method Not Allowed" }), {
       status: 405,
+      headers: { "Content-Type": "application/json" },
     });
   }
 
   try {
-    const auth = getAdminAuth();
-    const db = getAdminDb();
+    const auth = await getAdminAuth();
+    const db = await getAdminDb();
     if (!auth || !db) {
       return new Response(
         JSON.stringify({
           success: false,
           error: "Backend authentication service is temporarily unconfigured.",
         }),
-        { status: 503 },
+        { status: 503, headers: { "Content-Type": "application/json" } },
       );
     }
 
@@ -34,7 +34,7 @@ export async function handleUpdateKyc(request: Request): Promise<Response> {
     ) {
       return new Response(
         JSON.stringify({ success: false, error: "Cloudinary credentials unconfigured on server." }),
-        { status: 503 },
+        { status: 503, headers: { "Content-Type": "application/json" } },
       );
     }
 
@@ -42,7 +42,7 @@ export async function handleUpdateKyc(request: Request): Promise<Response> {
     if (!authHeader?.startsWith("Bearer ")) {
       return new Response(
         JSON.stringify({ success: false, error: "Unauthorized: Missing or invalid token format" }),
-        { status: 401 },
+        { status: 401, headers: { "Content-Type": "application/json" } },
       );
     }
 
@@ -50,7 +50,7 @@ export async function handleUpdateKyc(request: Request): Promise<Response> {
     if (!idToken) {
       return new Response(
         JSON.stringify({ success: false, error: "Unauthorized: Invalid token structure" }),
-        { status: 401 },
+        { status: 401, headers: { "Content-Type": "application/json" } },
       );
     }
 
@@ -60,19 +60,25 @@ export async function handleUpdateKyc(request: Request): Promise<Response> {
     } catch (verifyError) {
       return new Response(
         JSON.stringify({ success: false, error: "Unauthorized: Token verification failed" }),
-        { status: 401 },
+        { status: 401, headers: { "Content-Type": "application/json" } },
       );
     }
     const authenticatedUid = decodedToken.uid;
 
     const formData = await request.formData();
-    const frontImageFile = formData.get("frontImage") as Blob | null;
-    const backImageFile = formData.get("backImage") as Blob | null;
+    const frontImageFile = formData.get("frontImage");
+    const backImageFile = formData.get("backImage");
 
-    if (!frontImageFile || !backImageFile) {
-      return new Response(JSON.stringify({ success: false, error: "Missing required fields" }), {
-        status: 400,
-      });
+    if (
+      !frontImageFile ||
+      !(frontImageFile instanceof Blob) ||
+      !backImageFile ||
+      !(backImageFile instanceof Blob)
+    ) {
+      return new Response(
+        JSON.stringify({ success: false, error: "Missing or invalid required fields (must be files)" }),
+        { status: 400, headers: { "Content-Type": "application/json" } },
+      );
     }
 
     const uploadToCloudinarySecure = async (imageBlob: Blob): Promise<string> => {
