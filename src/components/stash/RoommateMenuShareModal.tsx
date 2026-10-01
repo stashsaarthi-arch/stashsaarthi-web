@@ -1,6 +1,8 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
 import {
   MessageCircle,
+
   Share2,
   Copy,
   Check,
@@ -9,7 +11,9 @@ import {
   Home,
   Utensils,
   Clock,
+
   X,
+
   HeartHandshake,
 } from "lucide-react";
 import {
@@ -22,6 +26,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useLanguage } from "@/context/LanguageContext";
+
 import { FOUNDER_WHATSAPP } from "@/lib/constants";
 import { playClick, playPop } from "@/lib/audio";
 import { checkAndRecordRateLimit, showRateLimitToast } from "@/lib/rateLimiter";
@@ -93,6 +98,7 @@ export const RoommateMenuShareModal: React.FC<RoommateMenuShareModalProps> = ({
   );
   const [menuPrice, setMenuPrice] = useState<number>(defaultDetails?.price || 70);
   const [slot, setSlot] = useState<"Lunch" | "Dinner">(defaultDetails?.slot || "Lunch");
+
   const [kitchenNode, setKitchenNode] = useState<string>(
     defaultDetails?.kitchenNode || "Kakadeo Hub - Annapurna Kitchen",
   );

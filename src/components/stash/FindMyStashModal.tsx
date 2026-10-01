@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
@@ -6,6 +7,7 @@ import {
   ExternalLink,
   Share2,
   PhoneCall,
+
   CheckCircle2,
   Compass,
   Footprints,

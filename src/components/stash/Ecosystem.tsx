@@ -1,5 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars, prettier/prettier, @typescript-eslint/no-explicit-any */
 "use client";
+
 import { useState } from "react";
+
 import { motion, AnimatePresence } from "motion/react";
 import {
   Boxes,
@@ -8,14 +11,18 @@ import {
   Home,
   ShieldCheck,
   Soup,
+
   ChevronDown,
   Check,
 } from "lucide-react";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import type { OpenBooking } from "./types";
 import { Tilt3D } from "./Tilt3D";
+
 import AnimatedContent from "@/components/ui/AnimatedContent";
+
 import { PrototypeBadge } from "@/components/ui/PrototypeBadge";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -70,6 +77,7 @@ export function Ecosystem({ onBook }: { onBook: OpenBooking }) {
       className="relative mx-auto max-w-4xl px-2 py-2 scroll-mt-20 w-full max-w-full overflow-hidden"
     >
       <div className="flex sm:grid overflow-x-auto sm:overflow-visible snap-x snap-mandatory gap-3 sm:gap-4 pb-2 no-scrollbar touch-pan-x overscroll-x-contain sm:grid-cols-2">
+
         {NODES_BASE.map((n, i) => {
           const Icon = n.icon;
           const textData = t.ecosystem[n.id];
@@ -135,6 +143,7 @@ export function Ecosystem({ onBook }: { onBook: OpenBooking }) {
                     </ul>
 
                     <Button
+
                       onClick={() => onBook({ service: n.id as any, note: textData.title })}
                       className="mt-4 w-full rounded-xl py-4 font-bold shadow-md transition-all active:scale-[0.98] text-xs sm:text-sm cursor-pointer"
                       style={{

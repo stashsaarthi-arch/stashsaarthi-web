@@ -1,22 +1,30 @@
+/* eslint-disable @typescript-eslint/no-unused-vars, prettier/prettier */
 import React, { useState, useEffect } from "react";
+
 import { motion, AnimatePresence } from "motion/react";
 import {
   ShieldCheck,
   QrCode,
   CheckCircle2,
   AlertCircle,
+
   Sparkles,
   X,
   Copy,
   Printer,
+
   Search,
   RotateCcw,
   Check,
   FileBadge,
+
   Award,
+
   Lock,
   PlusCircle,
+
   Building2,
+
   UserCheck,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";

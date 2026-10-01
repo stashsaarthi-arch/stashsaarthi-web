@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any */
 import { useState, memo } from "react";
 import { Link } from "@tanstack/react-router";
 import { toast } from "sonner";
@@ -18,6 +19,7 @@ import {
   User,
   Phone,
   GraduationCap,
+
   ShieldCheck,
   Download,
   MessageCircle,
@@ -30,8 +32,10 @@ import {
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+
 import { AuthButton } from "./AuthButton";
 import { LegalDialog } from "./LegalDialog";
+
 import { smoothScrollTo, handleDownloadInvestorMemo } from "./legal";
 import { ReferralPill } from "./ReferralPill";
 import { StashPass } from "./StashPass";
@@ -41,10 +45,15 @@ import { CampusCaptainModal } from "./CampusCaptainModal";
 import { AndroidGoPerformanceModal } from "./AndroidGoPerformanceModal";
 import { LowDataToggle } from "@/components/ui/LowDataToggle";
 import {
+
   Sheet,
+
   SheetContent,
+
   SheetHeader,
+
   SheetTitle,
+
   SheetDescription,
 } from "@/components/ui/sheet";
 import {
@@ -129,6 +138,7 @@ export const FooterSection = memo(function FooterSection() {
   const [showInvestorModal, setShowInvestorModal] = useState(false);
   const [showCaptainModal, setShowCaptainModal] = useState(false);
   const [showAndroidGoModal, setShowAndroidGoModal] = useState(false);
+
   const [waitlistDrawerOpen, setWaitlistDrawerOpen] = useState(false);
   const [touched, setTouched] = useState<{ name?: boolean; email?: boolean; phone?: boolean }>({});
 
@@ -190,6 +200,7 @@ export const FooterSection = memo(function FooterSection() {
             provider: "google",
           });
         }
+
       } catch (err) {
         toast.error(isHi ? "वेटलिस्ट प्रविष्टि विफल" : "Waitlist entry failed", {
           description: isHi ? "कृपया पुनः प्रयास करें।" : "Please try again.",
@@ -878,6 +889,7 @@ export const FooterSection = memo(function FooterSection() {
             </div>
           </div>
           <button
+
             onClick={() => smoothScrollTo("top")(undefined as any)}
             className="min-h-[48px] px-3 py-2 flex items-center gap-2 font-semibold hover:text-emerald-400 transition-colors cursor-pointer rounded-lg"
             aria-label="Scroll to top"

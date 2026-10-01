@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-explicit-any */
 // Host Web Push Notifications Engine & Persistent Audio Alert Synthesizer
 
 export interface HostPushSubscription {
@@ -38,6 +39,7 @@ export function playPersistentHostBookingAlert(): void {
   stopPersistentHostBookingAlert();
 
   try {
+
     const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
     if (!AudioContextClass) return;
 
@@ -244,6 +246,7 @@ export async function triggerHostPushNotification(
   // 4. Trigger Native Browser Web Push Notification
   if ("Notification" in window && Notification.permission === "granted") {
     const title = `🚨 New ${payload.bookingType.toUpperCase()} Booking Request!`;
+
     const options: any = {
       body: `${payload.studentName} (${payload.studentPhone}) booked ${payload.details} at ${payload.nodeName} for ₹${payload.amount}.`,
       icon: "/app-icon.png",

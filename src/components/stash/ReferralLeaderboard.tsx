@@ -1,9 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unused-vars, prettier/prettier */
 import { useState } from "react";
+
 import { motion, AnimatePresence } from "motion/react";
 import {
   Trophy,
   Crown,
+
   Medal,
+
   Award,
   Share2,
   Copy,
@@ -11,9 +15,13 @@ import {
   Zap,
   TrendingUp,
   Gift,
+
   Users,
+
   Sparkles,
+
   ChevronRight,
+
   ShieldCheck,
   Building2,
   GraduationCap,

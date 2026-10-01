@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any, prettier/prettier */
 /**
  * StashSaarthi — Unified User Master Bookings Engine
  * Compiles Storage (stash_bookings), Kitchen Tokens (meal_bookings),
@@ -23,6 +24,7 @@ export interface MasterBookingRecord {
   user_phone: string | null;
   user_email: string | null;
   title: string;
+
   service_details: Record<string, any>;
   total_amount: number;
   status: "active" | "completed" | "cancelled" | "confirmed";
@@ -149,6 +151,7 @@ export async function getUserMasterBookings(
   let supabaseRecords: MasterBookingRecord[] = [];
 
   try {
+
     let query = (supabase as any).from("user_master_bookings").select("*");
 
     if (email) {

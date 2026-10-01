@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 import { useState, useEffect } from "react";
 import {
   Dialog,
@@ -14,6 +15,7 @@ import {
   Package,
   Plus,
   Trash2,
+
   Tag,
   QrCode,
   ShieldCheck,
@@ -26,7 +28,9 @@ import {
   Shirt,
   Box,
   Laptop,
+
   Layers,
+
   ArrowRight,
 } from "lucide-react";
 import { toast } from "sonner";

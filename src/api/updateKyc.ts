@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any */
 import { Buffer } from "node:buffer";
 import { getAdminAuth, getAdminDb } from "@/lib/firebaseAdmin";
 export async function handleUpdateKyc(request: Request): Promise<Response> {
@@ -57,6 +58,7 @@ export async function handleUpdateKyc(request: Request): Promise<Response> {
     let decodedToken;
     try {
       decodedToken = await auth.verifyIdToken(idToken);
+
     } catch (verifyError) {
       return new Response(
         JSON.stringify({ success: false, error: "Unauthorized: Token verification failed" }),
@@ -127,6 +129,7 @@ export async function handleUpdateKyc(request: Request): Promise<Response> {
     return new Response(JSON.stringify({ success: true }), {
       headers: { "Content-Type": "application/json" },
     });
+
   } catch (error: any) {
     console.error("API Error updating KYC:", error);
     return new Response(

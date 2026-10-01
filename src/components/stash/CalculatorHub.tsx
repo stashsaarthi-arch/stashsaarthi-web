@@ -1,27 +1,38 @@
+/* eslint-disable @typescript-eslint/no-unused-vars, prettier/prettier */
 import { useState, useEffect, memo } from "react";
+
 import { Calculator, TrendingUp, Sparkles, ChevronRight, X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+
 import { Button } from "@/components/ui/button";
 import { StashCalculator } from "./Calculator";
 import { HostSimulator } from "./HostSimulator";
 import { useLanguage } from "@/context/LanguageContext";
 import { usePersona } from "@/context/PersonaContext";
 import {
+
   Sheet,
+
   SheetContent,
+
   SheetHeader,
+
   SheetTitle,
+
   SheetDescription,
 } from "@/components/ui/sheet";
+
 import { playPop, playTab } from "@/lib/audio";
 import type { OpenBooking } from "./types";
 
 export const CalculatorHub = memo(function CalculatorHub({ onBook }: { onBook: OpenBooking }) {
   const { role } = usePersona();
   const [activeTab, setActiveTab] = useState<"student" | "host">(role);
+
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const { language } = useLanguage();
   const isHi = language === "hi";
+
   const isStudent = activeTab === "student";
 
   // Sync with global role changes

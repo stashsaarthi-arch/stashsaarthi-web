@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 import { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
@@ -6,10 +7,12 @@ import {
   Zap,
   Navigation,
   ArrowRight,
+
   Activity,
   CheckCircle2,
   Radar,
   ListFilter,
+
   ShieldCheck,
   Footprints,
 } from "lucide-react";

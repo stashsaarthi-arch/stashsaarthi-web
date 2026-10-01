@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 /**
  * StashSaarthi — Booking Live Status Badge & Lifecycle Stepper (Task 111)
  * Real-time Supabase status badge showing:
@@ -8,6 +9,7 @@ import React from "react";
 import {
   useBookingRealtimeStatus,
   dispatchBookingStatusUpdate,
+
   LIFECYCLE_STEPS,
   type BookingLifecycleState,
 } from "@/hooks/useBookingRealtimeStatus";

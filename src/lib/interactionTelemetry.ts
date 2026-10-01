@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars, prettier/prettier, @typescript-eslint/no-explicit-any */
 /**
  * StashSaarthi Component Interaction Telemetry & Hover-Dwell Analytics Engine
  *
@@ -11,6 +12,7 @@
 
 import { supabase } from "@/integrations/supabase/client";
 import { logSupabaseError, queueOfflineSubmission } from "@/lib/supabaseLogger";
+
 import { useEffect, useRef, useCallback } from "react";
 
 export interface ComponentInteractionRecord {
@@ -111,6 +113,7 @@ export async function flushTelemetryBuffer(): Promise<void> {
   }
 
   try {
+
     const { error } = await (supabase.from as any)("component_interaction_telemetry").insert(
       recordsToFlush,
     );

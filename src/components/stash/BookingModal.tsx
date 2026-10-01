@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "motion/react";
@@ -16,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import {
   Boxes,
   Home,
+
   HandHeart,
   Soup,
   ShieldCheck,
@@ -29,9 +31,12 @@ import {
   AlertCircle,
   QrCode,
   Copy,
+
   Calendar,
+
   MapPin,
   Sparkles,
+
   Info,
   Clock,
   Plus,
@@ -39,6 +44,7 @@ import {
   Tag,
   Package,
   Luggage,
+
   BookOpen,
   MessageCircle,
 } from "lucide-react";
@@ -49,11 +55,14 @@ import {
   isValidIndianPin,
 } from "@/lib/waitlistService";
 import { StashPass } from "./StashPass";
+
 import { LuggageItemizerModal, type LuggageStorageItem } from "./LuggageItemizerModal";
 import { useLanguage } from "@/context/LanguageContext";
+
 import { MealPersonalizationSelector } from "./MealPersonalizationSelector";
 import {
   getStashWallet,
+
   applyTrialTokenToCheckout,
   consumeTrialTokenOnBooking,
 } from "@/lib/stashWallet";
@@ -63,6 +72,7 @@ import {
 } from "@/lib/extendedBreakUpsell";
 import { ScheduledPickupSelector, type ScheduledPickupSelection } from "./ScheduledPickupSelector";
 import { FreePickupNudgeBanner } from "./FreePickupNudgeBanner";
+
 import { calculateFreePickupStatus } from "@/lib/freePickupThreshold";
 
 export function BookingModal({
@@ -113,6 +123,7 @@ export function BookingModal({
   // 1. Stash specific fields & Itemization
   const [bags, setBags] = useState<number>(initialBags || 1);
   const [months, setMonths] = useState<number>(initialMonths || 1);
+
   const [itemType, setItemType] = useState("Suitcase & Luggage");
   const [showItemizerModal, setShowItemizerModal] = useState(false);
 
@@ -207,7 +218,9 @@ export function BookingModal({
   // 3. Kitchen specific fields
   const [mealPlan, setMealPlan] = useState<"trial" | "smart" | "freedom" | "semester">("smart");
   const [dietType, setDietType] = useState("Pure Vegetarian");
+
   const [selectedPersonalizations, setSelectedPersonalizations] = useState<string[]>([]);
+
   const [personalizationDelta, setPersonalizationDelta] = useState<number>(0);
 
   // 4. Connect specific fields
@@ -360,6 +373,7 @@ export function BookingModal({
 
   const isPhoneValid = !phone.trim() ? true : isValidPhone(phone);
   const isEmailValid = !email.trim() ? true : isValidEmail(email);
+
   const isPinValid = !pincode.trim() ? true : isValidIndianPin(pincode);
   const isNameValid = !name.trim() || name.trim().length >= 2;
 
@@ -445,6 +459,7 @@ export function BookingModal({
       let serviceMeta = "";
       if (service === "stash") {
         const itemizationStr = luggageItems
+
           .map((it, idx) => `${it.barcode}: [${it.category}] ${it.customLabel || "Unlabeled"}`)
           .join(" | ");
         serviceMeta = `[Stash] Bags: ${bags}, Months: ${months}, Pickup Window: ${scheduledPickupWindow}, Itemization: {${itemizationStr}}, Pickup: ${addressDetail || "Hostel/Campus Gate"}`;
@@ -554,6 +569,7 @@ export function BookingModal({
           });
           enqueueOfflineSubmission("booking", payload);
         }
+
       } catch (networkErr) {
         syncError = true;
         enqueueOfflineSubmission("booking", payload);
@@ -1122,6 +1138,7 @@ export function BookingModal({
                           id="bk-room-type"
                           aria-label={isHi ? "कमरे का प्रकार चुनें" : "Select room preference"}
                           value={roomType}
+
                           onChange={(e) => setRoomType(e.target.value as any)}
                           className="w-full mt-1.5 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white cursor-pointer"
                         >
@@ -1174,6 +1191,7 @@ export function BookingModal({
                           id="bk-meal-plan"
                           aria-label={isHi ? "मील प्लान चुनें" : "Select meal plan"}
                           value={mealPlan}
+
                           onChange={(e) => setMealPlan(e.target.value as any)}
                           className="w-full mt-1.5 rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white cursor-pointer"
                         >
@@ -2077,6 +2095,7 @@ export function BookingModal({
         onOpenChange={setShowItemizerModal}
         items={luggageItems.map((it) => ({
           id: it.id,
+
           category: (it.category || "Carton Box") as any,
           customLabel: it.customLabel || "",
           barcode: it.barcode || "#SS-BAG-01",

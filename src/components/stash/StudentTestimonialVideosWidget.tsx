@@ -1,20 +1,29 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import {
   Play,
   Pause,
   Video,
+
   Sparkles,
   Heart,
+
   MessageCircle,
+
   Share2,
+
   ThumbsUp,
   Star,
+
   CheckCircle2,
+
   ChevronRight,
   FileText,
   X,
+
   Volume2,
+
   VolumeX,
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";

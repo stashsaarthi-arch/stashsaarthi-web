@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { getBookings, type BookingRecord } from "./localSubmissions";
 
 export interface StorageQrScanResult {
@@ -95,6 +96,7 @@ export function getOfflineQrSvgDataUri(tokenId: string): string {
     ) {
       const isTL = r <= 6 && c <= 6;
       const isTR = r <= 6 && c >= 14;
+
       const isBL = r >= 14 && c <= 6;
       const localR = isTL ? r : isTR ? r : r - 14;
       const localC = isTL ? c : isTR ? c - 14 : c;

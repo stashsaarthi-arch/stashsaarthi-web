@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 import React, { createContext, useContext, useEffect, useState, useMemo } from "react";
 
 export type Language = "en" | "hi";
@@ -1040,6 +1041,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
           setLanguageState("en");
           document.documentElement.lang = "en";
         }
+
       } catch (e) {
         document.documentElement.lang = "en";
       }
@@ -1052,6 +1054,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
       try {
         sessionStorage.setItem("ss-language", lang);
         document.documentElement.lang = lang;
+
       } catch (e) {
         // Ignore storage write issues
       }

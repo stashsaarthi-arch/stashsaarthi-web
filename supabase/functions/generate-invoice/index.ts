@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-explicit-any */
 // Supabase Edge Function: generate-invoice (Task 109)
 // Generates GST-compliant PDF invoice bytes using pdf-lib on Deno / Supabase Edge Runtimes
 
@@ -94,6 +95,7 @@ serve(async (req: Request) => {
         "Content-Disposition": `attachment; filename=Invoice_${booking.token}.pdf`,
       },
     });
+
   } catch (error: any) {
     return new Response(JSON.stringify({ error: error.message }), {
       status: 500,

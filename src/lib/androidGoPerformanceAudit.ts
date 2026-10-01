@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /**
  * Android Go & Low-End Device Performance Audit Engine
  * Evaluates hardware memory budgets, CPU concurrency, CSS animation throttling,
@@ -189,6 +190,7 @@ export async function measureAndroidGoFpsBenchmark(
 
       // 2. DOM/Layout Thrashing Stress (triggers forced reflow)
       container.innerHTML = `<div style="width:${(Math.random() * 100).toFixed(2)}px">Stress ${calc.toFixed(2)}</div>`;
+
       const dummyRead = container.offsetWidth; // Force layout calculation
 
       if (now - startTime < durationMs) {

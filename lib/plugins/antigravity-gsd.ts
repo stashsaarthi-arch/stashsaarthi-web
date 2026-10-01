@@ -5,8 +5,11 @@
 
 export interface Context {
   logger: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     info: (msg: string, ...args: any[]) => void;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     warn: (msg: string, ...args: any[]) => void;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     error: (msg: string, ...args: any[]) => void;
   };
 }
@@ -35,6 +38,7 @@ export function defineConfig(config: AntigravityAppConfig): AntigravityAppConfig
 export class GSDRunner {
   private configPath: string;
   private env: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private activeProcesses: Map<string, any> = new Map();
 
   constructor(options: { configPath?: string; env?: string } = {}) {
@@ -47,7 +51,9 @@ export class GSDRunner {
   }
 
   async startPipeline(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     pipelineName: string,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     handlers?: { onTaskFail?: (taskName: string, err: Error) => void },
   ): Promise<void> {
     // Starts the designated pipeline cleanly

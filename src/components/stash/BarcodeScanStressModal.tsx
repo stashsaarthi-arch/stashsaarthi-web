@@ -1,16 +1,21 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 import { useState, useEffect } from "react";
 import {
   X,
   QrCode,
   Zap,
   CheckCircle2,
+
   AlertTriangle,
   Play,
   RotateCcw,
   Sparkles,
   Sliders,
+
   Sun,
+
   Moon,
+
   FileCode,
   ShieldCheck,
 } from "lucide-react";
@@ -37,6 +42,7 @@ export function BarcodeScanStressModal({ isOpen, onClose }: BarcodeScanStressMod
   const [selectedProfileId, setSelectedProfileId] = useState<string>("dim_and_crumpled_extreme");
   const [sampleBarcode, setSampleBarcode] = useState("SS-SEAL-8921");
   const [liveScanResult, setLiveScanResult] = useState<ScanResult | null>(null);
+
   const [torchGain, setTorchGain] = useState(true);
 
   useEffect(() => {

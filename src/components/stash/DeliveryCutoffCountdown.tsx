@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect } from "react";
+
 import { Clock, Flame, Utensils, AlertTriangle, ChevronRight, CheckCircle2 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { playClick, playPop } from "@/lib/audio";

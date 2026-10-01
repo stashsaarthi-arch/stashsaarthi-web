@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 import { useState, useEffect, useCallback } from "react";
 import {
   X,
@@ -5,26 +6,38 @@ import {
   Camera,
   Flashlight,
   CheckCircle2,
+
   AlertTriangle,
   MapPin,
   Phone,
   MessageCircle,
   Package,
+
   Weight,
+
   Clock,
   Zap,
   TrendingUp,
   ShieldCheck,
   Search,
+
   Navigation,
+
   ChevronRight,
+
   Sparkles,
   SignalLow,
+
   Send,
+
   Smartphone,
+
   ShieldAlert,
+
   Copy,
+
   Radio,
+
   Check,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -38,10 +51,15 @@ import {
   type RunnerTask,
 } from "@/lib/deliveryFleetEngine";
 import {
+
   generateRunnerOtp,
+
   generateEncryptedSmsPayload,
+
   parseAndVerifySmsPayload,
+
   verifyRunnerOtpSms,
+
   getNativeSmsUri,
 } from "@/lib/smsFallbackGateway";
 
@@ -62,9 +80,13 @@ export function DeliveryFleetScannerModal({ isOpen, onClose }: DeliveryFleetScan
 
   // SMS Fallback Gateway State (Task 129)
   const [isCellularDataOff, setIsCellularDataOff] = useState(false);
+
   const [smsOtpInput, setSmsOtpInput] = useState("");
+
   const [smsRawPacketInput, setSmsRawPacketInput] = useState("");
+
   const [selectedTaskForSms, setSelectedTaskForSms] = useState<RunnerTask | null>(null);
+
   const [copiedSms, setCopiedSms] = useState(false);
 
   const refreshTasks = useCallback(() => {

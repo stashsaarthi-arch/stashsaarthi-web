@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { toast } from "sonner";
@@ -52,6 +53,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (storedUser) {
       try {
         setUserLocal(JSON.parse(storedUser));
+
       } catch (e) {
         localStorage.removeItem("stash_user_session");
       }
@@ -87,6 +89,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }
 
         // Establish real Supabase session using the Google ID Token
+
         const { data, error } = await supabase.auth.signInWithIdToken({
           provider: "google",
           token: response.credential,

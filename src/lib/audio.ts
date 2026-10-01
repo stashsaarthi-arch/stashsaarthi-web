@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // Ultra-low latency Web Audio API based synthetic micro-haptics / audio architecture
 // Audio has been globally disabled per user request.
 

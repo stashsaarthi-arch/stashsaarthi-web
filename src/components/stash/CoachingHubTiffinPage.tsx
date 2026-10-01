@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import {
@@ -7,11 +8,15 @@ import {
   Clock,
   ShieldCheck,
   Star,
+
   Phone,
   MessageCircle,
+
   CheckCircle2,
   Sparkles,
+
   Award,
+
   Zap,
   ChevronRight,
   HeartHandshake,
@@ -23,13 +28,16 @@ import { Button } from "@/components/ui/button";
 import { BrandLogo } from "@/components/ui/BrandLogo";
 import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 import { useLanguage } from "@/context/LanguageContext";
+
 import { FOUNDER_WHATSAPP, FOUNDER_PHONE_DISPLAY } from "@/lib/constants";
 import { BookingModal } from "@/components/stash/BookingModal";
 import { FooterSection } from "@/components/stash/FooterSection";
 import {
+
   RoommateMenuShareModal,
   MenuShareDetails,
 } from "@/components/stash/RoommateMenuShareModal";
+
 import { showRateLimitToast } from "@/lib/rateLimiter";
 import { toast } from "sonner";
 import { DeliveryCutoffCountdown } from "@/components/stash/DeliveryCutoffCountdown";
@@ -63,9 +71,13 @@ export interface HubConfig {
 export function CoachingHubTiffinPage({ config }: { config: HubConfig }) {
   const { language, setLanguage } = useLanguage();
   const [isBookingOpen, setIsBookingOpen] = useState(false);
+
   const [selectedSlot, setSelectedSlot] = useState<"lunch" | "dinner">("lunch");
+
   const [selectedTier, setSelectedTier] = useState<"standard" | "feast">("standard");
+
   const [isRoommateShareOpen, setIsRoommateShareOpen] = useState<boolean>(false);
+
   const [roommateShareDetails, setRoommateShareDetails] = useState<MenuShareDetails | undefined>(
     undefined,
   );

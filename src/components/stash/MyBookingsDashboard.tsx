@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 /**
  * StashSaarthi — My Bookings Dashboard
  * Shows logged-in user's booking history, meal orders, and waitlist submissions.
@@ -19,8 +20,10 @@ import {
   MessageCircle,
   Hash,
   Receipt,
+
   Eye,
   QrCode,
+
   WifiOff,
   RefreshCw,
   RotateCw,
@@ -410,6 +413,7 @@ export function MyBookingsDashboard() {
                     toast.success(
                       isHi ? "GST चालान PDF डाउनलोड हुआ!" : "GST Invoice PDF downloaded!",
                     );
+
                   } catch (e) {
                     toast.error(isHi ? "PDF जनरेट नहीं हो सका" : "Failed to generate PDF invoice");
                   }

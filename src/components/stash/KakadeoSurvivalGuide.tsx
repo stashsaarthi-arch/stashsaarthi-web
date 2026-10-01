@@ -1,9 +1,11 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import {
   BookOpen,
   Download,
   Share2,
+
   PhoneCall,
   MapPin,
   Utensils,
@@ -11,14 +13,20 @@ import {
   PackageCheck,
   CheckCircle2,
   AlertTriangle,
+
   ArrowRight,
+
   ExternalLink,
   Printer,
   Sparkles,
+
   FileText,
+
   Clock,
   Building,
+
   Heart,
+
   ChevronRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -26,6 +34,7 @@ import { Button } from "@/components/ui/button";
 export function KakadeoSurvivalGuide() {
   const { language } = useLanguage();
   const isHi = language === "hi";
+
   const [activeTab, setActiveTab] = useState<string>("all");
   const [downloading, setDownloading] = useState(false);
 

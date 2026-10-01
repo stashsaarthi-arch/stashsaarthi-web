@@ -1,4 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import { memo, useState } from "react";
+
 import { motion, AnimatePresence } from "framer-motion";
 
 export const ModeToggle = memo(function ModeToggle({

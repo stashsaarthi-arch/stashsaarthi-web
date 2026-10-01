@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, memo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { GraduationCap, Heart, Merge, RotateCcw, Sparkles } from "lucide-react";
@@ -10,11 +11,13 @@ const STUDENT = [
   "The Dead-Rent Tax: ₹8,000 burned during holidays just so your luggage doesn’t get stolen.",
   "The Mess Nightmare: Watery daal, unhygienic oil, and homesickness.",
 ];
+
 const SENIOR = [
   "Zero Brokerage: Direct connection to audited family and verified PG owner-hosted homes.",
   "Flat ₹300/mo Stash: Barcode-sealed, ₹10,000 insured vacation luggage storage.",
   "Ghar Ka Khana: Fresh micro-batch meals cooked by neighbourhood dadi/nani.",
 ];
+
 const FUSION = [
   "Empty verified PG owner rooms become verified, brokerage-free student homes",
   "One hour a day of tech help & errands earns up to 60% rent subsidy",

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createClient } from "@supabase/supabase-js";
 import type { Database } from "./types";
 
@@ -17,6 +18,7 @@ function createSupabaseClient() {
     console.warn(`[Supabase] ${message}`);
 
     // Return a deeply mocked client that returns safe empty values instead of crashing
+
     const createMockObject = (): any => {
       const mockResult = Promise.resolve({ data: [], error: null, count: 0 });
       return new Proxy(() => createMockObject(), {

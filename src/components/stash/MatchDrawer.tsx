@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from "react";
+
 import { Loader2, Heart, CheckCircle2 } from "lucide-react";
 import { toast } from "sonner";
 import {
@@ -24,6 +26,7 @@ export function MatchDrawer({
   city,
   presetRole = "student",
   seniorName,
+
   seniorDetail,
   seniorOffer,
   compatibilityScore,

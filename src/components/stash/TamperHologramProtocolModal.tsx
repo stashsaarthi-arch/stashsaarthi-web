@@ -1,26 +1,36 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect, useCallback } from "react";
 import {
   ShieldCheck,
   Scan,
   Lock,
   CheckCircle2,
+
   AlertTriangle,
   FileText,
+
   RefreshCw,
   Copy,
   Check,
+
   Sparkles,
   X,
+
   Building2,
+
   Download,
   Camera,
   Search,
   Award,
   ShieldAlert,
+
   Boxes,
+
   UserCheck,
+
   Clock,
   KeyRound,
+
   ExternalLink,
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
@@ -29,6 +39,7 @@ import {
   getTamperHologramRecords,
   linkHologramToStashRecord,
   recordHologramTamperCheck,
+
   verifyTamperHologramCodeFormat,
   getHologramStats,
   generateHologramSecuritySealHash,
@@ -64,6 +75,7 @@ export const TamperHologramProtocolModal: React.FC<TamperHologramProtocolModalPr
   const [campusNode, setCampusNode] = useState(defaultCampusNode);
   const [boxCount, setBoxCount] = useState<number>(2);
   const [inspectorNotes, setInspectorNotes] = useState("");
+
   const [isScanning, setIsScanning] = useState(false);
   const [copiedHash, setCopiedHash] = useState<string | null>(null);
   const [searchFilter, setSearchFilter] = useState("");

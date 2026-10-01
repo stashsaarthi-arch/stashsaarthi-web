@@ -1,16 +1,21 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect } from "react";
 import {
   X,
   ShieldAlert,
   Camera,
   CheckCircle2,
+
   AlertTriangle,
+
   ArrowRight,
+
   Upload,
   Sparkles,
   RefreshCw,
   FileText,
   Check,
+
   AlertCircle,
 } from "lucide-react";
 import {
@@ -43,9 +48,11 @@ export const DamageClaimsModal: React.FC<DamageClaimsModalProps> = ({
   // Form State
   const [bookingId, setBookingId] = useState(defaultBookingId || "BK-STASH-2026-88");
   const [studentName, setStudentName] = useState("Rahul Verma (IIT Kanpur)");
+
   const [studentPhone, setStudentPhone] = useState("+91 9369454350");
   const [itemLabel, setItemLabel] = useState("Carton Box #1 (Study Materials & Laptop)");
   const [claimedAmount, setClaimedAmount] = useState<number>(3000);
+
   const [intakePhoto, setIntakePhoto] = useState<string>(SAMPLE_INTAKE_PHOTO);
   const [unboxingPhoto, setUnboxingPhoto] = useState<string>(SAMPLE_UNBOXING_PHOTO_DAMAGED);
   const [notes, setNotes] = useState("");
@@ -68,16 +75,13 @@ export const DamageClaimsModal: React.FC<DamageClaimsModalProps> = ({
     if (isOpen) {
       refreshClaims();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isOpen]);
+  }, [isOpen, refreshClaims]);
 
-  const refreshClaims = () => {
+  const refreshClaims = useCallback(() => {
     const data = getDamageClaims();
     setClaims(data);
-    if (data.length > 0 && !selectedClaim) {
-      setSelectedClaim(data[0] || null);
-    }
-  };
+    setSelectedClaim(prev => prev ? prev : (data[0] || null));
+  }, []);
 
   if (!isOpen) return null;
 

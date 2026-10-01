@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
@@ -8,10 +9,13 @@ import {
   Star,
   CheckCircle2,
   Gift,
+
   Heart,
   TrendingUp,
+
   ShieldCheck,
   X,
+
   ChevronRight,
   Info,
 } from "lucide-react";

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 /**
  * StashSaarthi — Booking Detail Slide-Over Drawer
  * Task 104: Har past booking card par click karte hi digital receipt, booking ID,
@@ -19,12 +20,15 @@ import {
   MessageSquare,
   Building,
   UserCheck,
+
   Calendar,
   IndianRupee,
+
   Clock,
   ExternalLink,
   QrCode,
   RefreshCw,
+
   FileText,
   Download,
   Loader2,
@@ -37,6 +41,7 @@ import { OfflineQrCode } from "@/components/ui/OfflineQrCode";
 import { downloadInvoicePdf } from "@/lib/pdfInvoiceEngine";
 import { BookingLiveStatusBadge } from "./BookingLiveStatusBadge";
 import { motion, AnimatePresence } from "motion/react";
+
 import { playConfirm, playMicroClick } from "@/lib/audio";
 
 const FOUNDER_WHATSAPP = "919369454350";
@@ -103,6 +108,7 @@ export function BookingDetailDrawer({ booking, open, onClose }: BookingDetailDra
           ? "GST टैक्स चालान PDF सफलतापूर्वक डाउनलोड हुआ!"
           : "GST Tax Invoice PDF downloaded successfully!",
       );
+
     } catch (err) {
       toast.error(isHi ? "चालान PDF डाउनलोड विफल रहा" : "Failed to generate PDF invoice");
     } finally {

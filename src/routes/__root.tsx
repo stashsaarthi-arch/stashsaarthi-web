@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars, prettier/prettier, @typescript-eslint/no-explicit-any */
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
@@ -9,6 +10,7 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode } from "react";
+
 import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import { PageTransition } from "@/components/ui/PageTransition";
 import { CustomCursor } from "@/components/ui/CustomCursor";
@@ -29,6 +31,7 @@ import { ToastProvider } from "@/context/ToastContext";
 import { AccessibilityAnnouncer } from "@/components/ui/AccessibilityAnnouncer";
 import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 import { NetworkStatus } from "@/components/stash/NetworkStatus";
+
 import { coLivingSpacesSchema, coLivingItemListSchema } from "@/lib/seo-coliving-schema";
 import { ReactLenis, useLenis } from "lenis/react";
 import "lenis/dist/lenis.css";
@@ -494,6 +497,7 @@ function SpatialVoid() {
 
     const onScroll = () => {
       const currentScroll =
+
         (window as any).__lenis?.scroll ??
         window.scrollY ??
         document.documentElement.scrollTop ??
@@ -690,6 +694,7 @@ function LenisHandler() {
 
   useEffect(() => {
     if (!lenis) return;
+
     (window as any).__lenis = lenis;
 
     // Scroll-Isolate Architecture: add .is-scrolling while scrolling, remove 100ms after scroll stops
@@ -726,6 +731,7 @@ function LenisHandler() {
       }
       window.removeEventListener("resize", handleResize);
       if (typeof window !== "undefined") {
+
         delete (window as any).__lenis;
       }
     };

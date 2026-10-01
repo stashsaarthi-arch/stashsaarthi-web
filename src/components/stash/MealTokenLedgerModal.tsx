@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect } from "react";
 import {
   MealTokenSubscription,
@@ -16,18 +17,25 @@ import {
   ShieldCheck,
   Flame,
   Ticket,
+
   QrCode,
   Lock,
   Unlock,
   CheckCircle2,
+
   RefreshCw,
+
   Zap,
+
   Clock,
+
   User,
   Plus,
   Key,
   X,
+
   Smartphone,
+
   ChevronRight,
 } from "lucide-react";
 

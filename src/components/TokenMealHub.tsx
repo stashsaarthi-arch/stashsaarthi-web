@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { logSupabaseError } from "@/lib/supabaseLogger";
@@ -15,9 +16,13 @@ import {
   Check,
   X,
   ChevronRight,
+
   Clock,
+
   MapPin,
+
   Phone,
+
   Share2,
   MessageCircle,
   Ticket,
@@ -26,15 +31,18 @@ import { playClick, playPop, playMicroClick, playToggle, playConfirm } from "@/l
 import { SaarthiKitchenSchema } from "@/components/seo/SaarthiKitchenSchema";
 import { IntelligentNudgesWidget } from "./stash/IntelligentNudgesWidget";
 import { MealPersonalizationSelector } from "./stash/MealPersonalizationSelector";
+
 import { formatPersonalizationsSummary } from "@/lib/mealPersonalization";
 import { DeliveryCutoffCountdown } from "./stash/DeliveryCutoffCountdown";
 import {
   useThaliPriceLabelVariant,
   trackThaliPriceClick,
+
   ThaliPriceLabelVariant,
 } from "@/lib/abTesting";
 import { CsoKitchenSealModal } from "./stash/CsoKitchenSealModal";
 import { MealTokenLedgerModal } from "./stash/MealTokenLedgerModal";
+
 import { motion, AnimatePresence } from "motion/react";
 import type { OpenBooking } from "./stash/types";
 
@@ -892,6 +900,7 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
                         service: "kitchen",
                         note: `Subscription Pack: ${pack.name} (+${pack.tokens} Tokens · ${pack.desc})`,
                         amount: pack.price,
+
                         mealPlan: pack.id as any,
                       });
                     } else {

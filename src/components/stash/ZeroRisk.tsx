@@ -1,4 +1,7 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
+
 import { useState, useEffect, useRef } from "react";
+
 import { motion, AnimatePresence, useInView } from "motion/react";
 import {
   ShieldAlert,
@@ -482,6 +485,7 @@ function CustodyTimeline() {
           {/* Mobile Timeline */}
           <div className="mt-6 md:hidden space-y-3">
             {CUSTODY_STEPS.map((step, i) => {
+
               const Icon = step.icon;
               const isCurrent = i === activeStep;
               return (

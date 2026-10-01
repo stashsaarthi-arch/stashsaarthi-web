@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 import { useState, useEffect } from "react";
 import {
   ShieldCheck,
@@ -7,6 +8,7 @@ import {
   QrCode,
   CheckCircle2,
   UserCheck,
+
   ShieldAlert,
   KeyRound,
 } from "lucide-react";

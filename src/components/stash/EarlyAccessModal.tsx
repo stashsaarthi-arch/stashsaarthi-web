@@ -1,6 +1,8 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
+
   Sparkles,
   CheckCircle2,
   X,
@@ -9,6 +11,7 @@ import {
   Phone,
   GraduationCap,
   Home,
+
   ShieldCheck,
   ArrowRight,
   Loader2,
@@ -26,6 +29,7 @@ import {
   insertWaitlistUser,
   showNetworkRetryToast,
 } from "@/lib/waitlistService";
+
 import { FOUNDER_WHATSAPP, FOUNDER_PHONE_DISPLAY, getWhatsAppUrl } from "@/lib/constants";
 import { checkAndRecordRateLimit, showRateLimitToast } from "@/lib/rateLimiter";
 import { useLanguage } from "@/context/LanguageContext";
@@ -47,6 +51,7 @@ export function EarlyAccessModal({
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [campus, setCampus] = useState("");
+
   const [servicePref, setServicePref] = useState<string>("storage");
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);

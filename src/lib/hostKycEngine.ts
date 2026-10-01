@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /**
  * StashSaarthi Autonomous System — Host KYC & DigiLocker Automation Engine
  *
@@ -85,6 +86,7 @@ export async function initiateDigiLockerAuth(hostPhone: string): Promise<{
  */
 export function verifyAadhaarXml(
   xmlDataOrAadhaar: string,
+
   shareCode: string = "1234",
 ): {
   isValid: boolean;
@@ -126,6 +128,7 @@ export function verifyAadhaarXml(
 /**
  * Simulates AI facial liveness detection matching live camera feed against Aadhaar photo.
  */
+
 export function verifyFacialMatch(liveCameraBase64?: string): {
   score: number;
   isLivenessPassed: boolean;

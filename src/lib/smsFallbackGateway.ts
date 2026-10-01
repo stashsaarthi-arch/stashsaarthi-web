@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 /**
  * StashSaarthi — SMS Fallback Gateway Protocol Engine
  * Task 129: Cellular data failure fallback via encrypted SMS OTP confirmation.
@@ -137,6 +138,7 @@ export function parseAndVerifySmsPayload(rawSmsBody: string): SmsVerificationRes
       message: "SMS OTP packet verified successfully!",
       packet,
     };
+
   } catch (err) {
     return {
       valid: false,

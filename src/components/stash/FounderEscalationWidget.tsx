@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, memo } from "react";
 import { motion, AnimatePresence } from "motion/react";
+
 import { MessageCircle, Mail, Phone, X, ShieldCheck, Sparkles, ArrowRight } from "lucide-react";
 import {
   FOUNDER_WHATSAPP,

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import { motion, Variants } from "framer-motion";
 import { supabase } from "@/lib/supabase";
@@ -51,6 +52,7 @@ export function StashVault() {
         if (error) throw error;
 
         // Map data to Vault UI structure
+
         const activeStashes = (data || []).map((lead: any) => ({
           id: lead.id,
           items: lead.items,

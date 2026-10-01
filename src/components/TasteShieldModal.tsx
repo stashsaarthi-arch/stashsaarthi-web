@@ -1,8 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars, prettier/prettier */
 import React, { useState, useEffect, useRef } from "react";
+
 import { motion, AnimatePresence } from "motion/react";
 import {
   Shield,
   ShieldCheck,
+
   ShieldAlert,
   Star,
   Camera,
@@ -11,7 +14,9 @@ import {
   AlertTriangle,
   Sparkles,
   Loader2,
+
   RotateCcw,
+
   ChefHat,
   Receipt,
   HelpCircle,

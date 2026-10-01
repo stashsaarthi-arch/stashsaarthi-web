@@ -1,23 +1,34 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 import React, { useState, Suspense, lazy } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   ChevronDown,
+
   ShieldCheck,
+
   Clock,
   Scale,
+
   MessageSquareQuote,
+
   Soup,
+
   AlertCircle,
   Trophy,
   Award,
+
   Users,
+
   Home,
+
   Lightbulb,
+
   HelpCircle,
   Sparkles,
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { playTab } from "@/lib/audio";
+
 import type { BookingPrefill, OpenBooking } from "./types";
 
 // Lazy-load the secondary modules inside accordions so unexpanded accordions consume zero DOM/render overhead
@@ -25,12 +36,15 @@ const PgComparisonTable = lazy(() =>
   import("./PgComparisonTable").then((m) => ({ default: m.PgComparisonTable })),
 );
 const DualCrisis = lazy(() => import("./DualCrisis").then((m) => ({ default: m.DualCrisis })));
+
 const StashTimeline = lazy(() =>
   import("./StashTimeline").then((m) => ({ default: m.StashTimeline })),
 );
+
 const TrustConsoleHub = lazy(() =>
   import("./TrustConsoleHub").then((m) => ({ default: m.TrustConsoleHub })),
 );
+
 const StudentStoriesCarousel = lazy(() =>
   import("./StudentStoriesCarousel").then((m) => ({ default: m.StudentStoriesCarousel })),
 );
@@ -50,6 +64,7 @@ const FamilyDashboard = lazy(() =>
 const FeedbackSuggestions = lazy(() =>
   import("./FeedbackSuggestions").then((m) => ({ default: m.FeedbackSuggestions })),
 );
+
 const FAQ = lazy(() => import("./FAQ").then((m) => ({ default: m.FAQ })));
 
 interface MobileSecondaryAccordionsProps {

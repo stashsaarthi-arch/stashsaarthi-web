@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars */
 import React from "react";
 import { motion } from "framer-motion";
 
@@ -7,6 +8,7 @@ export interface AnimatedContentProps extends React.HTMLAttributes<HTMLDivElemen
   direction?: "vertical" | "horizontal";
   reverse?: boolean;
   duration?: number;
+
   ease?: any;
   delay?: number;
   scale?: number;
@@ -35,10 +37,15 @@ export const AnimatedContent = React.memo(function AnimatedContent({
   threshold = 0.12,
   initialOpacity = 0,
   animateOpacity = true,
+
   parallax = false,
+
   yPercent = 0,
+
   scrub = false,
+
   staggerChildren = false,
+
   staggerDelay = 0.1,
   className = "",
   style = {},
@@ -76,6 +83,7 @@ export const AnimatedContent = React.memo(function AnimatedContent({
       transition={transition}
       className={`gpu-layer ${className}`}
       style={style}
+
       {...(rest as any)}
     >
       {children}

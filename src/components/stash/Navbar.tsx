@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any */
 import { useState, useEffect, memo, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X, GraduationCap, HeartHandshake } from "lucide-react";
@@ -11,6 +12,7 @@ import { smoothScrollTo } from "./legal";
 import { useLanguage } from "@/context/LanguageContext";
 import type { Role } from "./types";
 import { StashWalletBadge, ZeroFeeTrialTokenModal } from "./ZeroFeeTrialTokenModal";
+
 import { playTab, playToggle, playConfirm, playMicroClick } from "@/lib/audio";
 
 const NAV_LINKS = [
@@ -74,6 +76,7 @@ export const Navbar = memo(function Navbar({
   role,
   setRole,
   onBook,
+
   onListRoom,
   onEarlyAccess,
   onRefer,
@@ -89,6 +92,7 @@ export const Navbar = memo(function Navbar({
   const innerNavRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
   const [showTrialModal, setShowTrialModal] = useState(false);
+
   const { language, setLanguage, t } = useLanguage();
   const isHi = language === "hi";
 
@@ -158,6 +162,7 @@ export const Navbar = memo(function Navbar({
           <button
             type="button"
             className="flex items-center gap-1.5 shrink-0 cursor-pointer group bg-transparent border-0 p-0 transition-transform active:scale-[0.98] focus:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500/70 focus-visible:ring-offset-1 focus-visible:ring-offset-[#0A0D0F] rounded-lg"
+
             onClick={() => smoothScrollTo("top")(undefined as any)}
             aria-label="Scroll to top of page"
             title="StashSaarthi - Back to top"

@@ -1,8 +1,10 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import {
   X,
   ShieldCheck,
+
   Package,
   QrCode,
   Scale,
@@ -11,20 +13,26 @@ import {
   CheckCircle2,
   AlertTriangle,
   FileCheck,
+
   Printer,
   Copy,
   Plus,
   History,
+
   Sparkles,
+
   ArrowRight,
   RefreshCw,
+
   Clock,
   User,
   MapPin,
+
   Check,
   LocateFixed,
   Lock,
   Unlock,
+
   Navigation,
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";

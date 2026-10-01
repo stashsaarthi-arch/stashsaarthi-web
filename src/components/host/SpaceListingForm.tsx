@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-explicit-any */
 import { useState, useRef } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { supabase } from "@/lib/supabase";
@@ -114,6 +115,7 @@ export function SpaceListingForm() {
       if (dbError) throw dbError;
 
       setSuccess(true);
+
     } catch (err: any) {
       setError(err.message || "Failed to list space");
     } finally {

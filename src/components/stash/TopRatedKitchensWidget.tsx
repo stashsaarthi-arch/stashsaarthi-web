@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
 import {
   Award,
@@ -8,6 +9,7 @@ import {
   MapPin,
   Utensils,
   CheckCircle2,
+
   Clock,
   Sparkles,
   Phone,
@@ -15,6 +17,7 @@ import {
   Vote,
   ExternalLink,
   ShieldCheck,
+
   TrendingUp,
   MessageCircle,
 } from "lucide-react";

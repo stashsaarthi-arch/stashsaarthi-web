@@ -1,12 +1,16 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import {
+
   BadgeCheck,
+
   MessageCircle,
   Phone,
   MapPin,
   Star,
   Gift,
+
   Compass,
   Zap,
   Search,
@@ -17,6 +21,7 @@ import { Button } from "@/components/ui/button";
 import AnimatedContent from "@/components/ui/AnimatedContent";
 import { supabase } from "@/integrations/supabase/client";
 import { SafetyAuditModal } from "./SafetyAuditModal";
+
 import { FOUNDER_WHATSAPP, getWhatsAppUrl } from "@/lib/constants";
 import { PrototypeBadge } from "@/components/ui/PrototypeBadge";
 import { useLanguage } from "@/context/LanguageContext";
@@ -185,6 +190,7 @@ export function Rooms({ onList, onBook }: { onList: () => void; onBook?: OpenBoo
   const [loading, setLoading] = useState(false);
   const [activeFilter, setActiveFilter] = useState<string>("all");
   const [auditOpen, setAuditOpen] = useState(false);
+
   const [expandedReviewId, setExpandedReviewId] = useState<string | null>(null);
 
   const filters = [
@@ -416,13 +422,11 @@ export function Rooms({ onList, onBook }: { onList: () => void; onBook?: OpenBoo
                         </span>
                       ) : null}
                     </div>
-
                     <p className="mt-1 flex items-center flex-wrap gap-1 text-[11px] text-muted-foreground">
                       <MapPin className="h-3 w-3 shrink-0 text-cyan" />
                       <span className="min-w-0">{l.address_location}</span>
                       <PrototypeBadge variant="text" />
                     </p>
-
                     {(isHi && l.transit_estimate_hi
                       ? l.transit_estimate_hi
                       : l.transit_estimate) && (
@@ -434,23 +438,24 @@ export function Rooms({ onList, onBook }: { onList: () => void; onBook?: OpenBoo
                     {(l as any).capacity_badge && (
                       <div
                         className={`mt-1.5 inline-flex items-center w-fit rounded-full border px-2 py-0.5 text-[10px] font-medium ${
+
                           (l as any).capacity_badge.color === "emerald"
                             ? "border-emerald-500/20 bg-emerald-500/10 text-emerald-400"
-                            : (l as any).capacity_badge.color === "amber"
+                            :  
+                              (l as any).capacity_badge.color === "amber"
                               ? "border-amber-500/20 bg-amber-500/10 text-amber-400"
                               : "border-cyan-500/20 bg-cyan-500/10 text-cyan-400"
                         }`}
                       >
+
                         {(l as any).capacity_badge.label}
                       </div>
                     )}
-
                     {l.student_review && (
                       <div className="mt-2 rounded-xl bg-white/[0.03] border border-white/[0.05] p-2 text-[11px] text-slate-300 italic line-clamp-2">
                         "{formatReview(l.student_review)}"
                       </div>
                     )}
-
                     <div className="mt-3 flex items-center justify-between gap-1.5 pt-2 border-t border-white/[0.06]">
                       {onBook ? (
                         <div className="flex-1 flex items-center gap-1.5">

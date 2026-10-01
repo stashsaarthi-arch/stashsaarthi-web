@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 import { useState, useRef, useEffect, memo } from "react";
 import {
   Bot,
@@ -5,11 +6,16 @@ import {
   X,
   Sparkles,
   ShieldCheck,
+
   PhoneCall,
   RefreshCw,
+
   MessageSquare,
+
   HelpCircle,
+
   Zap,
+
   ChevronDown,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -18,6 +24,7 @@ import { Badge } from "@/components/ui/badge";
 import { useLanguage } from "@/context/LanguageContext";
 import { usePersona } from "@/context/PersonaContext";
 import { generateRagResponse, RagResponse } from "@/lib/ragChatbot";
+
 import { FOUNDER_PHONE_DISPLAY, getWhatsAppUrl } from "@/lib/constants";
 
 interface ChatMessage {

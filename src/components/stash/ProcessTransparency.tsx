@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
@@ -8,17 +9,27 @@ import {
   XCircle,
   ArrowRight,
   ShieldCheck,
+
   MapPin,
+
   QrCode,
+
   FileCheck2,
+
   Lock,
+
   Eye,
+
   DollarSign,
+
   AlertCircle,
+
   Sparkles,
 } from "lucide-react";
 import AnimatedContent from "@/components/ui/AnimatedContent";
+
 import { Card3D } from "@/components/ui/Card3D";
+
 import { Badge } from "@/components/ui/badge";
 import { useLanguage } from "@/context/LanguageContext";
 

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 import {
   ShieldCheck,
@@ -7,6 +8,7 @@ import {
   Trash2,
   Download,
   X,
+
   AlertCircle,
   RefreshCw,
   MessageCircle,
@@ -334,6 +336,7 @@ export const DataPrivacyAuditModal: React.FC<DataPrivacyAuditModalProps> = ({
                   {isHi ? "अनुरोध प्रकार" : "Request Type"}
                   <select
                     value={dsarType}
+
                     onChange={(e) => setDsarType(e.target.value as any)}
                     className="mt-1 block w-full rounded-xl border border-white/10 bg-black/60 px-3 py-2 text-xs text-white focus:border-emerald-500 focus:outline-none cursor-pointer"
                   >

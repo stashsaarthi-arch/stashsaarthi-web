@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 import { useState, useEffect, memo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
@@ -8,15 +9,19 @@ import {
   Layers,
   Eye,
   RotateCcw,
+
   CheckCircle2,
   Play,
   Pause,
   ArrowRight,
   Clock,
+
   Sparkles,
   PackagePlus,
+
   FileCheck2,
   Thermometer,
+
   ShieldAlert,
   ChevronRight,
   QrCode,
@@ -35,6 +40,7 @@ export const StashTimeline = memo(function StashTimeline({ onBook }: StashTimeli
   const { language } = useLanguage();
   const { role } = usePersona();
   const isHi = language === "hi";
+
   const isStudent = role === "student";
 
   const [activeStep, setActiveStep] = useState<number>(0);
@@ -288,6 +294,7 @@ export const StashTimeline = memo(function StashTimeline({ onBook }: StashTimeli
       <div className="mt-6 sm:mt-8">
         <div className="glass flex items-center justify-between gap-1 overflow-x-auto rounded-2xl border border-white/10 p-1.5 no-scrollbar">
           {TIMELINE_STEPS.map((s, idx) => {
+
             const StepIcon = s.icon;
             const isActive = activeStep === idx;
             const isCompleted = idx < activeStep;

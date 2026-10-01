@@ -41,8 +41,7 @@ export const PeacockFeatherMatkiDusting: React.FC<PeacockFeatherMatkiDustingProp
     if (isAutoTriggered) {
       triggerDusting();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isAutoTriggered]);
+  }, [isAutoTriggered, triggerDusting]);
 
   if (compact) {
     return (

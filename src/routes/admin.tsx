@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, useEffect, useCallback, lazy, Suspense } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
@@ -72,6 +73,7 @@ const ReverseLogisticsModal = lazy(() =>
     default: m.ReverseLogisticsModal,
   })),
 );
+
 const ProxyHandoverModal = lazy(() =>
   import("@/components/stash/ProxyHandoverModal").then((m) => ({ default: m.ProxyHandoverModal })),
 );

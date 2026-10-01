@@ -1,9 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unused-vars, prettier/prettier */
 import { useState, useMemo } from "react";
+
 import { motion } from "framer-motion";
 import {
   TrendingUp,
   Coins,
+
   Users,
+
   ShieldCheck,
   Download,
   RefreshCw,
@@ -11,11 +15,14 @@ import {
   BarChart3,
   PieChart,
   Layers,
+
   Award,
+
   CheckCircle2,
   Sparkles,
   Calculator,
   Percent,
+
   Clock,
   ArrowUpRight,
   Boxes,

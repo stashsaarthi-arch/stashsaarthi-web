@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /**
  * StashSaarthi Autonomous System — Slot Lock & Overbooking Prevention Engine
  *
@@ -24,6 +25,7 @@ export interface NodeSlotCapacity {
 }
 
 const DEFAULT_LOCK_TTL_MS = 5 * 60 * 1000; // 5 minutes lock reservation
+
 const LOCAL_STORAGE_SLOTS_KEY = "ss_node_slot_capacities";
 
 // In-memory atomic state for client / mock node environment

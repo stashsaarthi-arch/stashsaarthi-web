@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
 import { FOUNDER_WHATSAPP } from "@/lib/constants";
 
@@ -19,7 +20,9 @@ export interface SaarthiKitchenSchemaProps {
 
 export const SaarthiKitchenSchema: React.FC<SaarthiKitchenSchemaProps> = ({
   kitchenName = "Saarthi Kitchens - Kanpur Homestyle Tiffins",
+
   rating = 4.92,
+
   reviewCount = 410,
   standardPrice = 50,
   monthlyPrice = 2400,

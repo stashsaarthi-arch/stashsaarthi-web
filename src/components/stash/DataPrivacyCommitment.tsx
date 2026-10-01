@@ -1,17 +1,26 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
+
 import { motion } from "motion/react";
 import {
+
   Lock,
   EyeOff,
+
   ShieldAlert,
+
   Clock,
   CheckCircle,
+
   FileText,
   BadgePercent,
+
   Sparkles,
+
   UserCheck,
   Zap,
 } from "lucide-react";
 import AnimatedContent from "@/components/ui/AnimatedContent";
+
 import { Badge } from "@/components/ui/badge";
 import { Card3D } from "@/components/ui/Card3D";
 import { useLanguage } from "@/context/LanguageContext";

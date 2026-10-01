@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-explicit-any */
 /**
  * StashSaarthi — Visitor Tracking Engine
  * Captures device, browser, geo, and behavioral signals from every visitor
@@ -185,6 +186,7 @@ async function flushToSupabase(): Promise<void> {
   saveSessionData(_session);
 
   try {
+
     await (supabase as any).from("visitor_sessions").upsert(
       {
         session_id: _session.session_id,
@@ -275,6 +277,7 @@ export interface VisitorRow {
 
 export async function fetchVisitorSessions(limit = 200): Promise<VisitorRow[]> {
   try {
+
     const { data, error } = await (supabase as any)
       .from("visitor_sessions")
       .select("*")

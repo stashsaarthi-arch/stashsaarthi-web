@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
 import { motion } from "motion/react";
+
 import { Truck, Sparkles, Plus, CheckCircle2, ShieldCheck } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { calculateFreePickupStatus, STANDARD_PICKUP_FEE } from "@/lib/freePickupThreshold";

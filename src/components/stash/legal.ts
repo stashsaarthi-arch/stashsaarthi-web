@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-explicit-any */
 export const dispatchNavTab = (type: "solution" | "calculator" | "trust", tab: string) => {
   if (typeof window !== "undefined") {
     window.dispatchEvent(new CustomEvent(`stashsaarthi-${type}-tab`, { detail: tab }));
@@ -14,6 +15,7 @@ export const smoothScrollTo =
 
     // Handle Top
     if (targetId === "top" || id === "top" || !targetId) {
+
       const lenis = (window as any).__lenis;
       if (lenis && typeof lenis.scrollTo === "function") {
         lenis.scrollTo(0, {

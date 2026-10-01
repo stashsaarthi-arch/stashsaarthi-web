@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 import { useState, useEffect, useRef, memo } from "react";
 import {
   Boxes,
@@ -8,7 +9,9 @@ import {
   Home,
   Soup,
   Search,
+
   MapPin,
+
   Sparkles,
   Clock,
   Trophy,

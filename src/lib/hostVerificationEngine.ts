@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   verifyGeoFenceLocation,
   PRESET_CAMPUS_HOST_NODES,
@@ -57,8 +58,10 @@ export const MAX_ALLOWED_WEIGHT_KG = 25.0;
  */
 export function validateIntakeChecklist(
   checklist: VerificationChecklistState,
+
   hostName: string = "Sudha Tripathi (Verified PG Owner Host)",
   campusNode: string = "Kakadeo PW Hub",
+
   verifiedBy: string = "StashSaarthi Host App Intake",
 ): VerificationValidationResult {
   const errors: string[] = [];

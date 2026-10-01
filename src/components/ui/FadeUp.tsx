@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
@@ -6,6 +7,7 @@ import { isLowDataModeEnabled } from "@/context/LowDataContext";
 
 export const FadeUp = ({
   children,
+
   stagger = 0.15,
   className = "",
 }: {

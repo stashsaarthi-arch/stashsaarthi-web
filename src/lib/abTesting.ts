@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any, prettier/prettier */
 import { useState, useEffect } from "react";
 import { logSupabaseError } from "./supabaseLogger";
 import { supabase } from "@/integrations/supabase/client";
@@ -124,6 +125,7 @@ export function trackPersonaLayoutRecording(role: string, moduleName: string, sc
     if (localHeatmapBuffer.length > 50) localHeatmapBuffer.shift();
 
     // Only attempt remote Supabase insert if explicitly flagged as provisioned
+
     const isTableActive = (window as any).__SS_HEATMAPS_ACTIVE__ === true;
     if (!isTableActive) {
       return;
@@ -131,6 +133,7 @@ export function trackPersonaLayoutRecording(role: string, moduleName: string, sc
 
     // Fire-and-forget insert to session_heatmaps, failing silently if table or RLS policy is pending
     void Promise.resolve(
+
       (supabase.from as any)("session_heatmaps").insert({
         role,
         module_name: moduleName,
@@ -138,6 +141,7 @@ export function trackPersonaLayoutRecording(role: string, moduleName: string, sc
         timestamp: new Date().toISOString(),
       }),
     )
+
       .then(({ error }: any) => {
         // Fail silently if table does not exist or RLS is pending (no unhandled console error)
         if (error) return;

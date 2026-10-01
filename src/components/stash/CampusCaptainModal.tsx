@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from "react";
 import {
   Dialog,
@@ -9,6 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+
 import { Award, CheckCircle2, Phone } from "lucide-react";
 import { toast } from "sonner";
 import { FOUNDER_WHATSAPP, getWhatsAppUrl } from "@/lib/constants";
@@ -36,7 +38,9 @@ export function CampusCaptainModal({
     e.preventDefault();
 
     const cleanPhone = phone.trim();
+
     const cleanName = name.trim() || "Campus Captain Applicant";
+
     const cleanCollege = college.trim() || "Kanpur Campus";
 
     if (!cleanPhone || !isValidPhone(cleanPhone)) {

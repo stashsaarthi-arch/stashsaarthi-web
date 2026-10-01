@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any, prettier/prettier */
 import React, { useState, useRef, useEffect } from "react";
 import { RecaptchaVerifier, signInWithPhoneNumber, ConfirmationResult } from "firebase/auth";
 import { auth } from "@/lib/firebase";
@@ -8,6 +9,7 @@ declare global {
   interface Window {
     recaptchaVerifier: RecaptchaVerifier;
   }
+
   const grecaptcha: any;
 }
 
@@ -41,6 +43,7 @@ export function PhoneAuth() {
       if (typeof window !== "undefined" && window.recaptchaVerifier) {
         try {
           window.recaptchaVerifier.clear();
+
           window.recaptchaVerifier = undefined as any;
         } catch {
           // ignore cleanup errors
@@ -75,6 +78,7 @@ export function PhoneAuth() {
       const confirmation = await signInWithPhoneNumber(auth, phoneNumber, appVerifier);
       setConfirmationResult(confirmation);
       setStep("otp");
+
     } catch (err: any) {
       console.error("Phone Auth Error:", err);
       const errCode = err?.code || "";
@@ -143,6 +147,7 @@ export function PhoneAuth() {
       await confirmationResult.confirm(otpCode);
       // Successful login, redirect to dashboard
       navigate({ to: "/host/dashboard" });
+
     } catch (err: any) {
       console.error("OTP Verification Error:", err);
       const errCode = err?.code || "";

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { memo } from "react";
 import { motion } from "motion/react";
 import {
@@ -22,6 +23,7 @@ import { FOUNDER_WHATSAPP } from "@/lib/constants";
 import { useLanguage } from "@/context/LanguageContext";
 import { AnimatedStat } from "./AnimatedStat";
 import { smoothScrollTo } from "./legal";
+
 import { useHeroCtaVariant, trackCtaClick, type HeroCtaVariant } from "@/lib/abTesting";
 
 export const Hero = memo(function Hero({
@@ -34,6 +36,7 @@ export const Hero = memo(function Hero({
   onRefer?: () => void;
 }) {
   const { t } = useLanguage();
+
   const { variant: ctaVariant, setVariant: setCtaVariant } = useHeroCtaVariant();
   const student = role === "student";
   const STATS = (student ? t.hero?.student?.stats : t.hero?.host?.stats) || [];

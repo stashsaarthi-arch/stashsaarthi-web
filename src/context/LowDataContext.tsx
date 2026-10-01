@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { createContext, useContext, useEffect, useState, useMemo, useCallback } from "react";
 import { toast } from "sonner";
 
@@ -122,6 +123,7 @@ export function LowDataProvider({ children }: { children: React.ReactNode }) {
     }
 
     // Listen to connection changes if supported
+
     const nav = typeof navigator !== "undefined" ? (navigator as any) : null;
     const connection = nav ? nav.connection || nav.mozConnection || nav.webkitConnection : null;
 

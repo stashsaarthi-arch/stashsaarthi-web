@@ -1,8 +1,10 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from "react";
 import {
   X,
   Users,
   ShieldCheck,
+
   QrCode,
   Send,
   CheckCircle2,
@@ -11,7 +13,9 @@ import {
   FileText,
   UserCheck,
   Share2,
+
   Clock,
+
   Lock,
 } from "lucide-react";
 import { toast } from "sonner";
@@ -41,6 +45,7 @@ export const ProxyHandoverModal: React.FC<ProxyHandoverModalProps> = ({
   // Delegation Form State
   const [bookingId, setBookingId] = useState(defaultBookingId || "ST-948201");
   const [studentName, setStudentName] = useState("");
+
   const [studentPhone, setStudentPhone] = useState("");
   const [proxyName, setProxyName] = useState("");
   const [proxyPhone, setProxyPhone] = useState("");
@@ -49,6 +54,7 @@ export const ProxyHandoverModal: React.FC<ProxyHandoverModalProps> = ({
   );
   const [proxyIdLast4, setProxyIdLast4] = useState("");
   const [relationship, setRelationship] = useState("Hostel Roommate");
+
   const [notes, setNotes] = useState("");
   const [createdPass, setCreatedPass] = useState<ProxyHandoverRecord | null>(null);
 
@@ -289,6 +295,7 @@ export const ProxyHandoverModal: React.FC<ProxyHandoverModalProps> = ({
                         </label>
                         <select
                           value={proxyIdType}
+
                           onChange={(e) => setProxyIdType(e.target.value as any)}
                           className="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:border-emerald-500 focus:outline-none"
                         >

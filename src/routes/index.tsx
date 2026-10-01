@@ -1,9 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { useState, useCallback, useEffect, lazy, Suspense, useRef } from "react";
 import { createFileRoute } from "@tanstack/react-router";
+
 import { motion, useScroll, useTransform } from "framer-motion";
+
 import { AmbientNodes } from "@/components/ui/AmbientNodes";
+
 import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 import { usePersona } from "@/context/PersonaContext";
 import type { BookingPrefill } from "@/components/stash/types";

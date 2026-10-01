@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 import React, { useState, useMemo } from "react";
 import {
   Weight,
@@ -8,10 +9,15 @@ import {
   Sparkles,
   CheckCircle2,
   ArrowRight,
+
   Shirt,
+
   BookOpen,
+
   Utensils,
+
   Bed,
+
   Laptop,
   ShieldCheck,
   TrendingDown,

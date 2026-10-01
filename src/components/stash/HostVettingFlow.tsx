@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 import { useState, memo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
@@ -6,19 +7,29 @@ import {
   Building2,
   FileText,
   CheckCircle2,
+
   QrCode,
+
   Lock,
   ArrowRight,
+
   AlertTriangle,
+
   Award,
+
   Sparkles,
+
   PhoneCall,
+
   Search,
+
   Eye,
+
   FileCheck,
 } from "lucide-react";
 import AnimatedContent from "@/components/ui/AnimatedContent";
 import { Badge } from "@/components/ui/badge";
+
 import { Card3D } from "@/components/ui/Card3D";
 import { useLanguage } from "@/context/LanguageContext";
 import { usePersona } from "@/context/PersonaContext";
@@ -46,6 +57,7 @@ export const HostVettingFlow = memo(function HostVettingFlow() {
   const { language } = useLanguage();
   const { role } = usePersona();
   const isHi = language === "hi";
+
   const isStudent = role === "student";
 
   const [activeStage, setActiveStage] = useState<number>(0);

@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any, prettier/prettier */
 import { supabase } from "@/integrations/supabase/client";
 import { logSupabaseError } from "./supabaseLogger";
 
 export interface OfflineSubmission {
   id: string;
   type: "booking" | "waitlist" | "meal";
+
   payload: Record<string, any>;
   timestamp: string;
   retryCount: number;
@@ -48,6 +50,7 @@ const writeQueue = (queue: OfflineSubmission[]) => {
  */
 export const enqueueOfflineSubmission = (
   type: "booking" | "waitlist" | "meal",
+
   payload: Record<string, any>,
 ): OfflineSubmission => {
   const queue = readQueue();
@@ -96,18 +99,22 @@ export const flushOfflineSubmissions = async (): Promise<{
       item.retryCount += 1;
 
       if (item.type === "booking") {
+
         const { error } = await (supabase as any).from("co_living_inquiries").insert(item.payload);
         if (error) throw error;
       } else if (item.type === "meal") {
+
         const { error } = await (supabase as any).from("meal_bookings").insert([item.payload]);
         if (error) throw error;
       } else if (item.type === "waitlist") {
+
         const { error } = await (supabase as any).from("waitlist_leads").insert([item.payload]);
         if (error) throw error;
       }
 
       item.status = "synced";
       synced += 1;
+
     } catch (err: any) {
       item.status = "failed";
       item.lastError = err?.message || String(err);

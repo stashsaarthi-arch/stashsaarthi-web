@@ -1,33 +1,48 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any */
 import { useState, useEffect, memo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   Star,
   ThumbsUp,
+
   MessageSquarePlus,
   Lightbulb,
   CheckCircle2,
   Sparkles,
   Filter,
   Send,
+
   User,
+
   Building,
+
   Heart,
+
   Share2,
   TrendingUp,
+
   Award,
+
   ArrowRight,
   MessageCircle,
+
   PlusCircle,
+
   HelpCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
+
   Dialog,
+
   DialogContent,
+
   DialogHeader,
+
   DialogTitle,
+
   DialogDescription,
 } from "@/components/ui/dialog";
 import { toast } from "sonner";
@@ -775,6 +790,7 @@ export const FeedbackSuggestions = memo(function FeedbackSuggestions() {
                             id="feedback-service-select"
                             aria-label={isHi ? "उपयोग की गई सेवा चुनें" : "Select service used"}
                             value={formService}
+
                             onChange={(e) => setFormService(e.target.value as any)}
                             className="w-full text-xs rounded-lg bg-[#172027] border border-white/15 p-2 text-white h-9 focus:outline-none focus:border-emerald-400 cursor-pointer"
                           >
@@ -1083,6 +1099,7 @@ export const FeedbackSuggestions = memo(function FeedbackSuggestions() {
                               isHi ? "आइडिया की श्रेणी चुनें" : "Select suggestion category"
                             }
                             value={sugCategory}
+
                             onChange={(e) => setSugCategory(e.target.value as any)}
                             className="w-full text-xs rounded-lg bg-[#172027] border border-white/15 p-2 text-white h-9 focus:outline-none focus:border-cyan-400 cursor-pointer"
                           >

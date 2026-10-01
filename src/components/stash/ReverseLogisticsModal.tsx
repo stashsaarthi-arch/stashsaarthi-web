@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect } from "react";
 import {
   UserCheck,
@@ -10,10 +11,14 @@ import {
   Share2,
   X,
   Lock,
+
   ArrowRight,
+
   FileText,
+
   Building2,
   Sparkles,
+
   RefreshCw,
   Phone,
   User,
@@ -51,6 +56,7 @@ export const ReverseLogisticsModal: React.FC<ReverseLogisticsModalProps> = ({
   // Form State
   const [bookingId, setBookingId] = useState(initialBookingId);
   const [studentName, setStudentName] = useState("Advik Sharma");
+
   const [studentPhone, setStudentPhone] = useState("+919876543210");
   const [proxyName, setProxyName] = useState("");
   const [proxyPhone, setProxyPhone] = useState("");

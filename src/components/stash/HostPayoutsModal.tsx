@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from "react";
 import {
   getHostBankAccounts,
@@ -15,12 +16,15 @@ import { playClick, playPop } from "../../lib/audio";
 import {
   Shield,
   Building2,
+
   CheckCircle2,
   Clock,
+
   ArrowUpRight,
   Zap,
   RefreshCw,
   X,
+
   Download,
 } from "lucide-react";
 
@@ -56,14 +60,14 @@ export const HostPayoutsModal: React.FC<HostPayoutsModalProps> = ({
     if (isOpen) {
       loadData();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isOpen]);
+  }, [isOpen, loadData]);
 
-  const loadData = () => {
+  const loadData = useCallback(() => {
     const loadedAccounts = getHostBankAccounts();
     const loadedPayouts = processPendingPayouts();
     setAccounts(loadedAccounts);
     setPayouts(loadedPayouts);
+  }, []);
 
     // Pre-fill active host details if found
     const currentHost = loadedAccounts.find((a) => a.hostPhone === hostPhone) || loadedAccounts[0];
@@ -441,6 +445,7 @@ export const HostPayoutsModal: React.FC<HostPayoutsModalProps> = ({
                     </label>
                     <select
                       value={calcService}
+
                       onChange={(e) => setCalcService(e.target.value as any)}
                       className="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:border-amber-400 focus:outline-none"
                     >

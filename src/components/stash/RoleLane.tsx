@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, memo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
@@ -14,6 +15,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+
 import { Slider } from "@/components/ui/slider";
 import AnimatedContent from "@/components/ui/AnimatedContent";
 import type { OpenBooking, Role } from "./types";

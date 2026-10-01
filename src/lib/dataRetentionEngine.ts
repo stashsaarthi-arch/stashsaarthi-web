@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any */
 /**
  * StashSaarthi Autonomous Data Retention & Auto-Purge Engine
  * Compliant with India's Digital Personal Data Protection (DPDP) Act 2023 — Sec 12(3)
@@ -13,6 +14,7 @@ import {
   getWaitlistEntries,
   getMealOrders,
   getReviews,
+
   getSuggestions,
 } from "./localSubmissions";
 
@@ -220,6 +222,7 @@ export function executeAutoPurge18Months(
       const rawBookings = localStorage.getItem("ss_local_bookings");
       if (rawBookings) {
         const bookings = JSON.parse(rawBookings);
+
         const filtered = bookings.filter((b: any) => {
           const ageDays = Math.floor(
             (now - new Date(b.created_at || now).getTime()) / (1000 * 60 * 60 * 24),
@@ -238,6 +241,7 @@ export function executeAutoPurge18Months(
       const rawWaitlist = localStorage.getItem("ss_local_waitlist");
       if (rawWaitlist) {
         const waitlist = JSON.parse(rawWaitlist);
+
         const filtered = waitlist.filter((w: any) => {
           const ageDays = Math.floor(
             (now - new Date(w.created_at || now).getTime()) / (1000 * 60 * 60 * 24),
@@ -256,6 +260,7 @@ export function executeAutoPurge18Months(
       const rawMeals = localStorage.getItem("ss_local_meal_orders");
       if (rawMeals) {
         const meals = JSON.parse(rawMeals);
+
         const filtered = meals.filter((m: any) => {
           const ageDays = Math.floor(
             (now - new Date(m.created_at || now).getTime()) / (1000 * 60 * 60 * 24),

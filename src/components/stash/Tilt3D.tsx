@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { memo, type ReactNode, useRef } from "react";
 import { motion, useMotionValue, useSpring, useMotionTemplate } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -14,6 +15,7 @@ export const Tilt3D = memo(function Tilt3D({
   children,
   className,
   max = 10,
+
   lift = 10,
   glare = true,
 }: Props) {

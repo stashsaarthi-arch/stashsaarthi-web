@@ -111,6 +111,7 @@ test.describe("Luggage Storage Booking Flow & Role-Based QR Code Verification", 
     expect(savedBookingsRaw).not.toBeNull();
 
     const savedBookings = JSON.parse(savedBookingsRaw || "[]");
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const matchingBooking = savedBookings.find((b: any) => b.token === tokenId);
     expect(matchingBooking).toBeDefined();
     expect(matchingBooking.name).toBe("Aarav Sharma");

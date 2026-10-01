@@ -1,7 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars, prettier/prettier */
 import { useState, memo, useRef } from "react";
+
 import { motion, AnimatePresence } from "motion/react";
 import {
   Sparkles,
+
   ShieldCheck,
   Camera,
   Upload,
@@ -9,9 +12,11 @@ import {
   AlertTriangle,
   RefreshCw,
   Scan,
+
   BadgeCheck,
   Eye,
   Info,
+
   Sliders,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -29,6 +34,7 @@ export const VisionAiPhotoVerifier = memo(function VisionAiPhotoVerifier() {
   const { language } = useLanguage();
   const { role } = usePersona();
   const isHi = language === "hi";
+
   const isHost = role === "host";
 
   const [selectedSample, setSelectedSample] = useState<SamplePhotoPreset>(

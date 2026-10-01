@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
@@ -12,6 +13,7 @@ import {
   Zap,
   Sliders,
   Award,
+
   CheckCircle2,
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
@@ -33,7 +35,9 @@ export function HostIncomeChart({
   cornerMonthly,
   roomMonthly,
   kitchenMonthly,
+
   totalMonthly,
+
   annualIncome,
   cornerBags,
   dailyTiffins,

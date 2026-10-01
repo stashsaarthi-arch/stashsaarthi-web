@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { Clock, Calendar, Truck, Sparkles, CheckCircle2 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -98,8 +98,7 @@ export function ScheduledPickupSelector({
       timeSlot: selectedSlot,
       formattedString: formatted,
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedDay, selectedSlot, language]);
+  }, [selectedDay, selectedSlot, language, onPickupSelect]);
 
   return (
     <div

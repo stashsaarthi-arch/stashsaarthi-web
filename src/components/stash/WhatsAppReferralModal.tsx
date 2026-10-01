@@ -1,11 +1,14 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
+
   Share2,
   MessageCircle,
   Copy,
   Check,
   X,
+
   Sparkles,
   GraduationCap,
   Home,

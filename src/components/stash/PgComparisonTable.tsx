@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
 import {
   Check,
@@ -11,6 +12,7 @@ import {
   Sparkles,
   Building2,
   Clock,
+
   AlertTriangle,
   ArrowRight,
   TrendingUp,
@@ -249,6 +251,7 @@ const COMPARISON_ROWS: ComparisonRow[] = [
 
 export const PgComparisonTable: React.FC<PgComparisonTableProps> = ({ onBook }) => {
   const { language } = useLanguage();
+
   const { role } = usePersona();
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>("all");
 

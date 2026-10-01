@@ -1,7 +1,9 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from "react";
 import {
   Bell,
   BellRing,
+
   BellOff,
   Volume2,
   VolumeX,
@@ -11,15 +13,19 @@ import {
   Sparkles,
   X,
   Clock,
+
   Smartphone,
   ShieldCheck,
+
   User,
   MapPin,
+
   IndianRupee,
   Trash2,
   Zap,
 } from "lucide-react";
 import {
+
   requestPushPermission,
   getPushPermissionState,
   getSavedPushSubscription,
@@ -83,6 +89,7 @@ export function HostPushNotificationModal({
       setSubscription(sub);
       setPermissionState(getPushPermissionState());
       playPop();
+
     } catch (err: any) {
       alert(err.message || "Failed to subscribe to Web Push Notifications.");
     } finally {

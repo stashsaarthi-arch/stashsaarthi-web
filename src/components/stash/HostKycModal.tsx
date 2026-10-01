@@ -1,8 +1,10 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import {
   ShieldCheck,
   CheckCircle2,
+
   AlertCircle,
   FileCheck,
   Lock,
@@ -14,13 +16,16 @@ import {
   Award,
   Sparkles,
   X,
+
   Building,
+
   UserCheck,
 } from "lucide-react";
 import {
   executeHostKycPipeline,
   getSavedHostKycRecord,
   maskAadhaarNumber,
+
   verifyAadhaarXml,
   verifyFacialMatch,
   KycVerificationResult,

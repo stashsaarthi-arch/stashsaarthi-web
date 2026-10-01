@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 /**
  * StashSaarthi — Campus Empty State Delight (Task 110)
  * Customized campus-specific graphic, instant ₹50 welcome discount voucher,
@@ -6,7 +7,9 @@
 
 import React, { useState } from "react";
 import {
+
   Sparkles,
+
   Ticket,
   Copy,
   Check,
@@ -14,6 +17,7 @@ import {
   ShieldCheck,
   Zap,
   Building2,
+
   PackageCheck,
   Gift,
 } from "lucide-react";

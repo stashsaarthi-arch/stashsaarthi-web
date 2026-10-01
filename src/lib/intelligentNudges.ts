@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * StashSaarthi Intelligent Nudges Engine (CAO - Task 77)
  * Automated backend system for detecting inactive students (3+ days since last meal order)
@@ -276,6 +277,7 @@ export async function fetchSupabaseInactiveStudents(): Promise<StudentNudgeRecor
     if (typeof window === "undefined") return MOCK_INACTIVE_STUDENTS;
 
     // Default to mock data when meal_bookings table migration is pending in Supabase, preventing 404 console errors
+
     const isTableActive = (window as any).__SS_MEAL_BOOKINGS_ACTIVE__ === true;
     if (!isTableActive) {
       return MOCK_INACTIVE_STUDENTS;

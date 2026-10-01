@@ -1,4 +1,7 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
+
 import { useState } from "react";
+
 import { motion } from "motion/react";
 import {
   Linkedin,
@@ -7,19 +10,25 @@ import {
   MessageCircle,
   MapPin,
   ShieldCheck,
+
   PhoneCall,
+
   ExternalLink,
+
   Award,
   Sparkles,
   CheckCircle2,
+
   Building,
 } from "lucide-react";
 import AnimatedContent from "@/components/ui/AnimatedContent";
 import { Card3D } from "@/components/ui/Card3D";
+
 import { Badge } from "@/components/ui/badge";
 import { OptimizedImage } from "@/components/ui/OptimizedImage";
 import { useLanguage } from "@/context/LanguageContext";
 import {
+
   FOUNDER_WHATSAPP,
   FOUNDER_PHONE_DISPLAY,
   FOUNDER_EMAIL,

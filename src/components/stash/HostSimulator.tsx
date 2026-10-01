@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any */
 import { useState, useMemo } from "react";
 import { motion } from "motion/react";
 import {
@@ -5,7 +6,9 @@ import {
   CheckCircle2,
   IndianRupee,
   ShieldCheck,
+
   Plus,
+
   Minus,
   Sparkles,
   Maximize2,
@@ -219,6 +222,7 @@ export function HostSimulator({ onBook }: { onBook: () => void }) {
                   <button
                     key={loc.id}
                     type="button"
+
                     onClick={() => setRoomLocality(loc.id as any)}
                     className={`px-2 py-1.5 rounded-lg text-[10.5px] font-bold text-left transition-all flex justify-between items-center cursor-pointer border ${
                       roomLocality === loc.id

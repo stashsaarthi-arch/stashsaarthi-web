@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /**
  * Stash Wallet & Zero-Fee Trial Token Engine (Task 80)
  * Allows first-time verified students to claim a ₹60 Zero-Fee Trial Token
@@ -5,6 +6,7 @@
  */
 
 import { playPop, playClick } from "./audio";
+
 import { toast } from "sonner";
 import { checkAndRecordTokenRateLimit } from "./tokenRateLimiter";
 

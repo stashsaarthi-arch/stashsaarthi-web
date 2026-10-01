@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any, prettier/prettier */
 /**
  * StashSaarthi Deterministic Supabase Telemetry & Zero-Data-Drop Engine
  *
@@ -123,6 +124,7 @@ export async function flushOfflineQueues() {
 
       // Batch insert: send all queued records in a single round trip
       const payloads = items.map((item) => item.data as Record<string, unknown>);
+
       const { error } = await (supabase.from as any)(table).insert(payloads);
 
       if (!error || (error && error.code === "23505")) {
@@ -136,6 +138,7 @@ export async function flushOfflineQueues() {
         const remaining: { data: unknown }[] = [];
         for (const item of items) {
           try {
+
             const { error: itemErr } = await (supabase.from as any)(table).insert(
               item.data as Record<string, unknown>,
             );

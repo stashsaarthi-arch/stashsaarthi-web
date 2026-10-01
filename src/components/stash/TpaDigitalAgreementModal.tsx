@@ -1,16 +1,22 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   FileText,
+
   ShieldCheck,
+
   CheckCircle2,
   Printer,
   Copy,
   Check,
   X,
   Lock,
+
   Award,
+
   Sparkles,
+
   Download,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";

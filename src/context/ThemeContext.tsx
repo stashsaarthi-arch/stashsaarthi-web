@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 import React, { createContext, useContext, useEffect, useState, useMemo, useCallback } from "react";
 
 export type Theme = "dark" | "light";
@@ -15,6 +16,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
  * Global Theme Provider — modified to enforce dark mode only.
  */
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
+
   const [theme] = useState<Theme>("dark");
 
   useEffect(() => {

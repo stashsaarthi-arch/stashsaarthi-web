@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { memo, useState } from "react";
 import { usePredictivePersonaAI } from "@/lib/predictiveAI";
 import { usePersona } from "@/context/PersonaContext";
 import { useLanguage } from "@/context/LanguageContext";
+
 import { Sparkles, BrainCircuit, ArrowRight, Zap, CheckCircle2 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { playPop } from "@/lib/audio";

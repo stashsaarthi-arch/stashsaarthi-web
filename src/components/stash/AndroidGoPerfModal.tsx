@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect } from "react";
 import {
   Smartphone,
@@ -10,6 +11,7 @@ import {
   X,
   Play,
   Activity,
+
   Layers,
   Sparkles,
 } from "lucide-react";

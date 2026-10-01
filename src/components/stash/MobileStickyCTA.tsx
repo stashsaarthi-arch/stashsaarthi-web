@@ -1,8 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
+
 import { Utensils, Package, Home, Users } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { dispatchNavTab, smoothScrollTo } from "./legal";
 import { playTab, playPop } from "@/lib/audio";
+
 import { ArrowRight, Zap } from "lucide-react";
 import type { OpenBooking } from "./types";
 import { useState, useEffect, useRef } from "react";

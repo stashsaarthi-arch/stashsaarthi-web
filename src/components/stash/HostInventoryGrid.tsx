@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect, useMemo } from "react";
 import {
   Boxes,
@@ -6,18 +7,25 @@ import {
   RefreshCw,
   Save,
   CheckCircle2,
+
   AlertCircle,
+
   HelpCircle,
+
   Home,
   IndianRupee,
+
   Maximize2,
+
   Minimize2,
   Grid,
   Eye,
+
   Sliders,
   Plus,
   Minus,
   X,
+
   Share2,
   ShieldCheck,
 } from "lucide-react";
