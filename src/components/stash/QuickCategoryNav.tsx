@@ -138,35 +138,55 @@ export const QuickCategoryNav = memo(function QuickCategoryNav() {
   const accentColor = isStudent ? "var(--emerald)" : "var(--amber)";
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const shouldBeSticky = scrollY > 480;
-      if (shouldBeSticky !== stickyRef.current) {
-        stickyRef.current = shouldBeSticky;
-        setIsSticky(shouldBeSticky);
-      }
-
-      // Track active section
-      for (let i = CATEGORIES.length - 1; i >= 0; i--) {
-        const cat = CATEGORIES[i];
-        if (cat) {
-          const el = document.getElementById(cat.id);
-          if (el) {
-            const rect = el.getBoundingClientRect();
-            if (rect.top <= 200) {
-              if (cat.id !== activeRef.current) {
-                activeRef.current = cat.id;
-                setActive(cat.id);
-              }
-              break;
-            }
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrollY = window.scrollY;
+          const shouldBeSticky = scrollY > 480;
+          if (shouldBeSticky !== stickyRef.current) {
+            stickyRef.current = shouldBeSticky;
+            setIsSticky(shouldBeSticky);
           }
-        }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    // Use IntersectionObserver to track active section instead of getBoundingClientRect on scroll
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // Find the visible entry that is closest to top (intersecting)
+        const visibleEntries = entries.filter(e => e.isIntersecting);
+        if (visibleEntries.length > 0) {
+          // Sort by top coordinate to find the most relevant one
+          visibleEntries.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+          const topEntry = visibleEntries[0];
+          const id = topEntry.target.id;
+          if (id !== activeRef.current) {
+            activeRef.current = id;
+            setActive(id);
+          }
+        }
+      },
+      {
+        rootMargin: "-20% 0px -60% 0px", // triggers when element is in upper part of screen
+        threshold: 0
+      }
+    );
+
+    CATEGORIES.forEach((cat) => {
+      const el = document.getElementById(cat.id);
+      if (el) observer.observe(el);
+    });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      observer.disconnect();
+    };
   }, []);
 
   const handleSearchResultClick = (target: string) => {

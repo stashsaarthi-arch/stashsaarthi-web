@@ -44,7 +44,7 @@ interface HomeDeepModulesProps {
 
 export function HomeDeepModules({ role, onBook, onRefer }: HomeDeepModulesProps) {
   return (
-    <div className="hidden md:block content-visibility-auto optimize-render">
+    <div className="hidden md:block">
       {role === "student" && (
         <>
           <FadeUp>

@@ -516,9 +516,10 @@ function SpatialVoid() {
         0;
 
       const { x: mouseX, y: mouseY } = mouseOffsetRef.current;
+      const isMobile = window.innerWidth < 640;
 
       // Direct GPU DOM updates — event-throttled without unthrottled CPU loops
-      if (containerRef.current) {
+      if (containerRef.current && !isMobile) {
         containerRef.current.style.transform = `translate3d(${mouseX * 0.4}px, ${mouseY * 0.4}px, 0)`;
       }
       if (starfieldRef.current) {
@@ -534,17 +535,17 @@ function SpatialVoid() {
       if (photon2Ref.current) {
         photon2Ref.current.style.transform = `translateY(${-(scrollY * 0.12) % 30}px)`;
       }
-      if (gridRef.current) {
+      if (gridRef.current && !isMobile) {
         const dynamicPitch = 64 + Math.sin(scrollY * 0.0012) * 2.5;
         gridRef.current.style.transform = `rotateX(${dynamicPitch}deg) translateY(${-(scrollY * 0.42) % 48}px) translateZ(0)`;
       }
-      if (node1Ref.current) {
+      if (node1Ref.current && !isMobile) {
         node1Ref.current.style.transform = `translateY(${-(scrollY * 0.15)}px) translateZ(0)`;
       }
-      if (node2Ref.current) {
+      if (node2Ref.current && !isMobile) {
         node2Ref.current.style.transform = `translateY(${-(scrollY * 0.24)}px) translateZ(0)`;
       }
-      if (node3Ref.current) {
+      if (node3Ref.current && window.innerWidth >= 768) {
         node3Ref.current.style.transform = `translateY(${-(scrollY * 0.09)}px) translateZ(0)`;
       }
       if (light1Ref.current) {
