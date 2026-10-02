@@ -32,6 +32,9 @@
 8. **Surgical Deprecation & Debloat:** Eradicated deprecated modules (Saarthi Connect), balanced SolutionsHub tab grid to 3 equal 214px columns (purging 4th empty slot), normalized text gradients to brand tokens, and purged heavyweight unused dependencies.
 9. **Full-Funnel Booking Engine:** Direct prefilled room booking, visit scheduling, kitchen escrow passes, and UPI QR payments across all platform nodes.
 10. **Enterprise SEO & Structured Data:** Deep Schema.org JSON-LD coverage (Co-Living, LocalBusiness, FAQ), DynamicOGHead, and automated sitemap generation.
+11. **World-Class Smooth Scroll Architecture:** Eradicated React `useState` scroll re-renders in `SpatialVoid` with direct GPU DOM ref transforms; enabled native 120Hz ProMotion touch scrolling on mobile (`syncTouch: false`); added `--scroll-velocity` CSS variable exporter with `.velocity-skew` physics inertia; optimized `body.is-scrolling` backdrop-blur bypass with tap preservation on interactive controls.
+12. **Scroll Scrubbing & Velocity Skew Integration:** Applied Studio Freight velocity skewing to `SolutionsHub` and `StashTimeline`; bound `StashTimeline` stage progress 1-to-1 with scroll position via Framer Motion `useScroll`; structured `HomeSolutions` into z-index stacked card deck layers.
+13. **TanStack Start Security Patch & Live Vercel Deployment:** Upgraded `@tanstack/react-start` to `1.168.60`, `@tanstack/react-router` to `1.170.41`, and `@tanstack/router-plugin` to `1.168.42`; resolved Vercel security block and deployed live production build to `https://stashsaarthi-web.vercel.app/`.
 
 ---
 

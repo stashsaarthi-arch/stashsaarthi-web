@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
-import { useState, useEffect, memo } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { useState, useEffect, useRef, memo } from "react";
+import { motion, AnimatePresence, useScroll } from "motion/react";
 import {
   Truck,
   ShieldCheck,

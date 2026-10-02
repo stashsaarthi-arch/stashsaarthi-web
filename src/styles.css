@@ -1018,34 +1018,12 @@ body {
    HARDWARE ACCELERATION & PAINT CONTAINMENT
    ========================================= */
 
-/* Promote structural layout containers to their own GPU composite layer
-   without applying it globally (which causes memory bloat) */
-header,
-main,
-footer,
-section,
-article {
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  perspective: 1000px;
-}
-
-/* Strict paint containment on complex repeating elements to prevent reflow
-   during fast scrolling. layout paint style isolations guarantee the 
-   compositor doesn't redraw the whole page when scrolling through cards. */
+/* Paint containment on complex card elements to prevent reflow */
 .glass,
 .card,
 [role="dialog"],
 [data-lenis-prevent] {
-  contain: layout paint style;
-}
-
-/* Scroll-Isolate Architecture: Kill all hover calculations and heavy paints while scrolling */
-body.is-scrolling * {
-  pointer-events: none !important;
-  backdrop-filter: none !important;
-  box-shadow: none !important;
-  transition: none !important;
+  contain: layout style;
 }
 
 /* Essential native overrides with strict Mobile Viewport Containment */

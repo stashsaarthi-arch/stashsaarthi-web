@@ -9,7 +9,7 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useState, useRef, type ReactNode } from "react";
 
 import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import { PageTransition } from "@/components/ui/PageTransition";
@@ -59,7 +59,7 @@ function NotFoundComponent() {
   );
 }
 
-function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+function ErrorComponent({ error, reset }: { error: any; reset: () => void }) {
   console.error(error);
   const router = useRouter();
   useEffect(() => {
@@ -487,51 +487,96 @@ function RootShell({ children }: { children: ReactNode }) {
 }
 
 function SpatialVoid() {
-  const [scrollY, setScrollY] = useState(0);
-  const [mouseOffset, setMouseOffset] = useState({ x: 0, y: 0 });
   const [mounted, setMounted] = useState(false);
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const starfieldRef = useRef<HTMLDivElement>(null);
+  const domeRef = useRef<HTMLDivElement>(null);
+  const photon1Ref = useRef<HTMLDivElement>(null);
+  const photon2Ref = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+  const node1Ref = useRef<HTMLDivElement>(null);
+  const node2Ref = useRef<HTMLDivElement>(null);
+  const node3Ref = useRef<HTMLDivElement>(null);
+  const light1Ref = useRef<HTMLDivElement>(null);
+  const light2Ref = useRef<HTMLDivElement>(null);
+
+  const scrollYRef = useRef(0);
+  const mouseOffsetRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     setMounted(true);
     let rafId: number;
 
-    const onScroll = () => {
-      const currentScroll =
+    const onMouseMove = (e: MouseEvent) => {
+      // Subtle 3D camera pan based on mouse coordinates (-15px to +15px)
+      mouseOffsetRef.current = {
+        x: (e.clientX / window.innerWidth - 0.5) * 20,
+        y: (e.clientY / window.innerHeight - 0.5) * 15,
+      };
+    };
 
+    const updateLoop = () => {
+      const currentScroll =
         (window as any).__lenis?.scroll ??
         window.scrollY ??
         document.documentElement.scrollTop ??
         0;
-      setScrollY(currentScroll);
-    };
 
-    const onMouseMove = (e: MouseEvent) => {
-      // Subtle 3D camera pan based on mouse coordinates (-15px to +15px)
-      const x = (e.clientX / window.innerWidth - 0.5) * 20;
-      const y = (e.clientY / window.innerHeight - 0.5) * 15;
-      setMouseOffset({ x, y });
-    };
+      scrollYRef.current = currentScroll;
+      const scrollY = currentScroll;
+      const { x: mouseX, y: mouseY } = mouseOffsetRef.current;
 
-    const updateLoop = () => {
-      onScroll();
+      // Direct GPU DOM updates — ZERO React re-renders on scroll frame!
+      if (containerRef.current) {
+        containerRef.current.style.transform = `translate3d(${mouseX * 0.4}px, ${mouseY * 0.4}px, 0)`;
+      }
+      if (starfieldRef.current) {
+        starfieldRef.current.style.transform = `translateY(${-(scrollY * 0.08)}px) translateZ(0)`;
+      }
+      if (domeRef.current) {
+        const domeScale = 1 + Math.min(scrollY * 0.00025, 0.12);
+        domeRef.current.style.transform = `translateX(-50%) translateY(${-(scrollY * 0.18)}px) scale(${domeScale}) translateZ(0)`;
+      }
+      if (photon1Ref.current) {
+        photon1Ref.current.style.transform = `translateY(${-(scrollY * 0.12) % 30}px)`;
+      }
+      if (photon2Ref.current) {
+        photon2Ref.current.style.transform = `translateY(${-(scrollY * 0.12) % 30}px)`;
+      }
+      if (gridRef.current) {
+        const dynamicPitch = 64 + Math.sin(scrollY * 0.0012) * 2.5;
+        gridRef.current.style.transform = `rotateX(${dynamicPitch}deg) translateY(${-(scrollY * 0.42) % 48}px) translateZ(0)`;
+      }
+      if (node1Ref.current) {
+        node1Ref.current.style.transform = `translateY(${-(scrollY * 0.15)}px) translateZ(0)`;
+      }
+      if (node2Ref.current) {
+        node2Ref.current.style.transform = `translateY(${-(scrollY * 0.24)}px) translateZ(0)`;
+      }
+      if (node3Ref.current) {
+        node3Ref.current.style.transform = `translateY(${-(scrollY * 0.09)}px) translateZ(0)`;
+      }
+      if (light1Ref.current) {
+        light1Ref.current.style.transform = `translateY(${scrollY * 0.16}px) translateZ(0)`;
+      }
+      if (light2Ref.current) {
+        light2Ref.current.style.transform = `translateY(${-(scrollY * 0.12)}px) translateZ(0)`;
+      }
+
       rafId = requestAnimationFrame(updateLoop);
     };
 
-    window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("mousemove", onMouseMove, { passive: true });
     rafId = requestAnimationFrame(updateLoop);
 
     return () => {
-      window.removeEventListener("scroll", onScroll);
       window.removeEventListener("mousemove", onMouseMove);
       cancelAnimationFrame(rafId);
     };
   }, []);
 
   if (!mounted) return <div className="fixed inset-0 z-0 pointer-events-none bg-[#030608]" />;
-
-  // Dynamic 3D camera pitch that reacts to user scroll velocity
-  const dynamicPitch = 64 + Math.sin(scrollY * 0.0012) * 2.5;
 
   return (
     <div
@@ -540,13 +585,12 @@ function SpatialVoid() {
     >
       {/* ── UNIFIED 3D SPATIAL PARALLAX ENVIRONMENT (E-Summit 3D Cosmos DNA) ── */}
       <div
+        ref={containerRef}
         className="absolute inset-0 overflow-hidden pointer-events-none transition-transform duration-700 ease-out"
-        style={{
-          transform: `translate3d(${mouseOffset.x * 0.4}px, ${mouseOffset.y * 0.4}px, 0)`,
-        }}
       >
         {/* 1. DEEP COSMIC STARFIELD LAYER (Parallax Depth 1) */}
         <div
+          ref={starfieldRef}
           className="absolute inset-0 opacity-40 transform-gpu"
           style={{
             backgroundImage: `
@@ -560,13 +604,13 @@ function SpatialVoid() {
               radial-gradient(2px 2px at 910px 280px, rgba(0,245,160,0.7), rgba(0,0,0,0))
             `,
             backgroundSize: "950px 450px",
-            transform: `translateY(${-(scrollY * 0.08)}px) translateZ(0)`,
             willChange: "transform",
           }}
         />
 
         {/* 2. THE ICONIC E-SUMMIT CURVED PLANETARY HORIZON DOME & CORONA AURORA */}
         <div
+          ref={domeRef}
           className="absolute top-[18%] sm:top-[20%] left-1/2 w-full sm:w-[120vw] h-[480px] sm:h-[580px] rounded-[100%] pointer-events-none transform-gpu"
           style={{
             background:
@@ -574,7 +618,6 @@ function SpatialVoid() {
             borderBottom: "1.5px solid rgba(0, 245, 160, 0.5)",
             boxShadow:
               "0 14px 70px -10px rgba(0, 245, 160, 0.4), inset 0 -20px 50px -10px rgba(16, 185, 129, 0.3)",
-            transform: `translateX(-50%) translateY(${-(scrollY * 0.18)}px) scale(${1 + Math.min(scrollY * 0.00025, 0.12)}) translateZ(0)`,
             willChange: "transform",
           }}
         />
@@ -583,20 +626,20 @@ function SpatialVoid() {
         <div className="absolute top-[28%] sm:top-[32%] inset-x-0 h-[3px] overflow-hidden pointer-events-none">
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-emerald-400/40 to-transparent" />
           <div
+            ref={photon1Ref}
             className="photon-streak w-48 sm:w-96"
             style={{
               top: 0,
               animationDuration: "5.5s",
-              transform: `translateY(${-(scrollY * 0.12) % 30}px)`,
             }}
           />
           <div
+            ref={photon2Ref}
             className="photon-streak w-36 sm:w-72"
             style={{
               top: 0,
               animationDuration: "8s",
               animationDelay: "2.8s",
-              transform: `translateY(${-(scrollY * 0.12) % 30}px)`,
             }}
           />
         </div>
@@ -607,6 +650,7 @@ function SpatialVoid() {
           style={{ perspective: "680px", perspectiveOrigin: "50% 27%" }}
         >
           <div
+            ref={gridRef}
             className="w-[140vw] sm:w-[160vw] h-[170vh] absolute top-[22%] sm:top-[26%] left-[-20vw] sm:left-[-30vw]"
             style={{
               backgroundImage: `
@@ -615,7 +659,6 @@ function SpatialVoid() {
                 radial-gradient(circle 1.5px at 0 0, rgba(0, 245, 160, 0.6) 100%, transparent 0)
               `,
               backgroundSize: "48px 48px, 48px 48px, 48px 48px",
-              transform: `rotateX(${dynamicPitch}deg) translateY(${-(scrollY * 0.42) % 48}px) translateZ(0)`,
               transformOrigin: "50% 0%",
               maskImage:
                 "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.95) 10%, rgba(0,0,0,1) 50%, rgba(0,0,0,0.2) 85%, transparent 100%)",
@@ -628,33 +671,27 @@ function SpatialVoid() {
 
         {/* 5. FLOATING TELEMETRY RADAR NODES (Mobile + Desktop Parallax Anchors) */}
         <div
+          ref={node1Ref}
           className="hidden sm:flex absolute top-[32%] sm:top-[36%] left-[3%] sm:left-[8%] font-mono text-[9px] sm:text-[10px] tracking-wider sm:tracking-widest text-emerald-400/70 border border-emerald-500/30 bg-emerald-950/50 backdrop-blur-md px-2.5 py-1.5 rounded-lg items-center gap-2 transform-gpu shadow-[0_0_15px_rgba(16,185,129,0.2)]"
-          style={{
-            transform: `translateY(${-(scrollY * 0.15)}px) translateZ(0)`,
-            willChange: "transform",
-          }}
+          style={{ willChange: "transform" }}
         >
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
           <span>NODE 01 // KANPUR [26.4°N]</span>
         </div>
 
         <div
+          ref={node2Ref}
           className="hidden sm:flex absolute top-[46%] sm:top-[50%] right-[3%] sm:right-[10%] font-mono text-[9px] sm:text-[10px] tracking-wider sm:tracking-widest text-teal-400/60 border border-teal-500/30 bg-teal-950/40 backdrop-blur-md px-2.5 py-1.5 rounded-lg items-center gap-2 transform-gpu shadow-[0_0_15px_rgba(20,184,166,0.2)]"
-          style={{
-            transform: `translateY(${-(scrollY * 0.24)}px) translateZ(0)`,
-            willChange: "transform",
-          }}
+          style={{ willChange: "transform" }}
         >
           <span className="w-1.5 h-1.5 rounded-full bg-teal-400" />
           <span>VAULT ALPHA // ESCROW VERIFIED</span>
         </div>
 
         <div
+          ref={node3Ref}
           className="hidden md:flex absolute top-[20%] right-[22%] font-mono text-[9px] tracking-widest text-cyan-400/40 border border-cyan-500/20 bg-cyan-950/20 px-2.5 py-1 rounded-md items-center gap-1.5 transform-gpu"
-          style={{
-            transform: `translateY(${-(scrollY * 0.09)}px) translateZ(0)`,
-            willChange: "transform",
-          }}
+          style={{ willChange: "transform" }}
         >
           <span className="w-1.5 h-1.5 rounded-full bg-cyan-400/60" />
           <span>STASHSAARTHI // 3D SPATIAL MATRIX</span>
@@ -662,18 +699,14 @@ function SpatialVoid() {
 
         {/* 6. AMBIENT COMPOSITING RADIAL LIGHTS (Zero-Lag Composite Pass) */}
         <div
+          ref={light1Ref}
           className="absolute top-[-10%] left-[-15%] sm:left-[-10%] w-[90vw] sm:w-[60vw] h-[90vw] sm:h-[60vw] bg-[radial-gradient(circle,rgba(16,185,129,0.16)_0%,transparent_70%)] transform-gpu pointer-events-none"
-          style={{
-            transform: `translateY(${scrollY * 0.16}px) translateZ(0)`,
-            willChange: "transform",
-          }}
+          style={{ willChange: "transform" }}
         />
         <div
+          ref={light2Ref}
           className="absolute bottom-[-15%] right-[-15%] sm:right-[-10%] w-[90vw] sm:w-[70vw] h-[90vw] sm:h-[70vw] bg-[radial-gradient(circle,rgba(20,184,166,0.14)_0%,transparent_70%)] transform-gpu pointer-events-none"
-          style={{
-            transform: `translateY(${-(scrollY * 0.12)}px) translateZ(0)`,
-            willChange: "transform",
-          }}
+          style={{ willChange: "transform" }}
         />
 
         {/* 7. ULTRA-SUBTLE FILM NOISE (Desktop only for pure clarity) */}
@@ -690,28 +723,10 @@ function SpatialVoid() {
 
 function LenisHandler() {
   const lenis = useLenis();
-  const { isLowData } = useLowData();
 
   useEffect(() => {
     if (!lenis) return;
-
     (window as any).__lenis = lenis;
-
-    // Scroll-Isolate Architecture: add .is-scrolling while scrolling, remove 100ms after scroll stops
-    let isScrollingTimeout: NodeJS.Timeout;
-    const handleScroll = () => {
-      document.body.classList.add("is-scrolling");
-      clearTimeout(isScrollingTimeout);
-      isScrollingTimeout = setTimeout(() => {
-        document.body.classList.remove("is-scrolling");
-      }, 100);
-    };
-
-    lenis.on("scroll", handleScroll);
-
-    // Force ultra-smooth 120 FPS scrolling via Lenis native mechanism if needed,
-    // but by default Lenis ties to browser refresh rate (which is usually ideal).
-    // Native requestAnimationFrame handles it.
 
     let resizeTimer: NodeJS.Timeout;
     const handleResize = () => {
@@ -723,19 +738,13 @@ function LenisHandler() {
 
     window.addEventListener("resize", handleResize, { passive: true });
     return () => {
-      lenis.off("scroll", handleScroll);
       clearTimeout(resizeTimer);
-      clearTimeout(isScrollingTimeout);
-      if (typeof document !== "undefined") {
-        document.body.classList.remove("is-scrolling");
-      }
       window.removeEventListener("resize", handleResize);
       if (typeof window !== "undefined") {
-
         delete (window as any).__lenis;
       }
     };
-  }, [lenis, isLowData]);
+  }, [lenis]);
 
   return null;
 }
@@ -832,13 +841,13 @@ function RootComponent() {
                       <ReactLenis
                         root
                         options={{
-                          lerp: 0.07, // Apple-like momentum inertia
+                          lerp: 0.08, // Apple-like momentum inertia
                           orientation: "vertical",
                           gestureOrientation: "vertical",
                           smoothWheel: true,
                           wheelMultiplier: 1.0,
-                          syncTouch: true, // Force synthetic touch for consistent iPhone feel on Android
-                          touchMultiplier: 2.5, // Mimic iOS flick velocity
+                          syncTouch: false, // Native 120Hz ProMotion touch on mobile devices
+                          touchMultiplier: 1.2,
                           infinite: false,
                           autoRaf: true, // Native rAF baseline
                         }}
