@@ -63,15 +63,7 @@ export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: S
 
     let mouseX = 0;
     let mouseY = 0;
-
-    const handleMouseMove = (e: MouseEvent) => {
-      if (isMobile || !isIntersecting) return;
-      const rect = sectionEl.getBoundingClientRect();
-      const relativeX = (e.clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
-      const relativeY = (e.clientY - (rect.top + rect.height / 2)) / (rect.height / 2);
-      mouseX = relativeX;
-      mouseY = relativeY;
-    };
+    let ticking = false;
 
     const updateParallax = () => {
       if (isIntersecting && sectionEl) {
@@ -102,20 +94,38 @@ export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: S
           gridRef.current.style.transform = `translate3d(0px, ${translateY}px, 0px)`;
         }
       }
-      rafId = requestAnimationFrame(updateParallax);
+      ticking = false;
+    };
+
+    const requestUpdate = () => {
+      if (!ticking && isIntersecting) {
+        ticking = true;
+        requestAnimationFrame(updateParallax);
+      }
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (isMobile || !isIntersecting) return;
+      const rect = sectionEl.getBoundingClientRect();
+      const relativeX = (e.clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
+      const relativeY = (e.clientY - (rect.top + rect.height / 2)) / (rect.height / 2);
+      mouseX = relativeX;
+      mouseY = relativeY;
+      requestUpdate();
     };
 
     if (!isMobile) {
       window.addEventListener("mousemove", handleMouseMove, { passive: true });
     }
-    rafId = requestAnimationFrame(updateParallax);
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    requestUpdate();
 
     return () => {
       observer.disconnect();
       if (!isMobile) {
         window.removeEventListener("mousemove", handleMouseMove);
       }
-      cancelAnimationFrame(rafId);
+      window.removeEventListener("scroll", requestUpdate);
     };
   }, []);
 

@@ -26,6 +26,7 @@ export const MagneticButton = ({
   const springY = useSpring(y, ELITE_SPRING);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (typeof window !== "undefined" && window.innerWidth < 768) return;
     const rect = ref.current?.getBoundingClientRect();
     if (rect) {
       const centerX = rect.left + rect.width / 2;

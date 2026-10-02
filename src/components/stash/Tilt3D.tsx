@@ -29,7 +29,7 @@ export const Tilt3D = memo(function Tilt3D({
   const glareY = useSpring(useMotionValue(50), springConfig);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!ref.current) return;
+    if (!ref.current || (typeof window !== "undefined" && window.innerWidth < 768)) return;
     const rect = ref.current.getBoundingClientRect();
     const width = rect.width;
     const height = rect.height;

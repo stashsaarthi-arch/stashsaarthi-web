@@ -1,23 +1,35 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 export const CustomCursor = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const cursorRef = useRef<HTMLDivElement>(null);
   const [isHovering, setIsHovering] = useState(false);
 
   useEffect(() => {
+    let mouseX = 0;
+    let mouseY = 0;
+    let ticking = false;
+
+    const updatePosition = () => {
+      if (cursorRef.current) {
+        cursorRef.current.style.transform = `translate3d(${mouseX - (isHovering ? 20 : 8)}px, ${mouseY - (isHovering ? 20 : 8)}px, 0)`;
+      }
+      ticking = false;
+    };
+
     const updateMousePosition = (e: MouseEvent) => {
-      setMousePosition({
-        x: e.clientX,
-        y: e.clientY,
-      });
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(updatePosition);
+      }
     };
 
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      // Check if hovering over interactive elements
       if (
         target.closest("button") ||
         target.closest("a") ||
@@ -33,38 +45,25 @@ export const CustomCursor = () => {
       }
     };
 
-    window.addEventListener("mousemove", updateMousePosition);
-    window.addEventListener("mouseover", handleMouseOver);
+    window.addEventListener("mousemove", updateMousePosition, { passive: true });
+    window.addEventListener("mouseover", handleMouseOver, { passive: true });
 
     return () => {
       window.removeEventListener("mousemove", updateMousePosition);
       window.removeEventListener("mouseover", handleMouseOver);
     };
-  }, []);
+  }, [isHovering]);
 
-  // To center the 16x16 cursor at the mouse point, we subtract 8 from x and y
   return (
-    <motion.div
-      className={`hidden md:flex fixed top-0 left-0 rounded-full pointer-events-none z-[9999] items-center justify-center transform-gpu`}
+    <div
+      ref={cursorRef}
+      className="hidden md:flex fixed top-0 left-0 rounded-full pointer-events-none z-[9999] items-center justify-center transition-all duration-150 ease-out"
       style={{
-        backdropFilter: isHovering ? "none" : "blur(4px)",
-        willChange: "transform",
-      }}
-      animate={{
-        x: mousePosition.x - (isHovering ? 20 : 8),
-        y: mousePosition.y - (isHovering ? 20 : 8),
-        scale: isHovering ? 2.5 : 1,
-        backgroundColor: isHovering ? "rgba(16, 185, 129, 0)" : "rgba(16, 185, 129, 0.8)",
-        borderColor: isHovering ? "rgba(16, 185, 129, 0.5)" : "rgba(16, 185, 129, 0)",
-        borderWidth: isHovering ? "1px" : "0px",
         width: isHovering ? "40px" : "16px",
         height: isHovering ? "40px" : "16px",
-      }}
-      transition={{
-        type: "spring",
-        stiffness: 400,
-        damping: 28,
-        mass: 0.5,
+        backgroundColor: isHovering ? "rgba(16, 185, 129, 0)" : "rgba(16, 185, 129, 0.8)",
+        border: isHovering ? "1px solid rgba(16, 185, 129, 0.5)" : "none",
+        willChange: "transform",
       }}
     />
   );

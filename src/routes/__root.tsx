@@ -506,28 +506,18 @@ function SpatialVoid() {
 
   useEffect(() => {
     setMounted(true);
-    let rafId: number;
+    let ticking = false;
 
-    const onMouseMove = (e: MouseEvent) => {
-      // Subtle 3D camera pan based on mouse coordinates (-15px to +15px)
-      mouseOffsetRef.current = {
-        x: (e.clientX / window.innerWidth - 0.5) * 20,
-        y: (e.clientY / window.innerHeight - 0.5) * 15,
-      };
-    };
-
-    const updateLoop = () => {
-      const currentScroll =
+    const updateVisuals = () => {
+      const scrollY =
         (window as any).__lenis?.scroll ??
         window.scrollY ??
         document.documentElement.scrollTop ??
         0;
 
-      scrollYRef.current = currentScroll;
-      const scrollY = currentScroll;
       const { x: mouseX, y: mouseY } = mouseOffsetRef.current;
 
-      // Direct GPU DOM updates — ZERO React re-renders on scroll frame!
+      // Direct GPU DOM updates — event-throttled without unthrottled CPU loops
       if (containerRef.current) {
         containerRef.current.style.transform = `translate3d(${mouseX * 0.4}px, ${mouseY * 0.4}px, 0)`;
       }
@@ -564,15 +554,31 @@ function SpatialVoid() {
         light2Ref.current.style.transform = `translateY(${-(scrollY * 0.12)}px) translateZ(0)`;
       }
 
-      rafId = requestAnimationFrame(updateLoop);
+      ticking = false;
     };
 
+    const requestUpdate = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(updateVisuals);
+      }
+    };
+
+    const onMouseMove = (e: MouseEvent) => {
+      mouseOffsetRef.current = {
+        x: (e.clientX / window.innerWidth - 0.5) * 20,
+        y: (e.clientY / window.innerHeight - 0.5) * 15,
+      };
+      requestUpdate();
+    };
+
+    window.addEventListener("scroll", requestUpdate, { passive: true });
     window.addEventListener("mousemove", onMouseMove, { passive: true });
-    rafId = requestAnimationFrame(updateLoop);
+    requestUpdate();
 
     return () => {
+      window.removeEventListener("scroll", requestUpdate);
       window.removeEventListener("mousemove", onMouseMove);
-      cancelAnimationFrame(rafId);
     };
   }, []);
 
@@ -644,9 +650,9 @@ function SpatialVoid() {
           />
         </div>
 
-        {/* 4. 3D INFINITE PERSPECTIVE FLOOR GRID WITH DYNAMIC PITCH & GLIDE */}
+        {/* 4. 3D INFINITE PERSPECTIVE FLOOR GRID WITH DYNAMIC PITCH & GLIDE (Desktop only for 120Hz Mobile GPU efficiency) */}
         <div
-          className="absolute inset-0 flex items-center justify-center overflow-hidden"
+          className="hidden sm:flex absolute inset-0 items-center justify-center overflow-hidden"
           style={{ perspective: "680px", perspectiveOrigin: "50% 27%" }}
         >
           <div
