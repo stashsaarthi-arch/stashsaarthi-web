@@ -1,7 +1,8 @@
-export async function getAdminAuth() {
-  const { getApps, initializeApp, cert } = await import("firebase-admin/app");
-  const { getAuth } = await import("firebase-admin/auth");
+import { getApps, initializeApp, cert } from "firebase-admin/app";
+import { getAuth } from "firebase-admin/auth";
+import { getFirestore } from "firebase-admin/firestore";
 
+export async function getAdminAuth() {
   if (!getApps().length) {
     const projectId = process.env["FIREBASE_ADMIN_PROJECT_ID"];
     const clientEmail = process.env["FIREBASE_ADMIN_CLIENT_EMAIL"];
@@ -26,9 +27,6 @@ export async function getAdminAuth() {
 }
 
 export async function getAdminDb() {
-  const { getApps } = await import("firebase-admin/app");
-  const { getFirestore } = await import("firebase-admin/firestore");
-
   if (!getApps().length) {
     await getAdminAuth();
   }

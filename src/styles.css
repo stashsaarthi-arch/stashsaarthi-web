@@ -960,7 +960,6 @@ html.light textarea::placeholder {
 [data-low-data-mode="true"] .gpu-accelerated,
 .low-data-mode .will-change-transform,
 [data-low-data-mode="true"] .will-change-transform {
-  transform: none !important;
   will-change: auto !important;
 }
 
