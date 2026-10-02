@@ -1,7 +1,7 @@
 {
   "name": "tanstack_start_ts",
   "private": true,
-  "sideEffects": ["src/polyfill.ts", "src/server.ts", "*.css"],
+  "sideEffects": ["*.css"],
   "type": "module",
   "scripts": {
     "dev": "cross-env NODE_OPTIONS=\"--localstorage-file=localstorage.json\" vite dev",

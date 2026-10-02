@@ -9,6 +9,10 @@ export default defineConfig({
   },
   nitro: {
     preset: process.env["VERCEL"] ? "vercel" : process.env["NITRO_PRESET"] || "node-server",
+    replace: {
+      "__dirname": "import.meta.dirname",
+      "__filename": "import.meta.filename",
+    },
     // @ts-expect-error: externals is a valid nitro property but missing from the wrapper's type definition
     externals: {
       external: [
@@ -24,6 +28,10 @@ export default defineConfig({
     },
   },
   vite: {
+    define: {
+      "__dirname": "import.meta.dirname",
+      "__filename": "import.meta.filename",
+    },
     resolve: {
       tsconfigPaths: true,
     },
