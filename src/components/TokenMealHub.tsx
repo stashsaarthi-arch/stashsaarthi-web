@@ -791,7 +791,7 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
       </div>
 
       {/* Background Accent Gradients */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[32rem] h-[32rem] bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[32rem] h-[32rem] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(16,185,129,0.1) 0%, transparent 60%)' }} />
 
       {/* Header & Wallet Banner */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8 items-stretch">

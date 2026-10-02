@@ -64,6 +64,9 @@ export const CustomCursor = () => {
       }
     };
 
+    const isTouchDevice = typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches;
+    if (isTouchDevice) return;
+
     window.addEventListener("mousemove", updateMousePosition, { passive: true });
     window.addEventListener("mouseover", handleMouseOver, { passive: true });
 

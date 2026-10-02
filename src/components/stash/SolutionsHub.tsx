@@ -64,12 +64,22 @@ export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: S
     let mouseX = 0;
     let mouseY = 0;
     let ticking = false;
+    let sectionTop = 0;
+    let viewportHeight = typeof window !== "undefined" ? window.innerHeight : 800;
+
+    const updateDimensions = () => {
+      if (sectionEl) {
+        sectionTop = sectionEl.getBoundingClientRect().top + window.scrollY;
+        viewportHeight = window.innerHeight;
+      }
+    };
+    updateDimensions();
+    window.addEventListener("resize", updateDimensions, { passive: true });
 
     const updateParallax = () => {
       if (isIntersecting && sectionEl) {
-        const rect = sectionEl.getBoundingClientRect();
-        const viewportHeight = window.innerHeight;
-        const scrollProgress = (rect.top - viewportHeight / 2) / (viewportHeight / 2);
+        const rectTop = sectionTop - window.scrollY;
+        const scrollProgress = (rectTop - viewportHeight / 2) / (viewportHeight / 2);
 
         if (orbTopRef.current) {
           const translateY = scrollProgress * -28 + (isMobile ? 0 : mouseY * -14);
@@ -126,6 +136,7 @@ export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: S
         window.removeEventListener("mousemove", handleMouseMove);
       }
       window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", updateDimensions);
     };
   }, []);
 
@@ -217,7 +228,6 @@ export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: S
             background: isStudent
               ? "radial-gradient(circle, rgba(16,185,129,0.25) 0%, rgba(6,182,212,0.08) 50%, transparent 70%)"
               : "radial-gradient(circle, rgba(245,158,11,0.25) 0%, rgba(251,191,36,0.08) 50%, transparent 70%)",
-            filter: "blur(40px)",
           }}
         />
 
@@ -229,7 +239,6 @@ export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: S
             background: isStudent
               ? "radial-gradient(circle, rgba(6,182,212,0.22) 0%, rgba(16,185,129,0.08) 50%, transparent 70%)"
               : "radial-gradient(circle, rgba(251,191,36,0.22) 0%, rgba(245,158,11,0.08) 50%, transparent 70%)",
-            filter: "blur(50px)",
           }}
         />
 

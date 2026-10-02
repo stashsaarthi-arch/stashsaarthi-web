@@ -75,11 +75,11 @@ export const Hero = memo(function Hero({
         }}
       />
       <div
-        className="pointer-events-none absolute left-1/2 top-0 h-[320px] w-[min(900px,140vw)] -translate-x-1/2 rounded-full opacity-40 blur-[80px]"
+        className="pointer-events-none absolute left-1/2 top-0 h-[320px] w-[min(900px,140vw)] -translate-x-1/2 rounded-full opacity-40"
         style={{
           background: student
-            ? "radial-gradient(circle, var(--cyan), transparent 65%)"
-            : "radial-gradient(circle, var(--amber), transparent 65%)",
+            ? "radial-gradient(circle, var(--cyan) 0%, transparent 70%)"
+            : "radial-gradient(circle, var(--amber) 0%, transparent 70%)",
         }}
       />
 

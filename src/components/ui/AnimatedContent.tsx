@@ -81,7 +81,7 @@ export const AnimatedContent = React.memo(function AnimatedContent({
       whileInView={animate}
       viewport={{ once: viewportOnce, amount: threshold }}
       transition={transition}
-      className={`gpu-layer ${className}`}
+      className={`gpu-accelerated ${className}`}
       style={style}
 
       {...(rest as any)}

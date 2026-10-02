@@ -89,7 +89,7 @@ export function Ecosystem({ onBook }: { onBook: OpenBooking }) {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ type: "spring", stiffness: 100, damping: 20 }}
               whileHover={{ y: -5 }}
-              className="snap-center min-w-[85vw] max-w-[88vw] sm:min-w-0 sm:max-w-none shrink-0 sm:shrink"
+              className="gpu-accelerated snap-center min-w-[85vw] max-w-[88vw] sm:min-w-0 sm:max-w-none shrink-0 sm:shrink"
             >
               <Tilt3D max={3} lift={6} className="rounded-3xl h-full">
                 <div className="relative overflow-hidden bg-[#0a0a0a]/40 backdrop-blur-md border border-white/10 rounded-3xl group transition-colors duration-300 hover:bg-[#0a0a0a]/60 h-full flex flex-col">
