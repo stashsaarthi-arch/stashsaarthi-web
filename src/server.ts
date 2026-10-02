@@ -3,7 +3,6 @@ import "./lib/error-capture";
 
 import { consumeLastCapturedError } from "./lib/error-capture";
 import { renderErrorPage } from "./lib/error-page";
-import { handleUpdateKyc } from "./api/updateKyc";
 
 type ServerEntry = {
   fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;
@@ -51,6 +50,7 @@ export default {
     try {
       const url = new URL(request.url);
       if (url.pathname === "/api/updateKyc") {
+        const { handleUpdateKyc } = await import("./api/updateKyc");
         return await handleUpdateKyc(request);
       }
 
