@@ -290,122 +290,12 @@ export const SolutionsHub = memo(function SolutionsHub({ onBook, onListRoom }: S
         </p>
       </div>
 
-      {/* Tab Switcher */}
-      <div className="mt-3 flex items-center justify-center">
-        <div
-          role="tablist"
-          aria-label={isHi ? "समाधान सेवा टैब" : "StashSaarthi Solutions Tabs"}
-          className="glass grid w-full max-w-2xl grid-cols-3 gap-1 rounded-2xl border border-white/[0.08] p-1.5 sm:gap-2 shadow-2xl"
-        >
-          {tabs.map((tab, idx) => {
-            const Icon = tab.icon;
-            const isActive = activeTab === tab.id;
-            return (
-              <motion.button
-                key={tab.id}
-                id={`solutions-tab-${tab.id}`}
-                role="tab"
-                aria-selected={isActive}
-                aria-controls={`solutions-panel-${tab.id}`}
-                tabIndex={isActive ? 0 : -1}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => {
-                  playTab();
-                  setActiveTab(tab.id);
-                }}
-                onKeyDown={(e) => {
-                  if (e.key === "ArrowRight") {
-                    e.preventDefault();
-                    const nextTab = tabs[(idx + 1) % tabs.length];
-                    if (nextTab) {
-                      playTab();
-                      setActiveTab(nextTab.id);
-                      document.getElementById(`solutions-tab-${nextTab.id}`)?.focus();
-                    }
-                  } else if (e.key === "ArrowLeft") {
-                    e.preventDefault();
-                    const prevTab = tabs[(idx - 1 + tabs.length) % tabs.length];
-                    if (prevTab) {
-                      playTab();
-                      setActiveTab(prevTab.id);
-                      document.getElementById(`solutions-tab-${prevTab.id}`)?.focus();
-                    }
-                  }
-                }}
-                className={`relative flex flex-col items-center justify-center rounded-xl p-2 text-center transition-all duration-200 cursor-pointer sm:p-2.5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400/80 focus-visible:ring-offset-1 focus-visible:ring-offset-[#0A0D0F] z-10 ${
-                  isActive
-                    ? "text-white font-bold shadow-xs"
-                    : "text-muted-foreground hover:bg-white/[0.04] hover:text-white"
-                }`}
-              >
-                {isActive && (
-                  <motion.div
-                    layoutId="activeSolutionsHubTab"
-                    transition={{ type: "spring", stiffness: 450, damping: 32 }}
-                    className="absolute inset-0 rounded-xl shadow-md -z-10"
-                    style={{
-                      background: isStudent
-                        ? "color-mix(in oklab, var(--emerald) 20%, rgba(255,255,255,0.05))"
-                        : "color-mix(in oklab, var(--amber) 20%, rgba(255,255,255,0.05))",
-                      border: isStudent
-                        ? "1px solid color-mix(in oklab, var(--emerald) 40%, transparent)"
-                        : "1px solid color-mix(in oklab, var(--amber) 40%, transparent)",
-                    }}
-                  />
-                )}
-                <div className="flex items-center gap-1.5">
-                  <Icon
-                    className="h-3.5 w-3.5 shrink-0"
-                    aria-hidden="true"
-                    style={{
-                      color: isActive
-                        ? isStudent
-                          ? "var(--emerald)"
-                          : "var(--amber)"
-                        : "currentColor",
-                    }}
-                  />
-                  <span className="text-xs font-bold sm:text-sm">
-                    {isHi ? tab.nameHi : tab.nameEn}
-                  </span>
-                </div>
-                <span
-                  className="mt-0.5 text-xs font-medium"
-                  style={{
-                    color: isActive
-                      ? isStudent
-                        ? "var(--emerald)"
-                        : "var(--amber)"
-                      : "var(--muted-foreground)",
-                  }}
-                >
-                  {isHi ? tab.badgeHi : tab.badgeEn}
-                </span>
-              </motion.button>
-            );
-          })}
-        </div>
+      {/* Content Stacked (Replaced Tabs) */}
+      <div className="mt-6 flex flex-col gap-12">
+        <Ecosystem onBook={onBook} />
+        <Rooms onList={onListRoom} onBook={onBook} />
+        <TokenMealHub onBook={onBook} />
       </div>
-
-      {/* Active Tab Panel Content with Spatial Continuity Transition */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={activeTab}
-          role="tabpanel"
-          id={`solutions-panel-${activeTab}`}
-          aria-labelledby={`solutions-tab-${activeTab}`}
-          tabIndex={0}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
-          transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-2.5 transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/20 rounded-xl"
-        >
-          {activeTab === "stash" && <Ecosystem onBook={onBook} />}
-          {activeTab === "rooms" && <Rooms onList={onListRoom} onBook={onBook} />}
-          {activeTab === "kitchen" && <TokenMealHub onBook={onBook} />}
-        </motion.div>
-      </AnimatePresence>
     </section>
   );
 });

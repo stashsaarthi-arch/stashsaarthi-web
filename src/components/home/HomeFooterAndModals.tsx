@@ -80,12 +80,6 @@ export function HomeFooterAndModals({
             <ScrollProgress />
           </ErrorBoundary>
 
-          <Suspense fallback={null}>
-            <ErrorBoundary sectionName="Founder Escalation Widget" compact>
-              <FounderEscalationWidget />
-            </ErrorBoundary>
-          </Suspense>
-
           <ErrorBoundary sectionName="Mobile Sticky CTA Widget" compact>
             <MobileStickyCTA onBook={onBook} />
           </ErrorBoundary>

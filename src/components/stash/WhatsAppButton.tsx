@@ -1,6 +1,6 @@
 import { useState, memo } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { MessageCircle, X, ShieldAlert, Home, Briefcase } from "lucide-react";
+import { MessageCircle, X, ShieldAlert, Home, Briefcase, Bot } from "lucide-react";
 import { FOUNDER_WHATSAPP, FOUNDER_PHONE_DISPLAY, getWhatsAppUrl } from "@/lib/constants";
 import { useLanguage } from "@/context/LanguageContext";
 import type { OpenBooking } from "./types";
@@ -106,6 +106,16 @@ export const WhatsAppButton = memo(function WhatsAppButton({ onBook }: { onBook:
               >
                 <ShieldAlert className="h-4 w-4 text-emerald-400" />
                 {isHi ? "अभिभावक व सुरक्षा हेल्पलाइन" : "Parent & Safety Helpline"}
+              </button>
+              <button
+                onClick={() => {
+                  setIsOpen(false);
+                  window.dispatchEvent(new Event("stashsaarthi:open-rag"));
+                }}
+                className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-left text-xs font-medium text-white/90 hover:bg-white/10 transition-colors cursor-pointer"
+              >
+                <Bot className="h-4 w-4 text-cyan-400" />
+                {isHi ? "सारथी AI RAG बॉट" : "Ask Saarthi AI (RAG)"}
               </button>
             </div>
           </motion.div>

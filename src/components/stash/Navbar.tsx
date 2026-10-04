@@ -186,6 +186,7 @@ export const Navbar = memo(function Navbar({
                 onClick={(e) => {
                   e.preventDefault();
                   playTab();
+                  window.dispatchEvent(new CustomEvent("stashsaarthi:nav-tab", { detail: l.href.replace(/^#/, "") }));
                   smoothScrollTo(l.href.replace(/^#/, ""))(e);
                 }}
                 className="whitespace-nowrap rounded-lg px-2 min-[1650px]:px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition-all hover:bg-white/[0.05] hover:text-foreground shrink-0 flex items-center gap-1.5 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400/80 focus-visible:ring-offset-1 focus-visible:ring-offset-[#0A0D0F]"
@@ -467,6 +468,7 @@ export const Navbar = memo(function Navbar({
                     onClick={(e) => {
                       playTab();
                       setOpen(false);
+                      window.dispatchEvent(new CustomEvent("stashsaarthi:nav-tab", { detail: l.href.replace(/^#/, "") }));
                       smoothScrollTo(l.href.replace(/^#/, ""))(e);
                     }}
                     className="flex flex-col items-start rounded-xl min-h-[64px] p-3 bg-white/5 hover:bg-white/10 border border-white/5 transition-all text-left cursor-pointer active:scale-98"

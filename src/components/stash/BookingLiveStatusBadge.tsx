@@ -28,6 +28,7 @@ const NEXT_STATE: Record<BookingLifecycleState, BookingLifecycleState> = {
   in_secure_locker: "ready_for_retrieval",
   ready_for_retrieval: "completed",
   completed: "item_received",
+  listed_for_sale: "completed",
 };
 
 export function BookingLiveStatusBadge({

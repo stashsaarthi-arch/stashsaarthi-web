@@ -12,7 +12,7 @@ const usePredictivePersonaAI = () => {
   };
 };
 
-import { Sparkles, BrainCircuit, ArrowRight, Zap, CheckCircle2 } from "lucide-react";
+import { Sparkles, BrainCircuit, ArrowRight, Zap, CheckCircle2, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { playPop } from "@/lib/audio";
 
@@ -33,67 +33,75 @@ export const PredictivePersonaWidget = memo(function PredictivePersonaWidget() {
     <AnimatePresence>
       {isHighConfidence && (
         <motion.div
-          initial={{ opacity: 0, scale: 0.9, y: 10 }}
+          initial={{ opacity: 0, scale: 0.95, y: 10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.9, y: 10 }}
-          className="fixed bottom-20 right-5 z-40 max-w-xs rounded-2xl border border-emerald-500/30 bg-[#0A0D0F]/95 p-3.5 shadow-2xl backdrop-blur-xl pointer-events-auto"
+          exit={{ opacity: 0, scale: 0.95, y: 10 }}
+          className="relative w-full h-full flex flex-col justify-between"
         >
-          <div className="flex items-start justify-between gap-2">
-            <div className="flex items-center gap-2 text-xs font-bold text-emerald-400">
-              <BrainCircuit className="h-4 w-4 animate-pulse text-cyan-400" />
-              <span>{isHi ? "αñ¬αÑìαñ░αÑçαñíαñ┐αñòαÑìαñƒαñ┐αñ╡ AI αñ¬αñ░αÑìαñ╕αÑïαñ¿αñ╛ αñçαñéαñ╕αñ╛αñçαñƒ" : "Predictive AI Persona"}</span>
+          <div className="flex items-start justify-between gap-2 mb-4">
+            <div className="flex items-center gap-2 text-sm font-bold text-emerald-400">
+              <BrainCircuit className="h-5 w-5 animate-pulse text-cyan-400" />
+              <span>{isHi ? "AI पर्सोना डिटेक्शन" : "AI Persona Detection"}</span>
             </div>
             <button
               onClick={() => setDismissed(true)}
-              className="text-slate-400 hover:text-white text-xs px-1"
+              className="text-slate-400 hover:text-white p-1"
               aria-label="Dismiss AI Insight"
             >
-              Γ£ò
+              <X className="h-4 w-4" />
             </button>
           </div>
 
-          <div className="mt-2 space-y-1.5 text-xs text-slate-300">
-            <div className="flex items-center justify-between">
-              <span className="text-slate-400">{isHi ? "αñàαñ¿αÑüαñ«αñ╛αñ¿αñ┐αññ αñ«αÑïαñí:" : "Predicted Role:"}</span>
-              <span className="font-semibold capitalize text-white flex items-center gap-1">
-                {predictedPersona === "host" ? "≡ƒÅí Verified PG Owner Host" : "≡ƒÄô Student"}
-                <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                  {Math.round(confidence * 100)}% {isHi ? "αñ╕αñƒαÑÇαñòαññαñ╛" : "conf."}
+          <div className="space-y-4 text-sm text-slate-300 flex-1">
+            <div className="flex items-center justify-between bg-black/20 p-3 rounded-xl border border-white/5">
+              <span className="text-slate-400">{isHi ? "अनुमानित मोड:" : "Predicted Mode:"}</span>
+              <span className="font-semibold capitalize text-white flex items-center gap-2">
+                {predictedPersona === "host" ? "🏡 Verified Host" : "🎓 Student"}
+                <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                  {Math.round(confidence * 100)}% {isHi ? "सटीक" : "conf."}
                 </span>
               </span>
             </div>
 
+            <div className="bg-black/20 p-3 rounded-xl border border-white/5 space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="text-slate-400">Recommended Plan:</span>
+                <span className="font-semibold text-white">Summer Stash (3 Mos)</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-slate-400">Est. Box Count:</span>
+                <span className="font-semibold text-white">3 Medium Boxes</span>
+              </div>
+            </div>
+
             {preloadedAssets.length > 0 && (
-              <div className="flex items-center gap-1 text-[11px] text-cyan-300">
-                <CheckCircle2 className="h-3 w-3 text-cyan-400" />
+              <div className="flex items-center gap-2 text-xs text-cyan-300 bg-cyan-950/30 p-2 rounded-lg border border-cyan-500/20">
+                <CheckCircle2 className="h-4 w-4 text-cyan-400" />
                 <span>
                   {isHi
-                    ? `αñ¬αÑìαñ░αÑÇ-αñ▓αÑïαñíαÑçαñí ${preloadedAssets.length} αñ╕αñéαñ¬αññαÑìαññαñ┐αñ»αñ╛αñé`
-                    : `Pre-loaded ${preloadedAssets.length} persona assets`}
+                    ? `प्री-लोडेड ${preloadedAssets.length} पर्सोना एसेट्स`
+                    : `Pre-loaded ${preloadedAssets.length} persona assets for zero-latency`}
                 </span>
-              </div>
-            )}
-
-            {isDiffPersona && (
-              <div className="pt-1.5 border-t border-white/10 mt-1.5 flex items-center justify-between">
-                <span className="text-[11px] text-slate-400">
-                  {isHi ? "αñ╕αÑìαñ╡αñ┐αñÜ αñòαñ░αñ¿αÑç αñòαÑÇ αñàαñ¿αÑüαñ╢αñéαñ╕αñ╛:" : "Switch persona view?"}
-                </span>
-                <button
-                  type="button"
-                  onClick={() => {
-                    playPop();
-                    setRole(predictedPersona);
-                  }}
-                  className="flex items-center gap-1 text-[11px] font-bold text-black bg-gradient-to-r from-emerald-400 to-cyan-400 hover:from-emerald-300 hover:to-cyan-300 px-2.5 py-1 rounded-full shadow-md transition-transform active:scale-95"
-                >
-                  <Zap className="h-3 w-3" />
-                  <span>{isHi ? "αñ╕αÑìαñ╡αÑÇαñòαñ╛αñ░ αñòαñ░αÑçαñé" : "Adapt View"}</span>
-                  <ArrowRight className="h-3 w-3" />
-                </button>
               </div>
             )}
           </div>
+
+          {isDiffPersona && (
+            <div className="mt-4 pt-4 border-t border-white/10">
+              <button
+                type="button"
+                onClick={() => {
+                  playPop();
+                  setRole(predictedPersona);
+                }}
+                className="w-full flex items-center justify-center gap-2 font-bold text-black bg-gradient-to-r from-emerald-400 to-cyan-400 hover:from-emerald-300 hover:to-cyan-300 px-4 py-3 rounded-xl shadow-lg transition-transform active:scale-95"
+              >
+                <Zap className="h-4 w-4" />
+                <span>{isHi ? "मोड अप्लाई करें" : "Apply Persona Preset"}</span>
+                <ArrowRight className="h-4 w-4" />
+              </button>
+            </div>
+          )}
         </motion.div>
       )}
     </AnimatePresence>

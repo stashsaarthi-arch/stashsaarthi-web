@@ -149,6 +149,37 @@ const TABS = [
 function WorkspacePartitions({ role, onBook, onListRoom, onRefer }: any) {
   const [activeTab, setActiveTab] = useState<typeof TABS[number]["id"]>("explore");
 
+  useEffect(() => {
+    const handleHash = () => {
+      const hash = window.location.hash;
+      if (hash === "#calculator") setActiveTab("savings");
+      else if (hash === "#liquidation") setActiveTab("liquidation");
+      else if (hash === "#host") setActiveTab("host");
+      else setActiveTab("explore");
+    };
+    
+    // Check initial hash
+    handleHash();
+
+    // Listen to hash changes or custom scroll events
+    window.addEventListener("hashchange", handleHash);
+    
+    // Also listen to custom events from Navbar if they intercept default link behavior
+    const handleCustomNav = (e: Event) => {
+      const target = (e as CustomEvent).detail;
+      if (target === "calculator") setActiveTab("savings");
+      else if (target === "liquidation") setActiveTab("liquidation");
+      else if (target === "host") setActiveTab("host");
+      else setActiveTab("explore");
+    };
+    window.addEventListener("stashsaarthi:nav-tab", handleCustomNav);
+
+    return () => {
+      window.removeEventListener("hashchange", handleHash);
+      window.removeEventListener("stashsaarthi:nav-tab", handleCustomNav);
+    };
+  }, []);
+
   return (
     <div className="w-full mt-8 mb-16 relative z-10">
       <div className="max-w-[1600px] mx-auto px-4 mb-8">

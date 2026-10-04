@@ -65,8 +65,8 @@ export const RagChatbotWidget = memo(function RagChatbotWidget() {
     id: "msg-0",
     sender: "bot",
     text: isHi
-      ? "αñ¿αñ«αñ╕αÑìαññαÑç! αñ«αÑêαñé αñ╕αñ╛αñ░αÑìαñÑαÑÇ RAG AI αñ╕αñ╣αñ╛αñ»αñò αñ╣αÑéαñüαÑñ αñ╕αÑìαñƒαÑêαñ╢ αñ╕αÑìαñƒαÑïαñ░αÑçαñ£, 0% αñ¼αÑìαñ░αÑïαñòαñ░αÑçαñ£ αñòαñ«αñ░αÑïαñé, Γé╣10k αñ¼αÑÇαñ«αÑç αñ»αñ╛ αñ¡αÑïαñ£αñ¿ αñ╕αÑçαñ╡αñ╛αñôαñé αñòαÑç αñ¼αñ╛αñ░αÑç αñ«αÑçαñé αñòαÑïαñê αñ¡αÑÇ αñ╕αñ╡αñ╛αñ▓ αñ¬αÑéαñ¢αÑçαñé!"
-      : "Namaste! I am the Saarthi RAG AI Assistant. Ask me anything about micro-storage, 0% brokerage rooms, Γé╣10k insurance, or home-cooked meals!",
+      ? "नमस्ते! मैं सारथी RAG AI सहायक हूं। माइक्रो-स्टोरेज, 0% ब्रोकरेज कमरों, ₹10k बीमा, या घर के खाने के बारे में कुछ भी पूछें!"
+      : "Namaste! I am the Saarthi RAG AI Assistant. Ask me anything about micro-storage, 0% brokerage rooms, ₹10k insurance, or home-cooked meals!",
     timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
     ragMeta: {
       confidence: 100,
@@ -79,15 +79,15 @@ export const RagChatbotWidget = memo(function RagChatbotWidget() {
 
   const suggestedChips = isHi
     ? [
-        "Γé╣300 αñ╕αÑìαñƒαÑïαñ░αÑçαñ£ αñ«αÑçαñé αñòαÑìαñ»αñ╛ αñ╢αñ╛αñ«αñ┐αñ▓ αñ╣αÑê?",
-        "αñòαÑìαñ»αñ╛ αñòαñ«αñ░αÑïαñé αñ¬αñ░ 0% αñ¼αÑìαñ░αÑïαñòαñ░αÑçαñ£ αñ╣αÑê?",
-        "Γé╣10,000 αñòαÑìαñ▓αÑçαñ« αñòαÑêαñ╕αÑç αñ«αñ┐αñ▓αññαñ╛ αñ╣αÑê?",
-        "αñ╕αñéαñ╕αÑìαñÑαñ╛αñ¬αñò αñ╕αÑç αñ¼αñ╛αññ αñòαñ░αÑçαñé",
+        "₹300 स्टोरेज में क्या शामिल है?",
+        "क्या कमरों पर 0% ब्रोकरेज है?",
+        "₹10,000 क्लेम कैसे मिलता है?",
+        "संस्थापक से बात करें",
       ]
     : [
-        "What is included in Γé╣300 storage?",
+        "What is included in ₹300 storage?",
         "Are rooms really 0% brokerage?",
-        "How does the Γé╣10k claim work?",
+        "How does the ₹10k claim work?",
         "Talk to Founder",
       ];
 
@@ -106,7 +106,7 @@ export const RagChatbotWidget = memo(function RagChatbotWidget() {
     if (!query) return;
 
     // Special trigger for talking to founder
-    if (query.toLowerCase().includes("founder") || query.includes("αñ╕αñéαñ╕αÑìαñÑαñ╛αñ¬αñò")) {
+    if (query.toLowerCase().includes("founder") || query.includes("संस्थापक")) {
       window.open(getWhatsAppUrl("Hello StashSaarthi Founder, I need help!"), "_blank");
     }
 
@@ -144,41 +144,19 @@ export const RagChatbotWidget = memo(function RagChatbotWidget() {
     setMessages([initialGreeting]);
   };
 
+  useEffect(() => {
+    const handleOpen = () => setIsOpen(true);
+    window.addEventListener("stashsaarthi:open-rag", handleOpen);
+    return () => window.removeEventListener("stashsaarthi:open-rag", handleOpen);
+  }, []);
+
   const [isMounted, setIsMounted] = useState(false);
   useEffect(() => setIsMounted(true), []);
   if (!isMounted) return null;
 
   return (
     <>
-      {/* Floating Trigger Button */}
-      {!isOpen && (
-        <button
-          onClick={() => setIsOpen(true)}
-          className={`fixed bottom-[160px] md:bottom-[76px] right-4 md:right-6 z-40 flex items-center gap-2 rounded-full px-3.5 py-2.5 shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer ${
-            isStudent
-              ? "bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 text-slate-950 shadow-emerald-500/20"
-              : "bg-gradient-to-r from-amber-500 via-amber-600 to-yellow-500 text-slate-950 shadow-amber-500/20"
-          }`}
-          aria-label="Open RAG AI Assistant"
-        >
-          <div className="relative">
-            <Bot className="h-5 w-5 animate-pulse" />
-            <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-white"></span>
-            </span>
-          </div>
-          <span className="text-xs font-bold font-mono tracking-tight hidden sm:inline">
-            {isHi ? "αñ╕αñ╛αñ░αÑìαñÑαÑÇ AI RAG αñ╕αñ╣αñ╛αñ»αñò" : "Saarthi AI RAG Bot"}
-          </span>
-          <Badge
-            variant="secondary"
-            className="bg-black/30 text-white text-[9px] px-1.5 py-0 font-mono"
-          >
-            RAG v2.0
-          </Badge>
-        </button>
-      )}
+      {/* Floating Trigger Button Removed - Now triggered via WhatsAppButton menu */}
 
       {/* Floating RAG Drawer/Modal */}
       {isOpen && (
@@ -204,7 +182,7 @@ export const RagChatbotWidget = memo(function RagChatbotWidget() {
               <div>
                 <div className="flex items-center gap-1.5">
                   <h3 className="text-xs font-bold text-foreground">
-                    {isHi ? "αñ╕αñ╛αñ░αÑìαñÑαÑÇ RAG AI αñ╕αñ╣αñ╛αñ»αñò" : "Saarthi RAG AI Assistant"}
+                    {isHi ? "सारथी RAG AI सहायक" : "Saarthi RAG AI Assistant"}
                   </h3>
                   <Badge
                     variant="outline"
@@ -219,8 +197,8 @@ export const RagChatbotWidget = memo(function RagChatbotWidget() {
                 </div>
                 <p className="text-[9.5px] text-muted-foreground">
                   {isHi
-                    ? "αññαññαÑìαñòαñ╛αñ▓ αñ¬αñ╛αñ░αñªαñ░αÑìαñ╢αÑÇ αñëαññαÑìαññαñ░ ΓÇó αñ╢αÑéαñ¿αÑìαñ» αñ¼αÑëαñƒ αñ£αñ╛αñ▓"
-                    : "Instant FAQ Retrieval ΓÇó 0 Bot Trap"}
+                    ? "त्वरित उत्तर • कोई बॉट ट्रैप नहीं"
+                    : "Instant FAQ Retrieval • 0 Bot Trap"}
                 </p>
               </div>
             </div>
@@ -309,7 +287,7 @@ export const RagChatbotWidget = memo(function RagChatbotWidget() {
           <div className="p-2.5 border-t border-white/10 bg-neutral-900/90 flex items-center gap-2">
             <Input
               type="text"
-              placeholder={isHi ? "αñòαÑïαñê αñ¡αÑÇ αñ¬αÑìαñ░αñ╢αÑìαñ¿ αñ¬αÑéαñ¢αÑçαñé..." : "Ask any FAQ question..."}
+              placeholder={isHi ? "कोई भी प्रश्न पूछें..." : "Ask any FAQ question..."}
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleSend()}
