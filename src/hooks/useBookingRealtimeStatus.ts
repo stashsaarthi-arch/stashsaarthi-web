@@ -8,7 +8,11 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 
 export type BookingLifecycleState =
-  "item_received" | "in_secure_locker" | "ready_for_retrieval" | "completed";
+  | "item_received"
+  | "in_secure_locker"
+  | "ready_for_retrieval"
+  | "completed"
+  | "listed_for_sale";
 
 export interface LifecycleStepInfo {
   state: BookingLifecycleState;
@@ -57,6 +61,15 @@ export const LIFECYCLE_STEPS: Record<BookingLifecycleState, LifecycleStepInfo> =
     icon: "✅",
     descriptionEn: "Handed over safely to verified student owner",
     descriptionHi: "सत्यापित छात्र को सुरक्षित सौंप दिया गया",
+  },
+  listed_for_sale: {
+    state: "listed_for_sale",
+    labelEn: "Listed for Sale",
+    labelHi: "बिक्री के लिए उपलब्ध",
+    badgeStyle: "bg-rose-500/20 text-rose-300 border-rose-500/40 shadow-rose-500/10 animate-pulse",
+    icon: "🏷️",
+    descriptionEn: "Item liquidated and available for purchase by incoming freshers",
+    descriptionHi: "आइटम बिक्री के लिए उपलब्ध है",
   },
 };
 

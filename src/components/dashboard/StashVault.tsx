@@ -182,11 +182,58 @@ export function StashVault() {
             <motion.button
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
-              className="w-full py-4 px-6 bg-white text-black font-bold rounded-xl transition-colors hover:bg-student-primary hover:shadow-[0_0_20px_rgba(0,245,160,0.4)]"
+              className="w-full py-4 px-6 bg-white text-black font-bold rounded-xl transition-colors hover:bg-student-primary hover:shadow-[0_0_20px_rgba(0,245,160,0.4)] mb-3"
             >
               Request Retrieval
             </motion.button>
+
+            {stashes.length > 0 && stashes[0]?.status !== "listed_for_sale" && (
+              <motion.button
+                onClick={async () => {
+                  if (!stashes[0]) return;
+                  await supabase.from("stash_leads").update({ status: 'listed_for_sale' }).eq("id", stashes[0].id);
+                  setStashes(prev => prev.map((s, i) => i === 0 ? { ...s, status: 'listed_for_sale' } : s));
+                  alert("Item liquidated at 50% discount!");
+                }}
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full py-4 px-6 bg-rose-500/20 text-rose-300 border border-rose-500/40 font-bold rounded-xl transition-colors hover:bg-rose-500 hover:text-black hover:shadow-[0_0_20px_rgba(244,63,94,0.4)]"
+              >
+                1-Click Liquidate (50% Off)
+              </motion.button>
+            )}
           </motion.div>
+        </motion.div>
+
+        {/* Campus Liquidation Deals Feed */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="mt-12"
+        >
+          <div className="flex items-center gap-3 mb-6">
+            <h2 className="text-2xl font-bold text-white">Campus Liquidation Deals</h2>
+            <span className="bg-rose-500/20 text-rose-300 text-xs font-bold px-2 py-1 rounded border border-rose-500/40 animate-pulse">
+              50% OFF
+            </span>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 hover:border-rose-500/50 transition-colors">
+              <div className="text-sm text-white/60 mb-1">Pre-owned Cooler</div>
+              <div className="text-xl font-bold text-rose-400 mb-3">₹1,500 <span className="line-through text-white/40 text-sm">₹3,000</span></div>
+              <button className="w-full py-2 bg-rose-500/20 text-rose-300 rounded-lg hover:bg-rose-500 hover:text-white transition-colors font-semibold text-sm">
+                Claim Deal
+              </button>
+            </div>
+            <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 hover:border-rose-500/50 transition-colors">
+              <div className="text-sm text-white/60 mb-1">Hostel Mattress</div>
+              <div className="text-xl font-bold text-rose-400 mb-3">₹800 <span className="line-through text-white/40 text-sm">₹1,600</span></div>
+              <button className="w-full py-2 bg-rose-500/20 text-rose-300 rounded-lg hover:bg-rose-500 hover:text-white transition-colors font-semibold text-sm">
+                Claim Deal
+              </button>
+            </div>
+          </div>
         </motion.div>
       </div>
     </div>
