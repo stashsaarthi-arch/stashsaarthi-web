@@ -22,6 +22,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/lib/supabase";
 import { updateUserProfile } from "@/lib/waitlistService";
 import { toast } from "sonner";
 import { useLanguage } from "@/context/LanguageContext";
@@ -67,7 +68,7 @@ interface ProfileModalProps {
 }
 
 export function ProfileModal({ open, onOpenChange, initialTab = "settings" }: ProfileModalProps) {
-  const { user, updateUser } = useAuth();
+  const { user } = useAuth();
   const { language } = useLanguage();
   const isHi = language === "hi";
 
@@ -119,15 +120,12 @@ export function ProfileModal({ open, onOpenChange, initialTab = "settings" }: Pr
     const result = await updateUserProfile(user.email, formData);
 
     if (result.success) {
-      updateUser({
-        name: formData.full_name,
-        avatar: formData.avatar,
-        phone_number: formData.phone_number,
-        role: formData.user_type,
-        college_or_locality: formData.college_or_locality,
-        bio: formData.bio,
-        address: formData.address,
-        emergency_contact: formData.emergency_contact,
+      await supabase.auth.updateUser({
+        data: {
+          full_name: formData.full_name,
+          avatar_url: formData.avatar,
+          role: formData.user_type,
+        }
       });
       toast.success(
         isHi ? "प्रोफ़ाइल व अवतार अपडेट किया गया" : "Profile & Avatar updated successfully",

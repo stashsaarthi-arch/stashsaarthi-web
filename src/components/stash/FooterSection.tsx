@@ -62,7 +62,6 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@/components/ui/accordion";
-import { useGoogleLogin } from "@react-oauth/google";
 import { useLanguage } from "@/context/LanguageContext";
 import { FOUNDER_WHATSAPP, FOUNDER_PHONE_DISPLAY, FOUNDER_LINKEDIN } from "@/lib/constants";
 import { checkAndRecordRateLimit, showRateLimitToast } from "@/lib/rateLimiter";
@@ -121,7 +120,7 @@ const SOCIALS = [
 ];
 
 export const FooterSection = memo(function FooterSection() {
-  const { user, loginWithProfile } = useAuth();
+  const { user, loginWithGoogle } = useAuth();
   const { language, t } = useLanguage();
   const isHi = language === "hi";
 
@@ -171,47 +170,9 @@ export const FooterSection = memo(function FooterSection() {
     { label: isHi ? "शिकायत व नोडल अधिकारी" : "Grievance & Nodal officer", doc: "grievance" },
   ];
 
-  const handleGoogleWaitlist = useGoogleLogin({
-    onSuccess: async (tokenResponse) => {
-      try {
-        const res = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
-          headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
-        });
-        const data = await res.json();
-
-        if (data.email) {
-          setEmail(data.email);
-          if (data.name && !fullName) {
-            setFullName(data.name);
-          }
-          upsertGoogleUser({
-            email: data.email,
-            name: data.name || data.email.split("@")[0] || "User",
-            picture: data.picture,
-          });
-
-          loginWithProfile({
-            id: data.sub || data.email || "saarthi",
-            name: data.name || data.email?.split("@")[0] || "Saarthi",
-            email: data.email || "",
-            avatar: data.picture || "",
-            role: userType || "student",
-            verified: !!data.email_verified,
-            provider: "google",
-          });
-        }
-
-      } catch (err) {
-        toast.error(isHi ? "वेटलिस्ट प्रविष्टि विफल" : "Waitlist entry failed", {
-          description: isHi ? "कृपया पुनः प्रयास करें।" : "Please try again.",
-        });
-      }
-    },
-    onError: (err) => {
-      console.error("Google Auth Error:", err);
-      toast.error(isHi ? "गूगल साइन-इन विफल रहा" : "Google sign-in failed");
-    },
-  });
+  const handleGoogleWaitlist = async () => {
+    await loginWithGoogle();
+  };
 
   const handleSubmit = async () => {
     setTouched({ name: true, email: true, phone: true });

@@ -214,11 +214,10 @@ export function Rooms({ onList, onBook }: { onList: () => void; onBook?: OpenBoo
           .select(
             "id, owner_name, owner_phone, rent_amount, address_location, student_review, ratings",
           )
-          .eq("status", "verified")
           .order("created_at", { ascending: false })
           .limit(6);
         if (active && Array.isArray(data) && data.length > 0) {
-          setListings(data as Listing[]);
+          setListings(data as unknown as Listing[]);
         }
       } catch {
         // use default DEMO

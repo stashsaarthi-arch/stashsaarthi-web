@@ -14,7 +14,6 @@ import { toast } from "sonner";
 import { useAuth } from "@/hooks/useAuth";
 import { useLanguage } from "@/context/LanguageContext";
 import { usePersona } from "@/context/PersonaContext";
-import { useGoogleLogin } from "@react-oauth/google";
 import { ProfileModal } from "./ProfileModal";
 
 function GoogleGlyph() {
@@ -41,44 +40,16 @@ function GoogleGlyph() {
 }
 
 export function AuthButton({ compact = false }: { compact?: boolean }) {
-  const { user, authenticating, loginWithProfile, setAuthenticating, logout } = useAuth();
+  const { user, loading, loginWithGoogle, logout } = useAuth();
   const { language, t } = useLanguage();
   const isHi = language === "hi";
 
   const [profileOpen, setProfileOpen] = useState(false);
   const [initialTab, setInitialTab] = useState<"settings" | "bookings">("settings");
 
-  const handleCustomLogin = useGoogleLogin({
-    onSuccess: async (tokenResponse) => {
-      try {
-        setAuthenticating(true);
-        const res = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
-          headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
-        });
-        const data = await res.json();
-
-        loginWithProfile({
-          id: data.sub || data.email || "saarthi",
-          name: data.name || data.email?.split("@")[0] || "Saarthi",
-          email: data.email || "",
-          avatar: data.picture || "",
-          role: "student",
-          verified: !!data.email_verified,
-          provider: "google",
-        });
-      } catch {
-        toast.error(
-          isHi ? "उपयोगकर्ता प्रोफ़ाइल लोड करने में विफल" : "Failed to fetch user profile",
-        );
-      } finally {
-        setAuthenticating(false);
-      }
-    },
-    onError: (errorResponse) => {
-      console.error("[AuthButton] Google sign-in failed:", errorResponse);
-      toast.error(isHi ? "गूगल साइन-इन विफल रहा" : "Google sign-in failed");
-    },
-  });
+  const handleCustomLogin = async () => {
+    await loginWithGoogle();
+  };
 
   const { role: activePersona } = usePersona();
   const name = user?.name || user?.email || "User";
@@ -91,14 +62,14 @@ export function AuthButton({ compact = false }: { compact?: boolean }) {
       <Button
         variant="outline"
         size={compact ? "sm" : "default"}
-        onClick={() => handleCustomLogin()}
-        disabled={authenticating}
-        aria-busy={authenticating}
+        onClick={handleCustomLogin}
+        disabled={loading}
+        aria-busy={loading}
         className="gap-2 bg-[#161B22] hover:bg-[#21262D] border border-slate-700 text-white rounded-full px-4 cursor-pointer"
       >
-        {authenticating ? <Loader2 className="h-4 w-4 animate-spin" /> : <GoogleGlyph />}
+        {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <GoogleGlyph />}
         <span className="whitespace-nowrap">
-          {authenticating ? (isHi ? "प्रमाणीकरण…" : "Authenticating…") : t.nav.auth}
+          {loading ? (isHi ? "प्रमाणीकरण…" : "Authenticating…") : t.nav.auth}
         </span>
       </Button>
     );

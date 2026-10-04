@@ -20,7 +20,6 @@ import appCss from "../styles.css?url";
 import { reportError } from "../lib/error-reporting";
 import { registerServiceWorker } from "../lib/sw-register";
 import { Toaster, toast } from "sonner";
-import { GoogleOAuthProvider } from "@react-oauth/google";
 import { AuthProvider } from "@/hooks/useAuth";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { PersonaProvider } from "@/context/PersonaContext";
@@ -833,51 +832,47 @@ function RootComponent() {
   }, []);
 
   return (
-    <GoogleOAuthProvider
-      clientId={import.meta.env["VITE_GOOGLE_CLIENT_ID"] || "fallback_client_id"}
-    >
-      <AuthProvider>
-        <LanguageProvider>
-          <PersonaProvider>
-            <ThemeProvider>
-              <LowDataProvider>
-                <ToastProvider>
-                  <QueryClientProvider client={queryClient}>
-                    <DynamicOGHead />
-                    <ErrorBoundary>
-                      <ReactLenis
-                        root
-                        options={{
-                          lerp: 0.08, // Apple-like momentum inertia
-                          orientation: "vertical",
-                          gestureOrientation: "vertical",
-                          smoothWheel: true,
-                          wheelMultiplier: 1.0,
-                          syncTouch: false, // Native 120Hz ProMotion touch on mobile devices
-                          touchMultiplier: 1.2,
-                          infinite: false,
-                          autoRaf: true, // Native rAF baseline
-                        }}
-                      >
-                        <LenisHandler />
-                        <AnimatePresence mode="wait" initial={false}>
-                          <PageTransition key={currentRoute} routeKey={currentRoute}>
-                            {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-                            <Outlet />
-                          </PageTransition>
-                        </AnimatePresence>
-                        <NetworkStatus />
-                        <AccessibilityAnnouncer />
-                      </ReactLenis>
-                    </ErrorBoundary>
-                    <ThemedToaster />
-                  </QueryClientProvider>
-                </ToastProvider>
-              </LowDataProvider>
-            </ThemeProvider>
-          </PersonaProvider>
-        </LanguageProvider>
-      </AuthProvider>
-    </GoogleOAuthProvider>
+    <AuthProvider>
+      <LanguageProvider>
+        <PersonaProvider>
+          <ThemeProvider>
+            <LowDataProvider>
+              <ToastProvider>
+                <QueryClientProvider client={queryClient}>
+                  <DynamicOGHead />
+                  <ErrorBoundary>
+                    <ReactLenis
+                      root
+                      options={{
+                        lerp: 0.08, // Apple-like momentum inertia
+                        orientation: "vertical",
+                        gestureOrientation: "vertical",
+                        smoothWheel: true,
+                        wheelMultiplier: 1.0,
+                        syncTouch: false, // Native 120Hz ProMotion touch on mobile devices
+                        touchMultiplier: 1.2,
+                        infinite: false,
+                        autoRaf: true, // Native rAF baseline
+                      }}
+                    >
+                      <LenisHandler />
+                      <AnimatePresence mode="wait" initial={false}>
+                        <PageTransition key={currentRoute} routeKey={currentRoute}>
+                          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+                          <Outlet />
+                        </PageTransition>
+                      </AnimatePresence>
+                      <NetworkStatus />
+                      <AccessibilityAnnouncer />
+                    </ReactLenis>
+                  </ErrorBoundary>
+                  <ThemedToaster />
+                </QueryClientProvider>
+              </ToastProvider>
+            </LowDataProvider>
+          </ThemeProvider>
+        </PersonaProvider>
+      </LanguageProvider>
+    </AuthProvider>
   );
 }
