@@ -165,8 +165,8 @@ export const QuickCategoryNav = memo(function QuickCategoryNav() {
           // Sort by top coordinate to find the most relevant one
           visibleEntries.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
           const topEntry = visibleEntries[0];
-          const id = topEntry.target.id;
-          if (id !== activeRef.current) {
+          if (topEntry && topEntry.target.id !== activeRef.current) {
+            const id = topEntry.target.id;
             activeRef.current = id;
             setActive(id);
           }

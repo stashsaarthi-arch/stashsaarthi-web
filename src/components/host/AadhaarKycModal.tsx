@@ -10,7 +10,7 @@ import {
   Image as ImageIcon,
   ShieldAlert,
 } from "lucide-react";
-import { auth } from "@/lib/firebase";
+import { supabase } from "@/lib/supabase";
 import { toast } from "sonner";
 
 interface AadhaarKycModalProps {
@@ -99,156 +99,40 @@ export function AadhaarKycModal({ isOpen, onClose, onSuccess }: AadhaarKycModalP
   };
 
   const uploadDocuments = async () => {
-    setError("");
-
-    const currentUser = auth.currentUser;
-    if (!currentUser) {
-      const errorMsg = "Authentication required. Please log in again.";
-      setError(errorMsg);
-      toast.error(errorMsg);
-      return;
-    }
-
     if (!frontImage || !backImage) {
-      const errorMsg = "Both front and back images are required.";
-      setError(errorMsg);
-      toast.error(errorMsg);
+      toast.error("Both images required.");
       return;
     }
-
-    setLoading(true); // START LOADER
+    setLoading(true);
     try {
-      // Client-side HTML Canvas downscaler: max 1280px dimension, JPEG quality 0.75, keeping file size < 800 KB
-      const compressImage = async (file: File): Promise<Blob> => {
-        return new Promise((resolve, reject) => {
-          const objectUrl = URL.createObjectURL(file);
-          const img = new Image();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error("Not logged in");
 
-          img.onload = () => {
-            URL.revokeObjectURL(objectUrl);
-            const canvas = document.createElement("canvas");
-            const MAX_DIMENSION = 1280;
-            let width = img.width;
-            let height = img.height;
-
-            if (width > MAX_DIMENSION || height > MAX_DIMENSION) {
-              if (width > height) {
-                height = Math.round((height * MAX_DIMENSION) / width);
-                width = MAX_DIMENSION;
-              } else {
-                width = Math.round((width * MAX_DIMENSION) / height);
-                height = MAX_DIMENSION;
-              }
-            }
-
-            canvas.width = width;
-            canvas.height = height;
-
-            const ctx = canvas.getContext("2d");
-            if (!ctx) {
-              reject(new Error("Canvas context initialization failed"));
-              return;
-            }
-
-            ctx.drawImage(img, 0, 0, width, height);
-
-            // Compress with quality 0.75 and verify size is strictly under 800 KB
-            canvas.toBlob(
-              (blob) => {
-                if (!blob) {
-                  reject(new Error("Image compression failed"));
-                  return;
-                }
-
-                if (blob.size > 800 * 1024) {
-                  // Secondary compression pass if initial blob exceeds 800 KB
-                  canvas.toBlob(
-                    (reducedBlob) => {
-                      resolve(reducedBlob || blob);
-                    },
-                    "image/jpeg",
-                    0.6,
-                  );
-                } else {
-                  resolve(blob);
-                }
-              },
-              "image/jpeg",
-              0.75,
-            );
-          };
-
-          img.onerror = (err) => {
-            URL.revokeObjectURL(objectUrl);
-            reject(new Error("Failed to load image for compression"));
-          };
-
-          img.src = objectUrl;
-        });
+      const upload = async (file: File, side: string) => {
+        const path = `kyc_documents/${user.id}/${side}.jpg`;
+        const { error } = await supabase.storage.from("kyc-documents").upload(path, file, { upsert: true });
+        if (error) throw error;
+        return path;
       };
 
-      // 1. Convert to compressed Blobs locally (< 800 KB each)
-      const frontBlob = await compressImage(frontImage);
-      const backBlob = await compressImage(backImage);
+      const [frontUrl, backUrl] = await Promise.all([
+        upload(frontImage, "front"),
+        upload(backImage, "back")
+      ]);
 
-      // 2. Efficient multipart/form-data upload with explicit 60-second timeout
-      const formData = new FormData();
-      formData.append("frontImage", frontBlob, "front.jpg");
-      formData.append("backImage", backBlob, "back.jpg");
+      const { error: dbError } = await supabase
+        .from("users")
+        .update({ kycStatus: "pending", aadhaarFrontUrl: frontUrl, aadhaarBackUrl: backUrl })
+        .eq("id", user.id);
 
-      const idToken = await currentUser.getIdToken();
+      if (dbError) throw dbError;
 
-      const apiResponse = await fetch("/api/updateKyc", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${idToken}`,
-        },
-        body: formData,
-        signal: AbortSignal.timeout(60000),
-      });
-
-      if (!apiResponse.ok) {
-        const errData = await apiResponse.json().catch(() => null);
-        throw new Error(errData?.error || `Upload failed with HTTP ${apiResponse.status}`);
-      }
-
-      // If successful:
       setStep("success");
       toast.success("KYC Uploaded Successfully!");
-
-      // Delay closing to show success animation
-      successTimerRef.current = setTimeout(() => {
-        onSuccess();
-      }, 2500);
-
-    } catch (error: any) {
-      console.error("UPLOAD FAILED:", error);
-
-      const isTimeout =
-        error.name === "TimeoutError" ||
-        error.name === "AbortError" ||
-        error.message?.includes("Timeout") ||
-        error.message?.includes("timeout");
-      const isBlocked =
-        error.message === "Network Request Blocked" ||
-        error.message?.includes("fetch") ||
-        error.message?.includes("Network") ||
-        error.message?.includes("blocked");
-
-      if (isTimeout) {
-        const timeoutMsg =
-          "Upload timed out (took longer than 60s). Please check your internet connection and try again.";
-        setError(timeoutMsg);
-        toast.error(timeoutMsg);
-      } else if (isBlocked) {
-        setStep("shield-warning");
-      } else {
-        const errorMsg = error.message || "Network blocked or upload failed. Please try again.";
-        setError(errorMsg);
-        toast.error(errorMsg);
-      }
+      successTimerRef.current = setTimeout(onSuccess, 2500);
+    } catch (err: any) {
+      toast.error(err.message || "Upload failed.");
     } finally {
-      // Guarantees the spinner stops spinning
       setLoading(false);
     }
   };

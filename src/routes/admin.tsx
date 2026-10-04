@@ -8,9 +8,6 @@ const ExecutiveAnalyticsDashboard = lazy(() =>
     default: m.ExecutiveAnalyticsDashboard,
   })),
 );
-const ApiPenTestModal = lazy(() =>
-  import("@/components/stash/ApiPenTestModal").then((m) => ({ default: m.ApiPenTestModal })),
-);
 const AndroidGoPerfModal = lazy(() =>
   import("@/components/stash/AndroidGoPerfModal").then((m) => ({ default: m.AndroidGoPerfModal })),
 );
@@ -515,7 +512,7 @@ function AdminPage() {
   const [serviceFilter, setServiceFilter] = useState<string>("all");
   const [visitors, setVisitors] = useState<VisitorRow[]>([]);
   const [visitorsLoading, setVisitorsLoading] = useState(false);
-  const [isPenTestOpen, setIsPenTestOpen] = useState(false);
+  
   const [isAndroidGoPerfOpen, setIsAndroidGoPerfOpen] = useState(false);
   const [isHostPayoutsOpen, setIsHostPayoutsOpen] = useState(false);
   const [isHostGridOpen, setIsHostGridOpen] = useState(false);
@@ -808,14 +805,6 @@ function AdminPage() {
             >
               <Smartphone className="h-3.5 w-3.5" />
               <span className="hidden sm:inline">Android Go Audit</span>
-            </button>
-            <button
-              onClick={() => setIsPenTestOpen(true)}
-              className="h-8 px-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs font-semibold flex items-center gap-1.5 hover:bg-rose-500/20 transition-colors"
-              title="Run API Security Pen-Test"
-            >
-              <ShieldAlert className="h-3.5 w-3.5" />
-              <span className="hidden sm:inline">API Pen-Test</span>
             </button>
             <button
               onClick={loadData}
@@ -1478,7 +1467,7 @@ function AdminPage() {
           <EdgeRegionMonitorWidget />
         </div>
 
-        <ApiPenTestModal isOpen={isPenTestOpen} onClose={() => setIsPenTestOpen(false)} />
+        
         <AndroidGoPerfModal
           isOpen={isAndroidGoPerfOpen}
           onClose={() => setIsAndroidGoPerfOpen(false)}

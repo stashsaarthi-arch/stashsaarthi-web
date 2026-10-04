@@ -1,17 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any, prettier/prettier */
 import React, { useState, useRef, useEffect } from "react";
-import { RecaptchaVerifier, signInWithPhoneNumber, ConfirmationResult } from "firebase/auth";
-import { auth } from "@/lib/firebase";
+import { supabase } from "@/lib/supabase";
 import { useNavigate } from "@tanstack/react-router";
 import { Smartphone, ArrowRight, Loader2, ArrowLeft } from "lucide-react";
-
-declare global {
-  interface Window {
-    recaptchaVerifier: RecaptchaVerifier;
-  }
-
-  const grecaptcha: any;
-}
 
 export function PhoneAuth() {
   const navigate = useNavigate();
@@ -20,92 +10,25 @@ export function PhoneAuth() {
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [confirmationResult, setConfirmationResult] = useState<ConfirmationResult | null>(null);
   const otpRefs = useRef<(HTMLInputElement | null)[]>([]);
-
   const [isMounted, setIsMounted] = useState(false);
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (!isMounted) return;
-
-    if (typeof window !== "undefined" && !window.recaptchaVerifier) {
-      window.recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha-container", {
-        size: "invisible",
-      });
-    }
-
-    // Cleanup to prevent memory leaks on unmount/refresh
-    return () => {
-      if (typeof window !== "undefined" && window.recaptchaVerifier) {
-        try {
-          window.recaptchaVerifier.clear();
-
-          window.recaptchaVerifier = undefined as any;
-        } catch {
-          // ignore cleanup errors
-        }
-      }
-    };
-  }, [isMounted]);
-
+  useEffect(() => setIsMounted(true), []);
   if (!isMounted) return null;
 
   const handleSendOtp = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-
     const cleanPhone = phone.replace(/\D/g, "");
-    if (cleanPhone.length !== 10) {
-      setError("Please enter a valid 10-digit mobile number");
-      return;
-    }
+    if (cleanPhone.length !== 10) return setError("Enter a valid 10-digit number");
 
     setLoading(true);
     try {
-      const phoneNumber = `+91${cleanPhone}`;
-      const appVerifier = window.recaptchaVerifier;
-
-      if (!appVerifier) {
-        setError("Security verifier not ready. Please refresh the page.");
-        setLoading(false);
-        return;
-      }
-
-      const confirmation = await signInWithPhoneNumber(auth, phoneNumber, appVerifier);
-      setConfirmationResult(confirmation);
+      const { error } = await supabase.auth.signInWithOtp({ phone: `+91${cleanPhone}` });
+      if (error) throw error;
       setStep("otp");
-
     } catch (err: any) {
-      console.error("Phone Auth Error:", err);
-      const errCode = err?.code || "";
-      const errMsg = err?.message || "";
-
-      const isBlocked =
-        errCode === "auth/network-request-failed" ||
-        errCode === "auth/captcha-check-failed" ||
-        errCode === "auth/web-storage-unsupported" ||
-        errMsg.includes("reCAPTCHA") ||
-        errMsg.includes("network") ||
-        errMsg.includes("Timeout") ||
-        errMsg.includes("blocked");
-
-      if (isBlocked) {
-        setError(
-          "Verification was blocked by your browser extension or shield. Please disable Ad-Blocker/Shields and try again.",
-        );
-      } else if (errCode === "auth/too-many-requests") {
-        setError("Too many attempts. Please wait a few moments and try again.");
-      } else if (errCode === "auth/invalid-phone-number") {
-        setError("Invalid mobile number format. Please check the 10 digits.");
-      } else if (errCode === "auth/quota-exceeded") {
-        setError("SMS quota exceeded for today. Please try again later.");
-      } else {
-        setError(errMsg || "Failed to send OTP. Please try again.");
-      }
+      setError(err.message || "Failed to send OTP.");
     } finally {
       setLoading(false);
     }
@@ -113,21 +36,14 @@ export function PhoneAuth() {
 
   const handleOtpChange = (index: number, value: string) => {
     if (!/^[0-9]*$/.test(value)) return;
-
     const newOtp = [...otp];
-    // Take only the last character if multiple are pasted
     newOtp[index] = value.slice(-1);
     setOtp(newOtp);
-
-    // Auto-focus next input
-    if (value && index < 5) {
-      otpRefs.current[index + 1]?.focus();
-    }
+    if (value && index < 5) otpRefs.current[index + 1]?.focus();
   };
 
   const handleOtpKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Backspace" && !otp[index] && index > 0) {
-      // Auto-focus previous input on backspace if current is empty
       otpRefs.current[index - 1]?.focus();
     }
   };
@@ -135,29 +51,20 @@ export function PhoneAuth() {
   const handleVerifyOtp = async (e: React.FormEvent) => {
     e.preventDefault();
     const otpCode = otp.join("");
-
-    if (otpCode.length !== 6 || !confirmationResult) {
-      setError("Please enter the complete 6-digit OTP");
-      return;
-    }
+    if (otpCode.length !== 6) return setError("Enter complete 6-digit OTP");
 
     setLoading(true);
     setError("");
     try {
-      await confirmationResult.confirm(otpCode);
-      // Successful login, redirect to dashboard
+      const { error } = await supabase.auth.verifyOtp({
+        phone: `+91${phone.replace(/\D/g, "")}`,
+        token: otpCode,
+        type: "sms"
+      });
+      if (error) throw error;
       navigate({ to: "/host/dashboard" });
-
     } catch (err: any) {
-      console.error("OTP Verification Error:", err);
-      const errCode = err?.code || "";
-      if (errCode === "auth/invalid-verification-code") {
-        setError("Incorrect OTP. Please enter the valid 6-digit code.");
-      } else if (errCode === "auth/code-expired") {
-        setError("OTP has expired. Please go back and request a new code.");
-      } else {
-        setError(err.message || "Verification failed. Please try again.");
-      }
+      setError(err.message || "Verification failed.");
     } finally {
       setLoading(false);
     }
@@ -165,9 +72,6 @@ export function PhoneAuth() {
 
   return (
     <div className="relative w-full max-w-md mx-auto z-10">
-      {/* Hidden recaptcha container placed at the absolute root to avoid conditional re-rendering */}
-      <div id="recaptcha-container" className="absolute pointer-events-none opacity-0" />
-
       {/* Ambient Apple Depth Glow strictly behind the auth container */}
       <div className="absolute inset-0 bg-emerald-500/10 blur-[80px] -z-10 pointer-events-none rounded-[2rem]" />
 
