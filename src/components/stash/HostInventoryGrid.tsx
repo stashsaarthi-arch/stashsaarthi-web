@@ -655,10 +655,7 @@ export function HostInventoryGrid({
           </div>
 
           <div
-            className="grid gap-3"
-            style={{
-              gridTemplateColumns: `repeat(${selectedPreset.cols}, minmax(0, 1fr))`,
-            }}
+            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5"
           >
             {slots.map((slot) => {
               const isOccupied = slot.state === "occupied";

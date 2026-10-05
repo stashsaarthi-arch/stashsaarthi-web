@@ -189,12 +189,12 @@ function WorkspacePartitions({ role, onBook, onListRoom, onRefer }: any) {
   return (
     <div className="w-full mt-8 mb-16 relative z-10">
       <div className="max-w-[1600px] mx-auto px-4 mb-8">
-        <div className="flex overflow-x-auto snap-x space-x-3 pb-2 scrollbar-hide items-center justify-start md:justify-center">
+        <div className="grid grid-cols-2 md:flex gap-2 w-full pb-2 items-center justify-start md:justify-center">
           {TABS.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`relative px-5 py-2.5 rounded-full font-bold text-sm whitespace-nowrap snap-center transition-all ${
+              className={`relative px-2 sm:px-5 py-2.5 rounded-full font-bold text-xs sm:text-sm md:whitespace-nowrap md:snap-center transition-all flex items-center justify-center text-center ${
                 activeTab === tab.id ? "text-black shadow-lg" : "text-white/60 hover:text-white bg-white/5 border border-white/10"
               }`}
             >

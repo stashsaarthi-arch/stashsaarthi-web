@@ -17,8 +17,9 @@ export const WhatsAppButton = memo(function WhatsAppButton({ onBook }: { onBook:
   };
 
   return (
-    <div className="fixed bottom-[90px] md:bottom-6 right-4 md:right-6 z-50 flex flex-col items-end">
-      <AnimatePresence>
+    <div className="fixed bottom-4 md:bottom-6 right-4 md:right-6 z-40 flex flex-col items-end pointer-events-none">
+      <div className="pointer-events-auto">
+        <AnimatePresence>
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, y: 10, scale: 0.95 }}
@@ -124,7 +125,7 @@ export const WhatsAppButton = memo(function WhatsAppButton({ onBook }: { onBook:
 
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="group relative flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-transform hover:scale-110 active:scale-95 cursor-pointer"
+        className="group relative flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-transform hover:scale-110 active:scale-95 cursor-pointer"
         aria-label="Open WhatsApp concierge"
       >
         <span className="absolute inset-0 rounded-full bg-[#25D366] opacity-40 blur-md transition-opacity group-hover:opacity-75 group-hover:blur-xl" />
@@ -133,11 +134,12 @@ export const WhatsAppButton = memo(function WhatsAppButton({ onBook }: { onBook:
           style={{ animationDuration: "2.5s" }}
         />
         {isOpen ? (
-          <X className="relative z-10 h-6 w-6" />
+          <X className="relative z-10 h-5 w-5" />
         ) : (
-          <MessageCircle className="relative z-10 h-7 w-7" />
+          <MessageCircle className="relative z-10 h-6 w-6" />
         )}
       </button>
+      </div>
     </div>
   );
 });

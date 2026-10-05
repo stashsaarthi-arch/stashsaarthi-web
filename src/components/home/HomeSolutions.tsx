@@ -4,9 +4,7 @@ import { FadeUp } from "@/components/ui/FadeUp";
 import { SolutionsHub } from "@/components/stash/SolutionsHub";
 import type { BookingPrefill } from "@/components/stash/types";
 
-const CalculatorHub = lazy(() =>
-  import("@/components/stash/CalculatorHub").then((m) => ({ default: m.CalculatorHub })),
-);
+
 const StashTimeline = lazy(() =>
   import("@/components/stash/StashTimeline").then((m) => ({ default: m.StashTimeline })),
 );
@@ -27,15 +25,6 @@ interface HomeSolutionsProps {
 export function HomeSolutions({ onBook, onListRoom }: HomeSolutionsProps) {
   return (
     <>
-      {/* High-Converting Savings Calculator Module placed high up for optimal scroll-depth conversion */}
-      <FadeUp>
-        <ErrorBoundary sectionName="Calculator Hub">
-          <Suspense fallback={null}>
-            <CalculatorHub onBook={onBook} />
-          </Suspense>
-        </ErrorBoundary>
-      </FadeUp>
-
       {/* Core Solutions Hub (Stash / Rooms / Kitchen / Connect) */}
       <FadeUp>
         <ErrorBoundary sectionName="Solutions Hub">

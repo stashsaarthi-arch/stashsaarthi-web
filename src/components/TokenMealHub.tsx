@@ -305,7 +305,7 @@ const MealTierCard: React.FC<MealTierCardProps> = ({ tier, isSelected, tierCost,
         </span>
       )}
 
-      <div className="relative z-10 flex items-center justify-between gap-2 mb-1 mt-4">
+      <div className="relative z-10 flex flex-wrap items-center justify-between gap-2 mb-1 mt-4 overflow-hidden">
         <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
           {tier.name}
         </div>
@@ -318,7 +318,7 @@ const MealTierCard: React.FC<MealTierCardProps> = ({ tier, isSelected, tierCost,
       </div>
 
       {tier.id === "standard" && (
-        <div className="mb-3 text-[11px] font-bold text-emerald-300 bg-emerald-950/70 border border-emerald-500/30 px-2.5 py-1 rounded-lg flex items-center justify-between shadow-sm">
+        <div className="mb-3 text-[11px] font-bold text-emerald-300 bg-emerald-950/70 border border-emerald-500/30 px-2.5 py-1 rounded-lg flex flex-wrap items-center justify-between gap-2 shadow-sm overflow-hidden">
           <span>{getLabel(false)}</span>
           <span className="text-[9px] font-mono uppercase bg-emerald-500/20 text-emerald-400 px-1.5 py-0.5 rounded border border-emerald-500/30">
             {variant === "classic" ? "Classic" : "Value-Save"}
@@ -1129,7 +1129,7 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
                   }`}
                 >
                   <div>
-                    <div className="flex items-center justify-between gap-1 mb-1.5">
+                    <div className="flex flex-wrap items-center justify-between gap-1 mb-1.5 overflow-hidden">
                       <span className="text-[11px] font-semibold text-slate-400 truncate">
                         {node.campus}
                       </span>

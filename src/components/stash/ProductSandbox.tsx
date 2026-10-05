@@ -63,12 +63,12 @@ export function ProductSandbox() {
   return (
     <div id="product-sandbox" className="relative mx-auto max-w-6xl px-2 py-2 scroll-mt-20">
       {/* ── Tab Switcher ── */}
-      <div className="flex justify-center mb-4">
-        <div className="inline-flex rounded-xl border border-white/10 bg-white/[0.03] p-1 max-w-full overflow-x-auto gap-1">
+      <div className="flex justify-center mb-4 w-full">
+        <div className="grid grid-cols-2 sm:flex rounded-xl border border-white/10 bg-white/[0.03] p-1 w-full sm:w-auto gap-1">
           <button
             type="button"
             onClick={() => setActiveTab("custody")}
-            className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
+            className={`flex items-center justify-center gap-1.5 rounded-lg px-2 sm:px-3 py-1.5 text-[10px] sm:text-xs font-semibold transition-all cursor-pointer text-center sm:whitespace-nowrap ${
               activeTab === "custody"
                 ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 shadow-[0_0_15px_-3px_rgba(16,185,129,0.3)]"
                 : "text-muted-foreground hover:text-white border border-transparent"
@@ -81,7 +81,7 @@ export function ProductSandbox() {
           <button
             type="button"
             onClick={() => setActiveTab("node")}
-            className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
+            className={`flex items-center justify-center gap-1.5 rounded-lg px-2 sm:px-3 py-1.5 text-[10px] sm:text-xs font-semibold transition-all cursor-pointer text-center sm:whitespace-nowrap ${
               activeTab === "node"
                 ? "bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-[0_0_15px_-3px_rgba(245,158,11,0.3)]"
                 : "text-muted-foreground hover:text-white border border-transparent"
@@ -94,7 +94,7 @@ export function ProductSandbox() {
           <button
             type="button"
             onClick={() => setActiveTab("economics")}
-            className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
+            className={`flex items-center justify-center gap-1.5 rounded-lg px-2 sm:px-3 py-1.5 text-[10px] sm:text-xs font-semibold transition-all cursor-pointer text-center sm:whitespace-nowrap col-span-2 sm:col-span-1 ${
               activeTab === "economics"
                 ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-[0_0_15px_-3px_rgba(56,189,248,0.3)]"
                 : "text-muted-foreground hover:text-white border border-transparent"

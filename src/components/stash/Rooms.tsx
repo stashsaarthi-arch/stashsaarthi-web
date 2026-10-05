@@ -375,11 +375,11 @@ export function Rooms({ onList, onBook }: { onList: () => void; onBook?: OpenBoo
                 direction="vertical"
                 duration={0.5}
                 delay={i * 0.05}
-                className="snap-center min-w-[85vw] max-w-[88vw] sm:min-w-0 sm:max-w-none shrink-0 sm:shrink"
+                className="w-[88vw] sm:w-[380px] shrink-0 snap-center overflow-hidden"
               >
                 <motion.article
                   whileHover={{ y: -5 }}
-                  className="relative overflow-hidden bg-[#0a0a0a]/40 backdrop-blur-md border border-white/10 rounded-3xl group transition-colors duration-300 hover:bg-[#0a0a0a]/60 flex flex-col p-3 w-full h-full"
+                  className="relative overflow-hidden bg-[#0a0a0a]/40 backdrop-blur-md border border-white/10 rounded-3xl group transition-colors duration-300 hover:bg-[#0a0a0a]/60 flex flex-col p-4 w-full h-full"
                 >
                   <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-16 bg-emerald-500/10 blur-[30px] rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
@@ -404,9 +404,9 @@ export function Rooms({ onList, onBook }: { onList: () => void; onBook?: OpenBoo
                   </div>
 
                   <div className="flex flex-1 flex-col px-1 pb-1">
-                    <div className="flex items-start justify-between gap-2 flex-wrap">
-                      <div className="flex items-center gap-1.5 flex-wrap">
-                        <span className="text-base font-extrabold">
+                    <div className="flex flex-wrap items-start justify-between gap-2">
+                      <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+                        <span className="text-base font-extrabold shrink-0">
                           {l.rent_amount
                             ? `${inr(l.rent_amount)}${t.rooms.perMonth}`
                             : t.rooms.rentOnRequest}

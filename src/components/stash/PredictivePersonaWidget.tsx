@@ -36,7 +36,7 @@ export const PredictivePersonaWidget = memo(function PredictivePersonaWidget() {
           initial={{ opacity: 0, scale: 0.95, y: 10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 10 }}
-          className="relative w-full h-full flex flex-col justify-between"
+          className="relative w-full"
         >
           <div className="flex items-start justify-between gap-2 mb-4">
             <div className="flex items-center gap-2 text-sm font-bold text-emerald-400">
