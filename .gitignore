@@ -53,3 +53,6 @@ config.json
 .env
 
 .env
+
+.env
+client_secret*.json
