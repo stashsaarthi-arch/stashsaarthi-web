@@ -51,3 +51,5 @@ config.json
 .playwright-mcp/
 
 .env
+
+.env
