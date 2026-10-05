@@ -49,3 +49,5 @@ config.json
 
 # Playwright MCP artifacts
 .playwright-mcp/
+
+.env
