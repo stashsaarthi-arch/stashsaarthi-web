@@ -849,7 +849,7 @@ function RootComponent() {
                         gestureOrientation: "vertical",
                         smoothWheel: true,
                         wheelMultiplier: 1.0,
-                        syncTouch: false, // Native 120Hz ProMotion touch on mobile devices
+                        syncTouch: true, // Sync touch to Lenis to fix mobile scroll
                         touchMultiplier: 1.2,
                         infinite: false,
                         autoRaf: true, // Native rAF baseline

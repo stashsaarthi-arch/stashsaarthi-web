@@ -1,4 +1,4 @@
-﻿// @ts-nocheck
+// @ts-nocheck
 /* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
@@ -173,7 +173,7 @@ export function HostStashVerificationModal({
         const { data: { user } } = await supabase.auth.getUser();
         if (!user) throw new Error("Authentication required");
 
-        const path = "verifications/$(user.id)/$(Date.now()).jpg";
+        const path = `verifications/${user.id}/${Date.now()}.jpg`;
         const { error } = await supabase.storage.from("stash-verifications").upload(path, file, { upsert: true });
         
         if (error) throw error;
