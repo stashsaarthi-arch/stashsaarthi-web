@@ -28,20 +28,24 @@ export function PhoneAuth() {
     setLoading(true);
     try {
       // 1. Try to login
-      const { error: signInError } = await supabase.auth.signInWithPassword({ 
-        email, 
-        password 
+      const { error: signInError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
       });
 
       if (signInError) {
-        if (signInError.message.includes("Invalid login credentials") || signInError.message.toLowerCase().includes("not found") || signInError.status === 400) {
+        if (
+          signInError.message.includes("Invalid login credentials") ||
+          signInError.message.toLowerCase().includes("not found") ||
+          signInError.status === 400
+        ) {
           // 2. Fallback to signup if account doesn't exist
           const { error: signUpError } = await supabase.auth.signUp({
             email,
             password,
             options: {
-              data: { phone: `+91${cleanPhone}` }
-            }
+              data: { phone: `+91${cleanPhone}` },
+            },
           });
           if (signUpError) throw signUpError;
         } else {
@@ -73,7 +77,10 @@ export function PhoneAuth() {
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-4">
             <div className="space-y-2">
-              <label htmlFor="email" className="text-xs font-semibold text-slate-300 uppercase tracking-wider ml-2">
+              <label
+                htmlFor="email"
+                className="text-xs font-semibold text-slate-300 uppercase tracking-wider ml-2"
+              >
                 Email Address
               </label>
               <div className="relative">
@@ -93,7 +100,10 @@ export function PhoneAuth() {
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="phone" className="text-xs font-semibold text-slate-300 uppercase tracking-wider ml-2">
+              <label
+                htmlFor="phone"
+                className="text-xs font-semibold text-slate-300 uppercase tracking-wider ml-2"
+              >
                 Mobile Number
               </label>
               <div className="relative">
@@ -119,7 +129,10 @@ export function PhoneAuth() {
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="password" className="text-xs font-semibold text-slate-300 uppercase tracking-wider ml-2">
+              <label
+                htmlFor="password"
+                className="text-xs font-semibold text-slate-300 uppercase tracking-wider ml-2"
+              >
                 Password / PIN
               </label>
               <div className="relative">
@@ -155,8 +168,8 @@ export function PhoneAuth() {
           </button>
         </form>
       </div>
-      
-      <AadhaarKycModal 
+
+      <AadhaarKycModal
         isOpen={showKycModal}
         onClose={() => navigate({ to: "/host/dashboard" })}
         onSuccess={() => navigate({ to: "/host/dashboard" })}

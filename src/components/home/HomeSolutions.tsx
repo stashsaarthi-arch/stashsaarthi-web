@@ -4,7 +4,6 @@ import { FadeUp } from "@/components/ui/FadeUp";
 import { SolutionsHub } from "@/components/stash/SolutionsHub";
 import type { BookingPrefill } from "@/components/stash/types";
 
-
 const StashTimeline = lazy(() =>
   import("@/components/stash/StashTimeline").then((m) => ({ default: m.StashTimeline })),
 );

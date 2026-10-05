@@ -152,7 +152,10 @@ export const Navbar = memo(function Navbar({
       ref={navRef}
       className="fixed top-0 left-0 right-0 !z-[999] w-full transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] !bg-[#0A0D0F]/10 !backdrop-blur-[12px] !border-b !border-white/5"
     >
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-24 -z-10 rounded-full pointer-events-none" style={{ background: 'radial-gradient(ellipse, rgba(16,185,129,0.2) 0%, transparent 70%)' }}></div>
+      <div
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-24 -z-10 rounded-full pointer-events-none"
+        style={{ background: "radial-gradient(ellipse, rgba(16,185,129,0.2) 0%, transparent 70%)" }}
+      ></div>
       <div
         ref={innerNavRef}
         className="max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-4 xl:px-6 w-full max-w-full overflow-visible flex items-center justify-between gap-1 sm:gap-2 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] !h-15 sm:!h-20"
@@ -186,7 +189,9 @@ export const Navbar = memo(function Navbar({
                 onClick={(e) => {
                   e.preventDefault();
                   playTab();
-                  window.dispatchEvent(new CustomEvent("stashsaarthi:nav-tab", { detail: l.href.replace(/^#/, "") }));
+                  window.dispatchEvent(
+                    new CustomEvent("stashsaarthi:nav-tab", { detail: l.href.replace(/^#/, "") }),
+                  );
                   smoothScrollTo(l.href.replace(/^#/, ""))(e);
                 }}
                 className="whitespace-nowrap rounded-lg px-2 min-[1650px]:px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition-all hover:bg-white/[0.05] hover:text-foreground shrink-0 flex items-center gap-1.5 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400/80 focus-visible:ring-offset-1 focus-visible:ring-offset-[#0A0D0F]"
@@ -468,7 +473,11 @@ export const Navbar = memo(function Navbar({
                     onClick={(e) => {
                       playTab();
                       setOpen(false);
-                      window.dispatchEvent(new CustomEvent("stashsaarthi:nav-tab", { detail: l.href.replace(/^#/, "") }));
+                      window.dispatchEvent(
+                        new CustomEvent("stashsaarthi:nav-tab", {
+                          detail: l.href.replace(/^#/, ""),
+                        }),
+                      );
                       smoothScrollTo(l.href.replace(/^#/, ""))(e);
                     }}
                     className="flex flex-col items-start rounded-xl min-h-[64px] p-3 bg-white/5 hover:bg-white/10 border border-white/5 transition-all text-left cursor-pointer active:scale-98"

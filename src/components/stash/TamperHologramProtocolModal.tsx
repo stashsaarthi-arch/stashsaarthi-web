@@ -1,4 +1,3 @@
-﻿// @ts-nocheck
 /* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect, useCallback } from "react";
 import {

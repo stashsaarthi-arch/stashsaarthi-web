@@ -8,7 +8,7 @@ const usePredictivePersonaAI = () => {
   return {
     predictedPersona: "host" as const,
     confidence: 0.85,
-    preloadedAssets: ["host-dashboard.js"]
+    preloadedAssets: ["host-dashboard.js"],
   };
 };
 
@@ -31,7 +31,7 @@ export const PredictivePersonaWidget = memo(function PredictivePersonaWidget() {
 
   return (
     <AnimatePresence>
-      {true && (
+      {!dismissed && (
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}

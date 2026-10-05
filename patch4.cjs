@@ -1,6 +1,6 @@
-const fs = require('fs');
+const fs = require("fs");
 
-let hsv = fs.readFileSync('src/components/stash/HostStashVerificationModal.tsx', 'utf8');
+let hsv = fs.readFileSync("src/components/stash/HostStashVerificationModal.tsx", "utf8");
 
 const oldStr = `const createAndSaveVerification = (state: any, bookingId?: any, hostName?: any, campusNode?: any) => ({
     success: true, message: "Verification Saved",
@@ -20,4 +20,4 @@ const newStr = `const createAndSaveVerification = async (state: any, bookingId?:
 
 hsv = hsv.replace(oldStr, newStr);
 
-fs.writeFileSync('src/components/stash/HostStashVerificationModal.tsx', hsv);
+fs.writeFileSync("src/components/stash/HostStashVerificationModal.tsx", hsv);

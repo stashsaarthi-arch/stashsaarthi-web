@@ -4,7 +4,13 @@ import { useAuth } from "@/hooks/useAuth";
 import { PhoneAuth } from "./PhoneAuth";
 import { Smartphone, Mail } from "lucide-react";
 
-export function LoginModal({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) {
+export function LoginModal({
+  open,
+  onOpenChange,
+}: {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}) {
   const { loginWithGoogle } = useAuth();
   const [showPhoneAuth, setShowPhoneAuth] = useState(false);
 
@@ -20,7 +26,7 @@ export function LoginModal({ open, onOpenChange }: { open: boolean; onOpenChange
         {showPhoneAuth ? (
           <div className="w-full">
             <PhoneAuth />
-            <button 
+            <button
               onClick={() => setShowPhoneAuth(false)}
               className="mt-4 text-xs text-muted-foreground w-full text-center hover:text-white transition-colors cursor-pointer"
             >
@@ -47,7 +53,6 @@ export function LoginModal({ open, onOpenChange }: { open: boolean; onOpenChange
               <Smartphone className="w-5 h-5" />
               Continue with Phone / Email
             </button>
-
           </div>
         )}
       </DialogContent>

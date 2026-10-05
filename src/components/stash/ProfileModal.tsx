@@ -125,7 +125,7 @@ export function ProfileModal({ open, onOpenChange, initialTab = "settings" }: Pr
           full_name: formData.full_name,
           avatar_url: formData.avatar,
           role: formData.user_type,
-        }
+        },
       });
       toast.success(
         isHi ? "प्रोफ़ाइल व अवतार अपडेट किया गया" : "Profile & Avatar updated successfully",

@@ -12,8 +12,8 @@ export default defineConfig({
   },
   vite: {
     define: {
-      "__dirname": "import.meta.dirname",
-      "__filename": "import.meta.filename",
+      __dirname: "import.meta.dirname",
+      __filename: "import.meta.filename",
     },
     resolve: {
       tsconfigPaths: true,

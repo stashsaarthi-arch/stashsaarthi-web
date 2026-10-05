@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars, prettier/prettier, @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any */
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,

@@ -36,7 +36,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return {
       id: supabaseUser.id,
       email: supabaseUser.email || "",
-      name: supabaseUser.user_metadata?.["full_name"] || supabaseUser.email?.split("@")[0] || "User",
+      name:
+        supabaseUser.user_metadata?.["full_name"] || supabaseUser.email?.split("@")[0] || "User",
       avatar: supabaseUser.user_metadata?.["avatar_url"] || "",
       role: supabaseUser.user_metadata?.["role"] || "student",
       verified: !!supabaseUser.email_confirmed_at,
@@ -45,18 +46,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const loginWithGoogle = async () => {
     try {
-      const { error } = await supabase.auth.signInWithOAuth({ 
+      const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: window.location.origin
-        }
+          redirectTo: window.location.origin,
+        },
       });
       if (error) throw error;
     } catch (err) {
       toast.error("Google sign-in failed", { description: "Please try again in a moment." });
     }
   };
-
 
   const logout = async () => {
     await supabase.auth.signOut();

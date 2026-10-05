@@ -62,20 +62,20 @@ export function AuthButton({ compact = false }: { compact?: boolean }) {
   if (!user) {
     return (
       <>
-      <Button
-        variant="outline"
-        size={compact ? "sm" : "default"}
-        onClick={handleCustomLogin}
-        disabled={loading}
-        aria-busy={loading}
-        className="gap-2 bg-[#161B22] hover:bg-[#21262D] border border-slate-700 text-white rounded-full px-4 cursor-pointer"
-      >
-        {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <GoogleGlyph />}
-        <span className="whitespace-nowrap">
-          {loading ? (isHi ? "प्रमाणीकरण…" : "Authenticating…") : t.nav.auth}
-        </span>
-      </Button>
-      <LoginModal open={loginModalOpen} onOpenChange={setLoginModalOpen} />
+        <Button
+          variant="outline"
+          size={compact ? "sm" : "default"}
+          onClick={handleCustomLogin}
+          disabled={loading}
+          aria-busy={loading}
+          className="gap-2 bg-[#161B22] hover:bg-[#21262D] border border-slate-700 text-white rounded-full px-4 cursor-pointer"
+        >
+          {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <GoogleGlyph />}
+          <span className="whitespace-nowrap">
+            {loading ? (isHi ? "प्रमाणीकरण…" : "Authenticating…") : t.nav.auth}
+          </span>
+        </Button>
+        <LoginModal open={loginModalOpen} onOpenChange={setLoginModalOpen} />
       </>
     );
   }

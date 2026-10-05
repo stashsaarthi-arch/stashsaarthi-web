@@ -1,4 +1,3 @@
-﻿// @ts-nocheck
 /* eslint-disable prettier/prettier, @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect, useCallback } from "react";
 import {
@@ -349,7 +348,7 @@ export const DamageClaimsModal: React.FC<DamageClaimsModalProps> = ({
                           : "bg-slate-800 border-slate-700 text-slate-300"
                       }`}
                     >
-                      Î“Â£Ã  Pristine Sample (1.2% Diff)
+                      ✨ Pristine Sample (1.2% Diff)
                     </button>
                   </div>
                 </div>

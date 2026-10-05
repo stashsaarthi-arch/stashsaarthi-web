@@ -56,7 +56,7 @@ export function StashVault() {
           .from("liquidation_deals")
           .select("*")
           .order("created_at", { ascending: false });
-        
+
         let activeDeals = dealsData || [];
         if (activeDeals.length === 0) {
           activeDeals = [
@@ -68,7 +68,7 @@ export function StashVault() {
               discounted_price: 1500,
               condition: "Good",
               campus: "Kakadeo",
-              status: "available"
+              status: "available",
             },
             {
               id: "deal-2",
@@ -78,8 +78,8 @@ export function StashVault() {
               discounted_price: 800,
               condition: "Good",
               campus: "IIT Kanpur",
-              status: "available"
-            }
+              status: "available",
+            },
           ];
         }
         setDeals(activeDeals);
@@ -93,7 +93,7 @@ export function StashVault() {
               liquidation_status: "none",
               retrieval_requested: false,
               created_at: new Date().toISOString(),
-            }
+            },
           ]);
           setLoading(false);
           return;
@@ -125,7 +125,7 @@ export function StashVault() {
               liquidation_status: "none",
               retrieval_requested: false,
               created_at: new Date().toISOString(),
-            }
+            },
           ];
         }
 
@@ -144,9 +144,12 @@ export function StashVault() {
     if (!stashes[0]) return;
     try {
       if (user && stashes[0].id !== "sample-stash-001") {
-        await supabase.from("stash_bookings").update({ retrieval_requested: true }).eq("id", stashes[0].id);
+        await supabase
+          .from("stash_bookings")
+          .update({ retrieval_requested: true })
+          .eq("id", stashes[0].id);
       }
-      setStashes(prev => prev.map((s, i) => i === 0 ? { ...s, retrieval_requested: true } : s));
+      setStashes((prev) => prev.map((s, i) => (i === 0 ? { ...s, retrieval_requested: true } : s)));
       toast.success("Retrieval request submitted successfully!");
     } catch (err) {
       toast.error("Failed to submit retrieval request");
@@ -157,9 +160,14 @@ export function StashVault() {
     if (!stashes[0]) return;
     try {
       if (user && stashes[0].id !== "sample-stash-001") {
-        await supabase.from("stash_bookings").update({ liquidation_status: 'liquidated' }).eq("id", stashes[0].id);
+        await supabase
+          .from("stash_bookings")
+          .update({ liquidation_status: "liquidated" })
+          .eq("id", stashes[0].id);
       }
-      setStashes(prev => prev.map((s, i) => i === 0 ? { ...s, liquidation_status: 'liquidated' } : s));
+      setStashes((prev) =>
+        prev.map((s, i) => (i === 0 ? { ...s, liquidation_status: "liquidated" } : s)),
+      );
       toast.success("Item liquidated at 50% discount!");
     } catch (err) {
       toast.error("Failed to liquidate item");
@@ -191,7 +199,13 @@ export function StashVault() {
 
   const totalItems = stashes.reduce((sum, stash) => sum + stash.items, 0);
   const primaryStash = stashes[0];
-  const latestStatus = primaryStash ? (primaryStash.liquidation_status === 'liquidated' ? "Liquidated" : primaryStash.retrieval_requested ? "Retrieval Pending" : primaryStash.status) : "No Active Stashes";
+  const latestStatus = primaryStash
+    ? primaryStash.liquidation_status === "liquidated"
+      ? "Liquidated"
+      : primaryStash.retrieval_requested
+        ? "Retrieval Pending"
+        : primaryStash.status
+    : "No Active Stashes";
 
   return (
     <div className="w-full min-h-[60vh] bg-transparent flex flex-col items-center justify-center relative z-10 p-6">
@@ -275,12 +289,15 @@ export function StashVault() {
                 />
               </svg>
             </div>
-            
+
             <motion.button
               onClick={handleRetrieve}
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
-              disabled={primaryStash?.retrieval_requested || primaryStash?.liquidation_status === 'liquidated'}
+              disabled={
+                primaryStash?.retrieval_requested ||
+                primaryStash?.liquidation_status === "liquidated"
+              }
               className="w-full py-4 px-6 bg-white text-black font-bold rounded-xl transition-colors hover:bg-student-primary hover:shadow-[0_0_20px_rgba(0,245,160,0.4)] mb-3 disabled:opacity-50"
             >
               {primaryStash?.retrieval_requested ? "Retrieval Requested" : "Request Retrieval"}
@@ -313,10 +330,16 @@ export function StashVault() {
             </span>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {deals.map(deal => (
-              <div key={deal.id} className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 hover:border-rose-500/50 transition-colors">
+            {deals.map((deal) => (
+              <div
+                key={deal.id}
+                className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 hover:border-rose-500/50 transition-colors"
+              >
                 <div className="text-sm text-white/60 mb-1">{deal.item_name}</div>
-                <div className="text-xl font-bold text-rose-400 mb-3">₹{deal.discounted_price} <span className="line-through text-white/40 text-sm">₹{deal.original_price}</span></div>
+                <div className="text-xl font-bold text-rose-400 mb-3">
+                  ₹{deal.discounted_price}{" "}
+                  <span className="line-through text-white/40 text-sm">₹{deal.original_price}</span>
+                </div>
                 <button className="w-full py-2 bg-rose-500/20 text-rose-300 rounded-lg hover:bg-rose-500 hover:text-white transition-colors font-semibold text-sm">
                   Claim Deal
                 </button>

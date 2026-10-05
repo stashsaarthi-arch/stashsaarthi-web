@@ -8,11 +8,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 
 export type BookingLifecycleState =
-  | "item_received"
-  | "in_secure_locker"
-  | "ready_for_retrieval"
-  | "completed"
-  | "listed_for_sale";
+  "item_received" | "in_secure_locker" | "ready_for_retrieval" | "completed" | "listed_for_sale";
 
 export interface LifecycleStepInfo {
   state: BookingLifecycleState;

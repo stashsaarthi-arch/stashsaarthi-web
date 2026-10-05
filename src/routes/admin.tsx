@@ -512,7 +512,7 @@ function AdminPage() {
   const [serviceFilter, setServiceFilter] = useState<string>("all");
   const [visitors, setVisitors] = useState<VisitorRow[]>([]);
   const [visitorsLoading, setVisitorsLoading] = useState(false);
-  
+
   const [isAndroidGoPerfOpen, setIsAndroidGoPerfOpen] = useState(false);
   const [isHostPayoutsOpen, setIsHostPayoutsOpen] = useState(false);
   const [isHostGridOpen, setIsHostGridOpen] = useState(false);
@@ -1467,7 +1467,6 @@ function AdminPage() {
           <EdgeRegionMonitorWidget />
         </div>
 
-        
         <AndroidGoPerfModal
           isOpen={isAndroidGoPerfOpen}
           onClose={() => setIsAndroidGoPerfOpen(false)}

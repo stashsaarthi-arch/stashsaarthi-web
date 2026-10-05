@@ -21,10 +21,20 @@ import { HomeSolutions } from "@/components/home/HomeSolutions";
 import { HomeDeepModules } from "@/components/home/HomeDeepModules";
 import { HomeFooterAndModals } from "@/components/home/HomeFooterAndModals";
 
-const CalculatorHub = lazy(() => import("@/components/stash/CalculatorHub").then((m) => ({ default: m.CalculatorHub })));
-const PredictivePersonaWidget = lazy(() => import("@/components/stash/PredictivePersonaWidget").then((m) => ({ default: m.PredictivePersonaWidget })));
-const StashVault = lazy(() => import("@/components/dashboard/StashVault").then((m) => ({ default: m.StashVault })));
-const HostInventoryGrid = lazy(() => import("@/components/stash/HostInventoryGrid").then((m) => ({ default: m.HostInventoryGrid })));
+const CalculatorHub = lazy(() =>
+  import("@/components/stash/CalculatorHub").then((m) => ({ default: m.CalculatorHub })),
+);
+const PredictivePersonaWidget = lazy(() =>
+  import("@/components/stash/PredictivePersonaWidget").then((m) => ({
+    default: m.PredictivePersonaWidget,
+  })),
+);
+const StashVault = lazy(() =>
+  import("@/components/dashboard/StashVault").then((m) => ({ default: m.StashVault })),
+);
+const HostInventoryGrid = lazy(() =>
+  import("@/components/stash/HostInventoryGrid").then((m) => ({ default: m.HostInventoryGrid })),
+);
 
 const TITLE = "StashSaarthi - Campus Micro-Storage & Zero-Brokerage Co-Living";
 const DESC =
@@ -118,11 +128,11 @@ function Index() {
         onRefer={handleRefer}
       />
 
-      <WorkspacePartitions 
-        role={role} 
-        onBook={open} 
-        onListRoom={handleListRoom} 
-        onRefer={handleRefer} 
+      <WorkspacePartitions
+        role={role}
+        onBook={open}
+        onListRoom={handleListRoom}
+        onRefer={handleRefer}
       />
 
       <HomeFooterAndModals
@@ -151,7 +161,7 @@ const TABS = [
 ] as const;
 
 function WorkspacePartitions({ role, onBook, onListRoom, onRefer }: any) {
-  const [activeTab, setActiveTab] = useState<typeof TABS[number]["id"]>("explore");
+  const [activeTab, setActiveTab] = useState<(typeof TABS)[number]["id"]>("explore");
   const [kycModalOpen, setKycModalOpen] = useState(false);
   const [verifyModalOpen, setVerifyModalOpen] = useState(false);
 
@@ -163,13 +173,13 @@ function WorkspacePartitions({ role, onBook, onListRoom, onRefer }: any) {
       else if (hash === "#host") setActiveTab("host");
       else setActiveTab("explore");
     };
-    
+
     // Check initial hash
     handleHash();
 
     // Listen to hash changes or custom scroll events
     window.addEventListener("hashchange", handleHash);
-    
+
     // Also listen to custom events from Navbar if they intercept default link behavior
     const handleCustomNav = (e: Event) => {
       const target = (e as CustomEvent).detail;
@@ -195,7 +205,9 @@ function WorkspacePartitions({ role, onBook, onListRoom, onRefer }: any) {
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
               className={`relative px-2 sm:px-5 py-2.5 rounded-full font-bold text-xs sm:text-sm md:whitespace-nowrap md:snap-center transition-all flex items-center justify-center text-center ${
-                activeTab === tab.id ? "text-black shadow-lg" : "text-white/60 hover:text-white bg-white/5 border border-white/10"
+                activeTab === tab.id
+                  ? "text-black shadow-lg"
+                  : "text-white/60 hover:text-white bg-white/5 border border-white/10"
               }`}
             >
               {activeTab === tab.id && (
@@ -206,7 +218,9 @@ function WorkspacePartitions({ role, onBook, onListRoom, onRefer }: any) {
                   transition={{ type: "spring", stiffness: 400, damping: 30 }}
                 />
               )}
-              <span className="relative" style={{ zIndex: 1 }}>{tab.label}</span>
+              <span className="relative" style={{ zIndex: 1 }}>
+                {tab.label}
+              </span>
             </button>
           ))}
         </div>
@@ -254,7 +268,9 @@ function WorkspacePartitions({ role, onBook, onListRoom, onRefer }: any) {
           {activeTab === "host" && (
             <div className="space-y-12">
               <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-12">
-                <h3 className="text-3xl font-bold text-amber-400 mb-6 text-center">Host Inventory Command</h3>
+                <h3 className="text-3xl font-bold text-amber-400 mb-6 text-center">
+                  Host Inventory Command
+                </h3>
                 <div className="flex flex-wrap items-center justify-center gap-4 mb-8">
                   <button
                     onClick={() => setKycModalOpen(true)}
