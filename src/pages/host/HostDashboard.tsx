@@ -157,7 +157,7 @@ export function HostDashboard() {
               onClick={() => setIsKycModalOpen(true)}
               className="z-10 shrink-0 w-full sm:w-auto px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-amber-950 font-bold rounded-xl text-sm transition-colors shadow-lg shadow-amber-500/20"
             >
-              Verify Aadhaar
+              Verify KYC / Upload ID Documents
             </button>
           </div>
         ) : (

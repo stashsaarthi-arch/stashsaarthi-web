@@ -165,18 +165,25 @@ export function HostStashVerificationModal({
     }, 600);
   };
 
-  // Handle file drop / upload
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Handle file drop / upload
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        if (event.target?.result) {
-          setPhotoProofUrl(event.target.result as string);
-          toast.success(isHi ? "Î±Ã±Â½Î±Ã‘Ã¯Î±Ã±Æ’Î±Ã‘Ã¯ Î±Ã±â••Î±Ã±Â¼Î±Ã‘Ã©Î±Ã±Ã± Î±Ã±Ã Î±Ã±Â¬Î±Ã±â–“Î±Ã‘Ã¯Î±Ã±Ã­ Î±Ã±Ã²Î±Ã±â”Î±Ã±Â»Î±Ã±â•› Î±Ã±Ã¹Î±Ã±Â»Î±Ã±â•›!" : "Photo proof uploaded!");
-        }
-      };
-      reader.readAsDataURL(file);
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user) throw new Error("Authentication required");
+
+        const path = "verifications/$(user.id)/$(Date.now()).jpg";
+        const { error } = await supabase.storage.from("stash-verifications").upload(path, file, { upsert: true });
+        
+        if (error) throw error;
+        
+        const { data } = supabase.storage.from("stash-verifications").getPublicUrl(path);
+        setPhotoProofUrl(data.publicUrl);
+        toast.success(isHi ? "फोटो अपलोड हो गया!" : "Photo proof uploaded successfully!");
+      } catch (err: any) {
+        toast.error("Failed to upload photo: " + (err.message || ""));
+      }
     }
   };
 
@@ -840,4 +847,5 @@ export function HostStashVerificationModal({
     document.body,
   );
 }
+
 

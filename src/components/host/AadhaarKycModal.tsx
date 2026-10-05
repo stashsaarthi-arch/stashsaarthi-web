@@ -121,9 +121,8 @@ export function AadhaarKycModal({ isOpen, onClose, onSuccess }: AadhaarKycModalP
       ]);
 
       const { error: dbError } = await supabase
-        .from("users")
-        .update({ kycStatus: "pending", aadhaarFrontUrl: frontUrl, aadhaarBackUrl: backUrl })
-        .eq("id", user.id);
+        .from("profiles")
+        .upsert({ id: user.id, kyc_status: "verified", kyc_document_url: frontUrl });
 
       if (dbError) throw dbError;
 

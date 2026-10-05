@@ -12,6 +12,10 @@ import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 import { usePersona } from "@/context/PersonaContext";
 import type { BookingPrefill } from "@/components/stash/types";
 
+import { ShieldAlert } from "lucide-react";
+import { AadhaarKycModal } from "@/components/host/AadhaarKycModal";
+import { HostStashVerificationModal } from "@/components/stash/HostStashVerificationModal";
+
 import { HomeHeroSection } from "@/components/home/HomeHeroSection";
 import { HomeSolutions } from "@/components/home/HomeSolutions";
 import { HomeDeepModules } from "@/components/home/HomeDeepModules";
@@ -148,6 +152,8 @@ const TABS = [
 
 function WorkspacePartitions({ role, onBook, onListRoom, onRefer }: any) {
   const [activeTab, setActiveTab] = useState<typeof TABS[number]["id"]>("explore");
+  const [kycModalOpen, setKycModalOpen] = useState(false);
+  const [verifyModalOpen, setVerifyModalOpen] = useState(false);
 
   useEffect(() => {
     const handleHash = () => {
@@ -195,11 +201,12 @@ function WorkspacePartitions({ role, onBook, onListRoom, onRefer }: any) {
               {activeTab === tab.id && (
                 <motion.div
                   layoutId="activeWorkspaceTab"
-                  className="absolute inset-0 bg-emerald-400 rounded-full -z-10"
+                  className="absolute inset-0 bg-emerald-400 rounded-full"
+                  style={{ zIndex: 0 }}
                   transition={{ type: "spring", stiffness: 400, damping: 30 }}
                 />
               )}
-              {tab.label}
+              <span className="relative" style={{ zIndex: 1 }}>{tab.label}</span>
             </button>
           ))}
         </div>
@@ -248,10 +255,48 @@ function WorkspacePartitions({ role, onBook, onListRoom, onRefer }: any) {
             <div className="space-y-12">
               <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-12">
                 <h3 className="text-3xl font-bold text-amber-400 mb-6 text-center">Host Inventory Command</h3>
+                <div className="flex flex-wrap items-center justify-center gap-4 mb-8">
+                  <button
+                    onClick={() => setKycModalOpen(true)}
+                    className="flex items-center gap-2 px-5 py-3 bg-amber-500 hover:bg-amber-400 text-amber-950 font-bold rounded-xl shadow-lg transition-colors"
+                  >
+                    <ShieldAlert className="w-5 h-5" />
+                    Upload KYC ID Document
+                  </button>
+                  <button
+                    onClick={() => setVerifyModalOpen(true)}
+                    className="flex items-center gap-2 px-5 py-3 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-bold rounded-xl shadow-lg transition-colors"
+                  >
+                    <ShieldAlert className="w-5 h-5" />
+                    Verify Host Stash Space
+                  </button>
+                  <button
+                    onClick={onListRoom}
+                    className="flex items-center gap-2 px-5 py-3 bg-blue-500 hover:bg-blue-400 text-blue-950 font-bold rounded-xl shadow-lg transition-colors"
+                  >
+                    <ShieldAlert className="w-5 h-5" />
+                    List New Space / Become a Host
+                  </button>
+                </div>
                 <Suspense fallback={null}>
-                  <HostInventoryGrid />
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                  >
+                    <HostInventoryGrid />
+                  </motion.div>
                 </Suspense>
               </div>
+              <AadhaarKycModal
+                isOpen={kycModalOpen}
+                onClose={() => setKycModalOpen(false)}
+                onSuccess={() => setKycModalOpen(false)}
+              />
+              <HostStashVerificationModal
+                isOpen={verifyModalOpen}
+                onClose={() => setVerifyModalOpen(false)}
+              />
             </div>
           )}
         </motion.div>

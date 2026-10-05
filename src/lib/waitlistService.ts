@@ -1,10 +1,10 @@
-import { supabase } from "@/integrations/supabase/client";
+﻿import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { logSupabaseError } from "./supabaseLogger";
 import { checkAndRecordRateLimit, showRateLimitToast } from "./rateLimiter";
 import { saveWaitlistEntry } from "./localSubmissions";
 
-// ─── Validation ──────────────────────────────────────────────
+// â”€â”€â”€ Validation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 /** Standard email format check */
 export function isValidEmail(email: string): boolean {
@@ -39,7 +39,7 @@ export function isValidIndianPin(pin: string): boolean {
   return /^[1-9][0-9]{5}$/.test(clean);
 }
 
-// ─── Error classification ────────────────────────────────────
+// â”€â”€â”€ Error classification â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 /** Supabase unique-violation error code */
 export function isDuplicateEmailError(error: unknown): boolean {
@@ -59,7 +59,7 @@ export function isNetworkError(error: unknown): boolean {
   return false;
 }
 
-// ─── Types ───────────────────────────────────────────────────
+// â”€â”€â”€ Types â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 export type WaitlistFormData = {
   full_name: string;
@@ -75,7 +75,7 @@ export type GoogleProfile = {
   picture?: string | undefined;
 };
 
-// ─── DB operations ───────────────────────────────────────────
+// â”€â”€â”€ DB operations â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 /**
  * Insert a new waitlist user. Returns structured result
@@ -91,12 +91,11 @@ export async function insertWaitlistUser(
   }
 
   const payload = {
-    full_name: data.full_name.trim(),
+    note: data.full_name.trim(),
     email: data.email.trim().toLowerCase(),
-    phone_number: data.phone_number?.trim() || null,
+    phone: data.phone_number?.trim() || null,
     user_type: data.user_type,
-    college_or_locality: data.college_or_locality?.trim() || null,
-    verified: false,
+    city: data.college_or_locality?.trim() || null,
     source: "waitlist_form",
   };
 
@@ -115,7 +114,7 @@ export async function insertWaitlistUser(
   });
 
   try {
-    const { error } = await supabase.from("users_waitlist").insert(payload);
+    const { error } = await supabase.from("waitlist_leads").insert(payload);
 
     if (error) {
       if (isDuplicateEmailError(error)) {
@@ -128,7 +127,7 @@ export async function insertWaitlistUser(
         error,
         context: "waitlist_form",
       });
-      // Don't throw — already saved locally
+      // Don't throw â€” already saved locally
     }
 
     return { success: true };
@@ -202,7 +201,7 @@ export async function upsertGoogleUser(profile: GoogleProfile): Promise<void> {
  * The `retryFn` is called when the user clicks "Retry".
  */
 export function showNetworkRetryToast(retryFn: () => void) {
-  toast.error("Connection issue — couldn't reach our servers", {
+  toast.error("Connection issue â€” couldn't reach our servers", {
     description: "Check your internet and try again.",
     action: {
       label: "Retry",
@@ -275,3 +274,4 @@ export async function updateUserProfile(
     return { success: false, error: "unknown" };
   }
 }
+

@@ -5,7 +5,6 @@ import { Navbar } from "@/components/stash/Navbar";
 import { PremiumHero } from "@/components/stash/PremiumHero";
 import { QuickCategoryNav } from "@/components/stash/QuickCategoryNav";
 import { FloatingPersonaToggle } from "@/components/stash/FloatingPersonaToggle";
-import { ServiceQuickJumpPill } from "@/components/stash/ServiceQuickJumpPill";
 import type { BookingPrefill, Role } from "@/components/stash/types";
 
 const RoleLane = lazy(() =>
@@ -49,19 +48,9 @@ export function HomeHeroSection({
         <FloatingPersonaToggle />
       </ErrorBoundary>
 
-      {/* Floating in-page quick jump sub-nav pill */}
-      <ServiceQuickJumpPill />
-
       <ErrorBoundary sectionName="Hero Section">
         <PremiumHero role={role} onBook={onBook} onRefer={onRefer} />
       </ErrorBoundary>
-
-      {/* TI.com-inspired Quick Jump Sticky Category Bar (Desktop only — mobile uses sticky bottom dock) */}
-      <div className="hidden md:block">
-        <ErrorBoundary sectionName="Category Navigation" compact>
-          <QuickCategoryNav />
-        </ErrorBoundary>
-      </div>
 
       <div className="hidden md:block">
         <ErrorBoundary sectionName="Role Switcher">

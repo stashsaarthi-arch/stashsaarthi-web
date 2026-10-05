@@ -3,12 +3,26 @@ import { useEffect, useState } from "react";
 import { motion, Variants } from "framer-motion";
 import { supabase } from "@/lib/supabase";
 import { useAuthStore } from "@/store/useAuthStore";
+import { toast } from "sonner";
 
 interface ActiveStash {
   id: string;
   items: number;
   status: string;
+  liquidation_status: string;
+  retrieval_requested: boolean;
   created_at: string;
+}
+
+interface LiquidationDeal {
+  id: string;
+  item_name: string;
+  category: string;
+  original_price: number;
+  discounted_price: number;
+  condition: string;
+  campus: string;
+  status: string;
 }
 
 // Cinematic Reveal Variants
@@ -17,7 +31,7 @@ const containerVariants: Variants = {
   show: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1, // 0.1s delay between each card cascading
+      staggerChildren: 0.1,
       delayChildren: 0.15,
     },
   },
@@ -31,34 +45,89 @@ const itemVariants: Variants = {
 export function StashVault() {
   const { user } = useAuthStore();
   const [stashes, setStashes] = useState<ActiveStash[]>([]);
+  const [deals, setDeals] = useState<LiquidationDeal[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchStashes = async () => {
-      // Return early if no user is authenticated
-      if (!user) {
-        setLoading(false);
-        return;
-      }
-
+    const fetchData = async () => {
       try {
-        // RLS Consideration: The policy should only allow users to select rows where auth.uid() = user_id
+        // Fetch liquidation deals
+        const { data: dealsData } = await supabase
+          .from("liquidation_deals")
+          .select("*")
+          .order("created_at", { ascending: false });
+        
+        let activeDeals = dealsData || [];
+        if (activeDeals.length === 0) {
+          activeDeals = [
+            {
+              id: "deal-1",
+              item_name: "Pre-owned Cooler",
+              category: "Coolers",
+              original_price: 3000,
+              discounted_price: 1500,
+              condition: "Good",
+              campus: "Kakadeo",
+              status: "available"
+            },
+            {
+              id: "deal-2",
+              item_name: "Hostel Mattress",
+              category: "Mattresses",
+              original_price: 1600,
+              discounted_price: 800,
+              condition: "Good",
+              campus: "IIT Kanpur",
+              status: "available"
+            }
+          ];
+        }
+        setDeals(activeDeals);
+
+        if (!user) {
+          setStashes([
+            {
+              id: "sample-stash-001",
+              items: 2,
+              status: "Secured at Host Facility",
+              liquidation_status: "none",
+              retrieval_requested: false,
+              created_at: new Date().toISOString(),
+            }
+          ]);
+          setLoading(false);
+          return;
+        }
+
         const { data, error } = await supabase
-          .from("stash_leads")
+          .from("stash_bookings")
           .select("*")
           .eq("user_id", user.id)
           .order("created_at", { ascending: false });
 
         if (error) throw error;
 
-        // Map data to Vault UI structure
-
-        const activeStashes = (data || []).map((lead: any) => ({
-          id: lead.id,
-          items: lead.items,
+        let activeStashes = (data || []).map((booking: any) => ({
+          id: booking.id,
+          items: booking.bag_count || 1,
           status: "Secured at Host Facility",
-          created_at: lead.created_at,
+          liquidation_status: booking.liquidation_status || "none",
+          retrieval_requested: booking.retrieval_requested || false,
+          created_at: booking.created_at,
         }));
+
+        if (activeStashes.length === 0) {
+          activeStashes = [
+            {
+              id: "sample-stash-001",
+              items: 2,
+              status: "Secured at Host Facility",
+              liquidation_status: "none",
+              retrieval_requested: false,
+              created_at: new Date().toISOString(),
+            }
+          ];
+        }
 
         setStashes(activeStashes);
       } catch (err) {
@@ -68,8 +137,34 @@ export function StashVault() {
       }
     };
 
-    fetchStashes();
+    fetchData();
   }, [user]);
+
+  const handleRetrieve = async () => {
+    if (!stashes[0]) return;
+    try {
+      if (user && stashes[0].id !== "sample-stash-001") {
+        await supabase.from("stash_bookings").update({ retrieval_requested: true }).eq("id", stashes[0].id);
+      }
+      setStashes(prev => prev.map((s, i) => i === 0 ? { ...s, retrieval_requested: true } : s));
+      toast.success("Retrieval request submitted successfully!");
+    } catch (err) {
+      toast.error("Failed to submit retrieval request");
+    }
+  };
+
+  const handleLiquidate = async () => {
+    if (!stashes[0]) return;
+    try {
+      if (user && stashes[0].id !== "sample-stash-001") {
+        await supabase.from("stash_bookings").update({ liquidation_status: 'liquidated' }).eq("id", stashes[0].id);
+      }
+      setStashes(prev => prev.map((s, i) => i === 0 ? { ...s, liquidation_status: 'liquidated' } : s));
+      toast.success("Item liquidated at 50% discount!");
+    } catch (err) {
+      toast.error("Failed to liquidate item");
+    }
+  };
 
   if (loading) {
     return (
@@ -95,7 +190,8 @@ export function StashVault() {
   }
 
   const totalItems = stashes.reduce((sum, stash) => sum + stash.items, 0);
-  const latestStatus = stashes.length > 0 && stashes[0] ? stashes[0].status : "No Active Stashes";
+  const primaryStash = stashes[0];
+  const latestStatus = primaryStash ? (primaryStash.liquidation_status === 'liquidated' ? "Liquidated" : primaryStash.retrieval_requested ? "Retrieval Pending" : primaryStash.status) : "No Active Stashes";
 
   return (
     <div className="w-full min-h-[60vh] bg-transparent flex flex-col items-center justify-center relative z-10 p-6">
@@ -118,7 +214,7 @@ export function StashVault() {
           animate="show"
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {/* Bento Grid Card 1: Active Stashes */}
+          {/* Bento Grid Card 1: Active Capacity */}
           <motion.div
             variants={itemVariants}
             className="bg-white/5 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 flex flex-col justify-between transform-gpu transition-all duration-300 md:hover:border-student-primary/50 md:hover:shadow-[0_0_30px_-5px_rgba(0,245,160,0.2)]"
@@ -179,22 +275,20 @@ export function StashVault() {
                 />
               </svg>
             </div>
+            
             <motion.button
+              onClick={handleRetrieve}
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
-              className="w-full py-4 px-6 bg-white text-black font-bold rounded-xl transition-colors hover:bg-student-primary hover:shadow-[0_0_20px_rgba(0,245,160,0.4)] mb-3"
+              disabled={primaryStash?.retrieval_requested || primaryStash?.liquidation_status === 'liquidated'}
+              className="w-full py-4 px-6 bg-white text-black font-bold rounded-xl transition-colors hover:bg-student-primary hover:shadow-[0_0_20px_rgba(0,245,160,0.4)] mb-3 disabled:opacity-50"
             >
-              Request Retrieval
+              {primaryStash?.retrieval_requested ? "Retrieval Requested" : "Request Retrieval"}
             </motion.button>
 
-            {stashes.length > 0 && stashes[0]?.status !== "listed_for_sale" && (
+            {primaryStash && primaryStash.liquidation_status !== "liquidated" && (
               <motion.button
-                onClick={async () => {
-                  if (!stashes[0]) return;
-                  await supabase.from("stash_leads").update({ status: 'listed_for_sale' }).eq("id", stashes[0].id);
-                  setStashes(prev => prev.map((s, i) => i === 0 ? { ...s, status: 'listed_for_sale' } : s));
-                  alert("Item liquidated at 50% discount!");
-                }}
+                onClick={handleLiquidate}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 className="w-full py-4 px-6 bg-rose-500/20 text-rose-300 border border-rose-500/40 font-bold rounded-xl transition-colors hover:bg-rose-500 hover:text-black hover:shadow-[0_0_20px_rgba(244,63,94,0.4)]"
@@ -218,21 +312,16 @@ export function StashVault() {
               50% OFF
             </span>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 hover:border-rose-500/50 transition-colors">
-              <div className="text-sm text-white/60 mb-1">Pre-owned Cooler</div>
-              <div className="text-xl font-bold text-rose-400 mb-3">₹1,500 <span className="line-through text-white/40 text-sm">₹3,000</span></div>
-              <button className="w-full py-2 bg-rose-500/20 text-rose-300 rounded-lg hover:bg-rose-500 hover:text-white transition-colors font-semibold text-sm">
-                Claim Deal
-              </button>
-            </div>
-            <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 hover:border-rose-500/50 transition-colors">
-              <div className="text-sm text-white/60 mb-1">Hostel Mattress</div>
-              <div className="text-xl font-bold text-rose-400 mb-3">₹800 <span className="line-through text-white/40 text-sm">₹1,600</span></div>
-              <button className="w-full py-2 bg-rose-500/20 text-rose-300 rounded-lg hover:bg-rose-500 hover:text-white transition-colors font-semibold text-sm">
-                Claim Deal
-              </button>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {deals.map(deal => (
+              <div key={deal.id} className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 hover:border-rose-500/50 transition-colors">
+                <div className="text-sm text-white/60 mb-1">{deal.item_name}</div>
+                <div className="text-xl font-bold text-rose-400 mb-3">₹{deal.discounted_price} <span className="line-through text-white/40 text-sm">₹{deal.original_price}</span></div>
+                <button className="w-full py-2 bg-rose-500/20 text-rose-300 rounded-lg hover:bg-rose-500 hover:text-white transition-colors font-semibold text-sm">
+                  Claim Deal
+                </button>
+              </div>
+            ))}
           </div>
         </motion.div>
       </div>

@@ -23,7 +23,7 @@ export const PredictivePersonaWidget = memo(function PredictivePersonaWidget() {
   const isHi = language === "hi";
   const [dismissed, setDismissed] = useState(false);
 
-  if (!prediction || dismissed) return null;
+  // if (!prediction || dismissed) return null;
 
   const { predictedPersona, confidence, preloadedAssets } = prediction;
   const isDiffPersona = predictedPersona !== role;
@@ -31,7 +31,7 @@ export const PredictivePersonaWidget = memo(function PredictivePersonaWidget() {
 
   return (
     <AnimatePresence>
-      {isHighConfidence && (
+      {true && (
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}

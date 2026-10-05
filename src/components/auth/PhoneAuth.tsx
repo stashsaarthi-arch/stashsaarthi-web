@@ -1,70 +1,58 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 import { useNavigate } from "@tanstack/react-router";
-import { Smartphone, ArrowRight, Loader2, ArrowLeft } from "lucide-react";
+import { Smartphone, ArrowRight, Loader2, Mail, Lock } from "lucide-react";
+import { AadhaarKycModal } from "@/components/host/AadhaarKycModal";
 
 export function PhoneAuth() {
   const navigate = useNavigate();
-  const [step, setStep] = useState<"phone" | "otp">("phone");
   const [phone, setPhone] = useState("");
-  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const otpRefs = useRef<(HTMLInputElement | null)[]>([]);
   const [isMounted, setIsMounted] = useState(false);
+  const [showKycModal, setShowKycModal] = useState(false);
 
   useEffect(() => setIsMounted(true), []);
   if (!isMounted) return null;
 
-  const handleSendOtp = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     const cleanPhone = phone.replace(/\D/g, "");
     if (cleanPhone.length !== 10) return setError("Enter a valid 10-digit number");
+    if (!email || !email.includes("@")) return setError("Enter a valid email address");
+    if (password.length < 6) return setError("Password must be at least 6 characters");
 
     setLoading(true);
     try {
-      const { error } = await supabase.auth.signInWithOtp({ phone: `+91${cleanPhone}` });
-      if (error) throw error;
-      setStep("otp");
-    } catch (err: any) {
-      setError(err.message || "Failed to send OTP.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleOtpChange = (index: number, value: string) => {
-    if (!/^[0-9]*$/.test(value)) return;
-    const newOtp = [...otp];
-    newOtp[index] = value.slice(-1);
-    setOtp(newOtp);
-    if (value && index < 5) otpRefs.current[index + 1]?.focus();
-  };
-
-  const handleOtpKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Backspace" && !otp[index] && index > 0) {
-      otpRefs.current[index - 1]?.focus();
-    }
-  };
-
-  const handleVerifyOtp = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const otpCode = otp.join("");
-    if (otpCode.length !== 6) return setError("Enter complete 6-digit OTP");
-
-    setLoading(true);
-    setError("");
-    try {
-      const { error } = await supabase.auth.verifyOtp({
-        phone: `+91${phone.replace(/\D/g, "")}`,
-        token: otpCode,
-        type: "sms"
+      // 1. Try to login
+      const { error: signInError } = await supabase.auth.signInWithPassword({ 
+        email, 
+        password 
       });
-      if (error) throw error;
-      navigate({ to: "/host/dashboard" });
+
+      if (signInError) {
+        if (signInError.message.includes("Invalid login credentials") || signInError.message.toLowerCase().includes("not found") || signInError.status === 400) {
+          // 2. Fallback to signup if account doesn't exist
+          const { error: signUpError } = await supabase.auth.signUp({
+            email,
+            password,
+            options: {
+              data: { phone: `+91${cleanPhone}` }
+            }
+          });
+          if (signUpError) throw signUpError;
+        } else {
+          throw signInError;
+        }
+      }
+
+      // Success - Immediately transition into KYC Upload Step!
+      setShowKycModal(true);
     } catch (err: any) {
-      setError(err.message || "Verification failed.");
+      setError(err.message || "Authentication failed.");
     } finally {
       setLoading(false);
     }
@@ -82,13 +70,30 @@ export function PhoneAuth() {
           </div>
         )}
 
-        {step === "phone" ? (
-          <form onSubmit={handleSendOtp} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="space-y-4">
             <div className="space-y-2">
-              <label
-                htmlFor="phone"
-                className="text-xs font-semibold text-slate-300 uppercase tracking-wider ml-2"
-              >
+              <label htmlFor="email" className="text-xs font-semibold text-slate-300 uppercase tracking-wider ml-2">
+                Email Address
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
+                  <Mail className="h-5 w-5 text-slate-400" />
+                </div>
+                <input
+                  id="email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full pl-16 pr-6 py-4 bg-black/30 backdrop-blur-xl border border-white/10 text-white rounded-[2rem] focus:outline-none focus:border-emerald-500 transition-all placeholder-slate-500"
+                  placeholder="Enter your email"
+                  autoComplete="email"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <label htmlFor="phone" className="text-xs font-semibold text-slate-300 uppercase tracking-wider ml-2">
                 Mobile Number
               </label>
               <div className="relative">
@@ -112,70 +117,50 @@ export function PhoneAuth() {
                 </div>
               </div>
             </div>
-            <button
-              type="submit"
-              disabled={loading || phone.length !== 10}
-              className="bg-emerald-500 text-black font-bold rounded-full py-4 w-full hover:bg-emerald-400 active:scale-95 transition-all ease-[cubic-bezier(0.23,1,0.32,1)] flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {loading ? (
-                <Loader2 className="w-5 h-5 animate-spin" />
-              ) : (
-                <>
-                  Send OTP
-                  <ArrowRight className="w-5 h-5" />
-                </>
-              )}
-            </button>
-          </form>
-        ) : (
-          <form onSubmit={handleVerifyOtp} className="space-y-6">
-            <div className="text-center mb-6">
-              <h3 className="text-xl font-bold text-white mb-2">Enter OTP</h3>
-              <p className="text-sm text-slate-400">We've sent a 6-digit code to +91 {phone}</p>
-            </div>
 
-            <div className="flex justify-between gap-2 sm:gap-3">
-              {otp.map((digit, index) => (
+            <div className="space-y-2">
+              <label htmlFor="password" className="text-xs font-semibold text-slate-300 uppercase tracking-wider ml-2">
+                Password / PIN
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
+                  <Lock className="h-5 w-5 text-slate-400" />
+                </div>
                 <input
-                  key={index}
-                  ref={(el) => {
-                    otpRefs.current[index] = el;
-                  }}
-                  type="text"
-                  inputMode="numeric"
-                  maxLength={1}
-                  value={digit}
-                  onChange={(e) => handleOtpChange(index, e.target.value)}
-                  onKeyDown={(e) => handleOtpKeyDown(index, e)}
-                  className="w-10 h-12 sm:w-12 sm:h-14 text-center text-xl sm:text-2xl font-bold bg-black/30 backdrop-blur-xl border border-white/10 text-white rounded-2xl focus:outline-none focus:border-emerald-500 transition-all"
+                  id="password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full pl-16 pr-6 py-4 bg-black/30 backdrop-blur-xl border border-white/10 text-white rounded-[2rem] focus:outline-none focus:border-emerald-500 transition-all placeholder-slate-500"
+                  placeholder="6-character PIN"
+                  autoComplete="new-password"
                 />
-              ))}
+              </div>
             </div>
+          </div>
 
-            <div className="pt-2">
-              <button
-                type="submit"
-                disabled={loading || otp.join("").length !== 6}
-                className="bg-emerald-500 text-black font-bold rounded-full py-4 w-full hover:bg-emerald-400 active:scale-95 transition-all ease-[cubic-bezier(0.23,1,0.32,1)] flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Verify & Continue"}
-              </button>
-            </div>
-
-            <button
-              type="button"
-              onClick={() => {
-                setStep("phone");
-                setOtp(["", "", "", "", "", ""]);
-                setError("");
-              }}
-              className="text-xs text-muted-foreground hover:text-white flex items-center gap-1 transition-colors mx-auto mt-4"
-            >
-              <ArrowLeft className="w-3 h-3" /> Change Phone Number
-            </button>
-          </form>
-        )}
+          <button
+            type="submit"
+            disabled={loading || phone.length !== 10 || !email.includes("@") || password.length < 6}
+            className="bg-emerald-500 text-black font-bold rounded-full py-4 w-full hover:bg-emerald-400 active:scale-95 transition-all ease-[cubic-bezier(0.23,1,0.32,1)] flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {loading ? (
+              <Loader2 className="w-5 h-5 animate-spin" />
+            ) : (
+              <>
+                Continue & Verify
+                <ArrowRight className="w-5 h-5" />
+              </>
+            )}
+          </button>
+        </form>
       </div>
+      
+      <AadhaarKycModal 
+        isOpen={showKycModal}
+        onClose={() => navigate({ to: "/host/dashboard" })}
+        onSuccess={() => navigate({ to: "/host/dashboard" })}
+      />
     </div>
   );
 }

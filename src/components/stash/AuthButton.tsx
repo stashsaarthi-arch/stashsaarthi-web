@@ -15,6 +15,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useLanguage } from "@/context/LanguageContext";
 import { usePersona } from "@/context/PersonaContext";
 import { ProfileModal } from "./ProfileModal";
+import { LoginModal } from "@/components/auth/LoginModal";
 
 function GoogleGlyph() {
   return (
@@ -45,10 +46,11 @@ export function AuthButton({ compact = false }: { compact?: boolean }) {
   const isHi = language === "hi";
 
   const [profileOpen, setProfileOpen] = useState(false);
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [initialTab, setInitialTab] = useState<"settings" | "bookings">("settings");
 
-  const handleCustomLogin = async () => {
-    await loginWithGoogle();
+  const handleCustomLogin = () => {
+    setLoginModalOpen(true);
   };
 
   const { role: activePersona } = usePersona();
@@ -59,6 +61,7 @@ export function AuthButton({ compact = false }: { compact?: boolean }) {
 
   if (!user) {
     return (
+      <>
       <Button
         variant="outline"
         size={compact ? "sm" : "default"}
@@ -72,6 +75,8 @@ export function AuthButton({ compact = false }: { compact?: boolean }) {
           {loading ? (isHi ? "प्रमाणीकरण…" : "Authenticating…") : t.nav.auth}
         </span>
       </Button>
+      <LoginModal open={loginModalOpen} onOpenChange={setLoginModalOpen} />
+      </>
     );
   }
 
