@@ -188,7 +188,6 @@ function Index() {
         onRefer={handleRefer}
       />
 
-      <MascotGuide />
     </motion.main>
   );
 }
@@ -365,6 +364,7 @@ function WorkspacePartitions({ role, onBook, onListRoom, onRefer }: any) {
       
       <CalculatorModal open={calculatorOpen} onClose={() => setCalculatorOpen(false)} />
       <ForumModal open={forumOpen} onClose={() => setForumOpen(false)} />
+      <MascotGuide activeTab={activeTab} calculatorOpen={calculatorOpen} forumOpen={forumOpen} />
     </div>
   );
 }

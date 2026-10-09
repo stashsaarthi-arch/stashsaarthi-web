@@ -43,33 +43,6 @@ const NAV_LINKS = [
     descEn: "Homestyle tiffins ₹90",
     descHi: "घर जैसा शुद्ध भोजन",
   },
-  {
-    key: "calculator",
-    href: "#calculator",
-    icon: "🧮",
-    labelEn: "Savings Simulator",
-    labelHi: "बचत कैलकुलेटर",
-    descEn: "Instant profit/savings",
-    descHi: "बचत व कमाई का हिसाब",
-  },
-  {
-    key: "trust",
-    href: "#trust",
-    icon: "🛡️",
-    labelEn: "Safety & Custody",
-    labelHi: "सुरक्षा व कस्टडी",
-    descEn: "QR seals & ₹10k cover",
-    descHi: "QR सील व ₹10k बीमा",
-  },
-  {
-    key: "faq",
-    href: "#faq",
-    icon: "❓",
-    labelEn: "FAQ & Help",
-    labelHi: "अक्सर पूछे जाने वाले सवाल",
-    descEn: "24×7 Answers",
-    descHi: "पारदर्शी उत्तर",
-  },
 ];
 
 export const Navbar = memo(function Navbar({

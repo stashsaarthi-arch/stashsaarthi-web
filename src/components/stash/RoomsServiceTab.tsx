@@ -17,10 +17,31 @@ export function RoomsServiceTab({ onBook }: { onBook: () => void }) {
 
   return (
     <div className="w-full space-y-8 pb-10">
-      {/* Top Shelf: Liquidation Carousel & Vault (Restored Logic) */}
-      <Suspense fallback={<div className="h-32 flex items-center justify-center text-white/50">Loading Deals...</div>}>
-        <StashVault />
-      </Suspense>
+      {/* Top Shelf: Liquidation Carousel */}
+      <div className="mb-8">
+        <h3 className="text-sm font-bold text-emerald-400 mb-3 flex items-center gap-2">
+          <span>🏷️</span> Campus Liquidation Deals (50% Off)
+        </h3>
+        <div className="flex gap-4 overflow-x-auto hide-scrollbar pb-2 snap-x snap-mandatory">
+          {[
+            { id: 1, item: "Symphony Cooler (40L)", price: "₹2,500", oldPrice: "₹5,000", tag: "Moving out in 2 days" },
+            { id: 2, item: "Study Table + Chair", price: "₹1,200", oldPrice: "₹3,000", tag: "Used 1 semester" },
+            { id: 3, item: "Wakefit Mattress (Single)", price: "₹1,500", oldPrice: "₹4,000", tag: "Like new" },
+            { id: 4, item: "Bajaj Induction Cooktop", price: "₹900", oldPrice: "₹2,200", tag: "Works perfectly" },
+          ].map(deal => (
+            <div key={deal.id} className="min-w-[240px] bg-emerald-500/5 border border-emerald-500/20 rounded-xl p-4 snap-center flex-shrink-0 cursor-pointer hover:bg-emerald-500/10 transition-colors">
+              <div className="flex justify-between items-start mb-1">
+                <h4 className="text-white font-bold text-sm truncate pr-2">{deal.item}</h4>
+                <div className="text-emerald-400 font-bold">{deal.price}</div>
+              </div>
+              <div className="flex justify-between items-center text-xs">
+                <span className="text-white/50">{deal.tag}</span>
+                <span className="text-white/40 line-through">{deal.oldPrice}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
 
       {/* Locality Filter Bar */}
       <div className="flex items-center gap-2 overflow-x-auto hide-scrollbar pb-2">

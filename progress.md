@@ -36,6 +36,7 @@
 12. **Scroll Scrubbing & Velocity Skew Integration:** Applied Studio Freight velocity skewing to `SolutionsHub` and `StashTimeline`; bound `StashTimeline` stage progress 1-to-1 with scroll position via Framer Motion `useScroll`; structured `HomeSolutions` into z-index stacked card deck layers.
 13. **TanStack Start Security Patch & Live Vercel Deployment:** Upgraded `@tanstack/react-start` to `1.168.60`, `@tanstack/react-router` to `1.170.41`, and `@tanstack/router-plugin` to `1.168.42`; resolved Vercel security block and deployed live production build to `https://stashsaarthi-web.vercel.app/`.
 14. **Mobile GPU Thermal & 120Hz Scroll Polish:** Hidden 3D perspective floor grid on small screens (<640px); capped mobile glassmorphism blur at 8px to protect GPU thermal limits; added mobile viewport guards to `Tilt3D` & `MagneticButton` touch handlers. Deployed live build to `https://stashsaarthi-web.vercel.app/`.
+15. **Homepage Information Architecture (IA) Refactor:** Stripped God-tab complexities and consolidated the experience into 3 primary tabs (`storage`, `rooms`, `khana`). Refactored `TokenMealHub` complex configuration flows into a slide-over `Sheet` drawer. Cleaned `Navbar` links to focus exclusively on the 3 core tabs. Rebuilt `MascotGuide` as a state-aware interactive AI avatar. Passed strict build and TS compilation checks.
 
 ---
 

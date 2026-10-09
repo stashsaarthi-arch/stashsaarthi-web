@@ -45,6 +45,7 @@ import { MealTokenLedgerModal } from "./stash/MealTokenLedgerModal";
 
 import { motion, AnimatePresence } from "motion/react";
 import type { OpenBooking } from "./stash/types";
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 
 type FulfillmentType = "DineIn_Pickup" | "RoomDelivery";
 
@@ -344,6 +345,7 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
   const [userName, setUserName] = useState<string>("");
   const [deliveryAddress, setDeliveryAddress] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [isCheckoutDrawerOpen, setIsCheckoutDrawerOpen] = useState<boolean>(false);
 
   // Meal Personalization State (Task 78)
   const [selectedPersonalizations, setSelectedPersonalizations] = useState<string[]>([]);
@@ -1019,205 +1021,12 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
 
       {/* Main Interactive Booking Flow */}
       <div className="bg-slate-900/40 border border-slate-800 rounded-3xl p-3.5 sm:p-6 shadow-2xl backdrop-blur-sm w-full max-w-full overflow-hidden">
-        {/* Fulfillment Segmented Control */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 pb-6 border-b border-slate-800/50">
-          <div>
-            <h3 className="text-lg font-bold text-white flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-xs flex items-center justify-center font-black">
-                1
-              </span>
-              Fulfillment Preference
-            </h3>
-            <p className="text-xs text-slate-400 mt-1 ml-8">
-              Choose how you want to receive your meal.
-            </p>
-          </div>
-          <div className="flex bg-slate-950 p-1 rounded-2xl border border-slate-800 relative">
-            <motion.button
-              type="button"
-              whileTap={{ scale: 0.97 }}
-              onClick={() => {
-                playToggle();
-                setFulfillmentType("DineIn_Pickup");
-              }}
-              className={`relative flex items-center gap-2 px-4 py-2.5 rounded-xl transition-colors cursor-pointer font-bold text-sm z-10 ${
-                fulfillmentType === "DineIn_Pickup"
-                  ? "text-slate-950"
-                  : "text-slate-300 hover:text-white"
-              }`}
-            >
-              {fulfillmentType === "DineIn_Pickup" && (
-                <motion.span
-                  layoutId="activeFulfillmentType"
-                  transition={{ type: "spring", stiffness: 450, damping: 32 }}
-                  className="absolute inset-0 rounded-xl bg-emerald-500 shadow-md -z-10"
-                />
-              )}
-              🏪 Self-Pickup (Free)
-            </motion.button>
-            <motion.button
-              type="button"
-              whileTap={{ scale: 0.97 }}
-              onClick={() => {
-                playToggle();
-                setFulfillmentType("RoomDelivery");
-              }}
-              className={`relative flex items-center gap-2 px-4 py-2.5 rounded-xl transition-colors cursor-pointer font-bold text-sm z-10 ${
-                fulfillmentType === "RoomDelivery"
-                  ? "text-slate-950"
-                  : "text-slate-300 hover:text-white"
-              }`}
-            >
-              {fulfillmentType === "RoomDelivery" && (
-                <motion.span
-                  layoutId="activeFulfillmentType"
-                  transition={{ type: "spring", stiffness: 450, damping: 32 }}
-                  className="absolute inset-0 rounded-xl bg-emerald-500 shadow-md -z-10"
-                />
-              )}
-              🛵 Room Delivery (+10 T)
-            </motion.button>
-          </div>
-        </div>
-
-        {/* Real-Time Kitchen Node Availability Percentage Bars (Task 60) */}
-        <div className="mb-8 bg-slate-950/90 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-lg w-full max-w-full overflow-hidden">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-slate-800/80">
-            <div>
-              <h3 className="text-sm font-extrabold text-white flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                <span>Real-Time Kitchen Node Availability ({deliverySlot} Slot)</span>
-              </h3>
-              <p className="text-xs text-slate-400 mt-0.5">
-                Live token allocation per kitchen node. Select a kitchen node below to order.
-              </p>
-            </div>
-            <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 self-start sm:self-auto">
-              Live Token Ledger Active
-            </span>
-          </div>
-
-          <div className="flex sm:grid overflow-x-auto sm:overflow-visible snap-x snap-mandatory gap-3.5 sm:grid-cols-2 lg:grid-cols-4 pb-3 no-scrollbar touch-pan-x overscroll-x-contain">
-            {KITCHEN_NODES.map((node) => {
-              const isSelected = vendorNode === node.name;
-              const percentSold =
-                deliverySlot === "Lunch" ? node.percentSoldLunch : node.percentSoldDinner;
-              const totalTokens =
-                deliverySlot === "Lunch" ? node.totalTokensLunch : node.totalTokensDinner;
-              const tokensSold =
-                deliverySlot === "Lunch" ? node.tokensSoldLunch : node.tokensSoldDinner;
-              const tokensLeft = totalTokens - tokensSold;
-
-              return (
-                <div
-                  key={node.id}
-                  role="button"
-                  tabIndex={0}
-                  aria-pressed={isSelected}
-                  aria-label={`${node.name}, ${node.campus}, ${percentSold}% of ${deliverySlot.toLowerCase()} tokens sold, ${tokensLeft} tokens remaining`}
-                  onClick={() => setVendorNode(node.name)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      setVendorNode(node.name);
-                    }
-                  }}
-                  className={`cursor-pointer rounded-xl p-4 border transition-all duration-300 flex flex-col justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 snap-center min-w-[85vw] max-w-[88vw] sm:min-w-0 sm:max-w-none shrink-0 sm:shrink ${
-                    isSelected
-                      ? "bg-slate-900 border-emerald-500 shadow-[0_0_15px_-3px_rgba(16,185,129,0.3)] ring-1 ring-emerald-500"
-                      : "bg-slate-900/60 border-slate-800 hover:border-slate-700 hover:bg-slate-900/90"
-                  }`}
-                >
-                  <div>
-                    <div className="flex flex-wrap items-center justify-between gap-1 mb-1.5 overflow-hidden">
-                      <span className="text-[11px] font-semibold text-slate-400 truncate">
-                        {node.campus}
-                      </span>
-                      {node.badge && (
-                        <span
-                          className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${percentSold > 80 ? "bg-rose-500/20 text-rose-300 border border-rose-500/30" : "bg-emerald-500/15 text-emerald-300 border border-emerald-500/20"}`}
-                        >
-                          {node.badge}
-                        </span>
-                      )}
-                    </div>
-                    <h4 className="text-xs font-bold text-white leading-snug mb-1 line-clamp-1">
-                      {node.name}
-                    </h4>
-                    <p className="text-[11px] text-slate-400 mb-3 line-clamp-1">{node.chefName}</p>
-                  </div>
-
-                  <div>
-                    {/* Availability Percentage Bar */}
-                    <div className="flex justify-between items-center text-[11px] font-bold mb-1.5">
-                      <span
-                        className={
-                          percentSold > 80
-                            ? "text-rose-400"
-                            : percentSold > 60
-                              ? "text-amber-400"
-                              : "text-emerald-400"
-                        }
-                      >
-                        {percentSold}% of {deliverySlot.toLowerCase()} tokens sold
-                      </span>
-                      <span className="text-slate-400 font-mono">{tokensLeft} left</span>
-                    </div>
-
-                    <div
-                      role="progressbar"
-                      aria-valuenow={percentSold}
-                      aria-valuemin={0}
-                      aria-valuemax={100}
-                      aria-label={`${node.name} ${deliverySlot.toLowerCase()} token availability: ${percentSold}% sold`}
-                      className="w-full bg-slate-950 rounded-full h-2 overflow-hidden border border-slate-800 p-0.5"
-                    >
-                      <div
-                        className={`h-full rounded-full transition-all duration-500 ${
-                          percentSold > 80
-                            ? "bg-gradient-to-r from-rose-500 to-amber-500"
-                            : percentSold > 60
-                              ? "bg-gradient-to-r from-amber-400 to-emerald-400"
-                              : "bg-gradient-to-r from-emerald-500 to-teal-400"
-                        }`}
-                        style={{ width: `${percentSold}%` }}
-                      />
-                    </div>
-
-                    {isSelected && (
-                      <div className="mt-2.5 text-[10px] font-bold text-emerald-400 flex items-center justify-center gap-1 bg-emerald-500/10 py-0.5 rounded border border-emerald-500/20">
-                        <span>✓ Selected Kitchen Node</span>
-                      </div>
-                    )}
-
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        playClick();
-                        setSelectedCsoNodeId(node.id);
-                        setIsCsoSealModalOpen(true);
-                      }}
-                      className="mt-2 text-[10px] font-mono font-bold text-amber-300 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 px-2 py-0.5 rounded flex items-center justify-between w-full transition-all cursor-pointer"
-                    >
-                      <span>🛡️ CSO Verified Seal</span>
-                      <span className="text-[9px] text-amber-400 font-extrabold">
-                        Inspect Barcode
-                      </span>
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
         {/* Step 2: Meal Tier Selection */}
         <div className="mb-8 w-full max-w-full overflow-hidden">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
             <h3 className="text-lg font-bold text-white flex items-center gap-2">
               <span className="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-xs flex items-center justify-center font-black">
-                2
+                1
               </span>
               Select Your Menu Tier
             </h3>
@@ -1239,7 +1048,10 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
                     tier={tier}
                     isSelected={isSelected}
                     tierCost={tierCost}
-                    onSelect={setSelectedMeal}
+                    onSelect={(t) => {
+                      setSelectedMeal(t);
+                      setIsCheckoutDrawerOpen(true);
+                    }}
                   />
                 </div>
               );
@@ -1253,7 +1065,7 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
               className="mt-5"
             />
 
-            {/* Step 2.5: Meal Personalization (Task 78) */}
+            {/* Meal Personalization */}
             <div className="mt-6">
               <MealPersonalizationSelector
                 selectedIds={selectedPersonalizations}
@@ -1263,165 +1075,189 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
                 }}
               />
             </div>
+            
+            <button
+              onClick={() => setIsCheckoutDrawerOpen(true)}
+              className="w-full mt-6 py-4 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-slate-950 font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg hover:shadow-emerald-500/25 transition-all cursor-pointer"
+            >
+              <span>Proceed to Config & Checkout →</span>
+            </button>
           </div>
         </div>
 
-        {/* Step 3: Checkout Details */}
-        <div>
-          <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-            <span className="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-xs flex items-center justify-center font-black">
-              3
-            </span>
-            Confirm Details & Deduct Tokens
-          </h3>
+      </div>
 
-          <form
-            onSubmit={handleRedeemMeal}
-            className="space-y-5 bg-slate-950 p-6 rounded-2xl border border-slate-800/80"
-          >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <div>
-                <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
-                  Your Name
-                </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="e.g. Advik Omer"
-                  value={userName}
-                  onChange={(e) => setUserName(e.target.value)}
-                  className="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all text-sm"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
-                  WhatsApp Number
-                </label>
-                <input
-                  type="tel"
-                  required
-                  pattern="^[6-9]\d{9}$"
-                  placeholder="10-digit mobile number"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  className="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all text-sm"
-                />
+      <Sheet open={isCheckoutDrawerOpen} onOpenChange={setIsCheckoutDrawerOpen}>
+        <SheetContent side="right" className="bg-slate-950 border-slate-800 text-white w-full sm:max-w-md md:max-w-xl p-0 overflow-y-auto">
+          <SheetHeader className="p-6 border-b border-slate-800 bg-slate-900/50 sticky top-0 z-20 backdrop-blur-md">
+            <SheetTitle className="text-xl font-bold text-white flex items-center gap-2">
+              <span className="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-xs flex items-center justify-center font-black">
+                2
+              </span>
+              Complete Your Order
+            </SheetTitle>
+          </SheetHeader>
+          
+          <div className="p-6 space-y-8">
+            {/* Fulfillment Segmented Control */}
+            <div>
+              <h3 className="text-base font-bold text-white mb-3">Fulfillment Preference</h3>
+              <div className="flex flex-col sm:flex-row bg-slate-900 p-1.5 rounded-2xl border border-slate-800 relative gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    playToggle();
+                    setFulfillmentType("DineIn_Pickup");
+                  }}
+                  className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl transition-colors cursor-pointer font-bold text-sm ${
+                    fulfillmentType === "DineIn_Pickup"
+                      ? "bg-emerald-500 text-slate-950 shadow-md"
+                      : "text-slate-300 hover:text-white hover:bg-slate-800"
+                  }`}
+                >
+                  🏪 Self-Pickup (Free)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    playToggle();
+                    setFulfillmentType("RoomDelivery");
+                  }}
+                  className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl transition-colors cursor-pointer font-bold text-sm ${
+                    fulfillmentType === "RoomDelivery"
+                      ? "bg-emerald-500 text-slate-950 shadow-md"
+                      : "text-slate-300 hover:text-white hover:bg-slate-800"
+                  }`}
+                >
+                  🛵 Room Delivery (+10 T)
+                </button>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <div>
-                <label
-                  htmlFor="master-kitchen-node"
-                  className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5 cursor-pointer"
-                >
-                  Select Master Kitchen Node
-                </label>
-                <select
-                  id="master-kitchen-node"
-                  aria-label="Select Master Kitchen Node"
-                  value={vendorNode}
-                  onChange={(e) => setVendorNode(e.target.value)}
-                  className="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all text-sm cursor-pointer appearance-none"
-                >
-                  {KITCHEN_NODES.map((node) => {
-                    const percentSold =
-                      deliverySlot === "Lunch" ? node.percentSoldLunch : node.percentSoldDinner;
-                    const totalTokens =
-                      deliverySlot === "Lunch" ? node.totalTokensLunch : node.totalTokensDinner;
-                    const tokensSold =
-                      deliverySlot === "Lunch" ? node.tokensSoldLunch : node.tokensSoldDinner;
-                    const tokensLeft = totalTokens - tokensSold;
-                    return (
-                      <option key={node.id} value={node.name}>
-                        {node.name} ({percentSold}% {deliverySlot} Sold • {tokensLeft} Tokens Left)
-                      </option>
-                    );
-                  })}
-                </select>
+            {/* Real-Time Kitchen Node Availability */}
+            <div>
+              <div className="flex justify-between items-center mb-3">
+                <h3 className="text-base font-bold text-white">Select Kitchen Node</h3>
+                <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                  {deliverySlot} Slot Live
+                </span>
               </div>
+              <div className="grid grid-cols-1 gap-3">
+                {KITCHEN_NODES.map((node) => {
+                  const isSelected = vendorNode === node.name;
+                  const percentSold =
+                    deliverySlot === "Lunch" ? node.percentSoldLunch : node.percentSoldDinner;
+                  const totalTokens =
+                    deliverySlot === "Lunch" ? node.totalTokensLunch : node.totalTokensDinner;
+                  const tokensSold =
+                    deliverySlot === "Lunch" ? node.tokensSoldLunch : node.tokensSoldDinner;
+                  const tokensLeft = totalTokens - tokensSold;
 
-              {fulfillmentType === "RoomDelivery" ? (
-                <div className="animate-in fade-in slide-in-from-top-4 duration-300">
-                  <label
-                    htmlFor="delivery-address-input"
-                    className="block text-xs font-bold text-emerald-300 uppercase tracking-wider mb-1.5 flex items-center gap-1.5 cursor-pointer"
-                  >
-                    Delivery Address <span className="text-rose-500">*</span>
-                  </label>
-                  <input
-                    id="delivery-address-input"
-                    type="text"
-                    required
-                    aria-label="Room delivery address"
-                    placeholder="e.g. Room 204, Sharda PG, Chhapeda Pulia"
-                    value={deliveryAddress}
-                    onChange={(e) => setDeliveryAddress(e.target.value)}
-                    className="w-full bg-slate-900 border border-emerald-500/30 rounded-xl px-4 py-3 text-white placeholder-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all text-sm"
-                  />
-                </div>
-              ) : (
-                <div className="flex flex-col animate-in fade-in duration-300">
-                  <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
-                    Fulfillment Status
-                  </label>
-                  <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-xl px-4 py-2.5 min-h-[46px] flex items-center gap-3">
-                    <div className="text-emerald-400 text-lg shrink-0">🏪</div>
-                    <div>
-                      <div className="text-xs font-bold text-emerald-400">Self-Pickup Active</div>
-                      <div className="text-xs text-slate-400">
-                        Fast-track pickup at StashShelf with auto-generated 3-digit code.
+                  return (
+                    <div
+                      key={node.id}
+                      onClick={() => setVendorNode(node.name)}
+                      className={`cursor-pointer rounded-xl p-4 border transition-all duration-300 ${
+                        isSelected
+                          ? "bg-slate-900 border-emerald-500 ring-1 ring-emerald-500 shadow-md"
+                          : "bg-slate-900/40 border-slate-800 hover:bg-slate-800/60"
+                      }`}
+                    >
+                      <div className="flex justify-between items-start mb-2">
+                        <div>
+                          <h4 className="text-sm font-bold text-white">{node.name}</h4>
+                          <p className="text-[11px] text-slate-400 mt-0.5">{node.chefName}</p>
+                        </div>
+                        {isSelected && (
+                          <div className="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                            Selected
+                          </div>
+                        )}
+                      </div>
+                      <div className="flex justify-between items-center text-[10px] font-bold mb-1.5 mt-3">
+                        <span className={percentSold > 80 ? "text-rose-400" : "text-emerald-400"}>
+                          {percentSold}% Sold
+                        </span>
+                        <span className="text-slate-400">{tokensLeft} left</span>
+                      </div>
+                      <div className="w-full bg-slate-950 rounded-full h-1.5 border border-slate-800 p-px">
+                        <div
+                          className={`h-full rounded-full ${
+                            percentSold > 80 ? "bg-rose-500" : "bg-emerald-500"
+                          }`}
+                          style={{ width: `${percentSold}%` }}
+                        />
                       </div>
                     </div>
-                  </div>
-                </div>
-              )}
+                  );
+                })}
+              </div>
             </div>
 
-            <div className="pt-6 mt-6 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between gap-6">
-              <div className="flex flex-col gap-1 w-full md:w-auto">
-                <div className="flex justify-between md:justify-start items-center gap-4 text-sm text-slate-400">
-                  <span>
-                    Total Deduction:{" "}
-                    <strong className="text-white ml-1">{currentCost} Tokens</strong>
-                  </span>
-                  <span className="hidden md:inline text-slate-600">|</span>
-                  <span>
-                    Closing Balance:{" "}
-                    <strong
-                      className={
-                        tokenBalance - currentCost >= 0
-                          ? "text-emerald-400 ml-1"
-                          : "text-rose-400 ml-1"
-                      }
-                    >
-                      {Math.max(0, tokenBalance - currentCost)} Tokens
-                    </strong>
-                  </span>
+            {/* Checkout Details */}
+            <div>
+              <h3 className="text-base font-bold text-white mb-4">Delivery & Payment</h3>
+              <form onSubmit={(e) => { e.preventDefault(); handleRedeemMeal(e as any); }} className="space-y-4">
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[11px] font-bold text-slate-400 mb-1.5 uppercase">Name</label>
+                    <input
+                      type="text"
+                      required
+                      value={userName}
+                      onChange={(e) => setUserName(e.target.value)}
+                      className="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2.5 text-white text-sm focus:border-emerald-500 focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[11px] font-bold text-slate-400 mb-1.5 uppercase">Phone</label>
+                    <input
+                      type="tel"
+                      required
+                      pattern="^[6-9]\d{9}$"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      className="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2.5 text-white text-sm focus:border-emerald-500 focus:outline-none"
+                    />
+                  </div>
                 </div>
-                {timeLeft.isLocked && (
-                  <div className="text-xs text-rose-400 font-medium">
-                    Cutoff time passed. Please select a different slot or try tomorrow.
+
+                {fulfillmentType === "RoomDelivery" && (
+                  <div className="animate-in fade-in slide-in-from-top-2 duration-200">
+                    <label className="block text-[11px] font-bold text-emerald-400 mb-1.5 uppercase">Delivery Address *</label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="Room number, Hostel/PG name"
+                      value={deliveryAddress}
+                      onChange={(e) => setDeliveryAddress(e.target.value)}
+                      className="w-full bg-slate-900 border border-emerald-500/30 rounded-xl px-3 py-2.5 text-white text-sm focus:border-emerald-500 focus:outline-none"
+                    />
                   </div>
                 )}
-              </div>
 
-              <button
-                type="submit"
-                disabled={isSubmitting || timeLeft.isLocked}
-                className={`w-full md:w-auto px-10 py-3.5 rounded-xl font-extrabold text-sm transition-all duration-300 shadow-lg flex items-center justify-center gap-2 ${isSubmitting || timeLeft.isLocked ? "bg-slate-800 text-slate-400 cursor-not-allowed border border-slate-700" : "bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-slate-950 shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5 border border-transparent cursor-pointer"}`}
-              >
-                {isSubmitting
-                  ? "Processing Ledger..."
-                  : timeLeft.isLocked
-                    ? "Slot Locked"
-                    : `Redeem Meal & Pay ${currentCost} T`}
-              </button>
+                <div className="mt-6 pt-5 border-t border-slate-800">
+                  <div className="flex justify-between items-center mb-4">
+                    <span className="text-sm text-slate-300">Total Deduction:</span>
+                    <span className="text-xl font-bold text-white">{currentCost} Tokens</span>
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={isSubmitting || timeLeft.isLocked}
+                    className={`w-full py-3.5 rounded-xl font-bold text-sm transition-all shadow-lg flex items-center justify-center gap-2 ${
+                      isSubmitting || timeLeft.isLocked
+                        ? "bg-slate-800 text-slate-500"
+                        : "bg-emerald-500 hover:bg-emerald-400 text-slate-950 cursor-pointer"
+                    }`}
+                  >
+                    {isSubmitting ? "Processing..." : timeLeft.isLocked ? "Slot Locked" : "Confirm & Pay"}
+                  </button>
+                </div>
+              </form>
             </div>
-          </form>
-        </div>
-      </div>
+          </div>
+        </SheetContent>
+      </Sheet>
 
       {/* 2-Step "Re-Order My Last Meal" Shortcut Modal (Task 61) */}
       {isReorderModalOpen && (

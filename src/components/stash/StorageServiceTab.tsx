@@ -1,6 +1,6 @@
 import { useState, Suspense, lazy } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ShieldCheck, Truck, Lock } from "lucide-react";
+import { ShieldCheck, Truck, Lock, PackageCheck } from "lucide-react";
 
 const StashTimeline = lazy(() =>
   import("./StashTimeline").then((m) => ({ default: m.StashTimeline })),
@@ -44,7 +44,9 @@ export function StorageServiceTab({ onBook }: { onBook: () => void }) {
           <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-transparent pointer-events-none" />
           <h3 className="text-2xl font-bold text-white mb-4">Don't carry heavy luggage.</h3>
           <p className="text-white/60 mb-6 max-w-sm relative z-10">Reserve your slot now before the vacation rush. Only limited hostel-approved stash nodes available.</p>
-          <img src="https://images.unsplash.com/photo-1595054225585-58ef29d91f24?auto=format&fit=crop&q=80&w=400" alt="Luggage" className="w-48 h-48 object-cover rounded-2xl shadow-2xl mb-4 border border-white/10 relative z-10" />
+          <div className="w-16 h-16 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mb-4 z-10 relative">
+            <PackageCheck className="w-8 h-8" />
+          </div>
         </div>
       </div>
 
