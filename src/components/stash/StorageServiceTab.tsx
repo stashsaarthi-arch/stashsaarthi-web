@@ -6,7 +6,14 @@ const StashTimeline = lazy(() =>
   import("./StashTimeline").then((m) => ({ default: m.StashTimeline })),
 );
 
+import { useRequireAuthAction } from "@/hooks/useRequireAuthAction";
+
 export function StorageServiceTab({ onBook }: { onBook: () => void }) {
+  const { requireAuth, useActionReplay } = useRequireAuthAction();
+  
+  // Replay logic for when the user successfully logs in
+  useActionReplay("book_stash", () => onBook());
+
   return (
     <div className="w-full space-y-8 pb-10">
       {/* Block A & B: Pricing and Booking form combined */}
@@ -34,7 +41,11 @@ export function StorageServiceTab({ onBook }: { onBook: () => void }) {
             </ul>
           </div>
           <button 
-            onClick={() => onBook()}
+            onClick={() => {
+              requireAuth("book_stash", "Login in 5 seconds to lock this deal to your account across all your devices.", () => {
+                onBook();
+              });
+            }}
             className="w-full py-4 bg-emerald-500 hover:bg-emerald-400 text-black font-bold rounded-xl transition-all shadow-[0_0_20px_rgba(16,185,129,0.3)]">
             Book Pickup / Reserve Slot
           </button>

@@ -16,6 +16,8 @@ import { useLanguage } from "@/context/LanguageContext";
 import { usePersona } from "@/context/PersonaContext";
 import { ProfileModal } from "./ProfileModal";
 import { LoginModal } from "@/components/auth/LoginModal";
+import { useAuthStore } from "@/store/useAuthStore";
+import { UserActivityDrawer } from "@/components/profile/UserActivityDrawer";
 
 function GoogleGlyph() {
   return (
@@ -46,11 +48,11 @@ export function AuthButton({ compact = false }: { compact?: boolean }) {
   const isHi = language === "hi";
 
   const [profileOpen, setProfileOpen] = useState(false);
-  const [loginModalOpen, setLoginModalOpen] = useState(false);
+  const openLoginModal = useAuthStore((s) => s.openLoginModal);
   const [initialTab, setInitialTab] = useState<"settings" | "bookings">("settings");
 
   const handleCustomLogin = () => {
-    setLoginModalOpen(true);
+    openLoginModal();
   };
 
   const { role: activePersona } = usePersona();
@@ -75,59 +77,33 @@ export function AuthButton({ compact = false }: { compact?: boolean }) {
             {loading ? (isHi ? "प्रमाणीकरण…" : "Authenticating…") : t.nav.auth}
           </span>
         </Button>
-        <LoginModal open={loginModalOpen} onOpenChange={setLoginModalOpen} />
+        <LoginModal />
       </>
     );
   }
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <button className="flex items-center gap-2 rounded-full border border-slate-700 bg-[#161B22] py-1 pl-1 pr-3 transition hover:bg-[#21262D] cursor-pointer">
-          <Avatar className="h-7 w-7">
-            {user.avatar ? <AvatarImage src={user.avatar} alt={name} /> : null}
-            <AvatarFallback className="text-[10px] bg-slate-800 text-white">
-              {(first.slice(0, 2) || "U").toUpperCase()}
-            </AvatarFallback>
-          </Avatar>
-          <div className="flex flex-col items-start leading-none">
-            <span className="max-w-[7rem] truncate text-xs font-semibold text-white">{first}</span>
-            <span
-              className={`text-[9px] font-medium uppercase tracking-wider ${isHostActive ? "text-amber-400" : "text-cyan-400"}`}
-            >
-              {roleBadge}
-            </span>
-          </div>
-        </button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-52">
-        <DropdownMenuLabel className="truncate">{name}</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem
-          onClick={() => {
-            setInitialTab("settings");
-            setProfileOpen(true);
-          }}
-          className="cursor-pointer"
-        >
-          <UserIcon className="mr-2 h-4 w-4" /> {isHi ? "प्रोफ़ाइल" : "Profile"}
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => {
-            setInitialTab("bookings");
-            setProfileOpen(true);
-          }}
-          className="cursor-pointer"
-        >
-          <CalendarCheck className="mr-2 h-4 w-4" /> {isHi ? "मेरी बुकिंग" : "My Bookings"}
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => logout()} className="cursor-pointer">
-          <LogOut className="mr-2 h-4 w-4" /> {isHi ? "लॉग आउट" : "Logout"}
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-
-      <ProfileModal open={profileOpen} onOpenChange={setProfileOpen} initialTab={initialTab} />
-    </DropdownMenu>
+    <>
+      <button 
+        onClick={() => setProfileOpen(true)}
+        className="flex items-center gap-2 rounded-full border border-slate-700 bg-[#161B22] py-1 pl-1 pr-3 transition hover:bg-[#21262D] cursor-pointer"
+      >
+        <Avatar className="h-7 w-7">
+          {user.avatar ? <AvatarImage src={user.avatar} alt={name} /> : null}
+          <AvatarFallback className="text-[10px] bg-slate-800 text-white">
+            {(first.slice(0, 2) || "U").toUpperCase()}
+          </AvatarFallback>
+        </Avatar>
+        <div className="flex flex-col items-start leading-none">
+          <span className="max-w-[7rem] truncate text-xs font-semibold text-white">{first}</span>
+          <span
+            className={`text-[9px] font-medium uppercase tracking-wider ${isHostActive ? "text-amber-400" : "text-cyan-400"}`}
+          >
+            {roleBadge}
+          </span>
+        </div>
+      </button>
+      <UserActivityDrawer open={profileOpen} onOpenChange={setProfileOpen} />
+    </>
   );
 }

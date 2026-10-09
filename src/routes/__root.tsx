@@ -23,6 +23,7 @@ import { Toaster, toast } from "sonner";
 import { AuthProvider } from "@/hooks/useAuth";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { PersonaProvider } from "@/context/PersonaContext";
+import { UserCloudProvider } from "@/context/UserCloudContext";
 import { ThemeProvider, useTheme } from "@/context/ThemeContext";
 import { LowDataProvider, useLowData } from "@/context/LowDataContext";
 import { useAuthStore } from "@/store/useAuthStore";
@@ -832,6 +833,7 @@ function RootComponent() {
   }, []);
 
   return (
+    <UserCloudProvider>
     <AuthProvider>
       <LanguageProvider>
         <PersonaProvider>
@@ -874,5 +876,6 @@ function RootComponent() {
         </PersonaProvider>
       </LanguageProvider>
     </AuthProvider>
+    </UserCloudProvider>
   );
 }

@@ -10,12 +10,20 @@ interface AuthState {
   setSession: (session: Session | null) => void;
   setIsLoading: (isLoading: boolean) => void;
   initialize: () => () => void;
+  loginModalOpen: boolean;
+  loginModalMessage: string | undefined;
+  openLoginModal: (message?: string) => void;
+  closeLoginModal: () => void;
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
   user: null,
   session: null,
   isLoading: true,
+  loginModalOpen: false,
+  loginModalMessage: undefined,
+  openLoginModal: (message) => set({ loginModalOpen: true, loginModalMessage: message }),
+  closeLoginModal: () => set({ loginModalOpen: false, loginModalMessage: undefined }),
   setUser: (user) => set({ user }),
   setSession: (session) => set({ session }),
   setIsLoading: (isLoading) => set({ isLoading }),

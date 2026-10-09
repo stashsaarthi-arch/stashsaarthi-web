@@ -98,7 +98,7 @@ export function BookingModal({
   roomType?: "single" | "shared" | "floor" | undefined;
   mealPlan?: "trial" | "smart" | "freedom" | "semester" | undefined;
 }) {
-  const { user } = useAuth();
+  const { user, loginWithGoogle } = useAuth();
   const { language } = useLanguage();
   const isHi = language === "hi";
 
@@ -444,6 +444,16 @@ export function BookingModal({
       return;
     }
 
+    if (!user) {
+      toast.info(
+        isHi
+          ? "कृपया बुकिंग सुरक्षित करने के लिए लॉग इन करें।"
+          : "Please login to secure your booking and prevent data loss.",
+      );
+      loginWithGoogle();
+      return;
+    }
+
     const rateCheck = checkAndRecordRateLimit("booking_modal");
     if (!rateCheck.allowed) {
       showRateLimitToast(rateCheck.remainingSeconds, rateCheck.message);
@@ -570,6 +580,25 @@ export function BookingModal({
           enqueueOfflineSubmission("booking", payload);
         }
 
+        if (service === "stash" && user?.id) {
+          const { error: stashError } = await supabase.from("stash_bookings").insert({
+            user_id: user.id,
+            booking_id: generatedToken,
+            bag_count: bags,
+            duration_months: months,
+            total_amount: calcAmount,
+            qr_code: qrCodeUrl,
+          } as any);
+          if (stashError) {
+            console.error("Failed to save to stash_bookings", stashError);
+          } else {
+            await supabase.from("user_activity_logs" as any).insert({
+              user_id: user.id,
+              activity_type: "STASH_BOOKING",
+              description: `Stashed ${bags} bags for ${months} months. Status: Secured at Host Vault`,
+            });
+          }
+        }
       } catch (networkErr) {
         syncError = true;
         enqueueOfflineSubmission("booking", payload);

@@ -1,5 +1,9 @@
 import { useState, Suspense, lazy } from "react";
 import { MapPin, MessageCircle } from "lucide-react";
+import { useRequireAuthAction } from "@/hooks/useRequireAuthAction";
+import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/lib/supabase";
+import { toast } from "sonner";
 
 const StashVault = lazy(() =>
   import("../dashboard/StashVault").then((m) => ({ default: m.StashVault }))
@@ -11,9 +15,68 @@ const ROOMS = [
   { id: 3, title: "Cozy Study Room", price: 6500, dist: "200m from Coaching", zone: "Kakadeo Coaching Belt", img: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=400" },
 ];
 
+const DEALS = [
+  { id: 1, item: "Symphony Cooler (40L)", price: "₹2,500", oldPrice: "₹5,000", tag: "Moving out in 2 days" },
+  { id: 2, item: "Study Table + Chair", price: "₹1,200", oldPrice: "₹3,000", tag: "Used 1 semester" },
+  { id: 3, item: "Wakefit Mattress (Single)", price: "₹1,500", oldPrice: "₹4,000", tag: "Like new" },
+  { id: 4, item: "Bajaj Induction Cooktop", price: "₹900", oldPrice: "₹2,200", tag: "Works perfectly" },
+];
+
 export function RoomsServiceTab({ onBook }: { onBook: () => void }) {
   const [filter, setFilter] = useState("All Kanpur");
   const FILTERS = ["All Kanpur", "Kakadeo Coaching Belt", "Kalyanpur / IITK Zone", "Rawatpur / HBTI"];
+
+  const { user } = useAuth();
+  const { requireAuth, useActionReplay } = useRequireAuthAction();
+
+  const handleClaimDeal = async (dealId: number, itemName: string) => {
+    if (!user) return;
+    try {
+      await supabase.from("liquidation_claims" as any).insert({
+        user_id: user.id,
+        item_id: dealId,
+        item_name: itemName,
+      });
+      await supabase.from("user_activity_logs" as any).insert({
+        user_id: user.id,
+        activity_type: "CLAIMED_DEAL",
+        description: `Claimed liquidation deal: ${itemName}`,
+      });
+      toast.success("Deal Claimed! Pick up instructions sent.");
+    } catch (e) {
+      toast.error("Failed to claim deal");
+    }
+  };
+
+  const handleBookVisit = async (roomId: number, roomName: string, actionType: string) => {
+    if (!user) return;
+    try {
+      await supabase.from("room_inquiries" as any).insert({
+        user_id: user.id,
+        room_id: roomId,
+        room_name: roomName,
+        action: actionType,
+      });
+      await supabase.from("user_activity_logs" as any).insert({
+        user_id: user.id,
+        activity_type: "ROOM_INQUIRY",
+        description: `Scheduled a visit for: ${roomName}`,
+      });
+      toast.success("Visit Scheduled! The owner will contact you shortly.");
+      onBook();
+    } catch (e) {
+      toast.error("Failed to schedule visit");
+    }
+  };
+
+  DEALS.forEach((deal) => {
+    useActionReplay(`claim_deal_${deal.id}`, () => handleClaimDeal(deal.id, deal.item));
+  });
+
+  ROOMS.forEach((r) => {
+    useActionReplay(`book_visit_${r.id}`, () => handleBookVisit(r.id, r.title, "Visit"));
+    useActionReplay(`contact_owner_${r.id}`, () => handleBookVisit(r.id, r.title, "Contact"));
+  });
 
   return (
     <div className="w-full space-y-8 pb-10">
@@ -23,13 +86,12 @@ export function RoomsServiceTab({ onBook }: { onBook: () => void }) {
           <span>🏷️</span> Campus Liquidation Deals (50% Off)
         </h3>
         <div className="flex gap-4 overflow-x-auto hide-scrollbar pb-2 snap-x snap-mandatory">
-          {[
-            { id: 1, item: "Symphony Cooler (40L)", price: "₹2,500", oldPrice: "₹5,000", tag: "Moving out in 2 days" },
-            { id: 2, item: "Study Table + Chair", price: "₹1,200", oldPrice: "₹3,000", tag: "Used 1 semester" },
-            { id: 3, item: "Wakefit Mattress (Single)", price: "₹1,500", oldPrice: "₹4,000", tag: "Like new" },
-            { id: 4, item: "Bajaj Induction Cooktop", price: "₹900", oldPrice: "₹2,200", tag: "Works perfectly" },
-          ].map(deal => (
-            <div key={deal.id} className="min-w-[240px] bg-emerald-500/5 border border-emerald-500/20 rounded-xl p-4 snap-center flex-shrink-0 cursor-pointer hover:bg-emerald-500/10 transition-colors">
+          {DEALS.map(deal => (
+            <div 
+              key={deal.id} 
+              onClick={() => requireAuth(`claim_deal_${deal.id}`, "Login in 5 seconds to lock this deal to your account across all your devices.", () => handleClaimDeal(deal.id, deal.item))}
+              className="min-w-[240px] bg-emerald-500/5 border border-emerald-500/20 rounded-xl p-4 snap-center flex-shrink-0 cursor-pointer hover:bg-emerald-500/10 transition-colors"
+            >
               <div className="flex justify-between items-start mb-1">
                 <h4 className="text-white font-bold text-sm truncate pr-2">{deal.item}</h4>
                 <div className="text-emerald-400 font-bold">{deal.price}</div>
@@ -76,10 +138,16 @@ export function RoomsServiceTab({ onBook }: { onBook: () => void }) {
                 <MapPin className="w-3 h-3" /> {r.dist}
               </div>
               <div className="flex gap-2 w-full">
-                <button onClick={onBook} className="flex-1 bg-white/10 hover:bg-white/20 text-white font-medium py-2 rounded-xl transition-colors text-sm">
+                <button 
+                  onClick={() => requireAuth(`book_visit_${r.id}`, "Login in 5 seconds to schedule your room visit securely.", () => handleBookVisit(r.id, r.title, "Visit"))}
+                  className="flex-1 bg-white/10 hover:bg-white/20 text-white font-medium py-2 rounded-xl transition-colors text-sm"
+                >
                   Book Free Visit
                 </button>
-                <button onClick={onBook} className="flex-none bg-[#25D366]/20 hover:bg-[#25D366]/30 text-[#25D366] p-2 rounded-xl transition-colors">
+                <button 
+                  onClick={() => requireAuth(`contact_owner_${r.id}`, "Login in 5 seconds to connect directly with the owner.", () => handleBookVisit(r.id, r.title, "Contact"))}
+                  className="flex-none bg-[#25D366]/20 hover:bg-[#25D366]/30 text-[#25D366] p-2 rounded-xl transition-colors"
+                >
                   <MessageCircle className="w-5 h-5" />
                 </button>
               </div>

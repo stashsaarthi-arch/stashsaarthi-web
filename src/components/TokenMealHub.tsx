@@ -46,6 +46,7 @@ import { MealTokenLedgerModal } from "./stash/MealTokenLedgerModal";
 import { motion, AnimatePresence } from "motion/react";
 import type { OpenBooking } from "./stash/types";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { useUserCloud } from "@/context/UserCloudContext";
 
 type FulfillmentType = "DineIn_Pickup" | "RoomDelivery";
 
@@ -334,9 +335,19 @@ const MealTierCard: React.FC<MealTierCardProps> = ({ tier, isSelected, tierCost,
   );
 };
 
+import { useRequireAuthAction } from "@/hooks/useRequireAuthAction";
+
 export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => {
-  // Wallet State
+  const { user, tokenBalance: cloudTokenBalance } = useUserCloud();
+  const { requireAuth, useActionReplay } = useRequireAuthAction();
   const [tokenBalance, setTokenBalance] = useState<number>(450); // Demo user balance
+
+  useEffect(() => {
+    if (user) {
+      setTokenBalance(cloudTokenBalance);
+    }
+  }, [user, cloudTokenBalance]);
+
   const [fulfillmentType, setFulfillmentType] = useState<FulfillmentType>("DineIn_Pickup");
   const [selectedMeal, setSelectedMeal] = useState<MealOption>(MEAL_TIERS[1] as MealOption);
   const [vendorNode, setVendorNode] = useState<string>("Kakadeo Hub - Annapurna Kitchen");
@@ -432,14 +443,15 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
       return;
     }
 
-    const prevBalance = tokenBalance;
-    // Optimistic balance update for instant perception
-    setTokenBalance((prev) => prev - reorderCost);
-    setIsReorderSubmitting(true);
-    playPop();
+    requireAuth("quick_reorder", "Login in 5 seconds to lock this deal to your account across all your devices.", async () => {
+      const prevBalance = tokenBalance;
+      // Optimistic balance update for instant perception
+      setTokenBalance((prev) => prev - reorderCost);
+      setIsReorderSubmitting(true);
+      playPop();
 
-    try {
-      const today = new Date().toISOString().split("T")[0]!;
+      try {
+        const today = new Date().toISOString().split("T")[0]!;
       const cutoffTime = new Date();
       cutoffTime.setHours(reorderSlot === "Lunch" ? 7 : 14, 0, 0, 0);
 
@@ -481,6 +493,13 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
         throw error;
       }
 
+      if (user?.id) {
+        await supabase
+          .from("meal_wallets" as any)
+          .update({ token_balance: prevBalance - reorderCost })
+          .eq("user_id", user.id);
+      }
+
       // Save updated last order
       const updatedOrder: LastMealOrder = {
         ...lastMeal,
@@ -518,6 +537,14 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
 
       setIsReorderModalOpen(false);
       setReorderStep(1);
+
+      if (user?.id) {
+        await supabase.from("user_activity_logs" as any).insert({
+          user_id: user.id,
+          activity_type: "QUICK_REORDER",
+          description: `Quick re-ordered ${mealTier.name} from ${lastMeal.vendorNode}`,
+        });
+      }
     } catch (err: unknown) {
       console.error("Failed to quick re-order", err);
       // Rollback optimistic balance
@@ -528,6 +555,7 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
     } finally {
       setIsReorderSubmitting(false);
     }
+    });
   };
 
   // Taste Shield Protection State
@@ -611,8 +639,8 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
   const currentCost = baseCost + personalizationDelta;
 
   // Handle Token Redemption
-  const handleRedeemMeal = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleRedeemMeal = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
 
     if (tokenBalance < currentCost) {
       toast.error("Insufficient tokens", {
@@ -638,10 +666,11 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
       return;
     }
 
-    const prevBalance = tokenBalance;
-    // Optimistic balance debit for zero perceived latency
-    setTokenBalance((prev) => prev - currentCost);
-    setIsSubmitting(true);
+    requireAuth("redeem_meal", "Login in 5 seconds to lock this deal to your account across all your devices.", async () => {
+      const prevBalance = tokenBalance;
+      // Optimistic balance debit for zero perceived latency
+      setTokenBalance((prev) => prev - currentCost);
+      setIsSubmitting(true);
 
     try {
       const today = new Date().toISOString().split("T")[0];
@@ -685,6 +714,19 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
           context: "TokenMealHub_submitOrder",
         });
         enqueueOfflineSubmission("meal", mealPayload);
+      }
+
+      if (user?.id) {
+        await supabase
+          .from("meal_wallets" as any)
+          .update({ token_balance: prevBalance - currentCost })
+          .eq("user_id", user.id);
+          
+        await supabase.from("user_activity_logs" as any).insert({
+          user_id: user.id,
+          activity_type: "REDEEMED_MEAL",
+          description: `Redeemed ${selectedMeal.name} for ${currentCost} tokens`,
+        });
       }
 
       // Register active booking for review & Taste Shield
@@ -764,16 +806,40 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
       setPhone("");
       setDeliveryAddress("");
     } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const handleQuickRecharge = (tokensToAdd: number, price: number) => {
-    setTokenBalance((prev) => prev + tokensToAdd);
-    toast.success(`Wallet Recharged!`, {
-      description: `Successfully added ${tokensToAdd} Tokens for ₹${price}. (Demo mode)`,
+        setIsSubmitting(false);
+      }
     });
   };
+
+  const handleQuickRecharge = async (tokensToAdd: number, price: number) => {
+    requireAuth(`recharge_${tokensToAdd}`, "Login in 5 seconds to recharge your wallet securely.", async () => {
+      const newBalance = tokenBalance + tokensToAdd;
+      setTokenBalance(newBalance);
+      
+      if (user?.id) {
+        await supabase
+          .from("meal_wallets" as any)
+          .update({ token_balance: newBalance })
+          .eq("user_id", user.id);
+          
+        await supabase.from("user_activity_logs" as any).insert({
+          user_id: user.id,
+          activity_type: "RECHARGE_WALLET",
+          description: `Recharged ${tokensToAdd} tokens`,
+        });
+      }
+      
+      toast.success(`Wallet Recharged!`, {
+        description: `Successfully added ${tokensToAdd} Tokens for ₹${price}.`,
+      });
+    });
+  };
+
+  useActionReplay("redeem_meal", () => handleRedeemMeal());
+  useActionReplay("quick_reorder", handleQuickReorderSubmit);
+  useActionReplay("recharge_30", () => handleQuickRecharge(30, 2400));
+  useActionReplay("recharge_90", () => handleQuickRecharge(90, 6800));
+  useActionReplay("recharge_180", () => handleQuickRecharge(180, 13000));
 
   const [isMounted, setIsMounted] = useState(false);
   useEffect(() => {

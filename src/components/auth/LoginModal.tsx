@@ -4,23 +4,27 @@ import { useAuth } from "@/hooks/useAuth";
 import { PhoneAuth } from "./PhoneAuth";
 import { Smartphone, Mail } from "lucide-react";
 
-export function LoginModal({
-  open,
-  onOpenChange,
-}: {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-}) {
+import { useAuthStore } from "@/store/useAuthStore";
+
+export function LoginModal() {
   const { loginWithGoogle } = useAuth();
   const [showPhoneAuth, setShowPhoneAuth] = useState(false);
+  const loginModalOpen = useAuthStore((s) => s.loginModalOpen);
+  const loginModalMessage = useAuthStore((s) => s.loginModalMessage);
+  const closeLoginModal = useAuthStore((s) => s.closeLoginModal);
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog open={loginModalOpen} onOpenChange={(open) => !open && closeLoginModal()}>
       <DialogContent className="max-w-md border border-white/10 bg-[#0A0D0F]/95 backdrop-blur-xl sm:rounded-3xl p-6">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold text-center text-white mb-4">
             Sign in to StashSaarthi
           </DialogTitle>
+          {loginModalMessage && (
+            <p className="text-center text-sm font-medium text-emerald-400 mb-2">
+              {loginModalMessage}
+            </p>
+          )}
         </DialogHeader>
 
         {showPhoneAuth ? (
@@ -37,8 +41,8 @@ export function LoginModal({
           <div className="flex flex-col gap-4 mt-2">
             <button
               onClick={() => {
+                closeLoginModal();
                 loginWithGoogle();
-                onOpenChange(false);
               }}
               className="flex items-center justify-center gap-3 w-full bg-white text-black py-4 rounded-2xl font-bold hover:bg-slate-200 transition-colors cursor-pointer shadow-lg"
             >

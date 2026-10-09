@@ -120,12 +120,14 @@ const SOCIALS = [
 ];
 
 import { LoginModal } from "@/components/auth/LoginModal";
+import { useAuthStore } from "@/store/useAuthStore";
 
 export const FooterSection = memo(function FooterSection() {
   const { user } = useAuth();
   const { language, t } = useLanguage();
   const isHi = language === "hi";
-
+  const openLoginModal = useAuthStore((s) => s.openLoginModal);
+  
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -139,7 +141,6 @@ export const FooterSection = memo(function FooterSection() {
   const [showInvestorModal, setShowInvestorModal] = useState(false);
   const [showCaptainModal, setShowCaptainModal] = useState(false);
   const [showAndroidGoModal, setShowAndroidGoModal] = useState(false);
-  const [loginModalOpen, setLoginModalOpen] = useState(false);
 
   const [waitlistDrawerOpen, setWaitlistDrawerOpen] = useState(false);
   const [touched, setTouched] = useState<{ name?: boolean; email?: boolean; phone?: boolean }>({});
@@ -174,7 +175,7 @@ export const FooterSection = memo(function FooterSection() {
   ];
 
   const handleGoogleWaitlist = () => {
-    setLoginModalOpen(true);
+    openLoginModal();
   };
 
   const handleSubmit = async () => {
@@ -868,7 +869,7 @@ export const FooterSection = memo(function FooterSection() {
       <InvestorModal open={showInvestorModal} onOpenChange={setShowInvestorModal} />
       <CampusCaptainModal open={showCaptainModal} onOpenChange={setShowCaptainModal} />
       <AndroidGoPerformanceModal open={showAndroidGoModal} onOpenChange={setShowAndroidGoModal} />
-      <LoginModal open={loginModalOpen} onOpenChange={setLoginModalOpen} />
+      <LoginModal />
     </footer>
   );
 });
