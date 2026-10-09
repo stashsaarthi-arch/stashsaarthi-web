@@ -109,8 +109,8 @@ export function UserActivityDrawer({ open, onOpenChange }: { open: boolean, onOp
                       </div>
                       <p className="text-xs text-white/70">Contact owner or navigate via map directions.</p>
                       <div className="mt-3 flex gap-2">
-                         <button className="text-[10px] uppercase font-bold px-3 py-1.5 bg-emerald-500/20 text-emerald-400 rounded-lg">Call Owner</button>
-                         <button className="text-[10px] uppercase font-bold px-3 py-1.5 bg-white/10 text-white rounded-lg">Map</button>
+                         <button onClick={() => alert("Contacting owner for " + visit.room_id)} className="text-[10px] uppercase font-bold px-3 py-1.5 bg-emerald-500/20 text-emerald-400 rounded-lg">Call Owner</button>
+                         <button onClick={() => alert("Opening map for " + visit.room_id)} className="text-[10px] uppercase font-bold px-3 py-1.5 bg-white/10 text-white rounded-lg">Map</button>
                       </div>
                     </div>
                   ))}
