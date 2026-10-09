@@ -642,6 +642,13 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
   const handleRedeemMeal = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
 
+    if (!userName || userName.trim().length < 2) {
+      toast.error("Name Required", {
+        description: "Please enter your name.",
+      });
+      return;
+    }
+
     if (tokenBalance < currentCost) {
       toast.error("Insufficient tokens", {
         description: `Need ${currentCost} tokens. Your balance is ${tokenBalance}. Please recharge your wallet below.`,
@@ -1269,7 +1276,6 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
                     <label className="block text-[11px] font-bold text-slate-400 mb-1.5 uppercase">Name</label>
                     <input
                       type="text"
-                      required
                       value={userName}
                       onChange={(e) => setUserName(e.target.value)}
                       className="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2.5 text-white text-sm focus:border-emerald-500 focus:outline-none"
@@ -1279,8 +1285,6 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
                     <label className="block text-[11px] font-bold text-slate-400 mb-1.5 uppercase">Phone</label>
                     <input
                       type="tel"
-                      required
-                      pattern="^[6-9]\d{9}$"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       className="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2.5 text-white text-sm focus:border-emerald-500 focus:outline-none"
@@ -1293,7 +1297,6 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
                     <label className="block text-[11px] font-bold text-emerald-400 mb-1.5 uppercase">Delivery Address *</label>
                     <input
                       type="text"
-                      required
                       placeholder="Room number, Hostel/PG name"
                       value={deliveryAddress}
                       onChange={(e) => setDeliveryAddress(e.target.value)}
