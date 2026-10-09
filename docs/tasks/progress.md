@@ -17,6 +17,15 @@
 
 ## Active Sprint Queue
 
+- [x] **[CPO] Task 125: Non-Destructive IA Refactor** (2026-10-09)
+  - Restored complete Savings Simulator via CalculatorModal
+  - Integrated interactive StashTimeline into StorageServiceTab
+  - Recovered full TokenMealHub in Khana Tab
+  - Re-integrated original StashVault (Liquidation/Stashes) into RoomsServiceTab
+  - Kept compact 3-tab layout without losing any rich component details
+
+
+
 - [x] [CTO] Refactor animations to Lenis / GSAP smooth scroll & GPU layers
 - [ ] [CMO] Optimize hero headline, messaging hooks & value proposition
 - [ ] [CPO] Polish component spacing, padding consistency & modern card styling

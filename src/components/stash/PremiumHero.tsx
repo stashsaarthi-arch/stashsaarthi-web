@@ -190,7 +190,7 @@ export const PremiumHero = ({ role, onBook, onRefer }: any) => {
           initial={{ opacity: 0, y: 50, filter: "blur(12px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 1, type: "spring", stiffness: 100, damping: 20, delay: 0.4 }}
-          className="flex flex-col sm:flex-row items-center justify-center w-full max-w-md sm:max-w-none gap-3 sm:gap-6 mt-8 sm:mt-16 px-2 sm:px-4 gpu-accelerated will-change-transform [transform:translateZ(0)]"
+          className="flex flex-col sm:flex-row items-center justify-center w-full max-w-md sm:max-w-none gap-3 sm:gap-6 mt-8 sm:mt-12 px-2 sm:px-4 gpu-accelerated will-change-transform [transform:translateZ(0)]"
         >
           <MagneticButton
             onClick={() => onBook({ service: role === "student" ? "stash" : "spaces" })}
@@ -206,6 +206,19 @@ export const PremiumHero = ({ role, onBook, onRefer }: any) => {
             {role === "student" ? "REFERRAL" : "PRICING"}
           </MagneticButton>
         </motion.div>
+
+        {role === "student" && (
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="mt-8"
+          >
+            <button onClick={() => window.dispatchEvent(new CustomEvent('stashsaarthi:open-calculator'))} className="flex items-center justify-center gap-2 px-6 py-3 bg-amber-500/10 border border-amber-500/30 text-amber-400 font-bold rounded-xl hover:bg-amber-500/20 transition-colors shadow-lg">
+              <span className="text-xl">⚡</span> Calculate My Vacation Savings <span className="hidden sm:block text-xs text-amber-500/70 ml-2">(See ₹8,000+ Dead-Rent Reduction)</span>
+            </button>
+          </motion.div>
+        )}
       </motion.div>
 
       {/* Top-Glow Cards Matrix with strict E-Summit grid architecture */}

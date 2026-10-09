@@ -40,6 +40,9 @@ const OfferPopup = lazy(() =>
 const RagChatbotWidget = lazy(() =>
   import("@/components/stash/RagChatbotWidget").then((m) => ({ default: m.RagChatbotWidget })),
 );
+const CalculatorModal = lazy(() =>
+  import("@/components/stash/CalculatorModal").then((m) => ({ default: m.CalculatorModal })),
+);
 
 interface HomeFooterAndModalsProps {
   role: Role;
@@ -71,7 +74,18 @@ export function HomeFooterAndModals({
   onRefer,
 }: HomeFooterAndModalsProps) {
   const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const [calculatorOpen, setCalculatorOpen] = useState(false);
+  
+  useEffect(() => {
+    setMounted(true);
+    
+    const handleOpenCalculator = () => setCalculatorOpen(true);
+    window.addEventListener("stashsaarthi:open-calculator", handleOpenCalculator);
+    
+    return () => {
+      window.removeEventListener("stashsaarthi:open-calculator", handleOpenCalculator);
+    };
+  }, []);
 
   const floatingWidgets = mounted
     ? createPortal(
@@ -157,6 +171,9 @@ export function HomeFooterAndModals({
               });
             }}
           />
+        </ErrorBoundary>
+        <ErrorBoundary sectionName="Calculator Modal" compact>
+          <CalculatorModal open={calculatorOpen} onClose={() => setCalculatorOpen(false)} />
         </ErrorBoundary>
       </Suspense>
       {floatingWidgets}

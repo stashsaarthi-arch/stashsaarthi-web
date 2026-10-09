@@ -136,6 +136,43 @@ function Index() {
         onRefer={handleRefer}
       />
 
+      {/* COMPACT TRUST BAR & TESTIMONIALS */}
+      {role === 'student' && (
+        <div className="max-w-[1600px] mx-auto px-4 mb-16 space-y-12">
+          <div className="bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-4 backdrop-blur-md">
+            <div className="flex items-center gap-3">
+              <span className="text-2xl">🏛️</span>
+              <p className="text-white/80 font-medium">
+                <strong className="text-white">Student-Governed Charter:</strong> Backed by verified student representatives across IITK, HBTI, CSJMU & Kakadeo.
+              </p>
+            </div>
+            <button onClick={() => window.dispatchEvent(new Event('stashsaarthi:open-forum'))} className="px-5 py-2.5 bg-white/10 hover:bg-white/20 border border-white/10 text-white font-bold rounded-xl transition-all whitespace-nowrap">
+              View Council Resolutions & Forum
+            </button>
+          </div>
+
+          <div className="space-y-4">
+            <h3 className="text-xl font-bold text-white pl-2">Real Stories</h3>
+            <div className="flex overflow-x-auto hide-scrollbar gap-4 pb-4 snap-x snap-mandatory">
+              {[
+                { name: 'Rahul S.', tag: 'IIT Kanpur', quote: 'Saved ₹12k over the summer. Totally seamless.' },
+                { name: 'Anjali M.', tag: 'HBTI', quote: 'Zero brokerage rooms actually exist! Very safe.' },
+                { name: 'Vikram K.', tag: 'Kakadeo', quote: 'Tiffin is exactly like home. No oil dripping.' },
+                { name: 'Priya D.', tag: 'CSJMU', quote: 'Kept my luggage for 2 months. Not a scratch.' }
+              ].map((t, i) => (
+                <div key={i} className="min-w-[280px] bg-[#0A0D0F] border border-white/10 rounded-2xl p-5 snap-center">
+                  <div className="flex justify-between items-start mb-3">
+                    <div className="font-bold text-white">{t.name}</div>
+                    <div className="text-xs px-2 py-1 bg-white/10 text-emerald-400 rounded-md font-bold">{t.tag}</div>
+                  </div>
+                  <p className="text-white/60 text-sm italic">"{t.quote}"</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
       <HomeFooterAndModals
         role={role}
         booking={booking}
@@ -162,10 +199,18 @@ const TABS = [
   { id: "khana", label: "🍱 Ghar Ka Khana" },
 ] as const;
 
+import { StorageServiceTab } from "@/components/stash/StorageServiceTab";
+import { RoomsServiceTab } from "@/components/stash/RoomsServiceTab";
+import { TokenMealHub } from "@/components/TokenMealHub";
+import { CalculatorModal } from "@/components/stash/CalculatorModal";
+import { ForumModal } from "@/components/stash/ForumModal";
+
 function WorkspacePartitions({ role, onBook, onListRoom, onRefer }: any) {
   const [activeTab, setActiveTab] = useState<(typeof TABS)[number]["id"]>("storage");
   const [kycModalOpen, setKycModalOpen] = useState(false);
   const [verifyModalOpen, setVerifyModalOpen] = useState(false);
+  const [calculatorOpen, setCalculatorOpen] = useState(false);
+  const [forumOpen, setForumOpen] = useState(false);
 
   useEffect(() => {
     const handleHash = () => {
@@ -175,13 +220,9 @@ function WorkspacePartitions({ role, onBook, onListRoom, onRefer }: any) {
       else setActiveTab("storage");
     };
 
-    // Check initial hash
     handleHash();
-
-    // Listen to hash changes or custom scroll events
     window.addEventListener("hashchange", handleHash);
 
-    // Also listen to custom events from Navbar if they intercept default link behavior
     const handleCustomNav = (e: Event) => {
       const target = (e as CustomEvent).detail;
       if (target === "rooms") setActiveTab("rooms");
@@ -190,9 +231,16 @@ function WorkspacePartitions({ role, onBook, onListRoom, onRefer }: any) {
     };
     window.addEventListener("stashsaarthi:nav-tab", handleCustomNav);
 
+    const openCalc = () => setCalculatorOpen(true);
+    const openForum = () => setForumOpen(true);
+    window.addEventListener("stashsaarthi:open-calculator", openCalc);
+    window.addEventListener("stashsaarthi:open-forum", openForum);
+
     return () => {
       window.removeEventListener("hashchange", handleHash);
       window.removeEventListener("stashsaarthi:nav-tab", handleCustomNav);
+      window.removeEventListener("stashsaarthi:open-calculator", openCalc);
+      window.removeEventListener("stashsaarthi:open-forum", openForum);
     };
   }, []);
 
@@ -285,23 +333,8 @@ function WorkspacePartitions({ role, onBook, onListRoom, onRefer }: any) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.2 }}
-                className="space-y-16"
               >
-                <HomeSolutions onBook={onBook} onListRoom={onListRoom} />
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6">
-                    <h3 className="text-2xl font-bold text-emerald-400 mb-4">Live Calculator</h3>
-                    <Suspense fallback={null}>
-                      <CalculatorHub onBook={onBook} />
-                    </Suspense>
-                  </div>
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6">
-                    <h3 className="text-2xl font-bold text-amber-400 mb-4">Predictive Persona</h3>
-                    <Suspense fallback={null}>
-                      <PredictivePersonaWidget />
-                    </Suspense>
-                  </div>
-                </div>
+                <StorageServiceTab onBook={onBook} />
               </motion.div>
             )}
             {activeTab === 'rooms' && (
@@ -311,14 +344,8 @@ function WorkspacePartitions({ role, onBook, onListRoom, onRefer }: any) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.2 }}
-                className="space-y-16"
               >
-                <HomeDeepModules role={role} onBook={onBook} onRefer={onRefer} />
-                <div className="w-full">
-                  <Suspense fallback={null}>
-                    <StashVault />
-                  </Suspense>
-                </div>
+                <RoomsServiceTab onBook={onBook} />
               </motion.div>
             )}
             {activeTab === 'khana' && (
@@ -329,18 +356,16 @@ function WorkspacePartitions({ role, onBook, onListRoom, onRefer }: any) {
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.2 }}
               >
-                <div className="flex flex-col items-center justify-center min-h-[400px] text-center space-y-6">
-                  <div className="text-6xl">🍲</div>
-                  <h2 className="text-3xl font-bold text-white">Ghar Ka Khana</h2>
-                  <p className="text-white/60 max-w-md">
-                    Homestyle tiffins starting at ₹90. Coming soon to your campus.
-                  </p>
-                </div>
+                <TokenMealHub onBook={onBook} />
               </motion.div>
             )}
           </AnimatePresence>
         </div>
       </div>
+      
+      <CalculatorModal open={calculatorOpen} onClose={() => setCalculatorOpen(false)} />
+      <ForumModal open={forumOpen} onClose={() => setForumOpen(false)} />
     </div>
   );
 }
+
