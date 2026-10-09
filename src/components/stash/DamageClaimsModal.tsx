@@ -138,6 +138,7 @@ export const DamageClaimsModal: React.FC<DamageClaimsModalProps> = ({
       itemLabel,
       initialIntakePhotoUrl: intakePhoto,
       unboxingPhotoUrl: unboxingPhoto,
+      claimedAmount: claimedAmount,
       notes,
     };
 
