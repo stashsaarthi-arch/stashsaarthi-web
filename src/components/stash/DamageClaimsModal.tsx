@@ -20,10 +20,13 @@ import {
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 
-export type DamageClaimStatus = "UNDER_REVIEW" | "APPROVED_PAYOUT" | "REJECTED" | "RESOLVED";
+export type DamageClaimStatus = "UNDER_REVIEW" | "APPROVED_PAYOUT" | "REJECTED" | "RESOLVED" | "PENDING_INSPECTION";
 
 export interface VisualDiffResult {
   similarityScore: number;
+  diffScore: number;
+  suggestedPayout: number;
+  inspectionHighlights: string[];
   damageSeverity: "NONE" | "MINOR" | "MODERATE" | "SEVERE";
   diffHighlights: Array<{ x: number; y: number; label: string }>;
 }
@@ -41,6 +44,7 @@ export interface DamageClaim {
   damageSeverity: string;
   status: DamageClaimStatus;
   payoutAmount: number;
+  approvedPayoutAmount?: number;
   submittedAt: string;
   resolvedAt?: string;
   notes?: string;
@@ -52,6 +56,9 @@ export const SAMPLE_UNBOXING_PHOTO_PRISTINE = "https://images.unsplash.com/photo
 
 const computeVisualDiff = (photoA: string, photoB: string): VisualDiffResult => ({
   similarityScore: 68,
+  diffScore: 32,
+  suggestedPayout: 3000,
+  inspectionHighlights: ["Structural dent detected"],
   damageSeverity: "MODERATE",
   diffHighlights: [{ x: 50, y: 50, label: "Structural dent detected" }],
 });
@@ -96,8 +103,7 @@ export const DamageClaimsModal: React.FC<DamageClaimsModalProps> = ({
   // Live Visual Diff calculation for form preview
   const liveDiffResult: VisualDiffResult = computeVisualDiff(
     intakePhoto,
-    unboxingPhoto,
-    claimedAmount,
+    unboxingPhoto
   );
 
   const refreshClaims = useCallback(() => {
@@ -132,7 +138,6 @@ export const DamageClaimsModal: React.FC<DamageClaimsModalProps> = ({
       itemLabel,
       initialIntakePhotoUrl: intakePhoto,
       unboxingPhotoUrl: unboxingPhoto,
-      claimedAmount,
       notes,
     };
 
@@ -784,4 +789,6 @@ export const DamageClaimsModal: React.FC<DamageClaimsModalProps> = ({
     </div>
   );
 };
+
+
 

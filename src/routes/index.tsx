@@ -20,6 +20,7 @@ import { HomeHeroSection } from "@/components/home/HomeHeroSection";
 import { HomeSolutions } from "@/components/home/HomeSolutions";
 import { HomeDeepModules } from "@/components/home/HomeDeepModules";
 import { HomeFooterAndModals } from "@/components/home/HomeFooterAndModals";
+import { MascotGuide } from "@/components/common/MascotGuide";
 
 const CalculatorHub = lazy(() =>
   import("@/components/stash/CalculatorHub").then((m) => ({ default: m.CalculatorHub })),
@@ -149,6 +150,8 @@ function Index() {
         onBook={open}
         onRefer={handleRefer}
       />
+
+      <MascotGuide />
     </motion.main>
   );
 }
