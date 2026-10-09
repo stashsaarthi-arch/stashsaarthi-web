@@ -455,7 +455,7 @@ export const TopRatedKitchensWidget: React.FC<TopRatedKitchensWidgetProps> = ({ 
         </div>
 
         <a
-          href="https://wa.me/919369454350?text=Hi%20StashSaarthi%20Food%20Audit%20Team"
+          href={`https://wa.me/919369454350?text=${encodeURIComponent("Hi StashSaarthi Food Audit Team")}`}
           target="_blank"
           rel="noopener noreferrer"
           className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold border border-slate-700 shrink-0 transition-all flex items-center gap-1.5"

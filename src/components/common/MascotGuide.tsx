@@ -49,7 +49,7 @@ export function MascotGuide({ activeTab = "storage", calculatorOpen = false, for
     } else if (actionId === 'rooms') {
       window.dispatchEvent(new CustomEvent("stashsaarthi:nav-tab", { detail: 'rooms' }));
     } else if (actionId === 'whatsapp') {
-      window.open('https://wa.me/919369454350?text=Hey,%20I%20need%20help%20with%20StashSaarthi!', '_blank');
+      window.open(`https://wa.me/919369454350?text=${encodeURIComponent("Hey, I need help with StashSaarthi!")}`, '_blank');
     }
   };
 

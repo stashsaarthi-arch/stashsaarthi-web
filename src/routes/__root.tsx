@@ -476,7 +476,7 @@ function RootShell({ children }: { children: ReactNode }) {
           <SpatialVoid />
 
           {/* THE FOREGROUND CONTENT (STRICTLY z-10) */}
-          <main className="relative z-10 w-full max-w-full overflow-x-hidden flex flex-col min-h-screen">
+          <main className="relative z-10 w-full max-w-full overflow-x-hidden flex flex-col min-h-screen pb-28 md:pb-8">
             {children}
           </main>
         </div>

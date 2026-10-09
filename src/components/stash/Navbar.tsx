@@ -123,7 +123,7 @@ export const Navbar = memo(function Navbar({
   return (
     <header
       ref={navRef}
-      className="fixed top-0 left-0 right-0 !z-[999] w-full transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] !bg-[#0A0D0F]/10 !backdrop-blur-[12px] !border-b !border-white/5"
+      className="fixed top-0 left-0 right-0 z-50 w-full transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] !bg-[#0A0D0F]/10 !backdrop-blur-[12px] !border-b !border-white/5"
     >
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-24 -z-10 rounded-full pointer-events-none"

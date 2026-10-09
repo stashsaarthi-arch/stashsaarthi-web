@@ -444,6 +444,11 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
     }
 
     requireAuth("quick_reorder", "Login in 5 seconds to lock this deal to your account across all your devices.", async () => {
+      if (!navigator.onLine) {
+        toast.error("No internet connection. Please check your network.");
+        setIsReorderSubmitting(false);
+        return;
+      }
       const prevBalance = tokenBalance;
       // Optimistic balance update for instant perception
       setTokenBalance((prev) => prev - reorderCost);
@@ -674,6 +679,11 @@ export const TokenMealHub: React.FC<{ onBook?: OpenBooking }> = ({ onBook }) => 
     }
 
     requireAuth("redeem_meal", "Login in 5 seconds to lock this deal to your account across all your devices.", async () => {
+      if (!navigator.onLine) {
+        toast.error("No internet connection. Please check your network.");
+        setIsSubmitting(false);
+        return;
+      }
       const prevBalance = tokenBalance;
       // Optimistic balance debit for zero perceived latency
       setTokenBalance((prev) => prev - currentCost);

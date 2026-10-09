@@ -603,7 +603,7 @@ export function KanpurStudentCouncil() {
 
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
               <motion.a
-                href="https://wa.me/919369454350?text=Hi%20StashSaarthi!%20I%20want%20to%20join%20the%20Kanpur%20Student%20Council%20WhatsApp%20Group."
+                href={`https://wa.me/919369454350?text=${encodeURIComponent("Hi StashSaarthi! I want to join the Kanpur Student Council WhatsApp Group.")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => playClick()}
