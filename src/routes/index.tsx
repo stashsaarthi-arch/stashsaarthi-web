@@ -4,7 +4,7 @@
 import { useState, useCallback, useEffect, lazy, Suspense, useRef } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 
 import { AmbientNodes } from "@/components/ui/AmbientNodes";
 
@@ -157,24 +157,22 @@ function Index() {
 }
 
 const TABS = [
-  { id: "explore", label: "📦 Explore Stashes & Rooms" },
-  { id: "savings", label: "🧮 Savings & AI Estimator" },
-  { id: "liquidation", label: "🔥 Campus Liquidation (50% Off)" },
-  { id: "host", label: "🏠 Host & Earn" },
+  { id: "storage", label: "📦 Micro-Storage" },
+  { id: "rooms", label: "🏠 Broker-Free Rooms" },
+  { id: "khana", label: "🍱 Ghar Ka Khana" },
 ] as const;
 
 function WorkspacePartitions({ role, onBook, onListRoom, onRefer }: any) {
-  const [activeTab, setActiveTab] = useState<(typeof TABS)[number]["id"]>("explore");
+  const [activeTab, setActiveTab] = useState<(typeof TABS)[number]["id"]>("storage");
   const [kycModalOpen, setKycModalOpen] = useState(false);
   const [verifyModalOpen, setVerifyModalOpen] = useState(false);
 
   useEffect(() => {
     const handleHash = () => {
       const hash = window.location.hash;
-      if (hash === "#calculator") setActiveTab("savings");
-      else if (hash === "#liquidation") setActiveTab("liquidation");
-      else if (hash === "#host") setActiveTab("host");
-      else setActiveTab("explore");
+      if (hash === "#rooms") setActiveTab("rooms");
+      else if (hash === "#khana") setActiveTab("khana");
+      else setActiveTab("storage");
     };
 
     // Check initial hash
@@ -186,10 +184,9 @@ function WorkspacePartitions({ role, onBook, onListRoom, onRefer }: any) {
     // Also listen to custom events from Navbar if they intercept default link behavior
     const handleCustomNav = (e: Event) => {
       const target = (e as CustomEvent).detail;
-      if (target === "calculator") setActiveTab("savings");
-      else if (target === "liquidation") setActiveTab("liquidation");
-      else if (target === "host") setActiveTab("host");
-      else setActiveTab("explore");
+      if (target === "rooms") setActiveTab("rooms");
+      else if (target === "khana") setActiveTab("khana");
+      else setActiveTab("storage");
     };
     window.addEventListener("stashsaarthi:nav-tab", handleCustomNav);
 
@@ -199,126 +196,150 @@ function WorkspacePartitions({ role, onBook, onListRoom, onRefer }: any) {
     };
   }, []);
 
+  if (role === "host") {
+    return (
+      <div className="w-full mt-8 mb-16 relative z-10">
+        <div className="max-w-[1600px] mx-auto px-4 min-h-[650px]">
+          <div className="space-y-12">
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-12">
+              <h3 className="text-3xl font-bold text-amber-400 mb-6 text-center">
+                Host Inventory Command
+              </h3>
+              <div className="flex flex-wrap items-center justify-center gap-4 mb-8">
+                <button
+                  onClick={() => setKycModalOpen(true)}
+                  className="flex items-center gap-2 px-5 py-3 bg-amber-500 hover:bg-amber-400 text-amber-950 font-bold rounded-xl shadow-lg transition-colors"
+                >
+                  <ShieldAlert className="w-5 h-5" />
+                  Upload KYC ID Document
+                </button>
+                <button
+                  onClick={() => setVerifyModalOpen(true)}
+                  className="flex items-center gap-2 px-5 py-3 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-bold rounded-xl shadow-lg transition-colors"
+                >
+                  <ShieldAlert className="w-5 h-5" />
+                  Verify Host Stash Space
+                </button>
+                <button
+                  onClick={onListRoom}
+                  className="flex items-center gap-2 px-5 py-3 bg-blue-500 hover:bg-blue-400 text-blue-950 font-bold rounded-xl shadow-lg transition-colors"
+                >
+                  <ShieldAlert className="w-5 h-5" />
+                  List New Space / Become a Host
+                </button>
+              </div>
+              <Suspense fallback={null}>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                >
+                  <HostInventoryGrid />
+                </motion.div>
+              </Suspense>
+            </div>
+            <AadhaarKycModal
+              isOpen={kycModalOpen}
+              onClose={() => setKycModalOpen(false)}
+              onSuccess={() => setKycModalOpen(false)}
+            />
+            <HostStashVerificationModal
+              isOpen={verifyModalOpen}
+              onClose={() => setVerifyModalOpen(false)}
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="w-full mt-8 mb-16 relative z-10">
       <div className="max-w-[1600px] mx-auto px-4 mb-8">
-        <div className="grid grid-cols-2 md:flex gap-2 w-full pb-2 items-center justify-start md:justify-center">
-          {TABS.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`relative px-2 sm:px-5 py-2.5 rounded-full font-bold text-xs sm:text-sm md:whitespace-nowrap md:snap-center transition-all flex items-center justify-center text-center ${
-                activeTab === tab.id
-                  ? "text-black shadow-lg"
-                  : "text-white/60 hover:text-white bg-white/5 border border-white/10"
-              }`}
-            >
-              {activeTab === tab.id && (
-                <motion.div
-                  layoutId="activeWorkspaceTab"
-                  className="absolute inset-0 bg-emerald-400 rounded-full"
-                  style={{ zIndex: 0 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                />
-              )}
-              <span className="relative" style={{ zIndex: 1 }}>
-                {tab.label}
-              </span>
-            </button>
-          ))}
+        <div className="flex justify-center w-full pb-2">
+          <div className="flex gap-2 p-1.5 bg-white/5 border border-white/10 rounded-full w-full max-w-2xl overflow-x-auto hide-scrollbar snap-x snap-mandatory">
+            {TABS.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`relative flex-1 min-w-fit px-4 sm:px-6 py-3 rounded-full font-bold text-sm transition-all flex items-center justify-center text-center snap-center ${
+                  activeTab === tab.id
+                    ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 shadow-[0_0_15px_rgba(16,185,129,0.15)]"
+                    : "text-white/60 hover:text-white hover:bg-white/5 border border-transparent"
+                }`}
+              >
+                <span className="relative z-10">{tab.label}</span>
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
-      <div className="max-w-[1600px] mx-auto px-4 min-h-[50vh]">
-        <motion.div
-          key={activeTab}
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-        >
-          {activeTab === "explore" && (
-            <div className="space-y-16">
-              <HomeSolutions onBook={onBook} onListRoom={onListRoom} />
-              <HomeDeepModules role={role} onBook={onBook} onRefer={onRefer} />
-            </div>
-          )}
-
-          {activeTab === "savings" && (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6">
-                <h3 className="text-2xl font-bold text-emerald-400 mb-4">Live Calculator</h3>
-                <Suspense fallback={null}>
-                  <CalculatorHub onBook={onBook} />
-                </Suspense>
-              </div>
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6">
-                <h3 className="text-2xl font-bold text-amber-400 mb-4">Predictive Persona</h3>
-                <Suspense fallback={null}>
-                  <PredictivePersonaWidget />
-                </Suspense>
-              </div>
-            </div>
-          )}
-
-          {activeTab === "liquidation" && (
-            <div className="w-full">
-              <Suspense fallback={null}>
-                <StashVault />
-              </Suspense>
-            </div>
-          )}
-
-          {activeTab === "host" && (
-            <div className="space-y-12">
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-12">
-                <h3 className="text-3xl font-bold text-amber-400 mb-6 text-center">
-                  Host Inventory Command
-                </h3>
-                <div className="flex flex-wrap items-center justify-center gap-4 mb-8">
-                  <button
-                    onClick={() => setKycModalOpen(true)}
-                    className="flex items-center gap-2 px-5 py-3 bg-amber-500 hover:bg-amber-400 text-amber-950 font-bold rounded-xl shadow-lg transition-colors"
-                  >
-                    <ShieldAlert className="w-5 h-5" />
-                    Upload KYC ID Document
-                  </button>
-                  <button
-                    onClick={() => setVerifyModalOpen(true)}
-                    className="flex items-center gap-2 px-5 py-3 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-bold rounded-xl shadow-lg transition-colors"
-                  >
-                    <ShieldAlert className="w-5 h-5" />
-                    Verify Host Stash Space
-                  </button>
-                  <button
-                    onClick={onListRoom}
-                    className="flex items-center gap-2 px-5 py-3 bg-blue-500 hover:bg-blue-400 text-blue-950 font-bold rounded-xl shadow-lg transition-colors"
-                  >
-                    <ShieldAlert className="w-5 h-5" />
-                    List New Space / Become a Host
-                  </button>
+      <div className="max-w-[1600px] mx-auto px-4">
+        <div className="min-h-[650px] w-full relative transition-all duration-300">
+          <AnimatePresence mode="wait">
+            {activeTab === 'storage' && (
+              <motion.div
+                key="storage"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+                className="space-y-16"
+              >
+                <HomeSolutions onBook={onBook} onListRoom={onListRoom} />
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6">
+                    <h3 className="text-2xl font-bold text-emerald-400 mb-4">Live Calculator</h3>
+                    <Suspense fallback={null}>
+                      <CalculatorHub onBook={onBook} />
+                    </Suspense>
+                  </div>
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6">
+                    <h3 className="text-2xl font-bold text-amber-400 mb-4">Predictive Persona</h3>
+                    <Suspense fallback={null}>
+                      <PredictivePersonaWidget />
+                    </Suspense>
+                  </div>
                 </div>
-                <Suspense fallback={null}>
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                  >
-                    <HostInventoryGrid />
-                  </motion.div>
-                </Suspense>
-              </div>
-              <AadhaarKycModal
-                isOpen={kycModalOpen}
-                onClose={() => setKycModalOpen(false)}
-                onSuccess={() => setKycModalOpen(false)}
-              />
-              <HostStashVerificationModal
-                isOpen={verifyModalOpen}
-                onClose={() => setVerifyModalOpen(false)}
-              />
-            </div>
-          )}
-        </motion.div>
+              </motion.div>
+            )}
+            {activeTab === 'rooms' && (
+              <motion.div
+                key="rooms"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+                className="space-y-16"
+              >
+                <HomeDeepModules role={role} onBook={onBook} onRefer={onRefer} />
+                <div className="w-full">
+                  <Suspense fallback={null}>
+                    <StashVault />
+                  </Suspense>
+                </div>
+              </motion.div>
+            )}
+            {activeTab === 'khana' && (
+              <motion.div
+                key="khana"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+              >
+                <div className="flex flex-col items-center justify-center min-h-[400px] text-center space-y-6">
+                  <div className="text-6xl">🍲</div>
+                  <h2 className="text-3xl font-bold text-white">Ghar Ka Khana</h2>
+                  <p className="text-white/60 max-w-md">
+                    Homestyle tiffins starting at ₹90. Coming soon to your campus.
+                  </p>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
     </div>
   );
