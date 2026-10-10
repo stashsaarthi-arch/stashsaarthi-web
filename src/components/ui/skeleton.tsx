@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 function Skeleton({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn("shimmer-skeleton rounded-lg bg-white/[0.04] dark:bg-white/[0.04]", className)}
+      className={cn("animate-pulse rounded-md bg-muted/60 bg-gray-200 dark:bg-gray-800", className)}
       {...props}
     />
   );

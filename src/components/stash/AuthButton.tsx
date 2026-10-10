@@ -18,6 +18,7 @@ import { ProfileModal } from "./ProfileModal";
 import { LoginModal } from "@/components/auth/LoginModal";
 import { useAuthStore } from "@/store/useAuthStore";
 import { UserActivityDrawer } from "@/components/profile/UserActivityDrawer";
+import { Skeleton } from "@/components/ui/skeleton";
 
 function GoogleGlyph() {
   return (
@@ -61,6 +62,10 @@ export function AuthButton({ compact = false }: { compact?: boolean }) {
   const isHostActive = activePersona === "host";
   const roleBadge = isHostActive ? (isHi ? "होस्ट" : "Host") : isHi ? "छात्र" : "Student";
 
+  if (loading) {
+    return <Skeleton className="h-9 w-[120px] rounded-full" />;
+  }
+
   if (!user) {
     return (
       <>
@@ -68,13 +73,11 @@ export function AuthButton({ compact = false }: { compact?: boolean }) {
           variant="outline"
           size={compact ? "sm" : "default"}
           onClick={handleCustomLogin}
-          disabled={loading}
-          aria-busy={loading}
           className="gap-2 bg-[#161B22] hover:bg-[#21262D] border border-slate-700 text-white rounded-full px-4 cursor-pointer"
         >
-          {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <GoogleGlyph />}
+          <GoogleGlyph />
           <span className="whitespace-nowrap">
-            {loading ? (isHi ? "प्रमाणीकरण…" : "Authenticating…") : t.nav.auth}
+            {t.nav.auth}
           </span>
         </Button>
         <LoginModal />

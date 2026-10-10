@@ -26,6 +26,7 @@ import { supabase } from "@/lib/supabase";
 import { updateUserProfile } from "@/lib/waitlistService";
 import { toast } from "sonner";
 import { useLanguage } from "@/context/LanguageContext";
+import { Skeleton, CardSkeleton } from "@/components/ui/skeleton";
 
 const MyBookingsDashboard = lazy(() =>
   import("./MyBookingsDashboard").then((m) => ({ default: m.MyBookingsDashboard })),
@@ -443,8 +444,16 @@ export function ProfileModal({ open, onOpenChange, initialTab = "settings" }: Pr
           <div className="mt-2">
             <Suspense
               fallback={
-                <div className="flex items-center justify-center py-12">
-                  <Loader2 className="h-5 w-5 animate-spin text-cyan-400" />
+                <div className="space-y-4 py-4">
+                  <div className="flex items-center gap-3">
+                    <Skeleton className="h-12 w-12 rounded-full" />
+                    <div className="space-y-2 flex-1">
+                      <Skeleton className="h-4 w-1/2 rounded-md" />
+                      <Skeleton className="h-3 w-1/3 rounded-md" />
+                    </div>
+                  </div>
+                  <Skeleton className="h-24 w-full rounded-xl" />
+                  <Skeleton className="h-24 w-full rounded-xl" />
                 </div>
               }
             >

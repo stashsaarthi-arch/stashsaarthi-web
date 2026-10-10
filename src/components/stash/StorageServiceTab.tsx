@@ -1,6 +1,7 @@
 import { useState, Suspense, lazy } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ShieldCheck, Truck, Lock, PackageCheck } from "lucide-react";
+import { Skeleton, NodeSkeleton } from "@/components/ui/skeleton";
 
 const StashTimeline = lazy(() =>
   import("./StashTimeline").then((m) => ({ default: m.StashTimeline })),
@@ -65,7 +66,7 @@ export function StorageServiceTab({ onBook }: { onBook: () => void }) {
         <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent pointer-events-none rounded-3xl" />
         <h3 className="text-xl font-bold text-white mb-2 relative z-10">Custody Tracking</h3>
         <p className="text-white/60 mb-6 text-sm relative z-10">100% Radical Transparency. Track your luggage at every stage.</p>
-        <Suspense fallback={<div className="min-h-[300px] text-center flex items-center justify-center text-white/50">Loading Tracker...</div>}>
+        <Suspense fallback={<div className="min-h-[300px] space-y-3 py-4"><NodeSkeleton /><NodeSkeleton /><NodeSkeleton /><NodeSkeleton /></div>}>
           <div className="-mx-4 sm:mx-0">
             <StashTimeline />
           </div>

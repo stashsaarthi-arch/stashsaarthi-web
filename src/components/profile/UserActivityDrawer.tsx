@@ -4,6 +4,7 @@ import { useUserCloud } from "@/context/UserCloudContext";
 import { Button } from "@/components/ui/button";
 import { LogOut, PackageCheck, Soup, Wallet, QrCode, Home, ShoppingBag, Clock } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export function UserActivityDrawer({ open, onOpenChange }: { open: boolean, onOpenChange: (open: boolean) => void }) {
   const { user, bookings, roomVisits, liquidationDeals, activityLogs, tokenBalance, isLoading } = useUserCloud();
@@ -21,8 +22,16 @@ export function UserActivityDrawer({ open, onOpenChange }: { open: boolean, onOp
         </SheetHeader>
         
         {isLoading ? (
-          <div className="flex justify-center items-center h-32">
-            <span className="text-white/60">Loading your data...</span>
+          <div className="space-y-6">
+            <Skeleton className="h-24 w-full rounded-2xl" />
+            <div className="space-y-4">
+              <Skeleton className="h-6 w-1/2 rounded-md" />
+              <Skeleton className="h-32 w-full rounded-2xl" />
+            </div>
+            <div className="space-y-4 pt-4 border-t border-white/5">
+              <Skeleton className="h-6 w-2/3 rounded-md" />
+              <Skeleton className="h-32 w-full rounded-2xl" />
+            </div>
           </div>
         ) : (
           <div className="space-y-8 pb-20">
@@ -70,7 +79,7 @@ export function UserActivityDrawer({ open, onOpenChange }: { open: boolean, onOp
                         {/* QR Code */}
                         {booking.qr_code && booking.qr_code.startsWith("http") ? (
                           <div className="bg-white p-1 rounded-lg">
-                            <img src={booking.qr_code} alt="QR Code" className="w-16 h-16" />
+                            <img src={booking.qr_code} alt="QR Code" className="w-16 h-16" loading="lazy" decoding="async" />
                           </div>
                         ) : (
                           <div className="bg-white p-2 rounded-lg flex items-center justify-center">

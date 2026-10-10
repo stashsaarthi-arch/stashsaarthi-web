@@ -812,7 +812,7 @@ export const FooterSection = memo(function FooterSection() {
         <DocCol title={isHi ? "कानूनी" : "Legal"} links={LEGAL} onOpen={setDoc} />
       </div>
 
-      <div className="border-t border-white/10 px-4 py-3 sm:py-6">
+      <div className="border-t border-white/10 px-4 py-3 sm:py-6 relative">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 sm:gap-4 sm:flex-row text-[11px] sm:text-xs text-muted-foreground">
           <div className="space-y-1 text-center sm:text-left">
             <p className="text-[11px] sm:text-xs">
@@ -861,6 +861,23 @@ export const FooterSection = memo(function FooterSection() {
           >
             <span>{isHi ? "शीर्ष पर जाएँ" : "Back to top"}</span>
             <ArrowUp className="h-4 w-4" />
+          </button>
+          <button
+            onClick={() => {
+              console.log(`
+   _____ _______       _____ _    _  _____         ___   _____ _______ _    _ _____ 
+  / ____|__   __|/\\   / ____| |  | |/ ____|  /\\   / _ \\ |  __ \\__   __| |  | |_   _|
+ | (___    | |  /  \\ | (___ | |__| | (___   /  \\ | | | || |__) | | |  | |__| |  | |  
+  \\___ \\   | | / /\\ \\ \\___ \\|  __  |\\___ \\ / /\\ \\| | | ||  _  /  | |  |  __  |  | |  
+  ____) |  | |/ ____ \\____) | |  | |____) / ____ \\ |_| || | \\ \\  | |  | |  | | _| |_ 
+ |_____/   |_/_/    \\_\\_____/|_|  |_|_____/_/    \\_\\___/ |_|  \\_\\ |_|  |_|  |_||_____|
+              `);
+              console.log("%cFounder Node Active. Awaiting Command.", "color: #10B981; font-weight: bold; font-size: 14px;");
+            }}
+            className="absolute bottom-2 right-2 opacity-5 hover:opacity-100 transition-opacity cursor-pointer p-2 z-50 text-[10px] font-mono text-emerald-500"
+            aria-label="HQ"
+          >
+            HQ
           </button>
         </div>
       </div>

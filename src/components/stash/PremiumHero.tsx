@@ -101,8 +101,7 @@ const FeatureCard = ({ title, desc, icon }: { title: string; desc: string; icon:
   return (
     <motion.div
       initial={{ opacity: 0, y: 60, scale: 0.95 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true, margin: "-50px" }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ type: "spring", stiffness: 120, damping: 20 }}
       whileHover={{ y: -5 }}
       className="relative overflow-hidden bg-neutral-950/40 backdrop-blur-md border border-white/5 rounded-3xl group p-8 flex flex-col gap-4 cursor-pointer"

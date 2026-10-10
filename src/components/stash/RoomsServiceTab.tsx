@@ -124,7 +124,7 @@ export function RoomsServiceTab({ onBook }: { onBook: () => void }) {
         {ROOMS.filter(r => filter === "All Kanpur" || r.zone === filter).map(r => (
           <div key={r.id} className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden group hover:border-emerald-500/30 transition-all">
             <div className="h-48 w-full relative overflow-hidden">
-              <img src={r.img} alt={r.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <img src={r.img} alt={r.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" />
               <div className="absolute top-3 left-3 bg-emerald-500 text-black text-xs font-bold px-2 py-1 rounded-md shadow-lg">
                 ZERO BROKERAGE
               </div>

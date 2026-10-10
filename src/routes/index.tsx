@@ -37,9 +37,9 @@ const HostInventoryGrid = lazy(() =>
   import("@/components/stash/HostInventoryGrid").then((m) => ({ default: m.HostInventoryGrid })),
 );
 
-const TITLE = "StashSaarthi - Campus Micro-Storage & Zero-Brokerage Co-Living";
+const TITLE = "StashSaarthi | India's 1st Hyperlocal Student Storage & Mobility Grid";
 const DESC =
-  "Official website of StashSaarthi. India's Zero-CapEx Intergenerational Living & Campus Micro-Storage Platform. Vacation luggage storage at ₹300/bag/mo, verified verified PG owner-hosted rooms, and homemade tiffins.";
+  "Drop your luggage, find zero-brokerage rooms, and claim campus deals. The ultimate student ecosystem for Kanpur.";
 const URL = "https://stashsaarthi-web.vercel.app/";
 const OG_IMAGE = "https://stashsaarthi-web.vercel.app/images/og-banner-new.png";
 
@@ -48,7 +48,7 @@ export const Route = createFileRoute("/")({
     meta: [
       { title: TITLE },
       { name: "description", content: DESC },
-      { property: "og:title", content: "StashSaarthi" },
+      { property: "og:title", content: TITLE },
       { property: "og:site_name", content: "StashSaarthi" },
       { property: "og:description", content: DESC },
       { property: "og:type", content: "website" },
@@ -327,33 +327,33 @@ function WorkspacePartitions({ role, onBook, onListRoom, onRefer }: any) {
           <AnimatePresence mode="wait">
             {activeTab === 'storage' && (
               <motion.div
-                key="storage"
+                key={activeTab}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.2 }}
+                transition={{ duration: 0.3 }}
               >
                 <StorageServiceTab onBook={onBook} />
               </motion.div>
             )}
             {activeTab === 'rooms' && (
               <motion.div
-                key="rooms"
+                key={activeTab}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.2 }}
+                transition={{ duration: 0.3 }}
               >
                 <RoomsServiceTab onBook={onBook} />
               </motion.div>
             )}
             {activeTab === 'khana' && (
               <motion.div
-                key="khana"
+                key={activeTab}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.2 }}
+                transition={{ duration: 0.3 }}
               >
                 <TokenMealHub onBook={onBook} />
               </motion.div>

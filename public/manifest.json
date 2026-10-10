@@ -1,25 +1,15 @@
 {
-  "name": "StashSaarthi - Campus Micro-Storage & Zero-Brokerage Living",
+  "name": "StashSaarthi Ecosystem",
   "short_name": "StashSaarthi",
-  "description": "India's Zero-CapEx Intergenerational Living & Campus Micro-Storage Platform.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0A0D0F",
-  "theme_color": "#0A0D0F",
-  "orientation": "portrait-primary",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
   "icons": [
     {
-      "src": "/app-icon.png",
+      "src": "/vite.svg",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/app-icon.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/svg+xml"
     }
-  ],
-  "categories": ["lifestyle", "utilities", "travel"]
+  ]
 }

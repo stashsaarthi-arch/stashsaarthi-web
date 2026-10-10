@@ -39,22 +39,41 @@ import "lenis/dist/lenis.css";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-transparent px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
-        </p>
-        <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Go home
-          </Link>
-        </div>
+    <div className="flex min-h-screen items-center justify-center bg-[#0A0D0F] px-4 relative overflow-hidden">
+      <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none opacity-20">
+        <div className="w-96 h-96 bg-emerald-500/20 rounded-full blur-[100px]" />
       </div>
+      
+      <motion.div 
+        initial={{ opacity: 0, y: 20, scale: 0.95 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className="max-w-2xl text-center relative z-10 p-8 sm:p-12 border border-white/5 bg-white/5 backdrop-blur-xl rounded-3xl shadow-2xl"
+      >
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.2, type: "spring" }}
+          className="w-20 h-20 sm:w-24 sm:h-24 mx-auto bg-emerald-500/10 rounded-full flex items-center justify-center mb-8 border border-emerald-500/20"
+        >
+          <span className="text-4xl sm:text-5xl">🧭</span>
+        </motion.div>
+        
+        <h1 className="text-4xl sm:text-6xl font-black text-white tracking-tight mb-4 drop-shadow-md">
+          Looks like this stash is missing.
+        </h1>
+        
+        <p className="text-lg sm:text-xl text-zinc-400 font-medium mb-10 max-w-lg mx-auto">
+          The page you're looking for doesn't exist, but we have plenty of secure storage and rooms waiting for you.
+        </p>
+        
+        <Link
+          to="/"
+          className="inline-flex items-center justify-center rounded-xl bg-emerald-600 px-8 py-4 text-lg font-bold text-white transition-all hover:bg-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] active:scale-95 uppercase tracking-wide"
+        >
+          Return to Hub
+        </Link>
+      </motion.div>
     </div>
   );
 }
@@ -106,7 +125,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover",
       },
-      { name: "theme-color", content: "#0A0D0F" },
+      { name: "theme-color", content: "#10B981" },
       { name: "color-scheme", content: "dark" },
       { name: "apple-mobile-web-app-capable", content: "yes" },
       { name: "mobile-web-app-capable", content: "yes" },
@@ -116,15 +135,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "google-site-verification", content: "googlec3390cf96e97cc6c" },
       { name: "robots", content: "index, follow, max-image-preview:large" },
       { name: "format-detection", content: "telephone=no" },
-      { title: "StashSaarthi | Student Storage, PG Rooms, Hostels & Kitchen Services in Kanpur" },
+      { title: "StashSaarthi | India's 1st Hyperlocal Student Storage & Mobility Grid" },
       {
         name: "title",
-        content: "StashSaarthi | Student Storage, PG Rooms, Hostels & Kitchen Services in Kanpur",
+        content: "StashSaarthi | India's 1st Hyperlocal Student Storage & Mobility Grid",
       },
       {
         name: "description",
         content:
-          "Affordable student luggage storage, verified PG rooms, student hostels, and tiffin/kitchen services near CSJMU Kanpur. Safe, verified, and budget-friendly.",
+          "Drop your luggage, find zero-brokerage rooms, and claim campus deals. The ultimate student ecosystem for Kanpur.",
       },
       {
         name: "keywords",
@@ -140,12 +159,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:locale", content: "en_IN" },
       {
         property: "og:title",
-        content: "StashSaarthi | Student Storage, PG Rooms, Hostels & Kitchen Services in Kanpur",
+        content: "StashSaarthi | India's 1st Hyperlocal Student Storage & Mobility Grid",
       },
       {
         property: "og:description",
         content:
-          "Affordable student luggage storage, verified PG rooms, student hostels, and tiffin/kitchen services near CSJMU Kanpur. Safe, verified, and budget-friendly.",
+          "Drop your luggage, find zero-brokerage rooms, and claim campus deals. The ultimate student ecosystem for Kanpur.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://stashsaarthi-web.vercel.app" },
@@ -162,12 +181,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:creator", content: "@StashSaarthi" },
       {
         name: "twitter:title",
-        content: "StashSaarthi | Student Storage, PG Rooms, Hostels & Kitchen Services in Kanpur",
+        content: "StashSaarthi | India's 1st Hyperlocal Student Storage & Mobility Grid",
       },
       {
         name: "twitter:description",
         content:
-          "Affordable student luggage storage, verified PG rooms, student hostels, and tiffin/kitchen services near CSJMU Kanpur. Safe, verified, and budget-friendly.",
+          "Drop your luggage, find zero-brokerage rooms, and claim campus deals. The ultimate student ecosystem for Kanpur.",
       },
       {
         name: "twitter:image",
@@ -175,6 +194,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
     ],
     links: [
+      { rel: "manifest", href: "/manifest.json" },
       {
         rel: "stylesheet",
         href: appCss,
